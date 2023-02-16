@@ -59,7 +59,8 @@ main_footer(result) <- c(
   "Source: [include Applicant source, datasets and/or software tools used].",
   "(1) Defined as any untoward medical occurrence that, at any dose that results in death, is life-threatening,
     requires hospitalization or prolongation of existing hospitalization, results in persistent incapacity or
-    substantial disruption of the ability to conduct normal life functions, or is a congenital anomaly or birth defect.",
+    substantial disruption of the ability to conduct normal life functions, or is a congenital anomaly or
+    birth defect.",
   "(2) Duration = [e.g., X week double-blind treatment period or median and
     a range indicating pooled trial durations]."
 )
