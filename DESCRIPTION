@@ -12,7 +12,10 @@ BugReports: https://github.com/pharmaverse/falcon/issues
 Depends:
     R (>= 3.6)
 Imports:
-    stringr
+    dplyr,
+    scda (>= 0.1.5),
+    scda.2022 (>= 0.1.3),
+    tern (>= 0.7.10)
 Suggests:
     knitr,
     testthat (>= 2.0)
@@ -23,4 +26,4 @@ Encoding: UTF-8
 Language: en-US
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3
