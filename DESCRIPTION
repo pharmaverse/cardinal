@@ -12,13 +12,13 @@ BugReports: https://github.com/pharmaverse/falcon/issues
 Depends:
     R (>= 3.6)
 Imports:
-    dplyr,
     scda (>= 0.1.5),
     scda.2022 (>= 0.1.3),
     tern (>= 0.7.10)
 Suggests:
+    dplyr,
     knitr,
-    testthat (>= 2.0)
+    testthat (>= 3.0.0)
 VignetteBuilder:
     knitr
 Remotes:
@@ -31,3 +31,4 @@ Language: en-US
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
+Config/testthat/edition: 3
