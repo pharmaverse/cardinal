@@ -5,50 +5,52 @@ library(scda)
 library(tern)
 
 adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") %>% df_explicit_na()
-adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")%>%
+adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae") %>%
   filter(
     SAFFL == "Y"
-    ) %>%
-  mutate(sex = as.factor(case_when(
-    SEX == "M" ~ "Male",
-    SEX == "F" ~ "Female"
-  )),
-  age_grp = as.factor(case_when(
-    AGE >= 17 & AGE<65 ~ ">=17 to <65",
-    AGE >= 65 ~ ">=65",
-    AGE >=65 & AGE<75 ~ ">=65 to <75",
-    AGE >= 75 ~ ">=75"
-  )),
-  race = as.factor(case_when(
-    RACE == "ASIAN" ~ "Asian",
-    RACE == "AMERICAN INDIAN OR ALASKA NATIVE" ~ "American Indian or Alaska Nattive",
-    RACE == "BLACK OR AFRICAN AMERICAN" ~ "Black or African American",
-    RACE == "WHITE" ~ "White",
-    RACE == "NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER" ~ "Native Hawaiian or Other Pacific Islander",
-    RACE == "MULTIPLE" ~ "Multiple"
-  )),
-  ethnic = as.factor(case_when(
-    ETHNIC == "NOT REPORTED" ~ "Not Reported",
-    ETHNIC == "HISPANIC OR LATINO" ~ "Hispanic or Latino",
-    ETHNIC == "NOT HISPANIC OR LATINO" ~ "Not Hispanic or Latino",
-    ETHNIC == "UNKNOWN" ~ "Unknown"
-  )),
-  country = as.factor(case_when(
-    COUNTRY == "CHN" ~ "China",
-    COUNTRY == "RUS" ~ "Russia",
-    COUNTRY == "USA" ~ "United States",
-    COUNTRY == "NGA" ~ "China",
-    COUNTRY == "PAK" ~ "Pakistan",
-    COUNTRY == "BRA" ~ "Brazil",
-    COUNTRY == "CAN" ~ "Canada",
-    COUNTRY == "GBR" ~ "Great Britain",
-    COUNTRY == "JPN" ~ "Japan"
-  )),
-  bio = as.factor(case_when(
-    BMRKR2 == "LOW" ~ "Low",
-    BMRKR2 == "MEDIUM" ~ "Medium",
-    BMRKR2 == "HIGH" ~ "High"
-  ))) %>%
+  ) %>%
+  mutate(
+    sex = as.factor(case_when(
+      SEX == "M" ~ "Male",
+      SEX == "F" ~ "Female"
+    )),
+    age_grp = as.factor(case_when(
+      AGE >= 17 & AGE < 65 ~ ">=17 to <65",
+      AGE >= 65 ~ ">=65",
+      AGE >= 65 & AGE < 75 ~ ">=65 to <75",
+      AGE >= 75 ~ ">=75"
+    )),
+    race = as.factor(case_when(
+      RACE == "ASIAN" ~ "Asian",
+      RACE == "AMERICAN INDIAN OR ALASKA NATIVE" ~ "American Indian or Alaska Nattive",
+      RACE == "BLACK OR AFRICAN AMERICAN" ~ "Black or African American",
+      RACE == "WHITE" ~ "White",
+      RACE == "NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER" ~ "Native Hawaiian or Other Pacific Islander",
+      RACE == "MULTIPLE" ~ "Multiple"
+    )),
+    ethnic = as.factor(case_when(
+      ETHNIC == "NOT REPORTED" ~ "Not Reported",
+      ETHNIC == "HISPANIC OR LATINO" ~ "Hispanic or Latino",
+      ETHNIC == "NOT HISPANIC OR LATINO" ~ "Not Hispanic or Latino",
+      ETHNIC == "UNKNOWN" ~ "Unknown"
+    )),
+    country = as.factor(case_when(
+      COUNTRY == "CHN" ~ "China",
+      COUNTRY == "RUS" ~ "Russia",
+      COUNTRY == "USA" ~ "United States",
+      COUNTRY == "NGA" ~ "China",
+      COUNTRY == "PAK" ~ "Pakistan",
+      COUNTRY == "BRA" ~ "Brazil",
+      COUNTRY == "CAN" ~ "Canada",
+      COUNTRY == "GBR" ~ "Great Britain",
+      COUNTRY == "JPN" ~ "Japan"
+    )),
+    bio = as.factor(case_when(
+      BMRKR2 == "LOW" ~ "Low",
+      BMRKR2 == "MEDIUM" ~ "Medium",
+      BMRKR2 == "HIGH" ~ "High"
+    ))
+  ) %>%
   df_explicit_na()
 
 # Build layout
@@ -61,7 +63,8 @@ lyt <- basic_table(show_colcounts = TRUE) %>%
     in_rows(
       "Mean (SD)" = rcell(c(mean(x), sd(x)), format = "xx.xx (xx.xx)"),
       "Median (min, max)" = rcell(c(median(x), range(x)), format = "xx.xx (xx.xx - xx.xx)")
-    )})%>%
+    )
+  }) %>%
   summarize_vars(
     vars = c("age_grp", "race", "ethnic", "country", "bio"),
     .stats = c("count_fraction"),
@@ -70,8 +73,9 @@ lyt <- basic_table(show_colcounts = TRUE) %>%
       race = "Race, n(%)",
       ethnic = "Ethnicity n(%)",
       country = "Country of participation, n(%)",
-      bio = "Categorical Level Biomarker 2")
+      bio = "Categorical Level Biomarker 2"
     )
+  )
 
 # Build table
 
