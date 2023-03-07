@@ -1,0 +1,38 @@
+{
+    "name": "R Environment for NEST projects",
+    // rstudio-local R image published by insightsengineering with all NEST packages installed: https://github.com/insightsengineering/ci-images
+    "image": "ghcr.io/insightsengineering/rstudio-local_4.2.2_bioc_3.16:2023.02.21",
+    // Install Dev Container Features. More info: https://containers.dev/features
+    "features": {
+        "ghcr.io/devcontainers-contrib/features/pre-commit:2": {},
+        "ghcr.io/devcontainers/features/github-cli:1": {},
+        "ghcr.io/dhoeric/features/act:1": {},
+        "ghcr.io/jungaretti/features/ripgrep:1": {},
+        "ghcr.io/meaningful-ooo/devcontainer-features/fish:1": {}
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "GitHub.copilot",
+                "REditorSupport.r",
+                "esbenp.prettier-vscode",
+                "quarto.quarto",
+                "streetsidesoftware.code-spell-checker",
+                "vscodevim.vim"
+            ]
+        }
+    },
+    // Forward RStudio port
+    "forwardPorts": [
+        8787
+    ],
+    "portsAttributes": {
+        "8787": {
+            "label": "Rstudio",
+            "requireLocalPort": true,
+            "onAutoForward": "ignore"
+        }
+    },
+    // Use 'postAttachCommand' to run commands after the container is started.
+    "postAttachCommand": "sudo rstudio-server start"
+}
