@@ -65,9 +65,5 @@ formatters::main_footer(result) <- c(
   "Abbreviations: CI, confidence interval; n, number of patients with indicated blood pressure; N, number of patients in treatment arm with available blood pressure data"
 )
 
-# formatters::prov_footer(result) <- c(
-#   "Abbreviations: CI, confidence interval; n, number of patients with indicated blood pressure; N, number of patients in treatment arm with available blood pressure data"
-# )
-
 # Print result
 print(result)
