@@ -17,8 +17,8 @@ advs <-
   dplyr::select(STUDYID, USUBJID, ARM, ACTARM, PARAMCD, PARAM, AVAL, AVALU, AVISITN, AVISIT, SAFFL) %>% #nolint
   dplyr::group_by(USUBJID, PARAMCD) %>%
   dplyr::mutate(
-    maxDIABP = if_else(PARAMCD == "DIABP", max(AVAL), NA),
-    maxSYSBP = if_else(PARAMCD == "SYSBP", max(AVAL), NA)
+    maxDIABP = if_else(PARAMCD == "DIABP", max(AVAL), NA_real_),
+    maxSYSBP = if_else(PARAMCD == "SYSBP", max(AVAL), NA_real_)
   ) %>%
   dplyr::mutate(
     SBP90 = (PARAMCD == "SYSBP" & maxSYSBP < 90),
