@@ -8,8 +8,7 @@ library(tern)
 adsl <-
   scda::synthetic_cdisc_dataset("rcd_2022_06_27", "adsl") %>%
   tern::df_explicit_na() %>%
-  dplyr::filter(SAFFL == "Y") %>%
-  dplyr::select(STUDYID, USUBJID, SAFFL, ARM, ACTARM)
+  dplyr::filter(SAFFL == "Y")
 
 # Vital signs - DIABP
 advs <-
