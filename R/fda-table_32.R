@@ -15,7 +15,6 @@ advs <-
   scda::synthetic_cdisc_dataset("rcd_2022_06_27", "advs") %>%
   tern::df_explicit_na() %>%
   dplyr::filter(PARAMCD == "DIABP" & SAFFL == "Y" & AVISITN >= 1) %>%
-  dplyr::select(STUDYID, USUBJID, ARM, ACTARM, PARAMCD, PARAM, AVAL, AVALU, AVISITN, AVISIT) %>%
   dplyr::group_by(USUBJID, PARAMCD) %>%
   dplyr::mutate(maxDIABP = max(AVAL)) %>%
   ungroup() %>%
