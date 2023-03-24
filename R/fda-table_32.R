@@ -55,7 +55,8 @@ rtables::top_left(result) <- "Diastolic Blood Pressure\n(Pa)"
 
 ## Title
 formatters::main_title(result) <-
-  "Table 32. Percentage of Patients With Maximum Diastolic Blood Pressure by Category of Blood Pressure Postbaseline, Safety Population, Pooled Analysis"
+  "Table 32. Percentage of Patients With Maximum Diastolic Blood Pressure by Category of Blood 
+Pressure Postbaseline, Safety Population, Pooled Analysis"
 
 ## Footnotes
 formatters::main_footer(result) <- c(
