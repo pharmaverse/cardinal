@@ -39,8 +39,7 @@ lyt <-
   rtables::split_cols_by("ARM") %>%
   tern::count_patients_with_flags(
     var = "USUBJID",
-    flag_variables = var_labels(advs[, c("L60", "U60", "U90", "U110", "UE120")]),
-    table_names = "diabp"
+    flag_variables = var_labels(advs[, c("L60", "U60", "U90", "U110", "UE120")])
   )
 
 
