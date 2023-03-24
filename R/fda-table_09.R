@@ -4,9 +4,9 @@ library(dplyr)
 library(scda)
 library(tern)
 
-adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
-adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae") %>%
-  formatters::var_relabel(
+adsl <- synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
+adae <- synthetic_cdisc_dataset("rcd_2022_10_13", "adae") %>%
+  var_relabel(
     AETERM = "Preferred Term" # Choose variable to use as Preferred Term
   )
 
