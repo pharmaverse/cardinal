@@ -6,12 +6,10 @@ library(scda)
 library(tern)
 
 # Safety population
-
-  scda
-    scda::synthetic_cdisc_dataset("rcd_2022_06_27", "adsl") %>%
-    tern::df_explicit_na() %>%
-    dplyr::filter(SAFFL == "Y") %>%
-    dplyr::select(STUDYID, USUBJID, SAFFL, ARM, ACTARM)
+adsl <-
+  scda::synthetic_cdisc_dataset("rcd_2022_06_27", "adsl") %>%
+  tern::df_explicit_na() %>%
+  dplyr::filter(SAFFL == "Y")
 
 # Vital signs - DIABP
 advs <-
@@ -68,12 +66,4 @@ formatters::main_footer(result) <- c(
 )
 
 # Print result
-print(result)lable blood pressure data"
-)
-
-# Print result
-print(result)able blood pressure data"
-)
-
-# Print result
-print(result)
+result
