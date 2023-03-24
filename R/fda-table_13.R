@@ -4,9 +4,9 @@ library(dplyr)
 library(scda)
 library(tern)
 
-adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
-adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae") %>%
-  formatters::var_relabel(
+adsl <- synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
+adae <- synthetic_cdisc_dataset("rcd_2022_10_13", "adae") %>%
+  var_relabel(
     AETERM = "Preferred Term(3)" # Choose variable to use as Preferred Term
   )
 
@@ -44,7 +44,7 @@ result <- prune_table(result, keep_rows(row_condition))
 # Add titles/footnotes
 
 main_title(result) <- paste0(
-  "Table 13. Patients With Common Adverse Events(1) Occurring at ≥", x * 100,
+  "Table 13. Patients With Common Adverse Events(1) Occurring at >=", x * 100,
   "% Frequency, Safety Population, Pooled Analyses(2)"
 )
 
