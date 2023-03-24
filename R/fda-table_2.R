@@ -4,8 +4,8 @@ library(dplyr)
 library(scda)
 library(tern)
 
-adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") %>% df_explicit_na()
-adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae") %>%
+adsl <- synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") %>% df_explicit_na()
+adae <- synthetic_cdisc_dataset("rcd_2022_10_13", "adae") %>%
   filter(
     SAFFL == "Y"
   ) %>%
@@ -22,7 +22,7 @@ adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae") %>%
     )),
     race = as.factor(case_when(
       RACE == "ASIAN" ~ "Asian",
-      RACE == "AMERICAN INDIAN OR ALASKA NATIVE" ~ "American Indian or Alaska Nattive",
+      RACE == "AMERICAN INDIAN OR ALASKA NATIVE" ~ "American Indian or Alaska Native",
       RACE == "BLACK OR AFRICAN AMERICAN" ~ "Black or African American",
       RACE == "WHITE" ~ "White",
       RACE == "NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER" ~ "Native Hawaiian or Other Pacific Islander",
@@ -58,23 +58,24 @@ adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae") %>%
 lyt <- basic_table(show_colcounts = TRUE) %>%
   split_cols_by(var = "ARM") %>%
   add_overall_col("All Patients") %>%
-  summarize_vars("sex", .stats = c("count_fraction"), var_labels = "Sex, n(%)") %>%
-  analyze(vars = "AGE", var_labels = "Age, years", afun = function(x) {
+  summarize_vars("sex", .stats = c("count_fraction"), var_labels = "Sex", na.rm = FALSE) %>%
+  analyze(vars = "AGE", var_labels = "Age (years)", afun = function(x) {
     in_rows(
       "Mean (SD)" = rcell(c(mean(x), sd(x)), format = "xx.xx (xx.xx)"),
-      "Median (min, max)" = rcell(c(median(x), range(x)), format = "xx.xx (xx.xx - xx.xx)")
+      "Median (min - max)" = rcell(c(median(x), range(x)), format = "xx.xx (xx.xx - xx.xx)")
     )
   }) %>%
   summarize_vars(
     vars = c("age_grp", "race", "ethnic", "country", "bio"),
     .stats = c("count_fraction"),
     var_labels = c(
-      age_grp = "Age groups (years), n(%)",
-      race = "Race, n(%)",
-      ethnic = "Ethnicity n(%)",
-      country = "Country of participation, n(%)",
+      age_grp = "Age groups (years)",
+      race = "Race",
+      ethnic = "Ethnicity",
+      country = "Country of participation",
       bio = "Categorical Level Biomarker 2"
-    )
+    ),
+    na.rm = FALSE
   )
 
 # Build table
@@ -88,8 +89,7 @@ main_title(result) <- paste0(
 )
 
 main_footer(result) <- c(
-  "Source: [include Applicant source, datasets and/or software tools used",
-  "(1) Difference is shown between [treatment arms] (e.g., difference is shown between Drug Name dosage X vs. placebo)."
+  "Source: [include Applicant source, datasets and/or software tools used].",
 )
 
 prov_footer(result) <- c("Abbreviations: N, number of patients in treatment arm; n, number of patients with given characteristic; SD, standard deviation")
