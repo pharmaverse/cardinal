@@ -65,4 +65,4 @@ formatters::main_footer(result) <- c(
 )
 
 # Print result
-print(result)
+result
