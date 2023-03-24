@@ -4,8 +4,8 @@ library(dplyr)
 library(scda)
 library(tern)
 
-adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") %>% df_explicit_na()
-adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae") %>%
+adsl <- synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") %>% df_explicit_na()
+adae <- synthetic_cdisc_dataset("rcd_2022_10_13", "adae") %>%
   df_explicit_na() %>%
   mutate(
     AESEV = factor(AESEV, labels = c("Mild", "Moderate", "Severe")),
@@ -92,7 +92,7 @@ result <- build_table(lyt, df = adae, alt_counts_df = adsl)
 main_title(result) <- "Table 6. Overview of Adverse Events(1), Safety Population, Pooled Analyses(2)"
 
 main_footer(result) <- c(
-  "Source: [include Applicant source, datasets and/or software tools used",
+  "Source: [include Applicant source, datasets and/or software tools used].",
   "(1) Treatment-emergent AE defined as [definition]. MedDRA version X.",
   "(2) Duration = [e.g., X-week double-blind treatment period or, median and a range indicating
     pooled trial durations]."
