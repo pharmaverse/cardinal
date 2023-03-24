@@ -89,10 +89,13 @@ main_title(result) <- paste0(
 )
 
 main_footer(result) <- c(
-  "Source: [include Applicant source, datasets and/or software tools used].",
+  "Source: [include Applicant source, datasets and/or software tools used]."
 )
 
-prov_footer(result) <- c("Abbreviations: N, number of patients in treatment arm; n, number of patients with given characteristic; SD, standard deviation")
+prov_footer(result) <- paste(
+  "Abbreviations: N, number of patients in treatment arm;",
+  "n, number of patients with given characteristic; SD, standard deviation"
+)
 
 
 result
