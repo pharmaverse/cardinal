@@ -4,7 +4,7 @@ library(tern)
 # Load and pre-process data
 
 adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
-ntrtem <- sample(adsl[["USUBJID"]], size = as.integer(nrow(adsl)/3)) # assign subjects to nontreatment emergent AE's
+ntrtem <- sample(adsl[["USUBJID"]], size = as.integer(nrow(adsl) / 3)) # assign subjects to nontreatment emergent AE's
 
 adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae") %>%
   filter(SAFFL == "Y", DTHFL == "Y") %>% # not actually necessary because all observations are flagged as Y
@@ -40,7 +40,7 @@ lyt <- basic_table(show_colcounts = TRUE) %>%
   analyze_num_patients(
     var = "USUBJID",
     .stats = "unique",
-   .labels = c(unique = "Total"),
+    .labels = c(unique = "Total"),
     denom = "N_col", # relative to all patients
     indent_mod = -1L,
     show_labels = "hidden"
@@ -86,4 +86,3 @@ prov_footer(tbl) <- c(
 
 result <- prune_table(tbl) # drop rows where all columns have zero counts
 result
-
