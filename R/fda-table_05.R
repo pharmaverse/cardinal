@@ -15,8 +15,8 @@ adex <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adex") %>%
   mutate(TRTDUR = as.numeric(TRTEDTM - TRTSDTM)) %>%
   mutate(
     any_d = (TRTDUR > 0),
-    d_less_1 = (TRTDUR < 365/12),
-    d_more_1 = (TRTDUR >= 365/12),
+    d_less_1 = (TRTDUR < 365/12 * 1),
+    d_more_1 = (TRTDUR >= 365/12 * 1),
     d_more_3 = (TRTDUR >= 365/12 * 3),
     d_more_6 = (TRTDUR >= 365/12 * 6),
     d_more_12 = (TRTDUR >= 365/12 * 12)
@@ -40,8 +40,8 @@ lyt <- basic_table(show_colcounts = TRUE) %>%
         "Mean (sd)" = c(mean(x), sd(x)),
         "Median (min - max)" = c(median(x),range(x)),
         "Interquartile range" = c(quantile(x, 0.25),  quantile(x, 0.75)),
-        "Total exposure (person years)" = sum(x)/365,
-        .formats = c("xx.xx (xx.xx)", "xx.xx (xx.xx - xx.xx)", "xx.xx - xx.xx", "xx.xx")
+        "Total exposure (person years)" = c(sum(x),sum(x)/365),
+        .formats = c("xx.xx (xx.xx)", "xx.xx (xx.xx - xx.xx)", "xx.xx - xx.xx", "xx.xx (xx.xx)")
       )
     } else {
       stop("type not supported")
