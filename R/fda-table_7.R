@@ -54,6 +54,34 @@ lyt <- basic_table(show_colcounts = TRUE) %>%
   rtables::append_topleft(c("", "Deaths")) # empty string to force position right above horizontal line
 
 
+# Build table
+
+tbl <- build_table(lyt, df = adae, alt_counts_df = adsl)
+
+# Add titles/footnotes
+
+main_title(tbl) <- paste(
+  "Table 7. Deaths, Safety Population, Pooled Analyses (1)"
+)
+
+main_footer(tbl) <- c(
+  "Source: [include Applicant source, datasets and/or software tools used].",
+  "(1) Duration = [e.g., X week double-blind treatment period or median and a range indicating pooled trial
+    durations].",
+  "(2) Difference is shown between [treatment arms] (e.g., difference is shown between Drug Name dosage X vs.
+    placebo).",
+  "(3) Treatment-emergent AE defined as [definition]. MedDRA version X.",
+  "(4) Defined as [(e.g., deaths beyond the protocol-defined treatment-emergent adverse event period in the same trial or deaths from other trials with drug)]."
+)
+
+prov_footer(tbl) <- c(
+  "Abbreviations: AE, adverse event; MedDRA, Medical Dictionary for Regulatory Activities; N, number of patients
+    in treatment arm; n, number of patients with adverse event"
+)
+
+# Note: I am not working with referential footnotes at this point in time in order to avoid
+# a mixture of manual/referential footnotes. (Jessica)
+# rtables::fnotes_at_path(tbl, rowpath = c("root", "TRTEMFL_", "Y")) <- c("hi")
 
 
 result <- prune_table(tbl) # drop rows where all columns have zero counts
