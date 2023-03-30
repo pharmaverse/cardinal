@@ -4,7 +4,7 @@ library(tern)
 # Load and pre-process data
 
 adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
-ntrtem <- sample(adsl[["USUBJID"]], size = as.integer(nrow(adsl)/3)) # assign subjects to nontreatment emergent AE's
+ntrtem <- sample(adsl[["USUBJID"]], size = as.integer(nrow(adsl) / 3)) # assign subjects to nontreatment emergent AE's
 
 adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae") %>%
   filter(SAFFL == "Y", DTHFL == "Y") %>% # not actually necessary because all observations are flagged as Y
@@ -71,7 +71,8 @@ main_footer(tbl) <- c(
   "(2) Difference is shown between [treatment arms] (e.g., difference is shown between Drug Name dosage X vs.
     placebo).",
   "(3) Treatment-emergent AE defined as [definition]. MedDRA version X.",
-  "(4) Defined as [(e.g., deaths beyond the protocol-defined treatment-emergent adverse event period in the same trial or deaths from other trials with drug)]."
+  "(4) Defined as [(e.g., deaths beyond the protocol-defined treatment-emergent adverse event period in the same
+    trial or deaths from other trials with drug)]."
 )
 
 prov_footer(tbl) <- c(
@@ -81,9 +82,6 @@ prov_footer(tbl) <- c(
 
 # Note: I am not working with referential footnotes at this point in time in order to avoid
 # a mixture of manual/referential footnotes. (Jessica)
-# rtables::fnotes_at_path(tbl, rowpath = c("root", "TRTEMFL_", "Y")) <- c("hi")
-
 
 result <- prune_table(tbl) # drop rows where all columns have zero counts
 result
-
