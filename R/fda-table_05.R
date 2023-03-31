@@ -12,7 +12,9 @@ adex <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adex") %>%
   filter(SAFFL == "Y") %>%
   select("USUBJID", "ARM", "TRTSDTM", "TRTEDTM") %>%
   distinct() %>%
-  mutate(TRTDUR = as.numeric(TRTEDTM - TRTSDTM)) %>%
+  mutate(TRTS_D = as.Date(ymd_hms(TRTSDTM)))%>%
+  mutate(TRTE_D = as.Date(ymd_hms(TRTEDTM)))%>%
+  mutate(TRTDUR = as.numeric(TRTE_D - TRTS_D + 1)) %>%
   mutate(
     any_d = (TRTDUR > 0),
     d_less_1 = (TRTDUR < 365/12 * 1),
