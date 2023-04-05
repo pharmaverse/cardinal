@@ -49,7 +49,7 @@ lyt <- basic_table(show_colcounts = TRUE) %>%
       stop("type not supported")
     }
   }) %>%
-  analyze("any_d", var_labels = "Patients treated, by duration, n (%)", function(x, .N_col) {
+  analyze("any_d", var_labels = "Patients treated, by duration", function(x, .N_col) {
     if (is.logical(x)) {
       in_rows("Any duration (at least 1 dose)" = rcell(sum(!is.na(x)) * c(1, 1 / .N_col), format = "xx (xx.x%)"))
     }
