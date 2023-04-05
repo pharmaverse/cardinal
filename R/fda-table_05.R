@@ -36,7 +36,7 @@ adex <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adex") %>%
 
 lyt <- basic_table(show_colcounts = TRUE) %>%
   split_cols_by("ARM") %>%
-  analyze(vars = "TRTDUR", var_labels = "Duration of treatment, weeks (or months, or days, or cycles)", function(x, ...) {
+  analyze(vars = "TRTDUR", var_labels = "Duration of treatment, days", function(x, ...) {
     if (is.numeric(x)) {
       in_rows(
         "Mean (sd)" = c(mean(x), sd(x)),
