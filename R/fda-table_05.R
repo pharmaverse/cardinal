@@ -39,7 +39,7 @@ lyt <- basic_table(show_colcounts = TRUE) %>%
   analyze(vars = "TRTDUR", var_labels = "Duration of treatment, days", function(x, ...) {
     if (is.numeric(x)) {
       in_rows(
-        "Mean (sd)" = c(mean(x), sd(x)),
+        "Mean (SD)" = c(mean(x), sd(x)),
         "Median (min - max)" = c(median(x), range(x)),
         "Interquartile range" = c(quantile(x, 0.25), quantile(x, 0.75)),
         "Total exposure (person years)" = c(sum(x), sum(x) / 365),
