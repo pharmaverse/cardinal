@@ -59,7 +59,8 @@ lyt <- basic_table(show_colcounts = TRUE) %>%
     table_names = "tbl_ser"
   ) %>%
   count_patients_with_event(
-    "USUBJID", filters = c("AESDTH" = "Y"),
+    "USUBJID",
+    filters = c("AESDTH" = "Y"),
     .labels = "Deaths",
     .indent_mods = 1L,
     table_names = "tbl_death"
@@ -80,7 +81,8 @@ lyt <- basic_table(show_colcounts = TRUE) %>%
     "USUBJID",
     filters = c("AELABFL" = "Y"),
     .labels = "Laboratory Assessment",
-    table_names = "tbl_lab")
+    table_names = "tbl_lab"
+  )
 
 
 # Build table
