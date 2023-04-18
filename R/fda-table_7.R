@@ -28,7 +28,6 @@ lyt <- basic_table(show_colcounts = TRUE) %>%
     .stats = "unique",
     .labels = c(unique = "Total deaths"),
     denom = "N_col",
-    indent_mod = -1L,
     show_labels = "hidden"
   ) %>%
   count_occurrences(
