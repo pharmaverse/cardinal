@@ -63,9 +63,6 @@ main_footer(tbl) <- c(
   "Source: [include Applicant source, datasets and/or software tools used].",
   "(1) Duration = [e.g., X week double-blind treatment period or median and a range indicating pooled trial
     durations]."
-  # "(3) Treatment-emergent AE defined as [definition]. MedDRA version X.",
-  # "(4) Defined as [(e.g., deaths beyond the protocol-defined treatment-emergent adverse event period in the same
-  #   trial or deaths from other trials with drug)]."
 )
 
 fnotes_at_path(tbl, c("TRTEMFL_", "Y")) <- "Treatment-emergent AE defined as [definition]. MedDRA version X."
