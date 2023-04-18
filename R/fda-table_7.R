@@ -11,8 +11,8 @@ adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae") %>%
   mutate(
     TRTEMFL_ = ifelse(USUBJID %in% ntrtem, "N", "Y"), # produce dummy data
     trtemlab = case_when( # produce label column
-      TRTEMFL_ == "Y" ~ "Treatment-emergent deaths (3)",
-      TRTEMFL_ == "N" ~ "Nontreatment-emergent deaths (4)",
+      TRTEMFL_ == "Y" ~ "Treatment-emergent deaths",
+      TRTEMFL_ == "N" ~ "Nontreatment-emergent deaths",
       .default = "Other"
     )
   )
@@ -62,21 +62,21 @@ main_title(tbl) <- paste(
 main_footer(tbl) <- c(
   "Source: [include Applicant source, datasets and/or software tools used].",
   "(1) Duration = [e.g., X week double-blind treatment period or median and a range indicating pooled trial
-    durations].",
-  "(2) Difference is shown between [treatment arms] (e.g., difference is shown between Drug Name dosage X vs.
-    placebo).",
-  "(3) Treatment-emergent AE defined as [definition]. MedDRA version X.",
-  "(4) Defined as [(e.g., deaths beyond the protocol-defined treatment-emergent adverse event period in the same
-    trial or deaths from other trials with drug)]."
+    durations]."
+  # "(3) Treatment-emergent AE defined as [definition]. MedDRA version X.",
+  # "(4) Defined as [(e.g., deaths beyond the protocol-defined treatment-emergent adverse event period in the same
+  #   trial or deaths from other trials with drug)]."
 )
+
+fnotes_at_path(tbl, c("TRTEMFL_", "Y")) <- "Treatment-emergent AE defined as [definition]. MedDRA version X."
+fnotes_at_path(tbl, c("TRTEMFL_", "N")) <- "Defined as [(e.g., deaths beyond the protocol-defined
+  treatment-emergent adverse event period in the same trial
+  or deaths from other trials with drug)]."
 
 prov_footer(tbl) <- c(
   "Abbreviations: AE, adverse event; MedDRA, Medical Dictionary for Regulatory Activities; N, number of patients
     in treatment arm; n, number of patients with adverse event"
 )
-
-# Note: I am not working with referential footnotes at this point in time in order to avoid
-# a mixture of manual/referential footnotes. (Jessica)
 
 result <- prune_table(tbl) # drop rows where all columns have zero counts
 result
