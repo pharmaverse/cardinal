@@ -65,8 +65,8 @@ main_footer(tbl) <- c(
     durations]."
 )
 
-fnotes_at_path(tbl, c("TRTEMFL_", "Y")) <- "Treatment-emergent AE defined as [definition]. MedDRA version X." #nolint
-fnotes_at_path(tbl, c("TRTEMFL_", "N")) <- "Defined as [(e.g., deaths beyond the protocol-defined treatment-emergent adverse event period in the same trial or deaths from other trials with drug)]." #nolint
+fnotes_at_path(tbl, c("TRTEMFL_", "Y")) <- "Treatment-emergent AE defined as [definition]. MedDRA version X." # nolint
+fnotes_at_path(tbl, c("TRTEMFL_", "N")) <- "Defined as [(e.g., deaths beyond the protocol-defined treatment-emergent adverse event period in the same trial or deaths from other trials with drug)]." # nolint
 
 prov_footer(tbl) <- c(
   "Abbreviations: AE, adverse event; MedDRA, Medical Dictionary for Regulatory Activities; N, number of patients
