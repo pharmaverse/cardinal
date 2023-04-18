@@ -47,7 +47,6 @@ lyt <- basic_table(show_colcounts = TRUE) %>%
   ) %>%
   count_occurrences(
     vars = "DTHCAUS",
-    .indent_mods = 1,
     denom = "n", # relative to row group, i.e. parent
     drop = FALSE
   ) %>%
