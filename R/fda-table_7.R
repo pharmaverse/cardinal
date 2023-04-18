@@ -41,7 +41,6 @@ lyt <- basic_table(show_colcounts = TRUE) %>%
     var = "USUBJID",
     .stats = "unique",
     .labels = c(unique = "Total"),
-    denom = "N_col", # relative to all patients
     indent_mod = -1L,
     show_labels = "hidden"
   ) %>%
