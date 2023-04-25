@@ -7,8 +7,7 @@ library(tern)
 # Safety population
 adsl <-
   scda::synthetic_cdisc_dataset("rcd_2022_06_27", "adsl") %>%
-  dplyr::filter(SAFFL == "Y") %>%
-  dplyr::select(STUDYID, USUBJID, SAFFL, ARM, ACTARM)
+  dplyr::filter(SAFFL == "Y")
 
 # Vital signs
 advs <-
