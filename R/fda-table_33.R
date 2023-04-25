@@ -52,7 +52,8 @@ formatters::main_title(result) <-
 formatters::main_footer(result) <- c(
   "Source: [include Applicant source, datasets and/or software tools used].",
   "(1) Difference is shown between [treatment arms] (e.g., difference is shown between Drug Name dosage X vs. placebo).", # nolint
-  "Abbreviations: CI, confidence interval; N, number of patients in treatment arm with available blood pressure data; n, number of patients with indicated blood pressure" # nolint
+  "Abbreviations: CI, confidence interval; N, number of patients in treatment arm with available blood pressure data;",
+  "  n, number of patients with indicated blood pressure"
 )
 
 # Print result
