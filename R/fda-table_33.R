@@ -42,7 +42,7 @@ result <- build_table(lyt, df = advs, alt_counts_df = adsl)
 # Add titles/footnotes
 
 ## Top left header
-rtables::top_left(result) <- "Diastolic Blood Pressure\n(Pa)"
+rtables::top_left(result) <- paste0("Blood Pressure\n(", unique(advs$AVALU)[1], ")")
 
 ## Title
 formatters::main_title(result) <-
