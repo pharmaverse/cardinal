@@ -110,7 +110,7 @@ fnotes_at_path(
 ) <- c("Use FMQ grouping if appropriate.")
 fnotes_at_path(
   result,
-  rowpath = c("AESEV")
+  rowpath = c("AESEV") #nolint
 ) <- c("Use FMQ grouping if appropriate.")
 fnotes_at_path(
   result,
