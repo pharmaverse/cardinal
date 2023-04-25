@@ -9,14 +9,6 @@ adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") %>%
 
 adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae") %>%
   mutate(
-    aesev = factor(
-      case_when(
-        AESEV == "MILD" ~ "Mild",
-        AESEV == "MODERATE" ~ "Moderate",
-        AESEV == "SEVERE" ~ "Severe"
-      ),
-      levels = c("Severe", "Moderate", "Mild")
-    ),
     # create adverse events of special interest flag
     AESIFL = case_when(
       AESOC == "cl A" ~ "Y",
@@ -48,7 +40,7 @@ lyt <- basic_table(show_colcounts = TRUE) %>%
     .indent_mods = 1L
   ) %>%
   count_occurrences(
-    "aesev",
+    "AESEV",
     var_labels = "Maximum severity",
     show_labels = "visible"
   ) %>%
@@ -118,7 +110,7 @@ fnotes_at_path(
 ) <- c("Use FMQ grouping if appropriate.")
 fnotes_at_path(
   result,
-  rowpath = c("aesev")
+  rowpath = c("AESEV")
 ) <- c("Use FMQ grouping if appropriate.")
 fnotes_at_path(
   result,
