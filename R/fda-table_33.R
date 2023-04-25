@@ -6,32 +6,32 @@ library(tern)
 
 # Safety population
 adsl <-
-  scda::synthetic_cdisc_dataset("rcd_2022_06_27", "adsl") %>%
-  dplyr::filter(SAFFL == "Y")
+  synthetic_cdisc_dataset("rcd_2022_06_27", "adsl") %>%
+  filter(SAFFL == "Y")
 
 # Vital signs
 advs <-
-  scda::synthetic_cdisc_dataset("rcd_2022_06_27", "advs") %>%
-  dplyr::filter(PARAMCD %in% c("DIABP", "SYSBP") & SAFFL == "Y" & AVISITN >= 1) %>% # nolint
-  dplyr::group_by(USUBJID, PARAMCD) %>%
-  dplyr::mutate(
+  synthetic_cdisc_dataset("rcd_2022_06_27", "advs") %>%
+  filter(PARAMCD %in% c("DIABP", "SYSBP") & SAFFL == "Y" & AVISITN >= 1) %>% # nolint
+  group_by(USUBJID, PARAMCD) %>%
+  mutate(
     maxDIABP = if_else(PARAMCD == "DIABP", max(AVAL), NA_real_),
     maxSYSBP = if_else(PARAMCD == "SYSBP", max(AVAL), NA_real_)
   ) %>%
-  dplyr::mutate(
+  mutate(
     SBP90 = (PARAMCD == "SYSBP" & maxSYSBP < 90),
     DBP60 = (PARAMCD == "DIABP" & maxDIABP < 60),
   ) %>%
-  formatters::var_relabel(
+  var_relabel(
     SBP90 = "SBP <90",
     DBP60 = "DBP <60"
   )
 
 # Build layout
 lyt <-
-  rtables::basic_table(show_colcounts = TRUE) %>%
-  rtables::split_cols_by("ARM") %>%
-  tern::count_patients_with_flags(
+  basic_table(show_colcounts = TRUE) %>%
+  split_cols_by("ARM") %>%
+  count_patients_with_flags(
     var = "USUBJID",
     flag_variables = var_labels(advs[, c("SBP90", "DBP60")])
   )
@@ -42,14 +42,14 @@ result <- build_table(lyt, df = advs, alt_counts_df = adsl)
 # Add titles/footnotes
 
 ## Top left header
-rtables::top_left(result) <- paste0("Blood Pressure\n(", unique(advs$AVALU)[1], ")")
+top_left(result) <- paste0("Blood Pressure\n(", unique(advs$AVALU)[1], ")")
 
 ## Title
-formatters::main_title(result) <-
+main_title(result) <-
   "Table 33. Percentage of Patients Meeting Specific Hypotension Levels Postbaseline, Safety Population, Pooled Analysis" # nolint
 
 ## Footnotes
-formatters::main_footer(result) <- c(
+main_footer(result) <- c(
   "Source: [include Applicant source, datasets and/or software tools used].",
   "(1) Difference is shown between [treatment arms] (e.g., difference is shown between Drug Name dosage X vs. placebo).", # nolint
   "Abbreviations: CI, confidence interval; N, number of patients in treatment arm with available blood pressure data;",
