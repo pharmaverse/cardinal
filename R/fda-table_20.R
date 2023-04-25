@@ -39,7 +39,7 @@ lyt <- basic_table(show_colcounts = TRUE) %>%
     "AEDECOD",
     .indent_mods = 1L
   ) %>%
-  count_occurrences(
+  count_occurrences_by_grade(
     "AESEV",
     var_labels = "Maximum severity",
     show_labels = "visible"
