@@ -33,8 +33,7 @@ lyt <-
   rtables::split_cols_by("ARM") %>%
   tern::count_patients_with_flags(
     var = "USUBJID",
-    flag_variables = var_labels(advs[, c("SBP90", "DBP60")]), # nolint
-    table_names = "bp"
+    flag_variables = var_labels(advs[, c("SBP90", "DBP60")])
   )
 
 # Build table
