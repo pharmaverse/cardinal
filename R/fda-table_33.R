@@ -13,7 +13,6 @@ adsl <-
 advs <-
   scda::synthetic_cdisc_dataset("rcd_2022_06_27", "advs") %>%
   dplyr::filter(PARAMCD %in% c("DIABP", "SYSBP") & SAFFL == "Y" & AVISITN >= 1) %>% # nolint
-  dplyr::select(STUDYID, USUBJID, ARM, ACTARM, PARAMCD, PARAM, AVAL, AVALU, AVISITN, AVISIT, SAFFL) %>% # nolint
   dplyr::group_by(USUBJID, PARAMCD) %>%
   dplyr::mutate(
     maxDIABP = if_else(PARAMCD == "DIABP", max(AVAL), NA_real_),
