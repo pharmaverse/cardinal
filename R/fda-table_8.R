@@ -54,4 +54,3 @@ Abbreviations: MedDRA, Medical Dictionary for Regulatory Activities; PT, preferr
     )
 
 head(final_list)
-final_list
