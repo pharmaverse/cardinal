@@ -38,8 +38,6 @@ tbl_join <-
     AGESEX  = "Age/\nGender",
     DOSAGE  = "Dosage",
     DTHADY  = "Study\nDay of\nDeath",
-    AEDECOD = "Cause of Death\nMedDRA\nPreferred Term",
-    AETERM  = "Cause of Death\nVerbatim Term",
     DOSDUR  = "Dosing\nDuration\n(Days)"
   ) %>%
   df_explicit_na() %>%
