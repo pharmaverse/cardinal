@@ -31,7 +31,7 @@ adex <-
 tbl_join <-
   adae %>%
   left_join(adex, by = "USUBJID") %>%
-  select(ACTARM, USUBJID, AGESEX, DOSAGE, DOSDUR, DTHADY, AEDECOD, AETERM) %>%
+  select(ACTARM, USUBJID, AGESEX, DOSAGE, DOSDUR, DTHADY, DTHCAUS, DTHCAT) %>%
   var_relabel(
     ACTARM  = "Study\nArm",
     USUBJID = "Patient\nID",
