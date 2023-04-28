@@ -41,7 +41,9 @@ tbl_join <-
     AEDECOD = "Cause of Death\nMedDRA\nPreferred Term",
     AETERM  = "Cause of Death\nVerbatim Term",
     DOSDUR  = "Dosing\nDuration\n(Days)"
-  )
+  ) %>%
+  df_explicit_na() %>%
+  arrange(ACTARM, USUBJID, AGESEX, DOSAGE, DOSDUR, DTHADY)
 
 # Listing
 final_list <-
