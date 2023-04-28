@@ -15,7 +15,7 @@ adae <-
     AGESEX = paste0(AGE, "/", SEX),
     DTHADY = as.character(DTHADY)
   ) %>%
-  distinct(USUBJID, AETERM, AEDECOD, DTHADY, .keep_all = TRUE)
+  distinct(USUBJID, DTHCAT, DTHCAUS, DTHADY, .keep_all = TRUE)
 
 # Dosing
 adex <-
