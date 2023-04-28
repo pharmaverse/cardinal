@@ -49,7 +49,7 @@ tbl_join <-
 final_list <-
   as_listing(
     tbl_join,
-    key_cols = c("ACTARM", "USUBJID", "AGESEX", "DOSAGE", "DOSDUR"),
+    key_cols = c("ACTARM", "USUBJID", "AGESEX", "DOSAGE", "DOSDUR", "DTHADY"),
     disp_cols = NULL,
     main_title = "Table 8. All Individual Patient Deaths, Safety Population, Pooled Analyses (1)",
     main_footer =
