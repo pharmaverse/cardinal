@@ -9,7 +9,7 @@ adae <-
   synthetic_cdisc_dataset("rcd_2022_06_27", "adae") %>%
   filter(SAFFL == "Y" & AESDTH == "Y") %>%
   select(
-    STUDYID, USUBJID, ACTARM, ACTARMCD, AGE, SEX, AETERM, AEDECOD, ASTDY, AESDTH, AEOUT, DTHADY
+    STUDYID, USUBJID, ACTARM, ACTARMCD, AGE, SEX, DTHCAT, DTHCAUS, ASTDY, AESDTH, AEOUT, DTHADY
   ) %>%
   mutate(AGESEX = paste0(AGE, "/", SEX)) %>%
   distinct(USUBJID, AETERM, AEDECOD, DTHADY, .keep_all = TRUE)
