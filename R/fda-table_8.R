@@ -23,7 +23,7 @@ adex <-
   filter(PARAMCD == "TDOSE") %>%
   select(USUBJID, PARAMCD, PARAM, AVAL, AVALU, TRTSDT, TRTEDT) %>%
   mutate(
-    DOSDUR = (TRTEDT - TRTSDT + 1),
+    DOSDUR = (TRTEDT - TRTSDT + 1) %>% as.character(),
     DOSAGE = paste0(AVAL, " ", AVALU)
   )
 
