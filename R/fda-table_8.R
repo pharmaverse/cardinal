@@ -33,13 +33,13 @@ tbl_join <-
   left_join(adex, by = "USUBJID") %>%
   select(ACTARM, USUBJID, AGESEX, DOSAGE, DOSDUR, DTHADY, DTHCAUS, DTHCAT) %>%
   var_relabel(
-    ACTARM  = "Study\nArm",
-    USUBJID = "Patient\nID",
-    AGESEX  = "Age\nGender",
+    ACTARM  = "Study Arm",
+    USUBJID = "Patient ID",
+    AGESEX  = "Age/\nGender",
     DOSAGE  = "Dosage",
     DTHADY  = "Study\nDay of\nDeath",
-    AEDECOD = "MedDRA\nPreferred Term",
-    AETERM  = "Verbatim Term",
+    AEDECOD = "Cause of Death\nMedDRA\nPreferred Term",
+    AETERM  = "Cause of Death\nVerbatim Term",
     DOSDUR  = "Dosing\nDuration\n(Days)"
   )
 
