@@ -11,7 +11,10 @@ adae <-
   select(
     STUDYID, USUBJID, ACTARM, ACTARMCD, AGE, SEX, DTHCAT, DTHCAUS, ASTDY, AESDTH, AEOUT, DTHADY
   ) %>%
-  mutate(AGESEX = paste0(AGE, "/", SEX)) %>%
+  mutate(
+    AGESEX = paste0(AGE, "/", SEX),
+    DTHADY = as.character(DTHADY)
+  ) %>%
   distinct(USUBJID, AETERM, AEDECOD, DTHADY, .keep_all = TRUE)
 
 # Dosing
