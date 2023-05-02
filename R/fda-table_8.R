@@ -38,7 +38,9 @@ tbl_join <-
     AGESEX  = "Age/\nGender",
     DOSAGE  = "Dosage",
     DTHADY  = "Study\nDay of\nDeath",
-    DOSDUR  = "Dosing\nDuration\n(Days)"
+    DOSDUR  = "Dosing\nDuration\n(Days)",
+    DTHCAUS = "Cause of Death\nMedDRA\nPreferred Term",
+    DTHCAT = "Cause of Death\nPreferred Term"
   ) %>%
   df_explicit_na() %>%
   arrange(ACTARM, USUBJID, AGESEX, DOSAGE, DOSDUR, DTHADY)
