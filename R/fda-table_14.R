@@ -10,13 +10,13 @@ adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae") %>%
 adae <- adae %>%
   filter(
     SAFFL == "Y"
-    )
+  )
 
 
 # Build layout
 
 lyt <- basic_table(show_colcounts = TRUE) %>%
-  split_cols_by("SMQ01SC")%>%
+  split_cols_by("SMQ01SC") %>%
   split_cols_by("ARM") %>%
   split_rows_by(
     "AEBODSYS",
