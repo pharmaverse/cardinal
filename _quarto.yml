@@ -1,0 +1,39 @@
+project:
+  type: website
+
+website:
+  search: false
+  navbar: 
+    background: light 
+    tools: 
+      - icon: github 
+        href: https://github.com/pharmaverse/falcon 
+      - icon: youtube 
+        href: https://youtube.com/
+      - icon: slack 
+        href: https://app.slack.com/client/T028PB489D3/C04MQS12MND 
+  back-to-top-navigation: true 
+  page-footer: 
+    background: light 
+    left: "Some contact information" 
+    right: 
+      - icon: github 
+        href: https://github.com/pharmaverse/falcon 
+      - icon: youtube 
+        href: https://youtube.com/ 
+      - icon: slack
+        href: https://app.slack.com/client/T028PB489D3/C04MQS12MND
+    center: 
+      - text: "This website as well as code examples are licensed under the Apache License, Version 2.0."
+          
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+
+editor: visual
+
+
+
+
