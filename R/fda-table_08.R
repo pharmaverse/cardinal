@@ -40,7 +40,7 @@ tbl_join <-
     DTHADY = "Study\nDay of\nDeath",
     DOSDUR = "Dosing\nDuration\n(Days)",
     DTHCAUS = "Cause of Death\nMedDRA\nPreferred Term",
-    DTHCAT = "Cause of Death\nPreferred Term"
+    DTHCAT = "Cause of Death\nVerbatim Term"
   ) %>%
   df_explicit_na(na_level = "") %>%
   arrange(ACTARM, USUBJID, AGESEX, DOSAGE, DOSDUR, DTHADY)
