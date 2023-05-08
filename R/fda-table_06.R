@@ -1,10 +1,9 @@
 #' FDA Table 6: Overview of Adverse Events, Safety Population, Pooled Analyses
 #'
 #' @details
-#' * `df` is typically ADAE.
+#' * `adae` must contain the variables `SAFFL`, `USUBJID`, `TRTEMFL`, `AESEV`, `AESER`, `AESDTH`, `AESLIFE`,
+#'   `AESHOSP`, `AESDISAB`, `AESCONG`, `AESMIE`, `AEACN`, and the variable specified by `arm_var`.
 #' * `alt_counts_df` is typically ADSL.
-#' * `df` must contain the variables `SAFFL`, `TRTEMFL`, `AESEV`, `AESER`, `AESDTH`, `AESLIFE`, `AESHOSP`, `AESDISAB`,
-#'   `AESCONG`, `AESMIE`, `AESACN`, and the variable specified by `arm_var`.
 #' * Columns are split by arm. Overall population column is excluded by default (see `lbl_overall` argument).
 #' * Numbers in table represent the absolute numbers of patients and fraction of `N`.
 #' * All-zero rows are not removed by default (see `prune_0` argument).
@@ -15,18 +14,23 @@
 #' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
 #' adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
 #'
-#' tbl <- make_table_06(df = adae, alt_counts_df = adsl)
+#' tbl <- make_table_06(adae = adae, alt_counts_df = adsl)
 #' tbl
 #'
 #' @export
-make_table_06 <- function(df,
+make_table_06 <- function(adae,
                           alt_counts_df = NULL,
                           show_colcounts = TRUE,
                           arm_var = "ARM",
                           lbl_overall = NULL,
                           prune_0 = FALSE,
                           annotations = NULL) {
-  df <- df %>%
+  checkmate::assert_subset(c(
+    "SAFFL", "USUBJID", "TRTEMFL", "AESEV", "AESER", "AESDTH", "AESLIFE",
+    "AESHOSP", "AESDISAB", "AESCONG", "AESMIE", "AEACN", arm_var
+  ), names(adae))
+
+  adae <- adae %>%
     filter(SAFFL == "Y", TRTEMFL == "Y") %>%
     df_explicit_na() %>%
     mutate(
@@ -51,37 +55,29 @@ make_table_06 <- function(df,
       DSMIE = with_label(AEACN == "DOSE INCREASED", "Other")
     )
 
-  lyt <- basic_table(
-    show_colcounts = show_colcounts,
-    title = if (!is.null(annotations$title)) annotations$title else "",
-    subtitles = if (!is.null(annotations$subtitles)) annotations$subtitles else character(),
-    main_footer = if (!is.null(annotations$main_footer)) annotations$main_footer else character(),
-    prov_footer = if (!is.null(annotations$prov_footer)) annotations$prov_footer else character()
-  ) %>%
-    split_cols_by(arm_var)
+  alt_counts_df <- alt_counts_df_preproc(alt_counts_df)
 
-  if (!is.null(lbl_overall)) lyt <- lyt %>% add_overall_col(lbl_overall)
-
-  lyt <- lyt %>%
+  lyt <- basic_table_annot(show_colcounts, annotations) %>%
+    split_cols_by_arm(arm_var, lbl_overall) %>%
     count_patients_with_flags(
       var = "USUBJID",
-      flag_variables = var_labels(df[, "SER"]),
+      flag_variables = var_labels(adae[, "SER"]),
       table_names = "ser"
     ) %>%
     count_patients_with_flags(
       var = "USUBJID",
-      flag_variables = var_labels(df[, c("SERFATAL", "SERLIFE", "SERHOSP", "SERDISAB", "SERCONG", "SERMIE")]),
+      flag_variables = var_labels(adae[, c("SERFATAL", "SERLIFE", "SERHOSP", "SERDISAB", "SERCONG", "SERMIE")]),
       .indent_mods = 1L,
       table_names = "ser_fl"
     ) %>%
     count_patients_with_flags(
       var = "USUBJID",
-      flag_variables = var_labels(df[, c("WD", "DSM")]),
+      flag_variables = var_labels(adae[, c("WD", "DSM")]),
       table_names = "ae"
     ) %>%
     count_patients_with_flags(
       var = "USUBJID",
-      flag_variables = var_labels(df[, c("DSINT", "DSRED", "DSD", "DSMIE")]),
+      flag_variables = var_labels(adae[, c("DSINT", "DSRED", "DSD", "DSMIE")]),
       .indent_mods = 1L,
       table_names = "ds"
     ) %>%
@@ -97,7 +93,7 @@ make_table_06 <- function(df,
       .indent_mods = 1L
     )
 
-  tbl <- build_table(lyt, df = df, alt_counts_df = alt_counts_df)
+  tbl <- build_table(lyt, df = adae, alt_counts_df = alt_counts_df)
   if (prune_0) tbl <- prune_table(tbl)
 
   tbl

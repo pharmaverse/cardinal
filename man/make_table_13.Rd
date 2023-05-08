@@ -5,19 +5,19 @@
 \title{FDA Table 13: Patients With Common Adverse Events Occurring at >=XX\% Frequency, Safety Population, Pooled Analyses}
 \usage{
 make_table_13(
-  df,
+  adae,
   alt_counts_df = NULL,
   show_colcounts = TRUE,
   min_freq = 0.05,
   arm_var = "ARM",
   pt_var = "AETERM",
-  lbl_pt_var = formatters::var_labels(df, fill = TRUE)[pt_var],
+  lbl_pt_var = formatters::var_labels(adae, fill = TRUE)[pt_var],
   lbl_overall = NULL,
   annotations = NULL
 )
 }
 \arguments{
-\item{df}{(\code{data.frame})\cr data required to build table.}
+\item{adae}{(\code{data.frame})\cr data (typically ADAE) required to build table.}
 
 \item{alt_counts_df}{(\code{character}) alternative (full) data (typically ADSL) used only to calculate column counts.}
 
@@ -43,9 +43,8 @@ FDA Table 13: Patients With Common Adverse Events Occurring at >=XX\% Frequency,
 }
 \details{
 \itemize{
-\item \code{df} is typically ADAE.
+\item \code{adae} must contain \code{SAFFL}, \code{USUBJID}, and the variables specified by \code{pt_var} and \code{arm_var}.
 \item \code{alt_counts_df} is typically ADSL.
-\item \code{df} must contain \code{SAFFL} and the variables specified by \code{pt_var} and \code{arm_var}.
 \item Columns are split by arm. Overall population column is not included by default (see \code{lbl_overall} argument).
 \item Numbers in table represent the absolute numbers of patients and fraction of \code{N}.
 }
@@ -54,7 +53,7 @@ FDA Table 13: Patients With Common Adverse Events Occurring at >=XX\% Frequency,
 adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
 adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
 
-tbl <- make_table_13(df = adae, alt_counts_df = adsl)
+tbl <- make_table_13(adae = adae, alt_counts_df = adsl)
 tbl
 
 }

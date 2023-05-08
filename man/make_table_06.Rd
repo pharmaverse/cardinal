@@ -5,7 +5,7 @@
 \title{FDA Table 6: Overview of Adverse Events, Safety Population, Pooled Analyses}
 \usage{
 make_table_06(
-  df,
+  adae,
   alt_counts_df = NULL,
   show_colcounts = TRUE,
   arm_var = "ARM",
@@ -15,7 +15,7 @@ make_table_06(
 )
 }
 \arguments{
-\item{df}{(\code{data.frame})\cr data required to build table.}
+\item{adae}{(\code{data.frame})\cr data (typically ADAE) required to build table.}
 
 \item{alt_counts_df}{(\code{character}) alternative (full) data (typically ADSL) used only to calculate column counts.}
 
@@ -37,10 +37,9 @@ FDA Table 6: Overview of Adverse Events, Safety Population, Pooled Analyses
 }
 \details{
 \itemize{
-\item \code{df} is typically ADAE.
+\item \code{adae} must contain the variables \code{SAFFL}, \code{USUBJID}, \code{TRTEMFL}, \code{AESEV}, \code{AESER}, \code{AESDTH}, \code{AESLIFE},
+\code{AESHOSP}, \code{AESDISAB}, \code{AESCONG}, \code{AESMIE}, \code{AEACN}, and the variable specified by \code{arm_var}.
 \item \code{alt_counts_df} is typically ADSL.
-\item \code{df} must contain the variables \code{SAFFL}, \code{TRTEMFL}, \code{AESEV}, \code{AESER}, \code{AESDTH}, \code{AESLIFE}, \code{AESHOSP}, \code{AESDISAB},
-\code{AESCONG}, \code{AESMIE}, \code{AESACN}, and the variable specified by \code{arm_var}.
 \item Columns are split by arm. Overall population column is excluded by default (see \code{lbl_overall} argument).
 \item Numbers in table represent the absolute numbers of patients and fraction of \code{N}.
 \item All-zero rows are not removed by default (see \code{prune_0} argument).
@@ -50,7 +49,7 @@ FDA Table 6: Overview of Adverse Events, Safety Population, Pooled Analyses
 adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
 adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
 
-tbl <- make_table_06(df = adae, alt_counts_df = adsl)
+tbl <- make_table_06(adae = adae, alt_counts_df = adsl)
 tbl
 
 }
