@@ -1,112 +1,104 @@
-# Pre-processing
+#' FDA Table 6: Overview of Adverse Events, Safety Population, Pooled Analyses
+#'
+#' @details
+#' * `df` is typically ADAE.
+#' * `alt_counts_df` is typically ADSL.
+#' * `df` must contain the variables `SAFFL`, `TRTEMFL`, `AESEV`, `AESER`, `AESDTH`, `AESLIFE`, `AESHOSP`, `AESDISAB`,
+#'   `AESCONG`, `AESMIE`, `AESACN`, and the variable specified by `arm_var`.
+#' * Columns are split by arm. Overall population column is excluded by default (see `lbl_overall` argument).
+#' * Numbers in table represent the absolute numbers of patients and fraction of `N`.
+#' * All-zero rows are not removed by default (see `prune_0` argument).
+#'
+#' @inheritParams argument_convention
+#'
+#' @examples
+#' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
+#' adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
+#'
+#' tbl <- make_table_06(df = adae, alt_counts_df = adsl)
+#' tbl
+#'
+#' @export
+make_table_06 <- function(df,
+                          alt_counts_df = NULL,
+                          show_colcounts = TRUE,
+                          arm_var = "ARM",
+                          lbl_overall = NULL,
+                          prune_0 = FALSE,
+                          annotations = NULL) {
+  df <- df %>%
+    filter(SAFFL == "Y", TRTEMFL == "Y") %>%
+    df_explicit_na() %>%
+    mutate(
+      SER = with_label(AESER == "Y", "SAE"),
+      SERFATAL = with_label(AESER == "Y" & AESDTH == "Y", "SAEs with fatal outcome"),
+      SERLIFE = with_label(AESER == "Y" & AESLIFE == "Y", "Life-threatening SAEs"),
+      SERHOSP = with_label(AESER == "Y" & AESHOSP == "Y", "SAEs requiring hospitalization"),
+      SERDISAB = with_label(
+        AESER == "Y" & AESDISAB == "Y",
+        "SAEs resulting in substantial disruption of normal life functions"
+      ),
+      SERCONG = with_label(AESER == "Y" & AESCONG == "Y", "Congenital anomaly or birth defect"),
+      SERMIE = with_label(AESER == "Y" & AESMIE == "Y", "Other"),
+      WD = with_label(AEACN == "DRUG WITHDRAWN", "AE leading to permanent discontinuation of study drug"),
+      DSM = with_label(
+        AEACN %in% c("DOSE INCREASED", "DOSE REDUCED", "DOSE RATE REDUCED", "DRUG INTERRUPTED"),
+        "AE leading to dose modification of study drug"
+      ),
+      DSINT = with_label(AEACN == "DRUG INTERRUPTED", "AE leading to interruption of study drug"),
+      DSRED = with_label(AEACN == "DOSE REDUCED", "AE leading to reduction of study drug"),
+      DSD = with_label(AEACN == "DOSE RATE REDUCED", "AE leading to dose delay of study drug"),
+      DSMIE = with_label(AEACN == "DOSE INCREASED", "Other")
+    )
 
-library(dplyr)
-library(scda)
-library(tern)
-
-adsl <- synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") %>% df_explicit_na()
-adae <- synthetic_cdisc_dataset("rcd_2022_10_13", "adae") %>%
-  df_explicit_na() %>%
-  mutate(
-    AESEV = factor(AESEV, labels = c("Mild", "Moderate", "Severe")),
-    SER = AESER == "Y",
-    SERFATAL = AESER == "Y" & AESDTH == "Y",
-    SERLIFE = AESER == "Y" & AESLIFE == "Y",
-    SERHOSP = AESER == "Y" & AESHOSP == "Y",
-    SERDISAB = AESER == "Y" & AESDISAB == "Y",
-    SERCONG = AESER == "Y" & AESCONG == "Y",
-    SERMIE = AESER == "Y" & AESMIE == "Y",
-    WD = AEACN == "DRUG WITHDRAWN",
-    DSM = AEACN %in% c("DOSE INCREASED", "DOSE REDUCED", "DOSE RATE REDUCED", "DRUG INTERRUPTED"),
-    DSINT = AEACN == "DRUG INTERRUPTED",
-    DSRED = AEACN == "DOSE REDUCED",
-    DSD = AEACN == "DOSE RATE REDUCED",
-    DSMIE = AEACN == "DOSE INCREASED"
+  lyt <- basic_table(
+    show_colcounts = show_colcounts,
+    title = if (!is.null(annotations$title)) annotations$title else "",
+    subtitles = if (!is.null(annotations$subtitles)) annotations$subtitles else character(),
+    main_footer = if (!is.null(annotations$main_footer)) annotations$main_footer else character(),
+    prov_footer = if (!is.null(annotations$prov_footer)) annotations$prov_footer else character()
   ) %>%
-  var_relabel(
-    SER = "SAE",
-    SERFATAL = "SAEs with fatal outcome",
-    SERLIFE = "Life-threatening SAEs",
-    SERHOSP = "SAEs requiring hospitalization",
-    SERDISAB = "SAEs resulting in substantial disruption of normal life functions",
-    SERCONG = "Congenital anomaly or birth defect",
-    SERMIE = "Other",
-    WD = "AE leading to permanent discontinuation of study drug",
-    DSM = "AE leading to dose modification of study drug",
-    DSINT = "AE leading to interruption of study drug",
-    DSRED = "AE leading to reduction of study drug",
-    DSD = "AE leading to dose delay of study drug",
-    DSMIE = "Other"
-  )
+    split_cols_by(arm_var)
 
-adae <- adae %>%
-  filter(
-    SAFFL == "Y",
-    TRTEMFL == "Y"
-  )
+  if (!is.null(lbl_overall)) lyt <- lyt %>% add_overall_col(lbl_overall)
 
-# Build layout
+  lyt <- lyt %>%
+    count_patients_with_flags(
+      var = "USUBJID",
+      flag_variables = var_labels(df[, "SER"]),
+      table_names = "ser"
+    ) %>%
+    count_patients_with_flags(
+      var = "USUBJID",
+      flag_variables = var_labels(df[, c("SERFATAL", "SERLIFE", "SERHOSP", "SERDISAB", "SERCONG", "SERMIE")]),
+      .indent_mods = 1L,
+      table_names = "ser_fl"
+    ) %>%
+    count_patients_with_flags(
+      var = "USUBJID",
+      flag_variables = var_labels(df[, c("WD", "DSM")]),
+      table_names = "ae"
+    ) %>%
+    count_patients_with_flags(
+      var = "USUBJID",
+      flag_variables = var_labels(df[, c("DSINT", "DSRED", "DSD", "DSMIE")]),
+      .indent_mods = 1L,
+      table_names = "ds"
+    ) %>%
+    analyze_num_patients(
+      vars = "USUBJID",
+      .stats = "unique",
+      .labels = c(unique = "Any AE"),
+      show_labels = "hidden"
+    ) %>%
+    count_occurrences_by_grade(
+      var = "AESEV",
+      show_labels = "hidden",
+      .indent_mods = 1L
+    )
 
-lyt <- basic_table(show_colcounts = TRUE) %>%
-  split_cols_by("ARM") %>%
-  count_patients_with_flags(
-    var = "USUBJID",
-    flag_variables = var_labels(adae[, "SER"]),
-    table_names = "ser"
-  ) %>%
-  count_patients_with_flags(
-    var = "USUBJID",
-    flag_variables = var_labels(adae[, c("SERFATAL", "SERLIFE", "SERHOSP", "SERDISAB", "SERCONG", "SERMIE")]),
-    .indent_mods = 1L,
-    table_names = "ser_fl"
-  ) %>%
-  count_patients_with_flags(
-    var = "USUBJID",
-    flag_variables = var_labels(adae[, c("WD", "DSM")]),
-    table_names = "ae"
-  ) %>%
-  count_patients_with_flags(
-    var = "USUBJID",
-    flag_variables = var_labels(adae[, c("DSINT", "DSRED", "DSD", "DSMIE")]),
-    .indent_mods = 1L,
-    table_names = "ds"
-  ) %>%
-  analyze_num_patients(
-    var = "USUBJID",
-    .stats = "unique",
-    .labels = c(unique = "Any AE"),
-    show_labels = "hidden"
-  ) %>%
-  count_occurrences_by_grade(
-    var = "AESEV",
-    show_labels = "hidden",
-    .indent_mods = 1L
-  )
+  tbl <- build_table(lyt, df = df, alt_counts_df = alt_counts_df)
+  if (prune_0) tbl <- prune_table(tbl)
 
-# Build table
-
-result <- build_table(lyt, df = adae, alt_counts_df = adsl)
-
-# Add titles/footnotes
-
-main_title(result) <- "Table 6. Overview of Adverse Events(1), Safety Population, Pooled Analyses(2)"
-
-main_footer(result) <- c(
-  "Source: [include Applicant source, datasets and/or software tools used].",
-  "(1) Treatment-emergent AE defined as [definition]. MedDRA version X.",
-  "(2) Duration = [e.g., X-week double-blind treatment period or, median and a range indicating
-    pooled trial durations]."
-)
-
-fnotes_at_path(
-  result,
-  rowpath = c("ma_ser_ser_fl_ae_ds_USUBJID_AESEV", "USUBJID", "unique"), # nolint
-  colpath = NULL
-) <- "Severity as assessed by the investigator"
-
-prov_footer(result) <- c(
-  "Abbreviations: AE, adverse event; CI, confidence interval; MedDRA, Medical Dictionary for Regulatory Activities;
-    N, number of patients in treatment arm; n, number of patients with at least one event; SAE, serious adverse event"
-)
-
-result
+  tbl
+}
