@@ -7,11 +7,23 @@ format: html
 ::: panel-tabset
 ## Spec Screenshot
 
-![](images/table_09.png){fig-align="center"}
+![](images/table_09.png){fig-align="center" width=78%}
+
+## Table
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+library(scda)
+library(falcon)
+
+adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
+adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
+
+make_table_09(adae = adae, alt_counts_df = adsl)
+```
 
 ## Table Setup
 
-```{r, message=FALSE, warning=FALSE}
+```{r, eval=FALSE}
 #| code-fold: show
 
 # Load Libraries & Data
@@ -20,9 +32,12 @@ library(falcon)
 
 adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
 adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
+
+# Output Table
+make_table_09(adae = adae, alt_counts_df = adsl)
 ```
 
-## Table Function
+## Function Details
 
 ### `make_table_09()`
 
@@ -38,10 +53,4 @@ adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
 | `prune_0`        | (`flag`) Whether all-zero rows should be removed from the table. | `FALSE` |
 | `annotations`    | (named `list` of `character`) List of annotations to add to the table. Valid annotations types are `title`, `subtitles`, `main_footer`, and `prov_footer.` Each name-value pair should use the annotation type as name and the desired string as value. | `NULL` |
     
-## Table
-
-```{r}
-make_table_09(adae = adae, alt_counts_df = adsl)
-```
-
 :::
