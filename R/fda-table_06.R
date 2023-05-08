@@ -91,7 +91,8 @@ make_table_06 <- function(adae,
       var = "AESEV",
       show_labels = "hidden",
       .indent_mods = 1L
-    )
+    ) %>%
+    append_topleft(c("", "Event"))
 
   tbl <- build_table(lyt, df = adae, alt_counts_df = alt_counts_df)
   if (prune_0) tbl <- prune_table(tbl)
