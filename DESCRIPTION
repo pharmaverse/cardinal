@@ -16,16 +16,16 @@ Imports:
     checkmate,
     dplyr,
     formatters (>= 0.4.0),
+    lubridate,
     magrittr,
     rtables (>= 0.6.0),
     rlang (>= 0.4.11),
     rlistings (>= 0.2.1),
+    scda (>= 0.1.5),
+    scda.2022 (>= 0.1.3),
     tern (>= 0.7.10)
 Suggests:
     knitr,
-    lubridate,
-    scda (>= 0.1.5),
-    scda.2022 (>= 0.1.3),
     testthat (>= 3.0.0)
 VignetteBuilder:
     knitr
