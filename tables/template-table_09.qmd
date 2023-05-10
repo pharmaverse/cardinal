@@ -41,8 +41,10 @@ make_table_09(adae = adae, alt_counts_df = adsl)
 
 ### `make_table_09()`
 \
-**Required variables:** `SAFFL`, `USUBJID`, `AESER`, `AESOC`, and the variables specified by `pt_var` and `arm_var`.
-\
+Source code for this function is available [here](https://github.com/pharmaverse/falcon/blob/main/R/fda-table_09.R).
+
+**Required variables in `adae`:** `SAFFL`, `USUBJID`, `AESER`, `AESOC`, and the variables specified by `pt_var` and `arm_var`.
+
 
 | Argument         | Description                                                                                                                                                                                                                                             | Default                                             |
 |:------------|:----------------------------------------------|:------------|

@@ -41,11 +41,12 @@ make_table_06(adae = adae, alt_counts_df = adsl)
 
 ### `make_table_06()`
 \
-**Required variables:** `SAFFL`, `USUBJID`, `TRTEMFL`, `AESEV`, `AESER`, `AESDTH`, `AESLIFE`, `AESHOSP`, `AESDISAB`, `AESCONG`, `AESMIE`, `AEACN`, and the variable specified by `arm_var`.
-\
+Source code for this function is available [here](https://github.com/pharmaverse/falcon/blob/main/R/fda-table_06.R).
+
+**Required variables in `adae`:** `SAFFL`, `USUBJID`, `TRTEMFL`, `AESEV`, `AESER`, `AESDTH`, `AESLIFE`, `AESHOSP`, `AESDISAB`, `AESCONG`, `AESMIE`, `AEACN`, and the variable specified by `arm_var`.
 
 | Argument         | Description                                                                                                                                                                                                                                             | Default      |
-|:------------|:----------------------------------------------|:------------|
+|:--------------|:-----------------------------------------|:--------------|
 | `adae`           | (`data.frame`) Data (typically ADAE) required to build table.                                                                                                                                                                                           | *No default* |
 | `alt_counts_df`  | (`character`) Alternative (full) data (typically ADSL) used only to calculate column counts.                                                                                                                                                            | `NULL`       |
 | `show_colcounts` | (`flag`) Whether column counts should be printed.                                                                                                                                                                                                       | `TRUE`       |
