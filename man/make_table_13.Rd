@@ -44,7 +44,7 @@ FDA Table 13: Patients With Common Adverse Events Occurring at >=XX\% Frequency,
 \details{
 \itemize{
 \item \code{adae} must contain \code{SAFFL}, \code{USUBJID}, and the variables specified by \code{pt_var} and \code{arm_var}.
-\item \code{alt_counts_df} is typically ADSL.
+\item \code{alt_counts_df} is typically ADSL and must contain variables \code{SAFFL} and \code{USUBJID}.
 \item Columns are split by arm. Overall population column is not included by default (see \code{lbl_overall} argument).
 \item Numbers in table represent the absolute numbers of patients and fraction of \code{N}.
 }

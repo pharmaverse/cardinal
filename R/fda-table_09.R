@@ -4,7 +4,7 @@
 #' @details
 #' * `adae` must contain `SAFFL`, `USUBJID`, `AESER`, `AESOC`, and the variables specified
 #'   by `pt_var` and `arm_var`.
-#' * `alt_counts_df` is typically ADSL.
+#' * `alt_counts_df` is typically ADSL and must contain variables `SAFFL` and `USUBJID`.
 #' * Columns are split by arm. Overall population column is not included by default (see `lbl_overall` argument).
 #' * Numbers in table represent the absolute numbers of patients and fraction of `N`.
 #' * All-zero rows are removed by default (see `prune_0` argument).
