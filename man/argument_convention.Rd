@@ -23,12 +23,12 @@
 \item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
 the given value as the column label.}
 
-\item{vars}{(\code{vector} of \code{character})\cr variables from \code{df} to include in the table.}
+\item{vars}{(\code{vector} of \code{character})\cr variables from \code{adsl} to include in the table.}
 
 \item{lbl_vars}{(\code{vector} of \code{character})\cr labels corresponding to variables in \code{vars} to print
 in the table. Labels should be ordered according to the order of variables in \code{vars}.}
 
-\item{pt_var}{(\code{character})\cr preferred term variable from \code{df} to include in the table.}
+\item{pt_var}{(\code{character})\cr preferred term variable from \code{adae} to include in the table.}
 
 \item{lbl_pt_var}{(\code{character})\cr label corresponding to preferred term variable \code{pt_var} to print in the table.}
 
@@ -51,6 +51,6 @@ use the annotation type as name and the desired string as value.}
 \item{na_level}{(\code{character})\cr string to represent missing values.}
 }
 \description{
-This documentation lists all the arguments in \code{falcon} that are used repeatedly to output tables.
+This documentation lists all the arguments in \code{falcon} that are used repeatedly by functions to output tables.
 }
 \keyword{internal}

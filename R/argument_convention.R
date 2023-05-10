@@ -1,6 +1,6 @@
 #' Standard Arguments
 #'
-#' This documentation lists all the arguments in `falcon` that are used repeatedly to output tables.
+#' This documentation lists all the arguments in `falcon` that are used repeatedly by functions to output tables.
 #'
 #' @param adsl (`data.frame`)\cr data (typically ADSL) required to build table.
 #' @param adae (`data.frame`)\cr data (typically ADAE) required to build table.
@@ -32,5 +32,4 @@
 #'
 #' @name argument_convention
 #' @keywords internal
-#'
 NULL

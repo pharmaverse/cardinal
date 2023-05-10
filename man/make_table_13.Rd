@@ -27,7 +27,7 @@ make_table_13(
 
 \item{arm_var}{(\code{character})\cr arm variable used to split table into columns.}
 
-\item{pt_var}{(\code{character})\cr preferred term variable from \code{df} to include in the table.}
+\item{pt_var}{(\code{character})\cr preferred term variable from \code{adae} to include in the table.}
 
 \item{lbl_pt_var}{(\code{character})\cr label corresponding to preferred term variable \code{pt_var} to print in the table.}
 
