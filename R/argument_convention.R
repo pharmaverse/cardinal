@@ -6,7 +6,7 @@
 #' @param adae (`data.frame`)\cr data (typically ADAE) required to build table.
 #' @param adex (`data.frame`)\cr data (typically ADEX) required to build table.
 #' @param advs (`data.frame`)\cr data (typically ADVS) required to build table.
-#' @param alt_counts_df (`character`) alternative (full) data (typically ADSL) used only to calculate column counts.
+#' @param alt_counts_df (`character`) alternative (full) dataset (typically ADSL) used only to calculate column counts.
 #' @param show_colcounts (`flag`)\cr whether column counts should be printed.
 #' @param arm_var (`character`)\cr arm variable used to split table into columns.
 #' @param id_var (`character`)\cr variable used as unique subject identifier.
@@ -15,8 +15,8 @@
 #' @param vars (`vector` of `character`)\cr variables from `adsl` to include in the table.
 #' @param lbl_vars (`vector` of `character`)\cr labels corresponding to variables in `vars` to print
 #'   in the table. Labels should be ordered according to the order of variables in `vars`.
-#' @param pt_var (`character`)\cr preferred term variable from `adae` to include in the table.
-#' @param lbl_pt_var (`character`)\cr label corresponding to preferred term variable `pt_var` to print in the table.
+#' @param pref_var (`character`)\cr preferred term variable from `adae` to include in the table.
+#' @param lbl_pref_var (`character`)\cr label corresponding to preferred term variable `pref_var` to print in the table.
 #' @param .stats (`character`)\cr statistics to include in the table. Includes statistics for all variable
 #'   types (only the statistics that are valid for a given variable's type will be printed).
 #'   See [`tern::summarize_vars()`] for options.

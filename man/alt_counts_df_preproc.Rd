@@ -7,7 +7,7 @@
 alt_counts_df_preproc(alt_counts_df)
 }
 \arguments{
-\item{alt_counts_df}{(\code{character}) alternative (full) data (typically ADSL) used only to calculate column counts.}
+\item{alt_counts_df}{(\code{character}) alternative (full) dataset (typically ADSL) used only to calculate column counts.}
 }
 \description{
 If \code{alt_counts_df} is not \code{NULL}, will check for required variables and filter

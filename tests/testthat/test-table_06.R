@@ -12,6 +12,7 @@ test_that("Table 06 generation works with custom values", {
   result <- make_table_06(
     adae,
     adsl,
+    lbl_overall = "Total",
     annotations = list(
       title = "Table 6. Overview of Adverse Events(1), Safety Population, Pooled Analyses(2)",
       main_footer = c(

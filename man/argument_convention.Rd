@@ -12,7 +12,7 @@
 
 \item{advs}{(\code{data.frame})\cr data (typically ADVS) required to build table.}
 
-\item{alt_counts_df}{(\code{character}) alternative (full) data (typically ADSL) used only to calculate column counts.}
+\item{alt_counts_df}{(\code{character}) alternative (full) dataset (typically ADSL) used only to calculate column counts.}
 
 \item{show_colcounts}{(\code{flag})\cr whether column counts should be printed.}
 
@@ -28,9 +28,9 @@ the given value as the column label.}
 \item{lbl_vars}{(\code{vector} of \code{character})\cr labels corresponding to variables in \code{vars} to print
 in the table. Labels should be ordered according to the order of variables in \code{vars}.}
 
-\item{pt_var}{(\code{character})\cr preferred term variable from \code{adae} to include in the table.}
+\item{pref_var}{(\code{character})\cr preferred term variable from \code{adae} to include in the table.}
 
-\item{lbl_pt_var}{(\code{character})\cr label corresponding to preferred term variable \code{pt_var} to print in the table.}
+\item{lbl_pref_var}{(\code{character})\cr label corresponding to preferred term variable \code{pref_var} to print in the table.}
 
 \item{.stats}{(\code{character})\cr statistics to include in the table. Includes statistics for all variable
 types (only the statistics that are valid for a given variable's type will be printed).

@@ -17,7 +17,7 @@ make_table_06(
 \arguments{
 \item{adae}{(\code{data.frame})\cr data (typically ADAE) required to build table.}
 
-\item{alt_counts_df}{(\code{character}) alternative (full) data (typically ADSL) used only to calculate column counts.}
+\item{alt_counts_df}{(\code{character}) alternative (full) dataset (typically ADSL) used only to calculate column counts.}
 
 \item{show_colcounts}{(\code{flag})\cr whether column counts should be printed.}
 
@@ -39,7 +39,7 @@ FDA Table 6: Overview of Adverse Events, Safety Population, Pooled Analyses
 \itemize{
 \item \code{adae} must contain the variables \code{SAFFL}, \code{USUBJID}, \code{TRTEMFL}, \code{AESEV}, \code{AESER}, \code{AESDTH}, \code{AESLIFE},
 \code{AESHOSP}, \code{AESDISAB}, \code{AESCONG}, \code{AESMIE}, \code{AEACN}, and the variable specified by \code{arm_var}.
-\item \code{alt_counts_df} is typically ADSL and must contain variables \code{SAFFL} and \code{USUBJID}.
+\item If specified, \code{alt_counts_df} must contain variables \code{SAFFL} and \code{USUBJID}.
 \item Columns are split by arm. Overall population column is excluded by default (see \code{lbl_overall} argument).
 \item Numbers in table represent the absolute numbers of patients and fraction of \code{N}.
 \item All-zero rows are not removed by default (see \code{prune_0} argument).

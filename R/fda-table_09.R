@@ -3,9 +3,9 @@
 #'
 #' @details
 #' * `adae` must contain `SAFFL`, `USUBJID`, `AESER`, `AESOC`, and the variables specified
-#'   by `pt_var` and `arm_var`.
-#' * `alt_counts_df` is typically ADSL and must contain variables `SAFFL` and `USUBJID`.
-#' * Columns are split by arm. Overall population column is not included by default (see `lbl_overall` argument).
+#'   by `pref_var` and `arm_var`.
+#' * If specified, `alt_counts_df` must contain variables `SAFFL` and `USUBJID`.
+#' * Columns are split by arm. Overall population column is excluded by default (see `lbl_overall` argument).
 #' * Numbers in table represent the absolute numbers of patients and fraction of `N`.
 #' * All-zero rows are removed by default (see `prune_0` argument).
 #'
@@ -23,14 +23,17 @@ make_table_09 <- function(adae,
                           alt_counts_df = NULL,
                           show_colcounts = TRUE,
                           arm_var = "ARM",
-                          pt_var = "AETERM",
-                          lbl_pt_var = formatters::var_labels(adae, fill = TRUE)[pt_var],
+                          pref_var = "AETERM",
+                          lbl_pref_var = formatters::var_labels(adae, fill = TRUE)[pref_var],
                           lbl_overall = NULL,
                           prune_0 = TRUE,
                           annotations = NULL) {
-  checkmate::assert_subset(c("SAFFL", "USUBJID", "AESER", "AESOC", arm_var, pt_var), names(adae))
+  checkmate::assert_subset(c("SAFFL", "USUBJID", "AESER", "AESOC", arm_var, pref_var), names(adae))
 
-  adae <- adae %>% filter(SAFFL == "Y", AESER == "Y")
+  adae <- adae %>%
+    filter(SAFFL == "Y", AESER == "Y") %>%
+    df_explicit_na()
+
   alt_counts_df <- alt_counts_df_preproc(alt_counts_df)
 
   lyt <- basic_table_annot(show_colcounts, annotations) %>%
@@ -51,8 +54,8 @@ make_table_09 <- function(adae,
       .stats = "unique",
       .labels = c(unique = NULL)
     ) %>%
-    count_occurrences(vars = pt_var) %>%
-    append_topleft(paste(" ", lbl_pt_var))
+    count_occurrences(vars = pref_var) %>%
+    append_topleft(paste(" ", lbl_pref_var))
 
   tbl <- build_table(lyt, df = adae, alt_counts_df = alt_counts_df)
   if (prune_0) tbl <- prune_table(tbl)

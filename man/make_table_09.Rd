@@ -10,8 +10,8 @@ make_table_09(
   alt_counts_df = NULL,
   show_colcounts = TRUE,
   arm_var = "ARM",
-  pt_var = "AETERM",
-  lbl_pt_var = formatters::var_labels(adae, fill = TRUE)[pt_var],
+  pref_var = "AETERM",
+  lbl_pref_var = formatters::var_labels(adae, fill = TRUE)[pref_var],
   lbl_overall = NULL,
   prune_0 = TRUE,
   annotations = NULL
@@ -20,15 +20,15 @@ make_table_09(
 \arguments{
 \item{adae}{(\code{data.frame})\cr data (typically ADAE) required to build table.}
 
-\item{alt_counts_df}{(\code{character}) alternative (full) data (typically ADSL) used only to calculate column counts.}
+\item{alt_counts_df}{(\code{character}) alternative (full) dataset (typically ADSL) used only to calculate column counts.}
 
 \item{show_colcounts}{(\code{flag})\cr whether column counts should be printed.}
 
 \item{arm_var}{(\code{character})\cr arm variable used to split table into columns.}
 
-\item{pt_var}{(\code{character})\cr preferred term variable from \code{adae} to include in the table.}
+\item{pref_var}{(\code{character})\cr preferred term variable from \code{adae} to include in the table.}
 
-\item{lbl_pt_var}{(\code{character})\cr label corresponding to preferred term variable \code{pt_var} to print in the table.}
+\item{lbl_pref_var}{(\code{character})\cr label corresponding to preferred term variable \code{pref_var} to print in the table.}
 
 \item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
 the given value as the column label.}
@@ -46,9 +46,9 @@ Safety Population, Pooled Analyses
 \details{
 \itemize{
 \item \code{adae} must contain \code{SAFFL}, \code{USUBJID}, \code{AESER}, \code{AESOC}, and the variables specified
-by \code{pt_var} and \code{arm_var}.
-\item \code{alt_counts_df} is typically ADSL and must contain variables \code{SAFFL} and \code{USUBJID}.
-\item Columns are split by arm. Overall population column is not included by default (see \code{lbl_overall} argument).
+by \code{pref_var} and \code{arm_var}.
+\item If specified, \code{alt_counts_df} must contain variables \code{SAFFL} and \code{USUBJID}.
+\item Columns are split by arm. Overall population column is excluded by default (see \code{lbl_overall} argument).
 \item Numbers in table represent the absolute numbers of patients and fraction of \code{N}.
 \item All-zero rows are removed by default (see \code{prune_0} argument).
 }

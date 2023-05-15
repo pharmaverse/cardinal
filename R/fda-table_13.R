@@ -1,9 +1,9 @@
 #' FDA Table 13: Patients With Common Adverse Events Occurring at >=XX% Frequency, Safety Population, Pooled Analyses
 #'
 #' @details
-#' * `adae` must contain `SAFFL`, `USUBJID`, and the variables specified by `pt_var` and `arm_var`.
-#' * `alt_counts_df` is typically ADSL and must contain variables `SAFFL` and `USUBJID`.
-#' * Columns are split by arm. Overall population column is not included by default (see `lbl_overall` argument).
+#' * `adae` must contain `SAFFL`, `USUBJID`, and the variables specified by `pref_var` and `arm_var`.
+#' * If specified, `alt_counts_df` must contain variables `SAFFL` and `USUBJID`.
+#' * Columns are split by arm. Overall population column is excluded by default (see `lbl_overall` argument).
 #' * Numbers in table represent the absolute numbers of patients and fraction of `N`.
 #'
 #' @inheritParams argument_convention
@@ -22,19 +22,22 @@ make_table_13 <- function(adae,
                           show_colcounts = TRUE,
                           min_freq = 0.05,
                           arm_var = "ARM",
-                          pt_var = "AETERM",
-                          lbl_pt_var = formatters::var_labels(adae, fill = TRUE)[pt_var],
+                          pref_var = "AETERM",
+                          lbl_pref_var = formatters::var_labels(adae, fill = TRUE)[pref_var],
                           lbl_overall = NULL,
                           annotations = NULL) {
-  checkmate::assert_subset(c("SAFFL", "USUBJID", arm_var, pt_var), names(adae))
+  checkmate::assert_subset(c("SAFFL", "USUBJID", arm_var, pref_var), names(adae))
 
-  adae <- adae %>% filter(SAFFL == "Y")
+  adae <- adae %>%
+    filter(SAFFL == "Y") %>%
+    df_explicit_na()
+
   alt_counts_df <- alt_counts_df_preproc(alt_counts_df)
 
   lyt <- basic_table_annot(show_colcounts, annotations) %>%
     split_cols_by_arm(arm_var, lbl_overall) %>%
-    count_occurrences(vars = pt_var) %>%
-    append_topleft(c("", lbl_pt_var))
+    count_occurrences(vars = pref_var) %>%
+    append_topleft(c("", lbl_pref_var))
 
   tbl <- build_table(lyt, df = adae, alt_counts_df = alt_counts_df)
 

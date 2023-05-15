@@ -12,6 +12,7 @@ test_that("Table 09 generation works with custom values", {
   result <- make_table_09(
     adae,
     adsl,
+    lbl_overall = "Total",
     annotations = list(
       title = paste(
         "Table 9. Patients With Serious Adverse Events(1) by System Organ Class and",

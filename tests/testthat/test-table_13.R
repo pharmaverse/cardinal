@@ -13,6 +13,7 @@ test_that("Table 13 generation works with custom values", {
   result <- make_table_13(
     adae,
     adsl,
+    lbl_overall = "Total",
     min_freq = 0.40,
     annotations = list(
       title = paste0(
