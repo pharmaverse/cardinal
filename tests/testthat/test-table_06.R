@@ -13,6 +13,7 @@ test_that("Table 06 generation works with custom values", {
     adae,
     adsl,
     lbl_overall = "Total",
+    prune_0 = TRUE,
     annotations = list(
       title = "Table 6. Overview of Adverse Events(1), Safety Population, Pooled Analyses(2)",
       main_footer = c(
