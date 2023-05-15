@@ -1,72 +1,64 @@
-# Pre-processing
+#' FDA Table 9: Patients With Serious Adverse Events by System Organ Class and Preferred Term,
+#'   Safety Population, Pooled Analyses
+#'
+#' @details
+#' * `adae` must contain `SAFFL`, `USUBJID`, `AESER`, `AESOC`, and the variables specified
+#'   by `pref_var` and `arm_var`.
+#' * If specified, `alt_counts_df` must contain variables `SAFFL` and `USUBJID`.
+#' * Columns are split by arm. Overall population column is excluded by default (see `lbl_overall` argument).
+#' * Numbers in table represent the absolute numbers of patients and fraction of `N`.
+#' * All-zero rows are removed by default (see `prune_0` argument).
+#'
+#' @inheritParams argument_convention
+#'
+#' @examples
+#' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
+#' adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
+#'
+#' tbl <- make_table_09(adae = adae, alt_counts_df = adsl)
+#' tbl
+#'
+#' @export
+make_table_09 <- function(adae,
+                          alt_counts_df = NULL,
+                          show_colcounts = TRUE,
+                          arm_var = "ARM",
+                          pref_var = "AETERM",
+                          lbl_pref_var = formatters::var_labels(adae, fill = TRUE)[pref_var],
+                          lbl_overall = NULL,
+                          prune_0 = TRUE,
+                          annotations = NULL) {
+  checkmate::assert_subset(c("SAFFL", "USUBJID", "AESER", "AESOC", arm_var, pref_var), names(adae))
 
-library(dplyr)
-library(scda)
-library(tern)
+  adae <- adae %>%
+    filter(SAFFL == "Y", AESER == "Y") %>%
+    df_explicit_na()
 
-adsl <- synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
-adae <- synthetic_cdisc_dataset("rcd_2022_10_13", "adae") %>%
-  var_relabel(
-    AETERM = "Preferred Term" # Choose variable to use as Preferred Term
-  )
+  alt_counts_df <- alt_counts_df_preproc(alt_counts_df)
 
-adae <- adae %>%
-  filter(
-    SAFFL == "Y",
-    AESER == "Y"
-  )
+  lyt <- basic_table_annot(show_colcounts, annotations) %>%
+    split_cols_by_arm(arm_var, lbl_overall) %>%
+    analyze_num_patients(
+      vars = "USUBJID",
+      .stats = "unique",
+      .labels = c(unique = "Any SAE")
+    ) %>%
+    split_rows_by(
+      var = "AESOC",
+      split_fun = drop_split_levels,
+      split_label = "System Organ Class",
+      label_pos = "topleft"
+    ) %>%
+    summarize_num_patients(
+      var = "USUBJID",
+      .stats = "unique",
+      .labels = c(unique = NULL)
+    ) %>%
+    count_occurrences(vars = pref_var) %>%
+    append_topleft(paste(" ", lbl_pref_var))
 
-# Build layout
+  tbl <- build_table(lyt, df = adae, alt_counts_df = alt_counts_df)
+  if (prune_0) tbl <- prune_table(tbl)
 
-lyt <- basic_table(show_colcounts = TRUE) %>%
-  split_cols_by("ARM") %>%
-  analyze_num_patients(
-    vars = "USUBJID",
-    .stats = "unique",
-    .labels = c(unique = "Any SAE")
-  ) %>%
-  split_rows_by(
-    var = "AESOC",
-    split_fun = drop_split_levels,
-    split_label = "System Organ Class",
-    label_pos = "topleft"
-  ) %>%
-  summarize_num_patients(
-    var = "USUBJID",
-    .stats = "unique",
-    .labels = c(unique = NULL)
-  ) %>%
-  count_occurrences(
-    vars = "AETERM"
-  ) %>%
-  append_varlabels(
-    df = adae,
-    vars = "AETERM",
-    indent = 1L
-  )
-
-# Build table
-
-result <- build_table(lyt, df = adae, alt_counts_df = adsl)
-
-# Add titles/footnotes
-
-main_title(result) <- paste(
-  "Table 9. Patients With Serious Adverse Events(1) by System Organ Class and",
-  "Preferred Term, Safety Population, Pooled Analyses(2)"
-)
-main_footer(result) <- c(
-  "Source: [include Applicant source, datasets and/or software tools used].",
-  "(1) Defined as any untoward medical occurrence that, at any dose that results in death, is life-threatening,
-    requires hospitalization or prolongation of existing hospitalization, results in persistent incapacity or
-    substantial disruption of the ability to conduct normal life functions, or is a congenital anomaly or
-    birth defect.",
-  "(2) Duration = [e.g., X week double-blind treatment period or median and
-    a range indicating pooled trial durations]."
-)
-prov_footer(result) <- c(
-  "Abbreviations: AE, adverse event; CI, confidence interval; N, number of patients in treatment arm;
-    n, number of patients with adverse event; PT, preferred term; SAE, serious adverse event; SOC, System Organ Class"
-)
-
-result
+  tbl
+}
