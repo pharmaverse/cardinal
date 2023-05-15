@@ -50,7 +50,7 @@ make_table_32 <- function(advs,
 
   alt_counts_df <- alt_counts_df_preproc(alt_counts_df)
 
-  lyt <-  basic_table_annot(show_colcounts, annotations) %>%
+  lyt <- basic_table_annot(show_colcounts, annotations) %>%
     split_cols_by_arm(arm_var, lbl_overall) %>%
     count_patients_with_flags(
       var = "USUBJID",
