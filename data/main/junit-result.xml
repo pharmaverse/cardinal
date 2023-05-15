@@ -1,6 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="falcon" timestamp="2023-05-02T12:54:28Z" hostname="98e53ccbff03" tests="1" skipped="0" failures="0" errors="0" time="0.022">
-    <testcase time="0.0220000000000002" classname="falcon" name="dummy_test"/>
+  <testsuite name="table_06" timestamp="2023-05-15T20:27:41Z" hostname="1f718a83ad06" tests="4" skipped="2" failures="0" errors="0" time="1.945">
+    <testcase time="0.924" classname="table_06" name="Table_06_generation_works_with_default_values"/>
+    <testcase time="0.18" classname="table_06" name="Table_06_generation_works_with_default_values">
+      <skipped message="Reason: On CRAN ('test-table_06.R:8:3')"/>
+    </testcase>
+    <testcase time="0.653" classname="table_06" name="Table_06_generation_works_with_custom_values"/>
+    <testcase time="0.188" classname="table_06" name="Table_06_generation_works_with_custom_values">
+      <skipped message="Reason: On CRAN ('test-table_06.R:40:3')"/>
+    </testcase>
+  </testsuite>
+  <testsuite name="table_09" timestamp="2023-05-15T20:27:43Z" hostname="1f718a83ad06" tests="4" skipped="2" failures="0" errors="0" time="0.97">
+    <testcase time="0.403" classname="table_09" name="Table_09_generation_works_with_default_values"/>
+    <testcase time="0.0650000000000004" classname="table_09" name="Table_09_generation_works_with_default_values">
+      <skipped message="Reason: On CRAN ('test-table_09.R:8:3')"/>
+    </testcase>
+    <testcase time="0.436" classname="table_09" name="Table_09_generation_works_with_custom_values"/>
+    <testcase time="0.0659999999999998" classname="table_09" name="Table_09_generation_works_with_custom_values">
+      <skipped message="Reason: On CRAN ('test-table_09.R:39:3')"/>
+    </testcase>
+  </testsuite>
+  <testsuite name="table_13" timestamp="2023-05-15T20:27:44Z" hostname="1f718a83ad06" tests="4" skipped="2" failures="0" errors="0" time="0.533">
+    <testcase time="0.213" classname="table_13" name="Table_13_generation_works_with_default_values"/>
+    <testcase time="0.0609999999999999" classname="table_13" name="Table_13_generation_works_with_default_values">
+      <skipped message="Reason: On CRAN ('test-table_13.R:8:3')"/>
+    </testcase>
+    <testcase time="0.215" classname="table_13" name="Table_13_generation_works_with_custom_values"/>
+    <testcase time="0.0440000000000005" classname="table_13" name="Table_13_generation_works_with_custom_values">
+      <skipped message="Reason: On CRAN ('test-table_13.R:38:3')"/>
+    </testcase>
   </testsuite>
 </testsuites>
