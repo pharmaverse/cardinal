@@ -15,6 +15,7 @@ test_that("Table 05 generation works with custom values", {
     adsl,
     u_trtdur = "years",
     lbl_overall = "Total\nPopulation",
+    prune_0 = TRUE,
     annotations = list(
       title = "Table 5. Duration of Treatment Exposure, Safety Population, Pooled Analyses*",
       main_footer = paste0(
