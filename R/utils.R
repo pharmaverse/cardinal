@@ -7,7 +7,7 @@
 #'
 #' @examples
 #' lyt <- basic_table_annot(annotations = list(title = "Title", main_footer = "Main Footer"))
-#' build_table(lyt, df = data.frame())
+#' rtables::build_table(lyt, df = data.frame())
 #'
 #' @export
 basic_table_annot <- function(show_colcounts = TRUE, annotations = NULL) {
@@ -29,10 +29,12 @@ basic_table_annot <- function(show_colcounts = TRUE, annotations = NULL) {
 #' @param lyt (`rtables` layout object)\cr Layout object pre-data used for tabulation.
 #'
 #' @examples
+#' library(magrittr)
+#'
 #' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
 #'
 #' lyt <- rtables::basic_table() %>% split_cols_by_arm(lbl_overall = "All Arms")
-#' build_table(lyt, df = adsl)
+#' rtables::build_table(lyt, df = adsl)
 #'
 #' @export
 split_cols_by_arm <- function(lyt, arm_var = "ARM", lbl_overall = NULL) {

@@ -19,6 +19,6 @@ argument. Adds any annotations supplied via the \code{annotations} argument.
 }
 \examples{
 lyt <- basic_table_annot(annotations = list(title = "Title", main_footer = "Main Footer"))
-build_table(lyt, df = data.frame())
+rtables::build_table(lyt, df = data.frame())
 
 }
