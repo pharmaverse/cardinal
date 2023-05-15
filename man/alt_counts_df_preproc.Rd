@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{alt_counts_df_preproc}
 \alias{alt_counts_df_preproc}
-\title{Preprocess \code{alt_counts_df} for Safety Population}
+\title{Pre-Process \code{alt_counts_df} for Safety Population}
 \usage{
 alt_counts_df_preproc(alt_counts_df)
 }

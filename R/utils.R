@@ -40,7 +40,7 @@ split_cols_by_arm <- function(lyt, arm_var = "ARM", lbl_overall = NULL) {
   if (!is.null(lbl_overall)) lyt %>% add_overall_col(lbl_overall) else lyt
 }
 
-#' Preprocess `alt_counts_df` for Safety Population
+#' Pre-Process `alt_counts_df` for Safety Population
 #'
 #' If `alt_counts_df` is not `NULL`, will check for required variables and filter
 #' to include only safety population, then apply [`tern::df_explicit_na()`].
