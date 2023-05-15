@@ -5,12 +5,12 @@
 \title{FDA Table 2: Baseline Demographic and Clinical Characteristics Safety Population, Pooled Analyses}
 \usage{
 make_table_02(
-  adsl,
+  df,
   alt_counts_df = NULL,
   show_colcounts = TRUE,
   arm_var = "ARM",
   vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY"),
-  lbl_vars = formatters::var_labels(adsl, fill = TRUE)[vars],
+  lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
   lbl_overall = "Total Population",
   .stats = c("mean_sd", "median_range", "count_fraction"),
   .formats = NULL,
@@ -20,7 +20,7 @@ make_table_02(
 )
 }
 \arguments{
-\item{adsl}{(\code{data.frame})\cr data (typically ADSL) required to build table.}
+\item{df}{(\code{data.frame})\cr data required to build table.}
 
 \item{alt_counts_df}{(\code{character}) alternative (full) dataset (typically ADSL) used only to calculate column counts.}
 
@@ -57,10 +57,10 @@ FDA Table 2: Baseline Demographic and Clinical Characteristics Safety Population
 }
 \details{
 \itemize{
-\item \code{adsl} must contain \code{SAFFL} and the variables specified by \code{vars} and \code{arm_var}.
+\item \code{df} must contain \code{SAFFL} and the variables specified by \code{vars} and \code{arm_var}.
 \item If specified, \code{alt_counts_df} must contain \code{SAFFL}, \code{USUBJID}, and the variable specified by \code{arm_var}.
 \item Columns are split by arm. Overall population column is included by default (see \code{lbl_overall} argument).
-\item Information from either ADSUB or ADVS is generally included into \code{adsl} prior to analysis.
+\item Information from either ADSUB or ADVS is generally included into \code{df} prior to analysis.
 \item Numbers in table for non-numeric variables represent the absolute numbers of patients and fraction of \code{N}.
 \item All-zero rows are removed by default (see \code{prune_0} argument).
 }
@@ -79,7 +79,7 @@ adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") \%>\%
     AGE = "Age, years"
   )
 
-tbl <- make_table_02(adsl = adsl)
+tbl <- make_table_02(df = adsl)
 tbl
 
 }

@@ -1,10 +1,10 @@
 #' FDA Table 2: Baseline Demographic and Clinical Characteristics Safety Population, Pooled Analyses
 #'
 #' @details
-#' * `adsl` must contain `SAFFL` and the variables specified by `vars` and `arm_var`.
+#' * `df` must contain `SAFFL` and the variables specified by `vars` and `arm_var`.
 #' * If specified, `alt_counts_df` must contain `SAFFL`, `USUBJID`, and the variable specified by `arm_var`.
 #' * Columns are split by arm. Overall population column is included by default (see `lbl_overall` argument).
-#' * Information from either ADSUB or ADVS is generally included into `adsl` prior to analysis.
+#' * Information from either ADSUB or ADVS is generally included into `df` prior to analysis.
 #' * Numbers in table for non-numeric variables represent the absolute numbers of patients and fraction of `N`.
 #' * All-zero rows are removed by default (see `prune_0` argument).
 #'
@@ -24,25 +24,25 @@
 #'     AGE = "Age, years"
 #'   )
 #'
-#' tbl <- make_table_02(adsl = adsl)
+#' tbl <- make_table_02(df = adsl)
 #' tbl
 #'
 #' @export
-make_table_02 <- function(adsl,
+make_table_02 <- function(df,
                           alt_counts_df = NULL,
                           show_colcounts = TRUE,
                           arm_var = "ARM",
                           vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY"),
-                          lbl_vars = formatters::var_labels(adsl, fill = TRUE)[vars],
+                          lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
                           lbl_overall = "Total Population",
                           .stats = c("mean_sd", "median_range", "count_fraction"),
                           .formats = NULL,
                           na_rm = FALSE,
                           prune_0 = TRUE,
                           annotations = NULL) {
-  checkmate::assert_subset(c("SAFFL", vars, arm_var), names(adsl))
+  checkmate::assert_subset(c("SAFFL", vars, arm_var), names(df))
 
-  adsl <- adsl %>%
+  df <- df %>%
     filter(SAFFL == "Y") %>%
     df_explicit_na()
 
@@ -60,7 +60,7 @@ make_table_02 <- function(adsl,
     ) %>%
     append_topleft(c("", "Characteristic"))
 
-  tbl <- build_table(lyt, df = adsl, alt_counts_df = alt_counts_df)
+  tbl <- build_table(lyt, df = df, alt_counts_df = alt_counts_df)
   if (prune_0) tbl <- prune_table(tbl)
 
   tbl

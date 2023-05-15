@@ -24,7 +24,7 @@ test_that("Table 02 generation works with custom values", {
   anl <- dplyr::left_join(adsl, advs, by = "USUBJID") %>% df_explicit_na()
 
   result <- make_table_02(
-    adsl = anl,
+    anl,
     vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY", "AVAL"),
     lbl_vars = c(
       "Sex", "Age, years", "Age Group, years", "Race", "Ethnicity",
