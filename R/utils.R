@@ -80,7 +80,7 @@ alt_counts_df_preproc <- function(alt_counts_df) {
 assert_flag_variables <- function(df, flag_vars, na_level = "<Missing>") {
   all(sapply(flag_vars, function(x) {
     checkmate::expect_subset(
-      as.character(unique(df[[x]])), c("Y", "N", NA, na_level),
+      as.character(unique(df[[x]])), c("Y", "N", "", NA, na_level),
       label = paste0("unique(df$", x, ")")
     )
   }) == "Y")
