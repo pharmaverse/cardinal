@@ -11,6 +11,7 @@ make_table_07(
   arm_var = "ARM",
   lbl_overall = NULL,
   prune_0 = TRUE,
+  na_level = "MISSING",
   annotations = NULL
 )
 }
@@ -28,6 +29,8 @@ the given value as the column label.}
 
 \item{prune_0}{(\code{flag})\cr whether all-zero rows should be removed from the table.}
 
+\item{na_level}{(\code{character})\cr string to represent missing values.}
+
 \item{annotations}{(named \code{list} of \code{character})\cr list of annotations to add to the table. Valid
 annotations types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
 use the annotation type as name and the desired string as value.}
@@ -39,6 +42,8 @@ FDA Table 7: Deaths, Safety Population, Pooled Analyses
 \itemize{
 \item \code{adae} must contain \code{SAFFL}, \code{USUBJID}, \code{TRTEMFL}, \code{DTHFL}, \code{DTHCAUS}, and the variable specified by \code{arm_var}.
 \item If specified, \code{alt_counts_df} must contain \code{SAFFL}, \code{USUBJID}, and the variable specified by \code{arm_var}.
+\item Flag variables (i.e. \code{XXXFL}) are expected to take two values: \code{"Y"} (true) and \code{"N"} (false). Missing values in
+flag variables are treated as \code{"N"}.
 \item Columns are split by arm. Overall population column is excluded by default (see \code{lbl_overall} argument).
 \item Numbers in table represent the absolute numbers of patients and fraction of \code{N} for category summary rows and
 fraction of \code{n} (number of patients in current category) for all other rows.
