@@ -40,6 +40,8 @@ FDA Table 6: Overview of Adverse Events, Safety Population, Pooled Analyses
 \item \code{adae} must contain the variables \code{SAFFL}, \code{USUBJID}, \code{TRTEMFL}, \code{AESEV}, \code{AESER}, \code{AESDTH}, \code{AESLIFE},
 \code{AESHOSP}, \code{AESDISAB}, \code{AESCONG}, \code{AESMIE}, \code{AEACN}, and the variable specified by \code{arm_var}.
 \item If specified, \code{alt_counts_df} must contain variables \code{SAFFL} and \code{USUBJID}.
+\item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
+flag variables are treated as \code{"N"}.
 \item Columns are split by arm. Overall population column is excluded by default (see \code{lbl_overall} argument).
 \item Numbers in table represent the absolute numbers of patients and fraction of \code{N}.
 \item All-zero rows are not removed by default (see \code{prune_0} argument).
