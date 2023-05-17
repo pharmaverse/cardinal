@@ -26,6 +26,10 @@ make_table_14(
 
 \item{arm_var}{(\code{character})\cr arm variable used to split table into columns.}
 
+\item{fmqsc_var}{(\code{character})\cr FMQ scope variable to use in table.}
+
+\item{fmqnam_var}{(\code{character})\cr FMQ reference name variable to use in table.}
+
 \item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
 the given value as the column label.}
 
