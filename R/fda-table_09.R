@@ -5,6 +5,8 @@
 #' * `adae` must contain `SAFFL`, `USUBJID`, `AESER`, `AESOC`, and the variables specified
 #'   by `pref_var` and `arm_var`.
 #' * If specified, `alt_counts_df` must contain variables `SAFFL` and `USUBJID`.
+#' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
+#'   flag variables are treated as `"N"`.
 #' * Columns are split by arm. Overall population column is excluded by default (see `lbl_overall` argument).
 #' * Numbers in table represent the absolute numbers of patients and fraction of `N`.
 #' * All-zero rows are removed by default (see `prune_0` argument).
@@ -29,6 +31,7 @@ make_table_09 <- function(adae,
                           prune_0 = TRUE,
                           annotations = NULL) {
   checkmate::assert_subset(c("SAFFL", "USUBJID", "AESER", "AESOC", arm_var, pref_var), names(adae))
+  assert_flag_variables(adae, "SAFFL")
 
   adae <- adae %>%
     filter(SAFFL == "Y", AESER == "Y") %>%
