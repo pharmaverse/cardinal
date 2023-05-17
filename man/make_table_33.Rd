@@ -43,6 +43,8 @@ Safety Population, Pooled Analysis
 specified by \code{arm_var}.
 \item If specified, \code{alt_counts_df} must contain variables \code{SAFFL} and \code{USUBJID}, and the variable
 specified by \code{arm_var}.
+\item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
+flag variables are treated as \code{"N"}.
 \item Columns are split by arm. Overall population column is excluded by default (see \code{lbl_overall} argument).
 \item Numbers in table for non-numeric variables represent the absolute numbers of patients and fraction of \code{N}.
 \item All-zero rows are not removed by default (see \code{prune_0} argument).

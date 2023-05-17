@@ -41,6 +41,8 @@ FDA Table 8: All Individual Patient Deaths, Safety Population, Pooled Analyses
 \item \code{adae} must contain \code{SAFFL}, \code{USUBJID}, \code{AGE}, \code{SEX}, \code{AESDTH}, \code{DTHADY}, and the variables specified by
 \code{dth_vars} and \code{arm_var}.
 \item \code{adex} must contain \code{SAFFL}, \code{USUBJID}, \code{PARAMCD}, \code{TRTSDT}, \code{TRTEDT}, \code{AVAL}, and \code{AVALU}.
+\item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
+flag variables are treated as \code{"N"}.
 }
 }
 \examples{

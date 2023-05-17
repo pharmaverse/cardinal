@@ -4,6 +4,8 @@
 #' * `adae` must contain `SAFFL`, `USUBJID`, `AGE`, `SEX`, `AESDTH`, `DTHADY`, and the variables specified by
 #'   `dth_vars` and `arm_var`.
 #' * `adex` must contain `SAFFL`, `USUBJID`, `PARAMCD`, `TRTSDT`, `TRTEDT`, `AVAL`, and `AVALU`.
+#' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
+#'   flag variables are treated as `"N"`.
 #'
 #' @inheritParams argument_convention
 #' @param dth_vars (`vector` of `character`)\cr additional death variables from `adae` to include in the table.
@@ -28,10 +30,11 @@ make_table_08 <- function(adae,
   checkmate::assert_subset(c(
     "SAFFL", "USUBJID", "AGE", "SEX", "AESDTH", "DTHADY", dth_vars, arm_var
   ), names(adae))
-
   checkmate::assert_subset(c(
     "SAFFL", "USUBJID", "PARAMCD", "TRTSDT", "TRTEDT", "AVAL", "AVALU"
   ), names(adex))
+  assert_flag_variables(adae, "SAFFL")
+  assert_flag_variables(adex, "SAFFL")
 
   # Deaths
   adae <- adae %>%
