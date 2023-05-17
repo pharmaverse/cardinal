@@ -1,64 +1,54 @@
-# Pre-processing
+#' FDA Table 13: Patients With Common Adverse Events Occurring at >=XX% Frequency, Safety Population, Pooled Analyses
+#'
+#' @details
+#' * `adae` must contain `SAFFL`, `USUBJID`, and the variables specified by `pref_var` and `arm_var`.
+#' * If specified, `alt_counts_df` must contain variables `SAFFL` and `USUBJID`.
+#' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
+#'   flag variables are treated as `"N"`.
+#' * Columns are split by arm. Overall population column is excluded by default (see `lbl_overall` argument).
+#' * Numbers in table represent the absolute numbers of patients and fraction of `N`.
+#'
+#' @inheritParams argument_convention
+#' @param min_freq (`proportion`)\cr minimum % frequency (fraction of `N`) required in any column to include each row.
+#'
+#' @examples
+#' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
+#' adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
+#'
+#' tbl <- make_table_13(adae = adae, alt_counts_df = adsl)
+#' tbl
+#'
+#' @export
+make_table_13 <- function(adae,
+                          alt_counts_df = NULL,
+                          show_colcounts = TRUE,
+                          min_freq = 0.05,
+                          arm_var = "ARM",
+                          pref_var = "AETERM",
+                          lbl_pref_var = formatters::var_labels(adae, fill = TRUE)[pref_var],
+                          lbl_overall = NULL,
+                          annotations = NULL) {
+  checkmate::assert_subset(c("SAFFL", "USUBJID", arm_var, pref_var), names(adae))
+  assert_flag_variables(adae, "SAFFL")
 
-library(dplyr)
-library(scda)
-library(tern)
+  adae <- adae %>%
+    filter(SAFFL == "Y") %>%
+    df_explicit_na()
 
-adsl <- synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
-adae <- synthetic_cdisc_dataset("rcd_2022_10_13", "adae") %>%
-  var_relabel(
-    AETERM = "Preferred Term(3)" # Choose variable to use as Preferred Term
+  alt_counts_df <- alt_counts_df_preproc(alt_counts_df)
+
+  lyt <- basic_table_annot(show_colcounts, annotations) %>%
+    split_cols_by_arm(arm_var, lbl_overall) %>%
+    count_occurrences(vars = pref_var) %>%
+    append_topleft(c("", lbl_pref_var))
+
+  tbl <- build_table(lyt, df = adae, alt_counts_df = alt_counts_df)
+
+  row_condition <- has_fraction_in_any_col(
+    atleast = min_freq,
+    col_names = names(table(adae[[arm_var]]))
   )
+  tbl <- prune_table(tbl, keep_rows(row_condition))
 
-adae <- adae %>%
-  filter(
-    SAFFL == "Y"
-  )
-
-# Build layout
-
-lyt <- basic_table(show_colcounts = TRUE) %>%
-  split_cols_by("ARM") %>%
-  count_occurrences(
-    vars = "AETERM"
-  ) %>%
-  append_varlabels(
-    df = adae,
-    vars = "AETERM"
-  )
-
-# Build table
-
-result <- build_table(lyt, df = adae, alt_counts_df = adsl)
-
-# Prune table
-
-x <- 0.05 # Minimum cut-off percentage
-
-row_condition <- has_fraction_in_any_col(
-  atleast = x,
-  col_names = names(table(adsl$ARM))
-)
-result <- prune_table(result, keep_rows(row_condition))
-
-# Add titles/footnotes
-
-main_title(result) <- paste0(
-  "Table 13. Patients With Common Adverse Events(1) Occurring at >=", x * 100,
-  "% Frequency, Safety Population, Pooled Analyses(2)"
-)
-
-main_footer(result) <- c(
-  "Source: [include Applicant source, datasets and/or software tools used].",
-  "(1) Treatment-emergent adverse event defined as [definition]. MedDRA version X.",
-  "(2) Duration = [e.g., X week double-blind treatment period or median and a range indicating
-    pooled trial durations].",
-  "(3) Coded as MedDRA preferred terms."
-)
-
-prov_footer(result) <- c(
-  "Abbreviations: CI, confidence interval; MedDRA, Medical Dictionary for Regulatory Activities;
-    N, number of patients in treatment arm; n, number of patients with adverse event; PT, preferred term"
-)
-
-result
+  tbl
+}
