@@ -57,8 +57,31 @@ split_cols_by_arm <- function(lyt, arm_var = "ARM", lbl_overall = NULL) {
 alt_counts_df_preproc <- function(alt_counts_df) {
   if (!is.null(alt_counts_df)) {
     checkmate::assert_subset(c("SAFFL", "USUBJID"), names(alt_counts_df))
+    assert_flag_variables(alt_counts_df, "SAFFL")
     alt_counts_df %>%
       filter(SAFFL == "Y") %>%
       df_explicit_na()
   }
+}
+
+#' Check Values of Flag Variables
+#'
+#' Flag variables are expected to take one of two values: `"Y"` (yes/true) or
+#' `"N"` (no/false). Missing values are also accepted and treated as `"N"`.
+#'
+#' @inheritParams argument_convention
+#' @param flag_vars (`vector` of `character`)\cr names of flag variables within `df` to check.
+#'
+#' @examples
+#' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
+#' falcon:::assert_flag_variables(adsl, c("SAFFL", "ITTFL"))
+#'
+#' @keywords internal
+assert_flag_variables <- function(df, flag_vars, na_level = "<Missing>") {
+  all(sapply(flag_vars, function(x) {
+    checkmate::expect_subset(
+      as.character(unique(df[[x]])), c("Y", "N", "", NA, na_level),
+      label = paste0("unique(df$", x, ")")
+    )
+  }) == "Y")
 }
