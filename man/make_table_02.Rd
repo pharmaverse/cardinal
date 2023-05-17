@@ -59,6 +59,8 @@ FDA Table 2: Baseline Demographic and Clinical Characteristics Safety Population
 \itemize{
 \item \code{df} must contain \code{SAFFL} and the variables specified by \code{vars} and \code{arm_var}.
 \item If specified, \code{alt_counts_df} must contain \code{SAFFL}, \code{USUBJID}, and the variable specified by \code{arm_var}.
+\item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
+flag variables are treated as \code{"N"}.
 \item Columns are split by arm. Overall population column is included by default (see \code{lbl_overall} argument).
 \item Information from either ADSUB or ADVS is generally included into \code{df} prior to analysis.
 \item Numbers in table for non-numeric variables represent the absolute numbers of patients and fraction of \code{N}.

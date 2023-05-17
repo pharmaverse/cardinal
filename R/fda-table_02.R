@@ -3,6 +3,8 @@
 #' @details
 #' * `df` must contain `SAFFL` and the variables specified by `vars` and `arm_var`.
 #' * If specified, `alt_counts_df` must contain `SAFFL`, `USUBJID`, and the variable specified by `arm_var`.
+#' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
+#'   flag variables are treated as `"N"`.
 #' * Columns are split by arm. Overall population column is included by default (see `lbl_overall` argument).
 #' * Information from either ADSUB or ADVS is generally included into `df` prior to analysis.
 #' * Numbers in table for non-numeric variables represent the absolute numbers of patients and fraction of `N`.
@@ -41,6 +43,7 @@ make_table_02 <- function(df,
                           prune_0 = TRUE,
                           annotations = NULL) {
   checkmate::assert_subset(c("SAFFL", vars, arm_var), names(df))
+  assert_flag_variables(df, "SAFFL")
 
   df <- df %>%
     filter(SAFFL == "Y") %>%
