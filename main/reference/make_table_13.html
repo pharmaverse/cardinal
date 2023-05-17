@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">falcon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0.9006</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0.9007</span>
       </span>
     </div>
 
@@ -28,12 +28,6 @@
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
-<!-- start dropdown for versions --> <li class="nav-item dropdown">
-        <a href="#" class="nav-link dropdown-toggle"
-          data-bs-toggle="dropdown" role="button"
-          aria-expanded="false" aria-haspopup="true"
-          id="dropdown-versions">Versions</a> <div class="dropdown-menu" aria-labelledby="dropdown-versions"> <a class="dropdown-item" data-toggle="tooltip" title="" href="https://pharmaverse.github.io/falcon/main">main</a> </div></li>
-<!-- end dropdown for versions -->
       </ul><ul class="nav navbar-nav navbar-right"><li>
   <a href="https://github.com/pharmaverse/falcon/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
@@ -118,6 +112,8 @@ use the annotation type as name and the desired string as value.</p></dd>
     
 <ul><li><p><code>adae</code> must contain <code>SAFFL</code>, <code>USUBJID</code>, and the variables specified by <code>pref_var</code> and <code>arm_var</code>.</p></li>
 <li><p>If specified, <code>alt_counts_df</code> must contain variables <code>SAFFL</code> and <code>USUBJID</code>.</p></li>
+<li><p>Flag variables (i.e. <code>XXXFL</code>) are expected to have two levels: <code>"Y"</code> (true) and <code>"N"</code> (false). Missing values in
+flag variables are treated as <code>"N"</code>.</p></li>
 <li><p>Columns are split by arm. Overall population column is excluded by default (see <code>lbl_overall</code> argument).</p></li>
 <li><p>Numbers in table represent the absolute numbers of patients and fraction of <code>N</code>.</p></li>
 </ul></div>
