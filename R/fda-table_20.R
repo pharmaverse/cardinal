@@ -4,6 +4,8 @@
 #' * `adae` must contain `SAFFL`, `USUBJID`, `AEDECOD`, `AESEV`, `AESER`, `AESDTH`, `EOSSTT`, `AEREL`, and the
 #'   variables specified by `pref_var`, `aesifl_var`, `aelabfl_var`, and `arm_var`.
 #' * If specified, `alt_counts_df` must contain `SAFFL`, `USUBJID`, and the variable specified by `arm_var`.
+#' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
+#'   flag variables are treated as `"N"`.
 #' * Columns are split by arm. Overall population column is excluded by default (see `lbl_overall` argument).
 #' * Numbers in table represent the absolute numbers of patients and fraction of `N`.
 #' * All-zero rows are removed by default (see `prune_0` argument).
@@ -38,6 +40,7 @@ make_table_20 <- function(adae,
     "SAFFL", "USUBJID", "AEDECOD", "AESEV", "AESER", "AESDTH", "EOSSTT", "AEREL",
     pref_var, aesifl_var, aelabfl_var, arm_var
   ), names(adae))
+  assert_flag_variables(adae, c("SAFFL", aesifl_var, aelabfl_var))
 
   adae <- adae %>%
     filter(SAFFL == "Y", AESIFL == "Y") %>%
