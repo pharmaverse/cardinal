@@ -7,6 +7,8 @@
 assert_flag_variables(df, flag_vars, na_level = "<Missing>")
 }
 \arguments{
+\item{df}{(\code{data.frame})\cr data required to build table.}
+
 \item{flag_vars}{(\code{vector} of \code{character})\cr names of flag variables within \code{df} to check.}
 
 \item{na_level}{(\code{character})\cr string to represent missing values.}

@@ -56,6 +56,8 @@ FDA Table 5: Duration of Treatment Exposure, Safety Population, Pooled Analyses
 \item \code{df} must contain \code{SAFFL}, \code{USUBJID}, and the variables specified by \code{arm_var}, \code{id_var}, \code{trtsdtm_var},
 and \code{trtedtm_var}.
 \item If specified, \code{alt_counts_df} must contain \code{SAFFL}, \code{USUBJID}, and the variable specified by \code{arm_var}.
+\item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
+flag variables are treated as \code{"N"}.
 \item Columns are split by arm. Overall population column is excluded by default (see \code{lbl_overall} argument).
 \item Numbers in table "Patients Treated" section are the absolute numbers of patients and fraction of \code{N}.
 \item All-zero rows are not removed by default (see \code{prune_0} argument).

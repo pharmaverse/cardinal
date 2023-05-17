@@ -4,6 +4,8 @@
 #' * `df` must contain `SAFFL`, `USUBJID`, and the variables specified by `arm_var`, `id_var`, `trtsdtm_var`,
 #'   and `trtedtm_var`.
 #' * If specified, `alt_counts_df` must contain `SAFFL`, `USUBJID`, and the variable specified by `arm_var`.
+#' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
+#'   flag variables are treated as `"N"`.
 #' * Columns are split by arm. Overall population column is excluded by default (see `lbl_overall` argument).
 #' * Numbers in table "Patients Treated" section are the absolute numbers of patients and fraction of `N`.
 #' * All-zero rows are not removed by default (see `prune_0` argument).
@@ -36,6 +38,7 @@ make_table_05 <- function(df,
                           annotations = NULL) {
   checkmate::assert_subset(c("SAFFL", "USUBJID", arm_var, id_var, trtsdtm_var, trtedtm_var), names(adae))
   checkmate::assert_choice(u_trtdur, c("days", "weeks", "months", "years"))
+  assert_flag_variables(df, "SAFFL")
 
   df <- df %>%
     filter(SAFFL == "Y") %>%
