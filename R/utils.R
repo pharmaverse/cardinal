@@ -74,7 +74,7 @@ alt_counts_df_preproc <- function(alt_counts_df) {
 #'
 #' @examples
 #' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
-#' assert_flag_variables(adsl, c("SAFFL", "ITTFL"))
+#' falcon:::assert_flag_variables(adsl, c("SAFFL", "ITTFL"))
 #'
 #' @keywords internal
 assert_flag_variables <- function(df, flag_vars, na_level = "<Missing>") {

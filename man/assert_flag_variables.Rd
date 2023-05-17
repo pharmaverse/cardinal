@@ -17,7 +17,7 @@ Flag variables are expected to take one of two values: \code{"Y"} (yes/true) or
 }
 \examples{
 adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
-assert_flag_variables(adsl, c("SAFFL", "ITTFL"))
+falcon:::assert_flag_variables(adsl, c("SAFFL", "ITTFL"))
 
 }
 \keyword{internal}
