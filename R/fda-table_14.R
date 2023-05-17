@@ -1,52 +1,63 @@
-# Pre-processing
+#' FDA Table 6: Overview of Adverse Events, Safety Population, Pooled Analyses
+#'
+#' @details
+#' * `adae` must contain the variables `SAFFL`, `USUBJID`, `AEBODSYS`, and the variables specified by `arm_var`,
+#'   `fmqsc_var`, and `fmqnam_var`.
+#' * If specified, `alt_counts_df` must contain variables `SAFFL` and `USUBJID`.
+#' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
+#'   flag variables are treated as `"N"`.
+#' * Columns are split by arm. Overall population column is excluded by default (see `lbl_overall` argument).
+#' * Numbers in table represent the absolute numbers of patients and fraction of `N`.
+#' * All-zero rows are not removed by default (see `prune_0` argument).
+#'
+#' @inheritParams argument_convention
+#'
+#' @examples
+#' adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
+#' adae <- dplyr::rename(adae, FMQ01SC = SMQ01SC, FMQ01NAM = SMQ01NAM)
+#' levels(adae$FMQ01SC) <- c("BROAD", "NARROW")
+#' adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
+#'
+#' tbl <- make_table_14(adae = adae)
+#' tbl
+#'
+#' @export
+make_table_14 <- function(adae,
+                          alt_counts_df = NULL,
+                          show_colcounts = TRUE,
+                          arm_var = "ARM",
+                          fmqsc_var = "FMQ01SC",
+                          fmqnam_var = "FMQ01NAM",
+                          lbl_overall = NULL,
+                          prune_0 = FALSE,
+                          na_level = "<Missing>",
+                          annotations = NULL) {
+  checkmate::assert_subset(c(
+    "SAFFL", "USUBJID", "AEBODSYS", arm_var, fmqsc_var, fmqnam_var
+  ), names(adae))
+  assert_flag_variables(adae, "SAFFL")
 
-library(dplyr)
-library(scda)
-library(tern)
+  adae <- adae %>%
+    filter(SAFFL == "Y") %>%
+    df_explicit_na(na_level = na_level)
+  adae[[fmqnam_var]] <- with_label(adae[[fmqnam_var]], "FMQ")
 
-adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae") %>%
-  df_explicit_na()
+  alt_counts_df <- alt_counts_df_preproc(alt_counts_df)
 
-adae <- adae %>%
-  filter(
-    SAFFL == "Y"
-  )
+  lyt <- basic_table_annot(show_colcounts, annotations) %>%
+    split_cols_by(fmqsc_var) %>%
+    split_cols_by_arm(arm_var, lbl_overall) %>%
+    split_rows_by(
+      "AEBODSYS",
+      child_labels = "visible",
+      label_pos = "topleft",
+      split_label = obj_label(adae$AEBODSYS)
+    ) %>%
+    count_occurrences(vars = fmqnam_var, drop = FALSE) %>%
+    append_varlabels(adae, fmqnam_var, indent = 1L)
 
+  tbl <- build_table(lyt, df = adae, alt_counts_df = alt_counts_df)
+  if (prune_0) tbl <- prune_table(tbl)
 
-# Build layout
-
-lyt <- basic_table(show_colcounts = TRUE) %>%
-  split_cols_by("SMQ01SC") %>%
-  split_cols_by("ARM") %>%
-  split_rows_by(
-    "AEBODSYS",
-    child_labels = "visible",
-    nested = TRUE,
-    label_pos = "topleft",
-    split_label = obj_label(adae$AEBODSYS)
-  ) %>%
-  count_occurrences(vars = "SMQ01NAM", drop = FALSE)
-
-# Build table
-
-result <- build_table(lyt, df = adae)
-
-# Add titles/footnotes
-
-main_title(result) <- "Table 14. Patients With Adverse Events(1) by System Organ Class and FDA Medical Query, Safety Population, Pooled Analyses(2)"
-
-main_footer(result) <- c(
-  "Source: [include Applicant source, datasets and/or software tools used",
-  "(1) Treatment-emergent AE defined as [definition]. MedDRA version X.",
-  "(2) Duration = [e.g., X-week double-blind treatment period or, median and a range indicating
-    pooled trial durations].",
-  "(3) Difference is shown between [treatment arms] (e.g., difference is shown between Drug Name dosage X vs. placebo)",
-  "(4) Each FMQ is aligned to a single SOC based on clinical judgement. Howevere, please beaware that some FMQs may contain PTs from more than one SOC."
-)
-
-prov_footer(result) <- c(
-  "Abbreviations: CI, confidence interval; FMQ, FDA Medical Query; MedDRA, Medical Dictionary for Regulatory Activities;
-    N, number of patients in treatment arm; n, number of patients with at least one event; SOC, System Organ Class"
-)
-
-result
+  tbl
+}
