@@ -9,6 +9,8 @@
 #' * Columns are split by arm. Overall population column is excluded by default (see `lbl_overall` argument).
 #' * Numbers in table "Patients Treated" section are the absolute numbers of patients and fraction of `N`.
 #' * All-zero rows are not removed by default (see `prune_0` argument).
+#' * Records with missing treatment start datetime are excluded from all calculations. Records with missing treatment
+#'   end datetime are included in "Any duration" counts but excluded from all other calculations.
 #'
 #' @inheritParams argument_convention
 #' @param trtsdtm_var (`character`)\cr treatment start datetime variable in `df`.
@@ -51,7 +53,7 @@ make_table_05 <- function(df,
       TRTDUR = TRTDUR %>% as.numeric(u_trtdur)
     ) %>%
     mutate(
-      D_ANY = (TRTDUR_MONTHS > 0) %>% with_label("Any duration (at least 1 dose)"),
+      D_ANY = !is.na(TRTSDTM) %>% with_label("Any duration (at least 1 dose)"),
       D_LT1 = (TRTDUR_MONTHS < 1) %>% with_label("<1 month"),
       D_GT1 = (TRTDUR_MONTHS >= 1) %>% with_label(">=1 month"),
       D_GT3 = (TRTDUR_MONTHS >= 3) %>% with_label(">=3 months"),
@@ -59,7 +61,6 @@ make_table_05 <- function(df,
       D_GT12 = (TRTDUR_MONTHS >= 12) %>% with_label(">=12 months"),
       DUR_LBL = "Patients Treated, by duration"
     )
-
   alt_counts_df <- alt_counts_df_preproc(alt_counts_df)
 
   lyt <- basic_table_annot(show_colcounts, annotations) %>%
