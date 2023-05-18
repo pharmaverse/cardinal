@@ -61,8 +61,7 @@ flag variables are treated as \code{"N"}.
 \item Columns are split by arm. Overall population column is excluded by default (see \code{lbl_overall} argument).
 \item Numbers in table "Patients Treated" section are the absolute numbers of patients and fraction of \code{N}.
 \item All-zero rows are not removed by default (see \code{prune_0} argument).
-\item Records with missing treatment start datetime are excluded from all calculations. Records with missing treatment
-end datetime are included in "Any duration" counts but excluded from all other calculations.
+\item Records with missing treatment start and/or end datetime are excluded from all calculations.
 }
 }
 \examples{

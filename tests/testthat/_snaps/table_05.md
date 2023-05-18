@@ -12,7 +12,7 @@
         Interquartile range                 102.00 - 299.00          106.25 - 298.75           89.50 - 303.25    
         Total exposure (person years)       26744.00 (73.22)         26765.00 (73.28)         25843.00 (70.75)   
       Patients Treated, by duration                                                                              
-        Any duration (at least 1 dose)         134 (100%)               134 (100%)               132 (100%)      
+        Any duration (at least 1 dose)         134 (100%)               134 (100%)              130 (98.5%)      
         <1 month                                6 (4.5%)                 5 (3.7%)                15 (11.4%)      
         >=1 month                             128 (95.5%)              129 (96.3%)              117 (88.6%)      
         >=3 months                            102 (76.1%)              107 (79.9%)               99 (75.0%)      
@@ -37,7 +37,7 @@
         Interquartile range                 0.28 - 0.82          0.29 - 0.82          0.25 - 0.83          0.28 - 0.82    
         Total exposure (person years)      73.22 (73.22)        73.28 (73.28)        70.75 (70.75)       217.25 (217.25)  
       Patients Treated, by duration                                                                                       
-        Any duration (at least 1 dose)       134 (100%)           134 (100%)           132 (100%)           400 (100%)    
+        Any duration (at least 1 dose)       134 (100%)           134 (100%)          130 (98.5%)          398 (99.5%)    
         <1 month                              6 (4.5%)             5 (3.7%)            15 (11.4%)           26 (6.5%)     
         >=1 month                           128 (95.5%)          129 (96.3%)          117 (88.6%)          374 (93.5%)    
         >=3 months                          102 (76.1%)          107 (79.9%)           99 (75.0%)          308 (77.0%)    
@@ -65,7 +65,7 @@
         Interquartile range                 49.75 - 129.00           57.50 - 133.50          32.75 - 124.50    
         Total exposure (person years)       5915.00 (16.19)         6111.00 (16.73)          5073.00 (13.89)   
       Patients Treated, by duration                                                                            
-        Any duration (at least 1 dose)        64 (47.8%)               62 (46.3%)              62 (47.0%)      
+        Any duration (at least 1 dose)        64 (47.8%)               62 (46.3%)              60 (45.5%)      
         <1 month                               6 (4.5%)                 5 (3.7%)               15 (11.4%)      
         >=1 month                             58 (43.3%)               57 (42.5%)              47 (35.6%)      
         >=3 months                            32 (23.9%)               35 (26.1%)              29 (22.0%)      
@@ -86,7 +86,7 @@
         Interquartile range                 49.75 - 129.00           57.50 - 133.50          32.75 - 124.50    
         Total exposure (person years)       5915.00 (16.19)         6111.00 (16.73)          5073.00 (13.89)   
       Patients Treated, by duration                                                                            
-        Any duration (at least 1 dose)        64 (47.8%)               62 (46.3%)              62 (47.0%)      
+        Any duration (at least 1 dose)        64 (47.8%)               62 (46.3%)              60 (45.5%)      
         <1 month                               6 (4.5%)                 5 (3.7%)               15 (11.4%)      
         >=1 month                             58 (43.3%)               57 (42.5%)              47 (35.6%)      
         >=3 months                            32 (23.9%)               35 (26.1%)              29 (22.0%)      
