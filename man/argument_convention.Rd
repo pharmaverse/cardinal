@@ -12,6 +12,8 @@
 
 \item{advs}{(\code{data.frame})\cr data (typically ADVS) required to build table.}
 
+\item{df}{(\code{data.frame})\cr data required to build table.}
+
 \item{alt_counts_df}{(\code{character}) alternative (full) dataset (typically ADSL) used only to calculate column counts.}
 
 \item{show_colcounts}{(\code{flag})\cr whether column counts should be printed.}
