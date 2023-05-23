@@ -49,7 +49,7 @@ make_table_33 <- function(advs,
       DBP60 = formatters::with_label(PARAMCD == "DIABP" & MAX_DIABP < 60, "DBP <60")
     )
 
-  alt_counts_df <- alt_counts_df_preproc(alt_counts_df)
+  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
 
   lyt <- basic_table_annot(show_colcounts, annotations) %>%
     split_cols_by_arm(arm_var, lbl_overall) %>%

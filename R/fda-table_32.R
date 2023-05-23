@@ -51,7 +51,7 @@ make_table_32 <- function(advs,
       GE120 = with_label(MAX_DIABP >= 120, ">=120")
     )
 
-  alt_counts_df <- alt_counts_df_preproc(alt_counts_df)
+  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
 
   lyt <- basic_table_annot(show_colcounts, annotations) %>%
     split_cols_by_arm(arm_var, lbl_overall) %>%

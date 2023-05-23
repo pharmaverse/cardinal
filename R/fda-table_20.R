@@ -51,7 +51,7 @@ make_table_20 <- function(adae,
   var_lbls <- c("AE grouping related to AESI", "Laboratory Assessment")
   names(var_lbls) <- c(aesifl_var, aelabfl_var)
 
-  alt_counts_df <- alt_counts_df_preproc(alt_counts_df)
+  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
 
   lyt <- basic_table_annot(show_colcounts, annotations) %>%
     split_cols_by_arm(arm_var, lbl_overall) %>%

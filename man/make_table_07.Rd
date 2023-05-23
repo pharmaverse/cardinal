@@ -55,8 +55,9 @@ adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
 adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
 
 set.seed(1)
-adae$TRTEMFL <- ifelse(adae$USUBJID \%in\% sample(adsl$USUBJID, size = as.integer(nrow(adsl) / 3)),
- "N", "Y")
+adae$TRTEMFL <- ifelse(
+  adae$USUBJID \%in\% sample(adsl$USUBJID, size = as.integer(nrow(adsl) / 3)), "N", "Y"
+)
 
 tbl <- make_table_07(adae = adae, alt_counts_df = adsl)
 tbl

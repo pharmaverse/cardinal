@@ -17,8 +17,8 @@
 #' adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
 #'
 #' set.seed(1)
-#' adae$TRTEMFL <- ifelse(adae$USUBJID %in% sample(adsl$USUBJID, size = as.integer(nrow(adsl) / 3)),
-#'   "N", "Y"
+#' adae$TRTEMFL <- ifelse(
+#'   adae$USUBJID %in% sample(adsl$USUBJID, size = as.integer(nrow(adsl) / 3)), "N", "Y"
 #' )
 #'
 #' tbl <- make_table_07(adae = adae, alt_counts_df = adsl)
@@ -46,7 +46,7 @@ make_table_07 <- function(adae,
     ) %>%
     df_explicit_na(na_level = na_level)
 
-  alt_counts_df <- alt_counts_df_preproc(alt_counts_df)
+  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
 
   lyt <- basic_table_annot(show_colcounts, annotations) %>%
     split_cols_by_arm(arm_var, lbl_overall) %>%
