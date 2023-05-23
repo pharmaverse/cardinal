@@ -18,7 +18,8 @@
 #'
 #' set.seed(1)
 #' adae$TRTEMFL <- ifelse(adae$USUBJID %in% sample(adsl$USUBJID, size = as.integer(nrow(adsl) / 3)),
-#'  "N", "Y")
+#'   "N", "Y"
+#' )
 #'
 #' tbl <- make_table_07(adae = adae, alt_counts_df = adsl)
 #' tbl
