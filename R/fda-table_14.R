@@ -44,7 +44,7 @@ make_table_14 <- function(adae,
     df_explicit_na(na_level = na_level)
   adae[[fmqnam_var]] <- with_label(adae[[fmqnam_var]], "FMQ")
 
-  alt_counts_df <- alt_counts_df_preproc(alt_counts_df)
+  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
 
   lyt <- basic_table_annot(show_colcounts, annotations) %>%
     split_cols_by(fmqsc_var) %>%
