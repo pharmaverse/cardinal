@@ -54,9 +54,9 @@ split_cols_by_arm <- function(lyt, arm_var = "ARM", lbl_overall = NULL) {
 #' alt_counts_df_preproc(adsl)
 #'
 #' @export
-alt_counts_df_preproc <- function(alt_counts_df) {
+alt_counts_df_preproc <- function(alt_counts_df, arm_var = "ARM") {
   if (!is.null(alt_counts_df)) {
-    checkmate::assert_subset(c("SAFFL", "USUBJID"), names(alt_counts_df))
+    checkmate::assert_subset(c("SAFFL", "USUBJID", arm_var), names(alt_counts_df))
     assert_flag_variables(alt_counts_df, "SAFFL")
     alt_counts_df %>%
       filter(SAFFL == "Y") %>%

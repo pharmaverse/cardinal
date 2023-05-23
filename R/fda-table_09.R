@@ -37,7 +37,7 @@ make_table_09 <- function(adae,
     filter(SAFFL == "Y", AESER == "Y") %>%
     df_explicit_na()
 
-  alt_counts_df <- alt_counts_df_preproc(alt_counts_df)
+  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
 
   lyt <- basic_table_annot(show_colcounts, annotations) %>%
     split_cols_by_arm(arm_var, lbl_overall) %>%

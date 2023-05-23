@@ -60,7 +60,7 @@ make_table_05 <- function(df,
       D_GT12 = (TRTDUR_MONTHS >= 12) %>% with_label(">=12 months"),
       DUR_LBL = "Patients Treated, by duration"
     )
-  alt_counts_df <- alt_counts_df_preproc(alt_counts_df)
+  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
 
   lyt <- basic_table_annot(show_colcounts, annotations) %>%
     split_cols_by_arm(arm_var, lbl_overall) %>%
