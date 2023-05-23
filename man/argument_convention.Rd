@@ -4,13 +4,13 @@
 \alias{argument_convention}
 \title{Standard Arguments}
 \arguments{
-\item{adsl}{(\code{data.frame})\cr data (typically ADSL) required to build table.}
-
 \item{adae}{(\code{data.frame})\cr data (typically ADAE) required to build table.}
 
 \item{adex}{(\code{data.frame})\cr data (typically ADEX) required to build table.}
 
 \item{advs}{(\code{data.frame})\cr data (typically ADVS) required to build table.}
+
+\item{df}{(\code{data.frame})\cr data required to build table.}
 
 \item{alt_counts_df}{(\code{character}) alternative (full) dataset (typically ADSL) used only to calculate column counts.}
 

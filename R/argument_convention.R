@@ -2,10 +2,10 @@
 #'
 #' This documentation lists all the arguments in `falcon` that are used repeatedly by functions to output tables.
 #'
-#' @param adsl (`data.frame`)\cr data (typically ADSL) required to build table.
 #' @param adae (`data.frame`)\cr data (typically ADAE) required to build table.
 #' @param adex (`data.frame`)\cr data (typically ADEX) required to build table.
 #' @param advs (`data.frame`)\cr data (typically ADVS) required to build table.
+#' @param df (`data.frame`)\cr data required to build table.
 #' @param alt_counts_df (`character`) alternative (full) dataset (typically ADSL) used only to calculate column counts.
 #' @param show_colcounts (`flag`)\cr whether column counts should be printed.
 #' @param arm_var (`character`)\cr arm variable used to split table into columns.

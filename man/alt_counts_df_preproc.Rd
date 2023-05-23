@@ -4,10 +4,12 @@
 \alias{alt_counts_df_preproc}
 \title{Pre-Process \code{alt_counts_df} for Safety Population}
 \usage{
-alt_counts_df_preproc(alt_counts_df)
+alt_counts_df_preproc(alt_counts_df, arm_var = "ARM")
 }
 \arguments{
 \item{alt_counts_df}{(\code{character}) alternative (full) dataset (typically ADSL) used only to calculate column counts.}
+
+\item{arm_var}{(\code{character})\cr arm variable used to split table into columns.}
 }
 \description{
 If \code{alt_counts_df} is not \code{NULL}, will check for required variables and filter
