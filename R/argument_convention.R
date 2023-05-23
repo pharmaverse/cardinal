@@ -12,7 +12,7 @@
 #' @param id_var (`character`)\cr variable used as unique subject identifier.
 #' @param lbl_overall (`character`)\cr if specified, an overall column will be added to the table with
 #'   the given value as the column label.
-#' @param vars (`vector` of `character`)\cr variables from `adsl` to include in the table.
+#' @param vars (`vector` of `character`)\cr variables from `df` to include in the table.
 #' @param lbl_vars (`vector` of `character`)\cr labels corresponding to variables in `vars` to print
 #'   in the table. Labels should be ordered according to the order of variables in `vars`.
 #' @param pref_var (`character`)\cr preferred term variable from `adae` to include in the table.

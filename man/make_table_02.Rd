@@ -28,7 +28,7 @@ make_table_02(
 
 \item{arm_var}{(\code{character})\cr arm variable used to split table into columns.}
 
-\item{vars}{(\code{vector} of \code{character})\cr variables from \code{adsl} to include in the table.}
+\item{vars}{(\code{vector} of \code{character})\cr variables from \code{df} to include in the table.}
 
 \item{lbl_vars}{(\code{vector} of \code{character})\cr labels corresponding to variables in \code{vars} to print
 in the table. Labels should be ordered according to the order of variables in \code{vars}.}
