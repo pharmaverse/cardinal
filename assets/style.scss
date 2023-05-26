@@ -1,3 +1,19 @@
+/*-- scss:defaults --*/
+
+$primary:  #0B41CD !default;
+$fg: #000000 !default;
+$bg: #ffffff !default;
+
+/*-- scss:rules --*/
+
+pre {
+  background-color: rgba(233, 236, 239, 0.65);
+}
+
+code {
+  color: inherit;
+}
+
 /* css styles */
 h1, h2, h3 {
   text-align: center;
@@ -56,6 +72,9 @@ h1, h2, h3 {
   position: absolute;
   width: 100%;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   -webkit-backface-visibility: hidden; /* Safari */
   backface-visibility: hidden;
 }

@@ -1,18 +1,63 @@
+---
 project:
   type: website
+  preview:
+    port: 4200
+    browser: true
+    watch-inputs: true
+    navigate: true
+    timeout: 300
+
+format:
+  html:
+    search: true
+    theme:
+      light: [flatly, assets/style.scss]
+      dark: [darkly, assets/style.scss]
+    anchor-sections: true
+    smooth-scroll: true
+    code-link: true
+    code-fold: true
+    code-overflow: scroll
+    code-line-numbers: true
+    code-copy: true
+    code-tools:
+      source: true
+      toggle: false
+      caption: none
+    code-block-bg: true
+    css: assets/style.scss
+    toc: true
+    number-sections: false
+    lang: en-US
+    page-layout: full
+
+execute:
+  freeze: auto
+  cache: true
+  code-line-numbers: true
+
+knitr:
+  opts_chunk:
+    echo: true
+    fig.width: 15
+
+editor: source
+highlight-style: github
 
 website:
-  search: false
-  navbar:
-    background: light
-    tools:
-      - icon: github
-        href: https://github.com/pharmaverse/falcon
-      - icon: youtube
-        href: https://youtube.com/
-      - icon: slack
-        href: https://app.slack.com/client/T028PB489D3/C04MQS12MND
-  back-to-top-navigation: true
+  title: falcon
+  open-graph: true
+  search:
+    location: navbar
+    type: overlay
+    copy-button: true
+  page-navigation: true
+  site-url: https://pharmaverse.github.io/falcon
+  repo-url: https://github.com/pharmaverse/falcon
+  repo-branch: main
+  google-analytics: UA-125641273-1
+  cookie-consent: true
   page-footer:
     background: light
     left: "Some contact information"
@@ -25,17 +70,24 @@ website:
         href: https://app.slack.com/client/T028PB489D3/C04MQS12MND
     center:
       - text: "This website as well as code examples are licensed under the Apache License, Version 2.0."
-
-format:
-  html:
-    theme:
-      light: cosmo
-      dark: darkly
-    css: styles.css
-    toc: true
-
-editor: visual
-
-
-
-
+  navbar:
+    pinned: true
+    collapse: true
+    logo: assets/images/falcon.png
+    background: primary
+    search: true
+    right:
+      - aria-label: Slack
+        href: https://app.slack.com/client/T028PB489D3/C04MQS12MND
+        icon: slack
+      - aria-label: GitHub
+        icon: github
+        menu:
+          - text: Source Code
+            url:  https://github.com/pharmaverse/falcon
+          - text: Report a Bug
+            url:  https://github.com/pharmaverse/falcon/issues
+    left:
+      - text: Home
+        file: index.qmd
+      - text: Template Library
