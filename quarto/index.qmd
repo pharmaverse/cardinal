@@ -8,7 +8,7 @@ echo: false
 
 #### 
 
-```{r}
+```{r, echo=FALSE}
 #| fig-align: "center"
 #| out-width: "1.5in"
 knitr::include_graphics("assets/images/falcon.png")
@@ -18,6 +18,7 @@ knitr::include_graphics("assets/images/falcon.png")
 
 The {falcon} initiative is an industry collaborative effort under {pharmaverse} that brings together pharmaceutical companies with the aspiration of building and open-sourcing a catalog of harmonized tables, listings, and graphs (TLGs) in clinical study reporting. Leveraging existing open-source R packages, {falcon} aims to simplify the process of output review, comparison and meta-analyses, foster efficient communication among stakeholders in the pharmaceutical sector, while aligning with CDISC's ARD/ARM effort at the same time. Drawing inspiration from the FDA Standard Safety Tables and Figures Integrated Guide, templates are developed and goinig to be open-sourced. Future plans entail expanding the catalog through continuous collaboration from participating companies and inviting wider industry to promote harmonization of TLGs for clinical reporting. 
 
+```{=html}
 <div class="divButton">
 <button onclick="window.location.href = 'getting_started.html';" class="button">Getting Started</button>
 <button onclick="window.location.href = 'template_library.html';" class="button">Template Library</button> 
@@ -27,6 +28,7 @@ The {falcon} initiative is an industry collaborative effort under {pharmaverse} 
 <button onclick="window.location.href = 'our_journey.html';" class="button">Our Journey</button>
 <button onclick="window.location.href = 'faq.html';" class="button">FAQ</button>
 </div>
+```
 
 #### Upcoming
 
