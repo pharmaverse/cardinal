@@ -19,6 +19,5 @@ RUN rm $FILE
 
 RUN Rscript -e "install.packages('languageserver')"
 RUN Rscript -e "install.packages('devtools')"
-RUN Rscript -e "devtools::install(dependencies=TRUE, upgrade='always')"
 
 CMD ["R"]
