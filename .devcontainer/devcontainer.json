@@ -1,0 +1,17 @@
+{
+	"name": "Falcon",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"args": { "VARIANT": "4.2.2" }
+	},
+
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"quarto.quarto",
+				"REditorSupport.r",
+				"RDebugger.r-debugger"
+			]
+		}
+	}
+}
