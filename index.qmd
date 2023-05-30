@@ -1,3 +1,86 @@
-## Coming Soon!
+---
+title: "falcon"
+toc: false
+echo: false
+---
 
-#### This website is currently under construction.
+### Implementation of FDA Safety Tables and Figures
+
+#### 
+
+```{r, echo=FALSE}
+#| fig-align: "center"
+#| out-width: "1.5in"
+knitr::include_graphics("quarto/assets/images/falcon.png")
+```
+
+#### What is it about?
+
+The {falcon} initiative is an industry collaborative effort under {pharmaverse} that brings together pharmaceutical companies with the aspiration of building and open-sourcing a catalog of harmonized tables, listings, and graphs (TLGs) in clinical study reporting. Leveraging existing open-source R packages, {falcon} aims to simplify the process of output review, comparison and meta-analyses, foster efficient communication among stakeholders in the pharmaceutical sector, while aligning with CDISC's ARD/ARM effort at the same time. Drawing inspiration from the FDA Standard Safety Tables and Figures Integrated Guide, templates are developed and goinig to be open-sourced. Future plans entail expanding the catalog through continuous collaboration from participating companies and inviting wider industry to promote harmonization of TLGs for clinical reporting.
+
+```{=html}
+<div class="divButton">
+<button onclick="window.location.href = 'quarto/getting_started.html';" class="button">Getting Started</button>
+<button onclick="window.location.href = 'quarto/template_library.html';" class="button">Template Library</button> 
+</div> 
+
+<div class="divButton">
+<button onclick="window.location.href = 'quarto/our_journey.html';" class="button">Our Journey</button>
+<button onclick="window.location.href = 'quarto/faq.html';" class="button">FAQ</button>
+</div>
+```
+#### Upcoming
+
+-   ...
+
+#### Contributors
+
+::: {layout-ncol="4"}
+::: flip-card
+::: flip-card-inner
+::: flip-card-front
+![](quarto/assets/images/logo-roche.png){width="150"}
+:::
+
+::: flip-card-back
+Roche
+:::
+:::
+:::
+
+::: flip-card
+::: flip-card-inner
+::: flip-card-front
+![](quarto/assets/images/logo-bi.png){width="150"}
+:::
+
+::: flip-card-back
+Boehringer Ingelheim
+:::
+:::
+:::
+
+::: flip-card
+::: flip-card-inner
+::: flip-card-front
+![](quarto/assets/images/logo-sanofi.png){width="150"}
+:::
+
+::: flip-card-back
+Sanofi
+:::
+:::
+:::
+
+::: flip-card
+::: flip-card-inner
+::: flip-card-front
+![](quarto/assets/images/logo-moderna.jpg){width="150"}
+:::
+
+::: flip-card-back
+Moderna
+:::
+:::
+:::
+:::
