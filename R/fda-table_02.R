@@ -1,101 +1,70 @@
-# Pre-processing
+#' FDA Table 2: Baseline Demographic and Clinical Characteristics Safety Population, Pooled Analyses
+#'
+#' @details
+#' * `df` must contain `SAFFL` and the variables specified by `vars` and `arm_var`.
+#' * If specified, `alt_counts_df` must contain `SAFFL`, `USUBJID`, and the variable specified by `arm_var`.
+#' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
+#'   flag variables are treated as `"N"`.
+#' * Columns are split by arm. Overall population column is included by default (see `lbl_overall` argument).
+#' * Information from either ADSUB or ADVS is generally included into `df` prior to analysis.
+#' * Numbers in table for non-numeric variables represent the absolute numbers of patients and fraction of `N`.
+#' * All-zero rows are removed by default (see `prune_0` argument).
+#'
+#' @inheritParams argument_convention
+#'
+#' @examples
+#' library(dplyr)
+#'
+#' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") %>%
+#'   mutate(AGEGR1 = as.factor(case_when(
+#'     AGE >= 17 & AGE < 65 ~ ">=17 to <65",
+#'     AGE >= 65 ~ ">=65",
+#'     AGE >= 65 & AGE < 75 ~ ">=65 to <75",
+#'     AGE >= 75 ~ ">=75"
+#'   )) %>% formatters::with_label("Age Group, years")) %>%
+#'   formatters::var_relabel(
+#'     AGE = "Age, years"
+#'   )
+#'
+#' tbl <- make_table_02(df = adsl)
+#' tbl
+#'
+#' @export
+make_table_02 <- function(df,
+                          alt_counts_df = NULL,
+                          show_colcounts = TRUE,
+                          arm_var = "ARM",
+                          vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY"),
+                          lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
+                          lbl_overall = "Total Population",
+                          .stats = c("mean_sd", "median_range", "count_fraction"),
+                          .formats = NULL,
+                          na_rm = FALSE,
+                          prune_0 = TRUE,
+                          annotations = NULL) {
+  checkmate::assert_subset(c("SAFFL", vars, arm_var), names(df))
+  assert_flag_variables(df, "SAFFL")
 
-library(dplyr)
-library(scda)
-library(tern)
+  df <- df %>%
+    filter(SAFFL == "Y") %>%
+    df_explicit_na()
 
-adsl <- synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") %>% df_explicit_na()
-adae <- synthetic_cdisc_dataset("rcd_2022_10_13", "adae") %>%
-  filter(
-    SAFFL == "Y"
-  ) %>%
-  mutate(
-    sex = as.factor(case_when(
-      SEX == "M" ~ "Male",
-      SEX == "F" ~ "Female"
-    )),
-    age_grp = as.factor(case_when(
-      AGE >= 17 & AGE < 65 ~ ">=17 to <65",
-      AGE >= 65 ~ ">=65",
-      AGE >= 65 & AGE < 75 ~ ">=65 to <75",
-      AGE >= 75 ~ ">=75"
-    )),
-    race = as.factor(case_when(
-      RACE == "ASIAN" ~ "Asian",
-      RACE == "AMERICAN INDIAN OR ALASKA NATIVE" ~ "American Indian or Alaska Native",
-      RACE == "BLACK OR AFRICAN AMERICAN" ~ "Black or African American",
-      RACE == "WHITE" ~ "White",
-      RACE == "NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER" ~ "Native Hawaiian or Other Pacific Islander",
-      RACE == "MULTIPLE" ~ "Multiple"
-    )),
-    ethnic = as.factor(case_when(
-      ETHNIC == "NOT REPORTED" ~ "Not Reported",
-      ETHNIC == "HISPANIC OR LATINO" ~ "Hispanic or Latino",
-      ETHNIC == "NOT HISPANIC OR LATINO" ~ "Not Hispanic or Latino",
-      ETHNIC == "UNKNOWN" ~ "Unknown"
-    )),
-    country = as.factor(case_when(
-      COUNTRY == "CHN" ~ "China",
-      COUNTRY == "RUS" ~ "Russia",
-      COUNTRY == "USA" ~ "United States",
-      COUNTRY == "NGA" ~ "China",
-      COUNTRY == "PAK" ~ "Pakistan",
-      COUNTRY == "BRA" ~ "Brazil",
-      COUNTRY == "CAN" ~ "Canada",
-      COUNTRY == "GBR" ~ "Great Britain",
-      COUNTRY == "JPN" ~ "Japan"
-    )),
-    bio = as.factor(case_when(
-      BMRKR2 == "LOW" ~ "Low",
-      BMRKR2 == "MEDIUM" ~ "Medium",
-      BMRKR2 == "HIGH" ~ "High"
-    ))
-  ) %>%
-  df_explicit_na()
+  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
 
-# Build layout
+  lyt <- basic_table_annot(show_colcounts, annotations) %>%
+    split_cols_by_arm(arm_var, lbl_overall) %>%
+    summarize_vars(
+      vars = vars,
+      var_labels = lbl_vars,
+      show_labels = "visible",
+      .stats = .stats,
+      .formats = .formats,
+      na.rm = na_rm
+    ) %>%
+    append_topleft(c("", "Characteristic"))
 
-lyt <- basic_table(show_colcounts = TRUE) %>%
-  split_cols_by(var = "ARM") %>%
-  add_overall_col("All Patients") %>%
-  summarize_vars("sex", .stats = c("count_fraction"), var_labels = "Sex", na.rm = FALSE) %>%
-  analyze(vars = "AGE", var_labels = "Age (years)", afun = function(x) {
-    in_rows(
-      "Mean (SD)" = rcell(c(mean(x), sd(x)), format = "xx.xx (xx.xx)"),
-      "Median (min - max)" = rcell(c(median(x), range(x)), format = "xx.xx (xx.xx - xx.xx)")
-    )
-  }) %>%
-  summarize_vars(
-    vars = c("age_grp", "race", "ethnic", "country", "bio"),
-    .stats = c("count_fraction"),
-    var_labels = c(
-      age_grp = "Age groups (years)",
-      race = "Race",
-      ethnic = "Ethnicity",
-      country = "Country of participation",
-      bio = "Categorical Level Biomarker 2"
-    ),
-    na.rm = FALSE
-  )
+  tbl <- build_table(lyt, df = df, alt_counts_df = alt_counts_df)
+  if (prune_0) tbl <- prune_table(tbl)
 
-# Build table
-
-result <- build_table(lyt, df = adae, alt_counts_df = adsl)
-
-# Add titles/footnotes
-
-main_title(result) <- paste0(
-  "Table 2. Baseline Demographic and Clinical Characteristics Safety Population, Pooled Analyses"
-)
-
-main_footer(result) <- c(
-  "Source: [include Applicant source, datasets and/or software tools used]."
-)
-
-prov_footer(result) <- paste(
-  "Abbreviations: N, number of patients in treatment arm;",
-  "n, number of patients with given characteristic; SD, standard deviation"
-)
-
-
-result
+  tbl
+}

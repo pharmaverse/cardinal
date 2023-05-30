@@ -1,60 +1,66 @@
-# Pre-processing
+#' FDA Table 33: Percentage of Patients Meeting Specific Hypotension Levels Postbaseline,
+#'   Safety Population, Pooled Analysis
+#'
+#' @details
+#' * `advs` must contain `SAFFL`, `USUBJID`, `AVISITN`, `PARAMCD`, `AVAL`, `AVALU`, and the variable
+#'   specified by `arm_var`.
+#' * If specified, `alt_counts_df` must contain variables `SAFFL` and `USUBJID`, and the variable
+#'   specified by `arm_var`.
+#' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
+#'   flag variables are treated as `"N"`.
+#' * Columns are split by arm. Overall population column is excluded by default (see `lbl_overall` argument).
+#' * Numbers in table for non-numeric variables represent the absolute numbers of patients and fraction of `N`.
+#' * All-zero rows are not removed by default (see `prune_0` argument).
+#'
+#' @inheritParams argument_convention
+#'
+#' @examples
+#' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
+#' advs <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "advs")
+#'
+#' tbl <- make_table_33(advs = advs, alt_counts_df = adsl)
+#' tbl
+#'
+#' @export
+make_table_33 <- function(advs,
+                          alt_counts_df = NULL,
+                          show_colcounts = TRUE,
+                          arm_var = "ARM",
+                          lbl_overall = NULL,
+                          prune_0 = FALSE,
+                          annotations = NULL) {
+  checkmate::assert_subset(c("SAFFL", "USUBJID", "AVISITN", "PARAMCD", "AVAL", "AVALU"), names(advs))
+  assert_flag_variables(advs, "SAFFL")
 
-library(dplyr)
-library(scda)
-library(tern)
+  advs <- advs %>%
+    filter(
+      SAFFL == "Y",
+      AVISITN >= 1,
+      PARAMCD %in% c("DIABP", "SYSBP")
+    ) %>%
+    group_by(USUBJID, PARAMCD) %>%
+    mutate(
+      MAX_DIABP = if_else(PARAMCD == "DIABP", max(AVAL), NA_real_),
+      MAX_SYSBP = if_else(PARAMCD == "SYSBP", max(AVAL), NA_real_)
+    ) %>%
+    ungroup() %>%
+    mutate(
+      SBP90 = formatters::with_label(PARAMCD == "SYSBP" & MAX_SYSBP < 90, "SBP <90"),
+      DBP60 = formatters::with_label(PARAMCD == "DIABP" & MAX_DIABP < 60, "DBP <60")
+    )
 
-# Safety population
-adsl <-
-  synthetic_cdisc_dataset("rcd_2022_06_27", "adsl") %>%
-  filter(SAFFL == "Y")
+  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
 
-# Vital signs
-advs <-
-  synthetic_cdisc_dataset("rcd_2022_06_27", "advs") %>%
-  filter(PARAMCD %in% c("DIABP", "SYSBP") & SAFFL == "Y" & AVISITN >= 1) %>% # nolint
-  group_by(USUBJID, PARAMCD) %>%
-  mutate(
-    maxDIABP = if_else(PARAMCD == "DIABP", max(AVAL), NA_real_),
-    maxSYSBP = if_else(PARAMCD == "SYSBP", max(AVAL), NA_real_)
-  ) %>%
-  mutate(
-    SBP90 = (PARAMCD == "SYSBP" & maxSYSBP < 90),
-    DBP60 = (PARAMCD == "DIABP" & maxDIABP < 60),
-  ) %>%
-  var_relabel(
-    SBP90 = "SBP <90",
-    DBP60 = "DBP <60"
-  )
+  lyt <- basic_table_annot(show_colcounts, annotations) %>%
+    split_cols_by_arm(arm_var, lbl_overall) %>%
+    count_patients_with_flags(
+      var = "USUBJID",
+      flag_variables = var_labels(advs[, c("SBP90", "DBP60")])
+    ) %>%
+    append_topleft(c("Blood Pressure", paste0("(", unique(advs$AVALU)[1], ")")))
 
-# Build layout
-lyt <-
-  basic_table(show_colcounts = TRUE) %>%
-  split_cols_by("ARM") %>%
-  count_patients_with_flags(
-    var = "USUBJID",
-    flag_variables = var_labels(advs[, c("SBP90", "DBP60")])
-  )
+  tbl <- build_table(lyt, df = advs, alt_counts_df = alt_counts_df)
+  if (prune_0) tbl <- prune_table(tbl)
 
-# Build table
-result <- build_table(lyt, df = advs, alt_counts_df = adsl)
-
-# Add titles/footnotes
-
-## Top left header
-top_left(result) <- paste0("Blood Pressure\n(", unique(advs$AVALU)[1], ")")
-
-## Title
-main_title(result) <-
-  "Table 33. Percentage of Patients Meeting Specific Hypotension Levels Postbaseline, Safety Population, Pooled Analysis" # nolint
-
-## Footnotes
-main_footer(result) <- c(
-  "Source: [include Applicant source, datasets and/or software tools used].",
-  "(1) Difference is shown between [treatment arms] (e.g., difference is shown between Drug Name dosage X vs. placebo).", # nolint
-  "Abbreviations: CI, confidence interval; N, number of patients in treatment arm with available blood pressure data;",
-  "  n, number of patients with indicated blood pressure"
-)
-
-# Print result
-result
+  tbl
+}
