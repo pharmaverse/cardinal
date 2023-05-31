@@ -4,7 +4,7 @@
 		"dockerfile": "Dockerfile",
 		"args": { "VARIANT": "4.2.2" }
 	},
-    "postCreateCommand": "Rscript -e 'devtools::install(dependencies=TRUE, upgrade=/'always/')'",
+    "postCreateCommand": "Rscript -e 'devtools::install(dependencies=TRUE, upgrade=TRUE)'",
 	"customizations": {
 		"vscode": {
 			"extensions": [
