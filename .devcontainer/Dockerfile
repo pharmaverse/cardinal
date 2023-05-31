@@ -1,6 +1,6 @@
 ARG VARIANT="latest"
 
-FROM rocker/r-base:${VARIANT}
+FROM rocker/r-ver:${VARIANT}
 
 RUN apt-get update && apt-get -y upgrade
 RUN apt-get -y install curl \
