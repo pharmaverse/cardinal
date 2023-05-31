@@ -11,21 +11,7 @@ format: html
 
 ## Table
 
-```{r, message=FALSE, warning=FALSE, echo=FALSE}
-library(scda)
-library(falcon)
-
-adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
-adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
-
-make_table_09(adae = adae, alt_counts_df = adsl)
-```
-
-## Table Setup
-
-```{r, eval=FALSE}
-#| code-fold: show
-
+```{r tbl, message=FALSE, warning=FALSE, echo=FALSE}
 # Load Libraries & Data
 library(scda)
 library(falcon)
@@ -38,6 +24,11 @@ prefterm_var <- "AETERM"
 
 # Output Table
 make_table_09(adae = adae, alt_counts_df = adsl, pref_var = prefterm_var)
+```
+
+## Table Setup
+
+```{r tbl, eval=FALSE}
 ```
 
 ## Function Details

@@ -11,24 +11,7 @@ format: html
 
 ## Table
 
-```{r, message=FALSE, warning=FALSE, echo=FALSE}
-library(scda)
-library(falcon)
-
-adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
-adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
-
-prefterm_var <- "AETERM"
-min_freq <- 0.40
-
-make_table_13(adae = adae, alt_counts_df = adsl, pref_var = prefterm_var, min_freq = min_freq)
-```
-
-## Table Setup
-
-```{r, eval=FALSE}
-#| code-fold: show
-
+```{r tbl, message=FALSE, warning=FALSE, echo=FALSE}
 # Load Libraries & Data
 library(scda)
 library(falcon)
@@ -44,6 +27,11 @@ min_freq <- 0.40
 
 # Output Table
 make_table_13(adae = adae, alt_counts_df = adsl, pref_var = prefterm_var, min_freq = min_freq)
+```
+
+## Table Setup
+
+```{r tbl, eval=FALSE}
 ```
 
 ## Function Details

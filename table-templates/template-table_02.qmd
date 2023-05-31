@@ -11,53 +11,16 @@ format: html
 
 ## Table
 
-```{r, message=FALSE, warning=FALSE, echo=FALSE}
-library(scda)
-library(falcon)
-library(dplyr)
-
-adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
-advs <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "advs")
-
-adsl <- adsl %>%
-  dplyr::mutate(AGEGR1 = as.factor(dplyr::case_when(
-    AGE >= 17 & AGE < 65 ~ ">=17 to <65",
-    AGE >= 65 ~ ">=65",
-    AGE >= 65 & AGE < 75 ~ ">=65 to <75",
-    AGE >= 75 ~ ">=75"
-  )))
-
-advs <- advs %>%
-  dplyr::filter(AVISIT == "BASELINE", VSTESTCD == "TEMP") %>%
-  dplyr::select("USUBJID", "AVAL")
-
-anl <- dplyr::left_join(adsl, advs, by = "USUBJID")
-
-make_table_02(
-  df = anl,
-  vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY", "AVAL"),
-  lbl_vars = c(
-    "Sex", "Age, years", "Age Group, years", "Race", "Ethnicity",
-    "Country of Participation", "Baseline Temperature (C)"
-  )
-)
-```
-
-## Table Setup
-
-```{r, eval=FALSE}
-#| code-fold: show
-
+```{r tbl, message=FALSE, warning=FALSE, echo=FALSE}
 # Load Libraries & Data
 library(scda)
 library(falcon)
+library(dplyr)
 
 adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
 advs <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "advs")
 
 # Pre-Processing - Add any variables needed in your table to df
-library(dplyr)
-
 adsl <- adsl %>%
   dplyr::mutate(AGEGR1 = as.factor(dplyr::case_when(
     AGE >= 17 & AGE < 65 ~ ">=17 to <65",
@@ -81,6 +44,11 @@ make_table_02(
     "Country of Participation", "Baseline Temperature (C)"
   )
 )
+```
+
+## Table Setup
+
+```{r tbl, eval=FALSE}
 ```
 
 ## Function Details
