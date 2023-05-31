@@ -4,15 +4,15 @@
 \alias{argument_convention}
 \title{Standard Arguments}
 \arguments{
-\item{adae}{(\code{data.frame})\cr data (typically ADAE) required to build table.}
+\item{adae}{(\code{data.frame})\cr dataset (typically ADAE) required to build table.}
 
-\item{adex}{(\code{data.frame})\cr data (typically ADEX) required to build table.}
+\item{adex}{(\code{data.frame})\cr dataset (typically ADEX) required to build table.}
 
-\item{advs}{(\code{data.frame})\cr data (typically ADVS) required to build table.}
+\item{advs}{(\code{data.frame})\cr dataset (typically ADVS) required to build table.}
 
-\item{df}{(\code{data.frame})\cr data required to build table.}
+\item{df}{(\code{data.frame})\cr dataset required to build table.}
 
-\item{alt_counts_df}{(\code{character}) alternative (full) dataset (typically ADSL) used only to calculate column counts.}
+\item{alt_counts_df}{(\code{character}) alternative dataset (typically ADSL) used only to calculate column counts.}
 
 \item{show_colcounts}{(\code{flag})\cr whether column counts should be printed.}
 
@@ -45,7 +45,7 @@ that statistic. See \code{\link[formatters:list_valid_format_labels]{formatters:
 \item{prune_0}{(\code{flag})\cr whether all-zero rows should be removed from the table.}
 
 \item{annotations}{(named \code{list} of \code{character})\cr list of annotations to add to the table. Valid
-annotations types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
+annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
 use the annotation type as name and the desired string as value.}
 
 \item{na_level}{(\code{character})\cr string to represent missing values.}

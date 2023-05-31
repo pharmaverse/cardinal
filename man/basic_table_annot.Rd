@@ -10,7 +10,7 @@ basic_table_annot(show_colcounts = TRUE, annotations = NULL)
 \item{show_colcounts}{(\code{flag})\cr whether column counts should be printed.}
 
 \item{annotations}{(named \code{list} of \code{character})\cr list of annotations to add to the table. Valid
-annotations types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
+annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
 use the annotation type as name and the desired string as value.}
 }
 \description{

@@ -16,9 +16,9 @@ make_table_08(
 )
 }
 \arguments{
-\item{adae}{(\code{data.frame})\cr data (typically ADAE) required to build table.}
+\item{adae}{(\code{data.frame})\cr dataset (typically ADAE) required to build table.}
 
-\item{adex}{(\code{data.frame})\cr data (typically ADEX) required to build table.}
+\item{adex}{(\code{data.frame})\cr dataset (typically ADEX) required to build table.}
 
 \item{arm_var}{(\code{character})\cr arm variable used to split table into columns.}
 
@@ -30,7 +30,7 @@ in the table. Labels should be ordered according to the order of variables in \c
 \item{na_level}{(\code{character})\cr string to represent missing values.}
 
 \item{annotations}{(named \code{list} of \code{character})\cr list of annotations to add to the table. Valid
-annotations types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
+annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
 use the annotation type as name and the desired string as value.}
 }
 \description{
