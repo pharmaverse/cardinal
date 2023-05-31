@@ -2,7 +2,7 @@
 	"name": "Falcon",
 	"build": {
 		"dockerfile": "Dockerfile",
-		"args": { "VARIANT": "4.2.2" }
+		"args": { "VARIANT": "latest" }
 	},
     "postCreateCommand": "Rscript -e 'devtools::install(dependencies=TRUE, upgrade=TRUE)'",
 	"customizations": {

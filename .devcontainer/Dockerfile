@@ -1,6 +1,6 @@
-ARG VARIANT="4.2.2"
+ARG VARIANT="latest"
 
-FROM rocker/r-ver:${VARIANT}
+FROM rocker/r-base:${VARIANT}
 
 RUN apt-get update && apt-get -y upgrade
 RUN apt-get -y install curl \
@@ -17,7 +17,9 @@ RUN curl -o $FILE -L "https://github.com/quarto-dev/quarto-cli/releases/download
 RUN gdebi -n $FILE
 RUN rm $FILE
 
-RUN Rscript -e "install.packages('languageserver')"
-RUN Rscript -e "install.packages('devtools')"
+
+RUN install2.r languageserver \
+    devtools \
+    && rm -rf /tmp/downloaded_packages
 
 CMD ["R"]
