@@ -14,8 +14,8 @@ print_ref_templates <- function(fpath) {
 section_header <- function(title) {
   cat(
     paste("", "------------------------------------------------------------------------", "",
-          paste0("### ", "**", title, "**"), "",
-          sep = "\n"
+      paste0("### ", "**", title, "**"), "",
+      sep = "\n"
     ),
     file = "./quarto/index-templates.qmd", append = TRUE
   )
