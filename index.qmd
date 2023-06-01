@@ -2,19 +2,25 @@
 title: falcon
 ---
 
+```{css}
+h3 {
+  text-align: center;
+}
+```
+
 ### Implementation of FDA Safety Tables and Figures
 
-#### 
+####
 
-```{r, echo=FALSE}
+```{r}
 #| fig-align: "center"
 #| out-width: "1.5in"
 knitr::include_graphics("quarto/assets/images/falcon.png")
 ```
 
-#### What is it about?
+#### What is falcon?
 
-The {falcon} initiative is an industry collaborative effort under {pharmaverse} that brings together pharmaceutical companies with the aspiration of building and open-sourcing a catalog of harmonized tables, listings, and graphs (TLGs) in clinical study reporting. Leveraging existing open-source R packages, {falcon} aims to simplify the process of output review, comparison and meta-analyses, foster efficient communication among stakeholders in the pharmaceutical sector, while aligning with CDISC's ARD/ARM effort at the same time. Drawing inspiration from the FDA Standard Safety Tables and Figures Integrated Guide, templates are developed and goinig to be open-sourced. Future plans entail expanding the catalog through continuous collaboration from participating companies and inviting wider industry to promote harmonization of TLGs for clinical reporting.
+The falcon initiative is an industry collaborative effort under pharmaverse that brings together pharmaceutical companies with the aspiration of building and open-sourcing a catalog of harmonized tables, listings, and graphs (TLGs) in clinical study reporting. Leveraging existing open-source R packages, falcon aims to simplify the process of output review, comparison and meta-analyses, foster efficient communication among stakeholders in the pharmaceutical sector, while aligning with CDISC's ARD/ARM effort at the same time. Drawing inspiration from the FDA Standard Safety Tables and Figures Integrated Guide, templates are developed and goinig to be open-sourced. Future plans entail expanding the catalog through continuous collaboration from participating companies and inviting wider industry to promote harmonization of TLGs for clinical reporting.
 
 ```{=html}
 <div class="divButton">
@@ -27,6 +33,7 @@ The {falcon} initiative is an industry collaborative effort under {pharmaverse} 
 <button onclick="window.location.href = 'quarto/faq.html';" class="button">FAQ</button>
 </div>
 ```
+
 #### Upcoming
 
 -   ...
