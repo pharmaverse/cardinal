@@ -17,7 +17,7 @@ format:
     anchor-sections: true
     smooth-scroll: true
     code-link: true
-    code-fold: true
+    code-fold: false
     code-overflow: scroll
     code-line-numbers: true
     code-copy: true
@@ -79,7 +79,10 @@ website:
         file: index.qmd
       - text: Template Library
         menu:
-          - text: Coming soon...
+          - quarto/table-templates/template-table_02.qmd
+          - quarto/table-templates/template-table_06.qmd
+          - quarto/table-templates/template-table_09.qmd
+          - quarto/table-templates/template-table_13.qmd
       - text: About
         menu:
           - text: About the Project
@@ -94,3 +97,4 @@ website:
             url:  https://github.com/pharmaverse/falcon/issues
           - text: FAQ
             file: quarto/faq.qmd
+

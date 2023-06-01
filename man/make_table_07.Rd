@@ -16,9 +16,9 @@ make_table_07(
 )
 }
 \arguments{
-\item{adae}{(\code{data.frame})\cr data (typically ADAE) required to build table.}
+\item{adae}{(\code{data.frame})\cr dataset (typically ADAE) required to build table.}
 
-\item{alt_counts_df}{(\code{character}) alternative (full) dataset (typically ADSL) used only to calculate column counts.}
+\item{alt_counts_df}{(\code{character}) alternative dataset (typically ADSL) used only to calculate column counts.}
 
 \item{show_colcounts}{(\code{flag})\cr whether column counts should be printed.}
 
@@ -32,7 +32,7 @@ the given value as the column label.}
 \item{na_level}{(\code{character})\cr string to represent missing values.}
 
 \item{annotations}{(named \code{list} of \code{character})\cr list of annotations to add to the table. Valid
-annotations types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
+annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
 use the annotation type as name and the desired string as value.}
 }
 \description{
