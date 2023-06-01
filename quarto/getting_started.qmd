@@ -1,5 +1,177 @@
 ---
 title: "Getting Started"
-toc: false
+toc: true
+toc-depth: 4
 echo: false
+sidebar: false
 ---
+
+### How to set up envirionment & install required packages
+
+#### Set up envirionment
+
+...
+
+#### Install required packages
+
+The {falcon} initiative is mostly using {pharmaverse} and {tidyverse} packages to provide templates.\
+The clinical dataframes used to develop the template programs requires the installation of the {scda} and {scda.2022} packages.
+
+You can follow this code to install all the necessary packages:
+
+```{r}
+#| eval: FALSE
+#| echo: TRUE
+
+# Install the remote package for some packages installation like tern
+if (!require("remotes")) {
+    install.packages("remotes")
+}
+
+# scda and scda.2022 packages
+# Those contains random data that are used in the templates
+if (!require("scda")) {
+    remotes::install_github("insightsengineering/scda@*release")
+}
+
+if (!require("scda.2022")) {
+    remotes::install_github("insightsengineering/scda.2022@*release")
+}
+
+# tidyverse packages collection
+# dplyr is the one that is the most used in the templates
+if (!require("tidyverse")) {
+    install.packages("tidyverse")
+}
+
+# rtables
+if (!require("rtables")) {
+    install.packages("rtables")
+}
+
+# tern
+if (!require("tern")) {
+    remotes::install_github("insightsengineering/tern@*release")
+}
+
+# rlistings
+if (!require("rlistings")) {
+    install.packages("rlistings")
+}
+
+# formatters
+if (!require("formatters")) {
+    remotes::install_github("insightsengineering/formatters")
+}
+```
+
+### Select dataframes to use {.leftalign}
+
+The {[scda](https://insightsengineering.github.io/scda/latest-tag/)} contains a panel of clinical datasets in CDISC format ready to be used with the templates. Command `ls_synthetic_cdisc_data()` gives all the available datasets:
+
+```{r}
+#| eval: FALSE
+#| echo: TRUE
+library(scda)
+ls_synthetic_cdisc_data()
+```
+
+Then you can choose a release and the wanted dataset to use:
+
+```{r}
+#| eval: TRUE
+#| echo: TRUE
+adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
+```
+
+### How to navigate to the template {.leftalign}
+
+The templates programs are available on [this page](template_library.qmd) and are reproducing tables, listings and figures from the [FDA Standard Safety Tables and Figures: Integrated Guide](https://downloads.regulations.gov/FDA-2022-N-1961-0046/attachment_1.pdf).
+
+Each template is associated to a function that is available in the [git repository](https://github.com/pharmaverse/falcon) of {falcon} in the [R folder](https://github.com/pharmaverse/falcon/tree/main/R).
+
+Each template page is divided into 4 panels:
+
+-   **Spec. Screenshot**: the panel provides a screenshot of the specifications coming from the FDA Standard Safety Table and Figures document.  
+
+![](assets/images/screenshots/gs-pan1.png){fig-align="center"}
+
+-   **Table**: this panel provides an output generated using the associated template program of the {falcon} initiative, such as shown in the example below. It is there to show the user the expected final layout of the table and the association with the FDA guide.
+
+![](assets/images/screenshots/gs-pan2.png){fig-align="center"}
+
+-   **Table Setup**: this panel gives an example of usage of the template program, with loading of necessary libraries and datasets, and pre-processing steps before calling the {falcon} function associated to the table when needed.\
+    Here's an example of the table 2 setup:
+
+![](assets/images/screenshots/gs-pan3.png){fig-align="center"}
+
+-   **Function Details**: gives a description of all the arguments used in the {falcon} function used to generate the table, with defaults values when applicable.
+
+![](assets/images/screenshots/gs-pan4.png){fig-align="center"}
+
+This panel also gives the link of the full function code for documentation at the bottom of the page:  
+
+![](assets/images/screenshots/gs-pan4b.png){fig-align="center"}
+
+### How to use the templates provided
+
+There are 100? templates available for use with the Safety Table Templates with R Base Code.
+
+#### Installing the Falcon Package
+
+To use the Safety Table Templates with R Base Code, you will need to install the Falcon Package. The Falcon Package is a package for R that provides a set of tools for creating safety tables. To install the Falcon Package, you can use the following command in R:
+
+```{r}
+#| eval: FALSE
+#| echo: TRUE
+remotes::install_github("pharmaverse/falcon")
+```
+
+#### Using the Safety Table Templates
+
+To use the Safety Table Templates with R Base Code, you will need to load the Falcon Package and then call the appropriate template function. For example, to create safety table "Table 2 (Baseline Demographic and Clinical Characteristics, Safety Population, Pooled Analyses)", you can use the following code:
+
+```{r}
+#| eval: FALSE
+#| echo: TRUE
+
+library(Falcon)
+
+#Data pre-processing
+ adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") %>%
+   mutate(AGEGR1 = as.factor(case_when(
+     AGE >= 17 & AGE < 65 ~ ">=17 to <65",
+     AGE >= 65 ~ ">=65",
+     AGE >= 65 & AGE < 75 ~ ">=65 to <75",
+     AGE >= 75 ~ ">=75"
+   )) %>% formatters::with_label("Age Group, years")) %>%
+   formatters::var_relabel(
+     AGE = "Age, years"
+   )
+
+ #make table
+ tbl <- make_table_02(df = adsl)
+ tbl
+```
+This will create a Safety templates using the default settings. You can customize the template tables by managing parameters to the function, such as the data to use, variables to include in the table, Footnotes, etc..
+
+
+### How to potentially customize the template if needed
+
+### References to useful materials
+
+CDISC standardized dataset are used to compute the template programs, using the {scda} package:
+
+-   [Scda: Synthetic CDISC Data Archive Accessor Functions](https://insightsengineering.github.io/scda/latest-tag/)
+
+{pharmaverse} package collections are the main component of the {falcon} tables, listings and figures:
+
+-   [{rtables}: Reporting tables with R](https://insightsengineering.github.io/rtables/main/index.html)\
+-   [{tern}: Analysis functions to create tables and graphs used for clinical trial reporting](https://insightsengineering.github.io/tern/latest-tag/)\
+-   [{rlistings}: Listings with R](https://insightsengineering.github.io/rlistings/latest-tag/index.html)\
+-   [{formatters}: ASCII rendering](https://insightsengineering.github.io/formatters/latest-tag/index.html)
+
+{dplyr} package form the {tidyverse} collection is mostly used to for pre-processing data manipulation, before computing TL&F:
+
+-   [{dplyr}: A Grammar of Data Manipulation](https://dplyr.tidyverse.org/)  
+-   [{tidyverse} package collection](https://www.tidyverse.org/packages/)
