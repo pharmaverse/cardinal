@@ -7,7 +7,7 @@
 alt_counts_df_preproc(alt_counts_df, arm_var = "ARM")
 }
 \arguments{
-\item{alt_counts_df}{(\code{character}) alternative (full) dataset (typically ADSL) used only to calculate column counts.}
+\item{alt_counts_df}{(\code{character}) alternative dataset (typically ADSL) used only to calculate column counts.}
 
 \item{arm_var}{(\code{character})\cr arm variable used to split table into columns.}
 }

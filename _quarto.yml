@@ -17,7 +17,7 @@ format:
     anchor-sections: true
     smooth-scroll: true
     code-link: true
-    code-fold: true
+    code-fold: false
     code-overflow: scroll
     code-line-numbers: true
     code-copy: true
@@ -80,3 +80,9 @@ website:
     left:
       - text: Home
         file: index.qmd
+      - text: Template Library
+        menu:
+          - table-templates/template-table_02.qmd
+          - table-templates/template-table_06.qmd
+          - table-templates/template-table_09.qmd
+          - table-templates/template-table_13.qmd
