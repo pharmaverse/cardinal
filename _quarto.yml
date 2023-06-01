@@ -27,7 +27,7 @@ format:
       caption: none
     code-block-bg: true
     css: quarto/assets/style.scss
-    toc: true
+    toc: false
     number-sections: false
     lang: en-US
     page-layout: full
@@ -39,7 +39,7 @@ execute:
 
 knitr:
   opts_chunk:
-    echo: true
+    echo: false
     fig.width: 15
 
 editor: source
