@@ -92,7 +92,7 @@ Each template is associated to a function that is available in the [git reposito
 
 Each template page is divided into 4 panels:
 
--   **Spec. Screenshot**: the panel provides a screenshot of the specifications coming from the FDA Standard Safety Table and Figures document.  
+-   **Spec. Screenshot**: the panel provides a screenshot of the specifications coming from the FDA Standard Safety Table and Figures document.
 
 ![](assets/images/screenshots/gs-pan1.png){fig-align="center"}
 
@@ -109,7 +109,7 @@ Each template page is divided into 4 panels:
 
 ![](assets/images/screenshots/gs-pan4.png){fig-align="center"}
 
-This panel also gives the link of the full function code for documentation at the bottom of the page:  
+This panel also gives the link of the full function code for documentation at the bottom of the page:
 
 ![](assets/images/screenshots/gs-pan4b.png){fig-align="center"}
 
@@ -153,10 +153,48 @@ library(Falcon)
  tbl <- make_table_02(df = adsl)
  tbl
 ```
+
 This will create a Safety templates using the default settings. You can customize the template tables by managing parameters to the function, such as the data to use, variables to include in the table, Footnotes, etc..
 
-
 ### How to potentially customize the template if needed
+
+#### Parameter update
+Each template takes several parameters that can be customized to generate a safety table that meets your requirements. A brief overview of the parameters is provided in the **Function Details** panel.
+
+This is the example for table2:
+
+**df**: The input dataset containing the variables to be summarized. 
+**alt_counts_df**: An optional dataset containing alternative counts for each arm. 
+**show_colcounts**: A logical value indicating whether to show the column counts in the table.
+**arm_var**: The variable in the dataset that specifies the treatment arm.
+**vars**: The variables in the dataset to be summarized.
+**lbl_vars**: The labels for the variables specified by the vars parameter.
+**lbl_overall**: The label for the overall population column.
+**.stats**: The summary statistics to be calculated for each variable. The default is c("mean_sd", "median_range", "count_fraction").
+**.formats**: The formats for the summary statistics. The default is NULL.
+**na_rm**: A logical value indicating whether to remove rows with missing values.
+**prune_0**: A logical value indicating whether to remove rows with all-zero values.
+**annotations**: An optional list of annotations to be added to the table.
+
+To customize the function, you can modify the values of these parameters as per your requirements, and run like below:
+
+```{r}
+make_table_02(df,
+              alt_counts_df = NULL,
+              show_colcounts = TRUE,
+              arm_var = "ARM",
+              vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY"),
+              lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
+              lbl_overall = "Total Population",
+              .stats = c("mean_sd", "median_range", "count_fraction"),
+              .formats = NULL,
+              na_rm = FALSE,
+              prune_0 = TRUE,
+              annotations = NULL)
+```
+
+
+
 
 ### References to useful materials
 
@@ -173,5 +211,5 @@ CDISC standardized dataset are used to compute the template programs, using the 
 
 {dplyr} package form the {tidyverse} collection is mostly used to for pre-processing data manipulation, before computing TL&F:
 
--   [{dplyr}: A Grammar of Data Manipulation](https://dplyr.tidyverse.org/)  
+-   [{dplyr}: A Grammar of Data Manipulation](https://dplyr.tidyverse.org/)\
 -   [{tidyverse} package collection](https://www.tidyverse.org/packages/)
