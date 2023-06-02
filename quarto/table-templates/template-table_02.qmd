@@ -1,17 +1,17 @@
 ---
-title: "FDA Table 2"
-subtitle: "Baseline Demographic and Clinical Characteristics Safety Population, Pooled Analyses"
+title: FDA Table 2
+subtitle: Baseline Demographic and Clinical Characteristics, Safety Population, Pooled Analyses
 format: html
 ---
 
 ::: panel-tabset
 ## Spec. Screenshot
 
-![](images/table_02.png){fig-align="center"}
+![](../assets/images/screenshots/table_02.png){fig-align="center"}
 
 ## Table
 
-```{r tbl, message=FALSE, warning=FALSE, echo=FALSE}
+```{r tbl, message=FALSE, warning=FALSE}
 # Load Libraries & Data
 library(scda)
 library(falcon)
@@ -48,7 +48,7 @@ make_table_02(
 
 ## Table Setup
 
-```{r tbl, eval=FALSE}
+```{r tbl, eval=FALSE, echo=TRUE}
 ```
 
 ## Function Details
