@@ -45,7 +45,7 @@ library(slickR)
 
 tbl_imgs <- list.files(file.path("./quarto/assets/images/screenshots"), full.names = TRUE, pattern = "png")[1:3]
 tbl_links <- paste0(
-  "https://pharmaverse.github.io/falcon/quarto/table-templates/template-", 
+  "https://pharmaverse.github.io/falcon/quarto/table-templates/template-",
   sapply(strsplit(tbl_imgs, "[/|.]"), `[`, 7), ".html"
 )
 
