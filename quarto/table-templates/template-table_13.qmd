@@ -1,6 +1,6 @@
 ---
-title: "FDA Table 13"
-subtitle: "Patients With Common Adverse Events Occurring at >=XX% Frequency, Safety Population, Pooled Analyses"
+title: FDA Table 13
+subtitle: Patients With Common Adverse Events Occurring at >=X% Frequency, Safety Population, Pooled Analyses
 format: html
 ---
 
@@ -11,7 +11,7 @@ format: html
 
 ## Table
 
-```{r tbl, message=FALSE, warning=FALSE, echo=FALSE}
+```{r tbl, message=FALSE, warning=FALSE}
 # Load Libraries & Data
 library(scda)
 library(falcon)
@@ -31,7 +31,7 @@ make_table_13(adae = adae, alt_counts_df = adsl, pref_var = prefterm_var, min_fr
 
 ## Table Setup
 
-```{r tbl, eval=FALSE}
+```{r tbl, eval=FALSE, echo=TRUE}
 ```
 
 ## Function Details

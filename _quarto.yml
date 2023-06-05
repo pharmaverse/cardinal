@@ -27,7 +27,7 @@ format:
       caption: none
     code-block-bg: true
     css: quarto/assets/style.scss
-    toc: true
+    toc: false
     number-sections: false
     lang: en-US
     page-layout: full
@@ -39,7 +39,7 @@ execute:
 
 knitr:
   opts_chunk:
-    echo: true
+    echo: false
     fig.width: 15
 
 editor: source
@@ -85,14 +85,11 @@ website:
           - quarto/table-templates/template-table_13.qmd
       - text: About
         menu:
-          - text: About the Project
-            file: quarto/about.qmd
-          - text: Our Journey
-            file: quarto/our_journey.qmd
+          - quarto/about.qmd
+          - quarto/our_journey.qmd
       - text: Help
         menu:
-          - text: Getting Started
-            file: quarto/getting_started.qmd
+          - quarto/getting_started.qmd
           - text: Report a Bug
             url:  https://github.com/pharmaverse/falcon/issues
           - text: FAQ
