@@ -2,241 +2,159 @@
 title: "Getting Started"
 toc: true
 toc-depth: 4
-echo: false
-sidebar: false
 ---
 
-### How to set up envirionment & install required packages
+```{r setup, include=FALSE, eval=TRUE}
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+```
 
-#### Set up envirionment
+### Environment Setup and Package Installation
+
+#### Environment Setup
 
 ...
 
-#### Install required packages
+#### Installing Required Packages
 
-The {falcon} initiative is mostly using {pharmaverse} and {tidyverse} packages to provide templates.\
-The clinical dataframes used to develop the template programs requires the installation of the {scda} and {scda.2022} packages.
+The `falcon` package requires use of the `dplyr` package as well as several packages available from the Insights Engineering organization on GitHub.
 
-You can follow this code to install all the necessary packages:
-
-```{r}
-#| eval: FALSE
-#| echo: TRUE
-
-# Install the remote package for some packages installation like tern
-if (!require("remotes")) {
-    install.packages("remotes")
-}
-
-# scda and scda.2022 packages
-# Those contains random data that are used in the templates
-if (!require("scda")) {
-    remotes::install_github("insightsengineering/scda@*release")
-}
-
-if (!require("scda.2022")) {
-    remotes::install_github("insightsengineering/scda.2022@*release")
-}
-
-# tidyverse packages collection
-# dplyr is the one that is the most used in the templates
-if (!require("tidyverse")) {
-    install.packages("tidyverse")
-}
-
-# rtables
-if (!require("rtables")) {
-    install.packages("rtables")
-}
-
-# tern
-if (!require("tern")) {
-    remotes::install_github("insightsengineering/tern@*release")
-}
-
-# rlistings
-if (!require("rlistings")) {
-    install.packages("rlistings")
-}
-
-# formatters
-if (!require("formatters")) {
-    remotes::install_github("insightsengineering/formatters")
-}
-```
-
-### Select dataframes to use {.leftalign}
-
-The {[scda](https://insightsengineering.github.io/scda/latest-tag/)} package contains a panel of clinical datasets in CDISC format ready to be used with the templates. Command `ls_synthetic_cdisc_data()` gives all the available datasets:
+To use the `falcon` package, ensure you have the necessary packages installed by running the following code:
 
 ```{r}
-#| eval: FALSE
-#| echo: TRUE
-library(scda)
-ls_synthetic_cdisc_data()
+if (!require("dplyr")) install.packages("dplyr")
+if (!require("formatters")) install.packages("formatters")
+if (!require("rtables")) install.packages("rtables")
+if (!require("rlistings")) install.packages("rlistings")
+if (!require("remotes")) install.packages("remotes")
+if (!require("tern")) remotes::install_github("insightsengineering/tern@*release")
 ```
 
-Then you can choose a release and the wanted dataset to use:
+Optionally, you can also install the synthetic CDISC data packages, which contain the datasets used in all `falcon` example tables provided within the `falcon` package and on this site, by running the following:
 
 ```{r}
-#| eval: TRUE
-#| echo: TRUE
-adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
+if (!require("scda")) remotes::install_github("insightsengineering/scda@*release")
+if (!require("scda.2022")) remotes::install_github("insightsengineering/scda.2022@*release")
 ```
 
-### How to navigate to the template {.leftalign}
+#### Installing the `falcon` Package
 
-The templates programs are available on [this page](template_library.qmd) and are reproducing tables, listings and figures from the [FDA Standard Safety Tables and Figures: Integrated Guide](https://downloads.regulations.gov/FDA-2022-N-1961-0046/attachment_1.pdf).
-
-Each template is associated to a function that is available in the [git repository](https://github.com/pharmaverse/falcon) of {falcon} in the [R folder](https://github.com/pharmaverse/falcon/tree/main/R).
-
-Each template page is divided into 4 panels:
-
--   **Spec. Screenshot**: the panel provides a screenshot of the specifications coming from the FDA Standard Safety Table and Figures document.
-
-![](assets/images/screenshots/gs-pan1.png){fig-align="center"}
-
--   **Table**: this panel provides an output generated using the associated template program of the {falcon} initiative, such as shown in the example below. It is there to show the user the expected final layout of the table and the association with the FDA guide.
-
-![](assets/images/screenshots/gs-pan2.png){fig-align="center"}
-
--   **Table Setup**: this panel gives an example of usage of the template program, with loading of necessary libraries and datasets, and pre-processing steps before calling the {falcon} function associated to the table when needed.\
-    Here's an example of the table 2 setup:
-
-![](assets/images/screenshots/gs-pan3.png){fig-align="center"}
-
--   **Function Details**: gives a description of all the arguments used in the {falcon} function used to generate the table, with defaults values when applicable.
-
-![](assets/images/screenshots/gs-pan4.png){fig-align="center"}
-
-This panel also gives the link of the full function code for documentation at the bottom of the page:
-
-![](assets/images/screenshots/gs-pan4b.png){fig-align="center"}
-
-### How to use the templates provided
-
-There are 100? templates available for use with the Safety Table Templates with R Base Code.
-
-#### Installing the Falcon Package
-
-To use the Safety Table Templates with R Base Code, you will need to install the Falcon Package. The Falcon Package is a package for R that provides a set of tools for creating safety tables. To install the Falcon Package, you can use the following command in R:
+To install the `falcon` package, run the following line of code:
 
 ```{r}
-#| eval: FALSE
-#| echo: TRUE
-remotes::install_github("pharmaverse/falcon")
+if (!require("falcon")) remotes::install_github("pharmaverse/falcon")
 ```
 
-#### Using the Safety Table Templates
+### Loading Data
 
-To use the Safety Table Templates with R Base Code, you will need to load the Falcon Package and then call the appropriate template function. For example, to create safety table "Table 2 (Baseline Demographic and Clinical Characteristics, Safety Population, Pooled Analyses)", you can use the following code:
+The table functions provided by `falcon` are designed to work with any data which adheres to CDISC standards. If you have access to your own CDISC data, load this into your R environment as usual to use when generating tables.
 
-```{r}
-#| eval: FALSE
-#| echo: TRUE
+If not, or to run the examples provided within the package, you can use the `scda` package to load a selection of datasets from the `scda.2022` package which contains example synthetic CDISC data. Datasets can be loaded using the `synthetic_cdisc_dataset()` function from `scda`. Specify the `archive_name` parameter, setting `archive_name = "latest"` for the most recent version or another version if desired (see the list of all available versions by running `ls_synthetic_cdisc_data()`). The `dataset_name` parameter must also be specified with the name of the desired dataset in lowercase, e.g. `dataset_name = "adsl"`. This data is loaded in where necessary as part of the provided examples.
 
-library(Falcon)
+### Template Navigation
 
-#Data pre-processing
- adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") %>%
-   mutate(AGEGR1 = as.factor(case_when(
-     AGE >= 17 & AGE < 65 ~ ">=17 to <65",
-     AGE >= 65 ~ ">=65",
-     AGE >= 65 & AGE < 75 ~ ">=65 to <75",
-     AGE >= 75 ~ ">=75"
-   )) %>% formatters::with_label("Age Group, years")) %>%
-   formatters::var_relabel(
-     AGE = "Age, years"
-   )
+A list of all templates available in `falcon` is provided in the [Template Library Index](template_library.qmd), with tables designed based on the [FDA Standard Safety Tables and Figures: Integrated Guide](https://downloads.regulations.gov/FDA-2022-N-1961-0046/attachment_1.pdf).
 
- #make table
- tbl <- make_table_02(df = adsl)
- tbl
+Each template provided is associated with a function available within the `falcon` package, and contains 4 sections:
+
+-   **Spec. Screenshot**: This tab provides a screenshot of the given table coming from the FDA Standard Safety Table and Figures document.
+
+![](assets/images/getting-started/gs-pan1.png){fig-align="center" width="90%"}
+
+-   **Table**: This tab displays the output table corresponding to the screenshot in the previous tab, generated using the associated `falcon` table function. You can expect a similar output table when using the table function with your own data, depending on pre-processing and the customizations that you apply via the table function parameters.
+
+![](assets/images/getting-started/gs-pan2.png){fig-align="center" width="90%"}
+
+-   **Table Setup**: This tab provides the code used to generate the example table displayed in the previous tab, including the loading of necessary libraries and example datasets, and any pre-processing steps to apply prior to generating the table.
+
+![](assets/images/getting-started/gs-pan3.png){fig-align="center" width="90%"}
+
+-   **Function Details**: This tab includes details of the table-generating function used for this template. Table functions use the naming convention `make_table_XX` where `XX` is the table number taken from the FDA Standard Safety Table and Figures document (preceded by a 0 if the number is one digit). Any required variables for the input datasets are listed and a description of all function arguments is included. This information is also available on each function's help page (i.e. `?make_table_XX`).
+
+![](assets/images/getting-started/gs-pan4.png){fig-align="center" width="90%"}
+
+|           This panel provides a link to the function's source code at the bottom of the page:
+
+![](assets/images/getting-started/gs-pan4b.png){fig-align="center" width="90%"}
+
+### Generating Tables
+
+There are many table-generating functions available within the `falcon` package that can be used to generate FDA standard safety tables using R. These functions each create an `rtables` table object, which can then be further customized, paginated, etc. if required using functions from the [`rtables`](https://insightsengineering.github.io/rtables/main/) package.
+
+#### Using the Table Functions
+
+To use the table functions, you will need to load the `falcon` package and then call the appropriate table function. For example, to create FDA Safety Table 2, you can run the following code:
+
+```{r, warning=FALSE, message=FALSE, eval=TRUE}
+library(dplyr)
+library(falcon)
+
+# Data pre-processing - ensure all necessary variables are present in the data
+adsl <- scda::synthetic_cdisc_dataset("latest", "adsl") %>%
+  dplyr::mutate(AGEGR1 = as.factor(dplyr::case_when(
+    AGE >= 17 & AGE < 65 ~ ">=17 to <65",
+    AGE >= 65 ~ ">=65",
+    AGE >= 65 & AGE < 75 ~ ">=65 to <75",
+    AGE >= 75 ~ ">=75"
+  )) %>% formatters::with_label("Age Group, years")) %>%
+  formatters::var_relabel(AGE = "Age, years")
+
+# Create table
+tbl <- make_table_02(df = adsl)
+tbl
 ```
 
-This will create a Safety templates using the default settings. You can customize the template tables by managing parameters to the function, such as the data to use, variables to include in the table, Footnotes, etc..
+The above table is created using the default settings. You can customize tables by specifying function parameter values to set input data, variables to include in the table, table annotations, etc.
 
-### How to potentially customize the template if needed
+#### Table Customization
 
-#### Arguments setup
+Each template takes several arguments that can be set to generate a table that meets your requirements. A brief overview of the parameters for each template is provided in the **Function Details** section of each table template page (e.g. for table 2 see [here](https://pharmaverse.github.io/falcon/quarto/table-templates/template-table_02.html#make_table_02)) and the function's help page within R (i.e. `?make_table_XX`), with many of these parameters being standard in multiple table functions.
 
-Each template takes several arguments that can be customized to generate a safety table that meets your requirements. A brief overview of the parameters for each template is provided in the **Function Details** panel.
+To customize the output table, you can modify the values of these arguments as per your requirements. For example, table 2 can be customized as follows:
 
-All the arguments in `falcon` that are used repeatedly by functions to output tables.:
+```{r, warning=FALSE, message=FALSE, eval=TRUE}
+advs <- scda::synthetic_cdisc_dataset("latest", "advs") %>%
+  dplyr::filter(AVISIT == "BASELINE", VSTESTCD == "TEMP") %>%
+  dplyr::select("USUBJID", "AVAL")
 
--   **df**: (data.frame) dataset required to build table.
--   **altcountsdf**: (character) alternative dataset (typically ADSL) used only to calculate column counts.
--   **show_colcounts**: (flag) whether column counts should be printed.
--   **arm_var**: (character) arm variable used to split table into columns.
--   **id_var**: (character) variable used as unique subject identifier.
--   **lbl_overall**: (character) if specified, an overall column will be added to the table with the given value as the column label.
--   **vars**: (vector of character) variables from df to include in the table.
--   **lbl_vars**: (vector of character) labels corresponding to variables in vars to print in the table. Labels should be ordered according to the order of variables in vars.
--   **pref_var**: (character) preferred term variable from adae to include in the table.
--   **lblprefvar**: (character) label corresponding to preferred term variable pref_var to print in the table.
--   **.stats**: (character) statistics to include in the table. Includes statistics for all variable types (only the statistics that are valid for a given variable's type will be printed). See tern::summarize_vars() for options.
--   **.formats** (named list of character) list of formats corresponding to each value in .stats. Each name is a value in .stats and the corresponding value is the format that should be applied to that statistic. See formatters::list_valid_format_labels() for a list of valid formats.
--   **na_rm** (flag) whether NA levels should be removed from the table.
--   **prune_0**: (flag) whether all-zero rows should be removed from the table.
--   **annotations**: (named list of character) list of annotations to add to the table. Valid annotation types are title, subtitles, main_footer, and prov_footer. Each name-value pair should use the annotation type as name and the desired string as value.
--   **na_level**: (character) string to represent missing values.
+anl <- dplyr::left_join(adsl, advs, by = "USUBJID") %>% tern::df_explicit_na()
 
-To customize the function, you can modify the values of these arguments as per your requirements:
-
-```{r}
-# default code 
-make_table_02(df,
-              alt_counts_df = NULL,
-              show_colcounts = TRUE,
-              arm_var = "ARM",
-              vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY"),
-              lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
-              lbl_overall = "Total Population",
-              .stats = c("mean_sd", "median_range", "count_fraction"),
-              .formats = NULL,
-              na_rm = FALSE,
-              prune_0 = TRUE,
-              annotations = NULL)
+tbl <- make_table_02(
+  df = anl,
+  vars = c("SEX", "AGE", "RACE", "COUNTRY", "AVAL"),
+  lbl_vars = c("Sex", "Age, years", "Race", "Country of Participation", "Baseline Temperature (C)"),
+  lbl_overall = "Total\nPopulation",
+  na_rm = TRUE,
+  annotations = list(
+    title = "Table 2. Baseline Demographic and Clinical Characteristics Safety Population, Pooled Analyses",
+    main_footer = "Source: [include Applicant source, datasets and/or software tools used].",
+    prov_footer = paste(
+      "Abbreviations: N, number of patients in treatment arm;",
+      "n, number of patients with given characteristic; SD, standard deviation"
+    )
+  )
+)
+tbl
 ```
 
-To add new rows to the demographic table generated by the make_table02() function, you can modify the vars and lbl_vars parameters. Here's an example:
+Note that the `prune_0` argument can be set to specify whether all-zero rows should be included in a table. For example, see that the demographics table below includes rows for `OTHER` and `UNKNOWN` for which all values are zero, whereas these two rows were excluded from the previous tables (`prune_0` defaults to `TRUE` in `make_table_02()`).
 
-```{r}
-make_table_02(df, vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY", "NEW_VAR"), lbl_vars = c("Sex", "Age", "Age Group", "Race", "Ethnicity", "Country", "New Variable"))
+```{r, eval=TRUE}
+make_table_02(df = anl, vars = "RACE", prune_0 = FALSE)
 ```
 
-You can also modify the prune_0 argument to show all-zero rows in the table.:
+### Feature Requests
 
-```{r}
-make_table_02(df, prune_0 = FALSE)
-```
+If you would like to request the addition of a new feature to a pre-existing function within `falcon`, or would like a specific table template not currently available to be added, please file an issue on GitHub [here](https://pharmaverse.github.io/falcon/) or reach out to the `falcon` team directly via our Slack channel [here](https://app.slack.com/client/T028PB489D3/C04MQS12MND).
 
-#### Code update
+You can access the source code for all currently available functions in the `falcon` GitHub repository [here](https://github.com/pharmaverse/falcon/tree/main/R).
 
-If you would like to modify the function R code directly to meet your requirements, it is possible. You can access the source code directly and update it as needed. The falcon package is built primarily with the following packages: {rtable}, {tern}, {rlistings},{formatters}, and {rlisting}. For more information on these packages, please refer to their respective reference sites.
+### Additional Resources
 
-The source code for each function can be accessed from the R package in which it is included. To access the source code, you can use the getAnywhere function in R. Here's an example:
+See the following repositories used within `falcon` for more information:
 
-```{r}
-getAnywhere(make_table_02)
-```
-
-You can also access to each function that is available in the [git repository](https://github.com/pharmaverse/falcon) of {falcon} in the [R folder](https://github.com/pharmaverse/falcon/tree/main/R).
-
-### References to useful materials
-
-CDISC standardized dataset are used to compute the template programs, using the {scda} package:
-
--   [{scda}: Synthetic CDISC Data Archive Accessor Functions](https://insightsengineering.github.io/scda/latest-tag/)
-
-{pharmaverse} package collections are the main component of the {falcon} tables, listings and figures:
-
--   [{rtables}: Reporting tables with R](https://insightsengineering.github.io/rtables/main/index.html)\
--   [{tern}: Analysis functions to create tables and graphs used for clinical trial reporting](https://insightsengineering.github.io/tern/latest-tag/)\
--   [{rlistings}: Listings with R](https://insightsengineering.github.io/rlistings/latest-tag/index.html)\
--   [{formatters}: ASCII rendering](https://insightsengineering.github.io/formatters/latest-tag/index.html)
-
-{dplyr} package form the {tidyverse} collection is mostly used to for pre-processing data manipulation, before computing TL&F:
-
--   [{dplyr}: A Grammar of Data Manipulation](https://dplyr.tidyverse.org/)\
--   [{tidyverse} package collection](https://www.tidyverse.org/packages/)
+-   [`dplyr`](https://dplyr.tidyverse.org/): Data manipulation and pre-processing
+-   [`rtables`](https://insightsengineering.github.io/rtables/main/): Table creation
+-   [`rlistings`](https://insightsengineering.github.io/rlistings/latest-tag/): Listing creation
+-   [`tern`](https://insightsengineering.github.io/tern/latest-tag/): Clinical trials analysis functions
+-   [`formatters`](https://insightsengineering.github.io/formatters/latest-tag/): Additional rendering formatting
+-   [`scda`](https://insightsengineering.github.io/scda/latest-tag/): Example synthetic CDISC data (required for examples only)
