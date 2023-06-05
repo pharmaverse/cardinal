@@ -67,7 +67,7 @@ if (!require("formatters")) {
 
 ### Select dataframes to use {.leftalign}
 
-The {[scda](https://insightsengineering.github.io/scda/latest-tag/)} contains a panel of clinical datasets in CDISC format ready to be used with the templates. Command `ls_synthetic_cdisc_data()` gives all the available datasets:
+The {[scda](https://insightsengineering.github.io/scda/latest-tag/)} package contains a panel of clinical datasets in CDISC format ready to be used with the templates. Command `ls_synthetic_cdisc_data()` gives all the available datasets:
 
 ```{r}
 #| eval: FALSE
@@ -227,7 +227,7 @@ You can also access to each function that is available in the [git repository](h
 
 CDISC standardized dataset are used to compute the template programs, using the {scda} package:
 
--   [Scda: Synthetic CDISC Data Archive Accessor Functions](https://insightsengineering.github.io/scda/latest-tag/)
+-   [{scda}: Synthetic CDISC Data Archive Accessor Functions](https://insightsengineering.github.io/scda/latest-tag/)
 
 {pharmaverse} package collections are the main component of the {falcon} tables, listings and figures:
 
