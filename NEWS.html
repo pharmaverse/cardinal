@@ -92,6 +92,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./quarto/assets/images/falcon.png" rel="icon" type="image/png">
 <script src="site_libs/cookie-consent/cookie-consent.js"></script>
 <link href="site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
 <script src="site_libs/quarto-html/quarto.js"></script>
@@ -157,16 +158,20 @@ cookieconsent.run({
 <style>html{ scroll-behavior: smooth; }</style>
 
 
-<link rel="stylesheet" href="assets/css/style.scss">
+<link rel="stylesheet" href="quarto/assets/style.scss">
 </head>
 
 <body class="nav-fixed">
+
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./quarto/assets/images/falcon.png" alt="" class="navbar-logo">
+    </a>
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">falcon</span>
     </a>
@@ -180,27 +185,60 @@ cookieconsent.run({
     <a class="nav-link" href="./index.html">
  <span class="menu-text">Home</span></a>
   </li>  
-</ul>
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item compact">
-    <a class="nav-link" href="https://app.slack.com/client/T028PB489D3/C04MQS12MND"><i class="bi bi-slack" role="img" aria-label="Slack">
-</i> 
- <span class="menu-text"></span></a>
-  </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-bi-github" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-      <i class="bi bi-github" role="img" aria-label="GitHub">
-</i> 
- <span class="menu-text"></span>
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-template-library" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Template Library</span>
     </a>
-    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-bi-github">    
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-template-library">    
         <li>
-    <a class="dropdown-item" href="https://github.com/pharmaverse/falcon">
- <span class="dropdown-text">Source Code</span></a>
+    <a class="dropdown-item" href="./quarto/table-templates/template-table_02.html">
+ <span class="dropdown-text">FDA Table 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./quarto/table-templates/template-table_06.html">
+ <span class="dropdown-text">FDA Table 6</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./quarto/table-templates/template-table_09.html">
+ <span class="dropdown-text">FDA Table 9</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./quarto/table-templates/template-table_13.html">
+ <span class="dropdown-text">FDA Table 13</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-about" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">About</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-about">    
+        <li>
+    <a class="dropdown-item" href="./quarto/about.html">
+ <span class="dropdown-text">About the Project</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./quarto/our_journey.html">
+ <span class="dropdown-text">Our Journey</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-help" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Help</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-help">    
+        <li>
+    <a class="dropdown-item" href="./quarto/getting_started.html">
+ <span class="dropdown-text">Getting Started</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="https://github.com/pharmaverse/falcon/issues">
  <span class="dropdown-text">Report a Bug</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./quarto/faq.html">
+ <span class="dropdown-text">FAQ</span></a>
   </li>  
     </ul>
   </li>
@@ -223,8 +261,8 @@ cookieconsent.run({
 
 
 
-<section id="falcon-0.1.0.9012" class="level1">
-<h1>falcon 0.1.0.9012</h1>
+<section id="falcon-0.1.0.9013" class="level1">
+<h1>falcon 0.1.0.9013</h1>
 <ul>
 <li>Initialize the package.</li>
 </ul>
@@ -534,7 +572,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu"># falcon 0.1.0.9012</span></span>
+<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu"># falcon 0.1.0.9013</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a></span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="ss">* </span>Initialize the package.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
@@ -548,6 +586,22 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </li>  
 </ul>
       <div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://app.slack.com/client/T028PB489D3/C04MQS12MND">
+      <i class="bi bi-slack" role="img" aria-label="Slack">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/pharmaverse/falcon">
+      <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
   </div>
 </footer>
 
