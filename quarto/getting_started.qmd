@@ -4,23 +4,19 @@ toc: true
 toc-depth: 4
 ---
 
-```{r setup, include=FALSE, eval=TRUE}
-knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
-```
-
 ### Environment Setup and Package Installation
 
 #### Environment Setup
 
-...
+Please ensure that R version 3.6 or higher is installed on your computer. This is required to install the `falcon` package and its dependencies. You can check your current version of R by running `sessionInfo()` within the R console.
 
-#### Installing Required Packages
+#### Installing Packages Dependencies
 
 The `falcon` package requires use of the `dplyr` package as well as several packages available from the Insights Engineering organization on GitHub.
 
-To use the `falcon` package, ensure you have the necessary packages installed by running the following code:
+To use the `falcon` package, ensure you have the necessary package dependencies installed by running the following code:
 
-```{r}
+```{r, echo=TRUE, eval=FALSE}
 if (!require("dplyr")) install.packages("dplyr")
 if (!require("formatters")) install.packages("formatters")
 if (!require("rtables")) install.packages("rtables")
@@ -31,16 +27,18 @@ if (!require("tern")) remotes::install_github("insightsengineering/tern@*release
 
 Optionally, you can also install the synthetic CDISC data packages, which contain the datasets used in all `falcon` example tables provided within the `falcon` package and on this site, by running the following:
 
-```{r}
+```{r, echo=TRUE, eval=FALSE}
 if (!require("scda")) remotes::install_github("insightsengineering/scda@*release")
 if (!require("scda.2022")) remotes::install_github("insightsengineering/scda.2022@*release")
 ```
+
+For more information on these packages, see the [Additional Resources](#additional-resources) section below.
 
 #### Installing the `falcon` Package
 
 To install the `falcon` package, run the following line of code:
 
-```{r}
+```{r, echo=TRUE, eval=FALSE}
 if (!require("falcon")) remotes::install_github("pharmaverse/falcon")
 ```
 
@@ -84,7 +82,7 @@ There are many table-generating functions available within the `falcon` package 
 
 To use the table functions, you will need to load the `falcon` package and then call the appropriate table function. For example, to create FDA Safety Table 2, you can run the following code:
 
-```{r, warning=FALSE, message=FALSE, eval=TRUE}
+```{r, echo=TRUE, warning=FALSE, message=FALSE}
 library(dplyr)
 library(falcon)
 
@@ -111,7 +109,7 @@ Each template takes several arguments that can be set to generate a table that m
 
 To customize the output table, you can modify the values of these arguments as per your requirements. For example, table 2 can be customized as follows:
 
-```{r, warning=FALSE, message=FALSE, eval=TRUE}
+```{r, echo=TRUE, warning=FALSE, message=FALSE}
 advs <- scda::synthetic_cdisc_dataset("latest", "advs") %>%
   dplyr::filter(AVISIT == "BASELINE", VSTESTCD == "TEMP") %>%
   dplyr::select("USUBJID", "AVAL")
@@ -138,7 +136,7 @@ tbl
 
 Note that the `prune_0` argument can be set to specify whether all-zero rows should be included in a table. For example, see that the demographics table below includes rows for `OTHER` and `UNKNOWN` for which all values are zero, whereas these two rows were excluded from the previous tables (`prune_0` defaults to `TRUE` in `make_table_02()`).
 
-```{r, eval=TRUE}
+```{r, echo=TRUE}
 make_table_02(df = anl, vars = "RACE", prune_0 = FALSE)
 ```
 
