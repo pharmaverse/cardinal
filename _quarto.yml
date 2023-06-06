@@ -1,0 +1,97 @@
+---
+project:
+  type: website
+  preview:
+    port: 4200
+    browser: true
+    watch-inputs: true
+    navigate: true
+    timeout: 300
+
+format:
+  html:
+    search: true
+    theme:
+      light: [flatly, quarto/assets/style.scss, quarto/assets/style-light.scss]
+      dark: [darkly, quarto/assets/style.scss, quarto/assets/style-dark.scss]
+    anchor-sections: true
+    smooth-scroll: true
+    code-link: true
+    code-fold: false
+    code-overflow: scroll
+    code-line-numbers: true
+    code-copy: true
+    code-tools:
+      source: true
+      toggle: false
+      caption: none
+    code-block-bg: true
+    css: quarto/assets/style.scss
+    toc: false
+    number-sections: false
+    lang: en-US
+    page-layout: full
+
+execute:
+  freeze: auto
+  cache: true
+  code-line-numbers: true
+
+knitr:
+  opts_chunk:
+    echo: false
+    fig.width: 15
+
+editor: source
+highlight-style: github
+
+website:
+  title: falcon
+  open-graph: true
+  favicon: quarto/assets/images/falcon.png
+  search:
+    location: navbar
+    type: overlay
+    copy-button: true
+  page-navigation: true
+  site-url: https://pharmaverse.github.io/falcon
+  repo-url: https://github.com/pharmaverse/falcon
+  repo-branch: main
+  google-analytics: UA-125641273-1
+  cookie-consent: true
+  page-footer:
+    center:
+      - text: "This website as well as code examples are licensed under the Apache License, Version 2.0."
+    right:
+      - aria-label: Slack
+        href: https://app.slack.com/client/T028PB489D3/C04MQS12MND
+        icon: slack
+      - aria-label: GitHub
+        href: https://github.com/pharmaverse/falcon
+        icon: github
+  navbar:
+    pinned: true
+    collapse: true
+    logo: quarto/assets/images/falcon.png
+    search: true
+    left:
+      - text: Home
+        file: index.qmd
+      - text: Template Library
+        menu:
+          - quarto/table-templates/template-table_02.qmd
+          - quarto/table-templates/template-table_06.qmd
+          - quarto/table-templates/template-table_09.qmd
+          - quarto/table-templates/template-table_13.qmd
+      - text: About
+        menu:
+          - quarto/about.qmd
+          - quarto/our_journey.qmd
+      - text: Help
+        menu:
+          - quarto/getting_started.qmd
+          - text: Report a Bug
+            url:  https://github.com/pharmaverse/falcon/issues
+          - text: FAQ
+            file: quarto/faq.qmd
+
