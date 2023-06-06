@@ -8,13 +8,13 @@ toc-depth: 4
 
 #### Environment Setup
 
-...
+Please ensure that R version 3.6 or higher is installed on your computer. This is required to install the `falcon` package and its dependencies. You can check your current version of R by running `sessionInfo()` within the R console.
 
-#### Installing Required Packages
+#### Installing Packages Dependencies
 
 The `falcon` package requires use of the `dplyr` package as well as several packages available from the Insights Engineering organization on GitHub.
 
-To use the `falcon` package, ensure you have the necessary packages installed by running the following code:
+To use the `falcon` package, ensure you have the necessary package dependencies installed by running the following code:
 
 ```{r, echo=TRUE, eval=FALSE}
 if (!require("dplyr")) install.packages("dplyr")
