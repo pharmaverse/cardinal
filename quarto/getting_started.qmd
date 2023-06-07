@@ -73,11 +73,11 @@ Each template provided is associated with a function available within the `falco
 
 ![](assets/images/getting-started/gs-pan4b.png){fig-align="center" width="90%"}
 
-### Generating Tables
+### Creating Tables
 
 There are many table-generating functions available within the `falcon` package, each of which is used to generate a different FDA standard safety table using R. These functions create `rtables` table objects which can then be further customized, paginated, etc. if required using functions from the [`rtables`](https://insightsengineering.github.io/rtables/main/) package.
 
-#### Utilizing the Table Functions
+#### Using the Table Functions
 
 To use the table functions you will need to load the `falcon` package and then call the appropriate table function. For example, to create FDA Safety Table 2, you can run the following code:
 
