@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">falcon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0.9007</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0.9014</span>
       </span>
     </div>
 
@@ -28,12 +28,6 @@
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
-<!-- start dropdown for versions --> <li class="nav-item dropdown">
-        <a href="#" class="nav-link dropdown-toggle"
-          data-bs-toggle="dropdown" role="button"
-          aria-expanded="false" aria-haspopup="true"
-          id="dropdown-versions">Versions</a> <div class="dropdown-menu" aria-labelledby="dropdown-versions"> <a class="dropdown-item" data-toggle="tooltip" title="" href="https://pharmaverse.github.io/falcon/main">main</a> </div></li>
-<!-- end dropdown for versions -->
       </ul><ul class="nav navbar-nav navbar-right"><li>
   <a href="https://github.com/pharmaverse/falcon/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
@@ -61,24 +55,24 @@
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>adsl</dt>
-<dd><p>(<code>data.frame</code>)<br> data (typically ADSL) required to build table.</p></dd>
-
-
-<dt>adae</dt>
-<dd><p>(<code>data.frame</code>)<br> data (typically ADAE) required to build table.</p></dd>
+    <dl><dt>adae</dt>
+<dd><p>(<code>data.frame</code>)<br> dataset (typically ADAE) required to build table.</p></dd>
 
 
 <dt>adex</dt>
-<dd><p>(<code>data.frame</code>)<br> data (typically ADEX) required to build table.</p></dd>
+<dd><p>(<code>data.frame</code>)<br> dataset (typically ADEX) required to build table.</p></dd>
 
 
 <dt>advs</dt>
-<dd><p>(<code>data.frame</code>)<br> data (typically ADVS) required to build table.</p></dd>
+<dd><p>(<code>data.frame</code>)<br> dataset (typically ADVS) required to build table.</p></dd>
+
+
+<dt>df</dt>
+<dd><p>(<code>data.frame</code>)<br> dataset required to build table.</p></dd>
 
 
 <dt>alt_counts_df</dt>
-<dd><p>(<code>character</code>) alternative (full) dataset (typically ADSL) used only to calculate column counts.</p></dd>
+<dd><p>(<code>character</code>) alternative dataset (typically ADSL) used only to calculate column counts.</p></dd>
 
 
 <dt>show_colcounts</dt>
@@ -99,7 +93,7 @@ the given value as the column label.</p></dd>
 
 
 <dt>vars</dt>
-<dd><p>(<code>vector</code> of <code>character</code>)<br> variables from <code>adsl</code> to include in the table.</p></dd>
+<dd><p>(<code>vector</code> of <code>character</code>)<br> variables from <code>df</code> to include in the table.</p></dd>
 
 
 <dt>lbl_vars</dt>
@@ -137,7 +131,7 @@ that statistic. See <code><a href="https://rdrr.io/pkg/formatters/man/list_valid
 
 <dt>annotations</dt>
 <dd><p>(named <code>list</code> of <code>character</code>)<br> list of annotations to add to the table. Valid
-annotations types are <code>title</code>, <code>subtitles</code>, <code>main_footer</code>, and <code>prov_footer</code>. Each name-value pair should
+annotation types are <code>title</code>, <code>subtitles</code>, <code>main_footer</code>, and <code>prov_footer</code>. Each name-value pair should
 use the annotation type as name and the desired string as value.</p></dd>
 
 
