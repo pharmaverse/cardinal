@@ -4,8 +4,7 @@
 #' @details
 #' * `advs` must contain `SAFFL`, `USUBJID`, `AVISITN`, `PARAMCD`, `AVAL`, `AVALU`, and the variable
 #'   specified by `arm_var`.
-#' * If specified, `alt_counts_df` must contain variables `SAFFL` and `USUBJID`, and the variable
-#'   specified by `arm_var`.
+#' * If specified, `alt_counts_df` must contain `SAFFL`, `USUBJID`, and the variable specified by `arm_var`.
 #' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
 #'   flag variables are treated as `"N"`.
 #' * Columns are split by arm. Overall population column is excluded by default (see `lbl_overall` argument).

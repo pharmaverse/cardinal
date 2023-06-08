@@ -3,7 +3,7 @@
 #' @details
 #' * `adae` must contain the variables `SAFFL`, `USUBJID`, `TRTEMFL`, `AESEV`, `AESER`, `AESDTH`, `AESLIFE`,
 #'   `AESHOSP`, `AESDISAB`, `AESCONG`, `AESMIE`, `AEACN`, and the variable specified by `arm_var`.
-#' * If specified, `alt_counts_df` must contain variables `SAFFL` and `USUBJID`.
+#' * If specified, `alt_counts_df` must contain `SAFFL`, `USUBJID`, and the variable specified by `arm_var`..
 #' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
 #'   flag variables are treated as `"N"`.
 #' * Columns are split by arm. Overall population column is excluded by default (see `lbl_overall` argument).
