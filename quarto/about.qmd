@@ -2,4 +2,31 @@
 title: About the Project
 ---
 
-Page content coming soon!
+The falcon project is a product of industry collaborations to encourage the development of shared code, expertise, knowledge and products.
+
+In the near future, the goal is to develop functionality to create regulatory reporting tables suitable for FDA filing. The long-term objective of this collaboration is to develop an R package that can be used industry wide - developing a cross-industry standard and reducing manual work from a reporting perspective.
+
+## Our Collaboration Journey
+
+Current collaborators are from Roche, Sanofi, Boehringer-Ingelheim, and Moderna. Developers are connected via GitHub for the creation of shared solutions using publicly available analysis packages for R. Developers are invited to browse the falcon project repository and related packages for insights into our template designs.
+
+### Joining as a Collaborator
+
+We invite further collaboration with additional companies joining this initiative and contributing to the falcon project. Please feel free to contact any of the repository maintainers for additional information and check out the section below for more information on joining the project as a developer.
+
+#### Information for Developers
+
+As a pharmaverse collaboration, we invite any interested developers to join the falcon team and contribute to template development. To on-board as a developer, please reach out to a product owner (Vincent Shen, Freeman Wang, Lian Lin or Thomas Neitman) to receive access to the falcon GitHub repository.
+
+Priorities are assigned as issues on our project board and worked on in development branches. Members of the team will review code or make suggestions before incorporating templates in the package.
+
+We encourage the smart developer to familiarize themselves with the following packages:
+
+[`rtables`](https://github.com/insightsengineering/rtables) - for table layout creation
+
+[`tern`](https://github.com/insightsengineering/tern) - for rtables wrapper functions
+
+[`scda`](https://github.com/insightsengineering/scda) - for test data
+
+As they contain functions leveraged by falcon for table creation.
+

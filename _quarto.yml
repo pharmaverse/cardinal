@@ -84,9 +84,7 @@ website:
           - quarto/table-templates/template-table_09.qmd
           - quarto/table-templates/template-table_13.qmd
       - text: About
-        menu:
-          - quarto/about.qmd
-          - quarto/our_journey.qmd
+        file: quarto/about.qmd
       - text: Help
         menu:
           - quarto/getting_started.qmd
