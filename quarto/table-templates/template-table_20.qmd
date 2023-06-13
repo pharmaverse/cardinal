@@ -28,7 +28,7 @@ adae$AELABFL <- sample(c("Y", "N"), nrow(adae), replace = TRUE)
 pref_var <- "AETERM"
 
 # Output Table
-make_table_09(adae = adae, alt_counts_df = adsl, pref_var = pref_var, aesifl_var = "AESIFL", aelabfl_var = "AELABFL")
+make_table_20(adae = adae, alt_counts_df = adsl, pref_var = pref_var, aesifl_var = "AESIFL", aelabfl_var = "AELABFL")
 ```
 
 ## Table Setup
