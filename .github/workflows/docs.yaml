@@ -52,7 +52,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Run Staged dependencies 🎦
-        uses: insightsengineering/staged-dependencies-action@v1
+        uses: insightsengineering/staged-dependencies-action@fix-remotes-self-install
         env:
           GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
         with:
