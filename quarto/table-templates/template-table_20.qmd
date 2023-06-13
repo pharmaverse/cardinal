@@ -1,0 +1,64 @@
+---
+title: FDA Table 20
+subtitle: Adverse Events of Special Interest Assessment, Safety Population, Pooled Analysis (or Trial X)
+format: html
+---
+
+::: panel-tabset
+## Spec. Screenshot
+
+![](../assets/images/screenshots/table_20.png){fig-align="center"}
+
+## Table
+
+```{r tbl, message=FALSE, warning=FALSE}
+# Load Libraries & Data
+library(scda)
+library(falcon)
+
+adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
+adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
+
+# Pre-Processing - Add/create any required variables in adae
+set.seed(1)
+adae$AESIFL <- ifelse(adae$AESOC %in% c("cl A", "cl D"), "Y", "N")
+adae$AELABFL <- sample(c("Y", "N"), nrow(adae), replace = TRUE)
+
+# Select Preferred Term Variable
+pref_var <- "AETERM"
+
+# Output Table
+make_table_09(adae = adae, alt_counts_df = adsl, pref_var = pref_var, aesifl_var = "AESIFL", aelabfl_var = "AELABFL")
+```
+
+## Table Setup
+
+```{r tbl, eval=FALSE, echo=TRUE}
+```
+
+## Function Details
+
+### `make_table_20()`
+
+------------------------------------------------------------------------
+
+Required variables:
+
+-   **`adae`**: `SAFFL`, `USUBJID`, `AEDECOD`, `AESEV`, `AESER`, `AESDTH`, `EOSSTT`, `AEREL`, and the variables specified by `pref_var`, `aesifl_var`, `aelabfl_var`, and `arm_var`.
+-   **`alt_counts_df`** (if specified): `SAFFL`, `USUBJID`, and the variable specified by `arm_var`.
+
+| Argument         | Description                                                                                                                                                                                                                                            | Default      |
+|:--------------|:------------------------------------------|:--------------|
+| `adae`           | (`data.frame`) Dataset (typically ADAE) required to build table.                                                                                                                                                                                       | *No default* |
+| `alt_counts_df`  | (`character`) Alternative dataset (typically ADSL) used only to calculate column counts.                                                                                                                                                               | `NULL`       |
+| `show_colcounts` | (`flag`) Whether column counts should be printed.                                                                                                                                                                                                      | `TRUE`       |
+| `arm_var`        | (`character`) Arm variable used to split table into columns.                                                                                                                                                                                           | `"ARM"`      |
+| `pref_var`       | (`character`) Preferred term variable from `adae` to include in the table.                                                                                                                                                                             | `"AETERM"`   |
+| `aesifl_var`     | (`character`) Variable from `adae` that indicates adverse events of special interest.                                                                                                                                                                  | `"AESIFL"`   |
+| `aelabfl_var`    | (`character`) Variable from `adae` that indicates a laboratory assessment.                                                                                                                                                                             | `"AELABFL"`  |
+| `lbl_overall`    | (`character`) If specified, an overall column will be added to the table with the given value as the column label.                                                                                                                                     | `NULL`       |
+| `prune_0`        | (`flag`) Whether all-zero rows should be removed from the table.                                                                                                                                                                                       | `TRUE`       |
+| `annotations`    | (named `list` of `character`) List of annotations to add to the table. Valid annotation types are `title`, `subtitles`, `main_footer`, and `prov_footer.` Each name-value pair should use the annotation type as name and the desired string as value. | `NULL`       |
+
+Source code for this function is available [here](https://github.com/pharmaverse/falcon/blob/main/R/fda-table_20.R).
+:::
