@@ -56,14 +56,14 @@ jobs:
         shell: bash
 
       - name: Upload Docs ⬆️
-        if: 'github.event_type != "push"'
+        if: github.event_name != 'push'
         uses: actions/upload-artifact@v3
         with:
           name: site
           path: ./_site
 
       - name: Publish Site 🗺️
-        if: 'github.event_type == "push"'
+        if: github.event_name == 'pull_request'
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
