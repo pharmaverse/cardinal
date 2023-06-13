@@ -19,6 +19,7 @@ library(dplyr)
 
 adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
 
+# Output Table
 make_table_05(df = adsl)
 ```
 
