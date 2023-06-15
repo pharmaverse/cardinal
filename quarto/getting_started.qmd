@@ -55,23 +55,23 @@ Each template provided is associated with a function available within the `falco
 
 -   **Spec. Screenshot**: This tab provides a screenshot of the given table coming from the FDA Standard Safety Table and Figures document.
 
-![](assets/images/getting-started/gs-pan1.png){fig-align="center" width="90%"}
+![](./assets/images/getting-started/gs-pan1.png){fig-align="center" width="90%"}
 
 -   **Table**: This tab displays the output table corresponding to the screenshot in the previous tab, generated using the associated `falcon` table function. You can expect a similar output table when using the table function with your own data, depending on pre-processing and the customizations that you apply via the table function parameters.
 
-![](assets/images/getting-started/gs-pan2.png){fig-align="center" width="90%"}
+![](./assets/images/getting-started/gs-pan2.png){fig-align="center" width="90%"}
 
 -   **Table Setup**: This tab provides the code used to generate the example table displayed in the previous tab, including the loading of necessary libraries and example datasets, and any pre-processing steps applied prior to generating the table.
 
-![](assets/images/getting-started/gs-pan3.png){fig-align="center" width="90%"}
+![](./assets/images/getting-started/gs-pan3.png){fig-align="center" width="90%"}
 
 -   **Function Details**: This tab includes details on the table-generating function used for this template. Table functions use the naming convention `make_table_XX()` where `XX` is the table number taken from the FDA Standard Safety Table and Figures document (preceded by a 0 if the number is a single digit). Any required variables for the input datasets are listed along with a description of all function arguments. This information is mirrored by the function's help page accesible within R (i.e. `?make_table_XX`).
 
-![](assets/images/getting-started/gs-pan4.png){fig-align="center" width="90%"}
+![](./assets/images/getting-started/gs-pan4.png){fig-align="center" width="90%"}
 
 |           A link to the function's source code can be found at the bottom of the page in this tab:
 
-![](assets/images/getting-started/gs-pan4b.png){fig-align="center" width="90%"}
+![](./assets/images/getting-started/gs-pan4b.png){fig-align="center" width="90%"}
 
 ### Creating Tables
 
