@@ -1,0 +1,53 @@
+---
+title: FDA Table 6
+subtitle: Overview of Adverse Events, Safety Population, Pooled Analyses
+format: html
+---
+
+::: panel-tabset
+## Spec. Screenshot
+
+![](../assets/images/screenshots/table_06.png){fig-align="center"}
+
+## Table
+
+```{r tbl, message=FALSE, warning=FALSE}
+# Load Libraries & Data
+library(scda)
+library(falcon)
+
+adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
+adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
+
+# Output Table
+make_table_06(adae = adae, alt_counts_df = adsl)
+```
+
+## Table Setup
+
+```{r tbl, eval=FALSE, echo=TRUE}
+```
+
+## Function Details
+
+### `make_table_06()`
+
+------------------------------------------------------------------------
+
+Required variables:
+
+-   **`adae`**: `SAFFL`, `USUBJID`, `TRTEMFL`, `AESEV`, `AESER`, `AESDTH`, `AESLIFE`, `AESHOSP`, `AESDISAB`, `AESCONG`, `AESMIE`, `AEACN`, and the variable specified by `arm_var`.
+-   **`alt_counts_df`** (if specified): `SAFFL`, `USUBJID`, and the variable specified by `arm_var`.
+
+| Argument         | Description                                                                                                                                                                                                                                             | Default      |
+|:---------|:----------------------------------------------------|:---------|
+| `adae`           | (`data.frame`) Dataset (typically ADAE) required to build table.                                                                                                                                                                                           | *No default* |
+| `alt_counts_df`  | (`character`) Alternative dataset (typically ADSL) used only to calculate column counts.                                                                                                                                                         | `NULL`       |
+| `show_colcounts` | (`flag`) Whether column counts should be printed.                                                                                                                                                                                                       | `TRUE`       |
+| `arm_var`        | (`character`) Arm variable used to split table into columns.                                                                                                                                                                                            | `"ARM"`      |
+| `lbl_overall`    | (`character`) If specified, an overall column will be added to the table with the given value as the column label.                                                                                                                                      | `NULL`       |
+| `prune_0`        | (`flag`) Whether all-zero rows should be removed from the table.                                                                                                                                                                                        | `FALSE`      |
+| `annotations`    | (named `list` of `character`) List of annotations to add to the table. Valid annotation types are `title`, `subtitles`, `main_footer`, and `prov_footer.` Each name-value pair should use the annotation type as name and the desired string as value. | `NULL`       |
+
+Source code for this function is available [here](https://github.com/pharmaverse/falcon/blob/main/R/fda-table_06.R).
+:::

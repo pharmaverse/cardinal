@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.353">
+<meta name="generator" content="quarto-1.2.269">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,10 +17,9 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -47,13 +46,43 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
+    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -131,7 +160,7 @@ cookieconsent.run({
 
 <link rel="stylesheet" href="../quarto/assets/style.scss">
 <meta property="og:title" content="falcon - Frequently Asked Questions">
-<meta property="og:description" content="">
+<meta property="og:description" content="For instructions on installing the falcon package please see the Environment Setup and Package Installation section of the Getting Started page.">
 <meta property="og:site-name" content="falcon">
 </head>
 
@@ -150,77 +179,70 @@ cookieconsent.run({
     <span class="navbar-title">falcon</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="true"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html" rel="" target="">
+    <a class="nav-link" href="../index.html">
  <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-template-library" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-template-library" role="button" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Template Library</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-template-library">    
         <li>
-    <a class="dropdown-item" href="../quarto/table-templates/template-table_02.html" rel="" target="">
+    <a class="dropdown-item" href="../quarto/table-templates/template-table_02.html">
  <span class="dropdown-text">FDA Table 2</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../quarto/table-templates/template-table_06.html" rel="" target="">
+    <a class="dropdown-item" href="../quarto/table-templates/template-table_05.html">
+ <span class="dropdown-text">FDA Table 5</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../quarto/table-templates/template-table_06.html">
  <span class="dropdown-text">FDA Table 6</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../quarto/table-templates/template-table_09.html" rel="" target="">
+    <a class="dropdown-item" href="../quarto/table-templates/template-table_09.html">
  <span class="dropdown-text">FDA Table 9</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../quarto/table-templates/template-table_13.html" rel="" target="">
+    <a class="dropdown-item" href="../quarto/table-templates/template-table_13.html">
  <span class="dropdown-text">FDA Table 13</span></a>
   </li>  
     </ul>
   </li>
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-about" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
- <span class="menu-text">About</span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-about">    
-        <li>
-    <a class="dropdown-item" href="../quarto/about.html" rel="" target="">
- <span class="dropdown-text">About the Project</span></a>
+  <li class="nav-item">
+    <a class="nav-link" href="../quarto/about.html">
+ <span class="menu-text">About</span></a>
   </li>  
-        <li>
-    <a class="dropdown-item" href="../quarto/our_journey.html" rel="" target="">
- <span class="dropdown-text">Our Journey</span></a>
-  </li>  
-    </ul>
-  </li>
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-help" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-help" role="button" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Help</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-help">    
         <li>
-    <a class="dropdown-item" href="../quarto/getting_started.html" rel="" target="">
+    <a class="dropdown-item" href="../quarto/getting_started.html">
  <span class="dropdown-text">Getting Started</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://github.com/pharmaverse/falcon/issues" rel="" target="">
+    <a class="dropdown-item" href="https://github.com/pharmaverse/falcon/issues">
  <span class="dropdown-text">Report a Bug</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../quarto/faq.html" rel="" target="">
+    <a class="dropdown-item" href="../quarto/faq.html">
  <span class="dropdown-text">FAQ</span></a>
   </li>  
     </ul>
   </li>
 </ul>
-            <div class="quarto-navbar-tools ms-auto">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
-</div>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+              </div>
+              <div id="quarto-search" class="" title="Search"></div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
@@ -229,7 +251,8 @@ cookieconsent.run({
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
 <!-- main -->
 <main class="content column-page" id="quarto-document-content">
 
@@ -249,12 +272,30 @@ cookieconsent.run({
   
 
 </header>
-
-<p>Page content coming soon!</p>
+<nav id="TOC" role="doc-toc">
+   
+  <ul>
+  <li><a href="#how-do-i-install-the-falcon-package" id="toc-how-do-i-install-the-falcon-package">1. &nbsp;How do I install the falcon package?</a></li>
+  <li><a href="#other-questions---contact-us" id="toc-other-questions---contact-us">Other Questions - Contact Us</a></li>
+  </ul>
+</nav>
+<hr>
+<section id="how-do-i-install-the-falcon-package" class="level4">
+<h4 class="anchored" data-anchor-id="how-do-i-install-the-falcon-package">1. &nbsp;How do I install the falcon package?</h4>
+<p>For instructions on installing the <code>falcon</code> package please see the <a href="https://pharmaverse.github.io/falcon/quarto/getting_started.html#environment-setup-and-package-installation">Environment Setup and Package Installation</a> section of the Getting Started page.</p>
+<section id="more-questions-to-be-added" class="level5">
+<h5 class="anchored" data-anchor-id="more-questions-to-be-added">More questions to be added!</h5>
+<hr>
+</section>
+</section>
+<section id="other-questions---contact-us" class="level4">
+<h4 class="anchored" data-anchor-id="other-questions---contact-us">Other Questions - Contact Us</h4>
+<p>If you have questions not listed above please contact us by filing an issue on GitHub <a href="https://pharmaverse.github.io/falcon/">here</a> or reaching out to the falcon team directly via our Slack channel <a href="https://app.slack.com/client/T028PB489D3/C04MQS12MND">here</a>.</p>
 
 
 <!-- -->
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -399,23 +440,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
+    target: function(trigger) {
+      return trigger.previousElementSibling;
     }
   });
   clipboard.on('success', function(e) {
@@ -531,92 +558,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -658,23 +599,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">---</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="an">title:</span><span class="co"> Frequently Asked Questions</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="co">---</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a></span>
-<span id="cb1-5"><a href="#cb1-5"></a>Page content coming soon!</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="an">format:</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="co">  html:</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="co">    toc: true</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="co">    toc-location: body</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="co">    toc-depth: 4</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="co">    toc-title: " "</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="co">---</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a></span>
+<span id="cb1-11"><a href="#cb1-11"></a>------------------------------------------------------------------------</span>
+<span id="cb1-12"><a href="#cb1-12"></a></span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="fu">#### 1. \ How do I install the falcon package?</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a></span>
+<span id="cb1-15"><a href="#cb1-15"></a>For instructions on installing the <span class="in">`falcon`</span> package please see the <span class="co">[</span><span class="ot">Environment Setup and Package Installation</span><span class="co">](https://pharmaverse.github.io/falcon/quarto/getting_started.html#environment-setup-and-package-installation)</span> section of the Getting Started page.</span>
+<span id="cb1-16"><a href="#cb1-16"></a></span>
+<span id="cb1-17"><a href="#cb1-17"></a><span class="fu">##### More questions to be added!</span></span>
+<span id="cb1-18"><a href="#cb1-18"></a></span>
+<span id="cb1-19"><a href="#cb1-19"></a>------------------------------------------------------------------------</span>
+<span id="cb1-20"><a href="#cb1-20"></a></span>
+<span id="cb1-21"><a href="#cb1-21"></a><span class="fu">#### Other Questions - Contact Us</span></span>
+<span id="cb1-22"><a href="#cb1-22"></a></span>
+<span id="cb1-23"><a href="#cb1-23"></a>If you have questions not listed above please contact us by filing an issue on GitHub <span class="co">[</span><span class="ot">here</span><span class="co">](https://pharmaverse.github.io/falcon/)</span> or reaching out to the falcon team directly via our Slack channel <span class="co">[</span><span class="ot">here</span><span class="co">](https://app.slack.com/client/T028PB489D3/C04MQS12MND)</span>.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left">
-      &nbsp;
-    </div>   
-    <div class="nav-footer-center">
-      <ul class="footer-items list-unstyled">
+      <div class="nav-footer-center">
+        <ul class="footer-items list-unstyled">
     <li class="nav-item">
  This website as well as code examples are licensed under the Apache License, Version 2.0.
   </li>  
 </ul>
-    <div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+      <div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">
