@@ -65,7 +65,7 @@ Each template provided is associated with a function available within the `falco
 
 ![](./assets/images/getting-started/gs-pan3.png){fig-align="center" width="90%"}
 
--   **Function Details**: This tab includes details on the table-generating function used for this template. Table functions use the naming convention `make_table_XX()` where `XX` is the table number taken from the FDA Standard Safety Table and Figures document (preceded by a 0 if the number is a single digit). Any required variables for the input datasets are listed along with a description of all function arguments. This information is mirrored by the function's help page accesible within R (i.e. `?make_table_XX`).
+-   **Function Details**: This tab includes details on the table-generating function used for this template. Table functions use the naming convention `make_table_XX()` where `XX` is the table number taken from the FDA Standard Safety Table and Figures document (preceded by a 0 if the number is a single digit). Any required variables for the input datasets are listed along with a description of all function arguments. This information is mirrored by the function's help page accessible within R (i.e. `?make_table_XX`).
 
 ![](./assets/images/getting-started/gs-pan4.png){fig-align="center" width="90%"}
 
