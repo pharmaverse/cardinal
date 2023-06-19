@@ -12,7 +12,7 @@ Please ensure that R version 3.6 or higher is installed on your computer. This i
 
 #### Installing Package Dependencies
 
-The `falcon` package requires several packages available from the Insights Engineering organization on GitHub.
+The `falcon` package requires several packages available on CRAN.
 
 To use the `falcon` package, ensure you have these necessary package dependencies installed by running the following code:
 
@@ -21,10 +21,10 @@ if (!require("formatters")) install.packages("formatters")
 if (!require("rtables")) install.packages("rtables")
 if (!require("rlistings")) install.packages("rlistings")
 if (!require("remotes")) install.packages("remotes")
-if (!require("tern")) remotes::install_github("insightsengineering/tern@*release")
+if (!require("tern")) install.packages("tern")
 ```
 
-Optionally, to run the examples provided within the `falcon` package and on this site you can also install the synthetic CDISC data packages, which contain the example datasets, by running the following:
+Optionally, to run the examples provided within the `falcon` package and on this site you can also install the synthetic CDISC data packages from GitHub, which contain the example datasets, by running the following:
 
 ```{r, echo=TRUE, eval=FALSE}
 if (!require("scda")) remotes::install_github("insightsengineering/scda@*release")
