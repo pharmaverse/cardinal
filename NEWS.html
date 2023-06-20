@@ -225,15 +225,32 @@ cookieconsent.run({
 
 
 
-<section id="falcon-0.1.0.9017" class="level1">
-<h1>falcon 0.1.0.9017</h1>
+<section id="falcon-0.1.0.9018" class="level1">
+<h1>falcon 0.1.0.9018</h1>
+<section id="new-features" class="level3">
+<h3 class="anchored" data-anchor-id="new-features">New Features</h3>
 <ul>
-<li>Initialize the package.</li>
+<li>Added new functions for creating standard FDA tables: <code>make_table_02</code>, <code>make_table_05</code>, <code>make_table_06</code>, <code>make_table_07</code>, <code>make_table_08</code>, <code>make_table_09</code>, <code>make_table_13</code>, <code>make_table_14</code>, <code>make_table_20</code>, <code>make_table_32</code>, <code>make_table_33</code>.</li>
+<li>Added helper functions used within table functions:
+<ul>
+<li><code>basic_table_annot</code> for adding basic table annotations (titles, footnotes, column counts).</li>
+<li><code>split_cols_by_arm</code> for splitting columns by arm with option to add total column.</li>
+<li><code>alt_counts_df_preproc</code> for pre-processing the <code>alt_counts_df</code> dataset.</li>
+<li><code>assert_flag_variables</code> (internal) for checking that formatting is correct for flag variables in the data.</li>
+</ul></li>
+</ul>
+</section>
+<section id="miscellaneous" class="level3">
+<h3 class="anchored" data-anchor-id="miscellaneous">Miscellaneous</h3>
+<ul>
+<li>Initialized the package.</li>
+<li>Developed Quarto website.</li>
 </ul>
 
 
 <!-- -->
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -636,9 +653,19 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu"># falcon 0.1.0.9017</span></span>
+<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu"># falcon 0.1.0.9018</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="ss">* </span>Initialize the package.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">### New Features</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="ss">* </span>Added new functions for creating standard FDA tables: <span class="in">`make_table_02`</span>, <span class="in">`make_table_05`</span>, <span class="in">`make_table_06`</span>, <span class="in">`make_table_07`</span>, <span class="in">`make_table_08`</span>, <span class="in">`make_table_09`</span>, <span class="in">`make_table_13`</span>, <span class="in">`make_table_14`</span>, <span class="in">`make_table_20`</span>, <span class="in">`make_table_32`</span>, <span class="in">`make_table_33`</span>.</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="ss">* </span>Added helper functions used within table functions:</span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="ss">  * </span><span class="in">`basic_table_annot`</span> for adding basic table annotations (titles, footnotes, column counts).</span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="ss">  * </span><span class="in">`split_cols_by_arm`</span> for splitting columns by arm with option to add total column.</span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="ss">  * </span><span class="in">`alt_counts_df_preproc`</span> for pre-processing the <span class="in">`alt_counts_df`</span> dataset.</span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="ss">  * </span><span class="in">`assert_flag_variables`</span> (internal) for checking that formatting is correct for flag variables in the data.</span>
+<span id="cb1-10"><a href="#cb1-10"></a></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="fu">### Miscellaneous</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="ss">* </span>Initialized the package.</span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="ss">* </span>Developed Quarto website.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
