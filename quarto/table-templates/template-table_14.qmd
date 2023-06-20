@@ -1,0 +1,60 @@
+---
+title: FDA Table 14
+subtitle: Patients With Adverse Events by System Organ Class and FDA Medical Query, Safety Population, Pooled Analyses
+format: html
+---
+
+::: panel-tabset
+## Spec. Screenshot
+
+![](../assets/images/screenshots/table_14.png){fig-align="center" width="78%"}
+
+## Table
+
+```{r tbl, message=FALSE, warning=FALSE}
+# Load Libraries & Data
+library(scda)
+library(falcon)
+
+adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
+
+# Pre-Processing - Create required variables (FMQ01SC, FMQ01NAM) in adae
+adae <- dplyr::rename(adae, FMQ01SC = SMQ01SC, FMQ01NAM = SMQ01NAM)
+levels(adae$FMQ01SC) <- c("BROAD", "NARROW")
+adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
+
+# Output Table
+make_table_14(adae = adae)
+
+```
+
+## Table Setup
+
+```{r tbl, eval=FALSE, echo=TRUE}
+```
+
+## Function Details
+
+### `make_table_14()`
+
+------------------------------------------------------------------------
+
+Required variables:
+
+-   **`adae`**: `adae` must contain the variables `SAFFL`, `USUBJID`, `AEBODSYS`, and the variables specified by `arm_var`, `fmqsc_var`, and `fmqnam_var`.
+
+| Argument         | Description                                                                                                                                                                                                                                            | Default       |
+|:-------------|:-------------------------------------------|:-------------|
+| `adae`           | (`data.frame`) Dataset (typically ADAE) required to build table.                                                                                                                                                                                       | *No default*  |
+| `alt_counts_df`  | (`character`) Alternative dataset used only to calculate column counts.                                                                                                                                                                                | `NULL`        |
+| `show_colcounts` | (`flag`) Whether column counts should be printed.                                                                                                                                                                                                      | `TRUE`        |
+| `arm_var`        | (`character`) Arm variable used to split table into columns.                                                                                                                                                                                           | `"ARM"`       |
+| `fmqsc_var`      | (`character`) FMQ scope variable to use in table.                                                                                                                                                                                                      | `"FMQ01SC"`   |
+| `fmqnam_var`     | (`character`) FMQ reference name variable to use in table.                                                                                                                                                                                             | `"FMQ01NAM"`  |
+| `lbl_overall`    | (`character`) If specified, an overall column will be added to the table with the given value as the column label.                                                                                                                                     | `NULL`        |
+| `prune_0`        | (`flag`) Whether all-zero rows should be removed from the table.                                                                                                                                                                                       | `FALSE`       |
+| `na_level`       | (`character`) string to represent missing values.                                                                                                                                                                                                      | `"<Missing>"` |
+| `annotations`    | (named `list` of `character`) List of annotations to add to the table. Valid annotation types are `title`, `subtitles`, `main_footer`, and `prov_footer.` Each name-value pair should use the annotation type as name and the desired string as value. | `NULL`        |
+
+Source code for this function is available [here](https://github.com/pharmaverse/falcon/blob/main/R/fda-table_14.R).
+:::
