@@ -12,7 +12,7 @@ Please ensure that R version 3.6 or higher is installed on your computer. This i
 
 #### Installing Package Dependencies
 
-The `falcon` package requires several packages available from the Insights Engineering organization on GitHub.
+The `falcon` package requires several packages available on CRAN.
 
 To use the `falcon` package, ensure you have these necessary package dependencies installed by running the following code:
 
@@ -21,10 +21,10 @@ if (!require("formatters")) install.packages("formatters")
 if (!require("rtables")) install.packages("rtables")
 if (!require("rlistings")) install.packages("rlistings")
 if (!require("remotes")) install.packages("remotes")
-if (!require("tern")) remotes::install_github("insightsengineering/tern@*release")
+if (!require("tern")) install.packages("tern")
 ```
 
-Optionally, to run the examples provided within the `falcon` package and on this site you can also install the synthetic CDISC data packages, which contain the example datasets, by running the following:
+Optionally, to run the examples provided within the `falcon` package and on this site you can also install the synthetic CDISC data packages from GitHub, which contain the example datasets, by running the following:
 
 ```{r, echo=TRUE, eval=FALSE}
 if (!require("scda")) remotes::install_github("insightsengineering/scda@*release")
@@ -55,23 +55,23 @@ Each template provided is associated with a function available within the `falco
 
 -   **Spec. Screenshot**: This tab provides a screenshot of the given table coming from the FDA Standard Safety Table and Figures document.
 
-![](assets/images/getting-started/gs-pan1.png){fig-align="center" width="90%"}
+![](./assets/images/getting-started/gs-pan1.png){fig-align="center" width="90%"}
 
 -   **Table**: This tab displays the output table corresponding to the screenshot in the previous tab, generated using the associated `falcon` table function. You can expect a similar output table when using the table function with your own data, depending on pre-processing and the customizations that you apply via the table function parameters.
 
-![](assets/images/getting-started/gs-pan2.png){fig-align="center" width="90%"}
+![](./assets/images/getting-started/gs-pan2.png){fig-align="center" width="90%"}
 
 -   **Table Setup**: This tab provides the code used to generate the example table displayed in the previous tab, including the loading of necessary libraries and example datasets, and any pre-processing steps applied prior to generating the table.
 
-![](assets/images/getting-started/gs-pan3.png){fig-align="center" width="90%"}
+![](./assets/images/getting-started/gs-pan3.png){fig-align="center" width="90%"}
 
--   **Function Details**: This tab includes details on the table-generating function used for this template. Table functions use the naming convention `make_table_XX()` where `XX` is the table number taken from the FDA Standard Safety Table and Figures document (preceded by a 0 if the number is a single digit). Any required variables for the input datasets are listed along with a description of all function arguments. This information is mirrored by the function's help page accesible within R (i.e. `?make_table_XX`).
+-   **Function Details**: This tab includes details on the table-generating function used for this template. Table functions use the naming convention `make_table_XX()` where `XX` is the table number taken from the FDA Standard Safety Table and Figures document (preceded by a 0 if the number is a single digit). Any required variables for the input datasets are listed along with a description of all function arguments. This information is mirrored by the function's help page accessible within R (i.e. `?make_table_XX`).
 
-![](assets/images/getting-started/gs-pan4.png){fig-align="center" width="90%"}
+![](./assets/images/getting-started/gs-pan4.png){fig-align="center" width="90%"}
 
 |           A link to the function's source code can be found at the bottom of the page in this tab:
 
-![](assets/images/getting-started/gs-pan4b.png){fig-align="center" width="90%"}
+![](./assets/images/getting-started/gs-pan4b.png){fig-align="center" width="90%"}
 
 ### Creating Tables
 
@@ -141,7 +141,7 @@ make_table_02(df = anl, vars = "RACE", prune_0 = FALSE)
 
 ### Feature Requests
 
-If you would like to request the addition of a new feature to a pre-existing function within `falcon`, or would like a specific table template to be added, please file an issue on GitHub [here](https://pharmaverse.github.io/falcon/) or reach out to the `falcon` team directly via our Slack channel [here](https://app.slack.com/client/T028PB489D3/C04MQS12MND).
+If you would like to request the addition of a new feature to a pre-existing function within `falcon`, or would like a specific table template to be added, please file an issue on GitHub [here](https://pharmaverse.github.io/falcon/) or reach out to the falcon team directly via our Slack channel [here](https://app.slack.com/client/T028PB489D3/C04MQS12MND).
 
 You can access the source code for all currently available functions in the `falcon` GitHub repository [here](https://github.com/pharmaverse/falcon/tree/main/R).
 
