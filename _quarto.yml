@@ -80,14 +80,13 @@ website:
       - text: Template Library
         menu:
           - quarto/table-templates/template-table_02.qmd
+          - quarto/table-templates/template-table_05.qmd
           - quarto/table-templates/template-table_06.qmd
           - quarto/table-templates/template-table_09.qmd
           - quarto/table-templates/template-table_13.qmd
           - quarto/table-templates/template-table_32.qmd
       - text: About
-        menu:
-          - quarto/about.qmd
-          - quarto/our_journey.qmd
+        file: quarto/about.qmd
       - text: Help
         menu:
           - quarto/getting_started.qmd

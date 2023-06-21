@@ -1,8 +1,8 @@
 Type: Package
 Package: falcon
 Title: FDA Safety Tables and Figures
-Version: 0.1.0.9017
-Date: 2023-06-13
+Version: 0.1.0.9020
+Date: 2023-06-21
 Authors@R:
     person("Pawel", "Rucki", , "pawel.rucki@roche.com", role = c("aut", "cre"))
 Description: R package with implementation of Safety Tables and Figures
@@ -31,8 +31,7 @@ VignetteBuilder:
     knitr
 Remotes:
     insightsengineering/scda.2022@*release,
-    insightsengineering/scda@*release,
-    insightsengineering/tern@*release
+    insightsengineering/scda@*release
 biocViews:
 Config/testthat/edition: 3
 Encoding: UTF-8
