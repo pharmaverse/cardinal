@@ -5,7 +5,7 @@ print_ref_templates <- function(fpath) {
   subtitle <- sub("subtitle: ", "", readLines(fpath)[3], )
   temp_name <- paste(title, subtitle, sep = " -- ")
   cat(
-    paste0(strrep("&nbsp;", 8), "[", temp_name, "]", "(", substring(fpath, 10), ")\n\n"),
+    paste0("-   ", "[", temp_name, "]", "(", substring(fpath, 10), ")\n\n"),
     file = "./quarto/index-templates.qmd",
     append = TRUE
   )
