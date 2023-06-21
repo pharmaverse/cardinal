@@ -2,7 +2,8 @@
 % Please edit documentation in R/fda-table_14.R
 \name{make_table_14}
 \alias{make_table_14}
-\title{FDA Table 14: Patients With Adverse Events by System Organ Class and FDA Medical Query, Safety Population, Pooled Analyses}
+\title{FDA Table 14: Patients With Adverse Events by System Organ Class and FDA Medical Query, Safety Population,
+Pooled Analyses}
 \usage{
 make_table_14(
   adae,
@@ -42,7 +43,8 @@ annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \co
 use the annotation type as name and the desired string as value.}
 }
 \description{
-FDA Table 14: Patients With Adverse Events by System Organ Class and FDA Medical Query, Safety Population, Pooled Analyses
+FDA Table 14: Patients With Adverse Events by System Organ Class and FDA Medical Query, Safety Population,
+Pooled Analyses
 }
 \details{
 \itemize{

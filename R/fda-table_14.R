@@ -1,4 +1,5 @@
-#' FDA Table 14: Patients With Adverse Events by System Organ Class and FDA Medical Query, Safety Population, Pooled Analyses
+#' FDA Table 14: Patients With Adverse Events by System Organ Class and FDA Medical Query, Safety Population,
+#'   Pooled Analyses
 #'
 #' @details
 #' * `adae` must contain the variables `SAFFL`, `USUBJID`, `AEBODSYS`, and the variables specified by `arm_var`,
