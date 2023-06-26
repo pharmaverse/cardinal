@@ -1,0 +1,53 @@
+---
+title: FDA Table 8
+subtitle: All Individual Patient Deaths, Safety Population, Pooled Analyses
+format: html
+---
+
+::: panel-tabset
+## Spec. Screenshot
+
+![](../assets/images/screenshots/table_08.png){fig-align="center" width="75%"}
+
+## Table
+
+```{r tbl, message=FALSE, warning=FALSE}
+# Load Libraries & Data
+library(scda)
+library(falcon)
+
+adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
+adex <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adex")
+
+# Output Table
+make_table_08(adae = adae, adex = adex)
+```
+
+## Table Setup
+
+```{r tbl, eval=FALSE, echo=TRUE}
+```
+
+## Function Details
+
+### `make_table_08()`
+
+------------------------------------------------------------------------
+
+Required variables:
+
+-   **`adae`**: `SAFFL`, `USUBJID`, `AGE`, `SEX`, `AESDTH`, `DTHADY`, and the variables specified by `dth_vars` and `arm_var`.
+-   **`adex`** (if specified): `SAFFL`, `USUBJID`, `PARAMCD`, `TRTSDT`, `TRTEDT`, `AVAL`, and `AVALU`.
+
+| Argument       | Description                                                                                                                                                                                                                                            | Default                                                                        |
+|:-----------------|:------------------------------------|:-----------------|
+| `adae`         | (`data.frame`) Dataset (typically ADAE) required to build table.                                                                                                                                                                                       | *No default*                                                                   |
+| `adex`         | (`data.frame`) Dataset (typically ADEX) required to build table.                                                                                                                                                                                       | *No default*                                                                   |
+| `arm_var`      | (`character`) Arm variable used to split table into columns.                                                                                                                                                                                           | `"ARM"`                                                                        |
+| `dth_var`      | (`vector` of `character`) additional death variables from `adae` to include in the table.                                                                                                                                                              | `c("DTHCAUS", "DTHCAT")`                                                       |
+| `lbl_dth_vars` | (`vector` of `character`) labels corresponding to variables in `dth_vars` to print in the table. Labels should be ordered according to the order of variables in `dth_vars`.                                                                           | `c("Cause of Death\nMedDRA\nPreferred Term", "Cause of Death\nVerbatim Term")` |
+| `na_level`     | (`character`) string to represent missing values.                                                                                                                                                                                                      | `"NA"`                                                                         |
+| `annotations`  | (named `list` of `character`) List of annotations to add to the table. Valid annotation types are `title`, `subtitles`, `main_footer`, and `prov_footer.` Each name-value pair should use the annotation type as name and the desired string as value. | `NULL`                                                                         |
+
+Source code for this function is available [here](https://github.com/pharmaverse/falcon/blob/main/R/fda-table_08.R).
+:::
