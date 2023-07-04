@@ -14,7 +14,7 @@
 #' @inheritParams argument_convention
 
 #' @examples
-#' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
+# adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
 #'
 #' tbl <- make_table_04(df = adsl)
 #' tbl
@@ -27,27 +27,27 @@ make_table_04 <- function(df,
                           lbl_overall = NULL,
                           prune_0 = FALSE,
                           annotations = NULL) {
-  checkmate::assert_subset(c("SAFFL", "USUBJID", "ARM",
-                             "AESER", "ITTFL", "SAFFL", "PPROTFL",
+  checkmate::assert_subset(c("USUBJID", "ARM",
+                             "RANDFL", "ITTFL", "SAFFL", "PPROTFL",
                              "EOTSTT", "DCTREAS", "EOSSTT", "DCSREAS"), names(df))
-  checkmate::assert_flag_variables(df, "SAFFL")
+  checkmate::assert_flag_variables(df,c("RANDFL", "ITTFL", "SAFFL", "PPROTFL"))
   
   df <- df %>%
     filter(SAFFL == "Y") %>%
     df_explicit_na() %>%
     mutate(
-      RAN = with_label(AESER != '', "Patients randomized"),  #RANDFL?
+      RAN = with_label(RANDFL == 'Y', "Patients randomized"),  #need to create
       ITT = with_label(ITTFL == 'Y', "ITT/mITT population"),
       SAF = with_label(SAFFL == 'Y', "Safety population"),
-      # PPP = with_label(PPROTFL == 'Y', "Per-protocol population"),  #?
+      PPP = with_label(PPROTFL == 'Y', "Per-protocol population"),  
       
       DISCSD = with_label(EOTSTT == 'DISCONTINUED', "Discontinued study drug"),
-      # DISCSD_AE  = with_label(EOTSTT == 'DISCONTINUED' & DCTREAS == 'ADVERSE EVENT', 'Adverse event'),
-      # DISCSD_LOE = with_label(EOTSTT == 'DISCONTINUED' & DCTREAS == 'LACK OF EFFICACY', 'Lack of efficacy'),
-      # DISCSD_PD  = with_label(EOTSTT == 'DISCONTINUED' & DCTREAS == 'PROTOCOL DEVIATION', 'Protocol deviation'),
-      # DISCSD_DT  = with_label(EOTSTT == 'DISCONTINUED' & DCTREAS == 'DEATH', 'Death'),
-      # DISCSD_WBS = with_label(EOTSTT == 'DISCONTINUED' & DCTREAS == 'WITHDRAWAL BY SUBJECT', 'Withdrawal by subject'),
-      # DISCSD_OTH = with_label(EOTSTT == 'DISCONTINUED' & DCTREAS == 'OTHER', 'Other'),
+      DISCSD_AE  = with_label(EOTSTT == 'DISCONTINUED' & DCTREAS == 'ADVERSE EVENT', 'Adverse event'),
+      DISCSD_LOE = with_label(EOTSTT == 'DISCONTINUED' & DCTREAS == 'LACK OF EFFICACY', 'Lack of efficacy'),
+      DISCSD_PD  = with_label(EOTSTT == 'DISCONTINUED' & DCTREAS == 'PROTOCOL DEVIATION', 'Protocol deviation'),
+      DISCSD_DT  = with_label(EOTSTT == 'DISCONTINUED' & DCTREAS == 'DEATH', 'Death'),
+      DISCSD_WBS = with_label(EOTSTT == 'DISCONTINUED' & DCTREAS == 'WITHDRAWAL BY SUBJECT', 'Withdrawal by subject'),
+      DISCSD_OTH = with_label(EOTSTT == 'DISCONTINUED' & DCTREAS == 'OTHER', 'Other'),
       
       DISCS = with_label(EOSSTT == 'DISCONTINUED', 'Discontinued study'),
       DISCS_DT  = with_label(EOSSTT == 'DISCONTINUED' & DCSREAS == 'DEATH', 'Death'),
