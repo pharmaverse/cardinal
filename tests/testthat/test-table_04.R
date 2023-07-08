@@ -10,18 +10,22 @@ adsl_raw <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
 
 set.seed(4)
 adsl <- adsl_raw %>%
-  mutate(test = rbinom(400,1,0.5)) %>%
-  mutate(RANDFL = ifelse(test==0, 'N', 'Y'),
-         PPROTFL = ifelse(test==0, 'N', 'Y'),
-         DCSREAS = if_else(DCSREAS %in% c("ADVERSE EVENT","LACK OF EFFICACY","PROTOCOL VIOLATION",
-                                         "DEATH","WITHDRAWAL BY PARENT/GUARDIAN" ), DCSREAS, "OTHER")) %>%
+  mutate(test = rbinom(400, 1, 0.5)) %>%
+  mutate(
+    RANDFL = ifelse(test == 0, "N", "Y"),
+    PPROTFL = ifelse(test == 0, "N", "Y"),
+    DCSREAS = if_else(DCSREAS %in% c(
+      "ADVERSE EVENT", "LACK OF EFFICACY", "PROTOCOL VIOLATION",
+      "DEATH", "WITHDRAWAL BY PARENT/GUARDIAN"
+    ), DCSREAS, "OTHER")
+  ) %>%
   mutate(DCTREAS = DCSREAS)
 
 
 test_that("Table 04 generation works with default values", {
   local_edition(3)
   result <- make_table_04(adsl)
-  
+
   res <- expect_silent(result)
   expect_snapshot(res)
 })
@@ -44,7 +48,7 @@ test_that("Table 04 generation works with custom values", {
       )
     )
   )
-  
+
   res <- expect_silent(result)
   expect_snapshot(res)
 })
