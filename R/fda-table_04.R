@@ -27,38 +27,38 @@ make_table_04 <- function(df,
                           lbl_overall = NULL,
                           prune_0 = FALSE,
                           annotations = NULL) {
-  checkmate::assert_subset(c("USUBJID", "ARM",
-                             "RANDFL", "ITTFL", "SAFFL", "PPROTFL",
-                             "EOTSTT", "DCTREAS", "EOSSTT", "DCSREAS"), names(df))
+  checkmate::assert_subset(c(
+    "USUBJID", "ARM",
+    "RANDFL", "ITTFL", "SAFFL", "PPROTFL",
+    "EOTSTT", "DCTREAS", "EOSSTT", "DCSREAS"
+  ), names(df))
   assert_flag_variables(df, c("RANDFL", "ITTFL", "SAFFL", "PPROTFL"))
-  
+
   df <- df %>%
     filter(SAFFL == "Y") %>%
     df_explicit_na() %>%
     mutate(
-      RAN = with_label(RANDFL == 'Y', "Patients randomized"),  #need to create
-      ITT = with_label(ITTFL == 'Y', "ITT/mITT population"),
-      SAF = with_label(SAFFL == 'Y', "Safety population"),
-      PPP = with_label(PPROTFL == 'Y', "Per-protocol population"),  
-      
-      DISCSD = with_label(EOTSTT == 'DISCONTINUED', "Discontinued study drug"),
-      DISCSD_AE  = with_label(EOTSTT == 'DISCONTINUED' & DCTREAS == 'ADVERSE EVENT', 'Adverse event'),
-      DISCSD_LOE = with_label(EOTSTT == 'DISCONTINUED' & DCTREAS == 'LACK OF EFFICACY', 'Lack of efficacy'),
-      DISCSD_PD  = with_label(EOTSTT == 'DISCONTINUED' & DCTREAS == 'PROTOCOL DEVIATION', 'Protocol deviation'),
-      DISCSD_DT  = with_label(EOTSTT == 'DISCONTINUED' & DCTREAS == 'DEATH', 'Death'),
-      DISCSD_WBS = with_label(EOTSTT == 'DISCONTINUED' & DCTREAS == 'WITHDRAWAL BY SUBJECT', 'Withdrawal by subject'),
-      DISCSD_OTH = with_label(EOTSTT == 'DISCONTINUED' & DCTREAS == 'OTHER', 'Other'),
-      
-      DISCS = with_label(EOSSTT == 'DISCONTINUED', 'Discontinued study'),
-      DISCS_DT  = with_label(EOSSTT == 'DISCONTINUED' & DCSREAS == 'DEATH', 'Death'),
-      DISCS_LFU = with_label(EOSSTT == 'DISCONTINUED' & DCSREAS == 'LOST TO FOLLOW-UP', 'Lost to follow-up'),
-      DISCS_WBS = with_label(EOSSTT == 'DISCONTINUED' & DCSREAS == 'WITHDRAWAL BY SUBJECT', 'Withdrawal by subject'),
-      DISCS_PHD = with_label(EOSSTT == 'DISCONTINUED' & DCSREAS == 'PHYSICIAN DECISION', 'Physician decision'),
-      DISCS_PD  = with_label(EOSSTT == 'DISCONTINUED' & DCSREAS == 'PROTOCOL VIOLATION', 'Protocol deviation'),
-      DISCS_OTH = with_label(EOSSTT == 'DISCONTINUED' & DCSREAS == 'OTHER', 'Other')
+      RAN = with_label(RANDFL == "Y", "Patients randomized"), # need to create
+      ITT = with_label(ITTFL == "Y", "ITT/mITT population"),
+      SAF = with_label(SAFFL == "Y", "Safety population"),
+      PPP = with_label(PPROTFL == "Y", "Per-protocol population"),
+      DISCSD = with_label(EOTSTT == "DISCONTINUED", "Discontinued study drug"),
+      DISCSD_AE = with_label(EOTSTT == "DISCONTINUED" & DCTREAS == "ADVERSE EVENT", "Adverse event"),
+      DISCSD_LOE = with_label(EOTSTT == "DISCONTINUED" & DCTREAS == "LACK OF EFFICACY", "Lack of efficacy"),
+      DISCSD_PD = with_label(EOTSTT == "DISCONTINUED" & DCTREAS == "PROTOCOL DEVIATION", "Protocol deviation"),
+      DISCSD_DT = with_label(EOTSTT == "DISCONTINUED" & DCTREAS == "DEATH", "Death"),
+      DISCSD_WBS = with_label(EOTSTT == "DISCONTINUED" & DCTREAS == "WITHDRAWAL BY SUBJECT", "Withdrawal by subject"),
+      DISCSD_OTH = with_label(EOTSTT == "DISCONTINUED" & DCTREAS == "OTHER", "Other"),
+      DISCS = with_label(EOSSTT == "DISCONTINUED", "Discontinued study"),
+      DISCS_DT = with_label(EOSSTT == "DISCONTINUED" & DCSREAS == "DEATH", "Death"),
+      DISCS_LFU = with_label(EOSSTT == "DISCONTINUED" & DCSREAS == "LOST TO FOLLOW-UP", "Lost to follow-up"),
+      DISCS_WBS = with_label(EOSSTT == "DISCONTINUED" & DCSREAS == "WITHDRAWAL BY SUBJECT", "Withdrawal by subject"),
+      DISCS_PHD = with_label(EOSSTT == "DISCONTINUED" & DCSREAS == "PHYSICIAN DECISION", "Physician decision"),
+      DISCS_PD = with_label(EOSSTT == "DISCONTINUED" & DCSREAS == "PROTOCOL VIOLATION", "Protocol deviation"),
+      DISCS_OTH = with_label(EOSSTT == "DISCONTINUED" & DCSREAS == "OTHER", "Other")
     )
   alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
-  
+
   lyt <- basic_table_annot(show_colcounts, annotations) %>%
     split_cols_by_arm(arm_var, lbl_overall) %>%
     count_patients_with_flags(
@@ -79,7 +79,7 @@ make_table_04 <- function(df,
     ) %>%
     count_patients_with_flags(
       var = "USUBJID",
-      flag_variables = var_labels(df[, c('DISCSD_AE', 'DISCSD_LOE', 'DISCSD_PD', 'DISCSD_DT', 'DISCSD_WBS', 'DISCSD_OTH')]),
+      flag_variables = var_labels(df[, c("DISCSD_AE", "DISCSD_LOE", "DISCSD_PD", "DISCSD_DT", "DISCSD_WBS", "DISCSD_OTH")]),
       .indent_mods = 1L,
       table_names = "discsd_fl"
     ) %>%
@@ -90,12 +90,13 @@ make_table_04 <- function(df,
     ) %>%
     count_patients_with_flags(
       var = "USUBJID",
-      flag_variables = var_labels(df[, c('DISCS_DT', 'DISCS_LFU', 'DISCS_WBS', 'DISCS_PHD', 'DISCS_PD', 'DISCS_OTH')]),
+      flag_variables = var_labels(df[, c("DISCS_DT", "DISCS_LFU", "DISCS_WBS", "DISCS_PHD", "DISCS_PD", "DISCS_OTH")]),
       .indent_mods = 1L,
-      table_names = "discs_fl")
-  
+      table_names = "discs_fl"
+    )
+
   tbl <- build_table(lyt, df = df, alt_counts_df = alt_counts_df)
   if (prune_0) tbl <- prune_table(tbl)
-  
+
   tbl
 }
