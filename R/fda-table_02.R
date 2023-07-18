@@ -82,6 +82,7 @@ make_table_02 <- function(df,
 #'
 #' tbl <- make_table_02_tplyr(df = adsl)
 #'
+#' # format output table using huxtable
 #' tbl <- huxtable::as_hux(tbl, add_colnames = FALSE) %>%
 #'   huxtable::set_bold(1, 1:ncol(tbl), FALSE) %>%
 #'   huxtable::set_align(1, 1:ncol(tbl), "center") %>%
@@ -97,17 +98,13 @@ make_table_02 <- function(df,
 #'
 #' @export
 make_table_02_tplyr <- function(df,
-                                alt_counts_df = NULL,
                                 show_colcounts = TRUE,
                                 arm_var = "ARM",
                                 vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY"),
                                 lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
                                 lbl_overall = "Total Population",
-                                .stats = c("mean_sd", "median_range", "count_fraction"),
-                                .formats = NULL,
                                 na_rm = FALSE,
-                                prune_0 = TRUE,
-                                annotations = NULL) {
+                                prune_0 = TRUE) {
   checkmate::assert_subset(c("SAFFL", vars, arm_var), names(df))
   assert_flag_variables(df, "SAFFL")
 
@@ -153,11 +150,21 @@ make_table_02_tplyr <- function(df,
     add_column_headers(
       paste0(
         "Characteristic | | ",
-        paste0(levels(df[[arm_var]]), "\n(N=**", levels(df[[arm_var]]), "**)| ", collapse = ""),
-        ifelse(!is.null(lbl_overall), paste0(lbl_overall, "\n(N=**Total**)"), "")
+        paste0(levels(df[[arm_var]]), if (show_colcounts) paste0("\n(N=**", levels(df[[arm_var]]), "**)| ") else "| ", collapse = ""),
+        ifelse(!is.null(lbl_overall), paste0(lbl_overall, ifelse(show_colcounts, c("\n(N=**Total**)"), ""), ""))
       ),
       header_n = header_n(lyt)
     )
+
+  if (na_rm) {
+    na_ind <- tbl[, 2] != "<Missing>"
+    tbl <- tbl[na_ind, ]
+  }
+
+  if (prune_0) {
+    prune_ind <- apply(tbl, MARGIN = 1, function(x) all(x == "") || !all(gsub("[0()\\% ]", "", x[-c(1:2)]) == ""))
+    tbl <- tbl[prune_ind, ]
+  }
 
   tbl
 }

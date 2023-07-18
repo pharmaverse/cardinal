@@ -22,17 +22,13 @@ make_table_02(
 
 make_table_02_tplyr(
   df,
-  alt_counts_df = NULL,
   show_colcounts = TRUE,
   arm_var = "ARM",
   vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY"),
   lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
   lbl_overall = "Total Population",
-  .stats = c("mean_sd", "median_range", "count_fraction"),
-  .formats = NULL,
   na_rm = FALSE,
-  prune_0 = TRUE,
-  annotations = NULL
+  prune_0 = TRUE
 )
 }
 \arguments{
@@ -112,6 +108,7 @@ library(huxtable)
 
 tbl <- make_table_02_tplyr(df = adsl)
 
+# format output table using huxtable
 tbl <- huxtable::as_hux(tbl, add_colnames = FALSE) \%>\%
   huxtable::set_bold(1, 1:ncol(tbl), FALSE) \%>\%
   huxtable::set_align(1, 1:ncol(tbl), "center") \%>\%
