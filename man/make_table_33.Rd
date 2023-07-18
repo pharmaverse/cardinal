@@ -18,7 +18,7 @@ make_table_33(
 \arguments{
 \item{advs}{(\code{data.frame})\cr dataset (typically ADVS) required to build table.}
 
-\item{alt_counts_df}{(\code{character}) alternative dataset (typically ADSL) used only to calculate column counts.}
+\item{alt_counts_df}{(\code{character})\cr alternative dataset (typically ADSL) used only to calculate column counts.}
 
 \item{show_colcounts}{(\code{flag})\cr whether column counts should be printed.}
 
