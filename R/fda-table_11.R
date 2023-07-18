@@ -18,13 +18,15 @@
 #' adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
 #' adae <- adae %>%
 #'   dplyr::rename(FMQ02SC = SMQ02SC, FMQ02NAM = CQ01NAM) %>%
-#'   mutate(AESER=sample(c("Y", "N"), size = nrow(adae), replace = TRUE))
+#'   mutate(AESER = sample(c("Y", "N"), size = nrow(adae), replace = TRUE))
 #' levels(adae$FMQ02SC) <- c("BROAD", "NARROW")
 #' adae$FMQ02SC[!is.na(adae$FMQ02NAM)] <- "NARROW"
 #' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
 #'
-#' tbl <- make_table_11(adae = adae, alt_counts_df = adsl, fmqsc_var = "FMQ02SC",
-#' fmqnam_var = "FMQ02NAM")
+#' tbl <- make_table_11(
+#'   adae = adae, alt_counts_df = adsl, fmqsc_var = "FMQ02SC",
+#'   fmqnam_var = "FMQ02NAM"
+#' )
 #'
 #' tbl
 
@@ -39,7 +41,7 @@ make_table_11 <- function(adae,
                           prune_0 = TRUE,
                           na_level = "<Missing>",
                           annotations = NULL,
-                          FMQ = "Narrow"){
+                          FMQ = "Narrow") {
   checkmate::assert_subset(c(
     "SAFFL", "USUBJID", "AEBODSYS", "AEACN", arm_var, fmqsc_var, fmqnam_var
   ), names(adae))
@@ -48,7 +50,7 @@ make_table_11 <- function(adae,
   adae <- adae %>%
     filter(SAFFL == "Y", AEACN == "DRUG WITHDRAWN", (adae[[fmqsc_var]] == FMQ | adae[[fmqsc_var]] == toupper(FMQ))) %>%
     df_explicit_na(na_level = na_level)
-  adae[[fmqnam_var]] <- with_label(adae[[fmqnam_var]], paste0("FMQ (",FMQ,")"))
+  adae[[fmqnam_var]] <- with_label(adae[[fmqnam_var]], paste0("FMQ (", FMQ, ")"))
   alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
 
   lyt <- basic_table_annot(show_colcounts, annotations) %>%
@@ -78,4 +80,3 @@ make_table_11 <- function(adae,
 
   tbl
 }
-

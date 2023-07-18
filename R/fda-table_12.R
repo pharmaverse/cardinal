@@ -29,10 +29,10 @@ make_table_12 <- function(adae,
                           pref_var = "AEDECOD",
                           lbl_overall = NULL,
                           prune_0 = TRUE,
-                          annotations = NULL
-                          ){
+                          annotations = NULL) {
   checkmate::assert_subset(c(
-    "SAFFL", "USUBJID", "AEBODSYS", pref_var, "AEACN", arm_var), names(adae))
+    "SAFFL", "USUBJID", "AEBODSYS", pref_var, "AEACN", arm_var
+  ), names(adae))
   assert_flag_variables(adae, "SAFFL")
 
   adae <- adae %>%
