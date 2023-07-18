@@ -5,7 +5,7 @@
 #' @keywords internal
 "_PACKAGE"
 
-#' @import dplyr rtables tern
+#' @import dplyr rtables tern Tplyr
 #' @importFrom rlang .data
 #' @importFrom magrittr %>%
 #' @importFrom formatters with_label var_labels var_relabel

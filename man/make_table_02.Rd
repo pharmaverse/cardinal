@@ -2,9 +2,25 @@
 % Please edit documentation in R/fda-table_02.R
 \name{make_table_02}
 \alias{make_table_02}
+\alias{make_table_02_tplyr}
 \title{FDA Table 2: Baseline Demographic and Clinical Characteristics Safety Population, Pooled Analyses}
 \usage{
 make_table_02(
+  df,
+  alt_counts_df = NULL,
+  show_colcounts = TRUE,
+  arm_var = "ARM",
+  vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY"),
+  lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
+  lbl_overall = "Total Population",
+  .stats = c("mean_sd", "median_range", "count_fraction"),
+  .formats = NULL,
+  na_rm = FALSE,
+  prune_0 = TRUE,
+  annotations = NULL
+)
+
+make_table_02_tplyr(
   df,
   alt_counts_df = NULL,
   show_colcounts = TRUE,
@@ -38,7 +54,7 @@ the given value as the column label.}
 
 \item{.stats}{(\code{character})\cr statistics to include in the table. Includes statistics for all variable
 types (only the statistics that are valid for a given variable's type will be printed).
-See \code{\link[tern:summarize_variables]{tern::summarize_vars()}} for options.}
+See \code{\link[tern:analyze_variables]{tern::summarize_vars()}} for options.}
 
 \item{.formats}{(named \code{list} of \code{character})\cr list of formats corresponding to each value in \code{.stats}.
 Each name is a value in \code{.stats} and the corresponding value is the format that should be applied to
@@ -67,6 +83,13 @@ flag variables are treated as \code{"N"}.
 \item All-zero rows are removed by default (see \code{prune_0} argument).
 }
 }
+\section{Functions}{
+\itemize{
+\item \code{make_table_02()}: Create FDA table 2 using functions from \code{rtables} and \code{tern}.
+
+\item \code{make_table_02_tplyr()}: Create FDA table 2 using functions from \code{Tplyr}.
+
+}}
 \examples{
 library(dplyr)
 
@@ -82,6 +105,24 @@ adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") \%>\%
   )
 
 tbl <- make_table_02(df = adsl)
+tbl
+
+library(dplyr)
+library(huxtable)
+
+tbl <- make_table_02_tplyr(df = adsl)
+
+tbl <- huxtable::as_hux(tbl, add_colnames = FALSE) \%>\%
+  huxtable::set_bold(1, 1:ncol(tbl), FALSE) \%>\%
+  huxtable::set_align(1, 1:ncol(tbl), "center") \%>\%
+  huxtable::set_align(2:nrow(tbl), 3:ncol(tbl), "center") \%>\%
+  huxtable::set_valign(1, 1:ncol(tbl), "bottom") \%>\%
+  huxtable::set_bottom_border(1, 1:ncol(tbl), 1) \%>\%
+  huxtable::set_width(2) \%>\%
+  huxtable::set_col_width(c(.2, .3, .125, .125, .125, .125))
+
+huxtable::position(tbl) <- "left"
+
 tbl
 
 }
