@@ -17,6 +17,9 @@ NULL
 
 #' @describeIn make_table_02 Create FDA table 2 using functions from `rtables` and `tern`.
 #'
+#' @return
+#' * `make_table_02` returns an `rtables` table object.
+#'
 #' @examples
 #' library(dplyr)
 #'
@@ -76,8 +79,10 @@ make_table_02 <- function(df,
 
 #' @describeIn make_table_02 Create FDA table 2 using functions from `Tplyr`.
 #'
+#' @return
+#' * `make_table_02_tplyr` returns a `tibble` object.
+#'
 #' @examples
-#' library(dplyr)
 #' library(huxtable)
 #'
 #' tbl <- make_table_02_tplyr(df = adsl)
@@ -112,8 +117,6 @@ make_table_02_tplyr <- function(df,
   for (lbl in lbl_vars) {
     df[[lbl]] <- lbl
   }
-
-  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
 
   var_types <- lapply(df[vars], function(x) if (is.numeric(x)) "numeric" else "count")
 

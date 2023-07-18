@@ -34,7 +34,7 @@ make_table_02_tplyr(
 \arguments{
 \item{df}{(\code{data.frame})\cr dataset required to build table.}
 
-\item{alt_counts_df}{(\code{character}) alternative dataset (typically ADSL) used only to calculate column counts.}
+\item{alt_counts_df}{(\code{character})\cr alternative dataset (typically ADSL) used only to calculate column counts.}
 
 \item{show_colcounts}{(\code{flag})\cr whether column counts should be printed.}
 
@@ -63,6 +63,15 @@ that statistic. See \code{\link[formatters:list_valid_format_labels]{formatters:
 \item{annotations}{(named \code{list} of \code{character})\cr list of annotations to add to the table. Valid
 annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
 use the annotation type as name and the desired string as value.}
+}
+\value{
+\itemize{
+\item \code{make_table_02} returns an \code{rtables} table object.
+}
+
+\itemize{
+\item \code{make_table_02_tplyr} returns a \code{tibble} object.
+}
 }
 \description{
 FDA Table 2: Baseline Demographic and Clinical Characteristics Safety Population, Pooled Analyses
@@ -103,7 +112,6 @@ adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") \%>\%
 tbl <- make_table_02(df = adsl)
 tbl
 
-library(dplyr)
 library(huxtable)
 
 tbl <- make_table_02_tplyr(df = adsl)
