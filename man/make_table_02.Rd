@@ -22,13 +22,16 @@ make_table_02(
 
 make_table_02_tplyr(
   df,
+  alt_counts_df = NULL,
   show_colcounts = TRUE,
   arm_var = "ARM",
   vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY"),
   lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
   lbl_overall = "Total Population",
   na_rm = FALSE,
-  prune_0 = TRUE
+  prune_0 = TRUE,
+  tplyr_raw = FALSE,
+  annotations = NULL
 )
 }
 \arguments{
@@ -63,6 +66,9 @@ that statistic. See \code{\link[formatters:list_valid_format_labels]{formatters:
 \item{annotations}{(named \code{list} of \code{character})\cr list of annotations to add to the table. Valid
 annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
 use the annotation type as name and the desired string as value.}
+
+\item{tplyr_raw}{(\code{logical})\cr whether the raw \code{tibble} created using \code{Tplyr} functions should be returned, or the
+output returned should be formatted using functions from \code{tfrmt} (default).}
 }
 \value{
 \itemize{
@@ -70,7 +76,8 @@ use the annotation type as name and the desired string as value.}
 }
 
 \itemize{
-\item \code{make_table_02_tplyr} returns a \code{tibble} object.
+\item \code{make_table_02_tplyr} returns a \code{gt_tbl} object when \code{tplyr_raw = FALSE} (default) and
+a \code{tibble} object when \code{tplyr_raw = TRUE}.
 }
 }
 \description{
@@ -92,9 +99,15 @@ flag variables are treated as \code{"N"}.
 \itemize{
 \item \code{make_table_02()}: Create FDA table 2 using functions from \code{rtables} and \code{tern}.
 
-\item \code{make_table_02_tplyr()}: Create FDA table 2 using functions from \code{Tplyr}.
+\item \code{make_table_02_tplyr()}: Create FDA table 2 using functions from \code{Tplyr} and \code{tfrmt}.
 
 }}
+\note{
+\itemize{
+\item \code{make_table_02_tplyr} does not currently support footnote annotations
+\item \code{make_table_02_tplyr} does not currently support \code{alt_counts_df} when \code{tplyr_raw = TRUE}.
+}
+}
 \examples{
 library(dplyr)
 
@@ -112,22 +125,10 @@ adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") \%>\%
 tbl <- make_table_02(df = adsl)
 tbl
 
-library(huxtable)
-
 tbl <- make_table_02_tplyr(df = adsl)
+tbl
 
-# format output table using huxtable
-tbl <- huxtable::as_hux(tbl, add_colnames = FALSE) \%>\%
-  huxtable::set_bold(1, 1:ncol(tbl), FALSE) \%>\%
-  huxtable::set_align(1, 1:ncol(tbl), "center") \%>\%
-  huxtable::set_align(2:nrow(tbl), 3:ncol(tbl), "center") \%>\%
-  huxtable::set_valign(1, 1:ncol(tbl), "bottom") \%>\%
-  huxtable::set_bottom_border(1, 1:ncol(tbl), 1) \%>\%
-  huxtable::set_width(2) \%>\%
-  huxtable::set_col_width(c(.2, .3, .125, .125, .125, .125))
-
-huxtable::position(tbl) <- "left"
-
+tbl <- make_table_02_tplyr(df = adsl, tplyr_raw = TRUE)
 tbl
 
 }
