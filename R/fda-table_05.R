@@ -70,9 +70,9 @@ make_table_05 <- function(df,
       show_labels = "visible",
       afun = function(x) {
         in_rows(
-          "Mean (SD)" = c(mean(x), stats::sd(x)),
-          "Median (min - max)" = c(stats::median(x), range(x)),
-          "Interquartile range" = c(stats::quantile(x, 0.25), stats::quantile(x, 0.75)),
+          "Mean (SD)" = c(mean(x), sd(x)),
+          "Median (min - max)" = c(median(x), range(x)),
+          "Interquartile range" = c(quantile(x, 0.25), quantile(x, 0.75)),
           "Total exposure (person years)" = c(
             sum(x), as.numeric(lubridate::duration(sum(x), u_trtdur), "years")
           ),
