@@ -79,8 +79,8 @@ make_table_02 <- function(df,
 
 #' @describeIn make_table_02 Create FDA table 2 using functions from `Tplyr` and `tfrmt`.
 #'
-#' @param tplyr_raw (`logical`)\cr whether the raw `tibble` created using `Tplyr` functions should be returned, or the
-#'   output returned should be formatted using functions from `tfrmt` (default).
+#' @param tplyr_raw (`flag`)\cr whether the raw `tibble` created using `Tplyr` functions should be returned, or the
+#'   table formatted using functions from `tfrmt` should be returned (default).
 #'
 #' @note
 #' * `make_table_02_tplyr` does not currently support footnote annotations
@@ -94,9 +94,6 @@ make_table_02 <- function(df,
 #' tbl <- make_table_02_tplyr(df = adsl)
 #' tbl
 #'
-#' tbl <- make_table_02_tplyr(df = adsl, tplyr_raw = TRUE)
-#' tbl
-#'
 #' @export
 make_table_02_tplyr <- function(df,
                                 alt_counts_df = NULL,
@@ -107,8 +104,8 @@ make_table_02_tplyr <- function(df,
                                 lbl_overall = "Total Population",
                                 na_rm = FALSE,
                                 prune_0 = TRUE,
-                                tplyr_raw = FALSE,
-                                annotations = NULL) {
+                                annotations = NULL,
+                                tplyr_raw = FALSE) {
   checkmate::assert_subset(c("SAFFL", vars, arm_var), names(df))
   assert_flag_variables(df, "SAFFL")
 
@@ -123,8 +120,9 @@ make_table_02_tplyr <- function(df,
 
   if (!is.null(lbl_overall)) lyt <- lyt %>% add_total_group(group_name = lbl_overall)
 
-  for (var in vars) {
-    var_lbl <- lbl_vars[[var]]
+  for (i in seq_along(vars)) {
+    var <- vars[i]
+    var_lbl <- lbl_vars[i]
     if (var_types[[var]] == "numeric") {
       if (tplyr_raw) {
         lyt <- lyt %>% add_layer(
@@ -189,6 +187,7 @@ make_table_02_tplyr <- function(df,
     tbl <- tbl %>%
       tidyr::pivot_longer(head(names(.)[-c(1:2)], -3), names_to = "column", values_to = "value") %>%
       mutate(
+        tbl_lbl = "Characteristic",
         column = gsub("var1_", "", column),
         param = ifelse(row_label2 %in% c("Mean", "SD", "Median", "Min", "Max"), row_label2, "n;pct"),
         row_label2 = case_when(
@@ -216,9 +215,10 @@ make_table_02_tplyr <- function(df,
         filter(sum(value) > 0) %>%
         ungroup()
     }
+    big_n_tbl <- if (show_colcounts) big_n_structure(param_val = "bigN", n_frmt = frmt("\n(N=xx)")) else NULL
 
     tbl <- tfrmt(
-      group = row_label1,
+      group = c(tbl_lbl, row_label1),
       label = row_label2,
       column = column,
       param = param,
@@ -229,7 +229,7 @@ make_table_02_tplyr <- function(df,
       body_plan = body_plan(
         frmt_structure(
           group_val = ".default", label_val = ".default",
-          frmt_combine("{n} ({pct}%)", n = frmt("xx"), pct = frmt_when("==0" ~ "", TRUE ~ frmt("xx.x")))
+          frmt_combine("{n} {pct}", n = frmt("xx"), pct = frmt_when("==0" ~ "", TRUE ~ frmt("(xx.x%)")))
         ),
         frmt_structure(
           group_val = ".default", label_val = "Mean (SD)",
@@ -241,7 +241,7 @@ make_table_02_tplyr <- function(df,
         )
       ),
       col_plan = col_plan(-starts_with("ord")),
-      big_n = if (show_colcounts) big_n_structure(param_val = "bigN", n_frmt = frmt("\n(N=xx)")) else NULL
+      big_n = big_n_tbl
     ) %>%
       print_to_gt(tbl)
   }

@@ -30,8 +30,8 @@ make_table_02_tplyr(
   lbl_overall = "Total Population",
   na_rm = FALSE,
   prune_0 = TRUE,
-  tplyr_raw = FALSE,
-  annotations = NULL
+  annotations = NULL,
+  tplyr_raw = FALSE
 )
 }
 \arguments{
@@ -67,8 +67,8 @@ that statistic. See \code{\link[formatters:list_valid_format_labels]{formatters:
 annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
 use the annotation type as name and the desired string as value.}
 
-\item{tplyr_raw}{(\code{logical})\cr whether the raw \code{tibble} created using \code{Tplyr} functions should be returned, or the
-output returned should be formatted using functions from \code{tfrmt} (default).}
+\item{tplyr_raw}{(\code{flag})\cr whether the raw \code{tibble} created using \code{Tplyr} functions should be returned, or the
+table formatted using functions from \code{tfrmt} should be returned (default).}
 }
 \value{
 \itemize{
@@ -126,9 +126,6 @@ tbl <- make_table_02(df = adsl)
 tbl
 
 tbl <- make_table_02_tplyr(df = adsl)
-tbl
-
-tbl <- make_table_02_tplyr(df = adsl, tplyr_raw = TRUE)
 tbl
 
 }
