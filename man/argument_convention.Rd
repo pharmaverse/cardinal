@@ -34,7 +34,7 @@ in the table. Labels should be ordered according to the order of variables in \c
 
 \item{.stats}{(\code{character})\cr statistics to include in the table. Includes statistics for all variable
 types (only the statistics that are valid for a given variable's type will be printed).
-See \code{\link[tern:analyze_variables]{tern::analyze_vars()}} for options.}
+See \code{\link[tern:summarize_variables]{tern::summarize_vars()}} for options.}
 
 \item{.formats}{(named \code{list} of \code{character})\cr list of formats corresponding to each value in \code{.stats}.
 Each name is a value in \code{.stats} and the corresponding value is the format that should be applied to
