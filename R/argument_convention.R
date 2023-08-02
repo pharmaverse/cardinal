@@ -6,7 +6,7 @@
 #' @param adex (`data.frame`)\cr dataset (typically ADEX) required to build table.
 #' @param advs (`data.frame`)\cr dataset (typically ADVS) required to build table.
 #' @param df (`data.frame`)\cr dataset required to build table.
-#' @param alt_counts_df (`character`) alternative dataset (typically ADSL) used only to calculate column counts.
+#' @param alt_counts_df (`character`)\cr alternative dataset (typically ADSL) used only to calculate column counts.
 #' @param show_colcounts (`flag`)\cr whether column counts should be printed.
 #' @param arm_var (`character`)\cr arm variable used to split table into columns.
 #' @param id_var (`character`)\cr variable used as unique subject identifier.
