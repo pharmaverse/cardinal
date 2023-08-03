@@ -50,7 +50,10 @@ make_table_11 <- function(adae,
   ), names(adae))
   assert_flag_variables(adae, "SAFFL")
 
-  id_dcsae <- adae %>% filter(DCSREAS == "ADVERSE EVENT") %>% select(USUBJID) %>% unlist()
+  id_dcsae <- adae %>%
+    filter(DCSREAS == "ADVERSE EVENT") %>%
+    select(USUBJID) %>%
+    unlist()
 
   adae <- adae %>%
     filter(SAFFL == "Y", USUBJID %in% id_dcsae, adae[[fmqsc_var]] == fmq_scope) %>%
