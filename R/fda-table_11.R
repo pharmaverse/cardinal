@@ -1,56 +1,62 @@
 #' FDA Table 11: Patients with FDA Medical Query (Narrow) Leading to Treatment
-#' Discontinuation, Safety Population, Pooled Analyses
+#'   Discontinuation, Safety Population, Pooled Analyses
+#'
 #' @details
-#' * `adae` must contain the variables `SAFFL`, `USUBJID`, `AEBODSYS`, `AEACN`
-#' and the variables specified by `arm_var`, `fmqsc_var`, and `fmqnam_var`.
-#' * the function output FMQ with Treatment Discontinuation (`AEACN` = "DRUG WITHDRAWN").
-#' * `fmqsc_var` must contain either "BROAD" or "NARROW" values. By default, the
-#' function outputs "NARROW" for the FMQ (see `FMQ` argument).
+#' * `adae` must contain the variables `SAFFL`, `USUBJID`, `AEBODSYS`, `DCSREAS`, and the variables specified by
+#'   `arm_var`, `fmqsc_var`, and `fmqnam_var`.
+#' * A patient is defined as having at least one AE leading to treatment discontinuation when they have at least one
+#'   record with `DCSREAS` = "ADVERSE EVENT".
+#' * `fmqsc_var` must contain "BROAD" or "NARROW" values. Defaults to narrow FMQs (see `fmq_scope` argument).
 #' * If specified, `alt_counts_df` must contain variables `SAFFL` and `USUBJID`.
-#' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true)
-#' and `"N"` (false). Missing values in flag variables are treated as `"N"`.
-#' * Columns are split by arm. Overall population column is excluded by default
-#' (see `lbl_overall` argument).
+#' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
+#'   flag variables are treated as `"N"`.
+#' * Columns are split by arm. Overall population column is excluded by default (see `lbl_overall` argument).
 #' * Numbers in table represent the absolute numbers of patients and fraction of `N`.
 #' * All-zero rows are removed by default (see `prune_0` argument).
+#'
+#' @inheritParams argument_convention
+#'
 #' @examples
-#' library(dplyr)
-#' adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
-#' adae <- adae %>%
-#'   dplyr::rename(FMQ02SC = SMQ02SC, FMQ02NAM = CQ01NAM) %>%
-#'   mutate(AESER = sample(c("Y", "N"), size = nrow(adae), replace = TRUE))
-#' levels(adae$FMQ02SC) <- c("BROAD", "NARROW")
-#' adae$FMQ02SC[!is.na(adae$FMQ02NAM)] <- "NARROW"
 #' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
+#' adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
 #'
-#' tbl <- make_table_11(
-#'   adae = adae, alt_counts_df = adsl, fmqsc_var = "FMQ02SC",
-#'   fmqnam_var = "FMQ02NAM"
-#' )
+#' set.seed(1)
+#' adae <- adae %>%
+#'   dplyr::rename(FMQ01SC = SMQ01SC) %>%
+#'   dplyr::mutate(
+#'     AESER = sample(c("Y", "N"), size = nrow(adae), replace = TRUE),
+#'     FMQ01NAM = sample(c("FMQ1", "FMQ2", "FMQ3"), size = nrow(adae), replace = TRUE)
+#'   )
+#' adae$DCSREAS[is.na(adae$DCSREAS)] <- "ADVERSE EVENT"
+#' adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
 #'
+#' tbl <- make_table_11(adae = adae, alt_counts_df = adsl)
 #' tbl
-
+#'
 #' @export
 make_table_11 <- function(adae,
-                          alt_counts_df = adsl,
+                          alt_counts_df = NULL,
                           show_colcounts = TRUE,
                           arm_var = "ARM",
-                          fmqsc_var = "FMQ02SC",
-                          fmqnam_var = "FMQ02NAM",
+                          fmqsc_var = "FMQ01SC",
+                          fmqnam_var = "FMQ01NAM",
+                          fmq_scope = "NARROW",
                           lbl_overall = NULL,
                           prune_0 = TRUE,
                           na_level = "<Missing>",
-                          annotations = NULL,
-                          FMQ = "Narrow") {
+                          annotations = NULL) {
   checkmate::assert_subset(c(
-    "SAFFL", "USUBJID", "AEBODSYS", "AEACN", arm_var, fmqsc_var, fmqnam_var
+    "SAFFL", "USUBJID", "AEBODSYS", "DCSREAS", arm_var, fmqsc_var, fmqnam_var
   ), names(adae))
   assert_flag_variables(adae, "SAFFL")
 
+  id_dcsae <- adae %>% filter(DCSREAS == "ADVERSE EVENT") %>% select(USUBJID) %>% unlist()
+
   adae <- adae %>%
-    filter(SAFFL == "Y", AEACN == "DRUG WITHDRAWN", (adae[[fmqsc_var]] == FMQ | adae[[fmqsc_var]] == toupper(FMQ))) %>%
+    filter(SAFFL == "Y", USUBJID %in% id_dcsae, adae[[fmqsc_var]] == fmq_scope) %>%
     df_explicit_na(na_level = na_level)
-  adae[[fmqnam_var]] <- with_label(adae[[fmqnam_var]], paste0("FMQ (", FMQ, ")"))
+  adae[[fmqnam_var]] <- with_label(adae[[fmqnam_var]], paste0("FMQ (", tools::toTitleCase(tolower(fmq_scope)), ")"))
+
   alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
 
   lyt <- basic_table_annot(show_colcounts, annotations) %>%
@@ -58,9 +64,7 @@ make_table_11 <- function(adae,
     analyze_num_patients(
       vars = "USUBJID",
       .stats = c("unique"),
-      .labels = c(
-        unique = "Patients with at least one AE leading to discontinuation"
-      )
+      .labels = c(unique = "Patients with at least one AE leading to discontinuation")
     ) %>%
     split_rows_by(
       "AEBODSYS",

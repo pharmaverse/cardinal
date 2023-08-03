@@ -1,12 +1,12 @@
 #' FDA Table 12: Patients With Adverse Events Leading to Treatment Discontinuation
-#' by System Organ Class and Preferred Term, Safety Population, Pooled Analyses
+#'   by System Organ Class and Preferred Term, Safety Population, Pooled Analyses
 #'
 #' @details
-#' * `adae` must contain `SAFFL`, `USUBJID`, `AEACN`, `AESOC`, and the variables specified
-#'   by `pref_var` and `arm_var`.
+#' * `adae` must contain `SAFFL`, `USUBJID`, `DCSREAS`, `AESOC`, and the variables specified by `pref_var`
+#'   and `arm_var`.
 #' * If specified, `alt_counts_df` must contain `SAFFL`, `USUBJID`, and the variable specified by `arm_var`.
-#' * the function output `pref_var` with Treatment Discontinuation (`AEACN` = "DRUG WITHDRAWN").
-#' * By default, `pref_var` is AEDECOD.
+#' * A patient is defined as having at least one AE leading to treatment discontinuation when they have at least one
+#'   record with `DCSREAS` = "ADVERSE EVENT".
 #' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
 #'   flag variables are treated as `"N"`.
 #' * Columns are split by arm. Overall population column is excluded by default (see `lbl_overall` argument).
@@ -14,16 +14,16 @@
 #' * All-zero rows are removed by default (see `prune_0` argument).
 #'
 #' @examples
-#' library(dplyr)
-#' adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
 #' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
+#' adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
+#' adae$DCSREAS[is.na(adae$DCSREAS)] <- "ADVERSE EVENT"
 #'
 #' tbl <- make_table_12(adae = adae, alt_counts_df = adsl)
 #' tbl
 #'
 #' @export
 make_table_12 <- function(adae,
-                          alt_counts_df = adsl,
+                          alt_counts_df = NULL,
                           show_colcounts = TRUE,
                           arm_var = "ARM",
                           pref_var = "AEDECOD",
@@ -31,13 +31,16 @@ make_table_12 <- function(adae,
                           prune_0 = TRUE,
                           annotations = NULL) {
   checkmate::assert_subset(c(
-    "SAFFL", "USUBJID", "AEBODSYS", pref_var, "AEACN", arm_var
+    "SAFFL", "USUBJID", "AEBODSYS", "DCSREAS", pref_var, arm_var
   ), names(adae))
   assert_flag_variables(adae, "SAFFL")
 
+  id_dcsae <- adae %>% filter(DCSREAS == "ADVERSE EVENT") %>% select(USUBJID) %>% unlist()
+
   adae <- adae %>%
-    filter(SAFFL == "Y", AEACN == "DRUG WITHDRAWN") %>%
+    filter(SAFFL == "Y", USUBJID %in% id_dcsae) %>%
     df_explicit_na()
+
   alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
 
   lyt <- basic_table_annot(show_colcounts, annotations) %>%
@@ -45,9 +48,7 @@ make_table_12 <- function(adae,
     analyze_num_patients(
       vars = "USUBJID",
       .stats = c("unique"),
-      .labels = c(
-        unique = "Patients with at least one AE leading to discontinuation"
-      )
+      .labels = c(unique = "Patients with at least one AE leading to discontinuation")
     ) %>%
     split_rows_by(
       "AEBODSYS",

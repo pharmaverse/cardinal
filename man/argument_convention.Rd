@@ -32,6 +32,12 @@ in the table. Labels should be ordered according to the order of variables in \c
 
 \item{lbl_pref_var}{(\code{character})\cr label corresponding to preferred term variable \code{pref_var} to print in the table.}
 
+\item{fmqsc_var}{(\code{character})\cr FMQ scope variable to use in table.}
+
+\item{fmqnam_var}{(\code{character})\cr FMQ reference name variable to use in table.}
+
+\item{fmq_scope}{(\code{character})\cr FMQ scope ("NARROW" or "BROAD") to output in table.}
+
 \item{.stats}{(\code{character})\cr statistics to include in the table. Includes statistics for all variable
 types (only the statistics that are valid for a given variable's type will be printed).
 See \code{\link[tern:summarize_variables]{tern::summarize_vars()}} for options.}

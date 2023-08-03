@@ -12,8 +12,6 @@
 #' * All-zero rows are not removed by default (see `prune_0` argument).
 #'
 #' @inheritParams argument_convention
-#' @param fmqsc_var (`character`)\cr FMQ scope variable to use in table.
-#' @param fmqnam_var (`character`)\cr FMQ reference name variable to use in table.
 #'
 #' @examples
 #' adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")

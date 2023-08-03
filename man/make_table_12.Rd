@@ -7,7 +7,7 @@ by System Organ Class and Preferred Term, Safety Population, Pooled Analyses}
 \usage{
 make_table_12(
   adae,
-  alt_counts_df = adsl,
+  alt_counts_df = NULL,
   show_colcounts = TRUE,
   arm_var = "ARM",
   pref_var = "AEDECOD",
@@ -22,11 +22,11 @@ by System Organ Class and Preferred Term, Safety Population, Pooled Analyses
 }
 \details{
 \itemize{
-\item \code{adae} must contain \code{SAFFL}, \code{USUBJID}, \code{AEACN}, \code{AESOC}, and the variables specified
-by \code{pref_var} and \code{arm_var}.
+\item \code{adae} must contain \code{SAFFL}, \code{USUBJID}, \code{DCSREAS}, \code{AESOC}, and the variables specified by \code{pref_var}
+and \code{arm_var}.
 \item If specified, \code{alt_counts_df} must contain \code{SAFFL}, \code{USUBJID}, and the variable specified by \code{arm_var}.
-\item the function output \code{pref_var} with Treatment Discontinuation (\code{AEACN} = "DRUG WITHDRAWN").
-\item By default, \code{pref_var} is AEDECOD.
+\item A patient is defined as having at least one AE leading to treatment discontinuation when they have at least one
+record with \code{DCSREAS} = "ADVERSE EVENT".
 \item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
 flag variables are treated as \code{"N"}.
 \item Columns are split by arm. Overall population column is excluded by default (see \code{lbl_overall} argument).
@@ -35,9 +35,9 @@ flag variables are treated as \code{"N"}.
 }
 }
 \examples{
-library(dplyr)
-adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
 adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
+adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
+adae$DCSREAS[is.na(adae$DCSREAS)] <- "ADVERSE EVENT"
 
 tbl <- make_table_12(adae = adae, alt_counts_df = adsl)
 tbl

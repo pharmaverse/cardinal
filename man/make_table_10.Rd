@@ -7,16 +7,16 @@ FDA Medical Query (Narrow), Safety Population, Pooled Analyses}
 \usage{
 make_table_10(
   adae,
-  alt_counts_df = adsl,
+  alt_counts_df = NULL,
   show_colcounts = TRUE,
   arm_var = "ARM",
-  fmqsc_var = "FMQ02SC",
-  fmqnam_var = "FMQ02NAM",
+  fmqsc_var = "FMQ01SC",
+  fmqnam_var = "FMQ01NAM",
+  fmq_scope = "NARROW",
   lbl_overall = NULL,
   prune_0 = TRUE,
   na_level = "<Missing>",
-  annotations = NULL,
-  FMQ = "Narrow"
+  annotations = NULL
 )
 }
 \arguments{
@@ -32,6 +32,8 @@ make_table_10(
 
 \item{fmqnam_var}{(\code{character})\cr FMQ reference name variable to use in table.}
 
+\item{fmq_scope}{(\code{character})\cr FMQ scope ("NARROW" or "BROAD") to output in table.}
+
 \item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
 the given value as the column label.}
 
@@ -42,8 +44,6 @@ the given value as the column label.}
 \item{annotations}{(named \code{list} of \code{character})\cr list of annotations to add to the table. Valid
 annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
 use the annotation type as name and the desired string as value.}
-
-\item{FMQ}{(\code{character})\cr FMQ scope ("Narrow" or "Broad" ) to output in table.}
 }
 \description{
 FDA Table 10: Patients With Serious Adverse Events by System Organ Class and
@@ -51,32 +51,31 @@ FDA Medical Query (Narrow), Safety Population, Pooled Analyses
 }
 \details{
 \itemize{
-\item \code{adae} must contain the variables \code{SAFFL}, \code{USUBJID}, \code{AEBODSYS}, \code{AESER}
-and the variables specified by \code{arm_var}, \code{fmqsc_var}, and \code{fmqnam_var}.
-\item \code{fmqsc_var} must contain either "BROAD" or "NARROW" values. By default, the
-function outputs "NARROW" for the FMQ (see \code{FMQ} argument).
+\item \code{adae} must contain the variables \code{SAFFL}, \code{USUBJID}, \code{AEBODSYS}, \code{AESER}, and the variables specified by
+\code{arm_var}, \code{fmqsc_var}, and \code{fmqnam_var}.
+\item \code{fmqsc_var} must contain "BROAD" or "NARROW" values.  Defaults to narrow FMQs (see \code{fmq_scope} argument).
 \item If specified, \code{alt_counts_df} must contain variables \code{SAFFL} and \code{USUBJID}.
-\item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true)
-and \code{"N"} (false). Missing values in flag variables are treated as \code{"N"}.
-\item Columns are split by arm. Overall population column is excluded by default
-(see \code{lbl_overall} argument).
+\item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
+flag variables are treated as \code{"N"}.
+\item Columns are split by arm. Overall population column is excluded by default (see \code{lbl_overall} argument).
 \item Numbers in table represent the absolute numbers of patients and fraction of \code{N}.
 \item All-zero rows are removed by default (see \code{prune_0} argument).
 }
 }
 \examples{
-library(dplyr)
-adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
-adae <- adae \%>\%
-  dplyr::rename(FMQ02SC = SMQ02SC, FMQ02NAM = CQ01NAM) \%>\%
-  mutate(AESER = sample(c("Y", "N"), size = nrow(adae), replace = TRUE))
-levels(adae$FMQ02SC) <- c("BROAD", "NARROW")
-adae$FMQ02SC[!is.na(adae$FMQ02NAM)] <- "NARROW"
 adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
+adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
 
-tbl <- make_table_10(
-  adae = adae, alt_counts_df = adsl, fmqsc_var = "FMQ02SC",
-  fmqnam_var = "FMQ02NAM"
-)
+set.seed(1)
+adae <- adae \%>\%
+  dplyr::rename(FMQ01SC = SMQ01SC) \%>\%
+  dplyr::mutate(
+    AESER = sample(c("Y", "N"), size = nrow(adae), replace = TRUE),
+    FMQ01NAM = sample(c("FMQ1", "FMQ2", "FMQ3"), size = nrow(adae), replace = TRUE)
+  )
+adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
+
+tbl <- make_table_10(adae = adae, alt_counts_df = adsl)
+tbl
 
 }
