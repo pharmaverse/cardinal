@@ -2,6 +2,7 @@
 % Please edit documentation in R/fda-table_02.R
 \name{make_table_02}
 \alias{make_table_02}
+\alias{make_table_02_tplyr}
 \title{FDA Table 2: Baseline Demographic and Clinical Characteristics Safety Population, Pooled Analyses}
 \usage{
 make_table_02(
@@ -18,11 +19,25 @@ make_table_02(
   prune_0 = TRUE,
   annotations = NULL
 )
+
+make_table_02_tplyr(
+  df,
+  alt_counts_df = NULL,
+  show_colcounts = TRUE,
+  arm_var = "ARM",
+  vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY"),
+  lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
+  lbl_overall = "Total Population",
+  na_rm = FALSE,
+  prune_0 = TRUE,
+  annotations = NULL,
+  tplyr_raw = FALSE
+)
 }
 \arguments{
 \item{df}{(\code{data.frame})\cr dataset required to build table.}
 
-\item{alt_counts_df}{(\code{character}) alternative dataset (typically ADSL) used only to calculate column counts.}
+\item{alt_counts_df}{(\code{character})\cr alternative dataset (typically ADSL) used only to calculate column counts.}
 
 \item{show_colcounts}{(\code{flag})\cr whether column counts should be printed.}
 
@@ -51,6 +66,19 @@ that statistic. See \code{\link[formatters:list_valid_format_labels]{formatters:
 \item{annotations}{(named \code{list} of \code{character})\cr list of annotations to add to the table. Valid
 annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
 use the annotation type as name and the desired string as value.}
+
+\item{tplyr_raw}{(\code{flag})\cr whether the raw \code{tibble} created using \code{Tplyr} functions should be returned, or the
+table formatted using functions from \code{tfrmt} should be returned (default).}
+}
+\value{
+\itemize{
+\item \code{make_table_02} returns an \code{rtables} table object.
+}
+
+\itemize{
+\item \code{make_table_02_tplyr} returns a \code{gt_tbl} object when \code{tplyr_raw = FALSE} (default) and
+a \code{tibble} object when \code{tplyr_raw = TRUE}.
+}
 }
 \description{
 FDA Table 2: Baseline Demographic and Clinical Characteristics Safety Population, Pooled Analyses
@@ -65,6 +93,19 @@ flag variables are treated as \code{"N"}.
 \item Information from either ADSUB or ADVS is generally included into \code{df} prior to analysis.
 \item Numbers in table for non-numeric variables represent the absolute numbers of patients and fraction of \code{N}.
 \item All-zero rows are removed by default (see \code{prune_0} argument).
+}
+}
+\section{Functions}{
+\itemize{
+\item \code{make_table_02()}: Create FDA table 2 using functions from \code{rtables} and \code{tern}.
+
+\item \code{make_table_02_tplyr()}: Create FDA table 2 using functions from \code{Tplyr} and \code{tfrmt}.
+
+}}
+\note{
+\itemize{
+\item \code{make_table_02_tplyr} does not currently support footnote annotations
+\item \code{make_table_02_tplyr} does not currently support \code{alt_counts_df} when \code{tplyr_raw = TRUE}.
 }
 }
 \examples{
@@ -82,6 +123,9 @@ adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") \%>\%
   )
 
 tbl <- make_table_02(df = adsl)
+tbl
+
+tbl <- make_table_02_tplyr(df = adsl)
 tbl
 
 }
