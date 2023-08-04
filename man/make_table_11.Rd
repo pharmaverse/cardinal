@@ -53,9 +53,10 @@ Discontinuation, Safety Population, Pooled Analyses
 \itemize{
 \item \code{adae} must contain the variables \code{SAFFL}, \code{USUBJID}, \code{AEBODSYS}, \code{DCSREAS}, and the variables specified by
 \code{arm_var}, \code{fmqsc_var}, and \code{fmqnam_var}.
-\item A patient is defined as having at least one AE leading to treatment discontinuation when they have at least one
-record with \code{DCSREAS} = "ADVERSE EVENT".
-\item \code{fmqsc_var} must contain "BROAD" or "NARROW" values. Defaults to narrow FMQs (see \code{fmq_scope} argument).
+\item A patient is defined as having at least one adverse event leading to treatment discontinuation when they have at
+least one record with \code{DCSREAS} = "ADVERSE EVENT".
+\item \code{fmqsc_var} must contain "BROAD" or "NARROW" values, one of which will be displayed in the table. Narrow is
+selected by default (see \code{fmq_scope} argument).
 \item If specified, \code{alt_counts_df} must contain variables \code{SAFFL} and \code{USUBJID}.
 \item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
 flag variables are treated as \code{"N"}.

@@ -5,8 +5,8 @@
 #' * `adae` must contain `SAFFL`, `USUBJID`, `DCSREAS`, `AESOC`, and the variables specified by `pref_var`
 #'   and `arm_var`.
 #' * If specified, `alt_counts_df` must contain `SAFFL`, `USUBJID`, and the variable specified by `arm_var`.
-#' * A patient is defined as having at least one AE leading to treatment discontinuation when they have at least one
-#'   record with `DCSREAS` = "ADVERSE EVENT".
+#' * A patient is defined as having at least one adverse event leading to treatment discontinuation when they have at
+#'   least one record with `DCSREAS` = "ADVERSE EVENT".
 #' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
 #'   flag variables are treated as `"N"`.
 #' * Columns are split by arm. Overall population column is excluded by default (see `lbl_overall` argument).

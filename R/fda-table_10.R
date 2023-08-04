@@ -4,7 +4,8 @@
 #' @details
 #' * `adae` must contain the variables `SAFFL`, `USUBJID`, `AEBODSYS`, `AESER`, and the variables specified by
 #'   `arm_var`, `fmqsc_var`, and `fmqnam_var`.
-#' * `fmqsc_var` must contain "BROAD" or "NARROW" values.  Defaults to narrow FMQs (see `fmq_scope` argument).
+#' * `fmqsc_var` must contain "BROAD" or "NARROW" values, one of which will be displayed in the table. Narrow is
+#'   selected by default (see `fmq_scope` argument).
 #' * If specified, `alt_counts_df` must contain variables `SAFFL` and `USUBJID`.
 #' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
 #'   flag variables are treated as `"N"`.

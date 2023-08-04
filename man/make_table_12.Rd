@@ -25,8 +25,8 @@ by System Organ Class and Preferred Term, Safety Population, Pooled Analyses
 \item \code{adae} must contain \code{SAFFL}, \code{USUBJID}, \code{DCSREAS}, \code{AESOC}, and the variables specified by \code{pref_var}
 and \code{arm_var}.
 \item If specified, \code{alt_counts_df} must contain \code{SAFFL}, \code{USUBJID}, and the variable specified by \code{arm_var}.
-\item A patient is defined as having at least one AE leading to treatment discontinuation when they have at least one
-record with \code{DCSREAS} = "ADVERSE EVENT".
+\item A patient is defined as having at least one adverse event leading to treatment discontinuation when they have at
+least one record with \code{DCSREAS} = "ADVERSE EVENT".
 \item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
 flag variables are treated as \code{"N"}.
 \item Columns are split by arm. Overall population column is excluded by default (see \code{lbl_overall} argument).
