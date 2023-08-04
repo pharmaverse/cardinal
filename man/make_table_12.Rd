@@ -16,6 +16,26 @@ make_table_12(
   annotations = NULL
 )
 }
+\arguments{
+\item{adae}{(\code{data.frame})\cr dataset (typically ADAE) required to build table.}
+
+\item{alt_counts_df}{(\code{character})\cr alternative dataset (typically ADSL) used only to calculate column counts.}
+
+\item{show_colcounts}{(\code{flag})\cr whether column counts should be printed.}
+
+\item{arm_var}{(\code{character})\cr arm variable used to split table into columns.}
+
+\item{pref_var}{(\code{character})\cr preferred term variable from \code{adae} to include in the table.}
+
+\item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
+the given value as the column label.}
+
+\item{prune_0}{(\code{flag})\cr whether all-zero rows should be removed from the table.}
+
+\item{annotations}{(named \code{list} of \code{character})\cr list of annotations to add to the table. Valid
+annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
+use the annotation type as name and the desired string as value.}
+}
 \description{
 FDA Table 12: Patients With Adverse Events Leading to Treatment Discontinuation
 by System Organ Class and Preferred Term, Safety Population, Pooled Analyses
