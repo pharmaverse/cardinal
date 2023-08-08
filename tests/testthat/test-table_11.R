@@ -1,5 +1,6 @@
 adsl <- adsl_raw
 adae <- adae_raw
+
 set.seed(1)
 adae <- adae %>%
   dplyr::rename(FMQ01SC = SMQ01SC) %>%
@@ -32,8 +33,8 @@ test_that("Table 11 generation works with custom values", {
         "Source: [include Applicant source, datasets and/or software tools used].\n",
         "(1) Duration = [e.g., X-week double-blind treatment period or median and a range indicating pooled trial\n",
         "durations].\n",
-        "(2) Each FMQ is aligned to a single SOC based on clinical judgement. Howevere, please be aware that some FMQs\n",
-        "may contain PTs from more than one SOC."
+        "(2) Each FMQ is aligned to a single SOC based on clinical judgement.",
+        "However, please be aware that some FMQs\n may contain PTs from more than one SOC."
       ),
       prov_footer = c(
         "Abbreviations: CI, confidence interval; FMQ, FDA Medical Query;",

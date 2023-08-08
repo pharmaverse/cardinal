@@ -61,7 +61,8 @@ website:
   cookie-consent: true
   page-footer:
     center:
-      - text: "This website as well as code examples are licensed under the Apache License, Version 2.0."
+      - text: >
+        "This website as well as code examples are licensed under the Apache License, Version 2.0."
     right:
       - aria-label: Slack
         href: https://app.slack.com/client/T028PB489D3/C04MQS12MND
@@ -99,7 +100,6 @@ website:
         menu:
           - quarto/getting_started.qmd
           - text: Report a Bug
-            url:  https://github.com/pharmaverse/falcon/issues
+            url: https://github.com/pharmaverse/falcon/issues
           - text: FAQ
             file: quarto/faq.qmd
-
