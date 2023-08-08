@@ -12,7 +12,6 @@ format: html
 ## Table
 
 ```{r tbl, message=FALSE, warning=FALSE}
-
 # Load Libraries & Data
 library(dplyr)
 library(falcon)
@@ -23,16 +22,15 @@ adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
 # Pre-Processing - Ensure required variables FMQ01SC and FMQ01NAM exist in adae
 set.seed(1)
 adae <- adae %>%
-dplyr::rename(FMQ01SC = SMQ01SC) %>%
-dplyr::mutate(
-  AESER = sample(c("Y", "N"), size = nrow(adae), replace = TRUE),
-  FMQ01NAM = sample(c("FMQ1", "FMQ2", "FMQ3"), size = nrow(adae), replace = TRUE)
-)
+  dplyr::rename(FMQ01SC = SMQ01SC) %>%
+  dplyr::mutate(
+    AESER = sample(c("Y", "N"), size = nrow(adae), replace = TRUE),
+    FMQ01NAM = sample(c("FMQ1", "FMQ2", "FMQ3"), size = nrow(adae), replace = TRUE)
+  )
 adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
 
 # Output Table
 make_table_10(adae = adae, alt_counts_df = adsl)
-
 ```
 
 ## Table Setup

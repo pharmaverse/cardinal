@@ -47,4 +47,3 @@ test_that("Table 10 generation works with custom values", {
   res <- expect_silent(result)
   expect_snapshot(res)
 })
-
