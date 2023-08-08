@@ -17,6 +17,9 @@
 #'   in the table. Labels should be ordered according to the order of variables in `vars`.
 #' @param pref_var (`character`)\cr preferred term variable from `adae` to include in the table.
 #' @param lbl_pref_var (`character`)\cr label corresponding to preferred term variable `pref_var` to print in the table.
+#' @param fmqsc_var (`character`)\cr FMQ scope variable to use in table.
+#' @param fmqnam_var (`character`)\cr FMQ reference name variable to use in table.
+#' @param fmq_scope (`character`)\cr FMQ scope ("NARROW" or "BROAD") to output in table.
 #' @param .stats (`character`)\cr statistics to include in the table. Includes statistics for all variable
 #'   types (only the statistics that are valid for a given variable's type will be printed).
 #'   See [`tern::summarize_vars()`] for options.
