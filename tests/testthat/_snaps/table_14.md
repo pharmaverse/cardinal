@@ -67,7 +67,7 @@
       Source: [include Applicant source, datasets and/or software tools used
        (1) Treatment-emergent AE defined as [definition]. MedDRA version X.
        (2) Duration = [e.g., X-week double-blind treatment period or, median and a range indicating pooled trial durations].
-       (3) Each FMQ is aligned to a single SOC based on clinical judgement. Howevere, please beaware that some FMQs may contain PTs from more than one SOC.
+       (3) Each FMQ is aligned to a single SOC based on clinical judgement. However, please beaware that some FMQs may contain PTs from more than one SOC.
       
       Abbreviations: CI, confidence interval; FMQ, FDA Medical Query;
       MedDRA, Medical Dictionary for Regulatory Activities; N, number of patients in treatment arm;
