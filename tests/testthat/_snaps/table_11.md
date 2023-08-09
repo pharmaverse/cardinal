@@ -59,7 +59,7 @@
       Source: [include Applicant source, datasets and/or software tools used].
        (1) Duration = [e.g., X-week double-blind treatment period or median and a range indicating pooled trial
        durations].
-       (2) Each FMQ is aligned to a single SOC based on clinical judgement. Howevere, please be aware that some FMQs
+       (2) Each FMQ is aligned to a single SOC based on clinical judgement. However, please be aware that some FMQs
        may contain PTs from more than one SOC.
       
       Abbreviations: CI, confidence interval; FMQ, FDA Medical Query;

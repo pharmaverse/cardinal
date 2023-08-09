@@ -52,6 +52,7 @@ make_table_11 <- function(adae,
     "SAFFL", "USUBJID", "AEBODSYS", "DCSREAS", arm_var, fmqsc_var, fmqnam_var
   ), names(adae))
   assert_flag_variables(adae, "SAFFL")
+  checkmate::assert_subset(toupper(fmq_scope), c("NARROW", "BROAD"))
 
   id_dcsae <- adae %>%
     filter(DCSREAS == "ADVERSE EVENT") %>%

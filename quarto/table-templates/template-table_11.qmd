@@ -26,7 +26,7 @@ adae <- adae %>%
   dplyr::mutate(
     AESER = sample(c("Y", "N"), size = nrow(adae), replace = TRUE),
     FMQ01NAM = sample(c("FMQ1", "FMQ2", "FMQ3"), size = nrow(adae), replace = TRUE)
-    )
+  )
 adae$DCSREAS[is.na(adae$DCSREAS)] <- "ADVERSE EVENT"
 adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
 

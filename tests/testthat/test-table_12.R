@@ -16,16 +16,20 @@ test_that("Table 12 generation works with custom values", {
     alt_counts_df = adsl,
     annotations = list(
       title = paste(
-        "Table 12. Patients With Adverse Events(1) Leading to Treatment Discontinuation by System Organ Class and Preferred Term,\n",
-        "Safety Population, Pooled Analyses(2)\n"
+        "Table 12. Patients With Adverse Events(1) Leading to Treatment Discontinuation by System Organ Class and",
+        "Preferred Term,\n Safety Population, Pooled Analyses(2)\n"
       ),
       main_footer = paste(
         "Source: [include Applicant source, datasets and/or software tools used].\n",
         "(1) Treatment-emergent adverse event defined as [definition]. MedDRA version X.\n",
-        "(2) Duration = [e.g., X week double-blind treatment period or median and a range indicating pooled trial durations].\n"
+        "(2) Duration = [e.g., X week double-blind treatment period or median and a range indicating",
+        "pooled trial durations].\n"
       ),
       prov_footer = c(
-        "Abbreviations: CI, confidence interval; MedDRA, Medical Dictionary for Regulatory Activities; N, number of patients\n",
+        paste(
+          "Abbreviations: CI, confidence interval; MedDRA, Medical Dictionary for Regulatory Activities;",
+          "N, number of patients\n"
+        ),
         "in treatment arm; n, number of patients with at least one event; PT, preferred term; SOC, System Organ Class"
       )
     )
