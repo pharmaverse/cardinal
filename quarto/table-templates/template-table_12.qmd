@@ -13,7 +13,6 @@ format: html
 
 ```{r tbl, message=FALSE, warning=FALSE}
 # Load Libraries & Data
-library(dplyr)
 library(falcon)
 
 adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
@@ -39,7 +38,7 @@ make_table_12(adae = adae, alt_counts_df = adsl)
 
 Required variables:
 
--   **`adae`**: `SAFFL`, `USUBJID`, `AESOC`, `DCSREAS` and the variables specified by `pref_var` and `arm_var`.
+-   **`adae`**: `SAFFL`, `USUBJID`, `AEBODSYS`, `DCSREAS` and the variables specified by `pref_var` and `arm_var`.
 -   **`alt_counts_df`** (if specified): `SAFFL`, `USUBJID`, and the variable specified by `arm_var`.
 
 | Argument         | Description                                                                                                                                                                                                                                            | Default      |
