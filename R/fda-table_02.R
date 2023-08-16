@@ -255,8 +255,6 @@ make_table_02_tplyr <- function(df,
 #' * `make_table_02_gt` returns a `tbl_summary` object
 #'
 #' @examples
-#' tbl <- make_table_02_gt(df = anl)
-#' tbl
 #'
 #' advs <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "advs")
 #' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") %>%
@@ -275,7 +273,10 @@ make_table_02_tplyr <- function(df,
 #'   dplyr::filter(AVISIT == "BASELINE", VSTESTCD == "TEMP") %>%
 #'   dplyr::select("USUBJID", "AVAL")
 #'
-# anl <- dplyr::left_join(adsl, advs, by = "USUBJID")
+#' anl <- dplyr::left_join(adsl, advs, by = "USUBJID")
+#'
+#' tbl <- make_table_02_gt(df = anl)
+#' tbl
 #'
 #' @export
 make_table_02_gt <- function(df,
