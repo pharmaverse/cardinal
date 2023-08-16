@@ -65,11 +65,11 @@ the given value as the column label.}
 
 \item{.stats}{(\code{character})\cr statistics to include in the table. Includes statistics for all variable
 types (only the statistics that are valid for a given variable's type will be printed).
-See \code{\link[tern:analyze_variables]{tern::summarize_vars()}} for options.}
+See \code{\link[tern:summarize_variables]{tern::summarize_vars()}} for options.}
 
 \item{.formats}{(named \code{list} of \code{character})\cr list of formats corresponding to each value in \code{.stats}.
 Each name is a value in \code{.stats} and the corresponding value is the format that should be applied to
-that statistic. See \code{\link[formatters:list_formats]{formatters::list_valid_format_labels()}} for a list of valid formats.}
+that statistic. See \code{\link[formatters:list_valid_format_labels]{formatters::list_valid_format_labels()}} for a list of valid formats.}
 
 \item{na_rm}{(\code{flag})\cr whether \code{NA} levels should be removed from the table.}
 
@@ -150,15 +150,17 @@ tbl <- make_table_02_gt(df = anl)
 tbl
 
 advs <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "advs")
-adsl<- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") \%>\%
+adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") \%>\%
   mutate(AGEGR1 = as.factor(case_when(
     AGE >= 17 & AGE < 65 ~ ">=17 to <65",
     AGE >= 65 ~ ">=65",
     AGE >= 65 & AGE < 75 ~ ">=65 to <75",
-    AGE >= 75 ~ ">=75")) \%>\%
-      formatters::with_label("Age Group, years")) \%>\%
+    AGE >= 75 ~ ">=75"
+  )) \%>\%
+    formatters::with_label("Age Group, years")) \%>\%
   formatters::var_relabel(
-    AGE = "Age, years")
+    AGE = "Age, years"
+  )
 
 advs <- advs \%>\%
   dplyr::filter(AVISIT == "BASELINE", VSTESTCD == "TEMP") \%>\%
