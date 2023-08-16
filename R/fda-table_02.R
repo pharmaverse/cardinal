@@ -264,16 +264,17 @@ make_table_02_tplyr <- function(df,
 #'     AGE >= 65 & AGE < 75 ~ ">=65 to <75",
 #'     AGE >= 75 ~ ">=75"
 #'   )) %>%
-#'     formatters::with_label("Age Group, years")) %>%
-#'   formatters::var_relabel(
-#'     AGE = "Age, years"
-#'   )
+#'     formatters::with_label("Age Group, years"))
 #'
 #' advs <- advs %>%
 #'   dplyr::filter(AVISIT == "BASELINE", VSTESTCD == "TEMP") %>%
 #'   dplyr::select("USUBJID", "AVAL")
 #'
-#' anl <- dplyr::left_join(adsl, advs, by = "USUBJID")
+#' anl <- dplyr::left_join(adsl, advs, by = "USUBJID")%>%
+#'  formatters::var_relabel(
+#'     AGE = "Age, years",
+#'     AVAL = "Baseline Temperature (C)"
+#'   )
 #'
 #' tbl <- make_table_02_gt(df = anl)
 #' tbl
@@ -283,7 +284,7 @@ make_table_02_gt <- function(df,
                              alt_counts_df = NULL,
                              show_colcounts = TRUE,
                              arm_var = "ARM",
-                             vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY", "AVAL"),
+                             vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY"),
                              lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
                              lbl_overall = "Total Population",
                              annotations = NULL) {
@@ -292,7 +293,7 @@ make_table_02_gt <- function(df,
 
   df <- df %>%
     filter(SAFFL == "Y") %>%
-    select(c(all_of(vars), arm_var))
+    select(all_of(c(vars, arm_var)))
 
   alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
 
@@ -308,7 +309,6 @@ make_table_02_gt <- function(df,
         all_categorical() ~ "{n} ({p}%)"
       ),
       digits = all_continuous() ~ 2,
-      label = c(AGE ~ "Age, years", SEX ~ "Sex", AGEGR1 ~ "Age Group (years)", AVAL ~ "Baseline Temperature (C)")
     ) %>%
     add_overall(last = TRUE, col_label = lbl_overall) %>%
     modify_header(all_stat_cols() ~ "**{level}**  \n N = {n}") %>%
