@@ -259,15 +259,17 @@ make_table_02_tplyr <- function(df,
 #' tbl
 #'
 #' advs <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "advs")
-#' adsl<- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") %>%
+#' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") %>%
 #'   mutate(AGEGR1 = as.factor(case_when(
 #'     AGE >= 17 & AGE < 65 ~ ">=17 to <65",
 #'     AGE >= 65 ~ ">=65",
 #'     AGE >= 65 & AGE < 75 ~ ">=65 to <75",
-#'     AGE >= 75 ~ ">=75")) %>%
-#'       formatters::with_label("Age Group, years")) %>%
+#'     AGE >= 75 ~ ">=75"
+#'   )) %>%
+#'     formatters::with_label("Age Group, years")) %>%
 #'   formatters::var_relabel(
-#'     AGE = "Age, years")
+#'     AGE = "Age, years"
+#'   )
 #'
 #' advs <- advs %>%
 #'   dplyr::filter(AVISIT == "BASELINE", VSTESTCD == "TEMP") %>%
@@ -294,16 +296,21 @@ make_table_02_gt <- function(df,
   alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
 
   tbl <- df %>%
-    tbl_summary(by = arm_var,
-                type = all_continuous() ~ "continuous2",
-                statistic = list(all_continuous() ~ c(
-                  "{mean} ({sd})",
-                  "{median} ({min} - {max})"),
-                  all_categorical() ~ "{n} ({p}%)"),
-                digits = all_continuous() ~ 2,
-                label = c(AGE ~ "Age, years", SEX ~ "Sex", AGEGR1 ~ "Age Group (years)", AVAL ~ "Baseline Temperature (C)")) %>%
+    tbl_summary(
+      by = arm_var,
+      type = all_continuous() ~ "continuous2",
+      statistic = list(
+        all_continuous() ~ c(
+          "{mean} ({sd})",
+          "{median} ({min} - {max})"
+        ),
+        all_categorical() ~ "{n} ({p}%)"
+      ),
+      digits = all_continuous() ~ 2,
+      label = c(AGE ~ "Age, years", SEX ~ "Sex", AGEGR1 ~ "Age Group (years)", AVAL ~ "Baseline Temperature (C)")
+    ) %>%
     add_overall(last = TRUE, col_label = lbl_overall) %>%
-    modify_header(all_stat_cols() ~ "**{level}**  \n N = {n}")%>%
+    modify_header(all_stat_cols() ~ "**{level}**  \n N = {n}") %>%
     modify_footnote(update = everything() ~ NA)
 
   tbl
