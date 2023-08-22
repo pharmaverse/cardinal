@@ -3,6 +3,7 @@
 \name{make_table_02}
 \alias{make_table_02}
 \alias{make_table_02_tplyr}
+\alias{make_table_02_gt}
 \title{FDA Table 2: Baseline Demographic and Clinical Characteristics Safety Population, Pooled Analyses}
 \usage{
 make_table_02(
@@ -33,6 +34,17 @@ make_table_02_tplyr(
   annotations = NULL,
   tplyr_raw = FALSE
 )
+
+make_table_02_gt(
+  df,
+  alt_counts_df = NULL,
+  show_colcounts = TRUE,
+  arm_var = "ARM",
+  vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY"),
+  lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
+  lbl_overall = "Total Population",
+  annotations = NULL
+)
 }
 \arguments{
 \item{df}{(\code{data.frame})\cr dataset required to build table.}
@@ -53,11 +65,11 @@ the given value as the column label.}
 
 \item{.stats}{(\code{character})\cr statistics to include in the table. Includes statistics for all variable
 types (only the statistics that are valid for a given variable's type will be printed).
-See \code{\link[tern:summarize_variables]{tern::summarize_vars()}} for options.}
+See \code{\link[tern:analyze_variables]{tern::summarize_vars()}} for options.}
 
 \item{.formats}{(named \code{list} of \code{character})\cr list of formats corresponding to each value in \code{.stats}.
 Each name is a value in \code{.stats} and the corresponding value is the format that should be applied to
-that statistic. See \code{\link[formatters:list_valid_format_labels]{formatters::list_valid_format_labels()}} for a list of valid formats.}
+that statistic. See \code{\link[formatters:list_formats]{formatters::list_valid_format_labels()}} for a list of valid formats.}
 
 \item{na_rm}{(\code{flag})\cr whether \code{NA} levels should be removed from the table.}
 
@@ -78,6 +90,10 @@ table formatted using functions from \code{tfrmt} should be returned (default).}
 \itemize{
 \item \code{make_table_02_tplyr} returns a \code{gt_tbl} object when \code{tplyr_raw = FALSE} (default) and
 a \code{tibble} object when \code{tplyr_raw = TRUE}.
+}
+
+\itemize{
+\item \code{make_table_02_gt} returns a \code{tbl_summary} object
 }
 }
 \description{
@@ -100,6 +116,8 @@ flag variables are treated as \code{"N"}.
 \item \code{make_table_02()}: Create FDA table 2 using functions from \code{rtables} and \code{tern}.
 
 \item \code{make_table_02_tplyr()}: Create FDA table 2 using functions from \code{Tplyr} and \code{tfrmt}.
+
+\item \code{make_table_02_gt()}: Create FDA table 2 using functions from \code{gtsummary}.
 
 }}
 \note{
@@ -126,6 +144,30 @@ tbl <- make_table_02(df = adsl)
 tbl
 
 tbl <- make_table_02_tplyr(df = adsl)
+tbl
+
+
+advs <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "advs")
+adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") \%>\%
+  mutate(AGEGR1 = as.factor(case_when(
+    AGE >= 17 & AGE < 65 ~ ">=17 to <65",
+    AGE >= 65 ~ ">=65",
+    AGE >= 65 & AGE < 75 ~ ">=65 to <75",
+    AGE >= 75 ~ ">=75"
+  )) \%>\%
+    formatters::with_label("Age Group, years"))
+
+advs <- advs \%>\%
+  dplyr::filter(AVISIT == "BASELINE", VSTESTCD == "TEMP") \%>\%
+  dplyr::select("USUBJID", "AVAL")
+
+anl <- dplyr::left_join(adsl, advs, by = "USUBJID")\%>\%
+ formatters::var_relabel(
+    AGE = "Age, years",
+    AVAL = "Baseline Temperature (C)"
+  )
+
+tbl <- make_table_02_gt(df = anl)
 tbl
 
 }
