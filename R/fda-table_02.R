@@ -270,8 +270,8 @@ make_table_02_tplyr <- function(df,
 #'   dplyr::filter(AVISIT == "BASELINE", VSTESTCD == "TEMP") %>%
 #'   dplyr::select("USUBJID", "AVAL")
 #'
-#' anl <- dplyr::left_join(adsl, advs, by = "USUBJID")%>%
-#'  formatters::var_relabel(
+#' anl <- dplyr::left_join(adsl, advs, by = "USUBJID") %>%
+#'   formatters::var_relabel(
 #'     AGE = "Age, years",
 #'     AVAL = "Baseline Temperature (C)"
 #'   )
