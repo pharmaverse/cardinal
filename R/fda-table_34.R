@@ -46,7 +46,7 @@ make_table_34 <- function(adae,
     filter(AESER == "Y") %>%
     df_explicit_na(na_level = na_level)
 
-  adae = adae[adae[[fmqsc_var]]=='NARROW',]
+  adae <- adae[adae[[fmqsc_var]] == "NARROW", ]
   adae[[fmqnam_var]] <- with_label(adae[[fmqnam_var]], "FMQ (Narrow)")
 
   alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
