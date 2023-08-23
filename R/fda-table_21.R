@@ -106,10 +106,10 @@ a_count_occurrences_ser_ae <- function(df,
   n_ids_per_occurrence <- as.list(rowSums(has_occurrence_per_id))
   lvls <- names(n_ids_per_occurrence)
 
+  denom <- match.arg(denom)
   if (denom == "N_s" && is.null(df_denom)) {
     stop("If using subgroup population counts, `df_denom` must be specified.")
   }
-  denom <- match.arg(denom)
   dn <- switch(denom,
     N_s = lapply(
       lvls,
