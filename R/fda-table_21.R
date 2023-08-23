@@ -5,7 +5,7 @@
 #' * If specified, `alt_counts_df` must contain `SAFFL`, `USUBJID`, and the variable specified by `arm_var`.
 #' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
 #'   flag variables are treated as `"N"`.
-#' * Columns are split by arm. Overall population column is included by default (see `lbl_overall` argument).
+#' * Columns are split by arm.
 #' * Information from either ADSUB or ADVS is generally included into `df` prior to analysis.
 #' * Numbers in table for non-numeric variables represent the absolute numbers of patients and fraction of `n`.
 #' * All-zero rows are removed by default (see `prune_0` argument).
@@ -43,7 +43,6 @@ make_table_21 <- function(df,
                           vars = c("SEX", "AGEGR1", "RACE", "ETHNIC"),
                           denom = c("N_s", "N_col", "n"),
                           lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
-                          lbl_overall = NULL,
                           prune_0 = FALSE,
                           annotations = NULL) {
   checkmate::assert_subset(c("SAFFL", vars, arm_var), names(df))
@@ -57,7 +56,7 @@ make_table_21 <- function(df,
   alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
 
   lyt <- basic_table_annot(show_colcounts, annotations) %>%
-    split_cols_by_arm(arm_var, lbl_overall) %>%
+    split_cols_by_arm(arm_var) %>%
     count_patients_with_event(
       "USUBJID",
       filters = c("AESER" = "Y"),
