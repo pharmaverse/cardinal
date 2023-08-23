@@ -12,7 +12,6 @@ make_table_21(
   vars = c("SEX", "AGEGR1", "RACE", "ETHNIC"),
   denom = c("N_s", "N_col", "n"),
   lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
-  lbl_overall = NULL,
   prune_0 = FALSE,
   annotations = NULL
 )
@@ -20,7 +19,7 @@ make_table_21(
 \arguments{
 \item{df}{(\code{data.frame})\cr dataset required to build table.}
 
-\item{alt_counts_df}{(\code{character}) alternative dataset (typically ADSL) used only to calculate column counts.}
+\item{alt_counts_df}{(\code{character})\cr alternative dataset (typically ADSL) used only to calculate column counts.}
 
 \item{show_colcounts}{(\code{flag})\cr whether column counts should be printed.}
 
@@ -34,9 +33,6 @@ subgroup/row counts), \code{"N_col"} (total \code{df} column counts), or \code{"
 
 \item{lbl_vars}{(\code{vector} of \code{character})\cr labels corresponding to variables in \code{vars} to print
 in the table. Labels should be ordered according to the order of variables in \code{vars}.}
-
-\item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
-the given value as the column label.}
 
 \item{prune_0}{(\code{flag})\cr whether all-zero rows should be removed from the table.}
 
@@ -53,7 +49,7 @@ FDA Table 21. Overview of Serious Adverse Events by Demographic Subgroup, Safety
 \item If specified, \code{alt_counts_df} must contain \code{SAFFL}, \code{USUBJID}, and the variable specified by \code{arm_var}.
 \item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
 flag variables are treated as \code{"N"}.
-\item Columns are split by arm. Overall population column is included by default (see \code{lbl_overall} argument).
+\item Columns are split by arm.
 \item Information from either ADSUB or ADVS is generally included into \code{df} prior to analysis.
 \item Numbers in table for non-numeric variables represent the absolute numbers of patients and fraction of \code{n}.
 \item All-zero rows are removed by default (see \code{prune_0} argument).
