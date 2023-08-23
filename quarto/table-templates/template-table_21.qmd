@@ -32,7 +32,7 @@ adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae") %>%
 df <- left_join(adsl, adae, by = intersect(names(adsl), names(adae)))
 
 # Output Table
-make_table_21(df = df, alt_counts_df = adsl, denom="N_s")
+make_table_21(df = df, alt_counts_df = adsl, denom = "N_s")
 ```
 
 ## Table Setup
