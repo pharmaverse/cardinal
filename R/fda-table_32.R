@@ -136,7 +136,8 @@ make_table_32_gt <- function(advs,
   tbl <- advs %>%
     tbl_summary(
       by = arm_var,
-      statistic = list(all_categorical() ~ "{n} ({p}%)")
+      statistic = list(all_categorical() ~ "{n} ({p}%)"),
+      digits = 2
     ) %>%
     modify_header(all_stat_cols() ~ "**{level}**  \n N = {n}") %>%
     modify_footnote(update = everything() ~ NA)
