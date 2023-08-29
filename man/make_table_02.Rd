@@ -42,8 +42,7 @@ make_table_02_gt(
   arm_var = "ARM",
   vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY"),
   lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
-  lbl_overall = "Total Population",
-  annotations = NULL
+  lbl_overall = "Total Population"
 )
 }
 \arguments{

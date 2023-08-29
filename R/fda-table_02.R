@@ -273,13 +273,13 @@ make_table_02_gt <- function(df,
                              arm_var = "ARM",
                              vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY"),
                              lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
-                             lbl_overall = "Total Population",
-                             annotations = NULL) {
+                             lbl_overall = "Total Population") {
   checkmate::assert_subset(c("SAFFL", vars, arm_var), names(df))
   assert_flag_variables(df, "SAFFL")
 
   df <- df %>%
     filter(SAFFL == "Y") %>%
+    df_explicit_na() %>%
     select(all_of(c(vars, arm_var)))
 
   alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
