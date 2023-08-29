@@ -248,15 +248,13 @@ make_table_02_tplyr <- function(df,
   tbl
 }
 
-
 #' @describeIn make_table_02 Create FDA table 2 using functions from `gtsummary`.
 #'
 #' @return
-#' * `make_table_02_gt` returns a `tbl_summary` object
+#' * `make_table_02_gt` returns a `tbl_summary` object.
 #'
 #' @examples
 #'
-#' advs <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "advs")
 #' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") %>%
 #'   mutate(AGEGR1 = as.factor(case_when(
 #'     AGE >= 17 & AGE < 65 ~ ">=17 to <65",
@@ -266,17 +264,7 @@ make_table_02_tplyr <- function(df,
 #'   )) %>%
 #'     formatters::with_label("Age Group, years"))
 #'
-#' advs <- advs %>%
-#'   dplyr::filter(AVISIT == "BASELINE", VSTESTCD == "TEMP") %>%
-#'   dplyr::select("USUBJID", "AVAL")
-#'
-#' anl <- dplyr::left_join(adsl, advs, by = "USUBJID")%>%
-#'  formatters::var_relabel(
-#'     AGE = "Age, years",
-#'     AVAL = "Baseline Temperature (C)"
-#'   )
-#'
-#' tbl <- make_table_02_gt(df = anl)
+#' tbl <- make_table_02_gt(df = adsl)
 #' tbl
 #'
 #' @export
@@ -308,10 +296,10 @@ make_table_02_gt <- function(df,
         ),
         all_categorical() ~ "{n} ({p}%)"
       ),
-      digits = all_continuous() ~ 2,
+      digits = all_continuous() ~ 2
     ) %>%
-    add_overall(last = TRUE, col_label = lbl_overall) %>%
-    modify_header(all_stat_cols() ~ "**{level}**  \n N = {n}") %>%
+    modify_header(all_stat_cols() ~ "**{level}**  \n (N={n})") %>%
+    add_overall(last = TRUE, col_label = paste0("**", lbl_overall, "**  \n (N={n})")) %>%
     modify_footnote(update = everything() ~ NA)
 
   tbl

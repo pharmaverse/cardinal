@@ -13,7 +13,6 @@
 #' @importFrom formatters with_label var_labels var_relabel
 #' @importFrom rlistings as_listing
 #' @importFrom tfrmt tfrmt body_plan frmt frmt_structure frmt_combine frmt_when col_plan print_to_gt big_n_structure
-#' @importFrom gtsummary tbl_summary
 NULL
 
 # Fix R CMD check warning for missing global definitions
