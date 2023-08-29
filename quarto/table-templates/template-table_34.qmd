@@ -1,0 +1,70 @@
+---
+title: FDA Table 34
+subtitle: Patients With Serious Adverse Events by System Organ Class, FDA Medical Query (Narrow), and Preferred Term, Safety Population, Pooled Analysis (or Trial X)
+format: html
+---
+
+::: panel-tabset
+## Spec. Screenshot
+
+![](../assets/images/screenshots/table_34.png){fig-align="center"}
+
+## Table
+
+```{r tbl, message=FALSE, warning=FALSE}
+# Load Libraries & Data
+library(dplyr)
+library(falcon)
+library(scda)
+
+adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
+adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
+
+# Pre-Processing - Ensure required variables fmqsc_var and fmqnam_var exist in adae
+set.seed(1)
+adae <- adae %>%
+  dplyr::rename(FMQ01SC = SMQ01SC) %>%
+  dplyr::mutate(
+    AESER = sample(c("Y", "N"), size = nrow(adae), replace = TRUE),
+    FMQ01NAM = sample(c("FMQ1", "FMQ2", "FMQ3"), size = nrow(adae), replace = TRUE)
+  )
+adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
+
+# Output Table
+make_table_34(adae = adae, alt_counts_df = adsl)
+```
+
+## Table Setup
+
+```{r tbl, eval=FALSE, echo=TRUE}
+```
+
+## Function Details
+
+### `make_table_34()`
+
+------------------------------------------------------------------------
+
+Required variables:
+
+-   **`adae`**: `SAFFL`, `USUBJID`, `AEBODSYS`, `AESER`, and the variables specified by `arm_var`, `fmqsc_var`, and `fmqnam_var`.
+-   **`alt_counts_df`** (if specified): `SAFFL`, `USUBJID`, and the variable specified by `arm_var`.
+
+| Argument         | Description                                                                                                                                                                                                                                            | Default                                               |
+|:-----------------|:------------------------------------|:-----------------|
+| `adae`           | (`data.frame`) Dataset (typically ADAE) required to build table.                                                                                                                                                                                       | *No default*  |
+| `alt_counts_df`  | (`character`) Alternative dataset used only to calculate column counts.                                                                                                                                                                                | `NULL`                                                |
+| `show_colcounts` | (`flag`) Whether column counts should be printed.                                                                                                                                                                                                      | `TRUE`                                                |
+| `arm_var`        | (`character`) Arm variable used to split table into columns.                                                                                                                                                                                           | `"ARM"`                                               |
+| `fmqsc_var`      | (`character`) FMQ scope variable to use in table.                                                                                                                                                                                                      | `"FMQ01SC"`                                           |
+| `fmqnam_var`     | (`character`) FMQ reference name variable to use in table.                                                                                                                                                                                             | `"FMQ01NAM"`                                          |
+| `fmq_scope`      | (`character`) FMQ scope, can be '"NARROW"' or '"BROAD"'.                                                                                                                                                                                               | `"NARROW"`                                            |
+| `pref_var`       | (`character`) Preferred term variable from `adae` to include in the table.                                                                                                                                                                             | `"AETERM"`                                            |
+| `lbl_pref_var`   | (`character`) Label corresponding to preferred term variable `pref_var` to print in the table.                                                                                                                                                         | `formatters::var_labels(adae, fill = TRUE)[pref_var]` |
+| `lbl_overall`    | (`character`) If specified, an overall column will be added to the table with the given value as the column label.                                                                                                                                     | `NULL`                                                |
+| `prune_0`        | (`flag`) Whether all-zero rows should be removed from the table.                                                                                                                                                                                       | `TRUE`                                                |
+| `na_level`       | (`character`) String to represent missing values.                                                                                                                                                                                                      | `"<Missing>"`                                         |
+| `annotations`    | (named `list` of `character`) List of annotations to add to the table. Valid annotation types are `title`, `subtitles`, `main_footer`, and `prov_footer.` Each name-value pair should use the annotation type as name and the desired string as value. | `NULL`                                       |
+
+Source code for this function is available [here](https://github.com/pharmaverse/falcon/blob/main/R/fda-table_34.R).
+:::
