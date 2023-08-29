@@ -49,6 +49,7 @@ flag variables are treated as \code{"N"}.
 }
 }
 \examples{
+library(dplyr)
 adsl_raw <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
 adsl <- adsl_raw \%>\%
   mutate(test = rbinom(400, 1, 0.5)) \%>\%
