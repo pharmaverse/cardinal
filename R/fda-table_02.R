@@ -45,8 +45,6 @@ make_table_02 <- function(df,
                           vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY"),
                           lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
                           lbl_overall = "Total Population",
-                          .stats = c("mean_sd", "median_range", "count_fraction"),
-                          .formats = NULL,
                           na_rm = FALSE,
                           prune_0 = TRUE,
                           annotations = NULL) {
@@ -65,8 +63,8 @@ make_table_02 <- function(df,
       vars = vars,
       var_labels = lbl_vars,
       show_labels = "visible",
-      .stats = .stats,
-      .formats = .formats,
+      .stats = c("mean_sd", "median_range", "count_fraction"),
+      .formats = NULL,
       na.rm = na_rm
     ) %>%
     append_topleft(c("", "Characteristic"))
