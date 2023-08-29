@@ -62,7 +62,7 @@ table formatted using functions from \code{tfrmt} should be returned (default).}
 }
 \value{
 \itemize{
-\item \code{make_table_02} returns an \code{rtables} table object.
+\item \code{make_table_02} returns an \code{rtable} object.
 }
 
 \itemize{
@@ -108,9 +108,7 @@ adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") \%>\%
     AGE >= 65 & AGE < 75 ~ ">=65 to <75",
     AGE >= 75 ~ ">=75"
   )) \%>\% formatters::with_label("Age Group, years")) \%>\%
-  formatters::var_relabel(
-    AGE = "Age, years"
-  )
+  formatters::var_relabel(AGE = "Age, years")
 
 tbl <- make_table_02(df = adsl)
 tbl

@@ -32,6 +32,9 @@ the given value as the column label.}
 annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
 use the annotation type as name and the desired string as value.}
 }
+\value{
+An \code{rtable} object.
+}
 \description{
 FDA Table 4: Patient Disposition, Pooled Analyses
 }
@@ -49,8 +52,9 @@ flag variables are treated as \code{"N"}.
 }
 }
 \examples{
-adsl_raw <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
-adsl <- adsl_raw \%>\%
+library(dplyr)
+
+adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") \%>\%
   mutate(test = rbinom(400, 1, 0.5)) \%>\%
   mutate(
     RANDFL = ifelse(test == 0, "N", "Y"),
@@ -61,6 +65,7 @@ adsl <- adsl_raw \%>\%
     ), DCSREAS, "OTHER")
   ) \%>\%
   mutate(DCTREAS = DCSREAS)
+
 tbl <- make_table_04(df = adsl)
 tbl
 

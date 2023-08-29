@@ -42,6 +42,9 @@ the given value as the column label.}
 annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
 use the annotation type as name and the desired string as value.}
 }
+\value{
+An \code{rtable} object.
+}
 \description{
 FDA Table 14: Patients With Adverse Events by System Organ Class and FDA Medical Query, Safety Population,
 Pooled Analyses
