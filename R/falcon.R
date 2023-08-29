@@ -5,7 +5,7 @@
 #' @keywords internal
 "_PACKAGE"
 
-#' @import dplyr rtables tern Tplyr
+#' @import dplyr rtables tern Tplyr gtsummary
 #' @importFrom rlang .data
 #' @importFrom magrittr %>%
 #' @importFrom stats median sd quantile

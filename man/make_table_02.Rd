@@ -3,6 +3,7 @@
 \name{make_table_02}
 \alias{make_table_02}
 \alias{make_table_02_tplyr}
+\alias{make_table_02_gt}
 \title{FDA Table 2: Baseline Demographic and Clinical Characteristics Safety Population, Pooled Analyses}
 \usage{
 make_table_02(
@@ -32,6 +33,16 @@ make_table_02_tplyr(
   prune_0 = TRUE,
   annotations = NULL,
   tplyr_raw = FALSE
+)
+
+make_table_02_gt(
+  df,
+  alt_counts_df = NULL,
+  show_colcounts = TRUE,
+  arm_var = "ARM",
+  vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY"),
+  lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
+  lbl_overall = "Total Population"
 )
 }
 \arguments{
@@ -79,6 +90,10 @@ table formatted using functions from \code{tfrmt} should be returned (default).}
 \item \code{make_table_02_tplyr} returns a \code{gt_tbl} object when \code{tplyr_raw = FALSE} (default) and
 a \code{tibble} object when \code{tplyr_raw = TRUE}.
 }
+
+\itemize{
+\item \code{make_table_02_gt} returns a \code{tbl_summary} object.
+}
 }
 \description{
 FDA Table 2: Baseline Demographic and Clinical Characteristics Safety Population, Pooled Analyses
@@ -100,6 +115,8 @@ flag variables are treated as \code{"N"}.
 \item \code{make_table_02()}: Create FDA table 2 using functions from \code{rtables} and \code{tern}.
 
 \item \code{make_table_02_tplyr()}: Create FDA table 2 using functions from \code{Tplyr} and \code{tfrmt}.
+
+\item \code{make_table_02_gt()}: Create FDA table 2 using functions from \code{gtsummary}.
 
 }}
 \note{
@@ -126,6 +143,19 @@ tbl <- make_table_02(df = adsl)
 tbl
 
 tbl <- make_table_02_tplyr(df = adsl)
+tbl
+
+
+adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") \%>\%
+  mutate(AGEGR1 = as.factor(case_when(
+    AGE >= 17 & AGE < 65 ~ ">=17 to <65",
+    AGE >= 65 ~ ">=65",
+    AGE >= 65 & AGE < 75 ~ ">=65 to <75",
+    AGE >= 75 ~ ">=75"
+  )) \%>\%
+    formatters::with_label("Age Group, years"))
+
+tbl <- make_table_02_gt(df = adsl)
 tbl
 
 }

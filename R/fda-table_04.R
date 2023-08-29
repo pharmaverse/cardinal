@@ -14,6 +14,7 @@
 #' @inheritParams argument_convention
 
 #' @examples
+#' library(dplyr)
 #' adsl_raw <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
 #' adsl <- adsl_raw %>%
 #'   mutate(test = rbinom(400, 1, 0.5)) %>%
@@ -89,7 +90,8 @@ make_table_04 <- function(df,
     ) %>%
     count_patients_with_flags(
       var = "USUBJID",
-      flag_variables = var_labels(df[, c("DISCSD_AE", "DISCSD_LOE", "DISCSD_PD", "DISCSD_DT", "DISCSD_WBS", "DISCSD_OTH")]),
+      flag_variables = var_labels(df[, c("DISCSD_AE", "DISCSD_LOE", "DISCSD_PD", "DISCSD_DT",
+                                         "DISCSD_WBS", "DISCSD_OTH")]),
       .indent_mods = 1L,
       table_names = "discsd_fl"
     ) %>%
