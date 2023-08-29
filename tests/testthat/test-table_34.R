@@ -1,15 +1,17 @@
-adsl_raw <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
-adae_raw <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
-
 adsl <- adsl_raw
 adae <- adae_raw
 
-adae <- dplyr::rename(adae, FMQ01SC = SMQ01SC, FMQ01NAM = SMQ01NAM)
-levels(adae$FMQ01SC) <- c("BROAD", "NARROW")
+set.seed(1)
+adae <- adae %>%
+  dplyr::rename(FMQ01SC = SMQ01SC) %>%
+  dplyr::mutate(
+    AESER = sample(c("Y", "N"), size = nrow(adae), replace = TRUE),
+    FMQ01NAM = sample(c("FMQ1", "FMQ2", "FMQ3"), size = nrow(adae), replace = TRUE)
+  )
 adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
 
 test_that("Table 34 generation works with default values", {
-  result <- make_table_34(adae, adsl)
+  result <- make_table_34(adae = adae, alt_counts_df = adsl)
 
   res <- expect_silent(result)
   expect_snapshot(res)
@@ -18,11 +20,12 @@ test_that("Table 34 generation works with default values", {
 test_that("Table 34 generation works with custom values", {
   adae <- formatters::var_relabel(adae, AEBODSYS = "Body System or Organ Class(3)(4)")
   result <- make_table_34(
-    adae,
-    adsl,
+    adae = adae,
+    alt_counts_df = adsl,
+    fmq_scope = 'BROAD',
     annotations = list(
       title = paste(
-        "Table 34. Patients With Serious Adverse Events(1) by System Organ Class, FDA Medical Query (Narrow)",
+        "Table 34. Patients With Serious Adverse Events(1) by System Organ Class, FDA Medical Query (Broad)",
         "and Preferred Term, Safety Population, Pooled Analyses or Trial X(2)"
       ),
       main_footer = paste(

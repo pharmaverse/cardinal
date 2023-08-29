@@ -14,40 +14,45 @@
 #' @inheritParams argument_convention
 #'
 #' @examples
+#' library(dplyr)
+#'
 #' adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
 #' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
 #'
-#' adae <- dplyr::rename(adae, FMQ01SC = SMQ01SC, FMQ01NAM = SMQ01NAM)
-#' levels(adae$FMQ01SC) <- c("BROAD", "NARROW")
+#' set.seed(1)
+#' adae <- adae %>%
+#'   dplyr::rename(FMQ01SC = SMQ01SC) %>%
+#'   dplyr::mutate(
+#'     AESER = sample(c("Y", "N"), size = nrow(adae), replace = TRUE),
+#'     FMQ01NAM = sample(c("FMQ1", "FMQ2", "FMQ3"), size = nrow(adae), replace = TRUE)
+#'   )
 #' adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
 #'
-#' tbl <- make_table_34(adae, adsl)
+#' tbl <- make_table_34(adae = adae, alt_counts_df = adsl)
 #' tbl
 #'
 #' @export
-
 make_table_34 <- function(adae,
                           alt_counts_df = NULL,
                           show_colcounts = TRUE,
                           arm_var = "ARM",
-                          fmqsc_var = "FMQO1SC",
+                          fmqsc_var = "FMQ01SC",
                           fmqnam_var = "FMQ01NAM",
+                          fmq_scope = "NARROW",
                           pref_var = "AETERM",
                           lbl_pref_var = formatters::var_labels(adae, fill = TRUE)[pref_var],
                           lbl_overall = NULL,
-                          prune_0 = FALSE,
+                          prune_0 = TRUE,
                           na_level = "<Missing>",
                           annotations = NULL) {
-  checkmate::assert_subset(c("SAFFL", "USUBJID", "AEBODSYS", arm_var, fmqnam_var, fmqnam_var, pref_var), names(adae))
-  assert_flag_variables(adae, "SAFFL")
+  checkmate::assert_subset(c("SAFFL", "USUBJID", "AEBODSYS", arm_var, fmqsc_var, fmqnam_var, pref_var), names(adae))
+  #assert_flag_variables(adae, "SAFFL")
+  checkmate::assert_subset(toupper(fmq_scope), c("NARROW", "BROAD"))
 
   adae <- adae %>%
-    filter(SAFFL == "Y") %>%
-    filter(AESER == "Y") %>%
+    filter(SAFFL == "Y", AESER == "Y", adae[[fmqsc_var]] == fmq_scope) %>%
     df_explicit_na(na_level = na_level)
-
-  adae <- adae[adae[[fmqsc_var]] == "NARROW", ]
-  adae[[fmqnam_var]] <- with_label(adae[[fmqnam_var]], "FMQ (Narrow)")
+  adae[[fmqnam_var]] <- with_label(adae[[fmqnam_var]], paste0("FMQ (", tools::toTitleCase(tolower(fmq_scope)), ")"))
 
   alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
 
