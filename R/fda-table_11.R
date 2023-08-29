@@ -27,8 +27,8 @@
 #'
 #' set.seed(1)
 #' adae <- adae %>%
-#'   dplyr::rename(FMQ01SC = SMQ01SC) %>%
-#'   dplyr::mutate(
+#'   rename(FMQ01SC = SMQ01SC) %>%
+#'   mutate(
 #'     AESER = sample(c("Y", "N"), size = nrow(adae), replace = TRUE),
 #'     FMQ01NAM = sample(c("FMQ1", "FMQ2", "FMQ3"), size = nrow(adae), replace = TRUE)
 #'   )

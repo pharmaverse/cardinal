@@ -16,8 +16,9 @@
 #' @return An `rtable` object.
 #'
 #' @examples
-#' adsl_raw <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
-#' adsl <- adsl_raw %>%
+#' library(dplyr)
+#'
+#' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") %>%
 #'   mutate(test = rbinom(400, 1, 0.5)) %>%
 #'   mutate(
 #'     RANDFL = ifelse(test == 0, "N", "Y"),
@@ -28,6 +29,7 @@
 #'     ), DCSREAS, "OTHER")
 #'   ) %>%
 #'   mutate(DCTREAS = DCSREAS)
+#'
 #' tbl <- make_table_04(df = adsl)
 #' tbl
 #'

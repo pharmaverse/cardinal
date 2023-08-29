@@ -30,9 +30,7 @@ NULL
 #'     AGE >= 65 & AGE < 75 ~ ">=65 to <75",
 #'     AGE >= 75 ~ ">=75"
 #'   )) %>% formatters::with_label("Age Group, years")) %>%
-#'   formatters::var_relabel(
-#'     AGE = "Age, years"
-#'   )
+#'   formatters::var_relabel(AGE = "Age, years")
 #'
 #' tbl <- make_table_02(df = adsl)
 #' tbl
