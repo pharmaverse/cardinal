@@ -93,7 +93,7 @@ a \code{tibble} object when \code{tplyr_raw = TRUE}.
 }
 
 \itemize{
-\item \code{make_table_02_gt} returns a \code{tbl_summary} object
+\item \code{make_table_02_gt} returns a \code{tbl_summary} object.
 }
 }
 \description{
@@ -147,7 +147,6 @@ tbl <- make_table_02_tplyr(df = adsl)
 tbl
 
 
-advs <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "advs")
 adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") \%>\%
   mutate(AGEGR1 = as.factor(case_when(
     AGE >= 17 & AGE < 65 ~ ">=17 to <65",
@@ -157,17 +156,7 @@ adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") \%>\%
   )) \%>\%
     formatters::with_label("Age Group, years"))
 
-advs <- advs \%>\%
-  dplyr::filter(AVISIT == "BASELINE", VSTESTCD == "TEMP") \%>\%
-  dplyr::select("USUBJID", "AVAL")
-
-anl <- dplyr::left_join(adsl, advs, by = "USUBJID")\%>\%
- formatters::var_relabel(
-    AGE = "Age, years",
-    AVAL = "Baseline Temperature (C)"
-  )
-
-tbl <- make_table_02_gt(df = anl)
+tbl <- make_table_02_gt(df = adsl)
 tbl
 
 }

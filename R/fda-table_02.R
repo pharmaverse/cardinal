@@ -247,7 +247,6 @@ make_table_02_tplyr <- function(df,
   }
   tbl
 }
-
 #' @describeIn make_table_02 Create FDA table 2 using functions from `gtsummary`.
 #'
 #' @return
