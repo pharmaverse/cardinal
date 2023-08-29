@@ -12,7 +12,9 @@
 #' * Records with missing treatment start and/or end datetime are excluded from all calculations.
 #'
 #' @inheritParams argument_convention
-
+#'
+#' @return An `rtable` object.
+#'
 #' @examples
 #' adsl_raw <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
 #' adsl <- adsl_raw %>%

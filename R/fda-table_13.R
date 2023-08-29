@@ -11,6 +11,8 @@
 #' @inheritParams argument_convention
 #' @param min_freq (`proportion`)\cr minimum % frequency (fraction of `N`) required in any column to include each row.
 #'
+#' @return An `rtable` object.
+#'
 #' @examples
 #' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
 #' adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")

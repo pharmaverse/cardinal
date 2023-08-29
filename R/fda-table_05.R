@@ -18,6 +18,8 @@
 #'   and `"years"`.
 #' @param lbl_trtdur (`character`)\cr label for treatment duration variable.
 #'
+#' @return An `rtable` object.
+#'
 #' @examples
 #' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
 #'

@@ -18,7 +18,7 @@ NULL
 #' @describeIn make_table_02 Create FDA table 2 using functions from `rtables` and `tern`.
 #'
 #' @return
-#' * `make_table_02` returns an `rtables` table object.
+#' * `make_table_02` returns an `rtable` object.
 #'
 #' @examples
 #' library(dplyr)
