@@ -22,7 +22,7 @@ test_that("Table 34 generation works with custom values", {
   result <- make_table_34(
     adae = adae,
     alt_counts_df = adsl,
-    fmq_scope = 'BROAD',
+    fmq_scope = "BROAD",
     annotations = list(
       title = paste(
         "Table 34. Patients With Serious Adverse Events(1) by System Organ Class, FDA Medical Query (Broad)",
