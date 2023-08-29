@@ -14,6 +14,10 @@ split_cols_by_arm(lyt, arm_var = "ARM", lbl_overall = NULL)
 \item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
 the given value as the column label.}
 }
+\value{
+An \code{rtables} \code{PreDataTableLayouts} object suitable for passing to further layouting functions, and
+to \code{build_table}.
+}
 \description{
 Splits \code{rtables} layout into columns by arm variable. Appends an "overall" column as the
 rightmost column if \code{lbl_overall} is supplied.

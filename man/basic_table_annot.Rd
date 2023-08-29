@@ -13,6 +13,10 @@ basic_table_annot(show_colcounts = TRUE, annotations = NULL)
 annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
 use the annotation type as name and the desired string as value.}
 }
+\value{
+An \code{rtables} \code{PreDataTableLayouts} object suitable for passing to further layouting functions, and
+to \code{build_table}.
+}
 \description{
 Initializes a table layout via \code{\link[rtables:basic_table]{rtables::basic_table()}} and applies \code{show_colcounts}
 argument. Adds any annotations supplied via the \code{annotations} argument.
