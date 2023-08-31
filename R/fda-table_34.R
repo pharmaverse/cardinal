@@ -1,15 +1,15 @@
-#' FDA Table 34: Patients With Serious Adverse Events1 by System Organ Class, FDA Medical Query (Narrow) and Preferred Term,
+#' FDA Table 34: Patients With Serious Adverse Events by System Organ Class, FDA Medical Query (Narrow) and Preferred Term,
 #' Safety Population, Pooled Analysis (or Trial X)
 #'
 #' @details
-#' * `adae` must contain the variables `SAFFL`, `USUBJID`, `AEBODSYS`, and the variables specified by `arm_var`,
-#'   `fmqsc_var`, and `fmqnam_var`.
+#' * `adae` must contain the variables `SAFFL`, `USUBJID`, `AEBODSYS`, `AESER`, and the variables specified by
+#'   `arm_var`, `fmqsc_var`, `fmqnam_var`, and `pref_var`.
 #' * If specified, `alt_counts_df` must contain variables `SAFFL` and `USUBJID`.
 #' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
 #'   flag variables are treated as `"N"`.
 #' * Columns are split by arm. Overall population column is excluded by default (see `lbl_overall` argument).
 #' * Numbers in table represent the absolute numbers of patients and fraction of `N`.
-#' * All-zero rows are not removed by default (see `prune_0` argument).
+#' * All-zero rows are removed by default (see `prune_0` argument).
 #'
 #' @inheritParams argument_convention
 #'
@@ -21,8 +21,8 @@
 #'
 #' set.seed(1)
 #' adae <- adae %>%
-#'   dplyr::rename(FMQ01SC = SMQ01SC) %>%
-#'   dplyr::mutate(
+#'   rename(FMQ01SC = SMQ01SC) %>%
+#'   mutate(
 #'     AESER = sample(c("Y", "N"), size = nrow(adae), replace = TRUE),
 #'     FMQ01NAM = sample(c("FMQ1", "FMQ2", "FMQ3"), size = nrow(adae), replace = TRUE)
 #'   )

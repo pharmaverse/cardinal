@@ -23,8 +23,8 @@ adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
 # Pre-Processing - Ensure required variables fmqsc_var and fmqnam_var exist in adae
 set.seed(1)
 adae <- adae %>%
-  dplyr::rename(FMQ01SC = SMQ01SC) %>%
-  dplyr::mutate(
+  rename(FMQ01SC = SMQ01SC) %>%
+  mutate(
     AESER = sample(c("Y", "N"), size = nrow(adae), replace = TRUE),
     FMQ01NAM = sample(c("FMQ1", "FMQ2", "FMQ3"), size = nrow(adae), replace = TRUE)
   )
@@ -47,7 +47,7 @@ make_table_34(adae = adae, alt_counts_df = adsl)
 
 Required variables:
 
--   **`adae`**: `SAFFL`, `USUBJID`, `AEBODSYS`, `AESER`, and the variables specified by `arm_var`, `fmqsc_var`, and `fmqnam_var`.
+-   **`adae`**: `SAFFL`, `USUBJID`, `AEBODSYS`, `AESER`, and the variables specified by `arm_var`, `fmqsc_var`, and `fmqnam_var`, and `pref_var`.
 -   **`alt_counts_df`** (if specified): `SAFFL`, `USUBJID`, and the variable specified by `arm_var`.
 
 | Argument         | Description                                                                                                                                                                                                                                            | Default                                               |

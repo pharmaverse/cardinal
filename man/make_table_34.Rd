@@ -2,7 +2,7 @@
 % Please edit documentation in R/fda-table_34.R
 \name{make_table_34}
 \alias{make_table_34}
-\title{FDA Table 34: Patients With Serious Adverse Events1 by System Organ Class, FDA Medical Query (Narrow) and Preferred Term,
+\title{FDA Table 34: Patients With Serious Adverse Events by System Organ Class, FDA Medical Query (Narrow) and Preferred Term,
 Safety Population, Pooled Analysis (or Trial X)}
 \usage{
 make_table_34(
@@ -10,12 +10,13 @@ make_table_34(
   alt_counts_df = NULL,
   show_colcounts = TRUE,
   arm_var = "ARM",
-  fmqsc_var = "FMQO1SC",
+  fmqsc_var = "FMQ01SC",
   fmqnam_var = "FMQ01NAM",
+  fmq_scope = "NARROW",
   pref_var = "AETERM",
   lbl_pref_var = formatters::var_labels(adae, fill = TRUE)[pref_var],
   lbl_overall = NULL,
-  prune_0 = FALSE,
+  prune_0 = TRUE,
   na_level = "<Missing>",
   annotations = NULL
 )
@@ -33,6 +34,8 @@ make_table_34(
 
 \item{fmqnam_var}{(\code{character})\cr FMQ reference name variable to use in table.}
 
+\item{fmq_scope}{(\code{character})\cr FMQ scope ("NARROW" or "BROAD") to output in table.}
+
 \item{pref_var}{(\code{character})\cr preferred term variable from \code{adae} to include in the table.}
 
 \item{lbl_pref_var}{(\code{character})\cr label corresponding to preferred term variable \code{pref_var} to print in the table.}
@@ -49,30 +52,37 @@ annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \co
 use the annotation type as name and the desired string as value.}
 }
 \description{
-FDA Table 34: Patients With Serious Adverse Events1 by System Organ Class, FDA Medical Query (Narrow) and Preferred Term,
+FDA Table 34: Patients With Serious Adverse Events by System Organ Class, FDA Medical Query (Narrow) and Preferred Term,
 Safety Population, Pooled Analysis (or Trial X)
 }
 \details{
 \itemize{
-\item \code{adae} must contain the variables \code{SAFFL}, \code{USUBJID}, \code{AEBODSYS}, and the variables specified by \code{arm_var},
-\code{fmqsc_var}, and \code{fmqnam_var}.
+\item \code{adae} must contain the variables \code{SAFFL}, \code{USUBJID}, \code{AEBODSYS}, \code{AESER}, and the variables specified by
+\code{arm_var}, \code{fmqsc_var}, \code{fmqnam_var}, and \code{pref_var}.
 \item If specified, \code{alt_counts_df} must contain variables \code{SAFFL} and \code{USUBJID}.
 \item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
 flag variables are treated as \code{"N"}.
 \item Columns are split by arm. Overall population column is excluded by default (see \code{lbl_overall} argument).
 \item Numbers in table represent the absolute numbers of patients and fraction of \code{N}.
-\item All-zero rows are not removed by default (see \code{prune_0} argument).
+\item All-zero rows are removed by default (see \code{prune_0} argument).
 }
 }
 \examples{
+library(dplyr)
+
 adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
 adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
 
-adae <- dplyr::rename(adae, FMQ01SC = SMQ01SC, FMQ01NAM = SMQ01NAM)
-levels(adae$FMQ01SC) <- c("BROAD", "NARROW")
+set.seed(1)
+adae <- adae \%>\%
+  rename(FMQ01SC = SMQ01SC) \%>\%
+  mutate(
+    AESER = sample(c("Y", "N"), size = nrow(adae), replace = TRUE),
+    FMQ01NAM = sample(c("FMQ1", "FMQ2", "FMQ3"), size = nrow(adae), replace = TRUE)
+  )
 adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
 
-tbl <- make_table_34(adae, adsl)
+tbl <- make_table_34(adae = adae, alt_counts_df = adsl)
 tbl
 
 }
