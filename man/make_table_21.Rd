@@ -2,7 +2,8 @@
 % Please edit documentation in R/fda-table_21.R
 \name{make_table_21}
 \alias{make_table_21}
-\title{FDA Table 21. Overview of Serious Adverse Events by Demographic Subgroup, Safety Population, Pooled Analysis (or Trial X)}
+\title{FDA Table 21. Overview of Serious Adverse Events by Demographic Subgroup, Safety Population, Pooled
+Analysis (or Trial X)}
 \usage{
 make_table_21(
   df,
@@ -41,7 +42,8 @@ annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \co
 use the annotation type as name and the desired string as value.}
 }
 \description{
-FDA Table 21. Overview of Serious Adverse Events by Demographic Subgroup, Safety Population, Pooled Analysis (or Trial X)
+FDA Table 21. Overview of Serious Adverse Events by Demographic Subgroup, Safety Population, Pooled
+Analysis (or Trial X)
 }
 \details{
 \itemize{
@@ -69,8 +71,8 @@ adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") \%>\%
     AGE = "Age, years"
   )
 
-adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae") \%>\%
-  mutate(ASER = AESER)
+adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
+adae$ASER <- adae$AESER
 
 df <- left_join(adsl, adae, by = intersect(names(adsl), names(adae)))
 
