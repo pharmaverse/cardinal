@@ -13,7 +13,7 @@ body:
       value: |
         [Replace this line with your table screenshot by dragging the file here.]
 
-        Please refer to page XX of the pdf here for more details: [FDA-2022-N-1961-0002_attachment_1.pdf](https://github.com/pharmaverse/falcon/files/10744259/FDA-2022-N-1961-0002_attachment_1.pdf)
+        Please refer to page XX of the [FDA guideline document](https://github.com/pharmaverse/falcon/files/10744259/FDA-2022-N-1961-0002_attachment_1.pdf) for more details.
   - type: textarea
     id: table-description
     attributes:
@@ -36,17 +36,17 @@ body:
       description: Filters applied to the data to generate the table.
       value: |
         Safety population: `SAFFL == "Y"`
-        [List additional filters here]
+        [List any additional filters here]
   - type: textarea
     id: additional-considerations
     attributes:
-      label: Additional Considerations
-      description: Any additional information that the developer should know before building the table function.
-      placeholder: Additional information
+      label: Additional Information
+      description: Any additional information that the developer should know before creating the table function.
+      placeholder: Additional info
   - type: textarea
     id: todo
     attributes:
-      label: Developer To Do List
+      label: Developer To Dos
       description: Steps to complete as a developer when creating your pull request.
       value: |
         - [ ] **Table Function:** Create `R/fda-table_XX.R` file with your table-generating function.
