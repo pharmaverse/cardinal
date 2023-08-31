@@ -7,7 +7,7 @@
 #'   flag variables are treated as `"N"`.
 #' * Columns are split by arm.
 #' * Information from either ADSUB or ADVS is generally included into `df` prior to analysis.
-#' * Numbers in table for non-numeric variables represent the absolute numbers of patients and fraction of `n`.
+#' * Numbers in the table for non-numeric variables represent the absolute number of patients and fraction of `n`.
 #' * All-zero rows are removed by default (see `prune_0` argument).
 #'
 #' @inheritParams argument_convention
