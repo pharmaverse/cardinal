@@ -29,8 +29,8 @@ make_table_21(
 \item{vars}{(\code{vector} of \code{character})\cr variables from \code{df} to include in the table.}
 
 \item{denom}{(\code{character})\cr Denominator to use to calculate fractions. Can be \code{"N_s"} (total \code{df_denom}
-subgroup/row counts), \code{"N_col"} (total \code{df} column counts), or \code{"n"} (total \code{df} overall patient count). Note that
-\code{df} is filtered to only include serious adverse events (\code{ASER == "Y"}).}
+subgroup/row counts), \code{"N_col"} (total \code{df} column counts), or \code{"n"} (total \code{df} overall patient count).
+Note that \code{df} is filtered to only include serious adverse events (\code{ASER == "Y"}).}
 
 \item{lbl_vars}{(\code{vector} of \code{character})\cr labels corresponding to variables in \code{vars} to print
 in the table. Labels should be ordered according to the order of variables in \code{vars}.}

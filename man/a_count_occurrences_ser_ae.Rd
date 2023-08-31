@@ -27,8 +27,8 @@ by a statistics function.}
 when \code{denom = "N_s"}.}
 
 \item{denom}{(\code{character})\cr Denominator to use to calculate fractions. Can be \code{"N_s"} (total \code{df_denom}
-subgroup/row counts), \code{"N_col"} (total \code{df} column counts), or \code{"n"} (total \code{df} overall patient count). Note that
-\code{df} is filtered to only include serious adverse events (\code{ASER == "Y"}).}
+subgroup/row counts), \code{"N_col"} (total \code{df} column counts), or \code{"n"} (total \code{df} overall patient count).
+Note that \code{df} is filtered to only include serious adverse events (\code{ASER == "Y"}).}
 
 \item{id}{(\code{string})\cr subject variable name.}
 
