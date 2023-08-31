@@ -7,7 +7,7 @@
   * `split_cols_by_arm` for splitting columns by arm with option to add total column.
   * `alt_counts_df_preproc` for pre-processing the `alt_counts_df` dataset.
   * `assert_flag_variables` (internal) for checking that formatting is correct for flag variables in the data.
-* Added new function for creating standard FDA tables using additional packages: `make_table_02_tplyr`.
+* Added new function for creating standard FDA tables using additional packages: `make_table_02_tplyr`, `make_table_02_gt`.
 
 ### Miscellaneous
 * Initialized the package.
