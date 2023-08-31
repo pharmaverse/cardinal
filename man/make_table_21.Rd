@@ -51,7 +51,7 @@ FDA Table 21. Overview of Serious Adverse Events by Demographic Subgroup, Safety
 flag variables are treated as \code{"N"}.
 \item Columns are split by arm.
 \item Information from either ADSUB or ADVS is generally included into \code{df} prior to analysis.
-\item Numbers in table for non-numeric variables represent the absolute numbers of patients and fraction of \code{n}.
+\item Numbers in the table for non-numeric variables represent the absolute number of patients and fraction of \code{n}.
 \item All-zero rows are removed by default (see \code{prune_0} argument).
 }
 }
