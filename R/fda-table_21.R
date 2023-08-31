@@ -27,8 +27,8 @@
 #'     AGE = "Age, years"
 #'   )
 #'
-#' adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae") %>%
-#'   mutate(ASER = AESER)
+#' adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
+#' adae$ASER <- adae$AESER
 #'
 #' df <- left_join(adsl, adae, by = intersect(names(adsl), names(adae)))
 #'
