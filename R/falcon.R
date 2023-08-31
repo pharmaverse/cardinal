@@ -5,14 +5,13 @@
 #' @keywords internal
 "_PACKAGE"
 
-#' @import dplyr rtables tern Tplyr
+#' @import dplyr rtables tern Tplyr tfrmt
 #' @importFrom rlang .data
 #' @importFrom magrittr %>%
 #' @importFrom stats median sd quantile
 #' @importFrom tidyr pivot_longer separate_rows
 #' @importFrom formatters with_label var_labels var_relabel
 #' @importFrom rlistings as_listing
-#' @importFrom tfrmt tfrmt body_plan frmt frmt_structure frmt_combine frmt_when col_plan print_to_gt big_n_structure
 NULL
 
 # Fix R CMD check warning for missing global definitions
