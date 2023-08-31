@@ -42,7 +42,8 @@ make_table_02_gt(
   arm_var = "ARM",
   vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY"),
   lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
-  lbl_overall = "Total Population"
+  lbl_overall = "Total Population",
+  na_rm = FALSE
 )
 }
 \arguments{
@@ -144,16 +145,6 @@ tbl
 
 tbl <- make_table_02_tplyr(df = adsl)
 tbl
-
-
-adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") \%>\%
-  mutate(AGEGR1 = as.factor(case_when(
-    AGE >= 17 & AGE < 65 ~ ">=17 to <65",
-    AGE >= 65 ~ ">=65",
-    AGE >= 65 & AGE < 75 ~ ">=65 to <75",
-    AGE >= 75 ~ ">=75"
-  )) \%>\%
-    formatters::with_label("Age Group, years"))
 
 tbl <- make_table_02_gt(df = adsl)
 tbl
