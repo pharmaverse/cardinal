@@ -4,10 +4,8 @@ adsl <- adsl_raw %>%
     AGE >= 65 ~ ">=65",
     AGE >= 65 & AGE < 75 ~ ">=65 to <75",
     AGE >= 75 ~ ">=75"
-  )) %>% formatters::with_label("Age Group, years")) %>%
-  formatters::var_relabel(
-    AGE = "Age, years"
-  )
+  )) %>%
+    formatters::with_label("Age Group, years"))
 
 adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
 adae$ASER <- adae$AESER
