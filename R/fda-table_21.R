@@ -1,4 +1,5 @@
-#' FDA Table 21. Overview of Serious Adverse Events by Demographic Subgroup, Safety Population, Pooled Analysis (or Trial X)
+#' FDA Table 21. Overview of Serious Adverse Events by Demographic Subgroup, Safety Population,
+#'   Pooled Analysis (or Trial X)
 #'
 #' @details
 #' * `df` must contain `SAFFL` and the variables specified by `vars` and `arm_var`.
@@ -12,6 +13,8 @@
 #'
 #' @inheritParams argument_convention
 #' @inheritParams a_count_occurrences_ser_ae
+#'
+#' @return An `rtable` object.
 #'
 #' @examples
 #' library(dplyr)
@@ -28,7 +31,7 @@
 #'   )
 #'
 #' adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae") %>%
-#'   mutate(ASER = AESER)
+#' adae$ASER <- adae$AESER
 #'
 #' df <- left_join(adsl, adae, by = intersect(names(adsl), names(adae)))
 #'
