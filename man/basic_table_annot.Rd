@@ -14,7 +14,7 @@ annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \co
 use the annotation type as name and the desired string as value.}
 }
 \value{
-An \code{rtables} \code{PreDataTableLayouts} object suitable for passing to further layouting functions, and
+An \code{rtables} \code{PreDataTableLayouts} object suitable for passing to further layout functions, and
 to \code{build_table}.
 }
 \description{

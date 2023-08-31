@@ -5,7 +5,7 @@
 #'
 #' @inheritParams argument_convention
 #'
-#' @return An `rtables` `PreDataTableLayouts` object suitable for passing to further layouting functions, and
+#' @return An `rtables` `PreDataTableLayouts` object suitable for passing to further layout functions, and
 #'   to `build_table`.
 #'
 #' @examples
@@ -31,7 +31,7 @@ basic_table_annot <- function(show_colcounts = TRUE, annotations = NULL) {
 #' @inheritParams argument_convention
 #' @param lyt (`rtables` layout object)\cr Layout object pre-data used for tabulation.
 #'
-#' @return An `rtables` `PreDataTableLayouts` object suitable for passing to further layouting functions, and
+#' @return An `rtables` `PreDataTableLayouts` object suitable for passing to further layout functions, and
 #'   to `build_table`.
 #'
 #' @examples

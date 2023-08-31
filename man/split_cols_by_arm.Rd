@@ -15,7 +15,7 @@ split_cols_by_arm(lyt, arm_var = "ARM", lbl_overall = NULL)
 the given value as the column label.}
 }
 \value{
-An \code{rtables} \code{PreDataTableLayouts} object suitable for passing to further layouting functions, and
+An \code{rtables} \code{PreDataTableLayouts} object suitable for passing to further layout functions, and
 to \code{build_table}.
 }
 \description{
