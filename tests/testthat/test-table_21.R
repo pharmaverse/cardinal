@@ -46,3 +46,10 @@ test_that("Table 21 generation works with custom values", {
   res <- expect_silent(result)
   expect_snapshot(res)
 })
+
+test_that("a_count_occurrences_ser_ae error message prints correctly", {
+  expect_error(
+    a_count_occurrences_ser_ae(df, .var = "USUBJID", .N_col = 10, denom = "N_s"),
+    "If using subgroup population counts"
+  )
+})
