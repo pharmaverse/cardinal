@@ -14,7 +14,6 @@ make_table_34(
   fmqnam_var = "FMQ01NAM",
   fmq_scope = "NARROW",
   pref_var = "AETERM",
-  lbl_pref_var = formatters::var_labels(adae, fill = TRUE)[pref_var],
   lbl_overall = NULL,
   prune_0 = TRUE,
   na_level = "<Missing>",
@@ -37,8 +36,6 @@ make_table_34(
 \item{fmq_scope}{(\code{character})\cr FMQ scope ("NARROW" or "BROAD") to output in table.}
 
 \item{pref_var}{(\code{character})\cr preferred term variable from \code{adae} to include in the table.}
-
-\item{lbl_pref_var}{(\code{character})\cr label corresponding to preferred term variable \code{pref_var} to print in the table.}
 
 \item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
 the given value as the column label.}
