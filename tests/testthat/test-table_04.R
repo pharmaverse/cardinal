@@ -38,15 +38,19 @@ test_that("Table 04 generation works with custom values", {
       title = "Patient Disposition, Pooled Analyses (1,2)",
       main_footer = c(
         "Source: [include Applicant source, datasets and/or software tools used].",
-        "(1) Duration = [e.g., X week double-blind treatment period or median and a range indicating pooled trial",
-        "durations].",
-        "(2) [Include route of administration for all treatment arms if different ROA were used in the drug development].",
-        "(3) Difference is shown between [treatment arms] (e.g., difference is shown between Drug Name dosage X vs. placebo)."
+        "(1) Duration = [e.g., X week double-blind treatment period or median and a range indicating pooled",
+        "trial durations].",
+        "(2) [Include route of administration for all treatment arms if different ROA were used in the drug",
+        "development].",
+        "(3) Difference is shown between [treatment arms] (e.g., difference is shown between Drug Name",
+        "dosage X vs. placebo)."
       ),
       prov_footer = c(
-        "Abbreviations: CI, confidence interval; ITT, intention-to-treat; mITT, modified intention-to-treat; N, number of patients in treatment arm; n, number of patients in specified population or group"
+        "Abbreviations: CI, confidence interval; ITT, intention-to-treat; mITT, modified intention-to-treat;",
+        "N, number of patients in treatment arm; n, number of patients in specified population or group"
       )
-    )
+    ),
+    prune_0 = TRUE
   )
 
   res <- expect_silent(result)
