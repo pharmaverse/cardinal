@@ -12,6 +12,7 @@ body:
       description: Take a screenshot of the table and paste it here.
       value: |
         [Replace this line with your table screenshot by dragging the file here.]
+
         Please refer to page XX of the pdf here for more details: [FDA-2022-N-1961-0002_attachment_1.pdf](https://github.com/pharmaverse/falcon/files/10744259/FDA-2022-N-1961-0002_attachment_1.pdf)
   - type: textarea
     id: table-description
@@ -26,6 +27,7 @@ body:
       description: Datasets that are used to generate the table.
       value: |
         [List required datasets here]
+
         When using data from the `scda` package, please use datasets with `archive_name` set to `"rcd_2022_10_13"`.
   - type: textarea
     id: analysis-filters
@@ -47,11 +49,11 @@ body:
       label: Developer To Do List
       description: Steps to complete as a developer when creating your pull request.
       value: |
-        - [ ] **Function:** Create fda-table_XX.R file in the R folder with your table-generating function (see other functions in R/ for reference)
-          - [ ] **Function Documentation:** title, @details section, document all parameters, @return section, @examples section, @export
-        - [ ] **Tests:** Create test-table_XX.R file in the tests/testthat folder with tests for the table function and run these tests
-        - [ ] **Quarto Template:** Create template-table_XX.qmd file in the quarto/table-templates folder with table template (see other templates in quarto/table-templates for reference)
-        - [ ] **Screenshot:** Add table screenshot as table_XX.png to quarto/assets/images/screenshots folder
-        - [ ] **_quarto.yml:** Add template to the "Template Library" section of the _quarto.yml file
-        - [ ] **Template Index:** Run generate-template_index.R script from quarto/assets folder to update the template index
-        - [ ] **NEWS:** Update NEWS.md
+        - [ ] **Table Function:** Create `R/fda-table_XX.R` file with your table-generating function.
+          - [ ] **Roxygen Documentation:** title, `@details`, document all parameters, `@return`, `@examples`, `@export`.
+        - [ ] **Tests:** Create `tests/testthat/test-table_XX.R` file with tests for the table function and then run these tests.
+        - [ ] **Quarto Template:** Create `quarto/table-templates/template-table_XX.qmd` file your table template.
+        - [ ] **Screenshot:** Add table screenshot as `table_XX.png` to the `quarto/assets/images/screenshots` folder.
+        - [ ] **_quarto.yml:** Add template to the "Template Library" section of the `_quarto.yml` file.
+        - [ ] **Template Index:** Run `quarto/assets/generate-template_index.R` script to update the template index.
+        - [ ] **NEWS:** Update `NEWS.md`.
