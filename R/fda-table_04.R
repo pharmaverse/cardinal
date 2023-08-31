@@ -91,7 +91,9 @@ make_table_04 <- function(df,
     ) %>%
     count_patients_with_flags(
       var = "USUBJID",
-      flag_variables = var_labels(df[, c("DISCSD_AE", "DISCSD_LOE", "DISCSD_PD", "DISCSD_DT", "DISCSD_WBS", "DISCSD_OTH")]),
+      flag_variables = var_labels(
+        df[, c("DISCSD_AE", "DISCSD_LOE", "DISCSD_PD", "DISCSD_DT", "DISCSD_WBS", "DISCSD_OTH")]
+      ),
       .indent_mods = 1L,
       table_names = "discsd_fl"
     ) %>%

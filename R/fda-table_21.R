@@ -1,4 +1,5 @@
-#' FDA Table 21. Overview of Serious Adverse Events by Demographic Subgroup, Safety Population, Pooled Analysis (or Trial X)
+#' FDA Table 21. Overview of Serious Adverse Events by Demographic Subgroup, Safety Population, Pooled
+#'   Analysis (or Trial X)
 #'
 #' @details
 #' * `df` must contain `SAFFL` and the variables specified by `vars` and `arm_var`.
@@ -88,13 +89,13 @@ make_table_21 <- function(df,
 #' @param df_denom (`data.frame`)\cr Full data frame used to calculate denominator subgroup counts
 #'   when `denom = "N_s"`.
 #' @param denom (`character`)\cr Denominator to use to calculate fractions. Can be `"N_s"` (total `df_denom`
-#'   subgroup/row counts), `"N_col"` (total `df` column counts), or `"n"` (total `df` overall patient count). Note that
-#'   `df` is filtered to only include serious adverse events (`ASER == "Y"`).
+#'   subgroup/row counts), `"N_col"` (total `df` column counts), or `"n"` (total `df` overall patient count).
+#'   Note that `df` is filtered to only include serious adverse events (`ASER == "Y"`).
 #'
 #' @keywords internal
 a_count_occurrences_ser_ae <- function(df,
                                        .var,
-                                       .N_col,
+                                       .N_col, # nolint
                                        df_denom = NULL,
                                        denom = c("N_s", "N_col", "n"),
                                        id = "USUBJID",
