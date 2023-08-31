@@ -2,8 +2,8 @@
 % Please edit documentation in R/fda-table_34.R
 \name{make_table_34}
 \alias{make_table_34}
-\title{FDA Table 34: Patients With Serious Adverse Events by System Organ Class, FDA Medical Query (Narrow) and Preferred Term,
-Safety Population, Pooled Analysis (or Trial X)}
+\title{FDA Table 34: Patients With Serious Adverse Events by System Organ Class, FDA Medical Query (Narrow) and
+Preferred Term, Safety Population, Pooled Analysis (or Trial X)}
 \usage{
 make_table_34(
   adae,
@@ -49,8 +49,8 @@ annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \co
 use the annotation type as name and the desired string as value.}
 }
 \description{
-FDA Table 34: Patients With Serious Adverse Events by System Organ Class, FDA Medical Query (Narrow) and Preferred Term,
-Safety Population, Pooled Analysis (or Trial X)
+FDA Table 34: Patients With Serious Adverse Events by System Organ Class, FDA Medical Query (Narrow) and
+Preferred Term, Safety Population, Pooled Analysis (or Trial X)
 }
 \details{
 \itemize{

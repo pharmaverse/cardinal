@@ -1,5 +1,5 @@
-#' FDA Table 34: Patients With Serious Adverse Events by System Organ Class, FDA Medical Query (Narrow) and Preferred Term,
-#' Safety Population, Pooled Analysis (or Trial X)
+#' FDA Table 34: Patients With Serious Adverse Events by System Organ Class, FDA Medical Query (Narrow) and
+#'   Preferred Term, Safety Population, Pooled Analysis (or Trial X)
 #'
 #' @details
 #' * `adae` must contain the variables `SAFFL`, `USUBJID`, `AEBODSYS`, `AESER`, and the variables specified by
