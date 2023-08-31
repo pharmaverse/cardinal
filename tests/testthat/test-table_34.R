@@ -30,17 +30,17 @@ test_that("Table 34 generation works with custom values", {
       ),
       main_footer = paste(
         "Source: [include Applicant source, datasets and/or software tools used\n",
-        "(1) Defined as any untoward medical occurrence that, at any dose that results in death, is life-threatening, requires hospitalization or",
-        "prolongation of existing hospitalization, results in persistent incapacity or substantial disruption of the ability to conduct normal life",
-        "functions, or is a congenital anomaly or birth defect.\n",
-        "(2) Duration = [e.g., X-week double-blind treatment period or, median and a range indicating pooled trial durations].\n",
-        "(3) Treatment-emergent adverse event defined as [definition].\n",
-        "(4) Each FMQ is aligned to a single SOC based on clinical judgement. However, please beaware that some FMQs may contain PTs",
-        "from more than one SOC."
+        "(1) Defined as any untoward medical occurrence that, at any dose that results in death, is life-threatening,",
+        "requires hospitalization or prolongation of existing\n hospitalization, results in persistent incapacity or",
+        "substantial disruption of the ability to conduct normal life functions, or is a congenital anomaly,",
+        "or birth defect.\n (2) Duration = [e.g., X-week double-blind treatment period or, median and a range",
+        "indicating pooled trial durations].\n (3) Treatment-emergent adverse event defined as [definition].\n",
+        "(4) Each FMQ is aligned to a single SOC based on clinical judgement. However, please be aware that some FMQs",
+        "may contain PTs from more than one SOC."
       ),
       prov_footer = c(
-        "Abbreviations: CI, confidence interval; FMQ, FDA Medical Query; N, number of patients in treatment arm; n, number of patients with",
-        "at least one event; SOC, System Organ Class"
+        "Abbreviations: CI, confidence interval; FMQ, FDA Medical Query; N, number of patients in treatment arm;",
+        "n, number of patients with at least one event; SOC, System Organ Class"
       )
     )
   )
