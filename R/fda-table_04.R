@@ -12,10 +12,11 @@
 #' * Records with missing treatment start and/or end datetime are excluded from all calculations.
 #'
 #' @inheritParams argument_convention
-
+#'
 #' @examples
-#' adsl_raw <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
-#' adsl <- adsl_raw %>%
+#' library(dplyr)
+#'
+#' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") %>%
 #'   mutate(test = rbinom(400, 1, 0.5)) %>%
 #'   mutate(
 #'     RANDFL = ifelse(test == 0, "N", "Y"),
@@ -26,6 +27,7 @@
 #'     ), DCSREAS, "OTHER")
 #'   ) %>%
 #'   mutate(DCTREAS = DCSREAS)
+#'
 #' tbl <- make_table_04(df = adsl)
 #' tbl
 #'
@@ -89,7 +91,9 @@ make_table_04 <- function(df,
     ) %>%
     count_patients_with_flags(
       var = "USUBJID",
-      flag_variables = var_labels(df[, c("DISCSD_AE", "DISCSD_LOE", "DISCSD_PD", "DISCSD_DT", "DISCSD_WBS", "DISCSD_OTH")]),
+      flag_variables = var_labels(
+        df[, c("DISCSD_AE", "DISCSD_LOE", "DISCSD_PD", "DISCSD_DT", "DISCSD_WBS", "DISCSD_OTH")]
+      ),
       .indent_mods = 1L,
       table_names = "discsd_fl"
     ) %>%

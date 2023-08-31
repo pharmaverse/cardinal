@@ -5,7 +5,7 @@
 #' @keywords internal
 "_PACKAGE"
 
-#' @import dplyr rtables tern Tplyr
+#' @import dplyr rtables tern Tplyr gtsummary
 #' @importFrom rlang .data
 #' @importFrom magrittr %>%
 #' @importFrom stats median sd quantile
@@ -19,7 +19,7 @@ NULL
 utils::globalVariables(c(
   ".", "AEACN", "AESCONG", "AESDISAB", "AESDTH", "AESER", "AESHOSP", "AESIFL", "AESLIFE", "AESMIE", "AGE",
   "AGESEX", "AVAL", "AVALU", "AVISITN", "DOSAGE", "DOSDUR", "DTHADY", "DTHCAT", "DTHCAUS", "DTHFL", "DCSREAS",
-  "MAX_DIABP", "MAX_SYSBP", "PARAMCD", "SAFFL", "SEX", "TRTDUR", "TRTDUR_MONTHS", "TRTEDT",
-  "TRTEMFL", "TRTSDT", "USUBJID", "column", "median", "ord_layer_1", "ord_layer_2", "ord_layer_index", "param",
-  "pct", "row_label1", "row_label2", "sd", "tbl_lbl", "value"
+  "MAX_DIABP", "MAX_SYSBP", "PARAMCD", "SAFFL", "SEX", "TRTDUR", "TRTDUR_MONTHS", "TRTEDT", "ASER", "DCTREAS",
+  "EOSSTT", "EOTSTT", "ITTFL", "PPROTFL", "RANDFL", "TRTEMFL", "TRTSDT", "USUBJID", "column", "median", "ord_layer_1",
+  "ord_layer_2", "ord_layer_index", "param", "pct", "row_label1", "row_label2", "sd", "tbl_lbl", "value"
 ))

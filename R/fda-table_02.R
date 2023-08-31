@@ -247,3 +247,53 @@ make_table_02_tplyr <- function(df,
   }
   tbl
 }
+
+#' @describeIn make_table_02 Create FDA table 2 using functions from `gtsummary`.
+#'
+#' @return
+#' * `make_table_02_gt` returns a `tbl_summary` object.
+#'
+#' @examples
+#' tbl <- make_table_02_gt(df = adsl)
+#' tbl
+#'
+#' @export
+make_table_02_gt <- function(df,
+                             alt_counts_df = NULL,
+                             show_colcounts = TRUE,
+                             arm_var = "ARM",
+                             vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY"),
+                             lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
+                             lbl_overall = "Total Population",
+                             na_rm = FALSE) {
+  checkmate::assert_subset(c("SAFFL", vars, arm_var), names(df))
+  assert_flag_variables(df, "SAFFL")
+
+  df <- df %>%
+    filter(SAFFL == "Y") %>%
+    select(all_of(c(vars, arm_var)))
+
+  if (!na_rm) df <- df %>% df_explicit_na()
+
+  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
+
+  tbl <- df %>%
+    tbl_summary(
+      by = arm_var,
+      type = all_continuous() ~ "continuous2",
+      statistic = list(
+        all_continuous() ~ c(
+          "{mean} ({sd})",
+          "{median} ({min} - {max})"
+        ),
+        all_categorical() ~ "{n} ({p}%)"
+      ),
+      digits = all_continuous() ~ 2,
+      missing = ifelse(na_rm, "no", "ifany")
+    ) %>%
+    modify_header(all_stat_cols() ~ "**{level}**  \n (N={n})") %>%
+    add_overall(last = TRUE, col_label = paste0("**", lbl_overall, "**  \n (N={n})")) %>%
+    modify_footnote(update = everything() ~ NA)
+
+  tbl
+}

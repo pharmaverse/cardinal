@@ -118,3 +118,47 @@ test_that("Table 02 generation (tplyr) works with some NA values", {
   res <- expect_silent(result[["_data"]])
   expect_snapshot(res)
 })
+
+test_that("Table 02 generation (gt) works with default values", {
+  options(pillar.print_max = 50, width = 200)
+
+  result <- suppressWarnings(make_table_02_gt(adsl))
+
+  res <- expect_silent(result[["_data"]])
+  expect_snapshot(res)
+})
+
+test_that("Table 02 generation (gt) works with custom values", {
+  options(pillar.print_max = 50, width = 200)
+
+  advs <- advs_raw %>%
+    dplyr::filter(AVISIT == "BASELINE", VSTESTCD == "TEMP") %>%
+    dplyr::select("USUBJID", "AVAL")
+
+  anl <- dplyr::left_join(adsl, advs, by = "USUBJID") %>% df_explicit_na()
+
+  result <- suppressWarnings(make_table_02_gt(
+    anl,
+    vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY", "AVAL")
+  ))
+
+  res <- expect_silent(result[["_data"]])
+  expect_snapshot(res)
+
+  res <- expect_silent(result[["_heading"]])
+  expect_snapshot(res)
+})
+
+test_that("Table 02 generation (gt) works with some NA values", {
+  options(pillar.print_max = 50, width = 200)
+
+  set.seed(1)
+  adsl[sample(seq_len(nrow(adsl)), 50), "SEX"] <- NA
+
+  adsl <- adsl %>% df_explicit_na()
+
+  result <- suppressWarnings(make_table_02_gt(adsl, vars = "SEX"))
+
+  res <- expect_silent(result[["_data"]])
+  expect_snapshot(res)
+})

@@ -17,7 +17,7 @@ make_table_04(
 \arguments{
 \item{df}{(\code{data.frame})\cr dataset required to build table.}
 
-\item{alt_counts_df}{(\code{character}) alternative dataset (typically ADSL) used only to calculate column counts.}
+\item{alt_counts_df}{(\code{character})\cr alternative dataset (typically ADSL) used only to calculate column counts.}
 
 \item{show_colcounts}{(\code{flag})\cr whether column counts should be printed.}
 
@@ -49,8 +49,9 @@ flag variables are treated as \code{"N"}.
 }
 }
 \examples{
-adsl_raw <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
-adsl <- adsl_raw \%>\%
+library(dplyr)
+
+adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") \%>\%
   mutate(test = rbinom(400, 1, 0.5)) \%>\%
   mutate(
     RANDFL = ifelse(test == 0, "N", "Y"),
@@ -61,6 +62,7 @@ adsl <- adsl_raw \%>\%
     ), DCSREAS, "OTHER")
   ) \%>\%
   mutate(DCTREAS = DCSREAS)
+
 tbl <- make_table_04(df = adsl)
 tbl
 
