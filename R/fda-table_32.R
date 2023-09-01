@@ -18,10 +18,10 @@ NULL
 
 
 #' @describeIn make_table_32 Create FDA table 32 using functions from `rtables` and `tern`.
-#' 
-#' @return 
+#'
+#' @return
 #' * `make_table_32` returns an `rtables` table object.
-#' 
+#'
 #' @examples
 #' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
 #' advs <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "advs")
@@ -82,8 +82,8 @@ make_table_32 <- function(advs,
 #'
 #' @return
 #' * `make_table_32_gt` returns a `tbl_summary` object
-#' 
-#' @examples 
+#'
+#' @examples
 #' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
 #' advs <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "advs")
 #'
@@ -92,10 +92,10 @@ make_table_32 <- function(advs,
 #'
 #' @export
 
-make_table_32_gt <- function(advs, 
+make_table_32_gt <- function(advs,
                              alt_counts_df = NULL,
                              arm_var = "ARM",
-                             lbl_overall = NULL, 
+                             lbl_overall = NULL,
                              annotations = NULL) {
   checkmate::assert_subset(c(
     "SAFFL", "USUBJID", "AVISITN", "PARAMCD", "AVAL", "AVALU", arm_var
@@ -122,7 +122,7 @@ make_table_32_gt <- function(advs,
     distinct(USUBJID, .keep_all = TRUE) %>%
     select(USUBJID, SAFFL, L60, G60, G90, G110, GE120, arm_var)
 
-  adsl_pop <- adsl %>% select(USUBJID, SAFFL) 
+  adsl_pop <- adsl %>% select(USUBJID, SAFFL)
 
   advs <-
     adsl_pop %>%
