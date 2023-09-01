@@ -2,6 +2,7 @@
 % Please edit documentation in R/fda-table_32.R
 \name{make_table_32}
 \alias{make_table_32}
+\alias{make_table_32_gt}
 \title{FDA Table 32: Percentage of Patients With Maximum Diastolic Blood Pressure by Category of Blood Pressure
 Postbaseline, Safety Population, Pooled Analysis}
 \usage{
@@ -12,6 +13,14 @@ make_table_32(
   arm_var = "ARM",
   lbl_overall = NULL,
   prune_0 = FALSE,
+  annotations = NULL
+)
+
+make_table_32_gt(
+  advs,
+  alt_counts_df = NULL,
+  arm_var = "ARM",
+  lbl_overall = NULL,
   annotations = NULL
 )
 }
@@ -33,6 +42,15 @@ the given value as the column label.}
 annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
 use the annotation type as name and the desired string as value.}
 }
+\value{
+\itemize{
+\item \code{make_table_32} returns an \code{rtables} table object.
+}
+
+\itemize{
+\item \code{make_table_32_gt} returns a \code{tbl_summary} object
+}
+}
 \description{
 FDA Table 32: Percentage of Patients With Maximum Diastolic Blood Pressure by Category of Blood Pressure
 Postbaseline, Safety Population, Pooled Analysis
@@ -49,11 +67,24 @@ flag variables are treated as \code{"N"}.
 \item All-zero rows are not removed by default (see \code{prune_0} argument).
 }
 }
+\section{Functions}{
+\itemize{
+\item \code{make_table_32()}: Create FDA table 32 using functions from \code{rtables} and \code{tern}.
+
+\item \code{make_table_32_gt()}: Create FDA table 32 using functions from \code{gtsummary}.
+
+}}
 \examples{
 adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
 advs <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "advs")
 
 tbl <- make_table_32(advs = advs, alt_counts_df = adsl)
+tbl
+
+adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
+advs <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "advs")
+
+tbl <- make_table_32_gt(advs = advs, alt_counts_df = adsl)
 tbl
 
 }

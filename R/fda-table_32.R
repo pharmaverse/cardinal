@@ -13,7 +13,7 @@
 #'
 #' @inheritParams argument_convention
 #'
-#' @name make_table_02
+#' @name make_table_32
 NULL
 
 
@@ -87,7 +87,7 @@ make_table_32 <- function(advs,
 #' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
 #' advs <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "advs")
 #'
-#' tbl <- make_table_32(advs = advs, alt_counts_df = adsl)
+#' tbl <- make_table_32_gt(advs = advs, alt_counts_df = adsl)
 #' tbl
 #'
 #' @export
@@ -137,7 +137,7 @@ make_table_32_gt <- function(advs,
     tbl_summary(
       by = arm_var,
       statistic = list(all_categorical() ~ "{n} ({p}%)"),
-      digits = 2
+      digits = everything() ~ 2
     ) %>%
     modify_header(all_stat_cols() ~ "**{level}**  \n N = {n}") %>%
     modify_footnote(update = everything() ~ NA)

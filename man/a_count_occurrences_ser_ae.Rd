@@ -20,8 +20,8 @@ a_count_occurrences_ser_ae(
 \item{.var}{(\code{string})\cr single variable name that is passed by \code{rtables} when requested
 by a statistics function.}
 
-\item{.N_col}{(\code{count})\cr row-wise N (row group count) for the group of observations being analyzed
-(i.e. with no column-based subsetting) that is passed by \code{rtables}.}
+\item{.N_col}{(\code{integer})\cr column-wise N (column count) for the full column being analyzed that is typically
+passed by \code{rtables}.}
 
 \item{df_denom}{(\code{data.frame})\cr Full data frame used to calculate denominator subgroup counts
 when \code{denom = "N_s"}.}
