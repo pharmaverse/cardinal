@@ -65,3 +65,113 @@ make_table_09 <- function(adae,
 
   tbl
 }
+
+
+
+# NOTES:
+
+# Non-optional vars: SAFFL, AESER, USUBJID, AESOC -> consider this in checkmate
+# arm_var col must be a factor
+# if pref_var is a factor, warnings will appear. They can be ignored. Can we suppress them?
+# test column headers correctly assigned (levels durcheinander oder gar kein factor)
+# test return value as defined per tplyr_raw
+# test pop_data_df
+# test risk difference (if specified + compare content to manual prop.test)
+
+make_table_09_tplyr <- function(adae,
+                                pop_data_df = NULL,
+                                arm_var = "ARM",
+                                pref_var = "AETERM",
+                                # TODO: add soc_var as parameter
+                                risk_diff_pairs = NULL,
+                                tplyr_raw = FALSE
+                                ) {
+  # Example
+  # TODO: remove
+  # adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
+  # adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
+  # make_table_09_tplyr(adae = adae, alt_counts_df = adsl)
+
+  # fnc <- function(x, bool) { if (bool) x %>% add_layer(group_count("Something")) }
+  # or rather: https://stackoverflow.com/questions/30604107/r-conditional-evaluation-when-using-the-pipe-operator
+
+  # TODO: remove
+  # pop_data_df <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
+  # adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
+  # arm_var <- "ARM"
+  # pref_var <- "AETERM"
+
+  # TODO: checkmate
+  # adae and pop_data_df must be data.frames with certain columns
+  # arm_var must be character and part of the column names of adae and pop_data_df
+  # pref_var must be character and part of the adae column names
+  # tplyr_raw must be logical/boolean
+  # risk_diff_pairs must be a list of character vectors length 2 and its elements must exist in the arm_var column of adae
+
+  # Initiate table structure
+  structure <- Tplyr::tplyr_table(adae, treat_var = !!rlang::sym(arm_var), where = (SAFFL == "Y" & AESER == "Y"))
+
+  # Use alternative counts if specified
+  if (!is.null(pop_data_df)) {
+    structure <- structure %>%
+      Tplyr::set_pop_data(pop_data_df) %>%
+      Tplyr::set_pop_where(TRUE) # takes all subjects as basis, not only those where AESER == "Y"!
+  }
+
+  layer1 <- structure %>%
+    Tplyr::group_count("Any SAE") %>%
+    #Tplyr::add_risk_diff(c("A: Drug X", "B: Placebo")) %>%
+
+    Tplyr::set_distinct_by(USUBJID)
+
+  layer2 <- structure %>%
+    Tplyr::group_count(vars(AESOC, !!sym(pref_var))) %>%
+    #Tplyr::add_risk_diff(... = ...) %>%
+    Tplyr::set_distinct_by(USUBJID) %>%
+    Tplyr::set_nest_count(TRUE) %>%
+    Tplyr::add_risk_diff(c("A: Drug X", "B: Placebo"))
+
+  arm_names <- levels(adae[[arm_var]])
+  header_string <- paste0(
+    "System Organ Class\n  Reported Term for Adverse Event|", # \\line
+    paste0(paste(arm_names, "\n(N=**", arm_names, "**)", sep = ""), collapse = "|") #\\line
+  )
+
+  # Add risk difference column(s) if specified
+  if (!is.null(risk_diff_pairs)) {
+    layer1 <- do.call(Tplyr::add_risk_diff, args = append(list(layer = layer1), risk_diff_pairs))
+    layer2 <- do.call(Tplyr::add_risk_diff, args = append(list(layer = layer2), risk_diff_pairs))
+
+    # TODO: Update header_string
+  }
+
+
+
+  # TODO: read f_str help to remove blank spaces within the percentage paranthesis
+
+  table <- structure %>%
+    Tplyr::add_layers(layer1, layer2) %>%
+    Tplyr::build() %>%
+    dplyr::arrange(ord_layer_index, ord_layer_1, ord_layer_2) %>% # TODO: confirm order with make_table_09() -> refer to https://atorus-research.github.io/Tplyr/articles/post_processing.html#highly-customized-sort-variables for sorting according to occurence
+    dplyr::select(dplyr::starts_with(c("row_label", "var", "rdiff"))) %>%
+    Tplyr::add_column_headers(s = header_string, header_n = header_n(structure)) #%>%
+    # dplyr::mutate(row_label1 = Tplyr::str_indent_wrap(row_label1, width = 10))
+
+  table
+
+  # Add Risk Difference columns -> Continue with l. 143
+
+  # Add Total column (lbl_overall): add_total_group()
+
+  # Handle missings
+
+
+  # if (!tplyr_raw) return a table formatted with tfrmt
+
+  # footnotes can only be added for tplyr_raw = FALSE
+
+
+
+}
+
+
