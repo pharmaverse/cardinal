@@ -76,7 +76,9 @@ make_table_09 <- function(adae,
 # test column headers correctly assigned (levels durcheinander oder gar kein factor)
 # test return value as defined per tplyr_raw
 # test pop_data_df
-# test risk difference (if specified + compare content to manual prop.test)
+# test risk difference (if specified)
+# test lbl_overall (if specified)
+# test whether header_string is updated if necessary
 
 make_table_09_tplyr <- function(adae,
                                 pop_data_df = NULL,
@@ -84,7 +86,8 @@ make_table_09_tplyr <- function(adae,
                                 pref_var = "AEDECOD",
                                 # TODO: add soc_var as parameter
                                 risk_diff_pairs = NULL,
-                                tplyr_raw = FALSE
+                                tplyr_raw = FALSE,
+                                lbl_overall = NULL
                                 ) {
   # Example
   # TODO: remove
@@ -101,6 +104,7 @@ make_table_09_tplyr <- function(adae,
   # arm_var <- "ARM"
   # pref_var <- "AEDECOD"
   # risk_diff_pairs <- list(c("A: Drug X", "B: Placebo"))
+  # lbl_overall <- "Total subjects"
 
   # TODO: checkmate
   # adae and pop_data_df must be data.frames with certain columns
@@ -108,6 +112,14 @@ make_table_09_tplyr <- function(adae,
   # pref_var must be character and part of the adae column names
   # tplyr_raw must be logical/boolean
   # risk_diff_pairs must be a list of character vectors length 2 and its elements must exist in the arm_var column of adae
+  # lbl_overall must be either character or NULL
+
+  # Initialize column headers
+  arm_names <- levels(adae[[arm_var]])
+  header_string <- paste0(
+    "System Organ Class\n  Reported Term for Adverse Event|", # \\line
+    paste0(paste(arm_names, "\n(N=**", arm_names, "**)", sep = ""), collapse = "|") #\\line
+  )
 
   # Initiate table structure
   structure <- Tplyr::tplyr_table(adae, treat_var = !!rlang::sym(arm_var), where = (SAFFL == "Y" & AESER == "Y"))
@@ -119,6 +131,14 @@ make_table_09_tplyr <- function(adae,
       Tplyr::set_pop_where(TRUE) # takes all subjects as basis, not only those where AESER == "Y"!
   }
 
+  # Add total column if specified
+  if (!is.null(lbl_overall)) {
+    structure <- structure %>%
+      Tplyr::add_total_group(group_name = lbl_overall)
+
+    header_string <- paste0(header_string, "|", lbl_overall)
+  }
+
   layer1 <- structure %>%
     Tplyr::group_count("Any SAE") %>%
     Tplyr::set_distinct_by(USUBJID)
@@ -128,12 +148,6 @@ make_table_09_tplyr <- function(adae,
     Tplyr::set_distinct_by(USUBJID) %>%
     Tplyr::set_nest_count(TRUE)
 
-  arm_names <- levels(adae[[arm_var]])
-  header_string <- paste0(
-    "System Organ Class\n  Reported Term for Adverse Event|", # \\line
-    paste0(paste(arm_names, "\n(N=**", arm_names, "**)", sep = ""), collapse = "|") #\\line
-  )
-
   # Add risk difference column(s) if specified
   if (!is.null(risk_diff_pairs)) {
     layer1 <- do.call(Tplyr::add_risk_diff, args = append(list(layer = layer1), risk_diff_pairs))
@@ -142,6 +156,9 @@ make_table_09_tplyr <- function(adae,
     rd_part <- sapply(risk_diff_pairs, function(pair) paste("|RD:", paste0(pair, collapse = " - ")))
     header_string <- paste0(header_string, paste0(rd_part, collapse = ""))
   }
+
+
+
 
 
 
@@ -157,9 +174,6 @@ make_table_09_tplyr <- function(adae,
 
   table
 
-  # Add Risk Difference columns -> Continue with l. 143
-
-  # Add Total column (lbl_overall): add_total_group()
 
   # Handle missings
 
