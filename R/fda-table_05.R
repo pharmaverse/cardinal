@@ -35,6 +35,7 @@ make_table_05 <- function(df,
                           u_trtdur = "days",
                           lbl_trtdur = paste("Duration of Treatment,", u_trtdur),
                           lbl_overall = NULL,
+                          risk_diff = NULL,
                           prune_0 = FALSE,
                           annotations = NULL) {
   checkmate::assert_subset(c("SAFFL", "USUBJID", arm_var, id_var, trtsdtm_var, trtedtm_var), names(df))
@@ -63,7 +64,7 @@ make_table_05 <- function(df,
   alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
 
   lyt <- basic_table_annot(show_colcounts, annotations) %>%
-    split_cols_by_arm(arm_var, lbl_overall) %>%
+    split_cols_by_arm(arm_var, lbl_overall, risk_diff) %>%
     analyze(
       vars = "TRTDUR",
       var_labels = lbl_trtdur,
@@ -83,7 +84,8 @@ make_table_05 <- function(df,
     split_rows_by("DUR_LBL") %>%
     count_patients_with_flags(
       var = id_var,
-      flag_variables = var_labels(df[, c("D_ANY", "D_LT1", "D_GT1", "D_GT3", "D_GT6", "D_GT12")])
+      flag_variables = var_labels(df[, c("D_ANY", "D_LT1", "D_GT1", "D_GT3", "D_GT6", "D_GT12")]),
+      riskdiff = !is.null(risk_diff)
     ) %>%
     append_topleft(c("", "Parameter"))
 

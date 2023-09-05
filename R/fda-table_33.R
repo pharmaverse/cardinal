@@ -26,6 +26,7 @@ make_table_33 <- function(advs,
                           show_colcounts = TRUE,
                           arm_var = "ARM",
                           lbl_overall = NULL,
+                          risk_diff = NULL,
                           prune_0 = FALSE,
                           annotations = NULL) {
   checkmate::assert_subset(c("SAFFL", "USUBJID", "AVISITN", "PARAMCD", "AVAL", "AVALU"), names(advs))
@@ -51,10 +52,11 @@ make_table_33 <- function(advs,
   alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
 
   lyt <- basic_table_annot(show_colcounts, annotations) %>%
-    split_cols_by_arm(arm_var, lbl_overall) %>%
+    split_cols_by_arm(arm_var, lbl_overall, risk_diff) %>%
     count_patients_with_flags(
       var = "USUBJID",
-      flag_variables = var_labels(advs[, c("SBP90", "DBP60")])
+      flag_variables = var_labels(advs[, c("SBP90", "DBP60")]),
+      riskdiff = !is.null(risk_diff)
     ) %>%
     append_topleft(c("Blood Pressure", paste0("(", unique(advs$AVALU)[1], ")")))
 
