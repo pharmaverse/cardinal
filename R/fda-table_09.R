@@ -81,7 +81,7 @@ make_table_09 <- function(adae,
 make_table_09_tplyr <- function(adae,
                                 pop_data_df = NULL,
                                 arm_var = "ARM",
-                                pref_var = "AETERM",
+                                pref_var = "AEDECOD",
                                 # TODO: add soc_var as parameter
                                 risk_diff_pairs = NULL,
                                 tplyr_raw = FALSE
@@ -90,7 +90,7 @@ make_table_09_tplyr <- function(adae,
   # TODO: remove
   # adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
   # adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
-  # make_table_09_tplyr(adae = adae, alt_counts_df = adsl)
+  # make_table_09_tplyr(adae = adae, pop_data_df = adsl)
 
   # fnc <- function(x, bool) { if (bool) x %>% add_layer(group_count("Something")) }
   # or rather: https://stackoverflow.com/questions/30604107/r-conditional-evaluation-when-using-the-pipe-operator
@@ -99,7 +99,8 @@ make_table_09_tplyr <- function(adae,
   # pop_data_df <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
   # adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
   # arm_var <- "ARM"
-  # pref_var <- "AETERM"
+  # pref_var <- "AEDECOD"
+  # risk_diff_pairs <- list(c("A: Drug X", "B: Placebo"))
 
   # TODO: checkmate
   # adae and pop_data_df must be data.frames with certain columns
@@ -120,16 +121,12 @@ make_table_09_tplyr <- function(adae,
 
   layer1 <- structure %>%
     Tplyr::group_count("Any SAE") %>%
-    #Tplyr::add_risk_diff(c("A: Drug X", "B: Placebo")) %>%
-
     Tplyr::set_distinct_by(USUBJID)
 
   layer2 <- structure %>%
     Tplyr::group_count(vars(AESOC, !!sym(pref_var))) %>%
-    #Tplyr::add_risk_diff(... = ...) %>%
     Tplyr::set_distinct_by(USUBJID) %>%
-    Tplyr::set_nest_count(TRUE) %>%
-    Tplyr::add_risk_diff(c("A: Drug X", "B: Placebo"))
+    Tplyr::set_nest_count(TRUE)
 
   arm_names <- levels(adae[[arm_var]])
   header_string <- paste0(
@@ -142,7 +139,8 @@ make_table_09_tplyr <- function(adae,
     layer1 <- do.call(Tplyr::add_risk_diff, args = append(list(layer = layer1), risk_diff_pairs))
     layer2 <- do.call(Tplyr::add_risk_diff, args = append(list(layer = layer2), risk_diff_pairs))
 
-    # TODO: Update header_string
+    rd_part <- sapply(risk_diff_pairs, function(pair) paste("|RD:", paste0(pair, collapse = " - ")))
+    header_string <- paste0(header_string, paste0(rd_part, collapse = ""))
   }
 
 
