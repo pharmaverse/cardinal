@@ -2,7 +2,8 @@
 % Please edit documentation in R/fda-table_21.R
 \name{make_table_21}
 \alias{make_table_21}
-\title{FDA Table 21. Overview of Serious Adverse Events by Demographic Subgroup, Safety Population, Pooled Analysis (or Trial X)}
+\title{FDA Table 21. Overview of Serious Adverse Events by Demographic Subgroup, Safety Population, Pooled
+Analysis (or Trial X)}
 \usage{
 make_table_21(
   df,
@@ -28,8 +29,8 @@ make_table_21(
 \item{vars}{(\code{vector} of \code{character})\cr variables from \code{df} to include in the table.}
 
 \item{denom}{(\code{character})\cr Denominator to use to calculate fractions. Can be \code{"N_s"} (total \code{df_denom}
-subgroup/row counts), \code{"N_col"} (total \code{df} column counts), or \code{"n"} (total \code{df} overall patient count). Note that
-\code{df} is filtered to only include serious adverse events (\code{ASER == "Y"}).}
+subgroup/row counts), \code{"N_col"} (total \code{df} column counts), or \code{"n"} (total \code{df} overall patient count).
+Note that \code{df} is filtered to only include serious adverse events (\code{ASER == "Y"}).}
 
 \item{lbl_vars}{(\code{vector} of \code{character})\cr labels corresponding to variables in \code{vars} to print
 in the table. Labels should be ordered according to the order of variables in \code{vars}.}
@@ -41,7 +42,8 @@ annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \co
 use the annotation type as name and the desired string as value.}
 }
 \description{
-FDA Table 21. Overview of Serious Adverse Events by Demographic Subgroup, Safety Population, Pooled Analysis (or Trial X)
+FDA Table 21. Overview of Serious Adverse Events by Demographic Subgroup, Safety Population, Pooled
+Analysis (or Trial X)
 }
 \details{
 \itemize{
@@ -69,8 +71,8 @@ adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") \%>\%
     AGE = "Age, years"
   )
 
-adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae") \%>\%
-  mutate(ASER = AESER)
+adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
+adae$ASER <- adae$AESER
 
 df <- left_join(adsl, adae, by = intersect(names(adsl), names(adae)))
 
