@@ -2,8 +2,8 @@
 #'   Safety Population, Pooled Analyses
 #'
 #' @details
-#' * `adae` must contain `SAFFL`, `USUBJID`, `AESER`, `AESOC`, and the variables specified
-#'   by `pref_var` and `arm_var`.
+#' * `adae` must contain `SAFFL`, `USUBJID`, `AESER`, and the variables specified
+#'   by `soc_var`, `pref_var` and `arm_var`.
 #' * If specified, `alt_counts_df` must contain `SAFFL`, `USUBJID`, and the variable specified by `arm_var`.
 #' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
 #'   flag variables are treated as `"N"`.
@@ -70,7 +70,7 @@ make_table_09 <- function(adae,
 
 # NOTES:
 
-# Non-optional vars: SAFFL, AESER, USUBJID, AESOC -> consider this in checkmate
+# Non-optional vars: SAFFL, AESER, USUBJID -> consider this in checkmate
 # arm_var col must be a factor
 # if pref_var is a factor, warnings will appear. They can be ignored. Can we suppress them?
 # test column headers correctly assigned (levels durcheinander oder gar kein factor)
@@ -83,8 +83,8 @@ make_table_09 <- function(adae,
 make_table_09_tplyr <- function(adae,
                                 pop_data_df = NULL,
                                 arm_var = "ARM",
+                                soc_var = "AESOC",
                                 pref_var = "AEDECOD",
-                                # TODO: add soc_var as parameter
                                 risk_diff_pairs = NULL,
                                 tplyr_raw = FALSE,
                                 lbl_overall = NULL
@@ -144,7 +144,7 @@ make_table_09_tplyr <- function(adae,
     Tplyr::set_distinct_by(USUBJID)
 
   layer2 <- structure %>%
-    Tplyr::group_count(vars(AESOC, !!sym(pref_var))) %>%
+    Tplyr::group_count(vars(!!sym(soc_var), !!sym(pref_var))) %>%
     Tplyr::set_distinct_by(USUBJID) %>%
     Tplyr::set_nest_count(TRUE)
 
