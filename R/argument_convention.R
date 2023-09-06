@@ -22,7 +22,7 @@
 #' @param fmq_scope (`character`)\cr FMQ scope ("NARROW" or "BROAD") to output in table.
 #' @param .stats (`character`)\cr statistics to include in the table. Includes statistics for all variable
 #'   types (only the statistics that are valid for a given variable's type will be printed).
-#'   See [`tern::summarize_vars()`] for options.
+#'   See [`tern::analyze_vars()`] for options.
 #' @param .formats (named `list` of `character`)\cr list of formats corresponding to each value in `.stats`.
 #'   Each name is a value in `.stats` and the corresponding value is the format that should be applied to
 #'   that statistic. See [`formatters::list_valid_format_labels()`] for a list of valid formats.
