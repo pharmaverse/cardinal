@@ -52,4 +52,6 @@
 
     Code
       res
+    Output
+      NULL
 

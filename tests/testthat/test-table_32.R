@@ -36,3 +36,10 @@ test_that("Table 32 generation works with pruned rows", {
   res <- expect_silent(result)
   expect_snapshot(res)
 })
+
+test_that("Table 32 (gt) generation works with default values", {
+  result <- suppressWarnings(make_table_32_gt(advs = advs))
+
+  res <- expect_silent(result[["_data"]])
+  expect_snapshot(res)
+})
