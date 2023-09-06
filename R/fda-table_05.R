@@ -84,7 +84,7 @@ make_table_05 <- function(df,
     split_rows_by("DUR_LBL") %>%
     count_patients_with_flags(
       var = id_var,
-      flag_variables = var_labels(df[, c("D_ANY", "D_LT1", "D_GT1", "D_GT3", "D_GT6", "D_GT12")]),
+      flag_variables = c("D_ANY", "D_LT1", "D_GT1", "D_GT3", "D_GT6", "D_GT12"),
       riskdiff = !is.null(risk_diff)
     ) %>%
     append_topleft(c("", "Parameter"))

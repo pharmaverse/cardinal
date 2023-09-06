@@ -16,7 +16,7 @@
 #' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
 #' adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
 #'
-#' tbl <- make_table_06(adae = adae, alt_counts_df = adsl)
+#' tbl <- make_table_06(adae = as.data.frame(adae), alt_counts_df = adsl)
 #' tbl
 #'
 #' @export
@@ -65,26 +65,26 @@ make_table_06 <- function(adae,
     split_cols_by_arm(arm_var, lbl_overall, risk_diff) %>%
     count_patients_with_flags(
       var = "USUBJID",
-      flag_variables = var_labels(adae[, "SER"]),
+      flag_variables = "SER",
       table_names = "ser",
       riskdiff = !is.null(risk_diff)
     ) %>%
     count_patients_with_flags(
       var = "USUBJID",
-      flag_variables = var_labels(adae[, c("SERFATAL", "SERLIFE", "SERHOSP", "SERDISAB", "SERCONG", "SERMIE")]),
+      flag_variables = c("SERFATAL", "SERLIFE", "SERHOSP", "SERDISAB", "SERCONG", "SERMIE"),
       .indent_mods = 1L,
       table_names = "ser_fl",
       riskdiff = !is.null(risk_diff)
     ) %>%
     count_patients_with_flags(
       var = "USUBJID",
-      flag_variables = var_labels(adae[, c("WD", "DSM")]),
+      flag_variables = c("WD", "DSM"),
       table_names = "ae",
       riskdiff = !is.null(risk_diff)
     ) %>%
     count_patients_with_flags(
       var = "USUBJID",
-      flag_variables = var_labels(adae[, c("DSINT", "DSRED", "DSD", "DSMIE")]),
+      flag_variables = c("DSINT", "DSRED", "DSD", "DSMIE"),
       .indent_mods = 1L,
       table_names = "ds",
       riskdiff = !is.null(risk_diff)

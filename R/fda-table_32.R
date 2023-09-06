@@ -58,7 +58,7 @@ make_table_32 <- function(advs,
     split_cols_by_arm(arm_var, lbl_overall, risk_diff) %>%
     count_patients_with_flags(
       var = "USUBJID",
-      flag_variables = var_labels(advs[, c("L60", "G60", "G90", "G110", "GE120")]),
+      flag_variables = c("L60", "G60", "G90", "G110", "GE120"),
       riskdiff = !is.null(risk_diff)
     ) %>%
     append_topleft(c("Diastolic Blood Pressure", paste0("(", unique(advs$AVALU)[1], ")")))

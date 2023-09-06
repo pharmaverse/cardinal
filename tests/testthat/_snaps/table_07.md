@@ -87,6 +87,7 @@
       Total deaths                      24 (17.9%)   19 (14.2%)     20 (15.2%)  
         ADVERSE EVENT                   8 (33.3%)    6 (31.6%)      10 (50.0%)  
         DISEASE PROGRESSION             8 (33.3%)    5 (26.3%)      6 (30.0%)   
+        LOST TO FOLLOW UP                   0            0              0       
         MISSING                         4 (16.7%)    4 (21.1%)      2 (10.0%)   
         Post-study reporting of death    1 (4.2%)     1 (5.3%)       1 (5.0%)   
         SUICIDE                          2 (8.3%)    2 (10.5%)       1 (5.0%)   

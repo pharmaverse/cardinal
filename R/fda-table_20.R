@@ -47,10 +47,8 @@ make_table_20 <- function(adae,
     filter(SAFFL == "Y", AESIFL == "Y") %>%
     df_explicit_na()
 
-  adae[[aesifl_var]] <- adae[[aesifl_var]] == "Y"
-  adae[[aelabfl_var]] <- adae[[aelabfl_var]] == "Y"
-  var_lbls <- c("AE grouping related to AESI", "Laboratory Assessment")
-  names(var_lbls) <- c(aesifl_var, aelabfl_var)
+  adae[[aesifl_var]] <- with_label(adae[[aesifl_var]] == "Y", "AE grouping related to AESI")
+  adae[[aelabfl_var]] <- with_label(adae[[aelabfl_var]] == "Y", "Laboratory Assessment")
 
   alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
 
@@ -58,7 +56,7 @@ make_table_20 <- function(adae,
     split_cols_by_arm(arm_var, lbl_overall, risk_diff) %>%
     count_patients_with_flags(
       "USUBJID",
-      flag_variables = var_lbls[1],
+      flag_variables = aesifl_var,
       denom = "N_col",
       riskdiff = !is.null(risk_diff),
       table_names = "tbl_aesi"
@@ -105,7 +103,7 @@ make_table_20 <- function(adae,
     ) %>%
     count_patients_with_flags(
       "USUBJID",
-      flag_variables = var_lbls[2],
+      flag_variables = aelabfl_var,
       denom = "N_col",
       riskdiff = !is.null(risk_diff),
       table_names = "tbl_lab"
