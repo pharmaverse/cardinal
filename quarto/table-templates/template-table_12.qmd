@@ -22,7 +22,8 @@ adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
 adae$DCSREAS[is.na(adae$DCSREAS)] <- "ADVERSE EVENT"
 
 # Output Table
-make_table_12(adae = adae, alt_counts_df = adsl)
+risk_diff <- list(arm_x = "B: Placebo", arm_y = "A: Drug X") # optional
+make_table_12(adae = adae, alt_counts_df = adsl, risk_diff = risk_diff)
 ```
 
 ## Table Setup

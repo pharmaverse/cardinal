@@ -24,7 +24,8 @@ levels(adae$FMQ01SC) <- c("BROAD", "NARROW")
 adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
 
 # Output Table
-make_table_14(adae = adae)
+risk_diff <- list(arm_x = "B: Placebo", arm_y = "A: Drug X") # optional
+make_table_14(adae = adae, risk_diff = risk_diff)
 ```
 
 ## Table Setup

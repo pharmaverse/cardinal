@@ -23,7 +23,8 @@ adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
 prefterm_var <- "AETERM"
 
 # Output Table
-make_table_09(adae = adae, alt_counts_df = adsl, pref_var = prefterm_var)
+risk_diff <- list(arm_x = "B: Placebo", arm_y = "A: Drug X") # optional
+make_table_09(adae = adae, alt_counts_df = adsl, pref_var = prefterm_var, risk_diff = risk_diff)
 ```
 
 ## Table Setup

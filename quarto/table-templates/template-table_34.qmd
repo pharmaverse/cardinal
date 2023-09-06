@@ -31,7 +31,8 @@ adae <- adae %>%
 adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
 
 # Output Table
-make_table_34(adae = adae, alt_counts_df = adsl)
+risk_diff <- list(arm_x = "B: Placebo", arm_y = "A: Drug X") # optional
+make_table_34(adae = adae, alt_counts_df = adsl, risk_diff = risk_diff)
 ```
 
 ## Table Setup

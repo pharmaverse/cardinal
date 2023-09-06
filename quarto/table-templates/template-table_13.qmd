@@ -26,7 +26,8 @@ prefterm_var <- "AETERM"
 min_freq <- 0.40
 
 # Output Table
-make_table_13(adae = adae, alt_counts_df = adsl, pref_var = prefterm_var, min_freq = min_freq)
+risk_diff <- list(arm_x = "B: Placebo", arm_y = "A: Drug X") # optional
+make_table_13(adae = adae, alt_counts_df = adsl, pref_var = prefterm_var, min_freq = min_freq, risk_diff = risk_diff)
 ```
 
 ## Table Setup
