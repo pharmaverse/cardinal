@@ -48,6 +48,7 @@ make_table_04 <- function(df,
   assert_flag_variables(df, c("RANDFL", "ITTFL", "SAFFL", "PPROTFL"))
 
   df <- df %>%
+    as_tibble() %>%
     filter(SAFFL == "Y") %>%
     df_explicit_na() %>%
     mutate(

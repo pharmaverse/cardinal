@@ -44,6 +44,7 @@ make_table_20 <- function(adae,
   assert_flag_variables(adae, c("SAFFL", aesifl_var, aelabfl_var))
 
   adae <- adae %>%
+    as_tibble() %>%
     filter(SAFFL == "Y", AESIFL == "Y") %>%
     df_explicit_na()
 

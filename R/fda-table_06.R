@@ -16,7 +16,7 @@
 #' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
 #' adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
 #'
-#' tbl <- make_table_06(adae = as.data.frame(adae), alt_counts_df = adsl)
+#' tbl <- make_table_06(adae = adae, alt_counts_df = adsl)
 #' tbl
 #'
 #' @export
@@ -35,6 +35,7 @@ make_table_06 <- function(adae,
   assert_flag_variables(adae, c("SAFFL", "TRTEMFL"))
 
   adae <- adae %>%
+    as_tibble() %>%
     filter(SAFFL == "Y", TRTEMFL == "Y") %>%
     df_explicit_na() %>%
     mutate(
