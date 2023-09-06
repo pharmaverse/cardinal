@@ -10,6 +10,7 @@ make_table_07(
   show_colcounts = TRUE,
   arm_var = "ARM",
   lbl_overall = NULL,
+  risk_diff = NULL,
   prune_0 = TRUE,
   na_level = "MISSING",
   annotations = NULL

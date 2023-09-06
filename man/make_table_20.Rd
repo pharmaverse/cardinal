@@ -13,6 +13,7 @@ make_table_20(
   aesifl_var = "AESIFL",
   aelabfl_var = "AELABFL",
   lbl_overall = NULL,
+  risk_diff = NULL,
   prune_0 = TRUE,
   annotations = NULL
 )

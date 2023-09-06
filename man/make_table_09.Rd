@@ -13,6 +13,7 @@ make_table_09(
   pref_var = "AETERM",
   lbl_pref_var = formatters::var_labels(adae, fill = TRUE)[pref_var],
   lbl_overall = NULL,
+  risk_diff = NULL,
   prune_0 = TRUE,
   annotations = NULL
 )

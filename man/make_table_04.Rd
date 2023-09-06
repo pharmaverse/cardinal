@@ -11,6 +11,7 @@ make_table_04(
   arm_var = "ARM",
   lbl_overall = NULL,
   prune_0 = FALSE,
+  risk_diff = NULL,
   annotations = NULL
 )
 }

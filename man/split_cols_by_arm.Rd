@@ -4,7 +4,7 @@
 \alias{split_cols_by_arm}
 \title{Split Columns by Arm Variable}
 \usage{
-split_cols_by_arm(lyt, arm_var = "ARM", lbl_overall = NULL)
+split_cols_by_arm(lyt, arm_var = "ARM", lbl_overall = NULL, risk_diff = NULL)
 }
 \arguments{
 \item{lyt}{(\code{rtables} layout object)\cr Layout object pre-data used for tabulation.}

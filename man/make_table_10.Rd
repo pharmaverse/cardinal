@@ -14,6 +14,7 @@ make_table_10(
   fmqnam_var = "FMQ01NAM",
   fmq_scope = "NARROW",
   lbl_overall = NULL,
+  risk_diff = NULL,
   prune_0 = TRUE,
   na_level = "<Missing>",
   annotations = NULL

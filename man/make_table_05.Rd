@@ -15,6 +15,7 @@ make_table_05(
   u_trtdur = "days",
   lbl_trtdur = paste("Duration of Treatment,", u_trtdur),
   lbl_overall = NULL,
+  risk_diff = NULL,
   prune_0 = FALSE,
   annotations = NULL
 )

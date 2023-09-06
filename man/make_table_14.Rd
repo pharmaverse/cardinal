@@ -13,6 +13,7 @@ make_table_14(
   fmqsc_var = "FMQ01SC",
   fmqnam_var = "FMQ01NAM",
   lbl_overall = NULL,
+  risk_diff = NULL,
   prune_0 = FALSE,
   na_level = "<Missing>",
   annotations = NULL

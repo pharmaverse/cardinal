@@ -12,6 +12,7 @@ make_table_12(
   arm_var = "ARM",
   pref_var = "AEDECOD",
   lbl_overall = NULL,
+  risk_diff = NULL,
   prune_0 = TRUE,
   annotations = NULL
 )
