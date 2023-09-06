@@ -51,20 +51,11 @@ make_table_07 <- function(adae,
 
   lyt <- basic_table_annot(show_colcounts, annotations) %>%
     split_cols_by_arm(arm_var, lbl_overall, risk_diff) %>%
-    analyze_num_patients(
-      vars = "USUBJID",
-      riskdiff = !is.null(risk_diff),
-      .stats = "unique",
-      .labels = c(unique = "Total deaths"),
-      show_labels = "hidden"
+    split_rows_by(
+      "TRTEMFL",
+      labels_var = "trtem_lab",
+      split_fun = add_overall_level("Total deaths")
     ) %>%
-    count_occurrences(
-      vars = "DTHCAUS",
-      riskdiff = !is.null(risk_diff),
-      .indent_mods = 1,
-      denom = "n"
-    ) %>%
-    split_rows_by("TRTEMFL", labels_var = "trtem_lab") %>%
     summarize_num_patients(
       var = "USUBJID",
       riskdiff = !is.null(risk_diff),
