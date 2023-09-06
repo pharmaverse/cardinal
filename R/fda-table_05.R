@@ -70,17 +70,8 @@ make_table_05 <- function(df,
       vars = "TRTDUR",
       var_labels = lbl_trtdur,
       show_labels = "visible",
-      afun = function(x) {
-        in_rows(
-          "Mean (SD)" = c(mean(x), sd(x)),
-          "Median (min - max)" = c(median(x), range(x)),
-          "Interquartile range" = c(quantile(x, 0.25), quantile(x, 0.75)),
-          "Total exposure (person years)" = c(
-            sum(x), as.numeric(lubridate::duration(sum(x), u_trtdur), "years")
-          ),
-          .formats = c("xx.xx (xx.xx)", "xx.xx (xx.xx - xx.xx)", "xx.xx - xx.xx", "xx.xx (xx.xx)")
-        )
-      }
+      afun = a_trtdur_stats,
+      extra_args = list(u_trtdur = u_trtdur, risk_diff = risk_diff)
     ) %>%
     split_rows_by("DUR_LBL") %>%
     count_patients_with_flags(
@@ -94,4 +85,38 @@ make_table_05 <- function(df,
 
   if (prune_0) tbl <- prune_table(tbl)
   tbl
+}
+
+#' Analysis Function to Calculate Statistics for Treatment Duration
+#'
+#' @inheritParams make_table_05
+#' @param x (`numeric`)\cr vector of numbers to analyze.
+#' @param .spl_context (`data.frame`)\cr data frame containing information about ancestor split states
+#'   that is passed by `rtables`.
+#'
+#' @keywords internal
+a_trtdur_stats <- function(x,
+                           u_trtdur,
+                           .spl_context) {
+  .labels <- c(
+    mean_sd = "Mean (SD)", median_range = "Median (min - max)",
+    iqr = "Interquartile range", tot_exp = "Total exposure (person years)"
+  )
+
+  cur_split <- tail(.spl_context$cur_col_split_val[[1]], 1)
+  if (!grepl("^riskdiff", cur_split)) {
+    x_stats <- list(
+      mean_sd = c(mean(x), sd(x)),
+      median_range = c(median(x), range(x)),
+      iqr = c(quantile(x, 0.25), quantile(x, 0.75)),
+      tot_exp = c(sum(x), as.numeric(lubridate::duration(sum(x), u_trtdur), "years"))
+    )
+    .formats <- c(
+      mean_sd = "xx.xx (xx.xx)", median_range = "xx.xx (xx.xx - xx.xx)",
+      iqr = "xx.xx - xx.xx", tot_exp = "xx.xx (xx.xx)"
+    )
+    in_rows(.list = x_stats, .formats = .formats, .labels = .labels)
+  } else { # print NAs in the risk difference column
+    in_rows(.list = list(mean_sd = NA, median_range = NA, iqr = NA, tot_exp = NA), .labels = .labels)
+  }
 }
