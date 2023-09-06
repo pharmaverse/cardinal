@@ -18,6 +18,7 @@ make_table_09_gt(
   soc_var = "AESOC",
   lbl_pref_var = formatters::var_labels(adae, fill = TRUE)[pref_var],
   lbl_soc_var = formatters::var_labels(adae, fill = TRUE)[soc_var],
+  lbl_overall = NULL,
   annotations = NULL
 )
 }
@@ -43,6 +44,9 @@ make_table_09_gt(
 \item{lbl_pref_var}{(\code{character})\cr label corresponding to preferred term variable \code{pref_var} to print in the table.}
 
 \item{lbl_soc_var}{(\code{character})\cr label corresponding to system organ class variable \code{soc_var} to print in the table.}
+
+\item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
+the given value as the column label.}
 
 \item{annotations}{(named \code{list} of \code{character})\cr list of annotations to add to the table. Valid
 annotation types are \code{title}, \code{subtitles}, and a list of characters called \code{footnotes}. Each name-value pair should

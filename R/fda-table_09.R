@@ -133,10 +133,13 @@ make_table_09_gt <- function(adae,
   adae <- adae %>%
     dplyr::filter(.data[[saffl_var]] == "Y", .data[[ser_var]] == "Y")
 
-  result_list <- calculate_data(adae = adae, alt_counts_df = alt_counts_df, arm_var = arm_var, id_var = id_var, soc_var = soc_var, pref_var = pref_var, lbl_overall = NULL)
+  # create data for table 09
+  # lbl_overall must be NULL to get the data for all columns besides the overall column
+  result_list <- create_table_09_data(adae = adae, alt_counts_df = alt_counts_df, arm_var = arm_var, id_var = id_var, soc_var = soc_var, pref_var = pref_var, lbl_overall = NULL)
 
+  # create data for overall column
   if (!is.null(lbl_overall)) {
-    overall_list <- calculate_data(adae = adae, alt_counts_df = alt_counts_df, arm_var = arm_var, id_var = id_var, soc_var = soc_var, pref_var = pref_var, lbl_overall = lbl_overall)
+    overall_list <- create_table_09_data(adae = adae, alt_counts_df = alt_counts_df, arm_var = arm_var, id_var = id_var, soc_var = soc_var, pref_var = pref_var, lbl_overall = lbl_overall)
 
     result_list$data <- result_list[["data"]] %>%
       left_join(overall_list[["data"]])
@@ -203,12 +206,15 @@ make_table_09_gt <- function(adae,
 }
 
 
-#' Helper function to calculate the data for `make_table08_gt()`
+#' Helper function to create the data for `make_table08_gt()`
+#'
+#' @details If `lbl_overall` is not `NULL` only the data for the overall column will be generated
 #'
 #' @inheritParams argument_convention
 #'
-#' @return
-calculate_data <- function(adae, alt_counts_df, arm_var, id_var, soc_var, pref_var, lbl_overall = NULL) {
+#' @return list containing the counted data to be displayed for table 9 and
+#' a `data.frame` containing information about the total N for each group
+create_table_09_data <- function(adae, alt_counts_df, arm_var, id_var, soc_var, pref_var, lbl_overall = NULL) {
   # count observations
   basis_df <- if (!is.null(alt_counts_df)) alt_counts_df else adae
   N_data <- basis_df %>%
@@ -232,27 +238,27 @@ calculate_data <- function(adae, alt_counts_df, arm_var, id_var, soc_var, pref_v
   input_list <- list(NULL, soc_var, c(soc_var, pref_var))
 
   data_list <- lapply(input_list, function(x) {
-    count_per_subject(adae = adae, arm_var = arm_var, sub_level_vars = x, lbl_overall = lbl_overall)
+    count_subjects(adae = adae, arm_var = arm_var, sub_level_vars = x, lbl_overall = lbl_overall)
   })
 
   sel_cols <- if (is.null(lbl_overall)) levels(N_data[[arm_var]]) else lbl_overall
 
-  data_list <- data_list %>%
+  result_data <- data_list %>%
     dplyr::bind_rows() %>%
     dplyr::select(dplyr::all_of(c(soc_var, pref_var, sel_cols))) %>%
     dplyr::arrange(dplyr::desc(is.na(.data[[soc_var]])), .data[[soc_var]], dplyr::desc(is.na(.data[[pref_var]])))
 
-  list(data = data_list, total_N = total_N)
+  list(data = result_data, total_N = total_N)
 }
 
-#' Helper function for `calculate_data()`
+#' Helper function for `create_table_09_data()`
 #' Used for counting subjects per group
 #'
 #' @inheritParams argument_convention
 #' @param sub_level_vars (`NULL` or `character`) specifying the sub group for counted subjects
 #'
-#' @return
-count_per_subject <- function(adae, arm_var, sub_level_vars = NULL, lbl_overall = NULL) {
+#' @return A `data.frame` containing the number of subjects with `sub_level_vars` events
+count_subjects <- function(adae, arm_var, sub_level_vars = NULL, lbl_overall = NULL) {
   grouping <- is.null(lbl_overall)
   if (grouping) {
     if (!is.null(sub_level_vars)) {
