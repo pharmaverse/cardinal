@@ -27,6 +27,7 @@ make_table_13 <- function(adae,
                           pref_var = "AETERM",
                           lbl_pref_var = formatters::var_labels(adae, fill = TRUE)[pref_var],
                           lbl_overall = NULL,
+                          risk_diff = NULL,
                           annotations = NULL) {
   checkmate::assert_subset(c("SAFFL", "USUBJID", arm_var, pref_var), names(adae))
   assert_flag_variables(adae, "SAFFL")
@@ -38,8 +39,11 @@ make_table_13 <- function(adae,
   alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
 
   lyt <- basic_table_annot(show_colcounts, annotations) %>%
-    split_cols_by_arm(arm_var, lbl_overall) %>%
-    count_occurrences(vars = pref_var) %>%
+    split_cols_by_arm(arm_var, lbl_overall, risk_diff) %>%
+    count_occurrences(
+      vars = pref_var,
+      riskdiff = !is.null(risk_diff)
+    ) %>%
     append_topleft(c("", lbl_pref_var))
 
   tbl <- build_table(lyt, df = adae, alt_counts_df = alt_counts_df)

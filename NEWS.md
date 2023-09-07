@@ -8,6 +8,8 @@
   * `alt_counts_df_preproc` for pre-processing the `alt_counts_df` dataset.
   * `assert_flag_variables` (internal) for checking that formatting is correct for flag variables in the data.
 * Added new function for creating standard FDA tables using additional packages: `make_table_02_tplyr`, `make_table_02_gt`.
+* Added option to include a risk difference column to tables using the `split_cols_by_arm` via the `risk_diff` argument.
+* Added risk difference functionality into relevant table-generating functions via the `risk_diff` argument.
 
 ### Miscellaneous
 * Initialized the package.

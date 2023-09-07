@@ -30,6 +30,7 @@ make_table_07 <- function(adae,
                           show_colcounts = TRUE,
                           arm_var = "ARM",
                           lbl_overall = NULL,
+                          risk_diff = NULL,
                           prune_0 = TRUE,
                           na_level = "MISSING",
                           annotations = NULL) {
@@ -49,28 +50,23 @@ make_table_07 <- function(adae,
   alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
 
   lyt <- basic_table_annot(show_colcounts, annotations) %>%
-    split_cols_by_arm(arm_var, lbl_overall) %>%
-    analyze_num_patients(
-      vars = "USUBJID",
-      .stats = "unique",
-      .labels = c(unique = "Total deaths"),
-      show_labels = "hidden"
+    split_cols_by_arm(arm_var, lbl_overall, risk_diff) %>%
+    split_rows_by(
+      "TRTEMFL",
+      labels_var = "trtem_lab",
+      split_fun = add_overall_level("Total deaths")
     ) %>%
-    count_occurrences(
-      vars = "DTHCAUS",
-      .indent_mods = 1,
-      denom = "n"
-    ) %>%
-    split_rows_by("TRTEMFL", labels_var = "trtem_lab") %>%
     summarize_num_patients(
       var = "USUBJID",
+      riskdiff = !is.null(risk_diff),
       .stats = "unique",
       .labels = c(unique = NULL)
     ) %>%
     count_occurrences(
       vars = "DTHCAUS",
       denom = "n",
-      drop = FALSE
+      drop = FALSE,
+      riskdiff = !is.null(risk_diff)
     ) %>%
     rtables::append_topleft(c("", "Deaths"))
 

@@ -61,7 +61,7 @@ make_table_02 <- function(df,
 
   lyt <- basic_table_annot(show_colcounts, annotations) %>%
     split_cols_by_arm(arm_var, lbl_overall) %>%
-    summarize_vars(
+    analyze_vars(
       vars = vars,
       var_labels = lbl_vars,
       show_labels = "visible",

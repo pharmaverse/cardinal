@@ -35,6 +35,7 @@ make_table_05 <- function(df,
                           u_trtdur = "days",
                           lbl_trtdur = paste("Duration of Treatment,", u_trtdur),
                           lbl_overall = NULL,
+                          risk_diff = NULL,
                           prune_0 = FALSE,
                           annotations = NULL) {
   checkmate::assert_subset(c("SAFFL", "USUBJID", arm_var, id_var, trtsdtm_var, trtedtm_var), names(df))
@@ -42,6 +43,7 @@ make_table_05 <- function(df,
   assert_flag_variables(df, "SAFFL")
 
   df <- df %>%
+    as_tibble() %>%
     filter(SAFFL == "Y") %>%
     df_explicit_na() %>%
     mutate(
@@ -63,27 +65,19 @@ make_table_05 <- function(df,
   alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
 
   lyt <- basic_table_annot(show_colcounts, annotations) %>%
-    split_cols_by_arm(arm_var, lbl_overall) %>%
+    split_cols_by_arm(arm_var, lbl_overall, risk_diff) %>%
     analyze(
       vars = "TRTDUR",
       var_labels = lbl_trtdur,
       show_labels = "visible",
-      afun = function(x) {
-        in_rows(
-          "Mean (SD)" = c(mean(x), sd(x)),
-          "Median (min - max)" = c(median(x), range(x)),
-          "Interquartile range" = c(quantile(x, 0.25), quantile(x, 0.75)),
-          "Total exposure (person years)" = c(
-            sum(x), as.numeric(lubridate::duration(sum(x), u_trtdur), "years")
-          ),
-          .formats = c("xx.xx (xx.xx)", "xx.xx (xx.xx - xx.xx)", "xx.xx - xx.xx", "xx.xx (xx.xx)")
-        )
-      }
+      afun = a_trtdur_stats,
+      extra_args = list(u_trtdur = u_trtdur, risk_diff = risk_diff)
     ) %>%
     split_rows_by("DUR_LBL") %>%
     count_patients_with_flags(
       var = id_var,
-      flag_variables = var_labels(df[, c("D_ANY", "D_LT1", "D_GT1", "D_GT3", "D_GT6", "D_GT12")])
+      flag_variables = c("D_ANY", "D_LT1", "D_GT1", "D_GT3", "D_GT6", "D_GT12"),
+      riskdiff = !is.null(risk_diff)
     ) %>%
     append_topleft(c("", "Parameter"))
 
@@ -91,4 +85,38 @@ make_table_05 <- function(df,
 
   if (prune_0) tbl <- prune_table(tbl)
   tbl
+}
+
+#' Analysis Function to Calculate Statistics for Treatment Duration
+#'
+#' @inheritParams make_table_05
+#' @param x (`numeric`)\cr vector of numbers to analyze.
+#' @param .spl_context (`data.frame`)\cr data frame containing information about ancestor split states
+#'   that is passed by `rtables`.
+#'
+#' @keywords internal
+a_trtdur_stats <- function(x,
+                           u_trtdur,
+                           .spl_context) {
+  .labels <- c(
+    mean_sd = "Mean (SD)", median_range = "Median (min - max)",
+    iqr = "Interquartile range", tot_exp = "Total exposure (person years)"
+  )
+
+  cur_split <- tail(.spl_context$cur_col_split_val[[1]], 1)
+  if (!grepl("^riskdiff", cur_split)) {
+    x_stats <- list(
+      mean_sd = c(mean(x), sd(x)),
+      median_range = c(median(x), range(x)),
+      iqr = c(quantile(x, 0.25), quantile(x, 0.75)),
+      tot_exp = c(sum(x), as.numeric(lubridate::duration(sum(x), u_trtdur), "years"))
+    )
+    .formats <- c(
+      mean_sd = "xx.xx (xx.xx)", median_range = "xx.xx (xx.xx - xx.xx)",
+      iqr = "xx.xx - xx.xx", tot_exp = "xx.xx (xx.xx)"
+    )
+    in_rows(.list = x_stats, .formats = .formats, .labels = .labels)
+  } else { # print NAs in the risk difference column
+    in_rows(.list = list(mean_sd = NA, median_range = NA, iqr = NA, tot_exp = NA), .labels = .labels)
+  }
 }
