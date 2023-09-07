@@ -30,7 +30,7 @@ pref_var <- "AETERM"
 # Output Table
 risk_diff <- list(arm_x = "B: Placebo", arm_y = "A: Drug X") # optional
 make_table_20(
-  adae = adae, alt_counts_df = adsl, pref_var = pref_var, aesifl_var = "AESIFL", 
+  adae = adae, alt_counts_df = adsl, pref_var = pref_var, aesifl_var = "AESIFL",
   aelabfl_var = "AELABFL", risk_diff = risk_diff
 )
 ```
