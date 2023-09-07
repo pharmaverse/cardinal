@@ -79,6 +79,8 @@ make_table_09 <- function(adae,
 # test risk difference (if specified)
 # test lbl_overall (if specified)
 # test whether header_string is updated if necessary
+# test show_colcounts if specified
+# test prune_0
 
 make_table_09_tplyr <- function(adae,
                                 pop_data_df = NULL,
@@ -86,8 +88,10 @@ make_table_09_tplyr <- function(adae,
                                 soc_var = "AESOC",
                                 pref_var = "AEDECOD",
                                 risk_diff_pairs = NULL,
-                                tplyr_raw = FALSE,
-                                lbl_overall = NULL
+                                show_colcounts = TRUE,
+                                lbl_overall = NULL,
+                                prune_0 = TRUE,
+                                tplyr_raw = FALSE
                                 ) {
   # Example
   # TODO: remove
@@ -103,8 +107,11 @@ make_table_09_tplyr <- function(adae,
   # adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
   # arm_var <- "ARM"
   # pref_var <- "AEDECOD"
-  # risk_diff_pairs <- list(c("A: Drug X", "B: Placebo"))
+  # soc_var <- "AESOC"
+  # risk_diff_pairs <- list(c("A: Drug X", "B: Placebo"), c("A: Drug X", "C: Combination"))
   # lbl_overall <- "Total subjects"
+  # show_colcounts <- TRUE
+  # prune_0 <- TRUE
 
   # TODO: checkmate
   # adae and pop_data_df must be data.frames with certain columns
@@ -113,16 +120,23 @@ make_table_09_tplyr <- function(adae,
   # tplyr_raw must be logical/boolean
   # risk_diff_pairs must be a list of character vectors length 2 and its elements must exist in the arm_var column of adae
   # lbl_overall must be either character or NULL
+  # prune_0 lgl
 
   # Initialize column headers
   arm_names <- levels(adae[[arm_var]])
+
   header_string <- paste0(
     "System Organ Class\n  Reported Term for Adverse Event|", # \\line
-    paste0(paste(arm_names, "\n(N=**", arm_names, "**)", sep = ""), collapse = "|") #\\line
+    paste0(
+      if (show_colcounts) # paste total counts to arm names
+        paste(arm_names, "\n(N=**", arm_names, "**)", sep = "")
+      else # use only arm names
+        arm_names,
+      collapse = "|") #\\line
   )
 
   # Initiate table structure
-  structure <- Tplyr::tplyr_table(adae, treat_var = !!rlang::sym(arm_var), where = (SAFFL == "Y" & AESER == "Y"))
+  structure <- Tplyr::tplyr_table(adae, treat_var = !!rlang::sym(arm_var), where = (SAFFL == "Y" & AESER == "Y")) # TODO: !hard-code both
 
   # Use alternative counts if specified
   if (!is.null(pop_data_df)) {
@@ -136,9 +150,13 @@ make_table_09_tplyr <- function(adae,
     structure <- structure %>%
       Tplyr::add_total_group(group_name = lbl_overall)
 
-    header_string <- paste0(header_string, "|", lbl_overall)
+    header_string <- paste0(
+      header_string, "|", lbl_overall,
+      if (show_colcounts) paste0("\n(N=**", lbl_overall, "**)")
+    )
   }
 
+  # Create table layers
   layer1 <- structure %>%
     Tplyr::group_count("Any SAE") %>%
     Tplyr::set_distinct_by(USUBJID)
@@ -157,22 +175,30 @@ make_table_09_tplyr <- function(adae,
     header_string <- paste0(header_string, paste0(rd_part, collapse = ""))
   }
 
+  # TODO: read f_str help to remove blank spaces within the percentage parenthesis
 
-
-
-
-
-  # TODO: read f_str help to remove blank spaces within the percentage paranthesis
-
+  # Build table
   table <- structure %>%
     Tplyr::add_layers(layer1, layer2) %>%
-    Tplyr::build() %>%
+    Tplyr::build()
+
+  # Revome "all zero"-rows if specified
+  if (prune_0) {
+    table <- table %>%
+      mutate(across(starts_with("var"), ~gsub("[0()\\%\\. ]", "", .x), .names = "detect_0_{.col}")) %>%
+      filter(if_any(starts_with("detect_0"), ~ .x != ""))
+  }
+
+  # Clean-up table
+  table <- table %>%
     dplyr::arrange(ord_layer_index, ord_layer_1, ord_layer_2) %>% # TODO: confirm order with make_table_09() -> refer to https://atorus-research.github.io/Tplyr/articles/post_processing.html#highly-customized-sort-variables for sorting according to occurence
     dplyr::select(dplyr::starts_with(c("row_label", "var", "rdiff"))) %>%
-    Tplyr::add_column_headers(s = header_string, header_n = header_n(structure)) #%>%
+    Tplyr::add_column_headers(s = header_string, header_n = Tplyr::header_n(structure)) #%>%
     # dplyr::mutate(row_label1 = Tplyr::str_indent_wrap(row_label1, width = 10))
 
   table
+
+
 
 
   # Handle missings
@@ -181,6 +207,8 @@ make_table_09_tplyr <- function(adae,
   # if (!tplyr_raw) return a table formatted with tfrmt
 
   # footnotes can only be added for tplyr_raw = FALSE
+
+  # TODO supress warnings
 
 
 
