@@ -2,7 +2,7 @@
 % Please edit documentation in R/fda-table_09.R
 \name{create_table_09_data}
 \alias{create_table_09_data}
-\title{Helper function to calculate the data for \code{make_table08_gt()}}
+\title{Helper function to create the data for \code{make_table08_gt()}}
 \usage{
 create_table_09_data(
   adae,
@@ -33,5 +33,8 @@ list containing the counted data to be displayed for table 9 and
 a \code{data.frame} containing information about the total N for each group
 }
 \description{
-Helper function to calculate the data for \code{make_table08_gt()}
+Helper function to create the data for \code{make_table08_gt()}
+}
+\details{
+If \code{lbl_overall} is not \code{NULL} only the data for the overall column will be generated
 }

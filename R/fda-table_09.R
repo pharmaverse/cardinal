@@ -131,7 +131,7 @@ make_table_09_gt <- function(adae,
   checkmate::assert_logical(show_colcounts)
 
   adae <- adae %>%
-    dplyr::filter(.data[[saffl_var]] == "Y", .data[[ser_var]] == "Y")
+    filter(.data[[saffl_var]] == "Y", .data[[ser_var]] == "Y")
 
   # create data for table 09
   # lbl_overall must be NULL to get the data for all columns besides the overall column
@@ -153,17 +153,17 @@ make_table_09_gt <- function(adae,
   rows_to_indent <- which(!is.na(result_data[[pref_var]]))
 
   result_data <- result_data %>%
-    dplyr::mutate(
-      !!soc_var := dplyr::if_else(is.na(.data[[soc_var]]), "Any SAE", .data[[soc_var]]),
-      !!pref_var := dplyr::if_else(is.na(.data[[pref_var]]), .data[[soc_var]], .data[[pref_var]])
+    mutate(
+      !!soc_var := if_else(is.na(.data[[soc_var]]), "Any SAE", .data[[soc_var]]),
+      !!pref_var := if_else(is.na(.data[[pref_var]]), .data[[soc_var]], .data[[pref_var]])
     ) %>%
-    dplyr::select(-dplyr::any_of(soc_var))
+    select(-any_of(soc_var))
 
   gt_table <- result_data %>%
-    gt::gt(
+    gt(
       rowname_col = pref_var
     ) %>%
-    gt::tab_stub_indent(rows = rows_to_indent, indent = 2)
+    tab_stub_indent(rows = rows_to_indent, indent = 2)
 
 
   if (show_colcounts) {
@@ -171,33 +171,33 @@ make_table_09_gt <- function(adae,
     total_N <- result_list[["total_N"]]
 
     set_col_labels <- function(x) {
-     gt::html(paste0(x, "<br/>(N=", total_N[[x]], ")"))
+     html(paste0(x, "<br/>(N=", total_N[[x]], ")"))
     }
 
     gt_table <- gt_table %>%
-      gt::cols_label_with(fn = set_col_labels)
+      cols_label_with(fn = set_col_labels)
   }
 
 
   label <- paste(lbl_soc_var, "<br/> &nbsp;&nbsp;", lbl_pref_var)
 
   gt_table <- gt_table %>%
-    gt::tab_stubhead(label = gt::md(label)) %>%
-    gt::cols_align(align = "center", columns = -1) # center all columns besides the first
+    tab_stubhead(label = md(label)) %>%
+    cols_align(align = "center", columns = -1) # center all columns besides the first
 
   if (!is.null(annotations)) {
     if (!is.null(annotations[["title"]])) {
       gt_table <- gt_table %>%
-        gt::tab_header(annotations[["title"]])
+        tab_header(annotations[["title"]])
     }
     if (!is.null(annotations[["subtitle"]])) {
       gt_table <- gt_table %>%
-        gt::tab_header(annotations[["title"]], subtitle = annotations[["subtitle"]])
+        tab_header(annotations[["title"]], subtitle = annotations[["subtitle"]])
     }
     if (!is.null(annotations[["footnotes"]])) {
       lapply(annotations[["footnotes"]], function(x) {
         gt_table <<- gt_table %>%
-          gt::tab_footnote(x)
+          tab_footnote(x)
       })
     }
   }
@@ -218,35 +218,35 @@ create_table_09_data <- function(adae, alt_counts_df, arm_var, id_var, soc_var, 
   # count observations
   basis_df <- if (!is.null(alt_counts_df)) alt_counts_df else adae
   N_data <- basis_df %>%
-    { if (is.null(lbl_overall)) dplyr::group_by(., .data[[arm_var]]) else . } %>%
-    dplyr::mutate(N = dplyr::n()) %>%
-    dplyr::ungroup() %>%
-    dplyr::select(dplyr::all_of(c(id_var, arm_var, "N")))
+    { if (is.null(lbl_overall)) group_by(., .data[[arm_var]]) else . } %>%
+    mutate(N = n()) %>%
+    ungroup() %>%
+    select(all_of(c(id_var, arm_var, "N")))
 
   total_N <- N_data %>%
-    { if (is.null(lbl_overall)) dplyr::group_by(., .data[[arm_var]]) else . }  %>%
-    dplyr::distinct(N) %>%
-    { if (is.null(lbl_overall)) tidyr::pivot_wider(.,
-                                                  names_from = dplyr::all_of(arm_var),
+    { if (is.null(lbl_overall)) group_by(., .data[[arm_var]]) else . }  %>%
+    distinct(N) %>%
+    { if (is.null(lbl_overall)) pivot_wider(.,
+                                                  names_from = all_of(arm_var),
                                                   values_from = N)
-      else dplyr::rename(., !!lbl_overall := "N")
+      else rename(., !!lbl_overall := "N")
     }
 
   adae <- adae %>%
-    dplyr::left_join(N_data, by = c(id_var, arm_var))
+    left_join(N_data, by = c(id_var, arm_var))
 
   input_list <- list(NULL, soc_var, c(soc_var, pref_var))
 
   data_list <- lapply(input_list, function(x) {
-    count_subjects(adae = adae, arm_var = arm_var, sub_level_vars = x, lbl_overall = lbl_overall)
+    count_subjects(adae = adae, arm_var = arm_var, id_var = id_var, sub_level_vars = x, lbl_overall = lbl_overall)
   })
 
   sel_cols <- if (is.null(lbl_overall)) levels(N_data[[arm_var]]) else lbl_overall
 
   result_data <- data_list %>%
-    dplyr::bind_rows() %>%
-    dplyr::select(dplyr::all_of(c(soc_var, pref_var, sel_cols))) %>%
-    dplyr::arrange(dplyr::desc(is.na(.data[[soc_var]])), .data[[soc_var]], dplyr::desc(is.na(.data[[pref_var]])))
+    bind_rows() %>%
+    select(all_of(c(soc_var, pref_var, sel_cols))) %>%
+    arrange(desc(is.na(.data[[soc_var]])), .data[[soc_var]], desc(is.na(.data[[pref_var]])))
 
   list(data = result_data, total_N = total_N)
 }
@@ -258,7 +258,7 @@ create_table_09_data <- function(adae, alt_counts_df, arm_var, id_var, soc_var, 
 #' @param sub_level_vars (`NULL` or `character`) specifying the sub group for counted subjects
 #'
 #' @return A `data.frame` containing the number of subjects with `sub_level_vars` events
-count_subjects <- function(adae, arm_var, sub_level_vars = NULL, lbl_overall = NULL) {
+count_subjects <- function(adae, arm_var, id_var, sub_level_vars = NULL, lbl_overall = NULL) {
   grouping <- is.null(lbl_overall)
   if (grouping) {
     if (!is.null(sub_level_vars)) {
@@ -273,18 +273,18 @@ count_subjects <- function(adae, arm_var, sub_level_vars = NULL, lbl_overall = N
   }
 
   adae %>%
-    {if (grouping || !is.null(sub_level_vars)) dplyr::group_by(., dplyr::across(dplyr::all_of(grouping_vars))) else . } %>%
-    dplyr::summarize(
-      val = dplyr::n_distinct(.data[[id_var]]), #count on patient level
+    {if (grouping || !is.null(sub_level_vars)) group_by(., across(all_of(grouping_vars))) else . } %>%
+    summarize(
+      val = n_distinct(.data[[id_var]]), #count on patient level
       pct = format(val/mean(N)*100, digits = 1, nsmall = 1),
       combined = paste0(val, " (", pct, "%)"),
       .groups = "drop"
     ) %>%
-    {if (grouping) tidyr::pivot_wider( .,
-                                       id_cols = dplyr::all_of(sub_level_vars),
-                                       names_from = dplyr::all_of(arm_var),
+    {if (grouping) pivot_wider( .,
+                                       id_cols = all_of(sub_level_vars),
+                                       names_from = all_of(arm_var),
                                        values_from = combined)
-      else dplyr::rename(., !!lbl_overall := "combined") %>%
-        dplyr::select(-c("val", "pct"))
+      else rename(., !!lbl_overall := "combined") %>%
+        select(-c("val", "pct"))
     }
 }

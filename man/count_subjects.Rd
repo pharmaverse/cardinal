@@ -5,12 +5,20 @@
 \title{Helper function for \code{create_table_09_data()}
 Used for counting subjects per group}
 \usage{
-count_subjects(adae, arm_var, sub_level_vars = NULL, lbl_overall = NULL)
+count_subjects(
+  adae,
+  arm_var,
+  id_var,
+  sub_level_vars = NULL,
+  lbl_overall = NULL
+)
 }
 \arguments{
 \item{adae}{(\code{data.frame})\cr dataset (typically ADAE) required to build table.}
 
 \item{arm_var}{(\code{character})\cr arm variable used to split table into columns.}
+
+\item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
 
 \item{sub_level_vars}{(\code{NULL} or \code{character}) specifying the sub group for counted subjects}
 
