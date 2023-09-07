@@ -37,8 +37,8 @@ FDA Table 4: Patient Disposition, Pooled Analyses
 }
 \details{
 \itemize{
-\item \code{df} must contain \code{SAFFL}, \code{USUBJID}, and the variables specified by \code{arm_var}
-and \code{trtedtm_var}.
+\item \code{df} must contain \code{SAFFL}, \code{USUBJID}, \code{RANDFL}, \code{ITTFL},\code{PPROTFL}, \code{EOTSTT}, \code{DCTREAS}, \code{EOSSTT}, \code{DCSREAS}
+and the variables specified by \code{arm_var}.
 \item If specified, \code{alt_counts_df} must contain \code{SAFFL}, \code{USUBJID}, and the variable specified by \code{arm_var}.
 \item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
 flag variables are treated as \code{"N"}.
