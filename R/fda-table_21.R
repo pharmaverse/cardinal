@@ -43,6 +43,7 @@ make_table_21 <- function(df,
                           arm_var = "ARM",
                           vars = c("SEX", "AGEGR1", "RACE", "ETHNIC"),
                           denom = c("N_s", "N_col", "n"),
+                          lbl_overall = NULL,
                           lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
                           prune_0 = FALSE,
                           annotations = NULL) {
@@ -52,12 +53,35 @@ make_table_21 <- function(df,
   df <- df %>%
     filter(SAFFL == "Y") %>%
     df_explicit_na()
+
+  # For percentages calculations in case of N_s, add the overall observations
+  if (!is.null(lbl_overall) && denom == "N_s") {
+    df_ovrl <- df %>% mutate(
+      !!arm_var := {{lbl_overall}}
+    )
+    df <- rbind(df, df_ovrl)
+  }
+
   sapply(vars, function(x) checkmate::assert_factor(df[[x]]))
 
   alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
 
-  lyt <- basic_table_annot(show_colcounts, annotations) %>%
-    split_cols_by_arm(arm_var) %>%
+  # For percentages calculations in case of N_s, add the overall observations
+  if (!is.null(lbl_overall) && denom == "N_s") {
+    df_ovrl2 <- alt_counts_df %>% mutate(
+      !!arm_var := {{lbl_overall}}
+    )
+    alt_counts_df <- rbind(alt_counts_df, df_ovrl2)
+  }
+
+  lyt <- basic_table_annot(show_colcounts, annotations)
+  if (!is.null(lbl_overall) && denom != "N_s") {
+    lyt <- lyt %>% split_cols_by_arm(arm_var, lbl_overall)
+  }
+  else {
+    lyt <- lyt %>% split_cols_by_arm(arm_var)
+  }
+  lyt <- lyt %>%
     count_patients_with_event(
       "USUBJID",
       filters = c("AESER" = "Y"),
