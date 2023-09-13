@@ -84,7 +84,10 @@ make_table_09 <- function(adae,
 
 make_table_09_tplyr <- function(adae,
                                 pop_data_df = NULL,
+                                id_var = "USUBJID",
                                 arm_var = "ARM",
+                                saffl_var = "SAFFL",
+                                ser_var = "AESER",
                                 soc_var = "AESOC",
                                 pref_var = "AEDECOD",
                                 risk_diff_pairs = NULL,
@@ -112,6 +115,9 @@ make_table_09_tplyr <- function(adae,
   # lbl_overall <- "Total subjects"
   # show_colcounts <- TRUE
   # prune_0 <- TRUE
+  # id_var <- "USUBJID"
+  # saffl_var <- "SAFFL"
+  # ser_var <- "AESER"
 
   # TODO: checkmate
   # adae and pop_data_df must be data.frames with certain columns
@@ -121,6 +127,7 @@ make_table_09_tplyr <- function(adae,
   # risk_diff_pairs must be a list of character vectors length 2 and its elements must exist in the arm_var column of adae
   # lbl_overall must be either character or NULL
   # prune_0 lgl
+  # ... all arguments ...
 
   # Initialize column headers
   arm_names <- levels(adae[[arm_var]])
@@ -136,13 +143,13 @@ make_table_09_tplyr <- function(adae,
   )
 
   # Initiate table structure
-  structure <- Tplyr::tplyr_table(adae, treat_var = !!rlang::sym(arm_var), where = (SAFFL == "Y" & AESER == "Y")) # TODO: !hard-code both
+  structure <- Tplyr::tplyr_table(adae, treat_var = !!rlang::sym(arm_var), where = (!!rlang::sym(saffl_var) == "Y" & !!rlang::sym(ser_var) == "Y"))
 
   # Use alternative counts if specified
   if (!is.null(pop_data_df)) {
     structure <- structure %>%
       Tplyr::set_pop_data(pop_data_df) %>%
-      Tplyr::set_pop_where(TRUE) # takes all subjects as basis, not only those where AESER == "Y"!
+      Tplyr::set_pop_where(TRUE) # takes all subjects as basis, not only those where !!rlang::sym(ser_var) == "Y"!
   }
 
   # Add total column if specified
@@ -159,11 +166,11 @@ make_table_09_tplyr <- function(adae,
   # Create table layers
   layer1 <- structure %>%
     Tplyr::group_count("Any SAE") %>%
-    Tplyr::set_distinct_by(USUBJID)
+    Tplyr::set_distinct_by(!!rlang::sym(id_var))
 
   layer2 <- structure %>%
     Tplyr::group_count(vars(!!sym(soc_var), !!sym(pref_var))) %>%
-    Tplyr::set_distinct_by(USUBJID) %>%
+    Tplyr::set_distinct_by(!!rlang::sym(id_var)) %>%
     Tplyr::set_nest_count(TRUE)
 
   # Add risk difference column(s) if specified
