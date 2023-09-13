@@ -201,14 +201,14 @@ make_table_09_tplyr <- function(adae,
 
 
 
-  # Handle missings
+  # TODO: Handle missings
 
 
   # if (!tplyr_raw) return a table formatted with tfrmt
 
   # footnotes can only be added for tplyr_raw = FALSE
 
-  # TODO supress warnings
+  # TODO: supress warnings
 
 
 
