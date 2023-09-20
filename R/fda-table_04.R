@@ -1,8 +1,8 @@
 #' FDA Table 4: Patient Disposition, Pooled Analyses
 #'
 #' @details
-#' * `df` must contain `SAFFL`, `USUBJID`, and the variables specified by `arm_var`
-#'   and `trtedtm_var`.
+#' * `df` must contain `SAFFL`, `USUBJID`, `RANDFL`, `ITTFL`,`PPROTFL`, `EOTSTT`, `DCTREAS`, `EOSSTT`, `DCSREAS`
+#' and the variables specified by `arm_var`.
 #' * If specified, `alt_counts_df` must contain `SAFFL`, `USUBJID`, and the variable specified by `arm_var`.
 #' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
 #'   flag variables are treated as `"N"`.
@@ -42,7 +42,7 @@ make_table_04 <- function(df,
                           prune_0 = FALSE,
                           annotations = NULL) {
   checkmate::assert_subset(c(
-    "USUBJID", "ARM",
+    "USUBJID", arm_var,
     "RANDFL", "ITTFL", "SAFFL", "PPROTFL",
     "EOTSTT", "DCTREAS", "EOSSTT", "DCSREAS"
   ), names(df))
