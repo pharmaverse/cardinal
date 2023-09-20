@@ -44,11 +44,11 @@ test_that("Table 21 generation works with custom values: N_col denominator and n
 Pooled Analysis (or Trial X)",
       main_footer = "Source: [include Applicant source, datasets and/or software tools used].",
       prov_footer = paste(
-      "Defined as any untoward medical occurrence that, at any dose that results in death, is life-threatening, requires hospitalization or",
-      "prolongation of existing hospitalization, results in persistent incapacity or substantial disruption of the ability to conduct normal life",
-      "functions, or is a congenital anomaly or birth defect.",
-      "Abbreviations: N, number of patients in treatment arm; n, number of patients with adverse event; Ns, total number of patients for",
-      "each specific subgroup; SAE, serious adverse event"
+        "Defined as any untoward medical occurrence that, at any dose that results in death, is life-threatening, requires hospitalization or",
+        "prolongation of existing hospitalization, results in persistent incapacity or substantial disruption of the ability to conduct normal life",
+        "functions, or is a congenital anomaly or birth defect.",
+        "Abbreviations: N, number of patients in treatment arm; n, number of patients with adverse event; Ns, total number of patients for",
+        "each specific subgroup; SAE, serious adverse event"
       )
     )
   )
