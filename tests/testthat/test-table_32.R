@@ -1,5 +1,5 @@
-adsl <- adsl_raw
-advs <- advs_raw
+adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
+advs <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "advs")
 
 test_that("Table 32 generation works with default values", {
   result <- make_table_32(advs, adsl)
@@ -39,6 +39,14 @@ test_that("Table 32 generation works with pruned rows", {
 
 test_that("Table 32 (gt) generation works with default values", {
   result <- suppressWarnings(make_table_32_gt(advs = advs))
+
+  res <- expect_silent(result[["_data"]])
+  expect_snapshot(res)
+})
+
+
+test_that("Table 32 (gt) generation works with custom values", {
+  result <- suppressWarnings(make_table_32_gt(advs = advs, lbl_overall = "Total Population"))
 
   res <- expect_silent(result[["_data"]])
   expect_snapshot(res)

@@ -95,8 +95,7 @@ make_table_32 <- function(advs,
 make_table_32_gt <- function(advs,
                              alt_counts_df = NULL,
                              arm_var = "ARM",
-                             lbl_overall = NULL,
-                             annotations = NULL) {
+                             lbl_overall = NULL) {
   checkmate::assert_subset(c(
     "SAFFL", "USUBJID", "AVISITN", "PARAMCD", "AVAL", "AVALU", arm_var
   ), names(advs))
@@ -139,13 +138,14 @@ make_table_32_gt <- function(advs,
       statistic = list(all_categorical() ~ "{n} ({p}%)"),
       digits = everything() ~ 2
     ) %>%
-    modify_header(all_stat_cols() ~ "**{level}**  \n N = {n}") %>%
-    modify_footnote(update = everything() ~ NA)
+    modify_header(all_stat_cols() ~ "**{level}**  \n (N={n})")
 
   if (!is.null(lbl_overall)) {
     tbl <- tbl %>%
-      add_overall(last = TRUE, col_label = lbl_overall)
+      add_overall(last = TRUE, col_label = paste0("**", lbl_overall, "**  \n (N={n})"))
   }
+
+  tbl <- tbl %>% modify_footnote(update = everything() ~ NA)
 
   tbl
 }
