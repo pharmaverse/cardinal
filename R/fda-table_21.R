@@ -130,7 +130,7 @@ a_count_occurrences_ser_ae <- function(df,
 
   denom <- match.arg(denom)
   if (denom == "N_s" && is.null(df_denom)) {
-    stop("If using subgroup population counts, `df_denom` must be specified.")
+    stop("If using subgroup population counts, `df_denom` must be specified.") # nocov
   }
   dn <- switch(denom,
     N_s = lapply(

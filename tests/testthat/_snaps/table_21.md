@@ -84,8 +84,6 @@
         AMERICAN INDIAN OR ALASKA NATIVE             7 (5.2%)       8 (6%)         5 (3.8%)   
         MULTIPLE                                         0         1 (0.7%)           0       
         NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER        0         1 (0.7%)           0       
-        OTHER                                            0             0              0       
-        UNKNOWN                                          0             0              0       
       ETHNIC                                                                                  
         NOT REPORTED                                 6 (4.5%)      7 (5.2%)        7 (5.3%)   
         HISPANIC OR LATINO                           11 (8.2%)     13 (9.7%)      11 (8.3%)   
@@ -95,7 +93,7 @@
       
       Source: [include Applicant source, datasets and/or software tools used].
       
-      Defined as any untoward medical occurrence that, at any dose that results in death, is life-threatening, requires hospitalization or prolongation of existing hospitalization, results in persistent incapacity or substantial disruption of the ability to conduct normal life functions, or is a congenital anomaly or birth defect. Abbreviations: N, number of patients in treatment arm; n, number of patients with adverse event; Ns, total number of patients for each specific subgroup; SAE, serious adverse event
+      Defined as any untoward medical occurrence that, at any dose that results in death, is life-threatening, requires hospitalization or prolongation of existing hospitalization, results in persistent incapacity or substantial disruption of the ability to conduct normal life, functions, or is a congenital anomaly or birth defect. Abbreviations: N, number of patients in treatment arm; n, number of patients with adverse event; Ns, total number of patients for each specific subgroup; SAE, serious adverse event
 
 # Table 21 generation works with some NA values
 
