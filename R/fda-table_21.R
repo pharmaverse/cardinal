@@ -55,32 +55,29 @@ make_table_21 <- function(df,
     df_explicit_na()
 
   # For percentages calculations in case of N_s, add the overall observations
+  denom <- match.arg(denom)
   if (!is.null(lbl_overall) && denom == "N_s") {
-    df_ovrl <- df %>% mutate(
-      !!arm_var := {{lbl_overall}}
-    )
+    df_ovrl <- df
+    df_ovrl[[arm_var]] <- lbl_overall
     df <- rbind(df, df_ovrl)
-  }
 
-  sapply(vars, function(x) checkmate::assert_factor(df[[x]]))
+    if (!is.null(alt_counts_df)) {
+      alt_df_ovrl <- alt_counts_df
+      alt_df_ovrl[[arm_var]] <- lbl_overall
+      alt_counts_df <- rbind(alt_counts_df, alt_df_ovrl)
+    }
+  }
 
   alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
 
-  # For percentages calculations in case of N_s, add the overall observations
-  if (!is.null(lbl_overall) && denom == "N_s") {
-    df_ovrl2 <- alt_counts_df %>% mutate(
-      !!arm_var := {{lbl_overall}}
-    )
-    alt_counts_df <- rbind(alt_counts_df, df_ovrl2)
+  lyt <- basic_table_annot(show_colcounts, annotations)
+
+  lyt <- if (!is.null(lbl_overall) && denom != "N_s") {
+    lyt %>% split_cols_by_arm(arm_var, lbl_overall)
+  } else {
+    lyt %>% split_cols_by_arm(arm_var)
   }
 
-  lyt <- basic_table_annot(show_colcounts, annotations)
-  if (!is.null(lbl_overall) && denom != "N_s") {
-    lyt <- lyt %>% split_cols_by_arm(arm_var, lbl_overall)
-  }
-  else {
-    lyt <- lyt %>% split_cols_by_arm(arm_var)
-  }
   lyt <- lyt %>%
     count_patients_with_event(
       "USUBJID",
