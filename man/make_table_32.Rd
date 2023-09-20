@@ -20,8 +20,7 @@ make_table_32_gt(
   advs,
   alt_counts_df = NULL,
   arm_var = "ARM",
-  lbl_overall = NULL,
-  annotations = NULL
+  lbl_overall = NULL
 )
 }
 \arguments{
