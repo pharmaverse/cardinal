@@ -82,6 +82,7 @@ make_table_09 <- function(adae,
 # test show_colcounts if specified
 # test prune_0
 
+#' @import gt
 make_table_09_tplyr <- function(adae,
                                 pop_data_df = NULL,
                                 id_var = "USUBJID",
@@ -90,20 +91,20 @@ make_table_09_tplyr <- function(adae,
                                 ser_var = "AESER",
                                 soc_var = "AESOC",
                                 pref_var = "AEDECOD",
+                                lbl_soc_var = "System Organ Class",
+                                lbl_pref_var = "Reported Term for Adverse Event",
                                 risk_diff_pairs = NULL,
                                 show_colcounts = TRUE,
                                 lbl_overall = NULL,
                                 prune_0 = TRUE,
-                                tplyr_raw = FALSE
+                                tplyr_raw = FALSE,
+                                annotations = NULL
                                 ) {
   # Example
   # TODO: remove
   # adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
   # adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
   # make_table_09_tplyr(adae = adae, pop_data_df = adsl)
-
-  # fnc <- function(x, bool) { if (bool) x %>% add_layer(group_count("Something")) }
-  # or rather: https://stackoverflow.com/questions/30604107/r-conditional-evaluation-when-using-the-pipe-operator
 
   # TODO: remove
   # pop_data_df <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
@@ -118,6 +119,15 @@ make_table_09_tplyr <- function(adae,
   # id_var <- "USUBJID"
   # saffl_var <- "SAFFL"
   # ser_var <- "AESER"
+  # lbl_soc_var <- "System Organ Class"
+  # lbl_pref_var <- "Reported Term for Adverse Event"
+  # tplyr_raw <- FALSE
+  # annotations <- list(
+  #   title = "Table 9. Patients with Serious Adverse Events by System Organ Class and Preferred Term, Safety Population, Pooled Analyses",
+  #   subtitles = c("I am proud to be a subtitle", "Me too!"),
+  #   main_footer = c("Main footer 1", "Main footer 2"),
+  #   prov_footer = c("abc", "def")
+  # )
 
   # TODO: checkmate
   # adae and pop_data_df must be data.frames with certain columns
@@ -128,12 +138,13 @@ make_table_09_tplyr <- function(adae,
   # lbl_overall must be either character or NULL
   # prune_0 lgl
   # ... all arguments ...
+  # annotations: only one title + can only contain title, subtitle, main_footer, prov_footer
 
   # Initialize column headers
   arm_names <- levels(adae[[arm_var]])
 
   header_string <- paste0(
-    "System Organ Class\n  Reported Term for Adverse Event|", # \\line
+    paste0(lbl_soc_var, " \n ", lbl_pref_var,  "|"), # \\line
     paste0(
       if (show_colcounts) # paste total counts to arm names
         paste(arm_names, "\n(N=**", arm_names, "**)", sep = "")
@@ -182,8 +193,6 @@ make_table_09_tplyr <- function(adae,
     header_string <- paste0(header_string, paste0(rd_part, collapse = ""))
   }
 
-  # TODO: read f_str help to remove blank spaces within the percentage parenthesis
-
   # Build table
   table <- structure %>%
     Tplyr::add_layers(layer1, layer2) %>%
@@ -198,27 +207,48 @@ make_table_09_tplyr <- function(adae,
 
   # Clean-up table
   table <- table %>%
-    dplyr::arrange(ord_layer_index, ord_layer_1, ord_layer_2) %>% # TODO: confirm order with make_table_09() -> refer to https://atorus-research.github.io/Tplyr/articles/post_processing.html#highly-customized-sort-variables for sorting according to occurence
+    # TODO dplyr::arrange(ord_layer_index, ord_layer_1, ord_layer_2) %>% # TODO: confirm order with make_table_09() -> refer to https://atorus-research.github.io/Tplyr/articles/post_processing.html#highly-customized-sort-variables for sorting according to occurence
     dplyr::select(dplyr::starts_with(c("row_label", "var", "rdiff"))) %>%
-    Tplyr::add_column_headers(s = header_string, header_n = Tplyr::header_n(structure)) #%>%
-    # dplyr::mutate(row_label1 = Tplyr::str_indent_wrap(row_label1, width = 10))
+    Tplyr::add_column_headers(s = header_string, header_n = Tplyr::header_n(structure))
 
-  table
+  if (tplyr_raw) return(table)
+  # else return gt_tbl object as follows
 
+  # Prepare for header row
+  lbl_stubhead <- paste(lbl_soc_var, "<br/> &nbsp;&nbsp;", lbl_pref_var)
+  lbl_cols <- gsub("\n", "<br/>", as.character(table[1, -1]))
+  names(lbl_cols) <- colnames(table)[-1]
 
+  # Trim prepending blank spaces from preferred term variable values
+  pref_var_lvls <- unique(adae[[pref_var]])
+  ind_prep_blank <- which(substr(pref_var_lvls, 1, 1) == " ")
+  trmd_pref_var_lvls <- pref_var_lvls
+  trmd_pref_var_lvls[ind_prep_blank] <- sub(" +", "", trmd_pref_var_lvls[ind_prep_blank])
 
+  gt_tbl <- table[-1,] %>% # drop header row
+    mutate(
+      # remove prepending blank spaces since they are ignored by gt
+      row_label1 = if_else(substr(row_label1, 1, 1) == " ", sub(" +", "", row_label1), row_label1),
+      # remove blank space between opening bracket and percentage number
+      across(!row_label1, ~ sub("\\( +", "(", .x))
+    ) %>%
+    gt(rowname_col = "row_label1") %>%
+    tab_stub_indent(any_of(trmd_pref_var_lvls), indent = 2) %>%
+    tab_stubhead(md(lbl_stubhead)) %>%
+    cols_label(.list = as.list(lbl_cols), .fn = md) %>%
+    tab_header(
+      title = if (!is.null(annotations[["title"]])) md(annotations[["title"]]) else NULL,
+      subtitle = if (!is.null(annotations[["subtitles"]])) md(paste(annotations[["subtitles"]], collapse = "<br/>")) else NULL
+    ) %>%
+    tab_footnote(
+      if (!is.null(annotations[["main_footer"]])) md(paste(annotations[["main_footer"]], collapse = "<br/>")) else NULL
+    ) %>%
+    tab_source_note(
+      if (!is.null(annotations[["prov_footer"]])) md(paste(annotations[["prov_footer"]], collapse = "<br/>")) else NULL
+    )
 
   # TODO: Handle missings
-
-
-  # if (!tplyr_raw) return a table formatted with tfrmt
-
-  # footnotes can only be added for tplyr_raw = FALSE
-
   # TODO: supress warnings
-
-
-
 }
 
 

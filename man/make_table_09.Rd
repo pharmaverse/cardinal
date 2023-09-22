@@ -45,8 +45,8 @@ Safety Population, Pooled Analyses
 }
 \details{
 \itemize{
-\item \code{adae} must contain \code{SAFFL}, \code{USUBJID}, \code{AESER}, \code{AESOC}, and the variables specified
-by \code{pref_var} and \code{arm_var}.
+\item \code{adae} must contain \code{SAFFL}, \code{USUBJID}, \code{AESER}, and the variables specified
+by \code{soc_var}, \code{pref_var} and \code{arm_var}.
 \item If specified, \code{alt_counts_df} must contain \code{SAFFL}, \code{USUBJID}, and the variable specified by \code{arm_var}.
 \item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
 flag variables are treated as \code{"N"}.
