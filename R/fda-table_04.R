@@ -36,24 +36,21 @@ make_table_04 <- function(df,
                           alt_counts_df = NULL,
                           show_colcounts = TRUE,
                           arm_var = "ARM",
+                          pop_var = c("RANDFL", "SAFFL"),
+                          pop_var_lbl = c("Patients randomized", "Safety population" ),
                           lbl_overall = NULL,
                           prune_0 = FALSE,
                           annotations = NULL) {
   checkmate::assert_subset(c(
-    "USUBJID", arm_var,
-    "RANDFL", "ITTFL", "SAFFL", "PPROTFL",
+    "USUBJID", arm_var, pop_var,
     "EOTSTT", "DCTREAS", "EOSSTT", "DCSREAS"
   ), names(df))
-  assert_flag_variables(df, c("RANDFL", "ITTFL", "SAFFL", "PPROTFL"))
+  assert_flag_variables(df, pop_var)
 
   df <- df %>%
-    filter(SAFFL == "Y") %>%
     df_explicit_na() %>%
     mutate(
-      RAN = with_label(RANDFL == "Y", "Patients randomized"), # need to create
-      ITT = with_label(ITTFL == "Y", "ITT/mITT population"),
-      SAF = with_label(SAFFL == "Y", "Safety population"),
-      PPP = with_label(PPROTFL == "Y", "Per-protocol population"),
+      across(all_of(pop_var), ~ with_label(. == "Y", pop_var_lbl[match(cur_column(), pop_var)])),
       DISCSD = with_label(EOTSTT == "DISCONTINUED", "Discontinued study drug"),
       DISCSD_AE = with_label(EOTSTT == "DISCONTINUED" & DCTREAS == "ADVERSE EVENT", "Adverse event"),
       DISCSD_LOE = with_label(EOTSTT == "DISCONTINUED" & DCTREAS == "LACK OF EFFICACY", "Lack of efficacy"),
@@ -75,14 +72,8 @@ make_table_04 <- function(df,
     split_cols_by_arm(arm_var, lbl_overall) %>%
     count_patients_with_flags(
       var = "USUBJID",
-      flag_variables = var_labels(df[, "RAN"]),
-      table_names = "ran"
-    ) %>%
-    count_patients_with_flags(
-      var = "USUBJID",
-      flag_variables = var_labels(df[, c("ITT", "SAF", "PPP")]),
-      .indent_mods = 1L,
-      table_names = "ran_fl"
+      flag_variables = var_labels(df[, pop_var]),
+      table_names = "pop"
     ) %>%
     count_patients_with_flags(
       var = "USUBJID",
@@ -114,3 +105,21 @@ make_table_04 <- function(df,
 
   tbl
 }
+
+
+# library(dplyr)
+#
+adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") %>%
+  mutate(test = rbinom(400, 1, 0.5)) %>%
+  mutate(
+    RANDFL = ifelse(test == 0, "N", "Y"),
+    PPROTFL = ifelse(test == 0, "N", "Y"),
+    DCSREAS = if_else(DCSREAS %in% c(
+      "ADVERSE EVENT", "LACK OF EFFICACY", "PROTOCOL VIOLATION",
+      "DEATH", "WITHDRAWAL BY PARENT/GUARDIAN"
+    ), DCSREAS, "OTHER")
+  ) %>%
+  mutate(DCTREAS = DCSREAS)
+
+tbl <- make_table_04(df = adsl)
+tbl
