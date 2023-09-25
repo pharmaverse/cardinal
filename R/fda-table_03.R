@@ -17,18 +17,21 @@
 #' adsl <- adsl %>%
 #'   dplyr::mutate(
 #'     SCRNFL = sample(c(TRUE, NA), size = nrow(adsl), replace = TRUE),
-#'     SCRNFLRS = sample(c("Inclusion/exclusion criteria not met",
-#'                         "Patient noncompliance",
-#'                         "Consent withdrawn",
-#'                         "Other"), size = nrow(adsl), replace = TRUE),
+#'     SCRNFLRS = sample(c(
+#'       "Inclusion/exclusion criteria not met",
+#'       "Patient noncompliance",
+#'       "Consent withdrawn",
+#'       "Other"
+#'     ), size = nrow(adsl), replace = TRUE),
 #'     ENRLFL = sample(c(TRUE, NA), size = nrow(adsl), replace = TRUE),
 #'     RANDFL = sample(c(TRUE, NA), size = nrow(adsl), replace = TRUE)
 #'   )
 #'
-#' labels <- c("SCRNFL" = "Patients screened",
-#'             "SCRNFLRS" = "Reason for SCRNFL=N",
-#'             "ENRLFL" = "Patients enrolled",
-#'             "RANDFL" = "Patients randomized"
+#' labels <- c(
+#'   "SCRNFL" = "Patients screened",
+#'   "SCRNFLRS" = "Reason for SCRNFL=N",
+#'   "ENRLFL" = "Patients enrolled",
+#'   "RANDFL" = "Patients randomized"
 #' )
 #'
 #' formatters::var_labels(adsl)[names(labels)] <- labels
@@ -43,9 +46,11 @@ make_table_03 <- function(df,
                           lbl_overall = NULL,
                           prune_0 = TRUE,
                           annotations = NULL) {
-  checkmate::assert_subset(c("USUBJID",
-                             "SCRNFL","SCRNFLRS","ENRLFL","RANDFL",
-                             arm_var), names(df))
+  checkmate::assert_subset(c(
+    "USUBJID",
+    "SCRNFL", "SCRNFLRS", "ENRLFL", "RANDFL",
+    arm_var
+  ), names(df))
 
   df <- df %>%
     df_explicit_na()
