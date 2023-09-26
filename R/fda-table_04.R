@@ -1,15 +1,12 @@
 #' FDA Table 4: Patient Disposition, Pooled Analyses
 #'
 #' @details
-#' * `df` must contain `SAFFL`, `USUBJID`, `RANDFL`, `ITTFL`,`PPROTFL`, `EOTSTT`, `DCTREAS`, `EOSSTT`, `DCSREAS`
-#' and the variables specified by `arm_var`.
-#' * If specified, `alt_counts_df` must contain `SAFFL`, `USUBJID`, and the variable specified by `arm_var`.
+#' * `df` must contain `USUBJID`, `EOTSTT`, `DCTREAS`, `EOSSTT`, `DCSREAS` and the variables specified by `arm_var` and `pop_var`.
+#' * If specified, `alt_counts_df` must contain `USUBJID`, and the variable specified by `arm_var` and `pop_var`.
 #' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
 #'   flag variables are treated as `"N"`.
 #' * Columns are split by arm. Overall population column is excluded by default (see `lbl_overall` argument).
-#' * Numbers in table "Patients Treated" section are the absolute numbers of patients and fraction of `N`.
 #' * All-zero rows are not removed by default (see `prune_0` argument).
-#' * Records with missing treatment start and/or end datetime are excluded from all calculations.
 #'
 #' @inheritParams argument_convention
 #'
@@ -36,8 +33,8 @@ make_table_04 <- function(df,
                           alt_counts_df = NULL,
                           show_colcounts = TRUE,
                           arm_var = "ARM",
-                          pop_var = c("RANDFL", "SAFFL"),
-                          pop_var_lbl = c("Patients randomized", "Safety population" ),
+                          pop_var = c("RANDFL", "SAFFL", "PPROTFL"),
+                          pop_var_lbl = c("Patients randomized", "Safety population", "Per-protocol population"),
                           lbl_overall = NULL,
                           prune_0 = FALSE,
                           annotations = NULL) {
@@ -105,21 +102,3 @@ make_table_04 <- function(df,
 
   tbl
 }
-
-
-# library(dplyr)
-#
-adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") %>%
-  mutate(test = rbinom(400, 1, 0.5)) %>%
-  mutate(
-    RANDFL = ifelse(test == 0, "N", "Y"),
-    PPROTFL = ifelse(test == 0, "N", "Y"),
-    DCSREAS = if_else(DCSREAS %in% c(
-      "ADVERSE EVENT", "LACK OF EFFICACY", "PROTOCOL VIOLATION",
-      "DEATH", "WITHDRAWAL BY PARENT/GUARDIAN"
-    ), DCSREAS, "OTHER")
-  ) %>%
-  mutate(DCTREAS = DCSREAS)
-
-tbl <- make_table_04(df = adsl)
-tbl
