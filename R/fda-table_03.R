@@ -46,13 +46,15 @@ make_table_03 <- function(df,
                           lbl_overall = NULL,
                           prune_0 = TRUE,
                           annotations = NULL) {
-  checkmate::assert_subset(c(
-    "USUBJID",
-    "SCRNFL", "SCRNFLRS", "ENRLFL", "RANDFL",
-    arm_var
-  ), names(df))
+  checkmate::assert_subset(c("USUBJID", scrnfl_var, scrn_dcsreas_var, "ENRLDT", "RANDDT", arm_var), names(df))
+  assert_flag_variables(df, c(scrnfl_var, scrnfailfl_var))
 
   df <- df %>%
+    mutate(
+      SCRNFL = with_label(scrnfl_var == "Y", "Patients screened"),
+      ENRLFL = with_label(!is.na(ENRLDT), "Patients enrolled"),
+      RANDFL = with_label(!is.na(RANDDT), "Patients randomized")
+    ) %>%
     df_explicit_na()
 
   alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
@@ -61,31 +63,21 @@ make_table_03 <- function(df,
     split_cols_by_arm(arm_var, lbl_overall) %>%
     count_patients_with_flags(
       var = "USUBJID",
-      flag_variables = var_labels(df[, "SCRNFL"]),
-      table_names = "scrn",
+      flag_variables = scrnfl_var
     ) %>%
-    analyze_num_patients(
-      vars = "USUBJID",
+    split_rows_by(scrnfailfl_var, split_fun = keep_split_levels("Y")) %>%
+    summarize_num_patients(
+      var = "USUBJID",
       .stats = "unique",
-      .labels = c(unique = "Screening failures"),
-      show_labels = "hidden"
+      .labels = c(unique = "Screening failures")
     ) %>%
-    count_occurrences(
-      vars = "SCRNFLRS",
-      .indent_mods = 1,
-      denom = "n"
-    ) %>%
+    count_occurrences(vars = scrn_dcsreas_var) %>%
     count_patients_with_flags(
       var = "USUBJID",
-      flag_variables = var_labels(df[, "ENRLFL"]),
-      table_names = "enrl"
+      flag_variables = c("ENRLFL", "RANDFL"),
+      nested = FALSE
     ) %>%
-    count_patients_with_flags(
-      var = "USUBJID",
-      flag_variables = var_labels(df[, "RANDFL"]),
-      table_names = "rand"
-    ) %>%
-    append_topleft(c("", "Disposition"))
+    append_topleft("Disposition")
 
   tbl <- build_table(lyt, df = df, alt_counts_df = alt_counts_df)
   if (prune_0) tbl <- prune_table(tbl)
