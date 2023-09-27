@@ -19,31 +19,24 @@ library(scda)
 
 adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
 
-# Pre-Processing - Add any variables needed in your table to df
+# Pre-Processing - Add all required screening variables are in df
+set.seed(1)
+adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
+adsl$RANDDT[sample(1:nrow(adsl), 100)] <- NA
 adsl <- adsl %>%
-  dplyr::mutate(
-    SCRNFL = sample(c(TRUE, NA), size = nrow(adsl), replace = TRUE),
-    SCRNFLRS = sample(c(
-      "Inclusion/exclusion criteria not met",
-      "Patient noncompliance",
-      "Consent withdrawn",
-      "Other"
-    ), size = nrow(adsl), replace = TRUE),
-    ENRLFL = sample(c(TRUE, NA), size = nrow(adsl), replace = TRUE),
-    RANDFL = sample(c(TRUE, NA), size = nrow(adsl), replace = TRUE)
+  mutate(
+    ENRLDT = RANDDT,
+    SCRNFL = "Y",
+    SCRNFRS = factor(sample(
+      c("Inclusion/exclusion criteria not met", "Patient noncompliance", "Consent withdrawn", "Other"),
+      size = nrow(adsl), replace = TRUE
+    ), levels = c("Inclusion/exclusion criteria not met", "Patient noncompliance", "Consent withdrawn", "Other")),
+    SCRNFAILFL = ifelse(is.na(ENRLDT), "Y", "N")
   )
-
-labels <- c(
-  "SCRNFL" = "Patients screened",
-  "SCRNFLRS" = "Reason for SCRNFL=N",
-  "ENRLFL" = "Patients enrolled",
-  "RANDFL" = "Patients randomized"
-)
-
-formatters::var_labels(adsl)[names(labels)] <- labels
+adsl$SCRNFRS[adsl$SCRNFL == "N" | !is.na(adsl$ENRLDT)] <- NA
 
 # Output Table
-make_table_03(df = adsl)
+make_table_03(df = adsl, scrnfl_var = "SCRNFL", scrnfailfl_var = "SCRNFAILFL", scrnfailreas_var = "SCRNFRS")
 ```
 
 ## Table Setup

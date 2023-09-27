@@ -1,31 +1,21 @@
 adsl <- adsl_raw
 
-set.seed(3)
-
+set.seed(1)
+adsl$RANDDT[sample(1:nrow(adsl), 100)] <- NA
 adsl <- adsl %>%
-  dplyr::mutate(
-    SCRNFL = sample(c(TRUE, NA), size = nrow(adsl), replace = TRUE),
-    SCRNFLRS = sample(c(
-      "Inclusion/exclusion criteria not met",
-      "Patient noncompliance",
-      "Consent withdrawn",
-      "Other"
-    ), size = nrow(adsl), replace = TRUE),
-    ENRLFL = sample(c(TRUE, NA), size = nrow(adsl), replace = TRUE),
-    RANDFL = sample(c(TRUE, NA), size = nrow(adsl), replace = TRUE)
+  mutate(
+    ENRLDT = RANDDT,
+    SCRNFL = "Y",
+    SCRNFRS = factor(sample(
+      c("Inclusion/exclusion criteria not met", "Patient noncompliance", "Consent withdrawn", "Other"),
+      size = nrow(adsl), replace = TRUE
+    ), levels = c("Inclusion/exclusion criteria not met", "Patient noncompliance", "Consent withdrawn", "Other")),
+    SCRNFAILFL = ifelse(is.na(ENRLDT), "Y", "N")
   )
-
-labels <- c(
-  "SCRNFL" = "Patients screened",
-  "SCRNFLRS" = "Reason for SCRNFL=N",
-  "ENRLFL" = "Patients enrolled",
-  "RANDFL" = "Patients randomized"
-)
-
-formatters::var_labels(adsl)[names(labels)] <- labels
+adsl$SCRNFRS[adsl$SCRNFL == "N" | !is.na(adsl$ENRLDT)] <- NA
 
 test_that("Table 3 generation works with default values", {
-  result <- make_table_03(adsl)
+  result <- make_table_03(adsl, scrnfl_var = "SCRNFL", scrnfailfl_var = "SCRNFAILFL", scrnfailreas_var = "SCRNFRS")
 
   res <- expect_silent(result)
   expect_snapshot(res)
@@ -34,6 +24,8 @@ test_that("Table 3 generation works with default values", {
 test_that("Table 3 generation works with custom values", {
   result <- make_table_03(
     adsl,
+    scrnfl_var = "SCRNFL", scrnfailfl_var = "SCRNFAILFL", scrnfailreas_var = "SCRNFRS",
+    show_colcounts = TRUE,
     lbl_overall = "Total\nPopulation",
     annotations = list(
       title = paste(

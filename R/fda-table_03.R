@@ -12,34 +12,28 @@
 #' @inheritParams argument_convention
 #' @param scrnfl_var (`character`)\cr variable from `df` that indicates whether patients were screened.
 #' @param scrnfailfl_var (`character`)\cr variable from `df` that indicates screening failure.
-#' @param scrn_dcsreas_var (`character`)\cr variable from `df` that contains reasons for screening failure.
+#' @param scrnfailreas_var (`character`)\cr variable from `df` that contains reasons for screening failure.
 #'
 #' @examples
+#' library(dplyr)
+#'
+#' set.seed(1)
 #' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
-#'
+#' adsl$RANDDT[sample(1:nrow(adsl), 100)] <- NA
 #' adsl <- adsl %>%
-#'   dplyr::mutate(
-#'     SCRNFL = sample(c(TRUE, NA), size = nrow(adsl), replace = TRUE),
-#'     SCRNFLRS = sample(c(
-#'       "Inclusion/exclusion criteria not met",
-#'       "Patient noncompliance",
-#'       "Consent withdrawn",
-#'       "Other"
-#'     ), size = nrow(adsl), replace = TRUE),
-#'     ENRLFL = sample(c(TRUE, NA), size = nrow(adsl), replace = TRUE),
-#'     RANDFL = sample(c(TRUE, NA), size = nrow(adsl), replace = TRUE)
+#'   mutate(
+#'     ENRLDT = RANDDT,
+#'     SCRNFL = "Y",
+#'     SCRNFRS = factor(sample(
+#'       c("Inclusion/exclusion criteria not met", "Patient noncompliance", "Consent withdrawn", "Other"),
+#'       size = nrow(adsl), replace = TRUE
+#'     ), levels = c("Inclusion/exclusion criteria not met", "Patient noncompliance", "Consent withdrawn", "Other")),
+#'     SCRNFAILFL = ifelse(is.na(ENRLDT), "Y", "N")
 #'   )
+#' adsl$SCRNFRS[adsl$SCRNFL == "N" | !is.na(adsl$ENRLDT)] <- NA
 #'
-#' labels <- c(
-#'   "SCRNFL" = "Patients screened",
-#'   "SCRNFLRS" = "Reason for SCRNFL=N",
-#'   "ENRLFL" = "Patients enrolled",
-#'   "RANDFL" = "Patients randomized"
-#' )
-#'
-#' formatters::var_labels(adsl)[names(labels)] <- labels
-#'
-#' make_table_03(df = adsl)
+#' tbl <- make_table_03(df = adsl, scrnfl_var = "SCRNFL", scrnfailfl_var = "SCRNFAILFL", scrnfailreas_var = "SCRNFRS")
+#' tbl
 #'
 #' @export
 make_table_03 <- function(df,
@@ -48,16 +42,16 @@ make_table_03 <- function(df,
                           arm_var = "ARM",
                           scrnfl_var,
                           scrnfailfl_var,
-                          scrn_dcsreas_var,
+                          scrnfailreas_var,
                           lbl_overall = NULL,
                           prune_0 = TRUE,
                           annotations = NULL) {
-  checkmate::assert_subset(c("USUBJID", scrnfl_var, scrn_dcsreas_var, "ENRLDT", "RANDDT", arm_var), names(df))
+  checkmate::assert_subset(c("USUBJID", scrnfl_var, scrnfailreas_var, "ENRLDT", "RANDDT", arm_var), names(df))
   assert_flag_variables(df, c(scrnfl_var, scrnfailfl_var))
 
   df <- df %>%
     mutate(
-      SCRNFL = with_label(scrnfl_var == "Y", "Patients screened"),
+      SCRNFL = with_label(.data[[scrnfl_var]] == "Y", "Patients screened"),
       ENRLFL = with_label(!is.na(ENRLDT), "Patients enrolled"),
       RANDFL = with_label(!is.na(RANDDT), "Patients randomized")
     ) %>%
@@ -69,7 +63,8 @@ make_table_03 <- function(df,
     split_cols_by_arm(arm_var, lbl_overall) %>%
     count_patients_with_flags(
       var = "USUBJID",
-      flag_variables = scrnfl_var
+      flag_variables = "SCRNFL",
+      .stats = "count"
     ) %>%
     split_rows_by(scrnfailfl_var, split_fun = keep_split_levels("Y")) %>%
     summarize_num_patients(
@@ -77,13 +72,13 @@ make_table_03 <- function(df,
       .stats = "unique",
       .labels = c(unique = "Screening failures")
     ) %>%
-    count_occurrences(vars = scrn_dcsreas_var) %>%
+    count_occurrences(vars = scrnfailreas_var) %>%
     count_patients_with_flags(
       var = "USUBJID",
       flag_variables = c("ENRLFL", "RANDFL"),
       nested = FALSE
     ) %>%
-    append_topleft("Disposition")
+    append_topleft(c("", "Disposition"))
 
   tbl <- build_table(lyt, df = df, alt_counts_df = alt_counts_df)
   if (prune_0) tbl <- prune_table(tbl)
