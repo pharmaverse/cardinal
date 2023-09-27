@@ -9,6 +9,9 @@ make_table_03(
   alt_counts_df = NULL,
   show_colcounts = FALSE,
   arm_var = "ARM",
+  scrnfl_var,
+  scrnfailfl_var,
+  scrnfailreas_var,
   lbl_overall = NULL,
   prune_0 = TRUE,
   annotations = NULL
@@ -22,6 +25,12 @@ make_table_03(
 \item{show_colcounts}{(\code{flag})\cr whether column counts should be printed.}
 
 \item{arm_var}{(\code{character})\cr arm variable used to split table into columns.}
+
+\item{scrnfl_var}{(\code{character})\cr variable from \code{df} that indicates whether patients were screened.}
+
+\item{scrnfailfl_var}{(\code{character})\cr variable from \code{df} that indicates screening failure.}
+
+\item{scrnfailreas_var}{(\code{character})\cr variable from \code{df} that contains reasons for screening failure.}
 
 \item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
 the given value as the column label.}
@@ -47,30 +56,24 @@ flag variables are treated as \code{"N"}.
 }
 }
 \examples{
+library(dplyr)
+
+set.seed(1)
 adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
-
+adsl$RANDDT[sample(1:nrow(adsl), 100)] <- NA
 adsl <- adsl \%>\%
-  dplyr::mutate(
-    SCRNFL = sample(c(TRUE, NA), size = nrow(adsl), replace = TRUE),
-    SCRNFLRS = sample(c(
-      "Inclusion/exclusion criteria not met",
-      "Patient noncompliance",
-      "Consent withdrawn",
-      "Other"
-    ), size = nrow(adsl), replace = TRUE),
-    ENRLFL = sample(c(TRUE, NA), size = nrow(adsl), replace = TRUE),
-    RANDFL = sample(c(TRUE, NA), size = nrow(adsl), replace = TRUE)
+  mutate(
+    ENRLDT = RANDDT,
+    SCRNFL = "Y",
+    SCRNFRS = factor(sample(
+      c("Inclusion/exclusion criteria not met", "Patient noncompliance", "Consent withdrawn", "Other"),
+      size = nrow(adsl), replace = TRUE
+    ), levels = c("Inclusion/exclusion criteria not met", "Patient noncompliance", "Consent withdrawn", "Other")),
+    SCRNFAILFL = ifelse(is.na(ENRLDT), "Y", "N")
   )
+adsl$SCRNFRS[adsl$SCRNFL == "N" | !is.na(adsl$ENRLDT)] <- NA
 
-labels <- c(
-  "SCRNFL" = "Patients screened",
-  "SCRNFLRS" = "Reason for SCRNFL=N",
-  "ENRLFL" = "Patients enrolled",
-  "RANDFL" = "Patients randomized"
-)
-
-formatters::var_labels(adsl)[names(labels)] <- labels
-
-make_table_03(df = adsl)
+tbl <- make_table_03(df = adsl, scrnfl_var = "SCRNFL", scrnfailfl_var = "SCRNFAILFL", scrnfailreas_var = "SCRNFRS")
+tbl
 
 }
