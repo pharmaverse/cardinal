@@ -36,7 +36,7 @@ adsl <- adsl %>%
 adsl$SCRNFRS[adsl$SCRNFL == "N" | !is.na(adsl$ENRLDT)] <- NA
 
 # Output Table
-make_table_03(df = adsl, scrnfl_var = "SCRNFL", scrnfailfl_var = "SCRNFAILFL", scrnfailreas_var = "SCRNFRS")
+make_table_03(df = adsl, scrnfl_var = "SCRNFL", scrnfailfl_var = "SCRNFAILFL", scrnfail_var = "SCRNFRS")
 ```
 
 ## Table Setup
@@ -52,18 +52,21 @@ make_table_03(df = adsl, scrnfl_var = "SCRNFL", scrnfailfl_var = "SCRNFAILFL", s
 
 Required variables:
 
--   **`adsl`**: USUBJID`,`SCRNFL`,`SCRNFLRS`,`ENRLFL`,`RANDFL`and the variables specified by`arm_var`.
+-   **`adsl`**: `USUBJID`, `ENRLDT`, `RANDDT`, and the variables specified by `arm_var`, `scrnfl_var`, `scrnfailfl_var`, and `scrnfail_var`.
 -   **`alt_counts_df`** (if specified): `USUBJID`, and the variable specified by `arm_var`.
 
 | Argument         | Description                                                                                                                                                                                                                                            | Default      |
-|:-----------------|:----------------------------------|:-----------------|
+|:---------|:----------------------------------------------------|:---------|
 | `adsl`           | (`data.frame`) Dataset (typically ADSL) required to build table.                                                                                                                                                                                       | *No default* |
 | `alt_counts_df`  | (`character`) Alternative dataset used only to calculate column counts.                                                                                                                                                                                | `NULL`       |
 | `show_colcounts` | (`flag`) Whether column counts should be printed.                                                                                                                                                                                                      | `FALSE`      |
 | `arm_var`        | (`character`) Arm variable used to split table into columns.                                                                                                                                                                                           | `"ARM"`      |
+| `scrnfl_var`     | (`character`) Variable from `df` that indicates whether patients were screened.                                                                                                                                                                        | *No default* |
+| `scrnfailfl_var` | (`character`) Variable from `df` that indicates screening failure.                                                                                                                                                                                     | *No default* |
+| `scrnfail_var`   | (`character`) Variable from `df` that contains reasons for screening failure.                                                                                                                                                                          | *No default* |
 | `lbl_overall`    | (`character`) If specified, an overall column will be added to the table with the given value as the column label.                                                                                                                                     | `NULL`       |
 | `prune_0`        | (`flag`) Whether all-zero rows should be removed from the table.                                                                                                                                                                                       | `TRUE`       |
-| `annotations`    | (named `list` of `character`) List of annotations to add to the table. Valid annotation types are `title`, `subtitles`, `main_footer`, and `prov_footer.` Each name-value pair should use the annotation type as name and the desired string as value. | `NULL`     |
+| `annotations`    | (named `list` of `character`) List of annotations to add to the table. Valid annotation types are `title`, `subtitles`, `main_footer`, and `prov_footer.` Each name-value pair should use the annotation type as name and the desired string as value. | `NULL`       |
 
 Source code for this function is available [here](https://github.com/pharmaverse/falcon/blob/main/R/fda-table_03.R).
 :::

@@ -1,18 +1,21 @@
 #' FDA Table 3: Patient Screening and Enrollment, Trials A and B
 #'
 #' @details
-#' * `adsl` must contain `USUBJID` and the variables specified by `vars` and `arm_var`.
+#' * `adsl` must contain `USUBJID`, `ENRLDT`, `RANDDT`, and the variables specified by `arm_var`, `scrnfl_var`,
+#'   `scrnfailfl_var`, and `scrnfail_var`.
 #' * If specified, `alt_counts_df` must contain `USUBJID`, and the variable specified by `arm_var`.
+#' * Patients are considered enrolled in they have an enrollment date (`ENRLDT` is not missing), and are considered
+#'   randomized if they have a randomization date (`RANDDT` is not missing).
 #' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
 #'   flag variables are treated as `"N"`.
 #' * Columns are split by arm.
-#' * Numbers in table for non-numeric variables represent the absolute numbers of patients and fraction of `N`.
+#' * Numbers in table represent the absolute numbers of patients and fraction of `N`.
 #' * All-zero rows are removed by default (see `prune_0` argument).
 #'
 #' @inheritParams argument_convention
 #' @param scrnfl_var (`character`)\cr variable from `df` that indicates whether patients were screened.
 #' @param scrnfailfl_var (`character`)\cr variable from `df` that indicates screening failure.
-#' @param scrnfailreas_var (`character`)\cr variable from `df` that contains reasons for screening failure.
+#' @param scrnfail_var (`character`)\cr variable from `df` that contains reasons for screening failure.
 #'
 #' @examples
 #' library(dplyr)
@@ -32,7 +35,7 @@
 #'   )
 #' adsl$SCRNFRS[adsl$SCRNFL == "N" | !is.na(adsl$ENRLDT)] <- NA
 #'
-#' tbl <- make_table_03(df = adsl, scrnfl_var = "SCRNFL", scrnfailfl_var = "SCRNFAILFL", scrnfailreas_var = "SCRNFRS")
+#' tbl <- make_table_03(df = adsl, scrnfl_var = "SCRNFL", scrnfailfl_var = "SCRNFAILFL", scrnfail_var = "SCRNFRS")
 #' tbl
 #'
 #' @export
