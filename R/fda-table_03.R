@@ -45,11 +45,13 @@ make_table_03 <- function(df,
                           arm_var = "ARM",
                           scrnfl_var,
                           scrnfailfl_var,
-                          scrnfailreas_var,
+                          scrnfail_var,
                           lbl_overall = NULL,
                           prune_0 = TRUE,
                           annotations = NULL) {
-  checkmate::assert_subset(c("USUBJID", scrnfl_var, scrnfailreas_var, "ENRLDT", "RANDDT", arm_var), names(df))
+  checkmate::assert_subset(
+    c("USUBJID", scrnfl_var, scrnfailfl_var, scrnfail_var, "ENRLDT", "RANDDT", arm_var), names(df)
+  )
   assert_flag_variables(df, c(scrnfl_var, scrnfailfl_var))
 
   df <- df %>%
@@ -75,7 +77,7 @@ make_table_03 <- function(df,
       .stats = "unique",
       .labels = c(unique = "Screening failures")
     ) %>%
-    count_occurrences(vars = scrnfailreas_var) %>%
+    count_occurrences(vars = scrnfail_var) %>%
     count_patients_with_flags(
       var = "USUBJID",
       flag_variables = c("ENRLFL", "RANDFL"),

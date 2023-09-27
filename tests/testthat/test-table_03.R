@@ -15,7 +15,7 @@ adsl <- adsl %>%
 adsl$SCRNFRS[adsl$SCRNFL == "N" | !is.na(adsl$ENRLDT)] <- NA
 
 test_that("Table 3 generation works with default values", {
-  result <- make_table_03(adsl, scrnfl_var = "SCRNFL", scrnfailfl_var = "SCRNFAILFL", scrnfailreas_var = "SCRNFRS")
+  result <- make_table_03(adsl, scrnfl_var = "SCRNFL", scrnfailfl_var = "SCRNFAILFL", scrnfail_var = "SCRNFRS")
 
   res <- expect_silent(result)
   expect_snapshot(res)
@@ -24,7 +24,7 @@ test_that("Table 3 generation works with default values", {
 test_that("Table 3 generation works with custom values", {
   result <- make_table_03(
     adsl,
-    scrnfl_var = "SCRNFL", scrnfailfl_var = "SCRNFAILFL", scrnfailreas_var = "SCRNFRS",
+    scrnfl_var = "SCRNFL", scrnfailfl_var = "SCRNFAILFL", scrnfail_var = "SCRNFRS",
     show_colcounts = TRUE,
     lbl_overall = "Total\nPopulation",
     annotations = list(

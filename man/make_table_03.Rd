@@ -11,7 +11,7 @@ make_table_03(
   arm_var = "ARM",
   scrnfl_var,
   scrnfailfl_var,
-  scrnfailreas_var,
+  scrnfail_var,
   lbl_overall = NULL,
   prune_0 = TRUE,
   annotations = NULL
@@ -30,7 +30,7 @@ make_table_03(
 
 \item{scrnfailfl_var}{(\code{character})\cr variable from \code{df} that indicates screening failure.}
 
-\item{scrnfailreas_var}{(\code{character})\cr variable from \code{df} that contains reasons for screening failure.}
+\item{scrnfail_var}{(\code{character})\cr variable from \code{df} that contains reasons for screening failure.}
 
 \item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
 the given value as the column label.}
@@ -46,12 +46,15 @@ FDA Table 3: Patient Screening and Enrollment, Trials A and B
 }
 \details{
 \itemize{
-\item \code{adsl} must contain \code{USUBJID} and the variables specified by \code{vars} and \code{arm_var}.
+\item \code{adsl} must contain \code{USUBJID}, \code{ENRLDT}, \code{RANDDT}, and the variables specified by \code{arm_var}, \code{scrnfl_var},
+\code{scrnfailfl_var}, and \code{scrnfail_var}.
 \item If specified, \code{alt_counts_df} must contain \code{USUBJID}, and the variable specified by \code{arm_var}.
+\item Patients are considered enrolled in they have an enrollment date (\code{ENRLDT} is not missing), and are considered
+randomized if they have a randomization date (\code{RANDDT} is not missing).
 \item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
 flag variables are treated as \code{"N"}.
 \item Columns are split by arm.
-\item Numbers in table for non-numeric variables represent the absolute numbers of patients and fraction of \code{N}.
+\item Numbers in table represent the absolute numbers of patients and fraction of \code{N}.
 \item All-zero rows are removed by default (see \code{prune_0} argument).
 }
 }
@@ -73,7 +76,7 @@ adsl <- adsl \%>\%
   )
 adsl$SCRNFRS[adsl$SCRNFL == "N" | !is.na(adsl$ENRLDT)] <- NA
 
-tbl <- make_table_03(df = adsl, scrnfl_var = "SCRNFL", scrnfailfl_var = "SCRNFAILFL", scrnfailreas_var = "SCRNFRS")
+tbl <- make_table_03(df = adsl, scrnfl_var = "SCRNFL", scrnfailfl_var = "SCRNFAILFL", scrnfail_var = "SCRNFRS")
 tbl
 
 }
