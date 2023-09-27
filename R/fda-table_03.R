@@ -10,6 +10,9 @@
 #' * All-zero rows are removed by default (see `prune_0` argument).
 #'
 #' @inheritParams argument_convention
+#' @param scrnfl_var (`character`)\cr variable from `df` that indicates whether patients were screened.
+#' @param scrnfailfl_var (`character`)\cr variable from `df` that indicates screening failure.
+#' @param scrn_dcsreas_var (`character`)\cr variable from `df` that contains reasons for screening failure.
 #'
 #' @examples
 #' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
@@ -43,6 +46,9 @@ make_table_03 <- function(df,
                           alt_counts_df = NULL,
                           show_colcounts = FALSE,
                           arm_var = "ARM",
+                          scrnfl_var,
+                          scrnfailfl_var,
+                          scrn_dcsreas_var,
                           lbl_overall = NULL,
                           prune_0 = TRUE,
                           annotations = NULL) {
