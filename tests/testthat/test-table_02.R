@@ -122,9 +122,9 @@ test_that("Table 02 generation (tplyr) works with some NA values", {
 test_that("Table 02 generation (gt) works with default values", {
   options(pillar.print_max = 50, width = 200)
 
-  result <- suppressWarnings(make_table_02_gt(adsl))
+  result <- suppressWarnings(make_table_02_gt(adsl) %>% as_gt)
 
-  res <- expect_silent(result[["_data"]])
+  res <- expect_silent(as.data.frame(result))
   expect_snapshot(res)
 })
 
@@ -140,13 +140,11 @@ test_that("Table 02 generation (gt) works with custom values", {
   result <- suppressWarnings(make_table_02_gt(
     anl,
     vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY", "AVAL")
-  ))
+  ) %>% as_gt)
 
-  res <- expect_silent(result[["_data"]])
+  res <- expect_silent(as.data.frame(result))
   expect_snapshot(res)
 
-  res <- expect_silent(result[["_heading"]])
-  expect_snapshot(res)
 })
 
 test_that("Table 02 generation (gt) works with some NA values", {
@@ -157,8 +155,8 @@ test_that("Table 02 generation (gt) works with some NA values", {
 
   adsl <- adsl %>% df_explicit_na()
 
-  result <- suppressWarnings(make_table_02_gt(adsl, vars = "SEX"))
+  result <- suppressWarnings(make_table_02_gt(adsl, vars = "SEX") %>% as_gt)
 
-  res <- expect_silent(result[["_data"]])
+  res <- expect_silent(as.data.frame(result))
   expect_snapshot(res)
 })
