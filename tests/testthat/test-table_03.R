@@ -1,7 +1,7 @@
 adsl <- adsl_raw
 
 set.seed(1)
-adsl$RANDDT[sample(1:nrow(adsl), 100)] <- NA
+adsl$RANDDT[sample(seq_len(nrow(adsl)), 100)] <- NA
 adsl <- adsl %>%
   mutate(
     ENRLDT = RANDDT,
