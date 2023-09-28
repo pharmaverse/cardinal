@@ -56,7 +56,7 @@ Required variables:
 -   **`alt_counts_df`** (if specified): `USUBJID`, and the variable specified by `arm_var`.
 
 | Argument         | Description                                                                                                                                                                                                                                            | Default      |
-|:---------|:----------------------------------------------------|:---------|
+|:-----------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------|
 | `adsl`           | (`data.frame`) Dataset (typically ADSL) required to build table.                                                                                                                                                                                       | *No default* |
 | `alt_counts_df`  | (`character`) Alternative dataset used only to calculate column counts.                                                                                                                                                                                | `NULL`       |
 | `show_colcounts` | (`flag`) Whether column counts should be printed.                                                                                                                                                                                                      | `FALSE`      |
