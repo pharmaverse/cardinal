@@ -147,9 +147,6 @@ Required variables:
 | `tplyr_raw`      | (`flag`) Whether the raw `tibble` created using `Tplyr` functions should be returned, or the table formatted using functions from `tfrmt` should be returned (default).                                                 | `FALSE`                                                  |
 
 Source code for this function is available [here](https://github.com/pharmaverse/falcon/blob/682cb17b65d88240dba0525483c09cc514707997/R/fda-table_02.R#L101).
-:::
-
-:::
 
 ## gt Table
 
@@ -214,4 +211,6 @@ Required variables:
 | `lbl_vars`       | (`character`) Labels corresponding to variables in `vars` to print in the table. Labels should be ordered according to the order of variables in `vars`. | `formatters::var_labels(df, fill = TRUE)[vars]`          |
 | `lbl_overall`    | (`character`) If specified, an overall column will be added to the table with the given value as the column label.                                       | `"Total Population"`                                     |
 
-Source code for this function is available [here](https://github.com/pharmaverse/falcon/blob/682cb17b65d88240dba0525483c09cc514707997/R/fda-table_02.R#L252). :::
+Source code for this function is available [here](https://github.com/pharmaverse/falcon/blob/682cb17b65d88240dba0525483c09cc514707997/R/fda-table_02.R#L252). 
+
+:::
