@@ -13,7 +13,7 @@ make_table_34(
   fmqsc_var = "FMQ01SC",
   fmqnam_var = "FMQ01NAM",
   fmq_scope = "NARROW",
-  pref_var = "AETERM",
+  pref_var = "AEDECOD",
   lbl_overall = NULL,
   prune_0 = TRUE,
   na_level = "<Missing>",

@@ -21,8 +21,11 @@ adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
 # Pre-Processing - Ensure required variable DCSREAS exist in adae
 adae$DCSREAS[is.na(adae$DCSREAS)] <- "ADVERSE EVENT"
 
+# Select Preferred Term Variable
+pref_var <- "AEDECOD"
+
 # Output Table
-make_table_12(adae = adae, alt_counts_df = adsl)
+make_table_12(adae = adae, alt_counts_df = adsl, pref_var = pref_var)
 ```
 
 ## Table Setup

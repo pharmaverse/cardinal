@@ -46,7 +46,7 @@ FDA Table 20: Adverse Events of Special Interest Assessment, Safety Population, 
 }
 \details{
 \itemize{
-\item \code{adae} must contain \code{SAFFL}, \code{USUBJID}, \code{AEDECOD}, \code{AESEV}, \code{AESER}, \code{AESDTH}, \code{EOSSTT}, \code{AEREL}, and the
+\item \code{adae} must contain \code{SAFFL}, \code{USUBJID}, \code{AESEV}, \code{AESER}, \code{AESDTH}, \code{EOSSTT}, \code{AEREL}, and the
 variables specified by \code{pref_var}, \code{aesifl_var}, \code{aelabfl_var}, and \code{arm_var}.
 \item If specified, \code{alt_counts_df} must contain \code{SAFFL}, \code{USUBJID}, and the variable specified by \code{arm_var}.
 \item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in

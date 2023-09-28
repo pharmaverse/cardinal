@@ -10,7 +10,7 @@ make_table_09(
   alt_counts_df = NULL,
   show_colcounts = TRUE,
   arm_var = "ARM",
-  pref_var = "AETERM",
+  pref_var = "AEDECOD",
   lbl_pref_var = formatters::var_labels(adae, fill = TRUE)[pref_var],
   lbl_overall = NULL,
   prune_0 = TRUE,

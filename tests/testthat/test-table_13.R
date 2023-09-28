@@ -9,7 +9,7 @@ test_that("Table 13 generation works with default values", {
 })
 
 test_that("Table 13 generation works with custom values", {
-  adae <- adae %>% var_relabel(AETERM = "Preferred Term(3)")
+  adae <- adae %>% var_relabel(AEDECOD = "Preferred Term(3)")
   result <- make_table_13(
     adae,
     adsl,
