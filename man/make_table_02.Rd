@@ -3,7 +3,7 @@
 \name{make_table_02}
 \alias{make_table_02}
 \alias{make_table_02_tplyr}
-\alias{make_table_02_gt}
+\alias{make_table_02_gtsum}
 \title{FDA Table 2: Baseline Demographic and Clinical Characteristics Safety Population, Pooled Analyses}
 \usage{
 make_table_02(
@@ -35,7 +35,7 @@ make_table_02_tplyr(
   tplyr_raw = FALSE
 )
 
-make_table_02_gt(
+make_table_02_gtsum(
   df,
   alt_counts_df = NULL,
   show_colcounts = TRUE,
@@ -93,7 +93,7 @@ a \code{tibble} object when \code{tplyr_raw = TRUE}.
 }
 
 \itemize{
-\item \code{make_table_02_gt} returns a \code{tbl_summary} object.
+\item \code{make_table_02_gtsum} returns a \code{tbl_summary} object.
 }
 }
 \description{
@@ -117,7 +117,7 @@ flag variables are treated as \code{"N"}.
 
 \item \code{make_table_02_tplyr()}: Create FDA table 2 using functions from \code{Tplyr} and \code{tfrmt}.
 
-\item \code{make_table_02_gt()}: Create FDA table 2 using functions from \code{gtsummary}.
+\item \code{make_table_02_gtsum()}: Create FDA table 2 using functions from \code{gtsummary}.
 
 }}
 \note{
@@ -146,7 +146,7 @@ tbl
 tbl <- make_table_02_tplyr(df = adsl)
 tbl
 
-tbl <- make_table_02_gt(df = adsl)
+tbl <- make_table_02_gtsum(df = adsl)
 tbl
 
 }

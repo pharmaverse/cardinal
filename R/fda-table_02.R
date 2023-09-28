@@ -251,21 +251,21 @@ make_table_02_tplyr <- function(df,
 #' @describeIn make_table_02 Create FDA table 2 using functions from `gtsummary`.
 #'
 #' @return
-#' * `make_table_02_gt` returns a `tbl_summary` object.
+#' * `make_table_02_gtsum` returns a `tbl_summary` object.
 #'
 #' @examples
-#' tbl <- make_table_02_gt(df = adsl)
+#' tbl <- make_table_02_gtsum(df = adsl)
 #' tbl
 #'
 #' @export
-make_table_02_gt <- function(df,
-                             alt_counts_df = NULL,
-                             show_colcounts = TRUE,
-                             arm_var = "ARM",
-                             vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY"),
-                             lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
-                             lbl_overall = "Total Population",
-                             na_rm = FALSE) {
+make_table_02_gtsum <- function(df,
+                                alt_counts_df = NULL,
+                                show_colcounts = TRUE,
+                                arm_var = "ARM",
+                                vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY"),
+                                lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
+                                lbl_overall = "Total Population",
+                                na_rm = FALSE) {
   checkmate::assert_subset(c("SAFFL", vars, arm_var), names(df))
   assert_flag_variables(df, "SAFFL")
 
