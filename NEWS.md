@@ -1,4 +1,4 @@
-# falcon 0.1.0.9033
+# falcon 0.1.0.9034
 
 ### New Features
 * Added new functions for creating standard FDA tables: `make_table_02`, `make_table_04`, `make_table_05`, `make_table_06`, 
