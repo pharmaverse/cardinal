@@ -44,6 +44,7 @@ make_table_10 <- function(adae,
                           fmqnam_var = "FMQ01NAM",
                           fmq_scope = "NARROW",
                           lbl_overall = NULL,
+                          risk_diff = NULL,
                           prune_0 = TRUE,
                           na_level = "<Missing>",
                           annotations = NULL) {
@@ -61,13 +62,17 @@ make_table_10 <- function(adae,
   alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
 
   lyt <- basic_table_annot(show_colcounts, annotations) %>%
-    split_cols_by_arm(arm_var, lbl_overall) %>%
+    split_cols_by_arm(arm_var, lbl_overall, risk_diff) %>%
     split_rows_by(
       "AEBODSYS",
       label_pos = "topleft",
       split_label = obj_label(adae$AEBODSYS)
     ) %>%
-    count_occurrences(vars = fmqnam_var, drop = FALSE) %>%
+    count_occurrences(
+      vars = fmqnam_var,
+      drop = FALSE,
+      riskdiff = !is.null(risk_diff)
+    ) %>%
     append_varlabels(adae, fmqnam_var, indent = 1L)
 
   tbl <- build_table(lyt, df = adae, alt_counts_df = alt_counts_df)

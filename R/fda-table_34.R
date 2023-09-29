@@ -41,6 +41,7 @@ make_table_34 <- function(adae,
                           fmq_scope = "NARROW",
                           pref_var = "AEDECOD",
                           lbl_overall = NULL,
+                          risk_diff = NULL,
                           prune_0 = TRUE,
                           na_level = "<Missing>",
                           annotations = NULL) {
@@ -56,7 +57,7 @@ make_table_34 <- function(adae,
   alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
 
   lyt <- basic_table_annot(show_colcounts, annotations) %>%
-    split_cols_by_arm(arm_var, lbl_overall) %>%
+    split_cols_by_arm(arm_var, lbl_overall, risk_diff) %>%
     split_rows_by(
       "AEBODSYS",
       child_labels = "visible",
@@ -69,7 +70,11 @@ make_table_34 <- function(adae,
       label_pos = "topleft",
       split_label = obj_label(adae[[fmqnam_var]])
     ) %>%
-    count_occurrences(vars = pref_var, drop = FALSE)
+    count_occurrences(
+      vars = pref_var,
+      drop = FALSE,
+      riskdiff = !is.null(risk_diff)
+    )
 
   tbl <- build_table(lyt, df = adae, alt_counts_df = alt_counts_df)
   if (prune_0) tbl <- prune_table(tbl)

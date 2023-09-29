@@ -30,6 +30,7 @@ make_table_09 <- function(adae,
                           pref_var = "AEDECOD",
                           lbl_pref_var = formatters::var_labels(adae, fill = TRUE)[pref_var],
                           lbl_overall = NULL,
+                          risk_diff = NULL,
                           prune_0 = TRUE,
                           annotations = NULL) {
   checkmate::assert_subset(c("SAFFL", "USUBJID", "AESER", "AESOC", arm_var, pref_var), names(adae))
@@ -42,11 +43,12 @@ make_table_09 <- function(adae,
   alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
 
   lyt <- basic_table_annot(show_colcounts, annotations) %>%
-    split_cols_by_arm(arm_var, lbl_overall) %>%
+    split_cols_by_arm(arm_var, lbl_overall, risk_diff) %>%
     analyze_num_patients(
       vars = "USUBJID",
       .stats = "unique",
-      .labels = c(unique = "Any SAE")
+      .labels = c(unique = "Any SAE"),
+      riskdiff = !is.null(risk_diff)
     ) %>%
     split_rows_by(
       var = "AESOC",
@@ -57,9 +59,13 @@ make_table_09 <- function(adae,
     summarize_num_patients(
       var = "USUBJID",
       .stats = "unique",
-      .labels = c(unique = NULL)
+      .labels = c(unique = NULL),
+      riskdiff = !is.null(risk_diff)
     ) %>%
-    count_occurrences(vars = pref_var) %>%
+    count_occurrences(
+      vars = pref_var,
+      riskdiff = !is.null(risk_diff)
+    ) %>%
     append_topleft(paste(" ", lbl_pref_var))
 
   tbl <- build_table(lyt, df = adae, alt_counts_df = alt_counts_df)

@@ -22,6 +22,14 @@
 #' @param fmq_scope (`character`)\cr FMQ scope ("NARROW" or "BROAD") to output in table.
 #' @param na_rm (`flag`)\cr whether `NA` levels should be removed from the table.
 #' @param prune_0 (`flag`)\cr whether all-zero rows should be removed from the table.
+#' @param risk_diff (named `list`)\cr list of settings to apply to add a risk difference column to the table.
+#'   Defaults to `NULL` (no risk difference column added). See [tern::add_riskdiff()] for more details. List should
+#'   contain the following elements:
+#'    * `arm_x`: (required) the name of reference arm.
+#'    * `arm_y`: (required) the name of the arm to compare to the reference arm.
+#'    * `col_label`: (optional) label to use for the risk difference column. Defaults to
+#'      `"Risk Difference (%) (95% CI)"`.
+#'    * `pct`: (optional) whether the output should be returned as percentages. Defaults to `TRUE`.
 #' @param annotations (named `list` of `character`)\cr list of annotations to add to the table. Valid
 #'   annotation types are `title`, `subtitles`, `main_footer`, and `prov_footer`. Each name-value pair should
 #'   use the annotation type as name and the desired string as value.

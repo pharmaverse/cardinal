@@ -11,6 +11,7 @@ make_table_04(
   arm_var = "ARM",
   lbl_overall = NULL,
   prune_0 = FALSE,
+  risk_diff = NULL,
   annotations = NULL
 )
 }
@@ -27,6 +28,17 @@ make_table_04(
 the given value as the column label.}
 
 \item{prune_0}{(\code{flag})\cr whether all-zero rows should be removed from the table.}
+
+\item{risk_diff}{(named \code{list})\cr list of settings to apply to add a risk difference column to the table.
+Defaults to \code{NULL} (no risk difference column added). See \code{\link[tern:add_riskdiff]{tern::add_riskdiff()}} for more details. List should
+contain the following elements:
+\itemize{
+\item \code{arm_x}: (required) the name of reference arm.
+\item \code{arm_y}: (required) the name of the arm to compare to the reference arm.
+\item \code{col_label}: (optional) label to use for the risk difference column. Defaults to
+\code{"Risk Difference (\%) (95\% CI)"}.
+\item \code{pct}: (optional) whether the output should be returned as percentages. Defaults to \code{TRUE}.
+}}
 
 \item{annotations}{(named \code{list} of \code{character})\cr list of annotations to add to the table. Valid
 annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should

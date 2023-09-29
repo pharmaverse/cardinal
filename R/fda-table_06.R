@@ -27,6 +27,7 @@ make_table_06 <- function(adae,
                           show_colcounts = TRUE,
                           arm_var = "ARM",
                           lbl_overall = NULL,
+                          risk_diff = NULL,
                           prune_0 = FALSE,
                           annotations = NULL) {
   checkmate::assert_subset(c(
@@ -36,6 +37,7 @@ make_table_06 <- function(adae,
   assert_flag_variables(adae, c("SAFFL", "TRTEMFL"))
 
   adae <- adae %>%
+    as_tibble() %>%
     filter(SAFFL == "Y", TRTEMFL == "Y") %>%
     df_explicit_na() %>%
     mutate(
@@ -63,39 +65,45 @@ make_table_06 <- function(adae,
   alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
 
   lyt <- basic_table_annot(show_colcounts, annotations) %>%
-    split_cols_by_arm(arm_var, lbl_overall) %>%
+    split_cols_by_arm(arm_var, lbl_overall, risk_diff) %>%
     count_patients_with_flags(
       var = "USUBJID",
-      flag_variables = var_labels(adae[, "SER"]),
-      table_names = "ser"
+      flag_variables = "SER",
+      table_names = "ser",
+      riskdiff = !is.null(risk_diff)
     ) %>%
     count_patients_with_flags(
       var = "USUBJID",
-      flag_variables = var_labels(adae[, c("SERFATAL", "SERLIFE", "SERHOSP", "SERDISAB", "SERCONG", "SERMIE")]),
+      flag_variables = c("SERFATAL", "SERLIFE", "SERHOSP", "SERDISAB", "SERCONG", "SERMIE"),
       .indent_mods = 1L,
-      table_names = "ser_fl"
+      table_names = "ser_fl",
+      riskdiff = !is.null(risk_diff)
     ) %>%
     count_patients_with_flags(
       var = "USUBJID",
-      flag_variables = var_labels(adae[, c("WD", "DSM")]),
-      table_names = "ae"
+      flag_variables = c("WD", "DSM"),
+      table_names = "ae",
+      riskdiff = !is.null(risk_diff)
     ) %>%
     count_patients_with_flags(
       var = "USUBJID",
-      flag_variables = var_labels(adae[, c("DSINT", "DSRED", "DSD", "DSMIE")]),
+      flag_variables = c("DSINT", "DSRED", "DSD", "DSMIE"),
       .indent_mods = 1L,
-      table_names = "ds"
+      table_names = "ds",
+      riskdiff = !is.null(risk_diff)
     ) %>%
     analyze_num_patients(
       vars = "USUBJID",
       .stats = "unique",
       .labels = c(unique = "Any AE"),
-      show_labels = "hidden"
+      show_labels = "hidden",
+      riskdiff = !is.null(risk_diff)
     ) %>%
     count_occurrences_by_grade(
       var = "AESEV",
       show_labels = "hidden",
-      .indent_mods = 1L
+      .indent_mods = 1L,
+      riskdiff = !is.null(risk_diff)
     ) %>%
     append_topleft(c("", "Event"))
 
