@@ -20,7 +20,7 @@ adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
 adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
 
 # Select Preferred Term Variable
-prefterm_var <- "AETERM"
+prefterm_var <- "AEDECOD"
 
 # Select Minimum Frequency (%)
 min_freq <- 0.40
@@ -46,13 +46,13 @@ Required variables:
 -   **`alt_counts_df`** (if specified): `SAFFL`, `USUBJID`, and the variable specified by `arm_var`.
 
 | Argument         | Description                                                                                                                                                                                                                                            | Default                                               |
-|:--------------|:------------------------------------------|:--------------|
-| `adae`           | (`data.frame`) Dataset (typically ADAE) required to build table.                                                                                                                                                                                          | *No default*                                          |
+|:---------------|:--------------------------------------|:---------------|
+| `adae`           | (`data.frame`) Dataset (typically ADAE) required to build table.                                                                                                                                                                                       | *No default*                                          |
 | `alt_counts_df`  | (`character`) Alternative dataset (typically ADSL) used only to calculate column counts.                                                                                                                                                               | `NULL`                                                |
 | `show_colcounts` | (`flag`) Whether column counts should be printed.                                                                                                                                                                                                      | `TRUE`                                                |
 | `min_freq`       | (`proportion`) Minimum % frequency (fraction of `N`) required in any column to include each row.                                                                                                                                                       | `0.05`                                                |
 | `arm_var`        | (`character`) Arm variable used to split table into columns.                                                                                                                                                                                           | `"ARM"`                                               |
-| `pref_var`       | (`character`) Preferred term variable from `adae` to include in the table.                                                                                                                                                                             | `"AETERM"`                                            |
+| `pref_var`       | (`character`) Preferred term variable from `adae` to include in the table.                                                                                                                                                                             | `"AEDECOD"`                                           |
 | `lbl_pref_var`   | (`character`) Label corresponding to preferred term variable `pref_var` to print in the table.                                                                                                                                                         | `formatters::var_labels(adae, fill = TRUE)[pref_var]` |
 | `lbl_overall`    | (`character`) If specified, an overall column will be added to the table with the given value as the column label.                                                                                                                                     | `NULL`                                                |
 | `annotations`    | (named `list` of `character`) List of annotations to add to the table. Valid annotation types are `title`, `subtitles`, `main_footer`, and `prov_footer.` Each name-value pair should use the annotation type as name and the desired string as value. | `NULL`                                                |

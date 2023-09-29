@@ -10,7 +10,7 @@ make_table_13(
   show_colcounts = TRUE,
   min_freq = 0.05,
   arm_var = "ARM",
-  pref_var = "AETERM",
+  pref_var = "AEDECOD",
   lbl_pref_var = formatters::var_labels(adae, fill = TRUE)[pref_var],
   lbl_overall = NULL,
   annotations = NULL

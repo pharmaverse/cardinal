@@ -25,7 +25,7 @@ adae$AESIFL <- ifelse(adae$AESOC %in% c("cl A", "cl D"), "Y", "N")
 adae$AELABFL <- sample(c("Y", "N"), nrow(adae), replace = TRUE)
 
 # Select Preferred Term Variable
-pref_var <- "AETERM"
+pref_var <- "AEDECOD"
 
 # Output Table
 make_table_20(adae = adae, alt_counts_df = adsl, pref_var = pref_var, aesifl_var = "AESIFL", aelabfl_var = "AELABFL")
@@ -44,7 +44,7 @@ make_table_20(adae = adae, alt_counts_df = adsl, pref_var = pref_var, aesifl_var
 
 Required variables:
 
--   **`adae`**: `SAFFL`, `USUBJID`, `AEDECOD`, `AESEV`, `AESER`, `AESDTH`, `EOSSTT`, `AEREL`, and the variables specified by `pref_var`, `aesifl_var`, `aelabfl_var`, and `arm_var`.
+-   **`adae`**: `SAFFL`, `USUBJID`, `AESEV`, `AESER`, `AESDTH`, `EOSSTT`, `AEREL`, and the variables specified by `pref_var`, `aesifl_var`, `aelabfl_var`, and `arm_var`.
 -   **`alt_counts_df`** (if specified): `SAFFL`, `USUBJID`, and the variable specified by `arm_var`.
 
 | Argument         | Description                                                                                                                                                                                                                                            | Default      |
