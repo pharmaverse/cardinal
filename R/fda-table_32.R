@@ -13,6 +13,8 @@
 #'
 #' @inheritParams argument_convention
 #'
+#' @return An `rtable` object.
+#'
 #' @examples
 #' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
 #' advs <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "advs")
@@ -26,6 +28,7 @@ make_table_32 <- function(advs,
                           show_colcounts = TRUE,
                           arm_var = "ARM",
                           lbl_overall = NULL,
+                          risk_diff = NULL,
                           prune_0 = FALSE,
                           annotations = NULL) {
   checkmate::assert_subset(c(
@@ -54,10 +57,11 @@ make_table_32 <- function(advs,
   alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
 
   lyt <- basic_table_annot(show_colcounts, annotations) %>%
-    split_cols_by_arm(arm_var, lbl_overall) %>%
+    split_cols_by_arm(arm_var, lbl_overall, risk_diff) %>%
     count_patients_with_flags(
       var = "USUBJID",
-      flag_variables = var_labels(advs[, c("L60", "G60", "G90", "G110", "GE120")])
+      flag_variables = c("L60", "G60", "G90", "G110", "GE120"),
+      riskdiff = !is.null(risk_diff)
     ) %>%
     append_topleft(c("Diastolic Blood Pressure", paste0("(", unique(advs$AVALU)[1], ")")))
 

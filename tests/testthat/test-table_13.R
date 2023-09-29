@@ -9,7 +9,7 @@ test_that("Table 13 generation works with default values", {
 })
 
 test_that("Table 13 generation works with custom values", {
-  adae <- adae %>% var_relabel(AETERM = "Preferred Term(3)")
+  adae <- adae %>% var_relabel(AEDECOD = "Preferred Term(3)")
   result <- make_table_13(
     adae,
     adsl,
@@ -33,6 +33,14 @@ test_that("Table 13 generation works with custom values", {
       )
     )
   )
+
+  res <- expect_silent(result)
+  expect_snapshot(res)
+})
+
+test_that("Table 13 generation works with risk difference column", {
+  risk_diff <- list(arm_x = "B: Placebo", arm_y = "A: Drug X")
+  result <- make_table_13(adae, adsl, risk_diff = risk_diff)
 
   res <- expect_silent(result)
   expect_snapshot(res)

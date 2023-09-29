@@ -263,7 +263,7 @@
       4 "    M"          50 (37.3%)           48 (35.8%)            54 (40.9%)                152 (38.0%)                 FALSE              
       5 "    <Missing>"  16 (11.9%)           18 (13.4%)            16 (12.1%)                50 (12.5%)                  FALSE              
 
-# Table 02 generation (gt) works with default values
+# Table 02 generation (gtsum) works with default values
 
     Code
       res
@@ -304,7 +304,7 @@
       33  COUNTRY categorical   Country    level                                           CAN              3 (2.2%)              2 (1.5%)              3 (2.3%)              8 (2.0%)
       34  COUNTRY categorical   Country    level                                           CHE                0 (0%)                0 (0%)                0 (0%)                0 (0%)
 
-# Table 02 generation (gt) works with custom values
+# Table 02 generation (gtsum) works with custom values
 
     Code
       res
@@ -348,7 +348,7 @@
       36     AVAL continuous2 Analysis Value    level                                     Mean (SD)          49.75 (8.27)          50.87 (7.42)          49.12 (8.25)          49.92 (8.00)
       37     AVAL continuous2 Analysis Value    level                                Median (Range) 50.44 (29.02 - 69.08) 51.51 (30.70 - 67.70) 48.69 (20.63 - 70.52) 50.27 (20.63 - 70.52)
 
-# Table 02 generation (gt) works with some NA values
+# Table 02 generation (gtsum) works with some NA values
 
     Code
       res

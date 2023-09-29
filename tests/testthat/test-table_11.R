@@ -47,3 +47,11 @@ test_that("Table 11 generation works with custom values", {
   res <- expect_silent(result)
   expect_snapshot(res)
 })
+
+test_that("Table 11 generation works with risk difference column", {
+  risk_diff <- list(arm_x = "B: Placebo", arm_y = "A: Drug X")
+  result <- make_table_11(adae, adsl, risk_diff = risk_diff)
+
+  res <- expect_silent(result)
+  expect_snapshot(res)
+})

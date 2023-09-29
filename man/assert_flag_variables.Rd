@@ -13,6 +13,9 @@ assert_flag_variables(df, flag_vars, na_level = "<Missing>")
 
 \item{na_level}{(\code{character})\cr string to represent missing values.}
 }
+\value{
+A \code{logical} indicating whether the given flag variables (\code{flag_vars}) in \code{df} are formatted correctly.
+}
 \description{
 Flag variables are expected to take one of two values: \code{"Y"} (yes/true) or
 \code{"N"} (no/false). Missing values are also accepted and treated as \code{"N"}.

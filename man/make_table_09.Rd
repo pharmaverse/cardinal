@@ -10,9 +10,10 @@ make_table_09(
   alt_counts_df = NULL,
   show_colcounts = TRUE,
   arm_var = "ARM",
-  pref_var = "AETERM",
+  pref_var = "AEDECOD",
   lbl_pref_var = formatters::var_labels(adae, fill = TRUE)[pref_var],
   lbl_overall = NULL,
+  risk_diff = NULL,
   prune_0 = TRUE,
   annotations = NULL
 )
@@ -33,11 +34,25 @@ make_table_09(
 \item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
 the given value as the column label.}
 
+\item{risk_diff}{(named \code{list})\cr list of settings to apply to add a risk difference column to the table.
+Defaults to \code{NULL} (no risk difference column added). See \code{\link[tern:add_riskdiff]{tern::add_riskdiff()}} for more details. List should
+contain the following elements:
+\itemize{
+\item \code{arm_x}: (required) the name of reference arm.
+\item \code{arm_y}: (required) the name of the arm to compare to the reference arm.
+\item \code{col_label}: (optional) label to use for the risk difference column. Defaults to
+\code{"Risk Difference (\%) (95\% CI)"}.
+\item \code{pct}: (optional) whether the output should be returned as percentages. Defaults to \code{TRUE}.
+}}
+
 \item{prune_0}{(\code{flag})\cr whether all-zero rows should be removed from the table.}
 
 \item{annotations}{(named \code{list} of \code{character})\cr list of annotations to add to the table. Valid
 annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
 use the annotation type as name and the desired string as value.}
+}
+\value{
+An \code{rtable} object.
 }
 \description{
 FDA Table 9: Patients With Serious Adverse Events by System Organ Class and Preferred Term,

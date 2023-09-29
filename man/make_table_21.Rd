@@ -2,8 +2,8 @@
 % Please edit documentation in R/fda-table_21.R
 \name{make_table_21}
 \alias{make_table_21}
-\title{FDA Table 21. Overview of Serious Adverse Events by Demographic Subgroup, Safety Population, Pooled
-Analysis (or Trial X)}
+\title{FDA Table 21. Overview of Serious Adverse Events by Demographic Subgroup, Safety Population,
+Pooled Analysis (or Trial X)}
 \usage{
 make_table_21(
   df,
@@ -45,9 +45,12 @@ in the table. Labels should be ordered according to the order of variables in \c
 annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
 use the annotation type as name and the desired string as value.}
 }
+\value{
+An \code{rtable} object.
+}
 \description{
-FDA Table 21. Overview of Serious Adverse Events by Demographic Subgroup, Safety Population, Pooled
-Analysis (or Trial X)
+FDA Table 21. Overview of Serious Adverse Events by Demographic Subgroup, Safety Population,
+Pooled Analysis (or Trial X)
 }
 \details{
 \itemize{
