@@ -92,8 +92,13 @@
       ————————————————————————————————————————————————————————————————————————————————————————
       
       Source: [include Applicant source, datasets and/or software tools used].
+      (1) Defined as any untoward medical occurrence that, at any dose that results in death, is life-threatening,
+      requires hospitalization or prolongation of existing hospitalization, results in persistent incapacity or
+      substantial disruption of the ability to conduct normal life functions, or is a congenital anomaly or
+      birth defect. 
       
-      Defined as any untoward medical occurrence that, at any dose that results in death, is life-threatening, requires hospitalization or prolongation of existing hospitalization, results in persistent incapacity or substantial disruption of the ability to conduct normal life, functions, or is a congenital anomaly or birth defect. Abbreviations: N, number of patients in treatment arm; n, number of patients with adverse event; Ns, total number of patients for each specific subgroup; SAE, serious adverse event
+      Abbreviations: N, number of patients in treatment arm; n, number of patients with adverse event;
+      Ns, total number of patients for each specific subgroup; SAE, serious adverse event
 
 # Table 21 generation works with some NA values
 
