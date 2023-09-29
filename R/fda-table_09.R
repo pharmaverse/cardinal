@@ -13,6 +13,8 @@
 #'
 #' @inheritParams argument_convention
 #'
+#' @return An `rtable` object.
+#'
 #' @examples
 #' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
 #' adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
@@ -25,7 +27,7 @@ make_table_09 <- function(adae,
                           alt_counts_df = NULL,
                           show_colcounts = TRUE,
                           arm_var = "ARM",
-                          pref_var = "AETERM",
+                          pref_var = "AEDECOD",
                           lbl_pref_var = formatters::var_labels(adae, fill = TRUE)[pref_var],
                           lbl_overall = NULL,
                           risk_diff = NULL,

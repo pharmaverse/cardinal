@@ -1,7 +1,7 @@
 #' FDA Table 20: Adverse Events of Special Interest Assessment, Safety Population, Pooled Analysis (or Trial X)
 #'
 #' @details
-#' * `adae` must contain `SAFFL`, `USUBJID`, `AEDECOD`, `AESEV`, `AESER`, `AESDTH`, `EOSSTT`, `AEREL`, and the
+#' * `adae` must contain `SAFFL`, `USUBJID`, `AESEV`, `AESER`, `AESDTH`, `EOSSTT`, `AEREL`, and the
 #'   variables specified by `pref_var`, `aesifl_var`, `aelabfl_var`, and `arm_var`.
 #' * If specified, `alt_counts_df` must contain `SAFFL`, `USUBJID`, and the variable specified by `arm_var`.
 #' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
@@ -13,6 +13,8 @@
 #' @inheritParams argument_convention
 #' @param aesifl_var (`character`)\cr variable from `adae` that indicates adverse events of special interest.
 #' @param aelabfl_var (`character`)\cr variable from `adae` that indicates a laboratory assessment.
+#'
+#' @return An `rtable` object.
 #'
 #' @examples
 #' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
@@ -38,7 +40,7 @@ make_table_20 <- function(adae,
                           prune_0 = TRUE,
                           annotations = NULL) {
   checkmate::assert_subset(c(
-    "SAFFL", "USUBJID", "AEDECOD", "AESEV", "AESER", "AESDTH", "EOSSTT", "AEREL",
+    "SAFFL", "USUBJID", "AESEV", "AESER", "AESDTH", "EOSSTT", "AEREL",
     pref_var, aesifl_var, aelabfl_var, arm_var
   ), names(adae))
   assert_flag_variables(adae, c("SAFFL", aesifl_var, aelabfl_var))

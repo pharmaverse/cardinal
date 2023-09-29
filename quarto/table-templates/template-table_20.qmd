@@ -25,7 +25,7 @@ adae$AESIFL <- ifelse(adae$AESOC %in% c("cl A", "cl D"), "Y", "N")
 adae$AELABFL <- sample(c("Y", "N"), nrow(adae), replace = TRUE)
 
 # Select Preferred Term Variable
-pref_var <- "AETERM"
+pref_var <- "AEDECOD"
 
 # Output Table
 risk_diff <- list(arm_x = "B: Placebo", arm_y = "A: Drug X") # optional
@@ -48,7 +48,7 @@ make_table_20(
 
 Required variables:
 
--   **`adae`**: `SAFFL`, `USUBJID`, `AEDECOD`, `AESEV`, `AESER`, `AESDTH`, `EOSSTT`, `AEREL`, and the variables specified by `pref_var`, `aesifl_var`, `aelabfl_var`, and `arm_var`.
+-   **`adae`**: `SAFFL`, `USUBJID`, `AESEV`, `AESER`, `AESDTH`, `EOSSTT`, `AEREL`, and the variables specified by `pref_var`, `aesifl_var`, `aelabfl_var`, and `arm_var`.
 -   **`alt_counts_df`** (if specified): `SAFFL`, `USUBJID`, and the variable specified by `arm_var`.
 
 +------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------+

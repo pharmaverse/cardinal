@@ -29,7 +29,7 @@ create_subsection <- function(fpath) {
 # Create Index Header
 
 cat(
-  paste("---", "title: Template Library Index", "date: '`r Sys.Date()`'", "---", "", sep = "\n"),
+  paste("---", "title: Template Library Index", "---", "", sep = "\n"),
   file = "./quarto/index-templates.qmd"
 )
 

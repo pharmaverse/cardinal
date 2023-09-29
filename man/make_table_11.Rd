@@ -57,6 +57,9 @@ contain the following elements:
 annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
 use the annotation type as name and the desired string as value.}
 }
+\value{
+An \code{rtable} object.
+}
 \description{
 FDA Table 11: Patients with FDA Medical Query (Narrow) Leading to Treatment
 Discontinuation, Safety Population, Pooled Analyses
@@ -85,8 +88,8 @@ adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
 
 set.seed(1)
 adae <- adae \%>\%
-  dplyr::rename(FMQ01SC = SMQ01SC) \%>\%
-  dplyr::mutate(
+  rename(FMQ01SC = SMQ01SC) \%>\%
+  mutate(
     AESER = sample(c("Y", "N"), size = nrow(adae), replace = TRUE),
     FMQ01NAM = sample(c("FMQ1", "FMQ2", "FMQ3"), size = nrow(adae), replace = TRUE)
   )

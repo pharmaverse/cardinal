@@ -13,6 +13,8 @@
 #'
 #' @inheritParams argument_convention
 #'
+#' @return An `rtable` object.
+#'
 #' @examples
 #' adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
 #' adae <- dplyr::rename(adae, FMQ01SC = SMQ01SC, FMQ01NAM = SMQ01NAM)

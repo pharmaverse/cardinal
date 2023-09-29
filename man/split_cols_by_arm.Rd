@@ -25,6 +25,10 @@ contain the following elements:
 \item \code{pct}: (optional) whether the output should be returned as percentages. Defaults to \code{TRUE}.
 }}
 }
+\value{
+An \code{rtables} \code{PreDataTableLayouts} object suitable for passing to further layout functions, and
+to \code{build_table}.
+}
 \description{
 Splits \code{rtables} layout into columns by arm variable. Appends an "overall" column as the
 rightmost column if \code{lbl_overall} is supplied.

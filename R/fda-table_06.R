@@ -12,6 +12,8 @@
 #'
 #' @inheritParams argument_convention
 #'
+#' @return An `rtable` object.
+#'
 #' @examples
 #' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
 #' adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")

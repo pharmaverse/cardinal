@@ -147,13 +147,10 @@ Required variables:
 | `tplyr_raw`      | (`flag`) Whether the raw `tibble` created using `Tplyr` functions should be returned, or the table formatted using functions from `tfrmt` should be returned (default).                                                 | `FALSE`                                                  |
 
 Source code for this function is available [here](https://github.com/pharmaverse/falcon/blob/682cb17b65d88240dba0525483c09cc514707997/R/fda-table_02.R#L101).
-:::
 
-:::
+## gtsummary Table
 
-## gt Table
-
-```{r tbl_gt, message=FALSE, warning=FALSE}
+```{r tbl_gtsummary, message=FALSE, warning=FALSE}
 # Load Libraries & Data
 library(scda)
 library(falcon)
@@ -178,7 +175,7 @@ advs <- advs %>%
 anl <- dplyr::left_join(adsl, advs, by = "USUBJID")
 
 # Output Table
-make_table_02_gt(
+make_table_02_gtsum(
   df = anl,
   vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY", "AVAL"),
   lbl_vars = c(
@@ -188,14 +185,14 @@ make_table_02_gt(
 )
 ```
 
-## gt Table Setup
+## gtsummary Table Setup
 
-```{r tbl_gt, eval=FALSE, echo=TRUE}
+```{r tbl_gtsummary, eval=FALSE, echo=TRUE}
 ```
 
-## Function Details: `make_table_02_gt`
+## Function Details: `make_table_02_gtsum`
 
-### `make_table_02_gt()`
+### `make_table_02_gtsum()`
 
 ------------------------------------------------------------------------
 
@@ -214,4 +211,6 @@ Required variables:
 | `lbl_vars`       | (`character`) Labels corresponding to variables in `vars` to print in the table. Labels should be ordered according to the order of variables in `vars`. | `formatters::var_labels(df, fill = TRUE)[vars]`          |
 | `lbl_overall`    | (`character`) If specified, an overall column will be added to the table with the given value as the column label.                                       | `"Total Population"`                                     |
 
-Source code for this function is available [here](https://github.com/pharmaverse/falcon/blob/682cb17b65d88240dba0525483c09cc514707997/R/fda-table_02.R#L252). :::
+Source code for this function is available [here](https://github.com/pharmaverse/falcon/blob/682cb17b65d88240dba0525483c09cc514707997/R/fda-table_02.R#L252). 
+
+:::

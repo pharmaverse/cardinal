@@ -10,7 +10,7 @@ make_table_09(
   alt_counts_df = NULL,
   show_colcounts = TRUE,
   arm_var = "ARM",
-  pref_var = "AETERM",
+  pref_var = "AEDECOD",
   lbl_pref_var = formatters::var_labels(adae, fill = TRUE)[pref_var],
   lbl_overall = NULL,
   risk_diff = NULL,
@@ -50,6 +50,9 @@ contain the following elements:
 \item{annotations}{(named \code{list} of \code{character})\cr list of annotations to add to the table. Valid
 annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
 use the annotation type as name and the desired string as value.}
+}
+\value{
+An \code{rtable} object.
 }
 \description{
 FDA Table 9: Patients With Serious Adverse Events by System Organ Class and Preferred Term,
