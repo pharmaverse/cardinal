@@ -9,6 +9,7 @@
 #' @param alt_counts_df (`character`)\cr alternative dataset (typically ADSL) used only to calculate column counts.
 #' @param show_colcounts (`flag`)\cr whether column counts should be printed.
 #' @param arm_var (`character`)\cr arm variable used to split table into columns.
+#' @param saffl_var (`character`)\cr flag variable used to indicate the safety population.
 #' @param id_var (`character`)\cr variable used as unique subject identifier.
 #' @param lbl_overall (`character`)\cr if specified, an overall column will be added to the table with
 #'   the given value as the column label.

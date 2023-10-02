@@ -11,6 +11,7 @@ make_table_02(
   alt_counts_df = NULL,
   show_colcounts = TRUE,
   arm_var = "ARM",
+  saffl_var = "SAFFL",
   vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY"),
   lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
   lbl_overall = "Total Population",
@@ -37,6 +38,7 @@ make_table_02_gtsum(
   df,
   alt_counts_df = NULL,
   show_colcounts = TRUE,
+  saffl_var = "SAFFL",
   arm_var = "ARM",
   vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY"),
   lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
@@ -52,6 +54,8 @@ make_table_02_gtsum(
 \item{show_colcounts}{(\code{flag})\cr whether column counts should be printed.}
 
 \item{arm_var}{(\code{character})\cr arm variable used to split table into columns.}
+
+\item{saffl_var}{(\code{character})\cr flag variable used to indicate the safety population.}
 
 \item{vars}{(\code{vector} of \code{character})\cr variables from \code{df} to include in the table.}
 
