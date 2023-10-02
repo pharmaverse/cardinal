@@ -11,6 +11,9 @@ alt_counts_df_preproc(alt_counts_df, arm_var = "ARM")
 
 \item{arm_var}{(\code{character})\cr arm variable used to split table into columns.}
 }
+\value{
+A \code{data.frame} (modified \code{alt_counts_df}) or \code{NULL}.
+}
 \description{
 If \code{alt_counts_df} is not \code{NULL}, will check for required variables and filter
 to include only safety population, then apply \code{\link[tern:df_explicit_na]{tern::df_explicit_na()}}.

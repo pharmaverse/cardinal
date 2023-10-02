@@ -14,6 +14,7 @@ make_table_11(
   fmqnam_var = "FMQ01NAM",
   fmq_scope = "NARROW",
   lbl_overall = NULL,
+  risk_diff = NULL,
   prune_0 = TRUE,
   na_level = "<Missing>",
   annotations = NULL
@@ -37,6 +38,17 @@ make_table_11(
 \item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
 the given value as the column label.}
 
+\item{risk_diff}{(named \code{list})\cr list of settings to apply to add a risk difference column to the table.
+Defaults to \code{NULL} (no risk difference column added). See \code{\link[tern:add_riskdiff]{tern::add_riskdiff()}} for more details. List should
+contain the following elements:
+\itemize{
+\item \code{arm_x}: (required) the name of reference arm.
+\item \code{arm_y}: (required) the name of the arm to compare to the reference arm.
+\item \code{col_label}: (optional) label to use for the risk difference column. Defaults to
+\code{"Risk Difference (\%) (95\% CI)"}.
+\item \code{pct}: (optional) whether the output should be returned as percentages. Defaults to \code{TRUE}.
+}}
+
 \item{prune_0}{(\code{flag})\cr whether all-zero rows should be removed from the table.}
 
 \item{na_level}{(\code{character})\cr string to represent missing values.}
@@ -44,6 +56,9 @@ the given value as the column label.}
 \item{annotations}{(named \code{list} of \code{character})\cr list of annotations to add to the table. Valid
 annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
 use the annotation type as name and the desired string as value.}
+}
+\value{
+An \code{rtable} object.
 }
 \description{
 FDA Table 11: Patients with FDA Medical Query (Narrow) Leading to Treatment
@@ -73,8 +88,8 @@ adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
 
 set.seed(1)
 adae <- adae \%>\%
-  dplyr::rename(FMQ01SC = SMQ01SC) \%>\%
-  dplyr::mutate(
+  rename(FMQ01SC = SMQ01SC) \%>\%
+  mutate(
     AESER = sample(c("Y", "N"), size = nrow(adae), replace = TRUE),
     FMQ01NAM = sample(c("FMQ1", "FMQ2", "FMQ3"), size = nrow(adae), replace = TRUE)
   )

@@ -73,3 +73,11 @@ test_that("Table 20 generation works with missing values/pruned rows", {
   res <- expect_silent(result)
   expect_snapshot(res)
 })
+
+test_that("Table 20 generation works with risk difference column", {
+  risk_diff <- list(arm_x = "B: Placebo", arm_y = "A: Drug X")
+  result <- make_table_20(adae, adsl, risk_diff = risk_diff)
+
+  res <- expect_silent(result)
+  expect_snapshot(res)
+})

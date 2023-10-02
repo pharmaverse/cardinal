@@ -18,7 +18,7 @@ NULL
 #' @describeIn make_table_02 Create FDA table 2 using functions from `rtables` and `tern`.
 #'
 #' @return
-#' * `make_table_02` returns an `rtables` table object.
+#' * `make_table_02` returns an `rtable` object.
 #'
 #' @examples
 #' library(dplyr)
@@ -30,9 +30,7 @@ NULL
 #'     AGE >= 65 & AGE < 75 ~ ">=65 to <75",
 #'     AGE >= 75 ~ ">=75"
 #'   )) %>% formatters::with_label("Age Group, years")) %>%
-#'   formatters::var_relabel(
-#'     AGE = "Age, years"
-#'   )
+#'   formatters::var_relabel(AGE = "Age, years")
 #'
 #' tbl <- make_table_02(df = adsl)
 #' tbl
@@ -45,8 +43,6 @@ make_table_02 <- function(df,
                           vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY"),
                           lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
                           lbl_overall = "Total Population",
-                          .stats = c("mean_sd", "median_range", "count_fraction"),
-                          .formats = NULL,
                           na_rm = FALSE,
                           prune_0 = TRUE,
                           annotations = NULL) {
@@ -61,12 +57,12 @@ make_table_02 <- function(df,
 
   lyt <- basic_table_annot(show_colcounts, annotations) %>%
     split_cols_by_arm(arm_var, lbl_overall) %>%
-    summarize_vars(
+    analyze_vars(
       vars = vars,
       var_labels = lbl_vars,
       show_labels = "visible",
-      .stats = .stats,
-      .formats = .formats,
+      .stats = c("mean_sd", "median_range", "count_fraction"),
+      .formats = NULL,
       na.rm = na_rm
     ) %>%
     append_topleft(c("", "Characteristic"))
@@ -251,21 +247,21 @@ make_table_02_tplyr <- function(df,
 #' @describeIn make_table_02 Create FDA table 2 using functions from `gtsummary`.
 #'
 #' @return
-#' * `make_table_02_gt` returns a `tbl_summary` object.
+#' * `make_table_02_gtsum` returns a `tbl_summary` object.
 #'
 #' @examples
-#' tbl <- make_table_02_gt(df = adsl)
+#' tbl <- make_table_02_gtsum(df = adsl)
 #' tbl
 #'
 #' @export
-make_table_02_gt <- function(df,
-                             alt_counts_df = NULL,
-                             show_colcounts = TRUE,
-                             arm_var = "ARM",
-                             vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY"),
-                             lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
-                             lbl_overall = "Total Population",
-                             na_rm = FALSE) {
+make_table_02_gtsum <- function(df,
+                                alt_counts_df = NULL,
+                                show_colcounts = TRUE,
+                                arm_var = "ARM",
+                                vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY"),
+                                lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
+                                lbl_overall = "Total Population",
+                                na_rm = FALSE) {
   checkmate::assert_subset(c("SAFFL", vars, arm_var), names(df))
   assert_flag_variables(df, "SAFFL")
 

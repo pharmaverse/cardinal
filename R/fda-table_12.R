@@ -15,6 +15,8 @@
 #'
 #' @inheritParams argument_convention
 #'
+#' @return An `rtable` object.
+#'
 #' @examples
 #' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
 #' adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
@@ -30,6 +32,7 @@ make_table_12 <- function(adae,
                           arm_var = "ARM",
                           pref_var = "AEDECOD",
                           lbl_overall = NULL,
+                          risk_diff = NULL,
                           prune_0 = TRUE,
                           annotations = NULL) {
   checkmate::assert_subset(c(
@@ -49,9 +52,10 @@ make_table_12 <- function(adae,
   alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
 
   lyt <- basic_table_annot(show_colcounts, annotations) %>%
-    split_cols_by_arm(arm_var, lbl_overall) %>%
+    split_cols_by_arm(arm_var, lbl_overall, risk_diff) %>%
     analyze_num_patients(
       vars = "USUBJID",
+      riskdiff = !is.null(risk_diff),
       .stats = c("unique"),
       .labels = c(unique = "Patients with at least one AE leading to discontinuation")
     ) %>%
@@ -62,10 +66,15 @@ make_table_12 <- function(adae,
     ) %>%
     summarize_num_patients(
       var = "USUBJID",
+      riskdiff = !is.null(risk_diff),
       .stats = "unique",
       .labels = c(unique = NULL)
     ) %>%
-    count_occurrences(vars = pref_var, drop = FALSE) %>%
+    count_occurrences(
+      vars = pref_var,
+      drop = FALSE,
+      riskdiff = !is.null(risk_diff)
+    ) %>%
     append_varlabels(adae, pref_var, indent = 1L)
 
   tbl <- build_table(lyt, df = adae, alt_counts_df = alt_counts_df)
