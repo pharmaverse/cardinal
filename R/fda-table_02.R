@@ -40,14 +40,15 @@ make_table_02 <- function(df,
                           alt_counts_df = NULL,
                           show_colcounts = TRUE,
                           arm_var = "ARM",
+                          saffl_var = "SAFFL",
                           vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY"),
                           lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
                           lbl_overall = "Total Population",
                           na_rm = FALSE,
                           prune_0 = TRUE,
                           annotations = NULL) {
-  checkmate::assert_subset(c("SAFFL", vars, arm_var), names(df))
-  assert_flag_variables(df, "SAFFL")
+  checkmate::assert_subset(c(saffl_var, vars, arm_var), names(df))
+  assert_flag_variables(df, saffl_var)
 
   df <- df %>%
     filter(SAFFL == "Y") %>%
@@ -257,13 +258,14 @@ make_table_02_tplyr <- function(df,
 make_table_02_gtsum <- function(df,
                                 alt_counts_df = NULL,
                                 show_colcounts = TRUE,
+                                saffl_var = "SAFFL",
                                 arm_var = "ARM",
                                 vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY"),
                                 lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
                                 lbl_overall = "Total Population",
                                 na_rm = FALSE) {
-  checkmate::assert_subset(c("SAFFL", vars, arm_var), names(df))
-  assert_flag_variables(df, "SAFFL")
+  checkmate::assert_subset(c(saffl_var, vars, arm_var), names(df))
+  assert_flag_variables(df, saffl_var)
 
   df <- df %>%
     filter(SAFFL == "Y") %>%

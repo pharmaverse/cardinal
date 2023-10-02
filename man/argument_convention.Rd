@@ -18,6 +18,8 @@
 
 \item{arm_var}{(\code{character})\cr arm variable used to split table into columns.}
 
+\item{saffl_var}{(\code{character})\cr flag variable used to indicate the safety population.}
+
 \item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
 
 \item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with

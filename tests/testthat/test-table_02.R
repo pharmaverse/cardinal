@@ -122,7 +122,7 @@ test_that("Table 02 generation (tplyr) works with some NA values", {
 test_that("Table 02 generation (gtsum) works with default values", {
   options(pillar.print_max = 50, width = 200)
 
-  result <- suppressWarnings(make_table_02_gt(adsl) %>% as_gt)
+  result <- suppressWarnings(make_table_02_gtsum(adsl) %>% as_gt)
 
   res <- expect_silent(as.data.frame(result))
   expect_snapshot(res)
@@ -155,11 +155,8 @@ test_that("Table 02 generation (gtsum) works with some NA values", {
 
   adsl <- adsl %>% df_explicit_na()
 
-<<<<<<< HEAD
-  result <- suppressWarnings(make_table_02_gt(adsl, vars = "SEX") %>% as_gt)
-=======
-  result <- suppressWarnings(make_table_02_gtsum(adsl, vars = "SEX"))
->>>>>>> main
+  result <- suppressWarnings(make_table_02_gtsum(adsl, vars = "SEX") %>% as_gt)
+
 
   res <- expect_silent(as.data.frame(result))
   expect_snapshot(res)
