@@ -8,9 +8,8 @@
 ![Check](https://github.com/pharmaverse/falcon/actions/workflows/check.yaml/badge.svg)
 ![Test Coverage](https://raw.githubusercontent.com/pharmaverse/falcon/_xml_coverage_reports/data/main/badge.svg)
 
-
 ![GitHub contributors](https://img.shields.io/github/contributors/pharmaverse/falcon)
-![GitHub repo stars](https://img.shields.io/github/stars/pharmaverse/falcon?style=social)
+![GitHub stars](https://img.shields.io/github/stars/pharmaverse/falcon?style=social)
 ![GitHub forks](https://img.shields.io/github/forks/pharmaverse/falcon?style=social)
 <!-- end badges -->
 
@@ -48,11 +47,12 @@ With data now loaded, the `make_table_02` function can be used to generate the F
 ```r
 make_table_02(
   df = adsl,
-  vars = c("SEX", "AGE", "RACE", "COUNTRY"),
-  lbl_vars = c("Sex", "Age, years", "Race", "Country of Participation")
+  vars = c("SEX", "AGE", "RACE"),
+  lbl_vars = c("Sex", "Age, years", "Race")
 )
 ```
 
+<!-- markdownlint-disable -->
 ```
                                                   A: Drug X            B: Placebo         C: Combination      Total Population 
 Characteristic                                     (N=134)              (N=134)              (N=132)              (N=400)      
@@ -70,17 +70,8 @@ Race
   AMERICAN INDIAN OR ALASKA NATIVE                  8 (6%)             11 (8.2%)             6 (4.5%)            25 (6.2%)     
   MULTIPLE                                            0                 1 (0.7%)                0                 1 (0.2%)     
   NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER           0                 1 (0.7%)                0                 1 (0.2%)     
-Country of Participation                                                                                                       
-  CHN                                             74 (55.2%)           81 (60.4%)           64 (48.5%)          219 (54.8%)    
-  USA                                             10 (7.5%)            13 (9.7%)            17 (12.9%)            40 (10%)     
-  BRA                                             13 (9.7%)             7 (5.2%)            10 (7.6%)            30 (7.5%)     
-  PAK                                              12 (9%)              9 (6.7%)            10 (7.6%)            31 (7.8%)     
-  NGA                                               8 (6%)              7 (5.2%)            11 (8.3%)            26 (6.5%)     
-  RUS                                              5 (3.7%)              8 (6%)              6 (4.5%)            19 (4.8%)     
-  JPN                                              5 (3.7%)              4 (3%)              9 (6.8%)            18 (4.5%)     
-  GBR                                               4 (3%)              3 (2.2%)             2 (1.5%)             9 (2.2%)     
-  CAN                                              3 (2.2%)             2 (1.5%)             3 (2.3%)              8 (2%)      
 ```
+<!-- markdownlint-restore -->
 
 For more information on the `make_table_02` function and parameters you can use to customize the output table, see the [FDA Table 2 page](https://pharmaverse.github.io/falcon/quarto/table-templates/template-table_02.html) on the falcon website.
 
@@ -96,7 +87,7 @@ For more information on the `make_table_02` function and parameters you can use 
 
 We are reachable via the following channels for inquiries and support:
 
-* [Slack](https://app.slack.com/client/T028PB489D3/C04MQS12MND) - Use this channel to message the falcon team directly with questions & feedback on the package. If you don't have access, use this [link](https://join.slack.com/t/pharmaverse/shared_invite/zt-yv5atkr4-Np2ytJ6W_QKz_4Olo7Jo9A) to join the pharmaverse Slack workspace
+* [Slack](https://app.slack.com/client/T028PB489D3/C04MQS12MND) - Use this channel to message the falcon team directly with questions & feedback on the package. If you don't have access, use this [link](https://join.slack.com/t/pharmaverse/shared_invite/zt-yv5atkr4-Np2ytJ6W_QKz_4Olo7Jo9A) to join the Pharmaverse Slack workspace
 * [GitHub Issues](https://github.com/pharmaverse/falcon/issues/new/choose) - To report a bug, request a new feature or table, or ask a question, open a new issue on GitHub.
 
 ## Acknowledgment
@@ -105,4 +96,4 @@ This package is a result of an industry collaboration across several different c
 
 ## Stargazers over time
 
-[![](https://starchart.cc/pharmaverse/falcon.svg)](https://starchart.cc/pharmaverse/falcon)
+[![stargazers](https://starchart.cc/pharmaverse/falcon.svg)](https://starchart.cc/pharmaverse/falcon)
