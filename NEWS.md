@@ -6,13 +6,12 @@
   `make_table_13`, `make_table_14`, `make_table_20`, `make_table_21`, `make_table_32`, `make_table_33`, `make_table_34`.
 * Added helper functions used within table functions:
   * `basic_table_annot` for adding basic table annotations (titles, footnotes, column counts).
-  * `split_cols_by_arm` for splitting columns by arm with option to add total column.
+  * `split_cols_by_arm` for splitting columns by arm with option to add total column and/or risk difference column.
   * `alt_counts_df_preproc` for pre-processing the `alt_counts_df` dataset.
   * `assert_flag_variables` (internal) for checking that formatting is correct for flag variables in the data.
-* Added new function for creating standard FDA tables using additional packages: `make_table_02_tplyr`, `make_table_02_gtsum`.
-* Added option to include a risk difference column to tables using the `split_cols_by_arm` via the `risk_diff` argument.
+* Added new functions for creating tables using different table engines: `make_table_02_tplyr`, `make_table_02_gtsum`.
 * Added risk difference functionality into relevant table-generating functions via the `risk_diff` argument.
 
 ### Miscellaneous
 * Initialized the package.
-* Developed Quarto website.
+* Created Quarto website.
