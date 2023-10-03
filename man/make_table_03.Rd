@@ -72,7 +72,8 @@ adsl <- adsl \%>\%
     ENRLDT = RANDDT,
     SCRNFL = "Y",
     SCRNFRS = factor(sample(scrnfail_reas_lvls, size = nrow(adsl), replace = TRUE),
-      levels = scrnfail_reas_lvls),
+      levels = scrnfail_reas_lvls
+    ),
     SCRNFAILFL = ifelse(is.na(ENRLDT), "Y", "N")
   )
 adsl$SCRNFRS[adsl$SCRNFL == "N" | !is.na(adsl$ENRLDT)] <- NA
