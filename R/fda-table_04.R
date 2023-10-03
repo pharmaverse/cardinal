@@ -75,6 +75,7 @@ make_table_04 <- function(df,
     count_patients_with_flags(
       var = "USUBJID",
       flag_variables = var_labels(df[, pop_var]),
+      riskdiff = !is.null(risk_diff),
       table_names = "pop"
     ) %>%
     count_patients_with_flags(
