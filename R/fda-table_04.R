@@ -13,6 +13,8 @@
 #'
 #' @inheritParams argument_convention
 #'
+#' @return An `rtable` object.
+#'
 #' @examples
 #' library(dplyr)
 #'
@@ -38,6 +40,7 @@ make_table_04 <- function(df,
                           arm_var = "ARM",
                           lbl_overall = NULL,
                           prune_0 = FALSE,
+                          risk_diff = NULL,
                           annotations = NULL) {
   checkmate::assert_subset(c(
     "USUBJID", arm_var,
@@ -47,6 +50,7 @@ make_table_04 <- function(df,
   assert_flag_variables(df, c("RANDFL", "ITTFL", "SAFFL", "PPROTFL"))
 
   df <- df %>%
+    as_tibble() %>%
     filter(SAFFL == "Y") %>%
     df_explicit_na() %>%
     mutate(
@@ -72,39 +76,43 @@ make_table_04 <- function(df,
   alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
 
   lyt <- basic_table_annot(show_colcounts, annotations) %>%
-    split_cols_by_arm(arm_var, lbl_overall) %>%
+    split_cols_by_arm(arm_var, lbl_overall, risk_diff) %>%
     count_patients_with_flags(
       var = "USUBJID",
-      flag_variables = var_labels(df[, "RAN"]),
+      flag_variables = "RAN",
+      riskdiff = !is.null(risk_diff),
       table_names = "ran"
     ) %>%
     count_patients_with_flags(
       var = "USUBJID",
-      flag_variables = var_labels(df[, c("ITT", "SAF", "PPP")]),
+      flag_variables = c("ITT", "SAF", "PPP"),
+      riskdiff = !is.null(risk_diff),
       .indent_mods = 1L,
       table_names = "ran_fl"
     ) %>%
     count_patients_with_flags(
       var = "USUBJID",
-      flag_variables = var_labels(df[, "DISCSD"]),
+      flag_variables = "DISCSD",
+      riskdiff = !is.null(risk_diff),
       table_names = "discsd"
     ) %>%
     count_patients_with_flags(
       var = "USUBJID",
-      flag_variables = var_labels(
-        df[, c("DISCSD_AE", "DISCSD_LOE", "DISCSD_PD", "DISCSD_DT", "DISCSD_WBS", "DISCSD_OTH")]
-      ),
+      flag_variables = c("DISCSD_AE", "DISCSD_LOE", "DISCSD_PD", "DISCSD_DT", "DISCSD_WBS", "DISCSD_OTH"),
+      riskdiff = !is.null(risk_diff),
       .indent_mods = 1L,
       table_names = "discsd_fl"
     ) %>%
     count_patients_with_flags(
       var = "USUBJID",
-      flag_variables = var_labels(df[, "DISCS"]),
+      flag_variables = "DISCS",
+      riskdiff = !is.null(risk_diff),
       table_names = "discs"
     ) %>%
     count_patients_with_flags(
       var = "USUBJID",
-      flag_variables = var_labels(df[, c("DISCS_DT", "DISCS_LFU", "DISCS_WBS", "DISCS_PHD", "DISCS_PD", "DISCS_OTH")]),
+      flag_variables = c("DISCS_DT", "DISCS_LFU", "DISCS_WBS", "DISCS_PHD", "DISCS_PD", "DISCS_OTH"),
+      riskdiff = !is.null(risk_diff),
       .indent_mods = 1L,
       table_names = "discs_fl"
     )

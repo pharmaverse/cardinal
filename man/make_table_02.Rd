@@ -3,7 +3,7 @@
 \name{make_table_02}
 \alias{make_table_02}
 \alias{make_table_02_tplyr}
-\alias{make_table_02_gt}
+\alias{make_table_02_gtsum}
 \title{FDA Table 2: Baseline Demographic and Clinical Characteristics Safety Population, Pooled Analyses}
 \usage{
 make_table_02(
@@ -14,8 +14,6 @@ make_table_02(
   vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY"),
   lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
   lbl_overall = "Total Population",
-  .stats = c("mean_sd", "median_range", "count_fraction"),
-  .formats = NULL,
   na_rm = FALSE,
   prune_0 = TRUE,
   annotations = NULL
@@ -35,7 +33,7 @@ make_table_02_tplyr(
   tplyr_raw = FALSE
 )
 
-make_table_02_gt(
+make_table_02_gtsum(
   df,
   alt_counts_df = NULL,
   show_colcounts = TRUE,
@@ -63,14 +61,6 @@ in the table. Labels should be ordered according to the order of variables in \c
 \item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
 the given value as the column label.}
 
-\item{.stats}{(\code{character})\cr statistics to include in the table. Includes statistics for all variable
-types (only the statistics that are valid for a given variable's type will be printed).
-See \code{\link[tern:analyze_variables]{tern::summarize_vars()}} for options.}
-
-\item{.formats}{(named \code{list} of \code{character})\cr list of formats corresponding to each value in \code{.stats}.
-Each name is a value in \code{.stats} and the corresponding value is the format that should be applied to
-that statistic. See \code{\link[formatters:list_formats]{formatters::list_valid_format_labels()}} for a list of valid formats.}
-
 \item{na_rm}{(\code{flag})\cr whether \code{NA} levels should be removed from the table.}
 
 \item{prune_0}{(\code{flag})\cr whether all-zero rows should be removed from the table.}
@@ -84,7 +74,7 @@ table formatted using functions from \code{tfrmt} should be returned (default).}
 }
 \value{
 \itemize{
-\item \code{make_table_02} returns an \code{rtables} table object.
+\item \code{make_table_02} returns an \code{rtable} object.
 }
 
 \itemize{
@@ -93,7 +83,7 @@ a \code{tibble} object when \code{tplyr_raw = TRUE}.
 }
 
 \itemize{
-\item \code{make_table_02_gt} returns a \code{tbl_summary} object.
+\item \code{make_table_02_gtsum} returns a \code{tbl_summary} object.
 }
 }
 \description{
@@ -117,7 +107,7 @@ flag variables are treated as \code{"N"}.
 
 \item \code{make_table_02_tplyr()}: Create FDA table 2 using functions from \code{Tplyr} and \code{tfrmt}.
 
-\item \code{make_table_02_gt()}: Create FDA table 2 using functions from \code{gtsummary}.
+\item \code{make_table_02_gtsum()}: Create FDA table 2 using functions from \code{gtsummary}.
 
 }}
 \note{
@@ -136,9 +126,7 @@ adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") \%>\%
     AGE >= 65 & AGE < 75 ~ ">=65 to <75",
     AGE >= 75 ~ ">=75"
   )) \%>\% formatters::with_label("Age Group, years")) \%>\%
-  formatters::var_relabel(
-    AGE = "Age, years"
-  )
+  formatters::var_relabel(AGE = "Age, years")
 
 tbl <- make_table_02(df = adsl)
 tbl
@@ -146,7 +134,7 @@ tbl
 tbl <- make_table_02_tplyr(df = adsl)
 tbl
 
-tbl <- make_table_02_gt(df = adsl)
+tbl <- make_table_02_gtsum(df = adsl)
 tbl
 
 }
