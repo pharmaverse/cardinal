@@ -23,19 +23,22 @@
 #' set.seed(1)
 #' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
 #' adsl$RANDDT[sample(seq_len(nrow(adsl)), 100)] <- NA
+#' scrnfail_reas_lvls <- c(
+#'   "Inclusion/exclusion criteria not met", "Patient noncompliance", "Consent withdrawn", "Other"
+#' )
 #' adsl <- adsl %>%
 #'   mutate(
 #'     ENRLDT = RANDDT,
 #'     SCRNFL = "Y",
-#'     SCRNFRS = factor(sample(
-#'       c("Inclusion/exclusion criteria not met", "Patient noncompliance", "Consent withdrawn", "Other"),
-#'       size = nrow(adsl), replace = TRUE
-#'     ), levels = c("Inclusion/exclusion criteria not met", "Patient noncompliance", "Consent withdrawn", "Other")),
+#'     SCRNFRS = factor(sample(scrnfail_reas_lvls, size = nrow(adsl), replace = TRUE),
+#'       levels = scrnfail_reas_lvls),
 #'     SCRNFAILFL = ifelse(is.na(ENRLDT), "Y", "N")
 #'   )
 #' adsl$SCRNFRS[adsl$SCRNFL == "N" | !is.na(adsl$ENRLDT)] <- NA
 #'
-#' tbl <- make_table_03(df = adsl, scrnfl_var = "SCRNFL", scrnfailfl_var = "SCRNFAILFL", scrnfail_var = "SCRNFRS")
+#' tbl <- make_table_03(
+#'   df = adsl, scrnfl_var = "SCRNFL", scrnfailfl_var = "SCRNFAILFL", scrnfail_var = "SCRNFRS"
+#' )
 #' tbl
 #'
 #' @export
