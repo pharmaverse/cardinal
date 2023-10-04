@@ -1,15 +1,13 @@
 #' FDA Table 4: Patient Disposition, Pooled Analyses
 #'
 #' @details
-#' * `df` must contain `SAFFL`, `USUBJID`, `RANDFL`, `ITTFL`,`PPROTFL`, `EOTSTT`, `DCTREAS`, `EOSSTT`, `DCSREAS`
-#' and the variables specified by `arm_var`.
-#' * If specified, `alt_counts_df` must contain `SAFFL`, `USUBJID`, and the variable specified by `arm_var`.
+#' * `df` must contain `USUBJID`, `EOTSTT`, `DCTREAS`, `EOSSTT`, `DCSREAS` and the variables specified by `arm_var`
+#'   and `pop_var`.
+#' * If specified, `alt_counts_df` must contain `USUBJID`, and the variable specified by `arm_var` and `pop_var`.
 #' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
 #'   flag variables are treated as `"N"`.
 #' * Columns are split by arm. Overall population column is excluded by default (see `lbl_overall` argument).
-#' * Numbers in table "Patients Treated" section are the absolute numbers of patients and fraction of `N`.
 #' * All-zero rows are not removed by default (see `prune_0` argument).
-#' * Records with missing treatment start and/or end datetime are excluded from all calculations.
 #'
 #' @inheritParams argument_convention
 #'
@@ -30,7 +28,8 @@
 #'   ) %>%
 #'   mutate(DCTREAS = DCSREAS)
 #'
-#' tbl <- make_table_04(df = adsl)
+#' tbl <- make_table_04(df = adsl, pop_var = c("RANDFL", "ITTFL", "SAFFL", "PPROTFL"),
+#' pop_var_lbl = c("Patients randomized", "ITT/mITT population", "Safety population", "Per-protocol population"))
 #' tbl
 #'
 #' @export
@@ -38,26 +37,23 @@ make_table_04 <- function(df,
                           alt_counts_df = NULL,
                           show_colcounts = TRUE,
                           arm_var = "ARM",
+                          pop_var = c("SAFFL"),
+                          pop_var_lbl = c("Safety population"),
                           lbl_overall = NULL,
                           prune_0 = FALSE,
                           risk_diff = NULL,
                           annotations = NULL) {
   checkmate::assert_subset(c(
-    "USUBJID", arm_var,
-    "RANDFL", "ITTFL", "SAFFL", "PPROTFL",
+    "USUBJID", arm_var, pop_var,
     "EOTSTT", "DCTREAS", "EOSSTT", "DCSREAS"
   ), names(df))
-  assert_flag_variables(df, c("RANDFL", "ITTFL", "SAFFL", "PPROTFL"))
+  assert_flag_variables(df, pop_var)
 
   df <- df %>%
     as_tibble() %>%
-    filter(SAFFL == "Y") %>%
     df_explicit_na() %>%
     mutate(
-      RAN = with_label(RANDFL == "Y", "Patients randomized"), # need to create
-      ITT = with_label(ITTFL == "Y", "ITT/mITT population"),
-      SAF = with_label(SAFFL == "Y", "Safety population"),
-      PPP = with_label(PPROTFL == "Y", "Per-protocol population"),
+      across(all_of(pop_var), ~ with_label(. == "Y", pop_var_lbl[match(cur_column(), pop_var)])),
       DISCSD = with_label(EOTSTT == "DISCONTINUED", "Discontinued study drug"),
       DISCSD_AE = with_label(EOTSTT == "DISCONTINUED" & DCTREAS == "ADVERSE EVENT", "Adverse event"),
       DISCSD_LOE = with_label(EOTSTT == "DISCONTINUED" & DCTREAS == "LACK OF EFFICACY", "Lack of efficacy"),
@@ -79,16 +75,9 @@ make_table_04 <- function(df,
     split_cols_by_arm(arm_var, lbl_overall, risk_diff) %>%
     count_patients_with_flags(
       var = "USUBJID",
-      flag_variables = "RAN",
+      flag_variables = var_labels(df[, pop_var]),
       riskdiff = !is.null(risk_diff),
-      table_names = "ran"
-    ) %>%
-    count_patients_with_flags(
-      var = "USUBJID",
-      flag_variables = c("ITT", "SAF", "PPP"),
-      riskdiff = !is.null(risk_diff),
-      .indent_mods = 1L,
-      table_names = "ran_fl"
+      table_names = "pop"
     ) %>%
     count_patients_with_flags(
       var = "USUBJID",

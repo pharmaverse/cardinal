@@ -30,7 +30,10 @@ adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") %>%
 
 # Output Table
 risk_diff <- list(arm_x = "B: Placebo", arm_y = "A: Drug X") # optional
-make_table_04(df = adsl, risk_diff = risk_diff)
+tbl <- make_table_04(df = adsl, pop_var = c("RANDFL", "ITTFL", "SAFFL", "PPROTFL"), 
+                     pop_var_lbl = c("Patients randomized", "ITT/mITT population", "Safety population", "Per-protocol population"),
+                     risk_diff = risk_diff)
+tbl
 ```
 
 ## Table Setup
@@ -49,14 +52,16 @@ make_table_04(df = adsl, risk_diff = risk_diff)
 
 Required variables:
 
--   **`df`**: `USUBJID`,`SAFFL`,`RANDFL`, `ITTFL`, `PPROTFL`, `EOTSTT`, `DCTREAS`, `EOSSTT`, `DCSREAS` and the variables specified by `arm_var`.
--   **`alt_counts_df`** (if specified): `SAFFL`, `USUBJID`, and the variable specified by `arm_var`.
+-   **`df`**: `USUBJID`, `EOTSTT`, `DCTREAS`, `EOSSTT`, `DCSREAS` and the variables specified by `arm_var` and `pop_var`.
+-   **`alt_counts_df`** (if specified): `USUBJID`, and the variable specified by `arm_var` and `pop_var`.
 
 | Argument        | Description                                                                                                                                                                                                                                            | Default                                     |
 |:------------------|:---------------------------------|:------------------|
 | `df`            | (`data.frame`) Dataset (typically ADSL) required to build table.                                                                                                                                                                                       | *No default*                                |
 | `alt_counts_df` | (`character`) Alternative dataset used only to calculate column counts.                                                                                                                                                                                | `NULL`                                      |
 | `arm_var`       | (`character`) Arm variable used to split table into columns.                                                                                                                                                                                           | `"ARM"`                                     |
+| `pop_var`       | (named `list` of `character`) List of Population variables to use in Table                                                                                                                                                                              | `c("SAFFL")`                               |
+| `pop_var_lbl`   | (named `list` of `character`) List of row labels for populations defined by `pop_var`                                                                                                                                                                   | `c("Safety population")`                   |
 | `lbl_overall`   | (`character`) If specified, an overall column will be added to the table with the given value as the column label.                                                                                                                                       | `NULL`                                      |
 | `prune_0`       | (`flag`) Whether all-zero rows should be removed from the table.                                                                                                                                                                                       | `FALSE`                                      |
 | `annotations`   | (named `list` of `character`) List of annotations to add to the table. Valid annotation types are `title`, `subtitles`, `main_footer`, and `prov_footer.` Each name-value pair should use the annotation type as name and the desired string as value. | `NULL`                                      |

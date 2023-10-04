@@ -21,6 +21,8 @@ test_that("Table 04 generation works with default values", {
 test_that("Table 04 generation works with custom values", {
   result <- make_table_04(
     adsl,
+    pop_var = c("RANDFL", "ITTFL", "SAFFL", "PPROTFL"),
+    pop_var_lbl = c("Patients randomized", "ITT/mITT population", "Safety population", "Per-protocol population"),
     annotations = list(
       title = "Patient Disposition, Pooled Analyses (1,2)",
       main_footer = c(
