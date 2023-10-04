@@ -28,8 +28,10 @@
 #'   ) %>%
 #'   mutate(DCTREAS = DCSREAS)
 #'
-#' tbl <- make_table_04(df = adsl, pop_var = c("RANDFL", "ITTFL", "SAFFL", "PPROTFL"),
-#' pop_var_lbl = c("Patients randomized", "ITT/mITT population", "Safety population", "Per-protocol population"))
+#' tbl <- make_table_04(
+#'   df = adsl, pop_var = c("RANDFL", "ITTFL", "SAFFL", "PPROTFL"),
+#'   pop_var_lbl = c("Patients randomized", "ITT/mITT population", "Safety population", "Per-protocol population")
+#' )
 #' tbl
 #'
 #' @export

@@ -30,9 +30,11 @@ adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") %>%
 
 # Output Table
 risk_diff <- list(arm_x = "B: Placebo", arm_y = "A: Drug X") # optional
-tbl <- make_table_04(df = adsl, pop_var = c("RANDFL", "ITTFL", "SAFFL", "PPROTFL"), 
-                     pop_var_lbl = c("Patients randomized", "ITT/mITT population", "Safety population", "Per-protocol population"),
-                     risk_diff = risk_diff)
+tbl <- make_table_04(
+  df = adsl, pop_var = c("RANDFL", "ITTFL", "SAFFL", "PPROTFL"),
+  pop_var_lbl = c("Patients randomized", "ITT/mITT population", "Safety population", "Per-protocol population"),
+  risk_diff = risk_diff
+)
 tbl
 ```
 
