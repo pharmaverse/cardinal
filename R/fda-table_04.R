@@ -1,7 +1,8 @@
 #' FDA Table 4: Patient Disposition, Pooled Analyses
 #'
 #' @details
-#' * `df` must contain `USUBJID`, `EOTSTT`, `DCTREAS`, `EOSSTT`, `DCSREAS` and the variables specified by `arm_var` and `pop_var`.
+#' * `df` must contain `USUBJID`, `EOTSTT`, `DCTREAS`, `EOSSTT`, `DCSREAS` and the variables specified by `arm_var`
+#'   and `pop_var`.
 #' * If specified, `alt_counts_df` must contain `USUBJID`, and the variable specified by `arm_var` and `pop_var`.
 #' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
 #'   flag variables are treated as `"N"`.
