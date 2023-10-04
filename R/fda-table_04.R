@@ -1,9 +1,9 @@
 #' FDA Table 4: Patient Disposition, Pooled Analyses
 #'
 #' @details
-#' * `df` must contain `SAFFL`, `USUBJID`, `RANDFL`, `ITTFL`,`PPROTFL`, `EOTSTT`, `DCTREAS`, `EOSSTT`, `DCSREAS`
-#' and the variables specified by `arm_var`.
-#' * If specified, `alt_counts_df` must contain `SAFFL`, `USUBJID`, and the variable specified by `arm_var`.
+#' * `df` must contain `USUBJID`, `RANDFL`, `ITTFL`,`PPROTFL`, `EOTSTT`, `DCTREAS`, `EOSSTT`, `DCSREAS`, and the
+#'   variables specified by `arm_var` and `saffl_var`.
+#' * If specified, `alt_counts_df` must contain `USUBJID` and the variable specified by `arm_var`.
 #' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
 #'   flag variables are treated as `"N"`.
 #' * Columns are split by arm. Overall population column is excluded by default (see `lbl_overall` argument).
@@ -38,25 +38,23 @@ make_table_04 <- function(df,
                           alt_counts_df = NULL,
                           show_colcounts = TRUE,
                           arm_var = "ARM",
+                          saffl_var = "SAFFL",
                           lbl_overall = NULL,
                           prune_0 = FALSE,
                           risk_diff = NULL,
                           annotations = NULL) {
   checkmate::assert_subset(c(
-    "USUBJID", arm_var,
-    "RANDFL", "ITTFL", "SAFFL", "PPROTFL",
-    "EOTSTT", "DCTREAS", "EOSSTT", "DCSREAS"
+    "USUBJID", arm_var, saffl_var, "RANDFL", "ITTFL", "PPROTFL", "EOTSTT", "DCTREAS", "EOSSTT", "DCSREAS"
   ), names(df))
-  assert_flag_variables(df, c("RANDFL", "ITTFL", "SAFFL", "PPROTFL"))
+  assert_flag_variables(df, c(saffl_var, "RANDFL", "ITTFL", "PPROTFL"))
 
   df <- df %>%
     as_tibble() %>%
-    filter(SAFFL == "Y") %>%
     df_explicit_na() %>%
     mutate(
       RAN = with_label(RANDFL == "Y", "Patients randomized"), # need to create
       ITT = with_label(ITTFL == "Y", "ITT/mITT population"),
-      SAF = with_label(SAFFL == "Y", "Safety population"),
+      SAF = with_label(.data[[saffl_var]] == "Y", "Safety population"),
       PPP = with_label(PPROTFL == "Y", "Per-protocol population"),
       DISCSD = with_label(EOTSTT == "DISCONTINUED", "Discontinued study drug"),
       DISCSD_AE = with_label(EOTSTT == "DISCONTINUED" & DCTREAS == "ADVERSE EVENT", "Adverse event"),
@@ -73,6 +71,7 @@ make_table_04 <- function(df,
       DISCS_PD = with_label(EOSSTT == "DISCONTINUED" & DCSREAS == "PROTOCOL VIOLATION", "Protocol deviation"),
       DISCS_OTH = with_label(EOSSTT == "DISCONTINUED" & DCSREAS == "OTHER", "Other")
     )
+
   alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
 
   lyt <- basic_table_annot(show_colcounts, annotations) %>%

@@ -61,8 +61,8 @@ split_cols_by_arm <- function(lyt, arm_var = "ARM", lbl_overall = NULL, risk_dif
 
 #' Pre-Process `alt_counts_df` for Safety Population
 #'
-#' If `alt_counts_df` is not `NULL`, will check for required variables and filter
-#' to include only safety population, then apply [`tern::df_explicit_na()`].
+#' If `alt_counts_df` is not `NULL`, will check for required variables (`arm_var`) and filter
+#' to include only safety population (`saffl_var`, if specified), then apply [`tern::df_explicit_na()`].
 #'
 #' @inheritParams argument_convention
 #'
@@ -73,13 +73,14 @@ split_cols_by_arm <- function(lyt, arm_var = "ARM", lbl_overall = NULL, risk_dif
 #' alt_counts_df_preproc(adsl)
 #'
 #' @export
-alt_counts_df_preproc <- function(alt_counts_df, arm_var = "ARM") {
+alt_counts_df_preproc <- function(alt_counts_df, arm_var = "ARM", saffl_var = NULL) {
   if (!is.null(alt_counts_df)) {
-    checkmate::assert_subset(c("SAFFL", "USUBJID", arm_var), names(alt_counts_df))
-    assert_flag_variables(alt_counts_df, "SAFFL")
-    alt_counts_df %>%
-      filter(SAFFL == "Y") %>%
-      df_explicit_na()
+    checkmate::assert_subset(c("USUBJID", arm_var, saffl_var), names(alt_counts_df))
+    if (!is.null(saffl_var)) {
+      assert_flag_variables(alt_counts_df, saffl_var)
+      alt_counts_df <- alt_counts_df %>% filter(.data[[saffl_var]] == "Y")
+    }
+    alt_counts_df %>% df_explicit_na()
   }
 }
 

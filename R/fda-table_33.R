@@ -2,9 +2,9 @@
 #'   Safety Population, Pooled Analysis
 #'
 #' @details
-#' * `advs` must contain `SAFFL`, `USUBJID`, `AVISITN`, `PARAMCD`, `AVAL`, `AVALU`, and the variable
-#'   specified by `arm_var`.
-#' * If specified, `alt_counts_df` must contain `SAFFL`, `USUBJID`, and the variable specified by `arm_var`.
+#' * `advs` must contain `USUBJID`, `AVISITN`, `PARAMCD`, `AVAL`, `AVALU`, and the variables specified by `arm_var`
+#'   and `saffl_var`.
+#' * If specified, `alt_counts_df` must contain `USUBJID` and the variables specified by `arm_var` and `saffl_var`.
 #' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
 #'   flag variables are treated as `"N"`.
 #' * Columns are split by arm. Overall population column is excluded by default (see `lbl_overall` argument).
@@ -27,16 +27,17 @@ make_table_33 <- function(advs,
                           alt_counts_df = NULL,
                           show_colcounts = TRUE,
                           arm_var = "ARM",
+                          saffl_var = "SAFFL",
                           lbl_overall = NULL,
                           risk_diff = NULL,
                           prune_0 = FALSE,
                           annotations = NULL) {
-  checkmate::assert_subset(c("SAFFL", "USUBJID", "AVISITN", "PARAMCD", "AVAL", "AVALU"), names(advs))
-  assert_flag_variables(advs, "SAFFL")
+  checkmate::assert_subset(c("USUBJID", "AVISITN", "PARAMCD", "AVAL", "AVALU", arm_var, saffl_var), names(advs))
+  assert_flag_variables(advs, saffl_var)
 
   advs <- advs %>%
     filter(
-      SAFFL == "Y",
+      .data[[saffl_var]] == "Y",
       AVISITN >= 1,
       PARAMCD %in% c("DIABP", "SYSBP")
     ) %>%
@@ -51,7 +52,7 @@ make_table_33 <- function(advs,
       DBP60 = formatters::with_label(PARAMCD == "DIABP" & MAX_DIABP < 60, "DBP <60")
     )
 
-  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
+  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var, saffl_var)
 
   lyt <- basic_table_annot(show_colcounts, annotations) %>%
     split_cols_by_arm(arm_var, lbl_overall, risk_diff) %>%
