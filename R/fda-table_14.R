@@ -2,9 +2,9 @@
 #'   Pooled Analyses
 #'
 #' @details
-#' * `adae` must contain the variables `SAFFL`, `USUBJID`, `AEBODSYS`, and the variables specified by `arm_var`,
+#' * `adae` must contain the variables `USUBJID`, `AEBODSYS`, and the variables specified by `arm_var`, `saffl_var`,
 #'   `fmqsc_var`, and `fmqnam_var`.
-#' * If specified, `alt_counts_df` must contain variables `SAFFL` and `USUBJID`.
+#' * If specified, `alt_counts_df` must contain `USUBJID` and the variables specified by `arm_var` and `saffl_var`.
 #' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
 #'   flag variables are treated as `"N"`.
 #' * Columns are split by arm. Overall population column is excluded by default (see `lbl_overall` argument).
@@ -29,6 +29,7 @@ make_table_14 <- function(adae,
                           alt_counts_df = NULL,
                           show_colcounts = TRUE,
                           arm_var = "ARM",
+                          saffl_var = "SAFFL",
                           fmqsc_var = "FMQ01SC",
                           fmqnam_var = "FMQ01NAM",
                           lbl_overall = NULL,
@@ -37,16 +38,16 @@ make_table_14 <- function(adae,
                           na_level = "<Missing>",
                           annotations = NULL) {
   checkmate::assert_subset(c(
-    "SAFFL", "USUBJID", "AEBODSYS", arm_var, fmqsc_var, fmqnam_var
+    "USUBJID", "AEBODSYS", arm_var, saffl_var, fmqsc_var, fmqnam_var
   ), names(adae))
-  assert_flag_variables(adae, "SAFFL")
+  assert_flag_variables(adae, saffl_var)
 
   adae <- adae %>%
-    filter(SAFFL == "Y") %>%
+    filter(.data[[saffl_var]] == "Y") %>%
     df_explicit_na(na_level = na_level)
   adae[[fmqnam_var]] <- with_label(adae[[fmqnam_var]], "FMQ")
 
-  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
+  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var, saffl_var)
 
   lyt <- basic_table_annot(show_colcounts, annotations) %>%
     split_cols_by(fmqsc_var) %>%

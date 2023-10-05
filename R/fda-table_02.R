@@ -1,8 +1,8 @@
-#' FDA Table 2: Baseline Demographic and Clinical Characteristics Safety Population, Pooled Analyses
+#' FDA Table 2: Baseline Demographic and Clinical Characteristics, Safety Population, Pooled Analyses
 #'
 #' @details
-#' * `df` must contain `SAFFL` and the variables specified by `vars` and `arm_var`.
-#' * If specified, `alt_counts_df` must contain `SAFFL`, `USUBJID`, and the variable specified by `arm_var`.
+#' * `df` must contain the variables specified by `vars`, `arm_var`, and `saffl_var`.
+#' * If specified, `alt_counts_df` must contain `USUBJID` and the variables specified by `arm_var` and `saffl_var`.
 #' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
 #'   flag variables are treated as `"N"`.
 #' * Columns are split by arm. Overall population column is included by default (see `lbl_overall` argument).
@@ -47,14 +47,14 @@ make_table_02 <- function(df,
                           na_rm = FALSE,
                           prune_0 = TRUE,
                           annotations = NULL) {
-  checkmate::assert_subset(c(saffl_var, vars, arm_var), names(df))
+  checkmate::assert_subset(c(vars, arm_var, saffl_var), names(df))
   assert_flag_variables(df, saffl_var)
 
   df <- df %>%
-    filter(SAFFL == "Y") %>%
+    filter(.data[[saffl_var]] == "Y") %>%
     df_explicit_na()
 
-  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
+  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var, saffl_var)
 
   lyt <- basic_table_annot(show_colcounts, annotations) %>%
     split_cols_by_arm(arm_var, lbl_overall) %>%
@@ -96,6 +96,7 @@ make_table_02_tplyr <- function(df,
                                 alt_counts_df = NULL,
                                 show_colcounts = TRUE,
                                 arm_var = "ARM",
+                                saffl_var = "SAFFL",
                                 vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY"),
                                 lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
                                 lbl_overall = "Total Population",
@@ -103,8 +104,8 @@ make_table_02_tplyr <- function(df,
                                 prune_0 = TRUE,
                                 annotations = NULL,
                                 tplyr_raw = FALSE) {
-  checkmate::assert_subset(c("SAFFL", vars, arm_var), names(df))
-  assert_flag_variables(df, "SAFFL")
+  checkmate::assert_subset(c(saffl_var, vars, arm_var), names(df))
+  assert_flag_variables(df, saffl_var)
 
   df <- df %>% df_explicit_na()
   for (lbl in lbl_vars) {
@@ -113,7 +114,7 @@ make_table_02_tplyr <- function(df,
 
   var_types <- lapply(df[vars], function(x) if (is.numeric(x)) "numeric" else "count")
 
-  lyt <- tplyr_table(df, treat_var = !!sym(arm_var), where = SAFFL == "Y")
+  lyt <- tplyr_table(df, treat_var = !!sym(arm_var), where = !!sym(saffl_var) == "Y")
 
   if (!is.null(lbl_overall)) lyt <- lyt %>% add_total_group(group_name = lbl_overall)
 
@@ -258,22 +259,22 @@ make_table_02_tplyr <- function(df,
 make_table_02_gtsum <- function(df,
                                 alt_counts_df = NULL,
                                 show_colcounts = TRUE,
-                                saffl_var = "SAFFL",
                                 arm_var = "ARM",
+                                saffl_var = "SAFFL",
                                 vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY"),
                                 lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
                                 lbl_overall = "Total Population",
                                 na_rm = FALSE) {
-  checkmate::assert_subset(c(saffl_var, vars, arm_var), names(df))
+  checkmate::assert_subset(c(vars, arm_var, saffl_var), names(df))
   assert_flag_variables(df, saffl_var)
 
   df <- df %>%
-    filter(SAFFL == "Y") %>%
+    filter(.data[[saffl_var]] == "Y") %>%
     select(all_of(c(vars, arm_var)))
 
   if (!na_rm) df <- df %>% df_explicit_na()
 
-  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
+  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var, saffl_var)
 
   tbl <- df %>%
     tbl_summary(

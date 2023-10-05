@@ -4,7 +4,7 @@
 \alias{make_table_02}
 \alias{make_table_02_tplyr}
 \alias{make_table_02_gtsum}
-\title{FDA Table 2: Baseline Demographic and Clinical Characteristics Safety Population, Pooled Analyses}
+\title{FDA Table 2: Baseline Demographic and Clinical Characteristics, Safety Population, Pooled Analyses}
 \usage{
 make_table_02(
   df,
@@ -25,6 +25,7 @@ make_table_02_tplyr(
   alt_counts_df = NULL,
   show_colcounts = TRUE,
   arm_var = "ARM",
+  saffl_var = "SAFFL",
   vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY"),
   lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
   lbl_overall = "Total Population",
@@ -38,8 +39,8 @@ make_table_02_gtsum(
   df,
   alt_counts_df = NULL,
   show_colcounts = TRUE,
-  saffl_var = "SAFFL",
   arm_var = "ARM",
+  saffl_var = "SAFFL",
   vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY"),
   lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
   lbl_overall = "Total Population",
@@ -55,7 +56,7 @@ make_table_02_gtsum(
 
 \item{arm_var}{(\code{character})\cr arm variable used to split table into columns.}
 
-\item{saffl_var}{(\code{character})\cr flag variable used to indicate the safety population.}
+\item{saffl_var}{(\code{character})\cr flag variable used to indicate inclusion in safety population.}
 
 \item{vars}{(\code{vector} of \code{character})\cr variables from \code{df} to include in the table.}
 
@@ -91,12 +92,12 @@ a \code{tibble} object when \code{tplyr_raw = TRUE}.
 }
 }
 \description{
-FDA Table 2: Baseline Demographic and Clinical Characteristics Safety Population, Pooled Analyses
+FDA Table 2: Baseline Demographic and Clinical Characteristics, Safety Population, Pooled Analyses
 }
 \details{
 \itemize{
-\item \code{df} must contain \code{SAFFL} and the variables specified by \code{vars} and \code{arm_var}.
-\item If specified, \code{alt_counts_df} must contain \code{SAFFL}, \code{USUBJID}, and the variable specified by \code{arm_var}.
+\item \code{df} must contain the variables specified by \code{vars}, \code{arm_var}, and \code{saffl_var}.
+\item If specified, \code{alt_counts_df} must contain \code{USUBJID} and the variables specified by \code{arm_var} and \code{saffl_var}.
 \item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
 flag variables are treated as \code{"N"}.
 \item Columns are split by arm. Overall population column is included by default (see \code{lbl_overall} argument).
