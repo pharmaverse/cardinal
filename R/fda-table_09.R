@@ -70,7 +70,6 @@ make_table_09 <- function(adae,
 
 # NOTES:
 
-# Non-optional vars: SAFFL, AESER, USUBJID -> consider this in checkmate
 # arm_var col must be a factor
 # if pref_var is a factor, warnings will appear. They can be ignored. Can we suppress them?
 # test column headers correctly assigned (levels durcheinander oder gar kein factor)
@@ -172,7 +171,8 @@ make_table_09_tplyr <- function(adae,
   }
 
   # Initialize column headers
-  arm_names <- levels(adae[[arm_var]])
+  # Allow for both, character and factor. The advantage of the latter is that users have control about the order
+  arm_names <- if (is.factor(adae[[arm_var]])) levels(adae[[arm_var]]) else unique(as.character(adae[[arm_var]]))
 
   header_string <- paste0(
     paste0(lbl_soc_var, " \n ", lbl_pref_var,  "|"), # \\line
@@ -185,7 +185,11 @@ make_table_09_tplyr <- function(adae,
   )
 
   # Initiate table structure
-  structure <- Tplyr::tplyr_table(adae, treat_var = !!rlang::sym(arm_var), where = (!!rlang::sym(saffl_var) == "Y" & !!rlang::sym(ser_var) == "Y"))
+  structure <- Tplyr::tplyr_table(
+    adae,
+    treat_var = !!rlang::sym(arm_var),
+    where = (!!rlang::sym(saffl_var) == "Y" & !!rlang::sym(ser_var) == "Y")
+  )
 
   # Use alternative counts if specified
   if (add_alt_counts) {
@@ -280,7 +284,7 @@ make_table_09_tplyr <- function(adae,
 
   gt_tbl
   # TODO: Handle missings
-  # TODO: supress warnings
+  # TODO: Mention tplyr warning in the PR
 }
 
 
