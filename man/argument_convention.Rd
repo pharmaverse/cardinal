@@ -10,27 +10,15 @@
 
 \item{advs}{(\code{data.frame})\cr dataset (typically ADVS) required to build table.}
 
-\item{df}{(\code{data.frame})\cr dataset required to build table.}
-
 \item{alt_counts_df}{(\code{character})\cr alternative dataset (typically ADSL) used only to calculate column counts.}
 
-\item{show_colcounts}{(\code{flag})\cr whether column counts should be printed.}
+\item{annotations}{(named \code{list} of \code{character})\cr list of annotations to add to the table. Valid
+annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
+use the annotation type as name and the desired string as value.}
 
 \item{arm_var}{(\code{character})\cr arm variable used to split table into columns.}
 
-\item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
-
-\item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
-the given value as the column label.}
-
-\item{vars}{(\code{vector} of \code{character})\cr variables from \code{df} to include in the table.}
-
-\item{lbl_vars}{(\code{vector} of \code{character})\cr labels corresponding to variables in \code{vars} to print
-in the table. Labels should be ordered according to the order of variables in \code{vars}.}
-
-\item{pref_var}{(\code{character})\cr preferred term variable from \code{adae} to include in the table.}
-
-\item{lbl_pref_var}{(\code{character})\cr label corresponding to preferred term variable \code{pref_var} to print in the table.}
+\item{df}{(\code{data.frame})\cr dataset required to build table.}
 
 \item{fmqsc_var}{(\code{character})\cr FMQ scope variable to use in table.}
 
@@ -38,7 +26,21 @@ in the table. Labels should be ordered according to the order of variables in \c
 
 \item{fmq_scope}{(\code{character})\cr FMQ scope ("NARROW" or "BROAD") to output in table.}
 
+\item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
+
+\item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
+the given value as the column label.}
+
+\item{lbl_pref_var}{(\code{character})\cr label corresponding to preferred term variable \code{pref_var} to print in the table.}
+
+\item{lbl_vars}{(\code{vector} of \code{character})\cr labels corresponding to variables in \code{vars} to print
+in the table. Labels should be ordered according to the order of variables in \code{vars}.}
+
+\item{na_level}{(\code{character})\cr string to represent missing values.}
+
 \item{na_rm}{(\code{flag})\cr whether \code{NA} levels should be removed from the table.}
+
+\item{pref_var}{(\code{character})\cr preferred term variable from \code{adae} to include in the table.}
 
 \item{prune_0}{(\code{flag})\cr whether all-zero rows should be removed from the table.}
 
@@ -53,11 +55,11 @@ contain the following elements:
 \item \code{pct}: (optional) whether the output should be returned as percentages. Defaults to \code{TRUE}.
 }}
 
-\item{annotations}{(named \code{list} of \code{character})\cr list of annotations to add to the table. Valid
-annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
-use the annotation type as name and the desired string as value.}
+\item{saffl_var}{(\code{character})\cr flag variable used to indicate inclusion in safety population.}
 
-\item{na_level}{(\code{character})\cr string to represent missing values.}
+\item{show_colcounts}{(\code{flag})\cr whether column counts should be printed.}
+
+\item{vars}{(\code{vector} of \code{character})\cr variables from \code{df} to include in the table.}
 }
 \description{
 This documentation lists all the arguments in \code{falcon} that are used repeatedly by functions to output tables.
