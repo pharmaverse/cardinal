@@ -16,20 +16,20 @@ make_table_08(
 )
 }
 \arguments{
-\item{adae}{(\code{data.frame})\cr dataset (typically ADAE) required to build table.}
+\item{adae}{(\code{data.frame})\cr Adverse events dataset (typically ADAE) required to build table.}
 
-\item{adex}{(\code{data.frame})\cr dataset (typically ADEX) required to build table.}
+\item{adex}{(\code{data.frame})\cr Dataset (typically ADEX) required to build table.}
 
-\item{arm_var}{(\code{character})\cr arm variable used to split table into columns.}
+\item{arm_var}{(\code{character})\cr Name of the treatment arm variable used to split table into columns.}
 
 \item{dth_vars}{(\code{vector} of \code{character})\cr additional death variables from \code{adae} to include in the table.}
 
 \item{lbl_dth_vars}{(\code{vector} of \code{character})\cr labels corresponding to variables in \code{dth_vars} to print
 in the table. Labels should be ordered according to the order of variables in \code{dth_vars}.}
 
-\item{na_level}{(\code{character})\cr string to represent missing values.}
+\item{na_level}{(\code{character})\cr String to represent missing values.}
 
-\item{annotations}{(named \code{list} of \code{character})\cr list of annotations to add to the table. Valid
+\item{annotations}{(named \code{list} of \code{character})\cr List of annotations to add to the table. Valid
 annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
 use the annotation type as name and the desired string as value.}
 }

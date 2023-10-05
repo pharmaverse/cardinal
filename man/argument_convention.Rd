@@ -4,33 +4,44 @@
 \alias{argument_convention}
 \title{Standard Arguments}
 \arguments{
-\item{adae}{(\code{data.frame})\cr dataset (typically ADAE) required to build table.}
+\item{adae}{(\code{data.frame})\cr Adverse events dataset (typically ADAE) required to build table.}
 
-\item{adex}{(\code{data.frame})\cr dataset (typically ADEX) required to build table.}
+\item{adex}{(\code{data.frame})\cr Dataset (typically ADEX) required to build table.}
 
-\item{advs}{(\code{data.frame})\cr dataset (typically ADVS) required to build table.}
+\item{advs}{(\code{data.frame})\cr Dataset (typically ADVS) required to build table.}
 
-\item{df}{(\code{data.frame})\cr dataset required to build table.}
+\item{df}{(\code{data.frame})\cr Dataset required to build table.}
 
-\item{alt_counts_df}{(\code{character})\cr alternative dataset (typically ADSL) used only to calculate column counts.}
+\item{alt_counts_df}{(\code{character})\cr Optional. Alternative dataset (typically ADSL) used only to calculate column
+counts.}
 
-\item{show_colcounts}{(\code{flag})\cr whether column counts should be printed.}
+\item{show_colcounts}{(\code{flag})\cr Whether column counts should be printed. Boolean.}
 
-\item{arm_var}{(\code{character})\cr arm variable used to split table into columns.}
+\item{arm_var}{(\code{character})\cr Name of the treatment arm variable used to split table into columns.}
 
-\item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
+\item{id_var}{(\code{character})\cr Name of the unique subject identifiers variable.}
 
-\item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
+\item{saffl_var}{(\code{character})\cr Name of the safety flag variable which must contain at least "Y" for "Yes".}
+
+\item{ser_var}{(\code{character})\cr Name of the serious adverse event flag variable which must contain at least
+"Y" for "Yes".}
+
+\item{lbl_overall}{(\code{character})\cr Optional. If specified, an overall column will be added to the table with
 the given value as the column label.}
 
-\item{vars}{(\code{vector} of \code{character})\cr variables from \code{df} to include in the table.}
+\item{vars}{(\code{vector} of \code{character})\cr Variables from \code{df} to include in the table.}
 
-\item{lbl_vars}{(\code{vector} of \code{character})\cr labels corresponding to variables in \code{vars} to print
+\item{lbl_vars}{(\code{vector} of \code{character})\cr Labels corresponding to variables in \code{vars} to print
 in the table. Labels should be ordered according to the order of variables in \code{vars}.}
 
-\item{pref_var}{(\code{character})\cr preferred term variable from \code{adae} to include in the table.}
+\item{pref_var}{(\code{character})\cr Name of the preferred term variable from \code{adae} to include in the table.}
 
-\item{lbl_pref_var}{(\code{character})\cr label corresponding to preferred term variable \code{pref_var} to print in the table.}
+\item{soc_var}{(\code{character})\cr Name of the system organ class variable from \code{adae} to include in the table.}
+
+\item{lbl_pref_var}{(\code{character})\cr Label corresponding to preferred term variable \code{pref_var} to print in the table.}
+
+\item{lbl_soc_var}{(\code{character})\cr Label corresponding to system organ class variable \code{pref_var} to print in the
+table.}
 
 \item{fmqsc_var}{(\code{character})\cr FMQ scope variable to use in table.}
 
@@ -38,23 +49,23 @@ in the table. Labels should be ordered according to the order of variables in \c
 
 \item{fmq_scope}{(\code{character})\cr FMQ scope ("NARROW" or "BROAD") to output in table.}
 
-\item{.stats}{(\code{character})\cr statistics to include in the table. Includes statistics for all variable
+\item{.stats}{(\code{character})\cr Statistics to include in the table. Includes statistics for all variable
 types (only the statistics that are valid for a given variable's type will be printed).
 See \code{\link[tern:summarize_variables]{tern::summarize_vars()}} for options.}
 
-\item{.formats}{(named \code{list} of \code{character})\cr list of formats corresponding to each value in \code{.stats}.
+\item{.formats}{(named \code{list} of \code{character})\cr List of formats corresponding to each value in \code{.stats}.
 Each name is a value in \code{.stats} and the corresponding value is the format that should be applied to
 that statistic. See \code{\link[formatters:list_valid_format_labels]{formatters::list_valid_format_labels()}} for a list of valid formats.}
 
-\item{na_rm}{(\code{flag})\cr whether \code{NA} levels should be removed from the table.}
+\item{na_rm}{(\code{flag})\cr Whether \code{NA} levels should be removed from the table.}
 
-\item{prune_0}{(\code{flag})\cr whether all-zero rows should be removed from the table.}
+\item{prune_0}{(\code{flag})\cr Whether all-zero rows should be removed from the table. Boolean.}
 
-\item{annotations}{(named \code{list} of \code{character})\cr list of annotations to add to the table. Valid
+\item{annotations}{(named \code{list} of \code{character})\cr List of annotations to add to the table. Valid
 annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
 use the annotation type as name and the desired string as value.}
 
-\item{na_level}{(\code{character})\cr string to represent missing values.}
+\item{na_level}{(\code{character})\cr String to represent missing values.}
 }
 \description{
 This documentation lists all the arguments in \code{falcon} that are used repeatedly by functions to output tables.

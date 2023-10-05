@@ -1,7 +1,16 @@
 #' FDA Table 9: Patients With Serious Adverse Events by System Organ Class and Preferred Term,
 #'   Safety Population, Pooled Analyses
 #'
+#' @inheritParams argument_convention
+#'
+#' @name make_table_09
+NULL
+
+
+#' @describeIn make_table_09 Create FDA table 9 using functions from `rtables` and `tern`.
+#'
 #' @details
+#' For `make_table_09()`
 #' * `adae` must contain `SAFFL`, `USUBJID`, `AESER`, and the variables specified
 #'   by `soc_var`, `pref_var` and `arm_var`.
 #' * If specified, `alt_counts_df` must contain `SAFFL`, `USUBJID`, and the variable specified by `arm_var`.
@@ -11,7 +20,8 @@
 #' * Numbers in table represent the absolute numbers of patients and fraction of `N`.
 #' * All-zero rows are removed by default (see `prune_0` argument).
 #'
-#' @inheritParams argument_convention
+#' @return
+#' * `make_table_09` returns an `rtables` table object.
 #'
 #' @examples
 #' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
@@ -68,23 +78,66 @@ make_table_09 <- function(adae,
 
 
 
-# NOTES:
-
-# arm_var col must be a factor
-# if pref_var is a factor, warnings will appear. They can be ignored. Can we suppress them?
-# test column headers correctly assigned (levels durcheinander oder gar kein factor)
-# test return value as defined per tplyr_raw
-# test pop_data_df
-# test risk difference (if specified)
-# test lbl_overall (if specified)
-# test whether header_string is updated if necessary
-# test show_colcounts if specified
-# test prune_0
-
+#' @describeIn make_table_09 Create FDA table 9 using functions from `Tplyr`.
+#'
+#' @param risk_diff_pairs (`list` of `character` vectors)\cr Optional. List of character vectors. Each vector must be
+#'   of length 2 and contain the name of treatment arms to calculate risk difference and its 95% CI for. Those names
+#'   must exist in the `arm_var` column of the dataset specified in `adae`.
+#' @param tplyr_raw (`flag`)\cr Boolean. Indicates whether the raw `tibble` created using `Tplyr` functions should be
+#' returned or a presentation ready `gt_table` (default).
+#'
+#' @details
+#' For `make_table_09_tplyr()`
+#' * `adae` must contain the variables specified by `id_var`, `arm_var`, `saffl_var`, `ser_var`, `soc_var`, and
+#'   `pref_var`.
+#' * If specified, `alt_counts_df` must contain the variables specified by `id_var`, `saffl_var`, and `arm_var`.
+#' * Flag variables are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
+#'     flag variables are treated as `"N"`.
+#' * Columns are split by the variable specified in `arm_var`. Overall population column is excluded by default
+#'   (see `lbl_overall` argument).
+#' * Numbers in the table represent the absolute numbers of patients and fraction of `N` (total number of patient in
+#'   the safety population.
+#' * All-zero rows are removed by default (see `prune_0` argument).
+#' * Risk difference is calculated by using the default functionality of `Tplyr::add_risk_diff()`
+#'
+#'
+#' @note
+#' * `make_table_09_tplyr()` does not support annotations in case `tplyr_raw = TRUE`.
+#' * `make_table_09_tplyr()` raises a warning in case `pref_var` or `soc_var` is a factor. Those can safely be ignored.
+#' * `make_table_09_tplyr()` does not explicitly handle missings.
+#'
+#' @return
+#' * `make_table_09_tplyr()` returns a `gt_tbl` object when `tplyr_raw = FALSE` (default) and
+#'   a `tibble` object when `tplyr_raw = TRUE`.
+#'
+#' @examples
+#'  adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
+#'  adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
+#'
+#'  # Basic table
+#'  make_table_09_tplyr(adae = adae, alt_counts_df = adsl)
+#'
+#'  # Activate risk difference column
+#'  rd_pairs <- list(c("A: Drug X", "B: Placebo"), c("A: Drug X", "C: Combination"))
+#'  make_table_09_tplyr(adae = adae, alt_counts_df = adsl, risk_diff_pairs = rd_pairs)
+#'
+#'  # Add overall column
+#'  make_table_09_tplyr(adae = adae, alt_counts_df = adsl, lbl_overall = "Total patients")
+#'
+#'  # Add titles and footnotes
+#'    annot <- list(
+#'      title = "Table 9. Patients with Serious Adverse Events by SOC and PT, Safety Population, Pooled Analyses",
+#'      subtitles = c("Only one title, but", "multiple subtitles possible"),
+#'      main_footer = c("Main footer 1", "Main footer 2"),
+#'      prov_footer = c("Some more information", "E.g. a source note")
+#'    )
+#'    make_table_09_tplyr(adae = adae, alt_counts_df = adsl, annotations = annot)
+#'
 #' @import gt
 #' @import checkmate
+#' @export
 make_table_09_tplyr <- function(adae,
-                                pop_data_df = NULL, # TODO: rename
+                                alt_counts_df = NULL,
                                 id_var = "USUBJID",
                                 arm_var = "ARM",
                                 saffl_var = "SAFFL",
@@ -101,17 +154,21 @@ make_table_09_tplyr <- function(adae,
                                 annotations = NULL
                                 ) {
   # TODO: include function into the homepage!
-  # TODO: roxygen documentation
+
+  # TODO
+  # test column headers correctly assigned (levels durcheinander oder gar kein factor)
+  # test return value as defined per tplyr_raw
+  # test alt_counts_df
+  # test risk difference (if specified)
+  # test lbl_overall (if specified)
+  # test whether header_string is updated if necessary
+  # test show_colcounts if specified
+  # test prune_0
 
 
-  # Example
-  # TODO: remove
-  # adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
-  # adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
-  # make_table_09_tplyr(adae = adae, pop_data_df = adsl)
-
-  # TODO: remove ----
-  # pop_data_df <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
+  # TODO: remove after it has been used in the tests
+  # ----
+  # alt_counts_df <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
   # adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
   # arm_var <- "ARM"
   # pref_var <- "AEDECOD"
@@ -135,7 +192,7 @@ make_table_09_tplyr <- function(adae,
   # ----
 
   # Set instructions to activate/deactivate table components
-  add_alt_counts <- ifelse(!is.null(pop_data_df), TRUE, FALSE)
+  add_alt_counts <- ifelse(!is.null(alt_counts_df), TRUE, FALSE)
   add_overall_col <- ifelse(!is.null(lbl_overall), TRUE, FALSE)
   add_rd_col <- ifelse(!is.null(risk_diff_pairs), TRUE, FALSE)
   add_title <- ifelse(!is.null(annotations[["title"]]), TRUE, FALSE)
@@ -152,8 +209,8 @@ make_table_09_tplyr <- function(adae,
   assert_string(soc_var)
   assert_string(pref_var)
   assert_subset(c(id_var, arm_var, saffl_var, ser_var, soc_var, pref_var), names(adae))
-  assert_data_frame(pop_data_df, null.ok = TRUE)
-  if (add_alt_counts) assert_subset(c(id_var, arm_var), names(pop_data_df))
+  assert_data_frame(alt_counts_df, null.ok = TRUE)
+  if (add_alt_counts) assert_subset(c(id_var, arm_var), names(alt_counts_df))
   assert_string(lbl_overall, null.ok = TRUE)
   assert_string(lbl_pref_var, null.ok = TRUE)
   assert_string(lbl_soc_var, null.ok = TRUE)
@@ -194,7 +251,7 @@ make_table_09_tplyr <- function(adae,
   # Use alternative counts if specified
   if (add_alt_counts) {
     structure <- structure %>%
-      Tplyr::set_pop_data(pop_data_df) %>%
+      Tplyr::set_pop_data(alt_counts_df) %>%
       Tplyr::set_pop_where(TRUE) # takes all subjects as basis, not only those where !!rlang::sym(ser_var) == "Y"!
   }
 
@@ -233,7 +290,7 @@ make_table_09_tplyr <- function(adae,
     Tplyr::add_layers(layer1, layer2) %>%
     Tplyr::build()
 
-  # Revome "all zero"-rows if specified
+  # Remove "all zero"-rows if specified
   if (prune_0) {
     table <- table %>%
       mutate(across(starts_with("var"), ~gsub("[0()\\%\\. ]", "", .x), .names = "detect_0_{.col}")) %>%
@@ -242,12 +299,14 @@ make_table_09_tplyr <- function(adae,
 
   # Clean-up table
   table <- table %>%
-    # TODO dplyr::arrange(ord_layer_index, ord_layer_1, ord_layer_2) %>% # TODO: confirm order with make_table_09() -> refer to https://atorus-research.github.io/Tplyr/articles/post_processing.html#highly-customized-sort-variables for sorting according to occurence
-    dplyr::select(dplyr::starts_with(c("row_label", "var", "rdiff"))) %>%
+    arrange(ord_layer_index, ord_layer_1, ord_layer_2) %>% # refer to
+    # https://atorus-research.github.io/Tplyr/articles/post_processing.html#highly-customized-sort-variables
+    # for sorting according to occurence in case this is reqired later
+    select(starts_with(c("row_label", "var", "rdiff"))) %>%
     Tplyr::add_column_headers(s = header_string, header_n = Tplyr::header_n(structure))
 
   if (tplyr_raw) return(table)
-  # else return gt_tbl object as follows
+  # else generate and return gt_tbl object as follows
 
   # Prepare for header row
   lbl_stubhead <- paste(lbl_soc_var, "<br/> &nbsp;&nbsp;", lbl_pref_var)
@@ -283,8 +342,6 @@ make_table_09_tplyr <- function(adae,
     )
 
   gt_tbl
-  # TODO: Handle missings
-  # TODO: Mention tplyr warning in the PR
 }
 
 
