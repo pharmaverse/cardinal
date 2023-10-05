@@ -83,8 +83,9 @@ make_table_09 <- function(adae,
 # test prune_0
 
 #' @import gt
+#' @import checkmate
 make_table_09_tplyr <- function(adae,
-                                pop_data_df = NULL,
+                                pop_data_df = NULL, # TODO: rename
                                 id_var = "USUBJID",
                                 arm_var = "ARM",
                                 saffl_var = "SAFFL",
@@ -100,13 +101,17 @@ make_table_09_tplyr <- function(adae,
                                 tplyr_raw = FALSE,
                                 annotations = NULL
                                 ) {
+  # TODO: include function into the homepage!
+  # TODO: roxygen documentation
+
+
   # Example
   # TODO: remove
   # adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
   # adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
   # make_table_09_tplyr(adae = adae, pop_data_df = adsl)
 
-  # TODO: remove
+  # TODO: remove ----
   # pop_data_df <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
   # adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
   # arm_var <- "ARM"
@@ -128,17 +133,43 @@ make_table_09_tplyr <- function(adae,
   #   main_footer = c("Main footer 1", "Main footer 2"),
   #   prov_footer = c("abc", "def")
   # )
+  # ----
 
-  # TODO: checkmate
-  # adae and pop_data_df must be data.frames with certain columns
-  # arm_var must be character and part of the column names of adae and pop_data_df
-  # pref_var must be character and part of the adae column names
-  # tplyr_raw must be logical/boolean
-  # risk_diff_pairs must be a list of character vectors length 2 and its elements must exist in the arm_var column of adae
-  # lbl_overall must be either character or NULL
-  # prune_0 lgl
-  # ... all arguments ...
-  # annotations: only one title + can only contain title, subtitle, main_footer, prov_footer
+  # Set instructions to activate/deactivate table components
+  add_alt_counts <- ifelse(!is.null(pop_data_df), TRUE, FALSE)
+  add_overall_col <- ifelse(!is.null(lbl_overall), TRUE, FALSE)
+  add_rd_col <- ifelse(!is.null(risk_diff_pairs), TRUE, FALSE)
+  add_title <- ifelse(!is.null(annotations[["title"]]), TRUE, FALSE)
+  add_subtitles <- ifelse(!is.null(annotations[["subtitles"]]), TRUE, FALSE)
+  add_footnotes <- ifelse(!is.null(annotations[["main_footer"]]), TRUE, FALSE)
+  add_source_notes <- ifelse(!is.null(annotations[["prov_footer"]]), TRUE, FALSE)
+
+  # Check validity of input parameters
+  assert_data_frame(adae)
+  assert_string(id_var)
+  assert_string(arm_var)
+  assert_string(saffl_var)
+  assert_string(ser_var)
+  assert_string(soc_var)
+  assert_string(pref_var)
+  assert_subset(c(id_var, arm_var, saffl_var, ser_var, soc_var, pref_var), names(adae))
+  assert_data_frame(pop_data_df, null.ok = TRUE)
+  if (add_alt_counts) assert_subset(c(id_var, arm_var), names(pop_data_df))
+  assert_string(lbl_overall, null.ok = TRUE)
+  assert_string(lbl_pref_var, null.ok = TRUE)
+  assert_string(lbl_soc_var, null.ok = TRUE)
+  assert_list(risk_diff_pairs, types = "character", null.ok = TRUE)
+  if (add_rd_col) {
+    lapply(risk_diff_pairs, assert_vector, len = 2, any.missing = FALSE)
+    lapply(risk_diff_pairs, function(vec) assert_true(all(vec %in% adae[[arm_var]])))
+  }
+  assert_logical(show_colcounts, len = 1)
+  assert_logical(prune_0, len = 1)
+  assert_logical(tplyr_raw, len = 1)
+  assert_list(annotations, types = "character", null.ok = TRUE)
+  if (!is.null(annotations)) {
+    assert_names(names(annotations), subset.of = c("title", "subtitles", "main_footer", "prov_footer"))
+  }
 
   # Initialize column headers
   arm_names <- levels(adae[[arm_var]])
@@ -157,14 +188,14 @@ make_table_09_tplyr <- function(adae,
   structure <- Tplyr::tplyr_table(adae, treat_var = !!rlang::sym(arm_var), where = (!!rlang::sym(saffl_var) == "Y" & !!rlang::sym(ser_var) == "Y"))
 
   # Use alternative counts if specified
-  if (!is.null(pop_data_df)) {
+  if (add_alt_counts) {
     structure <- structure %>%
       Tplyr::set_pop_data(pop_data_df) %>%
       Tplyr::set_pop_where(TRUE) # takes all subjects as basis, not only those where !!rlang::sym(ser_var) == "Y"!
   }
 
   # Add total column if specified
-  if (!is.null(lbl_overall)) {
+  if (add_overall_col) {
     structure <- structure %>%
       Tplyr::add_total_group(group_name = lbl_overall)
 
@@ -185,7 +216,7 @@ make_table_09_tplyr <- function(adae,
     Tplyr::set_nest_count(TRUE)
 
   # Add risk difference column(s) if specified
-  if (!is.null(risk_diff_pairs)) {
+  if (add_rd_col) {
     layer1 <- do.call(Tplyr::add_risk_diff, args = append(list(layer = layer1), risk_diff_pairs))
     layer2 <- do.call(Tplyr::add_risk_diff, args = append(list(layer = layer2), risk_diff_pairs))
 
@@ -237,16 +268,17 @@ make_table_09_tplyr <- function(adae,
     tab_stubhead(md(lbl_stubhead)) %>%
     cols_label(.list = as.list(lbl_cols), .fn = md) %>%
     tab_header(
-      title = if (!is.null(annotations[["title"]])) md(annotations[["title"]]) else NULL,
-      subtitle = if (!is.null(annotations[["subtitles"]])) md(paste(annotations[["subtitles"]], collapse = "<br/>")) else NULL
+      title = if (add_title) md(annotations[["title"]]) else NULL,
+      subtitle = if (add_subtitles) md(paste(annotations[["subtitles"]], collapse = "<br/>")) else NULL
     ) %>%
     tab_footnote(
-      if (!is.null(annotations[["main_footer"]])) md(paste(annotations[["main_footer"]], collapse = "<br/>")) else NULL
+      if (add_footnotes) md(paste(annotations[["main_footer"]], collapse = "<br/>")) else NULL
     ) %>%
     tab_source_note(
-      if (!is.null(annotations[["prov_footer"]])) md(paste(annotations[["prov_footer"]], collapse = "<br/>")) else NULL
+      if (add_source_notes) md(paste(annotations[["prov_footer"]], collapse = "<br/>")) else NULL
     )
 
+  gt_tbl
   # TODO: Handle missings
   # TODO: supress warnings
 }
