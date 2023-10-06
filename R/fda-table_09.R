@@ -79,8 +79,11 @@ make_table_09 <- function(adae,
 #' @param annotations (named `list` of `character`)\cr list of annotations to add to the table. Valid
 #'   annotation types are `title`, `subtitles`, and a list of characters called `footnotes`. Each name-value pair should
 #'   use the annotation type as name and the desired string as value.
+#' @param risk_diff (`list` of `character` vectors)\cr List of character vectors. Each vector must be
+#'   of length 2 and contain the name of treatment arms to calculate risk difference and its 95% CI for. Those names
+#'   must exist in the `arm_var` column of the dataset specified in `adae`.
 #'
-#' @return A gt table object
+#' @return A `gt_tbl` object
 #' @export
 #'
 #' @examples
@@ -101,8 +104,8 @@ make_table_09 <- function(adae,
 #'     "Difference is shown between [treatment arms] (e.g., difference is shown between Drug Name dosage X vs. placebo)."
 #'   )
 #' )
-#'
-#' tbl <- make_table_09(adae = adae, alt_counts_df = adsl, annotations = annotations)
+#' risk_diff <- list(c("A: Drug X", "C: Combination"), c("A: Drug X", "B: Placebo"))
+#' tbl <- make_table_09(adae = adae, alt_counts_df = adsl, annotations = annotations, risk_diff = risk_diff)
 #' tbl
 make_table_09_gt <- function(adae,
                              alt_counts_df = NULL,
@@ -348,7 +351,7 @@ calculate_riskdiff <- function(x, y, n_x, n_y) {
     pt <- prop.test(c(x[[i]],y[[i]]), c(n_x[[i]], n_y[[i]]))
     val <- format(pt$estimate[[1]] - pt$estimate[[2]], digits = 2, nsmall = 2)
     conf_int <- format(pt$conf.int, digits = 2, nsmall = 2)
-    paste0(val, " (", conf_int[[1]], ", ", conf_int[[1]], ")")
+    paste0(val, " (", conf_int[[1]], ", ", conf_int[[2]], ")")
   })
 
 }
