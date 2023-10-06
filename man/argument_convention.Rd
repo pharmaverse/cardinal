@@ -40,7 +40,7 @@ in the table. Labels should be ordered according to the order of variables in \c
 
 \item{lbl_pref_var}{(\code{character})\cr Label corresponding to preferred term variable \code{pref_var} to print in the table.}
 
-\item{lbl_soc_var}{(\code{character})\cr Label corresponding to system organ class variable \code{pref_var} to print in the
+\item{lbl_soc_var}{(\code{character})\cr Label corresponding to system organ class variable \code{soc_var} to print in the
 table.}
 
 \item{fmqsc_var}{(\code{character})\cr FMQ scope variable to use in table.}

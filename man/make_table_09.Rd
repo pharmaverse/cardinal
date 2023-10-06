@@ -69,7 +69,7 @@ use the annotation type as name and the desired string as value.}
 
 \item{soc_var}{(\code{character})\cr Name of the system organ class variable from \code{adae} to include in the table.}
 
-\item{lbl_soc_var}{(\code{character})\cr Label corresponding to system organ class variable \code{pref_var} to print in the
+\item{lbl_soc_var}{(\code{character})\cr Label corresponding to system organ class variable \code{soc_var} to print in the
 table.}
 
 \item{risk_diff_pairs}{(\code{list} of \code{character} vectors)\cr Optional. List of character vectors. Each vector must be
@@ -85,7 +85,7 @@ returned or a presentation ready \code{gt_table} (default).}
 }
 
 \itemize{
-\item \code{make_table_09_tplyr} returns a \code{gt_tbl} object when \code{tplyr_raw = FALSE} (default) and
+\item \code{make_table_09_tplyr()} returns a \code{gt_tbl} object when \code{tplyr_raw = FALSE} (default) and
 a \code{tibble} object when \code{tplyr_raw = TRUE}.
 }
 }
@@ -94,7 +94,7 @@ FDA Table 9: Patients With Serious Adverse Events by System Organ Class and Pref
 Safety Population, Pooled Analyses
 }
 \details{
-In \code{make_table_09}
+For \code{make_table_09()}
 \itemize{
 \item \code{adae} must contain \code{SAFFL}, \code{USUBJID}, \code{AESER}, and the variables specified
 by \code{soc_var}, \code{pref_var} and \code{arm_var}.
@@ -106,7 +106,7 @@ flag variables are treated as \code{"N"}.
 \item All-zero rows are removed by default (see \code{prune_0} argument).
 }
 
-In \code{make_table_09_tplyr}
+For \code{make_table_09_tplyr()}
 \itemize{
 \item \code{adae} must contain the variables specified by \code{id_var}, \code{arm_var}, \code{saffl_var}, \code{ser_var}, \code{soc_var}, and
 \code{pref_var}.
@@ -130,9 +130,9 @@ the safety population.
 }}
 \note{
 \itemize{
-\item \code{make_table_09_tplyr} does not support annotations in case \code{tplyr_raw = TRUE}.
-\item \code{make_table_09_tplyr} raises a warning in case \code{pref_var} or \code{soc_var} is a factor. Those can safely be ignored.
-\item \code{make_table_09_tplyr} does not explicitly handle missings.
+\item \code{make_table_09_tplyr()} does not support annotations in case \code{tplyr_raw = TRUE}.
+\item \code{make_table_09_tplyr()} raises a warning in case \code{pref_var} or \code{soc_var} is a factor. Those can safely be ignored.
+\item \code{make_table_09_tplyr()} does not explicitly handle missings.
 }
 }
 \examples{

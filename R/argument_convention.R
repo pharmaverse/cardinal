@@ -22,7 +22,7 @@
 #' @param pref_var (`character`)\cr Name of the preferred term variable from `adae` to include in the table.
 #' @param soc_var (`character`)\cr Name of the system organ class variable from `adae` to include in the table.
 #' @param lbl_pref_var (`character`)\cr Label corresponding to preferred term variable `pref_var` to print in the table.
-#' @param lbl_soc_var (`character`)\cr Label corresponding to system organ class variable `pref_var` to print in the
+#' @param lbl_soc_var (`character`)\cr Label corresponding to system organ class variable `soc_var` to print in the
 #'   table.
 #' @param fmqsc_var (`character`)\cr FMQ scope variable to use in table.
 #' @param fmqnam_var (`character`)\cr FMQ reference name variable to use in table.
