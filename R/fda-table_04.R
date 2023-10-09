@@ -39,10 +39,8 @@ make_table_04 <- function(df,
                           alt_counts_df = NULL,
                           show_colcounts = TRUE,
                           arm_var = "ARM",
-
                           pop_var = c("SAFFL"),
                           pop_var_lbl = c("Safety population"),
-
                           lbl_overall = NULL,
                           prune_0 = FALSE,
                           risk_diff = NULL,
