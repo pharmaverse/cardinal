@@ -1,9 +1,9 @@
 #' FDA Table 5: Duration of Treatment Exposure, Safety Population, Pooled Analyses
 #'
 #' @details
-#' * `df` must contain `SAFFL`, `USUBJID`, and the variables specified by `arm_var`, `id_var`, `trtsdtm_var`,
+#' * `df` must contain `USUBJID` and the variables specified by `arm_var`, `saffl_var`, `id_var`, `trtsdtm_var`,
 #'   and `trtedtm_var`.
-#' * If specified, `alt_counts_df` must contain `SAFFL`, `USUBJID`, and the variable specified by `arm_var`.
+#' * If specified, `alt_counts_df` must contain `USUBJID` and the variables specified by `arm_var` and `saffl_var`.
 #' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
 #'   flag variables are treated as `"N"`.
 #' * Columns are split by arm. Overall population column is excluded by default (see `lbl_overall` argument).
@@ -31,6 +31,7 @@ make_table_05 <- function(df,
                           alt_counts_df = NULL,
                           show_colcounts = TRUE,
                           arm_var = "ARM",
+                          saffl_var = "SAFFL",
                           id_var = "USUBJID",
                           trtsdtm_var = "TRTSDTM",
                           trtedtm_var = "TRTEDTM",
@@ -40,13 +41,13 @@ make_table_05 <- function(df,
                           risk_diff = NULL,
                           prune_0 = FALSE,
                           annotations = NULL) {
-  checkmate::assert_subset(c("SAFFL", "USUBJID", arm_var, id_var, trtsdtm_var, trtedtm_var), names(df))
+  checkmate::assert_subset(c("USUBJID", arm_var, saffl_var, id_var, trtsdtm_var, trtedtm_var), names(df))
   checkmate::assert_choice(u_trtdur, c("days", "weeks", "months", "years"))
-  assert_flag_variables(df, "SAFFL")
+  assert_flag_variables(df, saffl_var)
 
   df <- df %>%
     as_tibble() %>%
-    filter(SAFFL == "Y") %>%
+    filter(.data[[saffl_var]] == "Y") %>%
     df_explicit_na() %>%
     mutate(
       TRTDUR = lubridate::interval(lubridate::ymd_hms(.data[[trtsdtm_var]]), lubridate::ymd_hms(.data[[trtedtm_var]]))
@@ -64,7 +65,8 @@ make_table_05 <- function(df,
       D_GT12 = (TRTDUR_MONTHS >= 12) %>% with_label(">=12 months"),
       DUR_LBL = "Patients Treated, by duration"
     )
-  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
+
+  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var, saffl_var)
 
   lyt <- basic_table_annot(show_colcounts, annotations) %>%
     split_cols_by_arm(arm_var, lbl_overall, risk_diff) %>%

@@ -1,9 +1,10 @@
 #' FDA Table 8: All Individual Patient Deaths, Safety Population, Pooled Analyses
 #'
 #' @details
-#' * `adae` must contain `SAFFL`, `USUBJID`, `AGE`, `SEX`, `AESDTH`, `DTHADY`, and the variables specified by
-#'   `dth_vars` and `arm_var`.
-#' * `adex` must contain `SAFFL`, `USUBJID`, `PARAMCD`, `TRTSDT`, `TRTEDT`, `AVAL`, and `AVALU`.
+#' * `adae` must contain `USUBJID`, `AGE`, `SEX`, `AESDTH`, `DTHADY`, and the variables specified by
+#'   `dth_vars`, `arm_var`, and `saffl_var`.
+#' * `adex` must contain `USUBJID`, `PARAMCD`, `TRTSDT`, `TRTEDT`, `AVAL`, `AVALU`, and the variables specified
+#'   by `arm_var` and `saffl_var`.
 #' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
 #'   flag variables are treated as `"N"`.
 #'
@@ -12,7 +13,7 @@
 #' @param lbl_dth_vars (`vector` of `character`)\cr labels corresponding to variables in `dth_vars` to print
 #'   in the table. Labels should be ordered according to the order of variables in `dth_vars`.
 #'
-#' @return An `rtable` object.
+#' @return A `listing_df` object.
 #'
 #' @examples
 #' adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
@@ -25,22 +26,23 @@
 make_table_08 <- function(adae,
                           adex,
                           arm_var = "ARM",
+                          saffl_var = "SAFFL",
                           dth_vars = c("DTHCAUS", "DTHCAT"),
                           lbl_dth_vars = c("Cause of Death\nMedDRA\nPreferred Term", "Cause of Death\nVerbatim Term"),
                           na_level = "NA",
                           annotations = NULL) {
   checkmate::assert_subset(c(
-    "SAFFL", "USUBJID", "AGE", "SEX", "AESDTH", "DTHADY", dth_vars, arm_var
+    "USUBJID", "AGE", "SEX", "AESDTH", "DTHADY", dth_vars, arm_var, saffl_var
   ), names(adae))
   checkmate::assert_subset(c(
-    "SAFFL", "USUBJID", "PARAMCD", "TRTSDT", "TRTEDT", "AVAL", "AVALU"
+    saffl_var, "USUBJID", "PARAMCD", "TRTSDT", "TRTEDT", "AVAL", "AVALU"
   ), names(adex))
-  assert_flag_variables(adae, "SAFFL")
-  assert_flag_variables(adex, "SAFFL")
+  assert_flag_variables(adae, saffl_var)
+  assert_flag_variables(adex, saffl_var)
 
   # Deaths
   adae <- adae %>%
-    filter(SAFFL == "Y" & AESDTH == "Y") %>%
+    filter(.data[[saffl_var]] == "Y" & AESDTH == "Y") %>%
     select(USUBJID, all_of(arm_var), AGE, SEX, DTHADY, all_of(dth_vars)) %>%
     mutate(
       AGESEX = paste0(AGE, "/", SEX),
@@ -50,7 +52,7 @@ make_table_08 <- function(adae,
 
   # Dosing
   adex <- adex %>%
-    filter(PARAMCD == "TDOSE") %>%
+    filter(.data[[saffl_var]] == "Y", PARAMCD == "TDOSE") %>%
     select(USUBJID, AVAL, AVALU, TRTSDT, TRTEDT) %>%
     mutate(
       DOSDUR = (TRTEDT - TRTSDT + 1) %>% as.character(),

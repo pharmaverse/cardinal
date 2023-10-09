@@ -39,8 +39,10 @@ make_table_04 <- function(df,
                           alt_counts_df = NULL,
                           show_colcounts = TRUE,
                           arm_var = "ARM",
+
                           pop_var = c("SAFFL"),
                           pop_var_lbl = c("Safety population"),
+
                           lbl_overall = NULL,
                           prune_0 = FALSE,
                           risk_diff = NULL,
@@ -50,6 +52,7 @@ make_table_04 <- function(df,
     "EOTSTT", "DCTREAS", "EOSSTT", "DCSREAS"
   ), names(df))
   assert_flag_variables(df, pop_var)
+
 
   df <- df %>%
     as_tibble() %>%
@@ -71,6 +74,7 @@ make_table_04 <- function(df,
       DISCS_PD = with_label(EOSSTT == "DISCONTINUED" & DCSREAS == "PROTOCOL VIOLATION", "Protocol deviation"),
       DISCS_OTH = with_label(EOSSTT == "DISCONTINUED" & DCSREAS == "OTHER", "Other")
     )
+
   alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
 
   lyt <- basic_table_annot(show_colcounts, annotations) %>%

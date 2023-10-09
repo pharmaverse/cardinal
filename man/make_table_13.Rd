@@ -10,6 +10,7 @@ make_table_13(
   show_colcounts = TRUE,
   min_freq = 0.05,
   arm_var = "ARM",
+  saffl_var = "SAFFL",
   pref_var = "AEDECOD",
   lbl_pref_var = formatters::var_labels(adae, fill = TRUE)[pref_var],
   lbl_overall = NULL,
@@ -27,6 +28,8 @@ make_table_13(
 \item{min_freq}{(\code{proportion})\cr minimum \% frequency (fraction of \code{N}) required in any column to include each row.}
 
 \item{arm_var}{(\code{character})\cr arm variable used to split table into columns.}
+
+\item{saffl_var}{(\code{character})\cr flag variable used to indicate inclusion in safety population.}
 
 \item{pref_var}{(\code{character})\cr preferred term variable from \code{adae} to include in the table.}
 
@@ -58,8 +61,8 @@ FDA Table 13: Patients With Common Adverse Events Occurring at >=XX\% Frequency,
 }
 \details{
 \itemize{
-\item \code{adae} must contain \code{SAFFL}, \code{USUBJID}, and the variables specified by \code{pref_var} and \code{arm_var}.
-\item If specified, \code{alt_counts_df} must contain \code{SAFFL}, \code{USUBJID}, and the variable specified by \code{arm_var}.
+\item \code{adae} must contain \code{USUBJID} and the variables specified by \code{arm_var}, \code{saffl_var}, and \code{pref_var}.
+\item If specified, \code{alt_counts_df} must contain \code{USUBJID} and the variables specified by \code{arm_var} and \code{saffl_var}.
 \item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
 flag variables are treated as \code{"N"}.
 \item Columns are split by arm. Overall population column is excluded by default (see \code{lbl_overall} argument).
