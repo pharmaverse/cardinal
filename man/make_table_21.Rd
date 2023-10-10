@@ -2,16 +2,18 @@
 % Please edit documentation in R/fda-table_21.R
 \name{make_table_21}
 \alias{make_table_21}
-\title{FDA Table 21. Overview of Serious Adverse Events by Demographic Subgroup, Safety Population, Pooled
-Analysis (or Trial X)}
+\title{FDA Table 21. Overview of Serious Adverse Events by Demographic Subgroup, Safety Population,
+Pooled Analysis (or Trial X)}
 \usage{
 make_table_21(
   df,
   alt_counts_df = NULL,
   show_colcounts = TRUE,
   arm_var = "ARM",
+  saffl_var = "SAFFL",
   vars = c("SEX", "AGEGR1", "RACE", "ETHNIC"),
   denom = c("N_s", "N_col", "n"),
+  lbl_overall = NULL,
   lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
   prune_0 = FALSE,
   annotations = NULL
@@ -26,11 +28,16 @@ make_table_21(
 
 \item{arm_var}{(\code{character})\cr arm variable used to split table into columns.}
 
+\item{saffl_var}{(\code{character})\cr flag variable used to indicate inclusion in safety population.}
+
 \item{vars}{(\code{vector} of \code{character})\cr variables from \code{df} to include in the table.}
 
 \item{denom}{(\code{character})\cr Denominator to use to calculate fractions. Can be \code{"N_s"} (total \code{df_denom}
 subgroup/row counts), \code{"N_col"} (total \code{df} column counts), or \code{"n"} (total \code{df} overall patient count).
 Note that \code{df} is filtered to only include serious adverse events (\code{ASER == "Y"}).}
+
+\item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
+the given value as the column label.}
 
 \item{lbl_vars}{(\code{vector} of \code{character})\cr labels corresponding to variables in \code{vars} to print
 in the table. Labels should be ordered according to the order of variables in \code{vars}.}
@@ -41,14 +48,17 @@ in the table. Labels should be ordered according to the order of variables in \c
 annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
 use the annotation type as name and the desired string as value.}
 }
+\value{
+An \code{rtable} object.
+}
 \description{
-FDA Table 21. Overview of Serious Adverse Events by Demographic Subgroup, Safety Population, Pooled
-Analysis (or Trial X)
+FDA Table 21. Overview of Serious Adverse Events by Demographic Subgroup, Safety Population,
+Pooled Analysis (or Trial X)
 }
 \details{
 \itemize{
-\item \code{df} must contain \code{SAFFL} and the variables specified by \code{vars} and \code{arm_var}.
-\item If specified, \code{alt_counts_df} must contain \code{SAFFL}, \code{USUBJID}, and the variable specified by \code{arm_var}.
+\item \code{df} must contain the variables specified by \code{vars}, \code{arm_var}, and \code{saffl_var}.
+\item If specified, \code{alt_counts_df} must contain \code{USUBJID} and the variables specified by \code{arm_var} and \code{saffl_var}.
 \item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
 flag variables are treated as \code{"N"}.
 \item Columns are split by arm.

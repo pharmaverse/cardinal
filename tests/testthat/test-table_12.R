@@ -10,7 +10,7 @@ test_that("Table 12 generation works with default values", {
 })
 
 test_that("Table 12 generation works with custom values", {
-  adae <- formatters::var_relabel(adae, AEDECOD = "Preferred Term")
+  adae <- var_relabel(adae, AEDECOD = "Preferred Term")
   result <- make_table_12(
     adae = adae,
     alt_counts_df = adsl,
@@ -34,6 +34,14 @@ test_that("Table 12 generation works with custom values", {
       )
     )
   )
+
+  res <- expect_silent(result)
+  expect_snapshot(res)
+})
+
+test_that("Table 12 generation works with risk difference column", {
+  risk_diff <- list(arm_x = "B: Placebo", arm_y = "A: Drug X")
+  result <- make_table_12(adae, adsl, risk_diff = risk_diff)
 
   res <- expect_silent(result)
   expect_snapshot(res)

@@ -9,8 +9,10 @@ make_table_04(
   alt_counts_df = NULL,
   show_colcounts = TRUE,
   arm_var = "ARM",
+  saffl_var = "SAFFL",
   lbl_overall = NULL,
   prune_0 = FALSE,
+  risk_diff = NULL,
   annotations = NULL
 )
 }
@@ -23,23 +25,39 @@ make_table_04(
 
 \item{arm_var}{(\code{character})\cr arm variable used to split table into columns.}
 
+\item{saffl_var}{(\code{character})\cr flag variable used to indicate inclusion in safety population.}
+
 \item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
 the given value as the column label.}
 
 \item{prune_0}{(\code{flag})\cr whether all-zero rows should be removed from the table.}
 
+\item{risk_diff}{(named \code{list})\cr list of settings to apply to add a risk difference column to the table.
+Defaults to \code{NULL} (no risk difference column added). See \code{\link[tern:add_riskdiff]{tern::add_riskdiff()}} for more details. List should
+contain the following elements:
+\itemize{
+\item \code{arm_x}: (required) the name of reference arm.
+\item \code{arm_y}: (required) the name of the arm to compare to the reference arm.
+\item \code{col_label}: (optional) label to use for the risk difference column. Defaults to
+\code{"Risk Difference (\%) (95\% CI)"}.
+\item \code{pct}: (optional) whether the output should be returned as percentages. Defaults to \code{TRUE}.
+}}
+
 \item{annotations}{(named \code{list} of \code{character})\cr list of annotations to add to the table. Valid
 annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
 use the annotation type as name and the desired string as value.}
+}
+\value{
+An \code{rtable} object.
 }
 \description{
 FDA Table 4: Patient Disposition, Pooled Analyses
 }
 \details{
 \itemize{
-\item \code{df} must contain \code{SAFFL}, \code{USUBJID}, and the variables specified by \code{arm_var}
-and \code{trtedtm_var}.
-\item If specified, \code{alt_counts_df} must contain \code{SAFFL}, \code{USUBJID}, and the variable specified by \code{arm_var}.
+\item \code{df} must contain \code{USUBJID}, \code{RANDFL}, \code{ITTFL},\code{PPROTFL}, \code{EOTSTT}, \code{DCTREAS}, \code{EOSSTT}, \code{DCSREAS}, and the
+variables specified by \code{arm_var} and \code{saffl_var}.
+\item If specified, \code{alt_counts_df} must contain \code{USUBJID} and the variable specified by \code{arm_var}.
 \item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
 flag variables are treated as \code{"N"}.
 \item Columns are split by arm. Overall population column is excluded by default (see \code{lbl_overall} argument).

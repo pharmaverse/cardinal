@@ -66,3 +66,29 @@
       Regulatory Activities; N, number of patients in treatment arm;
       n, number of patients with at least one event; SAE, serious adverse event
 
+# Table 06 generation works with risk difference column
+
+    Code
+      res
+    Output
+                                                                             A: Drug X    B: Placebo    C: Combination   Risk Difference (%) (95% CI)
+      Event                                                                   (N=134)       (N=134)        (N=132)                 (N=268)           
+      ———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+      SAE                                                                   104 (77.6%)   101 (75.4%)     99 (75.0%)          -2.2 (-12.4 - 7.9)     
+        SAEs with fatal outcome                                             76 (56.7%)    70 (52.2%)      75 (56.8%)          -4.5 (-16.4 - 7.4)     
+        Life-threatening SAEs                                                9 (6.7%)      13 (9.7%)      19 (14.4%)           3.0 (-3.6 - 9.5)      
+        SAEs requiring hospitalization                                      24 (17.9%)    28 (20.9%)      29 (22.0%)          3.0 (-6.5 - 12.4)      
+        SAEs resulting in substantial disruption of normal life functions   28 (20.9%)    21 (15.7%)      23 (17.4%)          -5.2 (-14.5 - 4.0)     
+        Congenital anomaly or birth defect                                  26 (19.4%)    27 (20.1%)      20 (15.2%)          0.7 (-8.8 - 10.3)      
+        Other                                                               30 (22.4%)    37 (27.6%)      32 (24.2%)          5.2 (-5.1 - 15.6)      
+      AE leading to permanent discontinuation of study drug                 27 (20.1%)    26 (19.4%)      30 (22.7%)          -0.7 (-10.3 - 8.8)     
+      AE leading to dose modification of study drug                         71 (53.0%)    86 (64.2%)      83 (62.9%)          11.2 (-0.5 - 22.9)     
+        AE leading to interruption of study drug                             4 (3.0%)      4 (3.0%)        3 (2.3%)            0.0 (-4.1 - 4.1)      
+        AE leading to reduction of study drug                               46 (34.3%)    46 (34.3%)      51 (38.6%)          0.0 (-11.4 - 11.4)     
+        AE leading to dose delay of study drug                              20 (14.9%)    28 (20.9%)      30 (22.7%)          6.0 (-3.2 - 15.1)      
+        Other                                                               34 (25.4%)    48 (35.8%)      46 (34.8%)          10.4 (-0.5 - 21.4)     
+      Any AE                                                                122 (91.0%)   123 (91.8%)    120 (90.9%)           0.7 (-6.0 - 7.5)      
+        MILD                                                                 7 (5.2%)      9 (6.7%)        4 (3.0%)            1.5 (-4.2 - 7.2)      
+        MODERATE                                                            24 (17.9%)    24 (17.9%)      23 (17.4%)           0.0 (-9.2 - 9.2)      
+        SEVERE                                                              91 (67.9%)    90 (67.2%)      93 (70.5%)         -0.7 (-12.0 - 10.5)     
+

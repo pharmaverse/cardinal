@@ -37,16 +37,23 @@ test_that("Table 32 generation works with pruned rows", {
   expect_snapshot(res)
 })
 
-test_that("Table 32 (gt) generation works with default values", {
-  result <- suppressWarnings(make_table_32_gt(advs = advs))
+test_that("Table 32 generation works with risk difference column", {
+  risk_diff <- list(arm_x = "B: Placebo", arm_y = "A: Drug X")
+  result <- make_table_32(advs, adsl, risk_diff = risk_diff)
+
+  res <- expect_silent(result)
+  expect_snapshot(res)
+})
+
+test_that("Table 32 (gtsum) generation works with default values", {
+  result <- suppressWarnings(make_table_32_gtsum(advs = advs))
 
   res <- expect_silent(result[["_data"]])
   expect_snapshot(res)
 })
 
-
-test_that("Table 32 (gt) generation works with custom values", {
-  result <- suppressWarnings(make_table_32_gt(advs = advs, lbl_overall = "Total Population"))
+test_that("Table 32 (gtsum) generation works with custom values", {
+  result <- suppressWarnings(make_table_32_gtsum(advs = advs, lbl_overall = "Total Population"))
 
   res <- expect_silent(result[["_data"]])
   expect_snapshot(res)
