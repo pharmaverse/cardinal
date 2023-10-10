@@ -19,7 +19,8 @@ make_table_09_gt(
   lbl_pref_var = formatters::var_labels(adae, fill = TRUE)[pref_var],
   lbl_soc_var = formatters::var_labels(adae, fill = TRUE)[soc_var],
   lbl_overall = NULL,
-  annotations = NULL
+  annotations = NULL,
+  risk_diff = NULL
 )
 }
 \arguments{
@@ -51,9 +52,13 @@ the given value as the column label.}
 \item{annotations}{(named \code{list} of \code{character})\cr list of annotations to add to the table. Valid
 annotation types are \code{title}, \code{subtitles}, and a list of characters called \code{footnotes}. Each name-value pair should
 use the annotation type as name and the desired string as value.}
+
+\item{risk_diff}{(\code{list} of \code{character} vectors)\cr List of character vectors. Each vector must be
+of length 2 and contain the name of treatment arms to calculate risk difference and its 95\% CI for. Those names
+must exist in the \code{arm_var} column of the dataset specified in \code{adae}.}
 }
 \value{
-A gt table object
+A \code{gt_tbl} object
 }
 \description{
 Function to create FDA Table 9: Patients With Serious Adverse Events
@@ -78,7 +83,7 @@ annotations <- list(
     "Difference is shown between [treatment arms] (e.g., difference is shown between Drug Name dosage X vs. placebo)."
   )
 )
-
-tbl <- make_table_09(adae = adae, alt_counts_df = adsl, annotations = annotations)
+risk_diff <- list(c("A: Drug X", "C: Combination"), c("A: Drug X", "B: Placebo"))
+tbl <- make_table_09(adae = adae, alt_counts_df = adsl, annotations = annotations, risk_diff = risk_diff)
 tbl
 }

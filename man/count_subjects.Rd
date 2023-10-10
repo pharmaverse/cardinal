@@ -10,7 +10,8 @@ count_subjects(
   arm_var,
   id_var,
   sub_level_vars = NULL,
-  lbl_overall = NULL
+  lbl_overall = NULL,
+  risk_diff = NULL
 )
 }
 \arguments{

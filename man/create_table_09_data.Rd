@@ -11,7 +11,8 @@ create_table_09_data(
   id_var,
   soc_var,
   pref_var,
-  lbl_overall = NULL
+  lbl_overall = NULL,
+  risk_diff = NULL
 )
 }
 \arguments{
