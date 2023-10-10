@@ -89,10 +89,10 @@ make_table_32 <- function(advs,
 #'
 #' @export
 make_table_32_gtsum <- function(advs,
-                             alt_counts_df = NULL,
-                             arm_var = "ARM",
-                             saffl_var = "SAFFL",
-                             lbl_overall = NULL) {
+                                alt_counts_df = NULL,
+                                arm_var = "ARM",
+                                saffl_var = "SAFFL",
+                                lbl_overall = NULL) {
   checkmate::assert_subset(c(
     "USUBJID", "AVISITN", "PARAMCD", "AVAL", "AVALU", arm_var, saffl_var
   ), names(advs))
