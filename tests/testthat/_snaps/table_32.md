@@ -62,3 +62,17 @@
       >110                           0            0              0                0.0 (0.0 - 0.0)       
       >=120                          0            0              0                0.0 (0.0 - 0.0)       
 
+# Table 32 (gtsum) generation works with default values
+
+    Code
+      res
+    Output
+      NULL
+
+# Table 32 (gtsum) generation works with custom values
+
+    Code
+      res
+    Output
+      NULL
+

@@ -1,5 +1,5 @@
-adsl <- adsl_raw
-advs <- advs_raw
+adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
+advs <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "advs")
 
 test_that("Table 32 generation works with default values", {
   result <- make_table_32(advs, adsl)
@@ -42,5 +42,19 @@ test_that("Table 32 generation works with risk difference column", {
   result <- make_table_32(advs, adsl, risk_diff = risk_diff)
 
   res <- expect_silent(result)
+  expect_snapshot(res)
+})
+
+test_that("Table 32 (gtsum) generation works with default values", {
+  result <- suppressWarnings(make_table_32_gtsum(advs = advs))
+
+  res <- expect_silent(result[["_data"]])
+  expect_snapshot(res)
+})
+
+test_that("Table 32 (gtsum) generation works with custom values", {
+  result <- suppressWarnings(make_table_32_gtsum(advs = advs, lbl_overall = "Total Population"))
+
+  res <- expect_silent(result[["_data"]])
   expect_snapshot(res)
 })
