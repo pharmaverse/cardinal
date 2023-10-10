@@ -41,8 +41,8 @@ make_table_07(adae = adae, alt_counts_df = adsl, risk_diff = risk_diff)
 
 Required variables:
 
--   **`adae`**: `SAFFL`, `USUBJID`, `TRTEMFL`, `DTHFL`, `DTHCAUS`, and the variable specified by `arm_var`.
--   **`alt_counts_df`** (if specified): `SAFFL`, `USUBJID`, and the variable specified by `arm_var`.
+-   **`adae`**: `USUBJID`, `TRTEMFL`, `DTHFL`, `DTHCAUS`, and the variables specified by `arm_var` and `saffl_var`.
+-   **`alt_counts_df`** (if specified): `USUBJID` and the variables specified by `arm_var` and `saffl_var`.
 
 +------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
 | Argument         | Description                                                                                                                                                                                                                                                  | Default      |

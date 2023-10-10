@@ -36,8 +36,8 @@ make_table_08(adae = adae, adex = adex)
 
 Required variables:
 
--   **`adae`**: `SAFFL`, `USUBJID`, `AGE`, `SEX`, `AESDTH`, `DTHADY`, and the variables specified by `dth_vars` and `arm_var`.
--   **`adex`** (if specified): `SAFFL`, `USUBJID`, `PARAMCD`, `TRTSDT`, `TRTEDT`, `AVAL`, and `AVALU`.
+-   **`adae`**: `USUBJID`, `AGE`, `SEX`, `AESDTH`, `DTHADY`, and the variables specified by `dth_vars`, `arm_var`, and `saffl_var`.
+-   **`adex`** (if specified): `USUBJID`, `PARAMCD`, `TRTSDT`, `TRTEDT`, `AVAL`, `AVALU`, and the variable specified by `saffl_var`.
 
 | Argument       | Description                                                                                                                                                                                                                                            | Default                                                                        |
 |:-----------------|:-----------------------------------|:-----------------|

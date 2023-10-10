@@ -37,8 +37,8 @@ make_table_33(advs = advs, alt_counts_df = adsl, risk_diff = risk_diff)
 
 Required variables:
 
--   **`advs`**: `SAFFL`, `USUBJID`, `AVISITN`, `PARAMCD`, `AVAL`, `AVALU`, and the variable specified by `arm_var`.
--   **`alt_counts_df`** (if specified): `SAFFL`, `USUBJID`, and the variable specified by `arm_var`.
+-   **`advs`**: `USUBJID`, `AVISITN`, `PARAMCD`, `AVAL`, `AVALU`, and the variables specified by `arm_var` and `saffl_var`.
+-   **`alt_counts_df`** (if specified): `USUBJID` and the variables specified by `arm_var` and `saffl_var`.
 
 +------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
 | Argument         | Description                                                                                                                                                                                                                                                  | Default      |

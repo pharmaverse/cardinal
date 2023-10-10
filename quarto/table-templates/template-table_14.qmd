@@ -41,8 +41,8 @@ make_table_14(adae = adae, risk_diff = risk_diff)
 
 Required variables:
 
--   **`adae`**: `SAFFL`, `USUBJID`, `AEBODSYS`, and the variables specified by `arm_var`, `fmqsc_var`, and `fmqnam_var`.
--   **`alt_counts_df`** (if specified): `SAFFL` and `USUBJID`.
+-   **`adae`**: `USUBJID`, `AEBODSYS`, and the variables specified by `arm_var`, `saffl_var`, `fmqsc_var`, and `fmqnam_var`.
+-   **`alt_counts_df`** (if specified): `USUBJID` and the variables specified by `arm_var` and `saffl_var`.
 
 +------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------+
 | Argument         | Description                                                                                                                                                                                                                                                  | Default       |

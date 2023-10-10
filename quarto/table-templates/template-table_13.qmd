@@ -43,8 +43,8 @@ make_table_13(adae = adae, alt_counts_df = adsl, pref_var = pref_var, min_freq =
 
 Required variables:
 
--   **`adae`**: `SAFFL`, `USUBJID`, and the variables specified by `pref_var` and `arm_var`.
--   **`alt_counts_df`** (if specified): `SAFFL`, `USUBJID`, and the variable specified by `arm_var`.
+-   **`adae`**: `USUBJID` and the variables specified by `pref_var`, `arm_var`, and `saffl_var`.
+-   **`alt_counts_df`** (if specified): `USUBJID` and the variables specified by `arm_var` and `saffl_var`.
 
 +------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------+
 | Argument         | Description                                                                                                                                                                                                                                                  | Default                                               |

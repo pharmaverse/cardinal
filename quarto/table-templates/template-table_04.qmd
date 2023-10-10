@@ -46,8 +46,8 @@ make_table_04(df = adsl, risk_diff = risk_diff)
 
 Required variables:
 
--   **`df`**: `USUBJID`,`SAFFL`,`RANDFL`, `ITTFL`, `PPROTFL`, `EOTSTT`, `DCTREAS`, `EOSSTT`, `DCSREAS` and the variables specified by `arm_var`.
--   **`alt_counts_df`** (if specified): `SAFFL`, `USUBJID`, and the variable specified by `arm_var`.
+-   **`df`**: `USUBJID`, `RANDFL`, `ITTFL`, `PPROTFL`, `EOTSTT`, `DCTREAS`, `EOSSTT`, `DCSREAS`, and the variables specified by `arm_var` and `saffl_var`.
+-   **`alt_counts_df`** (if specified): `USUBJID` and the variables specified by `arm_var` and `saffl_var`.
 
 | Argument        | Description                                                                                                                                                                                                                                            | Default      |
 |:------------------|:---------------------------------|:------------------|

@@ -37,8 +37,8 @@ make_table_05(df = adsl, risk_diff = risk_diff)
 
 Required variables:
 
--   **`df`**: `SAFFL` and the variables specified by `vars` and `arm_var`.
--   **`alt_counts_df`** (if specified): `SAFFL`, `USUBJID`, and the variable specified by `arm_var`.
+-   **`df`**: The variables specified by `vars`, `arm_var`,  and `saffl_var`.
+-   **`alt_counts_df`** (if specified): `USUBJID` and the variables specified by `arm_var` and `saffl_var`.
 
 +-----------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------+
 | Argument        | Description                                                                                                                                                                                                                                                  | Default                                     |

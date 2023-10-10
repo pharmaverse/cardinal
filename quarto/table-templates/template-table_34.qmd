@@ -51,8 +51,8 @@ make_table_34(adae = adae, alt_counts_df = adsl, pref_var = pref_var, risk_diff 
 
 Required variables:
 
--   **`adae`**: `SAFFL`, `USUBJID`, `AEBODSYS`, `AESER`, and the variables specified by `arm_var`, `fmqsc_var`, and `fmqnam_var`, and `pref_var`.
--   **`alt_counts_df`** (if specified): `SAFFL`, `USUBJID`, and the variable specified by `arm_var`.
+-   **`adae`**: `USUBJID`, `AEBODSYS`, `AESER`, and the variables specified by `arm_var`, `saffl_var`, `fmqsc_var`, and `fmqnam_var`, and `pref_var`.
+-   **`alt_counts_df`** (if specified): `USUBJID` and the variables specified by `arm_var` and `saffl_var`.
 
 +------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------+
 | Argument         | Description                                                                                                                                                                                                                                                  | Default       |
