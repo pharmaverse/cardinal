@@ -36,14 +36,15 @@ make_table_08(adae = adae, adex = adex)
 
 Required variables:
 
--   **`adae`**: `SAFFL`, `USUBJID`, `AGE`, `SEX`, `AESDTH`, `DTHADY`, and the variables specified by `dth_vars` and `arm_var`.
--   **`adex`** (if specified): `SAFFL`, `USUBJID`, `PARAMCD`, `TRTSDT`, `TRTEDT`, `AVAL`, and `AVALU`.
+-   **`adae`**: `USUBJID`, `AGE`, `SEX`, `AESDTH`, `DTHADY`, and the variables specified by `dth_vars`, `arm_var`, and `saffl_var`.
+-   **`adex`** (if specified): `USUBJID`, `PARAMCD`, `TRTSDT`, `TRTEDT`, `AVAL`, `AVALU`, and the variable specified by `saffl_var`.
 
 | Argument       | Description                                                                                                                                                                                                                                            | Default                                                                        |
-|:-----------------|:------------------------------------|:-----------------|
+|:-----------------|:-----------------------------------|:-----------------|
 | `adae`         | (`data.frame`) Dataset (typically ADAE) required to build table.                                                                                                                                                                                       | *No default*                                                                   |
 | `adex`         | (`data.frame`) Dataset (typically ADEX) required to build table.                                                                                                                                                                                       | *No default*                                                                   |
 | `arm_var`      | (`character`) Arm variable used to split table into columns.                                                                                                                                                                                           | `"ARM"`                                                                        |
+| `saffl_var`    | (`character`) Flag variable used to indicate inclusion in safety population.                                                                                                                                                                           | `"SAFFL"`                                                                      |
 | `dth_var`      | (`vector` of `character`) additional death variables from `adae` to include in the table.                                                                                                                                                              | `c("DTHCAUS", "DTHCAT")`                                                       |
 | `lbl_dth_vars` | (`vector` of `character`) labels corresponding to variables in `dth_vars` to print in the table. Labels should be ordered according to the order of variables in `dth_vars`.                                                                           | `c("Cause of Death\nMedDRA\nPreferred Term", "Cause of Death\nVerbatim Term")` |
 | `na_level`     | (`character`) String to represent missing values.                                                                                                                                                                                                      | `"NA"`                                                                         |
