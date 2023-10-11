@@ -23,7 +23,7 @@
         MULTIPLE                                            0                 1 (0.7%)                0                 1 (0.2%)     
         NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER           0                 1 (0.7%)                0                 1 (0.2%)     
       Ethnicity                                                                                                                      
-         NOT REPORTED                                    6 (4.5%)            10 (7.5%)            11 (8.3%)            27 (6.8%)     
+        NOT REPORTED                                     6 (4.5%)            10 (7.5%)            11 (8.3%)            27 (6.8%)     
         HISPANIC OR LATINO                              15 (11.2%)           18 (13.4%)           15 (11.4%)            48 (12%)     
         NOT HISPANIC OR LATINO                         104 (77.6%)          103 (76.9%)          101 (76.5%)           308 (77%)     
         UNKNOWN                                          9 (6.7%)             3 (2.2%)             5 (3.8%)            17 (4.2%)     
@@ -66,7 +66,7 @@
         MULTIPLE                                            0                 1 (0.7%)                0                 1 (0.2%)     
         NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER           0                 1 (0.7%)                0                 1 (0.2%)     
       Ethnicity                                                                                                                      
-         NOT REPORTED                                    6 (4.5%)            10 (7.5%)            11 (8.3%)            27 (6.8%)     
+        NOT REPORTED                                     6 (4.5%)            10 (7.5%)            11 (8.3%)            27 (6.8%)     
         HISPANIC OR LATINO                              15 (11.2%)           18 (13.4%)           15 (11.4%)            48 (12%)     
         NOT HISPANIC OR LATINO                         104 (77.6%)          103 (76.9%)          101 (76.5%)           308 (77%)     
         UNKNOWN                                          9 (6.7%)             3 (2.2%)             5 (3.8%)            17 (4.2%)     

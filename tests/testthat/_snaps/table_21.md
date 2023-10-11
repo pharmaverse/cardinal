@@ -23,7 +23,7 @@
         OTHER                                            0             0              0       
         UNKNOWN                                          0             0              0       
       ETHNIC                                                                                  
-         NOT REPORTED                                6 (100%)       7 (70%)       7 (63.6%)   
+        NOT REPORTED                                 6 (100%)       7 (70%)       7 (63.6%)   
         HISPANIC OR LATINO                          11 (73.3%)    13 (72.2%)      11 (73.3%)  
         NOT HISPANIC OR LATINO                      81 (77.9%)    80 (77.7%)      78 (77.2%)  
         UNKNOWN                                      6 (66.7%)     1 (33.3%)       3 (60%)    
@@ -53,7 +53,7 @@
         OTHER                                            0             0              0                 0        
         UNKNOWN                                          0             0              0                 0        
       ETHNIC                                                                                                     
-         NOT REPORTED                                6 (100%)       7 (70%)       7 (63.6%)         20 (74.1%)   
+        NOT REPORTED                                 6 (100%)       7 (70%)       7 (63.6%)         20 (74.1%)   
         HISPANIC OR LATINO                          11 (73.3%)    13 (72.2%)      11 (73.3%)        35 (72.9%)   
         NOT HISPANIC OR LATINO                      81 (77.9%)    80 (77.7%)      78 (77.2%)       239 (77.6%)   
         UNKNOWN                                      6 (66.7%)     1 (33.3%)       3 (60%)          10 (58.8%)   
@@ -85,7 +85,7 @@
         MULTIPLE                                         0         1 (0.7%)           0       
         NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER        0         1 (0.7%)           0       
       ETHNIC                                                                                  
-         NOT REPORTED                                6 (4.5%)      7 (5.2%)        7 (5.3%)   
+        NOT REPORTED                                 6 (4.5%)      7 (5.2%)        7 (5.3%)   
         HISPANIC OR LATINO                           11 (8.2%)     13 (9.7%)      11 (8.3%)   
         NOT HISPANIC OR LATINO                      81 (60.4%)    80 (59.7%)      78 (59.1%)  
         UNKNOWN                                      6 (4.5%)      1 (0.7%)        3 (2.3%)   
