@@ -538,15 +538,15 @@ C: Combination   AB12345-BRA-1-id-141     35/F    6960 mg      37        NA     
 <p>Required variables:</p>
 <ul>
 <li>
-<strong><code>adae</code></strong>: <code>SAFFL</code>, <code>USUBJID</code>, <code>AGE</code>, <code>SEX</code>, <code>AESDTH</code>, <code>DTHADY</code>, and the variables specified by <code>dth_vars</code> and <code>arm_var</code>.</li>
+<strong><code>adae</code></strong>: <code>USUBJID</code>, <code>AGE</code>, <code>SEX</code>, <code>AESDTH</code>, <code>DTHADY</code>, and the variables specified by <code>dth_vars</code>, <code>arm_var</code>, and <code>saffl_var</code>.</li>
 <li>
-<strong><code>adex</code></strong> (if specified): <code>SAFFL</code>, <code>USUBJID</code>, <code>PARAMCD</code>, <code>TRTSDT</code>, <code>TRTEDT</code>, <code>AVAL</code>, and <code>AVALU</code>.</li>
+<strong><code>adex</code></strong> (if specified): <code>USUBJID</code>, <code>PARAMCD</code>, <code>TRTSDT</code>, <code>TRTEDT</code>, <code>AVAL</code>, <code>AVALU</code>, and the variable specified by <code>saffl_var</code>.</li>
 </ul>
 <table class="table">
 <colgroup>
-<col style="width: 24%">
+<col style="width: 25%">
 <col style="width: 50%">
-<col style="width: 24%">
+<col style="width: 25%">
 </colgroup>
 <thead><tr class="header">
 <th style="text-align: left;">Argument</th>
@@ -570,21 +570,26 @@ C: Combination   AB12345-BRA-1-id-141     35/F    6960 mg      37        NA     
 <td style="text-align: left;"><code>"ARM"</code></td>
 </tr>
 <tr class="even">
+<td style="text-align: left;"><code>saffl_var</code></td>
+<td style="text-align: left;">(<code>character</code>) Flag variable used to indicate inclusion in safety population.</td>
+<td style="text-align: left;"><code>"SAFFL"</code></td>
+</tr>
+<tr class="odd">
 <td style="text-align: left;"><code>dth_var</code></td>
 <td style="text-align: left;">(<code>vector</code> of <code>character</code>) additional death variables from <code>adae</code> to include in the table.</td>
 <td style="text-align: left;"><code>c("DTHCAUS", "DTHCAT")</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><code>lbl_dth_vars</code></td>
 <td style="text-align: left;">(<code>vector</code> of <code>character</code>) labels corresponding to variables in <code>dth_vars</code> to print in the table. Labels should be ordered according to the order of variables in <code>dth_vars</code>.</td>
 <td style="text-align: left;"><code>c("Cause of Death\nMedDRA\nPreferred Term", "Cause of Death\nVerbatim Term")</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><code>na_level</code></td>
 <td style="text-align: left;">(<code>character</code>) String to represent missing values.</td>
 <td style="text-align: left;"><code>"NA"</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><code>annotations</code></td>
 <td style="text-align: left;">(named <code>list</code> of <code>character</code>) List of annotations to add to the table. Valid annotation types are <code>title</code>, <code>subtitles</code>, <code>main_footer</code>, and <code>prov_footer.</code> Each name-value pair should use the annotation type as name and the desired string as value.</td>
 <td style="text-align: left;"><code>NULL</code></td>
@@ -1038,21 +1043,22 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb3-36"><a href="#cb3-36"></a></span>
 <span id="cb3-37"><a href="#cb3-37"></a>Required variables:</span>
 <span id="cb3-38"><a href="#cb3-38"></a></span>
-<span id="cb3-39"><a href="#cb3-39"></a><span class="ss">-   </span>**`adae`**: <span class="in">`SAFFL`</span>, <span class="in">`USUBJID`</span>, <span class="in">`AGE`</span>, <span class="in">`SEX`</span>, <span class="in">`AESDTH`</span>, <span class="in">`DTHADY`</span>, and the variables specified by <span class="in">`dth_vars`</span> and <span class="in">`arm_var`</span>.</span>
-<span id="cb3-40"><a href="#cb3-40"></a><span class="ss">-   </span>**`adex`** (if specified): <span class="in">`SAFFL`</span>, <span class="in">`USUBJID`</span>, <span class="in">`PARAMCD`</span>, <span class="in">`TRTSDT`</span>, <span class="in">`TRTEDT`</span>, <span class="in">`AVAL`</span>, and <span class="in">`AVALU`</span>.</span>
+<span id="cb3-39"><a href="#cb3-39"></a><span class="ss">-   </span>**`adae`**: <span class="in">`USUBJID`</span>, <span class="in">`AGE`</span>, <span class="in">`SEX`</span>, <span class="in">`AESDTH`</span>, <span class="in">`DTHADY`</span>, and the variables specified by <span class="in">`dth_vars`</span>, <span class="in">`arm_var`</span>, and <span class="in">`saffl_var`</span>.</span>
+<span id="cb3-40"><a href="#cb3-40"></a><span class="ss">-   </span>**`adex`** (if specified): <span class="in">`USUBJID`</span>, <span class="in">`PARAMCD`</span>, <span class="in">`TRTSDT`</span>, <span class="in">`TRTEDT`</span>, <span class="in">`AVAL`</span>, <span class="in">`AVALU`</span>, and the variable specified by <span class="in">`saffl_var`</span>.</span>
 <span id="cb3-41"><a href="#cb3-41"></a></span>
 <span id="cb3-42"><a href="#cb3-42"></a>| Argument       | Description                                                                                                                                                                                                                                            | Default                                                                        |</span>
-<span id="cb3-43"><a href="#cb3-43"></a>|:-----------------|:------------------------------------|:-----------------|</span>
+<span id="cb3-43"><a href="#cb3-43"></a>|:-----------------|:-----------------------------------|:-----------------|</span>
 <span id="cb3-44"><a href="#cb3-44"></a>| <span class="in">`adae`</span>         | (<span class="in">`data.frame`</span>) Dataset (typically ADAE) required to build table.                                                                                                                                                                                       | *No default*                                                                   |</span>
 <span id="cb3-45"><a href="#cb3-45"></a>| <span class="in">`adex`</span>         | (<span class="in">`data.frame`</span>) Dataset (typically ADEX) required to build table.                                                                                                                                                                                       | *No default*                                                                   |</span>
 <span id="cb3-46"><a href="#cb3-46"></a>| <span class="in">`arm_var`</span>      | (<span class="in">`character`</span>) Arm variable used to split table into columns.                                                                                                                                                                                           | <span class="in">`"ARM"`</span>                                                                        |</span>
-<span id="cb3-47"><a href="#cb3-47"></a>| <span class="in">`dth_var`</span>      | (<span class="in">`vector`</span> of <span class="in">`character`</span>) additional death variables from <span class="in">`adae`</span> to include in the table.                                                                                                                                                              | <span class="in">`c("DTHCAUS", "DTHCAT")`</span>                                                       |</span>
-<span id="cb3-48"><a href="#cb3-48"></a>| <span class="in">`lbl_dth_vars`</span> | (<span class="in">`vector`</span> of <span class="in">`character`</span>) labels corresponding to variables in <span class="in">`dth_vars`</span> to print in the table. Labels should be ordered according to the order of variables in <span class="in">`dth_vars`</span>.                                                                           | <span class="in">`c("Cause of Death\nMedDRA\nPreferred Term", "Cause of Death\nVerbatim Term")`</span> |</span>
-<span id="cb3-49"><a href="#cb3-49"></a>| <span class="in">`na_level`</span>     | (<span class="in">`character`</span>) String to represent missing values.                                                                                                                                                                                                      | <span class="in">`"NA"`</span>                                                                         |</span>
-<span id="cb3-50"><a href="#cb3-50"></a>| <span class="in">`annotations`</span>  | (named <span class="in">`list`</span> of <span class="in">`character`</span>) List of annotations to add to the table. Valid annotation types are <span class="in">`title`</span>, <span class="in">`subtitles`</span>, <span class="in">`main_footer`</span>, and <span class="in">`prov_footer.`</span> Each name-value pair should use the annotation type as name and the desired string as value. | <span class="in">`NULL`</span>                                                                         |</span>
-<span id="cb3-51"><a href="#cb3-51"></a></span>
-<span id="cb3-52"><a href="#cb3-52"></a>Source code for this function is available <span class="co">[</span><span class="ot">here</span><span class="co">](https://github.com/pharmaverse/falcon/blob/main/R/fda-table_08.R)</span>.</span>
-<span id="cb3-53"><a href="#cb3-53"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-47"><a href="#cb3-47"></a>| <span class="in">`saffl_var`</span>    | (<span class="in">`character`</span>) Flag variable used to indicate inclusion in safety population.                                                                                                                                                                           | <span class="in">`"SAFFL"`</span>                                                                      |</span>
+<span id="cb3-48"><a href="#cb3-48"></a>| <span class="in">`dth_var`</span>      | (<span class="in">`vector`</span> of <span class="in">`character`</span>) additional death variables from <span class="in">`adae`</span> to include in the table.                                                                                                                                                              | <span class="in">`c("DTHCAUS", "DTHCAT")`</span>                                                       |</span>
+<span id="cb3-49"><a href="#cb3-49"></a>| <span class="in">`lbl_dth_vars`</span> | (<span class="in">`vector`</span> of <span class="in">`character`</span>) labels corresponding to variables in <span class="in">`dth_vars`</span> to print in the table. Labels should be ordered according to the order of variables in <span class="in">`dth_vars`</span>.                                                                           | <span class="in">`c("Cause of Death\nMedDRA\nPreferred Term", "Cause of Death\nVerbatim Term")`</span> |</span>
+<span id="cb3-50"><a href="#cb3-50"></a>| <span class="in">`na_level`</span>     | (<span class="in">`character`</span>) String to represent missing values.                                                                                                                                                                                                      | <span class="in">`"NA"`</span>                                                                         |</span>
+<span id="cb3-51"><a href="#cb3-51"></a>| <span class="in">`annotations`</span>  | (named <span class="in">`list`</span> of <span class="in">`character`</span>) List of annotations to add to the table. Valid annotation types are <span class="in">`title`</span>, <span class="in">`subtitles`</span>, <span class="in">`main_footer`</span>, and <span class="in">`prov_footer.`</span> Each name-value pair should use the annotation type as name and the desired string as value. | <span class="in">`NULL`</span>                                                                         |</span>
+<span id="cb3-52"><a href="#cb3-52"></a></span>
+<span id="cb3-53"><a href="#cb3-53"></a>Source code for this function is available <span class="co">[</span><span class="ot">here</span><span class="co">](https://github.com/pharmaverse/falcon/blob/main/R/fda-table_08.R)</span>.</span>
+<span id="cb3-54"><a href="#cb3-54"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">

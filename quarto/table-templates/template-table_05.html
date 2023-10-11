@@ -329,9 +329,9 @@ Patients Treated, by duration
 <p>Required variables:</p>
 <ul>
 <li>
-<strong><code>df</code></strong>: <code>SAFFL</code> and the variables specified by <code>vars</code> and <code>arm_var</code>.</li>
+<strong><code>df</code></strong>: The variables specified by <code>vars</code>, <code>arm_var</code>, and <code>saffl_var</code>.</li>
 <li>
-<strong><code>alt_counts_df</code></strong> (if specified): <code>SAFFL</code>, <code>USUBJID</code>, and the variable specified by <code>arm_var</code>.</li>
+<strong><code>alt_counts_df</code></strong> (if specified): <code>USUBJID</code> and the variables specified by <code>arm_var</code> and <code>saffl_var</code>.</li>
 </ul>
 <table class="table">
 <thead><tr class="header">
@@ -356,36 +356,41 @@ Patients Treated, by duration
 <td style="text-align: left;"><code>"ARM"</code></td>
 </tr>
 <tr class="even">
+<td style="text-align: left;"><code>saffl_var</code></td>
+<td style="text-align: left;">(<code>character</code>) Flag variable used to indicate inclusion in safety population.</td>
+<td style="text-align: left;"><code>"SAFFL"</code></td>
+</tr>
+<tr class="odd">
 <td style="text-align: left;"><code>id_var</code></td>
 <td style="text-align: left;">(<code>character</code>) Identifier variable used to count the participants within each flag.</td>
 <td style="text-align: left;"><code>"USUBJID"</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><code>trtsdtm_var</code></td>
 <td style="text-align: left;">(<code>character</code>) Treatment start datetime variable in df.</td>
 <td style="text-align: left;"><code>"TRTSDTM"</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><code>trtedtm_var</code></td>
 <td style="text-align: left;">(<code>character</code>) Treatment end datetime variable in df.</td>
 <td style="text-align: left;"><code>"TRTEDTM"</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><code>u_trtdur</code></td>
 <td style="text-align: left;">(<code>character</code>) Unit for duration of treatment. Options are <code>"days"</code>, <code>"weeks"</code>, <code>"months"</code> and <code>"years"</code>.</td>
 <td style="text-align: left;"><code>"days"</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><code>lbl_trtdur</code></td>
 <td style="text-align: left;">(<code>character</code>) Label for treatment duration variable <code>u_trtdur</code>.</td>
 <td style="text-align: left;"><code>paste("Duration of Treatment,", u_trtdur)</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><code>lbl_overall</code></td>
 <td style="text-align: left;">(<code>character</code>) If specified, an overall column will be added to the table with the given value as the column label.</td>
 <td style="text-align: left;"><code>NULL</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><code>risk_diff</code></td>
 <td style="text-align: left;">
 <p>(named <code>list</code>) List of settings to apply to add a risk difference column to the table. See <a href="https://insightsengineering.github.io/tern/main/reference/add_riskdiff.html">tern::add_riskdiff()</a> for more details. List should contain the following elements:</p>
@@ -398,12 +403,12 @@ Patients Treated, by duration
 </td>
 <td style="text-align: left;"><code>NULL</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><code>prune_0</code></td>
 <td style="text-align: left;">(<code>flag</code>) Whether all-zero rows should be removed from the table.</td>
 <td style="text-align: left;"><code>TRUE</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><code>annotations</code></td>
 <td style="text-align: left;">(named <code>list</code> of <code>character</code>) List of annotations to add to the table. Valid annotation types are <code>title</code>, <code>subtitles</code>, <code>main_footer</code>, and <code>prov_footer.</code> Each name-value pair should use the annotation type as name and the desired string as value.</td>
 <td style="text-align: left;"><code>NULL</code></td>
@@ -858,8 +863,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb3-37"><a href="#cb3-37"></a></span>
 <span id="cb3-38"><a href="#cb3-38"></a>Required variables:</span>
 <span id="cb3-39"><a href="#cb3-39"></a></span>
-<span id="cb3-40"><a href="#cb3-40"></a><span class="ss">-   </span>**`df`**: <span class="in">`SAFFL`</span> and the variables specified by <span class="in">`vars`</span> and <span class="in">`arm_var`</span>.</span>
-<span id="cb3-41"><a href="#cb3-41"></a><span class="ss">-   </span>**`alt_counts_df`** (if specified): <span class="in">`SAFFL`</span>, <span class="in">`USUBJID`</span>, and the variable specified by <span class="in">`arm_var`</span>.</span>
+<span id="cb3-40"><a href="#cb3-40"></a><span class="ss">-   </span>**`df`**: The variables specified by <span class="in">`vars`</span>, <span class="in">`arm_var`</span>,  and <span class="in">`saffl_var`</span>.</span>
+<span id="cb3-41"><a href="#cb3-41"></a><span class="ss">-   </span>**`alt_counts_df`** (if specified): <span class="in">`USUBJID`</span> and the variables specified by <span class="in">`arm_var`</span> and <span class="in">`saffl_var`</span>.</span>
 <span id="cb3-42"><a href="#cb3-42"></a></span>
 <span id="cb3-43"><a href="#cb3-43"></a>+-----------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------+</span>
 <span id="cb3-44"><a href="#cb3-44"></a>| Argument        | Description                                                                                                                                                                                                                                                  | Default                                     |</span>
@@ -870,35 +875,37 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb3-49"><a href="#cb3-49"></a>+-----------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------+</span>
 <span id="cb3-50"><a href="#cb3-50"></a>| <span class="in">`arm_var`</span>       | (<span class="in">`character`</span>) Arm variable used to split table into columns.                                                                                                                                                                                                 | <span class="in">`"ARM"`</span>                                     |</span>
 <span id="cb3-51"><a href="#cb3-51"></a>+-----------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------+</span>
-<span id="cb3-52"><a href="#cb3-52"></a>| <span class="in">`id_var`</span>        | (<span class="in">`character`</span>) Identifier variable used to count the participants within each flag.                                                                                                                                                                           | <span class="in">`"USUBJID"`</span>                                 |</span>
+<span id="cb3-52"><a href="#cb3-52"></a>| <span class="in">`saffl_var`</span>     | (<span class="in">`character`</span>) Flag variable used to indicate inclusion in safety population.                                                                                                                                                                                 | <span class="in">`"SAFFL"`</span>                                   |</span>
 <span id="cb3-53"><a href="#cb3-53"></a>+-----------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------+</span>
-<span id="cb3-54"><a href="#cb3-54"></a>| <span class="in">`trtsdtm_var`</span>   | (<span class="in">`character`</span>) Treatment start datetime variable in df.                                                                                                                                                                                                       | <span class="in">`"TRTSDTM"`</span>                                 |</span>
+<span id="cb3-54"><a href="#cb3-54"></a>| <span class="in">`id_var`</span>        | (<span class="in">`character`</span>) Identifier variable used to count the participants within each flag.                                                                                                                                                                           | <span class="in">`"USUBJID"`</span>                                 |</span>
 <span id="cb3-55"><a href="#cb3-55"></a>+-----------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------+</span>
-<span id="cb3-56"><a href="#cb3-56"></a>| <span class="in">`trtedtm_var`</span>   | (<span class="in">`character`</span>) Treatment end datetime variable in df.                                                                                                                                                                                                         | <span class="in">`"TRTEDTM"`</span>                                 |</span>
+<span id="cb3-56"><a href="#cb3-56"></a>| <span class="in">`trtsdtm_var`</span>   | (<span class="in">`character`</span>) Treatment start datetime variable in df.                                                                                                                                                                                                       | <span class="in">`"TRTSDTM"`</span>                                 |</span>
 <span id="cb3-57"><a href="#cb3-57"></a>+-----------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------+</span>
-<span id="cb3-58"><a href="#cb3-58"></a>| <span class="in">`u_trtdur`</span>      | (<span class="in">`character`</span>) Unit for duration of treatment. Options are <span class="in">`"days"`</span>, <span class="in">`"weeks"`</span>, <span class="in">`"months"`</span> and <span class="in">`"years"`</span>.                                                                                                                                                     | <span class="in">`"days"`</span>                                    |</span>
+<span id="cb3-58"><a href="#cb3-58"></a>| <span class="in">`trtedtm_var`</span>   | (<span class="in">`character`</span>) Treatment end datetime variable in df.                                                                                                                                                                                                         | <span class="in">`"TRTEDTM"`</span>                                 |</span>
 <span id="cb3-59"><a href="#cb3-59"></a>+-----------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------+</span>
-<span id="cb3-60"><a href="#cb3-60"></a>| <span class="in">`lbl_trtdur`</span>    | (<span class="in">`character`</span>) Label for treatment duration variable <span class="in">`u_trtdur`</span>.                                                                                                                                                                                              | <span class="in">`paste("Duration of Treatment,", u_trtdur)`</span> |</span>
+<span id="cb3-60"><a href="#cb3-60"></a>| <span class="in">`u_trtdur`</span>      | (<span class="in">`character`</span>) Unit for duration of treatment. Options are <span class="in">`"days"`</span>, <span class="in">`"weeks"`</span>, <span class="in">`"months"`</span> and <span class="in">`"years"`</span>.                                                                                                                                                     | <span class="in">`"days"`</span>                                    |</span>
 <span id="cb3-61"><a href="#cb3-61"></a>+-----------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------+</span>
-<span id="cb3-62"><a href="#cb3-62"></a>| <span class="in">`lbl_overall`</span>   | (<span class="in">`character`</span>) If specified, an overall column will be added to the table with the given value as the column label.                                                                                                                                           | <span class="in">`NULL`</span>                                      |</span>
+<span id="cb3-62"><a href="#cb3-62"></a>| <span class="in">`lbl_trtdur`</span>    | (<span class="in">`character`</span>) Label for treatment duration variable <span class="in">`u_trtdur`</span>.                                                                                                                                                                                              | <span class="in">`paste("Duration of Treatment,", u_trtdur)`</span> |</span>
 <span id="cb3-63"><a href="#cb3-63"></a>+-----------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------+</span>
-<span id="cb3-64"><a href="#cb3-64"></a>| <span class="in">`risk_diff`</span>     | (named <span class="in">`list`</span>) List of settings to apply to add a risk difference column to the table. See <span class="co">[</span><span class="ot">tern::add_riskdiff()</span><span class="co">](https://insightsengineering.github.io/tern/main/reference/add_riskdiff.html)</span> for more details. List should contain the following elements: | <span class="in">`NULL`</span>                                      |</span>
-<span id="cb3-65"><a href="#cb3-65"></a>|                 |                                                                                                                                                                                                                                                              |                                             |</span>
-<span id="cb3-66"><a href="#cb3-66"></a>|                 | -   <span class="in">`arm_x`</span>: (required) the name of reference arm.                                                                                                                                                                                                           |                                             |</span>
+<span id="cb3-64"><a href="#cb3-64"></a>| <span class="in">`lbl_overall`</span>   | (<span class="in">`character`</span>) If specified, an overall column will be added to the table with the given value as the column label.                                                                                                                                           | <span class="in">`NULL`</span>                                      |</span>
+<span id="cb3-65"><a href="#cb3-65"></a>+-----------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------+</span>
+<span id="cb3-66"><a href="#cb3-66"></a>| <span class="in">`risk_diff`</span>     | (named <span class="in">`list`</span>) List of settings to apply to add a risk difference column to the table. See <span class="co">[</span><span class="ot">tern::add_riskdiff()</span><span class="co">](https://insightsengineering.github.io/tern/main/reference/add_riskdiff.html)</span> for more details. List should contain the following elements: | <span class="in">`NULL`</span>                                      |</span>
 <span id="cb3-67"><a href="#cb3-67"></a>|                 |                                                                                                                                                                                                                                                              |                                             |</span>
-<span id="cb3-68"><a href="#cb3-68"></a>|                 | -   <span class="in">`arm_y`</span>: (required) the name of the arm to compare to the reference arm.                                                                                                                                                                                 |                                             |</span>
+<span id="cb3-68"><a href="#cb3-68"></a>|                 | -   <span class="in">`arm_x`</span>: (required) the name of reference arm.                                                                                                                                                                                                           |                                             |</span>
 <span id="cb3-69"><a href="#cb3-69"></a>|                 |                                                                                                                                                                                                                                                              |                                             |</span>
-<span id="cb3-70"><a href="#cb3-70"></a>|                 | -   <span class="in">`col_label`</span>: (optional) label to use for the risk difference column. Defaults to <span class="in">`"Risk Difference (%) (95% CI)"`</span>.                                                                                                                                       |                                             |</span>
+<span id="cb3-70"><a href="#cb3-70"></a>|                 | -   <span class="in">`arm_y`</span>: (required) the name of the arm to compare to the reference arm.                                                                                                                                                                                 |                                             |</span>
 <span id="cb3-71"><a href="#cb3-71"></a>|                 |                                                                                                                                                                                                                                                              |                                             |</span>
-<span id="cb3-72"><a href="#cb3-72"></a>|                 | -   <span class="in">`pct`</span>: (optional) whether the output should be returned as percentages. Defaults to <span class="in">`TRUE`</span>.                                                                                                                                                              |                                             |</span>
-<span id="cb3-73"><a href="#cb3-73"></a>+-----------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------+</span>
-<span id="cb3-74"><a href="#cb3-74"></a>| <span class="in">`prune_0`</span>       | (<span class="in">`flag`</span>) Whether all-zero rows should be removed from the table.                                                                                                                                                                                             | <span class="in">`TRUE`</span>                                      |</span>
+<span id="cb3-72"><a href="#cb3-72"></a>|                 | -   <span class="in">`col_label`</span>: (optional) label to use for the risk difference column. Defaults to <span class="in">`"Risk Difference (%) (95% CI)"`</span>.                                                                                                                                       |                                             |</span>
+<span id="cb3-73"><a href="#cb3-73"></a>|                 |                                                                                                                                                                                                                                                              |                                             |</span>
+<span id="cb3-74"><a href="#cb3-74"></a>|                 | -   <span class="in">`pct`</span>: (optional) whether the output should be returned as percentages. Defaults to <span class="in">`TRUE`</span>.                                                                                                                                                              |                                             |</span>
 <span id="cb3-75"><a href="#cb3-75"></a>+-----------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------+</span>
-<span id="cb3-76"><a href="#cb3-76"></a>| <span class="in">`annotations`</span>   | (named <span class="in">`list`</span> of <span class="in">`character`</span>) List of annotations to add to the table. Valid annotation types are <span class="in">`title`</span>, <span class="in">`subtitles`</span>, <span class="in">`main_footer`</span>, and <span class="in">`prov_footer.`</span> Each name-value pair should use the annotation type as name and the desired string as value.       | <span class="in">`NULL`</span>                                      |</span>
+<span id="cb3-76"><a href="#cb3-76"></a>| <span class="in">`prune_0`</span>       | (<span class="in">`flag`</span>) Whether all-zero rows should be removed from the table.                                                                                                                                                                                             | <span class="in">`TRUE`</span>                                      |</span>
 <span id="cb3-77"><a href="#cb3-77"></a>+-----------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------+</span>
-<span id="cb3-78"><a href="#cb3-78"></a></span>
-<span id="cb3-79"><a href="#cb3-79"></a>Source code for this function is available <span class="co">[</span><span class="ot">here</span><span class="co">](https://github.com/pharmaverse/falcon/blob/main/R/fda-table_05.R)</span>.</span>
-<span id="cb3-80"><a href="#cb3-80"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-78"><a href="#cb3-78"></a>| <span class="in">`annotations`</span>   | (named <span class="in">`list`</span> of <span class="in">`character`</span>) List of annotations to add to the table. Valid annotation types are <span class="in">`title`</span>, <span class="in">`subtitles`</span>, <span class="in">`main_footer`</span>, and <span class="in">`prov_footer.`</span> Each name-value pair should use the annotation type as name and the desired string as value.       | <span class="in">`NULL`</span>                                      |</span>
+<span id="cb3-79"><a href="#cb3-79"></a>+-----------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------+</span>
+<span id="cb3-80"><a href="#cb3-80"></a></span>
+<span id="cb3-81"><a href="#cb3-81"></a>Source code for this function is available <span class="co">[</span><span class="ot">here</span><span class="co">](https://github.com/pharmaverse/falcon/blob/main/R/fda-table_05.R)</span>.</span>
+<span id="cb3-82"><a href="#cb3-82"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
