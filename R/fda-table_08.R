@@ -12,6 +12,8 @@
 #' @param lbl_dth_vars (`vector` of `character`)\cr labels corresponding to variables in `dth_vars` to print
 #'   in the table. Labels should be ordered according to the order of variables in `dth_vars`.
 #'
+#' @return An `rtable` object.
+#'
 #' @examples
 #' adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
 #' adex <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adex")

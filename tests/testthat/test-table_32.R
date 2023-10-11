@@ -1,5 +1,5 @@
-adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
-advs <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "advs")
+adsl <- adsl_raw
+advs <- advs_raw
 
 test_that("Table 32 generation works with default values", {
   result <- make_table_32(advs, adsl)
@@ -37,17 +37,24 @@ test_that("Table 32 generation works with pruned rows", {
   expect_snapshot(res)
 })
 
-test_that("Table 32 (gt) generation works with default values", {
-  result <- suppressWarnings(make_table_32_gt(advs = advs))
+test_that("Table 32 generation works with risk difference column", {
+  risk_diff <- list(arm_x = "B: Placebo", arm_y = "A: Drug X")
+  result <- make_table_32(advs, adsl, risk_diff = risk_diff)
 
-  res <- expect_silent(result[["_data"]])
+  res <- expect_silent(result)
+  expect_snapshot(res)
+})
+
+test_that("Table 32 (gt) generation works with default values", {
+  result <- suppressWarnings(make_table_32_gtsum(advs = advs, adsl = adsl) %>% as_gt())
+  res <- expect_silent(as.data.frame(result))
   expect_snapshot(res)
 })
 
 
 test_that("Table 32 (gt) generation works with custom values", {
-  result <- suppressWarnings(make_table_32_gt(advs = advs, lbl_overall = "Total Population"))
+  result <- suppressWarnings(make_table_32_gtsum(advs = advs, adsl = adsl, lbl_overall = "Total Population") %>% as_gt())
 
-  res <- expect_silent(result[["_data"]])
+  res <- expect_silent(as.data.frame(result))
   expect_snapshot(res)
-})
+  })

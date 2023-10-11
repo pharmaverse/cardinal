@@ -48,10 +48,17 @@
       <60                        72 (53.7%)   83 (61.9%)     78 (59.1%)  
       >60                        62 (46.3%)   51 (38.1%)     54 (40.9%)  
 
-# Table 32 (gt) generation works with default values
+# Table 32 generation works with risk difference column
 
     Code
       res
     Output
-      NULL
+      Diastolic Blood Pressure   A: Drug X    B: Placebo   C: Combination   Risk Difference (%) (95% CI)
+      (Pa)                        (N=134)      (N=134)        (N=132)                 (N=268)           
+      ——————————————————————————————————————————————————————————————————————————————————————————————————
+      <60                        72 (53.7%)   83 (61.9%)     78 (59.1%)          8.2 (-3.6 - 20.0)      
+      >60                        62 (46.3%)   51 (38.1%)     54 (40.9%)          -8.2 (-20.0 - 3.6)     
+      >90                            0            0              0                0.0 (0.0 - 0.0)       
+      >110                           0            0              0                0.0 (0.0 - 0.0)       
+      >=120                          0            0              0                0.0 (0.0 - 0.0)       
 

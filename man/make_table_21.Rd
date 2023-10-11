@@ -2,8 +2,8 @@
 % Please edit documentation in R/fda-table_21.R
 \name{make_table_21}
 \alias{make_table_21}
-\title{FDA Table 21. Overview of Serious Adverse Events by Demographic Subgroup, Safety Population, Pooled
-Analysis (or Trial X)}
+\title{FDA Table 21. Overview of Serious Adverse Events by Demographic Subgroup, Safety Population,
+Pooled Analysis (or Trial X)}
 \usage{
 make_table_21(
   df,
@@ -12,6 +12,7 @@ make_table_21(
   arm_var = "ARM",
   vars = c("SEX", "AGEGR1", "RACE", "ETHNIC"),
   denom = c("N_s", "N_col", "n"),
+  lbl_overall = NULL,
   lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
   prune_0 = FALSE,
   annotations = NULL
@@ -32,6 +33,9 @@ make_table_21(
 subgroup/row counts), \code{"N_col"} (total \code{df} column counts), or \code{"n"} (total \code{df} overall patient count).
 Note that \code{df} is filtered to only include serious adverse events (\code{ASER == "Y"}).}
 
+\item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
+the given value as the column label.}
+
 \item{lbl_vars}{(\code{vector} of \code{character})\cr labels corresponding to variables in \code{vars} to print
 in the table. Labels should be ordered according to the order of variables in \code{vars}.}
 
@@ -41,9 +45,12 @@ in the table. Labels should be ordered according to the order of variables in \c
 annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
 use the annotation type as name and the desired string as value.}
 }
+\value{
+An \code{rtable} object.
+}
 \description{
-FDA Table 21. Overview of Serious Adverse Events by Demographic Subgroup, Safety Population, Pooled
-Analysis (or Trial X)
+FDA Table 21. Overview of Serious Adverse Events by Demographic Subgroup, Safety Population,
+Pooled Analysis (or Trial X)
 }
 \details{
 \itemize{

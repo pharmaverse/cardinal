@@ -2,7 +2,7 @@
 % Please edit documentation in R/fda-table_32.R
 \name{make_table_32}
 \alias{make_table_32}
-\alias{make_table_32_gt}
+\alias{make_table_32_gtsum}
 \title{FDA Table 32: Percentage of Patients With Maximum Diastolic Blood Pressure by Category of Blood Pressure
 Postbaseline, Safety Population, Pooled Analysis}
 \usage{
@@ -12,14 +12,17 @@ make_table_32(
   show_colcounts = TRUE,
   arm_var = "ARM",
   lbl_overall = NULL,
+  risk_diff = NULL,
   prune_0 = FALSE,
   annotations = NULL
 )
 
-make_table_32_gt(
+make_table_32_gtsum(
   advs,
+  adsl,
   alt_counts_df = NULL,
   arm_var = "ARM",
+  saffl_var = "SAFFL",
   lbl_overall = NULL
 )
 }
@@ -35,6 +38,17 @@ make_table_32_gt(
 \item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
 the given value as the column label.}
 
+\item{risk_diff}{(named \code{list})\cr list of settings to apply to add a risk difference column to the table.
+Defaults to \code{NULL} (no risk difference column added). See \code{\link[tern:add_riskdiff]{tern::add_riskdiff()}} for more details. List should
+contain the following elements:
+\itemize{
+\item \code{arm_x}: (required) the name of reference arm.
+\item \code{arm_y}: (required) the name of the arm to compare to the reference arm.
+\item \code{col_label}: (optional) label to use for the risk difference column. Defaults to
+\code{"Risk Difference (\%) (95\% CI)"}.
+\item \code{pct}: (optional) whether the output should be returned as percentages. Defaults to \code{TRUE}.
+}}
+
 \item{prune_0}{(\code{flag})\cr whether all-zero rows should be removed from the table.}
 
 \item{annotations}{(named \code{list} of \code{character})\cr list of annotations to add to the table. Valid
@@ -47,7 +61,7 @@ use the annotation type as name and the desired string as value.}
 }
 
 \itemize{
-\item \code{make_table_32_gt} returns a \code{tbl_summary} object
+\item \code{make_table_32_gtsum} returns a \code{gt} object
 }
 }
 \description{
@@ -70,7 +84,7 @@ flag variables are treated as \code{"N"}.
 \itemize{
 \item \code{make_table_32()}: Create FDA table 32 using functions from \code{rtables} and \code{tern}.
 
-\item \code{make_table_32_gt()}: Create FDA table 32 using functions from \code{gtsummary}.
+\item \code{make_table_32_gtsum()}: Create FDA table 32 using functions from \code{gtsummary}.
 
 }}
 \examples{
@@ -83,7 +97,7 @@ tbl
 adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
 advs <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "advs")
 
-tbl <- make_table_32_gt(advs = advs, alt_counts_df = adsl)
+tbl <- make_table_32_gtsum(advs = advs, alt_counts_df = adsl)
 tbl
 
 }

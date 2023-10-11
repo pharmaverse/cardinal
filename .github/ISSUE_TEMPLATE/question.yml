@@ -1,0 +1,12 @@
+---
+name: ❓ Question
+description: Question about usage or documentation
+title: "[Question]: <title>"
+labels: ["question"]
+projects: ["falcon"]
+body:
+  - type: textarea
+    attributes:
+      label: What is your question?
+    validations:
+      required: true

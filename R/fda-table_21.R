@@ -1,5 +1,5 @@
-#' FDA Table 21. Overview of Serious Adverse Events by Demographic Subgroup, Safety Population, Pooled
-#'   Analysis (or Trial X)
+#' FDA Table 21. Overview of Serious Adverse Events by Demographic Subgroup, Safety Population,
+#'   Pooled Analysis (or Trial X)
 #'
 #' @details
 #' * `df` must contain `SAFFL` and the variables specified by `vars` and `arm_var`.
@@ -13,6 +13,8 @@
 #'
 #' @inheritParams argument_convention
 #' @inheritParams a_count_occurrences_ser_ae
+#'
+#' @return An `rtable` object.
 #'
 #' @examples
 #' library(dplyr)
@@ -43,6 +45,7 @@ make_table_21 <- function(df,
                           arm_var = "ARM",
                           vars = c("SEX", "AGEGR1", "RACE", "ETHNIC"),
                           denom = c("N_s", "N_col", "n"),
+                          lbl_overall = NULL,
                           lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
                           prune_0 = FALSE,
                           annotations = NULL) {
@@ -52,12 +55,32 @@ make_table_21 <- function(df,
   df <- df %>%
     filter(SAFFL == "Y") %>%
     df_explicit_na()
-  sapply(vars, function(x) checkmate::assert_factor(df[[x]]))
+
+  # For percentages calculations in case of N_s, add the overall observations
+  denom <- match.arg(denom)
+  if (!is.null(lbl_overall) && denom == "N_s") {
+    df_ovrl <- df
+    df_ovrl[[arm_var]] <- lbl_overall
+    df <- rbind(df, df_ovrl)
+
+    if (!is.null(alt_counts_df)) {
+      alt_df_ovrl <- alt_counts_df
+      alt_df_ovrl[[arm_var]] <- lbl_overall
+      alt_counts_df <- rbind(alt_counts_df, alt_df_ovrl)
+    }
+  }
 
   alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
 
-  lyt <- basic_table_annot(show_colcounts, annotations) %>%
-    split_cols_by_arm(arm_var) %>%
+  lyt <- basic_table_annot(show_colcounts, annotations)
+
+  lyt <- if (!is.null(lbl_overall) && denom != "N_s") {
+    lyt %>% split_cols_by_arm(arm_var, lbl_overall)
+  } else {
+    lyt %>% split_cols_by_arm(arm_var)
+  }
+
+  lyt <- lyt %>%
     count_patients_with_event(
       "USUBJID",
       filters = c("AESER" = "Y"),
@@ -109,7 +132,7 @@ a_count_occurrences_ser_ae <- function(df,
 
   denom <- match.arg(denom)
   if (denom == "N_s" && is.null(df_denom)) {
-    stop("If using subgroup population counts, `df_denom` must be specified.")
+    stop("If using subgroup population counts, `df_denom` must be specified.") # nocov
   }
   dn <- switch(denom,
     N_s = lapply(

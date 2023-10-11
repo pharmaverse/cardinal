@@ -263,14 +263,14 @@
       4 "    M"          50 (37.3%)           48 (35.8%)            54 (40.9%)                152 (38.0%)                 FALSE              
       5 "    <Missing>"  16 (11.9%)           18 (13.4%)            16 (12.1%)                50 (12.5%)                  FALSE              
 
-# Table 02 generation (gt) works with default values
+# Table 02 generation (gtsum) works with default values
 
     Code
       res
     Output
       NULL
 
-# Table 02 generation (gt) works with custom values
+# Table 02 generation (gtsum) works with custom values
 
     Code
       res
@@ -284,7 +284,7 @@
     Output
       NULL
 
-# Table 02 generation (gt) works with some NA values
+# Table 02 generation (gtsum) works with some NA values
 
     Code
       res
