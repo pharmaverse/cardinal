@@ -2,9 +2,9 @@
 #'   Postbaseline, Safety Population, Pooled Analysis
 #'
 #' @details
-#' * `advs` must contain `SAFFL`, `USUBJID`, `AVISITN`, `PARAMCD`, `AVAL`, `AVALU`, and the variable
-#'   specified by `arm_var`.
-#' * If specified, `alt_counts_df` must contain variables `SAFFL`, `USUBJID`, and the variable specified by `arm_var`.
+#' * `advs` must contain `USUBJID`, `AVISITN`, `PARAMCD`, `AVAL`, `AVALU`, and the variables specified by
+#'   `arm_var` and `saffl_var`.
+#' * If specified, `alt_counts_df` must contain `USUBJID` and the variables specified by `arm_var` and `saffl_var`.
 #' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
 #'   flag variables are treated as `"N"`.
 #' * Columns are split by arm. Overall population column is excluded by default (see `lbl_overall` argument).
@@ -19,7 +19,11 @@ NULL
 #' @describeIn make_table_32 Create FDA table 32 using functions from `rtables` and `tern`.
 #'
 #' @return
+<<<<<<< HEAD
 #' * `make_table_32` returns an `rtables` table object.
+=======
+#' * `make_table_32` returns an `rtable` object.
+>>>>>>> 3a5898ea64ee10eaf0757c7c62caa05f3fd7a612
 #'
 #' @examples
 #' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
@@ -33,18 +37,19 @@ make_table_32 <- function(advs,
                           alt_counts_df = NULL,
                           show_colcounts = TRUE,
                           arm_var = "ARM",
+                          saffl_var = "SAFFL",
                           lbl_overall = NULL,
                           risk_diff = NULL,
                           prune_0 = FALSE,
                           annotations = NULL) {
   checkmate::assert_subset(c(
-    "SAFFL", "USUBJID", "AVISITN", "PARAMCD", "AVAL", "AVALU", arm_var
+    "USUBJID", "AVISITN", "PARAMCD", "AVAL", "AVALU", arm_var, saffl_var
   ), names(advs))
-  assert_flag_variables(advs, "SAFFL")
+  assert_flag_variables(advs, saffl_var)
 
   advs <- advs %>%
     filter(
-      SAFFL == "Y",
+      .data[[saffl_var]] == "Y",
       AVISITN >= 1,
       PARAMCD == "DIABP"
     ) %>%
@@ -60,7 +65,7 @@ make_table_32 <- function(advs,
       GE120 = with_label(MAX_DIABP >= 120, ">=120")
     )
 
-  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
+  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var, saffl_var)
 
   lyt <- basic_table_annot(show_colcounts, annotations) %>%
     split_cols_by_arm(arm_var, lbl_overall, risk_diff) %>%
@@ -77,21 +82,26 @@ make_table_32 <- function(advs,
   tbl
 }
 
-
-
 #' @describeIn make_table_32 Create FDA table 32 using functions from `gtsummary`.
 #'
 #' @return
+<<<<<<< HEAD
 #' * `make_table_32_gtsum` returns a `gt` object
 #'
 #' @examples
 #' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
 #' advs <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "advs")
 #'
+=======
+#' * `make_table_32_gtsum` returns a `tbl_summary` object.
+#'
+#' @examples
+>>>>>>> 3a5898ea64ee10eaf0757c7c62caa05f3fd7a612
 #' tbl <- make_table_32_gtsum(advs = advs, alt_counts_df = adsl)
 #' tbl
 #'
 #' @export
+<<<<<<< HEAD
 
 make_table_32_gtsum <- function(advs,
                                 adsl,
@@ -101,12 +111,25 @@ make_table_32_gtsum <- function(advs,
                              lbl_overall = NULL) {
   checkmate::assert_subset(c(
     saffl_var, "USUBJID", "AVISITN", "PARAMCD", "AVAL", "AVALU", arm_var
+=======
+make_table_32_gtsum <- function(advs,
+                                alt_counts_df = NULL,
+                                arm_var = "ARM",
+                                saffl_var = "SAFFL",
+                                lbl_overall = NULL) {
+  checkmate::assert_subset(c(
+    "USUBJID", "AVISITN", "PARAMCD", "AVAL", "AVALU", arm_var, saffl_var
+>>>>>>> 3a5898ea64ee10eaf0757c7c62caa05f3fd7a612
   ), names(advs))
   assert_flag_variables(advs, saffl_var)
 
   advs <- advs %>%
     filter(
+<<<<<<< HEAD
       saffl_var == "Y",
+=======
+      .data[[saffl_var]] == "Y",
+>>>>>>> 3a5898ea64ee10eaf0757c7c62caa05f3fd7a612
       AVISITN >= 1,
       PARAMCD == "DIABP"
     ) %>%
@@ -121,19 +144,29 @@ make_table_32_gtsum <- function(advs,
       G110 = with_label(MAX_DIABP > 110, ">110"),
       GE120 = with_label(MAX_DIABP >= 120, ">=120")
     ) %>%
+<<<<<<< HEAD
     distinct("USUBJID", .keep_all = TRUE) %>%
     select(all_of(c("USUBJID", saffl_var, "L60", "G60", "G90", "G110", "GE120", arm_var)))
 
   adsl_pop <- adsl %>% select("USUBJID", saffl_var)
+=======
+    distinct(USUBJID, .keep_all = TRUE) %>%
+    select(all_of(c("USUBJID", "L60", "G60", "G90", "G110", "GE120", arm_var, saffl_var)))
+
+  adsl_pop <- adsl %>% select(all_of(c("USUBJID", saffl_var)))
+>>>>>>> 3a5898ea64ee10eaf0757c7c62caa05f3fd7a612
 
   advs <-
     adsl_pop %>%
     left_join(advs, by = c("USUBJID", saffl_var)) %>%
+<<<<<<< HEAD
     filter(saffl_var == "Y") %>%
+=======
+>>>>>>> 3a5898ea64ee10eaf0757c7c62caa05f3fd7a612
     select(L60, G60, G90, G110, GE120, arm_var)
 
 
-  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
+  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var, saffl_var)
 
   tbl <- advs %>%
     tbl_summary(

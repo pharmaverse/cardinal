@@ -2,8 +2,8 @@
 #'   Pooled Analysis (or Trial X)
 #'
 #' @details
-#' * `df` must contain `SAFFL` and the variables specified by `vars` and `arm_var`.
-#' * If specified, `alt_counts_df` must contain `SAFFL`, `USUBJID`, and the variable specified by `arm_var`.
+#' * `df` must contain the variables specified by `vars`, `arm_var`, and `saffl_var`.
+#' * If specified, `alt_counts_df` must contain `USUBJID` and the variables specified by `arm_var` and `saffl_var`.
 #' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
 #'   flag variables are treated as `"N"`.
 #' * Columns are split by arm.
@@ -43,17 +43,18 @@ make_table_21 <- function(df,
                           alt_counts_df = NULL,
                           show_colcounts = TRUE,
                           arm_var = "ARM",
+                          saffl_var = "SAFFL",
                           vars = c("SEX", "AGEGR1", "RACE", "ETHNIC"),
                           denom = c("N_s", "N_col", "n"),
                           lbl_overall = NULL,
                           lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
                           prune_0 = FALSE,
                           annotations = NULL) {
-  checkmate::assert_subset(c("SAFFL", vars, arm_var), names(df))
-  assert_flag_variables(df, c("SAFFL", "ASER"))
+  checkmate::assert_subset(c(vars, arm_var, saffl_var), names(df))
+  assert_flag_variables(df, c(saffl_var, "ASER"))
 
   df <- df %>%
-    filter(SAFFL == "Y") %>%
+    filter(.data[[saffl_var]] == "Y") %>%
     df_explicit_na()
 
   # For percentages calculations in case of N_s, add the overall observations
@@ -70,7 +71,7 @@ make_table_21 <- function(df,
     }
   }
 
-  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
+  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var, saffl_var)
 
   lyt <- basic_table_annot(show_colcounts, annotations)
 

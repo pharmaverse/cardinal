@@ -2,9 +2,9 @@
 #'   Preferred Term, Safety Population, Pooled Analysis (or Trial X)
 #'
 #' @details
-#' * `adae` must contain the variables `SAFFL`, `USUBJID`, `AEBODSYS`, `AESER`, and the variables specified by
-#'   `arm_var`, `fmqsc_var`, `fmqnam_var`, and `pref_var`.
-#' * If specified, `alt_counts_df` must contain variables `SAFFL` and `USUBJID`.
+#' * `adae` must contain the variables `USUBJID`, `AEBODSYS`, `AESER`, and the variables specified by
+#'   `arm_var`, `saffl_var`, `fmqsc_var`, `fmqnam_var`, and `pref_var`.
+#' * If specified, `alt_counts_df` must contain `USUBJID` and the variables specified by `arm_var` and `saffl_var`.
 #' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
 #'   flag variables are treated as `"N"`.
 #' * Columns are split by arm. Overall population column is excluded by default (see `lbl_overall` argument).
@@ -36,6 +36,7 @@ make_table_34 <- function(adae,
                           alt_counts_df = NULL,
                           show_colcounts = TRUE,
                           arm_var = "ARM",
+                          saffl_var = "SAFFL",
                           fmqsc_var = "FMQ01SC",
                           fmqnam_var = "FMQ01NAM",
                           fmq_scope = "NARROW",
@@ -45,16 +46,16 @@ make_table_34 <- function(adae,
                           prune_0 = TRUE,
                           na_level = "<Missing>",
                           annotations = NULL) {
-  checkmate::assert_subset(c("SAFFL", "USUBJID", "AEBODSYS", arm_var, fmqsc_var, fmqnam_var, pref_var), names(adae))
-  assert_flag_variables(adae, "SAFFL")
+  checkmate::assert_subset(c("USUBJID", "AEBODSYS", arm_var, saffl_var, fmqsc_var, fmqnam_var, pref_var), names(adae))
+  assert_flag_variables(adae, saffl_var)
   checkmate::assert_subset(toupper(fmq_scope), c("NARROW", "BROAD"))
 
   adae <- adae %>%
-    filter(SAFFL == "Y", AESER == "Y", adae[[fmqsc_var]] == fmq_scope) %>%
+    filter(.data[[saffl_var]] == "Y", AESER == "Y", .data[[fmqsc_var]] == fmq_scope) %>%
     df_explicit_na(na_level = na_level)
   adae[[fmqnam_var]] <- with_label(adae[[fmqnam_var]], paste0("FMQ (", tools::toTitleCase(tolower(fmq_scope)), ")"))
 
-  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
+  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var, saffl_var)
 
   lyt <- basic_table_annot(show_colcounts, annotations) %>%
     split_cols_by_arm(arm_var, lbl_overall, risk_diff) %>%

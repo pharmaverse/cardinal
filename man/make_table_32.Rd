@@ -11,6 +11,7 @@ make_table_32(
   alt_counts_df = NULL,
   show_colcounts = TRUE,
   arm_var = "ARM",
+  saffl_var = "SAFFL",
   lbl_overall = NULL,
   risk_diff = NULL,
   prune_0 = FALSE,
@@ -35,6 +36,8 @@ make_table_32_gtsum(
 
 \item{arm_var}{(\code{character})\cr arm variable used to split table into columns.}
 
+\item{saffl_var}{(\code{character})\cr flag variable used to indicate inclusion in safety population.}
+
 \item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
 the given value as the column label.}
 
@@ -57,11 +60,15 @@ use the annotation type as name and the desired string as value.}
 }
 \value{
 \itemize{
-\item \code{make_table_32} returns an \code{rtables} table object.
+\item \code{make_table_32} returns an \code{rtable} object.
 }
 
 \itemize{
+<<<<<<< HEAD
 \item \code{make_table_32_gtsum} returns a \code{gt} object
+=======
+\item \code{make_table_32_gtsum} returns a \code{tbl_summary} object.
+>>>>>>> 3a5898ea64ee10eaf0757c7c62caa05f3fd7a612
 }
 }
 \description{
@@ -70,9 +77,9 @@ Postbaseline, Safety Population, Pooled Analysis
 }
 \details{
 \itemize{
-\item \code{advs} must contain \code{SAFFL}, \code{USUBJID}, \code{AVISITN}, \code{PARAMCD}, \code{AVAL}, \code{AVALU}, and the variable
-specified by \code{arm_var}.
-\item If specified, \code{alt_counts_df} must contain variables \code{SAFFL}, \code{USUBJID}, and the variable specified by \code{arm_var}.
+\item \code{advs} must contain \code{USUBJID}, \code{AVISITN}, \code{PARAMCD}, \code{AVAL}, \code{AVALU}, and the variables specified by
+\code{arm_var} and \code{saffl_var}.
+\item If specified, \code{alt_counts_df} must contain \code{USUBJID} and the variables specified by \code{arm_var} and \code{saffl_var}.
 \item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
 flag variables are treated as \code{"N"}.
 \item Columns are split by arm. Overall population column is excluded by default (see \code{lbl_overall} argument).
@@ -94,9 +101,12 @@ advs <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "advs")
 tbl <- make_table_32(advs = advs, alt_counts_df = adsl)
 tbl
 
+<<<<<<< HEAD
 adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
 advs <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "advs")
 
+=======
+>>>>>>> 3a5898ea64ee10eaf0757c7c62caa05f3fd7a612
 tbl <- make_table_32_gtsum(advs = advs, alt_counts_df = adsl)
 tbl
 

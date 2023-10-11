@@ -41,6 +41,7 @@ Required variables:
 -   **`alt_counts_df`** (if specified): `SAFFL`, `USUBJID`, and the variable specified by `arm_var`.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 | Argument         | Description                                                                                                                                                                                                                                            | Default      |
 |:--------------|:------------------------------------------|:--------------|
 | `advs`           | (`data.frame`) Dataset (typically ADVS) required to build table.                                                                                                                                                                                       | *No default* |
@@ -95,6 +96,8 @@ Required variables:
 | `arm_var`       | (`character`) Arm variable used to split table into columns.                                                       | `"ARM"`              |
 | `lbl_overall`   | (`character`) If specified, an overall column will be added to the table with the given value as the column label. | `"Total Population"` |
 =======
+=======
+>>>>>>> 3a5898ea64ee10eaf0757c7c62caa05f3fd7a612
 +------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
 | Argument         | Description                                                                                                                                                                                                                                                  | Default      |
 +:=================+:=============================================================================================================================================================================================================================================================+:=============+
@@ -122,7 +125,54 @@ Required variables:
 +------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
 | `annotations`    | (named `list` of `character`) List of annotations to add to the table. Valid annotation types are `title`, `subtitles`, `main_footer`, and `prov_footer.` Each name-value pair should use the annotation type as name and the desired string as value.       | `NULL`       |
 +------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
+<<<<<<< HEAD
 >>>>>>> main
+=======
+
+Source code for this function is available [here](https://github.com/pharmaverse/falcon/blob/main/R/fda-table_32.R).
+
+## gtsummary Table
+
+```{r tbl_gtsum, message=FALSE, warning=FALSE}
+# Load Libraries & Data
+library(scda)
+library(falcon)
+library(dplyr)
+library(gt)
+library(gtsummary)
+library(tern)
+
+adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
+advs <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "advs")
+
+# Output table
+tbl <- make_table_32_gtsum(advs = advs, alt_counts_df = adsl)
+tbl
+```
+
+## gtsummary Table Setup
+
+```{r tbl_gtsum, eval=FALSE, echo=TRUE}
+```
+
+## Function Details: `make_table_32_gtsum`
+
+### `make_table_32_gtsum()`
+
+------------------------------------------------------------------------
+
+Required variables:
+
+-   **`advs`**: `SAFFL`, `USUBJID`, `AVISITN`, `PARAMCD`, `AVAL`, `AVALU`, and the variables specified by `arm_var`.
+-   **`alt_counts_df`** (if specified): `SAFFL`, `USUBJID`, and the variable specified by `arm_var`.
+
+| Argument        | Description                                                                                                        | Default              |
+|:-----------------|:----------------------------------|:-----------------|
+| `advs`          | (`data.frame`) Dataset (typically ADVS) required to build table.                                                   | *No default*         |
+| `alt_counts_df` | (`character`) Alternative dataset used only to calculate column counts.                                            | `NULL`               |
+| `arm_var`       | (`character`) Arm variable used to split table into columns.                                                       | `"ARM"`              |
+| `lbl_overall`   | (`character`) If specified, an overall column will be added to the table with the given value as the column label. | `"Total Population"` |
+>>>>>>> 3a5898ea64ee10eaf0757c7c62caa05f3fd7a612
 
 Source code for this function is available [here](https://github.com/pharmaverse/falcon/blob/main/R/fda-table_32.R).
 :::

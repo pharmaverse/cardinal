@@ -8,6 +8,7 @@ make_table_08(
   adae,
   adex,
   arm_var = "ARM",
+  saffl_var = "SAFFL",
   dth_vars = c("DTHCAUS", "DTHCAT"),
   lbl_dth_vars = c("Cause of Death\\nMedDRA\\nPreferred Term",
     "Cause of Death\\nVerbatim Term"),
@@ -22,6 +23,8 @@ make_table_08(
 
 \item{arm_var}{(\code{character})\cr arm variable used to split table into columns.}
 
+\item{saffl_var}{(\code{character})\cr flag variable used to indicate inclusion in safety population.}
+
 \item{dth_vars}{(\code{vector} of \code{character})\cr additional death variables from \code{adae} to include in the table.}
 
 \item{lbl_dth_vars}{(\code{vector} of \code{character})\cr labels corresponding to variables in \code{dth_vars} to print
@@ -34,16 +37,17 @@ annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \co
 use the annotation type as name and the desired string as value.}
 }
 \value{
-An \code{rtable} object.
+A \code{listing_df} object.
 }
 \description{
 FDA Table 8: All Individual Patient Deaths, Safety Population, Pooled Analyses
 }
 \details{
 \itemize{
-\item \code{adae} must contain \code{SAFFL}, \code{USUBJID}, \code{AGE}, \code{SEX}, \code{AESDTH}, \code{DTHADY}, and the variables specified by
-\code{dth_vars} and \code{arm_var}.
-\item \code{adex} must contain \code{SAFFL}, \code{USUBJID}, \code{PARAMCD}, \code{TRTSDT}, \code{TRTEDT}, \code{AVAL}, and \code{AVALU}.
+\item \code{adae} must contain \code{USUBJID}, \code{AGE}, \code{SEX}, \code{AESDTH}, \code{DTHADY}, and the variables specified by
+\code{dth_vars}, \code{arm_var}, and \code{saffl_var}.
+\item \code{adex} must contain \code{USUBJID}, \code{PARAMCD}, \code{TRTSDT}, \code{TRTEDT}, \code{AVAL}, \code{AVALU}, and the variables specified
+by \code{arm_var} and \code{saffl_var}.
 \item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
 flag variables are treated as \code{"N"}.
 }
