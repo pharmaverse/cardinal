@@ -2,6 +2,7 @@
 % Please edit documentation in R/fda-table_32.R
 \name{make_table_32}
 \alias{make_table_32}
+\alias{make_table_32_gtsum}
 \title{FDA Table 32: Percentage of Patients With Maximum Diastolic Blood Pressure by Category of Blood Pressure
 Postbaseline, Safety Population, Pooled Analysis}
 \usage{
@@ -15,6 +16,15 @@ make_table_32(
   risk_diff = NULL,
   prune_0 = FALSE,
   annotations = NULL
+)
+
+make_table_32_gtsum(
+  advs,
+  adsl,
+  alt_counts_df = NULL,
+  arm_var = "ARM",
+  saffl_var = "SAFFL",
+  lbl_overall = NULL
 )
 }
 \arguments{
@@ -49,7 +59,13 @@ annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \co
 use the annotation type as name and the desired string as value.}
 }
 \value{
-An \code{rtable} object.
+\itemize{
+\item \code{make_table_32} returns an \code{rtables} table object.
+}
+
+\itemize{
+\item \code{make_table_32_gtsum} returns a \code{gt} object
+}
 }
 \description{
 FDA Table 32: Percentage of Patients With Maximum Diastolic Blood Pressure by Category of Blood Pressure
@@ -59,6 +75,7 @@ Postbaseline, Safety Population, Pooled Analysis
 \itemize{
 \item \code{advs} must contain \code{USUBJID}, \code{AVISITN}, \code{PARAMCD}, \code{AVAL}, \code{AVALU}, and the variables specified by
 \code{arm_var} and \code{saffl_var}.
+\item \code{adsl} must contain \code{USUBJID}, and the variables specified by \code{saffl_var}.
 \item If specified, \code{alt_counts_df} must contain \code{USUBJID} and the variables specified by \code{arm_var} and \code{saffl_var}.
 \item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
 flag variables are treated as \code{"N"}.
@@ -67,11 +84,23 @@ flag variables are treated as \code{"N"}.
 \item All-zero rows are not removed by default (see \code{prune_0} argument).
 }
 }
+\section{Functions}{
+\itemize{
+\item \code{make_table_32()}: Create FDA table 32 using functions from \code{rtables} and \code{tern}.
+
+\item \code{make_table_32_gtsum()}: Create FDA table 32 using functions from \code{gtsummary}.
+
+}}
 \examples{
 adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
 advs <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "advs")
 
 tbl <- make_table_32(advs = advs, alt_counts_df = adsl)
+tbl
+
+adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
+advs <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "advs")
+tbl <- make_table_32_gtsum(advs = advs, adsl = adsl, alt_counts_df = adsl)
 tbl
 
 }
