@@ -26,8 +26,6 @@ use the annotation type as name and the desired string as value.}
 
 \item{fmq_scope}{(\code{character})\cr FMQ scope ("NARROW" or "BROAD") to output in table.}
 
-<<<<<<< HEAD
-=======
 \item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
 
 \item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
@@ -40,7 +38,6 @@ in the table. Labels should be ordered according to the order of variables in \c
 
 \item{na_level}{(\code{character})\cr string to represent missing values.}
 
->>>>>>> 3a5898ea64ee10eaf0757c7c62caa05f3fd7a612
 \item{na_rm}{(\code{flag})\cr whether \code{NA} levels should be removed from the table.}
 
 \item{pref_var}{(\code{character})\cr preferred term variable from \code{adae} to include in the table.}

@@ -61,21 +61,4 @@
       >90                            0            0              0                0.0 (0.0 - 0.0)       
       >110                           0            0              0                0.0 (0.0 - 0.0)       
       >=120                          0            0              0                0.0 (0.0 - 0.0)       
-<<<<<<< HEAD
-=======
-
-# Table 32 (gtsum) generation works with default values
-
-    Code
-      res
-    Output
-      NULL
-
-# Table 32 (gtsum) generation works with custom values
-
-    Code
-      res
-    Output
-      NULL
->>>>>>> 3a5898ea64ee10eaf0757c7c62caa05f3fd7a612
 

@@ -42,23 +42,20 @@ test_that("Table 32 generation works with risk difference column", {
   result <- make_table_32(advs, adsl, risk_diff = risk_diff)
 
   res <- expect_silent(result)
-<<<<<<< HEAD
-=======
   expect_snapshot(res)
 })
 
 test_that("Table 32 (gtsum) generation works with default values", {
-  result <- suppressWarnings(make_table_32_gtsum(advs = advs))
+  result <- suppressWarnings(make_table_32_gtsum(advs = advs, adsl = adsl))
 
   res <- expect_silent(result[["_data"]])
   expect_snapshot(res)
 })
 
 test_that("Table 32 (gtsum) generation works with custom values", {
-  result <- suppressWarnings(make_table_32_gtsum(advs = advs, lbl_overall = "Total Population"))
+  result <- suppressWarnings(make_table_32_gtsum(advs = advs, adsl = adsl, lbl_overall = "Total Population"))
 
   res <- expect_silent(result[["_data"]])
->>>>>>> 3a5898ea64ee10eaf0757c7c62caa05f3fd7a612
   expect_snapshot(res)
 })
 
