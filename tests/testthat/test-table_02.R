@@ -144,7 +144,6 @@ test_that("Table 02 generation (gtsum) works with custom values", {
 
   res <- expect_silent(as.data.frame(result))
   expect_snapshot(res)
-
 })
 
 test_that("Table 02 generation (gtsum) works with some NA values", {

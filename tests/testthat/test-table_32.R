@@ -71,4 +71,4 @@ test_that("Table 32 (gt) generation works with custom values", {
 
   res <- expect_silent(as.data.frame(result))
   expect_snapshot(res)
-  })
+})
