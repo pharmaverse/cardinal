@@ -47,17 +47,13 @@ tbl
 
 ### `make_table_04()`
 
-
 ------------------------------------------------------------------------
 
-
-
 Required variables:
-
 -   **`df`**: `USUBJID`, `EOTSTT`, `DCTREAS`, `EOSSTT`, `DCSREAS` and the variables specified by `arm_var` and `pop_var`.
 -   **`alt_counts_df`** (if specified): `USUBJID`, and the variable specified by `arm_var` and `pop_var`.
 
-| Argument        | Description                                                                                                                                                                                                                                            | Default                                     |
+| Argument        | Description                                                                                                                                                                                                                                            | Default      |
 |:------------------|:---------------------------------|:------------------|
 | `df`            | (`data.frame`) Dataset (typically ADSL) required to build table.                                                                                                                                                                                       | *No default*                                |
 | `alt_counts_df` | (`character`) Alternative dataset used only to calculate column counts.                                                                                                                                                                                | `NULL`                                      |
@@ -69,6 +65,4 @@ Required variables:
 | `annotations`   | (named `list` of `character`) List of annotations to add to the table. Valid annotation types are `title`, `subtitles`, `main_footer`, and `prov_footer.` Each name-value pair should use the annotation type as name and the desired string as value. | `NULL`                                      |
 
 Source code for this function is available [here](https://github.com/pharmaverse/falcon/blob/main/R/fda-table_04.R).
-
-
 :::
