@@ -5,6 +5,9 @@
 #'
 #' @inheritParams argument_convention
 #'
+#' @return An `rtables` `PreDataTableLayouts` object suitable for passing to further layout functions, and
+#'   to `build_table`.
+#'
 #' @examples
 #' lyt <- basic_table_annot(annotations = list(title = "Title", main_footer = "Main Footer"))
 #' rtables::build_table(lyt, df = data.frame())
@@ -28,6 +31,9 @@ basic_table_annot <- function(show_colcounts = TRUE, annotations = NULL) {
 #' @inheritParams argument_convention
 #' @param lyt (`rtables` layout object)\cr Layout object pre-data used for tabulation.
 #'
+#' @return An `rtables` `PreDataTableLayouts` object suitable for passing to further layout functions, and
+#'   to `build_table`.
+#'
 #' @examples
 #' library(magrittr)
 #'
@@ -37,30 +43,44 @@ basic_table_annot <- function(show_colcounts = TRUE, annotations = NULL) {
 #' rtables::build_table(lyt, df = adsl)
 #'
 #' @export
-split_cols_by_arm <- function(lyt, arm_var = "ARM", lbl_overall = NULL) {
-  lyt <- lyt %>% split_cols_by(arm_var)
+split_cols_by_arm <- function(lyt, arm_var = "ARM", lbl_overall = NULL, risk_diff = NULL) {
+  spl_fun <- if (is.null(risk_diff)) {
+    NULL
+  } else {
+    add_riskdiff(
+      arm_x = risk_diff$arm_x,
+      arm_y = risk_diff$arm_y,
+      col_label = if ("col_label" %in% names(risk_diff)) risk_diff$col_label else formals(add_riskdiff)$col_label,
+      pct = if ("pct" %in% names(risk_diff)) risk_diff$pct else TRUE
+    )
+  }
+
+  lyt <- lyt %>% split_cols_by(arm_var, split_fun = spl_fun)
   if (!is.null(lbl_overall)) lyt %>% add_overall_col(lbl_overall) else lyt
 }
 
 #' Pre-Process `alt_counts_df` for Safety Population
 #'
-#' If `alt_counts_df` is not `NULL`, will check for required variables and filter
-#' to include only safety population, then apply [`tern::df_explicit_na()`].
+#' If `alt_counts_df` is not `NULL`, will check for required variables (`arm_var`) and filter
+#' to include only safety population (`saffl_var`, if specified), then apply [`tern::df_explicit_na()`].
 #'
 #' @inheritParams argument_convention
+#'
+#' @return A `data.frame` (modified `alt_counts_df`) or `NULL`.
 #'
 #' @examples
 #' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
 #' alt_counts_df_preproc(adsl)
 #'
 #' @export
-alt_counts_df_preproc <- function(alt_counts_df, arm_var = "ARM") {
+alt_counts_df_preproc <- function(alt_counts_df, arm_var = "ARM", saffl_var = NULL) {
   if (!is.null(alt_counts_df)) {
-    checkmate::assert_subset(c("SAFFL", "USUBJID", arm_var), names(alt_counts_df))
-    assert_flag_variables(alt_counts_df, "SAFFL")
-    alt_counts_df %>%
-      filter(SAFFL == "Y") %>%
-      df_explicit_na()
+    checkmate::assert_subset(c("USUBJID", arm_var, saffl_var), names(alt_counts_df))
+    if (!is.null(saffl_var)) {
+      assert_flag_variables(alt_counts_df, saffl_var)
+      alt_counts_df <- alt_counts_df %>% filter(.data[[saffl_var]] == "Y")
+    }
+    alt_counts_df %>% df_explicit_na()
   }
 }
 
@@ -71,6 +91,8 @@ alt_counts_df_preproc <- function(alt_counts_df, arm_var = "ARM") {
 #'
 #' @inheritParams argument_convention
 #' @param flag_vars (`vector` of `character`)\cr names of flag variables within `df` to check.
+#'
+#' @return A `logical` indicating whether the given flag variables (`flag_vars`) in `df` are formatted correctly.
 #'
 #' @examples
 #' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")

@@ -9,12 +9,14 @@ make_table_05(
   alt_counts_df = NULL,
   show_colcounts = TRUE,
   arm_var = "ARM",
+  saffl_var = "SAFFL",
   id_var = "USUBJID",
   trtsdtm_var = "TRTSDTM",
   trtedtm_var = "TRTEDTM",
   u_trtdur = "days",
   lbl_trtdur = paste("Duration of Treatment,", u_trtdur),
   lbl_overall = NULL,
+  risk_diff = NULL,
   prune_0 = FALSE,
   annotations = NULL
 )
@@ -27,6 +29,8 @@ make_table_05(
 \item{show_colcounts}{(\code{flag})\cr whether column counts should be printed.}
 
 \item{arm_var}{(\code{character})\cr arm variable used to split table into columns.}
+
+\item{saffl_var}{(\code{character})\cr flag variable used to indicate inclusion in safety population.}
 
 \item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
 
@@ -42,20 +46,34 @@ and \code{"years"}.}
 \item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
 the given value as the column label.}
 
+\item{risk_diff}{(named \code{list})\cr list of settings to apply to add a risk difference column to the table.
+Defaults to \code{NULL} (no risk difference column added). See \code{\link[tern:add_riskdiff]{tern::add_riskdiff()}} for more details. List should
+contain the following elements:
+\itemize{
+\item \code{arm_x}: (required) the name of reference arm.
+\item \code{arm_y}: (required) the name of the arm to compare to the reference arm.
+\item \code{col_label}: (optional) label to use for the risk difference column. Defaults to
+\code{"Risk Difference (\%) (95\% CI)"}.
+\item \code{pct}: (optional) whether the output should be returned as percentages. Defaults to \code{TRUE}.
+}}
+
 \item{prune_0}{(\code{flag})\cr whether all-zero rows should be removed from the table.}
 
 \item{annotations}{(named \code{list} of \code{character})\cr list of annotations to add to the table. Valid
 annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
 use the annotation type as name and the desired string as value.}
 }
+\value{
+An \code{rtable} object.
+}
 \description{
 FDA Table 5: Duration of Treatment Exposure, Safety Population, Pooled Analyses
 }
 \details{
 \itemize{
-\item \code{df} must contain \code{SAFFL}, \code{USUBJID}, and the variables specified by \code{arm_var}, \code{id_var}, \code{trtsdtm_var},
+\item \code{df} must contain \code{USUBJID} and the variables specified by \code{arm_var}, \code{saffl_var}, \code{id_var}, \code{trtsdtm_var},
 and \code{trtedtm_var}.
-\item If specified, \code{alt_counts_df} must contain \code{SAFFL}, \code{USUBJID}, and the variable specified by \code{arm_var}.
+\item If specified, \code{alt_counts_df} must contain \code{USUBJID} and the variables specified by \code{arm_var} and \code{saffl_var}.
 \item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
 flag variables are treated as \code{"N"}.
 \item Columns are split by arm. Overall population column is excluded by default (see \code{lbl_overall} argument).

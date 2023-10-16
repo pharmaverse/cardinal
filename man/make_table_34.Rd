@@ -10,11 +10,13 @@ make_table_34(
   alt_counts_df = NULL,
   show_colcounts = TRUE,
   arm_var = "ARM",
+  saffl_var = "SAFFL",
   fmqsc_var = "FMQ01SC",
   fmqnam_var = "FMQ01NAM",
   fmq_scope = "NARROW",
-  pref_var = "AETERM",
+  pref_var = "AEDECOD",
   lbl_overall = NULL,
+  risk_diff = NULL,
   prune_0 = TRUE,
   na_level = "<Missing>",
   annotations = NULL
@@ -29,6 +31,8 @@ make_table_34(
 
 \item{arm_var}{(\code{character})\cr arm variable used to split table into columns.}
 
+\item{saffl_var}{(\code{character})\cr flag variable used to indicate inclusion in safety population.}
+
 \item{fmqsc_var}{(\code{character})\cr FMQ scope variable to use in table.}
 
 \item{fmqnam_var}{(\code{character})\cr FMQ reference name variable to use in table.}
@@ -39,6 +43,17 @@ make_table_34(
 
 \item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
 the given value as the column label.}
+
+\item{risk_diff}{(named \code{list})\cr list of settings to apply to add a risk difference column to the table.
+Defaults to \code{NULL} (no risk difference column added). See \code{\link[tern:add_riskdiff]{tern::add_riskdiff()}} for more details. List should
+contain the following elements:
+\itemize{
+\item \code{arm_x}: (required) the name of reference arm.
+\item \code{arm_y}: (required) the name of the arm to compare to the reference arm.
+\item \code{col_label}: (optional) label to use for the risk difference column. Defaults to
+\code{"Risk Difference (\%) (95\% CI)"}.
+\item \code{pct}: (optional) whether the output should be returned as percentages. Defaults to \code{TRUE}.
+}}
 
 \item{prune_0}{(\code{flag})\cr whether all-zero rows should be removed from the table.}
 
@@ -54,9 +69,9 @@ Preferred Term, Safety Population, Pooled Analysis (or Trial X)
 }
 \details{
 \itemize{
-\item \code{adae} must contain the variables \code{SAFFL}, \code{USUBJID}, \code{AEBODSYS}, \code{AESER}, and the variables specified by
-\code{arm_var}, \code{fmqsc_var}, \code{fmqnam_var}, and \code{pref_var}.
-\item If specified, \code{alt_counts_df} must contain variables \code{SAFFL} and \code{USUBJID}.
+\item \code{adae} must contain the variables \code{USUBJID}, \code{AEBODSYS}, \code{AESER}, and the variables specified by
+\code{arm_var}, \code{saffl_var}, \code{fmqsc_var}, \code{fmqnam_var}, and \code{pref_var}.
+\item If specified, \code{alt_counts_df} must contain \code{USUBJID} and the variables specified by \code{arm_var} and \code{saffl_var}.
 \item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
 flag variables are treated as \code{"N"}.
 \item Columns are split by arm. Overall population column is excluded by default (see \code{lbl_overall} argument).

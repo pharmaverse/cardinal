@@ -10,10 +10,12 @@ make_table_10(
   alt_counts_df = NULL,
   show_colcounts = TRUE,
   arm_var = "ARM",
+  saffl_var = "SAFFL",
   fmqsc_var = "FMQ01SC",
   fmqnam_var = "FMQ01NAM",
   fmq_scope = "NARROW",
   lbl_overall = NULL,
+  risk_diff = NULL,
   prune_0 = TRUE,
   na_level = "<Missing>",
   annotations = NULL
@@ -28,6 +30,8 @@ make_table_10(
 
 \item{arm_var}{(\code{character})\cr arm variable used to split table into columns.}
 
+\item{saffl_var}{(\code{character})\cr flag variable used to indicate inclusion in safety population.}
+
 \item{fmqsc_var}{(\code{character})\cr FMQ scope variable to use in table.}
 
 \item{fmqnam_var}{(\code{character})\cr FMQ reference name variable to use in table.}
@@ -37,6 +41,17 @@ make_table_10(
 \item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
 the given value as the column label.}
 
+\item{risk_diff}{(named \code{list})\cr list of settings to apply to add a risk difference column to the table.
+Defaults to \code{NULL} (no risk difference column added). See \code{\link[tern:add_riskdiff]{tern::add_riskdiff()}} for more details. List should
+contain the following elements:
+\itemize{
+\item \code{arm_x}: (required) the name of reference arm.
+\item \code{arm_y}: (required) the name of the arm to compare to the reference arm.
+\item \code{col_label}: (optional) label to use for the risk difference column. Defaults to
+\code{"Risk Difference (\%) (95\% CI)"}.
+\item \code{pct}: (optional) whether the output should be returned as percentages. Defaults to \code{TRUE}.
+}}
+
 \item{prune_0}{(\code{flag})\cr whether all-zero rows should be removed from the table.}
 
 \item{na_level}{(\code{character})\cr string to represent missing values.}
@@ -45,17 +60,20 @@ the given value as the column label.}
 annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
 use the annotation type as name and the desired string as value.}
 }
+\value{
+An \code{rtable} object.
+}
 \description{
 FDA Table 10: Patients With Serious Adverse Events by System Organ Class and
 FDA Medical Query (Narrow), Safety Population, Pooled Analyses
 }
 \details{
 \itemize{
-\item \code{adae} must contain the variables \code{SAFFL}, \code{USUBJID}, \code{AEBODSYS}, \code{AESER}, and the variables specified by
-\code{arm_var}, \code{fmqsc_var}, and \code{fmqnam_var}.
+\item \code{adae} must contain the variables \code{USUBJID}, \code{AEBODSYS}, \code{AESER}, and the variables specified by
+\code{arm_var}, \code{saffl_var}, \code{fmqsc_var}, and \code{fmqnam_var}.
+\item If specified, \code{alt_counts_df} must contain \code{USUBJID} and the variables specified by \code{arm_var} and \code{saffl_var}.
 \item \code{fmqsc_var} must contain "BROAD" or "NARROW" values, one of which will be displayed in the table. Narrow is
 selected by default (see \code{fmq_scope} argument).
-\item If specified, \code{alt_counts_df} must contain variables \code{SAFFL} and \code{USUBJID}.
 \item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
 flag variables are treated as \code{"N"}.
 \item Columns are split by arm. Overall population column is excluded by default (see \code{lbl_overall} argument).
@@ -71,8 +89,8 @@ adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
 
 set.seed(1)
 adae <- adae \%>\%
-  dplyr::rename(FMQ01SC = SMQ01SC) \%>\%
-  dplyr::mutate(
+  rename(FMQ01SC = SMQ01SC) \%>\%
+  mutate(
     AESER = sample(c("Y", "N"), size = nrow(adae), replace = TRUE),
     FMQ01NAM = sample(c("FMQ1", "FMQ2", "FMQ3"), size = nrow(adae), replace = TRUE)
   )

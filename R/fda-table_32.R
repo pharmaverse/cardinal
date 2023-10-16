@@ -2,9 +2,9 @@
 #'   Postbaseline, Safety Population, Pooled Analysis
 #'
 #' @details
-#' * `advs` must contain `SAFFL`, `USUBJID`, `AVISITN`, `PARAMCD`, `AVAL`, `AVALU`, and the variable
-#'   specified by `arm_var`.
-#' * If specified, `alt_counts_df` must contain variables `SAFFL`, `USUBJID`, and the variable specified by `arm_var`.
+#' * `advs` must contain `USUBJID`, `AVISITN`, `PARAMCD`, `AVAL`, `AVALU`, and the variables specified by
+#'   `arm_var` and `saffl_var`.
+#' * If specified, `alt_counts_df` must contain `USUBJID` and the variables specified by `arm_var` and `saffl_var`.
 #' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
 #'   flag variables are treated as `"N"`.
 #' * Columns are split by arm. Overall population column is excluded by default (see `lbl_overall` argument).
@@ -12,6 +12,8 @@
 #' * All-zero rows are not removed by default (see `prune_0` argument).
 #'
 #' @inheritParams argument_convention
+#'
+#' @return An `rtable` object.
 #'
 #' @examples
 #' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
@@ -25,17 +27,19 @@ make_table_32 <- function(advs,
                           alt_counts_df = NULL,
                           show_colcounts = TRUE,
                           arm_var = "ARM",
+                          saffl_var = "SAFFL",
                           lbl_overall = NULL,
+                          risk_diff = NULL,
                           prune_0 = FALSE,
                           annotations = NULL) {
   checkmate::assert_subset(c(
-    "SAFFL", "USUBJID", "AVISITN", "PARAMCD", "AVAL", "AVALU", arm_var
+    "USUBJID", "AVISITN", "PARAMCD", "AVAL", "AVALU", arm_var, saffl_var
   ), names(advs))
-  assert_flag_variables(advs, "SAFFL")
+  assert_flag_variables(advs, saffl_var)
 
   advs <- advs %>%
     filter(
-      SAFFL == "Y",
+      .data[[saffl_var]] == "Y",
       AVISITN >= 1,
       PARAMCD == "DIABP"
     ) %>%
@@ -51,13 +55,14 @@ make_table_32 <- function(advs,
       GE120 = with_label(MAX_DIABP >= 120, ">=120")
     )
 
-  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
+  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var, saffl_var)
 
   lyt <- basic_table_annot(show_colcounts, annotations) %>%
-    split_cols_by_arm(arm_var, lbl_overall) %>%
+    split_cols_by_arm(arm_var, lbl_overall, risk_diff) %>%
     count_patients_with_flags(
       var = "USUBJID",
-      flag_variables = var_labels(advs[, c("L60", "G60", "G90", "G110", "GE120")])
+      flag_variables = c("L60", "G60", "G90", "G110", "GE120"),
+      riskdiff = !is.null(risk_diff)
     ) %>%
     append_topleft(c("Diastolic Blood Pressure", paste0("(", unique(advs$AVALU)[1], ")")))
 
