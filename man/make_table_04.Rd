@@ -26,8 +26,6 @@ make_table_04(
 
 \item{arm_var}{(\code{character})\cr arm variable used to split table into columns.}
 
-\item{saffl_var}{(\code{character})\cr flag variable used to indicate inclusion in safety population.}
-
 \item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
 the given value as the column label.}
 
@@ -59,7 +57,6 @@ FDA Table 4: Patient Disposition, Pooled Analyses
 \item \code{df} must contain \code{USUBJID}, \code{EOTSTT}, \code{DCTREAS}, \code{EOSSTT}, \code{DCSREAS} and the variables specified by \code{arm_var}
 and \code{pop_var}.
 \item If specified, \code{alt_counts_df} must contain \code{USUBJID}, and the variable specified by \code{arm_var} and \code{pop_var}.
-
 \item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
 flag variables are treated as \code{"N"}.
 \item Columns are split by arm. Overall population column is excluded by default (see \code{lbl_overall} argument).
