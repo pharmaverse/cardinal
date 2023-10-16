@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE coverage SYSTEM "https://raw.githubusercontent.com/cobertura/cobertura/master/cobertura/src/site/htdocs/xml/coverage-04.dtd">
-<coverage line-rate="1" branch-rate="0" lines-covered="938" lines-valid="938" branches-covered="0" branches-valid="0" complexity="0" version="3.6.2" timestamp="2023-10-09 14:58:49.816543">
+<coverage line-rate="1" branch-rate="0" lines-covered="938" lines-valid="938" branches-covered="0" branches-valid="0" complexity="0" version="3.6.3" timestamp="2023-10-16 14:34:39.962807">
   <sources>
     <source>/__w/falcon/falcon/falcon</source>
   </sources>
@@ -429,11 +429,13 @@
           <methods>
             <method name="make_table_04" signature="" line-rate="1" branch-rate="0" complexity="0">
               <lines>
+                <line number="48" hits="2" branch="false"/>
+                <line number="49" hits="2" branch="false"/>
                 <line number="50" hits="2" branch="false"/>
                 <line number="51" hits="2" branch="false"/>
                 <line number="52" hits="2" branch="false"/>
-                <line number="53" hits="2" branch="false"/>
-                <line number="54" hits="2" branch="false"/>
+                <line number="55" hits="2" branch="false"/>
+                <line number="56" hits="2" branch="false"/>
                 <line number="57" hits="2" branch="false"/>
                 <line number="58" hits="2" branch="false"/>
                 <line number="59" hits="2" branch="false"/>
@@ -452,9 +454,9 @@
                 <line number="72" hits="2" branch="false"/>
                 <line number="73" hits="2" branch="false"/>
                 <line number="74" hits="2" branch="false"/>
-                <line number="75" hits="2" branch="false"/>
                 <line number="76" hits="2" branch="false"/>
                 <line number="78" hits="2" branch="false"/>
+                <line number="79" hits="2" branch="false"/>
                 <line number="80" hits="2" branch="false"/>
                 <line number="81" hits="2" branch="false"/>
                 <line number="82" hits="2" branch="false"/>
@@ -487,20 +489,20 @@
                 <line number="109" hits="2" branch="false"/>
                 <line number="110" hits="2" branch="false"/>
                 <line number="111" hits="2" branch="false"/>
-                <line number="112" hits="2" branch="false"/>
                 <line number="113" hits="2" branch="false"/>
-                <line number="115" hits="2" branch="false"/>
-                <line number="116" hits="1" branch="false"/>
-                <line number="118" hits="2" branch="false"/>
+                <line number="114" hits="1" branch="false"/>
+                <line number="116" hits="2" branch="false"/>
               </lines>
             </method>
           </methods>
           <lines>
+            <line number="48" hits="2" branch="false"/>
+            <line number="49" hits="2" branch="false"/>
             <line number="50" hits="2" branch="false"/>
             <line number="51" hits="2" branch="false"/>
             <line number="52" hits="2" branch="false"/>
-            <line number="53" hits="2" branch="false"/>
-            <line number="54" hits="2" branch="false"/>
+            <line number="55" hits="2" branch="false"/>
+            <line number="56" hits="2" branch="false"/>
             <line number="57" hits="2" branch="false"/>
             <line number="58" hits="2" branch="false"/>
             <line number="59" hits="2" branch="false"/>
@@ -519,9 +521,9 @@
             <line number="72" hits="2" branch="false"/>
             <line number="73" hits="2" branch="false"/>
             <line number="74" hits="2" branch="false"/>
-            <line number="75" hits="2" branch="false"/>
             <line number="76" hits="2" branch="false"/>
             <line number="78" hits="2" branch="false"/>
+            <line number="79" hits="2" branch="false"/>
             <line number="80" hits="2" branch="false"/>
             <line number="81" hits="2" branch="false"/>
             <line number="82" hits="2" branch="false"/>
@@ -554,11 +556,9 @@
             <line number="109" hits="2" branch="false"/>
             <line number="110" hits="2" branch="false"/>
             <line number="111" hits="2" branch="false"/>
-            <line number="112" hits="2" branch="false"/>
             <line number="113" hits="2" branch="false"/>
-            <line number="115" hits="2" branch="false"/>
-            <line number="116" hits="1" branch="false"/>
-            <line number="118" hits="2" branch="false"/>
+            <line number="114" hits="1" branch="false"/>
+            <line number="116" hits="2" branch="false"/>
           </lines>
         </class>
         <class name="fda-table_05.R" filename="R/fda-table_05.R" line-rate="1" branch-rate="0" complexity="0">
