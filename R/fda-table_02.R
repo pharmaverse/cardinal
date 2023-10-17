@@ -274,7 +274,7 @@ make_table_02_gtsum <- function(df,
 
   if (!na_rm) df <- df %>% df_explicit_na()
 
-  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
+  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var, saffl_var)
 
   tbl <- df %>%
     tbl_summary(
