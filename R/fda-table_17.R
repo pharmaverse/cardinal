@@ -63,9 +63,11 @@ make_table_17 <- function(adae,
       label_pos = "topleft",
       split_label = obj_label(adae[[fmqnam_var]])
     ) %>%
-    count_occurrences(vars = pref_var,
-                      drop = FALSE,
-                      riskdiff = !is.null(risk_diff)) %>%
+    count_occurrences(
+      vars = pref_var,
+      drop = FALSE,
+      riskdiff = !is.null(risk_diff)
+    ) %>%
     append_varlabels(adae, pref_var, indent = 1L)
 
   tbl <- build_table(lyt, df = adae, alt_counts_df = alt_counts_df)
