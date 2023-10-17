@@ -155,8 +155,7 @@ test_that("Table 02 generation (gtsum) works with some NA values", {
   adsl <- adsl %>% df_explicit_na()
 
   result <- suppressWarnings(make_table_02_gtsum(adsl, vars = "SEX") %>% as_gt())
-
-
+  
   res <- expect_silent(as.data.frame(result))
   expect_snapshot(res)
 })
