@@ -65,9 +65,11 @@ test_that("Table 32 (gtsum) generation works with default values", {
   expect_snapshot(res)
 })
 
-
 test_that("Table 32 (gtsum) generation works with custom values", {
-  result <- suppressWarnings(make_table_32_gtsum(advs = advs, adsl = adsl, lbl_overall = "Total Population") %>% as_gt())
+  result <- suppressWarnings(
+    make_table_32_gtsum(advs = advs, adsl = adsl, lbl_overall = "Total Population") %>%
+      as_gt()
+  )
 
   res <- expect_silent(as.data.frame(result))
   expect_snapshot(res)
