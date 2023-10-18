@@ -108,7 +108,7 @@ make_table_32_gtsum <- function(advs,
       PARAMCD == "DIABP"
     ) %>%
     df_explicit_na() %>%
-    group_by("USUBJID", PARAMCD) %>%
+    group_by(USUBJID, PARAMCD) %>%
     mutate(MAX_DIABP = max(AVAL)) %>%
     ungroup() %>%
     mutate(
@@ -118,7 +118,7 @@ make_table_32_gtsum <- function(advs,
       G110 = with_label(MAX_DIABP > 110, ">110"),
       GE120 = with_label(MAX_DIABP >= 120, ">=120")
     ) %>%
-    distinct("USUBJID", .keep_all = TRUE) %>%
+    distinct(USUBJID, .keep_all = TRUE) %>%
     select(c("USUBJID", saffl_var, "L60", "G60", "G90", "G110", "GE120", arm_var))
 
   adsl_pop <- adsl %>% select(all_of(c("USUBJID", saffl_var)))
@@ -136,7 +136,7 @@ make_table_32_gtsum <- function(advs,
     tbl_summary(
       by = arm_var,
       statistic = list(all_categorical() ~ "{n} ({p}%)"),
-      digits = everything() ~ 2
+      digits = everything() ~ 1
     ) %>%
     modify_header(all_stat_cols() ~ "**{level}**  \n (N={n})")
 
