@@ -26,6 +26,11 @@ make_table_04(
 
 \item{arm_var}{(\code{character})\cr arm variable used to split table into columns.}
 
+\item{pop_vars}{(\code{vector} of \code{character})\cr population variables from \code{df} to include in the table.}
+
+\item{lbl_pop_vars}{(\code{vector} of \code{character})\cr labels corresponding to variables in \code{pop_vars} to print
+in the table. Labels should be ordered according to the order of variables in \code{pop_vars}.}
+
 \item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
 the given value as the column label.}
 
@@ -55,8 +60,8 @@ FDA Table 4: Patient Disposition, Pooled Analyses
 \details{
 \itemize{
 \item \code{df} must contain \code{USUBJID}, \code{EOTSTT}, \code{DCTREAS}, \code{EOSSTT}, \code{DCSREAS} and the variables specified by \code{arm_var}
-and \code{pop_var}.
-\item If specified, \code{alt_counts_df} must contain \code{USUBJID}, and the variable specified by \code{arm_var} and \code{pop_var}.
+and \code{pop_vars}.
+\item If specified, \code{alt_counts_df} must contain \code{USUBJID}, and the variable specified by \code{arm_var} and \code{pop_vars}.
 \item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
 flag variables are treated as \code{"N"}.
 \item Columns are split by arm. Overall population column is excluded by default (see \code{lbl_overall} argument).
@@ -79,8 +84,8 @@ adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") \%>\%
   mutate(DCTREAS = DCSREAS)
 
 tbl <- make_table_04(
-  df = adsl, pop_var = c("RANDFL", "ITTFL", "SAFFL", "PPROTFL"),
-  pop_var_lbl = c("Patients randomized", "ITT/mITT population", "Safety population", "Per-protocol population")
+  df = adsl, pop_vars = c("RANDFL", "ITTFL", "SAFFL", "PPROTFL"),
+  lbl_pop_vars = c("Patients randomized", "ITT/mITT population", "Safety population", "Per-protocol population")
 )
 tbl
 
