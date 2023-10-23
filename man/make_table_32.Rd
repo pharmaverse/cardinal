@@ -57,6 +57,8 @@ contain the following elements:
 \item{annotations}{(named \code{list} of \code{character})\cr list of annotations to add to the table. Valid
 annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
 use the annotation type as name and the desired string as value.}
+
+\item{adsl}{(\code{data.frame})\cr dataset (typically ADSL) required to build table.}
 }
 \value{
 \itemize{
@@ -75,7 +77,6 @@ Postbaseline, Safety Population, Pooled Analysis
 \itemize{
 \item \code{advs} must contain \code{USUBJID}, \code{AVISITN}, \code{PARAMCD}, \code{AVAL}, \code{AVALU}, and the variables specified by
 \code{arm_var} and \code{saffl_var}.
-\item \code{adsl} must contain \code{USUBJID}, and the variables specified by \code{saffl_var}.
 \item If specified, \code{alt_counts_df} must contain \code{USUBJID} and the variables specified by \code{arm_var} and \code{saffl_var}.
 \item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
 flag variables are treated as \code{"N"}.
@@ -100,7 +101,7 @@ tbl
 
 adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
 advs <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "advs")
-tbl <- make_table_32_gtsum(advs = advs, adsl = adsl, alt_counts_df = adsl)
+tbl <- make_table_32_gtsum(advs = advs, alt_counts_df = adsl)
 tbl
 
 }

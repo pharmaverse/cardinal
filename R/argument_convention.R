@@ -5,6 +5,7 @@
 #' @param adae (`data.frame`)\cr dataset (typically ADAE) required to build table.
 #' @param adex (`data.frame`)\cr dataset (typically ADEX) required to build table.
 #' @param advs (`data.frame`)\cr dataset (typically ADVS) required to build table.
+#' @param adsl (`data.frame`)\cr dataset (typically ADSL) required to build table.
 #' @param alt_counts_df (`character`)\cr alternative dataset (typically ADSL) used only to calculate column counts.
 #' @param annotations (named `list` of `character`)\cr list of annotations to add to the table. Valid
 #'   annotation types are `title`, `subtitles`, `main_footer`, and `prov_footer`. Each name-value pair should

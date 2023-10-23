@@ -4,7 +4,6 @@
 #' @details
 #' * `advs` must contain `USUBJID`, `AVISITN`, `PARAMCD`, `AVAL`, `AVALU`, and the variables specified by
 #'   `arm_var` and `saffl_var`.
-#' * `adsl` must contain `USUBJID`, and the variables specified by `saffl_var`.
 #' * If specified, `alt_counts_df` must contain `USUBJID` and the variables specified by `arm_var` and `saffl_var`.
 #' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
 #'   flag variables are treated as `"N"`.
@@ -86,7 +85,7 @@ make_table_32 <- function(advs,
 #' @examples
 #' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
 #' advs <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "advs")
-#' tbl <- make_table_32_gtsum(advs = advs, adsl = adsl, alt_counts_df = adsl)
+#' tbl <- make_table_32_gtsum(advs = advs, alt_counts_df = adsl)
 #' tbl
 #'
 #' @export
@@ -119,16 +118,7 @@ make_table_32_gtsum <- function(advs,
       GE120 = with_label(MAX_DIABP >= 120, ">=120")
     ) %>%
     distinct(USUBJID, .keep_all = TRUE) %>%
-    select(c("USUBJID", saffl_var, "L60", "G60", "G90", "G110", "GE120", arm_var))
-
-  adsl_pop <- adsl %>% select(all_of(c("USUBJID", saffl_var)))
-
-  advs <-
-    adsl_pop %>%
-    left_join(advs, by = c("USUBJID", saffl_var)) %>%
-    filter(.data[[saffl_var]] == "Y") %>%
     select(L60, G60, G90, G110, GE120, arm_var)
-
 
   alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var, saffl_var)
 
@@ -149,3 +139,4 @@ make_table_32_gtsum <- function(advs,
 
   tbl
 }
+
