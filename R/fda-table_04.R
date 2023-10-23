@@ -2,13 +2,16 @@
 #'
 #' @details
 #' * `df` must contain `USUBJID`, `EOTSTT`, `DCTREAS`, `EOSSTT`, `DCSREAS` and the variables specified by `arm_var`
-#'   and `pop_var`.
-#' * If specified, `alt_counts_df` must contain `USUBJID`, and the variable specified by `arm_var` and `pop_var`.
+#'   and `pop_vars`.
+#' * If specified, `alt_counts_df` must contain `USUBJID`, and the variable specified by `arm_var` and `pop_vars`.
 #' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
 #'   flag variables are treated as `"N"`.
 #' * Columns are split by arm. Overall population column is excluded by default (see `lbl_overall` argument).
 #' * All-zero rows are not removed by default (see `prune_0` argument).
 #'
+#' @param pop_vars (`vector` of `character`)\cr population variables from `df` to include in the table.
+#' @param lbl_pop_vars (`vector` of `character`)\cr labels corresponding to variables in `pop_vars` to print
+#'   in the table. Labels should be ordered according to the order of variables in `pop_vars`.
 #' @inheritParams argument_convention
 #'
 #' @return An `rtable` object.
@@ -29,8 +32,8 @@
 #'   mutate(DCTREAS = DCSREAS)
 #'
 #' tbl <- make_table_04(
-#'   df = adsl, pop_var = c("RANDFL", "ITTFL", "SAFFL", "PPROTFL"),
-#'   pop_var_lbl = c("Patients randomized", "ITT/mITT population", "Safety population", "Per-protocol population")
+#'   df = adsl, pop_vars = c("RANDFL", "ITTFL", "SAFFL", "PPROTFL"),
+#'   lbl_pop_vars = c("Patients randomized", "ITT/mITT population", "Safety population", "Per-protocol population")
 #' )
 #' tbl
 #'
@@ -46,17 +49,17 @@ make_table_04 <- function(df,
                           risk_diff = NULL,
                           annotations = NULL) {
   checkmate::assert_subset(c(
-    "USUBJID", arm_var, pop_var,
+    "USUBJID", arm_var, pop_vars,
     "EOTSTT", "DCTREAS", "EOSSTT", "DCSREAS"
   ), names(df))
-  assert_flag_variables(df, pop_var)
+  assert_flag_variables(df, pop_vars)
 
 
   df <- df %>%
     as_tibble() %>%
     df_explicit_na() %>%
     mutate(
-      across(all_of(pop_var), ~ with_label(. == "Y", pop_var_lbl[match(cur_column(), pop_var)])),
+      across(all_of(pop_vars), ~ with_label(. == "Y", lbl_pop_vars[match(cur_column(), pop_vars)])),
       DISCSD = with_label(EOTSTT == "DISCONTINUED", "Discontinued study drug"),
       DISCSD_AE = with_label(EOTSTT == "DISCONTINUED" & DCTREAS == "ADVERSE EVENT", "Adverse event"),
       DISCSD_LOE = with_label(EOTSTT == "DISCONTINUED" & DCTREAS == "LACK OF EFFICACY", "Lack of efficacy"),
@@ -79,7 +82,7 @@ make_table_04 <- function(df,
     split_cols_by_arm(arm_var, lbl_overall, risk_diff) %>%
     count_patients_with_flags(
       var = "USUBJID",
-      flag_variables = var_labels(df[, pop_var]),
+      flag_variables = var_labels(df[, pop_vars]),
       riskdiff = !is.null(risk_diff),
       table_names = "pop"
     ) %>%
