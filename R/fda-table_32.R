@@ -139,4 +139,3 @@ make_table_32_gtsum <- function(advs,
 
   tbl
 }
-
