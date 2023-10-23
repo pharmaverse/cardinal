@@ -10,6 +10,8 @@
 
 \item{advs}{(\code{data.frame})\cr dataset (typically ADVS) required to build table.}
 
+\item{adsl}{(\code{data.frame})\cr dataset (typically ADSL) required to build table.}
+
 \item{alt_counts_df}{(\code{character})\cr alternative dataset (typically ADSL) used only to calculate column counts.}
 
 \item{annotations}{(named \code{list} of \code{character})\cr list of annotations to add to the table. Valid

@@ -27,9 +27,9 @@
       Table 5. Duration of Treatment Exposure, Safety Population, Pooled Analyses*
       
       ————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-      Parameter                                                                                               Total       
+                                                                                                              Total       
                                              A: Drug X            B: Placebo         C: Combination         Population    
-                                              (N=134)              (N=134)              (N=132)              (N=400)      
+      Parameter                               (N=134)              (N=134)              (N=132)              (N=400)      
       ————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
       Duration of Treatment, years                                                                                        
         Mean (SD)                           0.55 (0.32)          0.55 (0.30)          0.54 (0.33)          0.54 (0.31)    
