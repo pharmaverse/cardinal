@@ -23,9 +23,9 @@
       Table 3. Patients Screening and Enrollment, Trials A and B
       
       ————————————————————————————————————————————————————————————————————————————————————————————————
-      Disposition                                                                             Total   
+                                                                                              Total   
                                                A: Drug X    B: Placebo    C: Combination   Population 
-                                                (N=134)       (N=134)        (N=132)         (N=400)  
+      Disposition                               (N=134)       (N=134)        (N=132)         (N=400)  
       ————————————————————————————————————————————————————————————————————————————————————————————————
       Patients screened                           134           134            132             400    
       Screening failures                       42 (31.3%)   32 (23.9%)      26 (19.7%)     100 (25.0%)

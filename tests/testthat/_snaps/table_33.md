@@ -18,9 +18,9 @@
        Postbaseline, Safety Population, Pooled Analysis
       
       ———————————————————————————————————————————————————————————————————————
-      Blood Pressure                                                 Total   
-      (Pa)             A: Drug X    B: Placebo   C: Combination   Population 
-                        (N=134)      (N=134)        (N=132)         (N=400)  
+                                                                     Total   
+      Blood Pressure   A: Drug X    B: Placebo   C: Combination   Population 
+      (Pa)              (N=134)      (N=134)        (N=132)         (N=400)  
       ———————————————————————————————————————————————————————————————————————
       SBP <90          134 (100%)   134 (100%)     132 (100%)     400 (100%) 
       DBP <60          72 (53.7%)   83 (61.9%)     78 (59.1%)     233 (58.2%)
