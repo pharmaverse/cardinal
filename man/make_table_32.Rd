@@ -21,7 +21,6 @@ make_table_32(
 make_table_32_gtsum(
   advs,
   adsl,
-  alt_counts_df = NULL,
   arm_var = "ARM",
   saffl_var = "SAFFL",
   lbl_overall = NULL

@@ -89,7 +89,6 @@ make_table_32 <- function(advs,
 #' @export
 make_table_32_gtsum <- function(advs,
                                 adsl,
-                                alt_counts_df = NULL,
                                 arm_var = "ARM",
                                 saffl_var = "SAFFL",
                                 lbl_overall = NULL) {
@@ -119,8 +118,6 @@ make_table_32_gtsum <- function(advs,
     select(L60, G60, G90, G110, GE120, arm_var, AVALU)
 
   avalu <- unique(advs$AVALU)[1]
-
-  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var, saffl_var)
 
   tbl <- advs %>%
     tbl_summary(

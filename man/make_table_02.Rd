@@ -37,7 +37,6 @@ make_table_02_tplyr(
 
 make_table_02_gtsum(
   df,
-  alt_counts_df = NULL,
   show_colcounts = TRUE,
   arm_var = "ARM",
   saffl_var = "SAFFL",
