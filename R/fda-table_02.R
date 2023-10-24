@@ -257,7 +257,6 @@ make_table_02_tplyr <- function(df,
 #'
 #' @export
 make_table_02_gtsum <- function(df,
-                                alt_counts_df = NULL,
                                 show_colcounts = TRUE,
                                 arm_var = "ARM",
                                 saffl_var = "SAFFL",
@@ -273,8 +272,6 @@ make_table_02_gtsum <- function(df,
     select(all_of(c(vars, arm_var)))
 
   if (!na_rm) df <- df %>% df_explicit_na()
-
-  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var, saffl_var)
 
   tbl <- df %>%
     tbl_summary(

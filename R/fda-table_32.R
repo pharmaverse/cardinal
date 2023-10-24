@@ -13,8 +13,13 @@
 #'
 #' @inheritParams argument_convention
 #'
-#' @return An `rtable` object.
+#' @name make_table_32
+NULL
+
+#' @describeIn make_table_32 Create FDA table 32 using functions from `rtables` and `tern`.
 #'
+#' @return
+#' * `make_table_32` returns an `rtables` table object.
 #' @examples
 #' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
 #' advs <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "advs")
@@ -68,6 +73,68 @@ make_table_32 <- function(advs,
 
   tbl <- build_table(lyt, df = advs, alt_counts_df = alt_counts_df)
   if (prune_0) tbl <- prune_table(tbl)
+
+  tbl
+}
+
+#' @describeIn make_table_32 Create FDA table 32 using functions from `gtsummary`.
+#'
+#' @return
+#' * `make_table_32_gtsum` returns a `gt` object
+#'
+#' @examples
+#' tbl <- make_table_32_gtsum(advs = advs)
+#' tbl
+#'
+#' @export
+make_table_32_gtsum <- function(advs,
+                                adsl,
+                                arm_var = "ARM",
+                                saffl_var = "SAFFL",
+                                lbl_overall = NULL) {
+  checkmate::assert_subset(c(
+    saffl_var, "USUBJID", "AVISITN", "PARAMCD", "AVAL", "AVALU", arm_var
+  ), names(advs))
+  assert_flag_variables(advs, saffl_var)
+
+  advs <- advs %>%
+    filter(
+      .data[[saffl_var]] == "Y",
+      AVISITN >= 1,
+      PARAMCD == "DIABP"
+    ) %>%
+    df_explicit_na() %>%
+    group_by(USUBJID, PARAMCD) %>%
+    mutate(MAX_DIABP = max(AVAL)) %>%
+    ungroup() %>%
+    mutate(
+      L60 = with_label(MAX_DIABP < 60, "<60"),
+      G60 = with_label(MAX_DIABP > 60, ">60"),
+      G90 = with_label(MAX_DIABP > 90, ">90"),
+      G110 = with_label(MAX_DIABP > 110, ">110"),
+      GE120 = with_label(MAX_DIABP >= 120, ">=120")
+    ) %>%
+    distinct(USUBJID, .keep_all = TRUE) %>%
+    select(L60, G60, G90, G110, GE120, arm_var, AVALU)
+
+  avalu <- unique(advs$AVALU)[1]
+  advs <- advs %>% select(-AVALU)
+
+  tbl <- advs %>%
+    tbl_summary(
+      by = arm_var,
+      statistic = list(all_categorical() ~ "{n} ({p}%)"),
+      digits = everything() ~ 1
+    ) %>%
+    modify_header(label ~ paste0("**Diastolic Blood Pressure (", avalu, ")**")) %>%
+    modify_header(all_stat_cols() ~ "**{level}**  \n (N={n})")
+
+  if (!is.null(lbl_overall)) {
+    tbl <- tbl %>%
+      add_overall(last = TRUE, col_label = paste0("**", lbl_overall, "**  \n (N={n})"))
+  }
+
+  tbl <- tbl %>% modify_footnote(update = everything() ~ NA)
 
   tbl
 }
