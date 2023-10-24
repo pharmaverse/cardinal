@@ -98,7 +98,7 @@ advs <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "advs")
 tbl <- make_table_32(advs = advs, alt_counts_df = adsl)
 tbl
 
-tbl <- make_table_32_gtsum(advs = advs, alt_counts_df = adsl)
+tbl <- make_table_32_gtsum(advs = advs)
 tbl
 
 }

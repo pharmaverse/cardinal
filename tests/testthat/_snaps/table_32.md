@@ -21,9 +21,9 @@
        of Blood Pressure Postbaseline, Safety Population, Pooled Analysis
       
       —————————————————————————————————————————————————————————————————————————————————
-                                                                               Total   
-      Diastolic Blood Pressure   A: Drug X    B: Placebo   C: Combination   Population 
-      (Pa)                        (N=134)      (N=134)        (N=132)         (N=400)  
+      Diastolic Blood Pressure                                                 Total   
+      (Pa)                       A: Drug X    B: Placebo   C: Combination   Population 
+                                  (N=134)      (N=134)        (N=132)         (N=400)  
       —————————————————————————————————————————————————————————————————————————————————
       <60                        72 (53.7%)   83 (61.9%)     78 (59.1%)     233 (58.2%)
       >60                        62 (46.3%)   51 (38.1%)     54 (40.9%)     167 (41.8%)
@@ -67,13 +67,6 @@
     Code
       res
     Output
-      NULL
-
----
-
-    Code
-      res
-    Output
         variable    var_type var_label row_type    label       stat_1       stat_2
       1      L60 dichotomous    &lt;60    label   &lt;60 72.0 (53.7%) 83.0 (61.9%)
       2      G60 dichotomous    &gt;60    label   &gt;60 62.0 (46.3%) 51.0 (38.1%)
@@ -88,24 +81,6 @@
       5   0.0 (0.0%)
 
 # Table 32 (gtsum) generation works with custom values
-
-    Code
-      res
-    Output
-        **Characteristic** **A: Drug X**  \n(N=134) **B: Placebo**  \n(N=134)
-      1                <60             72.0 (53.7%)              83.0 (61.9%)
-      2                >60             62.0 (46.3%)              51.0 (38.1%)
-      3                >90               0.0 (0.0%)                0.0 (0.0%)
-      4               >110               0.0 (0.0%)                0.0 (0.0%)
-      5              >=120               0.0 (0.0%)                0.0 (0.0%)
-        **C: Combination**  \n(N=132) **Total Population**  \n(N=400)
-      1                  78.0 (59.1%)                   233.0 (58.3%)
-      2                  54.0 (40.9%)                   167.0 (41.8%)
-      3                    0.0 (0.0%)                      0.0 (0.0%)
-      4                    0.0 (0.0%)                      0.0 (0.0%)
-      5                    0.0 (0.0%)                      0.0 (0.0%)
-
----
 
     Code
       res

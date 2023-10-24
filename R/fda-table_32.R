@@ -83,7 +83,7 @@ make_table_32 <- function(advs,
 #' * `make_table_32_gtsum` returns a `gt` object
 #'
 #' @examples
-#' tbl <- make_table_32_gtsum(advs = advs, alt_counts_df = adsl)
+#' tbl <- make_table_32_gtsum(advs = advs)
 #' tbl
 #'
 #' @export
@@ -118,6 +118,7 @@ make_table_32_gtsum <- function(advs,
     select(L60, G60, G90, G110, GE120, arm_var, AVALU)
 
   avalu <- unique(advs$AVALU)[1]
+  advs <- advs %>% select(-AVALU)
 
   tbl <- advs %>%
     tbl_summary(
