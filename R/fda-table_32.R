@@ -83,8 +83,6 @@ make_table_32 <- function(advs,
 #' * `make_table_32_gtsum` returns a `gt` object
 #'
 #' @examples
-#' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
-#' advs <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "advs")
 #' tbl <- make_table_32_gtsum(advs = advs, alt_counts_df = adsl)
 #' tbl
 #'
@@ -118,7 +116,9 @@ make_table_32_gtsum <- function(advs,
       GE120 = with_label(MAX_DIABP >= 120, ">=120")
     ) %>%
     distinct(USUBJID, .keep_all = TRUE) %>%
-    select(L60, G60, G90, G110, GE120, arm_var)
+    select(L60, G60, G90, G110, GE120, arm_var, AVALU)
+
+  avalu <- unique(advs$AVALU)[1]
 
   alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var, saffl_var)
 
@@ -128,6 +128,7 @@ make_table_32_gtsum <- function(advs,
       statistic = list(all_categorical() ~ "{n} ({p}%)"),
       digits = everything() ~ 1
     ) %>%
+    modify_header(label ~ paste0("**Diastolic Blood Pressure (", avalu, ")**")) %>%
     modify_header(all_stat_cols() ~ "**{level}**  \n (N={n})")
 
   if (!is.null(lbl_overall)) {
