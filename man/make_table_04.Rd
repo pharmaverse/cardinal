@@ -9,7 +9,8 @@ make_table_04(
   alt_counts_df = NULL,
   show_colcounts = TRUE,
   arm_var = "ARM",
-  saffl_var = "SAFFL",
+  pop_vars = c("SAFFL"),
+  lbl_pop_vars = c("Safety population"),
   lbl_overall = NULL,
   prune_0 = FALSE,
   risk_diff = NULL,
@@ -25,7 +26,10 @@ make_table_04(
 
 \item{arm_var}{(\code{character})\cr arm variable used to split table into columns.}
 
-\item{saffl_var}{(\code{character})\cr flag variable used to indicate inclusion in safety population.}
+\item{pop_vars}{(\code{vector} of \code{character})\cr population variables from \code{df} to include in the table.}
+
+\item{lbl_pop_vars}{(\code{vector} of \code{character})\cr labels corresponding to variables in \code{pop_vars} to print
+in the table. Labels should be ordered according to the order of variables in \code{pop_vars}.}
 
 \item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
 the given value as the column label.}
@@ -55,15 +59,13 @@ FDA Table 4: Patient Disposition, Pooled Analyses
 }
 \details{
 \itemize{
-\item \code{df} must contain \code{USUBJID}, \code{RANDFL}, \code{ITTFL},\code{PPROTFL}, \code{EOTSTT}, \code{DCTREAS}, \code{EOSSTT}, \code{DCSREAS}, and the
-variables specified by \code{arm_var} and \code{saffl_var}.
-\item If specified, \code{alt_counts_df} must contain \code{USUBJID} and the variable specified by \code{arm_var}.
+\item \code{df} must contain \code{USUBJID}, \code{EOTSTT}, \code{DCTREAS}, \code{EOSSTT}, \code{DCSREAS} and the variables specified by \code{arm_var}
+and \code{pop_vars}.
+\item If specified, \code{alt_counts_df} must contain \code{USUBJID}, and the variable specified by \code{arm_var} and \code{pop_vars}.
 \item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
 flag variables are treated as \code{"N"}.
 \item Columns are split by arm. Overall population column is excluded by default (see \code{lbl_overall} argument).
-\item Numbers in table "Patients Treated" section are the absolute numbers of patients and fraction of \code{N}.
 \item All-zero rows are not removed by default (see \code{prune_0} argument).
-\item Records with missing treatment start and/or end datetime are excluded from all calculations.
 }
 }
 \examples{
@@ -81,7 +83,10 @@ adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") \%>\%
   ) \%>\%
   mutate(DCTREAS = DCSREAS)
 
-tbl <- make_table_04(df = adsl)
+tbl <- make_table_04(
+  df = adsl, pop_vars = c("RANDFL", "ITTFL", "SAFFL", "PPROTFL"),
+  lbl_pop_vars = c("Patients randomized", "ITT/mITT population", "Safety population", "Per-protocol population")
+)
 tbl
 
 }
