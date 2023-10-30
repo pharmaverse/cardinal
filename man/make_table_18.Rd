@@ -2,7 +2,8 @@
 % Please edit documentation in R/fda-table_18.R
 \name{make_table_18}
 \alias{make_table_18}
-\title{FDA Table 18: Patients With Adverse Events by Female-Specific FDA Medical Query (Broad) and Preferred Term, Female Safety Population, Pooled Analyses}
+\title{FDA Table 18: Patients With Adverse Events by Female-Specific FDA Medical Query (Broad) and Preferred Term,
+Female Safety Population, Pooled Analyses}
 \usage{
 make_table_18(
   adae,
@@ -67,11 +68,13 @@ use the annotation type as name and the desired string as value.}
 An \code{rtable} object.
 }
 \description{
-FDA Table 18: Patients With Adverse Events by Female-Specific FDA Medical Query (Broad) and Preferred Term, Female Safety Population, Pooled Analyses
+FDA Table 18: Patients With Adverse Events by Female-Specific FDA Medical Query (Broad) and Preferred Term,
+Female Safety Population, Pooled Analyses
 }
 \details{
 \itemize{
-\item \code{adae} must contain \code{USUBJID}, \code{SEX}, and the variables specified by \code{arm_var}, \code{saffl_var}, \code{pref_var}, \code{fmqsc_var} and \code{fmqnam_var}.
+\item \code{adae} must contain \code{USUBJID}, \code{SEX}, and the variables specified by \code{arm_var}, \code{saffl_var}, \code{pref_var},
+\code{fmqsc_var} and \code{fmqnam_var}.
 \item If specified, \code{alt_counts_df} must contain \code{USUBJID} and the variables specified by \code{arm_var} and \code{saffl_var}.
 \item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
 flag variables are treated as \code{"N"}.
