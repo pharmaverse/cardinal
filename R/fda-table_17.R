@@ -1,7 +1,9 @@
-#' FDA Table 17: Patients With Adverse Events by Female-Specific FDA Medical Query (Narrow) and Preferred Term, Female Safety Population, Pooled Analyses
+#' FDA Table 17: Patients With Adverse Events by Female-Specific FDA Medical Query (Narrow) and Preferred Term,
+#'   Female Safety Population, Pooled Analyses
 #'
 #' @details
-#' * `adae` must contain `USUBJID`, `SEX`, and the variables specified by `arm_var`, `saffl_var`, `pref_var`, `fmqsc_var` and `fmqnam_var`.
+#' * `adae` must contain `USUBJID`, `SEX`, and the variables specified by `arm_var`, `saffl_var`, `pref_var`,
+#'   `fmqsc_var` and `fmqnam_var`.
 #' * If specified, `alt_counts_df` must contain `USUBJID` and the variables specified by `arm_var` and `saffl_var`.
 #' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
 #'   flag variables are treated as `"N"`.
