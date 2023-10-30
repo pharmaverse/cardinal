@@ -1,332 +1,332 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="table_02" timestamp="2023-10-24T12:20:43Z" hostname="71db300676e9" tests="30" skipped="10" failures="0" errors="0" time="19.521">
-    <testcase time="0.109" classname="table_02" name="Table_02_generation_works_with_default_values"/>
-    <testcase time="0.624" classname="table_02" name="Table_02_generation_works_with_default_values"/>
-    <testcase time="0.286" classname="table_02" name="Table_02_generation_works_with_default_values">
+  <testsuite name="table_02" timestamp="2023-10-30T23:55:36Z" hostname="7de0fe61e5a2" tests="30" skipped="10" failures="0" errors="0" time="20.804">
+    <testcase time="0.093" classname="table_02" name="Table_02_generation_works_with_default_values"/>
+    <testcase time="0.651" classname="table_02" name="Table_02_generation_works_with_default_values"/>
+    <testcase time="0.308" classname="table_02" name="Table_02_generation_works_with_default_values">
       <skipped message="Reason: On CRAN ('test-table_02.R:16:3')"/>
     </testcase>
-    <testcase time="0.0959999999999992" classname="table_02" name="Table_02_generation_works_with_custom_values"/>
-    <testcase time="0.507000000000001" classname="table_02" name="Table_02_generation_works_with_custom_values"/>
-    <testcase time="0.317" classname="table_02" name="Table_02_generation_works_with_custom_values">
+    <testcase time="0.102" classname="table_02" name="Table_02_generation_works_with_custom_values"/>
+    <testcase time="0.511" classname="table_02" name="Table_02_generation_works_with_custom_values"/>
+    <testcase time="0.343999999999999" classname="table_02" name="Table_02_generation_works_with_custom_values">
       <skipped message="Reason: On CRAN ('test-table_02.R:45:3')"/>
     </testcase>
-    <testcase time="0.069" classname="table_02" name="Table_02_generation_works_with_some_NA_values"/>
-    <testcase time="0.133999999999999" classname="table_02" name="Table_02_generation_works_with_some_NA_values"/>
-    <testcase time="0.0739999999999998" classname="table_02" name="Table_02_generation_works_with_some_NA_values">
+    <testcase time="0.077" classname="table_02" name="Table_02_generation_works_with_some_NA_values"/>
+    <testcase time="0.138000000000001" classname="table_02" name="Table_02_generation_works_with_some_NA_values"/>
+    <testcase time="0.0659999999999998" classname="table_02" name="Table_02_generation_works_with_some_NA_values">
       <skipped message="Reason: On CRAN ('test-table_02.R:57:3')"/>
     </testcase>
     <testcase time="0.0270000000000001" classname="table_02" name="Table_02_generation_tplyr_works_with_default_values"/>
-    <testcase time="2.349" classname="table_02" name="Table_02_generation_tplyr_works_with_default_values"/>
-    <testcase time="0.0419999999999998" classname="table_02" name="Table_02_generation_tplyr_works_with_default_values">
+    <testcase time="2.482" classname="table_02" name="Table_02_generation_tplyr_works_with_default_values"/>
+    <testcase time="0.043000000000001" classname="table_02" name="Table_02_generation_tplyr_works_with_default_values">
       <skipped message="Reason: On CRAN ('test-table_02.R:66:3')"/>
     </testcase>
-    <testcase time="0.032" classname="table_02" name="Table_02_generation_tplyr_works_with_tplyr_raw_TRUE"/>
-    <testcase time="1.452" classname="table_02" name="Table_02_generation_tplyr_works_with_tplyr_raw_TRUE"/>
+    <testcase time="0.0350000000000001" classname="table_02" name="Table_02_generation_tplyr_works_with_tplyr_raw_TRUE"/>
+    <testcase time="1.588" classname="table_02" name="Table_02_generation_tplyr_works_with_tplyr_raw_TRUE"/>
     <testcase time="0.0329999999999995" classname="table_02" name="Table_02_generation_tplyr_works_with_tplyr_raw_TRUE">
       <skipped message="Reason: On CRAN ('test-table_02.R:75:3')"/>
     </testcase>
-    <testcase time="0.0619999999999994" classname="table_02" name="Table_02_generation_tplyr_works_with_custom_values"/>
-    <testcase time="2.218" classname="table_02" name="Table_02_generation_tplyr_works_with_custom_values"/>
-    <testcase time="0.0350000000000001" classname="table_02" name="Table_02_generation_tplyr_works_with_custom_values">
+    <testcase time="0.0609999999999999" classname="table_02" name="Table_02_generation_tplyr_works_with_custom_values"/>
+    <testcase time="2.388" classname="table_02" name="Table_02_generation_tplyr_works_with_custom_values"/>
+    <testcase time="0.0289999999999999" classname="table_02" name="Table_02_generation_tplyr_works_with_custom_values">
       <skipped message="Reason: On CRAN ('test-table_02.R:102:3')"/>
     </testcase>
-    <testcase time="0.0590000000000011" classname="table_02" name="Table_02_generation_tplyr_works_with_some_NA_values"/>
-    <testcase time="0.868" classname="table_02" name="Table_02_generation_tplyr_works_with_some_NA_values"/>
-    <testcase time="0.0299999999999994" classname="table_02" name="Table_02_generation_tplyr_works_with_some_NA_values">
+    <testcase time="0.0579999999999998" classname="table_02" name="Table_02_generation_tplyr_works_with_some_NA_values"/>
+    <testcase time="0.936999999999999" classname="table_02" name="Table_02_generation_tplyr_works_with_some_NA_values"/>
+    <testcase time="0.032" classname="table_02" name="Table_02_generation_tplyr_works_with_some_NA_values">
       <skipped message="Reason: On CRAN ('test-table_02.R:119:3')"/>
     </testcase>
     <testcase time="0.0239999999999991" classname="table_02" name="Table_02_generation_gtsum_works_with_default_values"/>
-    <testcase time="4.025" classname="table_02" name="Table_02_generation_gtsum_works_with_default_values"/>
-    <testcase time="0.00999999999999801" classname="table_02" name="Table_02_generation_gtsum_works_with_default_values">
+    <testcase time="4.329" classname="table_02" name="Table_02_generation_gtsum_works_with_default_values"/>
+    <testcase time="0.0109999999999992" classname="table_02" name="Table_02_generation_gtsum_works_with_default_values">
       <skipped message="Reason: On CRAN ('test-table_02.R:128:3')"/>
     </testcase>
-    <testcase time="0.0620000000000012" classname="table_02" name="Table_02_generation_gtsum_works_with_custom_values"/>
-    <testcase time="4.436" classname="table_02" name="Table_02_generation_gtsum_works_with_custom_values"/>
-    <testcase time="0.00999999999999801" classname="table_02" name="Table_02_generation_gtsum_works_with_custom_values">
+    <testcase time="0.0599999999999987" classname="table_02" name="Table_02_generation_gtsum_works_with_custom_values"/>
+    <testcase time="4.778" classname="table_02" name="Table_02_generation_gtsum_works_with_custom_values"/>
+    <testcase time="0.0120000000000005" classname="table_02" name="Table_02_generation_gtsum_works_with_custom_values">
       <skipped message="Reason: On CRAN ('test-table_02.R:146:3')"/>
     </testcase>
-    <testcase time="0.0480000000000018" classname="table_02" name="Table_02_generation_gtsum_works_with_some_NA_values"/>
-    <testcase time="1.474" classname="table_02" name="Table_02_generation_gtsum_works_with_some_NA_values"/>
-    <testcase time="0.00900000000000034" classname="table_02" name="Table_02_generation_gtsum_works_with_some_NA_values">
+    <testcase time="0.0489999999999995" classname="table_02" name="Table_02_generation_gtsum_works_with_some_NA_values"/>
+    <testcase time="1.526" classname="table_02" name="Table_02_generation_gtsum_works_with_some_NA_values"/>
+    <testcase time="0.0120000000000005" classname="table_02" name="Table_02_generation_gtsum_works_with_some_NA_values">
       <skipped message="Reason: On CRAN ('test-table_02.R:160:3')"/>
     </testcase>
   </testsuite>
-  <testsuite name="table_03" timestamp="2023-10-24T12:21:02Z" hostname="71db300676e9" tests="8" skipped="2" failures="0" errors="0" time="1.039">
+  <testsuite name="table_03" timestamp="2023-10-30T23:55:57Z" hostname="7de0fe61e5a2" tests="8" skipped="2" failures="0" errors="0" time="1.144">
     <testcase time="0.0470000000000006" classname="table_03" name="Table_3_generation_works_with_default_values"/>
-    <testcase time="0.000999999999997669" classname="table_03" name="Table_3_generation_works_with_default_values"/>
-    <testcase time="0.417000000000002" classname="table_03" name="Table_3_generation_works_with_default_values"/>
-    <testcase time="0.070999999999998" classname="table_03" name="Table_3_generation_works_with_default_values">
+    <testcase time="0.00199999999999889" classname="table_03" name="Table_3_generation_works_with_default_values"/>
+    <testcase time="0.460999999999999" classname="table_03" name="Table_3_generation_works_with_default_values"/>
+    <testcase time="0.0820000000000007" classname="table_03" name="Table_3_generation_works_with_default_values">
       <skipped message="Reason: On CRAN ('test-table_03.R:21:3')"/>
     </testcase>
-    <testcase time="0.0240000000000009" classname="table_03" name="Table_3_generation_works_with_custom_values"/>
+    <testcase time="0.0289999999999999" classname="table_03" name="Table_3_generation_works_with_custom_values"/>
     <testcase time="0.00300000000000011" classname="table_03" name="Table_3_generation_works_with_custom_values"/>
-    <testcase time="0.382000000000001" classname="table_03" name="Table_3_generation_works_with_custom_values"/>
-    <testcase time="0.0939999999999976" classname="table_03" name="Table_3_generation_works_with_custom_values">
+    <testcase time="0.416" classname="table_03" name="Table_3_generation_works_with_custom_values"/>
+    <testcase time="0.103999999999999" classname="table_03" name="Table_3_generation_works_with_custom_values">
       <skipped message="Reason: On CRAN ('test-table_03.R:41:3')"/>
     </testcase>
   </testsuite>
-  <testsuite name="table_04" timestamp="2023-10-24T12:21:03Z" hostname="71db300676e9" tests="12" skipped="2" failures="0" errors="0" time="1.133">
-    <testcase time="0.0520000000000032" classname="table_04" name="Table_04_generation_works_with_default_values"/>
-    <testcase time="0.000999999999997669" classname="table_04" name="Table_04_generation_works_with_default_values"/>
+  <testsuite name="table_04" timestamp="2023-10-30T23:55:58Z" hostname="7de0fe61e5a2" tests="12" skipped="2" failures="0" errors="0" time="1.208">
+    <testcase time="0.0530000000000008" classname="table_04" name="Table_04_generation_works_with_default_values"/>
+    <testcase time="0.00300000000000011" classname="table_04" name="Table_04_generation_works_with_default_values"/>
     <testcase time="0.00199999999999889" classname="table_04" name="Table_04_generation_works_with_default_values"/>
     <testcase time="0.00200000000000244" classname="table_04" name="Table_04_generation_works_with_default_values"/>
-    <testcase time="0.413" classname="table_04" name="Table_04_generation_works_with_default_values"/>
-    <testcase time="0.131" classname="table_04" name="Table_04_generation_works_with_default_values">
+    <testcase time="0.439" classname="table_04" name="Table_04_generation_works_with_default_values"/>
+    <testcase time="0.132999999999999" classname="table_04" name="Table_04_generation_works_with_default_values">
       <skipped message="Reason: On CRAN ('test-table_04.R:18:3')"/>
     </testcase>
     <testcase time="0.0219999999999985" classname="table_04" name="Table_04_generation_works_with_custom_values"/>
-    <testcase time="0.00100000000000122" classname="table_04" name="Table_04_generation_works_with_custom_values"/>
+    <testcase time="0.00200000000000244" classname="table_04" name="Table_04_generation_works_with_custom_values"/>
     <testcase time="0.00199999999999889" classname="table_04" name="Table_04_generation_works_with_custom_values"/>
     <testcase time="0.00199999999999889" classname="table_04" name="Table_04_generation_works_with_custom_values"/>
-    <testcase time="0.392000000000003" classname="table_04" name="Table_04_generation_works_with_custom_values"/>
-    <testcase time="0.113" classname="table_04" name="Table_04_generation_works_with_custom_values">
+    <testcase time="0.431000000000001" classname="table_04" name="Table_04_generation_works_with_custom_values"/>
+    <testcase time="0.117000000000001" classname="table_04" name="Table_04_generation_works_with_custom_values">
       <skipped message="Reason: On CRAN ('test-table_04.R:44:3')"/>
     </testcase>
   </testsuite>
-  <testsuite name="table_05" timestamp="2023-10-24T12:21:05Z" hostname="71db300676e9" tests="12" skipped="4" failures="0" errors="0" time="1.789">
-    <testcase time="0.212" classname="table_05" name="Table_05_generation_works_with_default_values"/>
-    <testcase time="0.244999999999997" classname="table_05" name="Table_05_generation_works_with_default_values"/>
-    <testcase time="0.0980000000000025" classname="table_05" name="Table_05_generation_works_with_default_values">
+  <testsuite name="table_05" timestamp="2023-10-30T23:55:59Z" hostname="7de0fe61e5a2" tests="12" skipped="4" failures="0" errors="0" time="1.881">
+    <testcase time="0.221999999999998" classname="table_05" name="Table_05_generation_works_with_default_values"/>
+    <testcase time="0.284000000000002" classname="table_05" name="Table_05_generation_works_with_default_values"/>
+    <testcase time="0.105" classname="table_05" name="Table_05_generation_works_with_default_values">
       <skipped message="Reason: On CRAN ('test-table_05.R:10:3')"/>
     </testcase>
-    <testcase time="0.0219999999999985" classname="table_05" name="Table_05_generation_works_with_custom_values"/>
-    <testcase time="0.297000000000001" classname="table_05" name="Table_05_generation_works_with_custom_values"/>
-    <testcase time="0.106999999999999" classname="table_05" name="Table_05_generation_works_with_custom_values">
+    <testcase time="0.0239999999999974" classname="table_05" name="Table_05_generation_works_with_custom_values"/>
+    <testcase time="0.305" classname="table_05" name="Table_05_generation_works_with_custom_values"/>
+    <testcase time="0.113000000000003" classname="table_05" name="Table_05_generation_works_with_custom_values">
       <skipped message="Reason: On CRAN ('test-table_05.R:34:3')"/>
     </testcase>
     <testcase time="0.0259999999999998" classname="table_05" name="Table_05_generation_works_with_NA_values_pruned_rows"/>
-    <testcase time="0.23" classname="table_05" name="Table_05_generation_works_with_NA_values_pruned_rows"/>
-    <testcase time="0.114000000000001" classname="table_05" name="Table_05_generation_works_with_NA_values_pruned_rows">
+    <testcase time="0.251999999999999" classname="table_05" name="Table_05_generation_works_with_NA_values_pruned_rows"/>
+    <testcase time="0.105" classname="table_05" name="Table_05_generation_works_with_NA_values_pruned_rows">
       <skipped message="Reason: On CRAN ('test-table_05.R:44:3')"/>
     </testcase>
     <testcase time="0.0259999999999998" classname="table_05" name="Table_05_generation_works_with_risk_difference_column"/>
-    <testcase time="0.309999999999999" classname="table_05" name="Table_05_generation_works_with_risk_difference_column"/>
-    <testcase time="0.102" classname="table_05" name="Table_05_generation_works_with_risk_difference_column">
+    <testcase time="0.308" classname="table_05" name="Table_05_generation_works_with_risk_difference_column"/>
+    <testcase time="0.111000000000001" classname="table_05" name="Table_05_generation_works_with_risk_difference_column">
       <skipped message="Reason: On CRAN ('test-table_05.R:57:3')"/>
     </testcase>
   </testsuite>
-  <testsuite name="table_06" timestamp="2023-10-24T12:21:06Z" hostname="71db300676e9" tests="15" skipped="3" failures="0" errors="0" time="2.741">
-    <testcase time="0.0300000000000011" classname="table_06" name="Table_06_generation_works_with_default_values"/>
-    <testcase time="0.00199999999999889" classname="table_06" name="Table_06_generation_works_with_default_values"/>
-    <testcase time="0.0680000000000014" classname="table_06" name="Table_06_generation_works_with_default_values"/>
-    <testcase time="0.576999999999998" classname="table_06" name="Table_06_generation_works_with_default_values"/>
-    <testcase time="0.173000000000002" classname="table_06" name="Table_06_generation_works_with_default_values">
+  <testsuite name="table_06" timestamp="2023-10-30T23:56:01Z" hostname="7de0fe61e5a2" tests="15" skipped="3" failures="0" errors="0" time="2.852">
+    <testcase time="0.0299999999999976" classname="table_06" name="Table_06_generation_works_with_default_values"/>
+    <testcase time="0.00200000000000244" classname="table_06" name="Table_06_generation_works_with_default_values"/>
+    <testcase time="0.0760000000000005" classname="table_06" name="Table_06_generation_works_with_default_values"/>
+    <testcase time="0.555999999999997" classname="table_06" name="Table_06_generation_works_with_default_values"/>
+    <testcase time="0.157" classname="table_06" name="Table_06_generation_works_with_default_values">
       <skipped message="Reason: On CRAN ('test-table_06.R:8:3')"/>
     </testcase>
-    <testcase time="0.0249999999999986" classname="table_06" name="Table_06_generation_works_with_custom_values"/>
-    <testcase time="0.00200000000000244" classname="table_06" name="Table_06_generation_works_with_custom_values"/>
-    <testcase time="0.0640000000000001" classname="table_06" name="Table_06_generation_works_with_custom_values"/>
-    <testcase time="0.677999999999997" classname="table_06" name="Table_06_generation_works_with_custom_values"/>
-    <testcase time="0.223000000000003" classname="table_06" name="Table_06_generation_works_with_custom_values">
+    <testcase time="0.022000000000002" classname="table_06" name="Table_06_generation_works_with_custom_values"/>
+    <testcase time="0.00199999999999889" classname="table_06" name="Table_06_generation_works_with_custom_values"/>
+    <testcase time="0.0629999999999988" classname="table_06" name="Table_06_generation_works_with_custom_values"/>
+    <testcase time="0.782" classname="table_06" name="Table_06_generation_works_with_custom_values"/>
+    <testcase time="0.212" classname="table_06" name="Table_06_generation_works_with_custom_values">
       <skipped message="Reason: On CRAN ('test-table_06.R:40:3')"/>
     </testcase>
-    <testcase time="0.0249999999999986" classname="table_06" name="Table_06_generation_works_with_risk_difference_column"/>
+    <testcase time="0.0250000000000021" classname="table_06" name="Table_06_generation_works_with_risk_difference_column"/>
     <testcase time="0.00199999999999889" classname="table_06" name="Table_06_generation_works_with_risk_difference_column"/>
-    <testcase time="0.0630000000000024" classname="table_06" name="Table_06_generation_works_with_risk_difference_column"/>
-    <testcase time="0.667999999999999" classname="table_06" name="Table_06_generation_works_with_risk_difference_column"/>
-    <testcase time="0.140999999999998" classname="table_06" name="Table_06_generation_works_with_risk_difference_column">
+    <testcase time="0.0700000000000003" classname="table_06" name="Table_06_generation_works_with_risk_difference_column"/>
+    <testcase time="0.715" classname="table_06" name="Table_06_generation_works_with_risk_difference_column"/>
+    <testcase time="0.138000000000002" classname="table_06" name="Table_06_generation_works_with_risk_difference_column">
       <skipped message="Reason: On CRAN ('test-table_06.R:48:3')"/>
     </testcase>
   </testsuite>
-  <testsuite name="table_07" timestamp="2023-10-24T12:21:09Z" hostname="71db300676e9" tests="24" skipped="4" failures="0" errors="0" time="2.925">
-    <testcase time="0.032" classname="table_07" name="Table_07_generation_works_with_default_values"/>
-    <testcase time="0.00200000000000244" classname="table_07" name="Table_07_generation_works_with_default_values"/>
+  <testsuite name="table_07" timestamp="2023-10-30T23:56:04Z" hostname="7de0fe61e5a2" tests="24" skipped="4" failures="0" errors="0" time="2.986">
+    <testcase time="0.0429999999999993" classname="table_07" name="Table_07_generation_works_with_default_values"/>
     <testcase time="0.00199999999999889" classname="table_07" name="Table_07_generation_works_with_default_values"/>
-    <testcase time="0.0519999999999996" classname="table_07" name="Table_07_generation_works_with_default_values"/>
+    <testcase time="0.00199999999999889" classname="table_07" name="Table_07_generation_works_with_default_values"/>
+    <testcase time="0.0530000000000008" classname="table_07" name="Table_07_generation_works_with_default_values"/>
     <testcase time="0.402000000000001" classname="table_07" name="Table_07_generation_works_with_default_values"/>
-    <testcase time="0.166" classname="table_07" name="Table_07_generation_works_with_default_values">
+    <testcase time="0.149999999999999" classname="table_07" name="Table_07_generation_works_with_default_values">
       <skipped message="Reason: On CRAN ('test-table_07.R:13:3')"/>
     </testcase>
-    <testcase time="0.0269999999999975" classname="table_07" name="Table_07_generation_works_with_custom_values"/>
-    <testcase time="0.00200000000000244" classname="table_07" name="Table_07_generation_works_with_custom_values"/>
-    <testcase time="0.00199999999999889" classname="table_07" name="Table_07_generation_works_with_custom_values"/>
-    <testcase time="0.0489999999999995" classname="table_07" name="Table_07_generation_works_with_custom_values"/>
-    <testcase time="0.577999999999999" classname="table_07" name="Table_07_generation_works_with_custom_values"/>
-    <testcase time="0.203000000000003" classname="table_07" name="Table_07_generation_works_with_custom_values">
+    <testcase time="0.0230000000000032" classname="table_07" name="Table_07_generation_works_with_custom_values"/>
+    <testcase time="0.00199999999999534" classname="table_07" name="Table_07_generation_works_with_custom_values"/>
+    <testcase time="0.000999999999997669" classname="table_07" name="Table_07_generation_works_with_custom_values"/>
+    <testcase time="0.046999999999997" classname="table_07" name="Table_07_generation_works_with_custom_values"/>
+    <testcase time="0.583000000000006" classname="table_07" name="Table_07_generation_works_with_custom_values"/>
+    <testcase time="0.198" classname="table_07" name="Table_07_generation_works_with_custom_values">
       <skipped message="Reason: On CRAN ('test-table_07.R:42:3')"/>
     </testcase>
-    <testcase time="0.0239999999999974" classname="table_07" name="Table_07_generation_works_with_NA_values_pruned_rows"/>
-    <testcase time="0.00100000000000122" classname="table_07" name="Table_07_generation_works_with_NA_values_pruned_rows"/>
-    <testcase time="0.00199999999999889" classname="table_07" name="Table_07_generation_works_with_NA_values_pruned_rows"/>
-    <testcase time="0.0519999999999996" classname="table_07" name="Table_07_generation_works_with_NA_values_pruned_rows"/>
-    <testcase time="0.418000000000003" classname="table_07" name="Table_07_generation_works_with_NA_values_pruned_rows"/>
-    <testcase time="0.156999999999996" classname="table_07" name="Table_07_generation_works_with_NA_values_pruned_rows">
+    <testcase time="0.0239999999999938" classname="table_07" name="Table_07_generation_works_with_NA_values_pruned_rows"/>
+    <testcase time="0.00400000000000489" classname="table_07" name="Table_07_generation_works_with_NA_values_pruned_rows"/>
+    <testcase time="0.00199999999999534" classname="table_07" name="Table_07_generation_works_with_NA_values_pruned_rows"/>
+    <testcase time="0.054000000000002" classname="table_07" name="Table_07_generation_works_with_NA_values_pruned_rows"/>
+    <testcase time="0.417999999999999" classname="table_07" name="Table_07_generation_works_with_NA_values_pruned_rows"/>
+    <testcase time="0.164999999999999" classname="table_07" name="Table_07_generation_works_with_NA_values_pruned_rows">
       <skipped message="Reason: On CRAN ('test-table_07.R:52:3')"/>
     </testcase>
-    <testcase time="0.0249999999999986" classname="table_07" name="Table_07_generation_works_with_risk_difference_column"/>
-    <testcase time="0.00200000000000244" classname="table_07" name="Table_07_generation_works_with_risk_difference_column"/>
+    <testcase time="0.0240000000000009" classname="table_07" name="Table_07_generation_works_with_risk_difference_column"/>
+    <testcase time="0.00100000000000477" classname="table_07" name="Table_07_generation_works_with_risk_difference_column"/>
     <testcase time="0.00300000000000011" classname="table_07" name="Table_07_generation_works_with_risk_difference_column"/>
-    <testcase time="0.0619999999999976" classname="table_07" name="Table_07_generation_works_with_risk_difference_column"/>
-    <testcase time="0.5" classname="table_07" name="Table_07_generation_works_with_risk_difference_column"/>
-    <testcase time="0.162000000000006" classname="table_07" name="Table_07_generation_works_with_risk_difference_column">
+    <testcase time="0.0519999999999996" classname="table_07" name="Table_07_generation_works_with_risk_difference_column"/>
+    <testcase time="0.539999999999999" classname="table_07" name="Table_07_generation_works_with_risk_difference_column"/>
+    <testcase time="0.192999999999998" classname="table_07" name="Table_07_generation_works_with_risk_difference_column">
       <skipped message="Reason: On CRAN ('test-table_07.R:65:3')"/>
     </testcase>
   </testsuite>
-  <testsuite name="table_08" timestamp="2023-10-24T12:21:12Z" hostname="71db300676e9" tests="8" skipped="2" failures="0" errors="0" time="0.534">
-    <testcase time="0.029999999999994" classname="table_08" name="Table_08_generation_works_with_default_values"/>
-    <testcase time="0.00200000000000244" classname="table_08" name="Table_08_generation_works_with_default_values"/>
-    <testcase time="0.0649999999999977" classname="table_08" name="Table_08_generation_works_with_default_values"/>
-    <testcase time="0.155000000000001" classname="table_08" name="Table_08_generation_works_with_default_values">
+  <testsuite name="table_08" timestamp="2023-10-30T23:56:07Z" hostname="7de0fe61e5a2" tests="8" skipped="2" failures="0" errors="0" time="0.596">
+    <testcase time="0.0320000000000036" classname="table_08" name="Table_08_generation_works_with_default_values"/>
+    <testcase time="0.00199999999999534" classname="table_08" name="Table_08_generation_works_with_default_values"/>
+    <testcase time="0.0609999999999999" classname="table_08" name="Table_08_generation_works_with_default_values"/>
+    <testcase time="0.166000000000004" classname="table_08" name="Table_08_generation_works_with_default_values">
       <skipped message="Reason: On CRAN ('test-table_08.R:10:3')"/>
     </testcase>
     <testcase time="0.0240000000000009" classname="table_08" name="Table_08_generation_works_with_custom_values"/>
-    <testcase time="0.00200000000000244" classname="table_08" name="Table_08_generation_works_with_custom_values"/>
-    <testcase time="0.0649999999999977" classname="table_08" name="Table_08_generation_works_with_custom_values"/>
-    <testcase time="0.191000000000003" classname="table_08" name="Table_08_generation_works_with_custom_values">
+    <testcase time="0.00199999999999534" classname="table_08" name="Table_08_generation_works_with_custom_values"/>
+    <testcase time="0.0549999999999997" classname="table_08" name="Table_08_generation_works_with_custom_values"/>
+    <testcase time="0.254000000000005" classname="table_08" name="Table_08_generation_works_with_custom_values">
       <skipped message="Reason: On CRAN ('test-table_08.R:31:3')"/>
     </testcase>
   </testsuite>
-  <testsuite name="table_09" timestamp="2023-10-24T12:21:13Z" hostname="71db300676e9" tests="12" skipped="3" failures="0" errors="0" time="1.887">
-    <testcase time="0.0449999999999946" classname="table_09" name="Table_09_generation_works_with_default_values"/>
-    <testcase time="0.0580000000000069" classname="table_09" name="Table_09_generation_works_with_default_values"/>
-    <testcase time="0.357999999999997" classname="table_09" name="Table_09_generation_works_with_default_values"/>
-    <testcase time="0.0790000000000006" classname="table_09" name="Table_09_generation_works_with_default_values">
+  <testsuite name="table_09" timestamp="2023-10-30T23:56:08Z" hostname="7de0fe61e5a2" tests="12" skipped="3" failures="0" errors="0" time="1.911">
+    <testcase time="0.0309999999999988" classname="table_09" name="Table_09_generation_works_with_default_values"/>
+    <testcase time="0.0549999999999997" classname="table_09" name="Table_09_generation_works_with_default_values"/>
+    <testcase time="0.393999999999998" classname="table_09" name="Table_09_generation_works_with_default_values"/>
+    <testcase time="0.0940000000000012" classname="table_09" name="Table_09_generation_works_with_default_values">
       <skipped message="Reason: On CRAN ('test-table_09.R:8:3')"/>
     </testcase>
-    <testcase time="0.0219999999999985" classname="table_09" name="Table_09_generation_works_with_custom_values"/>
-    <testcase time="0.0640000000000001" classname="table_09" name="Table_09_generation_works_with_custom_values"/>
-    <testcase time="0.481000000000002" classname="table_09" name="Table_09_generation_works_with_custom_values"/>
-    <testcase time="0.106000000000002" classname="table_09" name="Table_09_generation_works_with_custom_values">
+    <testcase time="0.0229999999999961" classname="table_09" name="Table_09_generation_works_with_custom_values"/>
+    <testcase time="0.0500000000000043" classname="table_09" name="Table_09_generation_works_with_custom_values"/>
+    <testcase time="0.506999999999998" classname="table_09" name="Table_09_generation_works_with_custom_values"/>
+    <testcase time="0.0889999999999986" classname="table_09" name="Table_09_generation_works_with_custom_values">
       <skipped message="Reason: On CRAN ('test-table_09.R:39:3')"/>
     </testcase>
-    <testcase time="0.0209999999999937" classname="table_09" name="Table_09_generation_works_with_risk_difference_column"/>
-    <testcase time="0.0470000000000041" classname="table_09" name="Table_09_generation_works_with_risk_difference_column"/>
-    <testcase time="0.502000000000002" classname="table_09" name="Table_09_generation_works_with_risk_difference_column"/>
-    <testcase time="0.103999999999999" classname="table_09" name="Table_09_generation_works_with_risk_difference_column">
+    <testcase time="0.0240000000000009" classname="table_09" name="Table_09_generation_works_with_risk_difference_column"/>
+    <testcase time="0.0510000000000019" classname="table_09" name="Table_09_generation_works_with_risk_difference_column"/>
+    <testcase time="0.491" classname="table_09" name="Table_09_generation_works_with_risk_difference_column"/>
+    <testcase time="0.101999999999997" classname="table_09" name="Table_09_generation_works_with_risk_difference_column">
       <skipped message="Reason: On CRAN ('test-table_09.R:47:3')"/>
     </testcase>
   </testsuite>
-  <testsuite name="table_10" timestamp="2023-10-24T12:21:14Z" hostname="71db300676e9" tests="15" skipped="3" failures="0" errors="0" time="2.136">
-    <testcase time="0.0379999999999967" classname="table_10" name="Table_10_generation_works_with_default_values"/>
+  <testsuite name="table_10" timestamp="2023-10-30T23:56:10Z" hostname="7de0fe61e5a2" tests="15" skipped="3" failures="0" errors="0" time="2.271">
+    <testcase time="0.0399999999999991" classname="table_10" name="Table_10_generation_works_with_default_values"/>
     <testcase time="0.00200000000000244" classname="table_10" name="Table_10_generation_works_with_default_values"/>
-    <testcase time="0.0529999999999973" classname="table_10" name="Table_10_generation_works_with_default_values"/>
-    <testcase time="0.447000000000003" classname="table_10" name="Table_10_generation_works_with_default_values"/>
-    <testcase time="0.170999999999999" classname="table_10" name="Table_10_generation_works_with_default_values">
+    <testcase time="0.054000000000002" classname="table_10" name="Table_10_generation_works_with_default_values"/>
+    <testcase time="0.506" classname="table_10" name="Table_10_generation_works_with_default_values"/>
+    <testcase time="0.161999999999999" classname="table_10" name="Table_10_generation_works_with_default_values">
       <skipped message="Reason: On CRAN ('test-table_10.R:17:3')"/>
     </testcase>
-    <testcase time="0.0259999999999962" classname="table_10" name="Table_10_generation_works_with_custom_values"/>
+    <testcase time="0.0249999999999986" classname="table_10" name="Table_10_generation_works_with_custom_values"/>
     <testcase time="0.00200000000000244" classname="table_10" name="Table_10_generation_works_with_custom_values"/>
-    <testcase time="0.0489999999999995" classname="table_10" name="Table_10_generation_works_with_custom_values"/>
-    <testcase time="0.459000000000003" classname="table_10" name="Table_10_generation_works_with_custom_values"/>
-    <testcase time="0.0790000000000006" classname="table_10" name="Table_10_generation_works_with_custom_values">
+    <testcase time="0.0480000000000018" classname="table_10" name="Table_10_generation_works_with_custom_values"/>
+    <testcase time="0.474999999999994" classname="table_10" name="Table_10_generation_works_with_custom_values"/>
+    <testcase time="0.078000000000003" classname="table_10" name="Table_10_generation_works_with_custom_values">
       <skipped message="Reason: On CRAN ('test-table_10.R:52:3')"/>
     </testcase>
-    <testcase time="0.0229999999999961" classname="table_10" name="Table_10_generation_works_with_risk_difference_column"/>
-    <testcase time="0.00200000000000244" classname="table_10" name="Table_10_generation_works_with_risk_difference_column"/>
-    <testcase time="0.0489999999999995" classname="table_10" name="Table_10_generation_works_with_risk_difference_column"/>
-    <testcase time="0.558" classname="table_10" name="Table_10_generation_works_with_risk_difference_column"/>
-    <testcase time="0.177999999999997" classname="table_10" name="Table_10_generation_works_with_risk_difference_column">
+    <testcase time="0.0240000000000009" classname="table_10" name="Table_10_generation_works_with_risk_difference_column"/>
+    <testcase time="0.00199999999999534" classname="table_10" name="Table_10_generation_works_with_risk_difference_column"/>
+    <testcase time="0.0660000000000025" classname="table_10" name="Table_10_generation_works_with_risk_difference_column"/>
+    <testcase time="0.587000000000003" classname="table_10" name="Table_10_generation_works_with_risk_difference_column"/>
+    <testcase time="0.199999999999996" classname="table_10" name="Table_10_generation_works_with_risk_difference_column">
       <skipped message="Reason: On CRAN ('test-table_10.R:60:3')"/>
     </testcase>
   </testsuite>
-  <testsuite name="table_11" timestamp="2023-10-24T12:21:17Z" hostname="71db300676e9" tests="12" skipped="3" failures="0" errors="0" time="3.28">
-    <testcase time="0.0339999999999989" classname="table_11" name="Table_11_generation_works_with_default_values"/>
+  <testsuite name="table_11" timestamp="2023-10-30T23:56:12Z" hostname="7de0fe61e5a2" tests="12" skipped="3" failures="0" errors="0" time="3.495">
+    <testcase time="0.0429999999999993" classname="table_11" name="Table_11_generation_works_with_default_values"/>
     <testcase time="0.0650000000000048" classname="table_11" name="Table_11_generation_works_with_default_values"/>
-    <testcase time="0.754999999999995" classname="table_11" name="Table_11_generation_works_with_default_values"/>
-    <testcase time="0.167000000000002" classname="table_11" name="Table_11_generation_works_with_default_values">
+    <testcase time="0.842999999999996" classname="table_11" name="Table_11_generation_works_with_default_values"/>
+    <testcase time="0.188000000000002" classname="table_11" name="Table_11_generation_works_with_default_values">
       <skipped message="Reason: On CRAN ('test-table_11.R:18:3')"/>
     </testcase>
-    <testcase time="0.0249999999999986" classname="table_11" name="Table_11_generation_works_with_custom_values"/>
-    <testcase time="0.0640000000000001" classname="table_11" name="Table_11_generation_works_with_custom_values"/>
-    <testcase time="0.711000000000006" classname="table_11" name="Table_11_generation_works_with_custom_values"/>
-    <testcase time="0.0999999999999943" classname="table_11" name="Table_11_generation_works_with_custom_values">
+    <testcase time="0.0240000000000009" classname="table_11" name="Table_11_generation_works_with_custom_values"/>
+    <testcase time="0.0539999999999949" classname="table_11" name="Table_11_generation_works_with_custom_values"/>
+    <testcase time="0.832000000000001" classname="table_11" name="Table_11_generation_works_with_custom_values"/>
+    <testcase time="0.0860000000000056" classname="table_11" name="Table_11_generation_works_with_custom_values">
       <skipped message="Reason: On CRAN ('test-table_11.R:48:3')"/>
     </testcase>
-    <testcase time="0.0330000000000013" classname="table_11" name="Table_11_generation_works_with_risk_difference_column"/>
-    <testcase time="0.0720000000000027" classname="table_11" name="Table_11_generation_works_with_risk_difference_column"/>
-    <testcase time="1.018" classname="table_11" name="Table_11_generation_works_with_risk_difference_column"/>
-    <testcase time="0.235999999999997" classname="table_11" name="Table_11_generation_works_with_risk_difference_column">
+    <testcase time="0.0249999999999986" classname="table_11" name="Table_11_generation_works_with_risk_difference_column"/>
+    <testcase time="0.0619999999999976" classname="table_11" name="Table_11_generation_works_with_risk_difference_column"/>
+    <testcase time="1.051" classname="table_11" name="Table_11_generation_works_with_risk_difference_column"/>
+    <testcase time="0.222000000000001" classname="table_11" name="Table_11_generation_works_with_risk_difference_column">
       <skipped message="Reason: On CRAN ('test-table_11.R:56:3')"/>
     </testcase>
   </testsuite>
-  <testsuite name="table_12" timestamp="2023-10-24T12:21:20Z" hostname="71db300676e9" tests="12" skipped="3" failures="0" errors="0" time="4.357">
-    <testcase time="0.0279999999999987" classname="table_12" name="Table_12_generation_works_with_default_values"/>
-    <testcase time="0.0609999999999999" classname="table_12" name="Table_12_generation_works_with_default_values"/>
-    <testcase time="1.037" classname="table_12" name="Table_12_generation_works_with_default_values"/>
-    <testcase time="0.149000000000001" classname="table_12" name="Table_12_generation_works_with_default_values">
+  <testsuite name="table_12" timestamp="2023-10-30T23:56:15Z" hostname="7de0fe61e5a2" tests="12" skipped="3" failures="0" errors="0" time="4.656">
+    <testcase time="0.0329999999999941" classname="table_12" name="Table_12_generation_works_with_default_values"/>
+    <testcase time="0.0660000000000025" classname="table_12" name="Table_12_generation_works_with_default_values"/>
+    <testcase time="1.145" classname="table_12" name="Table_12_generation_works_with_default_values"/>
+    <testcase time="0.162999999999997" classname="table_12" name="Table_12_generation_works_with_default_values">
       <skipped message="Reason: On CRAN ('test-table_12.R:9:3')"/>
     </testcase>
-    <testcase time="0.0260000000000034" classname="table_12" name="Table_12_generation_works_with_custom_values"/>
-    <testcase time="0.0609999999999999" classname="table_12" name="Table_12_generation_works_with_custom_values"/>
-    <testcase time="1.026" classname="table_12" name="Table_12_generation_works_with_custom_values"/>
-    <testcase time="0.159000000000006" classname="table_12" name="Table_12_generation_works_with_custom_values">
+    <testcase time="0.0240000000000009" classname="table_12" name="Table_12_generation_works_with_custom_values"/>
+    <testcase time="0.0680000000000049" classname="table_12" name="Table_12_generation_works_with_custom_values"/>
+    <testcase time="1.11199999999999" classname="table_12" name="Table_12_generation_works_with_custom_values"/>
+    <testcase time="0.154000000000003" classname="table_12" name="Table_12_generation_works_with_custom_values">
       <skipped message="Reason: On CRAN ('test-table_12.R:39:3')"/>
     </testcase>
-    <testcase time="0.0239999999999938" classname="table_12" name="Table_12_generation_works_with_risk_difference_column"/>
-    <testcase time="0.0630000000000024" classname="table_12" name="Table_12_generation_works_with_risk_difference_column"/>
-    <testcase time="1.573" classname="table_12" name="Table_12_generation_works_with_risk_difference_column"/>
-    <testcase time="0.149999999999999" classname="table_12" name="Table_12_generation_works_with_risk_difference_column">
+    <testcase time="0.0240000000000009" classname="table_12" name="Table_12_generation_works_with_risk_difference_column"/>
+    <testcase time="0.0640000000000001" classname="table_12" name="Table_12_generation_works_with_risk_difference_column"/>
+    <testcase time="1.635" classname="table_12" name="Table_12_generation_works_with_risk_difference_column"/>
+    <testcase time="0.167999999999999" classname="table_12" name="Table_12_generation_works_with_risk_difference_column">
       <skipped message="Reason: On CRAN ('test-table_12.R:47:3')"/>
     </testcase>
   </testsuite>
-  <testsuite name="table_13" timestamp="2023-10-24T12:21:24Z" hostname="71db300676e9" tests="12" skipped="3" failures="0" errors="0" time="1.046">
-    <testcase time="0.0260000000000034" classname="table_13" name="Table_13_generation_works_with_default_values"/>
-    <testcase time="0.0519999999999996" classname="table_13" name="Table_13_generation_works_with_default_values"/>
-    <testcase time="0.149000000000001" classname="table_13" name="Table_13_generation_works_with_default_values"/>
-    <testcase time="0.0959999999999965" classname="table_13" name="Table_13_generation_works_with_default_values">
+  <testsuite name="table_13" timestamp="2023-10-30T23:56:20Z" hostname="7de0fe61e5a2" tests="12" skipped="3" failures="0" errors="0" time="1.056">
+    <testcase time="0.0300000000000011" classname="table_13" name="Table_13_generation_works_with_default_values"/>
+    <testcase time="0.0619999999999976" classname="table_13" name="Table_13_generation_works_with_default_values"/>
+    <testcase time="0.161000000000001" classname="table_13" name="Table_13_generation_works_with_default_values"/>
+    <testcase time="0.0850000000000009" classname="table_13" name="Table_13_generation_works_with_default_values">
       <skipped message="Reason: On CRAN ('test-table_13.R:8:3')"/>
     </testcase>
-    <testcase time="0.0229999999999961" classname="table_13" name="Table_13_generation_works_with_custom_values"/>
-    <testcase time="0.0670000000000002" classname="table_13" name="Table_13_generation_works_with_custom_values"/>
-    <testcase time="0.173999999999999" classname="table_13" name="Table_13_generation_works_with_custom_values"/>
+    <testcase time="0.0240000000000009" classname="table_13" name="Table_13_generation_works_with_custom_values"/>
+    <testcase time="0.0619999999999976" classname="table_13" name="Table_13_generation_works_with_custom_values"/>
+    <testcase time="0.187000000000005" classname="table_13" name="Table_13_generation_works_with_custom_values"/>
     <testcase time="0.0670000000000002" classname="table_13" name="Table_13_generation_works_with_custom_values">
       <skipped message="Reason: On CRAN ('test-table_13.R:38:3')"/>
     </testcase>
-    <testcase time="0.0260000000000034" classname="table_13" name="Table_13_generation_works_with_risk_difference_column"/>
-    <testcase time="0.0609999999999999" classname="table_13" name="Table_13_generation_works_with_risk_difference_column"/>
-    <testcase time="0.207999999999998" classname="table_13" name="Table_13_generation_works_with_risk_difference_column"/>
-    <testcase time="0.0970000000000013" classname="table_13" name="Table_13_generation_works_with_risk_difference_column">
+    <testcase time="0.0249999999999986" classname="table_13" name="Table_13_generation_works_with_risk_difference_column"/>
+    <testcase time="0.0619999999999976" classname="table_13" name="Table_13_generation_works_with_risk_difference_column"/>
+    <testcase time="0.188000000000002" classname="table_13" name="Table_13_generation_works_with_risk_difference_column"/>
+    <testcase time="0.102999999999994" classname="table_13" name="Table_13_generation_works_with_risk_difference_column">
       <skipped message="Reason: On CRAN ('test-table_13.R:46:3')"/>
     </testcase>
   </testsuite>
-  <testsuite name="table_14" timestamp="2023-10-24T12:21:25Z" hostname="71db300676e9" tests="13" skipped="4" failures="0" errors="0" time="3.919">
-    <testcase time="0.0379999999999967" classname="table_14" name="Table_14_generation_works_with_default_values"/>
-    <testcase time="0.691000000000003" classname="table_14" name="Table_14_generation_works_with_default_values"/>
-    <testcase time="0.170000000000002" classname="table_14" name="Table_14_generation_works_with_default_values">
+  <testsuite name="table_14" timestamp="2023-10-30T23:56:21Z" hostname="7de0fe61e5a2" tests="13" skipped="4" failures="0" errors="0" time="4.198">
+    <testcase time="0.0470000000000041" classname="table_14" name="Table_14_generation_works_with_default_values"/>
+    <testcase time="0.743000000000002" classname="table_14" name="Table_14_generation_works_with_default_values"/>
+    <testcase time="0.201000000000001" classname="table_14" name="Table_14_generation_works_with_default_values">
       <skipped message="Reason: On CRAN ('test-table_14.R:16:3')"/>
     </testcase>
-    <testcase time="0.0249999999999986" classname="table_14" name="Table_14_generation_works_with_custom_values"/>
-    <testcase time="0.054000000000002" classname="table_14" name="Table_14_generation_works_with_custom_values"/>
-    <testcase time="0.731000000000002" classname="table_14" name="Table_14_generation_works_with_custom_values"/>
-    <testcase time="0.190999999999995" classname="table_14" name="Table_14_generation_works_with_custom_values">
+    <testcase time="0.0259999999999962" classname="table_14" name="Table_14_generation_works_with_custom_values"/>
+    <testcase time="0.0589999999999975" classname="table_14" name="Table_14_generation_works_with_custom_values"/>
+    <testcase time="0.800000000000004" classname="table_14" name="Table_14_generation_works_with_custom_values"/>
+    <testcase time="0.199999999999996" classname="table_14" name="Table_14_generation_works_with_custom_values">
       <skipped message="Reason: On CRAN ('test-table_14.R:46:3')"/>
     </testcase>
-    <testcase time="0.027000000000001" classname="table_14" name="Table_14_generation_works_with_NA_values_pruned_rows"/>
-    <testcase time="0.694000000000003" classname="table_14" name="Table_14_generation_works_with_NA_values_pruned_rows"/>
-    <testcase time="0.143999999999998" classname="table_14" name="Table_14_generation_works_with_NA_values_pruned_rows">
+    <testcase time="0.0230000000000032" classname="table_14" name="Table_14_generation_works_with_NA_values_pruned_rows"/>
+    <testcase time="0.744" classname="table_14" name="Table_14_generation_works_with_NA_values_pruned_rows"/>
+    <testcase time="0.143000000000001" classname="table_14" name="Table_14_generation_works_with_NA_values_pruned_rows">
       <skipped message="Reason: On CRAN ('test-table_14.R:53:3')"/>
     </testcase>
-    <testcase time="0.0219999999999985" classname="table_14" name="Table_14_generation_works_with_risk_difference_column"/>
-    <testcase time="0.880000000000003" classname="table_14" name="Table_14_generation_works_with_risk_difference_column"/>
-    <testcase time="0.251999999999995" classname="table_14" name="Table_14_generation_works_with_risk_difference_column">
+    <testcase time="0.0240000000000009" classname="table_14" name="Table_14_generation_works_with_risk_difference_column"/>
+    <testcase time="0.958999999999996" classname="table_14" name="Table_14_generation_works_with_risk_difference_column"/>
+    <testcase time="0.228999999999999" classname="table_14" name="Table_14_generation_works_with_risk_difference_column">
       <skipped message="Reason: On CRAN ('test-table_14.R:61:3')"/>
     </testcase>
   </testsuite>
-  <testsuite name="table_15" timestamp="2023-10-24T12:21:29Z" hostname="71db300676e9" tests="10" skipped="1" failures="0" errors="3" time="0.632">
-    <testcase time="0.0420000000000016" classname="table_15" name="Table_15_generation_works_with_default_values"/>
-    <testcase time="0.0600000000000023" classname="table_15" name="Table_15_generation_works_with_default_values">
+  <testsuite name="table_15" timestamp="2023-10-30T23:56:25Z" hostname="7de0fe61e5a2" tests="10" skipped="1" failures="0" errors="3" time="0.444">
+    <testcase time="0.0360000000000014" classname="table_15" name="Table_15_generation_works_with_default_values"/>
+    <testcase time="0.0549999999999997" classname="table_15" name="Table_15_generation_works_with_default_values">
       <error type="error" message="Error in `make_table_15(adae)`: object 'adsl' not found ('test-table_15.R:11:3')">Error in `make_table_15(adae)`: object 'adsl' not found
 Backtrace:
     x
  1. \-falcon::make_table_15(adae) at test-table_15.R:11:2
  2.   \-falcon::alt_counts_df_preproc(alt_counts_df, arm_var, saffl_var)</error>
     </testcase>
-    <testcase time="0.0360000000000014" classname="table_15" name="Table_15_generation_works_with_custom_values"/>
-    <testcase time="0.046999999999997" classname="table_15" name="Table_15_generation_works_with_custom_values"/>
-    <testcase time="0.197000000000003" classname="table_15" name="Table_15_generation_works_with_custom_values"/>
-    <testcase time="0.0850000000000009" classname="table_15" name="Table_15_generation_works_with_custom_values">
+    <testcase time="0.0349999999999966" classname="table_15" name="Table_15_generation_works_with_custom_values"/>
+    <testcase time="0.0470000000000041" classname="table_15" name="Table_15_generation_works_with_custom_values"/>
+    <testcase time="0.0949999999999989" classname="table_15" name="Table_15_generation_works_with_custom_values"/>
+    <testcase time="0.00800000000000267" classname="table_15" name="Table_15_generation_works_with_custom_values">
       <skipped message="Reason: On CRAN ('test-table_15.R:44:3')"/>
     </testcase>
-    <testcase time="0.0229999999999961" classname="table_15" name="Table_15_generation_works_with_NA_values_pruned_rows"/>
-    <testcase time="0.0549999999999997" classname="table_15" name="Table_15_generation_works_with_NA_values_pruned_rows">
+    <testcase time="0.0259999999999962" classname="table_15" name="Table_15_generation_works_with_NA_values_pruned_rows"/>
+    <testcase time="0.054000000000002" classname="table_15" name="Table_15_generation_works_with_NA_values_pruned_rows">
       <error type="error" message="Error in `make_table_15(adae, prune_0 = TRUE)`: object 'adsl' not found ('test-table_15.R:48:3')">Error in `make_table_15(adae, prune_0 = TRUE)`: object 'adsl' not found
 Backtrace:
     x
  1. \-falcon::make_table_15(adae, prune_0 = TRUE) at test-table_15.R:48:2
  2.   \-falcon::alt_counts_df_preproc(alt_counts_df, arm_var, saffl_var)</error>
     </testcase>
-    <testcase time="0.0309999999999988" classname="table_15" name="Table_15_generation_works_with_risk_difference_column"/>
+    <testcase time="0.0319999999999965" classname="table_15" name="Table_15_generation_works_with_risk_difference_column"/>
     <testcase time="0.0560000000000045" classname="table_15" name="Table_15_generation_works_with_risk_difference_column">
       <error type="error" message="Error in `make_table_15(adae, risk_diff = risk_diff)`: object 'adsl' not found ('test-table_15.R:56:3')">Error in `make_table_15(adae, risk_diff = risk_diff)`: object 'adsl' not found
 Backtrace:
@@ -335,31 +335,31 @@ Backtrace:
  2.   \-falcon::alt_counts_df_preproc(alt_counts_df, arm_var, saffl_var)</error>
     </testcase>
   </testsuite>
-  <testsuite name="table_16" timestamp="2023-10-24T12:21:30Z" hostname="71db300676e9" tests="10" skipped="1" failures="0" errors="3" time="0.552">
-    <testcase time="0.0529999999999973" classname="table_16" name="Table_16_generation_works_with_default_values"/>
-    <testcase time="0.0510000000000019" classname="table_16" name="Table_16_generation_works_with_default_values">
+  <testsuite name="table_16" timestamp="2023-10-30T23:56:26Z" hostname="7de0fe61e5a2" tests="10" skipped="1" failures="0" errors="3" time="0.46">
+    <testcase time="0.0450000000000017" classname="table_16" name="Table_16_generation_works_with_default_values"/>
+    <testcase time="0.0619999999999976" classname="table_16" name="Table_16_generation_works_with_default_values">
       <error type="error" message="Error in `make_table_16(adae)`: object 'adsl' not found ('test-table_16.R:11:3')">Error in `make_table_16(adae)`: object 'adsl' not found
 Backtrace:
     x
  1. \-falcon::make_table_16(adae) at test-table_16.R:11:2
  2.   \-falcon::alt_counts_df_preproc(alt_counts_df, arm_var, saffl_var)</error>
     </testcase>
-    <testcase time="0.0319999999999965" classname="table_16" name="Table_16_generation_works_with_custom_values"/>
-    <testcase time="0.0500000000000043" classname="table_16" name="Table_16_generation_works_with_custom_values"/>
-    <testcase time="0.165999999999997" classname="table_16" name="Table_16_generation_works_with_custom_values"/>
-    <testcase time="0.0500000000000043" classname="table_16" name="Table_16_generation_works_with_custom_values">
+    <testcase time="0.0459999999999994" classname="table_16" name="Table_16_generation_works_with_custom_values"/>
+    <testcase time="0.0489999999999995" classname="table_16" name="Table_16_generation_works_with_custom_values"/>
+    <testcase time="0.0690000000000026" classname="table_16" name="Table_16_generation_works_with_custom_values"/>
+    <testcase time="0.00799999999999557" classname="table_16" name="Table_16_generation_works_with_custom_values">
       <skipped message="Reason: On CRAN ('test-table_16.R:44:3')"/>
     </testcase>
-    <testcase time="0.0219999999999985" classname="table_16" name="Table_16_generation_works_with_NA_values_pruned_rows"/>
-    <testcase time="0.0480000000000018" classname="table_16" name="Table_16_generation_works_with_NA_values_pruned_rows">
+    <testcase time="0.0249999999999986" classname="table_16" name="Table_16_generation_works_with_NA_values_pruned_rows"/>
+    <testcase time="0.0579999999999998" classname="table_16" name="Table_16_generation_works_with_NA_values_pruned_rows">
       <error type="error" message="Error in `make_table_16(adae, prune_0 = TRUE)`: object 'adsl' not found ('test-table_16.R:48:3')">Error in `make_table_16(adae, prune_0 = TRUE)`: object 'adsl' not found
 Backtrace:
     x
  1. \-falcon::make_table_16(adae, prune_0 = TRUE) at test-table_16.R:48:2
  2.   \-falcon::alt_counts_df_preproc(alt_counts_df, arm_var, saffl_var)</error>
     </testcase>
-    <testcase time="0.0309999999999988" classname="table_16" name="Table_16_generation_works_with_risk_difference_column"/>
-    <testcase time="0.0489999999999995" classname="table_16" name="Table_16_generation_works_with_risk_difference_column">
+    <testcase time="0.0350000000000037" classname="table_16" name="Table_16_generation_works_with_risk_difference_column"/>
+    <testcase time="0.0630000000000024" classname="table_16" name="Table_16_generation_works_with_risk_difference_column">
       <error type="error" message="Error in `make_table_16(adae, risk_diff = risk_diff)`: object 'adsl' not found ('test-table_16.R:56:3')">Error in `make_table_16(adae, risk_diff = risk_diff)`: object 'adsl' not found
 Backtrace:
     x
@@ -367,22 +367,22 @@ Backtrace:
  2.   \-falcon::alt_counts_df_preproc(alt_counts_df, arm_var, saffl_var)</error>
     </testcase>
   </testsuite>
-  <testsuite name="table_17" timestamp="2023-10-24T12:21:30Z" hostname="71db300676e9" tests="10" skipped="1" failures="0" errors="3" time="0.626">
-    <testcase time="0.0429999999999993" classname="table_17" name="Table_17_generation_works_with_default_values"/>
-    <testcase time="0.070999999999998" classname="table_17" name="Table_17_generation_works_with_default_values">
+  <testsuite name="table_17" timestamp="2023-10-30T23:56:26Z" hostname="7de0fe61e5a2" tests="10" skipped="1" failures="0" errors="3" time="0.441">
+    <testcase time="0.046999999999997" classname="table_17" name="Table_17_generation_works_with_default_values"/>
+    <testcase time="0.0559999999999974" classname="table_17" name="Table_17_generation_works_with_default_values">
       <error type="error" message="Error in `make_table_17(adae)`: object 'adsl' not found ('test-table_17.R:11:3')">Error in `make_table_17(adae)`: object 'adsl' not found
 Backtrace:
     x
  1. \-falcon::make_table_17(adae) at test-table_17.R:11:2
  2.   \-falcon::alt_counts_df_preproc(alt_counts_df, arm_var, saffl_var)</error>
     </testcase>
-    <testcase time="0.0290000000000035" classname="table_17" name="Table_17_generation_works_with_custom_values"/>
-    <testcase time="0.0519999999999996" classname="table_17" name="Table_17_generation_works_with_custom_values"/>
-    <testcase time="0.170000000000002" classname="table_17" name="Table_17_generation_works_with_custom_values"/>
-    <testcase time="0.0859999999999985" classname="table_17" name="Table_17_generation_works_with_custom_values">
+    <testcase time="0.034000000000006" classname="table_17" name="Table_17_generation_works_with_custom_values"/>
+    <testcase time="0.0499999999999972" classname="table_17" name="Table_17_generation_works_with_custom_values"/>
+    <testcase time="0.0679999999999978" classname="table_17" name="Table_17_generation_works_with_custom_values"/>
+    <testcase time="0.00900000000000034" classname="table_17" name="Table_17_generation_works_with_custom_values">
       <skipped message="Reason: On CRAN ('test-table_17.R:44:3')"/>
     </testcase>
-    <testcase time="0.0260000000000034" classname="table_17" name="Table_17_generation_works_with_NA_values_pruned_rows"/>
+    <testcase time="0.0300000000000011" classname="table_17" name="Table_17_generation_works_with_NA_values_pruned_rows"/>
     <testcase time="0.0619999999999976" classname="table_17" name="Table_17_generation_works_with_NA_values_pruned_rows">
       <error type="error" message="Error in `make_table_17(adae, prune_0 = TRUE)`: object 'adsl' not found ('test-table_17.R:48:3')">Error in `make_table_17(adae, prune_0 = TRUE)`: object 'adsl' not found
 Backtrace:
@@ -390,8 +390,8 @@ Backtrace:
  1. \-falcon::make_table_17(adae, prune_0 = TRUE) at test-table_17.R:48:2
  2.   \-falcon::alt_counts_df_preproc(alt_counts_df, arm_var, saffl_var)</error>
     </testcase>
-    <testcase time="0.0309999999999988" classname="table_17" name="Table_17_generation_works_with_risk_difference_column"/>
-    <testcase time="0.0559999999999974" classname="table_17" name="Table_17_generation_works_with_risk_difference_column">
+    <testcase time="0.0330000000000013" classname="table_17" name="Table_17_generation_works_with_risk_difference_column"/>
+    <testcase time="0.0519999999999996" classname="table_17" name="Table_17_generation_works_with_risk_difference_column">
       <error type="error" message="Error in `make_table_17(adae, risk_diff = risk_diff)`: object 'adsl' not found ('test-table_17.R:56:3')">Error in `make_table_17(adae, risk_diff = risk_diff)`: object 'adsl' not found
 Backtrace:
     x
@@ -399,22 +399,22 @@ Backtrace:
  2.   \-falcon::alt_counts_df_preproc(alt_counts_df, arm_var, saffl_var)</error>
     </testcase>
   </testsuite>
-  <testsuite name="table_18" timestamp="2023-10-24T12:21:31Z" hostname="71db300676e9" tests="10" skipped="1" failures="0" errors="3" time="0.584">
-    <testcase time="0.0400000000000063" classname="table_18" name="Table_18_generation_works_with_default_values"/>
-    <testcase time="0.0670000000000002" classname="table_18" name="Table_18_generation_works_with_default_values">
+  <testsuite name="table_18" timestamp="2023-10-30T23:56:27Z" hostname="7de0fe61e5a2" tests="10" skipped="1" failures="0" errors="3" time="0.45">
+    <testcase time="0.0429999999999993" classname="table_18" name="Table_18_generation_works_with_default_values"/>
+    <testcase time="0.0590000000000046" classname="table_18" name="Table_18_generation_works_with_default_values">
       <error type="error" message="Error in `make_table_18(adae)`: object 'adsl' not found ('test-table_18.R:11:3')">Error in `make_table_18(adae)`: object 'adsl' not found
 Backtrace:
     x
  1. \-falcon::make_table_18(adae) at test-table_18.R:11:2
  2.   \-falcon::alt_counts_df_preproc(alt_counts_df, arm_var, saffl_var)</error>
     </testcase>
-    <testcase time="0.0329999999999941" classname="table_18" name="Table_18_generation_works_with_custom_values"/>
-    <testcase time="0.0560000000000045" classname="table_18" name="Table_18_generation_works_with_custom_values"/>
-    <testcase time="0.161000000000001" classname="table_18" name="Table_18_generation_works_with_custom_values"/>
-    <testcase time="0.0629999999999953" classname="table_18" name="Table_18_generation_works_with_custom_values">
+    <testcase time="0.0330000000000013" classname="table_18" name="Table_18_generation_works_with_custom_values"/>
+    <testcase time="0.0539999999999949" classname="table_18" name="Table_18_generation_works_with_custom_values"/>
+    <testcase time="0.0900000000000034" classname="table_18" name="Table_18_generation_works_with_custom_values"/>
+    <testcase time="0.00799999999999557" classname="table_18" name="Table_18_generation_works_with_custom_values">
       <skipped message="Reason: On CRAN ('test-table_18.R:44:3')"/>
     </testcase>
-    <testcase time="0.0219999999999985" classname="table_18" name="Table_18_generation_works_with_NA_values_pruned_rows"/>
+    <testcase time="0.0260000000000034" classname="table_18" name="Table_18_generation_works_with_NA_values_pruned_rows"/>
     <testcase time="0.0529999999999973" classname="table_18" name="Table_18_generation_works_with_NA_values_pruned_rows">
       <error type="error" message="Error in `make_table_18(adae, prune_0 = TRUE)`: object 'adsl' not found ('test-table_18.R:48:3')">Error in `make_table_18(adae, prune_0 = TRUE)`: object 'adsl' not found
 Backtrace:
@@ -422,8 +422,8 @@ Backtrace:
  1. \-falcon::make_table_18(adae, prune_0 = TRUE) at test-table_18.R:48:2
  2.   \-falcon::alt_counts_df_preproc(alt_counts_df, arm_var, saffl_var)</error>
     </testcase>
-    <testcase time="0.0320000000000036" classname="table_18" name="Table_18_generation_works_with_risk_difference_column"/>
-    <testcase time="0.0569999999999951" classname="table_18" name="Table_18_generation_works_with_risk_difference_column">
+    <testcase time="0.0309999999999988" classname="table_18" name="Table_18_generation_works_with_risk_difference_column"/>
+    <testcase time="0.0530000000000044" classname="table_18" name="Table_18_generation_works_with_risk_difference_column">
       <error type="error" message="Error in `make_table_18(adae, risk_diff = risk_diff)`: object 'adsl' not found ('test-table_18.R:56:3')">Error in `make_table_18(adae, risk_diff = risk_diff)`: object 'adsl' not found
 Backtrace:
     x
@@ -431,148 +431,148 @@ Backtrace:
  2.   \-falcon::alt_counts_df_preproc(alt_counts_df, arm_var, saffl_var)</error>
     </testcase>
   </testsuite>
-  <testsuite name="table_20" timestamp="2023-10-24T12:21:32Z" hostname="71db300676e9" tests="24" skipped="4" failures="0" errors="0" time="3.325">
-    <testcase time="0.0429999999999993" classname="table_20" name="Table_20_generation_works_with_default_values"/>
+  <testsuite name="table_20" timestamp="2023-10-30T23:56:27Z" hostname="7de0fe61e5a2" tests="24" skipped="4" failures="0" errors="0" time="3.563">
+    <testcase time="0.0420000000000016" classname="table_20" name="Table_20_generation_works_with_default_values"/>
+    <testcase time="0.00199999999999534" classname="table_20" name="Table_20_generation_works_with_default_values"/>
     <testcase time="0.00200000000000244" classname="table_20" name="Table_20_generation_works_with_default_values"/>
-    <testcase time="0.00200000000000244" classname="table_20" name="Table_20_generation_works_with_default_values"/>
-    <testcase time="0.0539999999999949" classname="table_20" name="Table_20_generation_works_with_default_values"/>
-    <testcase time="0.498000000000005" classname="table_20" name="Table_20_generation_works_with_default_values"/>
-    <testcase time="0.123999999999995" classname="table_20" name="Table_20_generation_works_with_default_values">
+    <testcase time="0.0549999999999997" classname="table_20" name="Table_20_generation_works_with_default_values"/>
+    <testcase time="0.558" classname="table_20" name="Table_20_generation_works_with_default_values"/>
+    <testcase time="0.113999999999997" classname="table_20" name="Table_20_generation_works_with_default_values">
       <skipped message="Reason: On CRAN ('test-table_20.R:17:3')"/>
     </testcase>
-    <testcase time="0.0210000000000008" classname="table_20" name="Table_20_generation_works_with_custom_values"/>
+    <testcase time="0.0260000000000034" classname="table_20" name="Table_20_generation_works_with_custom_values"/>
+    <testcase time="0.00300000000000011" classname="table_20" name="Table_20_generation_works_with_custom_values"/>
     <testcase time="0.00200000000000244" classname="table_20" name="Table_20_generation_works_with_custom_values"/>
-    <testcase time="0.00200000000000244" classname="table_20" name="Table_20_generation_works_with_custom_values"/>
-    <testcase time="0.0509999999999948" classname="table_20" name="Table_20_generation_works_with_custom_values"/>
-    <testcase time="0.779000000000003" classname="table_20" name="Table_20_generation_works_with_custom_values"/>
-    <testcase time="0.177999999999997" classname="table_20" name="Table_20_generation_works_with_custom_values">
+    <testcase time="0.0589999999999975" classname="table_20" name="Table_20_generation_works_with_custom_values"/>
+    <testcase time="0.832000000000001" classname="table_20" name="Table_20_generation_works_with_custom_values"/>
+    <testcase time="0.174999999999997" classname="table_20" name="Table_20_generation_works_with_custom_values">
       <skipped message="Reason: On CRAN ('test-table_20.R:65:3')"/>
     </testcase>
-    <testcase time="0.0240000000000009" classname="table_20" name="Table_20_generation_works_with_missing_values_pruned_rows"/>
+    <testcase time="0.0309999999999988" classname="table_20" name="Table_20_generation_works_with_missing_values_pruned_rows"/>
+    <testcase time="0.00300000000000011" classname="table_20" name="Table_20_generation_works_with_missing_values_pruned_rows"/>
     <testcase time="0.00200000000000244" classname="table_20" name="Table_20_generation_works_with_missing_values_pruned_rows"/>
-    <testcase time="0.00199999999999534" classname="table_20" name="Table_20_generation_works_with_missing_values_pruned_rows"/>
-    <testcase time="0.0580000000000069" classname="table_20" name="Table_20_generation_works_with_missing_values_pruned_rows"/>
-    <testcase time="0.488" classname="table_20" name="Table_20_generation_works_with_missing_values_pruned_rows"/>
-    <testcase time="0.116" classname="table_20" name="Table_20_generation_works_with_missing_values_pruned_rows">
+    <testcase time="0.0609999999999999" classname="table_20" name="Table_20_generation_works_with_missing_values_pruned_rows"/>
+    <testcase time="0.536000000000001" classname="table_20" name="Table_20_generation_works_with_missing_values_pruned_rows"/>
+    <testcase time="0.128999999999998" classname="table_20" name="Table_20_generation_works_with_missing_values_pruned_rows">
       <skipped message="Reason: On CRAN ('test-table_20.R:74:3')"/>
     </testcase>
     <testcase time="0.0249999999999986" classname="table_20" name="Table_20_generation_works_with_risk_difference_column"/>
-    <testcase time="0.00199999999999534" classname="table_20" name="Table_20_generation_works_with_risk_difference_column"/>
     <testcase time="0.00200000000000244" classname="table_20" name="Table_20_generation_works_with_risk_difference_column"/>
-    <testcase time="0.054000000000002" classname="table_20" name="Table_20_generation_works_with_risk_difference_column"/>
-    <testcase time="0.667999999999999" classname="table_20" name="Table_20_generation_works_with_risk_difference_column"/>
-    <testcase time="0.128" classname="table_20" name="Table_20_generation_works_with_risk_difference_column">
+    <testcase time="0.00200000000000244" classname="table_20" name="Table_20_generation_works_with_risk_difference_column"/>
+    <testcase time="0.0579999999999998" classname="table_20" name="Table_20_generation_works_with_risk_difference_column"/>
+    <testcase time="0.708999999999996" classname="table_20" name="Table_20_generation_works_with_risk_difference_column"/>
+    <testcase time="0.135000000000005" classname="table_20" name="Table_20_generation_works_with_risk_difference_column">
       <skipped message="Reason: On CRAN ('test-table_20.R:82:3')"/>
     </testcase>
   </testsuite>
-  <testsuite name="table_21" timestamp="2023-10-24T12:21:35Z" hostname="71db300676e9" tests="19" skipped="4" failures="0" errors="0" time="3.211">
-    <testcase time="0.0859999999999985" classname="table_21" name="Table_21_generation_works_with_default_values"/>
-    <testcase time="0.00200000000000244" classname="table_21" name="Table_21_generation_works_with_default_values"/>
-    <testcase time="0.719999999999999" classname="table_21" name="Table_21_generation_works_with_default_values"/>
-    <testcase time="0.128" classname="table_21" name="Table_21_generation_works_with_default_values">
+  <testsuite name="table_21" timestamp="2023-10-30T23:56:31Z" hostname="7de0fe61e5a2" tests="19" skipped="4" failures="0" errors="0" time="3.507">
+    <testcase time="0.0949999999999989" classname="table_21" name="Table_21_generation_works_with_default_values"/>
+    <testcase time="0.00199999999999534" classname="table_21" name="Table_21_generation_works_with_default_values"/>
+    <testcase time="0.783000000000001" classname="table_21" name="Table_21_generation_works_with_default_values"/>
+    <testcase time="0.161000000000001" classname="table_21" name="Table_21_generation_works_with_default_values">
       <skipped message="Reason: On CRAN ('test-table_21.R:22:3')"/>
     </testcase>
-    <testcase time="0.0390000000000015" classname="table_21" name="Table_21_generation_works_with_custom_values_N_s_denominator_and_overall_column"/>
-    <testcase time="0.00199999999999534" classname="table_21" name="Table_21_generation_works_with_custom_values_N_s_denominator_and_overall_column"/>
-    <testcase time="0.0900000000000034" classname="table_21" name="Table_21_generation_works_with_custom_values_N_s_denominator_and_overall_column"/>
-    <testcase time="0.860999999999997" classname="table_21" name="Table_21_generation_works_with_custom_values_N_s_denominator_and_overall_column"/>
-    <testcase time="0.155000000000001" classname="table_21" name="Table_21_generation_works_with_custom_values_N_s_denominator_and_overall_column">
+    <testcase time="0.027000000000001" classname="table_21" name="Table_21_generation_works_with_custom_values_N_s_denominator_and_overall_column"/>
+    <testcase time="0.00200000000000244" classname="table_21" name="Table_21_generation_works_with_custom_values_N_s_denominator_and_overall_column"/>
+    <testcase time="0.0970000000000013" classname="table_21" name="Table_21_generation_works_with_custom_values_N_s_denominator_and_overall_column"/>
+    <testcase time="0.945999999999998" classname="table_21" name="Table_21_generation_works_with_custom_values_N_s_denominator_and_overall_column"/>
+    <testcase time="0.185000000000002" classname="table_21" name="Table_21_generation_works_with_custom_values_N_s_denominator_and_overall_column">
       <skipped message="Reason: On CRAN ('test-table_21.R:34:3')"/>
     </testcase>
-    <testcase time="0.0219999999999985" classname="table_21" name="Table_21_generation_works_with_custom_values_N_col_denominator_and_no_overall_column"/>
-    <testcase time="0.00100000000000477" classname="table_21" name="Table_21_generation_works_with_custom_values_N_col_denominator_and_no_overall_column"/>
-    <testcase time="0.054000000000002" classname="table_21" name="Table_21_generation_works_with_custom_values_N_col_denominator_and_no_overall_column"/>
-    <testcase time="0.378" classname="table_21" name="Table_21_generation_works_with_custom_values_N_col_denominator_and_no_overall_column"/>
-    <testcase time="0.131" classname="table_21" name="Table_21_generation_works_with_custom_values_N_col_denominator_and_no_overall_column">
+    <testcase time="0.0279999999999987" classname="table_21" name="Table_21_generation_works_with_custom_values_N_col_denominator_and_no_overall_column"/>
+    <testcase time="0.00199999999999534" classname="table_21" name="Table_21_generation_works_with_custom_values_N_col_denominator_and_no_overall_column"/>
+    <testcase time="0.0700000000000003" classname="table_21" name="Table_21_generation_works_with_custom_values_N_col_denominator_and_no_overall_column"/>
+    <testcase time="0.396999999999998" classname="table_21" name="Table_21_generation_works_with_custom_values_N_col_denominator_and_no_overall_column"/>
+    <testcase time="0.143000000000001" classname="table_21" name="Table_21_generation_works_with_custom_values_N_col_denominator_and_no_overall_column">
       <skipped message="Reason: On CRAN ('test-table_21.R:62:3')"/>
     </testcase>
-    <testcase time="0.0829999999999984" classname="table_21" name="Table_21_generation_works_with_some_NA_values"/>
-    <testcase time="0.00200000000000244" classname="table_21" name="Table_21_generation_works_with_some_NA_values"/>
-    <testcase time="0.0629999999999953" classname="table_21" name="Table_21_generation_works_with_some_NA_values"/>
-    <testcase time="0.308" classname="table_21" name="Table_21_generation_works_with_some_NA_values"/>
-    <testcase time="0.0859999999999985" classname="table_21" name="Table_21_generation_works_with_some_NA_values">
+    <testcase time="0.0840000000000032" classname="table_21" name="Table_21_generation_works_with_some_NA_values"/>
+    <testcase time="0.00199999999999534" classname="table_21" name="Table_21_generation_works_with_some_NA_values"/>
+    <testcase time="0.0680000000000049" classname="table_21" name="Table_21_generation_works_with_some_NA_values"/>
+    <testcase time="0.311" classname="table_21" name="Table_21_generation_works_with_some_NA_values"/>
+    <testcase time="0.103999999999999" classname="table_21" name="Table_21_generation_works_with_some_NA_values">
       <skipped message="Reason: On CRAN ('test-table_21.R:82:3')"/>
     </testcase>
   </testsuite>
-  <testsuite name="table_32" timestamp="2023-10-24T12:21:38Z" hostname="71db300676e9" tests="22" skipped="6" failures="0" errors="0" time="7.248">
-    <testcase time="0.0310000000000059" classname="table_32" name="Table_32_generation_works_with_default_values"/>
-    <testcase time="0.0579999999999998" classname="table_32" name="Table_32_generation_works_with_default_values"/>
-    <testcase time="0.159999999999997" classname="table_32" name="Table_32_generation_works_with_default_values"/>
-    <testcase time="0.0560000000000045" classname="table_32" name="Table_32_generation_works_with_default_values">
+  <testsuite name="table_32" timestamp="2023-10-30T23:56:34Z" hostname="7de0fe61e5a2" tests="22" skipped="6" failures="0" errors="0" time="7.682">
+    <testcase time="0.0319999999999965" classname="table_32" name="Table_32_generation_works_with_default_values"/>
+    <testcase time="0.0630000000000024" classname="table_32" name="Table_32_generation_works_with_default_values"/>
+    <testcase time="0.173000000000002" classname="table_32" name="Table_32_generation_works_with_default_values"/>
+    <testcase time="0.0609999999999999" classname="table_32" name="Table_32_generation_works_with_default_values">
       <skipped message="Reason: On CRAN ('test-table_32.R:8:3')"/>
     </testcase>
-    <testcase time="0.0219999999999985" classname="table_32" name="Table_32_generation_works_with_custom_values"/>
-    <testcase time="0.0559999999999974" classname="table_32" name="Table_32_generation_works_with_custom_values"/>
-    <testcase time="0.192999999999998" classname="table_32" name="Table_32_generation_works_with_custom_values"/>
-    <testcase time="0.0660000000000025" classname="table_32" name="Table_32_generation_works_with_custom_values">
+    <testcase time="0.0249999999999986" classname="table_32" name="Table_32_generation_works_with_custom_values"/>
+    <testcase time="0.0670000000000002" classname="table_32" name="Table_32_generation_works_with_custom_values"/>
+    <testcase time="0.211999999999996" classname="table_32" name="Table_32_generation_works_with_custom_values"/>
+    <testcase time="0.0710000000000051" classname="table_32" name="Table_32_generation_works_with_custom_values">
       <skipped message="Reason: On CRAN ('test-table_32.R:30:3')"/>
     </testcase>
-    <testcase time="0.0240000000000009" classname="table_32" name="Table_32_generation_works_with_pruned_rows"/>
-    <testcase time="0.0619999999999976" classname="table_32" name="Table_32_generation_works_with_pruned_rows"/>
-    <testcase time="0.163000000000004" classname="table_32" name="Table_32_generation_works_with_pruned_rows"/>
-    <testcase time="0.0399999999999991" classname="table_32" name="Table_32_generation_works_with_pruned_rows">
+    <testcase time="0.0249999999999986" classname="table_32" name="Table_32_generation_works_with_pruned_rows"/>
+    <testcase time="0.070999999999998" classname="table_32" name="Table_32_generation_works_with_pruned_rows"/>
+    <testcase time="0.172000000000004" classname="table_32" name="Table_32_generation_works_with_pruned_rows"/>
+    <testcase time="0.0459999999999994" classname="table_32" name="Table_32_generation_works_with_pruned_rows">
       <skipped message="Reason: On CRAN ('test-table_32.R:37:3')"/>
     </testcase>
-    <testcase time="0.0229999999999961" classname="table_32" name="Table_32_generation_works_with_risk_difference_column"/>
-    <testcase time="0.0600000000000023" classname="table_32" name="Table_32_generation_works_with_risk_difference_column"/>
-    <testcase time="0.204000000000001" classname="table_32" name="Table_32_generation_works_with_risk_difference_column"/>
-    <testcase time="0.0720000000000027" classname="table_32" name="Table_32_generation_works_with_risk_difference_column">
+    <testcase time="0.0249999999999986" classname="table_32" name="Table_32_generation_works_with_risk_difference_column"/>
+    <testcase time="0.0660000000000025" classname="table_32" name="Table_32_generation_works_with_risk_difference_column"/>
+    <testcase time="0.211999999999996" classname="table_32" name="Table_32_generation_works_with_risk_difference_column"/>
+    <testcase time="0.0679999999999978" classname="table_32" name="Table_32_generation_works_with_risk_difference_column">
       <skipped message="Reason: On CRAN ('test-table_32.R:45:3')"/>
     </testcase>
-    <testcase time="0.0309999999999988" classname="table_32" name="Table_32_gtsum_generation_works_with_default_values"/>
-    <testcase time="2.403" classname="table_32" name="Table_32_gtsum_generation_works_with_default_values"/>
-    <testcase time="0.0110000000000028" classname="table_32" name="Table_32_gtsum_generation_works_with_default_values">
+    <testcase time="0.0290000000000035" classname="table_32" name="Table_32_gtsum_generation_works_with_default_values"/>
+    <testcase time="2.548" classname="table_32" name="Table_32_gtsum_generation_works_with_default_values"/>
+    <testcase time="0.00999999999999091" classname="table_32" name="Table_32_gtsum_generation_works_with_default_values">
       <skipped message="Reason: On CRAN ('test-table_32.R:51:3')"/>
     </testcase>
-    <testcase time="0.029999999999994" classname="table_32" name="Table_32_gtsum_generation_works_with_custom_values"/>
-    <testcase time="3.474" classname="table_32" name="Table_32_gtsum_generation_works_with_custom_values"/>
-    <testcase time="0.00900000000000034" classname="table_32" name="Table_32_gtsum_generation_works_with_custom_values">
+    <testcase time="0.0260000000000105" classname="table_32" name="Table_32_gtsum_generation_works_with_custom_values"/>
+    <testcase time="3.67" classname="table_32" name="Table_32_gtsum_generation_works_with_custom_values"/>
+    <testcase time="0.0100000000000051" classname="table_32" name="Table_32_gtsum_generation_works_with_custom_values">
       <skipped message="Reason: On CRAN ('test-table_32.R:61:3')"/>
     </testcase>
   </testsuite>
-  <testsuite name="table_33" timestamp="2023-10-24T12:21:45Z" hostname="71db300676e9" tests="16" skipped="4" failures="0" errors="0" time="2.479">
-    <testcase time="0.0289999999999964" classname="table_33" name="Table_33_generation_works_with_default_values"/>
-    <testcase time="0.394999999999996" classname="table_33" name="Table_33_generation_works_with_default_values"/>
-    <testcase time="0.163000000000011" classname="table_33" name="Table_33_generation_works_with_default_values"/>
-    <testcase time="0.0450000000000017" classname="table_33" name="Table_33_generation_works_with_default_values">
+  <testsuite name="table_33" timestamp="2023-10-30T23:56:42Z" hostname="7de0fe61e5a2" tests="16" skipped="4" failures="0" errors="0" time="2.525">
+    <testcase time="0.0330000000000013" classname="table_33" name="Table_33_generation_works_with_default_values"/>
+    <testcase time="0.390000000000001" classname="table_33" name="Table_33_generation_works_with_default_values"/>
+    <testcase time="0.146000000000001" classname="table_33" name="Table_33_generation_works_with_default_values"/>
+    <testcase time="0.0429999999999922" classname="table_33" name="Table_33_generation_works_with_default_values">
       <skipped message="Reason: On CRAN ('test-table_33.R:8:3')"/>
     </testcase>
-    <testcase time="0.0229999999999961" classname="table_33" name="Table_33_generation_works_with_custom_values"/>
-    <testcase time="0.393000000000001" classname="table_33" name="Table_33_generation_works_with_custom_values"/>
-    <testcase time="0.164000000000001" classname="table_33" name="Table_33_generation_works_with_custom_values"/>
-    <testcase time="0.0549999999999926" classname="table_33" name="Table_33_generation_works_with_custom_values">
+    <testcase time="0.0240000000000009" classname="table_33" name="Table_33_generation_works_with_custom_values"/>
+    <testcase time="0.415000000000006" classname="table_33" name="Table_33_generation_works_with_custom_values"/>
+    <testcase time="0.182999999999993" classname="table_33" name="Table_33_generation_works_with_custom_values"/>
+    <testcase time="0.0530000000000115" classname="table_33" name="Table_33_generation_works_with_custom_values">
       <skipped message="Reason: On CRAN ('test-table_33.R:34:3')"/>
     </testcase>
-    <testcase time="0.0229999999999961" classname="table_33" name="Table_33_generation_works_with_pruned_rows"/>
-    <testcase time="0.403000000000006" classname="table_33" name="Table_33_generation_works_with_pruned_rows"/>
-    <testcase time="0.138999999999996" classname="table_33" name="Table_33_generation_works_with_pruned_rows"/>
-    <testcase time="0.0460000000000065" classname="table_33" name="Table_33_generation_works_with_pruned_rows">
+    <testcase time="0.0259999999999962" classname="table_33" name="Table_33_generation_works_with_pruned_rows"/>
+    <testcase time="0.405000000000001" classname="table_33" name="Table_33_generation_works_with_pruned_rows"/>
+    <testcase time="0.134" classname="table_33" name="Table_33_generation_works_with_pruned_rows"/>
+    <testcase time="0.0379999999999967" classname="table_33" name="Table_33_generation_works_with_pruned_rows">
       <skipped message="Reason: On CRAN ('test-table_33.R:42:3')"/>
     </testcase>
-    <testcase time="0.0229999999999961" classname="table_33" name="Table_33_generation_works_with_risk_difference_column"/>
-    <testcase time="0.381" classname="table_33" name="Table_33_generation_works_with_risk_difference_column"/>
-    <testcase time="0.152000000000001" classname="table_33" name="Table_33_generation_works_with_risk_difference_column"/>
-    <testcase time="0.0450000000000017" classname="table_33" name="Table_33_generation_works_with_risk_difference_column">
+    <testcase time="0.0240000000000009" classname="table_33" name="Table_33_generation_works_with_risk_difference_column"/>
+    <testcase time="0.390999999999991" classname="table_33" name="Table_33_generation_works_with_risk_difference_column"/>
+    <testcase time="0.165000000000006" classname="table_33" name="Table_33_generation_works_with_risk_difference_column"/>
+    <testcase time="0.0550000000000068" classname="table_33" name="Table_33_generation_works_with_risk_difference_column">
       <skipped message="Reason: On CRAN ('test-table_33.R:50:3')"/>
     </testcase>
   </testsuite>
-  <testsuite name="table_34" timestamp="2023-10-24T12:21:48Z" hostname="71db300676e9" tests="12" skipped="3" failures="0" errors="0" time="8.086">
-    <testcase time="0.034000000000006" classname="table_34" name="Table_34_generation_works_with_default_values"/>
-    <testcase time="0.0609999999999928" classname="table_34" name="Table_34_generation_works_with_default_values"/>
-    <testcase time="2.26000000000001" classname="table_34" name="Table_34_generation_works_with_default_values"/>
-    <testcase time="0.316000000000003" classname="table_34" name="Table_34_generation_works_with_default_values">
+  <testsuite name="table_34" timestamp="2023-10-30T23:56:44Z" hostname="7de0fe61e5a2" tests="12" skipped="3" failures="0" errors="0" time="8.217">
+    <testcase time="0.0429999999999922" classname="table_34" name="Table_34_generation_works_with_default_values"/>
+    <testcase time="0.0580000000000069" classname="table_34" name="Table_34_generation_works_with_default_values"/>
+    <testcase time="2.35199999999999" classname="table_34" name="Table_34_generation_works_with_default_values"/>
+    <testcase time="0.294000000000011" classname="table_34" name="Table_34_generation_works_with_default_values">
       <skipped message="Reason: On CRAN ('test-table_34.R:17:3')"/>
     </testcase>
-    <testcase time="0.0229999999999961" classname="table_34" name="Table_34_generation_works_with_custom_values"/>
-    <testcase time="0.0480000000000018" classname="table_34" name="Table_34_generation_works_with_custom_values"/>
-    <testcase time="2.181" classname="table_34" name="Table_34_generation_works_with_custom_values"/>
-    <testcase time="0.0969999999999942" classname="table_34" name="Table_34_generation_works_with_custom_values">
+    <testcase time="0.0249999999999915" classname="table_34" name="Table_34_generation_works_with_custom_values"/>
+    <testcase time="0.046999999999997" classname="table_34" name="Table_34_generation_works_with_custom_values"/>
+    <testcase time="2.215" classname="table_34" name="Table_34_generation_works_with_custom_values"/>
+    <testcase time="0.100000000000009" classname="table_34" name="Table_34_generation_works_with_custom_values">
       <skipped message="Reason: On CRAN ('test-table_34.R:49:3')"/>
     </testcase>
-    <testcase time="0.0240000000000009" classname="table_34" name="Table_34_generation_works_with_risk_difference_column"/>
-    <testcase time="0.0690000000000026" classname="table_34" name="Table_34_generation_works_with_risk_difference_column"/>
-    <testcase time="2.65900000000001" classname="table_34" name="Table_34_generation_works_with_risk_difference_column"/>
-    <testcase time="0.313999999999993" classname="table_34" name="Table_34_generation_works_with_risk_difference_column">
+    <testcase time="0.0249999999999915" classname="table_34" name="Table_34_generation_works_with_risk_difference_column"/>
+    <testcase time="0.0529999999999973" classname="table_34" name="Table_34_generation_works_with_risk_difference_column"/>
+    <testcase time="2.697" classname="table_34" name="Table_34_generation_works_with_risk_difference_column"/>
+    <testcase time="0.308000000000007" classname="table_34" name="Table_34_generation_works_with_risk_difference_column">
       <skipped message="Reason: On CRAN ('test-table_34.R:57:3')"/>
     </testcase>
   </testsuite>
