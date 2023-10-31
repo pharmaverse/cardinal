@@ -73,10 +73,11 @@ test_that("Table 09 (gt) generation works with custom values", {
   risk_diff <- list(c("A: Drug X", "C: Combination"), c("A: Drug X", "B: Placebo"))
 
   result <- make_table_09_gtsum(adae,
-                             alt_counts_df = adsl,
-                             lbl_overall = "Total",
-                             annotations = annotations,
-                             risk_diff = risk_diff)
+    alt_counts_df = adsl,
+    lbl_overall = "Total",
+    annotations = annotations,
+    risk_diff = risk_diff
+  )
 
   res <- list(
     "data" = result[["_data"]],
@@ -85,4 +86,4 @@ test_that("Table 09 (gt) generation works with custom values", {
     "footnotes" = result[["_footnotes"]][["footnotes"]]
   )
   expect_snapshot(res)
-  })
+})
