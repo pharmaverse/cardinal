@@ -114,23 +114,25 @@ make_table_09 <- function(adae,
 #'   )
 #' )
 #' risk_diff <- list(c("A: Drug X", "C: Combination"), c("A: Drug X", "B: Placebo"))
-#' tbl <- make_table_09_gtsum(adae = adae, alt_counts_df = adsl, annotations = annotations,
-#' risk_diff = risk_diff)
+#' tbl <- make_table_09_gtsum(
+#'   adae = adae, alt_counts_df = adsl, annotations = annotations,
+#'   risk_diff = risk_diff
+#' )
 #' tbl
 make_table_09_gtsum <- function(adae,
-                             alt_counts_df = NULL,
-                             show_colcounts = TRUE,
-                             saffl_var = "SAFFL",
-                             ser_var = "AESER",
-                             arm_var = "ARM",
-                             pref_var = "AEDECOD",
-                             id_var = "USUBJID",
-                             soc_var = "AESOC",
-                             lbl_pref_var = formatters::var_labels(adae, fill = TRUE)[pref_var],
-                             lbl_soc_var = formatters::var_labels(adae, fill = TRUE)[soc_var],
-                             lbl_overall = NULL,
-                             annotations = NULL,
-                             risk_diff = NULL) {
+                                alt_counts_df = NULL,
+                                show_colcounts = TRUE,
+                                saffl_var = "SAFFL",
+                                ser_var = "AESER",
+                                arm_var = "ARM",
+                                pref_var = "AEDECOD",
+                                id_var = "USUBJID",
+                                soc_var = "AESOC",
+                                lbl_pref_var = formatters::var_labels(adae, fill = TRUE)[pref_var],
+                                lbl_soc_var = formatters::var_labels(adae, fill = TRUE)[soc_var],
+                                lbl_overall = NULL,
+                                annotations = NULL,
+                                risk_diff = NULL) {
   checkmate::assert_data_frame(adae)
   checkmate::assert_subset(c(saffl_var, id_var, ser_var, soc_var, arm_var, pref_var), names(adae))
   assert_flag_variables(adae, saffl_var)
