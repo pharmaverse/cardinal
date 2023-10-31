@@ -130,7 +130,9 @@ annotations <- list(
   )
 )
 risk_diff <- list(c("A: Drug X", "C: Combination"), c("A: Drug X", "B: Placebo"))
-tbl <- make_table_09_gtsum(adae = adae, alt_counts_df = adsl, annotations = annotations,
-risk_diff = risk_diff)
+tbl <- make_table_09_gtsum(
+  adae = adae, alt_counts_df = adsl, annotations = annotations,
+  risk_diff = risk_diff
+)
 tbl
 }
