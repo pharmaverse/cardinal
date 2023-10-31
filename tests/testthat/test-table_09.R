@@ -39,8 +39,17 @@ test_that("Table 09 generation works with custom values", {
   expect_snapshot(res)
 })
 
+test_that("Table 09 (gt) generation works with risk difference column", {
+  risk_diff <- list(arm_x = "B: Placebo", arm_y = "A: Drug X")
+  result <- make_table_09(adae, adsl, risk_diff = risk_diff)
+
+  res <- expect_silent(result)
+  expect_snapshot(res)
+})
+
+
 test_that("Table 09 (gt) generation works with default values", {
-  result <- make_table_09_gt(adae)
+  result <- make_table_09_gtsum(adae)
 
   res <- list(
     "data" = result[["_data"]],
@@ -51,18 +60,19 @@ test_that("Table 09 (gt) generation works with default values", {
   expect_snapshot(res)
 })
 
-test_that("Table 09 (gt) generation works with costum values", {
+test_that("Table 09 (gt) generation works with custom values", {
   annotations <- list(
     title = "Table 9. Patients With Serious Adverse Events",
     subtitle = "by System Organ Class and Preferred Term, Safety Population, Pooled Analyses",
     footnotes = list(
-      "Duration = [e.g., X week double-blind treatment period or median and a range indicating pooled trial durations].",
+      "Duration = [e.g., X week double-blind treatment period or median and a range indicating
+      pooled trial durations].",
       "Difference is shown between [treatment arms] (e.g., difference is shown between Drug Name dosage X vs. placebo)."
     )
   )
   risk_diff <- list(c("A: Drug X", "C: Combination"), c("A: Drug X", "B: Placebo"))
 
-  result <- make_table_09_gt(adae,
+  result <- make_table_09_gtsum(adae,
                              alt_counts_df = adsl,
                              lbl_overall = "Total",
                              annotations = annotations,
@@ -74,11 +84,5 @@ test_that("Table 09 (gt) generation works with costum values", {
     "header" = result[["_heading"]],
     "footnotes" = result[["_footnotes"]][["footnotes"]]
   )
-
-test_that("Table 09 generation works with risk difference column", {
-  risk_diff <- list(arm_x = "B: Placebo", arm_y = "A: Drug X")
-  result <- make_table_09(adae, adsl, risk_diff = risk_diff)
-
-  res <- expect_silent(result)
   expect_snapshot(res)
-})
+  })

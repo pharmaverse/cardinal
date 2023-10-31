@@ -84,10 +84,11 @@ make_table_09 <- function(adae,
 #' @param saffl_var (`character`)\cr safety population flag variable from `adae` to include in the table.
 #' @param ser_var (`character`)\cr serious Event variable from `adae` to include in the table.
 #' @param soc_var (`character`)\cr system organ class variable from `adae` to include in the table.
-#' @param lbl_soc_var (`character`)\cr label corresponding to system organ class variable `soc_var` to print in the table.
+#' @param lbl_soc_var (`character`)\cr label corresponding to system organ class variable
+#' `soc_var` to print in the table.
 #' @param annotations (named `list` of `character`)\cr list of annotations to add to the table. Valid
-#'   annotation types are `title`, `subtitles`, and a list of characters called `footnotes`. Each name-value pair should
-#'   use the annotation type as name and the desired string as value.
+#'   annotation types are `title`, `subtitles`, and a list of characters called `footnotes`.
+#'   Each name-value pair should use the annotation type as name and the desired string as the value.
 #' @param risk_diff (`list` of `character` vectors)\cr List of character vectors. Each vector must be
 #'   of length 2 and contain the name of treatment arms to calculate risk difference and its 95% CI for. Those names
 #'   must exist in the `arm_var` column of the dataset specified in `adae`.
@@ -99,24 +100,24 @@ make_table_09 <- function(adae,
 #' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
 #' adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
 #'
-#' tbl <- make_table_09(adae = adae, alt_counts_df = adsl)
+#' tbl <- make_table_09_gtsum(adae = adae, alt_counts_df = adsl)
 #' tbl
-#'
-#' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
-#' adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
 #'
 #' annotations <- list(
 #'   title = "Table 9. Patients With Serious Adverse Events",
 #'   subtitle = "by System Organ Class and Preferred Term, Safety Population, Pooled Analyses",
 #'   footnotes = list(
-#'     "Duration = [e.g., X week double-blind treatment period or median and a range indicating pooled trial durations].",
-#'     "Difference is shown between [treatment arms] (e.g., difference is shown between Drug Name dosage X vs. placebo)."
+#'     "Duration = [e.g., X week double-blind treatment period or median and a range
+#'     indicating pooled trial durations].",
+#'     "Difference is shown between [treatment arms] (e.g., difference is shown
+#'     between Drug Name dosage X vs. placebo)."
 #'   )
 #' )
 #' risk_diff <- list(c("A: Drug X", "C: Combination"), c("A: Drug X", "B: Placebo"))
-#' tbl <- make_table_09(adae = adae, alt_counts_df = adsl, annotations = annotations, risk_diff = risk_diff)
+#' tbl <- make_table_09_gtsum(adae = adae, alt_counts_df = adsl, annotations = annotations,
+#' risk_diff = risk_diff)
 #' tbl
-make_table_09_gt <- function(adae,
+make_table_09_gtsum <- function(adae,
                              alt_counts_df = NULL,
                              show_colcounts = TRUE,
                              saffl_var = "SAFFL",
@@ -227,7 +228,7 @@ make_table_09_gt <- function(adae,
 }
 
 
-#' Helper function to create the data for `make_table08_gt()`
+#' Helper function to create the data for `make_table09_gtsum()`
 #'
 #' @details If `lbl_overall` is not `NULL` only the data for the overall column will be generated
 #'
@@ -256,7 +257,7 @@ create_table_09_data <- function(adae, alt_counts_df, arm_var, id_var, soc_var, 
     }
 
   adae <- adae %>%
-    left_join(N_data, by = c(id_var, arm_var))
+    left_join(N_data, by = c(id_var, arm_var), relationship = "many-to-many")
 
   input_list <- list(NULL, soc_var, c(soc_var, pref_var))
 
