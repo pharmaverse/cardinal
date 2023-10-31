@@ -40,7 +40,6 @@
       Table 11. Patients with FDA Medical Query (Broad) Leading to Treatment Discontinuation, Safety Population,
        Pooled Analyses(1)
       
-      
       ———————————————————————————————————————————————————————————————————————————————————————————————————
       Body System or Organ Class(2)                              A: Drug X    B: Placebo   C: Combination
         FMQ (Broad)                                               (N=134)      (N=134)        (N=132)    
