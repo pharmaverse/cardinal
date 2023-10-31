@@ -7,7 +7,7 @@ Female Safety Population, Pooled Analyses}
 \usage{
 make_table_17(
   adae,
-  alt_counts_df = adsl,
+  alt_counts_df = NULL,
   show_colcounts = TRUE,
   arm_var = "ARM",
   saffl_var = "SAFFL",

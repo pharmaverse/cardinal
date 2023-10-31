@@ -39,7 +39,7 @@
 #'
 #' @export
 make_table_18 <- function(adae,
-                          alt_counts_df = adsl,
+                          alt_counts_df = NULL,
                           show_colcounts = TRUE,
                           arm_var = "ARM",
                           saffl_var = "SAFFL",

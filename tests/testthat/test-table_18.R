@@ -19,7 +19,7 @@ adae$FMQ01NAM[adae$SEX == "F"] <- as.factor(
 risk_diff <- list(arm_x = "A: Drug X", arm_y = "C: Combination")
 
 test_that("Table 18 generation works with default values", {
-  result <- make_table_18(adae)
+  result <- make_table_18(adae, adsl)
 
   res <- expect_silent(result)
   expect_snapshot(res)
@@ -58,7 +58,7 @@ test_that("Table 18 generation works with custom values", {
 })
 
 test_that("Table 18 generation works with NA values/pruned rows", {
-  result <- make_table_18(adae, prune_0 = TRUE)
+  result <- make_table_18(adae, adsl, prune_0 = TRUE)
 
   res <- expect_silent(result)
   expect_snapshot(res)
@@ -66,7 +66,7 @@ test_that("Table 18 generation works with NA values/pruned rows", {
 
 test_that("Table 18 generation works with risk difference column", {
   risk_diff <- list(arm_x = "A: Drug X", arm_y = "C: Combination")
-  result <- make_table_18(adae, risk_diff = risk_diff)
+  result <- make_table_18(adae, adsl, risk_diff = risk_diff)
 
   res <- expect_silent(result)
   expect_snapshot(res)
