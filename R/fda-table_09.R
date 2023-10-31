@@ -131,7 +131,6 @@ make_table_09_gtsum <- function(adae,
                              lbl_overall = NULL,
                              annotations = NULL,
                              risk_diff = NULL) {
-
   checkmate::assert_data_frame(adae)
   checkmate::assert_subset(c(saffl_var, id_var, ser_var, soc_var, arm_var, pref_var), names(adae))
   assert_flag_variables(adae, saffl_var)
@@ -139,7 +138,7 @@ make_table_09_gtsum <- function(adae,
 
   if (!is.null(alt_counts_df)) {
     checkmate::assert_data_frame(alt_counts_df)
-    checkmate::assert_subset(c(id_var,arm_var), names(alt_counts_df))
+    checkmate::assert_subset(c(id_var, arm_var), names(alt_counts_df))
   }
 
   checkmate::assert_list(risk_diff, types = "character", null.ok = TRUE)
@@ -183,17 +182,14 @@ make_table_09_gtsum <- function(adae,
 
 
   if (show_colcounts) {
-
     total_N <- result_list[["total_N"]]
 
     set_col_labels <- function(x) {
       if (startsWith(x, "rd_")) {
-
         html(paste0("Risk Difference <br/>", substr(x, 4, nchar(x)), "<br/> (%) (95% CI)"))
       } else {
         html(paste0(x, "<br/>(N=", total_N[[x]], ")"))
       }
-
     }
 
     gt_table <- gt_table %>%
@@ -237,23 +233,30 @@ make_table_09_gtsum <- function(adae,
 #' @return list containing the counted data to be displayed for table 9 and
 #' a `data.frame` containing information about the total N for each group
 create_table_09_data <- function(adae, alt_counts_df, arm_var, id_var, soc_var, pref_var, lbl_overall = NULL, risk_diff = NULL) {
-
-
   basis_df <- if (!is.null(alt_counts_df)) alt_counts_df else adae
   N_data <- basis_df %>%
-    { if (is.null(lbl_overall)) group_by(., .data[[arm_var]]) else . } %>%
+    {
+      if (is.null(lbl_overall)) group_by(., .data[[arm_var]]) else .
+    } %>%
     mutate(N = n()) %>% # count observations
     ungroup() %>%
     select(all_of(c(id_var, arm_var, "N")))
 
   # get total N
   total_N <- N_data %>%
-    { if (is.null(lbl_overall)) group_by(., .data[[arm_var]]) else . }  %>%
+    {
+      if (is.null(lbl_overall)) group_by(., .data[[arm_var]]) else .
+    } %>%
     distinct(N) %>%
-    { if (is.null(lbl_overall)) pivot_wider(.,
-                                            names_from = all_of(arm_var),
-                                            values_from = N)
-      else rename(., !!lbl_overall := "N")
+    {
+      if (is.null(lbl_overall)) {
+        pivot_wider(.,
+          names_from = all_of(arm_var),
+          values_from = N
+        )
+      } else {
+        rename(., !!lbl_overall := "N")
+      }
     }
 
   adae <- adae %>%
@@ -303,30 +306,36 @@ count_subjects <- function(adae, arm_var, id_var, sub_level_vars = NULL, lbl_ove
   }
 
   count_data <- adae %>%
-    {if (grouping || !is.null(sub_level_vars)) group_by(., across(all_of(grouping_vars))) else . } %>%
+    {
+      if (grouping || !is.null(sub_level_vars)) group_by(., across(all_of(grouping_vars))) else .
+    } %>%
     summarize(
-      val = n_distinct(.data[[id_var]]), #count on patient level
+      val = n_distinct(.data[[id_var]]), # count on patient level
       N = unique(N),
-      pct = format(val/mean(N)*100, digits = 1, nsmall = 1),
+      pct = format(val / mean(N) * 100, digits = 1, nsmall = 1),
       combined = paste0(val, " (", pct, "%)"),
       .groups = "drop"
     ) %>%
-    {if (grouping) pivot_wider( .,
-                                id_cols = all_of(sub_level_vars),
-                                names_from = all_of(arm_var),
-                                values_from = all_of(c("val", "N", "combined")))
-      else rename(., !!lbl_overall := "combined") %>%
-        select(-c("val", "pct"))
+    {
+      if (grouping) {
+        pivot_wider(.,
+          id_cols = all_of(sub_level_vars),
+          names_from = all_of(arm_var),
+          values_from = all_of(c("val", "N", "combined"))
+        )
+      } else {
+        rename(., !!lbl_overall := "combined") %>%
+          select(-c("val", "pct"))
+      }
     }
 
   if (!is.null(risk_diff)) {
-    purrr::walk(risk_diff, function(x){
+    purrr::walk(risk_diff, function(x) {
       count_data <<- count_data %>%
-        mutate(!!paste0("rd_", x[[1]], "-", x[[2]]) := calculate_riskdiff( .data[[paste0("val_", x[[1]])]], .data[[paste0("val_", x[[2]])]], .data[[paste0("N_", x[[1]])]], .data[[paste0("N_", x[[2]])]]))
+        mutate(!!paste0("rd_", x[[1]], "-", x[[2]]) := calculate_riskdiff(.data[[paste0("val_", x[[1]])]], .data[[paste0("val_", x[[2]])]], .data[[paste0("N_", x[[1]])]], .data[[paste0("N_", x[[2]])]]))
     })
   }
   if (grouping) {
-
     count_data <- count_data %>%
       rename_with(renaming_function, dplyr::starts_with("combined")) %>%
       select(-any_of(c(starts_with("val_"), starts_with("N_"))))
@@ -358,10 +367,9 @@ renaming_function <- function(x) {
 #' the corresponding 95% Confidence interval in Brackets
 calculate_riskdiff <- function(x, y, n_x, n_y) {
   sapply(seq_along(x), function(i) {
-    pt <- prop.test(c(x[[i]],y[[i]]), c(n_x[[i]], n_y[[i]]))
+    pt <- prop.test(c(x[[i]], y[[i]]), c(n_x[[i]], n_y[[i]]))
     val <- format(pt$estimate[[1]] - pt$estimate[[2]], digits = 2, nsmall = 2)
     conf_int <- format(pt$conf.int, digits = 2, nsmall = 2)
     paste0(val, " (", conf_int[[1]], ", ", conf_int[[2]], ")")
   })
-
 }
