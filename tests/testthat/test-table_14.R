@@ -31,7 +31,7 @@ test_that("Table 14 generation works with custom values", {
         "(1) Treatment-emergent AE defined as [definition]. MedDRA version X.\n",
         "(2) Duration = [e.g., X-week double-blind treatment period or, median and a range indicating pooled trial",
         "durations].\n",
-        "(3) Each FMQ is aligned to a single SOC based on clinical judgement. Howevere, please beaware that some FMQs",
+        "(3) Each FMQ is aligned to a single SOC based on clinical judgement. However, please beaware that some FMQs",
         "may contain PTs from more than one SOC."
       ),
       prov_footer = c(
@@ -48,6 +48,14 @@ test_that("Table 14 generation works with custom values", {
 
 test_that("Table 14 generation works with NA values/pruned rows", {
   result <- make_table_14(adae, prune_0 = TRUE)
+
+  res <- expect_silent(result)
+  expect_snapshot(res)
+})
+
+test_that("Table 14 generation works with risk difference column", {
+  risk_diff <- list(arm_x = "B: Placebo", arm_y = "A: Drug X")
+  result <- make_table_14(adae, risk_diff = risk_diff)
 
   res <- expect_silent(result)
   expect_snapshot(res)

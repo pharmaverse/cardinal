@@ -61,7 +61,7 @@ website:
   cookie-consent: true
   page-footer:
     center:
-      - text: "This website as well as code examples are licensed under the Apache License, Version 2.0."
+      - text: "This website as well as code examples are licensed under the Apache License, Version 2.0." # nolint
     right:
       - aria-label: Slack
         href: https://app.slack.com/client/T028PB489D3/C04MQS12MND
@@ -80,23 +80,29 @@ website:
       - text: Template Library
         menu:
           - quarto/table-templates/template-table_02.qmd
+          - quarto/table-templates/template-table_03.qmd
+          - quarto/table-templates/template-table_04.qmd
           - quarto/table-templates/template-table_05.qmd
           - quarto/table-templates/template-table_06.qmd
           - quarto/table-templates/template-table_07.qmd
           - quarto/table-templates/template-table_08.qmd
           - quarto/table-templates/template-table_09.qmd
+          - quarto/table-templates/template-table_10.qmd
+          - quarto/table-templates/template-table_11.qmd
+          - quarto/table-templates/template-table_12.qmd
           - quarto/table-templates/template-table_13.qmd
           - quarto/table-templates/template-table_14.qmd
           - quarto/table-templates/template-table_20.qmd
+          - quarto/table-templates/template-table_21.qmd
           - quarto/table-templates/template-table_32.qmd
           - quarto/table-templates/template-table_33.qmd
+          - quarto/table-templates/template-table_34.qmd
       - text: About
         file: quarto/about.qmd
       - text: Help
         menu:
           - quarto/getting_started.qmd
           - text: Report a Bug
-            url:  https://github.com/pharmaverse/falcon/issues
+            url: https://github.com/pharmaverse/falcon/issues/new/choose
           - text: FAQ
             file: quarto/faq.qmd
-

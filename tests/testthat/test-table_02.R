@@ -118,3 +118,44 @@ test_that("Table 02 generation (tplyr) works with some NA values", {
   res <- expect_silent(result[["_data"]])
   expect_snapshot(res)
 })
+
+test_that("Table 02 generation (gtsum) works with default values", {
+  options(pillar.print_max = 50, width = 200)
+
+  result <- suppressWarnings(make_table_02_gtsum(adsl) %>% as_gt())
+
+  res <- expect_silent(as.data.frame(result))
+  expect_snapshot(res)
+})
+
+test_that("Table 02 generation (gtsum) works with custom values", {
+  options(pillar.print_max = 50, width = 200)
+
+  advs <- advs_raw %>%
+    dplyr::filter(AVISIT == "BASELINE", VSTESTCD == "TEMP") %>%
+    dplyr::select("USUBJID", "AVAL")
+
+  anl <- dplyr::left_join(adsl, advs, by = "USUBJID") %>% df_explicit_na()
+
+  result <- suppressWarnings(make_table_02_gtsum(
+    anl,
+    vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY", "AVAL")
+  ) %>% as_gt())
+
+  res <- expect_silent(as.data.frame(result))
+  expect_snapshot(res)
+})
+
+test_that("Table 02 generation (gtsum) works with some NA values", {
+  options(pillar.print_max = 50, width = 200)
+
+  set.seed(1)
+  adsl[sample(seq_len(nrow(adsl)), 50), "SEX"] <- NA
+
+  adsl <- adsl %>% df_explicit_na()
+
+  result <- suppressWarnings(make_table_02_gtsum(adsl, vars = "SEX") %>% as_gt())
+
+  res <- expect_silent(as.data.frame(result))
+  expect_snapshot(res)
+})

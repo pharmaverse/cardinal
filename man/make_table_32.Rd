@@ -2,6 +2,7 @@
 % Please edit documentation in R/fda-table_32.R
 \name{make_table_32}
 \alias{make_table_32}
+\alias{make_table_32_gtsum}
 \title{FDA Table 32: Percentage of Patients With Maximum Diastolic Blood Pressure by Category of Blood Pressure
 Postbaseline, Safety Population, Pooled Analysis}
 \usage{
@@ -10,9 +11,19 @@ make_table_32(
   alt_counts_df = NULL,
   show_colcounts = TRUE,
   arm_var = "ARM",
+  saffl_var = "SAFFL",
   lbl_overall = NULL,
+  risk_diff = NULL,
   prune_0 = FALSE,
   annotations = NULL
+)
+
+make_table_32_gtsum(
+  advs,
+  adsl,
+  arm_var = "ARM",
+  saffl_var = "SAFFL",
+  lbl_overall = NULL
 )
 }
 \arguments{
@@ -24,14 +35,38 @@ make_table_32(
 
 \item{arm_var}{(\code{character})\cr arm variable used to split table into columns.}
 
+\item{saffl_var}{(\code{character})\cr flag variable used to indicate inclusion in safety population.}
+
 \item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
 the given value as the column label.}
+
+\item{risk_diff}{(named \code{list})\cr list of settings to apply to add a risk difference column to the table.
+Defaults to \code{NULL} (no risk difference column added). See \code{\link[tern:add_riskdiff]{tern::add_riskdiff()}} for more details. List should
+contain the following elements:
+\itemize{
+\item \code{arm_x}: (required) the name of reference arm.
+\item \code{arm_y}: (required) the name of the arm to compare to the reference arm.
+\item \code{col_label}: (optional) label to use for the risk difference column. Defaults to
+\code{"Risk Difference (\%) (95\% CI)"}.
+\item \code{pct}: (optional) whether the output should be returned as percentages. Defaults to \code{TRUE}.
+}}
 
 \item{prune_0}{(\code{flag})\cr whether all-zero rows should be removed from the table.}
 
 \item{annotations}{(named \code{list} of \code{character})\cr list of annotations to add to the table. Valid
 annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
 use the annotation type as name and the desired string as value.}
+
+\item{adsl}{(\code{data.frame})\cr dataset (typically ADSL) required to build table.}
+}
+\value{
+\itemize{
+\item \code{make_table_32} returns an \code{rtables} table object.
+}
+
+\itemize{
+\item \code{make_table_32_gtsum} returns a \code{gt} object
+}
 }
 \description{
 FDA Table 32: Percentage of Patients With Maximum Diastolic Blood Pressure by Category of Blood Pressure
@@ -39,9 +74,9 @@ Postbaseline, Safety Population, Pooled Analysis
 }
 \details{
 \itemize{
-\item \code{advs} must contain \code{SAFFL}, \code{USUBJID}, \code{AVISITN}, \code{PARAMCD}, \code{AVAL}, \code{AVALU}, and the variable
-specified by \code{arm_var}.
-\item If specified, \code{alt_counts_df} must contain variables \code{SAFFL}, \code{USUBJID}, and the variable specified by \code{arm_var}.
+\item \code{advs} must contain \code{USUBJID}, \code{AVISITN}, \code{PARAMCD}, \code{AVAL}, \code{AVALU}, and the variables specified by
+\code{arm_var} and \code{saffl_var}.
+\item If specified, \code{alt_counts_df} must contain \code{USUBJID} and the variables specified by \code{arm_var} and \code{saffl_var}.
 \item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
 flag variables are treated as \code{"N"}.
 \item Columns are split by arm. Overall population column is excluded by default (see \code{lbl_overall} argument).
@@ -49,11 +84,21 @@ flag variables are treated as \code{"N"}.
 \item All-zero rows are not removed by default (see \code{prune_0} argument).
 }
 }
+\section{Functions}{
+\itemize{
+\item \code{make_table_32()}: Create FDA table 32 using functions from \code{rtables} and \code{tern}.
+
+\item \code{make_table_32_gtsum()}: Create FDA table 32 using functions from \code{gtsummary}.
+
+}}
 \examples{
 adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
 advs <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "advs")
 
 tbl <- make_table_32(advs = advs, alt_counts_df = adsl)
+tbl
+
+tbl <- make_table_32_gtsum(advs = advs)
 tbl
 
 }

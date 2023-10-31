@@ -74,5 +74,11 @@ test_that("Table 09 (gt) generation works with costum values", {
     "header" = result[["_heading"]],
     "footnotes" = result[["_footnotes"]][["footnotes"]]
   )
+
+test_that("Table 09 generation works with risk difference column", {
+  risk_diff <- list(arm_x = "B: Placebo", arm_y = "A: Drug X")
+  result <- make_table_09(adae, adsl, risk_diff = risk_diff)
+
+  res <- expect_silent(result)
   expect_snapshot(res)
 })

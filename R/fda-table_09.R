@@ -2,9 +2,9 @@
 #'   Safety Population, Pooled Analyses
 #'
 #' @details
-#' * `adae` must contain `SAFFL`, `USUBJID`, `AESER`, `AESOC`, and the variables specified
-#'   by `pref_var` and `arm_var`.
-#' * If specified, `alt_counts_df` must contain `SAFFL`, `USUBJID`, and the variable specified by `arm_var`.
+#' * `adae` must contain `USUBJID`, `AESER`, `AESOC`, and the variables specified by `pref_var`, `arm_var`,
+#'   and `saffl_var`.
+#' * If specified, `alt_counts_df` must contain `USUBJID` and the variables specified by `arm_var` and `saffl_var`.
 #' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
 #'   flag variables are treated as `"N"`.
 #' * Columns are split by arm. Overall population column is excluded by default (see `lbl_overall` argument).
@@ -12,6 +12,8 @@
 #' * All-zero rows are removed by default (see `prune_0` argument).
 #'
 #' @inheritParams argument_convention
+#'
+#' @return An `rtable` object.
 #'
 #' @examples
 #' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
@@ -25,26 +27,29 @@ make_table_09 <- function(adae,
                           alt_counts_df = NULL,
                           show_colcounts = TRUE,
                           arm_var = "ARM",
-                          pref_var = "AETERM",
+                          saffl_var = "SAFFL",
+                          pref_var = "AEDECOD",
                           lbl_pref_var = formatters::var_labels(adae, fill = TRUE)[pref_var],
                           lbl_overall = NULL,
+                          risk_diff = NULL,
                           prune_0 = TRUE,
                           annotations = NULL) {
-  checkmate::assert_subset(c("SAFFL", "USUBJID", "AESER", "AESOC", arm_var, pref_var), names(adae))
-  assert_flag_variables(adae, "SAFFL")
+  checkmate::assert_subset(c("USUBJID", "AESER", "AESOC", arm_var, saffl_var, pref_var), names(adae))
+  assert_flag_variables(adae, saffl_var)
 
   adae <- adae %>%
-    filter(SAFFL == "Y", AESER == "Y") %>%
+    filter(.data[[saffl_var]] == "Y", AESER == "Y") %>%
     df_explicit_na()
 
-  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
+  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var, saffl_var)
 
   lyt <- basic_table_annot(show_colcounts, annotations) %>%
-    split_cols_by_arm(arm_var, lbl_overall) %>%
+    split_cols_by_arm(arm_var, lbl_overall, risk_diff) %>%
     analyze_num_patients(
       vars = "USUBJID",
       .stats = "unique",
-      .labels = c(unique = "Any SAE")
+      .labels = c(unique = "Any SAE"),
+      riskdiff = !is.null(risk_diff)
     ) %>%
     split_rows_by(
       var = "AESOC",
@@ -55,9 +60,13 @@ make_table_09 <- function(adae,
     summarize_num_patients(
       var = "USUBJID",
       .stats = "unique",
-      .labels = c(unique = NULL)
+      .labels = c(unique = NULL),
+      riskdiff = !is.null(risk_diff)
     ) %>%
-    count_occurrences(vars = pref_var) %>%
+    count_occurrences(
+      vars = pref_var,
+      riskdiff = !is.null(risk_diff)
+    ) %>%
     append_topleft(paste(" ", lbl_pref_var))
 
   tbl <- build_table(lyt, df = adae, alt_counts_df = alt_counts_df)
