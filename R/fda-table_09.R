@@ -79,7 +79,7 @@ make_table_09 <- function(adae,
 #' by System Organ Class and Preferred Term,
 #' Safety Population, Pooled Analyses with /code{gt}
 #'
-#'
+#' @describeIn make_table_09 Create FDA table 9 using functions from `gt`.
 #' @inheritParams argument_convention
 #' @param saffl_var (`character`)\cr safety population flag variable from `adae` to include in the table.
 #' @param ser_var (`character`)\cr serious Event variable from `adae` to include in the table.
@@ -93,8 +93,8 @@ make_table_09 <- function(adae,
 #'   of length 2 and contain the name of treatment arms to calculate risk difference and its 95% CI for. Those names
 #'   must exist in the `arm_var` column of the dataset specified in `adae`.
 #'
-#' @return A `gt_tbl` object
-#' @export
+#' @return
+#' * `make_table_32_gtsum` returns a `gt` object
 #'
 #' @examples
 #' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
@@ -117,6 +117,7 @@ make_table_09 <- function(adae,
 #' tbl <- make_table_09_gtsum(adae = adae, alt_counts_df = adsl, annotations = annotations,
 #' risk_diff = risk_diff)
 #' tbl
+#' @export
 make_table_09_gtsum <- function(adae,
                              alt_counts_df = NULL,
                              show_colcounts = TRUE,
