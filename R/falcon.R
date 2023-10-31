@@ -5,11 +5,12 @@
 #' @keywords internal
 "_PACKAGE"
 
-#' @import dplyr gtsummary rtables tern tfrmt Tplyr
+
+#' @import dplyr gt gtsummary rtables tern tfrmt Tplyr
 #' @importFrom rlang .data
 #' @importFrom magrittr %>%
 #' @importFrom stats median sd quantile
-#' @importFrom tidyr pivot_longer separate_rows
+#' @importFrom tidyr pivot_longer separate_rows pivot_wider
 #' @importFrom formatters with_label var_labels var_relabel
 #' @importFrom rlistings as_listing
 NULL
