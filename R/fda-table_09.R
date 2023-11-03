@@ -203,7 +203,7 @@ make_table_09_gtsum <- function(adae,
 
 
   if (show_colcounts) {
-    total_N <- result_list[["total_N"]] #nolint
+    total_N <- result_list[["total_N"]] # nolint
 
     set_col_labels <- function(x) {
       if (startsWith(x, "rd_")) {
@@ -261,10 +261,9 @@ create_table_09_data <- function(
     soc_var,
     pref_var,
     lbl_overall = NULL,
-    risk_diff = NULL
-) {
+    risk_diff = NULL) {
   basis_df <- if (!is.null(alt_counts_df)) alt_counts_df else adae
-  N_data <- basis_df %>% #nolint
+  N_data <- basis_df %>% # nolint
     {
       if (is.null(lbl_overall)) group_by(., .data[[arm_var]]) else .
     } %>%
@@ -273,7 +272,7 @@ create_table_09_data <- function(
     select(all_of(c(id_var, arm_var, "N")))
 
   # get total N
-  total_N <- N_data %>% #nolint
+  total_N <- N_data %>% # nolint
     {
       if (is.null(lbl_overall)) group_by(., .data[[arm_var]]) else .
     } %>%
@@ -281,8 +280,8 @@ create_table_09_data <- function(
     {
       if (is.null(lbl_overall)) {
         pivot_wider(.,
-                    names_from = all_of(arm_var),
-                    values_from = N
+          names_from = all_of(arm_var),
+          values_from = N
         )
       } else {
         rename(., !!lbl_overall := "N")
@@ -356,9 +355,9 @@ count_subjects <- function(adae, arm_var, id_var, sub_level_vars = NULL, lbl_ove
     {
       if (grouping) {
         pivot_wider(.,
-                    id_cols = all_of(sub_level_vars),
-                    names_from = all_of(arm_var),
-                    values_from = all_of(c("val", "N", "combined"))
+          id_cols = all_of(sub_level_vars),
+          names_from = all_of(arm_var),
+          values_from = all_of(c("val", "N", "combined"))
         )
       } else {
         rename(., !!lbl_overall := "combined") %>%
