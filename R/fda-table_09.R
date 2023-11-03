@@ -153,11 +153,29 @@ make_table_09_gtsum <- function(adae,
 
   # create data for table 09
   # lbl_overall must be NULL to get the data for all columns besides the overall column
-  result_list <- create_table_09_data(adae = adae, alt_counts_df = alt_counts_df, arm_var = arm_var, id_var = id_var, soc_var = soc_var, pref_var = pref_var, lbl_overall = NULL, risk_diff = risk_diff)
+  result_list <- create_table_09_data(
+    adae = adae,
+    alt_counts_df = alt_counts_df,
+    arm_var = arm_var,
+    id_var = id_var,
+    soc_var = soc_var,
+    pref_var = pref_var,
+    lbl_overall = NULL,
+    risk_diff = risk_diff
+  )
 
   # create data for overall column
   if (!is.null(lbl_overall)) {
-    overall_list <- create_table_09_data(adae = adae, alt_counts_df = alt_counts_df, arm_var = arm_var, id_var = id_var, soc_var = soc_var, pref_var = pref_var, lbl_overall = lbl_overall, risk_diff = NULL)
+    overall_list <- create_table_09_data(
+      adae = adae,
+      alt_counts_df = alt_counts_df,
+      arm_var = arm_var,
+      id_var = id_var,
+      soc_var = soc_var,
+      pref_var = pref_var,
+      lbl_overall = lbl_overall,
+      risk_diff = NULL
+    )
 
     result_list$data <- result_list[["data"]] %>%
       left_join(overall_list[["data"]])
@@ -185,7 +203,7 @@ make_table_09_gtsum <- function(adae,
 
 
   if (show_colcounts) {
-    total_N <- result_list[["total_N"]]
+    total_N <- result_list[["total_N"]] #nolint
 
     set_col_labels <- function(x) {
       if (startsWith(x, "rd_")) {
@@ -235,9 +253,18 @@ make_table_09_gtsum <- function(adae,
 #'
 #' @return list containing the counted data to be displayed for table 9 and
 #' a `data.frame` containing information about the total N for each group
-create_table_09_data <- function(adae, alt_counts_df, arm_var, id_var, soc_var, pref_var, lbl_overall = NULL, risk_diff = NULL) {
+create_table_09_data <- function(
+    adae,
+    alt_counts_df,
+    arm_var,
+    id_var,
+    soc_var,
+    pref_var,
+    lbl_overall = NULL,
+    risk_diff = NULL
+) {
   basis_df <- if (!is.null(alt_counts_df)) alt_counts_df else adae
-  N_data <- basis_df %>%
+  N_data <- basis_df %>% #nolint
     {
       if (is.null(lbl_overall)) group_by(., .data[[arm_var]]) else .
     } %>%
@@ -246,7 +273,7 @@ create_table_09_data <- function(adae, alt_counts_df, arm_var, id_var, soc_var, 
     select(all_of(c(id_var, arm_var, "N")))
 
   # get total N
-  total_N <- N_data %>%
+  total_N <- N_data %>% #nolint
     {
       if (is.null(lbl_overall)) group_by(., .data[[arm_var]]) else .
     } %>%
@@ -254,8 +281,8 @@ create_table_09_data <- function(adae, alt_counts_df, arm_var, id_var, soc_var, 
     {
       if (is.null(lbl_overall)) {
         pivot_wider(.,
-          names_from = all_of(arm_var),
-          values_from = N
+                    names_from = all_of(arm_var),
+                    values_from = N
         )
       } else {
         rename(., !!lbl_overall := "N")
@@ -268,7 +295,14 @@ create_table_09_data <- function(adae, alt_counts_df, arm_var, id_var, soc_var, 
   input_list <- list(NULL, soc_var, c(soc_var, pref_var))
 
   data_list <- lapply(input_list, function(x) {
-    count_subjects(adae = adae, arm_var = arm_var, id_var = id_var, sub_level_vars = x, lbl_overall = lbl_overall, risk_diff = risk_diff)
+    count_subjects(
+      adae = adae,
+      arm_var = arm_var,
+      id_var = id_var,
+      sub_level_vars = x,
+      lbl_overall = lbl_overall,
+      risk_diff = risk_diff
+    )
   })
 
   sel_cols <- if (is.null(lbl_overall)) levels(N_data[[arm_var]]) else lbl_overall
@@ -322,9 +356,9 @@ count_subjects <- function(adae, arm_var, id_var, sub_level_vars = NULL, lbl_ove
     {
       if (grouping) {
         pivot_wider(.,
-          id_cols = all_of(sub_level_vars),
-          names_from = all_of(arm_var),
-          values_from = all_of(c("val", "N", "combined"))
+                    id_cols = all_of(sub_level_vars),
+                    names_from = all_of(arm_var),
+                    values_from = all_of(c("val", "N", "combined"))
         )
       } else {
         rename(., !!lbl_overall := "combined") %>%
@@ -335,7 +369,14 @@ count_subjects <- function(adae, arm_var, id_var, sub_level_vars = NULL, lbl_ove
   if (!is.null(risk_diff)) {
     purrr::walk(risk_diff, function(x) {
       count_data <<- count_data %>%
-        mutate(!!paste0("rd_", x[[1]], "-", x[[2]]) := calculate_riskdiff(.data[[paste0("val_", x[[1]])]], .data[[paste0("val_", x[[2]])]], .data[[paste0("N_", x[[1]])]], .data[[paste0("N_", x[[2]])]]))
+        mutate(
+          !!paste0("rd_", x[[1]], "-", x[[2]]) := calculate_riskdiff(
+            .data[[paste0("val_", x[[1]])]],
+            .data[[paste0("val_", x[[2]])]],
+            .data[[paste0("N_", x[[1]])]],
+            .data[[paste0("N_", x[[2]])]]
+          )
+        )
     })
   }
   if (grouping) {
@@ -354,7 +395,6 @@ count_subjects <- function(adae, arm_var, id_var, sub_level_vars = NULL, lbl_ove
 renaming_function <- function(x) {
   sapply(x, function(y) {
     substr(y, 10, nchar(y))
-    # unlist(strsplit(y, "_"))[2]
   }, simplify = TRUE)
 }
 
