@@ -9,6 +9,7 @@
 #' @import dplyr gt gtsummary rtables tern tfrmt Tplyr
 #' @importFrom rlang .data :=
 #' @importFrom magrittr %>%
+#' @importFrom purrr walk
 #' @importFrom stats median sd quantile
 #' @importFrom tidyr pivot_longer separate_rows pivot_wider
 #' @importFrom formatters with_label var_labels var_relabel
