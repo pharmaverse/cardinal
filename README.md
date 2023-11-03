@@ -35,11 +35,11 @@ See the [Getting Started page](https://pharmaverse.github.io/falcon/quarto/getti
 
 In the following example, Table 2 (Baseline Demographic and Clinical Characteristics) from the [FDA Safety Tables and Figures Integrated Guide](https://downloads.regulations.gov/FDA-2022-N-1961-0046/attachment_1.pdf) is generated using the `make_table_02` function from the `falcon` package.
 
-First we will load the `falcon` package and use the [`scda`](https://github.com/insightsengineering/scda) package to load an example ADSL dataset from the [`scda.2022`](https://github.com/insightsengineering/scda.2022) package. The `falcon` package works with standard CDISC datasets and variable names while allowing users to set custom variable names & labels where necessary.
+First we will load the `falcon` package and use the [`random.cdisc.data`](https://github.com/insightsengineering/random.cdisc.data) package to load an example ADSL dataset. The `falcon` package works with standard CDISC datasets and variable names while allowing users to set custom variable names & labels where necessary.
 
 ```r
 library(falcon)
-adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
+adsl <- random.cdisc.data::cadsl
 ```
 
 With data now loaded, the `make_table_02` function can be used to generate the FDA standard table.

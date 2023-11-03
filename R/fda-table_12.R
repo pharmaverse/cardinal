@@ -18,8 +18,8 @@
 #' @return An `rtable` object.
 #'
 #' @examples
-#' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
-#' adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
+#' adsl <- random.cdisc.data::cadsl
+#' adae <- random.cdisc.data::cadae
 #' adae$DCSREAS[is.na(adae$DCSREAS)] <- "ADVERSE EVENT"
 #'
 #' tbl <- make_table_12(adae = adae, alt_counts_df = adsl)

@@ -70,8 +70,8 @@ fraction of \code{n} (number of patients in current category) for all other rows
 }
 }
 \examples{
-adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
-adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
+adsl <- random.cdisc.data::cadsl
+adae <- random.cdisc.data::cadae
 
 set.seed(1)
 adae$TRTEMFL <- ifelse(

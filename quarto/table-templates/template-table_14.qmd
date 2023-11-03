@@ -13,10 +13,9 @@ format: html
 
 ```{r tbl, message=FALSE, warning=FALSE}
 # Load Libraries & Data
-library(scda)
 library(falcon)
 
-adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
+adae <- random.cdisc.data::cadae
 
 # Pre-Processing - Ensure required variables FMQ01SC and FMQ01NAM exist in adae
 adae <- dplyr::rename(adae, FMQ01SC = SMQ01SC, FMQ01NAM = SMQ01NAM)

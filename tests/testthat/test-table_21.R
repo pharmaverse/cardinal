@@ -1,4 +1,4 @@
-adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") %>%
+adsl <- adsl_raw %>%
   mutate(AGEGR1 = as.factor(case_when(
     AGE >= 17 & AGE < 65 ~ ">=17 to <65",
     AGE >= 65 ~ ">=65",
@@ -10,7 +10,7 @@ adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") %>%
     AGE = "Age, years"
   )
 
-adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
+adae <- adae_raw
 adae$ASER <- adae$AESER
 
 df <- left_join(adsl, adae, by = intersect(names(adsl), names(adae)))

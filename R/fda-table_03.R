@@ -21,7 +21,7 @@
 #' library(dplyr)
 #'
 #' set.seed(1)
-#' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
+#' adsl <- random.cdisc.data::cadsl
 #' adsl$RANDDT[sample(seq_len(nrow(adsl)), 100)] <- NA
 #' scrnfail_reas_lvls <- c(
 #'   "Inclusion/exclusion criteria not met", "Patient noncompliance", "Consent withdrawn", "Other"

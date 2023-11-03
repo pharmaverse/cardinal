@@ -16,8 +16,8 @@
 #' @return A `listing_df` object.
 #'
 #' @examples
-#' adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
-#' adex <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adex")
+#' adae <- random.cdisc.data::cadae
+#' adex <- random.cdisc.data::cadex
 #'
 #' tbl <- make_table_08(adae = adae, adex = adex)
 #' head(tbl, 20)

@@ -1,7 +1,6 @@
 library(dplyr)
-library(scda)
 
-adsl_raw <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
-adae_raw <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
-adex_raw <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adex")
-advs_raw <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "advs")
+adsl_raw <- random.cdisc.data::cadsl
+adae_raw <- random.cdisc.data::cadae
+adex_raw <- random.cdisc.data::cadex
+advs_raw <- random.cdisc.data::cadvs

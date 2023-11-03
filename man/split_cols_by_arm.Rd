@@ -36,7 +36,7 @@ rightmost column if \code{lbl_overall} is supplied.
 \examples{
 library(magrittr)
 
-adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
+adsl <- random.cdisc.data::cadsl
 
 lyt <- rtables::basic_table() \%>\% split_cols_by_arm(lbl_overall = "All Arms")
 rtables::build_table(lyt, df = adsl)

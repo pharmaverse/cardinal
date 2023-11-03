@@ -92,8 +92,8 @@ flag variables are treated as \code{"N"}.
 
 }}
 \examples{
-adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
-advs <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "advs")
+adsl <- random.cdisc.data::cadsl
+advs <- random.cdisc.data::cadvs
 
 tbl <- make_table_32(advs = advs, alt_counts_df = adsl)
 tbl

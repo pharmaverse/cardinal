@@ -21,7 +21,7 @@
 #' @return An `rtable` object.
 #'
 #' @examples
-#' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
+#' adsl <- random.cdisc.data::cadsl
 #'
 #' tbl <- make_table_05(df = adsl)
 #' tbl

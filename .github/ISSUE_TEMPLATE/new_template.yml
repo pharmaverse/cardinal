@@ -28,7 +28,8 @@ body:
       value: |
         [List required datasets here]
 
-        When using data from the `scda` package, please use datasets with `archive_name` set to `"rcd_2022_10_13"`.
+        Data from the `random.cdisc.data` package, can be retrieved by `random.cdisc.data::c` followed by your
+        dataset name.
   - type: textarea
     id: analysis-filters
     attributes:
