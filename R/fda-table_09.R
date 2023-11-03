@@ -250,6 +250,7 @@ make_table_09_gtsum <- function(adae,
 #' @details If `lbl_overall` is not `NULL` only the data for the overall column will be generated
 #'
 #' @inheritParams argument_convention
+#' @inheritParams make_table_09_gtsum
 #'
 #' @return list containing the counted data to be displayed for table 9 and
 #' a `data.frame` containing information about the total N for each group
@@ -409,7 +410,7 @@ renaming_function <- function(x) {
 #' the corresponding 95% Confidence interval in Brackets
 calculate_riskdiff <- function(x, y, n_x, n_y) {
   sapply(seq_along(x), function(i) {
-    pt <- prop.test(c(x[[i]], y[[i]]), c(n_x[[i]], n_y[[i]]))
+    pt <- stats::prop.test(c(x[[i]], y[[i]]), c(n_x[[i]], n_y[[i]]))
     val <- format(pt$estimate[[1]] - pt$estimate[[2]], digits = 2, nsmall = 2)
     conf_int <- format(pt$conf.int, digits = 2, nsmall = 2)
     paste0(val, " (", conf_int[[1]], ", ", conf_int[[2]], ")")
