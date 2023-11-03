@@ -90,16 +90,16 @@ adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
 adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
 
 # Output Table
-make_table_09_gt(adae = adae, alt_counts_df = adsl)
+make_table_09_gtsum(adae = adae, alt_counts_df = adsl)
 ```
 ## gt Table Setup
 
 ```{r tbl_gt, eval=FALSE, echo=TRUE}
 ```
 
-## Function Details: `make_table_09_gt`
+## Function Details: `make_table_09_gtsum`
 
-### `make_table_09_gt()`
+### `make_table_09_gtsum()`
 
 ------------------------------------------------------------------------
 
