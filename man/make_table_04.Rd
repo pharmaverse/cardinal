@@ -85,7 +85,10 @@ adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") \%>\%
 
 tbl <- make_table_04(
   df = adsl, pop_vars = c("RANDFL", "ITTFL", "SAFFL", "PPROTFL"),
-  lbl_pop_vars = c("Patients randomized", "ITT/mITT population", "Safety population", "Per-protocol population")
+  lbl_pop_vars = c(
+    "Patients randomized", "ITT/mITT population",
+    "Safety population", "Per-protocol population"
+  )
 )
 tbl
 
