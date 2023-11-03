@@ -69,7 +69,8 @@ flag variables are treated as \code{"N"}.
 }
 \examples{
 adsl <- random.cdisc.data::cadsl
-advs <- random.cdisc.data::cadvs
+advs <- random.cdisc.data::cadvs \%>\%
+  mutate(AVAL = AVAL - 100)
 
 tbl <- make_table_33(advs = advs, alt_counts_df = adsl)
 tbl
