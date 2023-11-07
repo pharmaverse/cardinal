@@ -81,7 +81,6 @@ library(falcon)
 library(dplyr)
 library(gt)
 library(gtsummary)
-library(tern)
 
 adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
 advs <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "advs")
