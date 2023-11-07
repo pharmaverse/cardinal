@@ -24,7 +24,8 @@
 #' levels(adae$FMQ01SC) <- c("BROAD", "NARROW")
 #' adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
 #' adae$FMQ01NAM <- factor(
-#'   adae$FMQ01NAM, levels = c(unique(adae$FMQ01NAM), "Erectile Dysfunction", "Gynecomastia")
+#'   adae$FMQ01NAM,
+#'   levels = c(unique(adae$FMQ01NAM), "Erectile Dysfunction", "Gynecomastia")
 #' )
 #' adae$FMQ01NAM[adae$SEX == "M"] <- as.factor(
 #'   sample(c("Erectile Dysfunction", "Gynecomastia"), sum(adae$SEX == "M"), replace = TRUE)
