@@ -2,6 +2,9 @@
 title: FDA Table 17
 subtitle: Patients With Adverse Events by Female-Specific FDA Medical Query (Narrow) and Preferred Term, Female Safety Population, Pooled Analyses
 format: html
+editor: 
+  markdown: 
+    wrap: 120
 ---
 
 ::: panel-tabset
@@ -49,92 +52,68 @@ make_table_17(adae = adae, alt_counts_df = adsl, risk_diff = risk_diff)
 
 ### `make_table_17()`
 
-------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
 
 Required variables:
 
--   **`adae`**: `adae` must contain `USUBJID`, `SEX`, and the variables
-    specified by `arm_var`, `saffl_var`, `pref_var`, `fmqsc_var` and
-    `fmqnam_var`.
--   **`alt_counts_df`** (if specified): `USUBJID` and the variables
-    specified by `arm_var` and `saffl_var`.
+-   **`adae`**: `adae` must contain `USUBJID`, `SEX`, and the variables specified by `arm_var`, `saffl_var`, `pref_var`,
+    `fmqsc_var` and `fmqnam_var`.
+-   **`alt_counts_df`** (if specified): `USUBJID` and the variables specified by `arm_var` and `saffl_var`.
 
-+------------+-------------------------------------------+------------+
-| Argument   | Description                               | Default    |
-+:===========+:==========================================+:===========+
-| `adae`     | (`data.frame`) Dataset (typically ADAE)   | *No        |
-|            | required to build table.                  | default*   |
-+------------+-------------------------------------------+------------+
-| `alt_      | (`character`) Alternative dataset used    | `NULL`     |
-| counts_df` | only to calculate column counts.          |            |
-+------------+-------------------------------------------+------------+
-| `show_     | (`flag`) Whether column counts should be  | `TRUE`     |
-| colcounts` | printed.                                  |            |
-+------------+-------------------------------------------+------------+
-| `arm_var`  | (`character`) Arm variable used to split  | `"ARM"`    |
-|            | table into columns.                       |            |
-+------------+-------------------------------------------+------------+
-| `          | (`character`) Flag variable used to       | `"SAFFL"`  |
-| saffl_var` | indicate inclusion in safety population.  |            |
-+------------+-------------------------------------------+------------+
-| `pref_var` | (`character`) Preferred term variable to  | `          |
-|            | use in table.                             | "AEDECOD"` |
-+------------+-------------------------------------------+------------+
-| `          | (`character`) Sex variable to use in      | `"F"`      |
-| sex_scope` | table.                                    |            |
-+------------+-------------------------------------------+------------+
-| `          | (`character`) FMQ scope value to use in   | `"NARROW"` |
-| fmq_scope` | table.                                    |            |
-+------------+-------------------------------------------+------------+
-| `          | (`character`) FMQ scope variable to use   | `          |
-| fmqsc_var` | in table.                                 | "FMQ01SC"` |
-+------------+-------------------------------------------+------------+
-| `f         | (`character`) FMQ reference name variable | `"         |
-| mqnam_var` | to use in table.                          | FMQ01NAM"` |
-+------------+-------------------------------------------+------------+
-| `lb        | (`character`) If specified, an overall    | `NULL`     |
-| l_overall` | column will be added to the table with    |            |
-|            | the given value as the column label.      |            |
-+------------+-------------------------------------------+------------+
-| `          | (named `list`) List of settings to apply  | `NULL`     |
-| risk_diff` | to add a risk difference column to the    |            |
-|            | table. See                                |            |
-|            | [tern::add_riskdi                         |            |
-|            | ff()](https://insightsengineering.github. |            |
-|            | io/tern/main/reference/add_riskdiff.html) |            |
-|            | for more details. List should contain the |            |
-|            | following elements:                       |            |
-|            |                                           |            |
-|            | -   `arm_x`: (required) the name of       |            |
-|            |     reference arm.                        |            |
-|            |                                           |            |
-|            | -   `arm_y`: (required) the name of the   |            |
-|            |     arm to compare to the reference arm.  |            |
-|            |                                           |            |
-|            | -   `col_label`: (optional) label to use  |            |
-|            |     for the risk difference column.       |            |
-|            |     Defaults to                           |            |
-|            |     `"Risk Difference (%) (95% CI)"`.     |            |
-|            |                                           |            |
-|            | -   `pct`: (optional) whether the output  |            |
-|            |     should be returned as percentages.    |            |
-|            |     Defaults to `TRUE`.                   |            |
-+------------+-------------------------------------------+------------+
-| `prune_0`  | (`flag`) Whether all-zero rows should be  | `FALSE`    |
-|            | removed from the table.                   |            |
-+------------+-------------------------------------------+------------+
-| `na_level` | (`character`) String to represent missing | `"<        |
-|            | values.                                   | Missing>"` |
-+------------+-------------------------------------------+------------+
-| `an        | (named `list` of `character`) List of     | `NULL`     |
-| notations` | annotations to add to the table. Valid    |            |
-|            | annotation types are `title`,             |            |
-|            | `subtitles`, `main_footer`, and           |            |
-|            | `prov_footer.` Each name-value pair       |            |
-|            | should use the annotation type as name    |            |
-|            | and the desired string as value.          |            |
-+------------+-------------------------------------------+------------+
++-----------------------+------------------------------------------------------------------+-----------------------+
+| Argument              | Description                                                      | Default               |
++:======================+:=================================================================+:======================+
+| `adae`                | (`data.frame`) Dataset (typically ADAE) required to build table. | *No default*          |
++-----------------------+------------------------------------------------------------------+-----------------------+
+| `alt_counts_df`       | (`character`) Alternative dataset used only to calculate column  | `NULL`                |
+|                       | counts.                                                          |                       |
++-----------------------+------------------------------------------------------------------+-----------------------+
+| `show_colcounts`      | (`flag`) Whether column counts should be printed.                | `TRUE`                |
++-----------------------+------------------------------------------------------------------+-----------------------+
+| `arm_var`             | (`character`) Arm variable used to split table into columns.     | `"ARM"`               |
++-----------------------+------------------------------------------------------------------+-----------------------+
+| `saffl_var`           | (`character`) Flag variable used to indicate inclusion in safety | `"SAFFL"`             |
+|                       | population.                                                      |                       |
++-----------------------+------------------------------------------------------------------+-----------------------+
+| `pref_var`            | (`character`) Preferred term variable to use in table.           | `"AEDECOD"`           |
++-----------------------+------------------------------------------------------------------+-----------------------+
+| `sex_scope`           | (`character`) Sex variable to use in table.                      | `"F"`                 |
++-----------------------+------------------------------------------------------------------+-----------------------+
+| `fmq_scope`           | (`character`) FMQ scope value to use in table.                   | `"NARROW"`            |
++-----------------------+------------------------------------------------------------------+-----------------------+
+| `fmqsc_var`           | (`character`) FMQ scope variable to use in table.                | `"FMQ01SC"`           |
++-----------------------+------------------------------------------------------------------+-----------------------+
+| `fmqnam_var`          | (`character`) FMQ reference name variable to use in table.       | `"FMQ01NAM"`          |
++-----------------------+------------------------------------------------------------------+-----------------------+
+| `lbl_overall`         | (`character`) If specified, an overall column will be added to   | `NULL`                |
+|                       | the table with the given value as the column label.              |                       |
++-----------------------+------------------------------------------------------------------+-----------------------+
+| `risk_diff`           | (named `list`) List of settings to apply to add a risk           | `NULL`                |
+|                       | difference column to the table. See                              |                       |
+|                       | [tern::add_riskdiff()](https://insight                           |                       |
+|                       | sengineering.github.%20io/tern/main/reference/add_riskdiff.html) |                       |
+|                       | for more details. List should contain the following elements:    |                       |
+|                       |                                                                  |                       |
+|                       | -   `arm_x`: (required) the name of reference arm.               |                       |
+|                       |                                                                  |                       |
+|                       | -   `arm_y`: (required) the name of the arm to compare to the    |                       |
+|                       |     reference arm.                                               |                       |
+|                       |                                                                  |                       |
+|                       | -   `col_label`: (optional) label to use for the risk difference |                       |
+|                       |     column. Defaults to `"Risk Difference (%) (95% CI)"`.        |                       |
+|                       |                                                                  |                       |
+|                       | -   `pct`: (optional) whether the output should be returned as   |                       |
+|                       |     percentages. Defaults to `TRUE`.                             |                       |
++-----------------------+------------------------------------------------------------------+-----------------------+
+| `prune_0`             | (`flag`) Whether all-zero rows should be removed from the table. | `FALSE`               |
++-----------------------+------------------------------------------------------------------+-----------------------+
+| `na_level`            | (`character`) String to represent missing values.                | `"<Missing>"`         |
++-----------------------+------------------------------------------------------------------+-----------------------+
+| `annotations`         | (named `list` of `character`) List of annotations to add to the  | `NULL`                |
+|                       | table. Valid annotation types are `title`, `subtitles`,          |                       |
+|                       | `main_footer`, and `prov_footer`. Each name-value pair should    |                       |
+|                       | use the annotation type as name and the desired string as value. |                       |
++-----------------------+------------------------------------------------------------------+-----------------------+
 
-Source code for this function is available
-[here](https://github.com/pharmaverse/falcon/blob/main/R/fda-table_17.R).
+Source code for this function is available [here](https://github.com/pharmaverse/falcon/blob/main/R/fda-table_17.R).
 :::
