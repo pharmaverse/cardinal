@@ -288,6 +288,8 @@ make_table_02_gtsum <- function(df,
       missing = ifelse(na_rm, "no", "ifany"),
       label = as.list(lbl_vars) %>% stats::setNames(vars)
     ) %>%
+    gtsummary::bold_labels() %>%
+    gtsummary::add_stat_label() %>%
     modify_header(all_stat_cols() ~ "**{level}**  \n (N={n})") %>%
     add_overall(last = TRUE, col_label = paste0("**", lbl_overall, "**  \n (N={n})")) %>%
     modify_footnote(update = everything() ~ NA)
