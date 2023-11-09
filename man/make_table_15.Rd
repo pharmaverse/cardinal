@@ -36,7 +36,7 @@ make_table_15(
 
 \item{pref_var}{(\code{character})\cr preferred term variable from \code{adae} to include in the table.}
 
-\item{sex_scope}{(\code{character})\cr flag variable used to indicate the scope of the population sex.}
+\item{sex_scope}{(\code{character})\cr Level of \code{SEX} to output in table.}
 
 \item{fmq_scope}{(\code{character})\cr FMQ scope ("NARROW" or "BROAD") to output in table.}
 
@@ -93,10 +93,10 @@ set.seed(1)
 adae <- dplyr::rename(adae, FMQ01SC = SMQ01SC, FMQ01NAM = SMQ01NAM)
 levels(adae$FMQ01SC) <- c("BROAD", "NARROW")
 adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
-adae$FMQ01NAM <- factor(adae$FMQ01NAM, levels = c(
-  unique(adae$FMQ01NAM),
-  "Erectile Dysfunction", "Gynecomastia"
-))
+adae$FMQ01NAM <- factor(
+  adae$FMQ01NAM,
+  levels = c(unique(adae$FMQ01NAM), "Erectile Dysfunction", "Gynecomastia")
+)
 adae$FMQ01NAM[adae$SEX == "M"] <- as.factor(
   sample(c("Erectile Dysfunction", "Gynecomastia"), sum(adae$SEX == "M"), replace = TRUE)
 )

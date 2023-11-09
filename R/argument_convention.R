@@ -34,7 +34,7 @@
 #'      `"Risk Difference (%) (95% CI)"`.
 #'    * `pct`: (optional) whether the output should be returned as percentages. Defaults to `TRUE`.
 #' @param saffl_var (`character`)\cr flag variable used to indicate inclusion in safety population.
-#' @param sex_scope (`character`)\cr flag variable used to indicate the scope of the population sex.
+#' @param sex_scope (`character`)\cr Level of `SEX` to output in table.
 #' @param show_colcounts (`flag`)\cr whether column counts should be printed.
 #' @param vars (`vector` of `character`)\cr variables from `df` to include in the table.
 #'

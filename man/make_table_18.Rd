@@ -36,7 +36,7 @@ make_table_18(
 
 \item{pref_var}{(\code{character})\cr preferred term variable from \code{adae} to include in the table.}
 
-\item{sex_scope}{(\code{character})\cr flag variable used to indicate the scope of the population sex.}
+\item{sex_scope}{(\code{character})\cr Level of \code{SEX} to output in table.}
 
 \item{fmq_scope}{(\code{character})\cr FMQ scope ("NARROW" or "BROAD") to output in table.}
 
