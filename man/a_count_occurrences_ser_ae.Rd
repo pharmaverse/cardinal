@@ -10,7 +10,7 @@ a_count_occurrences_ser_ae(
   .N_col,
   df_denom = NULL,
   denom = c("N_s", "N_col", "n"),
-  id = "USUBJID",
+  id_var = "USUBJID",
   arm_var = "ARM"
 )
 }
@@ -30,7 +30,7 @@ when \code{denom = "N_s"}.}
 subgroup/row counts), \code{"N_col"} (total \code{df} column counts), or \code{"n"} (total \code{df} overall patient count).
 Note that \code{df} is filtered to only include serious adverse events (\code{ASER == "Y"}).}
 
-\item{id}{(\code{string})\cr subject variable name.}
+\item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
 
 \item{arm_var}{(\code{character})\cr arm variable used to split table into columns.}
 }

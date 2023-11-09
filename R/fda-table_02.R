@@ -2,7 +2,7 @@
 #'
 #' @details
 #' * `df` must contain the variables specified by `vars`, `arm_var`, and `saffl_var`.
-#' * If specified, `alt_counts_df` must contain `USUBJID` and the variables specified by `arm_var` and `saffl_var`.
+#' * If specified, `alt_counts_df` must contain the variables specified by `arm_var`, `id_var`, and `saffl_var`.
 #' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
 #'   flag variables are treated as `"N"`.
 #' * Columns are split by arm. Overall population column is included by default (see `lbl_overall` argument).
@@ -54,7 +54,7 @@ make_table_02 <- function(df,
     filter(.data[[saffl_var]] == "Y") %>%
     df_explicit_na()
 
-  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var, saffl_var)
+  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, id_var, arm_var, saffl_var)
 
   lyt <- basic_table_annot(show_colcounts, annotations) %>%
     split_cols_by_arm(arm_var, lbl_overall) %>%

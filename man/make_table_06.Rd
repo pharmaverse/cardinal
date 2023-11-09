@@ -9,6 +9,7 @@ make_table_06(
   alt_counts_df = NULL,
   show_colcounts = TRUE,
   arm_var = "ARM",
+  id_var = "USUBJID",
   saffl_var = "SAFFL",
   lbl_overall = NULL,
   risk_diff = NULL,
@@ -24,6 +25,8 @@ make_table_06(
 \item{show_colcounts}{(\code{flag})\cr whether column counts should be printed.}
 
 \item{arm_var}{(\code{character})\cr arm variable used to split table into columns.}
+
+\item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
 
 \item{saffl_var}{(\code{character})\cr flag variable used to indicate inclusion in safety population.}
 
@@ -55,9 +58,9 @@ FDA Table 6: Overview of Adverse Events, Safety Population, Pooled Analyses
 }
 \details{
 \itemize{
-\item \code{adae} must contain the variables \code{USUBJID}, \code{TRTEMFL}, \code{AESEV}, \code{AESER}, \code{AESDTH}, \code{AESLIFE},
-\code{AESHOSP}, \code{AESDISAB}, \code{AESCONG}, \code{AESMIE}, \code{AEACN}, and the variables specified by \code{arm_var} and \code{saffl_var}.
-\item If specified, \code{alt_counts_df} must contain \code{USUBJID} and the variables specified by \code{arm_var} and \code{saffl_var}.
+\item \code{adae} must contain the variables \code{TRTEMFL}, \code{AESEV}, \code{AESER}, \code{AESDTH}, \code{AESLIFE},
+\code{AESHOSP}, \code{AESDISAB}, \code{AESCONG}, \code{AESMIE}, \code{AEACN}, and the variables specified by \code{arm_var}, \code{id_var}, and \code{saffl_var}.
+\item If specified, \code{alt_counts_df} must contain the variables specified by \code{arm_var}, 'id_var\verb{, and }saffl_var`.
 \item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
 flag variables are treated as \code{"N"}.
 \item Columns are split by arm. Overall population column is excluded by default (see \code{lbl_overall} argument).

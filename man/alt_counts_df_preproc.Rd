@@ -4,10 +4,17 @@
 \alias{alt_counts_df_preproc}
 \title{Pre-Process \code{alt_counts_df} for Safety Population}
 \usage{
-alt_counts_df_preproc(alt_counts_df, arm_var = "ARM", saffl_var = NULL)
+alt_counts_df_preproc(
+  alt_counts_df,
+  id_var = "USUBJID",
+  arm_var = "ARM",
+  saffl_var = NULL
+)
 }
 \arguments{
 \item{alt_counts_df}{(\code{character})\cr alternative dataset (typically ADSL) used only to calculate column counts.}
+
+\item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
 
 \item{arm_var}{(\code{character})\cr arm variable used to split table into columns.}
 
