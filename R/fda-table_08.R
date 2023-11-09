@@ -59,7 +59,7 @@ make_table_08 <- function(adae,
       DOSDUR = (TRTEDT - TRTSDT + 1) %>% as.character(),
       DOSAGE = paste0(AVAL, " ", AVALU)
     )
-    tbl_join <- left_join(adae, adex, by = id_var) %>%
+  tbl_join <- left_join(adae, adex, by = id_var) %>%
     select(all_of(c(arm_var, id_var)), AGESEX, DOSAGE, DOSDUR, DTHADY, all_of(dth_vars)) %>%
     var_relabel(
       AGESEX = "Age/\nGender",
@@ -71,7 +71,7 @@ make_table_08 <- function(adae,
     arrange(across(all_of(c(arm_var, id_var, "AGESEX", "DOSAGE", "DOSDUR", "DTHADY"))))
 
   tbl_join[[arm_var]] <- with_label(tbl_join[[arm_var]], "Study Arm")
-  tbl_join[[id_var]] <- with_label( tbl_join[[id_var]],  "Patient ID")
+  tbl_join[[id_var]] <- with_label(tbl_join[[id_var]], "Patient ID")
   for (i in seq_len(length(dth_vars))) {
     tbl_join[[dth_vars[i]]] <- with_label(tbl_join[[dth_vars[i]]], lbl_dth_vars[i])
   }
