@@ -59,6 +59,8 @@ contain the following elements:
 
 \item{saffl_var}{(\code{character})\cr flag variable used to indicate inclusion in safety population.}
 
+\item{sex_scope}{(\code{character})\cr Level of \code{SEX} to output in table.}
+
 \item{show_colcounts}{(\code{flag})\cr whether column counts should be printed.}
 
 \item{vars}{(\code{vector} of \code{character})\cr variables from \code{df} to include in the table.}
