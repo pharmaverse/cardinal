@@ -294,5 +294,7 @@ make_table_02_gtsum <- function(df,
     add_overall(last = TRUE, col_label = paste0("**", lbl_overall, "**  \n (N={n})")) %>%
     modify_footnote(update = everything() ~ NA)
 
-  tbl
-}
+  gtsummary::with_gtsummary_theme(
+    x = gtsummary::theme_gtsummary_compact(),
+    expr = tbl
+  )}

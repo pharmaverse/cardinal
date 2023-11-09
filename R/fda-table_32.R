@@ -136,5 +136,8 @@ make_table_32_gtsum <- function(advs,
 
   tbl <- tbl %>% modify_footnote(update = everything() ~ NA)
 
-  tbl
+  gtsummary::with_gtsummary_theme(
+    x = gtsummary::theme_gtsummary_compact(),
+    expr = tbl
+  )
 }
