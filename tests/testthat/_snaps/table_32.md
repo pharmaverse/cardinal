@@ -21,9 +21,9 @@
        of Blood Pressure Postbaseline, Safety Population, Pooled Analysis
       
       —————————————————————————————————————————————————————————————————————————————————
-      Diastolic Blood Pressure                                                 Total   
-      (Pa)                       A: Drug X    B: Placebo   C: Combination   Population 
-                                  (N=134)      (N=134)        (N=132)         (N=400)  
+                                                                               Total   
+      Diastolic Blood Pressure   A: Drug X    B: Placebo   C: Combination   Population 
+      (Pa)                        (N=134)      (N=134)        (N=132)         (N=400)  
       —————————————————————————————————————————————————————————————————————————————————
       <60                        72 (53.7%)   83 (61.9%)     78 (59.1%)     233 (58.2%)
       >60                        62 (46.3%)   51 (38.1%)     54 (40.9%)     167 (41.8%)

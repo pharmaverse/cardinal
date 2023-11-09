@@ -9,6 +9,7 @@ make_table_33(
   advs,
   alt_counts_df = NULL,
   show_colcounts = TRUE,
+  id_var = "USUBJID",
   arm_var = "ARM",
   saffl_var = "SAFFL",
   lbl_overall = NULL,
@@ -23,6 +24,8 @@ make_table_33(
 \item{alt_counts_df}{(\code{character})\cr alternative dataset (typically ADSL) used only to calculate column counts.}
 
 \item{show_colcounts}{(\code{flag})\cr whether column counts should be printed.}
+
+\item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
 
 \item{arm_var}{(\code{character})\cr arm variable used to split table into columns.}
 
@@ -57,9 +60,9 @@ Safety Population, Pooled Analysis
 }
 \details{
 \itemize{
-\item \code{advs} must contain \code{USUBJID}, \code{AVISITN}, \code{PARAMCD}, \code{AVAL}, \code{AVALU}, and the variables specified by \code{arm_var}
+\item \code{advs} must contain \code{AVISITN}, \code{PARAMCD}, \code{AVAL}, \code{AVALU}, and the variables specified by \code{arm_var}, \code{id_var},
 and \code{saffl_var}.
-\item If specified, \code{alt_counts_df} must contain \code{USUBJID} and the variables specified by \code{arm_var} and \code{saffl_var}.
+\item If specified, \code{alt_counts_df} must contain the variables specified by \code{arm_var}, \code{id_var}, and \code{saffl_var}.
 \item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
 flag variables are treated as \code{"N"}.
 \item Columns are split by arm. Overall population column is excluded by default (see \code{lbl_overall} argument).

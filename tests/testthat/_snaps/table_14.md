@@ -3,9 +3,9 @@
     Code
       res
     Output
-      Body System or Organ Class                    BROAD                                      NARROW                 
-        FMQ                        A: Drug X    B: Placebo   C: Combination   A: Drug X    B: Placebo   C: Combination
-                                    (N=119)      (N=139)        (N=141)        (N=490)      (N=483)        (N=562)    
+                                                    BROAD                                      NARROW                 
+      Body System or Organ Class   A: Drug X    B: Placebo   C: Combination   A: Drug X    B: Placebo   C: Combination
+        FMQ                         (N=119)      (N=139)        (N=141)        (N=490)      (N=483)        (N=562)    
       ————————————————————————————————————————————————————————————————————————————————————————————————————————————————
       cl A.1                                                                                                          
         C.1.1.1.3/B.2.2.3.1 AESI       0            0              0              0            0              0       
@@ -37,9 +37,9 @@
       Table 14. Patients With Adverse Events(1) by System Organ Class and FDA Medical Query, Safety Population, Pooled Analyses(2)
       
       ———————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-      Body System or Organ Class(3)                    BROAD                                      NARROW                 
-        FMQ                           A: Drug X    B: Placebo   C: Combination   A: Drug X    B: Placebo   C: Combination
-                                       (N=119)      (N=139)        (N=141)        (N=490)      (N=483)        (N=562)    
+                                                       BROAD                                      NARROW                 
+      Body System or Organ Class(3)   A: Drug X    B: Placebo   C: Combination   A: Drug X    B: Placebo   C: Combination
+        FMQ                            (N=119)      (N=139)        (N=141)        (N=490)      (N=483)        (N=562)    
       ———————————————————————————————————————————————————————————————————————————————————————————————————————————————————
       cl A.1                                                                                                             
         C.1.1.1.3/B.2.2.3.1 AESI          0            0              0              0            0              0       
@@ -78,9 +78,9 @@
     Code
       res
     Output
-      Body System or Organ Class                    BROAD                                      NARROW                 
-        FMQ                        A: Drug X    B: Placebo   C: Combination   A: Drug X    B: Placebo   C: Combination
-                                    (N=119)      (N=139)        (N=141)        (N=490)      (N=483)        (N=562)    
+                                                    BROAD                                      NARROW                 
+      Body System or Organ Class   A: Drug X    B: Placebo   C: Combination   A: Drug X    B: Placebo   C: Combination
+        FMQ                         (N=119)      (N=139)        (N=141)        (N=490)      (N=483)        (N=562)    
       ————————————————————————————————————————————————————————————————————————————————————————————————————————————————
       cl A.1                                                                                                          
         <Missing>                      0            0              0          78 (15.9%)   75 (15.5%)     89 (15.8%)  
@@ -103,9 +103,9 @@
     Code
       res
     Output
-      Body System or Organ Class                                    BROAD                                                                    NARROW                                 
-        FMQ                        A: Drug X    B: Placebo   C: Combination   Risk Difference (%) (95% CI)   A: Drug X    B: Placebo   C: Combination   Risk Difference (%) (95% CI)
-                                    (N=119)      (N=139)        (N=141)                 (N=258)               (N=490)      (N=483)        (N=562)                 (N=973)           
+                                                                    BROAD                                                                    NARROW                                 
+      Body System or Organ Class   A: Drug X    B: Placebo   C: Combination   Risk Difference (%) (95% CI)   A: Drug X    B: Placebo   C: Combination   Risk Difference (%) (95% CI)
+        FMQ                         (N=119)      (N=139)        (N=141)                 (N=258)               (N=490)      (N=483)        (N=562)                 (N=973)           
       ——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
       cl A.1                                                                                                                                                                        
         C.1.1.1.3/B.2.2.3.1 AESI       0            0              0                0.0 (0.0 - 0.0)              0            0              0                0.0 (0.0 - 0.0)       
