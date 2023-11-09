@@ -59,8 +59,9 @@ FDA Table 6: Overview of Adverse Events, Safety Population, Pooled Analyses
 \details{
 \itemize{
 \item \code{adae} must contain the variables \code{TRTEMFL}, \code{AESEV}, \code{AESER}, \code{AESDTH}, \code{AESLIFE},
-\code{AESHOSP}, \code{AESDISAB}, \code{AESCONG}, \code{AESMIE}, \code{AEACN}, and the variables specified by \code{arm_var}, \code{id_var}, and \code{saffl_var}.
-\item If specified, \code{alt_counts_df} must contain the variables specified by \code{arm_var}, 'id_var\verb{, and }saffl_var`.
+\code{AESHOSP}, \code{AESDISAB}, \code{AESCONG}, \code{AESMIE}, \code{AEACN}, and the variables specified by \code{arm_var},
+\code{id_var}, and \code{saffl_var}.
+\item If specified, \code{alt_counts_df} must contain the variables specified by \code{arm_var}, \code{id_var}, and \code{saffl_var}.
 \item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
 flag variables are treated as \code{"N"}.
 \item Columns are split by arm. Overall population column is excluded by default (see \code{lbl_overall} argument).

@@ -42,7 +42,7 @@ make_table_33 <- function(advs,
       AVISITN >= 1,
       PARAMCD %in% c("DIABP", "SYSBP")
     ) %>%
-    group_by(id_var, PARAMCD) %>%
+    group_by(.data[[id_var]], PARAMCD) %>%
     mutate(
       MAX_DIABP = if_else(PARAMCD == "DIABP", max(AVAL), NA_real_),
       MAX_SYSBP = if_else(PARAMCD == "SYSBP", max(AVAL), NA_real_)

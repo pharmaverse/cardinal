@@ -59,6 +59,7 @@ make_table_08 <- function(adae,
       DOSDUR = (TRTEDT - TRTSDT + 1) %>% as.character(),
       DOSAGE = paste0(AVAL, " ", AVALU)
     )
+
   tbl_join <- left_join(adae, adex, by = id_var) %>%
     select(all_of(c(arm_var, id_var)), AGESEX, DOSAGE, DOSDUR, DTHADY, all_of(dth_vars)) %>%
     var_relabel(
