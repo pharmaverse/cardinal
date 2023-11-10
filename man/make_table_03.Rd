@@ -9,6 +9,7 @@ make_table_03(
   alt_counts_df = NULL,
   show_colcounts = FALSE,
   arm_var = "ARM",
+  id_var = "USUBJID",
   scrnfl_var,
   scrnfailfl_var,
   scrnfail_var,
@@ -25,6 +26,8 @@ make_table_03(
 \item{show_colcounts}{(\code{flag})\cr whether column counts should be printed.}
 
 \item{arm_var}{(\code{character})\cr arm variable used to split table into columns.}
+
+\item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
 
 \item{scrnfl_var}{(\code{character})\cr variable from \code{df} that indicates whether patients were screened.}
 
@@ -46,9 +49,9 @@ FDA Table 3: Patient Screening and Enrollment, Trials A and B
 }
 \details{
 \itemize{
-\item \code{adsl} must contain \code{USUBJID}, \code{ENRLDT}, \code{RANDDT}, and the variables specified by \code{arm_var}, \code{scrnfl_var},
+\item \code{adsl} must contain \code{ENRLDT}, \code{RANDDT}, and the variables specified by \code{id_var}, \code{arm_var}, \code{scrnfl_var},
 \code{scrnfailfl_var}, and \code{scrnfail_var}.
-\item If specified, \code{alt_counts_df} must contain \code{USUBJID}, and the variable specified by \code{arm_var}.
+\item If specified, \code{alt_counts_df} must contain the variables specified by \code{arm_var} and \code{id_var}.
 \item Patients are considered enrolled in they have an enrollment date (\code{ENRLDT} is not missing), and are considered
 randomized if they have a randomization date (\code{RANDDT} is not missing).
 \item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in

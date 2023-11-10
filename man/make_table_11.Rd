@@ -9,6 +9,7 @@ make_table_11(
   adae,
   alt_counts_df = NULL,
   show_colcounts = TRUE,
+  id_var = "USUBJID",
   arm_var = "ARM",
   saffl_var = "SAFFL",
   fmqsc_var = "FMQ01SC",
@@ -27,6 +28,8 @@ make_table_11(
 \item{alt_counts_df}{(\code{character})\cr alternative dataset (typically ADSL) used only to calculate column counts.}
 
 \item{show_colcounts}{(\code{flag})\cr whether column counts should be printed.}
+
+\item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
 
 \item{arm_var}{(\code{character})\cr arm variable used to split table into columns.}
 
@@ -69,8 +72,8 @@ Discontinuation, Safety Population, Pooled Analyses
 }
 \details{
 \itemize{
-\item \code{adae} must contain the variables \code{USUBJID}, \code{AEBODSYS}, \code{DCSREAS}, and the variables specified by
-\code{arm_var}, \code{saffl_var}, \code{fmqsc_var}, and \code{fmqnam_var}.
+\item \code{adae} must contain the variables \code{AEBODSYS}, \code{DCSREAS}, and the variables specified by
+\code{arm_var}, \code{id_var}, \code{saffl_var}, \code{fmqsc_var}, and \code{fmqnam_var}.
 \item If specified, \code{alt_counts_df} must contain \code{USUBJID} and the variables specified by \code{arm_var} and \code{saffl_var}.
 \item A patient is defined as having at least one adverse event leading to treatment discontinuation when they have at
 least one record with \code{DCSREAS = "ADVERSE EVENT"}.
