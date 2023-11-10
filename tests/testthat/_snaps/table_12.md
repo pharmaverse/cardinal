@@ -33,7 +33,6 @@
       Table 12. Patients With Adverse Events(1) Leading to Treatment Discontinuation by System Organ Class and Preferred Term,
        Safety Population, Pooled Analyses(2)
       
-      
       ———————————————————————————————————————————————————————————————————————————————————————————————————
       Body System or Organ Class                                 A: Drug X    B: Placebo   C: Combination
         Preferred Term                                            (N=134)      (N=134)        (N=132)    
@@ -62,9 +61,7 @@
        (1) Treatment-emergent adverse event defined as [definition]. MedDRA version X.
        (2) Duration = [e.g., X week double-blind treatment period or median and a range indicating pooled trial durations].
       
-      
       Abbreviations: CI, confidence interval; MedDRA, Medical Dictionary for Regulatory Activities; N, number of patients
-      
       in treatment arm; n, number of patients with at least one event; PT, preferred term; SOC, System Organ Class
 
 # Table 12 generation works with risk difference column
