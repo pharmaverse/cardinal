@@ -297,4 +297,5 @@ make_table_02_gtsum <- function(df,
   gtsummary::with_gtsummary_theme(
     x = gtsummary::theme_gtsummary_compact(),
     expr = tbl
-  )}
+  )
+}
