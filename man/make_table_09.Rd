@@ -70,8 +70,6 @@ Each name-value pair should use the annotation type as name and the desired stri
 
 \item{ser_var}{(\code{character})\cr serious Event variable from \code{adae} to include in the table.}
 
-\item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
-
 \item{soc_var}{(\code{character})\cr system organ class variable from \code{adae} to include in the table.}
 
 \item{lbl_soc_var}{(\code{character})\cr label corresponding to system organ class variable
@@ -96,7 +94,7 @@ Safety Population, Pooled Analyses with /code{gt}
 \itemize{
 \item \code{adae} must contain \code{AESER}, \code{AESOC}, and the variables specified by \code{pref_var}, \code{id_var}, \code{arm_var},
 and \code{saffl_var}.
-\item If specified, \code{alt_counts_df} must contain \code{USUBJID} and the variables specified by \code{arm_var} and \code{saffl_var}.
+\item If specified, \code{alt_counts_df} must contain the variables specified by \code{arm_var}, \code{id_var}, and \code{saffl_var}.
 \item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
 flag variables are treated as \code{"N"}.
 \item Columns are split by arm. Overall population column is excluded by default (see \code{lbl_overall} argument).

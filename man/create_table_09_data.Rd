@@ -24,7 +24,7 @@ create_table_09_data(
 
 \item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
 
-\item{soc_var}{(\code{character})\cr system organ class variable from \code{adae} to include in the table.}
+\item{soc_var}{(\code{character})\cr flag variable used to indicate system organ class.}
 
 \item{pref_var}{(\code{character})\cr preferred term variable from \code{adae} to include in the table.}
 
