@@ -2,6 +2,7 @@
 % Please edit documentation in R/fda-table_09.R
 \name{make_table_09}
 \alias{make_table_09}
+\alias{make_table_09_gtsum}
 \title{FDA Table 9: Patients With Serious Adverse Events by System Organ Class and Preferred Term,
 Safety Population, Pooled Analyses}
 \usage{
@@ -19,6 +20,23 @@ make_table_09(
   prune_0 = TRUE,
   annotations = NULL
 )
+
+make_table_09_gtsum(
+  adae,
+  alt_counts_df = NULL,
+  show_colcounts = TRUE,
+  saffl_var = "SAFFL",
+  ser_var = "AESER",
+  arm_var = "ARM",
+  pref_var = "AEDECOD",
+  id_var = "USUBJID",
+  soc_var = "AESOC",
+  lbl_pref_var = formatters::var_labels(adae, fill = TRUE)[pref_var],
+  lbl_soc_var = formatters::var_labels(adae, fill = TRUE)[soc_var],
+  lbl_overall = NULL,
+  annotations = NULL,
+  risk_diff = NULL
+)
 }
 \arguments{
 \item{adae}{(\code{data.frame})\cr dataset (typically ADAE) required to build table.}
@@ -31,7 +49,7 @@ make_table_09(
 
 \item{arm_var}{(\code{character})\cr arm variable used to split table into columns.}
 
-\item{saffl_var}{(\code{character})\cr flag variable used to indicate inclusion in safety population.}
+\item{saffl_var}{(\code{character})\cr safety population flag variable from \code{adae} to include in the table.}
 
 \item{pref_var}{(\code{character})\cr preferred term variable from \code{adae} to include in the table.}
 
@@ -40,29 +58,39 @@ make_table_09(
 \item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
 the given value as the column label.}
 
-\item{risk_diff}{(named \code{list})\cr list of settings to apply to add a risk difference column to the table.
-Defaults to \code{NULL} (no risk difference column added). See \code{\link[tern:add_riskdiff]{tern::add_riskdiff()}} for more details. List should
-contain the following elements:
-\itemize{
-\item \code{arm_x}: (required) the name of reference arm.
-\item \code{arm_y}: (required) the name of the arm to compare to the reference arm.
-\item \code{col_label}: (optional) label to use for the risk difference column. Defaults to
-\code{"Risk Difference (\%) (95\% CI)"}.
-\item \code{pct}: (optional) whether the output should be returned as percentages. Defaults to \code{TRUE}.
-}}
+\item{risk_diff}{(\code{list} of \code{character} vectors)\cr List of character vectors. Each vector must be
+of length 2 and contain the name of treatment arms to calculate risk difference and its 95\% CI for. Those names
+must exist in the \code{arm_var} column of the dataset specified in \code{adae}.}
 
 \item{prune_0}{(\code{flag})\cr whether all-zero rows should be removed from the table.}
 
 \item{annotations}{(named \code{list} of \code{character})\cr list of annotations to add to the table. Valid
-annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
-use the annotation type as name and the desired string as value.}
+annotation types are \code{title}, \code{subtitles}, and a list of characters called \code{footnotes}.
+Each name-value pair should use the annotation type as name and the desired string as the value.}
+
+\item{ser_var}{(\code{character})\cr serious Event variable from \code{adae} to include in the table.}
+
+\item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
+
+\item{soc_var}{(\code{character})\cr system organ class variable from \code{adae} to include in the table.}
+
+\item{lbl_soc_var}{(\code{character})\cr label corresponding to system organ class variable
+\code{soc_var} to print in the table.}
 }
 \value{
 An \code{rtable} object.
+
+\itemize{
+\item \code{make_table_32_gtsum} returns a \code{gt} object
+}
 }
 \description{
 FDA Table 9: Patients With Serious Adverse Events by System Organ Class and Preferred Term,
 Safety Population, Pooled Analyses
+
+Function to create FDA Table 9: Patients With Serious Adverse Events
+by System Organ Class and Preferred Term,
+Safety Population, Pooled Analyses with /code{gt}
 }
 \details{
 \itemize{
@@ -76,6 +104,11 @@ flag variables are treated as \code{"N"}.
 \item All-zero rows are removed by default (see \code{prune_0} argument).
 }
 }
+\section{Functions}{
+\itemize{
+\item \code{make_table_09_gtsum()}: Create FDA table 9 using functions from \code{gt}.
+
+}}
 \examples{
 adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
 adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
@@ -83,4 +116,26 @@ adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
 tbl <- make_table_09(adae = adae, alt_counts_df = adsl)
 tbl
 
+adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
+adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
+
+tbl <- make_table_09_gtsum(adae = adae, alt_counts_df = adsl)
+tbl
+
+annotations <- list(
+  title = "Table 9. Patients With Serious Adverse Events",
+  subtitle = "by System Organ Class and Preferred Term, Safety Population, Pooled Analyses",
+  footnotes = list(
+    "Duration = [e.g., X week double-blind treatment period or median and a range
+    indicating pooled trial durations].",
+    "Difference is shown between [treatment arms] (e.g., difference is shown
+    between Drug Name dosage X vs. placebo)."
+  )
+)
+risk_diff <- list(c("A: Drug X", "C: Combination"), c("A: Drug X", "B: Placebo"))
+tbl <- make_table_09_gtsum(
+  adae = adae, alt_counts_df = adsl, annotations = annotations,
+  risk_diff = risk_diff
+)
+tbl
 }
