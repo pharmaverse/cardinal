@@ -20,6 +20,11 @@ h1, h2, .subtitle {
   text-align: center;
 }
 
+ul {
+  max-height: 400px;
+  overflow-y: scroll;
+}
+
 .button {
   width: 25%;
   font: bold 16px Arial;
