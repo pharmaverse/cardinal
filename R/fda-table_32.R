@@ -126,7 +126,7 @@ make_table_32_gtsum <- function(advs,
     tbl_summary(
       by = arm_var,
       statistic = list(all_categorical() ~ "{n} ({p}%)"),
-      digits = everything() ~ 1
+      digits = everything() ~ c(0, 1)
     ) %>%
     modify_header(label ~ paste0("**Diastolic Blood Pressure (", avalu, ")**")) %>%
     modify_header(all_stat_cols() ~ "**{level}**  \n (N={n})")
@@ -138,5 +138,8 @@ make_table_32_gtsum <- function(advs,
 
   tbl <- tbl %>% modify_footnote(update = everything() ~ NA)
 
-  tbl
+  gtsummary::with_gtsummary_theme(
+    x = gtsummary::theme_gtsummary_compact(),
+    expr = tbl
+  )
 }

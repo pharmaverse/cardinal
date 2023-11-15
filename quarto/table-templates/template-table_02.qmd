@@ -181,7 +181,7 @@ make_table_02_gtsum(
   df = anl,
   vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY", "AVAL"),
   lbl_vars = c(
-    "Sex", "Age, years", "Age Group, years", "Race", "Ethnicity",
+    "Sex", "Age, years", "Age Group years", "Race", "Ethnicity",
     "Country of Participation", "Baseline Temperature (C)"
   )
 )
