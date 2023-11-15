@@ -23,5 +23,5 @@ utils::globalVariables(c(
   "MAX_DIABP", "MAX_SYSBP", "PARAMCD", "SEX", "TRTDUR", "TRTDUR_MONTHS", "TRTEDT", "ASER", "DCTREAS",
   "EOSSTT", "EOTSTT", "ITTFL", "PPROTFL", "RANDFL", "TRTEMFL", "TRTSDT", "USUBJID", "column", "median", "ord_layer_1",
   "ord_layer_2", "ord_layer_index", "param", "pct", "row_label1", "row_label2", "sd", "tbl_lbl", "value",
-  "ENRLDT", "RANDDT", "G110", "G60", "G90", "GE120", "L60", "N", "val"
+  "ENRLDT", "RANDDT", "G110", "G60", "G90", "GE120", "L60", "N", "val", "id_var"
 ))

@@ -1,10 +1,10 @@
 #' FDA Table 5: Duration of Treatment Exposure, Safety Population, Pooled Analyses
 #'
 #' @details
-#' * `df` must contain `USUBJID` and the variables specified by `arm_var`, `saffl_var`, `id_var`, `trtsdtm_var`,
+#' * `df` must contain the variables specified by `arm_var`, `id_var`, `saffl_var`, `id_var`, `trtsdtm_var`,
 #'   and `trtedtm_var`.
-#' * If specified, `alt_counts_df` must contain `USUBJID` and the variables specified by `arm_var` and `saffl_var`.
-#' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
+#' * If specified, `alt_counts_df` must contain the variables specified by `arm_var`, `id_var` and `saffl_var`.
+#' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false,). Missing values in
 #'   flag variables are treated as `"N"`.
 #' * Columns are split by arm. Overall population column is excluded by default (see `lbl_overall` argument).
 #' * Numbers in table "Patients Treated" section are the absolute numbers of patients and fraction of `N`.
@@ -31,8 +31,8 @@ make_table_05 <- function(df,
                           alt_counts_df = NULL,
                           show_colcounts = TRUE,
                           arm_var = "ARM",
-                          saffl_var = "SAFFL",
                           id_var = "USUBJID",
+                          saffl_var = "SAFFL",
                           trtsdtm_var = "TRTSDTM",
                           trtedtm_var = "TRTEDTM",
                           u_trtdur = "days",
@@ -41,7 +41,7 @@ make_table_05 <- function(df,
                           risk_diff = NULL,
                           prune_0 = FALSE,
                           annotations = NULL) {
-  checkmate::assert_subset(c("USUBJID", arm_var, saffl_var, id_var, trtsdtm_var, trtedtm_var), names(df))
+  checkmate::assert_subset(c(id_var, arm_var, saffl_var, id_var, trtsdtm_var, trtedtm_var), names(df))
   checkmate::assert_choice(u_trtdur, c("days", "weeks", "months", "years"))
   assert_flag_variables(df, saffl_var)
 
@@ -66,7 +66,7 @@ make_table_05 <- function(df,
       DUR_LBL = "Patients Treated, by duration"
     )
 
-  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var, saffl_var)
+  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, id_var, arm_var, saffl_var)
 
   lyt <- basic_table_annot(show_colcounts, annotations) %>%
     split_cols_by_arm(arm_var, lbl_overall, risk_diff) %>%
