@@ -9,7 +9,7 @@ format: html
 
 ![](../assets/images/screenshots/table_21.png){fig-align="center" width="70%"}
 
-## Table
+## rtables/tern Table
 
 ```{r tbl, message=FALSE, warning=FALSE}
 # Load Libraries & Data
@@ -37,7 +37,7 @@ df <- left_join(adsl, adae, by = intersect(names(adsl), names(adae)))
 make_table_21(df = df, alt_counts_df = adsl, denom = "N_s")
 ```
 
-## Table Setup
+## rtables/tern Table Setup
 
 ```{r tbl, eval=FALSE, echo=TRUE}
 ```
