@@ -8,6 +8,7 @@ make_table_08(
   adae,
   adex,
   arm_var = "ARM",
+  id_var = "USUBJID",
   saffl_var = "SAFFL",
   dth_vars = c("DTHCAUS", "DTHCAT"),
   lbl_dth_vars = c("Cause of Death\\nMedDRA\\nPreferred Term",
@@ -22,6 +23,8 @@ make_table_08(
 \item{adex}{(\code{data.frame})\cr dataset (typically ADEX) required to build table.}
 
 \item{arm_var}{(\code{character})\cr arm variable used to split table into columns.}
+
+\item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
 
 \item{saffl_var}{(\code{character})\cr flag variable used to indicate inclusion in safety population.}
 
@@ -44,10 +47,10 @@ FDA Table 8: All Individual Patient Deaths, Safety Population, Pooled Analyses
 }
 \details{
 \itemize{
-\item \code{adae} must contain \code{USUBJID}, \code{AGE}, \code{SEX}, \code{AESDTH}, \code{DTHADY}, and the variables specified by
-\code{dth_vars}, \code{arm_var}, and \code{saffl_var}.
-\item \code{adex} must contain \code{USUBJID}, \code{PARAMCD}, \code{TRTSDT}, \code{TRTEDT}, \code{AVAL}, \code{AVALU}, and the variables specified
-by \code{arm_var} and \code{saffl_var}.
+\item \code{adae} must contain \code{AGE}, \code{SEX}, \code{AESDTH}, \code{DTHADY}, and the variables specified by
+\code{dth_vars}, \code{arm_var}, \code{id_var}, and \code{saffl_var}.
+\item \code{adex} must contain \code{PARAMCD}, \code{TRTSDT}, \code{TRTEDT}, \code{AVAL}, \code{AVALU}, and the variables specified
+by \code{arm_var}, \code{id_var}, and \code{saffl_var}.
 \item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
 flag variables are treated as \code{"N"}.
 }

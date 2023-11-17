@@ -9,6 +9,7 @@ make_table_04(
   alt_counts_df = NULL,
   show_colcounts = TRUE,
   arm_var = "ARM",
+  id_var = "USUBJID",
   pop_vars = c("SAFFL"),
   lbl_pop_vars = c("Safety population"),
   lbl_overall = NULL,
@@ -25,6 +26,8 @@ make_table_04(
 \item{show_colcounts}{(\code{flag})\cr whether column counts should be printed.}
 
 \item{arm_var}{(\code{character})\cr arm variable used to split table into columns.}
+
+\item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
 
 \item{pop_vars}{(\code{vector} of \code{character})\cr population variables from \code{df} to include in the table.}
 
@@ -59,9 +62,9 @@ FDA Table 4: Patient Disposition, Pooled Analyses
 }
 \details{
 \itemize{
-\item \code{df} must contain \code{USUBJID}, \code{EOTSTT}, \code{DCTREAS}, \code{EOSSTT}, \code{DCSREAS} and the variables specified by \code{arm_var}
+\item \code{df} must contain \code{EOTSTT}, \code{DCTREAS}, \code{EOSSTT}, \code{DCSREAS} and the variables specified by \code{arm_var}, \code{id_var},
 and \code{pop_vars}.
-\item If specified, \code{alt_counts_df} must contain \code{USUBJID}, and the variable specified by \code{arm_var} and \code{pop_vars}.
+\item If specified, \code{alt_counts_df} must contain the variable specified by \code{arm_var}, \code{id_var}, and \code{pop_vars}.
 \item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
 flag variables are treated as \code{"N"}.
 \item Columns are split by arm. Overall population column is excluded by default (see \code{lbl_overall} argument).
@@ -85,7 +88,9 @@ adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") \%>\%
 
 tbl <- make_table_04(
   df = adsl, pop_vars = c("RANDFL", "ITTFL", "SAFFL", "PPROTFL"),
-  lbl_pop_vars = c("Patients randomized", "ITT/mITT population", "Safety population", "Per-protocol population")
+  lbl_pop_vars = c(
+    "Patients randomized", "ITT/mITT population", "Safety population", "Per-protocol population"
+  )
 )
 tbl
 

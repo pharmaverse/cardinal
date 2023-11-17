@@ -2,9 +2,9 @@
 #'   Postbaseline, Safety Population, Pooled Analysis
 #'
 #' @details
-#' * `advs` must contain `USUBJID`, `AVISITN`, `PARAMCD`, `AVAL`, `AVALU`, and the variables specified by
-#'   `arm_var` and `saffl_var`.
-#' * If specified, `alt_counts_df` must contain `USUBJID` and the variables specified by `arm_var` and `saffl_var`.
+#' * `advs` must contain `AVISITN`, `PARAMCD`, `AVAL`, `AVALU`, and the variables specified by
+#'   `arm_var`, `id_var`, and `saffl_var`.
+#' * If specified, `alt_counts_df` must contain the variables specified by `arm_var`, `id_var`, and `saffl_var`.
 #' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
 #'   flag variables are treated as `"N"`.
 #' * Columns are split by arm. Overall population column is excluded by default (see `lbl_overall` argument).
@@ -31,6 +31,7 @@ NULL
 make_table_32 <- function(advs,
                           alt_counts_df = NULL,
                           show_colcounts = TRUE,
+                          id_var = "USUBJID",
                           arm_var = "ARM",
                           saffl_var = "SAFFL",
                           lbl_overall = NULL,
@@ -38,7 +39,7 @@ make_table_32 <- function(advs,
                           prune_0 = FALSE,
                           annotations = NULL) {
   checkmate::assert_subset(c(
-    "USUBJID", "AVISITN", "PARAMCD", "AVAL", "AVALU", arm_var, saffl_var
+    "AVISITN", "PARAMCD", "AVAL", "AVALU", arm_var, id_var, saffl_var
   ), names(advs))
   assert_flag_variables(advs, saffl_var)
 
@@ -49,7 +50,7 @@ make_table_32 <- function(advs,
       PARAMCD == "DIABP"
     ) %>%
     df_explicit_na() %>%
-    group_by(USUBJID, PARAMCD) %>%
+    group_by(.data[[id_var]], PARAMCD) %>%
     mutate(MAX_DIABP = max(AVAL)) %>%
     ungroup() %>%
     mutate(
@@ -60,12 +61,12 @@ make_table_32 <- function(advs,
       GE120 = with_label(MAX_DIABP >= 120, ">=120")
     )
 
-  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var, saffl_var)
+  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, id_var, arm_var, saffl_var)
 
   lyt <- basic_table_annot(show_colcounts, annotations) %>%
     split_cols_by_arm(arm_var, lbl_overall, risk_diff) %>%
     count_patients_with_flags(
-      var = "USUBJID",
+      var = id_var,
       flag_variables = c("L60", "G60", "G90", "G110", "GE120"),
       riskdiff = !is.null(risk_diff)
     ) %>%
@@ -89,11 +90,12 @@ make_table_32 <- function(advs,
 #' @export
 make_table_32_gtsum <- function(advs,
                                 adsl,
+                                id_var = "USUBJID",
                                 arm_var = "ARM",
                                 saffl_var = "SAFFL",
                                 lbl_overall = NULL) {
   checkmate::assert_subset(c(
-    saffl_var, "USUBJID", "AVISITN", "PARAMCD", "AVAL", "AVALU", arm_var
+    saffl_var, "AVISITN", "PARAMCD", "AVAL", "AVALU", arm_var, id_var
   ), names(advs))
   assert_flag_variables(advs, saffl_var)
 
@@ -104,7 +106,7 @@ make_table_32_gtsum <- function(advs,
       PARAMCD == "DIABP"
     ) %>%
     df_explicit_na() %>%
-    group_by(USUBJID, PARAMCD) %>%
+    group_by(.data[[id_var]], PARAMCD) %>%
     mutate(MAX_DIABP = max(AVAL)) %>%
     ungroup() %>%
     mutate(
@@ -114,7 +116,7 @@ make_table_32_gtsum <- function(advs,
       G110 = with_label(MAX_DIABP > 110, ">110"),
       GE120 = with_label(MAX_DIABP >= 120, ">=120")
     ) %>%
-    distinct(USUBJID, .keep_all = TRUE) %>%
+    distinct(.data[[id_var]], .keep_all = TRUE) %>%
     select(L60, G60, G90, G110, GE120, arm_var, AVALU)
 
   avalu <- unique(advs$AVALU)[1]
@@ -124,7 +126,7 @@ make_table_32_gtsum <- function(advs,
     tbl_summary(
       by = arm_var,
       statistic = list(all_categorical() ~ "{n} ({p}%)"),
-      digits = everything() ~ 1
+      digits = everything() ~ c(0, 1)
     ) %>%
     modify_header(label ~ paste0("**Diastolic Blood Pressure (", avalu, ")**")) %>%
     modify_header(all_stat_cols() ~ "**{level}**  \n (N={n})")
@@ -136,5 +138,8 @@ make_table_32_gtsum <- function(advs,
 
   tbl <- tbl %>% modify_footnote(update = everything() ~ NA)
 
-  tbl
+  gtsummary::with_gtsummary_theme(
+    x = gtsummary::theme_gtsummary_compact(),
+    expr = tbl
+  )
 }
