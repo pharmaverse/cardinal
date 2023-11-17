@@ -89,7 +89,7 @@ make_table_10 <- function(adae,
 #' FDA Table 10: Patients With Serious Adverse Events by System Organ Class and
 #'   FDA Medical Query (Narrow), Safety Population, Pooled Analyses with /code{gt}
 #'
-#' @describeIn make_table_10_gt Create FDA table 10 using functions from `gt`.
+#' @describeIn make_table_10 Create FDA table 10 using functions from `gt`.
 #' @inheritParams argument_convention
 #' @param saffl_var (`character`)\cr safety population flag variable from `adae` to include in the table.
 #' @param ser_var (`character`)\cr serious Event variable from `adae` to include in the table.
@@ -110,12 +110,13 @@ make_table_10 <- function(adae,
 #' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
 #' adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
 #'
-#' tbl <- make_table_09_gtsum(adae = adae, alt_counts_df = adsl)
+#' tbl <- make_table_10_gtsum(adae = adae, alt_counts_df = adsl)
 #' tbl
 #'
 #' annotations <- list(
 #'   title = "Table 10. Patients With Serious Adverse Events ",
-#'   subtitle = "by System Organ Class and FDA Medical Query (Narrow), Safety Population, Pooled Analyses",
+#'   subtitle = "by System Organ Class and FDA Medical Query (Narrow),
+#'   Safety Population, Pooled Analyses",
 #'   footnotes = list(
 #'     "Duration = [e.g., X week double-blind treatment period or median and a range
 #'     indicating pooled trial durations].",
@@ -124,24 +125,13 @@ make_table_10 <- function(adae,
 #'   )
 #' )
 #' risk_diff <- list(c("A: Drug X", "C: Combination"), c("A: Drug X", "B: Placebo"))
-#' make_table_10_gt (adae,
+#' tbl <- make_table_10_gtsum (adae,
 #'                   alt_counts_df = adsl,
-#'                   show_colcounts = TRUE,
-#'                   saffl_var = "SAFFL",
-#'                   ser_var = "AESER",
-#'                   arm_var = "ARM",
-#'                   id_var = "USUBJID",
-#'                   soc_var = "AEBODSYS",
-#'                   fmqsc_var = "FMQ01SC",
-#'                   fmqnam_var = "FMQ01NAM",
-#'                   fmq_scope = "NARROW",
-#'                   lbl_overall = NULL,
 #'                   annotations = annotations,
-#'                   prune_0 = TRUE,
-#'                   na_level = "<Missing>",
 #'                   risk_diff = risk_diff)
+#' tbl
 #' @export
-make_table_10_gt <- function(adae,
+make_table_10_gtsum <- function(adae,
                              alt_counts_df = NULL,
                              show_colcounts = TRUE,
                              saffl_var = "SAFFL",
