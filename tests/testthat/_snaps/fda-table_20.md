@@ -39,20 +39,22 @@
         dcd D.1.1.1.1                   50 (37.3%)    42 (31.3%)      51 (38.6%)  
         dcd D.1.1.4.2                   48 (35.8%)    42 (31.3%)      50 (37.9%)  
         dcd D.2.1.5.3                   47 (35.1%)    58 (43.3%)      57 (43.2%)  
-      Maximum severity {1}                                                        
+      Maximum severity {2}                                                        
         MILD                            16 (11.9%)    19 (14.2%)      17 (12.9%)  
         MODERATE                        41 (30.6%)    51 (38.1%)      45 (34.1%)  
         SEVERE                          50 (37.3%)    42 (31.3%)      51 (38.6%)  
-      Serious {1}                       75 (70.1%)    77 (68.8%)      83 (73.5%)  
+      Serious {3}                       75 (70.1%)    77 (68.8%)      83 (73.5%)  
         Deaths                          50 (46.7%)    42 (37.5%)      51 (45.1%)  
       Resulting in discontinuation      35 (32.7%)    34 (30.4%)      33 (29.2%)  
-      Relatedness {2}                   74 (69.2%)    74 (66.1%)      84 (74.3%)  
-      Laboratory Assessment {3}         89 (66.4%)    86 (64.2%)      90 (68.2%)  
+      Relatedness {4}                   74 (69.2%)    74 (66.1%)      84 (74.3%)  
+      Laboratory Assessment {5}         89 (66.4%)    86 (64.2%)      90 (68.2%)  
       ————————————————————————————————————————————————————————————————————————————
       
       {1} - Use FMQ grouping if appropriate.
-      {2} - As determined by investigator.
-      {3} - Include relevant laboratory results as appropriate for AESI evaluation.
+      {2} - Use FMQ grouping if appropriate.
+      {3} - Use FMQ grouping if appropriate.
+      {4} - As determined by investigator.
+      {5} - Include relevant laboratory results as appropriate for AESI evaluation.
       ————————————————————————————————————————————————————————————————————————————
       
       Source: [include Applicant source, datasets and/or software tools used].
