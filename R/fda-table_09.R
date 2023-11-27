@@ -227,6 +227,15 @@ make_table_09_tplyr <- function(adae,
     assert_names(names(annotations), subset.of = c("title", "subtitles", "main_footer", "prov_footer"))
   }
 
+  # Artificially convert factor for nested variables to character to suppress tplyr warning
+  if (is.factor(adae[[pref_var]])) {
+    adae[[pref_var]] <- as.character(adae[[pref_var]])
+  }
+
+  if (is.factor(adae[[soc_var]])) {
+    adae[[soc_var]] <- as.character(adae[[soc_var]])
+  }
+
   # Initialize column headers
   # Allow for both, character and factor. The advantage of the latter is that users have control about the order
   arm_names <- if (is.factor(adae[[arm_var]])) levels(adae[[arm_var]]) else unique(as.character(adae[[arm_var]]))
@@ -301,7 +310,7 @@ make_table_09_tplyr <- function(adae,
   table <- table %>%
     arrange(ord_layer_index, ord_layer_1, ord_layer_2) %>% # refer to
     # https://atorus-research.github.io/Tplyr/articles/post_processing.html#highly-customized-sort-variables
-    # for sorting according to occurence in case this is reqired later
+    # for sorting according to occurrence in case this is required later
     select(starts_with(c("row_label", "var", "rdiff"))) %>%
     Tplyr::add_column_headers(s = header_string, header_n = Tplyr::header_n(structure))
 
