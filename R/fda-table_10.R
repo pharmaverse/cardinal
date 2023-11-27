@@ -110,6 +110,15 @@ make_table_10 <- function(adae,
 #' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
 #' adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
 #'
+#' set.seed(1)
+#' adae <- adae %>%
+#'   rename(FMQ01SC = SMQ01SC) %>%
+#'   mutate(
+#'     AESER = sample(c("Y", "N"), size = nrow(adae), replace = TRUE),
+#'     FMQ01NAM = sample(c("FMQ1", "FMQ2", "FMQ3"), size = nrow(adae), replace = TRUE)
+#'   )
+#' adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
+#'
 #' tbl <- make_table_10_gtsum(adae = adae, alt_counts_df = adsl)
 #' tbl
 #'
@@ -132,22 +141,22 @@ make_table_10 <- function(adae,
 #' tbl
 #' @export
 make_table_10_gtsum <- function(adae,
-                             alt_counts_df = NULL,
-                             show_colcounts = TRUE,
-                             saffl_var = "SAFFL",
-                             ser_var = "AESER",
-                             arm_var = "ARM",
-                             id_var = "USUBJID",
-                             soc_var = "AEBODSYS",
-                             fmqsc_var = "FMQ01SC",
-                             fmqnam_var = "FMQ01NAM",
-                             fmq_scope = "NARROW",
-                             lbl_soc_var = formatters::var_labels(adae, fill = TRUE)[soc_var],
-                             lbl_overall = NULL,
-                             annotations = NULL,
-                             prune_0 = TRUE,
-                             na_level = "<Missing>",
-                             risk_diff = NULL) {
+                                alt_counts_df = NULL,
+                                show_colcounts = TRUE,
+                                saffl_var = "SAFFL",
+                                ser_var = "AESER",
+                                arm_var = "ARM",
+                                id_var = "USUBJID",
+                                soc_var = "AEBODSYS",
+                                fmqsc_var = "FMQ01SC",
+                                fmqnam_var = "FMQ01NAM",
+                                fmq_scope = "NARROW",
+                                lbl_soc_var = formatters::var_labels(adae, fill = TRUE)[soc_var],
+                                lbl_overall = NULL,
+                                annotations = NULL,
+                                prune_0 = TRUE,
+                                na_level = "<Missing>",
+                                risk_diff = NULL) {
   checkmate::assert_data_frame(adae)
   checkmate::assert_subset(c(saffl_var, id_var, soc_var, fmqnam_var, arm_var), names(adae))
   assert_flag_variables(adae, saffl_var)
@@ -230,7 +239,7 @@ make_table_10_gtsum <- function(adae,
     gt_table <- gt_table %>%
       cols_label_with(fn = set_col_labels)
   }
-  lbl_fmq_var = paste0("FMQ (", tools::toTitleCase(tolower(fmq_scope)), ")")
+  lbl_fmq_var <- paste0("FMQ (", tools::toTitleCase(tolower(fmq_scope)), ")")
   label <- paste(lbl_soc_var, "<br/> &nbsp;&nbsp;", lbl_fmq_var)
 
   gt_table <- gt_table %>%
@@ -257,12 +266,12 @@ make_table_10_gtsum <- function(adae,
   gt_table
 }
 
-#' Helper function to create the data for `make_table_10_gt()`
+#' Helper function to create the data for `make_table_10_gtsum()`
 #'
 #' @details If `lbl_overall` is not `NULL` only the data for the overall column will be generated
 #'
 #' @inheritParams argument_convention
-#' @inheritParams make_table_10_gt
+#' @inheritParams make_table_10_gtsum
 #'
 #' @return list containing the counted data to be displayed for table 10 and
 #' a `data.frame` containing information about the total N for each group
@@ -292,7 +301,7 @@ create_table_10_data <- function(
         pivot_wider(.,
                     names_from = all_of(arm_var),
                     values_from = N
-        )
+                    )
       } else {
         rename(., !!lbl_overall := "N")
       }
@@ -424,11 +433,3 @@ calculate_riskdiff <- function(x, y, n_x, n_y) {
     paste0(val, " (", conf_int[[1]], ", ", conf_int[[2]], ")")
   })
 }
-
-
-
-
-
-
-
-
