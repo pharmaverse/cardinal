@@ -142,7 +142,7 @@ a_count_occurrences_ser_ae <- function(df,
       function(x) {
         df_denom %>%
           filter(.data[[.var]] == x, .data[[arm_var]] == df[[arm_var]][1]) %>%
-          select(id_var) %>%
+          select(all_of(id_var)) %>%
           distinct() %>%
           nrow()
       }
