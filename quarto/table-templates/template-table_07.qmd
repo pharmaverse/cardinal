@@ -9,7 +9,7 @@ format: html
 
 ![](../assets/images/screenshots/table_07.png){fig-align="center" width="78%"}
 
-## Table
+## rtables/tern Table
 
 ```{r tbl, message=FALSE, warning=FALSE}
 # Load Libraries & Data
@@ -28,7 +28,7 @@ risk_diff <- list(arm_x = "B: Placebo", arm_y = "A: Drug X") # optional
 make_table_07(adae = adae, alt_counts_df = adsl, risk_diff = risk_diff)
 ```
 
-## Table Setup
+## rtables/tern Table Setup
 
 ```{r tbl, eval=FALSE, echo=TRUE}
 ```
