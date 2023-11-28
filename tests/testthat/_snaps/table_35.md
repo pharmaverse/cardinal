@@ -3,8 +3,8 @@
     Code
       res
     Output
-      System Organ Class   A: Drug X    B: Placebo   C: Combination
-                            (N=134)      (N=134)        (N=132)    
+                           A: Drug X    B: Placebo   C: Combination
+      System Organ Class    (N=134)      (N=134)        (N=132)    
       —————————————————————————————————————————————————————————————
       cl A.1               78 (63.9%)   75 (61.0%)     89 (74.2%)  
       cl B.1               47 (38.5%)   49 (39.8%)     43 (35.8%)  
@@ -53,8 +53,8 @@
     Code
       res
     Output
-      System Organ Class   A: Drug X    B: Placebo   C: Combination   Risk Difference (%) (95% CI)
-                            (N=134)      (N=134)        (N=132)                 (N=268)           
+                           A: Drug X    B: Placebo   C: Combination   Risk Difference (%) (95% CI)
+      System Organ Class    (N=134)      (N=134)        (N=132)                 (N=268)           
       ————————————————————————————————————————————————————————————————————————————————————————————
       cl A.1               78 (58.2%)   75 (56.0%)     89 (67.4%)          -2.2 (-14.1 - 9.6)     
       cl B.1               47 (35.1%)   49 (36.6%)     43 (32.6%)          1.5 (-10.0 - 13.0)     
@@ -69,8 +69,8 @@
     Code
       res
     Output
-      System Organ Class   A: Drug X    B: Placebo   C: Combination
-                            (N=134)      (N=134)        (N=132)    
+                           A: Drug X    B: Placebo   C: Combination
+      System Organ Class    (N=134)      (N=134)        (N=132)    
       —————————————————————————————————————————————————————————————
       cl A.1               78 (63.9%)   75 (61.0%)     89 (74.2%)  
       cl B.1               47 (38.5%)   49 (39.8%)     43 (35.8%)  

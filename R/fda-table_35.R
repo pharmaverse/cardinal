@@ -60,7 +60,7 @@ make_table_35 <- function(adae,
       flag_variables = adae_lst,
       riskdiff = !is.null(risk_diff)
     ) %>%
-    append_topleft(c("System Organ Class"))
+    append_topleft(c("", "System Organ Class"))
 
   tbl <- build_table(lyt, df = adae, alt_counts_df = alt_counts_df)
   if (prune_0) tbl <- prune_table(tbl)
