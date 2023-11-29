@@ -1,0 +1,165 @@
+#' FDA Table 22. Overview of Adverse Events1 by Demographic Subgroup, Safety Population, Pooled Analysis (or Trial X)
+#'
+#' @details
+#' * `df` must contain the variables specified by `vars`, `arm_var`, and `saffl_var`.
+#' * If specified, `alt_counts_df` must contain `USUBJID` and the variables specified by `arm_var` and `saffl_var`.
+#' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
+#'   flag variables are treated as `"N"`.
+#' * Columns are split by arm.
+#' * Information from either ADSUB or ADVS is generally included into `df` prior to analysis.
+#' * Numbers in the table for non-numeric variables represent the absolute number of patients and fraction of `n`.
+#' * All-zero rows are removed by default (see `prune_0` argument).
+#'
+#' @inheritParams argument_convention
+#' @inheritParams a_count_occurrences_trtem_ae
+#'
+#' @return An `rtable` object.
+#'
+#' @examples
+#' library(dplyr)
+#'
+#' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") %>%
+#'   mutate(AGEGR1 = as.factor(case_when(
+#'     AGE >= 17 & AGE < 65 ~ ">=17 to <65",
+#'     AGE >= 65 ~ ">=65",
+#'     AGE >= 65 & AGE < 75 ~ ">=65 to <75",
+#'     AGE >= 75 ~ ">=75"
+#'   )) %>% formatters::with_label("Age Group, years")) %>%
+#'   formatters::var_relabel(
+#'     AGE = "Age, years"
+#'   )
+#'
+#' adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
+#'
+#' df <- left_join(adsl, adae, by = intersect(names(adsl), names(adae)))
+#'
+#' tbl <- make_table_22(df = df, alt_counts_df = adsl)
+#' tbl
+#'
+#' @export
+make_table_22 <- function(df,
+                          alt_counts_df = NULL,
+                          show_colcounts = TRUE,
+                          arm_var = "ARM",
+                          saffl_var = "SAFFL",
+                          vars = c("SEX", "AGEGR1", "RACE", "ETHNIC"),
+                          denom = c("N_s", "N_col", "n"),
+                          lbl_overall = NULL,
+                          lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
+                          prune_0 = FALSE,
+                          annotations = NULL) {
+  checkmate::assert_subset(c(vars, arm_var, saffl_var), names(df))
+
+  df <- df %>%
+    filter(.data[[saffl_var]] == "Y") %>%
+    df_explicit_na()
+
+  # For percentages calculations in case of N_s, add the overall observations
+  denom <- match.arg(denom)
+  if (!is.null(lbl_overall) && denom == "N_s") {
+    df_ovrl <- df
+    df_ovrl[[arm_var]] <- lbl_overall
+    df <- rbind(df, df_ovrl)
+
+    if (!is.null(alt_counts_df)) {
+      alt_df_ovrl <- alt_counts_df
+      alt_df_ovrl[[arm_var]] <- lbl_overall
+      alt_counts_df <- rbind(alt_counts_df, alt_df_ovrl)
+    }
+  }
+
+  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var, saffl_var)
+
+  lyt <- basic_table_annot(show_colcounts, annotations)
+
+  lyt <- if (!is.null(lbl_overall) && denom != "N_s") {
+    lyt %>% split_cols_by_arm(arm_var, lbl_overall)
+  } else {
+    lyt %>% split_cols_by_arm(arm_var)
+  }
+
+  lyt <- lyt %>%
+    count_patients_with_event(
+      "USUBJID",
+      filters = c("TRTEMFL" = "Y"),
+      .labels = c(count_fraction = "Any AE, n (%)")
+    ) %>%
+    analyze(
+      vars = vars,
+      var_labels = paste0(lbl_vars, ", n (%)"),
+      afun = a_count_occurrences_trtem_ae,
+      extra_args = list(
+        denom = denom,
+        arm_var = arm_var,
+        df_denom = if (!is.null(alt_counts_df)) alt_counts_df else df
+      ),
+      show_labels = "visible"
+    ) %>%
+    append_topleft(c("", "Characteristic"))
+
+  tbl <- build_table(lyt, df = df, alt_counts_df = alt_counts_df)
+  if (prune_0) tbl <- prune_table(tbl)
+
+  tbl
+}
+
+#' Analysis Function to Calculate Count/Fraction of Any Adverse Event Occurrences
+#'
+#' @inheritParams tern::s_count_occurrences
+#' @inheritParams argument_convention
+#' @param df_denom (`data.frame`)\cr Full data frame used to calculate denominator subgroup counts
+#'   when `denom = "N_s"`.
+#' @param denom (`character`)\cr Denominator to use to calculate fractions. Can be `"N_s"` (total `df_denom`
+#'   subgroup/row counts), `"N_col"` (total `df` column counts), or `"n"` (total `df` overall patient count).
+#'   Note that `df` is filtered to only include treatment-emergent adverse events (`TRTEMFL == "Y"`).
+#'
+#' @keywords internal
+a_count_occurrences_trtem_ae <- function(df,
+                                         .var,
+                                         .N_col, # nolint
+                                         df_denom = NULL,
+                                         denom = c("N_s", "N_col", "n"),
+                                         id_var = "USUBJID",
+                                         arm_var = "ARM") {
+  df <- df %>% filter(TRTEMFL == "Y")
+  occurrences <- df[[.var]]
+  ids <- factor(df[[id_var]])
+  has_occurrence_per_id <- table(occurrences, ids) > 0
+  n_ids_per_occurrence <- as.list(rowSums(has_occurrence_per_id))
+  lvls <- names(n_ids_per_occurrence)
+
+  denom <- match.arg(denom)
+  if (denom == "N_s" && is.null(df_denom)) {
+    stop("If using subgroup population counts, `df_denom` must be specified.") # nocov
+  }
+  dn <- switch(denom,
+               N_s = lapply(
+                 lvls,
+                 function(x) {
+                   df_denom %>%
+                     filter(.data[[.var]] == x, .data[[arm_var]] == df[[arm_var]][1]) %>%
+                     select(USUBJID) %>%
+                     distinct() %>%
+                     nrow()
+                 }
+               ),
+               n = nlevels(ids),
+               N_col = .N_col
+  )
+  if (denom == "N_s") names(dn) <- lvls
+
+  x_stats <- lapply(
+    lvls,
+    function(x) {
+      i <- n_ids_per_occurrence[[x]]
+      denom <- if (denom == "N_s") dn[[x]] else dn
+      if (i == 0 && denom == 0) c(0, 0) else c(i, i / denom)
+    }
+  )
+  names(x_stats) <- names(n_ids_per_occurrence)
+
+  in_rows(
+    .list = x_stats,
+    .formats = tern::format_count_fraction
+  )
+}
