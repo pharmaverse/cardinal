@@ -1,0 +1,72 @@
+---
+title: FDA Table 22
+subtitle: Overview of Adverse Events1 by Demographic Subgroup, Safety Population, Pooled Analysis (or Trial X)
+format: html
+---
+
+::: panel-tabset
+## Spec. Screenshot
+
+![](../assets/images/screenshots/table_22.png){fig-align="center"}
+
+## rtables/tern Table
+
+```{r tbl, message=FALSE, warning=FALSE}
+# Load Libraries & Data
+library(dplyr)
+library(scda)
+library(falcon)
+
+adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") %>%
+  mutate(AGEGR1 = as.factor(case_when(
+    AGE >= 17 & AGE < 65 ~ ">=17 to <65",
+    AGE >= 65 ~ ">=65",
+    AGE >= 65 & AGE < 75 ~ ">=65 to <75",
+    AGE >= 75 ~ ">=75"
+  )) %>% formatters::with_label("Age Group, years")) %>%
+  formatters::var_relabel(
+    AGE = "Age, years"
+  )
+
+adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
+
+df <- left_join(adsl, adae, by = intersect(names(adsl), names(adae)))
+
+# Output Table
+make_table_22(df = df, alt_counts_df = adsl, denom = "N_s")
+```
+
+## rtables/tern Table Setup
+
+```{r tbl, eval=FALSE, echo=TRUE}
+```
+
+## Function Details
+
+### `make_table_22()`
+
+------------------------------------------------------------------------
+
+Required variables:
+
+-   **`df`**: `USUBJID`, and the variables specified by `arm_var` and `saffl_var`.
+-   **`alt_counts_df`** (if specified): `USUBJID` and the variables specified by `arm_var` and `saffl_var`.
+
+`make_table_22()` inherits from `falcon::a_count_occurrences_ser_ae()` function.
+
+| Argument         | Description                                                                                                                                                                                                                                            | Default                                                  |
+|:----------------|:-------------------------------------|:----------------|
+| `df`             | (`data.frame`) Dataset (typically ADSL) required to build table.                                                                                                                                                                                       | *No default*                                             |
+| `alt_counts_df`  | (`character`) Alternative dataset used only to calculate column counts.                                                                                                                                                                                | `NULL`                                                   |
+| `show_colcounts` | (`flag`) Whether column counts should be printed.                                                                                                                                                                                                      | `TRUE`                                                   |
+| `arm_var`        | (`character`) Arm variable used to split table into columns.                                                                                                                                                                                           | `"ARM"`                                                  |
+| `saffl_var`      | (`character`) Flag variable used to indicate inclusion in safety population.                                                                                                                                                                           | `"SAFFL"`                                                |
+| `vars`           | (`character`) Variables from `df` to include in the table.                                                                                                                                                                                             | `c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY")` |
+| `denom`          | (`character`) Denominator choice (`N_col` to get the total column, `n` to have the total number of "Any SAE" in the column, or `N_s` to have the total number of participants of the category in the column as denominator).                           | `c("N_s", "N_col", "n")`                                 |
+| `lbl_vars`       | (`character`) Labels corresponding to variables in `vars` to print in the table. Labels should be ordered according to the order of variables in `vars`.                                                                                               | `formatters::var_labels(df, fill = TRUE)[vars]`          |
+| `lbl_overall`    | (`character`) If specified, an overall column will be added to the table with the given value as the column label.                                                                                                                                     | `NULL`                                                   |
+| `prune_0`        | (`flag`) Whether all-zero rows should be removed from the table.                                                                                                                                                                                       | `TRUE`                                                   |
+| `annotations`    | (named `list` of `character`) List of annotations to add to the table. Valid annotation types are `title`, `subtitles`, `main_footer`, and `prov_footer.` Each name-value pair should use the annotation type as name and the desired string as value. | `NULL`                                                   |
+
+Source code for this function is available [here](https://github.com/pharmaverse/falcon/blob/main/R/fda-table_21.R).
+:::
