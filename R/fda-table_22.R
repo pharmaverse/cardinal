@@ -133,18 +133,18 @@ a_count_occurrences_trtem_ae <- function(df,
     stop("If using subgroup population counts, `df_denom` must be specified.") # nocov
   }
   dn <- switch(denom,
-               N_s = lapply(
-                 lvls,
-                 function(x) {
-                   df_denom %>%
-                     filter(.data[[.var]] == x, .data[[arm_var]] == df[[arm_var]][1]) %>%
-                     select(USUBJID) %>%
-                     distinct() %>%
-                     nrow()
-                 }
-               ),
-               n = nlevels(ids),
-               N_col = .N_col
+    N_s = lapply(
+      lvls,
+      function(x) {
+        df_denom %>%
+          filter(.data[[.var]] == x, .data[[arm_var]] == df[[arm_var]][1]) %>%
+          select(USUBJID) %>%
+          distinct() %>%
+          nrow()
+      }
+    ),
+    n = nlevels(ids),
+    N_col = .N_col
   )
   if (denom == "N_s") names(dn) <- lvls
 
