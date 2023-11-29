@@ -44,7 +44,7 @@ make_table_08 <- function(adae,
   # Deaths
   adae <- adae %>%
     filter(.data[[saffl_var]] == "Y" & AESDTH == "Y") %>%
-    select(.data[[id_var]], all_of(arm_var), AGE, SEX, DTHADY, all_of(dth_vars)) %>%
+    select(all_of(id_var), all_of(arm_var), AGE, SEX, DTHADY, all_of(dth_vars)) %>%
     mutate(
       AGESEX = paste0(AGE, "/", SEX),
       DTHADY = as.character(DTHADY)
@@ -54,7 +54,7 @@ make_table_08 <- function(adae,
   # Dosing
   adex <- adex %>%
     filter(.data[[saffl_var]] == "Y", PARAMCD == "TDOSE") %>%
-    select(.data[[id_var]], AVAL, AVALU, TRTSDT, TRTEDT) %>%
+    select(all_of(id_var), AVAL, AVALU, TRTSDT, TRTEDT) %>%
     mutate(
       DOSDUR = (TRTEDT - TRTSDT + 1) %>% as.character(),
       DOSAGE = paste0(AVAL, " ", AVALU)
