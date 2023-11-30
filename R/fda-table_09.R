@@ -179,7 +179,7 @@ make_table_09_gtsum <- function(adae,
     )
 
     result_list$data <- result_list[["data"]] %>%
-      left_join(overall_list[["data"]])
+      left_join(overall_list[["data"]], by = join_by(!!sym(soc_var), !!sym(pref_var)))
 
     result_list$total_N <- result_list[["total_N"]] %>%
       cross_join(overall_list[["total_N"]])
