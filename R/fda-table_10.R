@@ -53,7 +53,6 @@ make_table_10 <- function(adae,
                           annotations = NULL) {
   checkmate::assert_subset(c(
     "USUBJID", soc_var, "AESER", arm_var, saffl_var, fmqsc_var, fmqnam_var
-
   ), names(adae))
   assert_flag_variables(adae, c(saffl_var, "AESER"))
   checkmate::assert_subset(toupper(fmq_scope), c("NARROW", "BROAD"))
@@ -134,10 +133,11 @@ make_table_10 <- function(adae,
 #'   )
 #' )
 #' risk_diff <- list(c("A: Drug X", "C: Combination"), c("A: Drug X", "B: Placebo"))
-#' tbl <- make_table_10_gtsum (adae,
-#'                   alt_counts_df = adsl,
-#'                   annotations = annotations,
-#'                   risk_diff = risk_diff)
+#' tbl <- make_table_10_gtsum(adae,
+#'   alt_counts_df = adsl,
+#'   annotations = annotations,
+#'   risk_diff = risk_diff
+#' )
 #' tbl
 #' @export
 make_table_10_gtsum <- function(adae,
@@ -299,9 +299,9 @@ create_table_10_data <- function(
     {
       if (is.null(lbl_overall)) {
         pivot_wider(.,
-                    names_from = all_of(arm_var),
-                    values_from = N
-                    )
+          names_from = all_of(arm_var),
+          values_from = N
+        )
       } else {
         rename(., !!lbl_overall := "N")
       }
@@ -375,9 +375,9 @@ count_subjects <- function(adae, arm_var, id_var, sub_level_vars = NULL, lbl_ove
     {
       if (grouping) {
         pivot_wider(.,
-                    id_cols = all_of(sub_level_vars),
-                    names_from = all_of(arm_var),
-                    values_from = all_of(c("val", "N", "combined"))
+          id_cols = all_of(sub_level_vars),
+          names_from = all_of(arm_var),
+          values_from = all_of(c("val", "N", "combined"))
         )
       } else {
         rename(., !!lbl_overall := "combined") %>%
