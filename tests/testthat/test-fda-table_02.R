@@ -1,12 +1,5 @@
 adsl <- adsl_raw %>%
   filter(SAFFL == "Y") %>%
-  mutate(AGEGR1 = as.factor(case_when(
-    AGE >= 17 & AGE < 65 ~ ">=17 to <65",
-    AGE >= 65 ~ ">=65",
-    AGE >= 65 & AGE < 75 ~ ">=65 to <75",
-    AGE >= 75 ~ ">=75"
-  )) %>%
-    formatters::with_label("Age Group")) %>%
   df_explicit_na()
 
 test_that("Table 02 generation works with default values", {
