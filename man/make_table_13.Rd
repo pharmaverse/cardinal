@@ -9,6 +9,7 @@ make_table_13(
   alt_counts_df = NULL,
   show_colcounts = TRUE,
   min_freq = 0.05,
+  id_var = "USUBJID",
   arm_var = "ARM",
   saffl_var = "SAFFL",
   pref_var = "AEDECOD",
@@ -26,6 +27,8 @@ make_table_13(
 \item{show_colcounts}{(\code{flag})\cr whether column counts should be printed.}
 
 \item{min_freq}{(\code{proportion})\cr minimum \% frequency (fraction of \code{N}) required in any column to include each row.}
+
+\item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
 
 \item{arm_var}{(\code{character})\cr arm variable used to split table into columns.}
 
@@ -61,7 +64,7 @@ FDA Table 13: Patients With Common Adverse Events Occurring at >=XX\% Frequency,
 }
 \details{
 \itemize{
-\item \code{adae} must contain \code{USUBJID} and the variables specified by \code{arm_var}, \code{saffl_var}, and \code{pref_var}.
+\item \code{adae} must contain the variables specified by \code{arm_var}, \code{id_var}, \code{saffl_var}, and \code{pref_var}.
 \item If specified, \code{alt_counts_df} must contain \code{USUBJID} and the variables specified by \code{arm_var} and \code{saffl_var}.
 \item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
 flag variables are treated as \code{"N"}.

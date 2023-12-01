@@ -96,7 +96,7 @@ FDA Table 2: Baseline Demographic and Clinical Characteristics, Safety Populatio
 \details{
 \itemize{
 \item \code{df} must contain the variables specified by \code{vars}, \code{arm_var}, and \code{saffl_var}.
-\item If specified, \code{alt_counts_df} must contain \code{USUBJID} and the variables specified by \code{arm_var} and \code{saffl_var}.
+\item If specified, \code{alt_counts_df} must contain the variables specified by \code{arm_var}, \code{id_var}, and \code{saffl_var}.
 \item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
 flag variables are treated as \code{"N"}.
 \item Columns are split by arm. Overall population column is included by default (see \code{lbl_overall} argument).

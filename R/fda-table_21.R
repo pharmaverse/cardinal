@@ -3,7 +3,7 @@
 #'
 #' @details
 #' * `df` must contain the variables specified by `vars`, `arm_var`, and `saffl_var`.
-#' * If specified, `alt_counts_df` must contain `USUBJID` and the variables specified by `arm_var` and `saffl_var`.
+#' * If specified, `alt_counts_df` must contain the variables specified by `arm_var`, `id_var`, and `saffl_var`.
 #' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
 #'   flag variables are treated as `"N"`.
 #' * Columns are split by arm.
@@ -42,6 +42,7 @@
 make_table_21 <- function(df,
                           alt_counts_df = NULL,
                           show_colcounts = TRUE,
+                          id_var = "USUBJID",
                           arm_var = "ARM",
                           saffl_var = "SAFFL",
                           vars = c("SEX", "AGEGR1", "RACE", "ETHNIC"),
@@ -50,7 +51,7 @@ make_table_21 <- function(df,
                           lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
                           prune_0 = FALSE,
                           annotations = NULL) {
-  checkmate::assert_subset(c(vars, arm_var, saffl_var), names(df))
+  checkmate::assert_subset(c(vars, id_var, arm_var, saffl_var), names(df))
   assert_flag_variables(df, c(saffl_var, "ASER"))
 
   df <- df %>%
@@ -71,7 +72,7 @@ make_table_21 <- function(df,
     }
   }
 
-  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var, saffl_var)
+  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, id_var, arm_var, saffl_var)
 
   lyt <- basic_table_annot(show_colcounts, annotations)
 
@@ -83,7 +84,7 @@ make_table_21 <- function(df,
 
   lyt <- lyt %>%
     count_patients_with_event(
-      "USUBJID",
+      id_var,
       filters = c("AESER" = "Y"),
       .labels = c(count_fraction = "Any SAE")
     ) %>%
@@ -122,11 +123,11 @@ a_count_occurrences_ser_ae <- function(df,
                                        .N_col, # nolint
                                        df_denom = NULL,
                                        denom = c("N_s", "N_col", "n"),
-                                       id = "USUBJID",
+                                       id_var = "USUBJID",
                                        arm_var = "ARM") {
   df <- df %>% filter(ASER == "Y")
   occurrences <- df[[.var]]
-  ids <- factor(df[[id]])
+  ids <- factor(df[[id_var]])
   has_occurrence_per_id <- table(occurrences, ids) > 0
   n_ids_per_occurrence <- as.list(rowSums(has_occurrence_per_id))
   lvls <- names(n_ids_per_occurrence)
@@ -141,7 +142,7 @@ a_count_occurrences_ser_ae <- function(df,
       function(x) {
         df_denom %>%
           filter(.data[[.var]] == x, .data[[arm_var]] == df[[arm_var]][1]) %>%
-          select(USUBJID) %>%
+          select(all_of(id_var)) %>%
           distinct() %>%
           nrow()
       }

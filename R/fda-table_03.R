@@ -1,9 +1,9 @@
 #' FDA Table 3: Patient Screening and Enrollment, Trials A and B
 #'
 #' @details
-#' * `adsl` must contain `USUBJID`, `ENRLDT`, `RANDDT`, and the variables specified by `arm_var`, `scrnfl_var`,
+#' * `adsl` must contain `ENRLDT`, `RANDDT`, and the variables specified by `id_var`, `arm_var`, `scrnfl_var`,
 #'   `scrnfailfl_var`, and `scrnfail_var`.
-#' * If specified, `alt_counts_df` must contain `USUBJID`, and the variable specified by `arm_var`.
+#' * If specified, `alt_counts_df` must contain the variables specified by `arm_var` and `id_var`.
 #' * Patients are considered enrolled in they have an enrollment date (`ENRLDT` is not missing), and are considered
 #'   randomized if they have a randomization date (`RANDDT` is not missing).
 #' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
@@ -47,6 +47,7 @@ make_table_03 <- function(df,
                           alt_counts_df = NULL,
                           show_colcounts = FALSE,
                           arm_var = "ARM",
+                          id_var = "USUBJID",
                           scrnfl_var,
                           scrnfailfl_var,
                           scrnfail_var,
@@ -54,7 +55,7 @@ make_table_03 <- function(df,
                           prune_0 = TRUE,
                           annotations = NULL) {
   checkmate::assert_subset(
-    c("USUBJID", scrnfl_var, scrnfailfl_var, scrnfail_var, "ENRLDT", "RANDDT", arm_var), names(df)
+    c(id_var, scrnfl_var, scrnfailfl_var, scrnfail_var, "ENRLDT", "RANDDT", arm_var), names(df)
   )
   assert_flag_variables(df, c(scrnfl_var, scrnfailfl_var))
 
@@ -66,24 +67,24 @@ make_table_03 <- function(df,
     ) %>%
     df_explicit_na()
 
-  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
+  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, id_var, arm_var)
 
   lyt <- basic_table_annot(show_colcounts, annotations) %>%
     split_cols_by_arm(arm_var, lbl_overall) %>%
     count_patients_with_flags(
-      var = "USUBJID",
+      var = id_var,
       flag_variables = "SCRNFL",
       .stats = "count"
     ) %>%
     split_rows_by(scrnfailfl_var, split_fun = keep_split_levels("Y")) %>%
     summarize_num_patients(
-      var = "USUBJID",
+      var = id_var,
       .stats = "unique",
       .labels = c(unique = "Screening failures")
     ) %>%
     count_occurrences(vars = scrnfail_var) %>%
     count_patients_with_flags(
-      var = "USUBJID",
+      var = id_var,
       flag_variables = c("ENRLFL", "RANDFL"),
       nested = FALSE
     ) %>%

@@ -9,6 +9,7 @@ make_table_17(
   adae,
   alt_counts_df = NULL,
   show_colcounts = TRUE,
+  id_var = "USUBJID",
   arm_var = "ARM",
   saffl_var = "SAFFL",
   pref_var = "AEDECOD",
@@ -30,11 +31,15 @@ make_table_17(
 
 \item{show_colcounts}{(\code{flag})\cr whether column counts should be printed.}
 
+\item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
+
 \item{arm_var}{(\code{character})\cr arm variable used to split table into columns.}
 
 \item{saffl_var}{(\code{character})\cr flag variable used to indicate inclusion in safety population.}
 
 \item{pref_var}{(\code{character})\cr preferred term variable from \code{adae} to include in the table.}
+
+\item{sex_scope}{(\code{character})\cr Level of \code{SEX} to output in table.}
 
 \item{fmq_scope}{(\code{character})\cr FMQ scope ("NARROW" or "BROAD") to output in table.}
 
@@ -73,9 +78,9 @@ Female Safety Population, Pooled Analyses
 }
 \details{
 \itemize{
-\item \code{adae} must contain \code{USUBJID}, \code{SEX}, and the variables specified by \code{arm_var}, \code{saffl_var}, \code{pref_var},
+\item \code{adae} must contain \code{SEX}, and the variables specified by \code{arm_var}, \code{id_var}, \code{saffl_var}, \code{pref_var},
 \code{fmqsc_var} and \code{fmqnam_var}.
-\item If specified, \code{alt_counts_df} must contain \code{USUBJID} and the variables specified by \code{arm_var} and \code{saffl_var}.
+\item If specified, \code{alt_counts_df} must contain the variables specified by \code{arm_var}, \code{id_var}, and \code{saffl_var}.
 \item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
 flag variables are treated as \code{"N"}.
 \item Columns are split by arm. Overall population column is excluded by default (see \code{lbl_overall} argument).

@@ -9,7 +9,7 @@ format: html
 
 ![](../assets/images/screenshots/table_08.png){fig-align="center" width="75%"}
 
-## Table
+## rtables/tern Table
 
 ```{r tbl, message=FALSE, warning=FALSE}
 # Load Libraries & Data
@@ -22,7 +22,7 @@ adex <- random.cdisc.data::cadex
 make_table_08(adae = adae, adex = adex)
 ```
 
-## Table Setup
+## rtables/tern Table Setup
 
 ```{r tbl, eval=FALSE, echo=TRUE}
 ```

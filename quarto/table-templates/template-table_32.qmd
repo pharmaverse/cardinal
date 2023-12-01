@@ -9,7 +9,7 @@ format: html
 
 ![](../assets/images/screenshots/table_32.png){fig-align="center" width="70%"}
 
-## Table
+## rtables/tern Table
 
 ```{r tbl, message=FALSE, warning=FALSE}
 # Load Libraries & Data
@@ -23,7 +23,7 @@ risk_diff <- list(arm_x = "B: Placebo", arm_y = "A: Drug X") # optional
 make_table_32(advs = advs, alt_counts_df = adsl, risk_diff = risk_diff)
 ```
 
-## Table Setup
+## rtables/tern Table Setup
 
 ```{r tbl, eval=FALSE, echo=TRUE}
 ```
@@ -80,7 +80,6 @@ library(falcon)
 library(dplyr)
 library(gt)
 library(gtsummary)
-library(tern)
 
 adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
 advs <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "advs")

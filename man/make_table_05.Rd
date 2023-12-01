@@ -9,8 +9,8 @@ make_table_05(
   alt_counts_df = NULL,
   show_colcounts = TRUE,
   arm_var = "ARM",
-  saffl_var = "SAFFL",
   id_var = "USUBJID",
+  saffl_var = "SAFFL",
   trtsdtm_var = "TRTSDTM",
   trtedtm_var = "TRTEDTM",
   u_trtdur = "days",
@@ -30,9 +30,9 @@ make_table_05(
 
 \item{arm_var}{(\code{character})\cr arm variable used to split table into columns.}
 
-\item{saffl_var}{(\code{character})\cr flag variable used to indicate inclusion in safety population.}
-
 \item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
+
+\item{saffl_var}{(\code{character})\cr flag variable used to indicate inclusion in safety population.}
 
 \item{trtsdtm_var}{(\code{character})\cr treatment start datetime variable in \code{df}.}
 
@@ -71,10 +71,10 @@ FDA Table 5: Duration of Treatment Exposure, Safety Population, Pooled Analyses
 }
 \details{
 \itemize{
-\item \code{df} must contain \code{USUBJID} and the variables specified by \code{arm_var}, \code{saffl_var}, \code{id_var}, \code{trtsdtm_var},
+\item \code{df} must contain the variables specified by \code{arm_var}, \code{id_var}, \code{saffl_var}, \code{id_var}, \code{trtsdtm_var},
 and \code{trtedtm_var}.
-\item If specified, \code{alt_counts_df} must contain \code{USUBJID} and the variables specified by \code{arm_var} and \code{saffl_var}.
-\item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
+\item If specified, \code{alt_counts_df} must contain the variables specified by \code{arm_var}, \code{id_var} and \code{saffl_var}.
+\item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false,). Missing values in
 flag variables are treated as \code{"N"}.
 \item Columns are split by arm. Overall population column is excluded by default (see \code{lbl_overall} argument).
 \item Numbers in table "Patients Treated" section are the absolute numbers of patients and fraction of \code{N}.
