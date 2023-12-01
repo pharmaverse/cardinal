@@ -75,14 +75,10 @@ Source code for this function is available [here](https://github.com/pharmaverse
 
 ```{r tbl_gtsum, message=FALSE, warning=FALSE}
 # Load Libraries & Data
-library(scda)
 library(falcon)
-library(dplyr)
-library(gt)
-library(gtsummary)
 
-adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
-advs <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "advs")
+adsl <- random.cdisc.data::cadsl
+advs <- random.cdisc.data::cadvs
 
 # Output table
 tbl <- make_table_32_gtsum(advs = advs)
