@@ -114,7 +114,7 @@ make_table_32_gtsum <- function(advs,
       G60 = with_label(MAX_DIABP > 60, ">60"),
       G90 = with_label(MAX_DIABP > 90, ">90"),
       G110 = with_label(MAX_DIABP > 110, ">110"),
-      GE120 = with_label(MAX_DIABP >= 120, "≥120")
+      GE120 = with_label(MAX_DIABP >= 120, ">=120")
     ) %>%
     distinct(.data[[id_var]], .keep_all = TRUE) %>%
     select(L60, G60, G90, G110, GE120, arm_var, AVALU)
