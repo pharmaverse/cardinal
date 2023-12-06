@@ -1,6 +1,6 @@
 adsl <- adsl_raw %>%
-  filter(SAFFL == "Y") %>%
-  mutate(AGEGR1 = as.factor(case_when(
+  dplyr::filter(SAFFL == "Y") %>%
+  dplyr::mutate(AGEGR1 = as.factor(case_when(
     AGE >= 17 & AGE < 65 ~ ">=17 to <65",
     AGE >= 65 ~ ">=65",
     AGE >= 65 & AGE < 75 ~ ">=65 to <75",
@@ -122,9 +122,9 @@ test_that("Table 02 generation (tplyr) works with some NA values", {
 test_that("Table 02 generation (gtsum) works with default values", {
   options(pillar.print_max = 50, width = 200)
 
-  result <- suppressWarnings(make_table_02_gtsum(adsl) %>% as_gt())
+  result <- suppressWarnings(make_table_02_gtsum(adsl) %>% gt::extract_body())
 
-  res <- expect_silent(as.data.frame(result))
+  res <- expect_silent(result)
   expect_snapshot(res)
 })
 
@@ -140,9 +140,9 @@ test_that("Table 02 generation (gtsum) works with custom values", {
   result <- suppressWarnings(make_table_02_gtsum(
     anl,
     vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY", "AVAL")
-  ) %>% as_gt())
+  ) %>% gt::extract_body())
 
-  res <- expect_silent(as.data.frame(result))
+  res <- expect_silent(result)
   expect_snapshot(res)
 })
 
@@ -154,8 +154,8 @@ test_that("Table 02 generation (gtsum) works with some NA values", {
 
   adsl <- adsl %>% df_explicit_na()
 
-  result <- suppressWarnings(make_table_02_gtsum(adsl, vars = "SEX") %>% as_gt())
+  result <- suppressWarnings(make_table_02_gtsum(adsl, vars = "SEX") %>% gt::extract_body())
 
-  res <- expect_silent(as.data.frame(result))
+  res <- expect_silent(result)
   expect_snapshot(res)
 })
