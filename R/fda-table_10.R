@@ -207,11 +207,11 @@ make_table_10_gtsum <- function(adae,
 
   result_data <- result_list[["data"]]
 
-  rows_to_indent <- which(result_data[[fmqnam_var]]!=" ")
+  rows_to_indent <- which(result_data[[fmqnam_var]] != " ")
 
   result_data <- result_data %>%
     mutate(
-      !!fmqnam_var := if_else(.data[[fmqnam_var]]==" ", .data[[soc_var]], .data[[fmqnam_var]])
+      !!fmqnam_var := if_else(.data[[fmqnam_var]] == " ", .data[[soc_var]], .data[[fmqnam_var]])
     ) %>%
     select(-any_of(soc_var))
 
@@ -313,10 +313,10 @@ create_table_10_data <- function(
       }
     }
 
-  if (is.null(lbl_overall)){
+  if (is.null(lbl_overall)) {
     adae <- adae %>%
       left_join(N_data, by = c(arm_var), relationship = "many-to-many")
-  } else{
+  } else {
     adae <- adae %>%
       cross_join(N_data)
   }
@@ -347,10 +347,9 @@ create_table_10_data <- function(
     select(all_of(c(soc_var, fmqnam_var, sel_cols))) %>%
     bind_rows(
       subset(data_list %>%
-               bind_rows() %>%
-               select(.data[[soc_var]]) %>%
-               distinct()
-      )
+        bind_rows() %>%
+        select(.data[[soc_var]]) %>%
+        distinct())
     ) %>%
     arrange(desc(is.na(.data[[soc_var]])), .data[[soc_var]], desc(is.na(.data[[fmqnam_var]]))) %>%
     mutate(across(where(is.character), ~ ifelse(is.na(.), " ", .)))
