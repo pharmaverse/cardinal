@@ -154,8 +154,6 @@ make_table_10_gtsum <- function(adae,
                                 lbl_soc_var = formatters::var_labels(adae, fill = TRUE)[soc_var],
                                 lbl_overall = NULL,
                                 annotations = NULL,
-                                prune_0 = TRUE,
-                                na_level = "<Missing>",
                                 risk_diff = NULL) {
   checkmate::assert_data_frame(adae)
   checkmate::assert_subset(c(saffl_var, id_var, soc_var, fmqnam_var, arm_var), names(adae))
@@ -209,12 +207,11 @@ make_table_10_gtsum <- function(adae,
 
   result_data <- result_list[["data"]]
 
-  rows_to_indent <- which(!is.na(result_data[[fmqnam_var]]))
+  rows_to_indent <- which(result_data[[fmqnam_var]]!=" ")
 
   result_data <- result_data %>%
     mutate(
-      !!soc_var := if_else(is.na(.data[[soc_var]]), "Any SAE", .data[[soc_var]]),
-      !!fmqnam_var := if_else(is.na(.data[[fmqnam_var]]), .data[[soc_var]], .data[[fmqnam_var]])
+      !!fmqnam_var := if_else(.data[[fmqnam_var]]==" ", .data[[soc_var]], .data[[fmqnam_var]])
     ) %>%
     select(-any_of(soc_var))
 
@@ -286,14 +283,23 @@ create_table_10_data <- function(
     lbl_overall = NULL,
     risk_diff = NULL) {
   basis_df <- if (!is.null(alt_counts_df)) alt_counts_df else adae
+
+  var_to_select <- if (is.null(lbl_overall)) {
+    all_of(c(arm_var, "N"))
+  } else {
+    all_of(c("N"))
+  }
+
   N_data <- basis_df %>%
     {
       if (is.null(lbl_overall)) group_by(., .data[[arm_var]]) else .
     } %>%
     mutate(N = n()) %>%
     ungroup() %>%
-    select(all_of(c(arm_var, "N"))) %>%
+    # select(all_of(c(arm_var, "N"))) %>%
+    select(all_of(var_to_select)) %>%
     distinct()
+
   # get total N
   total_N <- N_data %>%
     {
@@ -307,10 +313,15 @@ create_table_10_data <- function(
       }
     }
 
-  adae <- adae %>%
-    left_join(N_data, by = c(arm_var), relationship = "many-to-many")
+  if (is.null(lbl_overall)){
+    adae <- adae %>%
+      left_join(N_data, by = c(arm_var), relationship = "many-to-many")
+  } else{
+    adae <- adae %>%
+      cross_join(N_data)
+  }
 
-  input_list <- list(NULL, soc_var, c(soc_var, fmqnam_var))
+  input_list <- list(c(soc_var, fmqnam_var))
 
   data_list <- lapply(input_list, function(x) {
     count_subjects(
@@ -334,7 +345,15 @@ create_table_10_data <- function(
   result_data <- data_list %>%
     bind_rows() %>%
     select(all_of(c(soc_var, fmqnam_var, sel_cols))) %>%
-    arrange(desc(is.na(.data[[soc_var]])), .data[[soc_var]], desc(is.na(.data[[fmqnam_var]])))
+    bind_rows(
+      subset(data_list %>%
+               bind_rows() %>%
+               select(.data[[soc_var]]) %>%
+               distinct()
+      )
+    ) %>%
+    arrange(desc(is.na(.data[[soc_var]])), .data[[soc_var]], desc(is.na(.data[[fmqnam_var]]))) %>%
+    mutate(across(where(is.character), ~ ifelse(is.na(.), " ", .)))
 
   list(data = result_data, total_N = total_N)
 }
