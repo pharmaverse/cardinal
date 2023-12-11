@@ -1,0 +1,13 @@
+name: Docs 📚
+
+on:
+  push:
+    branches:
+      - main
+      - devel
+
+jobs:
+  links:
+    name: Links
+    uses: phuse-org/devops-toolkit/.github/workflows/urlchecker.yaml@main
+    if: github.event_name == 'pull_request'
