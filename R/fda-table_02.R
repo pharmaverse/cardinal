@@ -66,7 +66,7 @@ make_table_02 <- function(df,
       .formats = NULL,
       na.rm = na_rm
     ) %>%
-    append_topleft(c("", "Characteristic"))
+    append_topleft("Characteristic")
 
   tbl <- build_table(lyt, df = df, alt_counts_df = alt_counts_df)
   if (prune_0) tbl <- prune_table(tbl)

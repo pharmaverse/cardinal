@@ -73,7 +73,7 @@ make_table_07 <- function(adae,
       drop = FALSE,
       riskdiff = !is.null(risk_diff)
     ) %>%
-    rtables::append_topleft(c("", "Deaths"))
+    rtables::append_topleft("Deaths")
 
   tbl <- build_table(lyt, df = adae, alt_counts_df = alt_counts_df)
   if (prune_0) tbl <- prune_table(tbl)
