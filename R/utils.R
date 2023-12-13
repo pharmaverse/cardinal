@@ -44,15 +44,15 @@ basic_table_annot <- function(show_colcounts = TRUE, annotations = NULL) {
 #'
 #' @export
 split_cols_by_arm <- function(lyt, arm_var = "ARM", lbl_overall = NULL, risk_diff = NULL) {
-  spl_fun <- if (is.null(risk_diff)) {
-    NULL
+  if (is.null(risk_diff)) {
+    spl_fun <- NULL
   } else {
-    add_riskdiff(
-      arm_x = risk_diff$arm_x,
-      arm_y = risk_diff$arm_y,
-      col_label = if ("col_label" %in% names(risk_diff)) risk_diff$col_label else formals(add_riskdiff)$col_label,
-      pct = if ("pct" %in% names(risk_diff)) risk_diff$pct else TRUE
-    )
+    arm_x <- risk_diff$arm_x
+    arm_y <- risk_diff$arm_y
+    col_label <- if ("col_label" %in% names(risk_diff)) risk_diff$col_label else eval(formals(add_riskdiff)$col_label)
+    pct <- if ("pct" %in% names(risk_diff)) risk_diff$pct else TRUE
+
+    spl_fun <- add_riskdiff(arm_x = arm_x, arm_y = arm_y, col_label = col_label, pct = pct)
   }
 
   lyt <- lyt %>% split_cols_by(arm_var, split_fun = spl_fun)
