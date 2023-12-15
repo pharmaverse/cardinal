@@ -112,7 +112,7 @@ make_table_20 <- function(adae,
       riskdiff = !is.null(risk_diff),
       table_names = "tbl_lab"
     ) %>%
-    append_topleft(c("", "AESI Assessment"))
+    append_topleft("AESI Assessment")
 
   tbl <- build_table(lyt, df = adae, alt_counts_df = alt_counts_df)
   if (prune_0) tbl <- prune_table(tbl)

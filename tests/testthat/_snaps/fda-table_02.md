@@ -268,94 +268,100 @@
     Code
       res
     Output
-         variable    var_type var_label row_type                                         label stat_label             stat_1             stat_2             stat_3             stat_0
-      1       SEX categorical       Sex    label                                    Sex, n (%)      n (%)             <br />             <br />             <br />             <br />
-      2       SEX categorical       Sex    level                                             F     <br />           79 (59%)           82 (61%)           70 (53%)          231 (58%)
-      3       SEX categorical       Sex    level                                             M     <br />           55 (41%)           52 (39%)           62 (47%)          169 (42%)
-      4       AGE continuous2       Age    label                                           Age     <br />             <br />             <br />             <br />             <br />
-      5       AGE continuous2       Age    level                                     Mean (SD)     <br />         33.8 (6.6)         35.4 (7.9)         35.4 (7.7)         34.9 (7.4)
-      6       AGE continuous2       Age    level                                Median (Range)     <br /> 33.0 (21.0 - 50.0) 35.0 (21.0 - 62.0) 35.0 (20.0 - 69.0) 34.0 (20.0 - 69.0)
-      7    AGEGR1 categorical Age Group    label                              Age Group, n (%)      n (%)             <br />             <br />             <br />             <br />
-      8    AGEGR1 categorical Age Group    level                                   >=17 to <65     <br />         134 (100%)         134 (100%)          131 (99%)         399 (100%)
-      9    AGEGR1 categorical Age Group    level                                          >=65     <br />             0 (0%)             0 (0%)           1 (0.8%)           1 (0.3%)
-      10     RACE categorical      Race    label                                   Race, n (%)      n (%)             <br />             <br />             <br />             <br />
-      11     RACE categorical      Race    level                                         ASIAN     <br />           68 (51%)           67 (50%)           73 (55%)          208 (52%)
-      12     RACE categorical      Race    level                     BLACK OR AFRICAN AMERICAN     <br />           31 (23%)           28 (21%)           32 (24%)           91 (23%)
-      13     RACE categorical      Race    level                                         WHITE     <br />           27 (20%)           26 (19%)           21 (16%)           74 (19%)
-      14     RACE categorical      Race    level              AMERICAN INDIAN OR ALASKA NATIVE     <br />           8 (6.0%)          11 (8.2%)           6 (4.5%)          25 (6.3%)
-      15     RACE categorical      Race    level                                      MULTIPLE     <br />             0 (0%)           1 (0.7%)             0 (0%)           1 (0.3%)
-      16     RACE categorical      Race    level     NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER     <br />             0 (0%)           1 (0.7%)             0 (0%)           1 (0.3%)
-      17     RACE categorical      Race    level                                         OTHER     <br />             0 (0%)             0 (0%)             0 (0%)             0 (0%)
-      18     RACE categorical      Race    level                                       UNKNOWN     <br />             0 (0%)             0 (0%)             0 (0%)             0 (0%)
-      19   ETHNIC categorical Ethnicity    label                              Ethnicity, n (%)      n (%)             <br />             <br />             <br />             <br />
-      20   ETHNIC categorical Ethnicity    level                                  NOT REPORTED     <br />           6 (4.5%)          10 (7.5%)          11 (8.3%)          27 (6.8%)
-      21   ETHNIC categorical Ethnicity    level                            HISPANIC OR LATINO     <br />           15 (11%)           18 (13%)           15 (11%)           48 (12%)
-      22   ETHNIC categorical Ethnicity    level                        NOT HISPANIC OR LATINO     <br />          104 (78%)          103 (77%)          101 (77%)          308 (77%)
-      23   ETHNIC categorical Ethnicity    level                                       UNKNOWN     <br />           9 (6.7%)           3 (2.2%)           5 (3.8%)          17 (4.3%)
-      24  COUNTRY categorical   Country    label                                Country, n (%)      n (%)             <br />             <br />             <br />             <br />
-      25  COUNTRY categorical   Country    level                                           CHN     <br />           74 (55%)           81 (60%)           64 (48%)          219 (55%)
-      26  COUNTRY categorical   Country    level                                           USA     <br />          10 (7.5%)          13 (9.7%)           17 (13%)           40 (10%)
-      27  COUNTRY categorical   Country    level                                           BRA     <br />          13 (9.7%)           7 (5.2%)          10 (7.6%)          30 (7.5%)
-      28  COUNTRY categorical   Country    level                                           PAK     <br />          12 (9.0%)           9 (6.7%)          10 (7.6%)          31 (7.8%)
-      29  COUNTRY categorical   Country    level                                           NGA     <br />           8 (6.0%)           7 (5.2%)          11 (8.3%)          26 (6.5%)
-      30  COUNTRY categorical   Country    level                                           RUS     <br />           5 (3.7%)           8 (6.0%)           6 (4.5%)          19 (4.8%)
-      31  COUNTRY categorical   Country    level                                           JPN     <br />           5 (3.7%)           4 (3.0%)           9 (6.8%)          18 (4.5%)
-      32  COUNTRY categorical   Country    level                                           GBR     <br />           4 (3.0%)           3 (2.2%)           2 (1.5%)           9 (2.3%)
-      33  COUNTRY categorical   Country    level                                           CAN     <br />           3 (2.2%)           2 (1.5%)           3 (2.3%)           8 (2.0%)
-      34  COUNTRY categorical   Country    level                                           CHE     <br />             0 (0%)             0 (0%)             0 (0%)             0 (0%)
+      # A tibble: 34 x 10
+         variable var_type    var_label row_type label                                         stat_label stat_1             stat_2             stat_3             stat_0            
+         <chr>    <chr>       <chr>     <chr>    <chr>                                         <chr>      <chr>              <chr>              <chr>              <chr>             
+       1 SEX      categorical Sex       label    Sex, n (%)                                    n (%)      <br />             <br />             <br />             <br />            
+       2 SEX      categorical Sex       level        F                                         <br />     79 (59%)           82 (61%)           70 (53%)           231 (58%)         
+       3 SEX      categorical Sex       level        M                                         <br />     55 (41%)           52 (39%)           62 (47%)           169 (42%)         
+       4 AGE      continuous2 Age       label    Age                                           <br />     <br />             <br />             <br />             <br />            
+       5 AGE      continuous2 Age       level        Mean (SD)                                 <br />     33.8 (6.6)         35.4 (7.9)         35.4 (7.7)         34.9 (7.4)        
+       6 AGE      continuous2 Age       level        Median (min - max)                        <br />     33.0 (21.0 - 50.0) 35.0 (21.0 - 62.0) 35.0 (20.0 - 69.0) 34.0 (20.0 - 69.0)
+       7 AGEGR1   categorical Age Group label    Age Group, n (%)                              n (%)      <br />             <br />             <br />             <br />            
+       8 AGEGR1   categorical Age Group level        >=17 to <65                               <br />     134 (100%)         134 (100%)         131 (99%)          399 (100%)        
+       9 AGEGR1   categorical Age Group level        >=65                                      <br />     0 (0%)             0 (0%)             1 (0.8%)           1 (0.3%)          
+      10 RACE     categorical Race      label    Race, n (%)                                   n (%)      <br />             <br />             <br />             <br />            
+      11 RACE     categorical Race      level        ASIAN                                     <br />     68 (51%)           67 (50%)           73 (55%)           208 (52%)         
+      12 RACE     categorical Race      level        BLACK OR AFRICAN AMERICAN                 <br />     31 (23%)           28 (21%)           32 (24%)           91 (23%)          
+      13 RACE     categorical Race      level        WHITE                                     <br />     27 (20%)           26 (19%)           21 (16%)           74 (19%)          
+      14 RACE     categorical Race      level        AMERICAN INDIAN OR ALASKA NATIVE          <br />     8 (6.0%)           11 (8.2%)          6 (4.5%)           25 (6.3%)         
+      15 RACE     categorical Race      level        MULTIPLE                                  <br />     0 (0%)             1 (0.7%)           0 (0%)             1 (0.3%)          
+      16 RACE     categorical Race      level        NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER <br />     0 (0%)             1 (0.7%)           0 (0%)             1 (0.3%)          
+      17 RACE     categorical Race      level        OTHER                                     <br />     0 (0%)             0 (0%)             0 (0%)             0 (0%)            
+      18 RACE     categorical Race      level        UNKNOWN                                   <br />     0 (0%)             0 (0%)             0 (0%)             0 (0%)            
+      19 ETHNIC   categorical Ethnicity label    Ethnicity, n (%)                              n (%)      <br />             <br />             <br />             <br />            
+      20 ETHNIC   categorical Ethnicity level         NOT REPORTED                             <br />     6 (4.5%)           10 (7.5%)          11 (8.3%)          27 (6.8%)         
+      21 ETHNIC   categorical Ethnicity level        HISPANIC OR LATINO                        <br />     15 (11%)           18 (13%)           15 (11%)           48 (12%)          
+      22 ETHNIC   categorical Ethnicity level        NOT HISPANIC OR LATINO                    <br />     104 (78%)          103 (77%)          101 (77%)          308 (77%)         
+      23 ETHNIC   categorical Ethnicity level        UNKNOWN                                   <br />     9 (6.7%)           3 (2.2%)           5 (3.8%)           17 (4.3%)         
+      24 COUNTRY  categorical Country   label    Country, n (%)                                n (%)      <br />             <br />             <br />             <br />            
+      25 COUNTRY  categorical Country   level        CHN                                       <br />     74 (55%)           81 (60%)           64 (48%)           219 (55%)         
+      26 COUNTRY  categorical Country   level        USA                                       <br />     10 (7.5%)          13 (9.7%)          17 (13%)           40 (10%)          
+      27 COUNTRY  categorical Country   level        BRA                                       <br />     13 (9.7%)          7 (5.2%)           10 (7.6%)          30 (7.5%)         
+      28 COUNTRY  categorical Country   level        PAK                                       <br />     12 (9.0%)          9 (6.7%)           10 (7.6%)          31 (7.8%)         
+      29 COUNTRY  categorical Country   level        NGA                                       <br />     8 (6.0%)           7 (5.2%)           11 (8.3%)          26 (6.5%)         
+      30 COUNTRY  categorical Country   level        RUS                                       <br />     5 (3.7%)           8 (6.0%)           6 (4.5%)           19 (4.8%)         
+      31 COUNTRY  categorical Country   level        JPN                                       <br />     5 (3.7%)           4 (3.0%)           9 (6.8%)           18 (4.5%)         
+      32 COUNTRY  categorical Country   level        GBR                                       <br />     4 (3.0%)           3 (2.2%)           2 (1.5%)           9 (2.3%)          
+      33 COUNTRY  categorical Country   level        CAN                                       <br />     3 (2.2%)           2 (1.5%)           3 (2.3%)           8 (2.0%)          
+      34 COUNTRY  categorical Country   level        CHE                                       <br />     0 (0%)             0 (0%)             0 (0%)             0 (0%)            
 
 # Table 02 generation (gtsum) works with custom values
 
     Code
       res
     Output
-         variable    var_type      var_label row_type                                         label stat_label             stat_1             stat_2             stat_3             stat_0
-      1       SEX categorical            Sex    label                                    Sex, n (%)      n (%)             <br />             <br />             <br />             <br />
-      2       SEX categorical            Sex    level                                             F     <br />           79 (59%)           82 (61%)           70 (53%)          231 (58%)
-      3       SEX categorical            Sex    level                                             M     <br />           55 (41%)           52 (39%)           62 (47%)          169 (42%)
-      4       AGE continuous2            Age    label                                           Age     <br />             <br />             <br />             <br />             <br />
-      5       AGE continuous2            Age    level                                     Mean (SD)     <br />         33.8 (6.6)         35.4 (7.9)         35.4 (7.7)         34.9 (7.4)
-      6       AGE continuous2            Age    level                                Median (Range)     <br /> 33.0 (21.0 - 50.0) 35.0 (21.0 - 62.0) 35.0 (20.0 - 69.0) 34.0 (20.0 - 69.0)
-      7    AGEGR1 categorical      Age Group    label                              Age Group, n (%)      n (%)             <br />             <br />             <br />             <br />
-      8    AGEGR1 categorical      Age Group    level                                   >=17 to <65     <br />         134 (100%)         134 (100%)          131 (99%)         399 (100%)
-      9    AGEGR1 categorical      Age Group    level                                          >=65     <br />             0 (0%)             0 (0%)           1 (0.8%)           1 (0.3%)
-      10     RACE categorical           Race    label                                   Race, n (%)      n (%)             <br />             <br />             <br />             <br />
-      11     RACE categorical           Race    level                                         ASIAN     <br />           68 (51%)           67 (50%)           73 (55%)          208 (52%)
-      12     RACE categorical           Race    level                     BLACK OR AFRICAN AMERICAN     <br />           31 (23%)           28 (21%)           32 (24%)           91 (23%)
-      13     RACE categorical           Race    level                                         WHITE     <br />           27 (20%)           26 (19%)           21 (16%)           74 (19%)
-      14     RACE categorical           Race    level              AMERICAN INDIAN OR ALASKA NATIVE     <br />           8 (6.0%)          11 (8.2%)           6 (4.5%)          25 (6.3%)
-      15     RACE categorical           Race    level                                      MULTIPLE     <br />             0 (0%)           1 (0.7%)             0 (0%)           1 (0.3%)
-      16     RACE categorical           Race    level     NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER     <br />             0 (0%)           1 (0.7%)             0 (0%)           1 (0.3%)
-      17     RACE categorical           Race    level                                         OTHER     <br />             0 (0%)             0 (0%)             0 (0%)             0 (0%)
-      18     RACE categorical           Race    level                                       UNKNOWN     <br />             0 (0%)             0 (0%)             0 (0%)             0 (0%)
-      19   ETHNIC categorical      Ethnicity    label                              Ethnicity, n (%)      n (%)             <br />             <br />             <br />             <br />
-      20   ETHNIC categorical      Ethnicity    level                                  NOT REPORTED     <br />           6 (4.5%)          10 (7.5%)          11 (8.3%)          27 (6.8%)
-      21   ETHNIC categorical      Ethnicity    level                            HISPANIC OR LATINO     <br />           15 (11%)           18 (13%)           15 (11%)           48 (12%)
-      22   ETHNIC categorical      Ethnicity    level                        NOT HISPANIC OR LATINO     <br />          104 (78%)          103 (77%)          101 (77%)          308 (77%)
-      23   ETHNIC categorical      Ethnicity    level                                       UNKNOWN     <br />           9 (6.7%)           3 (2.2%)           5 (3.8%)          17 (4.3%)
-      24  COUNTRY categorical        Country    label                                Country, n (%)      n (%)             <br />             <br />             <br />             <br />
-      25  COUNTRY categorical        Country    level                                           CHN     <br />           74 (55%)           81 (60%)           64 (48%)          219 (55%)
-      26  COUNTRY categorical        Country    level                                           USA     <br />          10 (7.5%)          13 (9.7%)           17 (13%)           40 (10%)
-      27  COUNTRY categorical        Country    level                                           BRA     <br />          13 (9.7%)           7 (5.2%)          10 (7.6%)          30 (7.5%)
-      28  COUNTRY categorical        Country    level                                           PAK     <br />          12 (9.0%)           9 (6.7%)          10 (7.6%)          31 (7.8%)
-      29  COUNTRY categorical        Country    level                                           NGA     <br />           8 (6.0%)           7 (5.2%)          11 (8.3%)          26 (6.5%)
-      30  COUNTRY categorical        Country    level                                           RUS     <br />           5 (3.7%)           8 (6.0%)           6 (4.5%)          19 (4.8%)
-      31  COUNTRY categorical        Country    level                                           JPN     <br />           5 (3.7%)           4 (3.0%)           9 (6.8%)          18 (4.5%)
-      32  COUNTRY categorical        Country    level                                           GBR     <br />           4 (3.0%)           3 (2.2%)           2 (1.5%)           9 (2.3%)
-      33  COUNTRY categorical        Country    level                                           CAN     <br />           3 (2.2%)           2 (1.5%)           3 (2.3%)           8 (2.0%)
-      34  COUNTRY categorical        Country    level                                           CHE     <br />             0 (0%)             0 (0%)             0 (0%)             0 (0%)
-      35     AVAL continuous2 Analysis Value    label                                Analysis Value     <br />             <br />             <br />             <br />             <br />
-      36     AVAL continuous2 Analysis Value    level                                     Mean (SD)     <br />         49.7 (8.3)         50.9 (7.4)         49.1 (8.2)         49.9 (8.0)
-      37     AVAL continuous2 Analysis Value    level                                Median (Range)     <br /> 50.4 (29.0 - 69.1) 51.5 (30.7 - 67.7) 48.7 (20.6 - 70.5) 50.3 (20.6 - 70.5)
+      # A tibble: 37 x 10
+         variable var_type    var_label      row_type label                                         stat_label stat_1             stat_2             stat_3             stat_0            
+         <chr>    <chr>       <chr>          <chr>    <chr>                                         <chr>      <chr>              <chr>              <chr>              <chr>             
+       1 SEX      categorical Sex            label    Sex, n (%)                                    n (%)      <br />             <br />             <br />             <br />            
+       2 SEX      categorical Sex            level        F                                         <br />     79 (59%)           82 (61%)           70 (53%)           231 (58%)         
+       3 SEX      categorical Sex            level        M                                         <br />     55 (41%)           52 (39%)           62 (47%)           169 (42%)         
+       4 AGE      continuous2 Age            label    Age                                           <br />     <br />             <br />             <br />             <br />            
+       5 AGE      continuous2 Age            level        Mean (SD)                                 <br />     33.8 (6.6)         35.4 (7.9)         35.4 (7.7)         34.9 (7.4)        
+       6 AGE      continuous2 Age            level        Median (min - max)                        <br />     33.0 (21.0 - 50.0) 35.0 (21.0 - 62.0) 35.0 (20.0 - 69.0) 34.0 (20.0 - 69.0)
+       7 AGEGR1   categorical Age Group      label    Age Group, n (%)                              n (%)      <br />             <br />             <br />             <br />            
+       8 AGEGR1   categorical Age Group      level        >=17 to <65                               <br />     134 (100%)         134 (100%)         131 (99%)          399 (100%)        
+       9 AGEGR1   categorical Age Group      level        >=65                                      <br />     0 (0%)             0 (0%)             1 (0.8%)           1 (0.3%)          
+      10 RACE     categorical Race           label    Race, n (%)                                   n (%)      <br />             <br />             <br />             <br />            
+      11 RACE     categorical Race           level        ASIAN                                     <br />     68 (51%)           67 (50%)           73 (55%)           208 (52%)         
+      12 RACE     categorical Race           level        BLACK OR AFRICAN AMERICAN                 <br />     31 (23%)           28 (21%)           32 (24%)           91 (23%)          
+      13 RACE     categorical Race           level        WHITE                                     <br />     27 (20%)           26 (19%)           21 (16%)           74 (19%)          
+      14 RACE     categorical Race           level        AMERICAN INDIAN OR ALASKA NATIVE          <br />     8 (6.0%)           11 (8.2%)          6 (4.5%)           25 (6.3%)         
+      15 RACE     categorical Race           level        MULTIPLE                                  <br />     0 (0%)             1 (0.7%)           0 (0%)             1 (0.3%)          
+      16 RACE     categorical Race           level        NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER <br />     0 (0%)             1 (0.7%)           0 (0%)             1 (0.3%)          
+      17 RACE     categorical Race           level        OTHER                                     <br />     0 (0%)             0 (0%)             0 (0%)             0 (0%)            
+      18 RACE     categorical Race           level        UNKNOWN                                   <br />     0 (0%)             0 (0%)             0 (0%)             0 (0%)            
+      19 ETHNIC   categorical Ethnicity      label    Ethnicity, n (%)                              n (%)      <br />             <br />             <br />             <br />            
+      20 ETHNIC   categorical Ethnicity      level         NOT REPORTED                             <br />     6 (4.5%)           10 (7.5%)          11 (8.3%)          27 (6.8%)         
+      21 ETHNIC   categorical Ethnicity      level        HISPANIC OR LATINO                        <br />     15 (11%)           18 (13%)           15 (11%)           48 (12%)          
+      22 ETHNIC   categorical Ethnicity      level        NOT HISPANIC OR LATINO                    <br />     104 (78%)          103 (77%)          101 (77%)          308 (77%)         
+      23 ETHNIC   categorical Ethnicity      level        UNKNOWN                                   <br />     9 (6.7%)           3 (2.2%)           5 (3.8%)           17 (4.3%)         
+      24 COUNTRY  categorical Country        label    Country, n (%)                                n (%)      <br />             <br />             <br />             <br />            
+      25 COUNTRY  categorical Country        level        CHN                                       <br />     74 (55%)           81 (60%)           64 (48%)           219 (55%)         
+      26 COUNTRY  categorical Country        level        USA                                       <br />     10 (7.5%)          13 (9.7%)          17 (13%)           40 (10%)          
+      27 COUNTRY  categorical Country        level        BRA                                       <br />     13 (9.7%)          7 (5.2%)           10 (7.6%)          30 (7.5%)         
+      28 COUNTRY  categorical Country        level        PAK                                       <br />     12 (9.0%)          9 (6.7%)           10 (7.6%)          31 (7.8%)         
+      29 COUNTRY  categorical Country        level        NGA                                       <br />     8 (6.0%)           7 (5.2%)           11 (8.3%)          26 (6.5%)         
+      30 COUNTRY  categorical Country        level        RUS                                       <br />     5 (3.7%)           8 (6.0%)           6 (4.5%)           19 (4.8%)         
+      31 COUNTRY  categorical Country        level        JPN                                       <br />     5 (3.7%)           4 (3.0%)           9 (6.8%)           18 (4.5%)         
+      32 COUNTRY  categorical Country        level        GBR                                       <br />     4 (3.0%)           3 (2.2%)           2 (1.5%)           9 (2.3%)          
+      33 COUNTRY  categorical Country        level        CAN                                       <br />     3 (2.2%)           2 (1.5%)           3 (2.3%)           8 (2.0%)          
+      34 COUNTRY  categorical Country        level        CHE                                       <br />     0 (0%)             0 (0%)             0 (0%)             0 (0%)            
+      35 AVAL     continuous2 Analysis Value label    Analysis Value                                <br />     <br />             <br />             <br />             <br />            
+      36 AVAL     continuous2 Analysis Value level        Mean (SD)                                 <br />     49.7 (8.3)         50.9 (7.4)         49.1 (8.2)         49.9 (8.0)        
+      37 AVAL     continuous2 Analysis Value level        Median (min - max)                        <br />     50.4 (29.0 - 69.1) 51.5 (30.7 - 67.7) 48.7 (20.6 - 70.5) 50.3 (20.6 - 70.5)
 
 # Table 02 generation (gtsum) works with some NA values
 
     Code
       res
     Output
-        variable    var_type var_label row_type         label stat_label   stat_1   stat_2   stat_3    stat_0
-      1      SEX categorical       Sex    label    Sex, n (%)      n (%)   <br />   <br />   <br />    <br />
-      2      SEX categorical       Sex    level             F     <br /> 68 (51%) 68 (51%) 62 (47%) 198 (50%)
-      3      SEX categorical       Sex    level             M     <br /> 50 (37%) 48 (36%) 54 (41%) 152 (38%)
-      4      SEX categorical       Sex    level     <Missing>     <br /> 16 (12%) 18 (13%) 16 (12%)  50 (13%)
+      # A tibble: 4 x 10
+        variable var_type    var_label row_type label         stat_label stat_1   stat_2   stat_3   stat_0   
+        <chr>    <chr>       <chr>     <chr>    <chr>         <chr>      <chr>    <chr>    <chr>    <chr>    
+      1 SEX      categorical Sex       label    Sex, n (%)    n (%)      <br />   <br />   <br />   <br />   
+      2 SEX      categorical Sex       level        F         <br />     68 (51%) 68 (51%) 62 (47%) 198 (50%)
+      3 SEX      categorical Sex       level        M         <br />     50 (37%) 48 (36%) 54 (41%) 152 (38%)
+      4 SEX      categorical Sex       level        <Missing> <br />     16 (12%) 18 (13%) 16 (12%) 50 (13%) 
 
