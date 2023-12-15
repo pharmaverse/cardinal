@@ -67,34 +67,26 @@
     Code
       res
     Output
-        variable    var_type var_label row_type    label     stat_1     stat_2
-      1      L60 dichotomous    &lt;60    label   &lt;60 72 (53.7%) 83 (61.9%)
-      2      G60 dichotomous    &gt;60    label   &gt;60 62 (46.3%) 51 (38.1%)
-      3      G90 dichotomous    &gt;90    label   &gt;90   0 (0.0%)   0 (0.0%)
-      4     G110 dichotomous   &gt;110    label  &gt;110   0 (0.0%)   0 (0.0%)
-      5    GE120 dichotomous  &gt;=120    label &gt;=120   0 (0.0%)   0 (0.0%)
-            stat_3
-      1 78 (59.1%)
-      2 54 (40.9%)
-      3   0 (0.0%)
-      4   0 (0.0%)
-      5   0 (0.0%)
+      # A tibble: 5 x 8
+        variable var_type    var_label row_type label   stat_1     stat_2     stat_3  
+        <chr>    <chr>       <chr>     <chr>    <chr>   <chr>      <chr>      <chr>   
+      1 L60      dichotomous &lt;60    label    &lt;60  72 (53.7%) 83 (61.9%) 78 (59.~
+      2 G60      dichotomous &gt;60    label    &gt;60  62 (46.3%) 51 (38.1%) 54 (40.~
+      3 G90      dichotomous &gt;90    label    &gt;90  0 (0.0%)   0 (0.0%)   0 (0.0%)
+      4 G110     dichotomous &gt;110   label    &gt;110 0 (0.0%)   0 (0.0%)   0 (0.0%)
+      5 GE120    dichotomous ≥120      label    ≥120    0 (0.0%)   0 (0.0%)   0 (0.0%)
 
 # Table 32 (gtsum) generation works with custom values
 
     Code
       res
     Output
-        variable    var_type var_label row_type    label     stat_1     stat_2
-      1      L60 dichotomous    &lt;60    label   &lt;60 72 (53.7%) 83 (61.9%)
-      2      G60 dichotomous    &gt;60    label   &gt;60 62 (46.3%) 51 (38.1%)
-      3      G90 dichotomous    &gt;90    label   &gt;90   0 (0.0%)   0 (0.0%)
-      4     G110 dichotomous   &gt;110    label  &gt;110   0 (0.0%)   0 (0.0%)
-      5    GE120 dichotomous  &gt;=120    label &gt;=120   0 (0.0%)   0 (0.0%)
-            stat_3      stat_0
-      1 78 (59.1%) 233 (58.3%)
-      2 54 (40.9%) 167 (41.8%)
-      3   0 (0.0%)    0 (0.0%)
-      4   0 (0.0%)    0 (0.0%)
-      5   0 (0.0%)    0 (0.0%)
+      # A tibble: 5 x 9
+        variable var_type    var_label row_type label   stat_1    stat_2 stat_3 stat_0
+        <chr>    <chr>       <chr>     <chr>    <chr>   <chr>     <chr>  <chr>  <chr> 
+      1 L60      dichotomous &lt;60    label    &lt;60  72 (53.7~ 83 (6~ 78 (5~ 233 (~
+      2 G60      dichotomous &gt;60    label    &gt;60  62 (46.3~ 51 (3~ 54 (4~ 167 (~
+      3 G90      dichotomous &gt;90    label    &gt;90  0 (0.0%)  0 (0.~ 0 (0.~ 0 (0.~
+      4 G110     dichotomous &gt;110   label    &gt;110 0 (0.0%)  0 (0.~ 0 (0.~ 0 (0.~
+      5 GE120    dichotomous ≥120      label    ≥120    0 (0.0%)  0 (0.~ 0 (0.~ 0 (0.~
 

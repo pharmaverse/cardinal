@@ -88,7 +88,7 @@ make_table_03 <- function(df,
       flag_variables = c("ENRLFL", "RANDFL"),
       nested = FALSE
     ) %>%
-    append_topleft(c("", "Disposition"))
+    append_topleft("Disposition")
 
   tbl <- build_table(lyt, df = df, alt_counts_df = alt_counts_df)
   if (prune_0) tbl <- prune_table(tbl)

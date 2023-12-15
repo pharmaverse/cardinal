@@ -108,7 +108,7 @@ make_table_06 <- function(adae,
       .indent_mods = 1L,
       riskdiff = !is.null(risk_diff)
     ) %>%
-    append_topleft(c("", "Event"))
+    append_topleft("Event")
 
   tbl <- build_table(lyt, df = adae, alt_counts_df = alt_counts_df)
   if (prune_0) tbl <- prune_table(tbl)

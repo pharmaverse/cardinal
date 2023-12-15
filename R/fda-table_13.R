@@ -48,7 +48,7 @@ make_table_13 <- function(adae,
       vars = pref_var,
       riskdiff = !is.null(risk_diff)
     ) %>%
-    append_topleft(c("", lbl_pref_var))
+    append_topleft(lbl_pref_var)
 
   tbl <- build_table(lyt, df = adae, alt_counts_df = alt_counts_df)
 

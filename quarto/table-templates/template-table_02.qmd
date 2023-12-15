@@ -161,10 +161,10 @@ advs <- random.cdisc.data::cadvs
 # Pre-Processing - Add any variables needed in your table to df
 adsl <- adsl %>%
   dplyr::mutate(AGEGR1 = as.factor(dplyr::case_when(
-    AGE >= 17 & AGE < 65 ~ ">=17 to <65",
-    AGE >= 65 ~ ">=65",
-    AGE >= 65 & AGE < 75 ~ ">=65 to <75",
-    AGE >= 75 ~ ">=75"
+    AGE >= 17 & AGE < 65 ~ "≥17 to &lt;65",
+    AGE >= 65 ~ "≥65",
+    AGE >= 65 & AGE < 75 ~ "≥65 to &lt;75",
+    AGE >= 75 ~ "≥75"
   )))
 
 advs <- advs %>%

@@ -83,7 +83,7 @@ make_table_05 <- function(df,
       flag_variables = c("D_ANY", "D_LT1", "D_GT1", "D_GT3", "D_GT6", "D_GT12"),
       riskdiff = !is.null(risk_diff)
     ) %>%
-    append_topleft(c("", "Parameter"))
+    append_topleft("Parameter")
 
   tbl <- build_table(lyt, df = df, alt_counts_df = alt_counts_df)
 

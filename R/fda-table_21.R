@@ -99,7 +99,7 @@ make_table_21 <- function(df,
       ),
       show_labels = "visible"
     ) %>%
-    append_topleft(c("", "Characteristic"))
+    append_topleft("Characteristic")
 
   tbl <- build_table(lyt, df = df, alt_counts_df = alt_counts_df)
   if (prune_0) tbl <- prune_table(tbl)

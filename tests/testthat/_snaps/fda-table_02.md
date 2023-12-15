@@ -353,9 +353,11 @@
     Code
       res
     Output
-        variable    var_type var_label row_type         label stat_label   stat_1   stat_2   stat_3    stat_0
-      1      SEX categorical       Sex    label    Sex, n (%)      n (%)   <br />   <br />   <br />    <br />
-      2      SEX categorical       Sex    level             F     <br /> 68 (51%) 68 (51%) 62 (47%) 198 (50%)
-      3      SEX categorical       Sex    level             M     <br /> 50 (37%) 48 (36%) 54 (41%) 152 (38%)
-      4      SEX categorical       Sex    level     <Missing>     <br /> 16 (12%) 18 (13%) 16 (12%)  50 (13%)
+      # A tibble: 4 x 10
+        variable var_type    var_label row_type label         stat_label stat_1   stat_2   stat_3   stat_0   
+        <chr>    <chr>       <chr>     <chr>    <chr>         <chr>      <chr>    <chr>    <chr>    <chr>    
+      1 SEX      categorical Sex       label    Sex, n (%)    n (%)      <br />   <br />   <br />   <br />   
+      2 SEX      categorical Sex       level        F         <br />     68 (51%) 68 (51%) 62 (47%) 198 (50%)
+      3 SEX      categorical Sex       level        M         <br />     50 (37%) 48 (36%) 54 (41%) 152 (38%)
+      4 SEX      categorical Sex       level        <Missing> <br />     16 (12%) 18 (13%) 16 (12%) 50 (13%) 
 
