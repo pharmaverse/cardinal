@@ -13,3 +13,11 @@ adsl_raw <- adsl_raw %>%
     AGE >= 75 ~ ">=75"
   )) %>%
     formatters::with_label("Age Group"))
+
+# Temporary fix for disparity between package versions
+adsl_raw$ETHNIC <- as.character(adsl_raw$ETHNIC)
+adsl_raw$ETHNIC[adsl_raw$ETHNIC == " NOT REPORTED"] <- "NOT REPORTED"
+adsl_raw$ETHNIC <- formatters::with_label(factor(adsl_raw$ETHNIC, levels = sort(unique(adsl_raw$ETHNIC))), "Ethnicity")
+adae_raw$ETHNIC <- as.character(adae_raw$ETHNIC)
+adae_raw$ETHNIC[adae_raw$ETHNIC == " NOT REPORTED"] <- "NOT REPORTED"
+adae_raw$ETHNIC <- formatters::with_label(factor(adae_raw$ETHNIC, levels = sort(unique(adae_raw$ETHNIC))), "Ethnicity")
