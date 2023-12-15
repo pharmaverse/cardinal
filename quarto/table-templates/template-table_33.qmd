@@ -16,8 +16,8 @@ format: html
 library(falcon)
 
 adsl <- random.cdisc.data::cadsl
-advs <- random.cdisc.data::cadvs %>%
-  mutate(AVAL = AVAL - 100)
+advs <- random.cdisc.data::cadvs
+advs$AVAL <- advs$AVAL - 100
 
 # Output Table
 risk_diff <- list(arm_x = "B: Placebo", arm_y = "A: Drug X") # optional
