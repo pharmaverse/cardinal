@@ -204,6 +204,7 @@ make_table_09_tplyr <- function(adae,
   assert_data_frame(adae)
   assert_string(id_var)
   assert_string(arm_var)
+  #assert_factor(adae[[arm_var]]) # to ensure correct assignment of colum headers
   assert_string(saffl_var)
   assert_string(ser_var)
   assert_string(soc_var)
