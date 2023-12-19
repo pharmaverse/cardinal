@@ -112,11 +112,13 @@ test_that("make_table_09_tplyr() assigns column headers correctly to the arm gro
   # Alternate levels order
   adae_alt <- adae %>%
     dplyr::mutate(ARM = factor(ARM, levels = unique(adae[["ARM"]])))
-  tbl_out2 <- make_table_09_tplyr(adae_alt, tplyr_raw = TRUE)
+  tbl_out <- make_table_09_tplyr(adae_alt, tplyr_raw = TRUE)
   arm_col_names <- colnames(tbl_out)[-1] |> sub(pattern = "var1_", replacement = "")
   arm_headers <- unlist(tbl_out[1, -1])
   position_valid <- sapply(1:length(arm_col_names), function(i) grepl(arm_col_names[i], arm_headers[i]))
   expect_true(all(position_valid))
+
+  #TODO: test with character
 })
 
 test_that("make_table_09_tplyr() provides risk difference columns based on the risk_diff_pairs parameter", {

@@ -204,7 +204,6 @@ make_table_09_tplyr <- function(adae,
   assert_data_frame(adae)
   assert_string(id_var)
   assert_string(arm_var)
-  #assert_factor(adae[[arm_var]]) # to ensure correct assignment of colum headers
   assert_string(saffl_var)
   assert_string(ser_var)
   assert_string(soc_var)
@@ -306,6 +305,14 @@ make_table_09_tplyr <- function(adae,
       mutate(across(starts_with("var"), ~gsub("[0()\\%\\. ]", "", .x), .names = "detect_0_{.col}")) %>%
       filter(if_any(starts_with("detect_0"), ~ .x != ""))
   }
+
+  # Adapt column order to arm order
+  col_names <- names(table)
+  arm_col_names <- paste0("var1_", arm_names)
+  other_col_names <- col_names[!col_names %in% c(arm_col_names, "row_label1")]
+
+  table <- table %>%
+    dplyr::select("row_label1", arm_col_names, other_col_names)
 
   # Clean-up table
   table <- table %>%
