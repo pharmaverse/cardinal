@@ -13,6 +13,7 @@ make_table_35(
   arm_var = "ARM",
   saffl_var = "SAFFL",
   soc_var = "AESOC",
+  lbl_soc_var = formatters::var_labels(adae, fill = TRUE)[soc_var],
   lbl_overall = NULL,
   risk_diff = NULL,
   prune_0 = FALSE,
