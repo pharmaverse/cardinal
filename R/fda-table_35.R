@@ -55,9 +55,9 @@ make_table_35 <- function(adae,
 
   lyt <- basic_table_annot(show_colcounts, annotations) %>%
     split_cols_by_arm(arm_var, lbl_overall, risk_diff) %>%
-    count_patients_with_flags(
-      var = id_var,
-      flag_variables = adae_lst,
+    count_occurrences(
+      vars = soc_var,
+      drop = FALSE,
       riskdiff = !is.null(risk_diff)
     ) %>%
     append_topleft(c("", "System Organ Class"))
