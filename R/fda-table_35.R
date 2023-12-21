@@ -2,8 +2,8 @@
 #'   Safety Population, Pooled Analysis (or Trial X)
 #'
 #' @details
-#' * `adae` must contain the variables `AEBODSYS`, and the variables specified by
-#'   `arm_var`, `id_var`, and `saffl_var`.
+#' * `adae` must contain the variables specified by
+#'   `arm_var`, `id_var`, `soc_var` and `saffl_var`.
 #' * If specified, `alt_counts_df` must contain the variables specified by `arm_var`, `id_var`, and `saffl_var`.
 #' * Columns are split by arm. Overall population column is excluded by default (see `lbl_overall` argument).
 #' * All-zero rows are removed by default (see `prune_0` argument).
