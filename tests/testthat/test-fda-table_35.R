@@ -57,3 +57,16 @@ test_that("Table 35 generation works with some NA values", {
   res <- expect_silent(result)
   expect_snapshot(res)
 })
+
+test_that("Table 35 generation works with custom values (SOC variable and label)", {
+  result <- make_table_35(
+    adae,
+    adsl,
+    lbl_overall = "Total\nPopulation",
+    soc_var = "AEBODSYS",
+    lbl_soc_var = "AEBODSYS var used"
+  )
+
+  res <- expect_silent(result)
+  expect_snapshot(res)
+})

@@ -26,32 +26,21 @@ make_table_35 <- function(adae,
                           arm_var = "ARM",
                           saffl_var = "SAFFL",
                           soc_var = "AESOC",
+                          lbl_soc_var = formatters::var_labels(adae, fill = TRUE)[soc_var],
                           lbl_overall = NULL,
                           risk_diff = NULL,
                           prune_0 = FALSE,
                           annotations = NULL) {
-  checkmate::assert_subset(c("AEBODSYS", arm_var, id_var, saffl_var), names(adae))
+  checkmate::assert_subset(c(soc_var, arm_var, id_var, saffl_var), names(adae))
   assert_flag_variables(adae, saffl_var)
 
   adae <- adae %>%
     filter(.data[[saffl_var]] == "Y") %>%
-    arrange(AEBODSYS) %>%
+    arrange(soc_var) %>%
     df_explicit_na()
-
-  # List of unique SOCs in the database
-  lst_soc <- unique(adae$AEBODSYS)
-
-  # Mutate a flag variable with label for each SOC
-  for (i in lst_soc) {
-    adae <- adae %>% mutate(!!paste0("fl_", i) := with_label(AEBODSYS == i, i))
-  }
 
   alt_counts_df <-
     alt_counts_df_preproc(alt_counts_df, id_var, arm_var, saffl_var)
-
-  # List of all 'fl_' SOC variables
-  adae_lst_df <- adae %>% select(starts_with("fl_"))
-  adae_lst <- colnames(adae_lst_df)
 
   lyt <- basic_table_annot(show_colcounts, annotations) %>%
     split_cols_by_arm(arm_var, lbl_overall, risk_diff) %>%
@@ -60,11 +49,11 @@ make_table_35 <- function(adae,
       drop = FALSE,
       riskdiff = !is.null(risk_diff)
     ) %>%
-    append_topleft(c("", "System Organ Class"))
+    append_topleft(c("", lbl_soc_var))
 
   tbl <- build_table(lyt, df = adae, alt_counts_df = alt_counts_df) %>%
     sort_at_path(
-      path = c("AEBODSYS"),
+      path = c(soc_var),
       scorefun = score_occurrences_cols(col_names = levels(adae[[arm_var]]))
     )
   if (prune_0) tbl <- prune_table(tbl)
