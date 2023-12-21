@@ -62,7 +62,11 @@ make_table_35 <- function(adae,
     ) %>%
     append_topleft(c("", "System Organ Class"))
 
-  tbl <- build_table(lyt, df = adae, alt_counts_df = alt_counts_df)
+  tbl <- build_table(lyt, df = adae, alt_counts_df = alt_counts_df) %>%
+    sort_at_path(
+      path = c("AEBODSYS"),
+      scorefun = score_occurrences_cols(col_names = levels(adae[[arm_var]]))
+    )
   if (prune_0) tbl <- prune_table(tbl)
 
   tbl
