@@ -61,8 +61,8 @@ Safety Population, Pooled Analysis (or Trial X)
 }
 \details{
 \itemize{
-\item \code{adae} must contain the variables \code{AEBODSYS}, and the variables specified by
-\code{arm_var}, \code{id_var}, and \code{saffl_var}.
+\item \code{adae} must contain the variables specified by
+\code{arm_var}, \code{id_var}, \code{soc_var} and \code{saffl_var}.
 \item If specified, \code{alt_counts_df} must contain the variables specified by \code{arm_var}, \code{id_var}, and \code{saffl_var}.
 \item Columns are split by arm. Overall population column is excluded by default (see \code{lbl_overall} argument).
 \item All-zero rows are removed by default (see \code{prune_0} argument).
