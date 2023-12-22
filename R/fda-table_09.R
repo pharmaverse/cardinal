@@ -153,43 +153,6 @@ make_table_09_tplyr <- function(adae,
                                 tplyr_raw = FALSE,
                                 annotations = NULL
                                 ) {
-  # TODO: include function into the homepage!
-
-  # TODO
-  # test column headers correctly assigned (levels durcheinander oder gar kein factor)
-  # test return value as defined per tplyr_raw
-  # test alt_counts_df
-  # test risk difference (if specified)
-  # test lbl_overall (if specified)
-  # test whether header_string is updated if necessary
-  # test show_colcounts if specified
-  # test prune_0
-
-
-  # TODO: remove after it has been used in the tests
-  # ----
-  # alt_counts_df <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
-  # adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
-  # arm_var <- "ARM"
-  # pref_var <- "AEDECOD"
-  # soc_var <- "AESOC"
-  # risk_diff_pairs <- list(c("A: Drug X", "B: Placebo"), c("A: Drug X", "C: Combination"))
-  # lbl_overall <- "Total subjects"
-  # show_colcounts <- TRUE
-  # prune_0 <- TRUE
-  # id_var <- "USUBJID"
-  # saffl_var <- "SAFFL"
-  # ser_var <- "AESER"
-  # lbl_soc_var <- "System Organ Class"
-  # lbl_pref_var <- "Reported Term for Adverse Event"
-  # tplyr_raw <- FALSE
-  # annotations <- list(
-  #   title = "Table 9. Patients with Serious Adverse Events by System Organ Class and Preferred Term, Safety Population, Pooled Analyses",
-  #   subtitles = c("I am proud to be a subtitle", "Me too!"),
-  #   main_footer = c("Main footer 1", "Main footer 2"),
-  #   prov_footer = c("abc", "def")
-  # )
-  # ----
 
   # Set instructions to activate/deactivate table components
   add_alt_counts <- ifelse(!is.null(alt_counts_df), TRUE, FALSE)
@@ -225,15 +188,6 @@ make_table_09_tplyr <- function(adae,
   assert_list(annotations, types = "character", null.ok = TRUE)
   if (!is.null(annotations)) {
     assert_names(names(annotations), subset.of = c("title", "subtitles", "main_footer", "prov_footer"))
-  }
-
-  # Artificially convert factor for nested variables to character to suppress tplyr warning
-  if (is.factor(adae[[pref_var]])) {
-    adae[[pref_var]] <- as.character(adae[[pref_var]])
-  }
-
-  if (is.factor(adae[[soc_var]])) {
-    adae[[soc_var]] <- as.character(adae[[soc_var]])
   }
 
   # Initialize column headers
@@ -297,7 +251,8 @@ make_table_09_tplyr <- function(adae,
   # Build table
   table <- structure %>%
     Tplyr::add_layers(layer1, layer2) %>%
-    Tplyr::build()
+    Tplyr::build() %>%
+    suppressWarnings() # Artificially suppress Tplyr warning for nested factor variables
 
   # Remove "all zero"-rows if specified
   if (prune_0) {
