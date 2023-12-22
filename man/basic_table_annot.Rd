@@ -9,9 +9,13 @@ basic_table_annot(show_colcounts = TRUE, annotations = NULL)
 \arguments{
 \item{show_colcounts}{(\code{flag})\cr Whether column counts should be printed. Boolean.}
 
-\item{annotations}{(named \code{list} of \code{character})\cr List of annotations to add to the table. Valid
+\item{annotations}{(named \code{list} of \code{character})\cr list of annotations to add to the table. Valid
 annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
 use the annotation type as name and the desired string as value.}
+}
+\value{
+An \code{rtables} \code{PreDataTableLayouts} object suitable for passing to further layout functions, and
+to \code{build_table}.
 }
 \description{
 Initializes a table layout via \code{\link[rtables:basic_table]{rtables::basic_table()}} and applies \code{show_colcounts}

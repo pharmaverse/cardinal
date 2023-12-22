@@ -7,11 +7,14 @@
 assert_flag_variables(df, flag_vars, na_level = "<Missing>")
 }
 \arguments{
-\item{df}{(\code{data.frame})\cr Dataset required to build table.}
+\item{df}{(\code{data.frame})\cr dataset required to build table.}
 
 \item{flag_vars}{(\code{vector} of \code{character})\cr names of flag variables within \code{df} to check.}
 
-\item{na_level}{(\code{character})\cr String to represent missing values.}
+\item{na_level}{(\code{character})\cr string to represent missing values.}
+}
+\value{
+A \code{logical} indicating whether the given flag variables (\code{flag_vars}) in \code{df} are formatted correctly.
 }
 \description{
 Flag variables are expected to take one of two values: \code{"Y"} (yes/true) or

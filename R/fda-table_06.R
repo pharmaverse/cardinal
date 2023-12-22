@@ -1,9 +1,10 @@
 #' FDA Table 6: Overview of Adverse Events, Safety Population, Pooled Analyses
 #'
 #' @details
-#' * `adae` must contain the variables `SAFFL`, `USUBJID`, `TRTEMFL`, `AESEV`, `AESER`, `AESDTH`, `AESLIFE`,
-#'   `AESHOSP`, `AESDISAB`, `AESCONG`, `AESMIE`, `AEACN`, and the variable specified by `arm_var`.
-#' * If specified, `alt_counts_df` must contain `SAFFL`, `USUBJID`, and the variable specified by `arm_var`..
+#' * `adae` must contain the variables `TRTEMFL`, `AESEV`, `AESER`, `AESDTH`, `AESLIFE`,
+#'   `AESHOSP`, `AESDISAB`, `AESCONG`, `AESMIE`, `AEACN`, and the variables specified by `arm_var`,
+#'   `id_var`, and `saffl_var`.
+#' * If specified, `alt_counts_df` must contain the variables specified by `arm_var`, `id_var`, and `saffl_var`.
 #' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
 #'   flag variables are treated as `"N"`.
 #' * Columns are split by arm. Overall population column is excluded by default (see `lbl_overall` argument).
@@ -11,6 +12,8 @@
 #' * All-zero rows are not removed by default (see `prune_0` argument).
 #'
 #' @inheritParams argument_convention
+#'
+#' @return An `rtable` object.
 #'
 #' @examples
 #' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
@@ -24,17 +27,21 @@ make_table_06 <- function(adae,
                           alt_counts_df = NULL,
                           show_colcounts = TRUE,
                           arm_var = "ARM",
+                          id_var = "USUBJID",
+                          saffl_var = "SAFFL",
                           lbl_overall = NULL,
+                          risk_diff = NULL,
                           prune_0 = FALSE,
                           annotations = NULL) {
   checkmate::assert_subset(c(
-    "SAFFL", "USUBJID", "TRTEMFL", "AESEV", "AESER", "AESDTH", "AESLIFE",
-    "AESHOSP", "AESDISAB", "AESCONG", "AESMIE", "AEACN", arm_var
+    "TRTEMFL", "AESEV", "AESER", "AESDTH", "AESLIFE", "AESHOSP",
+    "AESDISAB", "AESCONG", "AESMIE", "AEACN", arm_var, id_var, saffl_var
   ), names(adae))
-  assert_flag_variables(adae, c("SAFFL", "TRTEMFL"))
+  assert_flag_variables(adae, c(saffl_var, "TRTEMFL"))
 
   adae <- adae %>%
-    filter(SAFFL == "Y", TRTEMFL == "Y") %>%
+    as_tibble() %>%
+    filter(.data[[saffl_var]] == "Y", TRTEMFL == "Y") %>%
     df_explicit_na() %>%
     mutate(
       SER = with_label(AESER == "Y", "SAE"),
@@ -58,44 +65,50 @@ make_table_06 <- function(adae,
       DSMIE = with_label(AEACN == "DOSE INCREASED", "Other")
     )
 
-  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
+  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, id_var, arm_var, saffl_var)
 
   lyt <- basic_table_annot(show_colcounts, annotations) %>%
-    split_cols_by_arm(arm_var, lbl_overall) %>%
+    split_cols_by_arm(arm_var, lbl_overall, risk_diff) %>%
     count_patients_with_flags(
-      var = "USUBJID",
-      flag_variables = var_labels(adae[, "SER"]),
-      table_names = "ser"
+      var = id_var,
+      flag_variables = "SER",
+      table_names = "ser",
+      riskdiff = !is.null(risk_diff)
     ) %>%
     count_patients_with_flags(
-      var = "USUBJID",
-      flag_variables = var_labels(adae[, c("SERFATAL", "SERLIFE", "SERHOSP", "SERDISAB", "SERCONG", "SERMIE")]),
+      var = id_var,
+      flag_variables = c("SERFATAL", "SERLIFE", "SERHOSP", "SERDISAB", "SERCONG", "SERMIE"),
       .indent_mods = 1L,
-      table_names = "ser_fl"
+      table_names = "ser_fl",
+      riskdiff = !is.null(risk_diff)
     ) %>%
     count_patients_with_flags(
-      var = "USUBJID",
-      flag_variables = var_labels(adae[, c("WD", "DSM")]),
-      table_names = "ae"
+      var = id_var,
+      flag_variables = c("WD", "DSM"),
+      table_names = "ae",
+      riskdiff = !is.null(risk_diff)
     ) %>%
     count_patients_with_flags(
-      var = "USUBJID",
-      flag_variables = var_labels(adae[, c("DSINT", "DSRED", "DSD", "DSMIE")]),
+      var = id_var,
+      flag_variables = c("DSINT", "DSRED", "DSD", "DSMIE"),
       .indent_mods = 1L,
-      table_names = "ds"
+      table_names = "ds",
+      riskdiff = !is.null(risk_diff)
     ) %>%
     analyze_num_patients(
-      vars = "USUBJID",
+      vars = id_var,
       .stats = "unique",
       .labels = c(unique = "Any AE"),
-      show_labels = "hidden"
+      show_labels = "hidden",
+      riskdiff = !is.null(risk_diff)
     ) %>%
     count_occurrences_by_grade(
       var = "AESEV",
       show_labels = "hidden",
-      .indent_mods = 1L
+      .indent_mods = 1L,
+      riskdiff = !is.null(risk_diff)
     ) %>%
-    append_topleft(c("", "Event"))
+    append_topleft("Event")
 
   tbl <- build_table(lyt, df = adae, alt_counts_df = alt_counts_df)
   if (prune_0) tbl <- prune_table(tbl)

@@ -8,24 +8,30 @@ make_table_20(
   adae,
   alt_counts_df = NULL,
   show_colcounts = TRUE,
+  id_var = "USUBJID",
   arm_var = "ARM",
+  saffl_var = "SAFFL",
   pref_var = "AEDECOD",
   aesifl_var = "AESIFL",
   aelabfl_var = "AELABFL",
   lbl_overall = NULL,
+  risk_diff = NULL,
   prune_0 = TRUE,
   annotations = NULL
 )
 }
 \arguments{
-\item{adae}{(\code{data.frame})\cr Adverse events dataset (typically ADAE) required to build table.}
+\item{adae}{(\code{data.frame})\cr dataset (typically ADAE) required to build table.}
 
-\item{alt_counts_df}{(\code{character})\cr Optional. Alternative dataset (typically ADSL) used only to calculate column
-counts.}
+\item{alt_counts_df}{(\code{character})\cr alternative dataset (typically ADSL) used only to calculate column counts.}
 
 \item{show_colcounts}{(\code{flag})\cr Whether column counts should be printed. Boolean.}
 
+\item{id_var}{(\code{character})\cr Name of the unique subject identifiers variable.}
+
 \item{arm_var}{(\code{character})\cr Name of the treatment arm variable used to split table into columns.}
+
+\item{saffl_var}{(\code{character})\cr Name of the safety flag variable which must contain at least "Y" for "Yes".}
 
 \item{pref_var}{(\code{character})\cr Name of the preferred term variable from \code{adae} to include in the table.}
 
@@ -36,20 +42,36 @@ counts.}
 \item{lbl_overall}{(\code{character})\cr Optional. If specified, an overall column will be added to the table with
 the given value as the column label.}
 
+\item{risk_diff}{(named \code{list})\cr list of settings to apply to add one or more risk difference columns to the table.
+Defaults to \code{NULL} (no risk difference column added). See \code{\link[tern:add_riskdiff]{tern::add_riskdiff()}} for more details. List should
+contain the following elements:
+\itemize{
+\item \code{arm_x}: (required) the name of reference arm.
+\item \code{arm_y}: (required) the names of the arms to compare to the reference arm. A new column will be added for each
+element of \code{arm_y}.
+\item \code{col_label}: (optional) labels to use for the risk difference columns. Defaults to
+\code{"Risk Difference (\%) (95\% CI)"}. For more than one risk difference column, \code{"arm x vs. arm y"} text will also
+be included in the column labels by default. The length of \code{col_label} must be equal to the length of \code{arm_y}.
+\item \code{pct}: (optional) whether the output should be returned as percentages. Defaults to \code{TRUE}.
+}}
+
 \item{prune_0}{(\code{flag})\cr Whether all-zero rows should be removed from the table. Boolean.}
 
-\item{annotations}{(named \code{list} of \code{character})\cr List of annotations to add to the table. Valid
+\item{annotations}{(named \code{list} of \code{character})\cr list of annotations to add to the table. Valid
 annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
 use the annotation type as name and the desired string as value.}
+}
+\value{
+An \code{rtable} object.
 }
 \description{
 FDA Table 20: Adverse Events of Special Interest Assessment, Safety Population, Pooled Analysis (or Trial X)
 }
 \details{
 \itemize{
-\item \code{adae} must contain \code{SAFFL}, \code{USUBJID}, \code{AEDECOD}, \code{AESEV}, \code{AESER}, \code{AESDTH}, \code{EOSSTT}, \code{AEREL}, and the
-variables specified by \code{pref_var}, \code{aesifl_var}, \code{aelabfl_var}, and \code{arm_var}.
-\item If specified, \code{alt_counts_df} must contain \code{SAFFL}, \code{USUBJID}, and the variable specified by \code{arm_var}.
+\item \code{adae} must contain \code{AESEV}, \code{AESER}, \code{AESDTH}, \code{EOSSTT}, \code{AEREL}, and the variables specified by
+\code{id_var}, \code{pref_var}, \code{aesifl_var}, \code{aelabfl_var}, \code{arm_var}, and \code{saffl_var}.
+\item If specified, \code{alt_counts_df} must contain the variables specified by \code{arm_var}, \code{id_var}, and \code{saffl_var}.
 \item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
 flag variables are treated as \code{"N"}.
 \item Columns are split by arm. Overall population column is excluded by default (see \code{lbl_overall} argument).

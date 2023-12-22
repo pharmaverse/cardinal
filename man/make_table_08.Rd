@@ -8,6 +8,8 @@ make_table_08(
   adae,
   adex,
   arm_var = "ARM",
+  id_var = "USUBJID",
+  saffl_var = "SAFFL",
   dth_vars = c("DTHCAUS", "DTHCAT"),
   lbl_dth_vars = c("Cause of Death\\nMedDRA\\nPreferred Term",
     "Cause of Death\\nVerbatim Term"),
@@ -16,31 +18,39 @@ make_table_08(
 )
 }
 \arguments{
-\item{adae}{(\code{data.frame})\cr Adverse events dataset (typically ADAE) required to build table.}
+\item{adae}{(\code{data.frame})\cr dataset (typically ADAE) required to build table.}
 
-\item{adex}{(\code{data.frame})\cr Dataset (typically ADEX) required to build table.}
+\item{adex}{(\code{data.frame})\cr dataset (typically ADEX) required to build table.}
 
 \item{arm_var}{(\code{character})\cr Name of the treatment arm variable used to split table into columns.}
+
+\item{id_var}{(\code{character})\cr Name of the unique subject identifiers variable.}
+
+\item{saffl_var}{(\code{character})\cr Name of the safety flag variable which must contain at least "Y" for "Yes".}
 
 \item{dth_vars}{(\code{vector} of \code{character})\cr additional death variables from \code{adae} to include in the table.}
 
 \item{lbl_dth_vars}{(\code{vector} of \code{character})\cr labels corresponding to variables in \code{dth_vars} to print
 in the table. Labels should be ordered according to the order of variables in \code{dth_vars}.}
 
-\item{na_level}{(\code{character})\cr String to represent missing values.}
+\item{na_level}{(\code{character})\cr string to represent missing values.}
 
-\item{annotations}{(named \code{list} of \code{character})\cr List of annotations to add to the table. Valid
+\item{annotations}{(named \code{list} of \code{character})\cr list of annotations to add to the table. Valid
 annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
 use the annotation type as name and the desired string as value.}
+}
+\value{
+A \code{listing_df} object.
 }
 \description{
 FDA Table 8: All Individual Patient Deaths, Safety Population, Pooled Analyses
 }
 \details{
 \itemize{
-\item \code{adae} must contain \code{SAFFL}, \code{USUBJID}, \code{AGE}, \code{SEX}, \code{AESDTH}, \code{DTHADY}, and the variables specified by
-\code{dth_vars} and \code{arm_var}.
-\item \code{adex} must contain \code{SAFFL}, \code{USUBJID}, \code{PARAMCD}, \code{TRTSDT}, \code{TRTEDT}, \code{AVAL}, and \code{AVALU}.
+\item \code{adae} must contain \code{AGE}, \code{SEX}, \code{AESDTH}, \code{DTHADY}, and the variables specified by
+\code{dth_vars}, \code{arm_var}, \code{id_var}, and \code{saffl_var}.
+\item \code{adex} must contain \code{PARAMCD}, \code{TRTSDT}, \code{TRTEDT}, \code{AVAL}, \code{AVALU}, and the variables specified
+by \code{arm_var}, \code{id_var}, and \code{saffl_var}.
 \item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
 flag variables are treated as \code{"N"}.
 }

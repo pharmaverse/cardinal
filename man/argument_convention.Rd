@@ -4,17 +4,6 @@
 \alias{argument_convention}
 \title{Standard Arguments}
 \arguments{
-\item{adae}{(\code{data.frame})\cr Adverse events dataset (typically ADAE) required to build table.}
-
-\item{adex}{(\code{data.frame})\cr Dataset (typically ADEX) required to build table.}
-
-\item{advs}{(\code{data.frame})\cr Dataset (typically ADVS) required to build table.}
-
-\item{df}{(\code{data.frame})\cr Dataset required to build table.}
-
-\item{alt_counts_df}{(\code{character})\cr Optional. Alternative dataset (typically ADSL) used only to calculate column
-counts.}
-
 \item{show_colcounts}{(\code{flag})\cr Whether column counts should be printed. Boolean.}
 
 \item{arm_var}{(\code{character})\cr Name of the treatment arm variable used to split table into columns.}
@@ -43,29 +32,56 @@ in the table. Labels should be ordered according to the order of variables in \c
 \item{lbl_soc_var}{(\code{character})\cr Label corresponding to system organ class variable \code{soc_var} to print in the
 table.}
 
+\item{.stats}{(\code{character})\cr Statistics to include in the table. Includes statistics for all variable
+types (only the statistics that are valid for a given variable's type will be printed).
+See \code{\link[tern:analyze_variables]{tern::summarize_vars()}} for options.}
+
+\item{.formats}{(named \code{list} of \code{character})\cr List of formats corresponding to each value in \code{.stats}.
+Each name is a value in \code{.stats} and the corresponding value is the format that should be applied to
+that statistic. See \code{\link[formatters:list_formats]{formatters::list_valid_format_labels()}} for a list of valid formats.}
+
+\item{prune_0}{(\code{flag})\cr Whether all-zero rows should be removed from the table. Boolean.}
+
+\item{adae}{(\code{data.frame})\cr dataset (typically ADAE) required to build table.}
+
+\item{adex}{(\code{data.frame})\cr dataset (typically ADEX) required to build table.}
+
+\item{advs}{(\code{data.frame})\cr dataset (typically ADVS) required to build table.}
+
+\item{adsl}{(\code{data.frame})\cr dataset (typically ADSL) required to build table.}
+
+\item{alt_counts_df}{(\code{character})\cr alternative dataset (typically ADSL) used only to calculate column counts.}
+
+\item{annotations}{(named \code{list} of \code{character})\cr list of annotations to add to the table. Valid
+annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
+use the annotation type as name and the desired string as value.}
+
+\item{df}{(\code{data.frame})\cr dataset required to build table.}
+
 \item{fmqsc_var}{(\code{character})\cr FMQ scope variable to use in table.}
 
 \item{fmqnam_var}{(\code{character})\cr FMQ reference name variable to use in table.}
 
 \item{fmq_scope}{(\code{character})\cr FMQ scope ("NARROW" or "BROAD") to output in table.}
 
-\item{.stats}{(\code{character})\cr Statistics to include in the table. Includes statistics for all variable
-types (only the statistics that are valid for a given variable's type will be printed).
-See \code{\link[tern:summarize_variables]{tern::summarize_vars()}} for options.}
+\item{na_level}{(\code{character})\cr string to represent missing values.}
 
-\item{.formats}{(named \code{list} of \code{character})\cr List of formats corresponding to each value in \code{.stats}.
-Each name is a value in \code{.stats} and the corresponding value is the format that should be applied to
-that statistic. See \code{\link[formatters:list_valid_format_labels]{formatters::list_valid_format_labels()}} for a list of valid formats.}
+\item{na_rm}{(\code{flag})\cr whether \code{NA} levels should be removed from the table.}
 
-\item{na_rm}{(\code{flag})\cr Whether \code{NA} levels should be removed from the table.}
+\item{risk_diff}{(named \code{list})\cr list of settings to apply to add one or more risk difference columns to the table.
+Defaults to \code{NULL} (no risk difference column added). See \code{\link[tern:add_riskdiff]{tern::add_riskdiff()}} for more details. List should
+contain the following elements:
+\itemize{
+\item \code{arm_x}: (required) the name of reference arm.
+\item \code{arm_y}: (required) the names of the arms to compare to the reference arm. A new column will be added for each
+element of \code{arm_y}.
+\item \code{col_label}: (optional) labels to use for the risk difference columns. Defaults to
+\code{"Risk Difference (\%) (95\% CI)"}. For more than one risk difference column, \code{"arm x vs. arm y"} text will also
+be included in the column labels by default. The length of \code{col_label} must be equal to the length of \code{arm_y}.
+\item \code{pct}: (optional) whether the output should be returned as percentages. Defaults to \code{TRUE}.
+}}
 
-\item{prune_0}{(\code{flag})\cr Whether all-zero rows should be removed from the table. Boolean.}
-
-\item{annotations}{(named \code{list} of \code{character})\cr List of annotations to add to the table. Valid
-annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
-use the annotation type as name and the desired string as value.}
-
-\item{na_level}{(\code{character})\cr String to represent missing values.}
+\item{sex_scope}{(\code{character})\cr Level of \code{SEX} to output in table.}
 }
 \description{
 This documentation lists all the arguments in \code{falcon} that are used repeatedly by functions to output tables.

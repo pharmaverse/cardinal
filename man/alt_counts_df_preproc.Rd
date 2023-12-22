@@ -4,17 +4,28 @@
 \alias{alt_counts_df_preproc}
 \title{Pre-Process \code{alt_counts_df} for Safety Population}
 \usage{
-alt_counts_df_preproc(alt_counts_df, arm_var = "ARM")
+alt_counts_df_preproc(
+  alt_counts_df,
+  id_var = "USUBJID",
+  arm_var = "ARM",
+  saffl_var = NULL
+)
 }
 \arguments{
-\item{alt_counts_df}{(\code{character})\cr Optional. Alternative dataset (typically ADSL) used only to calculate column
-counts.}
+\item{alt_counts_df}{(\code{character})\cr alternative dataset (typically ADSL) used only to calculate column counts.}
+
+\item{id_var}{(\code{character})\cr Name of the unique subject identifiers variable.}
 
 \item{arm_var}{(\code{character})\cr Name of the treatment arm variable used to split table into columns.}
+
+\item{saffl_var}{(\code{character})\cr Name of the safety flag variable which must contain at least "Y" for "Yes".}
+}
+\value{
+A \code{data.frame} (modified \code{alt_counts_df}) or \code{NULL}.
 }
 \description{
-If \code{alt_counts_df} is not \code{NULL}, will check for required variables and filter
-to include only safety population, then apply \code{\link[tern:df_explicit_na]{tern::df_explicit_na()}}.
+If \code{alt_counts_df} is not \code{NULL}, will check for required variables (\code{arm_var}) and filter
+to include only safety population (\code{saffl_var}, if specified), then apply \code{\link[tern:df_explicit_na]{tern::df_explicit_na()}}.
 }
 \examples{
 adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")

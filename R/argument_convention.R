@@ -2,12 +2,6 @@
 #'
 #' This documentation lists all the arguments in `falcon` that are used repeatedly by functions to output tables.
 #'
-#' @param adae (`data.frame`)\cr Adverse events dataset (typically ADAE) required to build table.
-#' @param adex (`data.frame`)\cr Dataset (typically ADEX) required to build table.
-#' @param advs (`data.frame`)\cr Dataset (typically ADVS) required to build table.
-#' @param df (`data.frame`)\cr Dataset required to build table.
-#' @param alt_counts_df (`character`)\cr Optional. Alternative dataset (typically ADSL) used only to calculate column
-#'   counts.
 #' @param show_colcounts (`flag`)\cr Whether column counts should be printed. Boolean.
 #' @param arm_var (`character`)\cr Name of the treatment arm variable used to split table into columns.
 #' @param id_var (`character`)\cr Name of the unique subject identifiers variable.
@@ -24,9 +18,6 @@
 #' @param lbl_pref_var (`character`)\cr Label corresponding to preferred term variable `pref_var` to print in the table.
 #' @param lbl_soc_var (`character`)\cr Label corresponding to system organ class variable `soc_var` to print in the
 #'   table.
-#' @param fmqsc_var (`character`)\cr FMQ scope variable to use in table.
-#' @param fmqnam_var (`character`)\cr FMQ reference name variable to use in table.
-#' @param fmq_scope (`character`)\cr FMQ scope ("NARROW" or "BROAD") to output in table.
 #' @param .stats (`character`)\cr Statistics to include in the table. Includes statistics for all variable
 #'   types (only the statistics that are valid for a given variable's type will be printed).
 #'   See [`tern::summarize_vars()`] for options.
@@ -39,6 +30,31 @@
 #'   annotation types are `title`, `subtitles`, `main_footer`, and `prov_footer`. Each name-value pair should
 #'   use the annotation type as name and the desired string as value.
 #' @param na_level (`character`)\cr String to represent missing values.
+#' @param adae (`data.frame`)\cr dataset (typically ADAE) required to build table.
+#' @param adex (`data.frame`)\cr dataset (typically ADEX) required to build table.
+#' @param advs (`data.frame`)\cr dataset (typically ADVS) required to build table.
+#' @param adsl (`data.frame`)\cr dataset (typically ADSL) required to build table.
+#' @param alt_counts_df (`character`)\cr alternative dataset (typically ADSL) used only to calculate column counts.
+#' @param annotations (named `list` of `character`)\cr list of annotations to add to the table. Valid
+#'   annotation types are `title`, `subtitles`, `main_footer`, and `prov_footer`. Each name-value pair should
+#'   use the annotation type as name and the desired string as value.
+#' @param df (`data.frame`)\cr dataset required to build table.
+#' @param fmqsc_var (`character`)\cr FMQ scope variable to use in table.
+#' @param fmqnam_var (`character`)\cr FMQ reference name variable to use in table.
+#' @param fmq_scope (`character`)\cr FMQ scope ("NARROW" or "BROAD") to output in table.
+#' @param na_level (`character`)\cr string to represent missing values.
+#' @param na_rm (`flag`)\cr whether `NA` levels should be removed from the table.
+#' @param risk_diff (named `list`)\cr list of settings to apply to add one or more risk difference columns to the table.
+#'   Defaults to `NULL` (no risk difference column added). See [tern::add_riskdiff()] for more details. List should
+#'   contain the following elements:
+#'    * `arm_x`: (required) the name of reference arm.
+#'    * `arm_y`: (required) the names of the arms to compare to the reference arm. A new column will be added for each
+#'      element of `arm_y`.
+#'    * `col_label`: (optional) labels to use for the risk difference columns. Defaults to
+#'      `"Risk Difference (%) (95% CI)"`. For more than one risk difference column, `"arm x vs. arm y"` text will also
+#'      be included in the column labels by default. The length of `col_label` must be equal to the length of `arm_y`.
+#'    * `pct`: (optional) whether the output should be returned as percentages. Defaults to `TRUE`.
+#' @param sex_scope (`character`)\cr Level of `SEX` to output in table.
 #'
 #' @name argument_convention
 #' @keywords internal

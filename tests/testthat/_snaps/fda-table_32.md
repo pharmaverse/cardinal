@@ -1,0 +1,92 @@
+# Table 32 generation works with default values
+
+    Code
+      res
+    Output
+      Diastolic Blood Pressure   A: Drug X    B: Placebo   C: Combination
+      (Pa)                        (N=134)      (N=134)        (N=132)    
+      ———————————————————————————————————————————————————————————————————
+      <60                        72 (53.7%)   83 (61.9%)     78 (59.1%)  
+      >60                        62 (46.3%)   51 (38.1%)     54 (40.9%)  
+      >90                            0            0              0       
+      >110                           0            0              0       
+      >=120                          0            0              0       
+
+# Table 32 generation works with custom values
+
+    Code
+      res
+    Output
+      Table 32. Percentage of Patients With Maximum Diastolic Blood Pressure by Category
+       of Blood Pressure Postbaseline, Safety Population, Pooled Analysis
+      
+      —————————————————————————————————————————————————————————————————————————————————
+                                                                               Total   
+      Diastolic Blood Pressure   A: Drug X    B: Placebo   C: Combination   Population 
+      (Pa)                        (N=134)      (N=134)        (N=132)         (N=400)  
+      —————————————————————————————————————————————————————————————————————————————————
+      <60                        72 (53.7%)   83 (61.9%)     78 (59.1%)     233 (58.2%)
+      >60                        62 (46.3%)   51 (38.1%)     54 (40.9%)     167 (41.8%)
+      >90                            0            0              0               0     
+      >110                           0            0              0               0     
+      >=120                          0            0              0               0     
+      —————————————————————————————————————————————————————————————————————————————————
+      
+      Source: [include Applicant source, datasets and/or software tools used].
+      
+      Abbreviations: CI, confidence interval; n, number of patients with indicated blood pressure;
+      N, number of patients in treatment arm with available blood pressure data
+
+# Table 32 generation works with pruned rows
+
+    Code
+      res
+    Output
+      Diastolic Blood Pressure   A: Drug X    B: Placebo   C: Combination
+      (Pa)                        (N=134)      (N=134)        (N=132)    
+      ———————————————————————————————————————————————————————————————————
+      <60                        72 (53.7%)   83 (61.9%)     78 (59.1%)  
+      >60                        62 (46.3%)   51 (38.1%)     54 (40.9%)  
+
+# Table 32 generation works with risk difference column
+
+    Code
+      res
+    Output
+      Diastolic Blood Pressure   A: Drug X    B: Placebo   C: Combination   Risk Difference (%) (95% CI)
+      (Pa)                        (N=134)      (N=134)        (N=132)                 (N=268)           
+      ——————————————————————————————————————————————————————————————————————————————————————————————————
+      <60                        72 (53.7%)   83 (61.9%)     78 (59.1%)          8.2 (-3.6 - 20.0)      
+      >60                        62 (46.3%)   51 (38.1%)     54 (40.9%)          -8.2 (-20.0 - 3.6)     
+      >90                            0            0              0                0.0 (0.0 - 0.0)       
+      >110                           0            0              0                0.0 (0.0 - 0.0)       
+      >=120                          0            0              0                0.0 (0.0 - 0.0)       
+
+# Table 32 (gtsum) generation works with default values
+
+    Code
+      res
+    Output
+      # A tibble: 5 x 8
+        variable var_type    var_label row_type label   stat_1     stat_2     stat_3  
+        <chr>    <chr>       <chr>     <chr>    <chr>   <chr>      <chr>      <chr>   
+      1 L60      dichotomous &lt;60    label    &lt;60  72 (53.7%) 83 (61.9%) 78 (59.~
+      2 G60      dichotomous &gt;60    label    &gt;60  62 (46.3%) 51 (38.1%) 54 (40.~
+      3 G90      dichotomous &gt;90    label    &gt;90  0 (0.0%)   0 (0.0%)   0 (0.0%)
+      4 G110     dichotomous &gt;110   label    &gt;110 0 (0.0%)   0 (0.0%)   0 (0.0%)
+      5 GE120    dichotomous ≥120      label    ≥120    0 (0.0%)   0 (0.0%)   0 (0.0%)
+
+# Table 32 (gtsum) generation works with custom values
+
+    Code
+      res
+    Output
+      # A tibble: 5 x 9
+        variable var_type    var_label row_type label   stat_1    stat_2 stat_3 stat_0
+        <chr>    <chr>       <chr>     <chr>    <chr>   <chr>     <chr>  <chr>  <chr> 
+      1 L60      dichotomous &lt;60    label    &lt;60  72 (53.7~ 83 (6~ 78 (5~ 233 (~
+      2 G60      dichotomous &gt;60    label    &gt;60  62 (46.3~ 51 (3~ 54 (4~ 167 (~
+      3 G90      dichotomous &gt;90    label    &gt;90  0 (0.0%)  0 (0.~ 0 (0.~ 0 (0.~
+      4 G110     dichotomous &gt;110   label    &gt;110 0 (0.0%)  0 (0.~ 0 (0.~ 0 (0.~
+      5 GE120    dichotomous ≥120      label    ≥120    0 (0.0%)  0 (0.~ 0 (0.~ 0 (0.~
+

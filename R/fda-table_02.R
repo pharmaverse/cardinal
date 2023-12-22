@@ -1,8 +1,8 @@
-#' FDA Table 2: Baseline Demographic and Clinical Characteristics Safety Population, Pooled Analyses
+#' FDA Table 2: Baseline Demographic and Clinical Characteristics, Safety Population, Pooled Analyses
 #'
 #' @details
-#' * `df` must contain `SAFFL` and the variables specified by `vars` and `arm_var`.
-#' * If specified, `alt_counts_df` must contain `SAFFL`, `USUBJID`, and the variable specified by `arm_var`.
+#' * `df` must contain the variables specified by `vars`, `arm_var`, and `saffl_var`.
+#' * If specified, `alt_counts_df` must contain the variables specified by `arm_var`, `id_var`, and `saffl_var`.
 #' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
 #'   flag variables are treated as `"N"`.
 #' * Columns are split by arm. Overall population column is included by default (see `lbl_overall` argument).
@@ -18,7 +18,7 @@ NULL
 #' @describeIn make_table_02 Create FDA table 2 using functions from `rtables` and `tern`.
 #'
 #' @return
-#' * `make_table_02` returns an `rtables` table object.
+#' * `make_table_02` returns an `rtable` object.
 #'
 #' @examples
 #' library(dplyr)
@@ -30,9 +30,7 @@ NULL
 #'     AGE >= 65 & AGE < 75 ~ ">=65 to <75",
 #'     AGE >= 75 ~ ">=75"
 #'   )) %>% formatters::with_label("Age Group, years")) %>%
-#'   formatters::var_relabel(
-#'     AGE = "Age, years"
-#'   )
+#'   formatters::var_relabel(AGE = "Age, years")
 #'
 #' tbl <- make_table_02(df = adsl)
 #' tbl
@@ -42,34 +40,33 @@ make_table_02 <- function(df,
                           alt_counts_df = NULL,
                           show_colcounts = TRUE,
                           arm_var = "ARM",
+                          saffl_var = "SAFFL",
                           vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY"),
                           lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
                           lbl_overall = "Total Population",
-                          .stats = c("mean_sd", "median_range", "count_fraction"),
-                          .formats = NULL,
                           na_rm = FALSE,
                           prune_0 = TRUE,
                           annotations = NULL) {
-  checkmate::assert_subset(c("SAFFL", vars, arm_var), names(df))
-  assert_flag_variables(df, "SAFFL")
+  checkmate::assert_subset(c(vars, arm_var, saffl_var), names(df))
+  assert_flag_variables(df, saffl_var)
 
   df <- df %>%
-    filter(SAFFL == "Y") %>%
+    filter(.data[[saffl_var]] == "Y") %>%
     df_explicit_na()
 
-  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, arm_var)
+  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, id_var, arm_var, saffl_var)
 
   lyt <- basic_table_annot(show_colcounts, annotations) %>%
     split_cols_by_arm(arm_var, lbl_overall) %>%
-    summarize_vars(
+    analyze_vars(
       vars = vars,
       var_labels = lbl_vars,
       show_labels = "visible",
-      .stats = .stats,
-      .formats = .formats,
+      .stats = c("mean_sd", "median_range", "count_fraction"),
+      .formats = NULL,
       na.rm = na_rm
     ) %>%
-    append_topleft(c("", "Characteristic"))
+    append_topleft("Characteristic")
 
   tbl <- build_table(lyt, df = df, alt_counts_df = alt_counts_df)
   if (prune_0) tbl <- prune_table(tbl)
@@ -99,6 +96,7 @@ make_table_02_tplyr <- function(df,
                                 alt_counts_df = NULL,
                                 show_colcounts = TRUE,
                                 arm_var = "ARM",
+                                saffl_var = "SAFFL",
                                 vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY"),
                                 lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
                                 lbl_overall = "Total Population",
@@ -106,8 +104,8 @@ make_table_02_tplyr <- function(df,
                                 prune_0 = TRUE,
                                 annotations = NULL,
                                 tplyr_raw = FALSE) {
-  checkmate::assert_subset(c("SAFFL", vars, arm_var), names(df))
-  assert_flag_variables(df, "SAFFL")
+  checkmate::assert_subset(c(saffl_var, vars, arm_var), names(df))
+  assert_flag_variables(df, saffl_var)
 
   df <- df %>% df_explicit_na()
   for (lbl in lbl_vars) {
@@ -116,7 +114,7 @@ make_table_02_tplyr <- function(df,
 
   var_types <- lapply(df[vars], function(x) if (is.numeric(x)) "numeric" else "count")
 
-  lyt <- tplyr_table(df, treat_var = !!sym(arm_var), where = SAFFL == "Y")
+  lyt <- tplyr_table(df, treat_var = !!sym(arm_var), where = !!sym(saffl_var) == "Y")
 
   if (!is.null(lbl_overall)) lyt <- lyt %>% add_total_group(group_name = lbl_overall)
 
@@ -246,4 +244,59 @@ make_table_02_tplyr <- function(df,
       print_to_gt(tbl)
   }
   tbl
+}
+
+#' @describeIn make_table_02 Create FDA table 2 using functions from `gtsummary`.
+#'
+#' @return
+#' * `make_table_02_gtsum` returns a `tbl_summary` object.
+#'
+#' @examples
+#' tbl <- make_table_02_gtsum(df = adsl)
+#' tbl
+#'
+#' @export
+make_table_02_gtsum <- function(df,
+                                show_colcounts = TRUE,
+                                arm_var = "ARM",
+                                saffl_var = "SAFFL",
+                                vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY"),
+                                lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
+                                lbl_overall = "Total Population",
+                                na_rm = FALSE) {
+  checkmate::assert_subset(c(vars, arm_var, saffl_var), names(df))
+  assert_flag_variables(df, saffl_var)
+
+  df <- df %>%
+    filter(.data[[saffl_var]] == "Y") %>%
+    select(all_of(c(vars, arm_var)))
+
+  if (!na_rm) df <- df %>% df_explicit_na()
+
+  tbl <- df %>%
+    tbl_summary(
+      by = arm_var,
+      type = all_continuous() ~ "continuous2",
+      statistic = list(
+        all_continuous() ~ c(
+          "{mean} ({sd})",
+          "{median} ({min} - {max})"
+        ),
+        all_categorical() ~ "{n} ({p}%)"
+      ),
+      digits = all_continuous() ~ 1,
+      missing = ifelse(na_rm, "no", "ifany"),
+      label = as.list(lbl_vars) %>% stats::setNames(vars)
+    ) %>%
+    gtsummary::bold_labels() %>%
+    modify_header(all_stat_cols() ~ "**{level}**  \nN = {n}") %>%
+    add_overall(last = TRUE, col_label = paste0("**", lbl_overall, "**  \nN = {n}")) %>%
+    gtsummary::add_stat_label(label = all_continuous2() ~ c("Mean (SD)", "Median (min - max)")) %>%
+    modify_footnote(update = everything() ~ NA) %>%
+    gtsummary::modify_column_alignment(columns = all_stat_cols(), align = "right")
+
+  gtsummary::with_gtsummary_theme(
+    x = gtsummary::theme_gtsummary_compact(),
+    expr = as_gt(tbl)
+  )
 }

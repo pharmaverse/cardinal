@@ -3,18 +3,18 @@
 \name{make_table_02}
 \alias{make_table_02}
 \alias{make_table_02_tplyr}
-\title{FDA Table 2: Baseline Demographic and Clinical Characteristics Safety Population, Pooled Analyses}
+\alias{make_table_02_gtsum}
+\title{FDA Table 2: Baseline Demographic and Clinical Characteristics, Safety Population, Pooled Analyses}
 \usage{
 make_table_02(
   df,
   alt_counts_df = NULL,
   show_colcounts = TRUE,
   arm_var = "ARM",
+  saffl_var = "SAFFL",
   vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY"),
   lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
   lbl_overall = "Total Population",
-  .stats = c("mean_sd", "median_range", "count_fraction"),
-  .formats = NULL,
   na_rm = FALSE,
   prune_0 = TRUE,
   annotations = NULL
@@ -25,6 +25,7 @@ make_table_02_tplyr(
   alt_counts_df = NULL,
   show_colcounts = TRUE,
   arm_var = "ARM",
+  saffl_var = "SAFFL",
   vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY"),
   lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
   lbl_overall = "Total Population",
@@ -33,16 +34,28 @@ make_table_02_tplyr(
   annotations = NULL,
   tplyr_raw = FALSE
 )
+
+make_table_02_gtsum(
+  df,
+  show_colcounts = TRUE,
+  arm_var = "ARM",
+  saffl_var = "SAFFL",
+  vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY"),
+  lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
+  lbl_overall = "Total Population",
+  na_rm = FALSE
+)
 }
 \arguments{
-\item{df}{(\code{data.frame})\cr Dataset required to build table.}
+\item{df}{(\code{data.frame})\cr dataset required to build table.}
 
-\item{alt_counts_df}{(\code{character})\cr Optional. Alternative dataset (typically ADSL) used only to calculate column
-counts.}
+\item{alt_counts_df}{(\code{character})\cr alternative dataset (typically ADSL) used only to calculate column counts.}
 
 \item{show_colcounts}{(\code{flag})\cr Whether column counts should be printed. Boolean.}
 
 \item{arm_var}{(\code{character})\cr Name of the treatment arm variable used to split table into columns.}
+
+\item{saffl_var}{(\code{character})\cr Name of the safety flag variable which must contain at least "Y" for "Yes".}
 
 \item{vars}{(\code{vector} of \code{character})\cr Variables from \code{df} to include in the table.}
 
@@ -52,19 +65,11 @@ in the table. Labels should be ordered according to the order of variables in \c
 \item{lbl_overall}{(\code{character})\cr Optional. If specified, an overall column will be added to the table with
 the given value as the column label.}
 
-\item{.stats}{(\code{character})\cr Statistics to include in the table. Includes statistics for all variable
-types (only the statistics that are valid for a given variable's type will be printed).
-See \code{\link[tern:summarize_variables]{tern::summarize_vars()}} for options.}
-
-\item{.formats}{(named \code{list} of \code{character})\cr List of formats corresponding to each value in \code{.stats}.
-Each name is a value in \code{.stats} and the corresponding value is the format that should be applied to
-that statistic. See \code{\link[formatters:list_valid_format_labels]{formatters::list_valid_format_labels()}} for a list of valid formats.}
-
-\item{na_rm}{(\code{flag})\cr Whether \code{NA} levels should be removed from the table.}
+\item{na_rm}{(\code{flag})\cr whether \code{NA} levels should be removed from the table.}
 
 \item{prune_0}{(\code{flag})\cr Whether all-zero rows should be removed from the table. Boolean.}
 
-\item{annotations}{(named \code{list} of \code{character})\cr List of annotations to add to the table. Valid
+\item{annotations}{(named \code{list} of \code{character})\cr list of annotations to add to the table. Valid
 annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
 use the annotation type as name and the desired string as value.}
 
@@ -73,21 +78,25 @@ table formatted using functions from \code{tfrmt} should be returned (default).}
 }
 \value{
 \itemize{
-\item \code{make_table_02} returns an \code{rtables} table object.
+\item \code{make_table_02} returns an \code{rtable} object.
 }
 
 \itemize{
 \item \code{make_table_02_tplyr} returns a \code{gt_tbl} object when \code{tplyr_raw = FALSE} (default) and
 a \code{tibble} object when \code{tplyr_raw = TRUE}.
 }
+
+\itemize{
+\item \code{make_table_02_gtsum} returns a \code{tbl_summary} object.
+}
 }
 \description{
-FDA Table 2: Baseline Demographic and Clinical Characteristics Safety Population, Pooled Analyses
+FDA Table 2: Baseline Demographic and Clinical Characteristics, Safety Population, Pooled Analyses
 }
 \details{
 \itemize{
-\item \code{df} must contain \code{SAFFL} and the variables specified by \code{vars} and \code{arm_var}.
-\item If specified, \code{alt_counts_df} must contain \code{SAFFL}, \code{USUBJID}, and the variable specified by \code{arm_var}.
+\item \code{df} must contain the variables specified by \code{vars}, \code{arm_var}, and \code{saffl_var}.
+\item If specified, \code{alt_counts_df} must contain the variables specified by \code{arm_var}, \code{id_var}, and \code{saffl_var}.
 \item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
 flag variables are treated as \code{"N"}.
 \item Columns are split by arm. Overall population column is included by default (see \code{lbl_overall} argument).
@@ -101,6 +110,8 @@ flag variables are treated as \code{"N"}.
 \item \code{make_table_02()}: Create FDA table 2 using functions from \code{rtables} and \code{tern}.
 
 \item \code{make_table_02_tplyr()}: Create FDA table 2 using functions from \code{Tplyr} and \code{tfrmt}.
+
+\item \code{make_table_02_gtsum()}: Create FDA table 2 using functions from \code{gtsummary}.
 
 }}
 \note{
@@ -119,14 +130,15 @@ adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") \%>\%
     AGE >= 65 & AGE < 75 ~ ">=65 to <75",
     AGE >= 75 ~ ">=75"
   )) \%>\% formatters::with_label("Age Group, years")) \%>\%
-  formatters::var_relabel(
-    AGE = "Age, years"
-  )
+  formatters::var_relabel(AGE = "Age, years")
 
 tbl <- make_table_02(df = adsl)
 tbl
 
 tbl <- make_table_02_tplyr(df = adsl)
+tbl
+
+tbl <- make_table_02_gtsum(df = adsl)
 tbl
 
 }
