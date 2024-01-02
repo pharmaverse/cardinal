@@ -66,7 +66,7 @@ make_table_02 <- function(df,
       .formats = NULL,
       na.rm = na_rm
     ) %>%
-    append_topleft(c("", "Characteristic"))
+    append_topleft("Characteristic")
 
   tbl <- build_table(lyt, df = df, alt_counts_df = alt_counts_df)
   if (prune_0) tbl <- prune_table(tbl)
@@ -289,13 +289,14 @@ make_table_02_gtsum <- function(df,
       label = as.list(lbl_vars) %>% stats::setNames(vars)
     ) %>%
     gtsummary::bold_labels() %>%
-    gtsummary::add_stat_label() %>%
-    modify_header(all_stat_cols() ~ "**{level}**  \n (N={n})") %>%
-    add_overall(last = TRUE, col_label = paste0("**", lbl_overall, "**  \n (N={n})")) %>%
-    modify_footnote(update = everything() ~ NA)
+    modify_header(all_stat_cols() ~ "**{level}**  \nN = {n}") %>%
+    add_overall(last = TRUE, col_label = paste0("**", lbl_overall, "**  \nN = {n}")) %>%
+    gtsummary::add_stat_label(label = all_continuous2() ~ c("Mean (SD)", "Median (min - max)")) %>%
+    modify_footnote(update = everything() ~ NA) %>%
+    gtsummary::modify_column_alignment(columns = all_stat_cols(), align = "right")
 
   gtsummary::with_gtsummary_theme(
     x = gtsummary::theme_gtsummary_compact(),
-    expr = tbl
+    expr = as_gt(tbl)
   )
 }

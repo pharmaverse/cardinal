@@ -3,7 +3,6 @@
     Code
       res
     Output
-                                                                                        
       Disposition                              A: Drug X    B: Placebo    C: Combination
       ——————————————————————————————————————————————————————————————————————————————————
       Patients screened                           134           134            132      
