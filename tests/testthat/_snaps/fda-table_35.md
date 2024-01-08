@@ -20,9 +20,9 @@
        Safety Population, Pooled Analysis
       
       ———————————————————————————————————————————————————————————————————————————————————
-      Primary System Organ Class                                                 Total   
+                                                                                 Total   
                                    A: Drug X    B: Placebo   C: Combination   Population 
-                                    (N=134)      (N=134)        (N=132)         (N=400)  
+      Primary System Organ Class    (N=134)      (N=134)        (N=132)         (N=400)  
       ———————————————————————————————————————————————————————————————————————————————————
       cl D                         96 (71.6%)   90 (67.2%)     98 (74.2%)     284 (71.0%)
       cl B                         96 (71.6%)   89 (66.4%)     97 (73.5%)     282 (70.5%)
@@ -73,9 +73,9 @@
     Code
       res
     Output
-      AEBODSYS var used                                                 Total   
+                                                                        Total   
                           A: Drug X    B: Placebo   C: Combination   Population 
-                           (N=134)      (N=134)        (N=132)         (N=400)  
+      AEBODSYS var used    (N=134)      (N=134)        (N=132)         (N=400)  
       ——————————————————————————————————————————————————————————————————————————
       cl A.1              78 (58.2%)   75 (56.0%)     89 (67.4%)     242 (60.5%)
       cl B.2              79 (59.0%)   74 (55.2%)     85 (64.4%)     238 (59.5%)
