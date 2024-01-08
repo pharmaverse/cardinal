@@ -1,5 +1,6 @@
 adsl <- adsl_raw
-advs <- advs_raw
+advs <- advs_raw %>%
+  mutate(AVAL = AVAL - 100)
 
 test_that("Table 33 generation works with default values", {
   result <- make_table_33(advs, adsl)

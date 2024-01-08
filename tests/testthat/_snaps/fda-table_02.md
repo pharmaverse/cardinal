@@ -23,9 +23,9 @@
         MULTIPLE                                            0                 1 (0.7%)                0                 1 (0.2%)     
         NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER           0                 1 (0.7%)                0                 1 (0.2%)     
       Ethnicity                                                                                                                      
-         NOT REPORTED                                    6 (4.5%)            10 (7.5%)            11 (8.3%)            27 (6.8%)     
         HISPANIC OR LATINO                              15 (11.2%)           18 (13.4%)           15 (11.4%)            48 (12%)     
         NOT HISPANIC OR LATINO                         104 (77.6%)          103 (76.9%)          101 (76.5%)           308 (77%)     
+        NOT REPORTED                                     6 (4.5%)            10 (7.5%)            11 (8.3%)            27 (6.8%)     
         UNKNOWN                                          9 (6.7%)             3 (2.2%)             5 (3.8%)            17 (4.2%)     
       Country                                                                                                                        
         CHN                                             74 (55.2%)           81 (60.4%)           64 (48.5%)          219 (54.8%)    
@@ -66,9 +66,9 @@
         MULTIPLE                                            0                 1 (0.7%)                0                 1 (0.2%)     
         NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER           0                 1 (0.7%)                0                 1 (0.2%)     
       Ethnicity                                                                                                                      
-         NOT REPORTED                                    6 (4.5%)            10 (7.5%)            11 (8.3%)            27 (6.8%)     
         HISPANIC OR LATINO                              15 (11.2%)           18 (13.4%)           15 (11.4%)            48 (12%)     
         NOT HISPANIC OR LATINO                         104 (77.6%)          103 (76.9%)          101 (76.5%)           308 (77%)     
+        NOT REPORTED                                     6 (4.5%)            10 (7.5%)            11 (8.3%)            27 (6.8%)     
         UNKNOWN                                          9 (6.7%)             3 (2.2%)             5 (3.8%)            17 (4.2%)     
       Country of Participation                                                                                                       
         CHN                                             74 (55.2%)           81 (60.4%)           64 (48.5%)          219 (54.8%)    
@@ -81,8 +81,8 @@
         GBR                                               4 (3%)              3 (2.2%)             2 (1.5%)             9 (2.2%)     
         CAN                                              3 (2.2%)             2 (1.5%)             3 (2.3%)              8 (2%)      
       Baseline Temperature (C)                                                                                                       
-        Mean (SD)                                       49.7 (8.3)           50.9 (7.4)           49.1 (8.2)           49.9 (8.0)    
-        Median (Min - Max)                          50.4 (29.0 - 69.1)   51.5 (30.7 - 67.7)   48.7 (20.6 - 70.5)   50.3 (20.6 - 70.5)
+        Mean (SD)                                       36.7 (1.0)           36.6 (1.1)           36.5 (1.0)           36.6 (1.0)    
+        Median (Min - Max)                          36.7 (34.0 - 39.3)   36.6 (33.6 - 38.9)   36.5 (34.2 - 38.9)   36.6 (33.6 - 39.3)
       ———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
       
       Source: [include Applicant source, datasets and/or software tools used].
@@ -128,9 +128,9 @@
       16 "    MULTIPLE"                                  " 0 "                " 1 ( 0.7%)"          " 0 "                     " 1 ( 0.2%)"                FALSE              
       17 "    NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER" " 0 "                " 1 ( 0.7%)"          " 0 "                     " 1 ( 0.2%)"                FALSE              
       18 "  Ethnicity"                                    <NA>                 <NA>                  <NA>                      <NA>                       TRUE               
-      19 "     NOT REPORTED"                             " 6 ( 4.5%)"         "10 ( 7.5%)"          "11 ( 8.3%)"              "27 ( 6.8%)"                FALSE              
-      20 "    HISPANIC OR LATINO"                        "15 (11.2%)"         "18 (13.4%)"          "15 (11.4%)"              "48 (12.0%)"                FALSE              
-      21 "    NOT HISPANIC OR LATINO"                    "104 (77.6%)"        "103 (76.9%)"         "101 (76.5%)"             "308 (77.0%)"               FALSE              
+      19 "    HISPANIC OR LATINO"                        "15 (11.2%)"         "18 (13.4%)"          "15 (11.4%)"              "48 (12.0%)"                FALSE              
+      20 "    NOT HISPANIC OR LATINO"                    "104 (77.6%)"        "103 (76.9%)"         "101 (76.5%)"             "308 (77.0%)"               FALSE              
+      21 "    NOT REPORTED"                              " 6 ( 4.5%)"         "10 ( 7.5%)"          "11 ( 8.3%)"              "27 ( 6.8%)"                FALSE              
       22 "    UNKNOWN"                                   " 9 ( 6.7%)"         " 3 ( 2.2%)"          " 5 ( 3.8%)"              "17 ( 4.2%)"                FALSE              
       23 "  Country"                                      <NA>                 <NA>                  <NA>                      <NA>                       TRUE               
       24 "    CHN"                                       "74 (55.2%)"         "81 (60.4%)"          "64 (48.5%)"              "219 (54.8%)"               FALSE              
@@ -170,9 +170,9 @@
       17 ""               "OTHER"                                     " 0 ( 0.0%)"         " 0 ( 0.0%)"          " 0 ( 0.0%)"              " 0 ( 0.0%)"             
       18 ""               "UNKNOWN"                                   " 0 ( 0.0%)"         " 0 ( 0.0%)"          " 0 ( 0.0%)"              " 0 ( 0.0%)"             
       19 ""               ""                                          ""                   ""                    ""                        ""                       
-      20 "Ethnicity"      " NOT REPORTED"                             " 6 ( 4.5%)"         "10 ( 7.5%)"          "11 ( 8.3%)"              "27 ( 6.8%)"             
-      21 ""               "HISPANIC OR LATINO"                        "15 (11.2%)"         "18 (13.4%)"          "15 (11.4%)"              "48 (12.0%)"             
-      22 ""               "NOT HISPANIC OR LATINO"                    "104 (77.6%)"        "103 (76.9%)"         "101 (76.5%)"             "308 (77.0%)"            
+      20 "Ethnicity"      "HISPANIC OR LATINO"                        "15 (11.2%)"         "18 (13.4%)"          "15 (11.4%)"              "48 (12.0%)"             
+      21 ""               "NOT HISPANIC OR LATINO"                    "104 (77.6%)"        "103 (76.9%)"         "101 (76.5%)"             "308 (77.0%)"            
+      22 ""               "NOT REPORTED"                              " 6 ( 4.5%)"         "10 ( 7.5%)"          "11 ( 8.3%)"              "27 ( 6.8%)"             
       23 ""               "UNKNOWN"                                   " 9 ( 6.7%)"         " 3 ( 2.2%)"          " 5 ( 3.8%)"              "17 ( 4.2%)"             
       24 ""               ""                                          ""                   ""                    ""                        ""                       
       25 "Country"        "CHN"                                       "74 (55.2%)"         "81 (60.4%)"          "64 (48.5%)"              "219 (54.8%)"            
@@ -215,9 +215,9 @@
       18 "    OTHER"                                     " 0 "                " 0 "                 " 0 "                     " 0 "                       FALSE              
       19 "    UNKNOWN"                                   " 0 "                " 0 "                 " 0 "                     " 0 "                       FALSE              
       20 "  Ethnicity"                                    <NA>                 <NA>                  <NA>                      <NA>                       TRUE               
-      21 "     NOT REPORTED"                             " 6 ( 4.5%)"         "10 ( 7.5%)"          "11 ( 8.3%)"              "27 ( 6.8%)"                FALSE              
-      22 "    HISPANIC OR LATINO"                        "15 (11.2%)"         "18 (13.4%)"          "15 (11.4%)"              "48 (12.0%)"                FALSE              
-      23 "    NOT HISPANIC OR LATINO"                    "104 (77.6%)"        "103 (76.9%)"         "101 (76.5%)"             "308 (77.0%)"               FALSE              
+      21 "    HISPANIC OR LATINO"                        "15 (11.2%)"         "18 (13.4%)"          "15 (11.4%)"              "48 (12.0%)"                FALSE              
+      22 "    NOT HISPANIC OR LATINO"                    "104 (77.6%)"        "103 (76.9%)"         "101 (76.5%)"             "308 (77.0%)"               FALSE              
+      23 "    NOT REPORTED"                              " 6 ( 4.5%)"         "10 ( 7.5%)"          "11 ( 8.3%)"              "27 ( 6.8%)"                FALSE              
       24 "    UNKNOWN"                                   " 9 ( 6.7%)"         " 3 ( 2.2%)"          " 5 ( 3.8%)"              "17 ( 4.2%)"                FALSE              
       25 "  Country of Participation"                     <NA>                 <NA>                  <NA>                      <NA>                       TRUE               
       26 "    CHN"                                       "74 (55.2%)"         "81 (60.4%)"          "64 (48.5%)"              "219 (54.8%)"               FALSE              
@@ -231,8 +231,8 @@
       34 "    CAN"                                       " 3 ( 2.2%)"         " 2 ( 1.5%)"          " 3 ( 2.3%)"              " 8 ( 2.0%)"                FALSE              
       35 "    CHE"                                       " 0 "                " 0 "                 " 0 "                     " 0 "                       FALSE              
       36 "  Baseline Temperature (C)"                     <NA>                 <NA>                  <NA>                      <NA>                       TRUE               
-      37 "    Mean (SD)"                                 "49.7 ( 8.3)"        "50.9 ( 7.4)"         "49.1 ( 8.2)"             "49.9 ( 8.0)"               FALSE              
-      38 "    Median (Min - Max)"                        "50.4 (29.0 - 69.1)" "51.5 (30.7 - 67.7)"  "48.7 (20.6 - 70.5)"      "50.3 (20.6 - 70.5)"        FALSE              
+      37 "    Mean (SD)"                                 "36.7 ( 1.0)"        "36.6 ( 1.1)"         "36.5 ( 1.0)"             "36.6 ( 1.0)"               FALSE              
+      38 "    Median (Min - Max)"                        "36.7 (34.0 - 39.3)" "36.6 (33.6 - 38.9)"  "36.5 (34.2 - 38.9)"      "36.6 (33.6 - 39.3)"        FALSE              
 
 ---
 
@@ -290,9 +290,9 @@
       17 RACE     categorical Race      level        OTHER                                     <br />     0 (0%)             0 (0%)             0 (0%)             0 (0%)            
       18 RACE     categorical Race      level        UNKNOWN                                   <br />     0 (0%)             0 (0%)             0 (0%)             0 (0%)            
       19 ETHNIC   categorical Ethnicity label    Ethnicity, n (%)                              n (%)      <br />             <br />             <br />             <br />            
-      20 ETHNIC   categorical Ethnicity level         NOT REPORTED                             <br />     6 (4.5%)           10 (7.5%)          11 (8.3%)          27 (6.8%)         
-      21 ETHNIC   categorical Ethnicity level        HISPANIC OR LATINO                        <br />     15 (11%)           18 (13%)           15 (11%)           48 (12%)          
-      22 ETHNIC   categorical Ethnicity level        NOT HISPANIC OR LATINO                    <br />     104 (78%)          103 (77%)          101 (77%)          308 (77%)         
+      20 ETHNIC   categorical Ethnicity level        HISPANIC OR LATINO                        <br />     15 (11%)           18 (13%)           15 (11%)           48 (12%)          
+      21 ETHNIC   categorical Ethnicity level        NOT HISPANIC OR LATINO                    <br />     104 (78%)          103 (77%)          101 (77%)          308 (77%)         
+      22 ETHNIC   categorical Ethnicity level        NOT REPORTED                              <br />     6 (4.5%)           10 (7.5%)          11 (8.3%)          27 (6.8%)         
       23 ETHNIC   categorical Ethnicity level        UNKNOWN                                   <br />     9 (6.7%)           3 (2.2%)           5 (3.8%)           17 (4.3%)         
       24 COUNTRY  categorical Country   label    Country, n (%)                                n (%)      <br />             <br />             <br />             <br />            
       25 COUNTRY  categorical Country   level        CHN                                       <br />     74 (55%)           81 (60%)           64 (48%)           219 (55%)         
@@ -333,9 +333,9 @@
       17 RACE     categorical Race           level        OTHER                                     <br />     0 (0%)             0 (0%)             0 (0%)             0 (0%)            
       18 RACE     categorical Race           level        UNKNOWN                                   <br />     0 (0%)             0 (0%)             0 (0%)             0 (0%)            
       19 ETHNIC   categorical Ethnicity      label    Ethnicity, n (%)                              n (%)      <br />             <br />             <br />             <br />            
-      20 ETHNIC   categorical Ethnicity      level         NOT REPORTED                             <br />     6 (4.5%)           10 (7.5%)          11 (8.3%)          27 (6.8%)         
-      21 ETHNIC   categorical Ethnicity      level        HISPANIC OR LATINO                        <br />     15 (11%)           18 (13%)           15 (11%)           48 (12%)          
-      22 ETHNIC   categorical Ethnicity      level        NOT HISPANIC OR LATINO                    <br />     104 (78%)          103 (77%)          101 (77%)          308 (77%)         
+      20 ETHNIC   categorical Ethnicity      level        HISPANIC OR LATINO                        <br />     15 (11%)           18 (13%)           15 (11%)           48 (12%)          
+      21 ETHNIC   categorical Ethnicity      level        NOT HISPANIC OR LATINO                    <br />     104 (78%)          103 (77%)          101 (77%)          308 (77%)         
+      22 ETHNIC   categorical Ethnicity      level        NOT REPORTED                              <br />     6 (4.5%)           10 (7.5%)          11 (8.3%)          27 (6.8%)         
       23 ETHNIC   categorical Ethnicity      level        UNKNOWN                                   <br />     9 (6.7%)           3 (2.2%)           5 (3.8%)           17 (4.3%)         
       24 COUNTRY  categorical Country        label    Country, n (%)                                n (%)      <br />             <br />             <br />             <br />            
       25 COUNTRY  categorical Country        level        CHN                                       <br />     74 (55%)           81 (60%)           64 (48%)           219 (55%)         
@@ -349,8 +349,8 @@
       33 COUNTRY  categorical Country        level        CAN                                       <br />     3 (2.2%)           2 (1.5%)           3 (2.3%)           8 (2.0%)          
       34 COUNTRY  categorical Country        level        CHE                                       <br />     0 (0%)             0 (0%)             0 (0%)             0 (0%)            
       35 AVAL     continuous2 Analysis Value label    Analysis Value                                <br />     <br />             <br />             <br />             <br />            
-      36 AVAL     continuous2 Analysis Value level        Mean (SD)                                 <br />     49.7 (8.3)         50.9 (7.4)         49.1 (8.2)         49.9 (8.0)        
-      37 AVAL     continuous2 Analysis Value level        Median (min - max)                        <br />     50.4 (29.0 - 69.1) 51.5 (30.7 - 67.7) 48.7 (20.6 - 70.5) 50.3 (20.6 - 70.5)
+      36 AVAL     continuous2 Analysis Value level        Mean (SD)                                 <br />     36.7 (1.0)         36.6 (1.1)         36.5 (1.0)         36.6 (1.0)        
+      37 AVAL     continuous2 Analysis Value level        Median (min - max)                        <br />     36.7 (34.0 - 39.3) 36.6 (33.6 - 38.9) 36.5 (34.2 - 38.9) 36.6 (33.6 - 39.3)
 
 # Table 02 generation (gtsum) works with some NA values
 

@@ -12,11 +12,11 @@ format: html
 
 ```{r tbl, message=FALSE, warning=FALSE}
 # Load Libraries & Data
-library(scda)
+library(random.cdisc.data)
 library(falcon)
 
-adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
-adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
+adsl <- random.cdisc.data::cadsl
+adae <- random.cdisc.data::cadae
 
 # Output Table
 risk_diff <- list(arm_x = "B: Placebo", arm_y = "A: Drug X") # optional

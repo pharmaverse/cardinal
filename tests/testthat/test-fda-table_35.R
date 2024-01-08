@@ -1,5 +1,5 @@
 adsl <- adsl_raw
-advs <- advs_raw
+adae <- adae_raw
 
 test_that("Table 35 generation works with default values", {
   result <- make_table_35(adae, adsl)

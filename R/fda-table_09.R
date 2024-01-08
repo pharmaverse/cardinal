@@ -16,8 +16,8 @@
 #' @return An `rtable` object.
 #'
 #' @examples
-#' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
-#' adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
+#' adsl <- random.cdisc.data::cadsl
+#' adae <- random.cdisc.data::cadae
 #'
 #' tbl <- make_table_09(adae = adae, alt_counts_df = adsl)
 #' tbl
@@ -98,8 +98,8 @@ make_table_09 <- function(adae,
 #' * `make_table_32_gtsum` returns a `gt` object
 #'
 #' @examples
-#' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
-#' adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
+#' adsl <- random.cdisc.data::cadsl
+#' adae <- random.cdisc.data::cadae
 #'
 #' tbl <- make_table_09_gtsum(adae = adae, alt_counts_df = adsl)
 #' tbl

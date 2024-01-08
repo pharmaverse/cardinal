@@ -35,6 +35,9 @@ the given value as the column label.}
 
 \item{lbl_pref_var}{(\code{character})\cr label corresponding to preferred term variable \code{pref_var} to print in the table.}
 
+\item{lbl_soc_var}{(\code{character})\cr label corresponding to system organ class variable \code{soc_var} to print in the
+table.}
+
 \item{lbl_vars}{(\code{vector} of \code{character})\cr labels corresponding to variables in \code{vars} to print
 in the table. Labels should be ordered according to the order of variables in \code{vars}.}
 

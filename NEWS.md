@@ -11,8 +11,9 @@
   * `split_cols_by_arm` for splitting columns by arm with option to add total column.
   * `alt_counts_df_preproc` for pre-processing the `alt_counts_df` dataset.
   * `assert_flag_variables` (internal) for checking that formatting is correct for flag variables in the data.
-* Added new function for creating standard FDA tables using additional packages: `make_table_02_tplyr`, `make_table_02_gtsum`.
-* Added option to include a risk difference column to tables using the `split_cols_by_arm` via the `risk_diff` argument.
+* Added new functions for creating standard FDA tables using additional packages: `make_table_02_tplyr`, `make_table_02_gtsum`,
+  `make_table_09_gtsum`, `make_table_32_gtsum`.
+* Added option to include risk difference columns in tables using the `split_cols_by_arm` function via the `risk_diff` argument.
 * Added risk difference functionality into relevant table-generating functions via the `risk_diff` argument.
 
 ### Miscellaneous

@@ -24,11 +24,10 @@ if (!require("remotes")) install.packages("remotes")
 if (!require("tern")) install.packages("tern")
 ```
 
-Optionally, to run the examples provided within the `falcon` package and on this site you can also install the synthetic CDISC data packages from GitHub, which contain the example datasets, by running the following:
+Optionally, to run the examples provided within the `falcon` package and on this site you can also install the synthetic CDISC data package from GitHub, which contains the example datasets, by running the following:
 
 ```{r, echo=TRUE, eval=FALSE}
-if (!require("scda")) remotes::install_github("insightsengineering/scda@*release")
-if (!require("scda.2022")) remotes::install_github("insightsengineering/scda.2022@*release")
+if (!require("random.cdisc.data")) remotes::install_github("insightsengineering/random.cdisc.data@*release")
 ```
 
 For more information on these packages, see the [Additional Resources](#additional-resources) section below.
@@ -45,7 +44,7 @@ if (!require("falcon")) remotes::install_github("pharmaverse/falcon")
 
 The table functions provided by `falcon` are designed to work with any datasets which adhere to CDISC standards. If you have access to CDISC data, load this into your R environment as usual to use when generating tables.
 
-If you do not have access to CDISC data, or want to run the examples provided within the package, you can use the `scda` package to load a selection of datasets stored in the `scda.2022` package containing example synthetic CDISC data. Datasets can be loaded using the `synthetic_cdisc_dataset()` function from `scda`. Specify the `archive_name` parameter, setting `archive_name` as `"latest"` for the most recent version, or setting another version if desired (see the list of all available versions by running `scda::ls_synthetic_cdisc_data()`). The `dataset_name` parameter must also be specified with the name of the desired dataset in lowercase, e.g. `dataset_name = "adsl"`. This data is loaded in where necessary as part of the provided examples.
+If you do not have access to CDISC data, or want to run the examples provided within the package, you can use the `random.cdisc.data` package to load a selection of datasets containing example synthetic randomized CDISC data. Datasets are stored in the package by name, prefixed by the letter `"c"` (for "cached"). For example, after loading the `random.cdisc.data` package you can access an ADSL dataset by running `cadsl`, or ADAE with `cadae`. This data is loaded in where necessary as part of the provided examples.
 
 ### Template Navigation
 
@@ -86,7 +85,7 @@ library(dplyr)
 library(falcon)
 
 # Data pre-processing - ensure all necessary variables are present in the data
-adsl <- scda::synthetic_cdisc_dataset("latest", "adsl") %>%
+adsl <- random.cdisc.data::cadsl %>%
   mutate(AGEGR1 = as.factor(case_when(
     AGE >= 17 & AGE < 65 ~ ">=17 to <65",
     AGE >= 65 ~ ">=65",
@@ -109,7 +108,7 @@ Each template takes several arguments that can be set to generate a table that m
 To customize the output table, you can modify the values of these arguments as per your requirements. For example, table 2 can be customized as follows:
 
 ```{r, echo=TRUE, warning=FALSE, message=FALSE}
-advs <- scda::synthetic_cdisc_dataset("latest", "advs") %>%
+advs <- random.cdisc.data::cadvs %>%
   filter(AVISIT == "BASELINE", VSTESTCD == "TEMP") %>%
   select("USUBJID", "AVAL")
 
@@ -150,8 +149,7 @@ You can access the source code for all currently available functions in the `fal
 See the following packages used by `falcon` for more information:
 
 -   [`rtables`](https://insightsengineering.github.io/rtables/main/): Table creation
--   [`rlistings`](https://insightsengineering.github.io/rlistings/latest-tag/): Listing creation
--   [`tern`](https://insightsengineering.github.io/tern/latest-tag/): Clinical trials analysis functions
--   [`formatters`](https://insightsengineering.github.io/formatters/latest-tag/): Additional rendering formatting
--   [`scda.2022`](https://insightsengineering.github.io/scda.2022/latest-tag/): Example synthetic CDISC datasets (required for examples only)
--   [`scda`](https://insightsengineering.github.io/scda/latest-tag/): Loading synthetic CDISC data (required for examples only)
+-   [`rlistings`](https://insightsengineering.github.io/rlistings/main/): Listing creation
+-   [`tern`](https://insightsengineering.github.io/tern/main/): Clinical trials analysis functions
+-   [`formatters`](https://insightsengineering.github.io/formatters/main/): Additional rendering formatting
+-   [`random.cdisc.data``](https://insightsengineering.github.io/random.cdisc.data/main/): Example synthetic randomized CDISC datasets (required for examples only)
