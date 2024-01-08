@@ -176,27 +176,27 @@ adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
 tbl <- make_table_09(adae = adae, alt_counts_df = adsl)
 tbl
 
- adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
- adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
+adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
+adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
 
- # Basic table
- make_table_09_tplyr(adae = adae, alt_counts_df = adsl)
+# Basic table
+make_table_09_tplyr(adae = adae, alt_counts_df = adsl)
 
- # Activate risk difference column
- rd_pairs <- list(c("A: Drug X", "B: Placebo"), c("A: Drug X", "C: Combination"))
- make_table_09_tplyr(adae = adae, alt_counts_df = adsl, risk_diff_pairs = rd_pairs)
+# Activate risk difference column
+rd_pairs <- list(c("A: Drug X", "B: Placebo"), c("A: Drug X", "C: Combination"))
+make_table_09_tplyr(adae = adae, alt_counts_df = adsl, risk_diff_pairs = rd_pairs)
 
- # Add overall column
- make_table_09_tplyr(adae = adae, alt_counts_df = adsl, lbl_overall = "Total patients")
+# Add overall column
+make_table_09_tplyr(adae = adae, alt_counts_df = adsl, lbl_overall = "Total patients")
 
- # Add titles and footnotes
-   annot <- list(
-     title = "Table 9. Patients with Serious Adverse Events by SOC and PT, Safety Population, Pooled Analyses",
-     subtitles = c("Only one title, but", "multiple subtitles possible"),
-     main_footer = c("Main footer 1", "Main footer 2"),
-     prov_footer = c("Some more information", "E.g. a source note")
-   )
-   make_table_09_tplyr(adae = adae, alt_counts_df = adsl, annotations = annot)
+# Add titles and footnotes
+annot <- list(
+  title = "Table 9. Patients with Serious Adverse Events by SOC and PT, Safety Population, Pooled Analyses",
+  subtitles = c("Only one title, but", "multiple subtitles possible"),
+  main_footer = c("Main footer 1", "Main footer 2"),
+  prov_footer = c("Some more information", "E.g. a source note")
+)
+make_table_09_tplyr(adae = adae, alt_counts_df = adsl, annotations = annot)
 
 adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
 adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
