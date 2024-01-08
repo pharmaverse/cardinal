@@ -118,32 +118,33 @@ make_table_09 <- function(adae,
 #'   a `tibble` object when `tplyr_raw = TRUE`.
 #'
 #' @examples
-#'  adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
-#'  adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
+#' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
+#' adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
 #'
-#'  # Basic table
-#'  make_table_09_tplyr(adae = adae, alt_counts_df = adsl)
+#' # Basic table
+#' make_table_09_tplyr(adae = adae, alt_counts_df = adsl)
 #'
-#'  # Activate risk difference column
-#'  rd_pairs <- list(c("A: Drug X", "B: Placebo"), c("A: Drug X", "C: Combination"))
-#'  make_table_09_tplyr(adae = adae, alt_counts_df = adsl, risk_diff_pairs = rd_pairs)
+#' # Activate risk difference column
+#' rd_pairs <- list(c("A: Drug X", "B: Placebo"), c("A: Drug X", "C: Combination"))
+#' make_table_09_tplyr(adae = adae, alt_counts_df = adsl, risk_diff_pairs = rd_pairs)
 #'
-#'  # Add overall column
-#'  make_table_09_tplyr(adae = adae, alt_counts_df = adsl, lbl_overall = "Total patients")
+#' # Add overall column
+#' make_table_09_tplyr(adae = adae, alt_counts_df = adsl, lbl_overall = "Total patients")
 #'
-#'  # Add titles and footnotes
-#'    annot <- list(
-#'      title = "Table 9. Patients with Serious Adverse Events by SOC and PT, Safety Population, Pooled Analyses",
-#'      subtitles = c("Only one title, but", "multiple subtitles possible"),
-#'      main_footer = c("Main footer 1", "Main footer 2"),
-#'      prov_footer = c("Some more information", "E.g. a source note")
-#'    )
-#'    make_table_09_tplyr(adae = adae, alt_counts_df = adsl, annotations = annot)
+#' # Add titles and footnotes
+#' annot <- list(
+#'   title = "Table 9. Patients with Serious Adverse Events by SOC and PT, Safety Population, Pooled Analyses",
+#'   subtitles = c("Only one title, but", "multiple subtitles possible"),
+#'   main_footer = c("Main footer 1", "Main footer 2"),
+#'   prov_footer = c("Some more information", "E.g. a source note")
+#' )
+#' make_table_09_tplyr(adae = adae, alt_counts_df = adsl, annotations = annot)
 #'
 #' @import gt
 #' @import checkmate
 #' @export
 make_table_09_tplyr <- function(adae,
+<<<<<<< HEAD
   alt_counts_df = NULL,
   id_var = "USUBJID",
   arm_var = "ARM",
@@ -161,6 +162,23 @@ make_table_09_tplyr <- function(adae,
   annotations = NULL
 ) {
 
+=======
+                                alt_counts_df = NULL,
+                                id_var = "USUBJID",
+                                arm_var = "ARM",
+                                saffl_var = "SAFFL",
+                                ser_var = "AESER",
+                                soc_var = "AESOC",
+                                pref_var = "AEDECOD",
+                                lbl_soc_var = "System Organ Class",
+                                lbl_pref_var = "Reported Term for Adverse Event",
+                                risk_diff_pairs = NULL,
+                                show_colcounts = TRUE,
+                                lbl_overall = NULL,
+                                prune_0 = TRUE,
+                                tplyr_raw = FALSE,
+                                annotations = NULL) {
+>>>>>>> bb80a156f72124368855614e2ab5d37e75afc4bf
   # Set instructions to activate/deactivate table components
   add_alt_counts <- ifelse(!is.null(alt_counts_df), TRUE, FALSE)
   add_overall_col <- ifelse(!is.null(lbl_overall), TRUE, FALSE)
@@ -202,13 +220,19 @@ make_table_09_tplyr <- function(adae,
   arm_names <- if (is.factor(adae[[arm_var]])) levels(adae[[arm_var]]) else unique(as.character(adae[[arm_var]]))
 
   header_string <- paste0(
-    paste0(lbl_soc_var, " \n ", lbl_pref_var,  "|"), # \\line
+    paste0(lbl_soc_var, " \n ", lbl_pref_var, "|"), # \\line
     paste0(
+<<<<<<< HEAD
       if (show_colcounts) # paste total counts to arm names #nolint
+=======
+      if (show_colcounts) { # paste total counts to arm names
+>>>>>>> bb80a156f72124368855614e2ab5d37e75afc4bf
         paste(arm_names, "\n(N=**", arm_names, "**)", sep = "")
-      else # use only arm names
-        arm_names,
-      collapse = "|") #\\line
+      } else { # use only arm names
+        arm_names
+      },
+      collapse = "|"
+    ) # \\line
   )
 
   # Initiate table structure
@@ -264,7 +288,7 @@ make_table_09_tplyr <- function(adae,
   # Remove "all zero"-rows if specified
   if (prune_0) {
     table <- table %>%
-      mutate(across(starts_with("var"), ~gsub("[0()\\%\\. ]", "", .x), .names = "detect_0_{.col}")) %>%
+      mutate(across(starts_with("var"), ~ gsub("[0()\\%\\. ]", "", .x), .names = "detect_0_{.col}")) %>%
       filter(if_any(starts_with("detect_0"), ~ .x != ""))
   }
 
@@ -284,7 +308,9 @@ make_table_09_tplyr <- function(adae,
     select(starts_with(c("row_label", "var", "rdiff"))) %>%
     Tplyr::add_column_headers(s = header_string, header_n = Tplyr::header_n(structure))
 
-  if (tplyr_raw) return(table)
+  if (tplyr_raw) {
+    return(table)
+  }
   # else generate and return gt_tbl object as follows
 
   # Prepare for header row

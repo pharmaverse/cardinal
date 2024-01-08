@@ -145,7 +145,6 @@ test_that("make_table_09_tplyr() provides total column counts based on the alt_c
     dplyr::mutate(equal = (n_exp == n_out))
 
   expect_true(all(counts_exp[["equal"]]))
-
 })
 
 test_that("make_table_09_tplyr() assigns column headers correctly to the arm groups", {
@@ -279,7 +278,7 @@ test_that("make_table_09_tplyr() considers annotations if tplyr_raw = FALSE", {
   )
   tbl_out <- make_table_09_tplyr(adae = adae, annotations = annot)
   title_out <- tbl_out[["_heading"]][["title"]]
-  subtitle_out <-  tbl_out[["_heading"]][["subtitle"]]
+  subtitle_out <- tbl_out[["_heading"]][["subtitle"]]
   main_footer_out <- tbl_out[["_footnotes"]][["footnotes"]][[1]]
   prov_footer_out <- tbl_out[["_source_notes"]][[1]]
 
