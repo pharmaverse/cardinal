@@ -19,6 +19,8 @@
 #' @param lbl_overall (`character`)\cr if specified, an overall column will be added to the table with
 #'   the given value as the column label.
 #' @param lbl_pref_var (`character`)\cr label corresponding to preferred term variable `pref_var` to print in the table.
+#' @param lbl_soc_var (`character`)\cr label corresponding to system organ class variable `soc_var` to print in the
+#'   table.
 #' @param lbl_vars (`vector` of `character`)\cr labels corresponding to variables in `vars` to print
 #'   in the table. Labels should be ordered according to the order of variables in `vars`.
 #' @param na_level (`character`)\cr string to represent missing values.
