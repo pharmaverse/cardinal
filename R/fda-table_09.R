@@ -143,24 +143,23 @@ make_table_09 <- function(adae,
 #' @import gt
 #' @import checkmate
 #' @export
-make_table_09_tplyr <- function(adae,
-  alt_counts_df = NULL,
-  id_var = "USUBJID",
-  arm_var = "ARM",
-  saffl_var = "SAFFL",
-  ser_var = "AESER",
-  soc_var = "AESOC",
-  pref_var = "AEDECOD",
-  lbl_soc_var = "System Organ Class",
-  lbl_pref_var = "Reported Term for Adverse Event",
-  risk_diff_pairs = NULL,
-  show_colcounts = TRUE,
-  lbl_overall = NULL,
-  prune_0 = TRUE,
-  tplyr_raw = FALSE,
-  annotations = NULL
-) {
-
+make_table_09_tplyr <- function(
+    adae,
+    alt_counts_df = NULL,
+    id_var = "USUBJID",
+    arm_var = "ARM",
+    saffl_var = "SAFFL",
+    ser_var = "AESER",
+    soc_var = "AESOC",
+    pref_var = "AEDECOD",
+    lbl_soc_var = "System Organ Class",
+    lbl_pref_var = "Reported Term for Adverse Event",
+    risk_diff_pairs = NULL,
+    show_colcounts = TRUE,
+    lbl_overall = NULL,
+    prune_0 = TRUE,
+    tplyr_raw = FALSE,
+    annotations = NULL) {
   # Set instructions to activate/deactivate table components
   add_alt_counts <- ifelse(!is.null(alt_counts_df), TRUE, FALSE)
   add_overall_col <- ifelse(!is.null(lbl_overall), TRUE, FALSE)
