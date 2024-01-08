@@ -114,7 +114,7 @@ test_that("make_table_09_tplyr() provides total column counts based on the alt_c
   tbl_out <- make_table_09_tplyr(adae = adae, alt_counts_df = adsl, tplyr_raw = TRUE)
 
   # Extract column counts
-  counts_row <- tbl_out[1,][2:ncol(tbl_out)]
+  counts_row <- tbl_out[1, ][2:ncol(tbl_out)]
   counts_out <- data.frame(
     arm = gsub("var1_", "", names(counts_row)),
     n_out = as.numeric(gsub("[^0-9]", "", counts_row))
@@ -131,7 +131,7 @@ test_that("make_table_09_tplyr() provides total column counts based on the alt_c
 
   # Repeat procedure for the case that no alt_counts_df is specified
   tbl_out_n <- make_table_09_tplyr(adae = adae, tplyr_raw = TRUE)
-  counts_row_n <- tbl_out_n[1,][2:ncol(tbl_out_n)]
+  counts_row_n <- tbl_out_n[1, ][2:ncol(tbl_out_n)]
   counts_out_n <- data.frame(
     arm = gsub("var1_", "", names(counts_row_n)),
     n_out = as.numeric(gsub("[^0-9]", "", counts_row_n))
@@ -152,7 +152,7 @@ test_that("make_table_09_tplyr() assigns column headers correctly to the arm gro
   tbl_out <- make_table_09_tplyr(adae, tplyr_raw = TRUE)
   arm_col_names <- colnames(tbl_out)[-1] |> sub(pattern = "var1_", replacement = "")
   arm_headers <- unlist(tbl_out[1, -1])
-  position_valid <- sapply(1:length(arm_col_names), function(i) grepl(arm_col_names[i], arm_headers[i]))
+  position_valid <- sapply(seq_along(length(arm_col_names)), function(i) grepl(arm_col_names[i], arm_headers[i]))
   expect_true(all(position_valid))
 
   # Alternate levels order
@@ -161,7 +161,7 @@ test_that("make_table_09_tplyr() assigns column headers correctly to the arm gro
   tbl_out <- make_table_09_tplyr(adae_alt, tplyr_raw = TRUE)
   arm_col_names <- colnames(tbl_out)[-1] |> sub(pattern = "var1_", replacement = "")
   arm_headers <- unlist(tbl_out[1, -1])
-  position_valid <- sapply(1:length(arm_col_names), function(i) grepl(arm_col_names[i], arm_headers[i]))
+  position_valid <- sapply(seq_along(length(arm_col_names)), function(i) grepl(arm_col_names[i], arm_headers[i]))
   expect_true(all(position_valid))
 
   # Test with character column instead factor column
@@ -170,7 +170,7 @@ test_that("make_table_09_tplyr() assigns column headers correctly to the arm gro
   tbl_out <- make_table_09_tplyr(adae_chr, tplyr_raw = TRUE)
   arm_col_names <- colnames(tbl_out)[-1] |> sub(pattern = "var1_", replacement = "")
   arm_headers <- unlist(tbl_out[1, -1])
-  position_valid <- sapply(1:length(arm_col_names), function(i) grepl(arm_col_names[i], arm_headers[i]))
+  position_valid <- sapply(seq_along(length(arm_col_names)), function(i) grepl(arm_col_names[i], arm_headers[i]))
   expect_true(all(position_valid))
 
   # TODO: check other functions
@@ -197,7 +197,7 @@ test_that("make_table_09_tplyr() provides risk difference columns based on the r
     sub(pattern = "rdiff_", replacement = "RD: ") |>
     sub(pattern = "_", replacement = " - ")
 
-  expect_equal(names_out, unlist(rd_tbl[1,]), ignore_attr = TRUE)
+  expect_equal(names_out, unlist(rd_tbl[1, ]), ignore_attr = TRUE)
 })
 
 test_that("make_table_09_tplyr() provides a total column based on the lbl_overall parameter", {
@@ -208,7 +208,7 @@ test_that("make_table_09_tplyr() provides a total column based on the lbl_overal
 
   lbl_out <- sub("var1_", "", colnames(tbl_out))
   expect_equal(lbl_out, lbl)
-  expect_true(grepl(lbl_out, unlist(tbl_out[1,])))
+  expect_true(grepl(lbl_out, unlist(tbl_out[1, ])))
 
   # Check that no overall column is presented, if lbl_overall parameter is NULL
   tbl_out <- make_table_09_tplyr(adae = adae, alt_counts_df = adsl, lbl_overall = NULL, tplyr_raw = TRUE) %>%
@@ -258,7 +258,7 @@ test_that("make_table_09_tplyr() considers lbl_soc_var and lbl_pref_var paramete
 
   # Check labels for Tplyr output
   tbl_out <- make_table_09_tplyr(adae = adae, lbl_soc_var = soc_lbl, lbl_pref_var = pt_lbl, tplyr_raw = TRUE)
-  lbl_out <- tbl_out[[1,1]]
+  lbl_out <- tbl_out[[1, 1]]
   expect_true(grepl(soc_lbl, lbl_out))
   expect_true(grepl(pt_lbl, lbl_out))
 

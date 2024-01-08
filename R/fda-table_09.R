@@ -144,22 +144,22 @@ make_table_09 <- function(adae,
 #' @import checkmate
 #' @export
 make_table_09_tplyr <- function(adae,
-                                alt_counts_df = NULL,
-                                id_var = "USUBJID",
-                                arm_var = "ARM",
-                                saffl_var = "SAFFL",
-                                ser_var = "AESER",
-                                soc_var = "AESOC",
-                                pref_var = "AEDECOD",
-                                lbl_soc_var = "System Organ Class",
-                                lbl_pref_var = "Reported Term for Adverse Event",
-                                risk_diff_pairs = NULL,
-                                show_colcounts = TRUE,
-                                lbl_overall = NULL,
-                                prune_0 = TRUE,
-                                tplyr_raw = FALSE,
-                                annotations = NULL
-                                ) {
+  alt_counts_df = NULL,
+  id_var = "USUBJID",
+  arm_var = "ARM",
+  saffl_var = "SAFFL",
+  ser_var = "AESER",
+  soc_var = "AESOC",
+  pref_var = "AEDECOD",
+  lbl_soc_var = "System Organ Class",
+  lbl_pref_var = "Reported Term for Adverse Event",
+  risk_diff_pairs = NULL,
+  show_colcounts = TRUE,
+  lbl_overall = NULL,
+  prune_0 = TRUE,
+  tplyr_raw = FALSE,
+  annotations = NULL
+) {
 
   # Set instructions to activate/deactivate table components
   add_alt_counts <- ifelse(!is.null(alt_counts_df), TRUE, FALSE)
@@ -204,7 +204,7 @@ make_table_09_tplyr <- function(adae,
   header_string <- paste0(
     paste0(lbl_soc_var, " \n ", lbl_pref_var,  "|"), # \\line
     paste0(
-      if (show_colcounts) # paste total counts to arm names
+      if (show_colcounts) # paste total counts to arm names #nolint
         paste(arm_names, "\n(N=**", arm_names, "**)", sep = "")
       else # use only arm names
         arm_names,
@@ -298,7 +298,7 @@ make_table_09_tplyr <- function(adae,
   trmd_pref_var_lvls <- pref_var_lvls
   trmd_pref_var_lvls[ind_prep_blank] <- sub(" +", "", trmd_pref_var_lvls[ind_prep_blank])
 
-  gt_tbl <- table[-1,] %>% # drop header row
+  gt_tbl <- table[-1, ] %>% # drop header row
     mutate(
       # remove prepending blank spaces since they are ignored by gt
       row_label1 = if_else(substr(row_label1, 1, 1) == " ", sub(" +", "", row_label1), row_label1),
