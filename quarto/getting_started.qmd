@@ -86,7 +86,7 @@ library(falcon)
 
 # Data pre-processing - ensure all necessary variables are present in the data
 adsl <- random.cdisc.data::cadsl %>%
-  dplyr::mutate(AGEGR1 = as.factor(dplyr::case_when(
+  mutate(AGEGR1 = as.factor(case_when(
     AGE >= 17 & AGE < 65 ~ ">=17 to <65",
     AGE >= 65 ~ ">=65",
     AGE >= 65 & AGE < 75 ~ ">=65 to <75",
@@ -109,10 +109,10 @@ To customize the output table, you can modify the values of these arguments as p
 
 ```{r, echo=TRUE, warning=FALSE, message=FALSE}
 advs <- random.cdisc.data::cadvs %>%
-  dplyr::filter(AVISIT == "BASELINE", VSTESTCD == "TEMP") %>%
-  dplyr::select("USUBJID", "AVAL")
+  filter(AVISIT == "BASELINE", VSTESTCD == "TEMP") %>%
+  select("USUBJID", "AVAL")
 
-anl <- dplyr::left_join(adsl, advs, by = "USUBJID") %>% tern::df_explicit_na()
+anl <- left_join(adsl, advs, by = "USUBJID") %>% tern::df_explicit_na()
 
 tbl <- make_table_02(
   df = anl,
