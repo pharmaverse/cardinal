@@ -313,7 +313,7 @@ cookieconsent.run({
 </div>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<div class="cell" data-hash="template-table_11_cache/html/tbl_09a27949c2978091444da8931141655e">
+<div class="cell" data-hash="template-table_11_cache/html/tbl_74e877c7f9c0516c0d83451146125a7e">
 <div class="cell-output cell-output-stdout">
 <pre><code>Body System or Organ Class                                 A: Drug X    B: Placebo   C: Combination   Risk Difference (%) (95% CI)
   FMQ (Narrow)                                              (N=134)      (N=134)        (N=132)                 (N=268)           
@@ -340,20 +340,20 @@ cl D.1                                                     51 (38.1%)   51 (38.1
   FMQ2                                                     24 (17.9%)   25 (18.7%)     33 (25.0%)          0.7 (-8.5 - 10.0)      
   FMQ3                                                     19 (14.2%)   24 (17.9%)     26 (19.7%)          3.7 (-5.0 - 12.5)      
 cl D.2                                                     35 (26.1%)   46 (34.3%)     44 (33.3%)          8.2 (-2.7 - 19.2)      
-  FMQ1                                                     11 (8.2%)    23 (17.2%)     16 (12.1%)           9.0 (1.1 - 16.9)      
+  FMQ1                                                     11 (8.2%)    23 (17.2%)     17 (12.9%)           9.0 (1.1 - 16.9)      
   FMQ2                                                     18 (13.4%)   16 (11.9%)     18 (13.6%)          -1.5 (-9.5 - 6.5)      
   FMQ3                                                     11 (8.2%)    16 (11.9%)     15 (11.4%)          3.7 (-3.5 - 10.9)      </code></pre>
 </div>
 </div>
 </div>
 <div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
-<div class="cell" data-hash="template-table_11_cache/html/tbl_0563e8c451108aaa8e6eb5f11485155f">
+<div class="cell" data-hash="template-table_11_cache/html/tbl_14d61da1e21f9e80493e88ea2e43fff3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Load Libraries &amp; Data</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb2-3"><a href="#cb2-3"></a><span class="fu">library</span>(falcon)</span>
 <span id="cb2-4"><a href="#cb2-4"></a></span>
-<span id="cb2-5"><a href="#cb2-5"></a>adsl <span class="ot">&lt;-</span> scda<span class="sc">::</span><span class="fu">synthetic_cdisc_dataset</span>(<span class="st">"rcd_2022_10_13"</span>, <span class="st">"adsl"</span>)</span>
-<span id="cb2-6"><a href="#cb2-6"></a>adae <span class="ot">&lt;-</span> scda<span class="sc">::</span><span class="fu">synthetic_cdisc_dataset</span>(<span class="st">"rcd_2022_10_13"</span>, <span class="st">"adae"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5"></a>adsl <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadsl</span>
+<span id="cb2-6"><a href="#cb2-6"></a>adae <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadae</span>
 <span id="cb2-7"><a href="#cb2-7"></a></span>
 <span id="cb2-8"><a href="#cb2-8"></a><span class="co"># Pre-Processing - Ensure required variables fmqsc_var and fmqnam_var exist in adae</span></span>
 <span id="cb2-9"><a href="#cb2-9"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
@@ -890,8 +890,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb3-16"><a href="#cb3-16"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb3-17"><a href="#cb3-17"></a><span class="fu">library</span>(falcon)</span>
 <span id="cb3-18"><a href="#cb3-18"></a></span>
-<span id="cb3-19"><a href="#cb3-19"></a>adsl <span class="ot">&lt;-</span> scda<span class="sc">::</span><span class="fu">synthetic_cdisc_dataset</span>(<span class="st">"rcd_2022_10_13"</span>, <span class="st">"adsl"</span>)</span>
-<span id="cb3-20"><a href="#cb3-20"></a>adae <span class="ot">&lt;-</span> scda<span class="sc">::</span><span class="fu">synthetic_cdisc_dataset</span>(<span class="st">"rcd_2022_10_13"</span>, <span class="st">"adae"</span>)</span>
+<span id="cb3-19"><a href="#cb3-19"></a>adsl <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadsl</span>
+<span id="cb3-20"><a href="#cb3-20"></a>adae <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadae</span>
 <span id="cb3-21"><a href="#cb3-21"></a></span>
 <span id="cb3-22"><a href="#cb3-22"></a><span class="co"># Pre-Processing - Ensure required variables fmqsc_var and fmqnam_var exist in adae</span></span>
 <span id="cb3-23"><a href="#cb3-23"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>

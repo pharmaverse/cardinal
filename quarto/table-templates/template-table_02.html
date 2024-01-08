@@ -319,7 +319,7 @@ cookieconsent.run({
 </div>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<div class="cell" data-hash="template-table_02_cache/html/tbl_c6b4c1bf83dc7d7603c6e31793661bdc">
+<div class="cell" data-hash="template-table_02_cache/html/tbl_c66355e9e7e99c7b80f545d7c1ca1361">
 <div class="cell-output cell-output-stdout">
 <pre><code>                                                  A: Drug X            B: Placebo         C: Combination      Total Population 
 Characteristic                                     (N=134)              (N=134)              (N=132)              (N=400)      
@@ -356,45 +356,44 @@ Country of Participation
   GBR                                               4 (3%)              3 (2.2%)             2 (1.5%)             9 (2.2%)     
   CAN                                              3 (2.2%)             2 (1.5%)             3 (2.3%)              8 (2%)      
 Baseline Temperature (C)                                                                                                       
-  Mean (SD)                                       49.7 (8.3)           50.9 (7.4)           49.1 (8.2)           49.9 (8.0)    
-  Median (Min - Max)                          50.4 (29.0 - 69.1)   51.5 (30.7 - 67.7)   48.7 (20.6 - 70.5)   50.3 (20.6 - 70.5)</code></pre>
+  Mean (SD)                                       36.7 (1.0)           36.6 (1.1)           36.5 (1.0)           36.6 (1.0)    
+  Median (Min - Max)                          36.7 (34.0 - 39.3)   36.6 (33.6 - 38.9)   36.5 (34.2 - 38.9)   36.6 (33.6 - 39.3)</code></pre>
 </div>
 </div>
 </div>
 <div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
-<div class="cell" data-hash="template-table_02_cache/html/tbl_29d1838c253f870ab3d1ab752e3fa2aa">
+<div class="cell" data-hash="template-table_02_cache/html/tbl_7dce96f4f52f5157d75f929f0e9fc002">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Load Libraries &amp; Data</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">library</span>(scda)</span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="fu">library</span>(falcon)</span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb2-5"><a href="#cb2-5"></a></span>
-<span id="cb2-6"><a href="#cb2-6"></a>adsl <span class="ot">&lt;-</span> scda<span class="sc">::</span><span class="fu">synthetic_cdisc_dataset</span>(<span class="st">"rcd_2022_10_13"</span>, <span class="st">"adsl"</span>)</span>
-<span id="cb2-7"><a href="#cb2-7"></a>advs <span class="ot">&lt;-</span> scda<span class="sc">::</span><span class="fu">synthetic_cdisc_dataset</span>(<span class="st">"rcd_2022_10_13"</span>, <span class="st">"advs"</span>)</span>
-<span id="cb2-8"><a href="#cb2-8"></a></span>
-<span id="cb2-9"><a href="#cb2-9"></a><span class="co"># Pre-Processing - Add any variables needed in your table to df</span></span>
-<span id="cb2-10"><a href="#cb2-10"></a>adsl <span class="ot">&lt;-</span> adsl <span class="sc">%&gt;%</span></span>
-<span id="cb2-11"><a href="#cb2-11"></a>  <span class="fu">mutate</span>(<span class="at">AGEGR1 =</span> <span class="fu">as.factor</span>(<span class="fu">case_when</span>(</span>
-<span id="cb2-12"><a href="#cb2-12"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">17</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"&gt;=17 to &lt;65"</span>,</span>
-<span id="cb2-13"><a href="#cb2-13"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"&gt;=65"</span>,</span>
-<span id="cb2-14"><a href="#cb2-14"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">75</span> <span class="sc">~</span> <span class="st">"&gt;=65 to &lt;75"</span>,</span>
-<span id="cb2-15"><a href="#cb2-15"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">75</span> <span class="sc">~</span> <span class="st">"&gt;=75"</span></span>
-<span id="cb2-16"><a href="#cb2-16"></a>  )))</span>
-<span id="cb2-17"><a href="#cb2-17"></a></span>
-<span id="cb2-18"><a href="#cb2-18"></a>advs <span class="ot">&lt;-</span> advs <span class="sc">%&gt;%</span></span>
-<span id="cb2-19"><a href="#cb2-19"></a>  <span class="fu">filter</span>(AVISIT <span class="sc">==</span> <span class="st">"BASELINE"</span>, VSTESTCD <span class="sc">==</span> <span class="st">"TEMP"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb2-20"><a href="#cb2-20"></a>  <span class="fu">select</span>(<span class="st">"USUBJID"</span>, <span class="st">"AVAL"</span>)</span>
-<span id="cb2-21"><a href="#cb2-21"></a></span>
-<span id="cb2-22"><a href="#cb2-22"></a>anl <span class="ot">&lt;-</span> <span class="fu">left_join</span>(adsl, advs, <span class="at">by =</span> <span class="st">"USUBJID"</span>)</span>
-<span id="cb2-23"><a href="#cb2-23"></a></span>
-<span id="cb2-24"><a href="#cb2-24"></a><span class="co"># Output Table</span></span>
-<span id="cb2-25"><a href="#cb2-25"></a><span class="fu">make_table_02</span>(</span>
-<span id="cb2-26"><a href="#cb2-26"></a>  <span class="at">df =</span> anl,</span>
-<span id="cb2-27"><a href="#cb2-27"></a>  <span class="at">vars =</span> <span class="fu">c</span>(<span class="st">"SEX"</span>, <span class="st">"AGE"</span>, <span class="st">"AGEGR1"</span>, <span class="st">"RACE"</span>, <span class="st">"ETHNIC"</span>, <span class="st">"COUNTRY"</span>, <span class="st">"AVAL"</span>),</span>
-<span id="cb2-28"><a href="#cb2-28"></a>  <span class="at">lbl_vars =</span> <span class="fu">c</span>(</span>
-<span id="cb2-29"><a href="#cb2-29"></a>    <span class="st">"Sex"</span>, <span class="st">"Age, years"</span>, <span class="st">"Age Group, years"</span>, <span class="st">"Race"</span>, <span class="st">"Ethnicity"</span>,</span>
-<span id="cb2-30"><a href="#cb2-30"></a>    <span class="st">"Country of Participation"</span>, <span class="st">"Baseline Temperature (C)"</span></span>
-<span id="cb2-31"><a href="#cb2-31"></a>  )</span>
-<span id="cb2-32"><a href="#cb2-32"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">library</span>(falcon)</span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb2-4"><a href="#cb2-4"></a></span>
+<span id="cb2-5"><a href="#cb2-5"></a>adsl <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadsl</span>
+<span id="cb2-6"><a href="#cb2-6"></a>advs <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadvs</span>
+<span id="cb2-7"><a href="#cb2-7"></a></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="co"># Pre-Processing - Add any variables needed in your table to df</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a>adsl <span class="ot">&lt;-</span> adsl <span class="sc">%&gt;%</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a>  <span class="fu">mutate</span>(<span class="at">AGEGR1 =</span> <span class="fu">as.factor</span>(<span class="fu">case_when</span>(</span>
+<span id="cb2-11"><a href="#cb2-11"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">17</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"&gt;=17 to &lt;65"</span>,</span>
+<span id="cb2-12"><a href="#cb2-12"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"&gt;=65"</span>,</span>
+<span id="cb2-13"><a href="#cb2-13"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">75</span> <span class="sc">~</span> <span class="st">"&gt;=65 to &lt;75"</span>,</span>
+<span id="cb2-14"><a href="#cb2-14"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">75</span> <span class="sc">~</span> <span class="st">"&gt;=75"</span></span>
+<span id="cb2-15"><a href="#cb2-15"></a>  )))</span>
+<span id="cb2-16"><a href="#cb2-16"></a></span>
+<span id="cb2-17"><a href="#cb2-17"></a>advs <span class="ot">&lt;-</span> advs <span class="sc">%&gt;%</span></span>
+<span id="cb2-18"><a href="#cb2-18"></a>  <span class="fu">filter</span>(AVISIT <span class="sc">==</span> <span class="st">"BASELINE"</span>, VSTESTCD <span class="sc">==</span> <span class="st">"TEMP"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-19"><a href="#cb2-19"></a>  <span class="fu">select</span>(<span class="st">"USUBJID"</span>, <span class="st">"AVAL"</span>)</span>
+<span id="cb2-20"><a href="#cb2-20"></a></span>
+<span id="cb2-21"><a href="#cb2-21"></a>anl <span class="ot">&lt;-</span> <span class="fu">left_join</span>(adsl, advs, <span class="at">by =</span> <span class="st">"USUBJID"</span>)</span>
+<span id="cb2-22"><a href="#cb2-22"></a></span>
+<span id="cb2-23"><a href="#cb2-23"></a><span class="co"># Output Table</span></span>
+<span id="cb2-24"><a href="#cb2-24"></a><span class="fu">make_table_02</span>(</span>
+<span id="cb2-25"><a href="#cb2-25"></a>  <span class="at">df =</span> anl,</span>
+<span id="cb2-26"><a href="#cb2-26"></a>  <span class="at">vars =</span> <span class="fu">c</span>(<span class="st">"SEX"</span>, <span class="st">"AGE"</span>, <span class="st">"AGEGR1"</span>, <span class="st">"RACE"</span>, <span class="st">"ETHNIC"</span>, <span class="st">"COUNTRY"</span>, <span class="st">"AVAL"</span>),</span>
+<span id="cb2-27"><a href="#cb2-27"></a>  <span class="at">lbl_vars =</span> <span class="fu">c</span>(</span>
+<span id="cb2-28"><a href="#cb2-28"></a>    <span class="st">"Sex"</span>, <span class="st">"Age, years"</span>, <span class="st">"Age Group, years"</span>, <span class="st">"Race"</span>, <span class="st">"Ethnicity"</span>,</span>
+<span id="cb2-29"><a href="#cb2-29"></a>    <span class="st">"Country of Participation"</span>, <span class="st">"Baseline Temperature (C)"</span></span>
+<span id="cb2-30"><a href="#cb2-30"></a>  )</span>
+<span id="cb2-31"><a href="#cb2-31"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
@@ -485,26 +484,26 @@ Baseline Temperature (C)
 </section>
 </div>
 <div id="tabset-1-5" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-5-tab">
-<div class="cell" data-hash="template-table_02_cache/html/tbl_tplyr_83fe2528d7114d358b99214aa681bdbe">
+<div class="cell" data-hash="template-table_02_cache/html/tbl_tplyr_b78443a1c2959691208a28824f817843">
 <div class="cell-output-display">
 
-<div id="dabqjbmbjs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#dabqjbmbjs table {
+<div id="vmvaswedpb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#vmvaswedpb table {
   font-family: Courier, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#dabqjbmbjs thead, #dabqjbmbjs tbody, #dabqjbmbjs tfoot, #dabqjbmbjs tr, #dabqjbmbjs td, #dabqjbmbjs th {
+#vmvaswedpb thead, #vmvaswedpb tbody, #vmvaswedpb tfoot, #vmvaswedpb tr, #vmvaswedpb td, #vmvaswedpb th {
   border-style: none;
 }
 
-#dabqjbmbjs p {
+#vmvaswedpb p {
   margin: 0;
   padding: 0;
 }
 
-#dabqjbmbjs .gt_table {
+#vmvaswedpb .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -530,12 +529,12 @@ Baseline Temperature (C)
   border-left-color: #D3D3D3;
 }
 
-#dabqjbmbjs .gt_caption {
+#vmvaswedpb .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#dabqjbmbjs .gt_title {
+#vmvaswedpb .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -547,7 +546,7 @@ Baseline Temperature (C)
   border-bottom-width: 0;
 }
 
-#dabqjbmbjs .gt_subtitle {
+#vmvaswedpb .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -559,7 +558,7 @@ Baseline Temperature (C)
   border-top-width: 0;
 }
 
-#dabqjbmbjs .gt_heading {
+#vmvaswedpb .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -571,13 +570,13 @@ Baseline Temperature (C)
   border-right-color: #D3D3D3;
 }
 
-#dabqjbmbjs .gt_bottom_border {
+#vmvaswedpb .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#dabqjbmbjs .gt_col_headings {
+#vmvaswedpb .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -592,7 +591,7 @@ Baseline Temperature (C)
   border-right-color: #D3D3D3;
 }
 
-#dabqjbmbjs .gt_col_heading {
+#vmvaswedpb .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -612,7 +611,7 @@ Baseline Temperature (C)
   overflow-x: hidden;
 }
 
-#dabqjbmbjs .gt_column_spanner_outer {
+#vmvaswedpb .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -624,15 +623,15 @@ Baseline Temperature (C)
   padding-right: 4px;
 }
 
-#dabqjbmbjs .gt_column_spanner_outer:first-child {
+#vmvaswedpb .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#dabqjbmbjs .gt_column_spanner_outer:last-child {
+#vmvaswedpb .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#dabqjbmbjs .gt_column_spanner {
+#vmvaswedpb .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -644,11 +643,11 @@ Baseline Temperature (C)
   width: 100%;
 }
 
-#dabqjbmbjs .gt_spanner_row {
+#vmvaswedpb .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#dabqjbmbjs .gt_group_heading {
+#vmvaswedpb .gt_group_heading {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -674,7 +673,7 @@ Baseline Temperature (C)
   text-align: left;
 }
 
-#dabqjbmbjs .gt_empty_group_heading {
+#vmvaswedpb .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -689,15 +688,15 @@ Baseline Temperature (C)
   vertical-align: middle;
 }
 
-#dabqjbmbjs .gt_from_md > :first-child {
+#vmvaswedpb .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#dabqjbmbjs .gt_from_md > :last-child {
+#vmvaswedpb .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#dabqjbmbjs .gt_row {
+#vmvaswedpb .gt_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -716,7 +715,7 @@ Baseline Temperature (C)
   overflow-x: hidden;
 }
 
-#dabqjbmbjs .gt_stub {
+#vmvaswedpb .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -729,7 +728,7 @@ Baseline Temperature (C)
   padding-right: 5px;
 }
 
-#dabqjbmbjs .gt_stub_row_group {
+#vmvaswedpb .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -743,15 +742,15 @@ Baseline Temperature (C)
   vertical-align: top;
 }
 
-#dabqjbmbjs .gt_row_group_first td {
+#vmvaswedpb .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#dabqjbmbjs .gt_row_group_first th {
+#vmvaswedpb .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#dabqjbmbjs .gt_summary_row {
+#vmvaswedpb .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -761,16 +760,16 @@ Baseline Temperature (C)
   padding-right: 5px;
 }
 
-#dabqjbmbjs .gt_first_summary_row {
+#vmvaswedpb .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#dabqjbmbjs .gt_first_summary_row.thick {
+#vmvaswedpb .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#dabqjbmbjs .gt_last_summary_row {
+#vmvaswedpb .gt_last_summary_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -780,7 +779,7 @@ Baseline Temperature (C)
   border-bottom-color: #D3D3D3;
 }
 
-#dabqjbmbjs .gt_grand_summary_row {
+#vmvaswedpb .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -790,7 +789,7 @@ Baseline Temperature (C)
   padding-right: 5px;
 }
 
-#dabqjbmbjs .gt_first_grand_summary_row {
+#vmvaswedpb .gt_first_grand_summary_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -800,7 +799,7 @@ Baseline Temperature (C)
   border-top-color: #D3D3D3;
 }
 
-#dabqjbmbjs .gt_last_grand_summary_row_top {
+#vmvaswedpb .gt_last_grand_summary_row_top {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -810,11 +809,11 @@ Baseline Temperature (C)
   border-bottom-color: #D3D3D3;
 }
 
-#dabqjbmbjs .gt_striped {
+#vmvaswedpb .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#dabqjbmbjs .gt_table_body {
+#vmvaswedpb .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -823,7 +822,7 @@ Baseline Temperature (C)
   border-bottom-color: #D3D3D3;
 }
 
-#dabqjbmbjs .gt_footnotes {
+#vmvaswedpb .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -837,7 +836,7 @@ Baseline Temperature (C)
   border-right-color: #D3D3D3;
 }
 
-#dabqjbmbjs .gt_footnote {
+#vmvaswedpb .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 1px;
@@ -846,7 +845,7 @@ Baseline Temperature (C)
   padding-right: 5px;
 }
 
-#dabqjbmbjs .gt_sourcenotes {
+#vmvaswedpb .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -860,7 +859,7 @@ Baseline Temperature (C)
   border-right-color: #D3D3D3;
 }
 
-#dabqjbmbjs .gt_sourcenote {
+#vmvaswedpb .gt_sourcenote {
   font-size: 90%;
   padding-top: 1px;
   padding-bottom: 1px;
@@ -868,63 +867,63 @@ Baseline Temperature (C)
   padding-right: 5px;
 }
 
-#dabqjbmbjs .gt_left {
+#vmvaswedpb .gt_left {
   text-align: left;
 }
 
-#dabqjbmbjs .gt_center {
+#vmvaswedpb .gt_center {
   text-align: center;
 }
 
-#dabqjbmbjs .gt_right {
+#vmvaswedpb .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#dabqjbmbjs .gt_font_normal {
+#vmvaswedpb .gt_font_normal {
   font-weight: normal;
 }
 
-#dabqjbmbjs .gt_font_bold {
+#vmvaswedpb .gt_font_bold {
   font-weight: bold;
 }
 
-#dabqjbmbjs .gt_font_italic {
+#vmvaswedpb .gt_font_italic {
   font-style: italic;
 }
 
-#dabqjbmbjs .gt_super {
+#vmvaswedpb .gt_super {
   font-size: 65%;
 }
 
-#dabqjbmbjs .gt_footnote_marks {
+#vmvaswedpb .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#dabqjbmbjs .gt_asterisk {
+#vmvaswedpb .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#dabqjbmbjs .gt_indent_1 {
+#vmvaswedpb .gt_indent_1 {
   text-indent: 5px;
 }
 
-#dabqjbmbjs .gt_indent_2 {
+#vmvaswedpb .gt_indent_2 {
   text-indent: 10px;
 }
 
-#dabqjbmbjs .gt_indent_3 {
+#vmvaswedpb .gt_indent_3 {
   text-indent: 15px;
 }
 
-#dabqjbmbjs .gt_indent_4 {
+#vmvaswedpb .gt_indent_4 {
   text-indent: 20px;
 }
 
-#dabqjbmbjs .gt_indent_5 {
+#vmvaswedpb .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1311,24 +1310,24 @@ Baseline Temperature (C)
 <tr>
 <th id="stub_1_34" scope="row" class="gt_row gt_left gt_stub" style="text-align: left; white-space: pre-wrap; font-family: Courier, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-top-width: 1px; border-top-style: solid; border-top-color: transparent; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: transparent;">    Mean (SD)</th>
 <td headers="stub_1_34 A: Drug X
-(N=134)" class="gt_row gt_right" style="white-space: pre-wrap; font-family: Courier, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-top-width: 1px; border-top-style: solid; border-top-color: transparent; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: transparent;">49.7 ( 8.3)</td>
+(N=134)" class="gt_row gt_right" style="white-space: pre-wrap; font-family: Courier, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-top-width: 1px; border-top-style: solid; border-top-color: transparent; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: transparent;">36.7 ( 1.0)</td>
 <td headers="stub_1_34 B: Placebo
-(N=134)" class="gt_row gt_right" style="white-space: pre-wrap; font-family: Courier, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-top-width: 1px; border-top-style: solid; border-top-color: transparent; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: transparent;">50.9 ( 7.4)</td>
+(N=134)" class="gt_row gt_right" style="white-space: pre-wrap; font-family: Courier, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-top-width: 1px; border-top-style: solid; border-top-color: transparent; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: transparent;">36.6 ( 1.1)</td>
 <td headers="stub_1_34 C: Combination
-(N=132)" class="gt_row gt_right" style="white-space: pre-wrap; font-family: Courier, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-top-width: 1px; border-top-style: solid; border-top-color: transparent; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: transparent;">49.1 ( 8.2)</td>
+(N=132)" class="gt_row gt_right" style="white-space: pre-wrap; font-family: Courier, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-top-width: 1px; border-top-style: solid; border-top-color: transparent; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: transparent;">36.5 ( 1.0)</td>
 <td headers="stub_1_34 Total Population
-(N=400)" class="gt_row gt_right" style="white-space: pre-wrap; font-family: Courier, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-top-width: 1px; border-top-style: solid; border-top-color: transparent; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: transparent;">49.9 ( 8.0)</td>
+(N=400)" class="gt_row gt_right" style="white-space: pre-wrap; font-family: Courier, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-top-width: 1px; border-top-style: solid; border-top-color: transparent; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: transparent;">36.6 ( 1.0)</td>
 </tr>
 <tr>
 <th id="stub_1_35" scope="row" class="gt_row gt_left gt_stub" style="text-align: left; white-space: pre-wrap; font-family: Courier, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-top-width: 1px; border-top-style: solid; border-top-color: transparent; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: transparent;">    Median (Min - Max)</th>
 <td headers="stub_1_35 A: Drug X
-(N=134)" class="gt_row gt_right" style="white-space: pre-wrap; font-family: Courier, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-top-width: 1px; border-top-style: solid; border-top-color: transparent; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: transparent;">50.4 (29.0 - 69.1)</td>
+(N=134)" class="gt_row gt_right" style="white-space: pre-wrap; font-family: Courier, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-top-width: 1px; border-top-style: solid; border-top-color: transparent; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: transparent;">36.7 (34.0 - 39.3)</td>
 <td headers="stub_1_35 B: Placebo
-(N=134)" class="gt_row gt_right" style="white-space: pre-wrap; font-family: Courier, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-top-width: 1px; border-top-style: solid; border-top-color: transparent; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: transparent;">51.5 (30.7 - 67.7)</td>
+(N=134)" class="gt_row gt_right" style="white-space: pre-wrap; font-family: Courier, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-top-width: 1px; border-top-style: solid; border-top-color: transparent; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: transparent;">36.6 (33.6 - 38.9)</td>
 <td headers="stub_1_35 C: Combination
-(N=132)" class="gt_row gt_right" style="white-space: pre-wrap; font-family: Courier, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-top-width: 1px; border-top-style: solid; border-top-color: transparent; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: transparent;">48.7 (20.6 - 70.5)</td>
+(N=132)" class="gt_row gt_right" style="white-space: pre-wrap; font-family: Courier, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-top-width: 1px; border-top-style: solid; border-top-color: transparent; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: transparent;">36.5 (34.2 - 38.9)</td>
 <td headers="stub_1_35 Total Population
-(N=400)" class="gt_row gt_right" style="white-space: pre-wrap; font-family: Courier, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-top-width: 1px; border-top-style: solid; border-top-color: transparent; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: transparent;">50.3 (20.6 - 70.5)</td>
+(N=400)" class="gt_row gt_right" style="white-space: pre-wrap; font-family: Courier, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-top-width: 1px; border-top-style: solid; border-top-color: transparent; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: transparent;">36.6 (33.6 - 39.3)</td>
 </tr>
 </tbody>
 </table>
@@ -1337,39 +1336,38 @@ Baseline Temperature (C)
 </div>
 </div>
 <div id="tabset-1-6" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-6-tab">
-<div class="cell" data-hash="template-table_02_cache/html/tbl_tplyr_4c9a77b0300faf0294df545eab4f2e69">
+<div class="cell" data-hash="template-table_02_cache/html/tbl_tplyr_33c37b0a4c93b500802b840e182551cd">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Load Libraries &amp; Data</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">library</span>(scda)</span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="fu">library</span>(falcon)</span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb3-5"><a href="#cb3-5"></a></span>
-<span id="cb3-6"><a href="#cb3-6"></a>adsl <span class="ot">&lt;-</span> scda<span class="sc">::</span><span class="fu">synthetic_cdisc_dataset</span>(<span class="st">"rcd_2022_10_13"</span>, <span class="st">"adsl"</span>)</span>
-<span id="cb3-7"><a href="#cb3-7"></a>advs <span class="ot">&lt;-</span> scda<span class="sc">::</span><span class="fu">synthetic_cdisc_dataset</span>(<span class="st">"rcd_2022_10_13"</span>, <span class="st">"advs"</span>)</span>
-<span id="cb3-8"><a href="#cb3-8"></a></span>
-<span id="cb3-9"><a href="#cb3-9"></a><span class="co"># Pre-Processing - Add any variables needed in your table to df</span></span>
-<span id="cb3-10"><a href="#cb3-10"></a>adsl <span class="ot">&lt;-</span> adsl <span class="sc">%&gt;%</span></span>
-<span id="cb3-11"><a href="#cb3-11"></a>  <span class="fu">mutate</span>(<span class="at">AGEGR1 =</span> <span class="fu">as.factor</span>(<span class="fu">case_when</span>(</span>
-<span id="cb3-12"><a href="#cb3-12"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">17</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"&gt;=17 to &lt;65"</span>,</span>
-<span id="cb3-13"><a href="#cb3-13"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"&gt;=65"</span>,</span>
-<span id="cb3-14"><a href="#cb3-14"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">75</span> <span class="sc">~</span> <span class="st">"&gt;=65 to &lt;75"</span>,</span>
-<span id="cb3-15"><a href="#cb3-15"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">75</span> <span class="sc">~</span> <span class="st">"&gt;=75"</span></span>
-<span id="cb3-16"><a href="#cb3-16"></a>  )))</span>
-<span id="cb3-17"><a href="#cb3-17"></a></span>
-<span id="cb3-18"><a href="#cb3-18"></a>advs <span class="ot">&lt;-</span> advs <span class="sc">%&gt;%</span></span>
-<span id="cb3-19"><a href="#cb3-19"></a>  <span class="fu">filter</span>(AVISIT <span class="sc">==</span> <span class="st">"BASELINE"</span>, VSTESTCD <span class="sc">==</span> <span class="st">"TEMP"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb3-20"><a href="#cb3-20"></a>  <span class="fu">select</span>(<span class="st">"USUBJID"</span>, <span class="st">"AVAL"</span>)</span>
-<span id="cb3-21"><a href="#cb3-21"></a></span>
-<span id="cb3-22"><a href="#cb3-22"></a>anl <span class="ot">&lt;-</span> <span class="fu">left_join</span>(adsl, advs, <span class="at">by =</span> <span class="st">"USUBJID"</span>)</span>
-<span id="cb3-23"><a href="#cb3-23"></a></span>
-<span id="cb3-24"><a href="#cb3-24"></a><span class="co"># Output Table</span></span>
-<span id="cb3-25"><a href="#cb3-25"></a><span class="fu">make_table_02_tplyr</span>(</span>
-<span id="cb3-26"><a href="#cb3-26"></a>  <span class="at">df =</span> anl,</span>
-<span id="cb3-27"><a href="#cb3-27"></a>  <span class="at">vars =</span> <span class="fu">c</span>(<span class="st">"SEX"</span>, <span class="st">"AGE"</span>, <span class="st">"AGEGR1"</span>, <span class="st">"RACE"</span>, <span class="st">"ETHNIC"</span>, <span class="st">"COUNTRY"</span>, <span class="st">"AVAL"</span>),</span>
-<span id="cb3-28"><a href="#cb3-28"></a>  <span class="at">lbl_vars =</span> <span class="fu">c</span>(</span>
-<span id="cb3-29"><a href="#cb3-29"></a>    <span class="st">"Sex"</span>, <span class="st">"Age, years"</span>, <span class="st">"Age Group, years"</span>, <span class="st">"Race"</span>, <span class="st">"Ethnicity"</span>,</span>
-<span id="cb3-30"><a href="#cb3-30"></a>    <span class="st">"Country of Participation"</span>, <span class="st">"Baseline Temperature (C)"</span></span>
-<span id="cb3-31"><a href="#cb3-31"></a>  )</span>
-<span id="cb3-32"><a href="#cb3-32"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">library</span>(falcon)</span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb3-4"><a href="#cb3-4"></a></span>
+<span id="cb3-5"><a href="#cb3-5"></a>adsl <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadsl</span>
+<span id="cb3-6"><a href="#cb3-6"></a>advs <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadvs</span>
+<span id="cb3-7"><a href="#cb3-7"></a></span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="co"># Pre-Processing - Add any variables needed in your table to df</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a>adsl <span class="ot">&lt;-</span> adsl <span class="sc">%&gt;%</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a>  <span class="fu">mutate</span>(<span class="at">AGEGR1 =</span> <span class="fu">as.factor</span>(<span class="fu">case_when</span>(</span>
+<span id="cb3-11"><a href="#cb3-11"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">17</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"&gt;=17 to &lt;65"</span>,</span>
+<span id="cb3-12"><a href="#cb3-12"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"&gt;=65"</span>,</span>
+<span id="cb3-13"><a href="#cb3-13"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">75</span> <span class="sc">~</span> <span class="st">"&gt;=65 to &lt;75"</span>,</span>
+<span id="cb3-14"><a href="#cb3-14"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">75</span> <span class="sc">~</span> <span class="st">"&gt;=75"</span></span>
+<span id="cb3-15"><a href="#cb3-15"></a>  )))</span>
+<span id="cb3-16"><a href="#cb3-16"></a></span>
+<span id="cb3-17"><a href="#cb3-17"></a>advs <span class="ot">&lt;-</span> advs <span class="sc">%&gt;%</span></span>
+<span id="cb3-18"><a href="#cb3-18"></a>  <span class="fu">filter</span>(AVISIT <span class="sc">==</span> <span class="st">"BASELINE"</span>, VSTESTCD <span class="sc">==</span> <span class="st">"TEMP"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-19"><a href="#cb3-19"></a>  <span class="fu">select</span>(<span class="st">"USUBJID"</span>, <span class="st">"AVAL"</span>)</span>
+<span id="cb3-20"><a href="#cb3-20"></a></span>
+<span id="cb3-21"><a href="#cb3-21"></a>anl <span class="ot">&lt;-</span> <span class="fu">left_join</span>(adsl, advs, <span class="at">by =</span> <span class="st">"USUBJID"</span>)</span>
+<span id="cb3-22"><a href="#cb3-22"></a></span>
+<span id="cb3-23"><a href="#cb3-23"></a><span class="co"># Output Table</span></span>
+<span id="cb3-24"><a href="#cb3-24"></a><span class="fu">make_table_02_tplyr</span>(</span>
+<span id="cb3-25"><a href="#cb3-25"></a>  <span class="at">df =</span> anl,</span>
+<span id="cb3-26"><a href="#cb3-26"></a>  <span class="at">vars =</span> <span class="fu">c</span>(<span class="st">"SEX"</span>, <span class="st">"AGE"</span>, <span class="st">"AGEGR1"</span>, <span class="st">"RACE"</span>, <span class="st">"ETHNIC"</span>, <span class="st">"COUNTRY"</span>, <span class="st">"AVAL"</span>),</span>
+<span id="cb3-27"><a href="#cb3-27"></a>  <span class="at">lbl_vars =</span> <span class="fu">c</span>(</span>
+<span id="cb3-28"><a href="#cb3-28"></a>    <span class="st">"Sex"</span>, <span class="st">"Age, years"</span>, <span class="st">"Age Group, years"</span>, <span class="st">"Race"</span>, <span class="st">"Ethnicity"</span>,</span>
+<span id="cb3-29"><a href="#cb3-29"></a>    <span class="st">"Country of Participation"</span>, <span class="st">"Baseline Temperature (C)"</span></span>
+<span id="cb3-30"><a href="#cb3-30"></a>  )</span>
+<span id="cb3-31"><a href="#cb3-31"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div id="tabset-1-7" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-7-tab">
@@ -1460,26 +1458,26 @@ Baseline Temperature (C)
 </section>
 </div>
 <div id="tabset-1-8" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-8-tab">
-<div class="cell" data-hash="template-table_02_cache/html/tbl_gtsummary_bc0d15637aa2a37ec96927d07edd3419">
+<div class="cell" data-hash="template-table_02_cache/html/tbl_gtsummary_73aea7772e6865cd4e859fedb06a3929">
 <div class="cell-output-display">
 
-<div id="vsbakffxqr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#vsbakffxqr table {
+<div id="jtwyhmtvwn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jtwyhmtvwn table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#vsbakffxqr thead, #vsbakffxqr tbody, #vsbakffxqr tfoot, #vsbakffxqr tr, #vsbakffxqr td, #vsbakffxqr th {
+#jtwyhmtvwn thead, #jtwyhmtvwn tbody, #jtwyhmtvwn tfoot, #jtwyhmtvwn tr, #jtwyhmtvwn td, #jtwyhmtvwn th {
   border-style: none;
 }
 
-#vsbakffxqr p {
+#jtwyhmtvwn p {
   margin: 0;
   padding: 0;
 }
 
-#vsbakffxqr .gt_table {
+#jtwyhmtvwn .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1505,12 +1503,12 @@ Baseline Temperature (C)
   border-left-color: #D3D3D3;
 }
 
-#vsbakffxqr .gt_caption {
+#jtwyhmtvwn .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#vsbakffxqr .gt_title {
+#jtwyhmtvwn .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1522,7 +1520,7 @@ Baseline Temperature (C)
   border-bottom-width: 0;
 }
 
-#vsbakffxqr .gt_subtitle {
+#jtwyhmtvwn .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1534,7 +1532,7 @@ Baseline Temperature (C)
   border-top-width: 0;
 }
 
-#vsbakffxqr .gt_heading {
+#jtwyhmtvwn .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1546,13 +1544,13 @@ Baseline Temperature (C)
   border-right-color: #D3D3D3;
 }
 
-#vsbakffxqr .gt_bottom_border {
+#jtwyhmtvwn .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#vsbakffxqr .gt_col_headings {
+#jtwyhmtvwn .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1567,7 +1565,7 @@ Baseline Temperature (C)
   border-right-color: #D3D3D3;
 }
 
-#vsbakffxqr .gt_col_heading {
+#jtwyhmtvwn .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1587,7 +1585,7 @@ Baseline Temperature (C)
   overflow-x: hidden;
 }
 
-#vsbakffxqr .gt_column_spanner_outer {
+#jtwyhmtvwn .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1599,15 +1597,15 @@ Baseline Temperature (C)
   padding-right: 4px;
 }
 
-#vsbakffxqr .gt_column_spanner_outer:first-child {
+#jtwyhmtvwn .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#vsbakffxqr .gt_column_spanner_outer:last-child {
+#jtwyhmtvwn .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#vsbakffxqr .gt_column_spanner {
+#jtwyhmtvwn .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1619,11 +1617,11 @@ Baseline Temperature (C)
   width: 100%;
 }
 
-#vsbakffxqr .gt_spanner_row {
+#jtwyhmtvwn .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#vsbakffxqr .gt_group_heading {
+#jtwyhmtvwn .gt_group_heading {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -1649,7 +1647,7 @@ Baseline Temperature (C)
   text-align: left;
 }
 
-#vsbakffxqr .gt_empty_group_heading {
+#jtwyhmtvwn .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1664,15 +1662,15 @@ Baseline Temperature (C)
   vertical-align: middle;
 }
 
-#vsbakffxqr .gt_from_md > :first-child {
+#jtwyhmtvwn .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#vsbakffxqr .gt_from_md > :last-child {
+#jtwyhmtvwn .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#vsbakffxqr .gt_row {
+#jtwyhmtvwn .gt_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -1691,7 +1689,7 @@ Baseline Temperature (C)
   overflow-x: hidden;
 }
 
-#vsbakffxqr .gt_stub {
+#jtwyhmtvwn .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1704,7 +1702,7 @@ Baseline Temperature (C)
   padding-right: 5px;
 }
 
-#vsbakffxqr .gt_stub_row_group {
+#jtwyhmtvwn .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1718,15 +1716,15 @@ Baseline Temperature (C)
   vertical-align: top;
 }
 
-#vsbakffxqr .gt_row_group_first td {
+#jtwyhmtvwn .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#vsbakffxqr .gt_row_group_first th {
+#jtwyhmtvwn .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#vsbakffxqr .gt_summary_row {
+#jtwyhmtvwn .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1736,16 +1734,16 @@ Baseline Temperature (C)
   padding-right: 5px;
 }
 
-#vsbakffxqr .gt_first_summary_row {
+#jtwyhmtvwn .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#vsbakffxqr .gt_first_summary_row.thick {
+#jtwyhmtvwn .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#vsbakffxqr .gt_last_summary_row {
+#jtwyhmtvwn .gt_last_summary_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -1755,7 +1753,7 @@ Baseline Temperature (C)
   border-bottom-color: #D3D3D3;
 }
 
-#vsbakffxqr .gt_grand_summary_row {
+#jtwyhmtvwn .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1765,7 +1763,7 @@ Baseline Temperature (C)
   padding-right: 5px;
 }
 
-#vsbakffxqr .gt_first_grand_summary_row {
+#jtwyhmtvwn .gt_first_grand_summary_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -1775,7 +1773,7 @@ Baseline Temperature (C)
   border-top-color: #D3D3D3;
 }
 
-#vsbakffxqr .gt_last_grand_summary_row_top {
+#jtwyhmtvwn .gt_last_grand_summary_row_top {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -1785,11 +1783,11 @@ Baseline Temperature (C)
   border-bottom-color: #D3D3D3;
 }
 
-#vsbakffxqr .gt_striped {
+#jtwyhmtvwn .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#vsbakffxqr .gt_table_body {
+#jtwyhmtvwn .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1798,7 +1796,7 @@ Baseline Temperature (C)
   border-bottom-color: #D3D3D3;
 }
 
-#vsbakffxqr .gt_footnotes {
+#jtwyhmtvwn .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1812,7 +1810,7 @@ Baseline Temperature (C)
   border-right-color: #D3D3D3;
 }
 
-#vsbakffxqr .gt_footnote {
+#jtwyhmtvwn .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 1px;
@@ -1821,7 +1819,7 @@ Baseline Temperature (C)
   padding-right: 5px;
 }
 
-#vsbakffxqr .gt_sourcenotes {
+#jtwyhmtvwn .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1835,7 +1833,7 @@ Baseline Temperature (C)
   border-right-color: #D3D3D3;
 }
 
-#vsbakffxqr .gt_sourcenote {
+#jtwyhmtvwn .gt_sourcenote {
   font-size: 90%;
   padding-top: 1px;
   padding-bottom: 1px;
@@ -1843,63 +1841,63 @@ Baseline Temperature (C)
   padding-right: 5px;
 }
 
-#vsbakffxqr .gt_left {
+#jtwyhmtvwn .gt_left {
   text-align: left;
 }
 
-#vsbakffxqr .gt_center {
+#jtwyhmtvwn .gt_center {
   text-align: center;
 }
 
-#vsbakffxqr .gt_right {
+#jtwyhmtvwn .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#vsbakffxqr .gt_font_normal {
+#jtwyhmtvwn .gt_font_normal {
   font-weight: normal;
 }
 
-#vsbakffxqr .gt_font_bold {
+#jtwyhmtvwn .gt_font_bold {
   font-weight: bold;
 }
 
-#vsbakffxqr .gt_font_italic {
+#jtwyhmtvwn .gt_font_italic {
   font-style: italic;
 }
 
-#vsbakffxqr .gt_super {
+#jtwyhmtvwn .gt_super {
   font-size: 65%;
 }
 
-#vsbakffxqr .gt_footnote_marks {
+#jtwyhmtvwn .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#vsbakffxqr .gt_asterisk {
+#jtwyhmtvwn .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#vsbakffxqr .gt_indent_1 {
+#jtwyhmtvwn .gt_indent_1 {
   text-indent: 5px;
 }
 
-#vsbakffxqr .gt_indent_2 {
+#jtwyhmtvwn .gt_indent_2 {
   text-indent: 10px;
 }
 
-#vsbakffxqr .gt_indent_3 {
+#jtwyhmtvwn .gt_indent_3 {
   text-indent: 15px;
 }
 
-#vsbakffxqr .gt_indent_4 {
+#jtwyhmtvwn .gt_indent_4 {
   text-indent: 20px;
 }
 
-#vsbakffxqr .gt_indent_5 {
+#jtwyhmtvwn .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2171,17 +2169,17 @@ N = 400</th>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Mean (SD)</td>
-<td headers="stat_1" class="gt_row gt_right">49.7 (8.3)</td>
-<td headers="stat_2" class="gt_row gt_right">50.9 (7.4)</td>
-<td headers="stat_3" class="gt_row gt_right">49.1 (8.2)</td>
-<td headers="stat_0" class="gt_row gt_right">49.9 (8.0)</td>
+<td headers="stat_1" class="gt_row gt_right">36.7 (1.0)</td>
+<td headers="stat_2" class="gt_row gt_right">36.6 (1.1)</td>
+<td headers="stat_3" class="gt_row gt_right">36.5 (1.0)</td>
+<td headers="stat_0" class="gt_row gt_right">36.6 (1.0)</td>
 </tr>
 <tr>
 <td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Median (min - max)</td>
-<td headers="stat_1" class="gt_row gt_right">50.4 (29.0 - 69.1)</td>
-<td headers="stat_2" class="gt_row gt_right">51.5 (30.7 - 67.7)</td>
-<td headers="stat_3" class="gt_row gt_right">48.7 (20.6 - 70.5)</td>
-<td headers="stat_0" class="gt_row gt_right">50.3 (20.6 - 70.5)</td>
+<td headers="stat_1" class="gt_row gt_right">36.7 (34.0 - 39.3)</td>
+<td headers="stat_2" class="gt_row gt_right">36.6 (33.6 - 38.9)</td>
+<td headers="stat_3" class="gt_row gt_right">36.5 (34.2 - 38.9)</td>
+<td headers="stat_0" class="gt_row gt_right">36.6 (33.6 - 39.3)</td>
 </tr>
 </tbody>
 </table>
@@ -2190,39 +2188,38 @@ N = 400</th>
 </div>
 </div>
 <div id="tabset-1-9" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-9-tab">
-<div class="cell" data-hash="template-table_02_cache/html/tbl_gtsummary_fb571c5e8e2b42784e7f7f1b7474d42a">
+<div class="cell" data-hash="template-table_02_cache/html/tbl_gtsummary_ccb3e475cee25573aee2c926fdf44584">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Load Libraries &amp; Data</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="fu">library</span>(scda)</span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="fu">library</span>(falcon)</span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb4-5"><a href="#cb4-5"></a></span>
-<span id="cb4-6"><a href="#cb4-6"></a>adsl <span class="ot">&lt;-</span> scda<span class="sc">::</span><span class="fu">synthetic_cdisc_dataset</span>(<span class="st">"rcd_2022_10_13"</span>, <span class="st">"adsl"</span>)</span>
-<span id="cb4-7"><a href="#cb4-7"></a>advs <span class="ot">&lt;-</span> scda<span class="sc">::</span><span class="fu">synthetic_cdisc_dataset</span>(<span class="st">"rcd_2022_10_13"</span>, <span class="st">"advs"</span>)</span>
-<span id="cb4-8"><a href="#cb4-8"></a></span>
-<span id="cb4-9"><a href="#cb4-9"></a><span class="co"># Pre-Processing - Add any variables needed in your table to df</span></span>
-<span id="cb4-10"><a href="#cb4-10"></a>adsl <span class="ot">&lt;-</span> adsl <span class="sc">%&gt;%</span></span>
-<span id="cb4-11"><a href="#cb4-11"></a>  <span class="fu">mutate</span>(<span class="at">AGEGR1 =</span> <span class="fu">as.factor</span>(<span class="fu">case_when</span>(</span>
-<span id="cb4-12"><a href="#cb4-12"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">17</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"≥17 to &amp;lt;65"</span>,</span>
-<span id="cb4-13"><a href="#cb4-13"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"≥65"</span>,</span>
-<span id="cb4-14"><a href="#cb4-14"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">75</span> <span class="sc">~</span> <span class="st">"≥65 to &amp;lt;75"</span>,</span>
-<span id="cb4-15"><a href="#cb4-15"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">75</span> <span class="sc">~</span> <span class="st">"≥75"</span></span>
-<span id="cb4-16"><a href="#cb4-16"></a>  )))</span>
-<span id="cb4-17"><a href="#cb4-17"></a></span>
-<span id="cb4-18"><a href="#cb4-18"></a>advs <span class="ot">&lt;-</span> advs <span class="sc">%&gt;%</span></span>
-<span id="cb4-19"><a href="#cb4-19"></a>  <span class="fu">filter</span>(AVISIT <span class="sc">==</span> <span class="st">"BASELINE"</span>, VSTESTCD <span class="sc">==</span> <span class="st">"TEMP"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb4-20"><a href="#cb4-20"></a>  <span class="fu">select</span>(<span class="st">"USUBJID"</span>, <span class="st">"AVAL"</span>)</span>
-<span id="cb4-21"><a href="#cb4-21"></a></span>
-<span id="cb4-22"><a href="#cb4-22"></a>anl <span class="ot">&lt;-</span> <span class="fu">left_join</span>(adsl, advs, <span class="at">by =</span> <span class="st">"USUBJID"</span>)</span>
-<span id="cb4-23"><a href="#cb4-23"></a></span>
-<span id="cb4-24"><a href="#cb4-24"></a><span class="co"># Output Table</span></span>
-<span id="cb4-25"><a href="#cb4-25"></a><span class="fu">make_table_02_gtsum</span>(</span>
-<span id="cb4-26"><a href="#cb4-26"></a>  <span class="at">df =</span> anl,</span>
-<span id="cb4-27"><a href="#cb4-27"></a>  <span class="at">vars =</span> <span class="fu">c</span>(<span class="st">"SEX"</span>, <span class="st">"AGE"</span>, <span class="st">"AGEGR1"</span>, <span class="st">"RACE"</span>, <span class="st">"ETHNIC"</span>, <span class="st">"COUNTRY"</span>, <span class="st">"AVAL"</span>),</span>
-<span id="cb4-28"><a href="#cb4-28"></a>  <span class="at">lbl_vars =</span> <span class="fu">c</span>(</span>
-<span id="cb4-29"><a href="#cb4-29"></a>    <span class="st">"Sex"</span>, <span class="st">"Age, years"</span>, <span class="st">"Age Group years"</span>, <span class="st">"Race"</span>, <span class="st">"Ethnicity"</span>,</span>
-<span id="cb4-30"><a href="#cb4-30"></a>    <span class="st">"Country of Participation"</span>, <span class="st">"Baseline Temperature (C)"</span></span>
-<span id="cb4-31"><a href="#cb4-31"></a>  )</span>
-<span id="cb4-32"><a href="#cb4-32"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="fu">library</span>(falcon)</span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb4-4"><a href="#cb4-4"></a></span>
+<span id="cb4-5"><a href="#cb4-5"></a>adsl <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadsl</span>
+<span id="cb4-6"><a href="#cb4-6"></a>advs <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadvs</span>
+<span id="cb4-7"><a href="#cb4-7"></a></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="co"># Pre-Processing - Add any variables needed in your table to df</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a>adsl <span class="ot">&lt;-</span> adsl <span class="sc">%&gt;%</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a>  <span class="fu">mutate</span>(<span class="at">AGEGR1 =</span> <span class="fu">as.factor</span>(<span class="fu">case_when</span>(</span>
+<span id="cb4-11"><a href="#cb4-11"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">17</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"≥17 to &amp;lt;65"</span>,</span>
+<span id="cb4-12"><a href="#cb4-12"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"≥65"</span>,</span>
+<span id="cb4-13"><a href="#cb4-13"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">75</span> <span class="sc">~</span> <span class="st">"≥65 to &amp;lt;75"</span>,</span>
+<span id="cb4-14"><a href="#cb4-14"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">75</span> <span class="sc">~</span> <span class="st">"≥75"</span></span>
+<span id="cb4-15"><a href="#cb4-15"></a>  )))</span>
+<span id="cb4-16"><a href="#cb4-16"></a></span>
+<span id="cb4-17"><a href="#cb4-17"></a>advs <span class="ot">&lt;-</span> advs <span class="sc">%&gt;%</span></span>
+<span id="cb4-18"><a href="#cb4-18"></a>  <span class="fu">filter</span>(AVISIT <span class="sc">==</span> <span class="st">"BASELINE"</span>, VSTESTCD <span class="sc">==</span> <span class="st">"TEMP"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-19"><a href="#cb4-19"></a>  <span class="fu">select</span>(<span class="st">"USUBJID"</span>, <span class="st">"AVAL"</span>)</span>
+<span id="cb4-20"><a href="#cb4-20"></a></span>
+<span id="cb4-21"><a href="#cb4-21"></a>anl <span class="ot">&lt;-</span> <span class="fu">left_join</span>(adsl, advs, <span class="at">by =</span> <span class="st">"USUBJID"</span>)</span>
+<span id="cb4-22"><a href="#cb4-22"></a></span>
+<span id="cb4-23"><a href="#cb4-23"></a><span class="co"># Output Table</span></span>
+<span id="cb4-24"><a href="#cb4-24"></a><span class="fu">make_table_02_gtsum</span>(</span>
+<span id="cb4-25"><a href="#cb4-25"></a>  <span class="at">df =</span> anl,</span>
+<span id="cb4-26"><a href="#cb4-26"></a>  <span class="at">vars =</span> <span class="fu">c</span>(<span class="st">"SEX"</span>, <span class="st">"AGE"</span>, <span class="st">"AGEGR1"</span>, <span class="st">"RACE"</span>, <span class="st">"ETHNIC"</span>, <span class="st">"COUNTRY"</span>, <span class="st">"AVAL"</span>),</span>
+<span id="cb4-27"><a href="#cb4-27"></a>  <span class="at">lbl_vars =</span> <span class="fu">c</span>(</span>
+<span id="cb4-28"><a href="#cb4-28"></a>    <span class="st">"Sex"</span>, <span class="st">"Age, years"</span>, <span class="st">"Age Group years"</span>, <span class="st">"Race"</span>, <span class="st">"Ethnicity"</span>,</span>
+<span id="cb4-29"><a href="#cb4-29"></a>    <span class="st">"Country of Participation"</span>, <span class="st">"Baseline Temperature (C)"</span></span>
+<span id="cb4-30"><a href="#cb4-30"></a>  )</span>
+<span id="cb4-31"><a href="#cb4-31"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div id="tabset-1-10" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-10-tab">
@@ -2713,209 +2710,206 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb5-13"><a href="#cb5-13"></a></span>
 <span id="cb5-14"><a href="#cb5-14"></a><span class="in">```{r tbl, message=FALSE, warning=FALSE}</span></span>
 <span id="cb5-15"><a href="#cb5-15"></a><span class="co"># Load Libraries &amp; Data</span></span>
-<span id="cb5-16"><a href="#cb5-16"></a><span class="fu">library</span>(scda)</span>
-<span id="cb5-17"><a href="#cb5-17"></a><span class="fu">library</span>(falcon)</span>
-<span id="cb5-18"><a href="#cb5-18"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb5-19"><a href="#cb5-19"></a></span>
-<span id="cb5-20"><a href="#cb5-20"></a>adsl <span class="ot">&lt;-</span> scda<span class="sc">::</span><span class="fu">synthetic_cdisc_dataset</span>(<span class="st">"rcd_2022_10_13"</span>, <span class="st">"adsl"</span>)</span>
-<span id="cb5-21"><a href="#cb5-21"></a>advs <span class="ot">&lt;-</span> scda<span class="sc">::</span><span class="fu">synthetic_cdisc_dataset</span>(<span class="st">"rcd_2022_10_13"</span>, <span class="st">"advs"</span>)</span>
-<span id="cb5-22"><a href="#cb5-22"></a></span>
-<span id="cb5-23"><a href="#cb5-23"></a><span class="co"># Pre-Processing - Add any variables needed in your table to df</span></span>
-<span id="cb5-24"><a href="#cb5-24"></a>adsl <span class="ot">&lt;-</span> adsl <span class="sc">%&gt;%</span></span>
-<span id="cb5-25"><a href="#cb5-25"></a>  <span class="fu">mutate</span>(<span class="at">AGEGR1 =</span> <span class="fu">as.factor</span>(<span class="fu">case_when</span>(</span>
-<span id="cb5-26"><a href="#cb5-26"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">17</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"&gt;=17 to &lt;65"</span>,</span>
-<span id="cb5-27"><a href="#cb5-27"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"&gt;=65"</span>,</span>
-<span id="cb5-28"><a href="#cb5-28"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">75</span> <span class="sc">~</span> <span class="st">"&gt;=65 to &lt;75"</span>,</span>
-<span id="cb5-29"><a href="#cb5-29"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">75</span> <span class="sc">~</span> <span class="st">"&gt;=75"</span></span>
-<span id="cb5-30"><a href="#cb5-30"></a>  )))</span>
-<span id="cb5-31"><a href="#cb5-31"></a></span>
-<span id="cb5-32"><a href="#cb5-32"></a>advs <span class="ot">&lt;-</span> advs <span class="sc">%&gt;%</span></span>
-<span id="cb5-33"><a href="#cb5-33"></a>  <span class="fu">filter</span>(AVISIT <span class="sc">==</span> <span class="st">"BASELINE"</span>, VSTESTCD <span class="sc">==</span> <span class="st">"TEMP"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb5-34"><a href="#cb5-34"></a>  <span class="fu">select</span>(<span class="st">"USUBJID"</span>, <span class="st">"AVAL"</span>)</span>
-<span id="cb5-35"><a href="#cb5-35"></a></span>
-<span id="cb5-36"><a href="#cb5-36"></a>anl <span class="ot">&lt;-</span> <span class="fu">left_join</span>(adsl, advs, <span class="at">by =</span> <span class="st">"USUBJID"</span>)</span>
-<span id="cb5-37"><a href="#cb5-37"></a></span>
-<span id="cb5-38"><a href="#cb5-38"></a><span class="co"># Output Table</span></span>
-<span id="cb5-39"><a href="#cb5-39"></a><span class="fu">make_table_02</span>(</span>
-<span id="cb5-40"><a href="#cb5-40"></a>  <span class="at">df =</span> anl,</span>
-<span id="cb5-41"><a href="#cb5-41"></a>  <span class="at">vars =</span> <span class="fu">c</span>(<span class="st">"SEX"</span>, <span class="st">"AGE"</span>, <span class="st">"AGEGR1"</span>, <span class="st">"RACE"</span>, <span class="st">"ETHNIC"</span>, <span class="st">"COUNTRY"</span>, <span class="st">"AVAL"</span>),</span>
-<span id="cb5-42"><a href="#cb5-42"></a>  <span class="at">lbl_vars =</span> <span class="fu">c</span>(</span>
-<span id="cb5-43"><a href="#cb5-43"></a>    <span class="st">"Sex"</span>, <span class="st">"Age, years"</span>, <span class="st">"Age Group, years"</span>, <span class="st">"Race"</span>, <span class="st">"Ethnicity"</span>,</span>
-<span id="cb5-44"><a href="#cb5-44"></a>    <span class="st">"Country of Participation"</span>, <span class="st">"Baseline Temperature (C)"</span></span>
-<span id="cb5-45"><a href="#cb5-45"></a>  )</span>
-<span id="cb5-46"><a href="#cb5-46"></a>)</span>
-<span id="cb5-47"><a href="#cb5-47"></a><span class="in">```</span></span>
-<span id="cb5-48"><a href="#cb5-48"></a></span>
-<span id="cb5-49"><a href="#cb5-49"></a><span class="fu">## rtables/tern Table Setup</span></span>
-<span id="cb5-50"><a href="#cb5-50"></a></span>
-<span id="cb5-51"><a href="#cb5-51"></a><span class="in">```{r tbl, eval=FALSE, echo=TRUE}</span></span>
-<span id="cb5-52"><a href="#cb5-52"></a><span class="in">```</span></span>
-<span id="cb5-53"><a href="#cb5-53"></a></span>
-<span id="cb5-54"><a href="#cb5-54"></a><span class="fu">## Function Details: `make_table_02`</span></span>
-<span id="cb5-55"><a href="#cb5-55"></a></span>
-<span id="cb5-56"><a href="#cb5-56"></a><span class="fu">### `make_table_02()`</span></span>
-<span id="cb5-57"><a href="#cb5-57"></a></span>
-<span id="cb5-58"><a href="#cb5-58"></a>------------------------------------------------------------------------</span>
-<span id="cb5-59"><a href="#cb5-59"></a></span>
-<span id="cb5-60"><a href="#cb5-60"></a>Required variables:</span>
-<span id="cb5-61"><a href="#cb5-61"></a></span>
-<span id="cb5-62"><a href="#cb5-62"></a><span class="ss">-   </span>**`df`**: The variables specified by <span class="in">`vars`</span>, <span class="in">`arm_var`</span>, and <span class="in">`saffl_var`</span>.</span>
-<span id="cb5-63"><a href="#cb5-63"></a><span class="ss">-   </span>**`alt_counts_df`** (if specified): <span class="in">`USUBJID`</span> and the variables specified by <span class="in">`arm_var`</span> and <span class="in">`saffl_var`</span>.</span>
-<span id="cb5-64"><a href="#cb5-64"></a></span>
-<span id="cb5-65"><a href="#cb5-65"></a>| Argument         | Description                                                                                                                                                                                                                                                                                                                                                                                         | Default                                                  |</span>
-<span id="cb5-66"><a href="#cb5-66"></a>|:-----------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------|</span>
-<span id="cb5-67"><a href="#cb5-67"></a>| <span class="in">`df`</span>             | (<span class="in">`data.frame`</span>) Dataset (typically ADSL) required to build table.                                                                                                                                                                                                                                                                                                                                    | *No default*                                             |</span>
-<span id="cb5-68"><a href="#cb5-68"></a>| <span class="in">`alt_counts_df`</span>  | (<span class="in">`character`</span>) Alternative dataset used only to calculate column counts.                                                                                                                                                                                                                                                                                                                             | <span class="in">`NULL`</span>                                                   |</span>
-<span id="cb5-69"><a href="#cb5-69"></a>| <span class="in">`show_colcounts`</span> | (<span class="in">`flag`</span>) Whether column counts should be printed.                                                                                                                                                                                                                                                                                                                                                   | <span class="in">`TRUE`</span>                                                   |</span>
-<span id="cb5-70"><a href="#cb5-70"></a>| <span class="in">`arm_var`</span>        | (<span class="in">`character`</span>) Arm variable used to split table into columns.                                                                                                                                                                                                                                                                                                                                        | <span class="in">`"ARM"`</span>                                                  |</span>
-<span id="cb5-71"><a href="#cb5-71"></a>| <span class="in">`saffl_var`</span>      | (<span class="in">`character`</span>) Flag variable used to indicate inclusion in safety population.                                                                                                                                                                                                                                                                                                                        | <span class="in">`"SAFFL"`</span>                                                |</span>
-<span id="cb5-72"><a href="#cb5-72"></a>| <span class="in">`vars`</span>           | (<span class="in">`character`</span>) Variables from <span class="in">`df`</span> to include in the table.                                                                                                                                                                                                                                                                                                                                          | <span class="in">`c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY")`</span> |</span>
-<span id="cb5-73"><a href="#cb5-73"></a>| <span class="in">`lbl_vars`</span>       | (<span class="in">`character`</span>) Labels corresponding to variables in <span class="in">`vars`</span> to print in the table. Labels should be ordered according to the order of variables in <span class="in">`vars`</span>.                                                                                                                                                                                                                                            | <span class="in">`formatters::var_labels(df, fill = TRUE)[vars]`</span>          |</span>
-<span id="cb5-74"><a href="#cb5-74"></a>| <span class="in">`lbl_overall`</span>    | (<span class="in">`character`</span>) If specified, an overall column will be added to the table with the given value as the column label.                                                                                                                                                                                                                                                                                  | <span class="in">`"Total Population"`</span>                                     |</span>
-<span id="cb5-75"><a href="#cb5-75"></a>| <span class="in">`.stats`</span>         | (<span class="in">`character`</span>) Statistics to include in the table. Includes statistics for all variable types (only the statistics that are valid for a given variable's type will be printed). See <span class="co">[</span><span class="ot">`tern::analyze_vars()`</span><span class="co">](https://insightsengineering.github.io/tern/main/reference/analyze_variables.html#value)</span> for options.                                                                                    | <span class="in">`c("mean_sd", "median_range", "count_fraction")`</span>         |</span>
-<span id="cb5-76"><a href="#cb5-76"></a>| <span class="in">`.formats`</span>       | (named <span class="in">`list`</span> of <span class="in">`character`</span>) List of formats corresponding to each value in <span class="in">`.stats`</span>. Each name is a value in <span class="in">`.stats`</span> and the corresponding value is the format that should be applied to that statistic. See <span class="co">[</span><span class="ot">`formatters::list_valid_format_labels()`</span><span class="co">](https://insightsengineering.github.io/formatters/main/reference/list_valid_format_labels.html#ref-examples)</span> for a list of valid formats. | <span class="in">`NULL`</span>                                                   |</span>
-<span id="cb5-77"><a href="#cb5-77"></a>| <span class="in">`prune_0`</span>        | (<span class="in">`flag`</span>) Whether all-zero rows should be removed from the table.                                                                                                                                                                                                                                                                                                                                    | <span class="in">`TRUE`</span>                                                   |</span>
-<span id="cb5-78"><a href="#cb5-78"></a>| <span class="in">`na_rm`</span>          | (<span class="in">`flag`</span>) Whether <span class="in">`NA`</span> levels should be removed from the table.                                                                                                                                                                                                                                                                                                                                      | <span class="in">`FALSE`</span>                                                  |</span>
-<span id="cb5-79"><a href="#cb5-79"></a>| <span class="in">`annotations`</span>    | (named <span class="in">`list`</span> of <span class="in">`character`</span>) List of annotations to add to the table. Valid annotation types are <span class="in">`title`</span>, <span class="in">`subtitles`</span>, <span class="in">`main_footer`</span>, and <span class="in">`prov_footer.`</span> Each name-value pair should use the annotation type as name and the desired string as value.                                                                                                                                              | <span class="in">`NULL`</span>                                                   |</span>
-<span id="cb5-80"><a href="#cb5-80"></a></span>
-<span id="cb5-81"><a href="#cb5-81"></a>Source code for this function is available <span class="co">[</span><span class="ot">here</span><span class="co">](https://github.com/pharmaverse/falcon/blob/main/R/fda-table_02.R#L39)</span>.</span>
-<span id="cb5-82"><a href="#cb5-82"></a></span>
-<span id="cb5-83"><a href="#cb5-83"></a><span class="fu">## Tplyr Table</span></span>
-<span id="cb5-84"><a href="#cb5-84"></a></span>
-<span id="cb5-85"><a href="#cb5-85"></a><span class="in">```{r tbl_tplyr, message=FALSE, warning=FALSE}</span></span>
-<span id="cb5-86"><a href="#cb5-86"></a><span class="co"># Load Libraries &amp; Data</span></span>
-<span id="cb5-87"><a href="#cb5-87"></a><span class="fu">library</span>(scda)</span>
-<span id="cb5-88"><a href="#cb5-88"></a><span class="fu">library</span>(falcon)</span>
-<span id="cb5-89"><a href="#cb5-89"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb5-90"><a href="#cb5-90"></a></span>
-<span id="cb5-91"><a href="#cb5-91"></a>adsl <span class="ot">&lt;-</span> scda<span class="sc">::</span><span class="fu">synthetic_cdisc_dataset</span>(<span class="st">"rcd_2022_10_13"</span>, <span class="st">"adsl"</span>)</span>
-<span id="cb5-92"><a href="#cb5-92"></a>advs <span class="ot">&lt;-</span> scda<span class="sc">::</span><span class="fu">synthetic_cdisc_dataset</span>(<span class="st">"rcd_2022_10_13"</span>, <span class="st">"advs"</span>)</span>
-<span id="cb5-93"><a href="#cb5-93"></a></span>
-<span id="cb5-94"><a href="#cb5-94"></a><span class="co"># Pre-Processing - Add any variables needed in your table to df</span></span>
-<span id="cb5-95"><a href="#cb5-95"></a>adsl <span class="ot">&lt;-</span> adsl <span class="sc">%&gt;%</span></span>
-<span id="cb5-96"><a href="#cb5-96"></a>  <span class="fu">mutate</span>(<span class="at">AGEGR1 =</span> <span class="fu">as.factor</span>(<span class="fu">case_when</span>(</span>
-<span id="cb5-97"><a href="#cb5-97"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">17</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"&gt;=17 to &lt;65"</span>,</span>
-<span id="cb5-98"><a href="#cb5-98"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"&gt;=65"</span>,</span>
-<span id="cb5-99"><a href="#cb5-99"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">75</span> <span class="sc">~</span> <span class="st">"&gt;=65 to &lt;75"</span>,</span>
-<span id="cb5-100"><a href="#cb5-100"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">75</span> <span class="sc">~</span> <span class="st">"&gt;=75"</span></span>
-<span id="cb5-101"><a href="#cb5-101"></a>  )))</span>
-<span id="cb5-102"><a href="#cb5-102"></a></span>
-<span id="cb5-103"><a href="#cb5-103"></a>advs <span class="ot">&lt;-</span> advs <span class="sc">%&gt;%</span></span>
-<span id="cb5-104"><a href="#cb5-104"></a>  <span class="fu">filter</span>(AVISIT <span class="sc">==</span> <span class="st">"BASELINE"</span>, VSTESTCD <span class="sc">==</span> <span class="st">"TEMP"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb5-105"><a href="#cb5-105"></a>  <span class="fu">select</span>(<span class="st">"USUBJID"</span>, <span class="st">"AVAL"</span>)</span>
+<span id="cb5-16"><a href="#cb5-16"></a><span class="fu">library</span>(falcon)</span>
+<span id="cb5-17"><a href="#cb5-17"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb5-18"><a href="#cb5-18"></a></span>
+<span id="cb5-19"><a href="#cb5-19"></a>adsl <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadsl</span>
+<span id="cb5-20"><a href="#cb5-20"></a>advs <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadvs</span>
+<span id="cb5-21"><a href="#cb5-21"></a></span>
+<span id="cb5-22"><a href="#cb5-22"></a><span class="co"># Pre-Processing - Add any variables needed in your table to df</span></span>
+<span id="cb5-23"><a href="#cb5-23"></a>adsl <span class="ot">&lt;-</span> adsl <span class="sc">%&gt;%</span></span>
+<span id="cb5-24"><a href="#cb5-24"></a>  <span class="fu">mutate</span>(<span class="at">AGEGR1 =</span> <span class="fu">as.factor</span>(<span class="fu">case_when</span>(</span>
+<span id="cb5-25"><a href="#cb5-25"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">17</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"&gt;=17 to &lt;65"</span>,</span>
+<span id="cb5-26"><a href="#cb5-26"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"&gt;=65"</span>,</span>
+<span id="cb5-27"><a href="#cb5-27"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">75</span> <span class="sc">~</span> <span class="st">"&gt;=65 to &lt;75"</span>,</span>
+<span id="cb5-28"><a href="#cb5-28"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">75</span> <span class="sc">~</span> <span class="st">"&gt;=75"</span></span>
+<span id="cb5-29"><a href="#cb5-29"></a>  )))</span>
+<span id="cb5-30"><a href="#cb5-30"></a></span>
+<span id="cb5-31"><a href="#cb5-31"></a>advs <span class="ot">&lt;-</span> advs <span class="sc">%&gt;%</span></span>
+<span id="cb5-32"><a href="#cb5-32"></a>  <span class="fu">filter</span>(AVISIT <span class="sc">==</span> <span class="st">"BASELINE"</span>, VSTESTCD <span class="sc">==</span> <span class="st">"TEMP"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-33"><a href="#cb5-33"></a>  <span class="fu">select</span>(<span class="st">"USUBJID"</span>, <span class="st">"AVAL"</span>)</span>
+<span id="cb5-34"><a href="#cb5-34"></a></span>
+<span id="cb5-35"><a href="#cb5-35"></a>anl <span class="ot">&lt;-</span> <span class="fu">left_join</span>(adsl, advs, <span class="at">by =</span> <span class="st">"USUBJID"</span>)</span>
+<span id="cb5-36"><a href="#cb5-36"></a></span>
+<span id="cb5-37"><a href="#cb5-37"></a><span class="co"># Output Table</span></span>
+<span id="cb5-38"><a href="#cb5-38"></a><span class="fu">make_table_02</span>(</span>
+<span id="cb5-39"><a href="#cb5-39"></a>  <span class="at">df =</span> anl,</span>
+<span id="cb5-40"><a href="#cb5-40"></a>  <span class="at">vars =</span> <span class="fu">c</span>(<span class="st">"SEX"</span>, <span class="st">"AGE"</span>, <span class="st">"AGEGR1"</span>, <span class="st">"RACE"</span>, <span class="st">"ETHNIC"</span>, <span class="st">"COUNTRY"</span>, <span class="st">"AVAL"</span>),</span>
+<span id="cb5-41"><a href="#cb5-41"></a>  <span class="at">lbl_vars =</span> <span class="fu">c</span>(</span>
+<span id="cb5-42"><a href="#cb5-42"></a>    <span class="st">"Sex"</span>, <span class="st">"Age, years"</span>, <span class="st">"Age Group, years"</span>, <span class="st">"Race"</span>, <span class="st">"Ethnicity"</span>,</span>
+<span id="cb5-43"><a href="#cb5-43"></a>    <span class="st">"Country of Participation"</span>, <span class="st">"Baseline Temperature (C)"</span></span>
+<span id="cb5-44"><a href="#cb5-44"></a>  )</span>
+<span id="cb5-45"><a href="#cb5-45"></a>)</span>
+<span id="cb5-46"><a href="#cb5-46"></a><span class="in">```</span></span>
+<span id="cb5-47"><a href="#cb5-47"></a></span>
+<span id="cb5-48"><a href="#cb5-48"></a><span class="fu">## rtables/tern Table Setup</span></span>
+<span id="cb5-49"><a href="#cb5-49"></a></span>
+<span id="cb5-50"><a href="#cb5-50"></a><span class="in">```{r tbl, eval=FALSE, echo=TRUE}</span></span>
+<span id="cb5-51"><a href="#cb5-51"></a><span class="in">```</span></span>
+<span id="cb5-52"><a href="#cb5-52"></a></span>
+<span id="cb5-53"><a href="#cb5-53"></a><span class="fu">## Function Details: `make_table_02`</span></span>
+<span id="cb5-54"><a href="#cb5-54"></a></span>
+<span id="cb5-55"><a href="#cb5-55"></a><span class="fu">### `make_table_02()`</span></span>
+<span id="cb5-56"><a href="#cb5-56"></a></span>
+<span id="cb5-57"><a href="#cb5-57"></a>------------------------------------------------------------------------</span>
+<span id="cb5-58"><a href="#cb5-58"></a></span>
+<span id="cb5-59"><a href="#cb5-59"></a>Required variables:</span>
+<span id="cb5-60"><a href="#cb5-60"></a></span>
+<span id="cb5-61"><a href="#cb5-61"></a><span class="ss">-   </span>**`df`**: The variables specified by <span class="in">`vars`</span>, <span class="in">`arm_var`</span>, and <span class="in">`saffl_var`</span>.</span>
+<span id="cb5-62"><a href="#cb5-62"></a><span class="ss">-   </span>**`alt_counts_df`** (if specified): <span class="in">`USUBJID`</span> and the variables specified by <span class="in">`arm_var`</span> and <span class="in">`saffl_var`</span>.</span>
+<span id="cb5-63"><a href="#cb5-63"></a></span>
+<span id="cb5-64"><a href="#cb5-64"></a>| Argument         | Description                                                                                                                                                                                                                                                                                                                                                                                         | Default                                                  |</span>
+<span id="cb5-65"><a href="#cb5-65"></a>|:-----------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------|</span>
+<span id="cb5-66"><a href="#cb5-66"></a>| <span class="in">`df`</span>             | (<span class="in">`data.frame`</span>) Dataset (typically ADSL) required to build table.                                                                                                                                                                                                                                                                                                                                    | *No default*                                             |</span>
+<span id="cb5-67"><a href="#cb5-67"></a>| <span class="in">`alt_counts_df`</span>  | (<span class="in">`character`</span>) Alternative dataset used only to calculate column counts.                                                                                                                                                                                                                                                                                                                             | <span class="in">`NULL`</span>                                                   |</span>
+<span id="cb5-68"><a href="#cb5-68"></a>| <span class="in">`show_colcounts`</span> | (<span class="in">`flag`</span>) Whether column counts should be printed.                                                                                                                                                                                                                                                                                                                                                   | <span class="in">`TRUE`</span>                                                   |</span>
+<span id="cb5-69"><a href="#cb5-69"></a>| <span class="in">`arm_var`</span>        | (<span class="in">`character`</span>) Arm variable used to split table into columns.                                                                                                                                                                                                                                                                                                                                        | <span class="in">`"ARM"`</span>                                                  |</span>
+<span id="cb5-70"><a href="#cb5-70"></a>| <span class="in">`saffl_var`</span>      | (<span class="in">`character`</span>) Flag variable used to indicate inclusion in safety population.                                                                                                                                                                                                                                                                                                                        | <span class="in">`"SAFFL"`</span>                                                |</span>
+<span id="cb5-71"><a href="#cb5-71"></a>| <span class="in">`vars`</span>           | (<span class="in">`character`</span>) Variables from <span class="in">`df`</span> to include in the table.                                                                                                                                                                                                                                                                                                                                          | <span class="in">`c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY")`</span> |</span>
+<span id="cb5-72"><a href="#cb5-72"></a>| <span class="in">`lbl_vars`</span>       | (<span class="in">`character`</span>) Labels corresponding to variables in <span class="in">`vars`</span> to print in the table. Labels should be ordered according to the order of variables in <span class="in">`vars`</span>.                                                                                                                                                                                                                                            | <span class="in">`formatters::var_labels(df, fill = TRUE)[vars]`</span>          |</span>
+<span id="cb5-73"><a href="#cb5-73"></a>| <span class="in">`lbl_overall`</span>    | (<span class="in">`character`</span>) If specified, an overall column will be added to the table with the given value as the column label.                                                                                                                                                                                                                                                                                  | <span class="in">`"Total Population"`</span>                                     |</span>
+<span id="cb5-74"><a href="#cb5-74"></a>| <span class="in">`.stats`</span>         | (<span class="in">`character`</span>) Statistics to include in the table. Includes statistics for all variable types (only the statistics that are valid for a given variable's type will be printed). See <span class="co">[</span><span class="ot">`tern::analyze_vars()`</span><span class="co">](https://insightsengineering.github.io/tern/main/reference/analyze_variables.html#value)</span> for options.                                                                                    | <span class="in">`c("mean_sd", "median_range", "count_fraction")`</span>         |</span>
+<span id="cb5-75"><a href="#cb5-75"></a>| <span class="in">`.formats`</span>       | (named <span class="in">`list`</span> of <span class="in">`character`</span>) List of formats corresponding to each value in <span class="in">`.stats`</span>. Each name is a value in <span class="in">`.stats`</span> and the corresponding value is the format that should be applied to that statistic. See <span class="co">[</span><span class="ot">`formatters::list_valid_format_labels()`</span><span class="co">](https://insightsengineering.github.io/formatters/main/reference/list_valid_format_labels.html#ref-examples)</span> for a list of valid formats. | <span class="in">`NULL`</span>                                                   |</span>
+<span id="cb5-76"><a href="#cb5-76"></a>| <span class="in">`prune_0`</span>        | (<span class="in">`flag`</span>) Whether all-zero rows should be removed from the table.                                                                                                                                                                                                                                                                                                                                    | <span class="in">`TRUE`</span>                                                   |</span>
+<span id="cb5-77"><a href="#cb5-77"></a>| <span class="in">`na_rm`</span>          | (<span class="in">`flag`</span>) Whether <span class="in">`NA`</span> levels should be removed from the table.                                                                                                                                                                                                                                                                                                                                      | <span class="in">`FALSE`</span>                                                  |</span>
+<span id="cb5-78"><a href="#cb5-78"></a>| <span class="in">`annotations`</span>    | (named <span class="in">`list`</span> of <span class="in">`character`</span>) List of annotations to add to the table. Valid annotation types are <span class="in">`title`</span>, <span class="in">`subtitles`</span>, <span class="in">`main_footer`</span>, and <span class="in">`prov_footer.`</span> Each name-value pair should use the annotation type as name and the desired string as value.                                                                                                                                              | <span class="in">`NULL`</span>                                                   |</span>
+<span id="cb5-79"><a href="#cb5-79"></a></span>
+<span id="cb5-80"><a href="#cb5-80"></a>Source code for this function is available <span class="co">[</span><span class="ot">here</span><span class="co">](https://github.com/pharmaverse/falcon/blob/main/R/fda-table_02.R#L39)</span>.</span>
+<span id="cb5-81"><a href="#cb5-81"></a></span>
+<span id="cb5-82"><a href="#cb5-82"></a><span class="fu">## Tplyr Table</span></span>
+<span id="cb5-83"><a href="#cb5-83"></a></span>
+<span id="cb5-84"><a href="#cb5-84"></a><span class="in">```{r tbl_tplyr, message=FALSE, warning=FALSE}</span></span>
+<span id="cb5-85"><a href="#cb5-85"></a><span class="co"># Load Libraries &amp; Data</span></span>
+<span id="cb5-86"><a href="#cb5-86"></a><span class="fu">library</span>(falcon)</span>
+<span id="cb5-87"><a href="#cb5-87"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb5-88"><a href="#cb5-88"></a></span>
+<span id="cb5-89"><a href="#cb5-89"></a>adsl <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadsl</span>
+<span id="cb5-90"><a href="#cb5-90"></a>advs <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadvs</span>
+<span id="cb5-91"><a href="#cb5-91"></a></span>
+<span id="cb5-92"><a href="#cb5-92"></a><span class="co"># Pre-Processing - Add any variables needed in your table to df</span></span>
+<span id="cb5-93"><a href="#cb5-93"></a>adsl <span class="ot">&lt;-</span> adsl <span class="sc">%&gt;%</span></span>
+<span id="cb5-94"><a href="#cb5-94"></a>  <span class="fu">mutate</span>(<span class="at">AGEGR1 =</span> <span class="fu">as.factor</span>(<span class="fu">case_when</span>(</span>
+<span id="cb5-95"><a href="#cb5-95"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">17</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"&gt;=17 to &lt;65"</span>,</span>
+<span id="cb5-96"><a href="#cb5-96"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"&gt;=65"</span>,</span>
+<span id="cb5-97"><a href="#cb5-97"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">75</span> <span class="sc">~</span> <span class="st">"&gt;=65 to &lt;75"</span>,</span>
+<span id="cb5-98"><a href="#cb5-98"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">75</span> <span class="sc">~</span> <span class="st">"&gt;=75"</span></span>
+<span id="cb5-99"><a href="#cb5-99"></a>  )))</span>
+<span id="cb5-100"><a href="#cb5-100"></a></span>
+<span id="cb5-101"><a href="#cb5-101"></a>advs <span class="ot">&lt;-</span> advs <span class="sc">%&gt;%</span></span>
+<span id="cb5-102"><a href="#cb5-102"></a>  <span class="fu">filter</span>(AVISIT <span class="sc">==</span> <span class="st">"BASELINE"</span>, VSTESTCD <span class="sc">==</span> <span class="st">"TEMP"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-103"><a href="#cb5-103"></a>  <span class="fu">select</span>(<span class="st">"USUBJID"</span>, <span class="st">"AVAL"</span>)</span>
+<span id="cb5-104"><a href="#cb5-104"></a></span>
+<span id="cb5-105"><a href="#cb5-105"></a>anl <span class="ot">&lt;-</span> <span class="fu">left_join</span>(adsl, advs, <span class="at">by =</span> <span class="st">"USUBJID"</span>)</span>
 <span id="cb5-106"><a href="#cb5-106"></a></span>
-<span id="cb5-107"><a href="#cb5-107"></a>anl <span class="ot">&lt;-</span> <span class="fu">left_join</span>(adsl, advs, <span class="at">by =</span> <span class="st">"USUBJID"</span>)</span>
-<span id="cb5-108"><a href="#cb5-108"></a></span>
-<span id="cb5-109"><a href="#cb5-109"></a><span class="co"># Output Table</span></span>
-<span id="cb5-110"><a href="#cb5-110"></a><span class="fu">make_table_02_tplyr</span>(</span>
-<span id="cb5-111"><a href="#cb5-111"></a>  <span class="at">df =</span> anl,</span>
-<span id="cb5-112"><a href="#cb5-112"></a>  <span class="at">vars =</span> <span class="fu">c</span>(<span class="st">"SEX"</span>, <span class="st">"AGE"</span>, <span class="st">"AGEGR1"</span>, <span class="st">"RACE"</span>, <span class="st">"ETHNIC"</span>, <span class="st">"COUNTRY"</span>, <span class="st">"AVAL"</span>),</span>
-<span id="cb5-113"><a href="#cb5-113"></a>  <span class="at">lbl_vars =</span> <span class="fu">c</span>(</span>
-<span id="cb5-114"><a href="#cb5-114"></a>    <span class="st">"Sex"</span>, <span class="st">"Age, years"</span>, <span class="st">"Age Group, years"</span>, <span class="st">"Race"</span>, <span class="st">"Ethnicity"</span>,</span>
-<span id="cb5-115"><a href="#cb5-115"></a>    <span class="st">"Country of Participation"</span>, <span class="st">"Baseline Temperature (C)"</span></span>
-<span id="cb5-116"><a href="#cb5-116"></a>  )</span>
-<span id="cb5-117"><a href="#cb5-117"></a>)</span>
-<span id="cb5-118"><a href="#cb5-118"></a><span class="in">```</span></span>
+<span id="cb5-107"><a href="#cb5-107"></a><span class="co"># Output Table</span></span>
+<span id="cb5-108"><a href="#cb5-108"></a><span class="fu">make_table_02_tplyr</span>(</span>
+<span id="cb5-109"><a href="#cb5-109"></a>  <span class="at">df =</span> anl,</span>
+<span id="cb5-110"><a href="#cb5-110"></a>  <span class="at">vars =</span> <span class="fu">c</span>(<span class="st">"SEX"</span>, <span class="st">"AGE"</span>, <span class="st">"AGEGR1"</span>, <span class="st">"RACE"</span>, <span class="st">"ETHNIC"</span>, <span class="st">"COUNTRY"</span>, <span class="st">"AVAL"</span>),</span>
+<span id="cb5-111"><a href="#cb5-111"></a>  <span class="at">lbl_vars =</span> <span class="fu">c</span>(</span>
+<span id="cb5-112"><a href="#cb5-112"></a>    <span class="st">"Sex"</span>, <span class="st">"Age, years"</span>, <span class="st">"Age Group, years"</span>, <span class="st">"Race"</span>, <span class="st">"Ethnicity"</span>,</span>
+<span id="cb5-113"><a href="#cb5-113"></a>    <span class="st">"Country of Participation"</span>, <span class="st">"Baseline Temperature (C)"</span></span>
+<span id="cb5-114"><a href="#cb5-114"></a>  )</span>
+<span id="cb5-115"><a href="#cb5-115"></a>)</span>
+<span id="cb5-116"><a href="#cb5-116"></a><span class="in">```</span></span>
+<span id="cb5-117"><a href="#cb5-117"></a></span>
+<span id="cb5-118"><a href="#cb5-118"></a><span class="fu">## Tplyr Table Setup</span></span>
 <span id="cb5-119"><a href="#cb5-119"></a></span>
-<span id="cb5-120"><a href="#cb5-120"></a><span class="fu">## Tplyr Table Setup</span></span>
-<span id="cb5-121"><a href="#cb5-121"></a></span>
-<span id="cb5-122"><a href="#cb5-122"></a><span class="in">```{r tbl_tplyr, eval=FALSE, echo=TRUE}</span></span>
-<span id="cb5-123"><a href="#cb5-123"></a><span class="in">```</span></span>
+<span id="cb5-120"><a href="#cb5-120"></a><span class="in">```{r tbl_tplyr, eval=FALSE, echo=TRUE}</span></span>
+<span id="cb5-121"><a href="#cb5-121"></a><span class="in">```</span></span>
+<span id="cb5-122"><a href="#cb5-122"></a></span>
+<span id="cb5-123"><a href="#cb5-123"></a><span class="fu">## Function Details: `make_table_02_tplyr`</span></span>
 <span id="cb5-124"><a href="#cb5-124"></a></span>
-<span id="cb5-125"><a href="#cb5-125"></a><span class="fu">## Function Details: `make_table_02_tplyr`</span></span>
+<span id="cb5-125"><a href="#cb5-125"></a><span class="fu">### `make_table_02_tplyr()`</span></span>
 <span id="cb5-126"><a href="#cb5-126"></a></span>
-<span id="cb5-127"><a href="#cb5-127"></a><span class="fu">### `make_table_02_tplyr()`</span></span>
+<span id="cb5-127"><a href="#cb5-127"></a>------------------------------------------------------------------------</span>
 <span id="cb5-128"><a href="#cb5-128"></a></span>
-<span id="cb5-129"><a href="#cb5-129"></a>------------------------------------------------------------------------</span>
+<span id="cb5-129"><a href="#cb5-129"></a>Required variables:</span>
 <span id="cb5-130"><a href="#cb5-130"></a></span>
-<span id="cb5-131"><a href="#cb5-131"></a>Required variables:</span>
-<span id="cb5-132"><a href="#cb5-132"></a></span>
-<span id="cb5-133"><a href="#cb5-133"></a><span class="ss">-   </span>**`df`**: <span class="in">`SAFFL`</span> and the variables specified by <span class="in">`vars`</span> and <span class="in">`arm_var`</span>.</span>
-<span id="cb5-134"><a href="#cb5-134"></a><span class="ss">-   </span>**`alt_counts_df`** (if specified and <span class="in">`tplyr_raw = FALSE`</span>): <span class="in">`SAFFL`</span>, <span class="in">`USUBJID`</span>, and the variable specified by <span class="in">`arm_var`</span>.</span>
-<span id="cb5-135"><a href="#cb5-135"></a></span>
-<span id="cb5-136"><a href="#cb5-136"></a>| Argument         | Description                                                                                                                                                                                                             | Default                                                  |</span>
-<span id="cb5-137"><a href="#cb5-137"></a>|:-----------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------|</span>
-<span id="cb5-138"><a href="#cb5-138"></a>| <span class="in">`df`</span>             | (<span class="in">`data.frame`</span>) Dataset (typically ADSL) required to build table.                                                                                                                                                        | *No default*                                             |</span>
-<span id="cb5-139"><a href="#cb5-139"></a>| <span class="in">`alt_counts_df`</span>  | (<span class="in">`character`</span>) Alternative dataset used only to calculate column counts.                                                                                                                                                 | <span class="in">`NULL`</span>                                                   |</span>
-<span id="cb5-140"><a href="#cb5-140"></a>| <span class="in">`show_colcounts`</span> | (<span class="in">`flag`</span>) Whether column counts should be printed.                                                                                                                                                                       | <span class="in">`TRUE`</span>                                                   |</span>
-<span id="cb5-141"><a href="#cb5-141"></a>| <span class="in">`arm_var`</span>        | (<span class="in">`character`</span>) Arm variable used to split table into columns.                                                                                                                                                            | <span class="in">`"ARM"`</span>                                                  |</span>
-<span id="cb5-142"><a href="#cb5-142"></a>| <span class="in">`saffl_var`</span>      | (<span class="in">`character`</span>) Flag variable used to indicate inclusion in safety population.                                                                                                                                            | <span class="in">`"SAFFL"`</span>                                                |</span>
-<span id="cb5-143"><a href="#cb5-143"></a>| <span class="in">`vars`</span>           | (<span class="in">`character`</span>) Variables from <span class="in">`df`</span> to include in the table.                                                                                                                                                              | <span class="in">`c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY")`</span> |</span>
-<span id="cb5-144"><a href="#cb5-144"></a>| <span class="in">`lbl_vars`</span>       | (<span class="in">`character`</span>) Labels corresponding to variables in <span class="in">`vars`</span> to print in the table. Labels should be ordered according to the order of variables in <span class="in">`vars`</span>.                                                                | <span class="in">`formatters::var_labels(df, fill = TRUE)[vars]`</span>          |</span>
-<span id="cb5-145"><a href="#cb5-145"></a>| <span class="in">`lbl_overall`</span>    | (<span class="in">`character`</span>) If specified, an overall column will be added to the table with the given value as the column label.                                                                                                      | <span class="in">`"Total Population"`</span>                                     |</span>
-<span id="cb5-146"><a href="#cb5-146"></a>| <span class="in">`prune_0`</span>        | (<span class="in">`flag`</span>) Whether all-zero rows should be removed from the table.                                                                                                                                                        | <span class="in">`TRUE`</span>                                                   |</span>
-<span id="cb5-147"><a href="#cb5-147"></a>| <span class="in">`na_rm`</span>          | (<span class="in">`flag`</span>) Whether <span class="in">`NA`</span> levels should be removed from the table.                                                                                                                                                          | <span class="in">`FALSE`</span>                                                  |</span>
-<span id="cb5-148"><a href="#cb5-148"></a>| <span class="in">`annotations`</span>    | (named <span class="in">`list`</span> of <span class="in">`character`</span>) List of annotations to add to the table. Valid annotation types are <span class="in">`title`</span> and <span class="in">`subtitles.`</span> Each name-value pair should use the annotation type as name and the desired string as value. | <span class="in">`NULL`</span>                                                   |</span>
-<span id="cb5-149"><a href="#cb5-149"></a>| <span class="in">`tplyr_raw`</span>      | (<span class="in">`flag`</span>) Whether the raw <span class="in">`tibble`</span> created using <span class="in">`Tplyr`</span> functions should be returned, or the table formatted using functions from <span class="in">`tfrmt`</span> should be returned (default).                                                 | <span class="in">`FALSE`</span>                                                  |</span>
+<span id="cb5-131"><a href="#cb5-131"></a><span class="ss">-   </span>**`df`**: <span class="in">`SAFFL`</span> and the variables specified by <span class="in">`vars`</span> and <span class="in">`arm_var`</span>.</span>
+<span id="cb5-132"><a href="#cb5-132"></a><span class="ss">-   </span>**`alt_counts_df`** (if specified and <span class="in">`tplyr_raw = FALSE`</span>): <span class="in">`SAFFL`</span>, <span class="in">`USUBJID`</span>, and the variable specified by <span class="in">`arm_var`</span>.</span>
+<span id="cb5-133"><a href="#cb5-133"></a></span>
+<span id="cb5-134"><a href="#cb5-134"></a>| Argument         | Description                                                                                                                                                                                                             | Default                                                  |</span>
+<span id="cb5-135"><a href="#cb5-135"></a>|:-----------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------|</span>
+<span id="cb5-136"><a href="#cb5-136"></a>| <span class="in">`df`</span>             | (<span class="in">`data.frame`</span>) Dataset (typically ADSL) required to build table.                                                                                                                                                        | *No default*                                             |</span>
+<span id="cb5-137"><a href="#cb5-137"></a>| <span class="in">`alt_counts_df`</span>  | (<span class="in">`character`</span>) Alternative dataset used only to calculate column counts.                                                                                                                                                 | <span class="in">`NULL`</span>                                                   |</span>
+<span id="cb5-138"><a href="#cb5-138"></a>| <span class="in">`show_colcounts`</span> | (<span class="in">`flag`</span>) Whether column counts should be printed.                                                                                                                                                                       | <span class="in">`TRUE`</span>                                                   |</span>
+<span id="cb5-139"><a href="#cb5-139"></a>| <span class="in">`arm_var`</span>        | (<span class="in">`character`</span>) Arm variable used to split table into columns.                                                                                                                                                            | <span class="in">`"ARM"`</span>                                                  |</span>
+<span id="cb5-140"><a href="#cb5-140"></a>| <span class="in">`saffl_var`</span>      | (<span class="in">`character`</span>) Flag variable used to indicate inclusion in safety population.                                                                                                                                            | <span class="in">`"SAFFL"`</span>                                                |</span>
+<span id="cb5-141"><a href="#cb5-141"></a>| <span class="in">`vars`</span>           | (<span class="in">`character`</span>) Variables from <span class="in">`df`</span> to include in the table.                                                                                                                                                              | <span class="in">`c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY")`</span> |</span>
+<span id="cb5-142"><a href="#cb5-142"></a>| <span class="in">`lbl_vars`</span>       | (<span class="in">`character`</span>) Labels corresponding to variables in <span class="in">`vars`</span> to print in the table. Labels should be ordered according to the order of variables in <span class="in">`vars`</span>.                                                                | <span class="in">`formatters::var_labels(df, fill = TRUE)[vars]`</span>          |</span>
+<span id="cb5-143"><a href="#cb5-143"></a>| <span class="in">`lbl_overall`</span>    | (<span class="in">`character`</span>) If specified, an overall column will be added to the table with the given value as the column label.                                                                                                      | <span class="in">`"Total Population"`</span>                                     |</span>
+<span id="cb5-144"><a href="#cb5-144"></a>| <span class="in">`prune_0`</span>        | (<span class="in">`flag`</span>) Whether all-zero rows should be removed from the table.                                                                                                                                                        | <span class="in">`TRUE`</span>                                                   |</span>
+<span id="cb5-145"><a href="#cb5-145"></a>| <span class="in">`na_rm`</span>          | (<span class="in">`flag`</span>) Whether <span class="in">`NA`</span> levels should be removed from the table.                                                                                                                                                          | <span class="in">`FALSE`</span>                                                  |</span>
+<span id="cb5-146"><a href="#cb5-146"></a>| <span class="in">`annotations`</span>    | (named <span class="in">`list`</span> of <span class="in">`character`</span>) List of annotations to add to the table. Valid annotation types are <span class="in">`title`</span> and <span class="in">`subtitles.`</span> Each name-value pair should use the annotation type as name and the desired string as value. | <span class="in">`NULL`</span>                                                   |</span>
+<span id="cb5-147"><a href="#cb5-147"></a>| <span class="in">`tplyr_raw`</span>      | (<span class="in">`flag`</span>) Whether the raw <span class="in">`tibble`</span> created using <span class="in">`Tplyr`</span> functions should be returned, or the table formatted using functions from <span class="in">`tfrmt`</span> should be returned (default).                                                 | <span class="in">`FALSE`</span>                                                  |</span>
+<span id="cb5-148"><a href="#cb5-148"></a></span>
+<span id="cb5-149"><a href="#cb5-149"></a>Source code for this function is available <span class="co">[</span><span class="ot">here</span><span class="co">](https://github.com/pharmaverse/falcon/blob/main/R/fda-table_02.R#L94)</span>.</span>
 <span id="cb5-150"><a href="#cb5-150"></a></span>
-<span id="cb5-151"><a href="#cb5-151"></a>Source code for this function is available <span class="co">[</span><span class="ot">here</span><span class="co">](https://github.com/pharmaverse/falcon/blob/main/R/fda-table_02.R#L94)</span>.</span>
+<span id="cb5-151"><a href="#cb5-151"></a><span class="fu">## gtsummary Table</span></span>
 <span id="cb5-152"><a href="#cb5-152"></a></span>
-<span id="cb5-153"><a href="#cb5-153"></a><span class="fu">## gtsummary Table</span></span>
-<span id="cb5-154"><a href="#cb5-154"></a></span>
-<span id="cb5-155"><a href="#cb5-155"></a><span class="in">```{r tbl_gtsummary, message=FALSE, warning=FALSE}</span></span>
-<span id="cb5-156"><a href="#cb5-156"></a><span class="co"># Load Libraries &amp; Data</span></span>
-<span id="cb5-157"><a href="#cb5-157"></a><span class="fu">library</span>(scda)</span>
-<span id="cb5-158"><a href="#cb5-158"></a><span class="fu">library</span>(falcon)</span>
-<span id="cb5-159"><a href="#cb5-159"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb5-153"><a href="#cb5-153"></a><span class="in">```{r tbl_gtsummary, message=FALSE, warning=FALSE}</span></span>
+<span id="cb5-154"><a href="#cb5-154"></a><span class="co"># Load Libraries &amp; Data</span></span>
+<span id="cb5-155"><a href="#cb5-155"></a><span class="fu">library</span>(falcon)</span>
+<span id="cb5-156"><a href="#cb5-156"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb5-157"><a href="#cb5-157"></a></span>
+<span id="cb5-158"><a href="#cb5-158"></a>adsl <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadsl</span>
+<span id="cb5-159"><a href="#cb5-159"></a>advs <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadvs</span>
 <span id="cb5-160"><a href="#cb5-160"></a></span>
-<span id="cb5-161"><a href="#cb5-161"></a>adsl <span class="ot">&lt;-</span> scda<span class="sc">::</span><span class="fu">synthetic_cdisc_dataset</span>(<span class="st">"rcd_2022_10_13"</span>, <span class="st">"adsl"</span>)</span>
-<span id="cb5-162"><a href="#cb5-162"></a>advs <span class="ot">&lt;-</span> scda<span class="sc">::</span><span class="fu">synthetic_cdisc_dataset</span>(<span class="st">"rcd_2022_10_13"</span>, <span class="st">"advs"</span>)</span>
-<span id="cb5-163"><a href="#cb5-163"></a></span>
-<span id="cb5-164"><a href="#cb5-164"></a><span class="co"># Pre-Processing - Add any variables needed in your table to df</span></span>
-<span id="cb5-165"><a href="#cb5-165"></a>adsl <span class="ot">&lt;-</span> adsl <span class="sc">%&gt;%</span></span>
-<span id="cb5-166"><a href="#cb5-166"></a>  <span class="fu">mutate</span>(<span class="at">AGEGR1 =</span> <span class="fu">as.factor</span>(<span class="fu">case_when</span>(</span>
-<span id="cb5-167"><a href="#cb5-167"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">17</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"≥17 to &amp;lt;65"</span>,</span>
-<span id="cb5-168"><a href="#cb5-168"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"≥65"</span>,</span>
-<span id="cb5-169"><a href="#cb5-169"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">75</span> <span class="sc">~</span> <span class="st">"≥65 to &amp;lt;75"</span>,</span>
-<span id="cb5-170"><a href="#cb5-170"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">75</span> <span class="sc">~</span> <span class="st">"≥75"</span></span>
-<span id="cb5-171"><a href="#cb5-171"></a>  )))</span>
-<span id="cb5-172"><a href="#cb5-172"></a></span>
-<span id="cb5-173"><a href="#cb5-173"></a>advs <span class="ot">&lt;-</span> advs <span class="sc">%&gt;%</span></span>
-<span id="cb5-174"><a href="#cb5-174"></a>  <span class="fu">filter</span>(AVISIT <span class="sc">==</span> <span class="st">"BASELINE"</span>, VSTESTCD <span class="sc">==</span> <span class="st">"TEMP"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb5-175"><a href="#cb5-175"></a>  <span class="fu">select</span>(<span class="st">"USUBJID"</span>, <span class="st">"AVAL"</span>)</span>
-<span id="cb5-176"><a href="#cb5-176"></a></span>
-<span id="cb5-177"><a href="#cb5-177"></a>anl <span class="ot">&lt;-</span> <span class="fu">left_join</span>(adsl, advs, <span class="at">by =</span> <span class="st">"USUBJID"</span>)</span>
-<span id="cb5-178"><a href="#cb5-178"></a></span>
-<span id="cb5-179"><a href="#cb5-179"></a><span class="co"># Output Table</span></span>
-<span id="cb5-180"><a href="#cb5-180"></a><span class="fu">make_table_02_gtsum</span>(</span>
-<span id="cb5-181"><a href="#cb5-181"></a>  <span class="at">df =</span> anl,</span>
-<span id="cb5-182"><a href="#cb5-182"></a>  <span class="at">vars =</span> <span class="fu">c</span>(<span class="st">"SEX"</span>, <span class="st">"AGE"</span>, <span class="st">"AGEGR1"</span>, <span class="st">"RACE"</span>, <span class="st">"ETHNIC"</span>, <span class="st">"COUNTRY"</span>, <span class="st">"AVAL"</span>),</span>
-<span id="cb5-183"><a href="#cb5-183"></a>  <span class="at">lbl_vars =</span> <span class="fu">c</span>(</span>
-<span id="cb5-184"><a href="#cb5-184"></a>    <span class="st">"Sex"</span>, <span class="st">"Age, years"</span>, <span class="st">"Age Group years"</span>, <span class="st">"Race"</span>, <span class="st">"Ethnicity"</span>,</span>
-<span id="cb5-185"><a href="#cb5-185"></a>    <span class="st">"Country of Participation"</span>, <span class="st">"Baseline Temperature (C)"</span></span>
-<span id="cb5-186"><a href="#cb5-186"></a>  )</span>
-<span id="cb5-187"><a href="#cb5-187"></a>)</span>
-<span id="cb5-188"><a href="#cb5-188"></a><span class="in">```</span></span>
-<span id="cb5-189"><a href="#cb5-189"></a></span>
-<span id="cb5-190"><a href="#cb5-190"></a><span class="fu">## gtsummary Table Setup</span></span>
+<span id="cb5-161"><a href="#cb5-161"></a><span class="co"># Pre-Processing - Add any variables needed in your table to df</span></span>
+<span id="cb5-162"><a href="#cb5-162"></a>adsl <span class="ot">&lt;-</span> adsl <span class="sc">%&gt;%</span></span>
+<span id="cb5-163"><a href="#cb5-163"></a>  <span class="fu">mutate</span>(<span class="at">AGEGR1 =</span> <span class="fu">as.factor</span>(<span class="fu">case_when</span>(</span>
+<span id="cb5-164"><a href="#cb5-164"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">17</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"≥17 to &amp;lt;65"</span>,</span>
+<span id="cb5-165"><a href="#cb5-165"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"≥65"</span>,</span>
+<span id="cb5-166"><a href="#cb5-166"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">75</span> <span class="sc">~</span> <span class="st">"≥65 to &amp;lt;75"</span>,</span>
+<span id="cb5-167"><a href="#cb5-167"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">75</span> <span class="sc">~</span> <span class="st">"≥75"</span></span>
+<span id="cb5-168"><a href="#cb5-168"></a>  )))</span>
+<span id="cb5-169"><a href="#cb5-169"></a></span>
+<span id="cb5-170"><a href="#cb5-170"></a>advs <span class="ot">&lt;-</span> advs <span class="sc">%&gt;%</span></span>
+<span id="cb5-171"><a href="#cb5-171"></a>  <span class="fu">filter</span>(AVISIT <span class="sc">==</span> <span class="st">"BASELINE"</span>, VSTESTCD <span class="sc">==</span> <span class="st">"TEMP"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-172"><a href="#cb5-172"></a>  <span class="fu">select</span>(<span class="st">"USUBJID"</span>, <span class="st">"AVAL"</span>)</span>
+<span id="cb5-173"><a href="#cb5-173"></a></span>
+<span id="cb5-174"><a href="#cb5-174"></a>anl <span class="ot">&lt;-</span> <span class="fu">left_join</span>(adsl, advs, <span class="at">by =</span> <span class="st">"USUBJID"</span>)</span>
+<span id="cb5-175"><a href="#cb5-175"></a></span>
+<span id="cb5-176"><a href="#cb5-176"></a><span class="co"># Output Table</span></span>
+<span id="cb5-177"><a href="#cb5-177"></a><span class="fu">make_table_02_gtsum</span>(</span>
+<span id="cb5-178"><a href="#cb5-178"></a>  <span class="at">df =</span> anl,</span>
+<span id="cb5-179"><a href="#cb5-179"></a>  <span class="at">vars =</span> <span class="fu">c</span>(<span class="st">"SEX"</span>, <span class="st">"AGE"</span>, <span class="st">"AGEGR1"</span>, <span class="st">"RACE"</span>, <span class="st">"ETHNIC"</span>, <span class="st">"COUNTRY"</span>, <span class="st">"AVAL"</span>),</span>
+<span id="cb5-180"><a href="#cb5-180"></a>  <span class="at">lbl_vars =</span> <span class="fu">c</span>(</span>
+<span id="cb5-181"><a href="#cb5-181"></a>    <span class="st">"Sex"</span>, <span class="st">"Age, years"</span>, <span class="st">"Age Group years"</span>, <span class="st">"Race"</span>, <span class="st">"Ethnicity"</span>,</span>
+<span id="cb5-182"><a href="#cb5-182"></a>    <span class="st">"Country of Participation"</span>, <span class="st">"Baseline Temperature (C)"</span></span>
+<span id="cb5-183"><a href="#cb5-183"></a>  )</span>
+<span id="cb5-184"><a href="#cb5-184"></a>)</span>
+<span id="cb5-185"><a href="#cb5-185"></a><span class="in">```</span></span>
+<span id="cb5-186"><a href="#cb5-186"></a></span>
+<span id="cb5-187"><a href="#cb5-187"></a><span class="fu">## gtsummary Table Setup</span></span>
+<span id="cb5-188"><a href="#cb5-188"></a></span>
+<span id="cb5-189"><a href="#cb5-189"></a><span class="in">```{r tbl_gtsummary, eval=FALSE, echo=TRUE}</span></span>
+<span id="cb5-190"><a href="#cb5-190"></a><span class="in">```</span></span>
 <span id="cb5-191"><a href="#cb5-191"></a></span>
-<span id="cb5-192"><a href="#cb5-192"></a><span class="in">```{r tbl_gtsummary, eval=FALSE, echo=TRUE}</span></span>
-<span id="cb5-193"><a href="#cb5-193"></a><span class="in">```</span></span>
-<span id="cb5-194"><a href="#cb5-194"></a></span>
-<span id="cb5-195"><a href="#cb5-195"></a><span class="fu">## Function Details: `make_table_02_gtsum`</span></span>
-<span id="cb5-196"><a href="#cb5-196"></a></span>
-<span id="cb5-197"><a href="#cb5-197"></a><span class="fu">### `make_table_02_gtsum()`</span></span>
-<span id="cb5-198"><a href="#cb5-198"></a></span>
-<span id="cb5-199"><a href="#cb5-199"></a>------------------------------------------------------------------------</span>
-<span id="cb5-200"><a href="#cb5-200"></a></span>
-<span id="cb5-201"><a href="#cb5-201"></a>Required variables:</span>
+<span id="cb5-192"><a href="#cb5-192"></a><span class="fu">## Function Details: `make_table_02_gtsum`</span></span>
+<span id="cb5-193"><a href="#cb5-193"></a></span>
+<span id="cb5-194"><a href="#cb5-194"></a><span class="fu">### `make_table_02_gtsum()`</span></span>
+<span id="cb5-195"><a href="#cb5-195"></a></span>
+<span id="cb5-196"><a href="#cb5-196"></a>------------------------------------------------------------------------</span>
+<span id="cb5-197"><a href="#cb5-197"></a></span>
+<span id="cb5-198"><a href="#cb5-198"></a>Required variables:</span>
+<span id="cb5-199"><a href="#cb5-199"></a></span>
+<span id="cb5-200"><a href="#cb5-200"></a><span class="ss">-   </span>**`df`**: <span class="in">`SAFFL`</span> and the variables specified by <span class="in">`vars`</span> and <span class="in">`arm_var`</span>.</span>
+<span id="cb5-201"><a href="#cb5-201"></a><span class="ss">-   </span>**`alt_counts_df`** (if specified and <span class="in">`tplyr_raw = FALSE`</span>): <span class="in">`SAFFL`</span>, <span class="in">`USUBJID`</span>, and the variable specified by <span class="in">`arm_var`</span>.</span>
 <span id="cb5-202"><a href="#cb5-202"></a></span>
-<span id="cb5-203"><a href="#cb5-203"></a><span class="ss">-   </span>**`df`**: <span class="in">`SAFFL`</span> and the variables specified by <span class="in">`vars`</span> and <span class="in">`arm_var`</span>.</span>
-<span id="cb5-204"><a href="#cb5-204"></a><span class="ss">-   </span>**`alt_counts_df`** (if specified and <span class="in">`tplyr_raw = FALSE`</span>): <span class="in">`SAFFL`</span>, <span class="in">`USUBJID`</span>, and the variable specified by <span class="in">`arm_var`</span>.</span>
-<span id="cb5-205"><a href="#cb5-205"></a></span>
-<span id="cb5-206"><a href="#cb5-206"></a>| Argument         | Description                                                                                                                                              | Default                                                  |</span>
-<span id="cb5-207"><a href="#cb5-207"></a>|:-----------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------|</span>
-<span id="cb5-208"><a href="#cb5-208"></a>| <span class="in">`df`</span>             | (<span class="in">`data.frame`</span>) Dataset (typically ADSL) required to build table.                                                                                         | *No default*                                             |</span>
-<span id="cb5-209"><a href="#cb5-209"></a>| <span class="in">`alt_counts_df`</span>  | (<span class="in">`character`</span>) Alternative dataset used only to calculate column counts.                                                                                  | <span class="in">`NULL`</span>                                                   |</span>
-<span id="cb5-210"><a href="#cb5-210"></a>| <span class="in">`show_colcounts`</span> | (<span class="in">`flag`</span>) Whether column counts should be printed.                                                                                                        | <span class="in">`TRUE`</span>                                                   |</span>
-<span id="cb5-211"><a href="#cb5-211"></a>| <span class="in">`arm_var`</span>        | (<span class="in">`character`</span>) Arm variable used to split table into columns.                                                                                             | <span class="in">`"ARM"`</span>                                                  |</span>
-<span id="cb5-212"><a href="#cb5-212"></a>| <span class="in">`saffl_var`</span>      | (<span class="in">`character`</span>) Flag variable used to indicate inclusion in safety population.                                                                             | <span class="in">`"SAFFL"`</span>                                                |</span>
-<span id="cb5-213"><a href="#cb5-213"></a>| <span class="in">`vars`</span>           | (<span class="in">`character`</span>) Variables from <span class="in">`df`</span> to include in the table.                                                                                               | <span class="in">`c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY")`</span> |</span>
-<span id="cb5-214"><a href="#cb5-214"></a>| <span class="in">`lbl_vars`</span>       | (<span class="in">`character`</span>) Labels corresponding to variables in <span class="in">`vars`</span> to print in the table. Labels should be ordered according to the order of variables in <span class="in">`vars`</span>. | <span class="in">`formatters::var_labels(df, fill = TRUE)[vars]`</span>          |</span>
-<span id="cb5-215"><a href="#cb5-215"></a>| <span class="in">`lbl_overall`</span>    | (<span class="in">`character`</span>) If specified, an overall column will be added to the table with the given value as the column label.                                       | <span class="in">`"Total Population"`</span>                                     |</span>
-<span id="cb5-216"><a href="#cb5-216"></a></span>
-<span id="cb5-217"><a href="#cb5-217"></a>Source code for this function is available <span class="co">[</span><span class="ot">here</span><span class="co">](https://github.com/pharmaverse/falcon/blob/main/R/fda-table_02.R#L257)</span>. </span>
-<span id="cb5-218"><a href="#cb5-218"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-203"><a href="#cb5-203"></a>| Argument         | Description                                                                                                                                              | Default                                                  |</span>
+<span id="cb5-204"><a href="#cb5-204"></a>|:-----------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------|</span>
+<span id="cb5-205"><a href="#cb5-205"></a>| <span class="in">`df`</span>             | (<span class="in">`data.frame`</span>) Dataset (typically ADSL) required to build table.                                                                                         | *No default*                                             |</span>
+<span id="cb5-206"><a href="#cb5-206"></a>| <span class="in">`alt_counts_df`</span>  | (<span class="in">`character`</span>) Alternative dataset used only to calculate column counts.                                                                                  | <span class="in">`NULL`</span>                                                   |</span>
+<span id="cb5-207"><a href="#cb5-207"></a>| <span class="in">`show_colcounts`</span> | (<span class="in">`flag`</span>) Whether column counts should be printed.                                                                                                        | <span class="in">`TRUE`</span>                                                   |</span>
+<span id="cb5-208"><a href="#cb5-208"></a>| <span class="in">`arm_var`</span>        | (<span class="in">`character`</span>) Arm variable used to split table into columns.                                                                                             | <span class="in">`"ARM"`</span>                                                  |</span>
+<span id="cb5-209"><a href="#cb5-209"></a>| <span class="in">`saffl_var`</span>      | (<span class="in">`character`</span>) Flag variable used to indicate inclusion in safety population.                                                                             | <span class="in">`"SAFFL"`</span>                                                |</span>
+<span id="cb5-210"><a href="#cb5-210"></a>| <span class="in">`vars`</span>           | (<span class="in">`character`</span>) Variables from <span class="in">`df`</span> to include in the table.                                                                                               | <span class="in">`c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY")`</span> |</span>
+<span id="cb5-211"><a href="#cb5-211"></a>| <span class="in">`lbl_vars`</span>       | (<span class="in">`character`</span>) Labels corresponding to variables in <span class="in">`vars`</span> to print in the table. Labels should be ordered according to the order of variables in <span class="in">`vars`</span>. | <span class="in">`formatters::var_labels(df, fill = TRUE)[vars]`</span>          |</span>
+<span id="cb5-212"><a href="#cb5-212"></a>| <span class="in">`lbl_overall`</span>    | (<span class="in">`character`</span>) If specified, an overall column will be added to the table with the given value as the column label.                                       | <span class="in">`"Total Population"`</span>                                     |</span>
+<span id="cb5-213"><a href="#cb5-213"></a></span>
+<span id="cb5-214"><a href="#cb5-214"></a>Source code for this function is available <span class="co">[</span><span class="ot">here</span><span class="co">](https://github.com/pharmaverse/falcon/blob/main/R/fda-table_02.R#L257)</span>. </span>
+<span id="cb5-215"><a href="#cb5-215"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">

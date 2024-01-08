@@ -313,14 +313,14 @@ cookieconsent.run({
 </div>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<div class="cell" data-hash="template-table_17_cache/html/tbl_bf5bac3825e9a27a414b5a4d2085b6ed">
+<div class="cell" data-hash="template-table_17_cache/html/tbl_6b47233bfd66ba639ba27e9cf24b4983">
 <div class="cell-output cell-output-stdout">
 <pre><code>FMQ (Narrow)                   A: Drug X   B: Placebo   C: Combination   Risk Difference (%) (95% CI)
   Preferred Term                (N=134)     (N=134)        (N=132)                 (N=268)           
 —————————————————————————————————————————————————————————————————————————————————————————————————————
 Abnormal Uterine Bleeding                                                                            
   dcd A.1.1.1.1                13 (9.7%)   10 (7.5%)      10 (7.6%)           -2.2 (-8.9 - 4.5)      
-  dcd A.1.1.1.2                10 (7.5%)    9 (6.7%)      13 (9.8%)           -0.7 (-6.9 - 5.4)      
+  dcd A.1.1.1.2                10 (7.5%)    9 (6.7%)      14 (10.6%)          -0.7 (-6.9 - 5.4)      
   dcd B.1.1.1.1                6 (4.5%)     7 (5.2%)       7 (5.3%)            0.7 (-4.4 - 5.9)      
   dcd B.2.1.2.1                9 (6.7%)     8 (6.0%)       6 (4.5%)           -0.7 (-6.6 - 5.1)      
   dcd C.2.1.2.1                7 (5.2%)     8 (6.0%)      11 (8.3%)            0.7 (-4.8 - 6.2)      
@@ -329,13 +329,13 @@ Abnormal Uterine Bleeding
   dcd D.2.1.5.3                9 (6.7%)    11 (8.2%)      11 (8.3%)            1.5 (-4.8 - 7.8)      
 Amenorrhea                                                                                           
   dcd A.1.1.1.1                7 (5.2%)     8 (6.0%)      16 (12.1%)           0.7 (-4.8 - 6.2)      
-  dcd A.1.1.1.2                12 (9.0%)   14 (10.4%)      6 (4.5%)            1.5 (-5.6 - 8.6)      
+  dcd A.1.1.1.2                12 (9.0%)   14 (10.4%)      5 (3.8%)            1.5 (-5.6 - 8.6)      
   dcd B.1.1.1.1                9 (6.7%)    14 (10.4%)      9 (6.8%)           3.7 (-3.0 - 10.4)      
   dcd B.2.1.2.1                13 (9.7%)   10 (7.5%)       8 (6.1%)           -2.2 (-8.9 - 4.5)      
   dcd C.2.1.2.1                6 (4.5%)     6 (4.5%)       9 (6.8%)            0.0 (-5.0 - 5.0)      
   dcd D.1.1.1.1                11 (8.2%)    6 (4.5%)       8 (6.1%)           -3.7 (-9.6 - 2.1)      
   dcd D.1.1.4.2                8 (6.0%)     3 (2.2%)       4 (3.0%)           -3.7 (-8.5 - 1.0)      
-  dcd D.2.1.5.3                7 (5.2%)    13 (9.7%)       8 (6.1%)           4.5 (-1.8 - 10.7)      
+  dcd D.2.1.5.3                7 (5.2%)    13 (9.7%)       9 (6.8%)           4.5 (-1.8 - 10.7)      
 Bacterial Vaginosis                                                                                  
   dcd A.1.1.1.1                8 (6.0%)     9 (6.7%)       5 (3.8%)            0.7 (-5.1 - 6.6)      
   dcd A.1.1.1.2                6 (4.5%)     9 (6.7%)       8 (6.1%)            2.2 (-3.3 - 7.7)      
@@ -358,33 +358,32 @@ Decreased Menstrual Bleeding
 </div>
 </div>
 <div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
-<div class="cell" data-hash="template-table_17_cache/html/tbl_38a371e6441a9af9f300eb73dfb7f94c">
+<div class="cell" data-hash="template-table_17_cache/html/tbl_cf74ae6ce77ee3563c2b050dea694510">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Load Libraries &amp; Data</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">library</span>(scda)</span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="fu">library</span>(falcon)</span>
-<span id="cb2-4"><a href="#cb2-4"></a></span>
-<span id="cb2-5"><a href="#cb2-5"></a>adsl <span class="ot">&lt;-</span> scda<span class="sc">::</span><span class="fu">synthetic_cdisc_dataset</span>(<span class="st">"rcd_2022_10_13"</span>, <span class="st">"adsl"</span>)</span>
-<span id="cb2-6"><a href="#cb2-6"></a>adae <span class="ot">&lt;-</span> scda<span class="sc">::</span><span class="fu">synthetic_cdisc_dataset</span>(<span class="st">"rcd_2022_10_13"</span>, <span class="st">"adae"</span>)</span>
-<span id="cb2-7"><a href="#cb2-7"></a></span>
-<span id="cb2-8"><a href="#cb2-8"></a><span class="co"># Pre-Processing - Ensure required variables FMQ01SC and FMQ01NAM exist in adae</span></span>
-<span id="cb2-9"><a href="#cb2-9"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb2-10"><a href="#cb2-10"></a>adae <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">rename</span>(adae, <span class="at">FMQ01SC =</span> SMQ01SC, <span class="at">FMQ01NAM =</span> SMQ01NAM)</span>
-<span id="cb2-11"><a href="#cb2-11"></a><span class="fu">levels</span>(adae<span class="sc">$</span>FMQ01SC) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"BROAD"</span>, <span class="st">"NARROW"</span>)</span>
-<span id="cb2-12"><a href="#cb2-12"></a>adae<span class="sc">$</span>FMQ01SC[<span class="fu">is.na</span>(adae<span class="sc">$</span>FMQ01SC)] <span class="ot">&lt;-</span> <span class="st">"NARROW"</span></span>
-<span id="cb2-13"><a href="#cb2-13"></a>adae<span class="sc">$</span>FMQ01NAM <span class="ot">&lt;-</span> <span class="fu">factor</span>(adae<span class="sc">$</span>FMQ01NAM, <span class="at">levels =</span> <span class="fu">c</span>(</span>
-<span id="cb2-14"><a href="#cb2-14"></a>  <span class="fu">unique</span>(adae<span class="sc">$</span>FMQ01NAM), <span class="st">"Abnormal Uterine Bleeding"</span>, <span class="st">"Amenorrhea"</span>,</span>
-<span id="cb2-15"><a href="#cb2-15"></a>  <span class="st">"Bacterial Vaginosis"</span>, <span class="st">"Decreased Menstrual Bleeding"</span></span>
-<span id="cb2-16"><a href="#cb2-16"></a>))</span>
-<span id="cb2-17"><a href="#cb2-17"></a>adae<span class="sc">$</span>FMQ01NAM[adae<span class="sc">$</span>SEX <span class="sc">==</span> <span class="st">"F"</span>] <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(</span>
-<span id="cb2-18"><a href="#cb2-18"></a>  <span class="fu">sample</span>(<span class="fu">c</span>(</span>
-<span id="cb2-19"><a href="#cb2-19"></a>    <span class="st">"Abnormal Uterine Bleeding"</span>, <span class="st">"Amenorrhea"</span>,</span>
-<span id="cb2-20"><a href="#cb2-20"></a>    <span class="st">"Bacterial Vaginosis"</span>, <span class="st">"Decreased Menstrual Bleeding"</span></span>
-<span id="cb2-21"><a href="#cb2-21"></a>  ), <span class="fu">sum</span>(adae<span class="sc">$</span>SEX <span class="sc">==</span> <span class="st">"F"</span>), <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb2-22"><a href="#cb2-22"></a>)</span>
-<span id="cb2-23"><a href="#cb2-23"></a></span>
-<span id="cb2-24"><a href="#cb2-24"></a><span class="co"># Output Table</span></span>
-<span id="cb2-25"><a href="#cb2-25"></a>risk_diff <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">arm_x =</span> <span class="st">"B: Placebo"</span>, <span class="at">arm_y =</span> <span class="st">"A: Drug X"</span>)</span>
-<span id="cb2-26"><a href="#cb2-26"></a><span class="fu">make_table_17</span>(<span class="at">adae =</span> adae, <span class="at">alt_counts_df =</span> adsl, <span class="at">risk_diff =</span> risk_diff)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">library</span>(falcon)</span>
+<span id="cb2-3"><a href="#cb2-3"></a></span>
+<span id="cb2-4"><a href="#cb2-4"></a>adsl <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadsl</span>
+<span id="cb2-5"><a href="#cb2-5"></a>adae <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadae</span>
+<span id="cb2-6"><a href="#cb2-6"></a></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="co"># Pre-Processing - Ensure required variables FMQ01SC and FMQ01NAM exist in adae</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb2-9"><a href="#cb2-9"></a>adae <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">rename</span>(adae, <span class="at">FMQ01SC =</span> SMQ01SC, <span class="at">FMQ01NAM =</span> SMQ01NAM)</span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="fu">levels</span>(adae<span class="sc">$</span>FMQ01SC) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"BROAD"</span>, <span class="st">"NARROW"</span>)</span>
+<span id="cb2-11"><a href="#cb2-11"></a>adae<span class="sc">$</span>FMQ01SC[<span class="fu">is.na</span>(adae<span class="sc">$</span>FMQ01SC)] <span class="ot">&lt;-</span> <span class="st">"NARROW"</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a>adae<span class="sc">$</span>FMQ01NAM <span class="ot">&lt;-</span> <span class="fu">factor</span>(adae<span class="sc">$</span>FMQ01NAM, <span class="at">levels =</span> <span class="fu">c</span>(</span>
+<span id="cb2-13"><a href="#cb2-13"></a>  <span class="fu">unique</span>(adae<span class="sc">$</span>FMQ01NAM), <span class="st">"Abnormal Uterine Bleeding"</span>, <span class="st">"Amenorrhea"</span>,</span>
+<span id="cb2-14"><a href="#cb2-14"></a>  <span class="st">"Bacterial Vaginosis"</span>, <span class="st">"Decreased Menstrual Bleeding"</span></span>
+<span id="cb2-15"><a href="#cb2-15"></a>))</span>
+<span id="cb2-16"><a href="#cb2-16"></a>adae<span class="sc">$</span>FMQ01NAM[adae<span class="sc">$</span>SEX <span class="sc">==</span> <span class="st">"F"</span>] <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(</span>
+<span id="cb2-17"><a href="#cb2-17"></a>  <span class="fu">sample</span>(<span class="fu">c</span>(</span>
+<span id="cb2-18"><a href="#cb2-18"></a>    <span class="st">"Abnormal Uterine Bleeding"</span>, <span class="st">"Amenorrhea"</span>,</span>
+<span id="cb2-19"><a href="#cb2-19"></a>    <span class="st">"Bacterial Vaginosis"</span>, <span class="st">"Decreased Menstrual Bleeding"</span></span>
+<span id="cb2-20"><a href="#cb2-20"></a>  ), <span class="fu">sum</span>(adae<span class="sc">$</span>SEX <span class="sc">==</span> <span class="st">"F"</span>), <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-21"><a href="#cb2-21"></a>)</span>
+<span id="cb2-22"><a href="#cb2-22"></a></span>
+<span id="cb2-23"><a href="#cb2-23"></a><span class="co"># Output Table</span></span>
+<span id="cb2-24"><a href="#cb2-24"></a>risk_diff <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">arm_x =</span> <span class="st">"B: Placebo"</span>, <span class="at">arm_y =</span> <span class="st">"A: Drug X"</span>)</span>
+<span id="cb2-25"><a href="#cb2-25"></a><span class="fu">make_table_17</span>(<span class="at">adae =</span> adae, <span class="at">alt_counts_df =</span> adsl, <span class="at">risk_diff =</span> risk_diff)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
@@ -916,107 +915,106 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb3-16"><a href="#cb3-16"></a></span>
 <span id="cb3-17"><a href="#cb3-17"></a><span class="in">```{r tbl, message=FALSE, warning=FALSE}</span></span>
 <span id="cb3-18"><a href="#cb3-18"></a><span class="co"># Load Libraries &amp; Data</span></span>
-<span id="cb3-19"><a href="#cb3-19"></a><span class="fu">library</span>(scda)</span>
-<span id="cb3-20"><a href="#cb3-20"></a><span class="fu">library</span>(falcon)</span>
-<span id="cb3-21"><a href="#cb3-21"></a></span>
-<span id="cb3-22"><a href="#cb3-22"></a>adsl <span class="ot">&lt;-</span> scda<span class="sc">::</span><span class="fu">synthetic_cdisc_dataset</span>(<span class="st">"rcd_2022_10_13"</span>, <span class="st">"adsl"</span>)</span>
-<span id="cb3-23"><a href="#cb3-23"></a>adae <span class="ot">&lt;-</span> scda<span class="sc">::</span><span class="fu">synthetic_cdisc_dataset</span>(<span class="st">"rcd_2022_10_13"</span>, <span class="st">"adae"</span>)</span>
-<span id="cb3-24"><a href="#cb3-24"></a></span>
-<span id="cb3-25"><a href="#cb3-25"></a><span class="co"># Pre-Processing - Ensure required variables FMQ01SC and FMQ01NAM exist in adae</span></span>
-<span id="cb3-26"><a href="#cb3-26"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb3-27"><a href="#cb3-27"></a>adae <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">rename</span>(adae, <span class="at">FMQ01SC =</span> SMQ01SC, <span class="at">FMQ01NAM =</span> SMQ01NAM)</span>
-<span id="cb3-28"><a href="#cb3-28"></a><span class="fu">levels</span>(adae<span class="sc">$</span>FMQ01SC) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"BROAD"</span>, <span class="st">"NARROW"</span>)</span>
-<span id="cb3-29"><a href="#cb3-29"></a>adae<span class="sc">$</span>FMQ01SC[<span class="fu">is.na</span>(adae<span class="sc">$</span>FMQ01SC)] <span class="ot">&lt;-</span> <span class="st">"NARROW"</span></span>
-<span id="cb3-30"><a href="#cb3-30"></a>adae<span class="sc">$</span>FMQ01NAM <span class="ot">&lt;-</span> <span class="fu">factor</span>(adae<span class="sc">$</span>FMQ01NAM, <span class="at">levels =</span> <span class="fu">c</span>(</span>
-<span id="cb3-31"><a href="#cb3-31"></a>  <span class="fu">unique</span>(adae<span class="sc">$</span>FMQ01NAM), <span class="st">"Abnormal Uterine Bleeding"</span>, <span class="st">"Amenorrhea"</span>,</span>
-<span id="cb3-32"><a href="#cb3-32"></a>  <span class="st">"Bacterial Vaginosis"</span>, <span class="st">"Decreased Menstrual Bleeding"</span></span>
-<span id="cb3-33"><a href="#cb3-33"></a>))</span>
-<span id="cb3-34"><a href="#cb3-34"></a>adae<span class="sc">$</span>FMQ01NAM[adae<span class="sc">$</span>SEX <span class="sc">==</span> <span class="st">"F"</span>] <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(</span>
-<span id="cb3-35"><a href="#cb3-35"></a>  <span class="fu">sample</span>(<span class="fu">c</span>(</span>
-<span id="cb3-36"><a href="#cb3-36"></a>    <span class="st">"Abnormal Uterine Bleeding"</span>, <span class="st">"Amenorrhea"</span>,</span>
-<span id="cb3-37"><a href="#cb3-37"></a>    <span class="st">"Bacterial Vaginosis"</span>, <span class="st">"Decreased Menstrual Bleeding"</span></span>
-<span id="cb3-38"><a href="#cb3-38"></a>  ), <span class="fu">sum</span>(adae<span class="sc">$</span>SEX <span class="sc">==</span> <span class="st">"F"</span>), <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb3-39"><a href="#cb3-39"></a>)</span>
-<span id="cb3-40"><a href="#cb3-40"></a></span>
-<span id="cb3-41"><a href="#cb3-41"></a><span class="co"># Output Table</span></span>
-<span id="cb3-42"><a href="#cb3-42"></a>risk_diff <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">arm_x =</span> <span class="st">"B: Placebo"</span>, <span class="at">arm_y =</span> <span class="st">"A: Drug X"</span>)</span>
-<span id="cb3-43"><a href="#cb3-43"></a><span class="fu">make_table_17</span>(<span class="at">adae =</span> adae, <span class="at">alt_counts_df =</span> adsl, <span class="at">risk_diff =</span> risk_diff)</span>
-<span id="cb3-44"><a href="#cb3-44"></a><span class="in">```</span></span>
-<span id="cb3-45"><a href="#cb3-45"></a></span>
-<span id="cb3-46"><a href="#cb3-46"></a><span class="fu">## rtables/tern Table Setup</span></span>
-<span id="cb3-47"><a href="#cb3-47"></a></span>
-<span id="cb3-48"><a href="#cb3-48"></a><span class="in">```{r tbl, eval=FALSE, echo=TRUE}</span></span>
-<span id="cb3-49"><a href="#cb3-49"></a><span class="in">```</span></span>
-<span id="cb3-50"><a href="#cb3-50"></a></span>
-<span id="cb3-51"><a href="#cb3-51"></a><span class="fu">## Function Details</span></span>
-<span id="cb3-52"><a href="#cb3-52"></a></span>
-<span id="cb3-53"><a href="#cb3-53"></a><span class="fu">### `make_table_17()`</span></span>
-<span id="cb3-54"><a href="#cb3-54"></a></span>
-<span id="cb3-55"><a href="#cb3-55"></a>------------------------------------------------------------------------------------------------------------------------</span>
-<span id="cb3-56"><a href="#cb3-56"></a></span>
-<span id="cb3-57"><a href="#cb3-57"></a>Required variables:</span>
-<span id="cb3-58"><a href="#cb3-58"></a></span>
-<span id="cb3-59"><a href="#cb3-59"></a><span class="ss">-   </span>**`adae`**: <span class="in">`adae`</span> must contain <span class="in">`USUBJID`</span>, <span class="in">`SEX`</span>, and the variables specified by <span class="in">`arm_var`</span>, <span class="in">`saffl_var`</span>, <span class="in">`pref_var`</span>,</span>
-<span id="cb3-60"><a href="#cb3-60"></a>    <span class="in">`fmqsc_var`</span> and <span class="in">`fmqnam_var`</span>.</span>
-<span id="cb3-61"><a href="#cb3-61"></a><span class="ss">-   </span>**`alt_counts_df`** (if specified): <span class="in">`USUBJID`</span> and the variables specified by <span class="in">`arm_var`</span> and <span class="in">`saffl_var`</span>.</span>
-<span id="cb3-62"><a href="#cb3-62"></a></span>
-<span id="cb3-63"><a href="#cb3-63"></a>+-----------------------+------------------------------------------------------------------+-----------------------+</span>
-<span id="cb3-64"><a href="#cb3-64"></a>| Argument              | Description                                                      | Default               |</span>
-<span id="cb3-65"><a href="#cb3-65"></a>+:======================+:=================================================================+:======================+</span>
-<span id="cb3-66"><a href="#cb3-66"></a>| <span class="in">`adae`</span>                | (<span class="in">`data.frame`</span>) Dataset (typically ADAE) required to build table. | *No default*          |</span>
-<span id="cb3-67"><a href="#cb3-67"></a>+-----------------------+------------------------------------------------------------------+-----------------------+</span>
-<span id="cb3-68"><a href="#cb3-68"></a>| <span class="in">`alt_counts_df`</span>       | (<span class="in">`character`</span>) Alternative dataset used only to calculate column  | <span class="in">`NULL`</span>                |</span>
-<span id="cb3-69"><a href="#cb3-69"></a>|                       | counts.                                                          |                       |</span>
-<span id="cb3-70"><a href="#cb3-70"></a>+-----------------------+------------------------------------------------------------------+-----------------------+</span>
-<span id="cb3-71"><a href="#cb3-71"></a>| <span class="in">`show_colcounts`</span>      | (<span class="in">`flag`</span>) Whether column counts should be printed.                | <span class="in">`TRUE`</span>                |</span>
-<span id="cb3-72"><a href="#cb3-72"></a>+-----------------------+------------------------------------------------------------------+-----------------------+</span>
-<span id="cb3-73"><a href="#cb3-73"></a>| <span class="in">`arm_var`</span>             | (<span class="in">`character`</span>) Arm variable used to split table into columns.     | <span class="in">`"ARM"`</span>               |</span>
-<span id="cb3-74"><a href="#cb3-74"></a>+-----------------------+------------------------------------------------------------------+-----------------------+</span>
-<span id="cb3-75"><a href="#cb3-75"></a>| <span class="in">`saffl_var`</span>           | (<span class="in">`character`</span>) Flag variable used to indicate inclusion in safety | <span class="in">`"SAFFL"`</span>             |</span>
-<span id="cb3-76"><a href="#cb3-76"></a>|                       | population.                                                      |                       |</span>
-<span id="cb3-77"><a href="#cb3-77"></a>+-----------------------+------------------------------------------------------------------+-----------------------+</span>
-<span id="cb3-78"><a href="#cb3-78"></a>| <span class="in">`pref_var`</span>            | (<span class="in">`character`</span>) Preferred term variable to use in table.           | <span class="in">`"AEDECOD"`</span>           |</span>
-<span id="cb3-79"><a href="#cb3-79"></a>+-----------------------+------------------------------------------------------------------+-----------------------+</span>
-<span id="cb3-80"><a href="#cb3-80"></a>| <span class="in">`sex_scope`</span>           | (<span class="in">`character`</span>) Level of <span class="in">`SEX`</span> to output in table.                 | <span class="in">`"F"`</span>                 |</span>
-<span id="cb3-81"><a href="#cb3-81"></a>+-----------------------+------------------------------------------------------------------+-----------------------+</span>
-<span id="cb3-82"><a href="#cb3-82"></a>| <span class="in">`fmq_scope`</span>           | (<span class="in">`character`</span>) FMQ scope value to use in table.                   | <span class="in">`"NARROW"`</span>            |</span>
-<span id="cb3-83"><a href="#cb3-83"></a>+-----------------------+------------------------------------------------------------------+-----------------------+</span>
-<span id="cb3-84"><a href="#cb3-84"></a>| <span class="in">`fmqsc_var`</span>           | (<span class="in">`character`</span>) FMQ scope variable to use in table.                | <span class="in">`"FMQ01SC"`</span>           |</span>
-<span id="cb3-85"><a href="#cb3-85"></a>+-----------------------+------------------------------------------------------------------+-----------------------+</span>
-<span id="cb3-86"><a href="#cb3-86"></a>| <span class="in">`fmqnam_var`</span>          | (<span class="in">`character`</span>) FMQ reference name variable to use in table.       | <span class="in">`"FMQ01NAM"`</span>          |</span>
-<span id="cb3-87"><a href="#cb3-87"></a>+-----------------------+------------------------------------------------------------------+-----------------------+</span>
-<span id="cb3-88"><a href="#cb3-88"></a>| <span class="in">`lbl_overall`</span>         | (<span class="in">`character`</span>) If specified, an overall column will be added to   | <span class="in">`NULL`</span>                |</span>
-<span id="cb3-89"><a href="#cb3-89"></a>|                       | the table with the given value as the column label.              |                       |</span>
-<span id="cb3-90"><a href="#cb3-90"></a>+-----------------------+------------------------------------------------------------------+-----------------------+</span>
-<span id="cb3-91"><a href="#cb3-91"></a>| <span class="in">`risk_diff`</span>           | (named <span class="in">`list`</span>) List of settings to apply to add a risk           | <span class="in">`NULL`</span>                |</span>
-<span id="cb3-92"><a href="#cb3-92"></a>|                       | difference column to the table. See                              |                       |</span>
-<span id="cb3-93"><a href="#cb3-93"></a>|                       | <span class="co">[</span><span class="ot">tern::add_riskdiff()</span><span class="co">]</span>(https://insight                           |                       |</span>
-<span id="cb3-94"><a href="#cb3-94"></a>|                       | sengineering.github.%20io/tern/main/reference/add_riskdiff.html) |                       |</span>
-<span id="cb3-95"><a href="#cb3-95"></a>|                       | for more details. List should contain the following elements:    |                       |</span>
-<span id="cb3-96"><a href="#cb3-96"></a>|                       |                                                                  |                       |</span>
-<span id="cb3-97"><a href="#cb3-97"></a>|                       | -   <span class="in">`arm_x`</span>: (required) the name of reference arm.               |                       |</span>
-<span id="cb3-98"><a href="#cb3-98"></a>|                       |                                                                  |                       |</span>
-<span id="cb3-99"><a href="#cb3-99"></a>|                       | -   <span class="in">`arm_y`</span>: (required) the name of the arm to compare to the    |                       |</span>
-<span id="cb3-100"><a href="#cb3-100"></a>|                       |     reference arm.                                               |                       |</span>
-<span id="cb3-101"><a href="#cb3-101"></a>|                       |                                                                  |                       |</span>
-<span id="cb3-102"><a href="#cb3-102"></a>|                       | -   <span class="in">`col_label`</span>: (optional) label to use for the risk difference |                       |</span>
-<span id="cb3-103"><a href="#cb3-103"></a>|                       |     column. Defaults to <span class="in">`"Risk Difference (%) (95% CI)"`</span>.        |                       |</span>
-<span id="cb3-104"><a href="#cb3-104"></a>|                       |                                                                  |                       |</span>
-<span id="cb3-105"><a href="#cb3-105"></a>|                       | -   <span class="in">`pct`</span>: (optional) whether the output should be returned as   |                       |</span>
-<span id="cb3-106"><a href="#cb3-106"></a>|                       |     percentages. Defaults to <span class="in">`TRUE`</span>.                             |                       |</span>
-<span id="cb3-107"><a href="#cb3-107"></a>+-----------------------+------------------------------------------------------------------+-----------------------+</span>
-<span id="cb3-108"><a href="#cb3-108"></a>| <span class="in">`prune_0`</span>             | (<span class="in">`flag`</span>) Whether all-zero rows should be removed from the table. | <span class="in">`FALSE`</span>               |</span>
-<span id="cb3-109"><a href="#cb3-109"></a>+-----------------------+------------------------------------------------------------------+-----------------------+</span>
-<span id="cb3-110"><a href="#cb3-110"></a>| <span class="in">`na_level`</span>            | (<span class="in">`character`</span>) String to represent missing values.                | <span class="in">`"&lt;Missing&gt;"`</span>         |</span>
-<span id="cb3-111"><a href="#cb3-111"></a>+-----------------------+------------------------------------------------------------------+-----------------------+</span>
-<span id="cb3-112"><a href="#cb3-112"></a>| <span class="in">`annotations`</span>         | (named <span class="in">`list`</span> of <span class="in">`character`</span>) List of annotations to add to the  | <span class="in">`NULL`</span>                |</span>
-<span id="cb3-113"><a href="#cb3-113"></a>|                       | table. Valid annotation types are <span class="in">`title`</span>, <span class="in">`subtitles`</span>,          |                       |</span>
-<span id="cb3-114"><a href="#cb3-114"></a>|                       | <span class="in">`main_footer`</span>, and <span class="in">`prov_footer`</span>. Each name-value pair should    |                       |</span>
-<span id="cb3-115"><a href="#cb3-115"></a>|                       | use the annotation type as name and the desired string as value. |                       |</span>
-<span id="cb3-116"><a href="#cb3-116"></a>+-----------------------+------------------------------------------------------------------+-----------------------+</span>
-<span id="cb3-117"><a href="#cb3-117"></a></span>
-<span id="cb3-118"><a href="#cb3-118"></a>Source code for this function is available <span class="co">[</span><span class="ot">here</span><span class="co">](https://github.com/pharmaverse/falcon/blob/main/R/fda-table_17.R)</span>.</span>
-<span id="cb3-119"><a href="#cb3-119"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-19"><a href="#cb3-19"></a><span class="fu">library</span>(falcon)</span>
+<span id="cb3-20"><a href="#cb3-20"></a></span>
+<span id="cb3-21"><a href="#cb3-21"></a>adsl <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadsl</span>
+<span id="cb3-22"><a href="#cb3-22"></a>adae <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadae</span>
+<span id="cb3-23"><a href="#cb3-23"></a></span>
+<span id="cb3-24"><a href="#cb3-24"></a><span class="co"># Pre-Processing - Ensure required variables FMQ01SC and FMQ01NAM exist in adae</span></span>
+<span id="cb3-25"><a href="#cb3-25"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb3-26"><a href="#cb3-26"></a>adae <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">rename</span>(adae, <span class="at">FMQ01SC =</span> SMQ01SC, <span class="at">FMQ01NAM =</span> SMQ01NAM)</span>
+<span id="cb3-27"><a href="#cb3-27"></a><span class="fu">levels</span>(adae<span class="sc">$</span>FMQ01SC) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"BROAD"</span>, <span class="st">"NARROW"</span>)</span>
+<span id="cb3-28"><a href="#cb3-28"></a>adae<span class="sc">$</span>FMQ01SC[<span class="fu">is.na</span>(adae<span class="sc">$</span>FMQ01SC)] <span class="ot">&lt;-</span> <span class="st">"NARROW"</span></span>
+<span id="cb3-29"><a href="#cb3-29"></a>adae<span class="sc">$</span>FMQ01NAM <span class="ot">&lt;-</span> <span class="fu">factor</span>(adae<span class="sc">$</span>FMQ01NAM, <span class="at">levels =</span> <span class="fu">c</span>(</span>
+<span id="cb3-30"><a href="#cb3-30"></a>  <span class="fu">unique</span>(adae<span class="sc">$</span>FMQ01NAM), <span class="st">"Abnormal Uterine Bleeding"</span>, <span class="st">"Amenorrhea"</span>,</span>
+<span id="cb3-31"><a href="#cb3-31"></a>  <span class="st">"Bacterial Vaginosis"</span>, <span class="st">"Decreased Menstrual Bleeding"</span></span>
+<span id="cb3-32"><a href="#cb3-32"></a>))</span>
+<span id="cb3-33"><a href="#cb3-33"></a>adae<span class="sc">$</span>FMQ01NAM[adae<span class="sc">$</span>SEX <span class="sc">==</span> <span class="st">"F"</span>] <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(</span>
+<span id="cb3-34"><a href="#cb3-34"></a>  <span class="fu">sample</span>(<span class="fu">c</span>(</span>
+<span id="cb3-35"><a href="#cb3-35"></a>    <span class="st">"Abnormal Uterine Bleeding"</span>, <span class="st">"Amenorrhea"</span>,</span>
+<span id="cb3-36"><a href="#cb3-36"></a>    <span class="st">"Bacterial Vaginosis"</span>, <span class="st">"Decreased Menstrual Bleeding"</span></span>
+<span id="cb3-37"><a href="#cb3-37"></a>  ), <span class="fu">sum</span>(adae<span class="sc">$</span>SEX <span class="sc">==</span> <span class="st">"F"</span>), <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-38"><a href="#cb3-38"></a>)</span>
+<span id="cb3-39"><a href="#cb3-39"></a></span>
+<span id="cb3-40"><a href="#cb3-40"></a><span class="co"># Output Table</span></span>
+<span id="cb3-41"><a href="#cb3-41"></a>risk_diff <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">arm_x =</span> <span class="st">"B: Placebo"</span>, <span class="at">arm_y =</span> <span class="st">"A: Drug X"</span>)</span>
+<span id="cb3-42"><a href="#cb3-42"></a><span class="fu">make_table_17</span>(<span class="at">adae =</span> adae, <span class="at">alt_counts_df =</span> adsl, <span class="at">risk_diff =</span> risk_diff)</span>
+<span id="cb3-43"><a href="#cb3-43"></a><span class="in">```</span></span>
+<span id="cb3-44"><a href="#cb3-44"></a></span>
+<span id="cb3-45"><a href="#cb3-45"></a><span class="fu">## rtables/tern Table Setup</span></span>
+<span id="cb3-46"><a href="#cb3-46"></a></span>
+<span id="cb3-47"><a href="#cb3-47"></a><span class="in">```{r tbl, eval=FALSE, echo=TRUE}</span></span>
+<span id="cb3-48"><a href="#cb3-48"></a><span class="in">```</span></span>
+<span id="cb3-49"><a href="#cb3-49"></a></span>
+<span id="cb3-50"><a href="#cb3-50"></a><span class="fu">## Function Details</span></span>
+<span id="cb3-51"><a href="#cb3-51"></a></span>
+<span id="cb3-52"><a href="#cb3-52"></a><span class="fu">### `make_table_17()`</span></span>
+<span id="cb3-53"><a href="#cb3-53"></a></span>
+<span id="cb3-54"><a href="#cb3-54"></a>------------------------------------------------------------------------------------------------------------------------</span>
+<span id="cb3-55"><a href="#cb3-55"></a></span>
+<span id="cb3-56"><a href="#cb3-56"></a>Required variables:</span>
+<span id="cb3-57"><a href="#cb3-57"></a></span>
+<span id="cb3-58"><a href="#cb3-58"></a><span class="ss">-   </span>**`adae`**: <span class="in">`adae`</span> must contain <span class="in">`USUBJID`</span>, <span class="in">`SEX`</span>, and the variables specified by <span class="in">`arm_var`</span>, <span class="in">`saffl_var`</span>, <span class="in">`pref_var`</span>,</span>
+<span id="cb3-59"><a href="#cb3-59"></a>    <span class="in">`fmqsc_var`</span> and <span class="in">`fmqnam_var`</span>.</span>
+<span id="cb3-60"><a href="#cb3-60"></a><span class="ss">-   </span>**`alt_counts_df`** (if specified): <span class="in">`USUBJID`</span> and the variables specified by <span class="in">`arm_var`</span> and <span class="in">`saffl_var`</span>.</span>
+<span id="cb3-61"><a href="#cb3-61"></a></span>
+<span id="cb3-62"><a href="#cb3-62"></a>+-----------------------+------------------------------------------------------------------+-----------------------+</span>
+<span id="cb3-63"><a href="#cb3-63"></a>| Argument              | Description                                                      | Default               |</span>
+<span id="cb3-64"><a href="#cb3-64"></a>+:======================+:=================================================================+:======================+</span>
+<span id="cb3-65"><a href="#cb3-65"></a>| <span class="in">`adae`</span>                | (<span class="in">`data.frame`</span>) Dataset (typically ADAE) required to build table. | *No default*          |</span>
+<span id="cb3-66"><a href="#cb3-66"></a>+-----------------------+------------------------------------------------------------------+-----------------------+</span>
+<span id="cb3-67"><a href="#cb3-67"></a>| <span class="in">`alt_counts_df`</span>       | (<span class="in">`character`</span>) Alternative dataset used only to calculate column  | <span class="in">`NULL`</span>                |</span>
+<span id="cb3-68"><a href="#cb3-68"></a>|                       | counts.                                                          |                       |</span>
+<span id="cb3-69"><a href="#cb3-69"></a>+-----------------------+------------------------------------------------------------------+-----------------------+</span>
+<span id="cb3-70"><a href="#cb3-70"></a>| <span class="in">`show_colcounts`</span>      | (<span class="in">`flag`</span>) Whether column counts should be printed.                | <span class="in">`TRUE`</span>                |</span>
+<span id="cb3-71"><a href="#cb3-71"></a>+-----------------------+------------------------------------------------------------------+-----------------------+</span>
+<span id="cb3-72"><a href="#cb3-72"></a>| <span class="in">`arm_var`</span>             | (<span class="in">`character`</span>) Arm variable used to split table into columns.     | <span class="in">`"ARM"`</span>               |</span>
+<span id="cb3-73"><a href="#cb3-73"></a>+-----------------------+------------------------------------------------------------------+-----------------------+</span>
+<span id="cb3-74"><a href="#cb3-74"></a>| <span class="in">`saffl_var`</span>           | (<span class="in">`character`</span>) Flag variable used to indicate inclusion in safety | <span class="in">`"SAFFL"`</span>             |</span>
+<span id="cb3-75"><a href="#cb3-75"></a>|                       | population.                                                      |                       |</span>
+<span id="cb3-76"><a href="#cb3-76"></a>+-----------------------+------------------------------------------------------------------+-----------------------+</span>
+<span id="cb3-77"><a href="#cb3-77"></a>| <span class="in">`pref_var`</span>            | (<span class="in">`character`</span>) Preferred term variable to use in table.           | <span class="in">`"AEDECOD"`</span>           |</span>
+<span id="cb3-78"><a href="#cb3-78"></a>+-----------------------+------------------------------------------------------------------+-----------------------+</span>
+<span id="cb3-79"><a href="#cb3-79"></a>| <span class="in">`sex_scope`</span>           | (<span class="in">`character`</span>) Level of <span class="in">`SEX`</span> to output in table.                 | <span class="in">`"F"`</span>                 |</span>
+<span id="cb3-80"><a href="#cb3-80"></a>+-----------------------+------------------------------------------------------------------+-----------------------+</span>
+<span id="cb3-81"><a href="#cb3-81"></a>| <span class="in">`fmq_scope`</span>           | (<span class="in">`character`</span>) FMQ scope value to use in table.                   | <span class="in">`"NARROW"`</span>            |</span>
+<span id="cb3-82"><a href="#cb3-82"></a>+-----------------------+------------------------------------------------------------------+-----------------------+</span>
+<span id="cb3-83"><a href="#cb3-83"></a>| <span class="in">`fmqsc_var`</span>           | (<span class="in">`character`</span>) FMQ scope variable to use in table.                | <span class="in">`"FMQ01SC"`</span>           |</span>
+<span id="cb3-84"><a href="#cb3-84"></a>+-----------------------+------------------------------------------------------------------+-----------------------+</span>
+<span id="cb3-85"><a href="#cb3-85"></a>| <span class="in">`fmqnam_var`</span>          | (<span class="in">`character`</span>) FMQ reference name variable to use in table.       | <span class="in">`"FMQ01NAM"`</span>          |</span>
+<span id="cb3-86"><a href="#cb3-86"></a>+-----------------------+------------------------------------------------------------------+-----------------------+</span>
+<span id="cb3-87"><a href="#cb3-87"></a>| <span class="in">`lbl_overall`</span>         | (<span class="in">`character`</span>) If specified, an overall column will be added to   | <span class="in">`NULL`</span>                |</span>
+<span id="cb3-88"><a href="#cb3-88"></a>|                       | the table with the given value as the column label.              |                       |</span>
+<span id="cb3-89"><a href="#cb3-89"></a>+-----------------------+------------------------------------------------------------------+-----------------------+</span>
+<span id="cb3-90"><a href="#cb3-90"></a>| <span class="in">`risk_diff`</span>           | (named <span class="in">`list`</span>) List of settings to apply to add a risk           | <span class="in">`NULL`</span>                |</span>
+<span id="cb3-91"><a href="#cb3-91"></a>|                       | difference column to the table. See                              |                       |</span>
+<span id="cb3-92"><a href="#cb3-92"></a>|                       | <span class="co">[</span><span class="ot">tern::add_riskdiff()</span><span class="co">]</span>(https://insight                           |                       |</span>
+<span id="cb3-93"><a href="#cb3-93"></a>|                       | sengineering.github.%20io/tern/main/reference/add_riskdiff.html) |                       |</span>
+<span id="cb3-94"><a href="#cb3-94"></a>|                       | for more details. List should contain the following elements:    |                       |</span>
+<span id="cb3-95"><a href="#cb3-95"></a>|                       |                                                                  |                       |</span>
+<span id="cb3-96"><a href="#cb3-96"></a>|                       | -   <span class="in">`arm_x`</span>: (required) the name of reference arm.               |                       |</span>
+<span id="cb3-97"><a href="#cb3-97"></a>|                       |                                                                  |                       |</span>
+<span id="cb3-98"><a href="#cb3-98"></a>|                       | -   <span class="in">`arm_y`</span>: (required) the name of the arm to compare to the    |                       |</span>
+<span id="cb3-99"><a href="#cb3-99"></a>|                       |     reference arm.                                               |                       |</span>
+<span id="cb3-100"><a href="#cb3-100"></a>|                       |                                                                  |                       |</span>
+<span id="cb3-101"><a href="#cb3-101"></a>|                       | -   <span class="in">`col_label`</span>: (optional) label to use for the risk difference |                       |</span>
+<span id="cb3-102"><a href="#cb3-102"></a>|                       |     column. Defaults to <span class="in">`"Risk Difference (%) (95% CI)"`</span>.        |                       |</span>
+<span id="cb3-103"><a href="#cb3-103"></a>|                       |                                                                  |                       |</span>
+<span id="cb3-104"><a href="#cb3-104"></a>|                       | -   <span class="in">`pct`</span>: (optional) whether the output should be returned as   |                       |</span>
+<span id="cb3-105"><a href="#cb3-105"></a>|                       |     percentages. Defaults to <span class="in">`TRUE`</span>.                             |                       |</span>
+<span id="cb3-106"><a href="#cb3-106"></a>+-----------------------+------------------------------------------------------------------+-----------------------+</span>
+<span id="cb3-107"><a href="#cb3-107"></a>| <span class="in">`prune_0`</span>             | (<span class="in">`flag`</span>) Whether all-zero rows should be removed from the table. | <span class="in">`FALSE`</span>               |</span>
+<span id="cb3-108"><a href="#cb3-108"></a>+-----------------------+------------------------------------------------------------------+-----------------------+</span>
+<span id="cb3-109"><a href="#cb3-109"></a>| <span class="in">`na_level`</span>            | (<span class="in">`character`</span>) String to represent missing values.                | <span class="in">`"&lt;Missing&gt;"`</span>         |</span>
+<span id="cb3-110"><a href="#cb3-110"></a>+-----------------------+------------------------------------------------------------------+-----------------------+</span>
+<span id="cb3-111"><a href="#cb3-111"></a>| <span class="in">`annotations`</span>         | (named <span class="in">`list`</span> of <span class="in">`character`</span>) List of annotations to add to the  | <span class="in">`NULL`</span>                |</span>
+<span id="cb3-112"><a href="#cb3-112"></a>|                       | table. Valid annotation types are <span class="in">`title`</span>, <span class="in">`subtitles`</span>,          |                       |</span>
+<span id="cb3-113"><a href="#cb3-113"></a>|                       | <span class="in">`main_footer`</span>, and <span class="in">`prov_footer`</span>. Each name-value pair should    |                       |</span>
+<span id="cb3-114"><a href="#cb3-114"></a>|                       | use the annotation type as name and the desired string as value. |                       |</span>
+<span id="cb3-115"><a href="#cb3-115"></a>+-----------------------+------------------------------------------------------------------+-----------------------+</span>
+<span id="cb3-116"><a href="#cb3-116"></a></span>
+<span id="cb3-117"><a href="#cb3-117"></a>Source code for this function is available <span class="co">[</span><span class="ot">here</span><span class="co">](https://github.com/pharmaverse/falcon/blob/main/R/fda-table_17.R)</span>.</span>
+<span id="cb3-118"><a href="#cb3-118"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">

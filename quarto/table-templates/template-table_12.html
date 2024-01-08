@@ -313,7 +313,7 @@ cookieconsent.run({
 </div>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<div class="cell" data-hash="template-table_12_cache/html/tbl_cf373e92d2060c58f68ab0e2e1fa8a03">
+<div class="cell" data-hash="template-table_12_cache/html/tbl_b8f31b0db5d3e203f47ee2e5ed19d048">
 <div class="cell-output cell-output-stdout">
 <pre><code>Body System or Organ Class                                 A: Drug X    B: Placebo   C: Combination   Risk Difference (%) (95% CI)
   Dictionary-Derived Term                                   (N=134)      (N=134)        (N=132)                 (N=268)           
@@ -340,12 +340,12 @@ cl D.2                                                     35 (26.1%)   46 (34.3
 </div>
 </div>
 <div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
-<div class="cell" data-hash="template-table_12_cache/html/tbl_17b662968de8ca98bcbae191f2937657">
+<div class="cell" data-hash="template-table_12_cache/html/tbl_e7751ac8d9eb26011d83647287eff922">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Load Libraries &amp; Data</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="fu">library</span>(falcon)</span>
 <span id="cb2-3"><a href="#cb2-3"></a></span>
-<span id="cb2-4"><a href="#cb2-4"></a>adsl <span class="ot">&lt;-</span> scda<span class="sc">::</span><span class="fu">synthetic_cdisc_dataset</span>(<span class="st">"rcd_2022_10_13"</span>, <span class="st">"adsl"</span>)</span>
-<span id="cb2-5"><a href="#cb2-5"></a>adae <span class="ot">&lt;-</span> scda<span class="sc">::</span><span class="fu">synthetic_cdisc_dataset</span>(<span class="st">"rcd_2022_10_13"</span>, <span class="st">"adae"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4"></a>adsl <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadsl</span>
+<span id="cb2-5"><a href="#cb2-5"></a>adae <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadae</span>
 <span id="cb2-6"><a href="#cb2-6"></a></span>
 <span id="cb2-7"><a href="#cb2-7"></a><span class="co"># Pre-Processing - Ensure required variable DCSREAS exist in adae</span></span>
 <span id="cb2-8"><a href="#cb2-8"></a>adae<span class="sc">$</span>DCSREAS[<span class="fu">is.na</span>(adae<span class="sc">$</span>DCSREAS)] <span class="ot">&lt;-</span> <span class="st">"ADVERSE EVENT"</span></span>
@@ -861,8 +861,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb3-15"><a href="#cb3-15"></a><span class="co"># Load Libraries &amp; Data</span></span>
 <span id="cb3-16"><a href="#cb3-16"></a><span class="fu">library</span>(falcon)</span>
 <span id="cb3-17"><a href="#cb3-17"></a></span>
-<span id="cb3-18"><a href="#cb3-18"></a>adsl <span class="ot">&lt;-</span> scda<span class="sc">::</span><span class="fu">synthetic_cdisc_dataset</span>(<span class="st">"rcd_2022_10_13"</span>, <span class="st">"adsl"</span>)</span>
-<span id="cb3-19"><a href="#cb3-19"></a>adae <span class="ot">&lt;-</span> scda<span class="sc">::</span><span class="fu">synthetic_cdisc_dataset</span>(<span class="st">"rcd_2022_10_13"</span>, <span class="st">"adae"</span>)</span>
+<span id="cb3-18"><a href="#cb3-18"></a>adsl <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadsl</span>
+<span id="cb3-19"><a href="#cb3-19"></a>adae <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadae</span>
 <span id="cb3-20"><a href="#cb3-20"></a></span>
 <span id="cb3-21"><a href="#cb3-21"></a><span class="co"># Pre-Processing - Ensure required variable DCSREAS exist in adae</span></span>
 <span id="cb3-22"><a href="#cb3-22"></a>adae<span class="sc">$</span>DCSREAS[<span class="fu">is.na</span>(adae<span class="sc">$</span>DCSREAS)] <span class="ot">&lt;-</span> <span class="st">"ADVERSE EVENT"</span></span>

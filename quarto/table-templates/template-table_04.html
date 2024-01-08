@@ -313,15 +313,15 @@ cookieconsent.run({
 </div>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<div class="cell" data-hash="template-table_04_cache/html/tbl_284fe2117c8b263697d1dc007e4fd802">
+<div class="cell" data-hash="template-table_04_cache/html/tbl_2a741c2b3c4f2c14915e1573416770ff">
 <div class="cell-output cell-output-stdout">
 <pre><code>                          A: Drug X    B: Placebo   C: Combination   Risk Difference (%) (95% CI)
                            (N=134)      (N=134)        (N=132)                 (N=268)           
 —————————————————————————————————————————————————————————————————————————————————————————————————
-Patients randomized       62 (46.3%)   67 (50.0%)     61 (46.2%)          3.7 (-8.2 - 15.7)      
+Patients randomized       72 (53.7%)   63 (47.0%)     69 (52.3%)          -6.7 (-18.7 - 5.2)     
 ITT/mITT population       134 (100%)   134 (100%)     132 (100%)           0.0 (0.0 - 0.0)       
 Safety population         134 (100%)   134 (100%)     132 (100%)           0.0 (0.0 - 0.0)       
-Per-protocol population   62 (46.3%)   67 (50.0%)     61 (46.2%)          3.7 (-8.2 - 15.7)      
+Per-protocol population   72 (53.7%)   63 (47.0%)     69 (52.3%)          -6.7 (-18.7 - 5.2)     
 Discontinued study drug   42 (31.3%)   40 (29.9%)     38 (28.8%)          -1.5 (-12.5 - 9.5)     
   Adverse event            3 (2.2%)     6 (4.5%)       5 (3.8%)            2.2 (-2.1 - 6.5)      
   Lack of efficacy         2 (1.5%)     2 (1.5%)       3 (2.3%)            0.0 (-2.9 - 2.9)      
@@ -340,12 +340,12 @@ Discontinued study        42 (31.3%)   40 (29.9%)     38 (28.8%)          -1.5 (
 </div>
 </div>
 <div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
-<div class="cell" data-hash="template-table_04_cache/html/tbl_4ac8426eec13f428692a2ddcdf9994a3">
+<div class="cell" data-hash="template-table_04_cache/html/tbl_d059d12e441c4c3007e09c6483a4fe25">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Load Libraries &amp; Data</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="fu">library</span>(falcon)</span>
 <span id="cb2-3"><a href="#cb2-3"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb2-4"><a href="#cb2-4"></a></span>
-<span id="cb2-5"><a href="#cb2-5"></a>adsl <span class="ot">&lt;-</span> scda<span class="sc">::</span><span class="fu">synthetic_cdisc_dataset</span>(<span class="st">"rcd_2022_10_13"</span>, <span class="st">"adsl"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>adsl <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadsl <span class="sc">%&gt;%</span></span>
 <span id="cb2-6"><a href="#cb2-6"></a>  <span class="fu">mutate</span>(<span class="at">test =</span> <span class="fu">rbinom</span>(<span class="dv">400</span>, <span class="dv">1</span>, <span class="fl">0.5</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb2-7"><a href="#cb2-7"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb2-8"><a href="#cb2-8"></a>    <span class="at">RANDFL =</span> <span class="fu">ifelse</span>(test <span class="sc">==</span> <span class="dv">0</span>, <span class="st">"N"</span>, <span class="st">"Y"</span>),</span>
@@ -853,7 +853,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb3-16"><a href="#cb3-16"></a><span class="fu">library</span>(falcon)</span>
 <span id="cb3-17"><a href="#cb3-17"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb3-18"><a href="#cb3-18"></a></span>
-<span id="cb3-19"><a href="#cb3-19"></a>adsl <span class="ot">&lt;-</span> scda<span class="sc">::</span><span class="fu">synthetic_cdisc_dataset</span>(<span class="st">"rcd_2022_10_13"</span>, <span class="st">"adsl"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-19"><a href="#cb3-19"></a>adsl <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadsl <span class="sc">%&gt;%</span></span>
 <span id="cb3-20"><a href="#cb3-20"></a>  <span class="fu">mutate</span>(<span class="at">test =</span> <span class="fu">rbinom</span>(<span class="dv">400</span>, <span class="dv">1</span>, <span class="fl">0.5</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb3-21"><a href="#cb3-21"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb3-22"><a href="#cb3-22"></a>    <span class="at">RANDFL =</span> <span class="fu">ifelse</span>(test <span class="sc">==</span> <span class="dv">0</span>, <span class="st">"N"</span>, <span class="st">"Y"</span>),</span>

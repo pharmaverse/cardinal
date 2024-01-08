@@ -313,24 +313,24 @@ cookieconsent.run({
 </div>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<div class="cell" data-hash="template-table_33_cache/html/tbl_d6e4eca16aab64994b2bce4c9ac713d9">
+<div class="cell" data-hash="template-table_33_cache/html/tbl_432fb447dbc9f774017be05712f43aa5">
 <div class="cell-output cell-output-stdout">
-<pre><code>Blood Pressure   A: Drug X    B: Placebo   C: Combination   Risk Difference (%) (95% CI)
-(Pa)              (N=134)      (N=134)        (N=132)                 (N=268)           
-————————————————————————————————————————————————————————————————————————————————————————
-SBP &lt;90          134 (100%)   134 (100%)     132 (100%)           0.0 (0.0 - 0.0)       
-DBP &lt;60          72 (53.7%)   83 (61.9%)     78 (59.1%)          8.2 (-3.6 - 20.0)      </code></pre>
+<pre><code>Blood Pressure    A: Drug X    B: Placebo   C: Combination   Risk Difference (%) (95% CI)
+(Pa)               (N=134)      (N=134)        (N=132)                 (N=268)           
+—————————————————————————————————————————————————————————————————————————————————————————
+SBP &lt;90          85 (63.4%)    84 (62.7%)     90 (68.2%)         -0.7 (-12.3 - 10.8)     
+DBP &lt;60          133 (99.3%)   134 (100%)     132 (100%)           0.7 (-0.7 - 2.2)      </code></pre>
 </div>
 </div>
 </div>
 <div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
-<div class="cell" data-hash="template-table_33_cache/html/tbl_ea6cb06961e052ad937362191a0bc521">
+<div class="cell" data-hash="template-table_33_cache/html/tbl_1687e6d2c2b7e0d9e416cb54b53edfb8">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Load Libraries &amp; Data</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">library</span>(scda)</span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="fu">library</span>(falcon)</span>
-<span id="cb2-4"><a href="#cb2-4"></a></span>
-<span id="cb2-5"><a href="#cb2-5"></a>adsl <span class="ot">&lt;-</span> scda<span class="sc">::</span><span class="fu">synthetic_cdisc_dataset</span>(<span class="st">"rcd_2022_10_13"</span>, <span class="st">"adsl"</span>)</span>
-<span id="cb2-6"><a href="#cb2-6"></a>advs <span class="ot">&lt;-</span> scda<span class="sc">::</span><span class="fu">synthetic_cdisc_dataset</span>(<span class="st">"rcd_2022_10_13"</span>, <span class="st">"advs"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">library</span>(falcon)</span>
+<span id="cb2-3"><a href="#cb2-3"></a></span>
+<span id="cb2-4"><a href="#cb2-4"></a>adsl <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadsl</span>
+<span id="cb2-5"><a href="#cb2-5"></a>advs <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadvs</span>
+<span id="cb2-6"><a href="#cb2-6"></a>advs<span class="sc">$</span>AVAL <span class="ot">&lt;-</span> advs<span class="sc">$</span>AVAL <span class="sc">-</span> <span class="dv">100</span></span>
 <span id="cb2-7"><a href="#cb2-7"></a></span>
 <span id="cb2-8"><a href="#cb2-8"></a><span class="co"># Output Table</span></span>
 <span id="cb2-9"><a href="#cb2-9"></a>risk_diff <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">arm_x =</span> <span class="st">"B: Placebo"</span>, <span class="at">arm_y =</span> <span class="st">"A: Drug X"</span>) <span class="co"># optional</span></span>
@@ -833,11 +833,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb3-13"><a href="#cb3-13"></a></span>
 <span id="cb3-14"><a href="#cb3-14"></a><span class="in">```{r tbl, message=FALSE, warning=FALSE}</span></span>
 <span id="cb3-15"><a href="#cb3-15"></a><span class="co"># Load Libraries &amp; Data</span></span>
-<span id="cb3-16"><a href="#cb3-16"></a><span class="fu">library</span>(scda)</span>
-<span id="cb3-17"><a href="#cb3-17"></a><span class="fu">library</span>(falcon)</span>
-<span id="cb3-18"><a href="#cb3-18"></a></span>
-<span id="cb3-19"><a href="#cb3-19"></a>adsl <span class="ot">&lt;-</span> scda<span class="sc">::</span><span class="fu">synthetic_cdisc_dataset</span>(<span class="st">"rcd_2022_10_13"</span>, <span class="st">"adsl"</span>)</span>
-<span id="cb3-20"><a href="#cb3-20"></a>advs <span class="ot">&lt;-</span> scda<span class="sc">::</span><span class="fu">synthetic_cdisc_dataset</span>(<span class="st">"rcd_2022_10_13"</span>, <span class="st">"advs"</span>)</span>
+<span id="cb3-16"><a href="#cb3-16"></a><span class="fu">library</span>(falcon)</span>
+<span id="cb3-17"><a href="#cb3-17"></a></span>
+<span id="cb3-18"><a href="#cb3-18"></a>adsl <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadsl</span>
+<span id="cb3-19"><a href="#cb3-19"></a>advs <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadvs</span>
+<span id="cb3-20"><a href="#cb3-20"></a>advs<span class="sc">$</span>AVAL <span class="ot">&lt;-</span> advs<span class="sc">$</span>AVAL <span class="sc">-</span> <span class="dv">100</span></span>
 <span id="cb3-21"><a href="#cb3-21"></a></span>
 <span id="cb3-22"><a href="#cb3-22"></a><span class="co"># Output Table</span></span>
 <span id="cb3-23"><a href="#cb3-23"></a>risk_diff <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">arm_x =</span> <span class="st">"B: Placebo"</span>, <span class="at">arm_y =</span> <span class="st">"A: Drug X"</span>) <span class="co"># optional</span></span>

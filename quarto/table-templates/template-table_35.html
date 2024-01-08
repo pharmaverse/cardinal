@@ -313,7 +313,7 @@ cookieconsent.run({
 </div>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<div class="cell" data-hash="template-table_35_cache/html/tbl_86f58f1b1b6dae43c706002b88ec88bb">
+<div class="cell" data-hash="template-table_35_cache/html/tbl_86429ccc8c97932c72d968500db1e61b">
 <div class="cell-output cell-output-stdout">
 <pre><code>                             A: Drug X    B: Placebo   C: Combination   Risk Difference (%) (95% CI)
 Primary System Organ Class    (N=134)      (N=134)        (N=132)                 (N=268)           
@@ -326,13 +326,13 @@ cl C                         67 (50.0%)   75 (56.0%)     79 (59.8%)          6.0
 </div>
 </div>
 <div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
-<div class="cell" data-hash="template-table_35_cache/html/tbl_67c9d3d5afa302c02bac65c0b4fefad2">
+<div class="cell" data-hash="template-table_35_cache/html/tbl_f5e5854af0aec3f7ce05f5ed3b474800">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Load Libraries &amp; Data</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">library</span>(scda)</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">library</span>(random.cdisc.data)</span>
 <span id="cb2-3"><a href="#cb2-3"></a><span class="fu">library</span>(falcon)</span>
 <span id="cb2-4"><a href="#cb2-4"></a></span>
-<span id="cb2-5"><a href="#cb2-5"></a>adsl <span class="ot">&lt;-</span> scda<span class="sc">::</span><span class="fu">synthetic_cdisc_dataset</span>(<span class="st">"rcd_2022_10_13"</span>, <span class="st">"adsl"</span>)</span>
-<span id="cb2-6"><a href="#cb2-6"></a>adae <span class="ot">&lt;-</span> scda<span class="sc">::</span><span class="fu">synthetic_cdisc_dataset</span>(<span class="st">"rcd_2022_10_13"</span>, <span class="st">"adae"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5"></a>adsl <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadsl</span>
+<span id="cb2-6"><a href="#cb2-6"></a>adae <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadae</span>
 <span id="cb2-7"><a href="#cb2-7"></a></span>
 <span id="cb2-8"><a href="#cb2-8"></a><span class="co"># Output Table</span></span>
 <span id="cb2-9"><a href="#cb2-9"></a>risk_diff <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">arm_x =</span> <span class="st">"B: Placebo"</span>, <span class="at">arm_y =</span> <span class="st">"A: Drug X"</span>) <span class="co"># optional</span></span>
@@ -844,11 +844,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb3-12"><a href="#cb3-12"></a></span>
 <span id="cb3-13"><a href="#cb3-13"></a><span class="in">```{r tbl, message=FALSE, warning=FALSE}</span></span>
 <span id="cb3-14"><a href="#cb3-14"></a><span class="co"># Load Libraries &amp; Data</span></span>
-<span id="cb3-15"><a href="#cb3-15"></a><span class="fu">library</span>(scda)</span>
+<span id="cb3-15"><a href="#cb3-15"></a><span class="fu">library</span>(random.cdisc.data)</span>
 <span id="cb3-16"><a href="#cb3-16"></a><span class="fu">library</span>(falcon)</span>
 <span id="cb3-17"><a href="#cb3-17"></a></span>
-<span id="cb3-18"><a href="#cb3-18"></a>adsl <span class="ot">&lt;-</span> scda<span class="sc">::</span><span class="fu">synthetic_cdisc_dataset</span>(<span class="st">"rcd_2022_10_13"</span>, <span class="st">"adsl"</span>)</span>
-<span id="cb3-19"><a href="#cb3-19"></a>adae <span class="ot">&lt;-</span> scda<span class="sc">::</span><span class="fu">synthetic_cdisc_dataset</span>(<span class="st">"rcd_2022_10_13"</span>, <span class="st">"adae"</span>)</span>
+<span id="cb3-18"><a href="#cb3-18"></a>adsl <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadsl</span>
+<span id="cb3-19"><a href="#cb3-19"></a>adae <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadae</span>
 <span id="cb3-20"><a href="#cb3-20"></a></span>
 <span id="cb3-21"><a href="#cb3-21"></a><span class="co"># Output Table</span></span>
 <span id="cb3-22"><a href="#cb3-22"></a>risk_diff <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">arm_x =</span> <span class="st">"B: Placebo"</span>, <span class="at">arm_y =</span> <span class="st">"A: Drug X"</span>) <span class="co"># optional</span></span>

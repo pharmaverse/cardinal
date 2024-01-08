@@ -334,10 +334,9 @@ cookieconsent.run({
 <span id="cb1-4"><a href="#cb1-4"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"remotes"</span>)) <span class="fu">install.packages</span>(<span class="st">"remotes"</span>)</span>
 <span id="cb1-5"><a href="#cb1-5"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"tern"</span>)) <span class="fu">install.packages</span>(<span class="st">"tern"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Optionally, to run the examples provided within the <code>falcon</code> package and on this site you can also install the synthetic CDISC data packages from GitHub, which contain the example datasets, by running the following:</p>
-<div class="cell" data-hash="getting_started_cache/html/unnamed-chunk-2_37f495f631105b04e8bcf2153604a828">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"scda"</span>)) remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"insightsengineering/scda@*release"</span>)</span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"scda.2022"</span>)) remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"insightsengineering/scda.2022@*release"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Optionally, to run the examples provided within the <code>falcon</code> package and on this site you can also install the synthetic CDISC data package from GitHub, which contains the example datasets, by running the following:</p>
+<div class="cell" data-hash="getting_started_cache/html/unnamed-chunk-2_a3a59f434e4191b5558a909291ffcd5a">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"random.cdisc.data"</span>)) remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"insightsengineering/random.cdisc.data@*release"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>For more information on these packages, see the <a href="#additional-resources">Additional Resources</a> section below.</p>
 </section><section id="installing-the-falcon-package" class="level4"><h4 class="anchored" data-anchor-id="installing-the-falcon-package">Installing the <code>falcon</code> Package</h4>
@@ -347,7 +346,7 @@ cookieconsent.run({
 </div>
 </section></section><section id="loading-data" class="level3"><h3 class="anchored" data-anchor-id="loading-data">Loading Data</h3>
 <p>The table functions provided by <code>falcon</code> are designed to work with any datasets which adhere to CDISC standards. If you have access to CDISC data, load this into your R environment as usual to use when generating tables.</p>
-<p>If you do not have access to CDISC data, or want to run the examples provided within the package, you can use the <code>scda</code> package to load a selection of datasets stored in the <code>scda.2022</code> package containing example synthetic CDISC data. Datasets can be loaded using the <code>synthetic_cdisc_dataset()</code> function from <code>scda</code>. Specify the <code>archive_name</code> parameter, setting <code>archive_name</code> as <code>"latest"</code> for the most recent version, or setting another version if desired (see the list of all available versions by running <code><a href="https://rdrr.io/pkg/scda/man/ls_synthetic_cdisc_data.html">scda::ls_synthetic_cdisc_data()</a></code>). The <code>dataset_name</code> parameter must also be specified with the name of the desired dataset in lowercase, e.g.&nbsp;<code>dataset_name = "adsl"</code>. This data is loaded in where necessary as part of the provided examples.</p>
+<p>If you do not have access to CDISC data, or want to run the examples provided within the package, you can use the <code>random.cdisc.data</code> package to load a selection of datasets containing example synthetic randomized CDISC data. Datasets are stored in the package by name, prefixed by the letter <code>"c"</code> (for “cached”). For example, after loading the <code>random.cdisc.data</code> package you can access an ADSL dataset by running <code>cadsl</code>, or ADAE with <code>cadae</code>. This data is loaded in where necessary as part of the provided examples.</p>
 </section><section id="template-navigation" class="level3"><h3 class="anchored" data-anchor-id="template-navigation">Template Navigation</h3>
 <p>A list of all templates currently available in <code>falcon</code> is provided in the <a href="../quarto/index-templates.html">Template Library Index</a>, with tables designed based on the <a href="https://downloads.regulations.gov/FDA-2022-N-1961-0046/attachment_1.pdf">FDA Standard Safety Tables and Figures: Integrated Guide</a>.</p>
 <p>Each template provided is associated with a function available within the <code>falcon</code> package, and contains 4 sections:</p>
@@ -392,12 +391,12 @@ cookieconsent.run({
 <p>There are many table-generating functions available within the <code>falcon</code> package, each of which is used to generate a different FDA standard safety table using R. These functions create <code>rtables</code> table objects which can then be further customized, paginated, etc. if required using functions from the <a href="https://insightsengineering.github.io/rtables/main/"><code>rtables</code></a> package.</p>
 <section id="using-the-table-functions" class="level4"><h4 class="anchored" data-anchor-id="using-the-table-functions">Using the Table Functions</h4>
 <p>To use the table functions you will need to load the <code>falcon</code> package and then call the appropriate table function. For example, to create FDA Safety Table 2, you can run the following code:</p>
-<div class="cell" data-hash="getting_started_cache/html/unnamed-chunk-4_4ef0194b83c1ef00b337c5cbdfb84e30">
+<div class="cell" data-hash="getting_started_cache/html/unnamed-chunk-4_b1569a2b0fed8937520d28028fc3ae21">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="fu">library</span>(falcon)</span>
 <span id="cb4-3"><a href="#cb4-3"></a></span>
 <span id="cb4-4"><a href="#cb4-4"></a><span class="co"># Data pre-processing - ensure all necessary variables are present in the data</span></span>
-<span id="cb4-5"><a href="#cb4-5"></a>adsl <span class="ot">&lt;-</span> scda<span class="sc">::</span><span class="fu">synthetic_cdisc_dataset</span>(<span class="st">"latest"</span>, <span class="st">"adsl"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a>adsl <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadsl <span class="sc">%&gt;%</span></span>
 <span id="cb4-6"><a href="#cb4-6"></a>  <span class="fu">mutate</span>(<span class="at">AGEGR1 =</span> <span class="fu">as.factor</span>(<span class="fu">case_when</span>(</span>
 <span id="cb4-7"><a href="#cb4-7"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">17</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"&gt;=17 to &lt;65"</span>,</span>
 <span id="cb4-8"><a href="#cb4-8"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"&gt;=65"</span>,</span>
@@ -450,8 +449,8 @@ Country
 </section><section id="table-customization" class="level4"><h4 class="anchored" data-anchor-id="table-customization">Table Customization</h4>
 <p>Each template takes several arguments that can be set to generate a table that meets your requirements. A brief overview of the parameters for each template is provided in the <strong>Function Details</strong> section of each table template page (see the Function Details section above) and the function’s help page within R (i.e.&nbsp;<code>?make_table_XX</code>), with many of these parameters being standard across table functions.</p>
 <p>To customize the output table, you can modify the values of these arguments as per your requirements. For example, table 2 can be customized as follows:</p>
-<div class="cell" data-hash="getting_started_cache/html/unnamed-chunk-5_b219099c1fa3463b1d54be590eabd64a">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>advs <span class="ot">&lt;-</span> scda<span class="sc">::</span><span class="fu">synthetic_cdisc_dataset</span>(<span class="st">"latest"</span>, <span class="st">"advs"</span>) <span class="sc">%&gt;%</span></span>
+<div class="cell" data-hash="getting_started_cache/html/unnamed-chunk-5_8cca8fd0a00f44b0a81b24a5421a385d">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>advs <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadvs <span class="sc">%&gt;%</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">filter</span>(AVISIT <span class="sc">==</span> <span class="st">"BASELINE"</span>, VSTESTCD <span class="sc">==</span> <span class="st">"TEMP"</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">select</span>(<span class="st">"USUBJID"</span>, <span class="st">"AVAL"</span>)</span>
 <span id="cb6-4"><a href="#cb6-4"></a></span>
@@ -541,15 +540,13 @@ Race
 <li>
 <a href="https://insightsengineering.github.io/rtables/main/"><code>rtables</code></a>: Table creation</li>
 <li>
-<a href="https://insightsengineering.github.io/rlistings/latest-tag/"><code>rlistings</code></a>: Listing creation</li>
+<a href="https://insightsengineering.github.io/rlistings/main/"><code>rlistings</code></a>: Listing creation</li>
 <li>
-<a href="https://insightsengineering.github.io/tern/latest-tag/"><code>tern</code></a>: Clinical trials analysis functions</li>
+<a href="https://insightsengineering.github.io/tern/main/"><code>tern</code></a>: Clinical trials analysis functions</li>
 <li>
-<a href="https://insightsengineering.github.io/formatters/latest-tag/"><code>formatters</code></a>: Additional rendering formatting</li>
+<a href="https://insightsengineering.github.io/formatters/main/"><code>formatters</code></a>: Additional rendering formatting</li>
 <li>
-<a href="https://insightsengineering.github.io/scda.2022/latest-tag/"><code>scda.2022</code></a>: Example synthetic CDISC datasets (required for examples only)</li>
-<li>
-<a href="https://insightsengineering.github.io/scda/latest-tag/"><code>scda</code></a>: Loading synthetic CDISC data (required for examples only)</li>
+<a href="https://insightsengineering.github.io/random.cdisc.data/main/">`random.cdisc.data``</a>: Example synthetic randomized CDISC datasets (required for examples only)</li>
 </ul>
 
 
@@ -980,137 +977,135 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb10-24"><a href="#cb10-24"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"tern"</span>)) <span class="fu">install.packages</span>(<span class="st">"tern"</span>)</span>
 <span id="cb10-25"><a href="#cb10-25"></a><span class="in">```</span></span>
 <span id="cb10-26"><a href="#cb10-26"></a></span>
-<span id="cb10-27"><a href="#cb10-27"></a>Optionally, to run the examples provided within the <span class="in">`falcon`</span> package and on this site you can also install the synthetic CDISC data packages from GitHub, which contain the example datasets, by running the following:</span>
+<span id="cb10-27"><a href="#cb10-27"></a>Optionally, to run the examples provided within the <span class="in">`falcon`</span> package and on this site you can also install the synthetic CDISC data package from GitHub, which contains the example datasets, by running the following:</span>
 <span id="cb10-28"><a href="#cb10-28"></a></span>
 <span id="cb10-29"><a href="#cb10-29"></a><span class="in">```{r, echo=TRUE, eval=FALSE}</span></span>
-<span id="cb10-30"><a href="#cb10-30"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"scda"</span>)) remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"insightsengineering/scda@*release"</span>)</span>
-<span id="cb10-31"><a href="#cb10-31"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"scda.2022"</span>)) remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"insightsengineering/scda.2022@*release"</span>)</span>
-<span id="cb10-32"><a href="#cb10-32"></a><span class="in">```</span></span>
-<span id="cb10-33"><a href="#cb10-33"></a></span>
-<span id="cb10-34"><a href="#cb10-34"></a>For more information on these packages, see the <span class="co">[</span><span class="ot">Additional Resources</span><span class="co">](#additional-resources)</span> section below.</span>
-<span id="cb10-35"><a href="#cb10-35"></a></span>
-<span id="cb10-36"><a href="#cb10-36"></a><span class="fu">#### Installing the `falcon` Package</span></span>
-<span id="cb10-37"><a href="#cb10-37"></a></span>
-<span id="cb10-38"><a href="#cb10-38"></a>To install the <span class="in">`falcon`</span> package, run the following line of code:</span>
-<span id="cb10-39"><a href="#cb10-39"></a></span>
-<span id="cb10-40"><a href="#cb10-40"></a><span class="in">```{r, echo=TRUE, eval=FALSE}</span></span>
-<span id="cb10-41"><a href="#cb10-41"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"falcon"</span>)) remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"pharmaverse/falcon"</span>)</span>
-<span id="cb10-42"><a href="#cb10-42"></a><span class="in">```</span></span>
-<span id="cb10-43"><a href="#cb10-43"></a></span>
-<span id="cb10-44"><a href="#cb10-44"></a><span class="fu">### Loading Data</span></span>
-<span id="cb10-45"><a href="#cb10-45"></a></span>
-<span id="cb10-46"><a href="#cb10-46"></a>The table functions provided by <span class="in">`falcon`</span> are designed to work with any datasets which adhere to CDISC standards. If you have access to CDISC data, load this into your R environment as usual to use when generating tables.</span>
-<span id="cb10-47"><a href="#cb10-47"></a></span>
-<span id="cb10-48"><a href="#cb10-48"></a>If you do not have access to CDISC data, or want to run the examples provided within the package, you can use the <span class="in">`scda`</span> package to load a selection of datasets stored in the <span class="in">`scda.2022`</span> package containing example synthetic CDISC data. Datasets can be loaded using the <span class="in">`synthetic_cdisc_dataset()`</span> function from <span class="in">`scda`</span>. Specify the <span class="in">`archive_name`</span> parameter, setting <span class="in">`archive_name`</span> as <span class="in">`"latest"`</span> for the most recent version, or setting another version if desired (see the list of all available versions by running <span class="in">`scda::ls_synthetic_cdisc_data()`</span>). The <span class="in">`dataset_name`</span> parameter must also be specified with the name of the desired dataset in lowercase, e.g. <span class="in">`dataset_name = "adsl"`</span>. This data is loaded in where necessary as part of the provided examples.</span>
-<span id="cb10-49"><a href="#cb10-49"></a></span>
-<span id="cb10-50"><a href="#cb10-50"></a><span class="fu">### Template Navigation</span></span>
-<span id="cb10-51"><a href="#cb10-51"></a></span>
-<span id="cb10-52"><a href="#cb10-52"></a>A list of all templates currently available in <span class="in">`falcon`</span> is provided in the <span class="co">[</span><span class="ot">Template Library Index</span><span class="co">](index-templates.qmd)</span>, with tables designed based on the <span class="co">[</span><span class="ot">FDA Standard Safety Tables and Figures: Integrated Guide</span><span class="co">](https://downloads.regulations.gov/FDA-2022-N-1961-0046/attachment_1.pdf)</span>.</span>
-<span id="cb10-53"><a href="#cb10-53"></a></span>
-<span id="cb10-54"><a href="#cb10-54"></a>Each template provided is associated with a function available within the <span class="in">`falcon`</span> package, and contains 4 sections:</span>
-<span id="cb10-55"><a href="#cb10-55"></a></span>
-<span id="cb10-56"><a href="#cb10-56"></a><span class="ss">-   </span>**Spec. Screenshot**: This tab provides a screenshot of the given table coming from the FDA Standard Safety Table and Figures document.</span>
-<span id="cb10-57"><a href="#cb10-57"></a></span>
-<span id="cb10-58"><a href="#cb10-58"></a><span class="al">![](./assets/images/getting-started/gs-pan1.png)</span>{fig-align="center" width="90%"}</span>
-<span id="cb10-59"><a href="#cb10-59"></a></span>
-<span id="cb10-60"><a href="#cb10-60"></a><span class="ss">-   </span>**Table**: This tab displays the output table corresponding to the screenshot in the previous tab, generated using the associated <span class="in">`falcon`</span> table function. You can expect a similar output table when using the table function with your own data, depending on pre-processing and the customizations that you apply via the table function parameters.</span>
-<span id="cb10-61"><a href="#cb10-61"></a></span>
-<span id="cb10-62"><a href="#cb10-62"></a><span class="al">![](./assets/images/getting-started/gs-pan2.png)</span>{fig-align="center" width="90%"}</span>
-<span id="cb10-63"><a href="#cb10-63"></a></span>
-<span id="cb10-64"><a href="#cb10-64"></a><span class="ss">-   </span>**Table Setup**: This tab provides the code used to generate the example table displayed in the previous tab, including the loading of necessary libraries and example datasets, and any pre-processing steps applied prior to generating the table.</span>
-<span id="cb10-65"><a href="#cb10-65"></a></span>
-<span id="cb10-66"><a href="#cb10-66"></a><span class="al">![](./assets/images/getting-started/gs-pan3.png)</span>{fig-align="center" width="90%"}</span>
-<span id="cb10-67"><a href="#cb10-67"></a></span>
-<span id="cb10-68"><a href="#cb10-68"></a><span class="ss">-   </span>**Function Details**: This tab includes details on the table-generating function used for this template. Table functions use the naming convention <span class="in">`make_table_XX()`</span> where <span class="in">`XX`</span> is the table number taken from the FDA Standard Safety Table and Figures document (preceded by a 0 if the number is a single digit). Any required variables for the input datasets are listed along with a description of all function arguments. This information is mirrored by the function's help page accessible within R (i.e. <span class="in">`?make_table_XX`</span>).</span>
-<span id="cb10-69"><a href="#cb10-69"></a></span>
-<span id="cb10-70"><a href="#cb10-70"></a><span class="al">![](./assets/images/getting-started/gs-pan4.png)</span>{fig-align="center" width="90%"}</span>
-<span id="cb10-71"><a href="#cb10-71"></a></span>
-<span id="cb10-72"><a href="#cb10-72"></a>|           A link to the function's source code can be found at the bottom of the page in this tab:</span>
-<span id="cb10-73"><a href="#cb10-73"></a></span>
-<span id="cb10-74"><a href="#cb10-74"></a><span class="al">![](./assets/images/getting-started/gs-pan4b.png)</span>{fig-align="center" width="90%"}</span>
-<span id="cb10-75"><a href="#cb10-75"></a></span>
-<span id="cb10-76"><a href="#cb10-76"></a><span class="fu">### Creating Tables</span></span>
-<span id="cb10-77"><a href="#cb10-77"></a></span>
-<span id="cb10-78"><a href="#cb10-78"></a>There are many table-generating functions available within the <span class="in">`falcon`</span> package, each of which is used to generate a different FDA standard safety table using R. These functions create <span class="in">`rtables`</span> table objects which can then be further customized, paginated, etc. if required using functions from the <span class="co">[</span><span class="ot">`rtables`</span><span class="co">](https://insightsengineering.github.io/rtables/main/)</span> package.</span>
-<span id="cb10-79"><a href="#cb10-79"></a></span>
-<span id="cb10-80"><a href="#cb10-80"></a><span class="fu">#### Using the Table Functions</span></span>
-<span id="cb10-81"><a href="#cb10-81"></a></span>
-<span id="cb10-82"><a href="#cb10-82"></a>To use the table functions you will need to load the <span class="in">`falcon`</span> package and then call the appropriate table function. For example, to create FDA Safety Table 2, you can run the following code:</span>
-<span id="cb10-83"><a href="#cb10-83"></a></span>
-<span id="cb10-84"><a href="#cb10-84"></a><span class="in">```{r, echo=TRUE, warning=FALSE, message=FALSE}</span></span>
-<span id="cb10-85"><a href="#cb10-85"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb10-86"><a href="#cb10-86"></a><span class="fu">library</span>(falcon)</span>
-<span id="cb10-87"><a href="#cb10-87"></a></span>
-<span id="cb10-88"><a href="#cb10-88"></a><span class="co"># Data pre-processing - ensure all necessary variables are present in the data</span></span>
-<span id="cb10-89"><a href="#cb10-89"></a>adsl <span class="ot">&lt;-</span> scda<span class="sc">::</span><span class="fu">synthetic_cdisc_dataset</span>(<span class="st">"latest"</span>, <span class="st">"adsl"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb10-90"><a href="#cb10-90"></a>  <span class="fu">mutate</span>(<span class="at">AGEGR1 =</span> <span class="fu">as.factor</span>(<span class="fu">case_when</span>(</span>
-<span id="cb10-91"><a href="#cb10-91"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">17</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"&gt;=17 to &lt;65"</span>,</span>
-<span id="cb10-92"><a href="#cb10-92"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"&gt;=65"</span>,</span>
-<span id="cb10-93"><a href="#cb10-93"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">75</span> <span class="sc">~</span> <span class="st">"&gt;=65 to &lt;75"</span>,</span>
-<span id="cb10-94"><a href="#cb10-94"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">75</span> <span class="sc">~</span> <span class="st">"&gt;=75"</span></span>
-<span id="cb10-95"><a href="#cb10-95"></a>  )) <span class="sc">%&gt;%</span> formatters<span class="sc">::</span><span class="fu">with_label</span>(<span class="st">"Age Group, years"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb10-96"><a href="#cb10-96"></a>  formatters<span class="sc">::</span><span class="fu">var_relabel</span>(<span class="at">AGE =</span> <span class="st">"Age, years"</span>)</span>
-<span id="cb10-97"><a href="#cb10-97"></a></span>
-<span id="cb10-98"><a href="#cb10-98"></a><span class="co"># Create table</span></span>
-<span id="cb10-99"><a href="#cb10-99"></a>tbl <span class="ot">&lt;-</span> <span class="fu">make_table_02</span>(<span class="at">df =</span> adsl)</span>
-<span id="cb10-100"><a href="#cb10-100"></a>tbl</span>
-<span id="cb10-101"><a href="#cb10-101"></a><span class="in">```</span></span>
-<span id="cb10-102"><a href="#cb10-102"></a></span>
-<span id="cb10-103"><a href="#cb10-103"></a>The above table is created using the default settings. You can customize tables by specifying function parameter values to set input data, variables to include in the table, table annotations, etc.</span>
-<span id="cb10-104"><a href="#cb10-104"></a></span>
-<span id="cb10-105"><a href="#cb10-105"></a><span class="fu">#### Table Customization</span></span>
-<span id="cb10-106"><a href="#cb10-106"></a></span>
-<span id="cb10-107"><a href="#cb10-107"></a>Each template takes several arguments that can be set to generate a table that meets your requirements. A brief overview of the parameters for each template is provided in the **Function Details** section of each table template page (see the Function Details section above) and the function's help page within R (i.e. <span class="in">`?make_table_XX`</span>), with many of these parameters being standard across table functions.</span>
-<span id="cb10-108"><a href="#cb10-108"></a></span>
-<span id="cb10-109"><a href="#cb10-109"></a>To customize the output table, you can modify the values of these arguments as per your requirements. For example, table 2 can be customized as follows:</span>
-<span id="cb10-110"><a href="#cb10-110"></a></span>
-<span id="cb10-111"><a href="#cb10-111"></a><span class="in">```{r, echo=TRUE, warning=FALSE, message=FALSE}</span></span>
-<span id="cb10-112"><a href="#cb10-112"></a>advs <span class="ot">&lt;-</span> scda<span class="sc">::</span><span class="fu">synthetic_cdisc_dataset</span>(<span class="st">"latest"</span>, <span class="st">"advs"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb10-113"><a href="#cb10-113"></a>  <span class="fu">filter</span>(AVISIT <span class="sc">==</span> <span class="st">"BASELINE"</span>, VSTESTCD <span class="sc">==</span> <span class="st">"TEMP"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb10-114"><a href="#cb10-114"></a>  <span class="fu">select</span>(<span class="st">"USUBJID"</span>, <span class="st">"AVAL"</span>)</span>
-<span id="cb10-115"><a href="#cb10-115"></a></span>
-<span id="cb10-116"><a href="#cb10-116"></a>anl <span class="ot">&lt;-</span> <span class="fu">left_join</span>(adsl, advs, <span class="at">by =</span> <span class="st">"USUBJID"</span>) <span class="sc">%&gt;%</span> tern<span class="sc">::</span><span class="fu">df_explicit_na</span>()</span>
-<span id="cb10-117"><a href="#cb10-117"></a></span>
-<span id="cb10-118"><a href="#cb10-118"></a>tbl <span class="ot">&lt;-</span> <span class="fu">make_table_02</span>(</span>
-<span id="cb10-119"><a href="#cb10-119"></a>  <span class="at">df =</span> anl,</span>
-<span id="cb10-120"><a href="#cb10-120"></a>  <span class="at">vars =</span> <span class="fu">c</span>(<span class="st">"SEX"</span>, <span class="st">"AGE"</span>, <span class="st">"RACE"</span>, <span class="st">"COUNTRY"</span>, <span class="st">"AVAL"</span>),</span>
-<span id="cb10-121"><a href="#cb10-121"></a>  <span class="at">lbl_vars =</span> <span class="fu">c</span>(<span class="st">"Sex"</span>, <span class="st">"Age, years"</span>, <span class="st">"Race"</span>, <span class="st">"Country of Participation"</span>, <span class="st">"Baseline Temperature (C)"</span>),</span>
-<span id="cb10-122"><a href="#cb10-122"></a>  <span class="at">lbl_overall =</span> <span class="st">"Total</span><span class="sc">\n</span><span class="st">Population"</span>,</span>
-<span id="cb10-123"><a href="#cb10-123"></a>  <span class="at">na_rm =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb10-124"><a href="#cb10-124"></a>  <span class="at">annotations =</span> <span class="fu">list</span>(</span>
-<span id="cb10-125"><a href="#cb10-125"></a>    <span class="at">title =</span> <span class="st">"Table 2. Baseline Demographic and Clinical Characteristics Safety Population, Pooled Analyses"</span>,</span>
-<span id="cb10-126"><a href="#cb10-126"></a>    <span class="at">main_footer =</span> <span class="st">"Source: [include Applicant source, datasets and/or software tools used]."</span>,</span>
-<span id="cb10-127"><a href="#cb10-127"></a>    <span class="at">prov_footer =</span> <span class="fu">paste</span>(</span>
-<span id="cb10-128"><a href="#cb10-128"></a>      <span class="st">"Abbreviations: N, number of patients in treatment arm;"</span>,</span>
-<span id="cb10-129"><a href="#cb10-129"></a>      <span class="st">"n, number of patients with given characteristic; SD, standard deviation"</span></span>
-<span id="cb10-130"><a href="#cb10-130"></a>    )</span>
-<span id="cb10-131"><a href="#cb10-131"></a>  )</span>
-<span id="cb10-132"><a href="#cb10-132"></a>)</span>
-<span id="cb10-133"><a href="#cb10-133"></a>tbl</span>
-<span id="cb10-134"><a href="#cb10-134"></a><span class="in">```</span></span>
-<span id="cb10-135"><a href="#cb10-135"></a></span>
-<span id="cb10-136"><a href="#cb10-136"></a>Note that the <span class="in">`prune_0`</span> argument can be set to specify whether all-zero rows should be included in a table. For example, see that the demographics table below includes rows for <span class="in">`OTHER`</span> and <span class="in">`UNKNOWN`</span> for which all values are zero, whereas these two rows were excluded from the previous tables (<span class="in">`prune_0`</span> defaults to <span class="in">`TRUE`</span> in <span class="in">`make_table_02()`</span>).</span>
-<span id="cb10-137"><a href="#cb10-137"></a></span>
-<span id="cb10-138"><a href="#cb10-138"></a><span class="in">```{r, echo=TRUE}</span></span>
-<span id="cb10-139"><a href="#cb10-139"></a><span class="fu">make_table_02</span>(<span class="at">df =</span> anl, <span class="at">vars =</span> <span class="st">"RACE"</span>, <span class="at">prune_0 =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb10-140"><a href="#cb10-140"></a><span class="in">```</span></span>
-<span id="cb10-141"><a href="#cb10-141"></a></span>
-<span id="cb10-142"><a href="#cb10-142"></a><span class="fu">### Feature Requests</span></span>
-<span id="cb10-143"><a href="#cb10-143"></a></span>
-<span id="cb10-144"><a href="#cb10-144"></a>If you would like to request the addition of a new feature to a pre-existing function within <span class="in">`falcon`</span>, or would like a specific table template to be added, please file an issue on GitHub <span class="co">[</span><span class="ot">here</span><span class="co">](https://github.com/pharmaverse/falcon/issues)</span> or reach out to the falcon team directly via our Slack channel <span class="co">[</span><span class="ot">here</span><span class="co">](https://app.slack.com/client/T028PB489D3/C04MQS12MND)</span>.</span>
-<span id="cb10-145"><a href="#cb10-145"></a></span>
-<span id="cb10-146"><a href="#cb10-146"></a>You can access the source code for all currently available functions in the <span class="in">`falcon`</span> GitHub repository <span class="co">[</span><span class="ot">here</span><span class="co">](https://github.com/pharmaverse/falcon/tree/main/R)</span>.</span>
-<span id="cb10-147"><a href="#cb10-147"></a></span>
-<span id="cb10-148"><a href="#cb10-148"></a><span class="fu">### Additional Resources {#additional-resources}</span></span>
-<span id="cb10-149"><a href="#cb10-149"></a></span>
-<span id="cb10-150"><a href="#cb10-150"></a>See the following packages used by <span class="in">`falcon`</span> for more information:</span>
-<span id="cb10-151"><a href="#cb10-151"></a></span>
-<span id="cb10-152"><a href="#cb10-152"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">`rtables`</span><span class="co">](https://insightsengineering.github.io/rtables/main/)</span>: Table creation</span>
-<span id="cb10-153"><a href="#cb10-153"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">`rlistings`</span><span class="co">](https://insightsengineering.github.io/rlistings/latest-tag/)</span>: Listing creation</span>
-<span id="cb10-154"><a href="#cb10-154"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">`tern`</span><span class="co">](https://insightsengineering.github.io/tern/latest-tag/)</span>: Clinical trials analysis functions</span>
-<span id="cb10-155"><a href="#cb10-155"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">`formatters`</span><span class="co">](https://insightsengineering.github.io/formatters/latest-tag/)</span>: Additional rendering formatting</span>
-<span id="cb10-156"><a href="#cb10-156"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">`scda.2022`</span><span class="co">](https://insightsengineering.github.io/scda.2022/latest-tag/)</span>: Example synthetic CDISC datasets (required for examples only)</span>
-<span id="cb10-157"><a href="#cb10-157"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">`scda`</span><span class="co">](https://insightsengineering.github.io/scda/latest-tag/)</span>: Loading synthetic CDISC data (required for examples only)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-30"><a href="#cb10-30"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"random.cdisc.data"</span>)) remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"insightsengineering/random.cdisc.data@*release"</span>)</span>
+<span id="cb10-31"><a href="#cb10-31"></a><span class="in">```</span></span>
+<span id="cb10-32"><a href="#cb10-32"></a></span>
+<span id="cb10-33"><a href="#cb10-33"></a>For more information on these packages, see the <span class="co">[</span><span class="ot">Additional Resources</span><span class="co">](#additional-resources)</span> section below.</span>
+<span id="cb10-34"><a href="#cb10-34"></a></span>
+<span id="cb10-35"><a href="#cb10-35"></a><span class="fu">#### Installing the `falcon` Package</span></span>
+<span id="cb10-36"><a href="#cb10-36"></a></span>
+<span id="cb10-37"><a href="#cb10-37"></a>To install the <span class="in">`falcon`</span> package, run the following line of code:</span>
+<span id="cb10-38"><a href="#cb10-38"></a></span>
+<span id="cb10-39"><a href="#cb10-39"></a><span class="in">```{r, echo=TRUE, eval=FALSE}</span></span>
+<span id="cb10-40"><a href="#cb10-40"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"falcon"</span>)) remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"pharmaverse/falcon"</span>)</span>
+<span id="cb10-41"><a href="#cb10-41"></a><span class="in">```</span></span>
+<span id="cb10-42"><a href="#cb10-42"></a></span>
+<span id="cb10-43"><a href="#cb10-43"></a><span class="fu">### Loading Data</span></span>
+<span id="cb10-44"><a href="#cb10-44"></a></span>
+<span id="cb10-45"><a href="#cb10-45"></a>The table functions provided by <span class="in">`falcon`</span> are designed to work with any datasets which adhere to CDISC standards. If you have access to CDISC data, load this into your R environment as usual to use when generating tables.</span>
+<span id="cb10-46"><a href="#cb10-46"></a></span>
+<span id="cb10-47"><a href="#cb10-47"></a>If you do not have access to CDISC data, or want to run the examples provided within the package, you can use the <span class="in">`random.cdisc.data`</span> package to load a selection of datasets containing example synthetic randomized CDISC data. Datasets are stored in the package by name, prefixed by the letter <span class="in">`"c"`</span> (for "cached"). For example, after loading the <span class="in">`random.cdisc.data`</span> package you can access an ADSL dataset by running <span class="in">`cadsl`</span>, or ADAE with <span class="in">`cadae`</span>. This data is loaded in where necessary as part of the provided examples.</span>
+<span id="cb10-48"><a href="#cb10-48"></a></span>
+<span id="cb10-49"><a href="#cb10-49"></a><span class="fu">### Template Navigation</span></span>
+<span id="cb10-50"><a href="#cb10-50"></a></span>
+<span id="cb10-51"><a href="#cb10-51"></a>A list of all templates currently available in <span class="in">`falcon`</span> is provided in the <span class="co">[</span><span class="ot">Template Library Index</span><span class="co">](index-templates.qmd)</span>, with tables designed based on the <span class="co">[</span><span class="ot">FDA Standard Safety Tables and Figures: Integrated Guide</span><span class="co">](https://downloads.regulations.gov/FDA-2022-N-1961-0046/attachment_1.pdf)</span>.</span>
+<span id="cb10-52"><a href="#cb10-52"></a></span>
+<span id="cb10-53"><a href="#cb10-53"></a>Each template provided is associated with a function available within the <span class="in">`falcon`</span> package, and contains 4 sections:</span>
+<span id="cb10-54"><a href="#cb10-54"></a></span>
+<span id="cb10-55"><a href="#cb10-55"></a><span class="ss">-   </span>**Spec. Screenshot**: This tab provides a screenshot of the given table coming from the FDA Standard Safety Table and Figures document.</span>
+<span id="cb10-56"><a href="#cb10-56"></a></span>
+<span id="cb10-57"><a href="#cb10-57"></a><span class="al">![](./assets/images/getting-started/gs-pan1.png)</span>{fig-align="center" width="90%"}</span>
+<span id="cb10-58"><a href="#cb10-58"></a></span>
+<span id="cb10-59"><a href="#cb10-59"></a><span class="ss">-   </span>**Table**: This tab displays the output table corresponding to the screenshot in the previous tab, generated using the associated <span class="in">`falcon`</span> table function. You can expect a similar output table when using the table function with your own data, depending on pre-processing and the customizations that you apply via the table function parameters.</span>
+<span id="cb10-60"><a href="#cb10-60"></a></span>
+<span id="cb10-61"><a href="#cb10-61"></a><span class="al">![](./assets/images/getting-started/gs-pan2.png)</span>{fig-align="center" width="90%"}</span>
+<span id="cb10-62"><a href="#cb10-62"></a></span>
+<span id="cb10-63"><a href="#cb10-63"></a><span class="ss">-   </span>**Table Setup**: This tab provides the code used to generate the example table displayed in the previous tab, including the loading of necessary libraries and example datasets, and any pre-processing steps applied prior to generating the table.</span>
+<span id="cb10-64"><a href="#cb10-64"></a></span>
+<span id="cb10-65"><a href="#cb10-65"></a><span class="al">![](./assets/images/getting-started/gs-pan3.png)</span>{fig-align="center" width="90%"}</span>
+<span id="cb10-66"><a href="#cb10-66"></a></span>
+<span id="cb10-67"><a href="#cb10-67"></a><span class="ss">-   </span>**Function Details**: This tab includes details on the table-generating function used for this template. Table functions use the naming convention <span class="in">`make_table_XX()`</span> where <span class="in">`XX`</span> is the table number taken from the FDA Standard Safety Table and Figures document (preceded by a 0 if the number is a single digit). Any required variables for the input datasets are listed along with a description of all function arguments. This information is mirrored by the function's help page accessible within R (i.e. <span class="in">`?make_table_XX`</span>).</span>
+<span id="cb10-68"><a href="#cb10-68"></a></span>
+<span id="cb10-69"><a href="#cb10-69"></a><span class="al">![](./assets/images/getting-started/gs-pan4.png)</span>{fig-align="center" width="90%"}</span>
+<span id="cb10-70"><a href="#cb10-70"></a></span>
+<span id="cb10-71"><a href="#cb10-71"></a>|           A link to the function's source code can be found at the bottom of the page in this tab:</span>
+<span id="cb10-72"><a href="#cb10-72"></a></span>
+<span id="cb10-73"><a href="#cb10-73"></a><span class="al">![](./assets/images/getting-started/gs-pan4b.png)</span>{fig-align="center" width="90%"}</span>
+<span id="cb10-74"><a href="#cb10-74"></a></span>
+<span id="cb10-75"><a href="#cb10-75"></a><span class="fu">### Creating Tables</span></span>
+<span id="cb10-76"><a href="#cb10-76"></a></span>
+<span id="cb10-77"><a href="#cb10-77"></a>There are many table-generating functions available within the <span class="in">`falcon`</span> package, each of which is used to generate a different FDA standard safety table using R. These functions create <span class="in">`rtables`</span> table objects which can then be further customized, paginated, etc. if required using functions from the <span class="co">[</span><span class="ot">`rtables`</span><span class="co">](https://insightsengineering.github.io/rtables/main/)</span> package.</span>
+<span id="cb10-78"><a href="#cb10-78"></a></span>
+<span id="cb10-79"><a href="#cb10-79"></a><span class="fu">#### Using the Table Functions</span></span>
+<span id="cb10-80"><a href="#cb10-80"></a></span>
+<span id="cb10-81"><a href="#cb10-81"></a>To use the table functions you will need to load the <span class="in">`falcon`</span> package and then call the appropriate table function. For example, to create FDA Safety Table 2, you can run the following code:</span>
+<span id="cb10-82"><a href="#cb10-82"></a></span>
+<span id="cb10-83"><a href="#cb10-83"></a><span class="in">```{r, echo=TRUE, warning=FALSE, message=FALSE}</span></span>
+<span id="cb10-84"><a href="#cb10-84"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb10-85"><a href="#cb10-85"></a><span class="fu">library</span>(falcon)</span>
+<span id="cb10-86"><a href="#cb10-86"></a></span>
+<span id="cb10-87"><a href="#cb10-87"></a><span class="co"># Data pre-processing - ensure all necessary variables are present in the data</span></span>
+<span id="cb10-88"><a href="#cb10-88"></a>adsl <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadsl <span class="sc">%&gt;%</span></span>
+<span id="cb10-89"><a href="#cb10-89"></a>  <span class="fu">mutate</span>(<span class="at">AGEGR1 =</span> <span class="fu">as.factor</span>(<span class="fu">case_when</span>(</span>
+<span id="cb10-90"><a href="#cb10-90"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">17</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"&gt;=17 to &lt;65"</span>,</span>
+<span id="cb10-91"><a href="#cb10-91"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"&gt;=65"</span>,</span>
+<span id="cb10-92"><a href="#cb10-92"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">75</span> <span class="sc">~</span> <span class="st">"&gt;=65 to &lt;75"</span>,</span>
+<span id="cb10-93"><a href="#cb10-93"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">75</span> <span class="sc">~</span> <span class="st">"&gt;=75"</span></span>
+<span id="cb10-94"><a href="#cb10-94"></a>  )) <span class="sc">%&gt;%</span> formatters<span class="sc">::</span><span class="fu">with_label</span>(<span class="st">"Age Group, years"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb10-95"><a href="#cb10-95"></a>  formatters<span class="sc">::</span><span class="fu">var_relabel</span>(<span class="at">AGE =</span> <span class="st">"Age, years"</span>)</span>
+<span id="cb10-96"><a href="#cb10-96"></a></span>
+<span id="cb10-97"><a href="#cb10-97"></a><span class="co"># Create table</span></span>
+<span id="cb10-98"><a href="#cb10-98"></a>tbl <span class="ot">&lt;-</span> <span class="fu">make_table_02</span>(<span class="at">df =</span> adsl)</span>
+<span id="cb10-99"><a href="#cb10-99"></a>tbl</span>
+<span id="cb10-100"><a href="#cb10-100"></a><span class="in">```</span></span>
+<span id="cb10-101"><a href="#cb10-101"></a></span>
+<span id="cb10-102"><a href="#cb10-102"></a>The above table is created using the default settings. You can customize tables by specifying function parameter values to set input data, variables to include in the table, table annotations, etc.</span>
+<span id="cb10-103"><a href="#cb10-103"></a></span>
+<span id="cb10-104"><a href="#cb10-104"></a><span class="fu">#### Table Customization</span></span>
+<span id="cb10-105"><a href="#cb10-105"></a></span>
+<span id="cb10-106"><a href="#cb10-106"></a>Each template takes several arguments that can be set to generate a table that meets your requirements. A brief overview of the parameters for each template is provided in the **Function Details** section of each table template page (see the Function Details section above) and the function's help page within R (i.e. <span class="in">`?make_table_XX`</span>), with many of these parameters being standard across table functions.</span>
+<span id="cb10-107"><a href="#cb10-107"></a></span>
+<span id="cb10-108"><a href="#cb10-108"></a>To customize the output table, you can modify the values of these arguments as per your requirements. For example, table 2 can be customized as follows:</span>
+<span id="cb10-109"><a href="#cb10-109"></a></span>
+<span id="cb10-110"><a href="#cb10-110"></a><span class="in">```{r, echo=TRUE, warning=FALSE, message=FALSE}</span></span>
+<span id="cb10-111"><a href="#cb10-111"></a>advs <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadvs <span class="sc">%&gt;%</span></span>
+<span id="cb10-112"><a href="#cb10-112"></a>  <span class="fu">filter</span>(AVISIT <span class="sc">==</span> <span class="st">"BASELINE"</span>, VSTESTCD <span class="sc">==</span> <span class="st">"TEMP"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-113"><a href="#cb10-113"></a>  <span class="fu">select</span>(<span class="st">"USUBJID"</span>, <span class="st">"AVAL"</span>)</span>
+<span id="cb10-114"><a href="#cb10-114"></a></span>
+<span id="cb10-115"><a href="#cb10-115"></a>anl <span class="ot">&lt;-</span> <span class="fu">left_join</span>(adsl, advs, <span class="at">by =</span> <span class="st">"USUBJID"</span>) <span class="sc">%&gt;%</span> tern<span class="sc">::</span><span class="fu">df_explicit_na</span>()</span>
+<span id="cb10-116"><a href="#cb10-116"></a></span>
+<span id="cb10-117"><a href="#cb10-117"></a>tbl <span class="ot">&lt;-</span> <span class="fu">make_table_02</span>(</span>
+<span id="cb10-118"><a href="#cb10-118"></a>  <span class="at">df =</span> anl,</span>
+<span id="cb10-119"><a href="#cb10-119"></a>  <span class="at">vars =</span> <span class="fu">c</span>(<span class="st">"SEX"</span>, <span class="st">"AGE"</span>, <span class="st">"RACE"</span>, <span class="st">"COUNTRY"</span>, <span class="st">"AVAL"</span>),</span>
+<span id="cb10-120"><a href="#cb10-120"></a>  <span class="at">lbl_vars =</span> <span class="fu">c</span>(<span class="st">"Sex"</span>, <span class="st">"Age, years"</span>, <span class="st">"Race"</span>, <span class="st">"Country of Participation"</span>, <span class="st">"Baseline Temperature (C)"</span>),</span>
+<span id="cb10-121"><a href="#cb10-121"></a>  <span class="at">lbl_overall =</span> <span class="st">"Total</span><span class="sc">\n</span><span class="st">Population"</span>,</span>
+<span id="cb10-122"><a href="#cb10-122"></a>  <span class="at">na_rm =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb10-123"><a href="#cb10-123"></a>  <span class="at">annotations =</span> <span class="fu">list</span>(</span>
+<span id="cb10-124"><a href="#cb10-124"></a>    <span class="at">title =</span> <span class="st">"Table 2. Baseline Demographic and Clinical Characteristics Safety Population, Pooled Analyses"</span>,</span>
+<span id="cb10-125"><a href="#cb10-125"></a>    <span class="at">main_footer =</span> <span class="st">"Source: [include Applicant source, datasets and/or software tools used]."</span>,</span>
+<span id="cb10-126"><a href="#cb10-126"></a>    <span class="at">prov_footer =</span> <span class="fu">paste</span>(</span>
+<span id="cb10-127"><a href="#cb10-127"></a>      <span class="st">"Abbreviations: N, number of patients in treatment arm;"</span>,</span>
+<span id="cb10-128"><a href="#cb10-128"></a>      <span class="st">"n, number of patients with given characteristic; SD, standard deviation"</span></span>
+<span id="cb10-129"><a href="#cb10-129"></a>    )</span>
+<span id="cb10-130"><a href="#cb10-130"></a>  )</span>
+<span id="cb10-131"><a href="#cb10-131"></a>)</span>
+<span id="cb10-132"><a href="#cb10-132"></a>tbl</span>
+<span id="cb10-133"><a href="#cb10-133"></a><span class="in">```</span></span>
+<span id="cb10-134"><a href="#cb10-134"></a></span>
+<span id="cb10-135"><a href="#cb10-135"></a>Note that the <span class="in">`prune_0`</span> argument can be set to specify whether all-zero rows should be included in a table. For example, see that the demographics table below includes rows for <span class="in">`OTHER`</span> and <span class="in">`UNKNOWN`</span> for which all values are zero, whereas these two rows were excluded from the previous tables (<span class="in">`prune_0`</span> defaults to <span class="in">`TRUE`</span> in <span class="in">`make_table_02()`</span>).</span>
+<span id="cb10-136"><a href="#cb10-136"></a></span>
+<span id="cb10-137"><a href="#cb10-137"></a><span class="in">```{r, echo=TRUE}</span></span>
+<span id="cb10-138"><a href="#cb10-138"></a><span class="fu">make_table_02</span>(<span class="at">df =</span> anl, <span class="at">vars =</span> <span class="st">"RACE"</span>, <span class="at">prune_0 =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb10-139"><a href="#cb10-139"></a><span class="in">```</span></span>
+<span id="cb10-140"><a href="#cb10-140"></a></span>
+<span id="cb10-141"><a href="#cb10-141"></a><span class="fu">### Feature Requests</span></span>
+<span id="cb10-142"><a href="#cb10-142"></a></span>
+<span id="cb10-143"><a href="#cb10-143"></a>If you would like to request the addition of a new feature to a pre-existing function within <span class="in">`falcon`</span>, or would like a specific table template to be added, please file an issue on GitHub <span class="co">[</span><span class="ot">here</span><span class="co">](https://github.com/pharmaverse/falcon/issues)</span> or reach out to the falcon team directly via our Slack channel <span class="co">[</span><span class="ot">here</span><span class="co">](https://app.slack.com/client/T028PB489D3/C04MQS12MND)</span>.</span>
+<span id="cb10-144"><a href="#cb10-144"></a></span>
+<span id="cb10-145"><a href="#cb10-145"></a>You can access the source code for all currently available functions in the <span class="in">`falcon`</span> GitHub repository <span class="co">[</span><span class="ot">here</span><span class="co">](https://github.com/pharmaverse/falcon/tree/main/R)</span>.</span>
+<span id="cb10-146"><a href="#cb10-146"></a></span>
+<span id="cb10-147"><a href="#cb10-147"></a><span class="fu">### Additional Resources {#additional-resources}</span></span>
+<span id="cb10-148"><a href="#cb10-148"></a></span>
+<span id="cb10-149"><a href="#cb10-149"></a>See the following packages used by <span class="in">`falcon`</span> for more information:</span>
+<span id="cb10-150"><a href="#cb10-150"></a></span>
+<span id="cb10-151"><a href="#cb10-151"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">`rtables`</span><span class="co">](https://insightsengineering.github.io/rtables/main/)</span>: Table creation</span>
+<span id="cb10-152"><a href="#cb10-152"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">`rlistings`</span><span class="co">](https://insightsengineering.github.io/rlistings/main/)</span>: Listing creation</span>
+<span id="cb10-153"><a href="#cb10-153"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">`tern`</span><span class="co">](https://insightsengineering.github.io/tern/main/)</span>: Clinical trials analysis functions</span>
+<span id="cb10-154"><a href="#cb10-154"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">`formatters`</span><span class="co">](https://insightsengineering.github.io/formatters/main/)</span>: Additional rendering formatting</span>
+<span id="cb10-155"><a href="#cb10-155"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">`random.cdisc.data``</span><span class="co">](https://insightsengineering.github.io/random.cdisc.data/main/)</span>: Example synthetic randomized CDISC datasets (required for examples only)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
