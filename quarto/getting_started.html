@@ -239,6 +239,10 @@ cookieconsent.run({
     <a class="dropdown-item" href="../quarto/table-templates/template-table_34.html" rel="" target="">
  <span class="dropdown-text">FDA Table 34</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../quarto/table-templates/template-table_35.html" rel="" target="">
+ <span class="dropdown-text">FDA Table 35</span></a>
+  </li>  
     </ul>
 </li>
   <li class="nav-item">
@@ -388,13 +392,13 @@ cookieconsent.run({
 <p>There are many table-generating functions available within the <code>falcon</code> package, each of which is used to generate a different FDA standard safety table using R. These functions create <code>rtables</code> table objects which can then be further customized, paginated, etc. if required using functions from the <a href="https://insightsengineering.github.io/rtables/main/"><code>rtables</code></a> package.</p>
 <section id="using-the-table-functions" class="level4"><h4 class="anchored" data-anchor-id="using-the-table-functions">Using the Table Functions</h4>
 <p>To use the table functions you will need to load the <code>falcon</code> package and then call the appropriate table function. For example, to create FDA Safety Table 2, you can run the following code:</p>
-<div class="cell" data-hash="getting_started_cache/html/unnamed-chunk-4_f376d6bb529b099f62e8425900fbf128">
+<div class="cell" data-hash="getting_started_cache/html/unnamed-chunk-4_4ef0194b83c1ef00b337c5cbdfb84e30">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="fu">library</span>(falcon)</span>
 <span id="cb4-3"><a href="#cb4-3"></a></span>
 <span id="cb4-4"><a href="#cb4-4"></a><span class="co"># Data pre-processing - ensure all necessary variables are present in the data</span></span>
 <span id="cb4-5"><a href="#cb4-5"></a>adsl <span class="ot">&lt;-</span> scda<span class="sc">::</span><span class="fu">synthetic_cdisc_dataset</span>(<span class="st">"latest"</span>, <span class="st">"adsl"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb4-6"><a href="#cb4-6"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">AGEGR1 =</span> <span class="fu">as.factor</span>(dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
+<span id="cb4-6"><a href="#cb4-6"></a>  <span class="fu">mutate</span>(<span class="at">AGEGR1 =</span> <span class="fu">as.factor</span>(<span class="fu">case_when</span>(</span>
 <span id="cb4-7"><a href="#cb4-7"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">17</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"&gt;=17 to &lt;65"</span>,</span>
 <span id="cb4-8"><a href="#cb4-8"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"&gt;=65"</span>,</span>
 <span id="cb4-9"><a href="#cb4-9"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">75</span> <span class="sc">~</span> <span class="st">"&gt;=65 to &lt;75"</span>,</span>
@@ -446,12 +450,12 @@ Country
 </section><section id="table-customization" class="level4"><h4 class="anchored" data-anchor-id="table-customization">Table Customization</h4>
 <p>Each template takes several arguments that can be set to generate a table that meets your requirements. A brief overview of the parameters for each template is provided in the <strong>Function Details</strong> section of each table template page (see the Function Details section above) and the function’s help page within R (i.e.&nbsp;<code>?make_table_XX</code>), with many of these parameters being standard across table functions.</p>
 <p>To customize the output table, you can modify the values of these arguments as per your requirements. For example, table 2 can be customized as follows:</p>
-<div class="cell" data-hash="getting_started_cache/html/unnamed-chunk-5_c41a56a131928c8c3f0cb9f8e5c68949">
+<div class="cell" data-hash="getting_started_cache/html/unnamed-chunk-5_b219099c1fa3463b1d54be590eabd64a">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>advs <span class="ot">&lt;-</span> scda<span class="sc">::</span><span class="fu">synthetic_cdisc_dataset</span>(<span class="st">"latest"</span>, <span class="st">"advs"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(AVISIT <span class="sc">==</span> <span class="st">"BASELINE"</span>, VSTESTCD <span class="sc">==</span> <span class="st">"TEMP"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="st">"USUBJID"</span>, <span class="st">"AVAL"</span>)</span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">filter</span>(AVISIT <span class="sc">==</span> <span class="st">"BASELINE"</span>, VSTESTCD <span class="sc">==</span> <span class="st">"TEMP"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">select</span>(<span class="st">"USUBJID"</span>, <span class="st">"AVAL"</span>)</span>
 <span id="cb6-4"><a href="#cb6-4"></a></span>
-<span id="cb6-5"><a href="#cb6-5"></a>anl <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">left_join</span>(adsl, advs, <span class="at">by =</span> <span class="st">"USUBJID"</span>) <span class="sc">%&gt;%</span> tern<span class="sc">::</span><span class="fu">df_explicit_na</span>()</span>
+<span id="cb6-5"><a href="#cb6-5"></a>anl <span class="ot">&lt;-</span> <span class="fu">left_join</span>(adsl, advs, <span class="at">by =</span> <span class="st">"USUBJID"</span>) <span class="sc">%&gt;%</span> tern<span class="sc">::</span><span class="fu">df_explicit_na</span>()</span>
 <span id="cb6-6"><a href="#cb6-6"></a></span>
 <span id="cb6-7"><a href="#cb6-7"></a>tbl <span class="ot">&lt;-</span> <span class="fu">make_table_02</span>(</span>
 <span id="cb6-8"><a href="#cb6-8"></a>  <span class="at">df =</span> anl,</span>
@@ -1039,7 +1043,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb10-87"><a href="#cb10-87"></a></span>
 <span id="cb10-88"><a href="#cb10-88"></a><span class="co"># Data pre-processing - ensure all necessary variables are present in the data</span></span>
 <span id="cb10-89"><a href="#cb10-89"></a>adsl <span class="ot">&lt;-</span> scda<span class="sc">::</span><span class="fu">synthetic_cdisc_dataset</span>(<span class="st">"latest"</span>, <span class="st">"adsl"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb10-90"><a href="#cb10-90"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">AGEGR1 =</span> <span class="fu">as.factor</span>(dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
+<span id="cb10-90"><a href="#cb10-90"></a>  <span class="fu">mutate</span>(<span class="at">AGEGR1 =</span> <span class="fu">as.factor</span>(<span class="fu">case_when</span>(</span>
 <span id="cb10-91"><a href="#cb10-91"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">17</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"&gt;=17 to &lt;65"</span>,</span>
 <span id="cb10-92"><a href="#cb10-92"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"&gt;=65"</span>,</span>
 <span id="cb10-93"><a href="#cb10-93"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">75</span> <span class="sc">~</span> <span class="st">"&gt;=65 to &lt;75"</span>,</span>
@@ -1062,10 +1066,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb10-110"><a href="#cb10-110"></a></span>
 <span id="cb10-111"><a href="#cb10-111"></a><span class="in">```{r, echo=TRUE, warning=FALSE, message=FALSE}</span></span>
 <span id="cb10-112"><a href="#cb10-112"></a>advs <span class="ot">&lt;-</span> scda<span class="sc">::</span><span class="fu">synthetic_cdisc_dataset</span>(<span class="st">"latest"</span>, <span class="st">"advs"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb10-113"><a href="#cb10-113"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(AVISIT <span class="sc">==</span> <span class="st">"BASELINE"</span>, VSTESTCD <span class="sc">==</span> <span class="st">"TEMP"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb10-114"><a href="#cb10-114"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="st">"USUBJID"</span>, <span class="st">"AVAL"</span>)</span>
+<span id="cb10-113"><a href="#cb10-113"></a>  <span class="fu">filter</span>(AVISIT <span class="sc">==</span> <span class="st">"BASELINE"</span>, VSTESTCD <span class="sc">==</span> <span class="st">"TEMP"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-114"><a href="#cb10-114"></a>  <span class="fu">select</span>(<span class="st">"USUBJID"</span>, <span class="st">"AVAL"</span>)</span>
 <span id="cb10-115"><a href="#cb10-115"></a></span>
-<span id="cb10-116"><a href="#cb10-116"></a>anl <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">left_join</span>(adsl, advs, <span class="at">by =</span> <span class="st">"USUBJID"</span>) <span class="sc">%&gt;%</span> tern<span class="sc">::</span><span class="fu">df_explicit_na</span>()</span>
+<span id="cb10-116"><a href="#cb10-116"></a>anl <span class="ot">&lt;-</span> <span class="fu">left_join</span>(adsl, advs, <span class="at">by =</span> <span class="st">"USUBJID"</span>) <span class="sc">%&gt;%</span> tern<span class="sc">::</span><span class="fu">df_explicit_na</span>()</span>
 <span id="cb10-117"><a href="#cb10-117"></a></span>
 <span id="cb10-118"><a href="#cb10-118"></a>tbl <span class="ot">&lt;-</span> <span class="fu">make_table_02</span>(</span>
 <span id="cb10-119"><a href="#cb10-119"></a>  <span class="at">df =</span> anl,</span>

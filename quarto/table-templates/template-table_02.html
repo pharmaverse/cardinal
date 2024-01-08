@@ -239,6 +239,10 @@ cookieconsent.run({
     <a class="dropdown-item" href="../../quarto/table-templates/template-table_34.html" rel="" target="">
  <span class="dropdown-text">FDA Table 34</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../../quarto/table-templates/template-table_35.html" rel="" target="">
+ <span class="dropdown-text">FDA Table 35</span></a>
+  </li>  
     </ul>
 </li>
   <li class="nav-item">
@@ -315,7 +319,7 @@ cookieconsent.run({
 </div>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<div class="cell" data-hash="template-table_02_cache/html/tbl_642f83c047642808fe1cfec2a8682215">
+<div class="cell" data-hash="template-table_02_cache/html/tbl_c6b4c1bf83dc7d7603c6e31793661bdc">
 <div class="cell-output cell-output-stdout">
 <pre><code>                                                  A: Drug X            B: Placebo         C: Combination      Total Population 
 Characteristic                                     (N=134)              (N=134)              (N=132)              (N=400)      
@@ -358,7 +362,7 @@ Baseline Temperature (C)
 </div>
 </div>
 <div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
-<div class="cell" data-hash="template-table_02_cache/html/tbl_8ce090eba54321ac518b5ef54db7cf22">
+<div class="cell" data-hash="template-table_02_cache/html/tbl_29d1838c253f870ab3d1ab752e3fa2aa">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Load Libraries &amp; Data</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="fu">library</span>(scda)</span>
 <span id="cb2-3"><a href="#cb2-3"></a><span class="fu">library</span>(falcon)</span>
@@ -369,7 +373,7 @@ Baseline Temperature (C)
 <span id="cb2-8"><a href="#cb2-8"></a></span>
 <span id="cb2-9"><a href="#cb2-9"></a><span class="co"># Pre-Processing - Add any variables needed in your table to df</span></span>
 <span id="cb2-10"><a href="#cb2-10"></a>adsl <span class="ot">&lt;-</span> adsl <span class="sc">%&gt;%</span></span>
-<span id="cb2-11"><a href="#cb2-11"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">AGEGR1 =</span> <span class="fu">as.factor</span>(dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
+<span id="cb2-11"><a href="#cb2-11"></a>  <span class="fu">mutate</span>(<span class="at">AGEGR1 =</span> <span class="fu">as.factor</span>(<span class="fu">case_when</span>(</span>
 <span id="cb2-12"><a href="#cb2-12"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">17</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"&gt;=17 to &lt;65"</span>,</span>
 <span id="cb2-13"><a href="#cb2-13"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"&gt;=65"</span>,</span>
 <span id="cb2-14"><a href="#cb2-14"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">75</span> <span class="sc">~</span> <span class="st">"&gt;=65 to &lt;75"</span>,</span>
@@ -377,10 +381,10 @@ Baseline Temperature (C)
 <span id="cb2-16"><a href="#cb2-16"></a>  )))</span>
 <span id="cb2-17"><a href="#cb2-17"></a></span>
 <span id="cb2-18"><a href="#cb2-18"></a>advs <span class="ot">&lt;-</span> advs <span class="sc">%&gt;%</span></span>
-<span id="cb2-19"><a href="#cb2-19"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(AVISIT <span class="sc">==</span> <span class="st">"BASELINE"</span>, VSTESTCD <span class="sc">==</span> <span class="st">"TEMP"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb2-20"><a href="#cb2-20"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="st">"USUBJID"</span>, <span class="st">"AVAL"</span>)</span>
+<span id="cb2-19"><a href="#cb2-19"></a>  <span class="fu">filter</span>(AVISIT <span class="sc">==</span> <span class="st">"BASELINE"</span>, VSTESTCD <span class="sc">==</span> <span class="st">"TEMP"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-20"><a href="#cb2-20"></a>  <span class="fu">select</span>(<span class="st">"USUBJID"</span>, <span class="st">"AVAL"</span>)</span>
 <span id="cb2-21"><a href="#cb2-21"></a></span>
-<span id="cb2-22"><a href="#cb2-22"></a>anl <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">left_join</span>(adsl, advs, <span class="at">by =</span> <span class="st">"USUBJID"</span>)</span>
+<span id="cb2-22"><a href="#cb2-22"></a>anl <span class="ot">&lt;-</span> <span class="fu">left_join</span>(adsl, advs, <span class="at">by =</span> <span class="st">"USUBJID"</span>)</span>
 <span id="cb2-23"><a href="#cb2-23"></a></span>
 <span id="cb2-24"><a href="#cb2-24"></a><span class="co"># Output Table</span></span>
 <span id="cb2-25"><a href="#cb2-25"></a><span class="fu">make_table_02</span>(</span>
@@ -481,26 +485,26 @@ Baseline Temperature (C)
 </section>
 </div>
 <div id="tabset-1-5" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-5-tab">
-<div class="cell" data-hash="template-table_02_cache/html/tbl_tplyr_6c81fbec12d6e72e9aa9ec893ed87bed">
+<div class="cell" data-hash="template-table_02_cache/html/tbl_tplyr_83fe2528d7114d358b99214aa681bdbe">
 <div class="cell-output-display">
 
-<div id="aqrjhcamsl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#aqrjhcamsl table {
+<div id="dabqjbmbjs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#dabqjbmbjs table {
   font-family: Courier, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#aqrjhcamsl thead, #aqrjhcamsl tbody, #aqrjhcamsl tfoot, #aqrjhcamsl tr, #aqrjhcamsl td, #aqrjhcamsl th {
+#dabqjbmbjs thead, #dabqjbmbjs tbody, #dabqjbmbjs tfoot, #dabqjbmbjs tr, #dabqjbmbjs td, #dabqjbmbjs th {
   border-style: none;
 }
 
-#aqrjhcamsl p {
+#dabqjbmbjs p {
   margin: 0;
   padding: 0;
 }
 
-#aqrjhcamsl .gt_table {
+#dabqjbmbjs .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -526,12 +530,12 @@ Baseline Temperature (C)
   border-left-color: #D3D3D3;
 }
 
-#aqrjhcamsl .gt_caption {
+#dabqjbmbjs .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#aqrjhcamsl .gt_title {
+#dabqjbmbjs .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -543,7 +547,7 @@ Baseline Temperature (C)
   border-bottom-width: 0;
 }
 
-#aqrjhcamsl .gt_subtitle {
+#dabqjbmbjs .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -555,7 +559,7 @@ Baseline Temperature (C)
   border-top-width: 0;
 }
 
-#aqrjhcamsl .gt_heading {
+#dabqjbmbjs .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -567,13 +571,13 @@ Baseline Temperature (C)
   border-right-color: #D3D3D3;
 }
 
-#aqrjhcamsl .gt_bottom_border {
+#dabqjbmbjs .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#aqrjhcamsl .gt_col_headings {
+#dabqjbmbjs .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -588,7 +592,7 @@ Baseline Temperature (C)
   border-right-color: #D3D3D3;
 }
 
-#aqrjhcamsl .gt_col_heading {
+#dabqjbmbjs .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -608,7 +612,7 @@ Baseline Temperature (C)
   overflow-x: hidden;
 }
 
-#aqrjhcamsl .gt_column_spanner_outer {
+#dabqjbmbjs .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -620,15 +624,15 @@ Baseline Temperature (C)
   padding-right: 4px;
 }
 
-#aqrjhcamsl .gt_column_spanner_outer:first-child {
+#dabqjbmbjs .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#aqrjhcamsl .gt_column_spanner_outer:last-child {
+#dabqjbmbjs .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#aqrjhcamsl .gt_column_spanner {
+#dabqjbmbjs .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -640,11 +644,11 @@ Baseline Temperature (C)
   width: 100%;
 }
 
-#aqrjhcamsl .gt_spanner_row {
+#dabqjbmbjs .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#aqrjhcamsl .gt_group_heading {
+#dabqjbmbjs .gt_group_heading {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -670,7 +674,7 @@ Baseline Temperature (C)
   text-align: left;
 }
 
-#aqrjhcamsl .gt_empty_group_heading {
+#dabqjbmbjs .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -685,15 +689,15 @@ Baseline Temperature (C)
   vertical-align: middle;
 }
 
-#aqrjhcamsl .gt_from_md > :first-child {
+#dabqjbmbjs .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#aqrjhcamsl .gt_from_md > :last-child {
+#dabqjbmbjs .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#aqrjhcamsl .gt_row {
+#dabqjbmbjs .gt_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -712,7 +716,7 @@ Baseline Temperature (C)
   overflow-x: hidden;
 }
 
-#aqrjhcamsl .gt_stub {
+#dabqjbmbjs .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -725,7 +729,7 @@ Baseline Temperature (C)
   padding-right: 5px;
 }
 
-#aqrjhcamsl .gt_stub_row_group {
+#dabqjbmbjs .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -739,15 +743,15 @@ Baseline Temperature (C)
   vertical-align: top;
 }
 
-#aqrjhcamsl .gt_row_group_first td {
+#dabqjbmbjs .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#aqrjhcamsl .gt_row_group_first th {
+#dabqjbmbjs .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#aqrjhcamsl .gt_summary_row {
+#dabqjbmbjs .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -757,16 +761,16 @@ Baseline Temperature (C)
   padding-right: 5px;
 }
 
-#aqrjhcamsl .gt_first_summary_row {
+#dabqjbmbjs .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#aqrjhcamsl .gt_first_summary_row.thick {
+#dabqjbmbjs .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#aqrjhcamsl .gt_last_summary_row {
+#dabqjbmbjs .gt_last_summary_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -776,7 +780,7 @@ Baseline Temperature (C)
   border-bottom-color: #D3D3D3;
 }
 
-#aqrjhcamsl .gt_grand_summary_row {
+#dabqjbmbjs .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -786,7 +790,7 @@ Baseline Temperature (C)
   padding-right: 5px;
 }
 
-#aqrjhcamsl .gt_first_grand_summary_row {
+#dabqjbmbjs .gt_first_grand_summary_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -796,7 +800,7 @@ Baseline Temperature (C)
   border-top-color: #D3D3D3;
 }
 
-#aqrjhcamsl .gt_last_grand_summary_row_top {
+#dabqjbmbjs .gt_last_grand_summary_row_top {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -806,11 +810,11 @@ Baseline Temperature (C)
   border-bottom-color: #D3D3D3;
 }
 
-#aqrjhcamsl .gt_striped {
+#dabqjbmbjs .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#aqrjhcamsl .gt_table_body {
+#dabqjbmbjs .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -819,7 +823,7 @@ Baseline Temperature (C)
   border-bottom-color: #D3D3D3;
 }
 
-#aqrjhcamsl .gt_footnotes {
+#dabqjbmbjs .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -833,7 +837,7 @@ Baseline Temperature (C)
   border-right-color: #D3D3D3;
 }
 
-#aqrjhcamsl .gt_footnote {
+#dabqjbmbjs .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 1px;
@@ -842,7 +846,7 @@ Baseline Temperature (C)
   padding-right: 5px;
 }
 
-#aqrjhcamsl .gt_sourcenotes {
+#dabqjbmbjs .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -856,7 +860,7 @@ Baseline Temperature (C)
   border-right-color: #D3D3D3;
 }
 
-#aqrjhcamsl .gt_sourcenote {
+#dabqjbmbjs .gt_sourcenote {
   font-size: 90%;
   padding-top: 1px;
   padding-bottom: 1px;
@@ -864,63 +868,63 @@ Baseline Temperature (C)
   padding-right: 5px;
 }
 
-#aqrjhcamsl .gt_left {
+#dabqjbmbjs .gt_left {
   text-align: left;
 }
 
-#aqrjhcamsl .gt_center {
+#dabqjbmbjs .gt_center {
   text-align: center;
 }
 
-#aqrjhcamsl .gt_right {
+#dabqjbmbjs .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#aqrjhcamsl .gt_font_normal {
+#dabqjbmbjs .gt_font_normal {
   font-weight: normal;
 }
 
-#aqrjhcamsl .gt_font_bold {
+#dabqjbmbjs .gt_font_bold {
   font-weight: bold;
 }
 
-#aqrjhcamsl .gt_font_italic {
+#dabqjbmbjs .gt_font_italic {
   font-style: italic;
 }
 
-#aqrjhcamsl .gt_super {
+#dabqjbmbjs .gt_super {
   font-size: 65%;
 }
 
-#aqrjhcamsl .gt_footnote_marks {
+#dabqjbmbjs .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#aqrjhcamsl .gt_asterisk {
+#dabqjbmbjs .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#aqrjhcamsl .gt_indent_1 {
+#dabqjbmbjs .gt_indent_1 {
   text-indent: 5px;
 }
 
-#aqrjhcamsl .gt_indent_2 {
+#dabqjbmbjs .gt_indent_2 {
   text-indent: 10px;
 }
 
-#aqrjhcamsl .gt_indent_3 {
+#dabqjbmbjs .gt_indent_3 {
   text-indent: 15px;
 }
 
-#aqrjhcamsl .gt_indent_4 {
+#dabqjbmbjs .gt_indent_4 {
   text-indent: 20px;
 }
 
-#aqrjhcamsl .gt_indent_5 {
+#dabqjbmbjs .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1333,7 +1337,7 @@ Baseline Temperature (C)
 </div>
 </div>
 <div id="tabset-1-6" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-6-tab">
-<div class="cell" data-hash="template-table_02_cache/html/tbl_tplyr_e2e1fe5b869488270e3634eecd4ed384">
+<div class="cell" data-hash="template-table_02_cache/html/tbl_tplyr_4c9a77b0300faf0294df545eab4f2e69">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Load Libraries &amp; Data</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="fu">library</span>(scda)</span>
 <span id="cb3-3"><a href="#cb3-3"></a><span class="fu">library</span>(falcon)</span>
@@ -1344,7 +1348,7 @@ Baseline Temperature (C)
 <span id="cb3-8"><a href="#cb3-8"></a></span>
 <span id="cb3-9"><a href="#cb3-9"></a><span class="co"># Pre-Processing - Add any variables needed in your table to df</span></span>
 <span id="cb3-10"><a href="#cb3-10"></a>adsl <span class="ot">&lt;-</span> adsl <span class="sc">%&gt;%</span></span>
-<span id="cb3-11"><a href="#cb3-11"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">AGEGR1 =</span> <span class="fu">as.factor</span>(dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
+<span id="cb3-11"><a href="#cb3-11"></a>  <span class="fu">mutate</span>(<span class="at">AGEGR1 =</span> <span class="fu">as.factor</span>(<span class="fu">case_when</span>(</span>
 <span id="cb3-12"><a href="#cb3-12"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">17</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"&gt;=17 to &lt;65"</span>,</span>
 <span id="cb3-13"><a href="#cb3-13"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"&gt;=65"</span>,</span>
 <span id="cb3-14"><a href="#cb3-14"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">75</span> <span class="sc">~</span> <span class="st">"&gt;=65 to &lt;75"</span>,</span>
@@ -1352,10 +1356,10 @@ Baseline Temperature (C)
 <span id="cb3-16"><a href="#cb3-16"></a>  )))</span>
 <span id="cb3-17"><a href="#cb3-17"></a></span>
 <span id="cb3-18"><a href="#cb3-18"></a>advs <span class="ot">&lt;-</span> advs <span class="sc">%&gt;%</span></span>
-<span id="cb3-19"><a href="#cb3-19"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(AVISIT <span class="sc">==</span> <span class="st">"BASELINE"</span>, VSTESTCD <span class="sc">==</span> <span class="st">"TEMP"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb3-20"><a href="#cb3-20"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="st">"USUBJID"</span>, <span class="st">"AVAL"</span>)</span>
+<span id="cb3-19"><a href="#cb3-19"></a>  <span class="fu">filter</span>(AVISIT <span class="sc">==</span> <span class="st">"BASELINE"</span>, VSTESTCD <span class="sc">==</span> <span class="st">"TEMP"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-20"><a href="#cb3-20"></a>  <span class="fu">select</span>(<span class="st">"USUBJID"</span>, <span class="st">"AVAL"</span>)</span>
 <span id="cb3-21"><a href="#cb3-21"></a></span>
-<span id="cb3-22"><a href="#cb3-22"></a>anl <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">left_join</span>(adsl, advs, <span class="at">by =</span> <span class="st">"USUBJID"</span>)</span>
+<span id="cb3-22"><a href="#cb3-22"></a>anl <span class="ot">&lt;-</span> <span class="fu">left_join</span>(adsl, advs, <span class="at">by =</span> <span class="st">"USUBJID"</span>)</span>
 <span id="cb3-23"><a href="#cb3-23"></a></span>
 <span id="cb3-24"><a href="#cb3-24"></a><span class="co"># Output Table</span></span>
 <span id="cb3-25"><a href="#cb3-25"></a><span class="fu">make_table_02_tplyr</span>(</span>
@@ -1456,26 +1460,26 @@ Baseline Temperature (C)
 </section>
 </div>
 <div id="tabset-1-8" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-8-tab">
-<div class="cell" data-hash="template-table_02_cache/html/tbl_gtsummary_7975e28126d12824dd6fa3a16cfc7c53">
+<div class="cell" data-hash="template-table_02_cache/html/tbl_gtsummary_bc0d15637aa2a37ec96927d07edd3419">
 <div class="cell-output-display">
 
-<div id="drfgkvhdsy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#drfgkvhdsy table {
+<div id="vsbakffxqr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#vsbakffxqr table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#drfgkvhdsy thead, #drfgkvhdsy tbody, #drfgkvhdsy tfoot, #drfgkvhdsy tr, #drfgkvhdsy td, #drfgkvhdsy th {
+#vsbakffxqr thead, #vsbakffxqr tbody, #vsbakffxqr tfoot, #vsbakffxqr tr, #vsbakffxqr td, #vsbakffxqr th {
   border-style: none;
 }
 
-#drfgkvhdsy p {
+#vsbakffxqr p {
   margin: 0;
   padding: 0;
 }
 
-#drfgkvhdsy .gt_table {
+#vsbakffxqr .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1501,12 +1505,12 @@ Baseline Temperature (C)
   border-left-color: #D3D3D3;
 }
 
-#drfgkvhdsy .gt_caption {
+#vsbakffxqr .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#drfgkvhdsy .gt_title {
+#vsbakffxqr .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1518,7 +1522,7 @@ Baseline Temperature (C)
   border-bottom-width: 0;
 }
 
-#drfgkvhdsy .gt_subtitle {
+#vsbakffxqr .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1530,7 +1534,7 @@ Baseline Temperature (C)
   border-top-width: 0;
 }
 
-#drfgkvhdsy .gt_heading {
+#vsbakffxqr .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1542,13 +1546,13 @@ Baseline Temperature (C)
   border-right-color: #D3D3D3;
 }
 
-#drfgkvhdsy .gt_bottom_border {
+#vsbakffxqr .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#drfgkvhdsy .gt_col_headings {
+#vsbakffxqr .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1563,7 +1567,7 @@ Baseline Temperature (C)
   border-right-color: #D3D3D3;
 }
 
-#drfgkvhdsy .gt_col_heading {
+#vsbakffxqr .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1583,7 +1587,7 @@ Baseline Temperature (C)
   overflow-x: hidden;
 }
 
-#drfgkvhdsy .gt_column_spanner_outer {
+#vsbakffxqr .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1595,15 +1599,15 @@ Baseline Temperature (C)
   padding-right: 4px;
 }
 
-#drfgkvhdsy .gt_column_spanner_outer:first-child {
+#vsbakffxqr .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#drfgkvhdsy .gt_column_spanner_outer:last-child {
+#vsbakffxqr .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#drfgkvhdsy .gt_column_spanner {
+#vsbakffxqr .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1615,11 +1619,11 @@ Baseline Temperature (C)
   width: 100%;
 }
 
-#drfgkvhdsy .gt_spanner_row {
+#vsbakffxqr .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#drfgkvhdsy .gt_group_heading {
+#vsbakffxqr .gt_group_heading {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -1645,7 +1649,7 @@ Baseline Temperature (C)
   text-align: left;
 }
 
-#drfgkvhdsy .gt_empty_group_heading {
+#vsbakffxqr .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1660,15 +1664,15 @@ Baseline Temperature (C)
   vertical-align: middle;
 }
 
-#drfgkvhdsy .gt_from_md > :first-child {
+#vsbakffxqr .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#drfgkvhdsy .gt_from_md > :last-child {
+#vsbakffxqr .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#drfgkvhdsy .gt_row {
+#vsbakffxqr .gt_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -1687,7 +1691,7 @@ Baseline Temperature (C)
   overflow-x: hidden;
 }
 
-#drfgkvhdsy .gt_stub {
+#vsbakffxqr .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1700,7 +1704,7 @@ Baseline Temperature (C)
   padding-right: 5px;
 }
 
-#drfgkvhdsy .gt_stub_row_group {
+#vsbakffxqr .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1714,15 +1718,15 @@ Baseline Temperature (C)
   vertical-align: top;
 }
 
-#drfgkvhdsy .gt_row_group_first td {
+#vsbakffxqr .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#drfgkvhdsy .gt_row_group_first th {
+#vsbakffxqr .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#drfgkvhdsy .gt_summary_row {
+#vsbakffxqr .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1732,16 +1736,16 @@ Baseline Temperature (C)
   padding-right: 5px;
 }
 
-#drfgkvhdsy .gt_first_summary_row {
+#vsbakffxqr .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#drfgkvhdsy .gt_first_summary_row.thick {
+#vsbakffxqr .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#drfgkvhdsy .gt_last_summary_row {
+#vsbakffxqr .gt_last_summary_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -1751,7 +1755,7 @@ Baseline Temperature (C)
   border-bottom-color: #D3D3D3;
 }
 
-#drfgkvhdsy .gt_grand_summary_row {
+#vsbakffxqr .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1761,7 +1765,7 @@ Baseline Temperature (C)
   padding-right: 5px;
 }
 
-#drfgkvhdsy .gt_first_grand_summary_row {
+#vsbakffxqr .gt_first_grand_summary_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -1771,7 +1775,7 @@ Baseline Temperature (C)
   border-top-color: #D3D3D3;
 }
 
-#drfgkvhdsy .gt_last_grand_summary_row_top {
+#vsbakffxqr .gt_last_grand_summary_row_top {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -1781,11 +1785,11 @@ Baseline Temperature (C)
   border-bottom-color: #D3D3D3;
 }
 
-#drfgkvhdsy .gt_striped {
+#vsbakffxqr .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#drfgkvhdsy .gt_table_body {
+#vsbakffxqr .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1794,7 +1798,7 @@ Baseline Temperature (C)
   border-bottom-color: #D3D3D3;
 }
 
-#drfgkvhdsy .gt_footnotes {
+#vsbakffxqr .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1808,7 +1812,7 @@ Baseline Temperature (C)
   border-right-color: #D3D3D3;
 }
 
-#drfgkvhdsy .gt_footnote {
+#vsbakffxqr .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 1px;
@@ -1817,7 +1821,7 @@ Baseline Temperature (C)
   padding-right: 5px;
 }
 
-#drfgkvhdsy .gt_sourcenotes {
+#vsbakffxqr .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1831,7 +1835,7 @@ Baseline Temperature (C)
   border-right-color: #D3D3D3;
 }
 
-#drfgkvhdsy .gt_sourcenote {
+#vsbakffxqr .gt_sourcenote {
   font-size: 90%;
   padding-top: 1px;
   padding-bottom: 1px;
@@ -1839,63 +1843,63 @@ Baseline Temperature (C)
   padding-right: 5px;
 }
 
-#drfgkvhdsy .gt_left {
+#vsbakffxqr .gt_left {
   text-align: left;
 }
 
-#drfgkvhdsy .gt_center {
+#vsbakffxqr .gt_center {
   text-align: center;
 }
 
-#drfgkvhdsy .gt_right {
+#vsbakffxqr .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#drfgkvhdsy .gt_font_normal {
+#vsbakffxqr .gt_font_normal {
   font-weight: normal;
 }
 
-#drfgkvhdsy .gt_font_bold {
+#vsbakffxqr .gt_font_bold {
   font-weight: bold;
 }
 
-#drfgkvhdsy .gt_font_italic {
+#vsbakffxqr .gt_font_italic {
   font-style: italic;
 }
 
-#drfgkvhdsy .gt_super {
+#vsbakffxqr .gt_super {
   font-size: 65%;
 }
 
-#drfgkvhdsy .gt_footnote_marks {
+#vsbakffxqr .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#drfgkvhdsy .gt_asterisk {
+#vsbakffxqr .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#drfgkvhdsy .gt_indent_1 {
+#vsbakffxqr .gt_indent_1 {
   text-indent: 5px;
 }
 
-#drfgkvhdsy .gt_indent_2 {
+#vsbakffxqr .gt_indent_2 {
   text-indent: 10px;
 }
 
-#drfgkvhdsy .gt_indent_3 {
+#vsbakffxqr .gt_indent_3 {
   text-indent: 15px;
 }
 
-#drfgkvhdsy .gt_indent_4 {
+#vsbakffxqr .gt_indent_4 {
   text-indent: 20px;
 }
 
-#drfgkvhdsy .gt_indent_5 {
+#vsbakffxqr .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2186,7 +2190,7 @@ N = 400</th>
 </div>
 </div>
 <div id="tabset-1-9" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-9-tab">
-<div class="cell" data-hash="template-table_02_cache/html/tbl_gtsummary_72332848429be8010208ab09e0d1a733">
+<div class="cell" data-hash="template-table_02_cache/html/tbl_gtsummary_fb571c5e8e2b42784e7f7f1b7474d42a">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Load Libraries &amp; Data</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="fu">library</span>(scda)</span>
 <span id="cb4-3"><a href="#cb4-3"></a><span class="fu">library</span>(falcon)</span>
@@ -2197,7 +2201,7 @@ N = 400</th>
 <span id="cb4-8"><a href="#cb4-8"></a></span>
 <span id="cb4-9"><a href="#cb4-9"></a><span class="co"># Pre-Processing - Add any variables needed in your table to df</span></span>
 <span id="cb4-10"><a href="#cb4-10"></a>adsl <span class="ot">&lt;-</span> adsl <span class="sc">%&gt;%</span></span>
-<span id="cb4-11"><a href="#cb4-11"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">AGEGR1 =</span> <span class="fu">as.factor</span>(dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
+<span id="cb4-11"><a href="#cb4-11"></a>  <span class="fu">mutate</span>(<span class="at">AGEGR1 =</span> <span class="fu">as.factor</span>(<span class="fu">case_when</span>(</span>
 <span id="cb4-12"><a href="#cb4-12"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">17</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"≥17 to &amp;lt;65"</span>,</span>
 <span id="cb4-13"><a href="#cb4-13"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"≥65"</span>,</span>
 <span id="cb4-14"><a href="#cb4-14"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">75</span> <span class="sc">~</span> <span class="st">"≥65 to &amp;lt;75"</span>,</span>
@@ -2205,10 +2209,10 @@ N = 400</th>
 <span id="cb4-16"><a href="#cb4-16"></a>  )))</span>
 <span id="cb4-17"><a href="#cb4-17"></a></span>
 <span id="cb4-18"><a href="#cb4-18"></a>advs <span class="ot">&lt;-</span> advs <span class="sc">%&gt;%</span></span>
-<span id="cb4-19"><a href="#cb4-19"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(AVISIT <span class="sc">==</span> <span class="st">"BASELINE"</span>, VSTESTCD <span class="sc">==</span> <span class="st">"TEMP"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb4-20"><a href="#cb4-20"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="st">"USUBJID"</span>, <span class="st">"AVAL"</span>)</span>
+<span id="cb4-19"><a href="#cb4-19"></a>  <span class="fu">filter</span>(AVISIT <span class="sc">==</span> <span class="st">"BASELINE"</span>, VSTESTCD <span class="sc">==</span> <span class="st">"TEMP"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-20"><a href="#cb4-20"></a>  <span class="fu">select</span>(<span class="st">"USUBJID"</span>, <span class="st">"AVAL"</span>)</span>
 <span id="cb4-21"><a href="#cb4-21"></a></span>
-<span id="cb4-22"><a href="#cb4-22"></a>anl <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">left_join</span>(adsl, advs, <span class="at">by =</span> <span class="st">"USUBJID"</span>)</span>
+<span id="cb4-22"><a href="#cb4-22"></a>anl <span class="ot">&lt;-</span> <span class="fu">left_join</span>(adsl, advs, <span class="at">by =</span> <span class="st">"USUBJID"</span>)</span>
 <span id="cb4-23"><a href="#cb4-23"></a></span>
 <span id="cb4-24"><a href="#cb4-24"></a><span class="co"># Output Table</span></span>
 <span id="cb4-25"><a href="#cb4-25"></a><span class="fu">make_table_02_gtsum</span>(</span>
@@ -2718,7 +2722,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb5-22"><a href="#cb5-22"></a></span>
 <span id="cb5-23"><a href="#cb5-23"></a><span class="co"># Pre-Processing - Add any variables needed in your table to df</span></span>
 <span id="cb5-24"><a href="#cb5-24"></a>adsl <span class="ot">&lt;-</span> adsl <span class="sc">%&gt;%</span></span>
-<span id="cb5-25"><a href="#cb5-25"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">AGEGR1 =</span> <span class="fu">as.factor</span>(dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
+<span id="cb5-25"><a href="#cb5-25"></a>  <span class="fu">mutate</span>(<span class="at">AGEGR1 =</span> <span class="fu">as.factor</span>(<span class="fu">case_when</span>(</span>
 <span id="cb5-26"><a href="#cb5-26"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">17</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"&gt;=17 to &lt;65"</span>,</span>
 <span id="cb5-27"><a href="#cb5-27"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"&gt;=65"</span>,</span>
 <span id="cb5-28"><a href="#cb5-28"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">75</span> <span class="sc">~</span> <span class="st">"&gt;=65 to &lt;75"</span>,</span>
@@ -2726,10 +2730,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb5-30"><a href="#cb5-30"></a>  )))</span>
 <span id="cb5-31"><a href="#cb5-31"></a></span>
 <span id="cb5-32"><a href="#cb5-32"></a>advs <span class="ot">&lt;-</span> advs <span class="sc">%&gt;%</span></span>
-<span id="cb5-33"><a href="#cb5-33"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(AVISIT <span class="sc">==</span> <span class="st">"BASELINE"</span>, VSTESTCD <span class="sc">==</span> <span class="st">"TEMP"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb5-34"><a href="#cb5-34"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="st">"USUBJID"</span>, <span class="st">"AVAL"</span>)</span>
+<span id="cb5-33"><a href="#cb5-33"></a>  <span class="fu">filter</span>(AVISIT <span class="sc">==</span> <span class="st">"BASELINE"</span>, VSTESTCD <span class="sc">==</span> <span class="st">"TEMP"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-34"><a href="#cb5-34"></a>  <span class="fu">select</span>(<span class="st">"USUBJID"</span>, <span class="st">"AVAL"</span>)</span>
 <span id="cb5-35"><a href="#cb5-35"></a></span>
-<span id="cb5-36"><a href="#cb5-36"></a>anl <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">left_join</span>(adsl, advs, <span class="at">by =</span> <span class="st">"USUBJID"</span>)</span>
+<span id="cb5-36"><a href="#cb5-36"></a>anl <span class="ot">&lt;-</span> <span class="fu">left_join</span>(adsl, advs, <span class="at">by =</span> <span class="st">"USUBJID"</span>)</span>
 <span id="cb5-37"><a href="#cb5-37"></a></span>
 <span id="cb5-38"><a href="#cb5-38"></a><span class="co"># Output Table</span></span>
 <span id="cb5-39"><a href="#cb5-39"></a><span class="fu">make_table_02</span>(</span>
@@ -2789,7 +2793,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb5-93"><a href="#cb5-93"></a></span>
 <span id="cb5-94"><a href="#cb5-94"></a><span class="co"># Pre-Processing - Add any variables needed in your table to df</span></span>
 <span id="cb5-95"><a href="#cb5-95"></a>adsl <span class="ot">&lt;-</span> adsl <span class="sc">%&gt;%</span></span>
-<span id="cb5-96"><a href="#cb5-96"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">AGEGR1 =</span> <span class="fu">as.factor</span>(dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
+<span id="cb5-96"><a href="#cb5-96"></a>  <span class="fu">mutate</span>(<span class="at">AGEGR1 =</span> <span class="fu">as.factor</span>(<span class="fu">case_when</span>(</span>
 <span id="cb5-97"><a href="#cb5-97"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">17</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"&gt;=17 to &lt;65"</span>,</span>
 <span id="cb5-98"><a href="#cb5-98"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"&gt;=65"</span>,</span>
 <span id="cb5-99"><a href="#cb5-99"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">75</span> <span class="sc">~</span> <span class="st">"&gt;=65 to &lt;75"</span>,</span>
@@ -2797,10 +2801,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb5-101"><a href="#cb5-101"></a>  )))</span>
 <span id="cb5-102"><a href="#cb5-102"></a></span>
 <span id="cb5-103"><a href="#cb5-103"></a>advs <span class="ot">&lt;-</span> advs <span class="sc">%&gt;%</span></span>
-<span id="cb5-104"><a href="#cb5-104"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(AVISIT <span class="sc">==</span> <span class="st">"BASELINE"</span>, VSTESTCD <span class="sc">==</span> <span class="st">"TEMP"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb5-105"><a href="#cb5-105"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="st">"USUBJID"</span>, <span class="st">"AVAL"</span>)</span>
+<span id="cb5-104"><a href="#cb5-104"></a>  <span class="fu">filter</span>(AVISIT <span class="sc">==</span> <span class="st">"BASELINE"</span>, VSTESTCD <span class="sc">==</span> <span class="st">"TEMP"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-105"><a href="#cb5-105"></a>  <span class="fu">select</span>(<span class="st">"USUBJID"</span>, <span class="st">"AVAL"</span>)</span>
 <span id="cb5-106"><a href="#cb5-106"></a></span>
-<span id="cb5-107"><a href="#cb5-107"></a>anl <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">left_join</span>(adsl, advs, <span class="at">by =</span> <span class="st">"USUBJID"</span>)</span>
+<span id="cb5-107"><a href="#cb5-107"></a>anl <span class="ot">&lt;-</span> <span class="fu">left_join</span>(adsl, advs, <span class="at">by =</span> <span class="st">"USUBJID"</span>)</span>
 <span id="cb5-108"><a href="#cb5-108"></a></span>
 <span id="cb5-109"><a href="#cb5-109"></a><span class="co"># Output Table</span></span>
 <span id="cb5-110"><a href="#cb5-110"></a><span class="fu">make_table_02_tplyr</span>(</span>
@@ -2859,7 +2863,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb5-163"><a href="#cb5-163"></a></span>
 <span id="cb5-164"><a href="#cb5-164"></a><span class="co"># Pre-Processing - Add any variables needed in your table to df</span></span>
 <span id="cb5-165"><a href="#cb5-165"></a>adsl <span class="ot">&lt;-</span> adsl <span class="sc">%&gt;%</span></span>
-<span id="cb5-166"><a href="#cb5-166"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">AGEGR1 =</span> <span class="fu">as.factor</span>(dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
+<span id="cb5-166"><a href="#cb5-166"></a>  <span class="fu">mutate</span>(<span class="at">AGEGR1 =</span> <span class="fu">as.factor</span>(<span class="fu">case_when</span>(</span>
 <span id="cb5-167"><a href="#cb5-167"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">17</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"≥17 to &amp;lt;65"</span>,</span>
 <span id="cb5-168"><a href="#cb5-168"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"≥65"</span>,</span>
 <span id="cb5-169"><a href="#cb5-169"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">75</span> <span class="sc">~</span> <span class="st">"≥65 to &amp;lt;75"</span>,</span>
@@ -2867,10 +2871,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb5-171"><a href="#cb5-171"></a>  )))</span>
 <span id="cb5-172"><a href="#cb5-172"></a></span>
 <span id="cb5-173"><a href="#cb5-173"></a>advs <span class="ot">&lt;-</span> advs <span class="sc">%&gt;%</span></span>
-<span id="cb5-174"><a href="#cb5-174"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(AVISIT <span class="sc">==</span> <span class="st">"BASELINE"</span>, VSTESTCD <span class="sc">==</span> <span class="st">"TEMP"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb5-175"><a href="#cb5-175"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="st">"USUBJID"</span>, <span class="st">"AVAL"</span>)</span>
+<span id="cb5-174"><a href="#cb5-174"></a>  <span class="fu">filter</span>(AVISIT <span class="sc">==</span> <span class="st">"BASELINE"</span>, VSTESTCD <span class="sc">==</span> <span class="st">"TEMP"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-175"><a href="#cb5-175"></a>  <span class="fu">select</span>(<span class="st">"USUBJID"</span>, <span class="st">"AVAL"</span>)</span>
 <span id="cb5-176"><a href="#cb5-176"></a></span>
-<span id="cb5-177"><a href="#cb5-177"></a>anl <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">left_join</span>(adsl, advs, <span class="at">by =</span> <span class="st">"USUBJID"</span>)</span>
+<span id="cb5-177"><a href="#cb5-177"></a>anl <span class="ot">&lt;-</span> <span class="fu">left_join</span>(adsl, advs, <span class="at">by =</span> <span class="st">"USUBJID"</span>)</span>
 <span id="cb5-178"><a href="#cb5-178"></a></span>
 <span id="cb5-179"><a href="#cb5-179"></a><span class="co"># Output Table</span></span>
 <span id="cb5-180"><a href="#cb5-180"></a><span class="fu">make_table_02_gtsum</span>(</span>
