@@ -15,8 +15,8 @@ format: html
 # Load Libraries & Data
 library(falcon)
 
-adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
-adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
+adsl <- random.cdisc.data::cadsl
+adae <- random.cdisc.data::cadae
 
 # Pre-Processing - Ensure required variable DCSREAS exist in adae
 adae$DCSREAS[is.na(adae$DCSREAS)] <- "ADVERSE EVENT"

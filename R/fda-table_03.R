@@ -21,7 +21,7 @@
 #' library(dplyr)
 #'
 #' set.seed(1)
-#' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
+#' adsl <- random.cdisc.data::cadsl
 #' adsl$RANDDT[sample(seq_len(nrow(adsl)), 100)] <- NA
 #' scrnfail_reas_lvls <- c(
 #'   "Inclusion/exclusion criteria not met", "Patient noncompliance", "Consent withdrawn", "Other"
@@ -88,7 +88,7 @@ make_table_03 <- function(df,
       flag_variables = c("ENRLFL", "RANDFL"),
       nested = FALSE
     ) %>%
-    append_topleft(c("", "Disposition"))
+    append_topleft("Disposition")
 
   tbl <- build_table(lyt, df = df, alt_counts_df = alt_counts_df)
   if (prune_0) tbl <- prune_table(tbl)

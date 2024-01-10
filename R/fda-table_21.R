@@ -19,7 +19,7 @@
 #' @examples
 #' library(dplyr)
 #'
-#' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") %>%
+#' adsl <- random.cdisc.data::cadsl %>%
 #'   mutate(AGEGR1 = as.factor(case_when(
 #'     AGE >= 17 & AGE < 65 ~ ">=17 to <65",
 #'     AGE >= 65 ~ ">=65",
@@ -30,7 +30,7 @@
 #'     AGE = "Age, years"
 #'   )
 #'
-#' adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
+#' adae <- random.cdisc.data::cadae
 #' adae$ASER <- adae$AESER
 #'
 #' df <- left_join(adsl, adae, by = intersect(names(adsl), names(adae)))
@@ -99,7 +99,7 @@ make_table_21 <- function(df,
       ),
       show_labels = "visible"
     ) %>%
-    append_topleft(c("", "Characteristic"))
+    append_topleft("Characteristic")
 
   tbl <- build_table(lyt, df = df, alt_counts_df = alt_counts_df)
   if (prune_0) tbl <- prune_table(tbl)

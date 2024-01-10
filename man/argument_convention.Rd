@@ -35,6 +35,9 @@ the given value as the column label.}
 
 \item{lbl_pref_var}{(\code{character})\cr label corresponding to preferred term variable \code{pref_var} to print in the table.}
 
+\item{lbl_soc_var}{(\code{character})\cr label corresponding to system organ class variable \code{soc_var} to print in the
+table.}
+
 \item{lbl_vars}{(\code{vector} of \code{character})\cr labels corresponding to variables in \code{vars} to print
 in the table. Labels should be ordered according to the order of variables in \code{vars}.}
 
@@ -46,14 +49,16 @@ in the table. Labels should be ordered according to the order of variables in \c
 
 \item{prune_0}{(\code{flag})\cr whether all-zero rows should be removed from the table.}
 
-\item{risk_diff}{(named \code{list})\cr list of settings to apply to add a risk difference column to the table.
+\item{risk_diff}{(named \code{list})\cr list of settings to apply to add one or more risk difference columns to the table.
 Defaults to \code{NULL} (no risk difference column added). See \code{\link[tern:add_riskdiff]{tern::add_riskdiff()}} for more details. List should
 contain the following elements:
 \itemize{
 \item \code{arm_x}: (required) the name of reference arm.
-\item \code{arm_y}: (required) the name of the arm to compare to the reference arm.
-\item \code{col_label}: (optional) label to use for the risk difference column. Defaults to
-\code{"Risk Difference (\%) (95\% CI)"}.
+\item \code{arm_y}: (required) the names of the arms to compare to the reference arm. A new column will be added for each
+element of \code{arm_y}.
+\item \code{col_label}: (optional) labels to use for the risk difference columns. Defaults to
+\code{"Risk Difference (\%) (95\% CI)"}. For more than one risk difference column, \code{"arm x vs. arm y"} text will also
+be included in the column labels by default. The length of \code{col_label} must be equal to the length of \code{arm_y}.
 \item \code{pct}: (optional) whether the output should be returned as percentages. Defaults to \code{TRUE}.
 }}
 

@@ -17,8 +17,8 @@
 #' @return An `rtable` object.
 #'
 #' @examples
-#' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
-#' adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
+#' adsl <- random.cdisc.data::cadsl
+#' adae <- random.cdisc.data::cadae
 #'
 #' set.seed(1)
 #' adae$AESIFL <- ifelse(adae$AESOC %in% c("cl A", "cl D"), "Y", "N")
@@ -112,7 +112,7 @@ make_table_20 <- function(adae,
       riskdiff = !is.null(risk_diff),
       table_names = "tbl_lab"
     ) %>%
-    append_topleft(c("", "AESI Assessment"))
+    append_topleft("AESI Assessment")
 
   tbl <- build_table(lyt, df = adae, alt_counts_df = alt_counts_df)
   if (prune_0) tbl <- prune_table(tbl)

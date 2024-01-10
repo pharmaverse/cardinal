@@ -1,8 +1,8 @@
 Type: Package
 Package: falcon
 Title: FDA Safety Tables and Figures
-Version: 0.1.0.9047
-Date: 2023-11-28
+Version: 0.1.0.9051
+Date: 2024-01-08
 Authors@R:
     person("Pawel", "Rucki", , "pawel.rucki@roche.com", role = c("aut", "cre"))
 Description: R package with implementation of Safety Tables and Figures
@@ -12,30 +12,28 @@ URL: https://github.com/pharmaverse/falcon/
 BugReports: https://github.com/pharmaverse/falcon/issues
 Depends:
     R (>= 3.6),
-    tern (>= 0.9.0)
+    tern (>= 0.9.3)
 Imports:
     checkmate,
     dplyr,
-    formatters (>= 0.4.0),
+    formatters (>= 0.5.5),
     gt,
     gtsummary,
     lubridate,
     magrittr,
     purrr (>= 1.0.1),
     rlang (>= 0.4.11),
-    rlistings (>= 0.2.1),
-    rtables (>= 0.6.0),
+    rlistings (>= 0.2.7),
+    rtables (>= 0.6.6),
     tfrmt,
     tidyr,
     Tplyr
 Suggests:
     knitr,
-    scda (>= 0.1.5),
-    scda.2022 (>= 0.1.3),
+    random.cdisc.data (>= 0.3.14),
     testthat (>= 3.0.0)
 Remotes:
-    insightsengineering/scda.2022@*release,
-    insightsengineering/scda@*release
+    insightsengineering/random.cdisc.data@*release
 biocViews:
 Config/testthat/edition: 3
 Encoding: UTF-8

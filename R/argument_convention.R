@@ -19,19 +19,23 @@
 #' @param lbl_overall (`character`)\cr if specified, an overall column will be added to the table with
 #'   the given value as the column label.
 #' @param lbl_pref_var (`character`)\cr label corresponding to preferred term variable `pref_var` to print in the table.
+#' @param lbl_soc_var (`character`)\cr label corresponding to system organ class variable `soc_var` to print in the
+#'   table.
 #' @param lbl_vars (`vector` of `character`)\cr labels corresponding to variables in `vars` to print
 #'   in the table. Labels should be ordered according to the order of variables in `vars`.
 #' @param na_level (`character`)\cr string to represent missing values.
 #' @param na_rm (`flag`)\cr whether `NA` levels should be removed from the table.
 #' @param pref_var (`character`)\cr preferred term variable from `adae` to include in the table.
 #' @param prune_0 (`flag`)\cr whether all-zero rows should be removed from the table.
-#' @param risk_diff (named `list`)\cr list of settings to apply to add a risk difference column to the table.
+#' @param risk_diff (named `list`)\cr list of settings to apply to add one or more risk difference columns to the table.
 #'   Defaults to `NULL` (no risk difference column added). See [tern::add_riskdiff()] for more details. List should
 #'   contain the following elements:
 #'    * `arm_x`: (required) the name of reference arm.
-#'    * `arm_y`: (required) the name of the arm to compare to the reference arm.
-#'    * `col_label`: (optional) label to use for the risk difference column. Defaults to
-#'      `"Risk Difference (%) (95% CI)"`.
+#'    * `arm_y`: (required) the names of the arms to compare to the reference arm. A new column will be added for each
+#'      element of `arm_y`.
+#'    * `col_label`: (optional) labels to use for the risk difference columns. Defaults to
+#'      `"Risk Difference (%) (95% CI)"`. For more than one risk difference column, `"arm x vs. arm y"` text will also
+#'      be included in the column labels by default. The length of `col_label` must be equal to the length of `arm_y`.
 #'    * `pct`: (optional) whether the output should be returned as percentages. Defaults to `TRUE`.
 #' @param saffl_var (`character`)\cr flag variable used to indicate inclusion in safety population.
 #' @param sex_scope (`character`)\cr Level of `SEX` to output in table.
