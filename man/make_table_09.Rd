@@ -176,8 +176,8 @@ adae <- random.cdisc.data::cadae
 tbl <- make_table_09(adae = adae, alt_counts_df = adsl)
 tbl
 
-adsl <- random.cdisc.data::cadsl
-adae <- random.cdisc.data::cadae
+adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
+adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
 
 # Basic table
 make_table_09_tplyr(adae = adae, alt_counts_df = adsl)
@@ -198,8 +198,8 @@ annot <- list(
 )
 make_table_09_tplyr(adae = adae, alt_counts_df = adsl, annotations = annot)
 
-adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
-adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
+adsl <- random.cdisc.data::cadsl
+adae <- random.cdisc.data::cadae
 
 tbl <- make_table_09_gtsum(adae = adae, alt_counts_df = adsl)
 tbl
