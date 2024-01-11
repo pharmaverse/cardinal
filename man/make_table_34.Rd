@@ -87,8 +87,8 @@ flag variables are treated as \code{"N"}.
 \examples{
 library(dplyr)
 
-adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
-adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
+adae <- random.cdisc.data::cadae
+adsl <- random.cdisc.data::cadsl
 
 set.seed(1)
 adae <- adae \%>\%

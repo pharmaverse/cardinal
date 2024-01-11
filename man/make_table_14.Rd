@@ -85,7 +85,7 @@ flag variables are treated as \code{"N"}.
 }
 }
 \examples{
-adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
+adae <- random.cdisc.data::cadae
 adae <- dplyr::rename(adae, FMQ01SC = SMQ01SC, FMQ01NAM = SMQ01NAM)
 levels(adae$FMQ01SC) <- c("BROAD", "NARROW")
 adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"

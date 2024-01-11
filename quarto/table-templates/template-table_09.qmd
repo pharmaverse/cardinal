@@ -13,11 +13,10 @@ format: html
 
 ```{r tbl, message=FALSE, warning=FALSE}
 # Load Libraries & Data
-library(scda)
 library(falcon)
 
-adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
-adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
+adsl <- random.cdisc.data::cadsl
+adae <- random.cdisc.data::cadae
 
 # Select Preferred Term Variable
 pref_var <- "AEDECOD"
@@ -83,11 +82,10 @@ Source code for this function is available [here](https://github.com/pharmaverse
 
 ```{r tbl_gt, message=FALSE, warning=FALSE}
 # Load Libraries & Data
-library(scda)
 library(falcon)
 
-adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
-adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
+adsl <- random.cdisc.data::cadsl
+adae <- random.cdisc.data::cadae
 
 # Output Table
 make_table_09_gtsum(adae = adae, alt_counts_df = adsl)

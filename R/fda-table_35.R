@@ -11,10 +11,9 @@
 #' @inheritParams argument_convention
 #'
 #' @examples
-#' library(dplyr)
+#' adsl <- random.cdisc.data::cadsl
+#' adae <- random.cdisc.data::cadae
 #'
-#' adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
-#' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
 #' tbl <- make_table_35(adae = adae, alt_counts_df = adsl)
 #' tbl
 #'

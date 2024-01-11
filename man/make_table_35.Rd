@@ -35,6 +35,9 @@ make_table_35(
 
 \item{soc_var}{(\code{character})\cr flag variable used to indicate system organ class.}
 
+\item{lbl_soc_var}{(\code{character})\cr label corresponding to system organ class variable \code{soc_var} to print in the
+table.}
+
 \item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
 the given value as the column label.}
 
@@ -71,10 +74,9 @@ Safety Population, Pooled Analysis (or Trial X)
 }
 }
 \examples{
-library(dplyr)
+adsl <- random.cdisc.data::cadsl
+adae <- random.cdisc.data::cadae
 
-adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
-adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
 tbl <- make_table_35(adae = adae, alt_counts_df = adsl)
 tbl
 

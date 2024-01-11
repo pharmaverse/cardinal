@@ -13,16 +13,15 @@ format: html
 
 ```{r tbl, message=FALSE, warning=FALSE}
 # Load Libraries & Data
-library(scda)
 library(falcon)
 library(dplyr)
 
-adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
-advs <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "advs")
+adsl <- random.cdisc.data::cadsl
+advs <- random.cdisc.data::cadvs
 
 # Pre-Processing - Add any variables needed in your table to df
 adsl <- adsl %>%
-  dplyr::mutate(AGEGR1 = as.factor(dplyr::case_when(
+  mutate(AGEGR1 = as.factor(case_when(
     AGE >= 17 & AGE < 65 ~ ">=17 to <65",
     AGE >= 65 ~ ">=65",
     AGE >= 65 & AGE < 75 ~ ">=65 to <75",
@@ -30,10 +29,10 @@ adsl <- adsl %>%
   )))
 
 advs <- advs %>%
-  dplyr::filter(AVISIT == "BASELINE", VSTESTCD == "TEMP") %>%
-  dplyr::select("USUBJID", "AVAL")
+  filter(AVISIT == "BASELINE", VSTESTCD == "TEMP") %>%
+  select("USUBJID", "AVAL")
 
-anl <- dplyr::left_join(adsl, advs, by = "USUBJID")
+anl <- left_join(adsl, advs, by = "USUBJID")
 
 # Output Table
 make_table_02(
@@ -84,16 +83,15 @@ Source code for this function is available [here](https://github.com/pharmaverse
 
 ```{r tbl_tplyr, message=FALSE, warning=FALSE}
 # Load Libraries & Data
-library(scda)
 library(falcon)
 library(dplyr)
 
-adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
-advs <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "advs")
+adsl <- random.cdisc.data::cadsl
+advs <- random.cdisc.data::cadvs
 
 # Pre-Processing - Add any variables needed in your table to df
 adsl <- adsl %>%
-  dplyr::mutate(AGEGR1 = as.factor(dplyr::case_when(
+  mutate(AGEGR1 = as.factor(case_when(
     AGE >= 17 & AGE < 65 ~ ">=17 to <65",
     AGE >= 65 ~ ">=65",
     AGE >= 65 & AGE < 75 ~ ">=65 to <75",
@@ -101,10 +99,10 @@ adsl <- adsl %>%
   )))
 
 advs <- advs %>%
-  dplyr::filter(AVISIT == "BASELINE", VSTESTCD == "TEMP") %>%
-  dplyr::select("USUBJID", "AVAL")
+  filter(AVISIT == "BASELINE", VSTESTCD == "TEMP") %>%
+  select("USUBJID", "AVAL")
 
-anl <- dplyr::left_join(adsl, advs, by = "USUBJID")
+anl <- left_join(adsl, advs, by = "USUBJID")
 
 # Output Table
 make_table_02_tplyr(
@@ -154,16 +152,15 @@ Source code for this function is available [here](https://github.com/pharmaverse
 
 ```{r tbl_gtsummary, message=FALSE, warning=FALSE}
 # Load Libraries & Data
-library(scda)
 library(falcon)
 library(dplyr)
 
-adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
-advs <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "advs")
+adsl <- random.cdisc.data::cadsl
+advs <- random.cdisc.data::cadvs
 
 # Pre-Processing - Add any variables needed in your table to df
 adsl <- adsl %>%
-  dplyr::mutate(AGEGR1 = as.factor(dplyr::case_when(
+  mutate(AGEGR1 = as.factor(case_when(
     AGE >= 17 & AGE < 65 ~ "≥17 to &lt;65",
     AGE >= 65 ~ "≥65",
     AGE >= 65 & AGE < 75 ~ "≥65 to &lt;75",
@@ -171,10 +168,10 @@ adsl <- adsl %>%
   )))
 
 advs <- advs %>%
-  dplyr::filter(AVISIT == "BASELINE", VSTESTCD == "TEMP") %>%
-  dplyr::select("USUBJID", "AVAL")
+  filter(AVISIT == "BASELINE", VSTESTCD == "TEMP") %>%
+  select("USUBJID", "AVAL")
 
-anl <- dplyr::left_join(adsl, advs, by = "USUBJID")
+anl <- left_join(adsl, advs, by = "USUBJID")
 
 # Output Table
 make_table_02_gtsum(
