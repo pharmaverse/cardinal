@@ -2,7 +2,7 @@
 % Please edit documentation in R/fda-table_22.R
 \name{make_table_22}
 \alias{make_table_22}
-\title{FDA Table 22. Overview of Adverse Events1 by Demographic Subgroup, Safety Population, Pooled Analysis (or Trial X)}
+\title{FDA Table 22. Overview of Adverse Events by Demographic Subgroup, Safety Population, Pooled Analysis (or Trial X)}
 \usage{
 make_table_22(
   df,
@@ -51,7 +51,7 @@ use the annotation type as name and the desired string as value.}
 An \code{rtable} object.
 }
 \description{
-FDA Table 22. Overview of Adverse Events1 by Demographic Subgroup, Safety Population, Pooled Analysis (or Trial X)
+FDA Table 22. Overview of Adverse Events by Demographic Subgroup, Safety Population, Pooled Analysis (or Trial X)
 }
 \details{
 \itemize{
