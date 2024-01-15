@@ -1,4 +1,4 @@
-#' FDA Table 22. Overview of Adverse Events1 by Demographic Subgroup, Safety Population, Pooled Analysis (or Trial X)
+#' FDA Table 22. Overview of Adverse Events by Demographic Subgroup, Safety Population, Pooled Analysis (or Trial X)
 #'
 #' @details
 #' * `df` must contain the variables specified by `vars`, `arm_var`, and `saffl_var`.
