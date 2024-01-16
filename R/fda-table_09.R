@@ -196,7 +196,7 @@ make_table_09_tplyr <- function(
     assert_names(names(annotations), subset.of = c("title", "subtitles", "main_footer", "prov_footer"))
   }
 
-  # Initialize column headers
+  # Initialize column headers -
   # Allow for both, character and factor. The advantage of the latter is that users have control about the order
   arm_names <- if (is.factor(adae[[arm_var]])) levels(adae[[arm_var]]) else unique(as.character(adae[[arm_var]]))
 
