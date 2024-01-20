@@ -49,7 +49,7 @@ make_fig_01 <- function(df,
     ) %>%
     mutate(TRTDUR = TRTDUR %>% as.numeric(u_trtdur)) %>%
     filter(!is.na(TRTDUR)) %>%
-    select(arm_var, id_var, TRTDUR) %>%
+    select(all_of(c(id_var, arm_var)), TRTDUR) %>%
     distinct() %>%
     mutate(AVALU = u_trtdur) %>%
     arrange(desc(TRTDUR))
@@ -99,7 +99,7 @@ make_fig_01 <- function(df,
         axis.ticks.y = element_blank(),
         panel.background = element_blank(),
         axis.text.x = element_blank(),
-        panel.border = element_rect(color = "black", fill = NA, size = 0.5),
+        panel.border = element_rect(color = "black", fill = NA, linewidth = 0.5),
         plot.margin = unit(c(0.1, 0.05, 0, 0.025), "npc")
       ) +
       labs(title = "Number of Patients") +
