@@ -2,21 +2,23 @@ set.seed(1)
 adsl <- adsl_raw
 adsl$TRTSDTM <- adsl$TRTSDTM[1]
 adsl$TRTEDTM <- adsl$TRTSDTM + lubridate::days(sample(0:400, nrow(adsl), replace = TRUE))
-skip_on_ci()
 
 test_that("Figure 01 generation works with default values", {
+  skip_on_ci()
   fig_01_default <- make_fig_01(adsl)
 
   expect_snapshot_ggplot("fig_01_default", fig_01_default, width = 8, height = 5)
 })
 
 test_that("Figure 01 generation works with no table", {
+  skip_on_ci()
   fig_01_notbl <- make_fig_01(adsl, add_table = FALSE)
 
   expect_snapshot_ggplot("fig_01_notbl", fig_01_notbl, width = 8, height = 3)
 })
 
 test_that("Figure 01 generation works with custom values", {
+  skip_on_ci()
   fig_01_custom <- make_fig_01(
     adsl,
     u_trtdur = "years",
