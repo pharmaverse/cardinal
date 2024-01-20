@@ -47,7 +47,9 @@ make_fig_01 <- function(df,
     mutate(
       TRTDUR = lubridate::interval(lubridate::ymd_hms(.data[[trtsdtm_var]]), lubridate::ymd_hms(.data[[trtedtm_var]]))
     ) %>%
-    mutate(TRTDUR = TRTDUR %>% as.numeric(u_trtdur)) %>%
+    mutate(
+      TRTDUR = TRTDUR %>% as.numeric(u_trtdur)
+    ) %>%
     filter(!is.na(TRTDUR)) %>%
     select(all_of(c(id_var, arm_var)), TRTDUR) %>%
     distinct() %>%
