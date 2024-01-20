@@ -8,8 +8,9 @@
 #' @param adsl (`data.frame`)\cr dataset (typically ADSL) required to build table.
 #' @param alt_counts_df (`character`)\cr alternative dataset (typically ADSL) used only to calculate column counts.
 #' @param annotations (named `list` of `character`)\cr list of annotations to add to the table. Valid
-#'   annotation types are `title`, `subtitles`, `main_footer`, and `prov_footer`. Each name-value pair should
-#'   use the annotation type as name and the desired string as value.
+#'   annotation types are `title`, `subtitles`, `main_footer`, and `prov_footer` for tables, and `title`, `subtitles`,
+#'   and `caption` for figures. Each name-value pair should use the annotation type as name and the desired string as
+#'   value.
 #' @param arm_var (`character`)\cr arm variable used to split table into columns.
 #' @param df (`data.frame`)\cr dataset required to build table.
 #' @param fmqsc_var (`character`)\cr FMQ scope variable to use in table.
@@ -41,7 +42,15 @@
 #' @param sex_scope (`character`)\cr Level of `SEX` to output in table.
 #' @param soc_var (`character`)\cr flag variable used to indicate system organ class.
 #' @param show_colcounts (`flag`)\cr whether column counts should be printed.
+#' @param trtsdtm_var (`character`)\cr treatment start datetime variable.
+#' @param trtedtm_var (`character`)\cr treatment end datetime variable.
+#' @param u_trtdur (`character`)\cr unit for duration of treatment. Options are `"days"`, `"weeks"`, `"months"`,
+#'   and `"years"`.
 #' @param vars (`vector` of `character`)\cr variables from `df` to include in the table.
+#' @param xticks (`vector` of `numeric`)\cr x-axis tick positions. If `NA` (default), tick mark positions are
+#'   automatically calculated.
+#' @param x_lab (`character`)\cr x-axis label.
+#' @param y_lab (`character`)\cr y-axis label.
 #'
 #' @name argument_convention
 #' @keywords internal
