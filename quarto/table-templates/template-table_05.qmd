@@ -14,7 +14,6 @@ format: html
 ```{r tbl, message=FALSE, warning=FALSE}
 # Load Libraries & Data
 library(falcon)
-library(dplyr)
 
 adsl <- random.cdisc.data::cadsl
 
