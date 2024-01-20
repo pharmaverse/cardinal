@@ -37,3 +37,8 @@ cat(
 
 section_header("FDA Tables")
 create_subsection("./quarto/table-templates")
+
+# Figures
+
+section_header("FDA Figures")
+create_subsection("./quarto/figure-templates")
