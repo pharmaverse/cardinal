@@ -8,9 +8,8 @@
 #' @param adsl (`data.frame`)\cr dataset (typically ADSL) required to build table.
 #' @param alt_counts_df (`character`)\cr alternative dataset (typically ADSL) used only to calculate column counts.
 #' @param annotations (named `list` of `character`)\cr list of annotations to add to the table. Valid
-#'   annotation types are `title`, `subtitles`, `main_footer`, and `prov_footer` for tables, and `title`, `subtitles`,
-#'   and `caption` for figures. Each name-value pair should use the annotation type as name and the desired string as
-#'   value.
+#'   annotation types are `title`, `subtitles`, `main_footer`, and `prov_footer`. Each name-value pair should
+#'   use the annotation type as name and the desired string as value.
 #' @param arm_var (`character`)\cr arm variable used to split table into columns.
 #' @param df (`data.frame`)\cr dataset required to build table.
 #' @param fmqsc_var (`character`)\cr FMQ scope variable to use in table.

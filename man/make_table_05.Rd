@@ -34,9 +34,9 @@ make_table_05(
 
 \item{saffl_var}{(\code{character})\cr flag variable used to indicate inclusion in safety population.}
 
-\item{trtsdtm_var}{(\code{character})\cr treatment start datetime variable in \code{df}.}
+\item{trtsdtm_var}{(\code{character})\cr treatment start datetime variable.}
 
-\item{trtedtm_var}{(\code{character})\cr treatment end datetime variable in \code{df}.}
+\item{trtedtm_var}{(\code{character})\cr treatment end datetime variable.}
 
 \item{u_trtdur}{(\code{character})\cr unit for duration of treatment. Options are \code{"days"}, \code{"weeks"}, \code{"months"},
 and \code{"years"}.}
@@ -73,10 +73,10 @@ FDA Table 5: Duration of Treatment Exposure, Safety Population, Pooled Analyses
 }
 \details{
 \itemize{
-\item \code{df} must contain the variables specified by \code{arm_var}, \code{id_var}, \code{saffl_var}, \code{id_var}, \code{trtsdtm_var},
+\item \code{df} must contain the variables specified by \code{arm_var}, \code{saffl_var}, \code{id_var}, \code{trtsdtm_var},
 and \code{trtedtm_var}.
 \item If specified, \code{alt_counts_df} must contain the variables specified by \code{arm_var}, \code{id_var} and \code{saffl_var}.
-\item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false,). Missing values in
+\item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
 flag variables are treated as \code{"N"}.
 \item Columns are split by arm. Overall population column is excluded by default (see \code{lbl_overall} argument).
 \item Numbers in table "Patients Treated" section are the absolute numbers of patients and fraction of \code{N}.

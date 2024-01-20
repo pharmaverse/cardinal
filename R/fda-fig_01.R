@@ -11,28 +11,31 @@
 #'
 #' @inheritParams argument_convention
 #' @param add_table (`flag`)\cr whether "Number of Patients" table should be printed under the plot.
+#' @param annotations (named `list` of `character`)\cr list of annotations to add to the figure. Valid annotation types
+#'   are `title`, `subtitles`, and `caption`. Each name-value pair should use the annotation type as name and the
+#'   desired string as value.
 #'
 #' @return A `ggplot2` object.
 #'
 #' @examples
 #' adsl <- random.cdisc.data::cadsl
 #'
-#' fig <- make_fig_1(df = adsl)
+#' fig <- make_fig_01(df = adsl)
 #' fig
 #'
 #' @export
-make_fig_1 <- function(df,
-                       arm_var = "ARM",
-                       id_var = "USUBJID",
-                       saffl_var = "SAFFL",
-                       trtsdtm_var = "TRTSDTM",
-                       trtedtm_var = "TRTEDTM",
-                       u_trtdur = "days",
-                       x_lab = paste0("Time from first dose (", u_trtdur, ")"),
-                       y_lab = "Percent of Patients (%)",
-                       xticks = NA,
-                       add_table = TRUE,
-                       annotations = NULL) {
+make_fig_01 <- function(df,
+                        arm_var = "ARM",
+                        id_var = "USUBJID",
+                        saffl_var = "SAFFL",
+                        trtsdtm_var = "TRTSDTM",
+                        trtedtm_var = "TRTEDTM",
+                        u_trtdur = "days",
+                        x_lab = paste0("Time from first dose (", u_trtdur, ")"),
+                        y_lab = "Percent of Patients (%)",
+                        xticks = NA,
+                        add_table = TRUE,
+                        annotations = NULL) {
   checkmate::assert_subset(c(arm_var, id_var, saffl_var, trtsdtm_var, trtedtm_var), names(df))
   checkmate::assert_choice(u_trtdur, c("days", "weeks", "months", "years"))
   assert_flag_variables(df, saffl_var)
