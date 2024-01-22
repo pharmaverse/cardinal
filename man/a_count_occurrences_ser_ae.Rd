@@ -30,9 +30,9 @@ when \code{denom = "N_s"}.}
 subgroup/row counts), \code{"N_col"} (total \code{df} column counts), or \code{"n"} (total \code{df} overall patient count).
 Note that \code{df} is filtered to only include serious adverse events (\code{ASER == "Y"}).}
 
-\item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
+\item{id_var}{(\code{character})\cr Name of the unique subject identifiers variable.}
 
-\item{arm_var}{(\code{character})\cr arm variable used to split table into columns.}
+\item{arm_var}{(\code{character})\cr Name of the treatment arm variable used to split table into columns.}
 }
 \description{
 Analysis Function to Calculate Count/Fraction of Serious Adverse Event Occurrences

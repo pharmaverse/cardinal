@@ -17,13 +17,13 @@ count_subjects(
 \arguments{
 \item{adae}{(\code{data.frame})\cr dataset (typically ADAE) required to build table.}
 
-\item{arm_var}{(\code{character})\cr arm variable used to split table into columns.}
+\item{arm_var}{(\code{character})\cr Name of the treatment arm variable used to split table into columns.}
 
-\item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
+\item{id_var}{(\code{character})\cr Name of the unique subject identifiers variable.}
 
 \item{sub_level_vars}{(\code{NULL} or \code{character}) specifying the sub group for counted subjects}
 
-\item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
+\item{lbl_overall}{(\code{character})\cr Optional. If specified, an overall column will be added to the table with
 the given value as the column label.}
 
 \item{risk_diff}{(named \code{list})\cr list of settings to apply to add one or more risk difference columns to the table.

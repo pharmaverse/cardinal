@@ -23,21 +23,21 @@ make_table_04(
 
 \item{alt_counts_df}{(\code{character})\cr alternative dataset (typically ADSL) used only to calculate column counts.}
 
-\item{show_colcounts}{(\code{flag})\cr whether column counts should be printed.}
+\item{show_colcounts}{(\code{flag})\cr Whether column counts should be printed. Boolean.}
 
-\item{arm_var}{(\code{character})\cr arm variable used to split table into columns.}
+\item{arm_var}{(\code{character})\cr Name of the treatment arm variable used to split table into columns.}
 
-\item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
+\item{id_var}{(\code{character})\cr Name of the unique subject identifiers variable.}
 
 \item{pop_vars}{(\code{vector} of \code{character})\cr population variables from \code{df} to include in the table.}
 
 \item{lbl_pop_vars}{(\code{vector} of \code{character})\cr labels corresponding to variables in \code{pop_vars} to print
 in the table. Labels should be ordered according to the order of variables in \code{pop_vars}.}
 
-\item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
+\item{lbl_overall}{(\code{character})\cr Optional. If specified, an overall column will be added to the table with
 the given value as the column label.}
 
-\item{prune_0}{(\code{flag})\cr whether all-zero rows should be removed from the table.}
+\item{prune_0}{(\code{flag})\cr Whether all-zero rows should be removed from the table. Boolean.}
 
 \item{risk_diff}{(named \code{list})\cr list of settings to apply to add one or more risk difference columns to the table.
 Defaults to \code{NULL} (no risk difference column added). See \code{\link[tern:add_riskdiff]{tern::add_riskdiff()}} for more details. List should
