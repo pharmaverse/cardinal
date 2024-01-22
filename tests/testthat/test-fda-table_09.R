@@ -171,7 +171,6 @@ test_that("make_table_09_tplyr() assigns column headers correctly to the arm gro
   arm_headers <- unlist(tbl_out[1, -1])
   position_valid <- sapply(seq_along(length(arm_col_names)), function(i) grepl(arm_col_names[i], arm_headers[i]))
   expect_true(all(position_valid))
-
 })
 
 test_that("make_table_09_tplyr() provides risk difference columns based on the risk_diff_pairs parameter", {
