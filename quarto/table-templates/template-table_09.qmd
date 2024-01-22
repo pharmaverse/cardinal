@@ -131,11 +131,10 @@ Source code for this function is available [here](https://github.com/pharmaverse
 
 ```{r tbl_tplyr, message=FALSE, warning=FALSE}
 # Load Libraries & Data
-library(scda)
 library(falcon)
 
-adsl <- synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
-adae <- synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
+adsl <- random.cdisc.data::cadsl
+adae <- random.cdisc.data::cadae
 
 # Output Table
 make_table_09_tplyr(adae = adae, alt_counts_df = adsl, tplyr_raw = TRUE)
