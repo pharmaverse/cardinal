@@ -67,6 +67,8 @@ or greater than the given time (times corresponding to the figure's x-ticks labe
 }
 \examples{
 adsl <- random.cdisc.data::cadsl
+adsl$TRTSDTM <- adsl$TRTSDTM[1]
+adsl$TRTEDTM <- adsl$TRTSDTM + lubridate::days(sample(0:400, nrow(adsl), replace = TRUE))
 
 fig <- make_fig_01(df = adsl)
 fig
