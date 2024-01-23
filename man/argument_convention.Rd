@@ -22,6 +22,8 @@ use the annotation type as name and the desired string as value.}
 
 \item{df}{(\code{data.frame})\cr dataset required to build table.}
 
+\item{eosdy_var}{(\code{character})\cr variable denoting last recorded (relative) study day.}
+
 \item{fmqsc_var}{(\code{character})\cr FMQ scope variable to use in table.}
 
 \item{fmqnam_var}{(\code{character})\cr FMQ reference name variable to use in table.}

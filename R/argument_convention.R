@@ -12,6 +12,7 @@
 #'   use the annotation type as name and the desired string as value.
 #' @param arm_var (`character`)\cr arm variable used to split table into columns.
 #' @param df (`data.frame`)\cr dataset required to build table.
+#' @param eosdy_var (`character`)\cr variable denoting last recorded (relative) study day.
 #' @param fmqsc_var (`character`)\cr FMQ scope variable to use in table.
 #' @param fmqnam_var (`character`)\cr FMQ reference name variable to use in table.
 #' @param fmq_scope (`character`)\cr FMQ scope ("NARROW" or "BROAD") to output in table.
