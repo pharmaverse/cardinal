@@ -21,8 +21,35 @@
 #' @examples
 #' advs <- random.cdisc.data::cadvs
 #'
-#' fig <- make_fig_14(df = advs)
-#' fig
+#' advs <- advs %>%
+#'   mutate(
+#'     AVISIT = case_when(
+#'       AVISIT == "BASELINE" ~ "Baseline",
+#'       AVISIT == "WEEK 1 DAY 8" ~ "Week 2",
+#'       AVISIT == "WEEK 2 DAY 15" ~ "Week 3",
+#'       AVISIT == "WEEK 3 DAY 22" ~ "Week 5",
+#'       AVISIT == "WEEK 4 DAY 29" ~ "Week 10",
+#'       AVISIT == "WEEK 5 DAY 36" ~ "Week 12"
+#'     ),
+#'     AVISITN = case_when(
+#'       AVISITN == 0 ~ 0,
+#'       AVISITN == 1 ~ 2,
+#'       AVISITN == 2 ~ 3,
+#'       AVISITN == 3 ~ 5,
+#'       AVISITN == 4 ~ 10,
+#'       AVISITN == 5 ~ 12
+#'     )
+#'   )
+# '
+# 'fig <- make_fig_14(
+# '  df = advs,
+# '  paramcd_val = "SYSBP",
+# '  add_cond = expr("ONTRTFL == 'Y' | ABLFL == 'Y'"),
+# '  add_table = TRUE,
+# '  y_lab = "Mean Value (95% CI)\nSystolic Blood Pressure (Pa)",
+# '  yticks = c(135, 140, 145, 150, 155, 160)
+# ')
+# 'fig
 #'
 #' @export
 make_fig_14 <- function(df,
@@ -84,7 +111,6 @@ make_fig_14 <- function(df,
         ymin = lower_ci,
         ymax = upper_ci
       ),
-      width = 1.5,
       position = position_dodge(width = 0.5)
     ) +
     labs(
