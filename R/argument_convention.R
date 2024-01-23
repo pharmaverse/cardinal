@@ -42,7 +42,15 @@
 #' @param sex_scope (`character`)\cr Level of `SEX` to output in table.
 #' @param soc_var (`character`)\cr flag variable used to indicate system organ class.
 #' @param show_colcounts (`flag`)\cr whether column counts should be printed.
+#' @param trtsdtm_var (`character`)\cr treatment start datetime variable.
+#' @param trtedtm_var (`character`)\cr treatment end datetime variable.
+#' @param u_trtdur (`character`)\cr unit for duration of treatment. Options are `"days"`, `"weeks"`, `"months"`,
+#'   and `"years"`.
 #' @param vars (`vector` of `character`)\cr variables from `df` to include in the table.
+#' @param xticks (`vector` of `numeric`)\cr x-axis tick positions. If `NA` (default), tick mark positions are
+#'   automatically calculated.
+#' @param x_lab (`character`)\cr x-axis label.
+#' @param y_lab (`character`)\cr y-axis label.
 #'
 #' @name argument_convention
 #' @keywords internal

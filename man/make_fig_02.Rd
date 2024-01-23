@@ -29,6 +29,16 @@ make_fig_02(
 
 \item{eosdy_var}{(\code{character})\cr variable denoting last recorded (relative) study day.}
 
+\item{u_trtdur}{(\code{character})\cr unit for duration of treatment. Options are \code{"days"}, \code{"weeks"}, \code{"months"},
+and \code{"years"}.}
+
+\item{x_lab}{(\code{character})\cr x-axis label.}
+
+\item{y_lab}{(\code{character})\cr y-axis label.}
+
+\item{xticks}{(\code{vector} of \code{numeric})\cr x-axis tick positions. If \code{NA} (default), tick mark positions are
+automatically calculated.}
+
 \item{add_table}{(\code{flag})\cr whether "Number of Patients" table should be printed under the plot.}
 
 \item{annotations}{(named \code{list} of \code{character})\cr list of annotations to add to the figure. Valid annotation types
