@@ -32,7 +32,7 @@ make_fig_14 <- function(df,
                         paramcd_val,
                         add_cond = NULL,
                         x_lab = "",
-                        y_lab = "Systolic Blood Pressure (Pa)",
+                        y_lab = "",
                         yticks = NA,
                         add_table = TRUE,
                         annotations = NULL){
@@ -43,7 +43,8 @@ make_fig_14 <- function(df,
     as_tibble() %>%
     filter(
       .data[[saffl_var]] == "Y",
-      PARAMCD == {{paramcd_val}}
+      PARAMCD == {{paramcd_val}},
+      !is.na(AVAL)
     ) %>%
     df_explicit_na()
 
@@ -126,35 +127,37 @@ make_fig_14 <- function(df,
     xtick_lbls <- xtick_lbls[!is.na(xtick_lbls)]
     xlims <- ggplot_build(g)$layout$panel_params[[1]]$x$limits
 
-    tbl_n <- expand.grid(
-      x = xtick_lbls,
-      arm = rev(levels(df[[arm_var]])),
-      # arm = df$n,
-      n = 0
-    )
+    tbl_n1 <- df %>%
+      mutate(
+        arm = .data[[arm_var]],
+        x = AVISITN,
+        meanr = sprintf("%.1f", mean)
+      )
 
-    # g_tbl1 <- ggplot(tbl_n, aes(x = x, y = arm)) +
-    #   theme(
-    #     axis.title.x = element_blank(),
-    #     axis.title.y = element_blank(),
-    #     axis.ticks.x = element_blank(),
-    #     axis.ticks.y = element_blank(),
-    #     panel.background = element_blank(),
-    #     axis.text.x = element_blank(),
-    #     panel.border = element_rect(color = "black", fill = NA, linewidth = 0.5),
-    #     plot.margin = unit(c(0.1, 0.05, 0, 0.025), "npc")
-    #   ) +
-    #   labs(title = "Number of Patients with Data") +
-    #   scale_x_continuous(breaks = xtick_lbls, limits = c(min(xlims, xtick_lbls), max(xlims, xtick_lbls)))
-    #
-    # for (i in seq_len(nrow(tbl_n))) {
-    #   tbl_n$n[i] <- (tbl_n$mean[i])
-    #   g_tbl1 <- g_tbl1 +
-    #     annotate("text", label = as.character(tbl_n$n[i]), x = tbl_n$x[i], y = tbl_n$arm[i])
-    # }
+    tbl_n2 <- tbl_n1
 
+    g_tbl1 <- ggplot(tbl_n1, aes(x = x, y = arm)) +
+      theme(
+        axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.ticks.y = element_blank(),
+        panel.background = element_blank(),
+        axis.text.x = element_blank(),
+        panel.border = element_rect(color = "black", fill = NA, linewidth = 0.5),
+        plot.margin = unit(c(0.1, 0.05, 0, 0.025), "npc"),
+        plot.title = element_text(size = 10)
+      ) +
+      labs(title = "Mean Value") +
+      scale_x_continuous(breaks = xtick_lbls, limits = c(min(xlims, xtick_lbls), max(xlims, xtick_lbls)))
 
-    g_tbl2 <- ggplot(tbl_n, aes(x = x, y = arm)) +
+    for (i in seq_len(nrow(tbl_n1))) {
+      tbl_n1$n[i] <- tbl_n1$meanr[i]
+      g_tbl1 <- g_tbl1 +
+        annotate("text", label = as.character(tbl_n1$n[i]), x = tbl_n1$x[i], y = tbl_n1$arm[i])
+    }
+
+    g_tbl2 <- ggplot(tbl_n2, aes(x = x, y = arm)) +
       theme(
         axis.title.x = element_blank(),
         axis.title.y = element_blank(),
@@ -169,16 +172,15 @@ make_fig_14 <- function(df,
       labs(title = "Number of Patients with Data") +
       scale_x_continuous(breaks = xtick_lbls, limits = c(min(xlims, xtick_lbls), max(xlims, xtick_lbls)))
 
-    for (i in seq_len(nrow(tbl_n))) {
-      tbl_n$n[i] <- sum(df$ARM == tbl_n$arm[i])
+    for (i in seq_len(nrow(tbl_n2))) {
+      tbl_n2$n[i] <- tbl_n2$n[i]
       g_tbl2 <- g_tbl2 +
-        annotate("text", label = as.character(tbl_n$n[i]), x = tbl_n$x[i], y = tbl_n$arm[i])
+        annotate("text", label = as.character(tbl_n2$n[i]), x = tbl_n2$x[i], y = tbl_n2$arm[i])
     }
 
     cowplot::plot_grid(
       g,
-      # g_tbl1,
-      g_tbl2,
+      g_tbl1,
       g_tbl2,
       g_legend,
       align = "v",
@@ -189,9 +191,6 @@ make_fig_14 <- function(df,
   } else {
     g
   }
-
-  # return(df)
-  return(tbl_n)
 }
 
 advs <- random.cdisc.data::cadvs
@@ -220,6 +219,8 @@ fig <- make_fig_14(
   df = advs,
   paramcd_val = "SYSBP",
   add_cond = expr("ONTRTFL == 'Y' | ABLFL == 'Y'"),
-  add_table = TRUE
+  add_table = TRUE,
+  y_lab = "Mean Value (95% CI)\nSystolic Blood Pressure (Pa)",
+  yticks = c(135, 140, 145, 150, 155, 160)
 )
 fig
