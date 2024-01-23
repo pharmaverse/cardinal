@@ -32,7 +32,7 @@
 #'   )
 #' adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
 #'
-#' tbl <- make_table_10(adae = adae, alt_counts_df = adsl)
+#' tbl2 <- make_table_10(adae = adae, alt_counts_df = adsl)
 #' tbl
 #'
 #' @export
@@ -169,96 +169,145 @@ make_table_10_gtsum <- function(adae,
 
   checkmate::assert_logical(show_colcounts)
 
+  cat("This function will take roughly 30 seconds to generate the table.")
+
   adae <- adae %>%
     filter(.data[[saffl_var]] == "Y", .data[[ser_var]] == "Y", .data[[fmqsc_var]] == fmq_scope)
 
-  # create data for table 10
-  # lbl_overall must be NULL to get the data for all columns besides the overall column
-  result_list <- create_table_10_data(
-    adae = adae,
-    alt_counts_df = alt_counts_df,
-    arm_var = arm_var,
-    id_var = id_var,
-    soc_var = soc_var,
-    fmqnam_var = fmqnam_var,
-    lbl_overall = NULL,
-    risk_diff = risk_diff
-  )
+  # using gtsummary code
 
-  # create data for overall column
-  if (!is.null(lbl_overall)) {
-    overall_list <- create_table_10_data(
-      adae = adae,
-      alt_counts_df = alt_counts_df,
-      arm_var = arm_var,
-      id_var = id_var,
-      soc_var = soc_var,
-      fmqnam_var = fmqnam_var,
-      lbl_overall = lbl_overall,
-      risk_diff = NULL
-    )
+  gt_table <-
+    # build primary table
+    gtsummary::tbl_strata2(
+      data = adae,
+      strata = soc_var,
+      ~gtreg::tbl_ae(
+        data = .x |> dplyr::mutate(.x, {{soc_var}} := .y),
+        strata = arm_var,
+        id = id_var,
+        soc = soc_var,
+        ae = fmqnam_var,
+        statistic = "{n} ({p}%)",
+        id_df = adsl
+      ),
+      .combine_with = "tbl_stack",
+      .combine_args = list(group_header = NULL)
+    ) |>
+    # remove stats from SOC row
+    gtsummary::modify_table_body(
+      ~.x |>
+        dplyr::mutate(
+          dplyr::across(
+            gtsummary::all_stat_cols(),
+            function(x) ifelse(.data$variable %in% "soc", "", x)
+          )
+        )
+    ) |>
+    # update column headers
+    gtsummary::modify_header(
+      gtreg::all_ae_cols() ~ "**{strata}**  \nN = {n}",
+      label = "**Body System or Organ Class**  \nFMQ (Narrow)"
+    ) |>
+    gtsummary::modify_spanning_header(gtreg::all_ae_cols() ~ NA) |>
+    # bold SOC rows
+    gtsummary::modify_table_styling(
+      columns = "label",
+      rows = variable %in% "soc",
+      text_format = "bold"
+    ) |>
+    gtsummary::modify_caption("<div style='text-align: left; font-weight: bold; color: grey'> ",annotations[["title"]],"</div>")
 
-    result_list$data <- result_list[["data"]] %>%
-      left_join(overall_list[["data"]])
-
-    result_list$total_N <- result_list[["total_N"]] %>%
-      cross_join(overall_list[["total_N"]])
-  }
-
-  result_data <- result_list[["data"]]
-
-  rows_to_indent <- which(result_data[[fmqnam_var]] != " ")
-
-  result_data <- result_data %>%
-    mutate(
-      !!fmqnam_var := if_else(.data[[fmqnam_var]] == " ", .data[[soc_var]], .data[[fmqnam_var]])
-    ) %>%
-    select(-any_of(soc_var))
-
-  gt_table <- result_data %>%
-    gt(
-      rowname_col = fmqnam_var
-    ) %>%
-    tab_stub_indent(rows = rows_to_indent, indent = 2)
-
-
-  if (show_colcounts) {
-    total_N <- result_list[["total_N"]] # nolint
-
-    set_col_labels <- function(x) {
-      if (startsWith(x, "rd_")) {
-        html(paste0("Risk Difference <br/>", substr(x, 4, nchar(x)), "<br/> (%) (95% CI)"))
-      } else {
-        html(paste0(x, "<br/>(N=", total_N[[x]], ")"))
-      }
-    }
-
-    gt_table <- gt_table %>%
-      cols_label_with(fn = set_col_labels)
-  }
-  lbl_fmq_var <- paste0("FMQ (", tools::toTitleCase(tolower(fmq_scope)), ")")
-  label <- paste(lbl_soc_var, "<br/> &nbsp;&nbsp;", lbl_fmq_var)
-
-  gt_table <- gt_table %>%
-    tab_stubhead(label = md(label)) %>%
-    cols_align(align = "center", columns = -1) # center all columns besides the first
-
-  if (!is.null(annotations)) {
-    if (!is.null(annotations[["title"]])) {
-      gt_table <- gt_table %>%
-        tab_header(annotations[["title"]])
-    }
-    if (!is.null(annotations[["subtitle"]])) {
-      gt_table <- gt_table %>%
-        tab_header(annotations[["title"]], subtitle = annotations[["subtitle"]])
-    }
-    if (!is.null(annotations[["footnotes"]])) {
-      lapply(annotations[["footnotes"]], function(x) {
-        gt_table <<- gt_table %>%
-          tab_footnote(x)
-      })
-    }
-  }
+#
+#
+#
+#
+#   # create data for table 10
+#   # lbl_overall must be NULL to get the data for all columns besides the overall column
+#   result_list <- create_table_10_data(
+#     adae = adae,
+#     alt_counts_df = alt_counts_df,
+#     arm_var = arm_var,
+#     id_var = id_var,
+#     soc_var = soc_var,
+#     fmqnam_var = fmqnam_var,
+#     lbl_overall = NULL,
+#     risk_diff = risk_diff
+#   )
+#
+#   # create data for overall column
+#   if (!is.null(lbl_overall)) {
+#     overall_list <- create_table_10_data(
+#       adae = adae,
+#       alt_counts_df = alt_counts_df,
+#       arm_var = arm_var,
+#       id_var = id_var,
+#       soc_var = soc_var,
+#       fmqnam_var = fmqnam_var,
+#       lbl_overall = lbl_overall,
+#       risk_diff = NULL
+#     )
+#
+#     result_list$data <- result_list[["data"]] %>%
+#       left_join(overall_list[["data"]])
+#
+#     result_list$total_N <- result_list[["total_N"]] %>%
+#       cross_join(overall_list[["total_N"]])
+#   }
+#
+#   result_data <- result_list[["data"]]
+#
+#   rows_to_indent <- which(result_data[[fmqnam_var]] != " ")
+#
+#   result_data <- result_data %>%
+#     mutate(
+#       !!fmqnam_var := if_else(.data[[fmqnam_var]] == " ", .data[[soc_var]], .data[[fmqnam_var]])
+#     ) %>%
+#     select(-any_of(soc_var))
+#
+#   gt_table <- result_data %>%
+#     gt(
+#       rowname_col = fmqnam_var
+#     ) %>%
+#     tab_stub_indent(rows = rows_to_indent, indent = 2)
+#
+#
+  # if (show_colcounts) {
+  #   total_N <- result_list[["total_N"]] # nolint
+  #
+  #   set_col_labels <- function(x) {
+  #     if (startsWith(x, "rd_")) {
+  #       html(paste0("Risk Difference <br/>", substr(x, 4, nchar(x)), "<br/> (%) (95% CI)"))
+  #     } else {
+  #       html(paste0(x, "<br/>(N=", total_N[[x]], ")"))
+  #     }
+  #   }
+  #
+  #   gt_table <- gt_table %>%
+  #     cols_label_with(fn = set_col_labels)
+  # }
+  # lbl_fmq_var <- paste0("FMQ (", tools::toTitleCase(tolower(fmq_scope)), ")")
+  # label <- paste(lbl_soc_var, "<br/> &nbsp;&nbsp;", lbl_fmq_var)
+  #
+  # gt_table <- gt_table %>%
+  #   tab_stubhead(label = md(label)) %>%
+  #   cols_align(align = "center", columns = -1) # center all columns besides the first
+  #
+  # if (!is.null(annotations)) {
+  #   if (!is.null(annotations[["title"]])) {
+  #     gt_table <- gt_table %>%
+  #       tab_header(annotations[["title"]])
+  #   }
+  #   if (!is.null(annotations[["subtitle"]])) {
+  #     gt_table <- gt_table %>%
+  #       tab_header(annotations[["title"]], subtitle = annotations[["subtitle"]])
+  #   }
+  #   if (!is.null(annotations[["footnotes"]])) {
+  #     lapply(annotations[["footnotes"]], function(x) {
+  #       gt_table <<- gt_table %>%
+  #         tab_footnote(x)
+  #     })
+  #   }
+  # }
 
   gt_table
 }
