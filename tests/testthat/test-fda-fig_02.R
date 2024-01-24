@@ -26,3 +26,12 @@ test_that("Figure 02 generation works with custom values", {
 
   expect_snapshot_ggplot("fig_02_custom", fig_02_custom, width = 10, height = 5)
 })
+
+test_that("Figure 02 generation works with ggtheme argument specified", {
+  fig_02_theme <- make_fig_02(
+    adsl,
+    ggtheme = theme_dark()
+  )
+
+  expect_snapshot_ggplot("fig_02_theme", fig_02_theme, width = 10, height = 6)
+})
