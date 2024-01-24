@@ -28,7 +28,7 @@ use the annotation type as name and the desired string as value.}
 
 \item{fmq_scope}{(\code{character})\cr FMQ scope ("NARROW" or "BROAD") to output in table.}
 
-\item{ggtheme}{(\code{theme})\cr a graphical theme as provided by \code{ggplot2} to control styling of the plot.}
+\item{ggtheme}{(\code{theme})\cr a graphical theme as provided by \code{ggplot2} to control styling of the \code{ggplot} object.}
 
 \item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
 
