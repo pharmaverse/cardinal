@@ -28,6 +28,8 @@ use the annotation type as name and the desired string as value.}
 
 \item{fmq_scope}{(\code{character})\cr FMQ scope ("NARROW" or "BROAD") to output in table.}
 
+\item{ggtheme}{(\code{theme})\cr a graphical theme as provided by \code{ggplot2} to control styling of the plot.}
+
 \item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
 
 \item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with

@@ -15,6 +15,7 @@
 #' @param fmqsc_var (`character`)\cr FMQ scope variable to use in table.
 #' @param fmqnam_var (`character`)\cr FMQ reference name variable to use in table.
 #' @param fmq_scope (`character`)\cr FMQ scope ("NARROW" or "BROAD") to output in table.
+#' @param ggtheme (`theme`)\cr a graphical theme as provided by `ggplot2` to control styling of the `ggplot` object.
 #' @param id_var (`character`)\cr variable used as unique subject identifier.
 #' @param lbl_overall (`character`)\cr if specified, an overall column will be added to the table with
 #'   the given value as the column label.

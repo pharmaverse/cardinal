@@ -15,6 +15,7 @@ make_fig_01(
   x_lab = paste0("Time from first dose (", u_trtdur, ")"),
   y_lab = "Percent of Patients (\%)",
   xticks = NA,
+  ggtheme = NULL,
   add_table = TRUE,
   annotations = NULL
 )
@@ -41,6 +42,8 @@ and \code{"years"}.}
 
 \item{xticks}{(\code{vector} of \code{numeric})\cr x-axis tick positions. If \code{NA} (default), tick mark positions are
 automatically calculated.}
+
+\item{ggtheme}{(\code{theme})\cr a graphical theme as provided by \code{ggplot2} to control styling of the plot.}
 
 \item{add_table}{(\code{flag})\cr whether "Number of Patients" table should be printed under the plot.}
 

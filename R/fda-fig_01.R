@@ -36,6 +36,7 @@ make_fig_01 <- function(df,
                         x_lab = paste0("Time from first dose (", u_trtdur, ")"),
                         y_lab = "Percent of Patients (%)",
                         xticks = NA,
+                        ggtheme = NULL,
                         add_table = TRUE,
                         annotations = NULL) {
   checkmate::assert_subset(c(arm_var, id_var, saffl_var, trtsdtm_var, trtedtm_var), names(df))
@@ -43,19 +44,16 @@ make_fig_01 <- function(df,
   assert_flag_variables(df, saffl_var)
 
   df <- df %>%
-    as_tibble() %>%
     filter(.data[[saffl_var]] == "Y") %>%
     df_explicit_na() %>%
     mutate(
-      TRTDUR = lubridate::interval(lubridate::ymd_hms(.data[[trtsdtm_var]]), lubridate::ymd_hms(.data[[trtedtm_var]]))
-    ) %>%
-    mutate(
-      TRTDUR = TRTDUR %>% as.numeric(u_trtdur)
+      TRTDUR = lubridate::interval(lubridate::ymd_hms(.data[[trtsdtm_var]]), lubridate::ymd_hms(.data[[trtedtm_var]])),
+      TRTDUR = TRTDUR %>% as.numeric(u_trtdur),
+      AVALU = u_trtdur
     ) %>%
     filter(!is.na(TRTDUR)) %>%
     select(all_of(c(id_var, arm_var)), TRTDUR) %>%
     distinct() %>%
-    mutate(AVALU = u_trtdur) %>%
     arrange(desc(TRTDUR))
 
   df$PT_PCT <- seq_len(nrow(df)) / nrow(df) * 100
@@ -80,6 +78,8 @@ make_fig_01 <- function(df,
     g <- g +
       scale_x_continuous(breaks = xticks, limits = c(min(xticks), max(c(xticks, max_time))))
   }
+
+  if (!is.null(ggtheme)) g <- g + ggtheme
 
   if (add_table) {
     g_legend <- cowplot::get_legend(g)
@@ -114,6 +114,8 @@ make_fig_01 <- function(df,
       g_tbl <- g_tbl +
         annotate("text", label = as.character(tbl_n$n[i]), x = tbl_n$x[i], y = tbl_n$arm[i])
     }
+
+    if (!is.null(ggtheme)) g_tbl <- g_tbl + ggtheme
 
     cowplot::plot_grid(
       g,
