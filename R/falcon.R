@@ -6,7 +6,7 @@
 "_PACKAGE"
 
 
-#' @import dplyr gt gtsummary rtables tern tfrmt Tplyr
+#' @import dplyr ggplot2 gt gtsummary rtables tern tfrmt Tplyr
 #' @importFrom rlang .data :=
 #' @importFrom magrittr %>%
 #' @importFrom purrr walk
@@ -14,6 +14,7 @@
 #' @importFrom tidyr pivot_longer separate_rows pivot_wider
 #' @importFrom formatters with_label var_labels var_relabel
 #' @importFrom rlistings as_listing
+#' @importFrom cowplot plot_grid get_legend
 NULL
 
 # Fix R CMD check warning for missing global definitions
