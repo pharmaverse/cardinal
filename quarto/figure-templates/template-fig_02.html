@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.3.353">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>falcon - FDA Figure 1</title>
+<title>falcon - FDA Figure 2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -117,12 +117,12 @@ cookieconsent.run({
 });
 </script><style>html{ scroll-behavior: smooth; }</style>
 <link rel="stylesheet" href="../../quarto/assets/style.scss">
-<meta property="og:title" content="falcon - FDA Figure 1">
-<meta property="og:description" content="Time to Permanent Discontinuation of Study Drug, Safety Population, Pooled Analyses">
-<meta property="og:image" content="https://pharmaverse.github.io/falcon/quarto/assets/images/screenshots/fig_01.png">
+<meta property="og:title" content="falcon - FDA Figure 2">
+<meta property="og:description" content="Time to Last Follow Up, Safety Population, Pooled Analyses">
+<meta property="og:image" content="https://pharmaverse.github.io/falcon/quarto/assets/images/screenshots/fig_02.png">
 <meta property="og:site-name" content="falcon">
-<meta property="og:image:height" content="482">
-<meta property="og:image:width" content="982">
+<meta property="og:image:height" content="456">
+<meta property="og:image:width" content="743">
 </head>
 <body class="nav-fixed">
 
@@ -292,8 +292,8 @@ cookieconsent.run({
     
 <!-- main -->
 <main class="content column-page" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">FDA Figure 1</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
-<p class="subtitle lead">Time to Permanent Discontinuation of Study Drug, Safety Population, Pooled Analyses</p>
+<div class="quarto-title-block"><div><h1 class="title">FDA Figure 2</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
+<p class="subtitle lead">Time to Last Follow Up, Safety Population, Pooled Analyses</p>
 </div>
 
 
@@ -316,37 +316,36 @@ cookieconsent.run({
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="../assets/images/screenshots/fig_01.png" class="img-fluid figure-img"></p>
+<figure class="figure"><p><img src="../assets/images/screenshots/fig_02.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<div class="cell" data-hash="template-fig_01_cache/html/fig_e15d4a3d5d4f9945527dd49cab958ba5">
+<div class="cell" data-hash="template-fig_02_cache/html/fig_9f7b7523c4f05aaf2648f7823938e100">
 <div class="cell-output-display">
-<p><img src="template-fig_01_files/figure-html/fig-1.png" class="img-fluid" width="1440"></p>
+<p><img src="template-fig_02_files/figure-html/fig-1.png" class="img-fluid" width="1440"></p>
 </div>
 </div>
 </div>
 <div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
-<div class="cell" data-hash="template-fig_01_cache/html/fig_43f696a7321bcf99b173ec3c307e5a0c">
+<div class="cell" data-hash="template-fig_02_cache/html/fig_eebedd00e485ef4cfc97f73fd1397570">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Load Libraries &amp; Data</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(falcon)</span>
 <span id="cb1-3"><a href="#cb1-3"></a></span>
 <span id="cb1-4"><a href="#cb1-4"></a>adsl <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadsl</span>
-<span id="cb1-5"><a href="#cb1-5"></a>adsl<span class="sc">$</span>TRTSDTM <span class="ot">&lt;-</span> adsl<span class="sc">$</span>TRTSDTM[<span class="dv">1</span>]</span>
-<span id="cb1-6"><a href="#cb1-6"></a>adsl<span class="sc">$</span>TRTEDTM <span class="ot">&lt;-</span> adsl<span class="sc">$</span>TRTSDTM <span class="sc">+</span> lubridate<span class="sc">::</span><span class="fu">days</span>(<span class="fu">sample</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">400</span>, <span class="fu">nrow</span>(adsl), <span class="at">replace =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb1-7"><a href="#cb1-7"></a></span>
-<span id="cb1-8"><a href="#cb1-8"></a><span class="co"># Output Figure</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a><span class="fu">make_fig_01</span>(<span class="at">df =</span> adsl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-5"><a href="#cb1-5"></a>adsl<span class="sc">$</span>EOSDY <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">400</span>, <span class="fu">nrow</span>(adsl), <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-6"><a href="#cb1-6"></a></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="co"># Output Figure</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="fu">make_fig_02</span>(<span class="at">df =</span> adsl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
-<section id="make_fig_01" class="level3"><h3 class="anchored" data-anchor-id="make_fig_01"><code>make_fig_01()</code></h3>
+<section id="make_fig_02" class="level3"><h3 class="anchored" data-anchor-id="make_fig_02"><code>make_fig_02()</code></h3>
 <hr>
 <p>Required variables:</p>
 <ul>
 <li>
-<strong><code>df</code></strong>: The variables specified by <code>arm_var</code>, <code>id_var</code>, <code>saffl_var</code>, <code>trtsdtm_var</code>, and <code>trtedtm_var</code>.</li>
+<strong><code>df</code></strong>: The variables specified by <code>arm_var</code>, <code>id_var</code>, <code>saffl_var</code>, and <code>eosdy_var</code>.</li>
 </ul>
 <table class="table">
 <colgroup>
@@ -381,48 +380,43 @@ cookieconsent.run({
 <td style="text-align: left;"><code>"USUBJID"</code></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><code>trtsdtm_var</code></td>
-<td style="text-align: left;">(<code>character</code>) Treatment start datetime variable in df.</td>
-<td style="text-align: left;"><code>"TRTSDTM"</code></td>
+<td style="text-align: left;"><code>eosdy_var</code></td>
+<td style="text-align: left;">(<code>character</code>) Variable denoting last recorded (relative) study day.</td>
+<td style="text-align: left;"><code>"EOSDY"</code></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><code>trtedtm_var</code></td>
-<td style="text-align: left;">(<code>character</code>) Treatment end datetime variable in df.</td>
-<td style="text-align: left;"><code>"TRTEDTM"</code></td>
-</tr>
-<tr class="odd">
 <td style="text-align: left;"><code>u_trtdur</code></td>
 <td style="text-align: left;">(<code>character</code>) Unit for duration of treatment. Options are <code>"days"</code>, <code>"weeks"</code>, <code>"months"</code> and <code>"years"</code>.</td>
 <td style="text-align: left;"><code>"days"</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><code>x_lab</code></td>
 <td style="text-align: left;">(<code>character</code>) x-axis label.</td>
 <td style="text-align: left;"><code>paste0("Time from first dose (", u_trtdur, ")")</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><code>y_lab</code></td>
 <td style="text-align: left;">(<code>character</code>) y-axis label.</td>
 <td style="text-align: left;"><code>"Percent of Patients (%)"</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><code>xticks</code></td>
 <td style="text-align: left;">(<code>vector</code> of <code>numeric</code>) x-axis tick positions. If <code>NA</code> (default), tick mark positions are automatically calculated.</td>
 <td style="text-align: left;"><code>NA</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><code>add_table</code></td>
 <td style="text-align: left;">(<code>flag</code>) whether “Number of Patients” table should be printed under the plot.</td>
 <td style="text-align: left;"><code>TRUE</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><code>annotations</code></td>
 <td style="text-align: left;">(named <code>list</code> of <code>character</code>) List of annotations to add to the table. Valid annotation types are <code>title</code>, <code>subtitles</code>, and <code>caption</code>. Each name-value pair should use the annotation type as name and the desired string as value.</td>
 <td style="text-align: left;"><code>NULL</code></td>
 </tr>
 </tbody>
 </table>
-<p>Source code for this function is available <a href="https://github.com/pharmaverse/falcon/blob/main/R/fda-fig_01.R">here</a>.</p>
+<p>Source code for this function is available <a href="https://github.com/pharmaverse/falcon/blob/main/R/fda-fig_02.R">here</a>.</p>
 </section>
 </div>
 </div>
@@ -832,15 +826,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb2" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1"></a><span class="co">---</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="an">title:</span><span class="co"> FDA Figure 1</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="an">subtitle:</span><span class="co"> Time to Permanent Discontinuation of Study Drug, Safety Population, Pooled Analyses</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="an">title:</span><span class="co"> FDA Figure 2</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="an">subtitle:</span><span class="co"> Time to Last Follow Up, Safety Population, Pooled Analyses</span></span>
 <span id="cb2-4"><a href="#cb2-4"></a><span class="an">format:</span><span class="co"> html</span></span>
 <span id="cb2-5"><a href="#cb2-5"></a><span class="co">---</span></span>
 <span id="cb2-6"><a href="#cb2-6"></a></span>
 <span id="cb2-7"><a href="#cb2-7"></a>::: panel-tabset</span>
 <span id="cb2-8"><a href="#cb2-8"></a><span class="fu">## Spec. Screenshot</span></span>
 <span id="cb2-9"><a href="#cb2-9"></a></span>
-<span id="cb2-10"><a href="#cb2-10"></a><span class="al">![](../assets/images/screenshots/fig_01.png)</span>{fig-align="center"}</span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="al">![](../assets/images/screenshots/fig_02.png)</span>{fig-align="center"}</span>
 <span id="cb2-11"><a href="#cb2-11"></a></span>
 <span id="cb2-12"><a href="#cb2-12"></a><span class="fu">## ggplot2 Figure</span></span>
 <span id="cb2-13"><a href="#cb2-13"></a></span>
@@ -849,45 +843,43 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb2-16"><a href="#cb2-16"></a><span class="fu">library</span>(falcon)</span>
 <span id="cb2-17"><a href="#cb2-17"></a></span>
 <span id="cb2-18"><a href="#cb2-18"></a>adsl <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadsl</span>
-<span id="cb2-19"><a href="#cb2-19"></a>adsl<span class="sc">$</span>TRTSDTM <span class="ot">&lt;-</span> adsl<span class="sc">$</span>TRTSDTM[<span class="dv">1</span>]</span>
-<span id="cb2-20"><a href="#cb2-20"></a>adsl<span class="sc">$</span>TRTEDTM <span class="ot">&lt;-</span> adsl<span class="sc">$</span>TRTSDTM <span class="sc">+</span> lubridate<span class="sc">::</span><span class="fu">days</span>(<span class="fu">sample</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">400</span>, <span class="fu">nrow</span>(adsl), <span class="at">replace =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb2-21"><a href="#cb2-21"></a></span>
-<span id="cb2-22"><a href="#cb2-22"></a><span class="co"># Output Figure</span></span>
-<span id="cb2-23"><a href="#cb2-23"></a><span class="fu">make_fig_01</span>(<span class="at">df =</span> adsl)</span>
-<span id="cb2-24"><a href="#cb2-24"></a><span class="in">```</span></span>
-<span id="cb2-25"><a href="#cb2-25"></a></span>
-<span id="cb2-26"><a href="#cb2-26"></a><span class="fu">## Figure Setup</span></span>
-<span id="cb2-27"><a href="#cb2-27"></a></span>
-<span id="cb2-28"><a href="#cb2-28"></a><span class="in">```{r fig, eval=FALSE, echo=TRUE}</span></span>
-<span id="cb2-29"><a href="#cb2-29"></a><span class="in">```</span></span>
-<span id="cb2-30"><a href="#cb2-30"></a></span>
-<span id="cb2-31"><a href="#cb2-31"></a><span class="fu">## Function Details</span></span>
-<span id="cb2-32"><a href="#cb2-32"></a></span>
-<span id="cb2-33"><a href="#cb2-33"></a><span class="fu">### `make_fig_01()`</span></span>
-<span id="cb2-34"><a href="#cb2-34"></a></span>
-<span id="cb2-35"><a href="#cb2-35"></a>------------------------------------------------------------------------</span>
-<span id="cb2-36"><a href="#cb2-36"></a></span>
-<span id="cb2-37"><a href="#cb2-37"></a>Required variables:</span>
-<span id="cb2-38"><a href="#cb2-38"></a></span>
-<span id="cb2-39"><a href="#cb2-39"></a><span class="ss">-   </span>**`df`**: The variables specified by <span class="in">`arm_var`</span>, <span class="in">`id_var`</span>, <span class="in">`saffl_var`</span>, <span class="in">`trtsdtm_var`</span>, and <span class="in">`trtedtm_var`</span>.</span>
-<span id="cb2-40"><a href="#cb2-40"></a></span>
-<span id="cb2-41"><a href="#cb2-41"></a>| Argument      | Description                                                                                                                                                                                                                         | Default                                           |</span>
-<span id="cb2-42"><a href="#cb2-42"></a>|:--------------|:------------------------------------------|:--------------|</span>
-<span id="cb2-43"><a href="#cb2-43"></a>| <span class="in">`df`</span>          | (<span class="in">`data.frame`</span>) Dataset (typically ADSL) required to build table.                                                                                                                                                                    | *No default*                                      |</span>
-<span id="cb2-44"><a href="#cb2-44"></a>| <span class="in">`arm_var`</span>     | (<span class="in">`character`</span>) Arm variable used to split table into columns.                                                                                                                                                                        | <span class="in">`"ARM"`</span>                                           |</span>
-<span id="cb2-45"><a href="#cb2-45"></a>| <span class="in">`saffl_var`</span>   | (<span class="in">`character`</span>) Flag variable used to indicate inclusion in safety population.                                                                                                                                                        | <span class="in">`"SAFFL"`</span>                                         |</span>
-<span id="cb2-46"><a href="#cb2-46"></a>| <span class="in">`id_var`</span>      | (<span class="in">`character`</span>) Identifier variable used to count the participants within each flag.                                                                                                                                                  | <span class="in">`"USUBJID"`</span>                                       |</span>
-<span id="cb2-47"><a href="#cb2-47"></a>| <span class="in">`trtsdtm_var`</span> | (<span class="in">`character`</span>) Treatment start datetime variable in df.                                                                                                                                                                              | <span class="in">`"TRTSDTM"`</span>                                       |</span>
-<span id="cb2-48"><a href="#cb2-48"></a>| <span class="in">`trtedtm_var`</span> | (<span class="in">`character`</span>) Treatment end datetime variable in df.                                                                                                                                                                                | <span class="in">`"TRTEDTM"`</span>                                       |</span>
-<span id="cb2-49"><a href="#cb2-49"></a>| <span class="in">`u_trtdur`</span>    | (<span class="in">`character`</span>) Unit for duration of treatment. Options are <span class="in">`"days"`</span>, <span class="in">`"weeks"`</span>, <span class="in">`"months"`</span> and <span class="in">`"years"`</span>.                                                                                                                            | <span class="in">`"days"`</span>                                          |</span>
-<span id="cb2-50"><a href="#cb2-50"></a>| <span class="in">`x_lab`</span>       | (<span class="in">`character`</span>) x-axis label.                                                                                                                                                                                                         | <span class="in">`paste0("Time from first dose (", u_trtdur, ")")`</span> |</span>
-<span id="cb2-51"><a href="#cb2-51"></a>| <span class="in">`y_lab`</span>       | (<span class="in">`character`</span>) y-axis label.                                                                                                                                                                                                         | <span class="in">`"Percent of Patients (%)"`</span>                       |</span>
-<span id="cb2-52"><a href="#cb2-52"></a>| <span class="in">`xticks`</span>      | (<span class="in">`vector`</span> of <span class="in">`numeric`</span>) x-axis tick positions. If <span class="in">`NA`</span> (default), tick mark positions are automatically calculated.                                                                                                                 | <span class="in">`NA`</span>                                              |</span>
-<span id="cb2-53"><a href="#cb2-53"></a>| <span class="in">`add_table`</span>   | (<span class="in">`flag`</span>) whether "Number of Patients" table should be printed under the plot.                                                                                                                                                       | <span class="in">`TRUE`</span>                                            |</span>
-<span id="cb2-54"><a href="#cb2-54"></a>| <span class="in">`annotations`</span> | (named <span class="in">`list`</span> of <span class="in">`character`</span>) List of annotations to add to the table. Valid annotation types are <span class="in">`title`</span>, <span class="in">`subtitles`</span>, and <span class="in">`caption`</span>. Each name-value pair should use the annotation type as name and the desired string as value. | <span class="in">`NULL`</span>                                            |</span>
-<span id="cb2-55"><a href="#cb2-55"></a></span>
-<span id="cb2-56"><a href="#cb2-56"></a>Source code for this function is available <span class="co">[</span><span class="ot">here</span><span class="co">](https://github.com/pharmaverse/falcon/blob/main/R/fda-fig_01.R)</span>.</span>
-<span id="cb2-57"><a href="#cb2-57"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-19"><a href="#cb2-19"></a>adsl<span class="sc">$</span>EOSDY <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">400</span>, <span class="fu">nrow</span>(adsl), <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-20"><a href="#cb2-20"></a></span>
+<span id="cb2-21"><a href="#cb2-21"></a><span class="co"># Output Figure</span></span>
+<span id="cb2-22"><a href="#cb2-22"></a><span class="fu">make_fig_02</span>(<span class="at">df =</span> adsl)</span>
+<span id="cb2-23"><a href="#cb2-23"></a><span class="in">```</span></span>
+<span id="cb2-24"><a href="#cb2-24"></a></span>
+<span id="cb2-25"><a href="#cb2-25"></a><span class="fu">## Figure Setup</span></span>
+<span id="cb2-26"><a href="#cb2-26"></a></span>
+<span id="cb2-27"><a href="#cb2-27"></a><span class="in">```{r fig, eval=FALSE, echo=TRUE}</span></span>
+<span id="cb2-28"><a href="#cb2-28"></a><span class="in">```</span></span>
+<span id="cb2-29"><a href="#cb2-29"></a></span>
+<span id="cb2-30"><a href="#cb2-30"></a><span class="fu">## Function Details</span></span>
+<span id="cb2-31"><a href="#cb2-31"></a></span>
+<span id="cb2-32"><a href="#cb2-32"></a><span class="fu">### `make_fig_02()`</span></span>
+<span id="cb2-33"><a href="#cb2-33"></a></span>
+<span id="cb2-34"><a href="#cb2-34"></a>------------------------------------------------------------------------</span>
+<span id="cb2-35"><a href="#cb2-35"></a></span>
+<span id="cb2-36"><a href="#cb2-36"></a>Required variables:</span>
+<span id="cb2-37"><a href="#cb2-37"></a></span>
+<span id="cb2-38"><a href="#cb2-38"></a><span class="ss">-   </span>**`df`**: The variables specified by <span class="in">`arm_var`</span>, <span class="in">`id_var`</span>, <span class="in">`saffl_var`</span>, and <span class="in">`eosdy_var`</span>.</span>
+<span id="cb2-39"><a href="#cb2-39"></a></span>
+<span id="cb2-40"><a href="#cb2-40"></a>| Argument      | Description                                                                                                                                                                                                                         | Default                                           |</span>
+<span id="cb2-41"><a href="#cb2-41"></a>|:--------------|:------------------------------------------|:--------------|</span>
+<span id="cb2-42"><a href="#cb2-42"></a>| <span class="in">`df`</span>          | (<span class="in">`data.frame`</span>) Dataset (typically ADSL) required to build table.                                                                                                                                                                    | *No default*                                      |</span>
+<span id="cb2-43"><a href="#cb2-43"></a>| <span class="in">`arm_var`</span>     | (<span class="in">`character`</span>) Arm variable used to split table into columns.                                                                                                                                                                        | <span class="in">`"ARM"`</span>                                           |</span>
+<span id="cb2-44"><a href="#cb2-44"></a>| <span class="in">`saffl_var`</span>   | (<span class="in">`character`</span>) Flag variable used to indicate inclusion in safety population.                                                                                                                                                        | <span class="in">`"SAFFL"`</span>                                         |</span>
+<span id="cb2-45"><a href="#cb2-45"></a>| <span class="in">`id_var`</span>      | (<span class="in">`character`</span>) Identifier variable used to count the participants within each flag.                                                                                                                                                  | <span class="in">`"USUBJID"`</span>                                       |</span>
+<span id="cb2-46"><a href="#cb2-46"></a>| <span class="in">`eosdy_var`</span>   | (<span class="in">`character`</span>) Variable denoting last recorded (relative) study day.                                                                                                                                                                 | <span class="in">`"EOSDY"`</span>                                         |</span>
+<span id="cb2-47"><a href="#cb2-47"></a>| <span class="in">`u_trtdur`</span>    | (<span class="in">`character`</span>) Unit for duration of treatment. Options are <span class="in">`"days"`</span>, <span class="in">`"weeks"`</span>, <span class="in">`"months"`</span> and <span class="in">`"years"`</span>.                                                                                                                            | <span class="in">`"days"`</span>                                          |</span>
+<span id="cb2-48"><a href="#cb2-48"></a>| <span class="in">`x_lab`</span>       | (<span class="in">`character`</span>) x-axis label.                                                                                                                                                                                                         | <span class="in">`paste0("Time from first dose (", u_trtdur, ")")`</span> |</span>
+<span id="cb2-49"><a href="#cb2-49"></a>| <span class="in">`y_lab`</span>       | (<span class="in">`character`</span>) y-axis label.                                                                                                                                                                                                         | <span class="in">`"Percent of Patients (%)"`</span>                       |</span>
+<span id="cb2-50"><a href="#cb2-50"></a>| <span class="in">`xticks`</span>      | (<span class="in">`vector`</span> of <span class="in">`numeric`</span>) x-axis tick positions. If <span class="in">`NA`</span> (default), tick mark positions are automatically calculated.                                                                                                                 | <span class="in">`NA`</span>                                              |</span>
+<span id="cb2-51"><a href="#cb2-51"></a>| <span class="in">`add_table`</span>   | (<span class="in">`flag`</span>) whether "Number of Patients" table should be printed under the plot.                                                                                                                                                       | <span class="in">`TRUE`</span>                                            |</span>
+<span id="cb2-52"><a href="#cb2-52"></a>| <span class="in">`annotations`</span> | (named <span class="in">`list`</span> of <span class="in">`character`</span>) List of annotations to add to the table. Valid annotation types are <span class="in">`title`</span>, <span class="in">`subtitles`</span>, and <span class="in">`caption`</span>. Each name-value pair should use the annotation type as name and the desired string as value. | <span class="in">`NULL`</span>                                            |</span>
+<span id="cb2-53"><a href="#cb2-53"></a></span>
+<span id="cb2-54"><a href="#cb2-54"></a>Source code for this function is available <span class="co">[</span><span class="ot">here</span><span class="co">](https://github.com/pharmaverse/falcon/blob/main/R/fda-fig_02.R)</span>.</span>
+<span id="cb2-55"><a href="#cb2-55"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
