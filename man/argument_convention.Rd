@@ -68,6 +68,8 @@ be included in the column labels by default. The length of \code{col_label} must
 
 \item{saffl_var}{(\code{character})\cr flag variable used to indicate inclusion in safety population.}
 
+\item{trtemfl_var}{(\code{character})\cr flag variable used to identify Treatment-emergent AE.}
+
 \item{sex_scope}{(\code{character})\cr Level of \code{SEX} to output in table.}
 
 \item{soc_var}{(\code{character})\cr flag variable used to indicate system organ class.}
