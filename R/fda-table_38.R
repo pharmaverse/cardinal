@@ -21,15 +21,15 @@
 #'
 #' set.seed(1)
 #' adae <- adae %>%
-#' rename(FMQ01SC = SMQ01SC) %>%
-#'  mutate(
-#'    AESER = sample(c("Y", "N"), size = nrow(adae), replace = TRUE),
-#'    FMQ01NAM = sample(c("FMQ1", "FMQ2", "FMQ3"), size = nrow(adae), replace = TRUE)
-#'  )
-#'adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "Broad"
+#'   rename(FMQ01SC = SMQ01SC) %>%
+#'   mutate(
+#'     AESER = sample(c("Y", "N"), size = nrow(adae), replace = TRUE),
+#'     FMQ01NAM = sample(c("FMQ1", "FMQ2", "FMQ3"), size = nrow(adae), replace = TRUE)
+#'   )
+#' adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "Broad"
 #'
-#'tbl <- make_table_38(adae = adae, alt_counts_df = adsl)
-#'tbl
+#' tbl <- make_table_38(adae = adae, alt_counts_df = adsl)
+#' tbl
 #'
 #' @export
 make_table_38 <- function(adae,
@@ -49,8 +49,10 @@ make_table_38 <- function(adae,
                           prune_0 = TRUE,
                           na_level = "<Missing>",
                           annotations = NULL) {
-  checkmate::assert_subset(c("AEBODSYS", arm_var, id_var, saffl_var, trtemfl_var, fmqsc_var,
-                             fmqnam_var, pref_var), names(adae))
+  checkmate::assert_subset(c(
+    "AEBODSYS", arm_var, id_var, saffl_var, trtemfl_var, fmqsc_var,
+    fmqnam_var, pref_var
+  ), names(adae))
   assert_flag_variables(adae, saffl_var, trtemfl_var)
   checkmate::assert_subset(toupper(fmq_scope), c("NARROW", "BROAD"))
 

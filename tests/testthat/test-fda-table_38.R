@@ -12,7 +12,6 @@ adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
 
 
 test_that("Table 38 generation works with default values", {
-
   result <- make_table_38(adae = adae, alt_counts_df = adsl)
 
   res <- expect_silent(result)
