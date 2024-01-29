@@ -39,8 +39,6 @@ make_table_10_gtsum(
   lbl_soc_var = formatters::var_labels(adae, fill = TRUE)[soc_var],
   lbl_overall = NULL,
   annotations = NULL,
-  prune_0 = TRUE,
-  na_level = "<Missing>",
   risk_diff = NULL
 )
 }
@@ -139,6 +137,15 @@ tbl
 adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
 adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
 
+set.seed(1)
+adae <- adae \%>\%
+  rename(FMQ01SC = SMQ01SC) \%>\%
+  mutate(
+    AESER = sample(c("Y", "N"), size = nrow(adae), replace = TRUE),
+    FMQ01NAM = sample(c("FMQ1", "FMQ2", "FMQ3"), size = nrow(adae), replace = TRUE)
+  )
+adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
+
 tbl <- make_table_10_gtsum(adae = adae, alt_counts_df = adsl)
 tbl
 
@@ -154,9 +161,10 @@ annotations <- list(
   )
 )
 risk_diff <- list(c("A: Drug X", "C: Combination"), c("A: Drug X", "B: Placebo"))
-tbl <- make_table_10_gtsum (adae,
-                  alt_counts_df = adsl,
-                  annotations = annotations,
-                  risk_diff = risk_diff)
+tbl <- make_table_10_gtsum(adae,
+  alt_counts_df = adsl,
+  annotations = annotations,
+  risk_diff = risk_diff
+)
 tbl
 }

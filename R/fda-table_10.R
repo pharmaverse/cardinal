@@ -32,7 +32,7 @@
 #'   )
 #' adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
 #'
-#' tbl2 <- make_table_10(adae = adae, alt_counts_df = adsl)
+#' tbl <- make_table_10(adae = adae, alt_counts_df = adsl)
 #' tbl
 #'
 #' @export
@@ -140,6 +140,8 @@ make_table_10 <- function(adae,
 #' )
 #' tbl
 #' @export
+#'
+#'
 make_table_10_gtsum <- function(adae,
                                 alt_counts_df = NULL,
                                 show_colcounts = TRUE,
@@ -174,15 +176,13 @@ make_table_10_gtsum <- function(adae,
   adae <- adae %>%
     filter(.data[[saffl_var]] == "Y", .data[[ser_var]] == "Y", .data[[fmqsc_var]] == fmq_scope)
 
-  # using gtsummary code
-
   gt_table <-
     # build primary table
     gtsummary::tbl_strata2(
       data = adae,
       strata = soc_var,
       ~gtreg::tbl_ae(
-        data = .x |> dplyr::mutate(.x, {{soc_var}} := .y),
+        data = .x |> dplyr::mutate(.x, !!soc_var := .y),
         strata = arm_var,
         id = id_var,
         soc = soc_var,
@@ -192,8 +192,7 @@ make_table_10_gtsum <- function(adae,
       ),
       .combine_with = "tbl_stack",
       .combine_args = list(group_header = NULL)
-    ) |>
-    # remove stats from SOC row
+    ) |> # remove stats from SOC row
     gtsummary::modify_table_body(
       ~.x |>
         dplyr::mutate(
@@ -205,9 +204,7 @@ make_table_10_gtsum <- function(adae,
     ) |>
     # update column headers
     gtsummary::modify_header(
-      gtreg::all_ae_cols() ~ "**{strata}**  \nN = {n}",
-      label = "**Body System or Organ Class**  \nFMQ (Narrow)"
-    ) |>
+      gtreg::all_ae_cols() ~ "**{strata}**  \nN = {n}") |>
     gtsummary::modify_spanning_header(gtreg::all_ae_cols() ~ NA) |>
     # bold SOC rows
     gtsummary::modify_table_styling(
@@ -215,288 +212,25 @@ make_table_10_gtsum <- function(adae,
       rows = variable %in% "soc",
       text_format = "bold"
     ) |>
-    gtsummary::modify_caption("<div style='text-align: left; font-weight: bold; color: grey'> ",annotations[["title"]],"</div>")
+    gtsummary::as_gt()
 
-#
-#
-#
-#
-#   # create data for table 10
-#   # lbl_overall must be NULL to get the data for all columns besides the overall column
-#   result_list <- create_table_10_data(
-#     adae = adae,
-#     alt_counts_df = alt_counts_df,
-#     arm_var = arm_var,
-#     id_var = id_var,
-#     soc_var = soc_var,
-#     fmqnam_var = fmqnam_var,
-#     lbl_overall = NULL,
-#     risk_diff = risk_diff
-#   )
-#
-#   # create data for overall column
-#   if (!is.null(lbl_overall)) {
-#     overall_list <- create_table_10_data(
-#       adae = adae,
-#       alt_counts_df = alt_counts_df,
-#       arm_var = arm_var,
-#       id_var = id_var,
-#       soc_var = soc_var,
-#       fmqnam_var = fmqnam_var,
-#       lbl_overall = lbl_overall,
-#       risk_diff = NULL
-#     )
-#
-#     result_list$data <- result_list[["data"]] %>%
-#       left_join(overall_list[["data"]])
-#
-#     result_list$total_N <- result_list[["total_N"]] %>%
-#       cross_join(overall_list[["total_N"]])
-#   }
-#
-#   result_data <- result_list[["data"]]
-#
-#   rows_to_indent <- which(result_data[[fmqnam_var]] != " ")
-#
-#   result_data <- result_data %>%
-#     mutate(
-#       !!fmqnam_var := if_else(.data[[fmqnam_var]] == " ", .data[[soc_var]], .data[[fmqnam_var]])
-#     ) %>%
-#     select(-any_of(soc_var))
-#
-#   gt_table <- result_data %>%
-#     gt(
-#       rowname_col = fmqnam_var
-#     ) %>%
-#     tab_stub_indent(rows = rows_to_indent, indent = 2)
-#
-#
-  # if (show_colcounts) {
-  #   total_N <- result_list[["total_N"]] # nolint
-  #
-  #   set_col_labels <- function(x) {
-  #     if (startsWith(x, "rd_")) {
-  #       html(paste0("Risk Difference <br/>", substr(x, 4, nchar(x)), "<br/> (%) (95% CI)"))
-  #     } else {
-  #       html(paste0(x, "<br/>(N=", total_N[[x]], ")"))
-  #     }
-  #   }
-  #
-  #   gt_table <- gt_table %>%
-  #     cols_label_with(fn = set_col_labels)
-  # }
-  # lbl_fmq_var <- paste0("FMQ (", tools::toTitleCase(tolower(fmq_scope)), ")")
-  # label <- paste(lbl_soc_var, "<br/> &nbsp;&nbsp;", lbl_fmq_var)
-  #
-  # gt_table <- gt_table %>%
-  #   tab_stubhead(label = md(label)) %>%
-  #   cols_align(align = "center", columns = -1) # center all columns besides the first
-  #
-  # if (!is.null(annotations)) {
-  #   if (!is.null(annotations[["title"]])) {
-  #     gt_table <- gt_table %>%
-  #       tab_header(annotations[["title"]])
-  #   }
-  #   if (!is.null(annotations[["subtitle"]])) {
-  #     gt_table <- gt_table %>%
-  #       tab_header(annotations[["title"]], subtitle = annotations[["subtitle"]])
-  #   }
-  #   if (!is.null(annotations[["footnotes"]])) {
-  #     lapply(annotations[["footnotes"]], function(x) {
-  #       gt_table <<- gt_table %>%
-  #         tab_footnote(x)
-  #     })
-  #   }
-  # }
+  if (!is.null(annotations)) {
+    if (!is.null(annotations[["title"]])) {
+      gt_table <- gt_table %>%
+        gt::tab_header(annotations[["title"]])
+    }
+    if (!is.null(annotations[["subtitle"]])) {
+      gt_table <- gt_table %>%
+        gt::tab_header(annotations[["title"]], subtitle = annotations[["subtitle"]])
+    }
+    if (!is.null(annotations[["footnotes"]])) {
+      lapply(annotations[["footnotes"]], function(x) {
+        gt_table <<- gt_table %>%
+          gt::tab_footnote(x)
+      })
+    }
+  }
 
   gt_table
 }
 
-#' Helper function to create the data for `make_table_10_gtsum()`
-#'
-#' @details If `lbl_overall` is not `NULL` only the data for the overall column will be generated
-#'
-#' @inheritParams argument_convention
-#' @inheritParams make_table_10_gtsum
-#'
-#' @return list containing the counted data to be displayed for table 10 and
-#' a `data.frame` containing information about the total N for each group
-create_table_10_data <- function(
-    adae,
-    alt_counts_df,
-    arm_var,
-    id_var,
-    soc_var,
-    fmqsc_var,
-    fmqnam_var,
-    lbl_overall = NULL,
-    risk_diff = NULL) {
-  basis_df <- if (!is.null(alt_counts_df)) alt_counts_df else adae
-
-  var_to_select <- if (is.null(lbl_overall)) {
-    all_of(c(arm_var, "N"))
-  } else {
-    all_of(c("N"))
-  }
-
-  N_data <- basis_df %>%
-    {
-      if (is.null(lbl_overall)) group_by(., .data[[arm_var]]) else .
-    } %>%
-    mutate(N = n()) %>%
-    ungroup() %>%
-    # select(all_of(c(arm_var, "N"))) %>%
-    select(all_of(var_to_select)) %>%
-    distinct()
-
-  # get total N
-  total_N <- N_data %>%
-    {
-      if (is.null(lbl_overall)) {
-        pivot_wider(.,
-          names_from = all_of(arm_var),
-          values_from = N
-        )
-      } else {
-        rename(., !!lbl_overall := "N")
-      }
-    }
-
-  if (is.null(lbl_overall)) {
-    adae <- adae %>%
-      left_join(N_data, by = c(arm_var), relationship = "many-to-many")
-  } else {
-    adae <- adae %>%
-      cross_join(N_data)
-  }
-
-  input_list <- list(c(soc_var, fmqnam_var))
-
-  data_list <- lapply(input_list, function(x) {
-    count_subjects(
-      adae = adae,
-      arm_var = arm_var,
-      id_var = id_var,
-      sub_level_vars = x,
-      lbl_overall = lbl_overall,
-      risk_diff = risk_diff
-    )
-  })
-
-  sel_cols <- if (is.null(lbl_overall)) levels(N_data[[arm_var]]) else lbl_overall
-  if (!is.null(risk_diff)) {
-    risk_diff_cols <- sapply(risk_diff, function(x) {
-      paste0("rd_", x[[1]], "-", x[[2]])
-    })
-    sel_cols <- c(sel_cols, risk_diff_cols)
-  }
-
-  result_data <- data_list %>%
-    bind_rows() %>%
-    select(all_of(c(soc_var, fmqnam_var, sel_cols))) %>%
-    bind_rows(
-      subset(data_list %>%
-        bind_rows() %>%
-        select(.data[[soc_var]]) %>%
-        distinct())
-    ) %>%
-    arrange(desc(is.na(.data[[soc_var]])), .data[[soc_var]], desc(is.na(.data[[fmqnam_var]]))) %>%
-    mutate(across(where(is.character), ~ ifelse(is.na(.), " ", .)))
-
-  list(data = result_data, total_N = total_N)
-}
-
-
-
-#' Helper function for `create_table_10_data()`
-#' Used for counting subjects per group
-#'
-#' @inheritParams argument_convention
-#' @param sub_level_vars (`NULL` or `character`) specifying the sub group for counted subjects
-#'
-#' @return A `data.frame` containing the number of subjects with `sub_level_vars` events
-count_subjects <- function(adae, arm_var, id_var, sub_level_vars = NULL, lbl_overall = NULL, risk_diff = NULL) {
-  grouping <- is.null(lbl_overall)
-  if (grouping) {
-    if (!is.null(sub_level_vars)) {
-      grouping_vars <- c(arm_var, sub_level_vars)
-    } else {
-      grouping_vars <- arm_var
-    }
-  } else {
-    if (!is.null(sub_level_vars)) {
-      grouping_vars <- sub_level_vars
-    }
-  }
-  count_data <- adae %>%
-    {
-      if (grouping || !is.null(sub_level_vars)) group_by(., across(all_of(grouping_vars))) else .
-    } %>%
-    summarize(
-      val = n_distinct(.data[[id_var]]), # count on patient level
-      N = unique(N),
-      pct = format(val / mean(N) * 100, digits = 1, nsmall = 1),
-      combined = paste0(val, " (", pct, "%)"),
-      .groups = "drop"
-    ) %>%
-    {
-      if (grouping) {
-        pivot_wider(.,
-          id_cols = all_of(sub_level_vars),
-          names_from = all_of(arm_var),
-          values_from = all_of(c("val", "N", "combined"))
-        )
-      } else {
-        rename(., !!lbl_overall := "combined") %>%
-          select(-c("val", "pct"))
-      }
-    }
-
-  if (!is.null(risk_diff)) {
-    purrr::walk(risk_diff, function(x) {
-      count_data <<- count_data %>%
-        mutate(
-          !!paste0("rd_", x[[1]], "-", x[[2]]) := calculate_riskdiff(
-            .data[[paste0("val_", x[[1]])]],
-            .data[[paste0("val_", x[[2]])]],
-            .data[[paste0("N_", x[[1]])]],
-            .data[[paste0("N_", x[[2]])]]
-          )
-        )
-    })
-  }
-  if (grouping) {
-    count_data <- count_data %>%
-      rename_with(renaming_function, dplyr::starts_with("combined")) %>%
-      select(-any_of(c(starts_with("val_"), starts_with("N_"))))
-  }
-  count_data
-}
-
-
-#' Helper function to rename the combined columns
-#'
-#' @param x character vector containing all column names which start with "combined"
-
-renaming_function <- function(x) {
-  unlist(lapply(x, function(y) substr(y, 10, nchar(y))))
-}
-
-
-#' helper function to calculate the risk difference for table 10
-#'
-#' @param x character vector containing all value for the first treatment
-#' @param y character vector containing all value for the second treatment
-#' @param n_x character vector containing for all values of x the corresponding N
-#' @param n_y character vector containing for all values of y the corresponding N
-#'
-#' @return vector of characters containing the value for risk difference and
-#' the corresponding 95% Confidence interval in Brackets
-calculate_riskdiff <- function(x, y, n_x, n_y) {
-  sapply(seq_along(x), function(i) {
-    pt <- stats::prop.test(c(x[[i]], y[[i]]), c(n_x[[i]], n_y[[i]]))
-    val <- format(pt$estimate[[1]] - pt$estimate[[2]], digits = 2, nsmall = 2)
-    conf_int <- format(pt$conf.int, digits = 2, nsmall = 2)
-    paste0(val, " (", conf_int[[1]], ", ", conf_int[[2]], ")")
-  })
-}
