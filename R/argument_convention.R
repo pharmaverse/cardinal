@@ -42,6 +42,9 @@
 #' @param soc_var (`character`)\cr flag variable used to indicate system organ class.
 #' @param show_colcounts (`flag`)\cr whether column counts should be printed.
 #' @param vars (`vector` of `character`)\cr variables from `df` to include in the table.
+#' @param yticks (`vector` of `numeric`)\cr y-axis tick positions. If `NA` (default), tick mark positions are
+#'   automatically calculated.
+#' @param ggtheme (`exprs`)\cr custom ggplot2 theme defined by the user.
 #'
 #' @name argument_convention
 #' @keywords internal

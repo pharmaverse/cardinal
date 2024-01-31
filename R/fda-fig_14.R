@@ -22,32 +22,10 @@
 #' library(ggplot2)
 #' advs <- random.cdisc.data::cadvs
 #'
-#' advs <- advs %>%
-#'   mutate(
-#'     AVISIT = case_when(
-#'       AVISIT == "BASELINE" ~ "Baseline",
-#'       AVISIT == "WEEK 1 DAY 8" ~ "Week 2",
-#'       AVISIT == "WEEK 2 DAY 15" ~ "Week 3",
-#'       AVISIT == "WEEK 3 DAY 22" ~ "Week 5",
-#'       AVISIT == "WEEK 4 DAY 29" ~ "Week 10",
-#'       AVISIT == "WEEK 5 DAY 36" ~ "Week 12"
-#'     ),
-#'     AVISITN = case_when(
-#'       AVISITN == 0 ~ 0,
-#'       AVISITN == 1 ~ 2,
-#'       AVISITN == 2 ~ 3,
-#'       AVISITN == 3 ~ 5,
-#'       AVISITN == 4 ~ 10,
-#'       AVISITN == 5 ~ 12
-#'     )
-#'   )
-#'
 #' fig <- make_fig_14(
 #'   df = advs,
-#'   paramcd_val = "SYSBP",
 #'   add_cond = expr("ONTRTFL == 'Y' | ABLFL == 'Y'"),
 #'   add_table = TRUE,
-#'   y_lab = "Mean Value (95% CI)\nSystolic Blood Pressure (Pa)",
 #'   yticks = c(135, 140, 145, 150, 155, 160)
 #' )
 #' fig
@@ -57,11 +35,12 @@ make_fig_14 <- function(df,
                         arm_var = "ARM",
                         id_var = "USUBJID",
                         saffl_var = "SAFFL",
-                        paramcd_val,
+                        paramcd_val = "SYSBP",
                         add_cond = NULL,
                         x_lab = "",
-                        y_lab = "",
+                        y_lab = NULL,
                         yticks = NA,
+                        ggtheme = NULL,
                         add_table = TRUE,
                         annotations = NULL){
   checkmate::assert_subset(c(arm_var, id_var, saffl_var), names(df))
@@ -79,6 +58,13 @@ make_fig_14 <- function(df,
   if (!(is.null({{add_cond}}))) {
     df <- df %>%
       filter(!!rlang::parse_expr(add_cond))
+  }
+
+  if (is.null({{y_lab}})) {
+    y_param <- unique(df$PARAM)
+    y_avalu <- unique(df$AVALU)
+
+    y_lab <- paste0("Mean Value (95% CI)", "\n", y_param, " (", y_avalu, ")")
   }
 
   df <- df %>%
@@ -121,30 +107,19 @@ make_fig_14 <- function(df,
       x = x_lab,
       y = y_lab
     ) +
-    theme_bw() +
     theme(
       legend.position = "bottom",
       legend.title = element_blank(),
-      plot.margin = unit(c(0.05, 0.05, 0, 0.025), "npc"),
-      panel.grid.major = element_blank(),
-      panel.grid.minor = element_blank(),
-      axis.line.x = element_line(),
-      axis.line.y = element_line(),
-      panel.border = element_blank(),
-      panel.background = element_blank()
+      plot.margin = unit(c(0.05, 0.05, 0, 0.025), "npc")
     ) +
     scale_x_continuous(breaks = df$AVISITN, labels = df$AVISIT)
 
   if (any(!is.na(yticks))) {
     g <- g +
-      scale_y_continuous(
-        breaks = yticks,
-        limits = c(
-          min(yticks),
-          max(yticks)
-        )
-      )
+      scale_y_continuous(breaks = yticks, limits = c(min(yticks), max(yticks)))
   }
+
+  if (!is.null(ggtheme)) g <- g + ggtheme
 
   if (add_table) {
     g_legend <- cowplot::get_legend(g)
