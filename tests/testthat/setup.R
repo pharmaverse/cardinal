@@ -1,4 +1,5 @@
 library(dplyr)
+library(ggplot2)
 
 adsl_raw <- random.cdisc.data::cadsl
 adae_raw <- random.cdisc.data::cadae
@@ -21,3 +22,16 @@ adsl_raw$ETHNIC <- formatters::with_label(factor(adsl_raw$ETHNIC, levels = sort(
 adae_raw$ETHNIC <- as.character(adae_raw$ETHNIC)
 adae_raw$ETHNIC[adae_raw$ETHNIC == " NOT REPORTED"] <- "NOT REPORTED"
 adae_raw$ETHNIC <- formatters::with_label(factor(adae_raw$ETHNIC, levels = sort(unique(adae_raw$ETHNIC))), "Ethnicity")
+
+# expect_snapshot_ggplot - set custom plot dimensions
+expect_snapshot_ggplot <- function(title, fig, width = NA, height = NA) {
+  skip_if_not_installed("svglite")
+
+  name <- paste0(title, ".svg")
+  path <- tempdir()
+  suppressMessages(ggplot2::ggsave(name, fig, path = path, width = width, height = height))
+  path <- file.path(path, name)
+
+  testthat::announce_snapshot_file(name = name)
+  testthat::expect_snapshot_file(path, name)
+}
