@@ -20,8 +20,8 @@
 #' @examples
 #' library(dplyr)
 #'
-#' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
-#' adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
+#' adsl <- random.cdisc.data::cadsl
+#' adae <- random.cdisc.data::cadae
 #'
 #' set.seed(1)
 #' adae <- adae %>%
@@ -86,9 +86,9 @@ make_table_10 <- function(adae,
 
 
 #' FDA Table 10: Patients With Serious Adverse Events by System Organ Class and
-#'   FDA Medical Query (Narrow), Safety Population, Pooled Analyses with /code{gt}
+#'   FDA Medical Query (Narrow), Safety Population, Pooled Analyses with /code{gtsummary}
 #'
-#' @describeIn make_table_10 Create FDA table 10 using functions from `gt`.
+#' @describeIn make_table_10 Create FDA table 10 using functions from `gtsummary`.
 #' @inheritParams argument_convention
 #' @param saffl_var (`character`)\cr safety population flag variable from `adae` to include in the table.
 #' @param ser_var (`character`)\cr serious Event variable from `adae` to include in the table.
@@ -103,11 +103,11 @@ make_table_10 <- function(adae,
 #'   must exist in the `arm_var` column of the dataset specified in `adae`.
 #'
 #' @return
-#' * `make_table_10_gt` returns a `gt` object
+#' * `make_table_10_gtsum` returns a `gtsummary` object
 #'
 #' @examples
-#' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
-#' adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
+#' adsl <- random.cdisc.data::cadsl
+#' adae <- random.cdisc.data::cadae
 #'
 #' set.seed(1)
 #' adae <- adae %>%
@@ -132,7 +132,6 @@ make_table_10 <- function(adae,
 #'     between Drug Name dosage X vs. placebo)."
 #'   )
 #' )
-#' risk_diff <- list(c("A: Drug X", "C: Combination"), c("A: Drug X", "B: Placebo"))
 #' tbl <- make_table_10_gtsum(adae,
 #'   alt_counts_df = adsl,
 #'   annotations = annotations,
@@ -155,8 +154,7 @@ make_table_10_gtsum <- function(adae,
                                 fmq_scope = "NARROW",
                                 lbl_soc_var = formatters::var_labels(adae, fill = TRUE)[soc_var],
                                 lbl_overall = NULL,
-                                annotations = NULL,
-                                risk_diff = NULL) {
+                                annotations = NULL) {
   checkmate::assert_data_frame(adae)
   checkmate::assert_subset(c(saffl_var, id_var, soc_var, fmqnam_var, arm_var), names(adae))
   assert_flag_variables(adae, saffl_var)
@@ -166,8 +164,6 @@ make_table_10_gtsum <- function(adae,
     checkmate::assert_data_frame(alt_counts_df)
     checkmate::assert_subset(c(id_var, arm_var), names(alt_counts_df))
   }
-
-  checkmate::assert_list(risk_diff, types = "character", null.ok = TRUE)
 
   checkmate::assert_logical(show_colcounts)
 
@@ -189,7 +185,10 @@ make_table_10_gtsum <- function(adae,
         ae = fmqnam_var,
         statistic = "{n} ({p}%)",
         id_df = adsl
-      ),
+      ) %>%
+        {
+          if (!is.null(lbl_overall)) gtreg::add_overall(., across = "strata") else .
+        } ,
       .combine_with = "tbl_stack",
       .combine_args = list(group_header = NULL)
     ) |> # remove stats from SOC row
@@ -202,17 +201,36 @@ make_table_10_gtsum <- function(adae,
           )
         )
     ) |>
-    # update column headers
-    gtsummary::modify_header(
-      gtreg::all_ae_cols() ~ "**{strata}**  \nN = {n}") |>
     gtsummary::modify_spanning_header(gtreg::all_ae_cols() ~ NA) |>
     # bold SOC rows
     gtsummary::modify_table_styling(
       columns = "label",
       rows = variable %in% "soc",
       text_format = "bold"
-    ) |>
-    gtsummary::as_gt()
+    )
+
+  # update column headers
+  if (show_colcounts) {
+    gt_table <- gt_table |> gtsummary::modify_header(gtreg::all_ae_cols() ~ "**{strata}**  \nN = {n}")
+  } else {
+    gt_table <- gt_table |> gtsummary::modify_header(gtreg::all_ae_cols() ~ "**{strata}**")
+  }
+
+
+  # update overall column headers
+
+  if (!is.null(lbl_overall)) {
+    gt_table$table_styling$header <- gt_table$table_styling$header %>%
+      mutate(label = ifelse(stringr::str_detect(column, "^stat_1") &
+                              stringr::str_detect(label, "\\*\\*Overall\\*\\*"),
+                            stringr::str_replace(label, "Overall", lbl_overall), label))
+  }
+
+  # update column headers and annotations
+  gt_table <- gt_table %>%
+    gtsummary::as_gt() %>%
+    gt::cols_label(label = gt::md(paste0("**System Organ Class** <br>",
+                                         "**FMQ (", tools::toTitleCase(tolower(fmq_scope)), "**)")))
 
   if (!is.null(annotations)) {
     if (!is.null(annotations[["title"]])) {
@@ -233,4 +251,3 @@ make_table_10_gtsum <- function(adae,
 
   gt_table
 }
-
