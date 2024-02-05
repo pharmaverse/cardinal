@@ -27,7 +27,7 @@ make_table_03(
 
 \item{arm_var}{(\code{character})\cr Name of the treatment arm variable used to split table into columns.}
 
-\item{id_var}{(\code{character})\cr Name of the unique subject identifiers variable.}
+\item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
 
 \item{scrnfl_var}{(\code{character})\cr variable from \code{df} that indicates whether patients were screened.}
 
@@ -35,7 +35,7 @@ make_table_03(
 
 \item{scrnfail_var}{(\code{character})\cr variable from \code{df} that contains reasons for screening failure.}
 
-\item{lbl_overall}{(\code{character})\cr Optional. If specified, an overall column will be added to the table with
+\item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
 the given value as the column label.}
 
 \item{prune_0}{(\code{flag})\cr Whether all-zero rows should be removed from the table. Boolean.}

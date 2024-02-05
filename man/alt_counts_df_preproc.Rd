@@ -14,7 +14,7 @@ alt_counts_df_preproc(
 \arguments{
 \item{alt_counts_df}{(\code{character})\cr alternative dataset (typically ADSL) used only to calculate column counts.}
 
-\item{id_var}{(\code{character})\cr Name of the unique subject identifiers variable.}
+\item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
 
 \item{arm_var}{(\code{character})\cr Name of the treatment arm variable used to split table into columns.}
 

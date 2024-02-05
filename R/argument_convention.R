@@ -39,9 +39,19 @@
 #'   annotation types are `title`, `subtitles`, `main_footer`, and `prov_footer`. Each name-value pair should
 #'   use the annotation type as name and the desired string as value.
 #' @param df (`data.frame`)\cr dataset required to build table.
+#' @param eosdy_var (`character`)\cr variable denoting last recorded (relative) study day.
 #' @param fmqsc_var (`character`)\cr FMQ scope variable to use in table.
 #' @param fmqnam_var (`character`)\cr FMQ reference name variable to use in table.
 #' @param fmq_scope (`character`)\cr FMQ scope ("NARROW" or "BROAD") to output in table.
+#' @param ggtheme (`theme`)\cr a graphical theme as provided by `ggplot2` to control styling of the `ggplot` object.
+#' @param id_var (`character`)\cr variable used as unique subject identifier.
+#' @param lbl_overall (`character`)\cr if specified, an overall column will be added to the table with
+#'   the given value as the column label.
+#' @param lbl_pref_var (`character`)\cr label corresponding to preferred term variable `pref_var` to print in the table.
+#' @param lbl_soc_var (`character`)\cr label corresponding to system organ class variable `soc_var` to print in the
+#'   table.
+#' @param lbl_vars (`vector` of `character`)\cr labels corresponding to variables in `vars` to print
+#'   in the table. Labels should be ordered according to the order of variables in `vars`.
 #' @param na_level (`character`)\cr string to represent missing values.
 #' @param na_rm (`flag`)\cr whether `NA` levels should be removed from the table.
 #' @param risk_diff (named `list`)\cr list of settings to apply to add one or more risk difference columns to the table.
@@ -55,6 +65,14 @@
 #'      be included in the column labels by default. The length of `col_label` must be equal to the length of `arm_y`.
 #'    * `pct`: (optional) whether the output should be returned as percentages. Defaults to `TRUE`.
 #' @param sex_scope (`character`)\cr Level of `SEX` to output in table.
+#' @param trtsdtm_var (`character`)\cr treatment start datetime variable.
+#' @param trtedtm_var (`character`)\cr treatment end datetime variable.
+#' @param u_trtdur (`character`)\cr unit for duration of treatment. Options are `"days"`, `"weeks"`, `"months"`,
+#'   and `"years"`.
+#' @param xticks (`vector` of `numeric`)\cr x-axis tick positions. If `NA` (default), tick mark positions are
+#'   automatically calculated.
+#' @param x_lab (`character`)\cr x-axis label.
+#' @param y_lab (`character`)\cr y-axis label.
 #'
 #' @name argument_convention
 #' @keywords internal

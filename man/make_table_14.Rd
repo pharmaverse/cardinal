@@ -29,7 +29,7 @@ make_table_14(
 
 \item{show_colcounts}{(\code{flag})\cr Whether column counts should be printed. Boolean.}
 
-\item{id_var}{(\code{character})\cr Name of the unique subject identifiers variable.}
+\item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
 
 \item{soc_var}{(\code{character})\cr Name of the system organ class variable from \code{adae} to include in the table.}
 
@@ -41,7 +41,7 @@ make_table_14(
 
 \item{fmqnam_var}{(\code{character})\cr FMQ reference name variable to use in table.}
 
-\item{lbl_overall}{(\code{character})\cr Optional. If specified, an overall column will be added to the table with
+\item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
 the given value as the column label.}
 
 \item{risk_diff}{(named \code{list})\cr list of settings to apply to add one or more risk difference columns to the table.

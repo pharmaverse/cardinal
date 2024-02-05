@@ -59,10 +59,10 @@ make_table_02_gtsum(
 
 \item{vars}{(\code{vector} of \code{character})\cr Variables from \code{df} to include in the table.}
 
-\item{lbl_vars}{(\code{vector} of \code{character})\cr Labels corresponding to variables in \code{vars} to print
+\item{lbl_vars}{(\code{vector} of \code{character})\cr labels corresponding to variables in \code{vars} to print
 in the table. Labels should be ordered according to the order of variables in \code{vars}.}
 
-\item{lbl_overall}{(\code{character})\cr Optional. If specified, an overall column will be added to the table with
+\item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
 the given value as the column label.}
 
 \item{na_rm}{(\code{flag})\cr whether \code{NA} levels should be removed from the table.}

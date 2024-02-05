@@ -28,7 +28,7 @@ make_table_13(
 
 \item{min_freq}{(\code{proportion})\cr minimum \% frequency (fraction of \code{N}) required in any column to include each row.}
 
-\item{id_var}{(\code{character})\cr Name of the unique subject identifiers variable.}
+\item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
 
 \item{arm_var}{(\code{character})\cr Name of the treatment arm variable used to split table into columns.}
 
@@ -36,9 +36,9 @@ make_table_13(
 
 \item{pref_var}{(\code{character})\cr Name of the preferred term variable from \code{adae} to include in the table.}
 
-\item{lbl_pref_var}{(\code{character})\cr Label corresponding to preferred term variable \code{pref_var} to print in the table.}
+\item{lbl_pref_var}{(\code{character})\cr label corresponding to preferred term variable \code{pref_var} to print in the table.}
 
-\item{lbl_overall}{(\code{character})\cr Optional. If specified, an overall column will be added to the table with
+\item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
 the given value as the column label.}
 
 \item{risk_diff}{(named \code{list})\cr list of settings to apply to add one or more risk difference columns to the table.

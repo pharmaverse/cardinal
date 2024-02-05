@@ -1,8 +1,8 @@
 Type: Package
 Package: falcon
 Title: FDA Safety Tables and Figures
-Version: 0.1.0.9051
-Date: 2024-01-08
+Version: 0.1.0.9053
+Date: 2024-01-25
 Authors@R:
     person("Pawel", "Rucki", , "pawel.rucki@roche.com", role = c("aut", "cre"))
 Description: R package with implementation of Safety Tables and Figures
@@ -15,8 +15,10 @@ Depends:
     tern (>= 0.9.3)
 Imports:
     checkmate,
+    cowplot (>= 0.7.0),
     dplyr,
     formatters (>= 0.5.5),
+    ggplot2 (>= 3.4.0),
     gt,
     gtsummary,
     lubridate,
@@ -31,6 +33,7 @@ Imports:
 Suggests:
     knitr,
     random.cdisc.data (>= 0.3.14),
+    svglite (>= 2.1.2),
     testthat (>= 3.0.0)
 Remotes:
     insightsengineering/random.cdisc.data@*release
@@ -40,4 +43,4 @@ Encoding: UTF-8
 Language: en-US
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.0
+RoxygenNote: 7.3.1

@@ -27,7 +27,7 @@ make_table_21(
 
 \item{show_colcounts}{(\code{flag})\cr Whether column counts should be printed. Boolean.}
 
-\item{id_var}{(\code{character})\cr Name of the unique subject identifiers variable.}
+\item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
 
 \item{arm_var}{(\code{character})\cr Name of the treatment arm variable used to split table into columns.}
 
@@ -39,10 +39,10 @@ make_table_21(
 subgroup/row counts), \code{"N_col"} (total \code{df} column counts), or \code{"n"} (total \code{df} overall patient count).
 Note that \code{df} is filtered to only include serious adverse events (\code{ASER == "Y"}).}
 
-\item{lbl_overall}{(\code{character})\cr Optional. If specified, an overall column will be added to the table with
+\item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
 the given value as the column label.}
 
-\item{lbl_vars}{(\code{vector} of \code{character})\cr Labels corresponding to variables in \code{vars} to print
+\item{lbl_vars}{(\code{vector} of \code{character})\cr labels corresponding to variables in \code{vars} to print
 in the table. Labels should be ordered according to the order of variables in \code{vars}.}
 
 \item{prune_0}{(\code{flag})\cr Whether all-zero rows should be removed from the table. Boolean.}

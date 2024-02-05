@@ -8,29 +8,16 @@
 
 \item{arm_var}{(\code{character})\cr Name of the treatment arm variable used to split table into columns.}
 
-\item{id_var}{(\code{character})\cr Name of the unique subject identifiers variable.}
-
 \item{saffl_var}{(\code{character})\cr Name of the safety flag variable which must contain at least "Y" for "Yes".}
 
 \item{ser_var}{(\code{character})\cr Name of the serious adverse event flag variable which must contain at least
 "Y" for "Yes".}
 
-\item{lbl_overall}{(\code{character})\cr Optional. If specified, an overall column will be added to the table with
-the given value as the column label.}
-
 \item{vars}{(\code{vector} of \code{character})\cr Variables from \code{df} to include in the table.}
-
-\item{lbl_vars}{(\code{vector} of \code{character})\cr Labels corresponding to variables in \code{vars} to print
-in the table. Labels should be ordered according to the order of variables in \code{vars}.}
 
 \item{pref_var}{(\code{character})\cr Name of the preferred term variable from \code{adae} to include in the table.}
 
 \item{soc_var}{(\code{character})\cr Name of the system organ class variable from \code{adae} to include in the table.}
-
-\item{lbl_pref_var}{(\code{character})\cr Label corresponding to preferred term variable \code{pref_var} to print in the table.}
-
-\item{lbl_soc_var}{(\code{character})\cr Label corresponding to system organ class variable \code{soc_var} to print in the
-table.}
 
 \item{.stats}{(\code{character})\cr Statistics to include in the table. Includes statistics for all variable
 types (only the statistics that are valid for a given variable's type will be printed).
@@ -58,11 +45,28 @@ use the annotation type as name and the desired string as value.}
 
 \item{df}{(\code{data.frame})\cr dataset required to build table.}
 
+\item{eosdy_var}{(\code{character})\cr variable denoting last recorded (relative) study day.}
+
 \item{fmqsc_var}{(\code{character})\cr FMQ scope variable to use in table.}
 
 \item{fmqnam_var}{(\code{character})\cr FMQ reference name variable to use in table.}
 
 \item{fmq_scope}{(\code{character})\cr FMQ scope ("NARROW" or "BROAD") to output in table.}
+
+\item{ggtheme}{(\code{theme})\cr a graphical theme as provided by \code{ggplot2} to control styling of the \code{ggplot} object.}
+
+\item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
+
+\item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
+the given value as the column label.}
+
+\item{lbl_pref_var}{(\code{character})\cr label corresponding to preferred term variable \code{pref_var} to print in the table.}
+
+\item{lbl_soc_var}{(\code{character})\cr label corresponding to system organ class variable \code{soc_var} to print in the
+table.}
+
+\item{lbl_vars}{(\code{vector} of \code{character})\cr labels corresponding to variables in \code{vars} to print
+in the table. Labels should be ordered according to the order of variables in \code{vars}.}
 
 \item{na_level}{(\code{character})\cr string to represent missing values.}
 
@@ -82,6 +86,20 @@ be included in the column labels by default. The length of \code{col_label} must
 }}
 
 \item{sex_scope}{(\code{character})\cr Level of \code{SEX} to output in table.}
+
+\item{trtsdtm_var}{(\code{character})\cr treatment start datetime variable.}
+
+\item{trtedtm_var}{(\code{character})\cr treatment end datetime variable.}
+
+\item{u_trtdur}{(\code{character})\cr unit for duration of treatment. Options are \code{"days"}, \code{"weeks"}, \code{"months"},
+and \code{"years"}.}
+
+\item{xticks}{(\code{vector} of \code{numeric})\cr x-axis tick positions. If \code{NA} (default), tick mark positions are
+automatically calculated.}
+
+\item{x_lab}{(\code{character})\cr x-axis label.}
+
+\item{y_lab}{(\code{character})\cr y-axis label.}
 }
 \description{
 This documentation lists all the arguments in \code{falcon} that are used repeatedly by functions to output tables.
