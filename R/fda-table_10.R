@@ -4,7 +4,7 @@
 #' @details
 #' * `adae` must contain the variables `AEBODSYS`, `AESER`, and the variables specified by
 #'   `arm_var`, `id_var`, `saffl_var`, `fmqsc_var`, and `fmqnam_var`.
-#' * If specified, `alt_counts_df` must contain `USUBJID` and the variables specified by `arm_var` and `saffl_var`.
+#' * If specified, `alt_counts_df` must contain `id_var` and the variables specified by `arm_var` and `saffl_var`.
 #' * `fmqsc_var` must contain "BROAD" or "NARROW" values, one of which will be displayed in the table. Narrow is
 #'   selected by default (see `fmq_scope` argument).
 #' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
@@ -52,7 +52,7 @@ make_table_10 <- function(adae,
                           na_level = "<Missing>",
                           annotations = NULL) {
   checkmate::assert_subset(c(
-    "USUBJID", soc_var, "AESER", arm_var, saffl_var, fmqsc_var, fmqnam_var
+    id_var, soc_var, "AESER", arm_var, saffl_var, fmqsc_var, fmqnam_var
   ), names(adae))
   assert_flag_variables(adae, c(saffl_var, "AESER"))
   checkmate::assert_subset(toupper(fmq_scope), c("NARROW", "BROAD"))
@@ -127,20 +127,15 @@ make_table_10 <- function(adae,
 #'   Safety Population, Pooled Analyses",
 #'   footnotes = list(
 #'     "Duration = [e.g., X week double-blind treatment period or median and a range
-#'     indicating pooled trial durations].",
-#'     "Difference is shown between [treatment arms] (e.g., difference is shown
-#'     between Drug Name dosage X vs. placebo)."
+#'     indicating pooled trial durations]."
 #'   )
 #' )
 #' tbl <- make_table_10_gtsum(adae,
 #'   alt_counts_df = adsl,
-#'   annotations = annotations,
-#'   risk_diff = risk_diff
+#'   annotations = annotations
 #' )
 #' tbl
 #' @export
-#'
-#'
 make_table_10_gtsum <- function(adae,
                                 alt_counts_df = NULL,
                                 show_colcounts = TRUE,
@@ -216,14 +211,12 @@ make_table_10_gtsum <- function(adae,
     gt_table <- gt_table |> gtsummary::modify_header(gtreg::all_ae_cols() ~ "**{strata}**")
   }
 
-
   # update overall column headers
-
   if (!is.null(lbl_overall)) {
     gt_table$table_styling$header <- gt_table$table_styling$header %>%
       mutate(label = ifelse(stringr::str_detect(column, "^stat_1") &
-        stringr::str_detect(label, "\\*\\*Overall\\*\\*"),
-      stringr::str_replace(label, "Overall", lbl_overall), label
+          stringr::str_detect(label, "\\*\\*Overall\\*\\*"),
+        stringr::str_replace(label, "Overall", lbl_overall), label
       ))
   }
 
@@ -232,7 +225,7 @@ make_table_10_gtsum <- function(adae,
     gtsummary::as_gt() %>%
     gt::cols_label(label = gt::md(paste0(
       "**System Organ Class** <br>",
-      "**FMQ (", tools::toTitleCase(tolower(fmq_scope)), "**)"
+      "FMQ (", tools::toTitleCase(tolower(fmq_scope)), ")"
     )))
 
   if (!is.null(annotations)) {

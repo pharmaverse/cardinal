@@ -73,24 +73,21 @@ test_that("Table 10 (gt) generation works", {
 
 test_that("Table 10 (gt) generation works with custom values", {
   adae <- formatters::var_relabel(adae, AEBODSYS = "Body System or Organ Class(3)")
-  risk_diff <- list(c("A: Drug X", "C: Combination"), c("A: Drug X", "B: Placebo"))
   annotations <- list(
     title = "Table 10. Patients With Serious Adverse Events ",
     subtitle = "by System Organ Class and FDA Medical Query (Narrow),
   Safety Population, Pooled Analyses",
     footnotes = list(
       "Duration = [e.g., X week double-blind treatment period or median and a range
-    indicating pooled trial durations].",
-      "Difference is shown between [treatment arms] (e.g., difference is shown
-    between Drug Name dosage X vs. placebo)."
+    indicating pooled trial durations]."
     )
   )
   result <- make_table_10_gtsum(
     adae = adae,
     alt_counts_df = adsl,
+    lbl_overall = "Overall",
     fmq_scope = "BROAD",
     annotations = annotations,
-    risk_diff = risk_diff
   )
 
   res <- list(

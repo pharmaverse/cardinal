@@ -105,47 +105,106 @@
       res
     Output
       $data
-      # A tibble: 25 x 4
-         FMQ01NAM `A: Drug X` `B: Placebo` `C: Combination`
-         <chr>    <chr>       <chr>        <chr>           
-       1 Any SAE  103 (76.9%) 103 (76.9%)  103 (78.0%)     
-       2 cl A.1   52 (38.8%)  40 (29.9%)   59 (44.7%)      
-       3 FMQ1     17 (12.7%)  14 (10.4%)   29 (22.0%)      
-       4 FMQ2     23 (17.2%)  20 (14.9%)   20 (15.2%)      
-       5 FMQ3     20 (14.9%)  19 (14.2%)   23 (17.4%)      
-       6 cl B.1   22 (16.4%)  27 (20.1%)   24 (18.2%)      
-       7 FMQ1     8 (6.0%)    11 (8.2%)    7 (5.3%)        
-       8 FMQ2     5 (3.7%)    12 (9.0%)    16 (12.1%)      
-       9 FMQ3     10 (7.5%)   7 (5.2%)     5 (3.8%)        
-      10 cl B.2   28 (20.9%)  27 (20.1%)   27 (20.5%)      
-      11 FMQ1     13 ( 9.7%)  15 (11.2%)   9 (6.8%)        
-      12 FMQ2     12 (9.0%)   9 (6.7%)     10 (7.6%)       
-      13 FMQ3     6 (4.5%)    7 (5.2%)     9 (6.8%)        
-      14 cl C.2   19 (14.2%)  25 (18.7%)   30 (22.7%)      
-      15 FMQ1     9 (6.7%)    9 (6.7%)     12 (9.1%)       
-      16 FMQ2     6 (4.5%)    8 (6.0%)     8 (6.1%)        
-      17 FMQ3     6 (4.5%)    9 (6.7%)     10 (7.6%)       
-      18 cl D.1   48 (35.8%)  48 (35.8%)   56 (42.4%)      
-      19 FMQ1     23 (17.2%)  17 (12.7%)   27 (20.5%)      
-      20 FMQ2     22 (16.4%)  20 (14.9%)   25 (18.9%)      
-      21 FMQ3     15 (11.2%)  19 (14.2%)   21 (15.9%)      
-      22 cl D.2   30 (22.4%)  30 (22.4%)   30 (22.7%)      
-      23 FMQ1     8 (6.0%)    11 (8.2%)    9 (6.8%)        
-      24 FMQ2     14 (10.4%)  15 (11.2%)   14 (10.6%)      
-      25 FMQ3     11 (8.2%)   9 (6.7%)     11 (8.3%)       
+      # A tibble: 24 x 14
+         tbl_id1 variable var_label row_type label  var_type_1  stat_1_1    stat_2_1  
+           <int> <chr>    <lgl>     <chr>    <chr>  <chr>       <chr>       <chr>     
+       1       1 soc      NA        label    cl A.1 categorical ""          ""        
+       2       1 ae       NA        level    FMQ1   categorical "17 (13%)"  "117 (87%~
+       3       1 ae       NA        level    FMQ2   categorical "23 (17%)"  "111 (83%~
+       4       1 ae       NA        level    FMQ3   categorical "20 (15%)"  "114 (85%~
+       5       2 soc      NA        label    cl B.1 categorical ""          ""        
+       6       2 ae       NA        level    FMQ1   categorical "8 (6.0%)"  "126 (94%~
+       7       2 ae       NA        level    FMQ2   categorical "5 (3.7%)"  "129 (96%~
+       8       2 ae       NA        level    FMQ3   categorical "10 (7.5%)" "124 (93%~
+       9       3 soc      NA        label    cl B.2 categorical ""          ""        
+      10       3 ae       NA        level    FMQ1   categorical "13 (9.7%)" "121 (90%~
+      11       3 ae       NA        level    FMQ2   categorical "12 (9.0%)" "122 (91%~
+      12       3 ae       NA        level    FMQ3   categorical "6 (4.5%)"  "128 (96%~
+      13       4 soc      NA        label    cl C.2 categorical ""          ""        
+      14       4 ae       NA        level    FMQ1   categorical "9 (6.7%)"  "125 (93%~
+      15       4 ae       NA        level    FMQ2   categorical "6 (4.5%)"  "128 (96%~
+      16       4 ae       NA        level    FMQ3   categorical "6 (4.5%)"  "128 (96%~
+      17       5 soc      NA        label    cl D.1 categorical ""          ""        
+      18       5 ae       NA        level    FMQ1   categorical "23 (17%)"  "111 (83%~
+      19       5 ae       NA        level    FMQ2   categorical "22 (16%)"  "112 (84%~
+      20       5 ae       NA        level    FMQ3   categorical "15 (11%)"  "119 (89%~
+      21       6 soc      NA        label    cl D.2 categorical ""          ""        
+      22       6 ae       NA        level    FMQ1   categorical "8 (6.0%)"  "126 (94%~
+      23       6 ae       NA        level    FMQ2   categorical "14 (10%)"  "120 (90%~
+      24       6 ae       NA        level    FMQ3   categorical "11 (8.2%)" "123 (92%~
+      # i 6 more variables: var_type_2 <chr>, stat_1_2 <chr>, stat_2_2 <chr>,
+      #   var_type_3 <chr>, stat_1_3 <chr>, stat_2_3 <chr>
       
       $column_label
       $column_label[[1]]
-      [1] "FMQ01NAM"
+      [1] "tbl_id1"
+      attr(,"class")
+      [1] "from_markdown"
       
       $column_label[[2]]
-      A: Drug X<br/>(N=134)
+      [1] "variable"
+      attr(,"class")
+      [1] "from_markdown"
       
       $column_label[[3]]
-      B: Placebo<br/>(N=134)
+      [1] "var_label"
+      attr(,"class")
+      [1] "from_markdown"
       
       $column_label[[4]]
-      C: Combination<br/>(N=132)
+      [1] "row_type"
+      attr(,"class")
+      [1] "from_markdown"
+      
+      $column_label[[5]]
+      [1] "**System Organ Class** <br>FMQ (Narrow)"
+      attr(,"class")
+      [1] "from_markdown"
+      
+      $column_label[[6]]
+      [1] "var_type"
+      attr(,"class")
+      [1] "from_markdown"
+      
+      $column_label[[7]]
+      [1] "**A: Drug X**  \nN = 134"
+      attr(,"class")
+      [1] "from_markdown"
+      
+      $column_label[[8]]
+      [1] "**NOT OBSERVED**"
+      attr(,"class")
+      [1] "from_markdown"
+      
+      $column_label[[9]]
+      [1] "var_type"
+      attr(,"class")
+      [1] "from_markdown"
+      
+      $column_label[[10]]
+      [1] "**B: Placebo**  \nN = 134"
+      attr(,"class")
+      [1] "from_markdown"
+      
+      $column_label[[11]]
+      [1] "**NOT OBSERVED**"
+      attr(,"class")
+      [1] "from_markdown"
+      
+      $column_label[[12]]
+      [1] "var_type"
+      attr(,"class")
+      [1] "from_markdown"
+      
+      $column_label[[13]]
+      [1] "**C: Combination**  \nN = 132"
+      attr(,"class")
+      [1] "from_markdown"
+      
+      $column_label[[14]]
+      [1] "**NOT OBSERVED**"
+      attr(,"class")
+      [1] "from_markdown"
       
       
       $header
@@ -169,39 +228,106 @@
       res
     Output
       $data
-      # A tibble: 9 x 6
-        FMQ01NAM `A: Drug X` `B: Placebo` `C: Combination` rd_A: Drug X-C: Combinati~1
-        <chr>    <chr>       <chr>        <chr>            <chr>                      
-      1 Any SAE  39 (29.1%)  55 (41.0%)   47 (35.6%)       -0.065 (-0.185,  0.055)    
-      2 cl B.2   23 (17.2%)  31 (23.1%)   26 (19.7%)       -0.025 (-0.126,  0.075)    
-      3 FMQ1     8 (6.0%)    10 (7.5%)    8 (6.1%)         -9e-04 (-0.059,  0.057)    
-      4 FMQ2     12 (9.0%)   12 (9.0%)    13 ( 9.8%)       -0.0089 (-0.087,  0.069)   
-      5 FMQ3     8 (6.0%)    16 (11.9%)   6 (4.5%)         0.014 (-0.047,  0.075)     
-      6 cl C.1   24 (17.9%)  29 (21.6%)   29 (22.0%)       -0.041 (-0.144,  0.063)    
-      7 FMQ1     7 (5.2%)    11 (8.2%)    14 (10.6%)       -0.054 (-0.126,  0.018)    
-      8 FMQ2     10 (7.5%)   16 (11.9%)   7 (5.3%)         0.022 (-0.045,  0.088)     
-      9 FMQ3     8 (6.0%)    5 (3.7%)     12 (9.1%)        -0.031 (-0.10,  0.04)      
-      # i abbreviated name: 1: `rd_A: Drug X-C: Combination`
-      # i 1 more variable: `rd_A: Drug X-B: Placebo` <chr>
+      # A tibble: 8 x 17
+        tbl_id1 variable row_type label  var_label var_type_1_1 stat_1_1_1  stat_2_1_1
+          <int> <chr>    <chr>    <chr>  <chr>     <chr>        <chr>       <chr>     
+      1       1 soc      label    cl B.2 cl B.2    categorical  ""          ""        
+      2       1 ae       level    FMQ1   <NA>      categorical  "8 (6.0%)"  "126 (94%~
+      3       1 ae       level    FMQ2   <NA>      categorical  "12 (9.0%)" "122 (91%~
+      4       1 ae       level    FMQ3   <NA>      categorical  "8 (6.0%)"  "126 (94%~
+      5       2 soc      label    cl C.1 cl C.1    categorical  ""          ""        
+      6       2 ae       level    FMQ1   <NA>      categorical  "7 (5.2%)"  "127 (95%~
+      7       2 ae       level    FMQ2   <NA>      categorical  "10 (7.5%)" "124 (93%~
+      8       2 ae       level    FMQ3   <NA>      categorical  "8 (6.0%)"  "126 (94%~
+      # i 9 more variables: var_type_2_1 <chr>, stat_1_2_1 <chr>, stat_2_2_1 <chr>,
+      #   var_type_3_1 <chr>, stat_1_3_1 <chr>, stat_2_3_1 <chr>, var_type_1_2 <chr>,
+      #   stat_1_1_2 <chr>, stat_2_1_2 <chr>
       
       $column_label
       $column_label[[1]]
-      [1] "FMQ01NAM"
+      [1] "tbl_id1"
+      attr(,"class")
+      [1] "from_markdown"
       
       $column_label[[2]]
-      A: Drug X<br/>(N=134)
+      [1] "variable"
+      attr(,"class")
+      [1] "from_markdown"
       
       $column_label[[3]]
-      B: Placebo<br/>(N=134)
+      [1] "row_type"
+      attr(,"class")
+      [1] "from_markdown"
       
       $column_label[[4]]
-      C: Combination<br/>(N=132)
+      [1] "**System Organ Class** <br>FMQ (Broad)"
+      attr(,"class")
+      [1] "from_markdown"
       
       $column_label[[5]]
-      Risk Difference <br/>A: Drug X-C: Combination<br/> (%) (95% CI)
+      [1] "var_label"
+      attr(,"class")
+      [1] "from_markdown"
       
       $column_label[[6]]
-      Risk Difference <br/>A: Drug X-B: Placebo<br/> (%) (95% CI)
+      [1] "var_type"
+      attr(,"class")
+      [1] "from_markdown"
+      
+      $column_label[[7]]
+      [1] "**A: Drug X**  \nN = 134"
+      attr(,"class")
+      [1] "from_markdown"
+      
+      $column_label[[8]]
+      [1] "**NOT OBSERVED**"
+      attr(,"class")
+      [1] "from_markdown"
+      
+      $column_label[[9]]
+      [1] "var_type"
+      attr(,"class")
+      [1] "from_markdown"
+      
+      $column_label[[10]]
+      [1] "**B: Placebo**  \nN = 134"
+      attr(,"class")
+      [1] "from_markdown"
+      
+      $column_label[[11]]
+      [1] "**NOT OBSERVED**"
+      attr(,"class")
+      [1] "from_markdown"
+      
+      $column_label[[12]]
+      [1] "var_type"
+      attr(,"class")
+      [1] "from_markdown"
+      
+      $column_label[[13]]
+      [1] "**C: Combination**  \nN = 132"
+      attr(,"class")
+      [1] "from_markdown"
+      
+      $column_label[[14]]
+      [1] "**NOT OBSERVED**"
+      attr(,"class")
+      [1] "from_markdown"
+      
+      $column_label[[15]]
+      [1] "var_type"
+      attr(,"class")
+      [1] "from_markdown"
+      
+      $column_label[[16]]
+      [1] "**Overall**  \nN = 400"
+      attr(,"class")
+      [1] "from_markdown"
+      
+      $column_label[[17]]
+      [1] "**NOT OBSERVED**"
+      attr(,"class")
+      [1] "from_markdown"
       
       
       $header
@@ -218,9 +344,6 @@
       $footnotes
       $footnotes[[1]]
       [1] "Duration = [e.g., X week double-blind treatment period or median and a range\n    indicating pooled trial durations]."
-      
-      $footnotes[[2]]
-      [1] "Difference is shown between [treatment arms] (e.g., difference is shown\n    between Drug Name dosage X vs. placebo)."
       
       
 
