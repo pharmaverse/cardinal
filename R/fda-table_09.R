@@ -133,7 +133,8 @@ make_table_09 <- function(adae,
 #'
 #' # Add titles and footnotes
 #' annot <- list(
-#'   title = "Table 9. Patients with Serious Adverse Events by SOC and PT, Safety Population, Pooled Analyses",
+#'   title = "Table 9. Patients with Serious Adverse Events by SOC and PT, Safety Population,
+#'     Pooled Analyses",
 #'   subtitles = c("Only one title, but", "multiple subtitles possible"),
 #'   main_footer = c("Main footer 1", "Main footer 2"),
 #'   prov_footer = c("Some more information", "E.g. a source note")
@@ -275,7 +276,8 @@ make_table_09_tplyr <- function(
   other_col_names <- col_names[!col_names %in% c(arm_col_names, "row_label1")]
 
   table <- table %>%
-    dplyr::select("row_label1", arm_col_names, other_col_names)
+    select(all_of(c("row_label1", arm_col_names, other_col_names))) %>%
+    mutate(ord_layer_2 = if_else(ord_layer_2 == Inf, 0, ord_layer_2)) # To avoid sorting of Inf in the next step
 
   # Clean-up table
   table <- table %>%

@@ -191,7 +191,8 @@ make_table_09_tplyr(adae = adae, alt_counts_df = adsl, lbl_overall = "Total pati
 
 # Add titles and footnotes
 annot <- list(
-  title = "Table 9. Patients with Serious Adverse Events by SOC and PT, Safety Population, Pooled Analyses",
+  title = "Table 9. Patients with Serious Adverse Events by SOC and PT, Safety Population,
+    Pooled Analyses",
   subtitles = c("Only one title, but", "multiple subtitles possible"),
   main_footer = c("Main footer 1", "Main footer 2"),
   prov_footer = c("Some more information", "E.g. a source note")
