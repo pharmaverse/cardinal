@@ -177,7 +177,7 @@ make_table_10_gtsum <- function(adae,
     gtsummary::tbl_strata2(
       data = adae,
       strata = soc_var,
-      ~gtreg::tbl_ae(
+      ~ gtreg::tbl_ae(
         data = .x |> dplyr::mutate(.x, !!soc_var := .y),
         strata = arm_var,
         id = id_var,
@@ -188,12 +188,12 @@ make_table_10_gtsum <- function(adae,
       ) %>%
         {
           if (!is.null(lbl_overall)) gtreg::add_overall(., across = "strata") else .
-        } ,
+        },
       .combine_with = "tbl_stack",
       .combine_args = list(group_header = NULL)
     ) |> # remove stats from SOC row
     gtsummary::modify_table_body(
-      ~.x |>
+      ~ .x |>
         dplyr::mutate(
           dplyr::across(
             gtsummary::all_stat_cols(),
@@ -222,15 +222,18 @@ make_table_10_gtsum <- function(adae,
   if (!is.null(lbl_overall)) {
     gt_table$table_styling$header <- gt_table$table_styling$header %>%
       mutate(label = ifelse(stringr::str_detect(column, "^stat_1") &
-                              stringr::str_detect(label, "\\*\\*Overall\\*\\*"),
-                            stringr::str_replace(label, "Overall", lbl_overall), label))
+        stringr::str_detect(label, "\\*\\*Overall\\*\\*"),
+      stringr::str_replace(label, "Overall", lbl_overall), label
+      ))
   }
 
   # update column headers and annotations
   gt_table <- gt_table %>%
     gtsummary::as_gt() %>%
-    gt::cols_label(label = gt::md(paste0("**System Organ Class** <br>",
-                                         "**FMQ (", tools::toTitleCase(tolower(fmq_scope)), "**)")))
+    gt::cols_label(label = gt::md(paste0(
+      "**System Organ Class** <br>",
+      "**FMQ (", tools::toTitleCase(tolower(fmq_scope)), "**)"
+    )))
 
   if (!is.null(annotations)) {
     if (!is.null(annotations[["title"]])) {
