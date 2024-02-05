@@ -98,11 +98,11 @@ adsl <- random.cdisc.data::cadsl
 
 set.seed(1)
 adae <- adae \%>\%
-rename(FMQ01SC = SMQ01SC) \%>\%
- mutate(
-   AESER = sample(c("Y", "N"), size = nrow(adae), replace = TRUE),
-   FMQ01NAM = sample(c("FMQ1", "FMQ2", "FMQ3"), size = nrow(adae), replace = TRUE)
- )
+  rename(FMQ01SC = SMQ01SC) \%>\%
+  mutate(
+    AESER = sample(c("Y", "N"), size = nrow(adae), replace = TRUE),
+    FMQ01NAM = sample(c("FMQ1", "FMQ2", "FMQ3"), size = nrow(adae), replace = TRUE)
+  )
 adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "Broad"
 
 tbl <- make_table_38(adae = adae, alt_counts_df = adsl)
