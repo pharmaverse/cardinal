@@ -1,10 +1,10 @@
 #' FDA Table 5: Duration of Treatment Exposure, Safety Population, Pooled Analyses
 #'
 #' @details
-#' * `df` must contain the variables specified by `arm_var`, `id_var`, `saffl_var`, `id_var`, `trtsdtm_var`,
+#' * `df` must contain the variables specified by `arm_var`, `saffl_var`, `id_var`, `trtsdtm_var`,
 #'   and `trtedtm_var`.
 #' * If specified, `alt_counts_df` must contain the variables specified by `arm_var`, `id_var` and `saffl_var`.
-#' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false,). Missing values in
+#' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
 #'   flag variables are treated as `"N"`.
 #' * Columns are split by arm. Overall population column is excluded by default (see `lbl_overall` argument).
 #' * Numbers in table "Patients Treated" section are the absolute numbers of patients and fraction of `N`.
@@ -12,16 +12,12 @@
 #' * Records with missing treatment start and/or end datetime are excluded from all calculations.
 #'
 #' @inheritParams argument_convention
-#' @param trtsdtm_var (`character`)\cr treatment start datetime variable in `df`.
-#' @param trtedtm_var (`character`)\cr treatment end datetime variable in `df`.
-#' @param u_trtdur (`character`)\cr unit for duration of treatment. Options are `"days"`, `"weeks"`, `"months"`,
-#'   and `"years"`.
 #' @param lbl_trtdur (`character`)\cr label for treatment duration variable.
 #'
 #' @return An `rtable` object.
 #'
 #' @examples
-#' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
+#' adsl <- random.cdisc.data::cadsl
 #'
 #' tbl <- make_table_05(df = adsl)
 #' tbl
@@ -83,7 +79,7 @@ make_table_05 <- function(df,
       flag_variables = c("D_ANY", "D_LT1", "D_GT1", "D_GT3", "D_GT6", "D_GT12"),
       riskdiff = !is.null(risk_diff)
     ) %>%
-    append_topleft(c("", "Parameter"))
+    append_topleft("Parameter")
 
   tbl <- build_table(lyt, df = df, alt_counts_df = alt_counts_df)
 

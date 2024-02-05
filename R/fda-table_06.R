@@ -16,8 +16,8 @@
 #' @return An `rtable` object.
 #'
 #' @examples
-#' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
-#' adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
+#' adsl <- random.cdisc.data::cadsl
+#' adae <- random.cdisc.data::cadae
 #'
 #' tbl <- make_table_06(adae = adae, alt_counts_df = adsl)
 #' tbl
@@ -108,7 +108,7 @@ make_table_06 <- function(adae,
       .indent_mods = 1L,
       riskdiff = !is.null(risk_diff)
     ) %>%
-    append_topleft(c("", "Event"))
+    append_topleft("Event")
 
   tbl <- build_table(lyt, df = adae, alt_counts_df = alt_counts_df)
   if (prune_0) tbl <- prune_table(tbl)

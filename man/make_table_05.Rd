@@ -34,9 +34,9 @@ make_table_05(
 
 \item{saffl_var}{(\code{character})\cr flag variable used to indicate inclusion in safety population.}
 
-\item{trtsdtm_var}{(\code{character})\cr treatment start datetime variable in \code{df}.}
+\item{trtsdtm_var}{(\code{character})\cr treatment start datetime variable.}
 
-\item{trtedtm_var}{(\code{character})\cr treatment end datetime variable in \code{df}.}
+\item{trtedtm_var}{(\code{character})\cr treatment end datetime variable.}
 
 \item{u_trtdur}{(\code{character})\cr unit for duration of treatment. Options are \code{"days"}, \code{"weeks"}, \code{"months"},
 and \code{"years"}.}
@@ -46,14 +46,16 @@ and \code{"years"}.}
 \item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
 the given value as the column label.}
 
-\item{risk_diff}{(named \code{list})\cr list of settings to apply to add a risk difference column to the table.
+\item{risk_diff}{(named \code{list})\cr list of settings to apply to add one or more risk difference columns to the table.
 Defaults to \code{NULL} (no risk difference column added). See \code{\link[tern:add_riskdiff]{tern::add_riskdiff()}} for more details. List should
 contain the following elements:
 \itemize{
 \item \code{arm_x}: (required) the name of reference arm.
-\item \code{arm_y}: (required) the name of the arm to compare to the reference arm.
-\item \code{col_label}: (optional) label to use for the risk difference column. Defaults to
-\code{"Risk Difference (\%) (95\% CI)"}.
+\item \code{arm_y}: (required) the names of the arms to compare to the reference arm. A new column will be added for each
+element of \code{arm_y}.
+\item \code{col_label}: (optional) labels to use for the risk difference columns. Defaults to
+\code{"Risk Difference (\%) (95\% CI)"}. For more than one risk difference column, \code{"arm x vs. arm y"} text will also
+be included in the column labels by default. The length of \code{col_label} must be equal to the length of \code{arm_y}.
 \item \code{pct}: (optional) whether the output should be returned as percentages. Defaults to \code{TRUE}.
 }}
 
@@ -71,10 +73,10 @@ FDA Table 5: Duration of Treatment Exposure, Safety Population, Pooled Analyses
 }
 \details{
 \itemize{
-\item \code{df} must contain the variables specified by \code{arm_var}, \code{id_var}, \code{saffl_var}, \code{id_var}, \code{trtsdtm_var},
+\item \code{df} must contain the variables specified by \code{arm_var}, \code{saffl_var}, \code{id_var}, \code{trtsdtm_var},
 and \code{trtedtm_var}.
 \item If specified, \code{alt_counts_df} must contain the variables specified by \code{arm_var}, \code{id_var} and \code{saffl_var}.
-\item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false,). Missing values in
+\item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
 flag variables are treated as \code{"N"}.
 \item Columns are split by arm. Overall population column is excluded by default (see \code{lbl_overall} argument).
 \item Numbers in table "Patients Treated" section are the absolute numbers of patients and fraction of \code{N}.
@@ -83,7 +85,7 @@ flag variables are treated as \code{"N"}.
 }
 }
 \examples{
-adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
+adsl <- random.cdisc.data::cadsl
 
 tbl <- make_table_05(df = adsl)
 tbl

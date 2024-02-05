@@ -21,8 +21,8 @@ NULL
 #' @return
 #' * `make_table_32` returns an `rtables` table object.
 #' @examples
-#' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
-#' advs <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "advs")
+#' adsl <- random.cdisc.data::cadsl
+#' advs <- random.cdisc.data::cadvs
 #'
 #' tbl <- make_table_32(advs = advs, alt_counts_df = adsl)
 #' tbl
@@ -129,17 +129,18 @@ make_table_32_gtsum <- function(advs,
       digits = everything() ~ c(0, 1)
     ) %>%
     modify_header(label ~ paste0("**Diastolic Blood Pressure (", avalu, ")**")) %>%
-    modify_header(all_stat_cols() ~ "**{level}**  \n (N={n})")
+    modify_header(all_stat_cols() ~ "**{level}**  \nN = {n}") %>%
+    gtsummary::modify_column_alignment(columns = all_stat_cols(), align = "right")
 
   if (!is.null(lbl_overall)) {
     tbl <- tbl %>%
-      add_overall(last = TRUE, col_label = paste0("**", lbl_overall, "**  \n (N={n})"))
+      add_overall(last = TRUE, col_label = paste0("**", lbl_overall, "**  \n N = {n}"))
   }
 
   tbl <- tbl %>% modify_footnote(update = everything() ~ NA)
 
   gtsummary::with_gtsummary_theme(
     x = gtsummary::theme_gtsummary_compact(),
-    expr = tbl
+    expr = as_gt(tbl)
   )
 }

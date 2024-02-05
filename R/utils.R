@@ -37,22 +37,22 @@ basic_table_annot <- function(show_colcounts = TRUE, annotations = NULL) {
 #' @examples
 #' library(magrittr)
 #'
-#' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
+#' adsl <- random.cdisc.data::cadsl
 #'
 #' lyt <- rtables::basic_table() %>% split_cols_by_arm(lbl_overall = "All Arms")
 #' rtables::build_table(lyt, df = adsl)
 #'
 #' @export
 split_cols_by_arm <- function(lyt, arm_var = "ARM", lbl_overall = NULL, risk_diff = NULL) {
-  spl_fun <- if (is.null(risk_diff)) {
-    NULL
+  if (is.null(risk_diff)) {
+    spl_fun <- NULL
   } else {
-    add_riskdiff(
-      arm_x = risk_diff$arm_x,
-      arm_y = risk_diff$arm_y,
-      col_label = if ("col_label" %in% names(risk_diff)) risk_diff$col_label else formals(add_riskdiff)$col_label,
-      pct = if ("pct" %in% names(risk_diff)) risk_diff$pct else TRUE
-    )
+    arm_x <- risk_diff$arm_x
+    arm_y <- risk_diff$arm_y
+    col_label <- if ("col_label" %in% names(risk_diff)) risk_diff$col_label else eval(formals(add_riskdiff)$col_label)
+    pct <- if ("pct" %in% names(risk_diff)) risk_diff$pct else TRUE
+
+    spl_fun <- add_riskdiff(arm_x = arm_x, arm_y = arm_y, col_label = col_label, pct = pct)
   }
 
   lyt <- lyt %>% split_cols_by(arm_var, split_fun = spl_fun)
@@ -69,7 +69,7 @@ split_cols_by_arm <- function(lyt, arm_var = "ARM", lbl_overall = NULL, risk_dif
 #' @return A `data.frame` (modified `alt_counts_df`) or `NULL`.
 #'
 #' @examples
-#' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
+#' adsl <- random.cdisc.data::cadsl
 #' alt_counts_df_preproc(adsl)
 #'
 #' @export
@@ -95,7 +95,7 @@ alt_counts_df_preproc <- function(alt_counts_df, id_var = "USUBJID", arm_var = "
 #' @return A `logical` indicating whether the given flag variables (`flag_vars`) in `df` are formatted correctly.
 #'
 #' @examples
-#' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
+#' adsl <- random.cdisc.data::cadsl
 #' falcon:::assert_flag_variables(adsl, c("SAFFL", "ITTFL"))
 #'
 #' @keywords internal

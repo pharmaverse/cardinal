@@ -13,11 +13,10 @@ format: html
 
 ```{r tbl, message=FALSE, warning=FALSE}
 # Load Libraries & Data
-library(scda)
 library(falcon)
 
-adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
-adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
+adsl <- random.cdisc.data::cadsl
+adae <- random.cdisc.data::cadae
 
 # Pre-Processing - Ensure all required variables are present in adae
 set.seed(1)

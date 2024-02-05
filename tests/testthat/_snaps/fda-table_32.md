@@ -3,14 +3,14 @@
     Code
       res
     Output
-      Diastolic Blood Pressure   A: Drug X    B: Placebo   C: Combination
-      (Pa)                        (N=134)      (N=134)        (N=132)    
-      ———————————————————————————————————————————————————————————————————
-      <60                        72 (53.7%)   83 (61.9%)     78 (59.1%)  
-      >60                        62 (46.3%)   51 (38.1%)     54 (40.9%)  
-      >90                            0            0              0       
-      >110                           0            0              0       
-      >=120                          0            0              0       
+      Diastolic Blood Pressure    A: Drug X    B: Placebo    C: Combination
+      (Pa)                         (N=134)       (N=134)        (N=132)    
+      —————————————————————————————————————————————————————————————————————
+      <60                             0             0              0       
+      >60                        134 (100%)    134 (100%)      132 (100%)  
+      >90                        134 (100%)    134 (100%)     131 (99.2%)  
+      >110                       123 (91.8%)   111 (82.8%)    107 (81.1%)  
+      >=120                      88 (65.7%)    70 (52.2%)      76 (57.6%)  
 
 # Table 32 generation works with custom values
 
@@ -20,17 +20,17 @@
       Table 32. Percentage of Patients With Maximum Diastolic Blood Pressure by Category
        of Blood Pressure Postbaseline, Safety Population, Pooled Analysis
       
-      —————————————————————————————————————————————————————————————————————————————————
-                                                                               Total   
-      Diastolic Blood Pressure   A: Drug X    B: Placebo   C: Combination   Population 
-      (Pa)                        (N=134)      (N=134)        (N=132)         (N=400)  
-      —————————————————————————————————————————————————————————————————————————————————
-      <60                        72 (53.7%)   83 (61.9%)     78 (59.1%)     233 (58.2%)
-      >60                        62 (46.3%)   51 (38.1%)     54 (40.9%)     167 (41.8%)
-      >90                            0            0              0               0     
-      >110                           0            0              0               0     
-      >=120                          0            0              0               0     
-      —————————————————————————————————————————————————————————————————————————————————
+      ———————————————————————————————————————————————————————————————————————————————————
+                                                                                 Total   
+      Diastolic Blood Pressure    A: Drug X    B: Placebo    C: Combination   Population 
+      (Pa)                         (N=134)       (N=134)        (N=132)         (N=400)  
+      ———————————————————————————————————————————————————————————————————————————————————
+      <60                             0             0              0               0     
+      >60                        134 (100%)    134 (100%)      132 (100%)     400 (100%) 
+      >90                        134 (100%)    134 (100%)     131 (99.2%)     399 (99.8%)
+      >110                       123 (91.8%)   111 (82.8%)    107 (81.1%)     341 (85.2%)
+      >=120                      88 (65.7%)    70 (52.2%)      76 (57.6%)     234 (58.5%)
+      ———————————————————————————————————————————————————————————————————————————————————
       
       Source: [include Applicant source, datasets and/or software tools used].
       
@@ -42,59 +42,53 @@
     Code
       res
     Output
-      Diastolic Blood Pressure   A: Drug X    B: Placebo   C: Combination
-      (Pa)                        (N=134)      (N=134)        (N=132)    
-      ———————————————————————————————————————————————————————————————————
-      <60                        72 (53.7%)   83 (61.9%)     78 (59.1%)  
-      >60                        62 (46.3%)   51 (38.1%)     54 (40.9%)  
+      Diastolic Blood Pressure    A: Drug X    B: Placebo    C: Combination
+      (Pa)                         (N=134)       (N=134)        (N=132)    
+      —————————————————————————————————————————————————————————————————————
+      >60                        134 (100%)    134 (100%)      132 (100%)  
+      >90                        134 (100%)    134 (100%)     131 (99.2%)  
+      >110                       123 (91.8%)   111 (82.8%)    107 (81.1%)  
+      >=120                      88 (65.7%)    70 (52.2%)      76 (57.6%)  
 
 # Table 32 generation works with risk difference column
 
     Code
       res
     Output
-      Diastolic Blood Pressure   A: Drug X    B: Placebo   C: Combination   Risk Difference (%) (95% CI)
-      (Pa)                        (N=134)      (N=134)        (N=132)                 (N=268)           
-      ——————————————————————————————————————————————————————————————————————————————————————————————————
-      <60                        72 (53.7%)   83 (61.9%)     78 (59.1%)          8.2 (-3.6 - 20.0)      
-      >60                        62 (46.3%)   51 (38.1%)     54 (40.9%)          -8.2 (-20.0 - 3.6)     
-      >90                            0            0              0                0.0 (0.0 - 0.0)       
-      >110                           0            0              0                0.0 (0.0 - 0.0)       
-      >=120                          0            0              0                0.0 (0.0 - 0.0)       
+      Diastolic Blood Pressure    A: Drug X    B: Placebo    C: Combination   Risk Difference (%) (95% CI)
+      (Pa)                         (N=134)       (N=134)        (N=132)                 (N=268)           
+      ————————————————————————————————————————————————————————————————————————————————————————————————————
+      <60                             0             0              0                0.0 (0.0 - 0.0)       
+      >60                        134 (100%)    134 (100%)      132 (100%)           0.0 (0.0 - 0.0)       
+      >90                        134 (100%)    134 (100%)     131 (99.2%)           0.0 (0.0 - 0.0)       
+      >110                       123 (91.8%)   111 (82.8%)    107 (81.1%)         -9.0 (-16.9 - -1.1)     
+      >=120                      88 (65.7%)    70 (52.2%)      76 (57.6%)         -13.4 (-25.1 - -1.8)    
 
 # Table 32 (gtsum) generation works with default values
 
     Code
       res
     Output
-        variable    var_type var_label row_type    label     stat_1     stat_2
-      1      L60 dichotomous    &lt;60    label   &lt;60 72 (53.7%) 83 (61.9%)
-      2      G60 dichotomous    &gt;60    label   &gt;60 62 (46.3%) 51 (38.1%)
-      3      G90 dichotomous    &gt;90    label   &gt;90   0 (0.0%)   0 (0.0%)
-      4     G110 dichotomous   &gt;110    label  &gt;110   0 (0.0%)   0 (0.0%)
-      5    GE120 dichotomous  &gt;=120    label &gt;=120   0 (0.0%)   0 (0.0%)
-            stat_3
-      1 78 (59.1%)
-      2 54 (40.9%)
-      3   0 (0.0%)
-      4   0 (0.0%)
-      5   0 (0.0%)
+      # A tibble: 5 x 8
+        variable var_type    var_label row_type label    stat_1       stat_2    stat_3
+        <chr>    <chr>       <chr>     <chr>    <chr>    <chr>        <chr>     <chr> 
+      1 L60      dichotomous &lt;60    label    &lt;60   0 (0.0%)     0 (0.0%)  0 (0.~
+      2 G60      dichotomous &gt;60    label    &gt;60   134 (100.0%) 134 (100~ 132 (~
+      3 G90      dichotomous &gt;90    label    &gt;90   134 (100.0%) 134 (100~ 131 (~
+      4 G110     dichotomous &gt;110   label    &gt;110  123 (91.8%)  111 (82.~ 107 (~
+      5 GE120    dichotomous &gt;=120  label    &gt;=120 88 (65.7%)   70 (52.2~ 76 (5~
 
 # Table 32 (gtsum) generation works with custom values
 
     Code
       res
     Output
-        variable    var_type var_label row_type    label     stat_1     stat_2
-      1      L60 dichotomous    &lt;60    label   &lt;60 72 (53.7%) 83 (61.9%)
-      2      G60 dichotomous    &gt;60    label   &gt;60 62 (46.3%) 51 (38.1%)
-      3      G90 dichotomous    &gt;90    label   &gt;90   0 (0.0%)   0 (0.0%)
-      4     G110 dichotomous   &gt;110    label  &gt;110   0 (0.0%)   0 (0.0%)
-      5    GE120 dichotomous  &gt;=120    label &gt;=120   0 (0.0%)   0 (0.0%)
-            stat_3      stat_0
-      1 78 (59.1%) 233 (58.3%)
-      2 54 (40.9%) 167 (41.8%)
-      3   0 (0.0%)    0 (0.0%)
-      4   0 (0.0%)    0 (0.0%)
-      5   0 (0.0%)    0 (0.0%)
+      # A tibble: 5 x 9
+        variable var_type    var_label row_type label    stat_1   stat_2 stat_3 stat_0
+        <chr>    <chr>       <chr>     <chr>    <chr>    <chr>    <chr>  <chr>  <chr> 
+      1 L60      dichotomous &lt;60    label    &lt;60   0 (0.0%) 0 (0.~ 0 (0.~ 0 (0.~
+      2 G60      dichotomous &gt;60    label    &gt;60   134 (10~ 134 (~ 132 (~ 400 (~
+      3 G90      dichotomous &gt;90    label    &gt;90   134 (10~ 134 (~ 131 (~ 399 (~
+      4 G110     dichotomous &gt;110   label    &gt;110  123 (91~ 111 (~ 107 (~ 341 (~
+      5 GE120    dichotomous &gt;=120  label    &gt;=120 88 (65.~ 70 (5~ 76 (5~ 234 (~
 

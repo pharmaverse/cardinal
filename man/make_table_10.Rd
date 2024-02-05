@@ -66,9 +66,18 @@ make_table_10_gtsum(
 \item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
 the given value as the column label.}
 
-\item{risk_diff}{(\code{list} of \code{character} vectors)\cr List of character vectors. Each vector must be
-of length 2 and contain the name of treatment arms to calculate risk difference and its 95\% CI for. Those names
-must exist in the \code{arm_var} column of the dataset specified in \code{adae}.}
+\item{risk_diff}{(named \code{list})\cr list of settings to apply to add one or more risk difference columns to the table.
+Defaults to \code{NULL} (no risk difference column added). See \code{\link[tern:add_riskdiff]{tern::add_riskdiff()}} for more details. List should
+contain the following elements:
+\itemize{
+\item \code{arm_x}: (required) the name of reference arm.
+\item \code{arm_y}: (required) the names of the arms to compare to the reference arm. A new column will be added for each
+element of \code{arm_y}.
+\item \code{col_label}: (optional) labels to use for the risk difference columns. Defaults to
+\code{"Risk Difference (\%) (95\% CI)"}. For more than one risk difference column, \code{"arm x vs. arm y"} text will also
+be included in the column labels by default. The length of \code{col_label} must be equal to the length of \code{arm_y}.
+\item \code{pct}: (optional) whether the output should be returned as percentages. Defaults to \code{TRUE}.
+}}
 
 \item{prune_0}{(\code{flag})\cr whether all-zero rows should be removed from the table.}
 
@@ -119,8 +128,8 @@ flag variables are treated as \code{"N"}.
 \examples{
 library(dplyr)
 
-adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
-adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
+adsl <- random.cdisc.data::cadsl
+adae <- random.cdisc.data::cadae
 
 set.seed(1)
 adae <- adae \%>\%
