@@ -215,8 +215,8 @@ make_table_10_gtsum <- function(adae,
   if (!is.null(lbl_overall)) {
     gt_table$table_styling$header <- gt_table$table_styling$header %>%
       mutate(label = ifelse(stringr::str_detect(column, "^stat_1") &
-          stringr::str_detect(label, "\\*\\*Overall\\*\\*"),
-        stringr::str_replace(label, "Overall", lbl_overall), label
+        stringr::str_detect(label, "\\*\\*Overall\\*\\*"),
+      stringr::str_replace(label, "Overall", lbl_overall), label
       ))
   }
 
