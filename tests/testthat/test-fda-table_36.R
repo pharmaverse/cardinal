@@ -9,7 +9,6 @@ test_that("Table 36 generation works with default values", {
 })
 
 test_that("Table 36 generation works with custom values", {
-
   annotations <- list(
     title = "Table 36. Patients With Adverse Events by System Organ Class and Preferred Term, Safety
     Population, Pooled Analysis (or Trial X)",
