@@ -24,21 +24,19 @@
 #'
 #' @export
 make_table_36 <- function(
-  adae,
-  alt_counts_df = NULL,
-  show_colcounts = TRUE,
-  id_var = "USUBJID",
-  arm_var = "ARM",
-  saffl_var = "SAFFL",
-  soc_var = "AESOC",
-  pref_var = "AEDECOD",
-  lbl_soc_var = formatters::var_labels(adae, fill = TRUE)[soc_var],
-  lbl_overall = NULL,
-  risk_diff = NULL,
-  prune_0 = FALSE,
-  annotations = NULL
-) {
-
+    adae,
+    alt_counts_df = NULL,
+    show_colcounts = TRUE,
+    id_var = "USUBJID",
+    arm_var = "ARM",
+    saffl_var = "SAFFL",
+    soc_var = "AESOC",
+    pref_var = "AEDECOD",
+    lbl_soc_var = formatters::var_labels(adae, fill = TRUE)[soc_var],
+    lbl_overall = NULL,
+    risk_diff = NULL,
+    prune_0 = FALSE,
+    annotations = NULL) {
   adae <- adae %>%
     filter(.data[[saffl_var]] == "Y") %>%
     df_explicit_na()

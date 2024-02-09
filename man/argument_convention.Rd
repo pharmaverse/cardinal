@@ -22,11 +22,15 @@ use the annotation type as name and the desired string as value.}
 
 \item{df}{(\code{data.frame})\cr dataset required to build table.}
 
+\item{eosdy_var}{(\code{character})\cr variable denoting last recorded (relative) study day.}
+
 \item{fmqsc_var}{(\code{character})\cr FMQ scope variable to use in table.}
 
 \item{fmqnam_var}{(\code{character})\cr FMQ reference name variable to use in table.}
 
 \item{fmq_scope}{(\code{character})\cr FMQ scope ("NARROW" or "BROAD") to output in table.}
+
+\item{ggtheme}{(\code{theme})\cr a graphical theme as provided by \code{ggplot2} to control styling of the \code{ggplot} object.}
 
 \item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
 
@@ -70,7 +74,21 @@ be included in the column labels by default. The length of \code{col_label} must
 
 \item{show_colcounts}{(\code{flag})\cr whether column counts should be printed.}
 
+\item{trtsdtm_var}{(\code{character})\cr treatment start datetime variable.}
+
+\item{trtedtm_var}{(\code{character})\cr treatment end datetime variable.}
+
+\item{u_trtdur}{(\code{character})\cr unit for duration of treatment. Options are \code{"days"}, \code{"weeks"}, \code{"months"},
+and \code{"years"}.}
+
 \item{vars}{(\code{vector} of \code{character})\cr variables from \code{df} to include in the table.}
+
+\item{xticks}{(\code{vector} of \code{numeric})\cr x-axis tick positions. If \code{NA} (default), tick mark positions are
+automatically calculated.}
+
+\item{x_lab}{(\code{character})\cr x-axis label.}
+
+\item{y_lab}{(\code{character})\cr y-axis label.}
 }
 \description{
 This documentation lists all the arguments in \code{falcon} that are used repeatedly by functions to output tables.
