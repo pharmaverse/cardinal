@@ -93,7 +93,8 @@
       Source: [include Applicant source, datasets and/or software tools used].
       (1) Treatment-emergent adverse event defined as [definition]. MedDRA version X.
       
-      Abbreviations: MedDRA, Medical Dictionary for Regulatory Activities.; N, number of patients in treatment arm; n, number of patients with adverse event;
+      Abbreviations: MedDRA, Medical Dictionary for Regulatory Activities.;
+      N, number of patients in treatment arm; n, number of patients with adverse event;
       Ns, total number of patients for each specific subgroup
 
 # Table 22 generation works with some NA values
