@@ -1,0 +1,59 @@
+---
+title: FDA Figure 14
+subtitle: Mean and 95% Confidence Interval of Systolic Blood Pressure Over Time by Treatment Arm, Safety Population, Trial X
+format: html
+---
+
+::: panel-tabset
+## Spec. Screenshot
+
+![](../assets/images/screenshots/fig_14.png){fig-align="center"}
+
+## ggplot2 Figure
+
+```{r fig, message=FALSE, warning=FALSE}
+# Load Libraries & Data
+library(falcon)
+
+advs <- random.cdisc.data::cadvs
+
+make_fig_14(
+  df = advs,
+  add_cond = expr("ONTRTFL == 'Y' | ABLFL == 'Y'"),
+  add_table = TRUE,
+  yticks = c(135, 140, 145, 150, 155, 160)
+)
+```
+
+## Figure Setup
+
+```{r fig, eval=FALSE, echo=TRUE}
+```
+
+## Function Details
+
+### `make_fig_14()`
+
+------------------------------------------------------------------------
+
+Required variables:
+
+-   **`df`**: The variables `AVAL` and `PARAMCD`, and the variables specified by `arm_var`, `saffl_var`, and `visit_var`.
+
+| Argument      | Description                                                                                                                                                                                                                         | Default                                           |
+|:--------------|:------------------------------------------|:--------------|
+| `df`          | (`data.frame`) Dataset (typically ADVS) required to build table.                                                                                                                                                                    | *No default*                                      |
+| `arm_var`     | (`character`) Arm variable used to split table into columns.                                                                                                                                                                        | `"ARM"`                                           |
+| `saffl_var`   | (`character`) Flag variable used to indicate inclusion in safety population.                                                                                                                                                        | `"SAFFL"`                                         |
+| `visit_var`   | (`character`) Visit variable to put on the x-axis.                                                                                                                                                                                  | `"AVISIT"`                                        |
+| `paramcd_val` | (`character`) Value of PARAMCD to use for the plot.                                                                                                                                                                                 | `"SYSBP"`                                         |
+| `add_cond`    | (`expression`) Additional filter for the analysis (e.g on ATPT or VSPOS).                                                                                                                                                           | `NULL`                                            |
+| `x_lab`       | (`character`) x-axis label.                                                                                                                                                                                                         | `paste0("Time from first dose (", u_trtdur, ")")` |
+| `y_lab`       | (`character`) y-axis label.                                                                                                                                                                                                         | `"Percent of Patients (%)"`                       |
+| `yticks`      | (`vector` of `numeric`) y-axis tick positions. If `NA` (default), tick mark positions are automatically calculated.                                                                                                                 | `NA`                                              |
+| `ggtheme`     | (`function`) Function from `ggplot2` to apply over the plot.                                                                                                                                                                        | `NULL`                                              |
+| `add_table`   | (`flag`) whether "Number of Patients" table should be printed under the plot.                                                                                                                                                       | `TRUE`                                            |
+| `annotations` | (named `list` of `character`) List of annotations to add to the table. Valid annotation types are `title`, `subtitles`, and `caption`. Each name-value pair should use the annotation type as name and the desired string as value. | `NULL`                                            |
+
+Source code for this function is available [here](https://github.com/pharmaverse/falcon/blob/main/R/fda-fig_14.R).
+:::

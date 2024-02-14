@@ -51,6 +51,8 @@
 #' @param xticks (`vector` of `numeric`)\cr x-axis tick positions. If `NA` (default), tick mark positions are
 #'   automatically calculated.
 #' @param x_lab (`character`)\cr x-axis label.
+#' @param yticks (`vector` of `numeric`)\cr y-axis tick positions. If `NA` (default), tick mark positions are
+#'   automatically calculated.
 #' @param y_lab (`character`)\cr y-axis label.
 #'
 #' @name argument_convention
