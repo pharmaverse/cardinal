@@ -1,13 +1,13 @@
 test_that("Figure 14 generation works with default values", {
   fig_14_default <- make_fig_14(advs_raw)
 
-  expect_snapshot_ggplot("fig_14_default", fig_14_default, width = 8, height = 5)
+  expect_snapshot_ggplot("fig_14_default", fig_14_default, width = 8, height = 6)
 })
 
 test_that("Figure 14 generation works with no table", {
   fig_14_notbl <- make_fig_14(advs_raw, add_table = FALSE)
 
-  expect_snapshot_ggplot("fig_14_notbl", fig_14_notbl, width = 8, height = 3)
+  expect_snapshot_ggplot("fig_14_notbl", fig_14_notbl, width = 8, height = 4)
 })
 
 test_that("Figure 14 generation works with custom values", {
@@ -24,7 +24,7 @@ test_that("Figure 14 generation works with custom values", {
     yticks = c(135, 140, 145, 150, 155, 160)
   )
 
-  expect_snapshot_ggplot("fig_14_custom", fig_14_custom, width = 10, height = 5)
+  expect_snapshot_ggplot("fig_14_custom", fig_14_custom, width = 10, height = 6)
 })
 
 test_that("Figure 14 generation works with ggtheme argument specified", {

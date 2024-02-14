@@ -1,17 +1,18 @@
-#' Figure 14. Mean and 95% Confidence Interval of Systolic Blood Pressure Over Time
+#' FDA Figure 14: Mean and 95% Confidence Interval of Systolic Blood Pressure Over Time
 #' by Treatment Arm, Safety Population, Trial X
 #'
 #' @details
-#' * `df` must contain the variables `AVAL`, `PARAMCD`, `AVISITN`, `AVISIT`,
-#'   and the variables specified by `arm_var`, `id_var`, `saffl_var`, and `add_cond`.
+#' * `df` must contain the variables `AVAL` and `PARAMCD`, and the variables specified by `arm_var`,
+#'   `saffl_var`, `visit_var`, and `add_cond`.
 #' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
 #'   flag variables are treated as `"N"`.
-#' * Records with missing treatment start and/or end datetime are excluded from all calculations.
+#' * It is assumed that `df` contains one unique record per patient.
 #'
 #' @inheritParams argument_convention
-#' @param add_table (`flag`)\cr whether "Number of Patients" table should be printed under the plot.
-#' @param add_cond (`expr`)\cr expression that provide additional filters for the analysis
-#'   (for instance on `ATPT` or `VSPOS`)
+#' @param add_table (`flag`)\cr whether "Mean Value" and "Number of Patients" tables should be printed under the plot.
+#' @param visit_var (`character`)\cr visit variable to put on the x-axis
+#' @param add_cond (`expr`)\cr expression that provides additional filters for the analysis
+#'   (for instance on `ATPT` or `VSPOS`).
 #' @param annotations (named `list` of `character`)\cr list of annotations to add to the figure. Valid annotation types
 #'   are `title`, `subtitles`, and `caption`. Each name-value pair should use the annotation type as name and the
 #'   desired string as value.
@@ -19,7 +20,6 @@
 #' @return A `ggplot2` object.
 #'
 #' @examples
-#' library(ggplot2)
 #' advs <- random.cdisc.data::cadvs
 #'
 #' fig <- make_fig_14(
@@ -33,8 +33,8 @@
 #' @export
 make_fig_14 <- function(df,
                         arm_var = "ARM",
-                        id_var = "USUBJID",
                         saffl_var = "SAFFL",
+                        visit_var = "AVISIT",
                         paramcd_val = "SYSBP",
                         add_cond = NULL,
                         x_lab = "",
@@ -43,7 +43,7 @@ make_fig_14 <- function(df,
                         ggtheme = NULL,
                         add_table = TRUE,
                         annotations = NULL){
-  checkmate::assert_subset(c(arm_var, id_var, saffl_var), names(df))
+  checkmate::assert_subset(c(arm_var, saffl_var, visit_var), names(df))
   assert_flag_variables(df, saffl_var)
 
   df <- df %>%
@@ -68,7 +68,7 @@ make_fig_14 <- function(df,
   }
 
   df <- df %>%
-    group_by(!!rlang::sym(arm_var), AVISIT, AVISITN, .drop = TRUE) %>%
+    group_by(!!sym(arm_var), !!sym(visit_var), .drop = TRUE) %>%
     summarise(
       mean = mean(AVAL, na.rm = TRUE),
       sd = sd(AVAL, na.rm = TRUE),
@@ -85,7 +85,7 @@ make_fig_14 <- function(df,
     ggplot(
       data = df,
       aes(
-        x = AVISITN,
+        x = !!sym(visit_var),
         y = mean,
         group = .data[[arm_var]],
         color = .data[[arm_var]]
@@ -111,8 +111,7 @@ make_fig_14 <- function(df,
       legend.position = "bottom",
       legend.title = element_blank(),
       plot.margin = unit(c(0.05, 0.05, 0, 0.025), "npc")
-    ) +
-    scale_x_continuous(breaks = df$AVISITN, labels = df$AVISIT)
+    )
 
   if (any(!is.na(yticks))) {
     g <- g +
@@ -125,20 +124,11 @@ make_fig_14 <- function(df,
     g_legend <- cowplot::get_legend(g)
     g <- g + theme(legend.position = "none")
 
-    xtick_lbls <- ggplot_build(g)$layout$panel_params[[1]]$x$breaks
-    xtick_lbls <- xtick_lbls[!is.na(xtick_lbls)]
-    xlims <- ggplot_build(g)$layout$panel_params[[1]]$x$limits
+    tbl_n <- df %>%
+      mutate(meanr = sprintf("%.1f", mean)) %>%
+      arrange(desc(!!sym(arm_var)))
 
-    tbl_n1 <- df %>%
-      mutate(
-        arm = .data[[arm_var]],
-        x = AVISITN,
-        meanr = sprintf("%.1f", mean)
-      )
-
-    tbl_n2 <- tbl_n1
-
-    g_tbl1 <- ggplot(tbl_n1, aes(x = x, y = arm)) +
+    g_tbl1 <- ggplot(tbl_n, aes(x = !!sym(visit_var), y = !!sym(arm_var))) +
       theme(
         axis.title.x = element_blank(),
         axis.title.y = element_blank(),
@@ -150,16 +140,14 @@ make_fig_14 <- function(df,
         plot.margin = unit(c(0.1, 0.05, 0, 0.025), "npc"),
         plot.title = element_text(size = 10)
       ) +
-      labs(title = "Mean Value") +
-      scale_x_continuous(breaks = xtick_lbls, limits = c(min(xlims, xtick_lbls), max(xlims, xtick_lbls)))
+      labs(title = "Mean Value")
 
-    for (i in seq_len(nrow(tbl_n1))) {
-      tbl_n1$n[i] <- tbl_n1$meanr[i]
+    for (i in seq_len(nrow(tbl_n))) {
       g_tbl1 <- g_tbl1 +
-        annotate("text", label = as.character(tbl_n1$n[i]), x = tbl_n1$x[i], y = tbl_n1$arm[i])
+        annotate("text", label = as.character(tbl_n$meanr[i]), x = tbl_n[[visit_var]][i], y = tbl_n[[arm_var]][i])
     }
 
-    g_tbl2 <- ggplot(tbl_n2, aes(x = x, y = arm)) +
+    g_tbl2 <- ggplot(tbl_n, aes(x = !!sym(visit_var), y = !!sym(arm_var))) +
       theme(
         axis.title.x = element_blank(),
         axis.title.y = element_blank(),
@@ -171,13 +159,11 @@ make_fig_14 <- function(df,
         plot.margin = unit(c(0.1, 0.05, 0, 0.025), "npc"),
         plot.title = element_text(size = 10)
       ) +
-      labs(title = "Number of Patients with Data") +
-      scale_x_continuous(breaks = xtick_lbls, limits = c(min(xlims, xtick_lbls), max(xlims, xtick_lbls)))
+      labs(title = "Number of Patients with Data")
 
-    for (i in seq_len(nrow(tbl_n2))) {
-      tbl_n2$n[i] <- tbl_n2$n[i]
+    for (i in seq_len(nrow(tbl_n))) {
       g_tbl2 <- g_tbl2 +
-        annotate("text", label = as.character(tbl_n2$n[i]), x = tbl_n2$x[i], y = tbl_n2$arm[i])
+        annotate("text", label = as.character(tbl_n$n[i]), x = tbl_n[[visit_var]][i], y = tbl_n[[arm_var]][i])
     }
 
     cowplot::plot_grid(
@@ -188,7 +174,7 @@ make_fig_14 <- function(df,
       align = "v",
       axis = "l",
       ncol = 1,
-      rel_heights = c(0.70, 0.13, 0.13, 0.04)
+      rel_heights = c(0.60, 0.15, 0.15, 0.1)
     )
   } else {
     g
