@@ -20,7 +20,8 @@ test_that("Figure 14 generation works with custom values", {
     annotations = list(
       title = paste(
         "Figure 14. Mean and 95% Confidence Interval of Systolic Blood Pressure Over Time by Treatment",
-        "Arm, Safety Population, Trial X", sep = "\n"
+        "Arm, Safety Population, Trial X",
+        sep = "\n"
       ),
       subtitle = "Source: [include source]"
     ),
