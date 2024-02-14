@@ -88,6 +88,9 @@ automatically calculated.}
 
 \item{x_lab}{(\code{character})\cr x-axis label.}
 
+\item{yticks}{(\code{vector} of \code{numeric})\cr y-axis tick positions. If \code{NA} (default), tick mark positions are
+automatically calculated.}
+
 \item{y_lab}{(\code{character})\cr y-axis label.}
 }
 \description{
