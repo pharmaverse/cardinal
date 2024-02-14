@@ -42,7 +42,7 @@ make_fig_14 <- function(df,
                         yticks = NA,
                         ggtheme = NULL,
                         add_table = TRUE,
-                        annotations = NULL){
+                        annotations = NULL) {
   checkmate::assert_subset(c(arm_var, saffl_var, visit_var), names(df))
   assert_flag_variables(df, saffl_var)
 
@@ -50,17 +50,17 @@ make_fig_14 <- function(df,
     as_tibble() %>%
     filter(
       .data[[saffl_var]] == "Y",
-      PARAMCD == {{paramcd_val}},
+      PARAMCD == {{ paramcd_val }},
       !is.na(AVAL)
     ) %>%
     df_explicit_na()
 
-  if (!(is.null({{add_cond}}))) {
+  if (!(is.null({{ add_cond }}))) {
     df <- df %>%
       filter(!!rlang::parse_expr(add_cond))
   }
 
-  if (is.null({{y_lab}})) {
+  if (is.null({{ y_lab }})) {
     y_param <- unique(df$PARAM)
     y_avalu <- unique(df$AVALU)
 
