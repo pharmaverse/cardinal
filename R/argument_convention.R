@@ -12,9 +12,11 @@
 #'   use the annotation type as name and the desired string as value.
 #' @param arm_var (`character`)\cr arm variable used to split table into columns.
 #' @param df (`data.frame`)\cr dataset required to build table.
+#' @param eosdy_var (`character`)\cr variable denoting last recorded (relative) study day.
 #' @param fmqsc_var (`character`)\cr FMQ scope variable to use in table.
 #' @param fmqnam_var (`character`)\cr FMQ reference name variable to use in table.
 #' @param fmq_scope (`character`)\cr FMQ scope ("NARROW" or "BROAD") to output in table.
+#' @param ggtheme (`theme`)\cr a graphical theme as provided by `ggplot2` to control styling of the `ggplot` object.
 #' @param id_var (`character`)\cr variable used as unique subject identifier.
 #' @param lbl_overall (`character`)\cr if specified, an overall column will be added to the table with
 #'   the given value as the column label.
@@ -41,10 +43,17 @@
 #' @param sex_scope (`character`)\cr Level of `SEX` to output in table.
 #' @param soc_var (`character`)\cr flag variable used to indicate system organ class.
 #' @param show_colcounts (`flag`)\cr whether column counts should be printed.
+#' @param trtsdtm_var (`character`)\cr treatment start datetime variable.
+#' @param trtedtm_var (`character`)\cr treatment end datetime variable.
+#' @param u_trtdur (`character`)\cr unit for duration of treatment. Options are `"days"`, `"weeks"`, `"months"`,
+#'   and `"years"`.
 #' @param vars (`vector` of `character`)\cr variables from `df` to include in the table.
+#' @param xticks (`vector` of `numeric`)\cr x-axis tick positions. If `NA` (default), tick mark positions are
+#'   automatically calculated.
+#' @param x_lab (`character`)\cr x-axis label.
 #' @param yticks (`vector` of `numeric`)\cr y-axis tick positions. If `NA` (default), tick mark positions are
 #'   automatically calculated.
-#' @param ggtheme (`exprs`)\cr custom ggplot2 theme defined by the user.
+#' @param y_lab (`character`)\cr y-axis label.
 #'
 #' @name argument_convention
 #' @keywords internal
