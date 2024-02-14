@@ -11,7 +11,7 @@ format: html
 
 ## ggplot2 Figure
 
-```{r fig, message=FALSE, warning=FALSE}
+```{r fig, message=FALSE, warning=FALSE, fig.height=7, fig.width=9}
 # Load Libraries & Data
 library(falcon)
 
@@ -19,7 +19,7 @@ advs <- random.cdisc.data::cadvs
 
 make_fig_14(
   df = advs,
-  add_cond = expr("ONTRTFL == 'Y' | ABLFL == 'Y'"),
+  add_cond = bquote("ONTRTFL == 'Y' | ABLFL == 'Y'"),
   add_table = TRUE,
   yticks = c(135, 140, 145, 150, 155, 160)
 )
