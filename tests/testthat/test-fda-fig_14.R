@@ -18,7 +18,10 @@ test_that("Figure 14 generation works with custom values", {
     x_lab = "Analysis Visit",
     y_lab = "Systolic (unit)",
     annotations = list(
-      title = "Figure 14. Mean and 95% Confidence Interval of Systolic Blood Pressure Over Time by Treatment Arm, Safety Population, Trial X",
+      title = paste(
+        "Figure 14. Mean and 95% Confidence Interval of Systolic Blood Pressure Over Time by Treatment",
+        "Arm, Safety Population, Trial X", sep = "\n"
+      ),
       subtitle = "Source: [include source]"
     ),
     yticks = c(135, 140, 145, 150, 155, 160)
