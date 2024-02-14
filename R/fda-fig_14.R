@@ -9,10 +9,11 @@
 #' * It is assumed that `df` contains one unique record per patient.
 #'
 #' @inheritParams argument_convention
-#' @param add_table (`flag`)\cr whether "Mean Value" and "Number of Patients" tables should be printed under the plot.
+#' @param add_table (`flag`)\cr whether "Mean Value" and "Number of Patients" tables should be printed under the plot
 #' @param visit_var (`character`)\cr visit variable to put on the x-axis
+#' @param paramcd_val (`character`)\cr value of `PARAMCD` to plot
 #' @param add_cond (`expr`)\cr expression that provides additional filters for the analysis
-#'   (for instance on `ATPT` or `VSPOS`).
+#'   (for instance on `ATPT` or `VSPOS`)
 #' @param annotations (named `list` of `character`)\cr list of annotations to add to the figure. Valid annotation types
 #'   are `title`, `subtitles`, and `caption`. Each name-value pair should use the annotation type as name and the
 #'   desired string as value.
@@ -24,7 +25,7 @@
 #'
 #' fig <- make_fig_14(
 #'   df = advs,
-#'   add_cond = expr("ONTRTFL == 'Y' | ABLFL == 'Y'"),
+#'   add_cond = bquote("ONTRTFL == 'Y' | ABLFL == 'Y'"),
 #'   add_table = TRUE,
 #'   yticks = c(135, 140, 145, 150, 155, 160)
 #' )

@@ -29,8 +29,10 @@ make_fig_14(
 
 \item{visit_var}{(\code{character})\cr visit variable to put on the x-axis}
 
+\item{paramcd_val}{(\code{character})\cr value of \code{PARAMCD} to plot}
+
 \item{add_cond}{(\code{expr})\cr expression that provides additional filters for the analysis
-(for instance on \code{ATPT} or \code{VSPOS}).}
+(for instance on \code{ATPT} or \code{VSPOS})}
 
 \item{x_lab}{(\code{character})\cr x-axis label.}
 
@@ -41,7 +43,7 @@ automatically calculated.}
 
 \item{ggtheme}{(\code{theme})\cr a graphical theme as provided by \code{ggplot2} to control styling of the \code{ggplot} object.}
 
-\item{add_table}{(\code{flag})\cr whether "Mean Value" and "Number of Patients" tables should be printed under the plot.}
+\item{add_table}{(\code{flag})\cr whether "Mean Value" and "Number of Patients" tables should be printed under the plot}
 
 \item{annotations}{(named \code{list} of \code{character})\cr list of annotations to add to the figure. Valid annotation types
 are \code{title}, \code{subtitles}, and \code{caption}. Each name-value pair should use the annotation type as name and the
@@ -68,7 +70,7 @@ advs <- random.cdisc.data::cadvs
 
 fig <- make_fig_14(
   df = advs,
-  add_cond = expr("ONTRTFL == 'Y' | ABLFL == 'Y'"),
+  add_cond = bquote("ONTRTFL == 'Y' | ABLFL == 'Y'"),
   add_table = TRUE,
   yticks = c(135, 140, 145, 150, 155, 160)
 )

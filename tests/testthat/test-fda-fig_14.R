@@ -14,7 +14,7 @@ test_that("Figure 14 generation works with custom values", {
   fig_14_custom <- make_fig_14(
     advs_raw,
     paramcd_val = "SYSBP",
-    add_cond = expr("ONTRTFL == 'Y' | ABLFL == 'Y'"),
+    add_cond = bquote("ONTRTFL == 'Y' | ABLFL == 'Y'"),
     x_lab = "Analysis Visit",
     y_lab = "Systolic (unit)",
     annotations = list(
