@@ -1,4 +1,5 @@
 library(dplyr)
+library(ggplot2)
 
 adsl_raw <- random.cdisc.data::cadsl
 adae_raw <- random.cdisc.data::cadae
