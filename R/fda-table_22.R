@@ -25,9 +25,7 @@
 #'     AGE >= 65 & AGE < 75 ~ ">=65 to <75",
 #'     AGE >= 75 ~ ">=75"
 #'   )) %>% formatters::with_label("Age Group, years")) %>%
-#'   formatters::var_relabel(
-#'     AGE = "Age, years"
-#'   )
+#'   formatters::var_relabel(AGE = "Age, years")
 #'
 #' adae <- random.cdisc.data::cadae
 #'
