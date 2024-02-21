@@ -31,7 +31,8 @@ test_that("Table 38 generation works with custom values", {
       ),
       main_footer = paste(
         "Source: [include Applicant source, datasets and/or software tools used]\n",
-        "(1) Duration = [e.g., X week double-blind treatment period or median and a range indicating pooled trial durations].\n",
+        "(1) Duration = [e.g., X week double-blind treatment period or median and a range indicating pooled trial",
+        "durations].\n",
         "(2) Treatment-emergent adverse event defined as [definition]. MedDRA version X.\n",
         "(3) Each FMQ is aligned to a single SOC based on clinical judgment. However,\n",
         "please be aware that some FMQs may contain PTs from more than one SOC."

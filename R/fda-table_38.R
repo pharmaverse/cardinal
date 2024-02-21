@@ -87,7 +87,7 @@ make_table_38 <- function(adae,
       vars = pref_var,
       riskdiff = !is.null(risk_diff)
     ) %>%
-    append_topleft(paste(" ", lbl_pref_var))
+    append_topleft(paste("   ", lbl_pref_var))
 
   tbl <- build_table(lyt, df = adae, alt_counts_df = alt_counts_df)
   if (prune_0) tbl <- prune_table(tbl)
