@@ -2,7 +2,7 @@
 % Please edit documentation in R/fda-table_35.R
 \name{make_table_35}
 \alias{make_table_35}
-\title{Table 35. Patients With Adverse Events1 by System Organ Class,
+\title{Table 35. Patients With Adverse Events by System Organ Class,
 Safety Population, Pooled Analysis (or Trial X)}
 \usage{
 make_table_35(
@@ -61,7 +61,7 @@ annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \co
 use the annotation type as name and the desired string as value.}
 }
 \description{
-Table 35. Patients With Adverse Events1 by System Organ Class,
+Table 35. Patients With Adverse Events by System Organ Class,
 Safety Population, Pooled Analysis (or Trial X)
 }
 \details{
