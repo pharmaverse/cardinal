@@ -29,7 +29,7 @@ make_table_33(
 
 \item{arm_var}{(\code{character})\cr Name of the treatment arm variable used to split table into columns.}
 
-\item{saffl_var}{(\code{character})\cr Name of the safety flag variable which must contain at least "Y" for "Yes".}
+\item{saffl_var}{(\code{character})\cr flag variable used to indicate inclusion in safety population.}
 
 \item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
 the given value as the column label.}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/fda-table_35.R
 \name{make_table_35}
 \alias{make_table_35}
-\title{Table 35. Patients With Adverse Events1 by System Organ Class,
+\title{Table 35. Patients With Adverse Events by System Organ Class,
 Safety Population, Pooled Analysis (or Trial X)}
 \usage{
 make_table_35(
@@ -31,7 +31,7 @@ make_table_35(
 
 \item{arm_var}{(\code{character})\cr Name of the treatment arm variable used to split table into columns.}
 
-\item{saffl_var}{(\code{character})\cr Name of the safety flag variable which must contain at least "Y" for "Yes".}
+\item{saffl_var}{(\code{character})\cr flag variable used to indicate inclusion in safety population.}
 
 \item{soc_var}{(\code{character})\cr Name of the system organ class variable from \code{adae} to include in the table.}
 
@@ -61,7 +61,7 @@ annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \co
 use the annotation type as name and the desired string as value.}
 }
 \description{
-Table 35. Patients With Adverse Events1 by System Organ Class,
+Table 35. Patients With Adverse Events by System Organ Class,
 Safety Population, Pooled Analysis (or Trial X)
 }
 \details{

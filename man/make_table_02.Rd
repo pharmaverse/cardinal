@@ -55,7 +55,7 @@ make_table_02_gtsum(
 
 \item{arm_var}{(\code{character})\cr Name of the treatment arm variable used to split table into columns.}
 
-\item{saffl_var}{(\code{character})\cr Name of the safety flag variable which must contain at least "Y" for "Yes".}
+\item{saffl_var}{(\code{character})\cr flag variable used to indicate inclusion in safety population.}
 
 \item{vars}{(\code{vector} of \code{character})\cr Variables from \code{df} to include in the table.}
 

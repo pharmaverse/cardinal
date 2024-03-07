@@ -27,7 +27,7 @@ make_fig_01(
 
 \item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
 
-\item{saffl_var}{(\code{character})\cr Name of the safety flag variable which must contain at least "Y" for "Yes".}
+\item{saffl_var}{(\code{character})\cr flag variable used to indicate inclusion in safety population.}
 
 \item{trtsdtm_var}{(\code{character})\cr treatment start datetime variable.}
 

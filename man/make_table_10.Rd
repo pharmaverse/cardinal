@@ -33,7 +33,7 @@ make_table_10(
 
 \item{arm_var}{(\code{character})\cr Name of the treatment arm variable used to split table into columns.}
 
-\item{saffl_var}{(\code{character})\cr Name of the safety flag variable which must contain at least "Y" for "Yes".}
+\item{saffl_var}{(\code{character})\cr flag variable used to indicate inclusion in safety population.}
 
 \item{fmqsc_var}{(\code{character})\cr FMQ scope variable to use in table.}
 

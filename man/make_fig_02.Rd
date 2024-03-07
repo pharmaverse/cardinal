@@ -26,7 +26,7 @@ make_fig_02(
 
 \item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
 
-\item{saffl_var}{(\code{character})\cr Name of the safety flag variable which must contain at least "Y" for "Yes".}
+\item{saffl_var}{(\code{character})\cr flag variable used to indicate inclusion in safety population.}
 
 \item{eosdy_var}{(\code{character})\cr variable denoting last recorded (relative) study day.}
 

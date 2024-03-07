@@ -26,7 +26,7 @@ make_table_08(
 
 \item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
 
-\item{saffl_var}{(\code{character})\cr Name of the safety flag variable which must contain at least "Y" for "Yes".}
+\item{saffl_var}{(\code{character})\cr flag variable used to indicate inclusion in safety population.}
 
 \item{dth_vars}{(\code{vector} of \code{character})\cr additional death variables from \code{adae} to include in the table.}
 

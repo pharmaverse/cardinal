@@ -8,8 +8,6 @@
 
 \item{arm_var}{(\code{character})\cr Name of the treatment arm variable used to split table into columns.}
 
-\item{saffl_var}{(\code{character})\cr Name of the safety flag variable which must contain at least "Y" for "Yes".}
-
 \item{ser_var}{(\code{character})\cr Name of the serious adverse event flag variable which must contain at least
 "Y" for "Yes".}
 
@@ -85,11 +83,15 @@ be included in the column labels by default. The length of \code{col_label} must
 \item \code{pct}: (optional) whether the output should be returned as percentages. Defaults to \code{TRUE}.
 }}
 
+\item{saffl_var}{(\code{character})\cr flag variable used to indicate inclusion in safety population.}
+
 \item{sex_scope}{(\code{character})\cr Level of \code{SEX} to output in table.}
 
-\item{trtsdtm_var}{(\code{character})\cr treatment start datetime variable.}
-
 \item{trtedtm_var}{(\code{character})\cr treatment end datetime variable.}
+
+\item{trtemfl_var}{(\code{character})\cr flag variable used to identify Treatment-emergent AE.}
+
+\item{trtsdtm_var}{(\code{character})\cr treatment start datetime variable.}
 
 \item{u_trtdur}{(\code{character})\cr unit for duration of treatment. Options are \code{"days"}, \code{"weeks"}, \code{"months"},
 and \code{"years"}.}

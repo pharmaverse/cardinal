@@ -1,4 +1,4 @@
-#' Table 35. Patients With Adverse Events1 by System Organ Class,
+#' Table 35. Patients With Adverse Events by System Organ Class,
 #'   Safety Population, Pooled Analysis (or Trial X)
 #'
 #' @details

@@ -18,7 +18,7 @@ alt_counts_df_preproc(
 
 \item{arm_var}{(\code{character})\cr Name of the treatment arm variable used to split table into columns.}
 
-\item{saffl_var}{(\code{character})\cr Name of the safety flag variable which must contain at least "Y" for "Yes".}
+\item{saffl_var}{(\code{character})\cr flag variable used to indicate inclusion in safety population.}
 }
 \value{
 A \code{data.frame} (modified \code{alt_counts_df}) or \code{NULL}.
