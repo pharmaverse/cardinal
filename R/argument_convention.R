@@ -40,6 +40,7 @@
 #'      be included in the column labels by default. The length of `col_label` must be equal to the length of `arm_y`.
 #'    * `pct`: (optional) whether the output should be returned as percentages. Defaults to `TRUE`.
 #' @param saffl_var (`character`)\cr flag variable used to indicate inclusion in safety population.
+#' @param trtemfl_var (`character`)\cr flag variable used to identify Treatment-emergent AE.
 #' @param sex_scope (`character`)\cr Level of `SEX` to output in table.
 #' @param soc_var (`character`)\cr flag variable used to indicate system organ class.
 #' @param show_colcounts (`flag`)\cr whether column counts should be printed.
@@ -51,6 +52,8 @@
 #' @param xticks (`vector` of `numeric`)\cr x-axis tick positions. If `NA` (default), tick mark positions are
 #'   automatically calculated.
 #' @param x_lab (`character`)\cr x-axis label.
+#' @param yticks (`vector` of `numeric`)\cr y-axis tick positions. If `NA` (default), tick mark positions are
+#'   automatically calculated.
 #' @param y_lab (`character`)\cr y-axis label.
 #'
 #' @name argument_convention

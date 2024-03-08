@@ -68,6 +68,8 @@ be included in the column labels by default. The length of \code{col_label} must
 
 \item{saffl_var}{(\code{character})\cr flag variable used to indicate inclusion in safety population.}
 
+\item{trtemfl_var}{(\code{character})\cr flag variable used to identify Treatment-emergent AE.}
+
 \item{sex_scope}{(\code{character})\cr Level of \code{SEX} to output in table.}
 
 \item{soc_var}{(\code{character})\cr flag variable used to indicate system organ class.}
@@ -87,6 +89,9 @@ and \code{"years"}.}
 automatically calculated.}
 
 \item{x_lab}{(\code{character})\cr x-axis label.}
+
+\item{yticks}{(\code{vector} of \code{numeric})\cr y-axis tick positions. If \code{NA} (default), tick mark positions are
+automatically calculated.}
 
 \item{y_lab}{(\code{character})\cr y-axis label.}
 }
