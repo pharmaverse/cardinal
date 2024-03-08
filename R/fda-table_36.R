@@ -1,7 +1,6 @@
 #' Table 36. Patients With Adverse Events by System Organ Class and Preferred Term, Safety
 #' Population, Pooled Analysis (or Trial X)
 #'
-#'
 #' @details
 #' * `adae` must contain the variables specified by `id_var`, `arm_var`, `saffl_var`, `soc_var`,
 #'   and `pref_var`.
