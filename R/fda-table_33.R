@@ -110,12 +110,12 @@ make_table_33_gtsum <- function(advs,
     )
 
   advs_diabp <- advs_all %>%
-    filter(PARAMCD == "DIABP")  %>%
+    filter(PARAMCD == "DIABP") %>%
     distinct(.data[[id_var]], .keep_all = TRUE) %>%
     select(all_of(id_var), DBP60, ARM, AVALU)
 
   advs_sysbp <- advs_all %>%
-    filter(PARAMCD == "SYSBP")  %>%
+    filter(PARAMCD == "SYSBP") %>%
     distinct(.data[[id_var]], .keep_all = TRUE) %>%
     select(all_of(id_var), SBP90)
 
