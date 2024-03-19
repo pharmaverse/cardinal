@@ -1,5 +1,16 @@
-adsl <- adsl_raw
-adae <- adae_raw
+adsl <- random.cdisc.data::cadsl %>%
+  mutate(AGEGR1 = as.factor(case_when(
+    AGE >= 17 & AGE < 65 ~ ">=17 to <65",
+    AGE >= 65 ~ ">=65",
+    AGE >= 65 & AGE < 75 ~ ">=65 to <75",
+    AGE >= 75 ~ ">=75"
+  )) %>%
+    formatters::with_label("Age Group, years")) %>%
+  formatters::var_relabel(
+    AGE = "Age, years"
+  )
+
+adae <- random.cdisc.data::cadae
 
 df <- left_join(adsl, adae, by = intersect(names(adsl), names(adae)))
 
