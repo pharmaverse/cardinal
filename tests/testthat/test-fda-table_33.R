@@ -1,7 +1,5 @@
 adsl <- adsl_raw
-advs <- advs_raw %>%
-  mutate(AVAL = AVAL - 100)
-
+advs <- advs_raw %>% mutate(AVAL = AVAL - 100)
 advs_missing <- advs %>%
   filter(PARAMCD %in% c("DIABP", "SYSBP") & AVISITN >= 1)
 set.seed(2)
