@@ -94,7 +94,6 @@ make_table_32_gtsum <- function(advs,
                                 arm_var = "ARM",
                                 saffl_var = "SAFFL",
                                 lbl_overall = NULL) {
-
   checkmate::assert_subset(c(
     saffl_var, "AVISITN", "PARAMCD", "AVAL", "AVALU", arm_var, id_var
   ), names(advs))
@@ -122,24 +121,23 @@ make_table_32_gtsum <- function(advs,
     advs <-
       adsl %>%
       left_join(advs, by = id_var)
-  }
-  else {
+  } else {
     advs <- advs
   }
 
   advs <- advs %>%
     mutate(
-      L60f   = case_when(MAX_DIABP < 60   ~ "true", TRUE ~ "false"),
-      G60f   = case_when(MAX_DIABP > 60   ~ "true", TRUE ~ "false"),
-      G90f   = case_when(MAX_DIABP > 90   ~ "true", TRUE ~ "false"),
-      G110f  = case_when(MAX_DIABP > 110  ~ "true", TRUE ~ "false"),
+      L60f   = case_when(MAX_DIABP < 60 ~ "true", TRUE ~ "false"),
+      G60f   = case_when(MAX_DIABP > 60 ~ "true", TRUE ~ "false"),
+      G90f   = case_when(MAX_DIABP > 90 ~ "true", TRUE ~ "false"),
+      G110f  = case_when(MAX_DIABP > 110 ~ "true", TRUE ~ "false"),
       GE120f = case_when(MAX_DIABP >= 120 ~ "true", TRUE ~ "false")
     ) %>%
     mutate(
-      L60   = with_label(L60f   == "true", "<60"),
-      G60   = with_label(G60f   == "true", ">60"),
-      G90   = with_label(G90f   == "true", ">90"),
-      G110  = with_label(G110f  == "true", ">110"),
+      L60   = with_label(L60f == "true", "<60"),
+      G60   = with_label(G60f == "true", ">60"),
+      G90   = with_label(G90f == "true", ">90"),
+      G110  = with_label(G110f == "true", ">110"),
       GE120 = with_label(GE120f == "true", ">=120")
     ) %>%
     select(L60, G60, G90, G110, GE120, AVALU, arm_var)

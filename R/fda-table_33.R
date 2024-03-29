@@ -134,8 +134,7 @@ make_table_33_gtsum <- function(advs,
       advs_combined %>%
       select(!all_of(arm_var)) %>%
       right_join(adsl, by = id_var)
-  }
-  else {
+  } else {
     advs_combined <- advs_combined
   }
 
