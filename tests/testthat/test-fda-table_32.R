@@ -68,7 +68,12 @@ test_that("Table 32 (gtsum) generation works with custom values", {
 
 test_that("Table 32 (gtsum) generation missing values and ADSL", {
   result <- suppressWarnings(
-    make_table_32_gtsum(advs = advs_missing, alt_counts_df = adsl, lbl_overall = "Total Population") %>% gt::extract_body()
+    make_table_32_gtsum(
+      advs = advs_missing,
+      alt_counts_df = adsl,
+      lbl_overall = "Total Population"
+    ) %>%
+      gt::extract_body()
   )
 
   res <- expect_silent(result)

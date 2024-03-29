@@ -141,7 +141,6 @@ make_table_33_gtsum <- function(advs,
 
   avalu <- unique(advs_combined$AVALU)[1]
   advs_combined <- advs_combined %>%
-    # select(-AVALU)
     select(SBP90, DBP60, all_of(arm_var))
 
   tbl <- advs_combined %>%
