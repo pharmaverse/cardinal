@@ -2,6 +2,13 @@ adsl <- adsl_raw
 advs <- advs_raw %>%
   mutate(AVAL = AVAL - 100)
 
+advs_missing <- advs %>%
+  filter(PARAMCD %in% c("DIABP", "SYSBP") & AVISITN >= 1)
+set.seed(2)
+advs_missing[sample(seq_len(nrow(advs_missing)), 100), "AVAL"] <- NA
+advs_missing <- advs_missing %>%
+  df_explicit_na()
+
 test_that("Table 33 generation works with default values", {
   result <- make_table_33(advs, adsl)
 
@@ -60,6 +67,15 @@ test_that("Table 33 (gtsum) generation works with default values", {
 test_that("Table 33 (gtsum) generation works with custom values", {
   result <- suppressWarnings(
     make_table_33_gtsum(advs = advs, lbl_overall = "Total Population") %>% gt::extract_body()
+  )
+
+  res <- expect_silent(result)
+  expect_snapshot(res)
+})
+
+test_that("Table 33 (gtsum) generation missing values and ADSL", {
+  result <- suppressWarnings(
+    make_table_33_gtsum(advs = advs_missing, alt_counts_df = adsl, lbl_overall = "Total Population") %>% gt::extract_body()
   )
 
   res <- expect_silent(result)

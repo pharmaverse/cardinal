@@ -21,7 +21,7 @@ make_table_32(
 
 make_table_32_gtsum(
   advs,
-  adsl,
+  alt_counts_df = NULL,
   id_var = "USUBJID",
   arm_var = "ARM",
   saffl_var = "SAFFL",
@@ -62,8 +62,6 @@ be included in the column labels by default. The length of \code{col_label} must
 \item{annotations}{(named \code{list} of \code{character})\cr list of annotations to add to the table. Valid
 annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
 use the annotation type as name and the desired string as value.}
-
-\item{adsl}{(\code{data.frame})\cr dataset (typically ADSL) required to build table.}
 }
 \value{
 \itemize{

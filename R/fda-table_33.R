@@ -82,7 +82,7 @@ make_table_33 <- function(advs,
 #'
 #' @export
 make_table_33_gtsum <- function(advs,
-                                adsl,
+                                alt_counts_df = NULL,
                                 id_var = "USUBJID",
                                 arm_var = "ARM",
                                 saffl_var = "SAFFL",
@@ -105,8 +105,10 @@ make_table_33_gtsum <- function(advs,
     ) %>%
     ungroup() %>%
     mutate(
-      SBP90 = formatters::with_label(PARAMCD == "SYSBP" & MAX_SYSBP < 90, "SBP <90"),
-      DBP60 = formatters::with_label(PARAMCD == "DIABP" & MAX_DIABP < 60, "DBP <60")
+      SBP90c = if_else(MAX_SYSBP < 90, "SBP <90", "Not", missing = "Not"),
+      DBP60c = if_else(MAX_DIABP < 60, "DBP <60", "Not", missing = "Not"),
+      SBP90 = formatters::with_label(SBP90c == "SBP <90", "SBP <90"),
+      DBP60 = formatters::with_label(DBP60c == "DBP <60", "DBP <60")
     )
 
   advs_diabp <- advs_all %>%
@@ -120,17 +122,35 @@ make_table_33_gtsum <- function(advs,
     select(all_of(id_var), SBP90)
 
   advs_combined <-
-    full_join(advs_diabp, advs_sysbp, by = "USUBJID") %>%
-    select(SBP90, DBP60, ARM, AVALU)
+    full_join(advs_diabp, advs_sysbp, by = id_var) %>%
+    select(SBP90, DBP60, ARM, AVALU, all_of(id_var), all_of(arm_var))
+
+  if (!is.null(alt_counts_df)) {
+    adsl <- alt_counts_df %>%
+      filter(.data[[saffl_var]] == "Y") %>%
+      select(all_of(id_var), all_of(arm_var), all_of(saffl_var))
+
+    advs_combined <-
+      advs_combined %>%
+      select(!all_of(arm_var)) %>%
+      right_join(adsl, by = id_var)
+  }
+  else {
+    advs_combined <- advs_combined
+  }
+
 
   avalu <- unique(advs_combined$AVALU)[1]
-  advs_combined <- advs_combined %>% select(-AVALU)
+  advs_combined <- advs_combined %>%
+    # select(-AVALU)
+    select(SBP90, DBP60, all_of(arm_var))
 
   tbl <- advs_combined %>%
     tbl_summary(
       by = arm_var,
       statistic = list(all_categorical() ~ "{n} ({p}%)"),
-      digits = everything() ~ c(0, 1)
+      digits = everything() ~ c(0, 1),
+      missing = "no"
     ) %>%
     modify_header(label ~ paste0("**Blood Pressure (", avalu, ")**")) %>%
     modify_header(all_stat_cols() ~ "**{level}**  \nN = {n}") %>%

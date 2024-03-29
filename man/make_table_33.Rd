@@ -21,7 +21,7 @@ make_table_33(
 
 make_table_33_gtsum(
   advs,
-  adsl,
+  adsl = NULL,
   id_var = "USUBJID",
   arm_var = "ARM",
   saffl_var = "SAFFL",
