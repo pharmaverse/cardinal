@@ -250,7 +250,6 @@ make_table_09_tplyr <- function(
 
   # Add risk difference column(s) if specified
   if (add_rd_col) {
-
     if (TRUE) {
       print("Risk difference is currently not supported for this function.") # due to {Tplyr} issue
     } else { # park code until risk difference issue of {Tplyr} is fixed
