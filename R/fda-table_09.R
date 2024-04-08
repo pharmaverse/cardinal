@@ -250,13 +250,17 @@ make_table_09_tplyr <- function(
 
   # Add risk difference column(s) if specified
   if (add_rd_col) {
-    layer1 <- do.call(Tplyr::add_risk_diff, args = append(list(layer = layer1), risk_diff_pairs))
-    layer2 <- do.call(Tplyr::add_risk_diff, args = append(list(layer = layer2), risk_diff_pairs))
 
-    rd_part <- sapply(risk_diff_pairs, function(pair) paste("|RD:", paste0(pair, collapse = " - ")))
-    header_string <- paste0(header_string, paste0(rd_part, collapse = ""))
+    if (TRUE) {
+      print("Risk difference is currently not supported for this function.") # due to {Tplyr} issue
+    } else { # park code until risk difference issue of {Tplyr} is fixed
+      layer1 <- do.call(Tplyr::add_risk_diff, args = append(list(layer = layer1), risk_diff_pairs))
+      layer2 <- do.call(Tplyr::add_risk_diff, args = append(list(layer = layer2), risk_diff_pairs))
+
+      rd_part <- sapply(risk_diff_pairs, function(pair) paste("|RD:", paste0(pair, collapse = " - ")))
+      header_string <- paste0(header_string, paste0(rd_part, collapse = ""))
+    }
   }
-
   # Build table
   table <- structure %>%
     Tplyr::add_layers(layer1, layer2) %>%
