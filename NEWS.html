@@ -239,6 +239,10 @@ cookieconsent.run({
  <span class="dropdown-text">FDA Table 21</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="./quarto/table-templates/template-table_22.html" rel="" target="">
+ <span class="dropdown-text">FDA Table 22</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="./quarto/table-templates/template-table_32.html" rel="" target="">
  <span class="dropdown-text">FDA Table 32</span></a>
   </li>  
@@ -255,12 +259,20 @@ cookieconsent.run({
  <span class="dropdown-text">FDA Table 35</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="./quarto/table-templates/template-table_36.html" rel="" target="">
+ <span class="dropdown-text">FDA Table 36</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="./quarto/figure-templates/template-fig_01.html" rel="" target="">
  <span class="dropdown-text">FDA Figure 1</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./quarto/figure-templates/template-fig_02.html" rel="" target="">
  <span class="dropdown-text">FDA Figure 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./quarto/figure-templates/template-fig_14.html" rel="" target="">
+ <span class="dropdown-text">FDA Figure 14</span></a>
   </li>  
     </ul>
   </li>
@@ -309,13 +321,13 @@ cookieconsent.run({
 
 
 
-<section id="falcon-0.1.0.9052" class="level1">
-<h1>falcon 0.1.0.9052</h1>
+<section id="falcon-0.1.0.9053" class="level1">
+<h1>falcon 0.1.0.9053</h1>
 <section id="new-features" class="level3">
 <h3 class="anchored" data-anchor-id="new-features">New Features</h3>
 <ul>
-<li>Added new functions for creating standard FDA tables: <code>make_table_02</code>, <code>make_table_03</code>, <code>make_table_04</code>, <code>make_table_05</code>, <code>make_table_06</code>, <code>make_table_07</code>, <code>make_table_08</code>, <code>make_table_09</code>, <code>make_table_10</code>, <code>make_table_11</code>, <code>make_table_12</code>, <code>make_table_13</code>, <code>make_table_14</code>, <code>make_table_15</code>, <code>make_table_16</code>, <code>make_table_17</code>, <code>make_table_18</code>, <code>make_table_20</code>, <code>make_table_21</code>, <code>make_table_32</code>, <code>make_table_33</code>, <code>make_table_34</code>, <code>make_table_35</code>.</li>
-<li>Added new functions for creating standard FDA figures: <code>make_fig_01</code>, <code>make_fig_02</code>.</li>
+<li>Added new functions for creating standard FDA tables: <code>make_table_02</code>, <code>make_table_03</code>, <code>make_table_04</code>, <code>make_table_05</code>, <code>make_table_06</code>, <code>make_table_07</code>, <code>make_table_08</code>, <code>make_table_09</code>, <code>make_table_10</code>, <code>make_table_11</code>, <code>make_table_12</code>, <code>make_table_13</code>, <code>make_table_14</code>, <code>make_table_15</code>, <code>make_table_16</code>, <code>make_table_17</code>, <code>make_table_18</code>, <code>make_table_20</code>, <code>make_table_21</code>, <code>make_table_22</code>, <code>make_table_32</code>, <code>make_table_33</code>, <code>make_table_34</code>, <code>make_table_35</code>, <code>make_table_36</code>.</li>
+<li>Added new functions for creating standard FDA figures: <code>make_fig_01</code>, <code>make_fig_02</code>, <code>make_fig_14</code>.</li>
 <li>Added helper functions used within table functions:
 <ul>
 <li><code>basic_table_annot</code> for adding basic table annotations (titles, footnotes, column counts).</li>
@@ -741,14 +753,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu"># falcon 0.1.0.9052</span></span>
+<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu"># falcon 0.1.0.9053</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a></span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="fu">### New Features</span></span>
 <span id="cb1-4"><a href="#cb1-4"></a><span class="ss">* </span>Added new functions for creating standard FDA tables: <span class="in">`make_table_02`</span>, <span class="in">`make_table_03`</span>, <span class="in">`make_table_04`</span>, <span class="in">`make_table_05`</span>, </span>
 <span id="cb1-5"><a href="#cb1-5"></a>  <span class="in">`make_table_06`</span>, <span class="in">`make_table_07`</span>, <span class="in">`make_table_08`</span>, <span class="in">`make_table_09`</span>, <span class="in">`make_table_10`</span>, <span class="in">`make_table_11`</span>, <span class="in">`make_table_12`</span>, </span>
 <span id="cb1-6"><a href="#cb1-6"></a>  <span class="in">`make_table_13`</span>, <span class="in">`make_table_14`</span>, <span class="in">`make_table_15`</span>, <span class="in">`make_table_16`</span>, <span class="in">`make_table_17`</span>, <span class="in">`make_table_18`</span>, <span class="in">`make_table_20`</span>, </span>
-<span id="cb1-7"><a href="#cb1-7"></a>  <span class="in">`make_table_21`</span>, <span class="in">`make_table_32`</span>, <span class="in">`make_table_33`</span>, <span class="in">`make_table_34`</span>, <span class="in">`make_table_35`</span>.</span>
-<span id="cb1-8"><a href="#cb1-8"></a><span class="ss">* </span>Added new functions for creating standard FDA figures: <span class="in">`make_fig_01`</span>, <span class="in">`make_fig_02`</span>.</span>
+<span id="cb1-7"><a href="#cb1-7"></a>  <span class="in">`make_table_21`</span>, <span class="in">`make_table_22`</span>, <span class="in">`make_table_32`</span>, <span class="in">`make_table_33`</span>, <span class="in">`make_table_34`</span>, <span class="in">`make_table_35`</span>, <span class="in">`make_table_36`</span>.</span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="ss">* </span>Added new functions for creating standard FDA figures: <span class="in">`make_fig_01`</span>, <span class="in">`make_fig_02`</span>, <span class="in">`make_fig_14`</span>.</span>
 <span id="cb1-9"><a href="#cb1-9"></a><span class="ss">* </span>Added helper functions used within table functions:</span>
 <span id="cb1-10"><a href="#cb1-10"></a><span class="ss">  * </span><span class="in">`basic_table_annot`</span> for adding basic table annotations (titles, footnotes, column counts).</span>
 <span id="cb1-11"><a href="#cb1-11"></a><span class="ss">  * </span><span class="in">`split_cols_by_arm`</span> for splitting columns by arm with option to add total column.</span>
