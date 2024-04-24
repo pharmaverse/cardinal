@@ -76,3 +76,14 @@
       1 SBP90    dichotomous SBP &lt;90 label    SBP &lt;~ 85 (6~ 84 (6~ 90 (6~ 259 (~
       2 DBP60    dichotomous DBP &lt;60 label    DBP &lt;~ 133 (~ 134 (~ 132 (~ 399 (~
 
+# Table 33 (gtsum) generation missing values and ADSL
+
+    Code
+      res
+    Output
+      # A tibble: 2 x 9
+        variable var_type    var_label  row_type label     stat_1 stat_2 stat_3 stat_0
+        <chr>    <chr>       <chr>      <chr>    <chr>     <chr>  <chr>  <chr>  <chr> 
+      1 SBP90    dichotomous SBP &lt;90 label    SBP &lt;~ 76 (5~ 73 (5~ 80 (6~ 229 (~
+      2 DBP60    dichotomous DBP &lt;60 label    DBP &lt;~ 114 (~ 122 (~ 113 (~ 349 (~
+
