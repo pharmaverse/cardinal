@@ -38,7 +38,7 @@ make_table_32 <- function(advs,
                           risk_diff = NULL,
                           prune_0 = FALSE,
                           annotations = NULL) {
-  checkmate::assert_subset(c(
+  assert_subset(c(
     "AVISITN", "PARAMCD", "AVAL", "AVALU", arm_var, id_var, saffl_var
   ), names(advs))
   assert_flag_variables(advs, saffl_var)
@@ -89,12 +89,12 @@ make_table_32 <- function(advs,
 #'
 #' @export
 make_table_32_gtsum <- function(advs,
-                                adsl,
+                                alt_counts_df = NULL,
                                 id_var = "USUBJID",
                                 arm_var = "ARM",
                                 saffl_var = "SAFFL",
                                 lbl_overall = NULL) {
-  checkmate::assert_subset(c(
+  assert_subset(c(
     saffl_var, "AVISITN", "PARAMCD", "AVAL", "AVALU", arm_var, id_var
   ), names(advs))
   assert_flag_variables(advs, saffl_var)
@@ -109,15 +109,38 @@ make_table_32_gtsum <- function(advs,
     group_by(.data[[id_var]], PARAMCD) %>%
     mutate(MAX_DIABP = max(AVAL)) %>%
     ungroup() %>%
-    mutate(
-      L60 = with_label(MAX_DIABP < 60, "<60"),
-      G60 = with_label(MAX_DIABP > 60, ">60"),
-      G90 = with_label(MAX_DIABP > 90, ">90"),
-      G110 = with_label(MAX_DIABP > 110, ">110"),
-      GE120 = with_label(MAX_DIABP >= 120, ">=120")
-    ) %>%
     distinct(.data[[id_var]], .keep_all = TRUE) %>%
-    select(L60, G60, G90, G110, GE120, arm_var, AVALU)
+    select(all_of(id_var), MAX_DIABP, AVALU, all_of(arm_var))
+
+  if (!is.null(alt_counts_df)) {
+    adsl <- alt_counts_df %>%
+      filter(.data[[saffl_var]] == "Y") %>%
+      select(all_of(id_var), all_of(arm_var), all_of(saffl_var))
+
+    advs <- advs %>% select(!all_of(arm_var))
+    advs <-
+      adsl %>%
+      left_join(advs, by = id_var)
+  } else {
+    advs <- advs
+  }
+
+  advs <- advs %>%
+    mutate(
+      L60 = case_when(MAX_DIABP < 60 ~ "true", TRUE ~ "false"),
+      G60 = case_when(MAX_DIABP > 60 ~ "true", TRUE ~ "false"),
+      G90 = case_when(MAX_DIABP > 90 ~ "true", TRUE ~ "false"),
+      G110 = case_when(MAX_DIABP > 110 ~ "true", TRUE ~ "false"),
+      GE120 = case_when(MAX_DIABP >= 120 ~ "true", TRUE ~ "false")
+    ) %>%
+    mutate(
+      L60 = with_label(L60 == "true", "<60"),
+      G60 = with_label(G60 == "true", ">60"),
+      G90 = with_label(G90 == "true", ">90"),
+      G110 = with_label(G110 == "true", ">110"),
+      GE120 = with_label(GE120 == "true", ">=120")
+    ) %>%
+    select(L60, G60, G90, G110, GE120, AVALU, arm_var)
 
   avalu <- unique(advs$AVALU)[1]
   advs <- advs %>% select(-AVALU)
@@ -126,7 +149,8 @@ make_table_32_gtsum <- function(advs,
     tbl_summary(
       by = arm_var,
       statistic = list(all_categorical() ~ "{n} ({p}%)"),
-      digits = everything() ~ c(0, 1)
+      digits = everything() ~ c(0, 1),
+      missing = "no"
     ) %>%
     modify_header(label ~ paste0("**Diastolic Blood Pressure (", avalu, ")**")) %>%
     modify_header(all_stat_cols() ~ "**{level}**  \nN = {n}") %>%

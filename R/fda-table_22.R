@@ -46,7 +46,7 @@ make_table_22 <- function(df,
                           lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
                           prune_0 = FALSE,
                           annotations = NULL) {
-  checkmate::assert_subset(c(vars, arm_var, saffl_var), names(df))
+  assert_subset(c(vars, arm_var, saffl_var), names(df))
 
   df <- df %>%
     filter(.data[[saffl_var]] == "Y") %>%

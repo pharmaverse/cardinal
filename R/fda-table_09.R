@@ -44,7 +44,7 @@ make_table_09 <- function(adae,
                           risk_diff = NULL,
                           prune_0 = TRUE,
                           annotations = NULL) {
-  checkmate::assert_subset(c("AESER", "AESOC", arm_var, id_var, saffl_var, pref_var), names(adae))
+  assert_subset(c("AESER", "AESOC", arm_var, id_var, saffl_var, pref_var), names(adae))
   assert_flag_variables(adae, saffl_var)
 
   adae <- adae %>%
@@ -141,8 +141,6 @@ make_table_09 <- function(adae,
 #' )
 #' make_table_09_tplyr(adae = adae, alt_counts_df = adsl, annotations = annot)
 #'
-#' @import gt
-#' @import checkmate
 #' @export
 make_table_09_tplyr <- function(
     adae,
@@ -251,7 +249,7 @@ make_table_09_tplyr <- function(
   # Add risk difference column(s) if specified
   if (add_rd_col) {
     if (TRUE) {
-      print("Risk difference is currently not supported for this function.") # due to {Tplyr} issue
+      warning("Risk difference is currently not supported for this function.") # due to {Tplyr} issue
     } else { # park code until risk difference issue of {Tplyr} is fixed
       layer1 <- do.call(Tplyr::add_risk_diff, args = append(list(layer = layer1), risk_diff_pairs))
       layer2 <- do.call(Tplyr::add_risk_diff, args = append(list(layer = layer2), risk_diff_pairs))
@@ -331,12 +329,8 @@ make_table_09_tplyr <- function(
   gt_tbl
 }
 
-
-#' Function to create FDA Table 9: Patients With Serious Adverse Events
-#' by System Organ Class and Preferred Term,
-#' Safety Population, Pooled Analyses with /code{gt}
-#'
 #' @describeIn make_table_09 Create FDA table 9 using functions from `gt`.
+#'
 #' @inheritParams argument_convention
 #' @param saffl_var (`character`)\cr safety population flag variable from `adae` to include in the table.
 #' @param ser_var (`character`)\cr serious Event variable from `adae` to include in the table.
@@ -351,7 +345,7 @@ make_table_09_tplyr <- function(
 #'   must exist in the `arm_var` column of the dataset specified in `adae`.
 #'
 #' @return
-#' * `make_table_32_gtsum` returns a `gt` object
+#' * `make_table_09_gtsum` returns a `gt` object.
 #'
 #' @examples
 #' adsl <- random.cdisc.data::cadsl
@@ -376,6 +370,7 @@ make_table_09_tplyr <- function(
 #'   risk_diff = risk_diff
 #' )
 #' tbl
+#'
 #' @export
 make_table_09_gtsum <- function(adae,
                                 alt_counts_df = NULL,
@@ -391,19 +386,19 @@ make_table_09_gtsum <- function(adae,
                                 lbl_overall = NULL,
                                 annotations = NULL,
                                 risk_diff = NULL) {
-  checkmate::assert_data_frame(adae)
-  checkmate::assert_subset(c(saffl_var, id_var, ser_var, soc_var, arm_var, pref_var), names(adae))
+  assert_data_frame(adae)
+  assert_subset(c(saffl_var, id_var, ser_var, soc_var, arm_var, pref_var), names(adae))
   assert_flag_variables(adae, saffl_var)
-  checkmate::assert_factor(adae[[arm_var]])
+  assert_factor(adae[[arm_var]])
 
   if (!is.null(alt_counts_df)) {
-    checkmate::assert_data_frame(alt_counts_df)
-    checkmate::assert_subset(c(id_var, arm_var), names(alt_counts_df))
+    assert_data_frame(alt_counts_df)
+    assert_subset(c(id_var, arm_var), names(alt_counts_df))
   }
 
-  checkmate::assert_list(risk_diff, types = "character", null.ok = TRUE)
+  assert_list(risk_diff, types = "character", null.ok = TRUE)
 
-  checkmate::assert_logical(show_colcounts)
+  assert_logical(show_colcounts)
 
   adae <- adae %>%
     filter(.data[[saffl_var]] == "Y", .data[[ser_var]] == "Y")
@@ -474,7 +469,6 @@ make_table_09_gtsum <- function(adae,
       cols_label_with(fn = set_col_labels)
   }
 
-
   label <- paste(lbl_soc_var, "<br/> &nbsp;&nbsp;", lbl_pref_var)
 
   gt_table <- gt_table %>%
@@ -501,16 +495,26 @@ make_table_09_gtsum <- function(adae,
   gt_table
 }
 
-
-#' Helper function to create the data for `make_table09_gtsum()`
-#'
-#' @details If `lbl_overall` is not `NULL` only the data for the overall column will be generated
+#' Helper functions used to construct FDA table 9
 #'
 #' @inheritParams argument_convention
 #' @inheritParams make_table_09_gtsum
 #'
-#' @return list containing the counted data to be displayed for table 9 and
-#' a `data.frame` containing information about the total N for each group
+#' @seealso [make_table_09()], [make_table_09_tplyr()], [make_table_09_gtsum()]
+#'
+#' @name h_make_table_09
+NULL
+
+#' @describeIn h_make_table_09 Helper function to create the data for [make_table_09_gtsum()].
+#'
+#' @return
+#' * `create_table_09_data` returns a list containing the counted data to be displayed for table 9 and
+#'   a `data.frame` containing information about the total N for each group.
+#'
+#' @details
+#' * `create_table_09_data`: If `lbl_overall` is non-`NULL`, only the data for the overall column will be generated.
+#'
+#' @keywords internal
 create_table_09_data <- function(
     adae,
     alt_counts_df,
@@ -578,13 +582,14 @@ create_table_09_data <- function(
   list(data = result_data, total_N = total_N)
 }
 
-#' Helper function for `create_table_09_data()`
-#' Used for counting subjects per group
+#' @describeIn h_make_table_09 Helper function used to count subjects per group.
 #'
-#' @inheritParams argument_convention
-#' @param sub_level_vars (`NULL` or `character`) specifying the sub group for counted subjects
+#' @param sub_level_vars (`character` or `NULL`) the subgroup for counted subjects.
 #'
-#' @return A `data.frame` containing the number of subjects with `sub_level_vars` events
+#' @return
+#' * `count_subjects` returns a `data.frame` containing the number of subjects with `sub_level_vars` events.
+#'
+#' @keywords internal
 count_subjects <- function(adae, arm_var, id_var, sub_level_vars = NULL, lbl_overall = NULL, risk_diff = NULL) {
   grouping <- is.null(lbl_overall)
   if (grouping) {
@@ -644,30 +649,35 @@ count_subjects <- function(adae, arm_var, id_var, sub_level_vars = NULL, lbl_ove
   count_data
 }
 
-
-#' Helper function to rename the combined columns
+#' @describeIn h_make_table_09 Helper function to rename the combined columns.
 #'
-#' @param x character vector containing all column names which start with "combined"
+#' @param x (`character`)\cr vector containing all column names which start with "combined".
 #'
+#' @return
+#' * `renaming_function` returns a vector.
+#'
+#' @keywords internal
 renaming_function <- function(x) {
   sapply(x, function(y) {
     substr(y, 10, nchar(y))
   }, simplify = TRUE)
 }
 
-
-#' helper function to calculate the risk difference for table 9
+#' @describeIn h_make_table_09 Helper function to calculate the risk difference for table 9.
 #'
-#' @param x character vector containing all value for the first treatment
-#' @param y character vector containing all value for the second treatment
-#' @param n_x character vector containing for all values of x the corresponding N
-#' @param n_y character vector containing for all values of y the corresponding N
+#' @param x (`character`)\cr vector containing all values for the first treatment.
+#' @param y (`character`)\cr vector containing all values for the second treatment.
+#' @param n_x (`character`)\cr vector containing for all values of `x` the corresponding N.
+#' @param n_y (`character`)\cr vector containing for all values of `y` the corresponding N.
 #'
-#' @return vector of characters containing the value for risk difference and
-#' the corresponding 95% Confidence interval in Brackets
+#' @return
+#' * `calculate_riskdiff` returns a vector of characters containing the value for risk difference and
+#'   the corresponding 95% confidence interval.
+#'
+#' @keywords internal
 calculate_riskdiff <- function(x, y, n_x, n_y) {
   sapply(seq_along(x), function(i) {
-    pt <- stats::prop.test(c(x[[i]], y[[i]]), c(n_x[[i]], n_y[[i]]))
+    pt <- prop.test(c(x[[i]], y[[i]]), c(n_x[[i]], n_y[[i]]))
     val <- format(pt$estimate[[1]] - pt$estimate[[2]], digits = 2, nsmall = 2)
     conf_int <- format(pt$conf.int, digits = 2, nsmall = 2)
     paste0(val, " (", conf_int[[1]], ", ", conf_int[[2]], ")")
