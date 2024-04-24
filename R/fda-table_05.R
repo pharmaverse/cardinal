@@ -37,8 +37,8 @@ make_table_05 <- function(df,
                           risk_diff = NULL,
                           prune_0 = FALSE,
                           annotations = NULL) {
-  checkmate::assert_subset(c(id_var, arm_var, saffl_var, id_var, trtsdtm_var, trtedtm_var), names(df))
-  checkmate::assert_choice(u_trtdur, c("days", "weeks", "months", "years"))
+  assert_subset(c(id_var, arm_var, saffl_var, id_var, trtsdtm_var, trtedtm_var), names(df))
+  assert_choice(u_trtdur, c("days", "weeks", "months", "years"))
   assert_flag_variables(df, saffl_var)
 
   df <- df %>%

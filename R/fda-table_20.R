@@ -41,7 +41,7 @@ make_table_20 <- function(adae,
                           risk_diff = NULL,
                           prune_0 = TRUE,
                           annotations = NULL) {
-  checkmate::assert_subset(c(
+  assert_subset(c(
     "AESEV", "AESER", "AESDTH", "EOSSTT", "AEREL", id_var, pref_var, aesifl_var, aelabfl_var, arm_var, saffl_var
   ), names(adae))
   assert_flag_variables(adae, c(saffl_var, aesifl_var, aelabfl_var))

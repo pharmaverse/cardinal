@@ -37,8 +37,8 @@ make_fig_02 <- function(df,
                         ggtheme = NULL,
                         add_table = TRUE,
                         annotations = NULL) {
-  checkmate::assert_subset(c(arm_var, id_var, saffl_var, eosdy_var), names(df))
-  checkmate::assert_choice(u_trtdur, c("days", "weeks", "months", "years"))
+  assert_subset(c(arm_var, id_var, saffl_var, eosdy_var), names(df))
+  assert_choice(u_trtdur, c("days", "weeks", "months", "years"))
   assert_flag_variables(df, saffl_var)
 
   df <- df %>%

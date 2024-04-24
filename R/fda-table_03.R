@@ -54,7 +54,7 @@ make_table_03 <- function(df,
                           lbl_overall = NULL,
                           prune_0 = TRUE,
                           annotations = NULL) {
-  checkmate::assert_subset(
+  assert_subset(
     c(id_var, scrnfl_var, scrnfailfl_var, scrnfail_var, "ENRLDT", "RANDDT", arm_var), names(df)
   )
   assert_flag_variables(df, c(scrnfl_var, scrnfailfl_var))

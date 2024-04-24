@@ -38,7 +38,7 @@ make_table_32 <- function(advs,
                           risk_diff = NULL,
                           prune_0 = FALSE,
                           annotations = NULL) {
-  checkmate::assert_subset(c(
+  assert_subset(c(
     "AVISITN", "PARAMCD", "AVAL", "AVALU", arm_var, id_var, saffl_var
   ), names(advs))
   assert_flag_variables(advs, saffl_var)
@@ -94,7 +94,7 @@ make_table_32_gtsum <- function(advs,
                                 arm_var = "ARM",
                                 saffl_var = "SAFFL",
                                 lbl_overall = NULL) {
-  checkmate::assert_subset(c(
+  assert_subset(c(
     saffl_var, "AVISITN", "PARAMCD", "AVAL", "AVALU", arm_var, id_var
   ), names(advs))
   assert_flag_variables(advs, saffl_var)
@@ -127,18 +127,18 @@ make_table_32_gtsum <- function(advs,
 
   advs <- advs %>%
     mutate(
-      L60f   = case_when(MAX_DIABP < 60 ~ "true", TRUE ~ "false"),
-      G60f   = case_when(MAX_DIABP > 60 ~ "true", TRUE ~ "false"),
-      G90f   = case_when(MAX_DIABP > 90 ~ "true", TRUE ~ "false"),
-      G110f  = case_when(MAX_DIABP > 110 ~ "true", TRUE ~ "false"),
-      GE120f = case_when(MAX_DIABP >= 120 ~ "true", TRUE ~ "false")
+      L60 = case_when(MAX_DIABP < 60 ~ "true", TRUE ~ "false"),
+      G60 = case_when(MAX_DIABP > 60 ~ "true", TRUE ~ "false"),
+      G90 = case_when(MAX_DIABP > 90 ~ "true", TRUE ~ "false"),
+      G110 = case_when(MAX_DIABP > 110 ~ "true", TRUE ~ "false"),
+      GE120 = case_when(MAX_DIABP >= 120 ~ "true", TRUE ~ "false")
     ) %>%
     mutate(
-      L60   = with_label(L60f == "true", "<60"),
-      G60   = with_label(G60f == "true", ">60"),
-      G90   = with_label(G90f == "true", ">90"),
-      G110  = with_label(G110f == "true", ">110"),
-      GE120 = with_label(GE120f == "true", ">=120")
+      L60 = with_label(L60 == "true", "<60"),
+      G60 = with_label(G60 == "true", ">60"),
+      G90 = with_label(G90 == "true", ">90"),
+      G110 = with_label(G110 == "true", ">110"),
+      GE120 = with_label(GE120 == "true", ">=120")
     ) %>%
     select(L60, G60, G90, G110, GE120, AVALU, arm_var)
 

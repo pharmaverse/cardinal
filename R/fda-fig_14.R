@@ -44,7 +44,7 @@ make_fig_14 <- function(df,
                         ggtheme = NULL,
                         add_table = TRUE,
                         annotations = NULL) {
-  checkmate::assert_subset(c(arm_var, saffl_var, visit_var), names(df))
+  assert_subset(c(arm_var, saffl_var, visit_var), names(df))
   assert_flag_variables(df, saffl_var)
 
   df <- df %>%

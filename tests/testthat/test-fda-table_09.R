@@ -194,6 +194,7 @@ test_that("make_table_09_tplyr() assigns column headers correctly to the arm gro
   expect_true(all(position_valid))
 })
 
+# nolint start
 test_that("make_table_09_tplyr() provides risk difference columns based on the risk_diff_pairs parameter", {
   # Test for display of one comparison
   rd <- list(c("A: Drug X", "B: Placebo"))
@@ -227,6 +228,7 @@ test_that("make_table_09_tplyr() provides risk difference columns based on the r
   #
   # expect_equal(names_out, unlist(rd_tbl[1, ]), ignore_attr = TRUE)
 })
+# nolint end
 
 test_that("make_table_09_tplyr() provides a total column based on the lbl_overall parameter", {
   # Check that overall column exists and the header string is assigned correctly to it

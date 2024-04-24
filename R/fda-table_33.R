@@ -34,7 +34,7 @@ make_table_33 <- function(advs,
                           risk_diff = NULL,
                           prune_0 = FALSE,
                           annotations = NULL) {
-  checkmate::assert_subset(c("AVISITN", "PARAMCD", "AVAL", "AVALU", arm_var, id_var, saffl_var), names(advs))
+  assert_subset(c("AVISITN", "PARAMCD", "AVAL", "AVALU", arm_var, id_var, saffl_var), names(advs))
   assert_flag_variables(advs, saffl_var)
 
   advs <- advs %>%
@@ -87,7 +87,7 @@ make_table_33_gtsum <- function(advs,
                                 arm_var = "ARM",
                                 saffl_var = "SAFFL",
                                 lbl_overall = NULL) {
-  checkmate::assert_subset(c(
+  assert_subset(c(
     saffl_var, "AVISITN", "PARAMCD", "AVAL", "AVALU", arm_var, id_var
   ), names(advs))
   assert_flag_variables(advs, saffl_var)
@@ -105,30 +105,32 @@ make_table_33_gtsum <- function(advs,
     ) %>%
     ungroup() %>%
     mutate(
-      SBP90c = if_else(MAX_SYSBP < 90, "SBP <90", "Not", missing = "Not"),
-      DBP60c = if_else(MAX_DIABP < 60, "DBP <60", "Not", missing = "Not"),
-      SBP90 = formatters::with_label(SBP90c == "SBP <90", "SBP <90"),
-      DBP60 = formatters::with_label(DBP60c == "DBP <60", "DBP <60")
+      SBP90 = if_else(MAX_SYSBP < 90, "SBP <90", "Not", missing = "Not"),
+      DBP60 = if_else(MAX_DIABP < 60, "DBP <60", "Not", missing = "Not")
+    ) %>%
+    mutate(
+      SBP90 = formatters::with_label(SBP90 == "SBP <90", "SBP <90"),
+      DBP60 = formatters::with_label(DBP60 == "DBP <60", "DBP <60")
     )
 
   advs_diabp <- advs_all %>%
     filter(PARAMCD == "DIABP") %>%
     distinct(.data[[id_var]], .keep_all = TRUE) %>%
-    select(all_of(id_var), DBP60, ARM, AVALU)
+    select(all_of(c(id_var, "DBP60", "ARM", "AVALU")))
 
   advs_sysbp <- advs_all %>%
     filter(PARAMCD == "SYSBP") %>%
     distinct(.data[[id_var]], .keep_all = TRUE) %>%
-    select(all_of(id_var), SBP90)
+    select(all_of(c(id_var, "SBP90")))
 
   advs_combined <-
     full_join(advs_diabp, advs_sysbp, by = id_var) %>%
-    select(SBP90, DBP60, ARM, AVALU, all_of(id_var), all_of(arm_var))
+    select(all_of(c("SBP90", "DBP60", "ARM", "AVALU", id_var, arm_var)))
 
   if (!is.null(alt_counts_df)) {
     adsl <- alt_counts_df %>%
       filter(.data[[saffl_var]] == "Y") %>%
-      select(all_of(id_var), all_of(arm_var), all_of(saffl_var))
+      select(all_of(c(id_var, arm_var, saffl_var)))
 
     advs_combined <-
       advs_combined %>%

@@ -115,16 +115,12 @@ a \code{tibble} object when \code{tplyr_raw = TRUE}.
 }
 
 \itemize{
-\item \code{make_table_32_gtsum} returns a \code{gt} object
+\item \code{make_table_09_gtsum} returns a \code{gt} object.
 }
 }
 \description{
 FDA Table 9: Patients With Serious Adverse Events by System Organ Class and Preferred Term,
 Safety Population, Pooled Analyses
-
-Function to create FDA Table 9: Patients With Serious Adverse Events
-by System Organ Class and Preferred Term,
-Safety Population, Pooled Analyses with /code{gt}
 }
 \details{
 \itemize{
@@ -221,4 +217,5 @@ tbl <- make_table_09_gtsum(
   risk_diff = risk_diff
 )
 tbl
+
 }
