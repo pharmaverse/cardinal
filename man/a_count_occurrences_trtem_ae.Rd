@@ -20,7 +20,7 @@ a_count_occurrences_trtem_ae(
 \item{.var}{(\code{string})\cr single variable name that is passed by \code{rtables} when requested
 by a statistics function.}
 
-\item{.N_col}{(\code{integer})\cr column-wise N (column count) for the full column being analyzed that is typically
+\item{.N_col}{(\code{integer(1)})\cr column-wise N (column count) for the full column being analyzed that is typically
 passed by \code{rtables}.}
 
 \item{df_denom}{(\code{data.frame})\cr Full data frame used to calculate denominator subgroup counts
