@@ -38,8 +38,7 @@ make_table_10_gtsum(
   fmq_scope = "NARROW",
   lbl_soc_var = formatters::var_labels(adae, fill = TRUE)[soc_var],
   lbl_overall = NULL,
-  annotations = NULL,
-  risk_diff = NULL
+  annotations = NULL
 )
 }
 \arguments{
@@ -66,18 +65,9 @@ make_table_10_gtsum(
 \item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
 the given value as the column label.}
 
-\item{risk_diff}{(named \code{list})\cr list of settings to apply to add one or more risk difference columns to the table.
-Defaults to \code{NULL} (no risk difference column added). See \code{\link[tern:add_riskdiff]{tern::add_riskdiff()}} for more details. List should
-contain the following elements:
-\itemize{
-\item \code{arm_x}: (required) the name of reference arm.
-\item \code{arm_y}: (required) the names of the arms to compare to the reference arm. A new column will be added for each
-element of \code{arm_y}.
-\item \code{col_label}: (optional) labels to use for the risk difference columns. Defaults to
-\code{"Risk Difference (\%) (95\% CI)"}. For more than one risk difference column, \code{"arm x vs. arm y"} text will also
-be included in the column labels by default. The length of \code{col_label} must be equal to the length of \code{arm_y}.
-\item \code{pct}: (optional) whether the output should be returned as percentages. Defaults to \code{TRUE}.
-}}
+\item{risk_diff}{(\code{list} of \code{character} vectors)\cr List of character vectors. Each vector must be
+of length 2 and contain the name of treatment arms to calculate risk difference and its 95\% CI for. Those names
+must exist in the \code{arm_var} column of the dataset specified in \code{adae}.}
 
 \item{prune_0}{(\code{flag})\cr Whether all-zero rows should be removed from the table. Boolean.}
 
@@ -96,21 +86,18 @@ Each name-value pair should use the annotation type as name and the desired stri
 An \code{rtable} object.
 
 \itemize{
-\item \code{make_table_10_gt} returns a \code{gt} object
+\item \code{make_table_10_gtsum} returns a \code{gt_tbl} object.
 }
 }
 \description{
 FDA Table 10: Patients With Serious Adverse Events by System Organ Class and
 FDA Medical Query (Narrow), Safety Population, Pooled Analyses
-
-FDA Table 10: Patients With Serious Adverse Events by System Organ Class and
-FDA Medical Query (Narrow), Safety Population, Pooled Analyses with /code{gt}
 }
 \details{
 \itemize{
 \item \code{adae} must contain the variables \code{AEBODSYS}, \code{AESER}, and the variables specified by
 \code{arm_var}, \code{id_var}, \code{saffl_var}, \code{fmqsc_var}, and \code{fmqnam_var}.
-\item If specified, \code{alt_counts_df} must contain \code{USUBJID} and the variables specified by \code{arm_var} and \code{saffl_var}.
+\item If specified, \code{alt_counts_df} must contain \code{id_var} and the variables specified by \code{arm_var} and \code{saffl_var}.
 \item \code{fmqsc_var} must contain "BROAD" or "NARROW" values, one of which will be displayed in the table. Narrow is
 selected by default (see \code{fmq_scope} argument).
 \item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
@@ -122,7 +109,7 @@ flag variables are treated as \code{"N"}.
 }
 \section{Functions}{
 \itemize{
-\item \code{make_table_10_gtsum()}: Create FDA table 10 using functions from \code{gt}.
+\item \code{make_table_10_gtsum()}: Create FDA table 10 using functions from \code{gtsummary}.
 
 }}
 \examples{
@@ -143,18 +130,6 @@ adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
 tbl <- make_table_10(adae = adae, alt_counts_df = adsl)
 tbl
 
-adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl")
-adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
-
-set.seed(1)
-adae <- adae \%>\%
-  rename(FMQ01SC = SMQ01SC) \%>\%
-  mutate(
-    AESER = sample(c("Y", "N"), size = nrow(adae), replace = TRUE),
-    FMQ01NAM = sample(c("FMQ1", "FMQ2", "FMQ3"), size = nrow(adae), replace = TRUE)
-  )
-adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
-
 tbl <- make_table_10_gtsum(adae = adae, alt_counts_df = adsl)
 tbl
 
@@ -164,16 +139,13 @@ annotations <- list(
   Safety Population, Pooled Analyses",
   footnotes = list(
     "Duration = [e.g., X week double-blind treatment period or median and a range
-    indicating pooled trial durations].",
-    "Difference is shown between [treatment arms] (e.g., difference is shown
-    between Drug Name dosage X vs. placebo)."
+    indicating pooled trial durations]."
   )
 )
-risk_diff <- list(c("A: Drug X", "C: Combination"), c("A: Drug X", "B: Placebo"))
 tbl <- make_table_10_gtsum(adae,
   alt_counts_df = adsl,
-  annotations = annotations,
-  risk_diff = risk_diff
+  annotations = annotations
 )
 tbl
+
 }

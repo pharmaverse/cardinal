@@ -85,10 +85,8 @@ make_table_10 <- function(adae,
 }
 
 
-#' FDA Table 10: Patients With Serious Adverse Events by System Organ Class and
-#'   FDA Medical Query (Narrow), Safety Population, Pooled Analyses with /code{gtsummary}
-#'
 #' @describeIn make_table_10 Create FDA table 10 using functions from `gtsummary`.
+#'
 #' @inheritParams argument_convention
 #' @param saffl_var (`character`)\cr safety population flag variable from `adae` to include in the table.
 #' @param ser_var (`character`)\cr serious Event variable from `adae` to include in the table.
@@ -103,21 +101,9 @@ make_table_10 <- function(adae,
 #'   must exist in the `arm_var` column of the dataset specified in `adae`.
 #'
 #' @return
-#' * `make_table_10_gtsum` returns a `gtsummary` object
+#' * `make_table_10_gtsum` returns a `gt_tbl` object.
 #'
 #' @examples
-#' adsl <- random.cdisc.data::cadsl
-#' adae <- random.cdisc.data::cadae
-#'
-#' set.seed(1)
-#' adae <- adae %>%
-#'   rename(FMQ01SC = SMQ01SC) %>%
-#'   mutate(
-#'     AESER = sample(c("Y", "N"), size = nrow(adae), replace = TRUE),
-#'     FMQ01NAM = sample(c("FMQ1", "FMQ2", "FMQ3"), size = nrow(adae), replace = TRUE)
-#'   )
-#' adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
-#'
 #' tbl <- make_table_10_gtsum(adae = adae, alt_counts_df = adsl)
 #' tbl
 #'
@@ -135,6 +121,7 @@ make_table_10 <- function(adae,
 #'   annotations = annotations
 #' )
 #' tbl
+#'
 #' @export
 make_table_10_gtsum <- function(adae,
                                 alt_counts_df = NULL,
@@ -154,15 +141,11 @@ make_table_10_gtsum <- function(adae,
   checkmate::assert_subset(c(saffl_var, id_var, soc_var, fmqnam_var, arm_var), names(adae))
   assert_flag_variables(adae, saffl_var)
   checkmate::assert_factor(adae[[arm_var]])
-
+  checkmate::assert_logical(show_colcounts)
   if (!is.null(alt_counts_df)) {
     checkmate::assert_data_frame(alt_counts_df)
     checkmate::assert_subset(c(id_var, arm_var), names(alt_counts_df))
   }
-
-  checkmate::assert_logical(show_colcounts)
-
-  cat("This function will take roughly 30 seconds to generate the table.")
 
   adae <- adae %>%
     filter(.data[[saffl_var]] == "Y", .data[[ser_var]] == "Y", .data[[fmqsc_var]] == fmq_scope)
@@ -173,13 +156,13 @@ make_table_10_gtsum <- function(adae,
       data = adae,
       strata = soc_var,
       ~ gtreg::tbl_ae(
-        data = .x |> dplyr::mutate(.x, !!soc_var := .y),
+        data = .x |> dplyr::mutate(!!soc_var := .y),
         strata = arm_var,
         id = id_var,
         soc = soc_var,
         ae = fmqnam_var,
         statistic = "{n} ({p}%)",
-        id_df = adsl
+        id_df = alt_counts_df
       ) %>%
         {
           if (!is.null(lbl_overall)) gtreg::add_overall(., across = "strata") else .
