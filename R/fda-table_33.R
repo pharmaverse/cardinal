@@ -34,7 +34,7 @@ make_table_33 <- function(advs,
                           risk_diff = NULL,
                           prune_0 = FALSE,
                           annotations = NULL) {
-  checkmate::assert_subset(c("AVISITN", "PARAMCD", "AVAL", "AVALU", arm_var, id_var, saffl_var), names(advs))
+  assert_subset(c("AVISITN", "PARAMCD", "AVAL", "AVALU", arm_var, id_var, saffl_var), names(advs))
   assert_flag_variables(advs, saffl_var)
 
   advs <- advs %>%
@@ -69,4 +69,102 @@ make_table_33 <- function(advs,
   if (prune_0) tbl <- prune_table(tbl)
 
   tbl
+}
+
+#' @describeIn make_table_33 Create FDA table 33 using functions from `gtsummary`.
+#'
+#' @return
+#' * `make_table_33_gtsum` returns a `gt` object
+#'
+#' @examples
+#' tbl <- make_table_33_gtsum(advs = advs)
+#' tbl
+#'
+#' @export
+make_table_33_gtsum <- function(advs,
+                                alt_counts_df = NULL,
+                                id_var = "USUBJID",
+                                arm_var = "ARM",
+                                saffl_var = "SAFFL",
+                                lbl_overall = NULL) {
+  assert_subset(c(
+    saffl_var, "AVISITN", "PARAMCD", "AVAL", "AVALU", arm_var, id_var
+  ), names(advs))
+  assert_flag_variables(advs, saffl_var)
+
+  advs_all <- advs %>%
+    filter(
+      .data[[saffl_var]] == "Y",
+      AVISITN >= 1,
+      PARAMCD %in% c("DIABP", "SYSBP")
+    ) %>%
+    group_by(.data[[id_var]], PARAMCD) %>%
+    mutate(
+      MAX_DIABP = if_else(PARAMCD == "DIABP", max(AVAL), NA_real_),
+      MAX_SYSBP = if_else(PARAMCD == "SYSBP", max(AVAL), NA_real_)
+    ) %>%
+    ungroup() %>%
+    mutate(
+      SBP90 = if_else(MAX_SYSBP < 90, "SBP <90", "Not", missing = "Not"),
+      DBP60 = if_else(MAX_DIABP < 60, "DBP <60", "Not", missing = "Not")
+    ) %>%
+    mutate(
+      SBP90 = formatters::with_label(SBP90 == "SBP <90", "SBP <90"),
+      DBP60 = formatters::with_label(DBP60 == "DBP <60", "DBP <60")
+    )
+
+  advs_diabp <- advs_all %>%
+    filter(PARAMCD == "DIABP") %>%
+    distinct(.data[[id_var]], .keep_all = TRUE) %>%
+    select(all_of(c(id_var, "DBP60", "ARM", "AVALU")))
+
+  advs_sysbp <- advs_all %>%
+    filter(PARAMCD == "SYSBP") %>%
+    distinct(.data[[id_var]], .keep_all = TRUE) %>%
+    select(all_of(c(id_var, "SBP90")))
+
+  advs_combined <-
+    full_join(advs_diabp, advs_sysbp, by = id_var) %>%
+    select(all_of(c("SBP90", "DBP60", "ARM", "AVALU", id_var, arm_var)))
+
+  if (!is.null(alt_counts_df)) {
+    adsl <- alt_counts_df %>%
+      filter(.data[[saffl_var]] == "Y") %>%
+      select(all_of(c(id_var, arm_var, saffl_var)))
+
+    advs_combined <-
+      advs_combined %>%
+      select(!all_of(arm_var)) %>%
+      right_join(adsl, by = id_var)
+  } else {
+    advs_combined <- advs_combined
+  }
+
+
+  avalu <- unique(advs_combined$AVALU)[1]
+  advs_combined <- advs_combined %>%
+    select(SBP90, DBP60, all_of(arm_var))
+
+  tbl <- advs_combined %>%
+    tbl_summary(
+      by = arm_var,
+      statistic = list(all_categorical() ~ "{n} ({p}%)"),
+      digits = everything() ~ c(0, 1),
+      missing = "no"
+    ) %>%
+    modify_header(label ~ paste0("**Blood Pressure (", avalu, ")**")) %>%
+    modify_header(all_stat_cols() ~ "**{level}**  \nN = {n}") %>%
+    gtsummary::modify_column_alignment(columns = all_stat_cols(), align = "right")
+
+  if (!is.null(lbl_overall)) {
+    tbl <- tbl %>%
+      add_overall(last = TRUE, col_label = paste0("**", lbl_overall, "**  \n N = {n}"))
+  }
+
+  tbl <- tbl %>% modify_footnote(update = everything() ~ NA)
+
+  gtsummary::with_gtsummary_theme(
+    x = gtsummary::theme_gtsummary_compact(),
+    expr = as_gt(tbl)
+  )
 }

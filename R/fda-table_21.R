@@ -51,7 +51,7 @@ make_table_21 <- function(df,
                           lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
                           prune_0 = FALSE,
                           annotations = NULL) {
-  checkmate::assert_subset(c(vars, id_var, arm_var, saffl_var), names(df))
+  assert_subset(c(vars, id_var, arm_var, saffl_var), names(df))
   assert_flag_variables(df, c(saffl_var, "ASER"))
 
   df <- df %>%

@@ -2,6 +2,7 @@
 % Please edit documentation in R/fda-table_33.R
 \name{make_table_33}
 \alias{make_table_33}
+\alias{make_table_33_gtsum}
 \title{FDA Table 33: Percentage of Patients Meeting Specific Hypotension Levels Postbaseline,
 Safety Population, Pooled Analysis}
 \usage{
@@ -17,17 +18,26 @@ make_table_33(
   prune_0 = FALSE,
   annotations = NULL
 )
+
+make_table_33_gtsum(
+  advs,
+  alt_counts_df = NULL,
+  id_var = "USUBJID",
+  arm_var = "ARM",
+  saffl_var = "SAFFL",
+  lbl_overall = NULL
+)
 }
 \arguments{
 \item{advs}{(\code{data.frame})\cr dataset (typically ADVS) required to build table.}
 
 \item{alt_counts_df}{(\code{character})\cr alternative dataset (typically ADSL) used only to calculate column counts.}
 
-\item{show_colcounts}{(\code{flag})\cr whether column counts should be printed.}
+\item{show_colcounts}{(\code{flag})\cr Whether column counts should be printed. Boolean.}
 
 \item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
 
-\item{arm_var}{(\code{character})\cr arm variable used to split table into columns.}
+\item{arm_var}{(\code{character})\cr Name of the treatment arm variable used to split table into columns.}
 
 \item{saffl_var}{(\code{character})\cr flag variable used to indicate inclusion in safety population.}
 
@@ -47,7 +57,7 @@ be included in the column labels by default. The length of \code{col_label} must
 \item \code{pct}: (optional) whether the output should be returned as percentages. Defaults to \code{TRUE}.
 }}
 
-\item{prune_0}{(\code{flag})\cr whether all-zero rows should be removed from the table.}
+\item{prune_0}{(\code{flag})\cr Whether all-zero rows should be removed from the table. Boolean.}
 
 \item{annotations}{(named \code{list} of \code{character})\cr list of annotations to add to the table. Valid
 annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
@@ -55,6 +65,10 @@ use the annotation type as name and the desired string as value.}
 }
 \value{
 An \code{rtable} object.
+
+\itemize{
+\item \code{make_table_33_gtsum} returns a \code{gt} object
+}
 }
 \description{
 FDA Table 33: Percentage of Patients Meeting Specific Hypotension Levels Postbaseline,
@@ -72,12 +86,20 @@ flag variables are treated as \code{"N"}.
 \item All-zero rows are not removed by default (see \code{prune_0} argument).
 }
 }
+\section{Functions}{
+\itemize{
+\item \code{make_table_33_gtsum()}: Create FDA table 33 using functions from \code{gtsummary}.
+
+}}
 \examples{
 adsl <- random.cdisc.data::cadsl
 advs <- random.cdisc.data::cadvs
 advs$AVAL <- advs$AVAL - 100
 
 tbl <- make_table_33(advs = advs, alt_counts_df = adsl)
+tbl
+
+tbl <- make_table_33_gtsum(advs = advs)
 tbl
 
 }

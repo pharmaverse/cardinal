@@ -55,7 +55,7 @@ make_table_10 <- function(adae,
     id_var, soc_var, "AESER", arm_var, saffl_var, fmqsc_var, fmqnam_var
   ), names(adae))
   assert_flag_variables(adae, c(saffl_var, "AESER"))
-  checkmate::assert_subset(toupper(fmq_scope), c("NARROW", "BROAD"))
+  assert_subset(toupper(fmq_scope), c("NARROW", "BROAD"))
 
   adae <- adae %>%
     filter(.data[[saffl_var]] == "Y", AESER == "Y", .data[[fmqsc_var]] == fmq_scope) %>%

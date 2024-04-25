@@ -33,7 +33,7 @@ make_table_13 <- function(adae,
                           lbl_overall = NULL,
                           risk_diff = NULL,
                           annotations = NULL) {
-  checkmate::assert_subset(c(id_var, arm_var, saffl_var, pref_var), names(adae))
+  assert_subset(c(id_var, arm_var, saffl_var, pref_var), names(adae))
   assert_flag_variables(adae, saffl_var)
 
   adae <- adae %>%

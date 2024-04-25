@@ -1,4 +1,4 @@
-adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") %>%
+adsl <- random.cdisc.data::cadsl %>%
   mutate(AGEGR1 = as.factor(case_when(
     AGE >= 17 & AGE < 65 ~ ">=17 to <65",
     AGE >= 65 ~ ">=65",
@@ -10,7 +10,7 @@ adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") %>%
     AGE = "Age, years"
   )
 
-adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
+adae <- random.cdisc.data::cadae
 
 df <- left_join(adsl, adae, by = intersect(names(adsl), names(adae)))
 
@@ -41,13 +41,17 @@ test_that("Table 22 generation works with custom values: N_col denominator and n
     lbl_overall = NULL,
     prune_0 = TRUE,
     annotations = list(
-      title = "Table 22. Overview of Adverse Events1 by Demographic Subgroup, Safety Population, Pooled Analysis (or Trial X)",
+      title = paste(
+        "Table 22. Overview of Adverse Events1 by Demographic Subgroup, Safety Population, Pooled Analysis",
+        "(or Trial X)"
+      ),
       main_footer = c(
         "Source: [include Applicant source, datasets and/or software tools used].",
         "(1) Treatment-emergent adverse event defined as [definition]. MedDRA version X."
       ),
       prov_footer = c(
-        "Abbreviations: MedDRA, Medical Dictionary for Regulatory Activities.; N, number of patients in treatment arm; n, number of patients with adverse event;",
+        "Abbreviations: MedDRA, Medical Dictionary for Regulatory Activities.;",
+        "N, number of patients in treatment arm; n, number of patients with adverse event;",
         "Ns, total number of patients for each specific subgroup"
       )
     )

@@ -47,7 +47,7 @@ make_table_02 <- function(df,
                           na_rm = FALSE,
                           prune_0 = TRUE,
                           annotations = NULL) {
-  checkmate::assert_subset(c(vars, arm_var, saffl_var), names(df))
+  assert_subset(c(vars, arm_var, saffl_var), names(df))
   assert_flag_variables(df, saffl_var)
 
   df <- df %>%
@@ -104,7 +104,7 @@ make_table_02_tplyr <- function(df,
                                 prune_0 = TRUE,
                                 annotations = NULL,
                                 tplyr_raw = FALSE) {
-  checkmate::assert_subset(c(saffl_var, vars, arm_var), names(df))
+  assert_subset(c(saffl_var, vars, arm_var), names(df))
   assert_flag_variables(df, saffl_var)
 
   df <- df %>% df_explicit_na()
@@ -264,7 +264,7 @@ make_table_02_gtsum <- function(df,
                                 lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
                                 lbl_overall = "Total Population",
                                 na_rm = FALSE) {
-  checkmate::assert_subset(c(vars, arm_var, saffl_var), names(df))
+  assert_subset(c(vars, arm_var, saffl_var), names(df))
   assert_flag_variables(df, saffl_var)
 
   df <- df %>%
@@ -286,7 +286,7 @@ make_table_02_gtsum <- function(df,
       ),
       digits = all_continuous() ~ 1,
       missing = ifelse(na_rm, "no", "ifany"),
-      label = as.list(lbl_vars) %>% stats::setNames(vars)
+      label = as.list(lbl_vars) %>% setNames(vars)
     ) %>%
     gtsummary::bold_labels() %>%
     modify_header(all_stat_cols() ~ "**{level}**  \nN = {n}") %>%

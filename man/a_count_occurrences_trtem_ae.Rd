@@ -20,7 +20,7 @@ a_count_occurrences_trtem_ae(
 \item{.var}{(\code{string})\cr single variable name that is passed by \code{rtables} when requested
 by a statistics function.}
 
-\item{.N_col}{(\code{integer})\cr column-wise N (column count) for the full column being analyzed that is typically
+\item{.N_col}{(\code{integer(1)})\cr column-wise N (column count) for the full column being analyzed that is typically
 passed by \code{rtables}.}
 
 \item{df_denom}{(\code{data.frame})\cr Full data frame used to calculate denominator subgroup counts
@@ -32,7 +32,7 @@ Note that \code{df} is filtered to only include treatment-emergent adverse event
 
 \item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
 
-\item{arm_var}{(\code{character})\cr arm variable used to split table into columns.}
+\item{arm_var}{(\code{character})\cr Name of the treatment arm variable used to split table into columns.}
 }
 \description{
 Analysis Function to Calculate Count/Fraction of Any Adverse Event Occurrences

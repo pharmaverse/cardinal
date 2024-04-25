@@ -39,7 +39,7 @@ make_table_07 <- function(adae,
                           prune_0 = TRUE,
                           na_level = "MISSING",
                           annotations = NULL) {
-  checkmate::assert_subset(c(
+  assert_subset(c(
     "TRTEMFL", "DTHFL", "DTHCAUS", arm_var, id_var, saffl_var
   ), names(adae))
   assert_flag_variables(adae, c(saffl_var, "TRTEMFL", "DTHFL"), na_level = na_level)
