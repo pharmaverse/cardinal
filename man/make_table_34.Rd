@@ -12,10 +12,12 @@ make_table_34(
   id_var = "USUBJID",
   arm_var = "ARM",
   saffl_var = "SAFFL",
+  trtemfl_var = "TRTEMFL",
   fmqsc_var = "FMQ01SC",
   fmqnam_var = "FMQ01NAM",
   fmq_scope = "NARROW",
   pref_var = "AEDECOD",
+  lbl_pref_var = formatters::var_labels(adae, fill = TRUE)[pref_var],
   lbl_overall = NULL,
   risk_diff = NULL,
   prune_0 = TRUE,
@@ -36,6 +38,8 @@ make_table_34(
 
 \item{saffl_var}{(\code{character})\cr flag variable used to indicate inclusion in safety population.}
 
+\item{trtemfl_var}{(\code{character})\cr flag variable used to identify Treatment-emergent AE.}
+
 \item{fmqsc_var}{(\code{character})\cr FMQ scope variable to use in table.}
 
 \item{fmqnam_var}{(\code{character})\cr FMQ reference name variable to use in table.}
@@ -43,6 +47,8 @@ make_table_34(
 \item{fmq_scope}{(\code{character})\cr FMQ scope ("NARROW" or "BROAD") to output in table.}
 
 \item{pref_var}{(\code{character})\cr Name of the preferred term variable from \code{adae} to include in the table.}
+
+\item{lbl_pref_var}{(\code{character})\cr label corresponding to preferred term variable \code{pref_var} to print in the table.}
 
 \item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
 the given value as the column label.}
@@ -75,7 +81,7 @@ Preferred Term, Safety Population, Pooled Analysis (or Trial X)
 \details{
 \itemize{
 \item \code{adae} must contain the variables \code{AEBODSYS}, \code{AESER}, and the variables specified by
-\code{arm_var}, \code{id_var}, \code{saffl_var}, \code{fmqsc_var}, \code{fmqnam_var}, and \code{pref_var}.
+\code{arm_var}, \code{id_var}, \code{saffl_var}, \code{trtemfl_var}, \code{fmqsc_var}, \code{fmqnam_var}, and \code{pref_var}.
 \item If specified, \code{alt_counts_df} must contain the variables specified by \code{arm_var}, \code{id_var}, and \code{saffl_var}.
 \item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
 flag variables are treated as \code{"N"}.
