@@ -39,7 +39,7 @@ make_table_14 <- function(adae,
                           prune_0 = FALSE,
                           na_level = "<Missing>",
                           annotations = NULL) {
-  checkmate::assert_subset(c(
+  assert_subset(c(
     id_var, soc_var, arm_var, saffl_var, fmqsc_var, fmqnam_var
   ), names(adae))
   assert_flag_variables(adae, saffl_var)

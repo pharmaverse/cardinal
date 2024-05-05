@@ -51,7 +51,7 @@ make_table_04 <- function(df,
                           prune_0 = FALSE,
                           risk_diff = NULL,
                           annotations = NULL) {
-  checkmate::assert_subset(c(
+  assert_subset(c(
     id_var, arm_var, pop_vars,
     "EOTSTT", "DCTREAS", "EOSSTT", "DCSREAS"
   ), names(df))

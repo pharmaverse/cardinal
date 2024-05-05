@@ -92,3 +92,17 @@
       4 G110     dichotomous &gt;110   label    &gt;110  123 (91~ 111 (~ 107 (~ 341 (~
       5 GE120    dichotomous &gt;=120  label    &gt;=120 88 (65.~ 70 (5~ 76 (5~ 234 (~
 
+# Table 32 (gtsum) generation missing values and ADSL
+
+    Code
+      res
+    Output
+      # A tibble: 5 x 9
+        variable var_type    var_label row_type label    stat_1   stat_2 stat_3 stat_0
+        <chr>    <chr>       <chr>     <chr>    <chr>    <chr>    <chr>  <chr>  <chr> 
+      1 L60      dichotomous &lt;60    label    &lt;60   0 (0.0%) 0 (0.~ 0 (0.~ 0 (0.~
+      2 G60      dichotomous &gt;60    label    &gt;60   114 (85~ 96 (7~ 96 (7~ 306 (~
+      3 G90      dichotomous &gt;90    label    &gt;90   114 (85~ 96 (7~ 95 (7~ 305 (~
+      4 G110     dichotomous &gt;110   label    &gt;110  103 (76~ 78 (5~ 78 (5~ 259 (~
+      5 GE120    dichotomous &gt;=120  label    &gt;=120 71 (53.~ 52 (3~ 53 (4~ 176 (~
+

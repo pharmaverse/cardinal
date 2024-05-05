@@ -51,9 +51,9 @@ make_table_15 <- function(adae,
                           prune_0 = TRUE,
                           na_level = "<Missing>",
                           annotations = NULL) {
-  checkmate::assert_subset(c("SEX", arm_var, id_var, fmqsc_var, fmqnam_var, saffl_var, pref_var), names(adae))
+  assert_subset(c("SEX", arm_var, id_var, fmqsc_var, fmqnam_var, saffl_var, pref_var), names(adae))
   assert_flag_variables(adae, saffl_var)
-  checkmate::assert_subset(toupper(fmq_scope), c("NARROW", "BROAD"))
+  assert_subset(toupper(fmq_scope), c("NARROW", "BROAD"))
 
   fmq_other_sexes <- unique(adae[adae[["SEX"]] != sex_scope, ][[fmqnam_var]])
   adae <- adae %>%
