@@ -3,7 +3,7 @@
 #'
 #' @details
 #' * `adae` must contain the variables `AEBODSYS`, `AESER`, and the variables specified by
-#'   `arm_var`, `id_var`, `saffl_var`, `fmqsc_var`, `fmqnam_var`, and `pref_var`.
+#'   `arm_var`, `id_var`, `saffl_var`, `trtemfl_var`, `fmqsc_var`, `fmqnam_var`, and `pref_var`.
 #' * If specified, `alt_counts_df` must contain the variables specified by `arm_var`, `id_var`, and `saffl_var`.
 #' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
 #'   flag variables are treated as `"N"`.
@@ -38,21 +38,26 @@ make_table_34 <- function(adae,
                           id_var = "USUBJID",
                           arm_var = "ARM",
                           saffl_var = "SAFFL",
+                          trtemfl_var = "TRTEMFL",
                           fmqsc_var = "FMQ01SC",
                           fmqnam_var = "FMQ01NAM",
                           fmq_scope = "NARROW",
                           pref_var = "AEDECOD",
+                          lbl_pref_var = formatters::var_labels(adae, fill = TRUE)[pref_var],
                           lbl_overall = NULL,
                           risk_diff = NULL,
                           prune_0 = TRUE,
                           na_level = "<Missing>",
                           annotations = NULL) {
-  assert_subset(c("AEBODSYS", arm_var, id_var, saffl_var, fmqsc_var, fmqnam_var, pref_var), names(adae))
-  assert_flag_variables(adae, saffl_var)
-  assert_subset(toupper(fmq_scope), c("NARROW", "BROAD"))
+  checkmate::assert_subset(c(
+    "AEBODSYS", arm_var, id_var, saffl_var, trtemfl_var, fmqsc_var, fmqnam_var,
+    pref_var
+  ), names(adae))
+  assert_flag_variables(adae, saffl_var, trtemfl_var)
+  checkmate::assert_subset(toupper(fmq_scope), c("NARROW", "BROAD"))
 
   adae <- adae %>%
-    filter(.data[[saffl_var]] == "Y", AESER == "Y", .data[[fmqsc_var]] == fmq_scope) %>%
+    filter(.data[[saffl_var]] == "Y", AESER == "Y", .data[[trtemfl_var]] == "Y", .data[[fmqsc_var]] == fmq_scope) %>%
     df_explicit_na(na_level = na_level)
   adae[[fmqnam_var]] <- with_label(adae[[fmqnam_var]], paste0("FMQ (", tools::toTitleCase(tolower(fmq_scope)), ")"))
 
@@ -63,20 +68,28 @@ make_table_34 <- function(adae,
     split_rows_by(
       "AEBODSYS",
       child_labels = "visible",
+      split_fun = drop_split_levels,
       label_pos = "topleft",
       split_label = obj_label(adae$AEBODSYS)
     ) %>%
     split_rows_by(
       fmqnam_var,
-      child_labels = "visible",
+      child_labels = "hidden",
       label_pos = "topleft",
       split_label = obj_label(adae[[fmqnam_var]])
+    ) %>%
+    summarize_num_patients(
+      var = id_var,
+      .stats = "unique",
+      .labels = c(unique = NULL),
+      riskdiff = !is.null(risk_diff)
     ) %>%
     count_occurrences(
       vars = pref_var,
       drop = FALSE,
       riskdiff = !is.null(risk_diff)
-    )
+    ) %>%
+    append_topleft(paste("   ", lbl_pref_var))
 
   tbl <- build_table(lyt, df = adae, alt_counts_df = alt_counts_df)
   if (prune_0) tbl <- prune_table(tbl)
