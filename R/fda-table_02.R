@@ -2,24 +2,19 @@
 #'
 #' @details
 #' * `data` must contain the variables specified by `continuous_vars`, and `categorical_vars`.
-#' * If specified, `alt_counts_df` must contain the variables specified by `arm_var`, `id_var`, and `saffl_var`.
-#' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
-#'   flag variables are treated as `"N"`.
-#' * Columns are split by arm. Overall population column is included by default (see `lbl_overall` argument).
-#' * Information from either ADSUB or ADVS is generally included into `df` prior to analysis.
-#' * Numbers in table for non-numeric variables represent the absolute numbers of patients and fraction of `N`.
-#' * All-zero rows are removed by default (see `prune_0` argument).
+#' * `tbl_engine` must be one of `gtsummary`, `rtables`, `tplyr`.
+#' * `return_ard` set to `TRUE` or `FALSE`; whether the intermediate ARD object should be returned.
 #'
 #' @inheritParams argument_convention
 #'
 #' @name make_table_02
 NULL
 
-#' @describeIn make_table_02 Create FDA table 2 using functions from `rtables` and `tern`.
+#' @describeIn make_table_02 Create FDA table 2 using an ARD.
 #'
 #' @return
 #' * `make_table_02` returns an object matching the selected `tbl_engine` argument.
-#' The intermediary `ARD` object is also returned by default
+#' The intermediary `ARD` object can also be returned with `return_ard` set to `TRUE`.
 #'
 #' @examples
 #' library(dplyr)
@@ -30,8 +25,7 @@ NULL
 #'     AGE >= 65 ~ ">=65",
 #'     AGE >= 65 & AGE < 75 ~ ">=65 to <75",
 #'     AGE >= 75 ~ ">=75"
-#'   )) %>% formatters::with_label("Age Group, years")) %>%
-#'   formatters::var_relabel(AGE = "Age, years")
+#'   ))
 #'
 #' tbl <- make_table_02(data = adsl)
 #' tbl
@@ -66,7 +60,7 @@ make_table_02 <- function(data,
   }
 }
 
-
+#' @keywords Internal
 make_ard_02 <- function(data = data,
                         by = "ARM",
                         continuous_vars = c("AGE"),
@@ -85,41 +79,6 @@ make_ard_02 <- function(data = data,
 }
 
 
-#' @details
-#' * `df` must contain the variables specified by `continuous_vars`, and `categorical_vars`.
-#' * If specified, `alt_counts_df` must contain the variables specified by `arm_var`, `id_var`, and `saffl_var`.
-#' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
-#'   flag variables are treated as `"N"`.
-#' * Columns are split by arm. Overall population column is included by default (see `lbl_overall` argument).
-#' * Information from either ADSUB or ADVS is generally included into `df` prior to analysis.
-#' * Numbers in table for non-numeric variables represent the absolute numbers of patients and fraction of `N`.
-#' * All-zero rows are removed by default (see `prune_0` argument).
-#'
-#' @inheritParams argument_convention
-#'
-#' @name make_table_02
-NULL
-
-#' @describeIn make_table_02 Create FDA table 2 using functions from `rtables` and `tern`.
-#'
-#' @return
-#' * `make_table_02` returns an object matching the selected `tbl_engine` argument.
-#' The intermediary `ARD` object is also returned by default
-#'
-#' @examples
-#' library(dplyr)
-#'
-#' adsl <- random.cdisc.data::cadsl %>%
-#'   mutate(AGEGR1 = as.factor(case_when(
-#'     AGE >= 17 & AGE < 65 ~ ">=17 to <65",
-#'     AGE >= 65 ~ ">=65",
-#'     AGE >= 65 & AGE < 75 ~ ">=65 to <75",
-#'     AGE >= 75 ~ ">=75"
-#'   )) %>% formatters::with_label("Age Group, years")) %>%
-#'   formatters::var_relabel(AGE = "Age, years")
-#'
-#' tbl <- make_table_02(data = adsl)
-#' tbl
 #' @keywords Internal
 make_table_02_rtables <- function(df,
                                   alt_counts_df = NULL,
@@ -385,3 +344,5 @@ make_table_02_gtsum <- function(df,
     expr = as_gt(tbl)
   )
 }
+
+
