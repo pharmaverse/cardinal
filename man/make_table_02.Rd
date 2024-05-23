@@ -2,11 +2,14 @@
 % Please edit documentation in R/fda-table_02.R
 \name{make_table_02}
 \alias{make_table_02}
+\alias{make_table_02_rtables}
 \alias{make_table_02_tplyr}
 \alias{make_table_02_gtsum}
 \title{FDA Table 2: Baseline Demographic and Clinical Characteristics, Safety Population, Pooled Analyses}
 \usage{
-make_table_02(
+make_table_02(data, ..., tbl_engine = "gtsummary", return_ard = TRUE)
+
+make_table_02_rtables(
   df,
   alt_counts_df = NULL,
   show_colcounts = TRUE,
@@ -78,7 +81,13 @@ table formatted using functions from \code{tfrmt} should be returned (default).}
 }
 \value{
 \itemize{
-\item \code{make_table_02} returns an \code{rtable} object.
+\item \code{make_table_02} returns an object matching the selected \code{tbl_engine} argument.
+The intermediary \code{ARD} object is also returned by default
+}
+
+\itemize{
+\item \code{make_table_02} returns an object matching the selected \code{tbl_engine} argument.
+The intermediary \code{ARD} object is also returned by default
 }
 
 \itemize{
@@ -95,7 +104,18 @@ FDA Table 2: Baseline Demographic and Clinical Characteristics, Safety Populatio
 }
 \details{
 \itemize{
-\item \code{df} must contain the variables specified by \code{vars}, \code{arm_var}, and \code{saffl_var}.
+\item \code{data} must contain the variables specified by \code{continuous_vars}, and \code{categorical_vars}.
+\item If specified, \code{alt_counts_df} must contain the variables specified by \code{arm_var}, \code{id_var}, and \code{saffl_var}.
+\item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
+flag variables are treated as \code{"N"}.
+\item Columns are split by arm. Overall population column is included by default (see \code{lbl_overall} argument).
+\item Information from either ADSUB or ADVS is generally included into \code{df} prior to analysis.
+\item Numbers in table for non-numeric variables represent the absolute numbers of patients and fraction of \code{N}.
+\item All-zero rows are removed by default (see \code{prune_0} argument).
+}
+
+\itemize{
+\item \code{df} must contain the variables specified by \code{continuous_vars}, and \code{categorical_vars}.
 \item If specified, \code{alt_counts_df} must contain the variables specified by \code{arm_var}, \code{id_var}, and \code{saffl_var}.
 \item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
 flag variables are treated as \code{"N"}.
@@ -108,6 +128,8 @@ flag variables are treated as \code{"N"}.
 \section{Functions}{
 \itemize{
 \item \code{make_table_02()}: Create FDA table 2 using functions from \code{rtables} and \code{tern}.
+
+\item \code{make_table_02_rtables()}: Create FDA table 2 using functions from \code{rtables} and \code{tern}.
 
 \item \code{make_table_02_tplyr()}: Create FDA table 2 using functions from \code{Tplyr} and \code{tfrmt}.
 
@@ -132,9 +154,22 @@ adsl <- random.cdisc.data::cadsl \%>\%
   )) \%>\% formatters::with_label("Age Group, years")) \%>\%
   formatters::var_relabel(AGE = "Age, years")
 
-tbl <- make_table_02(df = adsl)
+tbl <- make_table_02(data = adsl)
 tbl
 
+library(dplyr)
+
+adsl <- random.cdisc.data::cadsl \%>\%
+  mutate(AGEGR1 = as.factor(case_when(
+    AGE >= 17 & AGE < 65 ~ ">=17 to <65",
+    AGE >= 65 ~ ">=65",
+    AGE >= 65 & AGE < 75 ~ ">=65 to <75",
+    AGE >= 75 ~ ">=75"
+  )) \%>\% formatters::with_label("Age Group, years")) \%>\%
+  formatters::var_relabel(AGE = "Age, years")
+
+tbl <- make_table_02(data = adsl)
+tbl
 tbl <- make_table_02_tplyr(df = adsl)
 tbl
 
@@ -142,3 +177,4 @@ tbl <- make_table_02_gtsum(df = adsl)
 tbl
 
 }
+\keyword{Internal}
