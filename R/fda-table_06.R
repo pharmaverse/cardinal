@@ -33,7 +33,7 @@ make_table_06 <- function(adae,
                           risk_diff = NULL,
                           prune_0 = FALSE,
                           annotations = NULL) {
-  checkmate::assert_subset(c(
+  assert_subset(c(
     "TRTEMFL", "AESEV", "AESER", "AESDTH", "AESLIFE", "AESHOSP",
     "AESDISAB", "AESCONG", "AESMIE", "AEACN", arm_var, id_var, saffl_var
   ), names(adae))

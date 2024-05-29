@@ -37,7 +37,7 @@ make_table_12 <- function(adae,
                           risk_diff = NULL,
                           prune_0 = TRUE,
                           annotations = NULL) {
-  checkmate::assert_subset(c(
+  assert_subset(c(
     "AEBODSYS", "DCSREAS", arm_var, id_var, saffl_var, pref_var
   ), names(adae))
   assert_flag_variables(adae, saffl_var)

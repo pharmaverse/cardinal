@@ -175,3 +175,38 @@
       
       
 
+# make_table_09_tplyr() returns a tibble when tplyr_raw = TRUE
+
+    Code
+      tbl_out
+    Output
+      # A tibble: 9 x 4
+        row_label1            `var1_A: Drug X` `var1_B: Placebo` `var1_C: Combination`
+        <chr>                 <chr>            <chr>             <chr>                
+      1 "System Organ Class ~ "A: Drug X\n(N=~ "B: Placebo\n(N=~ "C: Combination\n(N=~
+      2 "Any SAE"             "104 (100.0%)"   "101 (100.0%)"    " 99 (100.0%)"       
+      3 "cl A"                " 48 ( 46.2%)"   " 48 ( 47.5%)"    " 50 ( 50.5%)"       
+      4 "   dcd A.1.1.1.2"    " 48 ( 46.2%)"   " 48 ( 47.5%)"    " 50 ( 50.5%)"       
+      5 "cl B"                " 79 ( 76.0%)"   " 78 ( 77.2%)"    " 76 ( 76.8%)"       
+      6 "   dcd B.1.1.1.1"    " 47 ( 45.2%)"   " 49 ( 48.5%)"    " 43 ( 43.4%)"       
+      7 "   dcd B.2.2.3.1"    " 48 ( 46.2%)"   " 54 ( 53.5%)"    " 51 ( 51.5%)"       
+      8 "cl D"                " 50 ( 48.1%)"   " 42 ( 41.6%)"    " 51 ( 51.5%)"       
+      9 "   dcd D.1.1.1.1"    " 50 ( 48.1%)"   " 42 ( 41.6%)"    " 51 ( 51.5%)"       
+
+# make_table_09_tplyr() returns a gt object when tplyr_raw = FALSE
+
+    Code
+      tbl_out %>% gt::extract_body()
+    Output
+      # A tibble: 8 x 4
+        row_label1    `var1_A: Drug X` `var1_B: Placebo` `var1_C: Combination`
+        <chr>         <chr>            <chr>             <chr>                
+      1 Any SAE       "104 (100.0%)"   "101 (100.0%)"    " 99 (100.0%)"       
+      2 cl A          " 48 (46.2%)"    " 48 (47.5%)"     " 50 (50.5%)"        
+      3 dcd A.1.1.1.2 " 48 (46.2%)"    " 48 (47.5%)"     " 50 (50.5%)"        
+      4 cl B          " 79 (76.0%)"    " 78 (77.2%)"     " 76 (76.8%)"        
+      5 dcd B.1.1.1.1 " 47 (45.2%)"    " 49 (48.5%)"     " 43 (43.4%)"        
+      6 dcd B.2.2.3.1 " 48 (46.2%)"    " 54 (53.5%)"     " 51 (51.5%)"        
+      7 cl D          " 50 (48.1%)"    " 42 (41.6%)"     " 51 (51.5%)"        
+      8 dcd D.1.1.1.1 " 50 (48.1%)"    " 42 (41.6%)"     " 51 (51.5%)"        
+

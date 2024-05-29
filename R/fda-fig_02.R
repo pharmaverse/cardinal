@@ -37,8 +37,8 @@ make_fig_02 <- function(df,
                         ggtheme = NULL,
                         add_table = TRUE,
                         annotations = NULL) {
-  checkmate::assert_subset(c(arm_var, id_var, saffl_var, eosdy_var), names(df))
-  checkmate::assert_choice(u_trtdur, c("days", "weeks", "months", "years"))
+  assert_subset(c(arm_var, id_var, saffl_var, eosdy_var), names(df))
+  assert_choice(u_trtdur, c("days", "weeks", "months", "years"))
   assert_flag_variables(df, saffl_var)
 
   df <- df %>%
@@ -80,7 +80,10 @@ make_fig_02 <- function(df,
   if (!is.null(ggtheme)) g <- g + ggtheme
 
   if (add_table) {
-    g_legend <- cowplot::get_legend(g)
+    # following 2 lines replace `g_legend <- cowplot::get_legend(g)` which is currently broken
+    legend_pos <- paste0("guide-box-", ifelse(is.null(ggtheme), "bottom", ggtheme$legend.position))
+    g_legend <- cowplot::get_plot_component(g, legend_pos, return_all = TRUE)
+
     g <- g + theme(legend.position = "none")
 
     xtick_lbls <- ggplot_build(g)$layout$panel_params[[1]]$x$breaks

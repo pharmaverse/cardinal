@@ -18,18 +18,16 @@
 #' @examples
 #' library(dplyr)
 #'
-#' adsl <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adsl") %>%
+#' adsl <- random.cdisc.data::cadsl %>%
 #'   mutate(AGEGR1 = as.factor(case_when(
 #'     AGE >= 17 & AGE < 65 ~ ">=17 to <65",
 #'     AGE >= 65 ~ ">=65",
 #'     AGE >= 65 & AGE < 75 ~ ">=65 to <75",
 #'     AGE >= 75 ~ ">=75"
 #'   )) %>% formatters::with_label("Age Group, years")) %>%
-#'   formatters::var_relabel(
-#'     AGE = "Age, years"
-#'   )
+#'   formatters::var_relabel(AGE = "Age, years")
 #'
-#' adae <- scda::synthetic_cdisc_dataset("rcd_2022_10_13", "adae")
+#' adae <- random.cdisc.data::cadae
 #'
 #' df <- left_join(adsl, adae, by = intersect(names(adsl), names(adae)))
 #'
@@ -48,7 +46,7 @@ make_table_22 <- function(df,
                           lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
                           prune_0 = FALSE,
                           annotations = NULL) {
-  checkmate::assert_subset(c(vars, arm_var, saffl_var), names(df))
+  assert_subset(c(vars, arm_var, saffl_var), names(df))
 
   df <- df %>%
     filter(.data[[saffl_var]] == "Y") %>%

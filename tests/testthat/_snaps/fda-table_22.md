@@ -23,9 +23,9 @@
         OTHER                                            0             0              0       
         UNKNOWN                                          0             0              0       
       ETHNIC, n (%)                                                                           
-        NOT REPORTED                                 6 (100%)      10 (100%)      10 (90.9%)  
         HISPANIC OR LATINO                          13 (86.7%)    17 (94.4%)      13 (86.7%)  
         NOT HISPANIC OR LATINO                      95 (91.3%)    94 (91.3%)      93 (92.1%)  
+        NOT REPORTED                                 6 (100%)      10 (100%)      10 (90.9%)  
         UNKNOWN                                      8 (88.9%)     2 (66.7%)       4 (80%)    
 
 # Table 22 generation works with custom values: N_s denominator and overall column
@@ -53,9 +53,9 @@
         OTHER                                            0             0              0                 0        
         UNKNOWN                                          0             0              0                 0        
       ETHNIC, n (%)                                                                                              
-        NOT REPORTED                                 6 (100%)      10 (100%)      10 (90.9%)        26 (96.3%)   
         HISPANIC OR LATINO                          13 (86.7%)    17 (94.4%)      13 (86.7%)        43 (89.6%)   
         NOT HISPANIC OR LATINO                      95 (91.3%)    94 (91.3%)      93 (92.1%)       282 (91.6%)   
+        NOT REPORTED                                 6 (100%)      10 (100%)      10 (90.9%)        26 (96.3%)   
         UNKNOWN                                      8 (88.9%)     2 (66.7%)       4 (80%)          14 (82.4%)   
 
 # Table 22 generation works with custom values: N_col denominator and no overall column
@@ -84,16 +84,17 @@
         MULTIPLE                                         0         1 (0.7%)           0       
         NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER        0         1 (0.7%)           0       
       ETHNIC, n (%)                                                                           
-        NOT REPORTED                                 6 (4.5%)      10 (7.5%)      10 (7.6%)   
         HISPANIC OR LATINO                           13 (9.7%)    17 (12.7%)      13 (9.8%)   
         NOT HISPANIC OR LATINO                      95 (70.9%)    94 (70.1%)      93 (70.5%)  
+        NOT REPORTED                                 6 (4.5%)      10 (7.5%)      10 (7.6%)   
         UNKNOWN                                       8 (6%)       2 (1.5%)         4 (3%)    
       ————————————————————————————————————————————————————————————————————————————————————————
       
       Source: [include Applicant source, datasets and/or software tools used].
       (1) Treatment-emergent adverse event defined as [definition]. MedDRA version X.
       
-      Abbreviations: MedDRA, Medical Dictionary for Regulatory Activities.; N, number of patients in treatment arm; n, number of patients with adverse event;
+      Abbreviations: MedDRA, Medical Dictionary for Regulatory Activities.;
+      N, number of patients in treatment arm; n, number of patients with adverse event;
       Ns, total number of patients for each specific subgroup
 
 # Table 22 generation works with some NA values

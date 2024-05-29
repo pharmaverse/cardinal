@@ -32,10 +32,10 @@ make_table_08 <- function(adae,
                           lbl_dth_vars = c("Cause of Death\nMedDRA\nPreferred Term", "Cause of Death\nVerbatim Term"),
                           na_level = "NA",
                           annotations = NULL) {
-  checkmate::assert_subset(c(
+  assert_subset(c(
     "AGE", "SEX", "AESDTH", "DTHADY", dth_vars, arm_var, id_var, saffl_var
   ), names(adae))
-  checkmate::assert_subset(c(
+  assert_subset(c(
     saffl_var, id_var, "PARAMCD", "TRTSDT", "TRTEDT", "AVAL", "AVALU"
   ), names(adex))
   assert_flag_variables(adae, saffl_var)
