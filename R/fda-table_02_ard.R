@@ -37,8 +37,12 @@ make_table_32 <- function(data,
   if (tbl_engine == "rtables") {
     ard <- "ARD not available for {rtables}"
     tbl <- make_table_32_rtables(df = data)
-  } else {
-    ard <- make_ard_32(...)
+  } else if (tlb_engine == "gtsummary") {
+
+    tbl <- make_table_32_gtsum(df = data)
+
+
+    # ard <- make_ard_32(...)
     # commenting out this table building portion until package refactor
     # if (tbl_engine == "gtsummary") {
     #   tbl <- make_table_02_gtsum(ard, ...)
@@ -60,22 +64,23 @@ make_table_32 <- function(data,
 #' * `make_table_32_gtsum` returns a `tbl_summary` object
 #'
 #' @examples
-#' tbl <- make_table_32_gtsum(advs = advs)
+#' tbl <- make_table_32_gtsum(df = advs)
 #' tbl
 #'
 #' @keywords Internal
-make_table_32_gtsum <- function(advs,
+make_table_32_gtsum <- function(df,
                                 alt_counts_df = NULL,
                                 id_var = "USUBJID",
                                 arm_var = "ARM",
                                 saffl_var = "SAFFL",
-                                lbl_overall = NULL) {
+                                lbl_overall = NULL,
+                                return_ard = NULL) {
   assert_subset(c(
     saffl_var, "AVISITN", "PARAMCD", "AVAL", "AVALU", arm_var, id_var
-  ), names(advs))
-  assert_flag_variables(advs, saffl_var)
+  ), names(df))
+  assert_flag_variables(df, saffl_var)
 
-  advs <- advs %>%
+  advs <- df %>%
     filter(
       .data[[saffl_var]] == "Y",
       AVISITN >= 1,
@@ -143,7 +148,43 @@ make_table_32_gtsum <- function(advs,
     x = gtsummary::theme_gtsummary_compact(),
     expr = as_gt(tbl)
   )
+
+  if (return_ard == TRUE) {
+    ard <-
+      ard_stack(
+        data = advs,
+        by = arm_var,
+        ard_categorical(variables = c("L60", "G60", "G90", "G110", "GE120"))
+      ) %>%
+      filter(variable_level == TRUE) %>%
+      mutate(
+        variable_level = case_when(
+          variable == "L60" ~ "<60",
+          variable == "G60" ~ ">60",
+          variable == "G90" ~ ">90",
+          variable == "G90" ~ ">90",
+          variable == "G110" ~ ">110",
+          variable == "GE120" ~ ">=120"
+        ),
+        variable = case_when(
+          variable != "ARM" ~ "DBP"
+        )
+      )
+
+    return(ard)
+  }
+  else {
+    return(tbl)
+  }
 }
+
+adsl <- random.cdisc.data::cadsl
+advs <- random.cdisc.data::cadvs
+library(cards)
+tbl_32_gtsum <- make_table_32_gtsum(df = advs, return_ard = FALSE)
+ard_32_gtsum <- make_table_32_gtsum(df = advs, return_ard = TRUE)
+tbl_32_gtsum
+print(ard_32_gtsum, n = 10000)
 
 #' @describeIn make_table_32_rtables Create FDA table 32 using functions from `rtables` and `tern`.
 #'
@@ -291,4 +332,4 @@ make_ard_32 <- function(data = data,
   return(ard)
 }
 
-tbl <- make_ard_32(data = advs)
+
