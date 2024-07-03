@@ -7,6 +7,8 @@
 make_table_05(
   df,
   alt_counts_df = NULL,
+  return_ard = TRUE,
+  table_engine = "rtables",
   show_colcounts = TRUE,
   arm_var = "ARM",
   id_var = "USUBJID",

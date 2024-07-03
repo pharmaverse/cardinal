@@ -25,6 +25,9 @@
 #' @export
 make_table_05 <- function(df,
                           alt_counts_df = NULL,
+                          return_table = TRUE,
+                          return_ard = TRUE,
+                          table_engine = "rtables",
                           show_colcounts = TRUE,
                           arm_var = "ARM",
                           id_var = "USUBJID",
@@ -37,6 +40,115 @@ make_table_05 <- function(df,
                           risk_diff = NULL,
                           prune_0 = FALSE,
                           annotations = NULL) {
+  assert_subset(c(id_var, arm_var, saffl_var, id_var, trtsdtm_var, trtedtm_var), names(df))
+  assert_choice(u_trtdur, c("days", "weeks", "months", "years"))
+  assert_flag_variables(df, saffl_var)
+
+  df <- df %>%
+    as_tibble() %>%
+    filter(.data[[saffl_var]] == "Y") %>%
+    df_explicit_na() %>%
+    mutate(
+      TRTDUR = lubridate::interval(lubridate::ymd_hms(.data[[trtsdtm_var]]), lubridate::ymd_hms(.data[[trtedtm_var]]))
+    ) %>%
+    mutate(
+      TRTDUR_MONTHS = TRTDUR %>% as.numeric("months"),
+      TRTDUR = TRTDUR %>% as.numeric(u_trtdur)
+    ) %>%
+    mutate(
+      D_ANY = (TRTDUR_MONTHS > 0) %>% with_label("Any duration (at least 1 dose)"),
+      D_LT1 = (TRTDUR_MONTHS < 1) %>% with_label("<1 month"),
+      D_GT1 = (TRTDUR_MONTHS >= 1) %>% with_label(">=1 month"),
+      D_GT3 = (TRTDUR_MONTHS >= 3) %>% with_label(">=3 months"),
+      D_GT6 = (TRTDUR_MONTHS >= 6) %>% with_label(">=6 months"),
+      D_GT12 = (TRTDUR_MONTHS >= 12) %>% with_label(">=12 months"),
+      DUR_LBL = "Patients Treated, by duration"
+    )
+
+  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, id_var, arm_var, saffl_var)
+
+  tbl_return <- if (return_ard && return_table) list() else NA
+  if (return_ard || table_engine == "gtsummary") {
+    ard_func <- ard_table_05
+
+  }
+  if (return_table) {
+    tbl_func <- switch(
+      table_engine,
+      "rtables" = make_table_05_rtables,
+      "gtsummary" = warning("There is currently no `gtsummary` function available for FDA table 5.")
+    )
+  }
+
+}
+
+#' ARD Table 05
+#'
+#' @examples
+#' adsl <- random.cdisc.data::cadsl
+#' tbl <- ard_table_05(df = adsl)
+#'
+#' tbl
+#'
+#' @export
+ard_table_05 <- function(df,
+                         alt_counts_df = NULL,
+                         show_colcounts = TRUE,
+                         arm_var = "ARM",
+                         id_var = "USUBJID",
+                         saffl_var = "SAFFL",
+                         trtsdtm_var = "TRTSDTM",
+                         trtedtm_var = "TRTEDTM",
+                         u_trtdur = "days",
+                         lbl_trtdur = paste("Duration of Treatment,", u_trtdur),
+                         lbl_overall = NULL,
+                         risk_diff = NULL,
+                         prune_0 = FALSE,
+                         annotations = NULL) {
+
+  stats_trtdur <- df |>
+    group_by(ARM) |>
+    ard_continuous(
+      variables = "TRTDUR",
+      statistic = everything() ~  continuous_summary_fns(
+        summaries = c("mean", "sd", "median", "min", "max", "p25", "p75"),
+        other_stats = list(
+          tot_exposure = \(x) sum(x),
+          person_yrs = \(x) as.numeric(lubridate::duration(sum(x), u_trtdur), "years")
+        )
+      ),
+      fmt_fn = ~ list(~ \(x) round5(x, digits = 2))
+    ) |>
+    apply_fmt_fn()
+
+  stats_pt_cts <- df |>
+    group_by(ARM) |>
+    ard_dichotomous(
+      variables = c(D_ANY, D_LT1, D_GT1, D_GT3, D_GT6, D_GT12),
+      value = list(D_ANY = TRUE, D_LT1 = TRUE, D_GT1 = TRUE, D_GT3 = TRUE, D_GT6 = TRUE, D_GT12 = TRUE),
+      statistic = everything() ~ categorical_summary_fns(summaries = c("n", "p")),
+      denominator = alt_counts_df
+    )
+
+  ard <- bind_ard(stats_trtdur, stats_pt_cts)
+
+  ard
+}
+
+make_table_05_rtables <- function(df,
+                                  alt_counts_df = NULL,
+                                  show_colcounts = TRUE,
+                                  arm_var = "ARM",
+                                  id_var = "USUBJID",
+                                  saffl_var = "SAFFL",
+                                  trtsdtm_var = "TRTSDTM",
+                                  trtedtm_var = "TRTEDTM",
+                                  u_trtdur = "days",
+                                  lbl_trtdur = paste("Duration of Treatment,", u_trtdur),
+                                  lbl_overall = NULL,
+                                  risk_diff = NULL,
+                                  prune_0 = FALSE,
+                                  annotations = NULL) {
   assert_subset(c(id_var, arm_var, saffl_var, id_var, trtsdtm_var, trtedtm_var), names(df))
   assert_choice(u_trtdur, c("days", "weeks", "months", "years"))
   assert_flag_variables(df, saffl_var)
