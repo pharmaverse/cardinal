@@ -1,14 +1,11 @@
 /*-- scss:defaults --*/
 
-$toc-color: #3CB371;
+$toc-color: #F0181E;
+$navbar-bg: #323232;
 
 /*-- scss:rules --*/
 
 /* css styles */
-.navbar {
-  background-color: #323232;
-}
-
 .navbar .navbar-brand {
   color: white !important;
 }
@@ -18,9 +15,9 @@ $toc-color: #3CB371;
 }
 
 .panel-tabset li.nav-item a.nav-link {
-  color: #2E8B57;
+  color: #8F0407;
 }
 
 .panel-tabset li.nav-item a.nav-link.active {
-  color: #3CB371;
+  color: #F0181E;
 }
