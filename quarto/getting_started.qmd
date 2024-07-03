@@ -20,19 +20,18 @@ To use the `cardinal` package, ensure you have these necessary package dependenc
 if (!require("formatters")) install.packages("formatters")
 if (!require("rtables")) install.packages("rtables")
 if (!require("rlistings")) install.packages("rlistings")
-if (!require("remotes")) install.packages("remotes")
 if (!require("tern")) install.packages("tern")
 ```
 
-Optionally, to run the examples provided within the `cardinal` package and on this site you can also install the synthetic CDISC data package from GitHub, which contains the example datasets, by running the following:
+Optionally, to run the examples provided within the `cardinal` package and on this site you can also install the random CDISC data package, which contains example datasets, by running the following:
 
 ```{r, echo=TRUE, eval=FALSE}
-if (!require("random.cdisc.data")) remotes::install_github("insightsengineering/random.cdisc.data@*release")
+if (!require("random.cdisc.data")) install.packages("random.cdisc.data")
 ```
 
 For more information on these packages, see the [Additional Resources](#additional-resources) section below.
 
-#### Installing the `cardinal` Package
+#### Installing the cardinal Package
 
 To install the `cardinal` package, run the following line of code:
 
@@ -74,7 +73,7 @@ Each template provided is associated with a function available within the `cardi
 
 ### Creating Tables
 
-There are many table-generating functions available within the `cardinal` package, each of which is used to generate a different FDA standard safety table using R. These functions create `rtables` table objects which can then be further customized, paginated, etc. if required using functions from the [`rtables`](https://insightsengineering.github.io/rtables/main/) package.
+There are many table-generating functions available within the `cardinal` package, each of which is used to generate a different FDA standard safety table using R. These functions create `rtables` table objects which can then be further customized, paginated, etc. if required using functions from the [`rtables`](https://insightsengineering.github.io/rtables/) package.
 
 #### Using the Table Functions
 
@@ -148,8 +147,8 @@ You can access the source code for all currently available functions in the `car
 
 See the following packages used by `cardinal` for more information:
 
--   [`rtables`](https://insightsengineering.github.io/rtables/main/): Table creation
--   [`rlistings`](https://insightsengineering.github.io/rlistings/main/): Listing creation
--   [`tern`](https://insightsengineering.github.io/tern/main/): Clinical trials analysis functions
--   [`formatters`](https://insightsengineering.github.io/formatters/main/): Additional rendering formatting
--   [`random.cdisc.data``](https://insightsengineering.github.io/random.cdisc.data/main/): Example synthetic randomized CDISC datasets (required for examples only)
+-   [`tern`](https://insightsengineering.github.io/tern): Clinical trials analysis functions
+-   [`rtables`](https://insightsengineering.github.io/rtables): Table creation
+-   [`rlistings`](https://insightsengineering.github.io/rlistings): Listing creation
+-   [`formatters`](https://insightsengineering.github.io/formatters): Additional rendering formatting
+-   [`random.cdisc.data`](https://insightsengineering.github.io/random.cdisc.data): Example synthetic randomized CDISC datasets (required for examples only)
