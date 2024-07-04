@@ -12,7 +12,7 @@ editor:
 
 ![](../assets/images/screenshots/table_17.png){fig-align="center"}
 
-## rtables/tern Table
+## rtables Table
 
 ```{r tbl, message=FALSE, warning=FALSE}
 # Load Libraries & Data
@@ -42,7 +42,7 @@ risk_diff <- list(arm_x = "B: Placebo", arm_y = "A: Drug X")
 make_table_17(adae = adae, alt_counts_df = adsl, risk_diff = risk_diff)
 ```
 
-## rtables/tern Table Setup
+## rtables Table Setup
 
 ```{r tbl, eval=FALSE, echo=TRUE}
 ```
@@ -89,7 +89,7 @@ Required variables:
 +-----------------------+------------------------------------------------------------------+-----------------------+
 | `risk_diff`           | (named `list`) List of settings to apply to add a risk           | `NULL`                |
 |                       | difference column to the table. See                              |                       |
-|                       | [tern::add_riskdiff()](https://insight                           |                       |
+|                       | [`tern::add_riskdiff()`](https://insight                           |                       |
 |                       | sengineering.github.%20io/tern/main/reference/add_riskdiff.html) |                       |
 |                       | for more details. List should contain the following elements:    |                       |
 |                       |                                                                  |                       |
