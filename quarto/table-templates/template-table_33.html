@@ -2,9 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.353">
+<meta name="generator" content="quarto-1.4.555">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>falcon - FDA Table 33</title>
+<title>cardinal - FDA Table 33</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,7 +19,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -59,7 +59,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../quarto/assets/images/falcon.png" rel="icon" type="image/png">
+<link href="../../quarto/assets/images/cardinal.png" rel="icon" type="image/png">
 <script src="../../site_libs/cookie-consent/cookie-consent.js"></script>
 <link href="../../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
@@ -78,7 +78,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -87,8 +92,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script><script type="text/plain" cookie-consent="tracking">
 
@@ -113,190 +120,188 @@ cookieconsent.run({
   "notice_banner_reject_button_hide":false,
   "preferences_center_close_button_hide":false,
   "website_name":""
+  ,
+"language":"en-US"
   });
 });
 </script><style>html{ scroll-behavior: smooth; }</style>
 <link rel="stylesheet" href="../../quarto/assets/style.scss">
-<meta property="og:title" content="falcon - FDA Table 33">
+<meta property="og:title" content="cardinal - FDA Table 33">
 <meta property="og:description" content="Percentage of Patients Meeting Specific Hypotension Levels Postbaseline, Safety Population, Pooled Analysis">
-<meta property="og:image" content="https://pharmaverse.github.io/falcon/quarto/assets/images/screenshots/table_33.png">
-<meta property="og:site-name" content="falcon">
-<meta property="og:image:height" content="321">
-<meta property="og:image:width" content="974">
+<meta property="og:site_name" content="cardinal">
 </head>
 <body class="nav-fixed">
 
-
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg " data-bs-theme="dark"><div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
     <a href="../../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../../quarto/assets/images/falcon.png" alt="" class="navbar-logo"></a>
+    <img src="../../quarto/assets/images/cardinal.png" alt="" class="navbar-logo"></a>
     <a class="navbar-brand" href="../../index.html">
-    <span class="navbar-title">falcon</span>
+    <span class="navbar-title">cardinal</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="true"></div>
+            <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
 <li class="nav-item">
-    <a class="nav-link" href="../../index.html" rel="" target="">
- <span class="menu-text">Home</span></a>
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-template-library" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-template-library" role="button" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Template Library</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-template-library">
 <li>
-    <a class="dropdown-item" href="../../quarto/table-templates/template-table_02.html" rel="" target="">
+    <a class="dropdown-item" href="../../quarto/table-templates/template-table_02.html">
  <span class="dropdown-text">FDA Table 2</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../quarto/table-templates/template-table_03.html" rel="" target="">
+    <a class="dropdown-item" href="../../quarto/table-templates/template-table_03.html">
  <span class="dropdown-text">FDA Table 3</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../quarto/table-templates/template-table_04.html" rel="" target="">
+    <a class="dropdown-item" href="../../quarto/table-templates/template-table_04.html">
  <span class="dropdown-text">FDA Table 4</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../quarto/table-templates/template-table_05.html" rel="" target="">
+    <a class="dropdown-item" href="../../quarto/table-templates/template-table_05.html">
  <span class="dropdown-text">FDA Table 5</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../quarto/table-templates/template-table_06.html" rel="" target="">
+    <a class="dropdown-item" href="../../quarto/table-templates/template-table_06.html">
  <span class="dropdown-text">FDA Table 6</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../quarto/table-templates/template-table_07.html" rel="" target="">
+    <a class="dropdown-item" href="../../quarto/table-templates/template-table_07.html">
  <span class="dropdown-text">FDA Table 7</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../quarto/table-templates/template-table_08.html" rel="" target="">
+    <a class="dropdown-item" href="../../quarto/table-templates/template-table_08.html">
  <span class="dropdown-text">FDA Table 8</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../quarto/table-templates/template-table_09.html" rel="" target="">
+    <a class="dropdown-item" href="../../quarto/table-templates/template-table_09.html">
  <span class="dropdown-text">FDA Table 9</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../quarto/table-templates/template-table_10.html" rel="" target="">
+    <a class="dropdown-item" href="../../quarto/table-templates/template-table_10.html">
  <span class="dropdown-text">FDA Table 10</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../quarto/table-templates/template-table_11.html" rel="" target="">
+    <a class="dropdown-item" href="../../quarto/table-templates/template-table_11.html">
  <span class="dropdown-text">FDA Table 11</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../quarto/table-templates/template-table_12.html" rel="" target="">
+    <a class="dropdown-item" href="../../quarto/table-templates/template-table_12.html">
  <span class="dropdown-text">FDA Table 12</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../quarto/table-templates/template-table_13.html" rel="" target="">
+    <a class="dropdown-item" href="../../quarto/table-templates/template-table_13.html">
  <span class="dropdown-text">FDA Table 13</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../quarto/table-templates/template-table_14.html" rel="" target="">
+    <a class="dropdown-item" href="../../quarto/table-templates/template-table_14.html">
  <span class="dropdown-text">FDA Table 14</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../quarto/table-templates/template-table_15.html" rel="" target="">
+    <a class="dropdown-item" href="../../quarto/table-templates/template-table_15.html">
  <span class="dropdown-text">FDA Table 15</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../quarto/table-templates/template-table_16.html" rel="" target="">
+    <a class="dropdown-item" href="../../quarto/table-templates/template-table_16.html">
  <span class="dropdown-text">FDA Table 16</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../quarto/table-templates/template-table_17.html" rel="" target="">
+    <a class="dropdown-item" href="../../quarto/table-templates/template-table_17.html">
  <span class="dropdown-text">FDA Table 17</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../quarto/table-templates/template-table_18.html" rel="" target="">
+    <a class="dropdown-item" href="../../quarto/table-templates/template-table_18.html">
  <span class="dropdown-text">FDA Table 18</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../quarto/table-templates/template-table_20.html" rel="" target="">
+    <a class="dropdown-item" href="../../quarto/table-templates/template-table_20.html">
  <span class="dropdown-text">FDA Table 20</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../quarto/table-templates/template-table_21.html" rel="" target="">
+    <a class="dropdown-item" href="../../quarto/table-templates/template-table_21.html">
  <span class="dropdown-text">FDA Table 21</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../quarto/table-templates/template-table_22.html" rel="" target="">
+    <a class="dropdown-item" href="../../quarto/table-templates/template-table_22.html">
  <span class="dropdown-text">FDA Table 22</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../quarto/table-templates/template-table_32.html" rel="" target="">
+    <a class="dropdown-item" href="../../quarto/table-templates/template-table_32.html">
  <span class="dropdown-text">FDA Table 32</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../quarto/table-templates/template-table_33.html" rel="" target="">
+    <a class="dropdown-item" href="../../quarto/table-templates/template-table_33.html">
  <span class="dropdown-text">FDA Table 33</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../quarto/table-templates/template-table_34.html" rel="" target="">
+    <a class="dropdown-item" href="../../quarto/table-templates/template-table_34.html">
  <span class="dropdown-text">FDA Table 34</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../quarto/table-templates/template-table_35.html" rel="" target="">
+    <a class="dropdown-item" href="../../quarto/table-templates/template-table_35.html">
  <span class="dropdown-text">FDA Table 35</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../quarto/table-templates/template-table_36.html" rel="" target="">
+    <a class="dropdown-item" href="../../quarto/table-templates/template-table_36.html">
  <span class="dropdown-text">FDA Table 36</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../quarto/figure-templates/template-fig_01.html" rel="" target="">
+    <a class="dropdown-item" href="../../quarto/figure-templates/template-fig_01.html">
  <span class="dropdown-text">FDA Figure 1</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../quarto/figure-templates/template-fig_02.html" rel="" target="">
+    <a class="dropdown-item" href="../../quarto/figure-templates/template-fig_02.html">
  <span class="dropdown-text">FDA Figure 2</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../quarto/figure-templates/template-fig_14.html" rel="" target="">
+    <a class="dropdown-item" href="../../quarto/figure-templates/template-fig_14.html">
  <span class="dropdown-text">FDA Figure 14</span></a>
   </li>  
     </ul>
 </li>
   <li class="nav-item">
-    <a class="nav-link" href="../../quarto/about.html" rel="" target="">
- <span class="menu-text">About</span></a>
+    <a class="nav-link" href="../../quarto/about.html"> 
+<span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../quarto/resources.html" rel="" target="">
- <span class="menu-text">Resources</span></a>
+    <a class="nav-link" href="../../quarto/resources.html"> 
+<span class="menu-text">Resources</span></a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-help" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-help" role="button" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Help</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-help">
 <li>
-    <a class="dropdown-item" href="../../quarto/getting_started.html" rel="" target="">
+    <a class="dropdown-item" href="../../quarto/getting_started.html">
  <span class="dropdown-text">Getting Started</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://github.com/pharmaverse/falcon/issues/new/choose" rel="" target="">
+    <a class="dropdown-item" href="https://github.com/pharmaverse/cardinal/issues/new/choose">
  <span class="dropdown-text">Report a Bug</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../quarto/faq.html" rel="" target="">
+    <a class="dropdown-item" href="../../quarto/faq.html">
  <span class="dropdown-text">FAQ</span></a>
   </li>  
     </ul>
 </li>
 </ul>
-<div class="quarto-navbar-tools ms-auto">
+</div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
-          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
@@ -310,7 +315,7 @@ cookieconsent.run({
 
 
 
-<div class="quarto-title-meta">
+<div class="quarto-title-meta column-page">
 
     
   
@@ -318,11 +323,12 @@ cookieconsent.run({
   </div>
   
 
+
 </header><div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
 <li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Spec. Screenshot</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">rtables/tern Table</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">rtables/tern Table Setup</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">rtables Table</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">rtables Table Setup</a></li>
 <li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false">Function Details</a></li>
 <li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-5" role="tab" aria-controls="tabset-1-5" aria-selected="false">gtsummary Table</a></li>
 <li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-6-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-6" role="tab" aria-controls="tabset-1-6" aria-selected="false">gtsummary Table Setup</a></li>
@@ -331,12 +337,12 @@ cookieconsent.run({
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="../assets/images/screenshots/table_33.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<figure class="figure"><p><img src="../assets/images/screenshots/table_33.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></p>
 </figure>
 </div>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<div class="cell" data-hash="template-table_33_cache/html/tbl_432fb447dbc9f774017be05712f43aa5">
+<div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>Blood Pressure    A: Drug X    B: Placebo   C: Combination   Risk Difference (%) (95% CI)
 (Pa)               (N=134)      (N=134)        (N=132)                 (N=268)           
@@ -347,9 +353,9 @@ DBP &lt;60          133 (99.3%)   134 (100%)     132 (100%)           0.7 (-0.7 
 </div>
 </div>
 <div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
-<div class="cell" data-hash="template-table_33_cache/html/tbl_1687e6d2c2b7e0d9e416cb54b53edfb8">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Load Libraries &amp; Data</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">library</span>(falcon)</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">library</span>(cardinal)</span>
 <span id="cb2-3"><a href="#cb2-3"></a></span>
 <span id="cb2-4"><a href="#cb2-4"></a>adsl <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadsl</span>
 <span id="cb2-5"><a href="#cb2-5"></a>advs <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadvs</span>
@@ -370,92 +376,93 @@ DBP &lt;60          133 (99.3%)   134 (100%)     132 (100%)           0.7 (-0.7 
 <li>
 <strong><code>alt_counts_df</code></strong> (if specified): <code>USUBJID</code> and the variables specified by <code>arm_var</code> and <code>saffl_var</code>.</li>
 </ul>
-<table class="table">
-<thead><tr class="header">
-<th style="text-align: left;">Argument</th>
-<th style="text-align: left;">Description</th>
-<th style="text-align: left;">Default</th>
-</tr></thead>
-<tbody>
+<table class="caption-top table"><tbody>
 <tr class="odd">
-<td style="text-align: left;"><code>advs</code></td>
-<td style="text-align: left;">(<code>data.frame</code>) Dataset (typically ADVS) required to build table.</td>
-<td style="text-align: left;"><em>No default</em></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><code>alt_counts_df</code></td>
-<td style="text-align: left;">(<code>character</code>) Alternative dataset (typically ADSL) used only to calculate column counts.</td>
-<td style="text-align: left;"><code>NULL</code></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><code>show_colcounts</code></td>
-<td style="text-align: left;">(<code>flag</code>) Whether column counts should be printed.</td>
-<td style="text-align: left;"><code>TRUE</code></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><code>arm_var</code></td>
-<td style="text-align: left;">(<code>character</code>) Arm variable used to split table into columns.</td>
-<td style="text-align: left;"><code>"ARM"</code></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><code>saffl_var</code></td>
-<td style="text-align: left;">(<code>character</code>) Flag variable used to indicate inclusion in safety population.</td>
-<td style="text-align: left;"><code>"SAFFL"</code></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><code>lbl_overall</code></td>
-<td style="text-align: left;">(<code>character</code>) If specified, an overall column will be added to the table with the given value as the column label.</td>
-<td style="text-align: left;"><code>NULL</code></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><code>risk_diff</code></td>
-<td style="text-align: left;">
-<p>(named <code>list</code>) List of settings to apply to add a risk difference column to the table. See <a href="https://insightsengineering.github.io/tern/main/reference/add_riskdiff.html">tern::add_riskdiff()</a> for more details. List should contain the following elements:</p>
-<ul>
-<li><p><code>arm_x</code>: (required) the name of reference arm.</p></li>
-<li><p><code>arm_y</code>: (required) the name of the arm to compare to the reference arm.</p></li>
-<li><p><code>col_label</code>: (optional) label to use for the risk difference column. Defaults to <code>"Risk Difference (%) (95% CI)"</code>.</p></li>
-<li><p><code>pct</code>: (optional) whether the output should be returned as percentages. Defaults to <code>TRUE</code>.</p></li>
-</ul>
+<td>Argument :================= <code>advs</code>
 </td>
-<td style="text-align: left;"><code>NULL</code></td>
+<td>Description :============================================================================================================================================================================================================================================================= (<code>data.frame</code>) Dataset (typically ADVS) required to build table.</td>
+<td>Default :============= <em>No default</em>
+</td>
+<td></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><code>prune_0</code></td>
-<td style="text-align: left;">(<code>flag</code>) Whether all-zero rows should be removed from the table.</td>
-<td style="text-align: left;"><code>FALSE</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><code>annotations</code></td>
-<td style="text-align: left;">(named <code>list</code> of <code>character</code>) List of annotations to add to the table. Valid annotation types are <code>title</code>, <code>subtitles</code>, <code>main_footer</code>, and <code>prov_footer.</code> Each name-value pair should use the annotation type as name and the desired string as value.</td>
-<td style="text-align: left;"><code>NULL</code></td>
+<td><code>alt_counts_df</code></td>
+<td>(<code>character</code>) Alternative dataset (typically ADSL) used only to calculate column counts.</td>
+<td><code>NULL</code></td>
+<td></td>
 </tr>
-</tbody>
-</table>
-<p>Source code for this function is available <a href="https://github.com/pharmaverse/falcon/blob/main/R/fda-table_33.R#L27">here</a>.</p>
+<tr class="even">
+<td><code>show_colcounts</code></td>
+<td>(<code>flag</code>) Whether column counts should be printed.</td>
+<td><code>TRUE</code></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>arm_var</code></td>
+<td>(<code>character</code>) Arm variable used to split table into columns.</td>
+<td><code>"ARM"</code></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>saffl_var</code></td>
+<td>(<code>character</code>) Flag variable used to indicate inclusion in safety population.</td>
+<td><code>"SAFFL"</code></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>lbl_overall</code></td>
+<td>(<code>character</code>) If specified, an overall column will be added to the table with the given value as the column label.</td>
+<td><code>NULL</code></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>risk_diff</code></td>
+<td>(named <code>list</code>) List of settings to apply to add a risk difference column to the table. See <a href="https://insightsengineering.github.io/tern/main/reference/add_riskdiff.html"><code>tern::add_riskdiff()</code></a> for more details. List should contain the following elements: | <code>NULL</code> | | - <code>arm_x</code>: (required) the name of reference arm. | | | | - <code>arm_y</code>: (required) the name of the arm to compare to the reference arm. | | | | - <code>col_label</code>: (optional) label to use for the risk difference column. Defaults to <code>"Risk Difference (%) (95% CI)"</code>. | | | | - <code>pct</code>: (optional) whether the output should be returned as percentages. Defaults to <code>TRUE</code>. | |</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>prune_0</code></td>
+<td>(<code>flag</code>) Whether all-zero rows should be removed from the table.</td>
+<td><code>FALSE</code></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>annotations</code></td>
+<td>(named <code>list</code> of <code>character</code>) List of annotations to add to the table. Valid annotation types are <code>title</code>, <code>subtitles</code>, <code>main_footer</code>, and <code>prov_footer.</code> Each name-value pair should use the annotation type as name and the desired string as value.</td>
+<td><code>NULL</code></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>Source code for this function is available <a href="https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_33.R#L27">here</a>.</p>
 </section>
 </div>
 <div id="tabset-1-5" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-5-tab">
-<div class="cell" data-hash="template-table_33_cache/html/tbl_gtsum_72a6394f3b0f7cf73bb27133d03e72ae">
+<div class="cell">
 <div class="cell-output-display">
-
-<div id="vkdbdebtfp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#vkdbdebtfp table {
+<div id="oyejcxgbrt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#oyejcxgbrt table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#vkdbdebtfp thead, #vkdbdebtfp tbody, #vkdbdebtfp tfoot, #vkdbdebtfp tr, #vkdbdebtfp td, #vkdbdebtfp th {
+#oyejcxgbrt thead, #oyejcxgbrt tbody, #oyejcxgbrt tfoot, #oyejcxgbrt tr, #oyejcxgbrt td, #oyejcxgbrt th {
   border-style: none;
 }
 
-#vkdbdebtfp p {
+#oyejcxgbrt p {
   margin: 0;
   padding: 0;
 }
 
-#vkdbdebtfp .gt_table {
+#oyejcxgbrt .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -481,12 +488,12 @@ DBP &lt;60          133 (99.3%)   134 (100%)     132 (100%)           0.7 (-0.7 
   border-left-color: #D3D3D3;
 }
 
-#vkdbdebtfp .gt_caption {
+#oyejcxgbrt .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#vkdbdebtfp .gt_title {
+#oyejcxgbrt .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -498,7 +505,7 @@ DBP &lt;60          133 (99.3%)   134 (100%)     132 (100%)           0.7 (-0.7 
   border-bottom-width: 0;
 }
 
-#vkdbdebtfp .gt_subtitle {
+#oyejcxgbrt .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -510,7 +517,7 @@ DBP &lt;60          133 (99.3%)   134 (100%)     132 (100%)           0.7 (-0.7 
   border-top-width: 0;
 }
 
-#vkdbdebtfp .gt_heading {
+#oyejcxgbrt .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -522,13 +529,13 @@ DBP &lt;60          133 (99.3%)   134 (100%)     132 (100%)           0.7 (-0.7 
   border-right-color: #D3D3D3;
 }
 
-#vkdbdebtfp .gt_bottom_border {
+#oyejcxgbrt .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#vkdbdebtfp .gt_col_headings {
+#oyejcxgbrt .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -543,7 +550,7 @@ DBP &lt;60          133 (99.3%)   134 (100%)     132 (100%)           0.7 (-0.7 
   border-right-color: #D3D3D3;
 }
 
-#vkdbdebtfp .gt_col_heading {
+#oyejcxgbrt .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -563,7 +570,7 @@ DBP &lt;60          133 (99.3%)   134 (100%)     132 (100%)           0.7 (-0.7 
   overflow-x: hidden;
 }
 
-#vkdbdebtfp .gt_column_spanner_outer {
+#oyejcxgbrt .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -575,15 +582,15 @@ DBP &lt;60          133 (99.3%)   134 (100%)     132 (100%)           0.7 (-0.7 
   padding-right: 4px;
 }
 
-#vkdbdebtfp .gt_column_spanner_outer:first-child {
+#oyejcxgbrt .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#vkdbdebtfp .gt_column_spanner_outer:last-child {
+#oyejcxgbrt .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#vkdbdebtfp .gt_column_spanner {
+#oyejcxgbrt .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -595,11 +602,11 @@ DBP &lt;60          133 (99.3%)   134 (100%)     132 (100%)           0.7 (-0.7 
   width: 100%;
 }
 
-#vkdbdebtfp .gt_spanner_row {
+#oyejcxgbrt .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#vkdbdebtfp .gt_group_heading {
+#oyejcxgbrt .gt_group_heading {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -625,7 +632,7 @@ DBP &lt;60          133 (99.3%)   134 (100%)     132 (100%)           0.7 (-0.7 
   text-align: left;
 }
 
-#vkdbdebtfp .gt_empty_group_heading {
+#oyejcxgbrt .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -640,15 +647,15 @@ DBP &lt;60          133 (99.3%)   134 (100%)     132 (100%)           0.7 (-0.7 
   vertical-align: middle;
 }
 
-#vkdbdebtfp .gt_from_md > :first-child {
+#oyejcxgbrt .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#vkdbdebtfp .gt_from_md > :last-child {
+#oyejcxgbrt .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#vkdbdebtfp .gt_row {
+#oyejcxgbrt .gt_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -667,7 +674,7 @@ DBP &lt;60          133 (99.3%)   134 (100%)     132 (100%)           0.7 (-0.7 
   overflow-x: hidden;
 }
 
-#vkdbdebtfp .gt_stub {
+#oyejcxgbrt .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -680,7 +687,7 @@ DBP &lt;60          133 (99.3%)   134 (100%)     132 (100%)           0.7 (-0.7 
   padding-right: 5px;
 }
 
-#vkdbdebtfp .gt_stub_row_group {
+#oyejcxgbrt .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -694,15 +701,15 @@ DBP &lt;60          133 (99.3%)   134 (100%)     132 (100%)           0.7 (-0.7 
   vertical-align: top;
 }
 
-#vkdbdebtfp .gt_row_group_first td {
+#oyejcxgbrt .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#vkdbdebtfp .gt_row_group_first th {
+#oyejcxgbrt .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#vkdbdebtfp .gt_summary_row {
+#oyejcxgbrt .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -712,16 +719,16 @@ DBP &lt;60          133 (99.3%)   134 (100%)     132 (100%)           0.7 (-0.7 
   padding-right: 5px;
 }
 
-#vkdbdebtfp .gt_first_summary_row {
+#oyejcxgbrt .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#vkdbdebtfp .gt_first_summary_row.thick {
+#oyejcxgbrt .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#vkdbdebtfp .gt_last_summary_row {
+#oyejcxgbrt .gt_last_summary_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -731,7 +738,7 @@ DBP &lt;60          133 (99.3%)   134 (100%)     132 (100%)           0.7 (-0.7 
   border-bottom-color: #D3D3D3;
 }
 
-#vkdbdebtfp .gt_grand_summary_row {
+#oyejcxgbrt .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -741,7 +748,7 @@ DBP &lt;60          133 (99.3%)   134 (100%)     132 (100%)           0.7 (-0.7 
   padding-right: 5px;
 }
 
-#vkdbdebtfp .gt_first_grand_summary_row {
+#oyejcxgbrt .gt_first_grand_summary_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -751,7 +758,7 @@ DBP &lt;60          133 (99.3%)   134 (100%)     132 (100%)           0.7 (-0.7 
   border-top-color: #D3D3D3;
 }
 
-#vkdbdebtfp .gt_last_grand_summary_row_top {
+#oyejcxgbrt .gt_last_grand_summary_row_top {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -761,11 +768,11 @@ DBP &lt;60          133 (99.3%)   134 (100%)     132 (100%)           0.7 (-0.7 
   border-bottom-color: #D3D3D3;
 }
 
-#vkdbdebtfp .gt_striped {
+#oyejcxgbrt .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#vkdbdebtfp .gt_table_body {
+#oyejcxgbrt .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -774,7 +781,7 @@ DBP &lt;60          133 (99.3%)   134 (100%)     132 (100%)           0.7 (-0.7 
   border-bottom-color: #D3D3D3;
 }
 
-#vkdbdebtfp .gt_footnotes {
+#oyejcxgbrt .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -788,7 +795,7 @@ DBP &lt;60          133 (99.3%)   134 (100%)     132 (100%)           0.7 (-0.7 
   border-right-color: #D3D3D3;
 }
 
-#vkdbdebtfp .gt_footnote {
+#oyejcxgbrt .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 1px;
@@ -797,7 +804,7 @@ DBP &lt;60          133 (99.3%)   134 (100%)     132 (100%)           0.7 (-0.7 
   padding-right: 5px;
 }
 
-#vkdbdebtfp .gt_sourcenotes {
+#oyejcxgbrt .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -811,7 +818,7 @@ DBP &lt;60          133 (99.3%)   134 (100%)     132 (100%)           0.7 (-0.7 
   border-right-color: #D3D3D3;
 }
 
-#vkdbdebtfp .gt_sourcenote {
+#oyejcxgbrt .gt_sourcenote {
   font-size: 90%;
   padding-top: 1px;
   padding-bottom: 1px;
@@ -819,94 +826,100 @@ DBP &lt;60          133 (99.3%)   134 (100%)     132 (100%)           0.7 (-0.7 
   padding-right: 5px;
 }
 
-#vkdbdebtfp .gt_left {
+#oyejcxgbrt .gt_left {
   text-align: left;
 }
 
-#vkdbdebtfp .gt_center {
+#oyejcxgbrt .gt_center {
   text-align: center;
 }
 
-#vkdbdebtfp .gt_right {
+#oyejcxgbrt .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#vkdbdebtfp .gt_font_normal {
+#oyejcxgbrt .gt_font_normal {
   font-weight: normal;
 }
 
-#vkdbdebtfp .gt_font_bold {
+#oyejcxgbrt .gt_font_bold {
   font-weight: bold;
 }
 
-#vkdbdebtfp .gt_font_italic {
+#oyejcxgbrt .gt_font_italic {
   font-style: italic;
 }
 
-#vkdbdebtfp .gt_super {
+#oyejcxgbrt .gt_super {
   font-size: 65%;
 }
 
-#vkdbdebtfp .gt_footnote_marks {
+#oyejcxgbrt .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#vkdbdebtfp .gt_asterisk {
+#oyejcxgbrt .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#vkdbdebtfp .gt_indent_1 {
+#oyejcxgbrt .gt_indent_1 {
   text-indent: 5px;
 }
 
-#vkdbdebtfp .gt_indent_2 {
+#oyejcxgbrt .gt_indent_2 {
   text-indent: 10px;
 }
 
-#vkdbdebtfp .gt_indent_3 {
+#oyejcxgbrt .gt_indent_3 {
   text-indent: 15px;
 }
 
-#vkdbdebtfp .gt_indent_4 {
+#oyejcxgbrt .gt_indent_4 {
   text-indent: 20px;
 }
 
-#vkdbdebtfp .gt_indent_5 {
+#oyejcxgbrt .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
-<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead><tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="<strong>Blood Pressure (Pa)</strong>"><strong>Blood Pressure (Pa)</strong></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="<strong>A: Drug X</strong><br />
-N = 134">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead><tr class="header gt_col_headings">
+<th id="<strong>Blood Pressure (Pa)</strong>" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Blood Pressure (Pa)</strong></th>
+<th id="<strong>A: Drug X</strong><br />
+N = 134" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">
 <strong>A: Drug X</strong><br>
 N = 134</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="<strong>B: Placebo</strong><br />
-N = 134">
+<th id="<strong>B: Placebo</strong><br />
+N = 134" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">
 <strong>B: Placebo</strong><br>
 N = 134</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="<strong>C: Combination</strong><br />
-N = 132">
+<th id="<strong>C: Combination</strong><br />
+N = 132" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">
 <strong>C: Combination</strong><br>
 N = 132</th>
-    </tr></thead>
+</tr></thead>
 <tbody class="gt_table_body">
-<tr>
-<td headers="label" class="gt_row gt_left">SBP &lt;90</td>
-<td headers="stat_1" class="gt_row gt_right">85 (63.4%)</td>
-<td headers="stat_2" class="gt_row gt_right">84 (62.7%)</td>
-<td headers="stat_3" class="gt_row gt_right">90 (68.2%)</td>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">SBP &lt;90</td>
+<td class="gt_row gt_right" headers="stat_1">85 (63.4%)</td>
+<td class="gt_row gt_right" headers="stat_2">84 (62.7%)</td>
+<td class="gt_row gt_right" headers="stat_3">90 (68.2%)</td>
 </tr>
-<tr>
-<td headers="label" class="gt_row gt_left">DBP &lt;60</td>
-<td headers="stat_1" class="gt_row gt_right">133 (99.3%)</td>
-<td headers="stat_2" class="gt_row gt_right">134 (100.0%)</td>
-<td headers="stat_3" class="gt_row gt_right">132 (100.0%)</td>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">DBP &lt;60</td>
+<td class="gt_row gt_right" headers="stat_1">133 (99.3%)</td>
+<td class="gt_row gt_right" headers="stat_2">134 (100.0%)</td>
+<td class="gt_row gt_right" headers="stat_3">132 (100.0%)</td>
 </tr>
 </tbody>
 </table>
@@ -915,9 +928,9 @@ N = 132</th>
 </div>
 </div>
 <div id="tabset-1-6" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-6-tab">
-<div class="cell" data-hash="template-table_33_cache/html/tbl_gtsum_27bd3faf1ee348e3ebe657da634d8599">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Load Libraries &amp; Data</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">library</span>(falcon)</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">library</span>(cardinal)</span>
 <span id="cb3-3"><a href="#cb3-3"></a></span>
 <span id="cb3-4"><a href="#cb3-4"></a>adsl <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadsl</span>
 <span id="cb3-5"><a href="#cb3-5"></a>advs <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadvs</span>
@@ -936,7 +949,7 @@ N = 132</th>
 <li>
 <strong><code>advs</code></strong>: <code>USUBJID</code>, <code>AVISITN</code>, <code>PARAMCD</code>, <code>AVAL</code>, <code>AVALU</code>, and the variables specified by <code>arm_var</code> and <code>saffl_var</code>.</li>
 </ul>
-<table class="table">
+<table class="caption-top table">
 <colgroup>
 <col style="width: 11%">
 <col style="width: 73%">
@@ -975,7 +988,7 @@ N = 132</th>
 </tr>
 </tbody>
 </table>
-<p>Source code for this function is available <a href="https://github.com/pharmaverse/falcon/blob/main/R/fda-table_33.R#L84">here</a>.</p>
+<p>Source code for this function is available <a href="https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_33.R#L84">here</a>.</p>
 </section>
 </div>
 </div>
@@ -1026,6 +1039,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       } else {
         el.classList.add('notransition');
       }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
     }
   }
   const toggleColorMode = (alternate) => {
@@ -1094,13 +1134,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'default';
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -1230,10 +1272,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   if (showAllCode) {
     showAllCode.addEventListener("click", toggleCodeHandler(true));
   }
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/pharmaverse\.github\.io\/cardinal");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1243,8 +1302,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1256,7 +1324,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1300,6 +1491,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1325,6 +1517,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1395,22 +1613,22 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb4-9"><a href="#cb4-9"></a></span>
 <span id="cb4-10"><a href="#cb4-10"></a><span class="al">![](../assets/images/screenshots/table_33.png)</span>{fig-align="center" width="70%"}</span>
 <span id="cb4-11"><a href="#cb4-11"></a></span>
-<span id="cb4-12"><a href="#cb4-12"></a><span class="fu">## rtables/tern Table</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a><span class="fu">## rtables Table</span></span>
 <span id="cb4-13"><a href="#cb4-13"></a></span>
 <span id="cb4-14"><a href="#cb4-14"></a><span class="in">```{r tbl, message=FALSE, warning=FALSE}</span></span>
-<span id="cb4-15"><a href="#cb4-15"></a><span class="co"># Load Libraries &amp; Data</span></span>
-<span id="cb4-16"><a href="#cb4-16"></a><span class="fu">library</span>(falcon)</span>
+<span id="cb4-15"><a href="#cb4-15"></a><span class="in"># Load Libraries &amp; Data</span></span>
+<span id="cb4-16"><a href="#cb4-16"></a><span class="in">library(cardinal)</span></span>
 <span id="cb4-17"><a href="#cb4-17"></a></span>
-<span id="cb4-18"><a href="#cb4-18"></a>adsl <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadsl</span>
-<span id="cb4-19"><a href="#cb4-19"></a>advs <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadvs</span>
-<span id="cb4-20"><a href="#cb4-20"></a>advs<span class="sc">$</span>AVAL <span class="ot">&lt;-</span> advs<span class="sc">$</span>AVAL <span class="sc">-</span> <span class="dv">100</span></span>
+<span id="cb4-18"><a href="#cb4-18"></a><span class="in">adsl &lt;- random.cdisc.data::cadsl</span></span>
+<span id="cb4-19"><a href="#cb4-19"></a><span class="in">advs &lt;- random.cdisc.data::cadvs</span></span>
+<span id="cb4-20"><a href="#cb4-20"></a><span class="in">advs$AVAL &lt;- advs$AVAL - 100</span></span>
 <span id="cb4-21"><a href="#cb4-21"></a></span>
-<span id="cb4-22"><a href="#cb4-22"></a><span class="co"># Output Table</span></span>
-<span id="cb4-23"><a href="#cb4-23"></a>risk_diff <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">arm_x =</span> <span class="st">"B: Placebo"</span>, <span class="at">arm_y =</span> <span class="st">"A: Drug X"</span>) <span class="co"># optional</span></span>
-<span id="cb4-24"><a href="#cb4-24"></a><span class="fu">make_table_33</span>(<span class="at">advs =</span> advs, <span class="at">alt_counts_df =</span> adsl, <span class="at">risk_diff =</span> risk_diff)</span>
+<span id="cb4-22"><a href="#cb4-22"></a><span class="in"># Output Table</span></span>
+<span id="cb4-23"><a href="#cb4-23"></a><span class="in">risk_diff &lt;- list(arm_x = "B: Placebo", arm_y = "A: Drug X") # optional</span></span>
+<span id="cb4-24"><a href="#cb4-24"></a><span class="in">make_table_33(advs = advs, alt_counts_df = adsl, risk_diff = risk_diff)</span></span>
 <span id="cb4-25"><a href="#cb4-25"></a><span class="in">```</span></span>
 <span id="cb4-26"><a href="#cb4-26"></a></span>
-<span id="cb4-27"><a href="#cb4-27"></a><span class="fu">## rtables/tern Table Setup</span></span>
+<span id="cb4-27"><a href="#cb4-27"></a><span class="fu">## rtables Table Setup</span></span>
 <span id="cb4-28"><a href="#cb4-28"></a></span>
 <span id="cb4-29"><a href="#cb4-29"></a><span class="in">```{r tbl, eval=FALSE, echo=TRUE}</span></span>
 <span id="cb4-30"><a href="#cb4-30"></a><span class="in">```</span></span>
@@ -1441,7 +1659,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb4-55"><a href="#cb4-55"></a>+------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
 <span id="cb4-56"><a href="#cb4-56"></a>| <span class="in">`lbl_overall`</span>    | (<span class="in">`character`</span>) If specified, an overall column will be added to the table with the given value as the column label.                                                                                                                                           | <span class="in">`NULL`</span>       |</span>
 <span id="cb4-57"><a href="#cb4-57"></a>+------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
-<span id="cb4-58"><a href="#cb4-58"></a>| <span class="in">`risk_diff`</span>      | (named <span class="in">`list`</span>) List of settings to apply to add a risk difference column to the table. See <span class="co">[</span><span class="ot">tern::add_riskdiff()</span><span class="co">](https://insightsengineering.github.io/tern/main/reference/add_riskdiff.html)</span> for more details. List should contain the following elements: | <span class="in">`NULL`</span>       |</span>
+<span id="cb4-58"><a href="#cb4-58"></a>| <span class="in">`risk_diff`</span>      | (named <span class="in">`list`</span>) List of settings to apply to add a risk difference column to the table. See <span class="co">[</span><span class="ot">`tern::add_riskdiff()`</span><span class="co">](https://insightsengineering.github.io/tern/main/reference/add_riskdiff.html)</span> for more details. List should contain the following elements: | <span class="in">`NULL`</span>       |</span>
 <span id="cb4-59"><a href="#cb4-59"></a>|                  |                                                                                                                                                                                                                                                              |              |</span>
 <span id="cb4-60"><a href="#cb4-60"></a>|                  | -   <span class="in">`arm_x`</span>: (required) the name of reference arm.                                                                                                                                                                                                           |              |</span>
 <span id="cb4-61"><a href="#cb4-61"></a>|                  |                                                                                                                                                                                                                                                              |              |</span>
@@ -1456,21 +1674,21 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb4-70"><a href="#cb4-70"></a>| <span class="in">`annotations`</span>    | (named <span class="in">`list`</span> of <span class="in">`character`</span>) List of annotations to add to the table. Valid annotation types are <span class="in">`title`</span>, <span class="in">`subtitles`</span>, <span class="in">`main_footer`</span>, and <span class="in">`prov_footer.`</span> Each name-value pair should use the annotation type as name and the desired string as value.       | <span class="in">`NULL`</span>       |</span>
 <span id="cb4-71"><a href="#cb4-71"></a>+------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
 <span id="cb4-72"><a href="#cb4-72"></a></span>
-<span id="cb4-73"><a href="#cb4-73"></a>Source code for this function is available <span class="co">[</span><span class="ot">here</span><span class="co">](https://github.com/pharmaverse/falcon/blob/main/R/fda-table_33.R#L27)</span>.</span>
+<span id="cb4-73"><a href="#cb4-73"></a>Source code for this function is available <span class="co">[</span><span class="ot">here</span><span class="co">](https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_33.R#L27)</span>.</span>
 <span id="cb4-74"><a href="#cb4-74"></a></span>
 <span id="cb4-75"><a href="#cb4-75"></a><span class="fu">## gtsummary Table</span></span>
 <span id="cb4-76"><a href="#cb4-76"></a></span>
 <span id="cb4-77"><a href="#cb4-77"></a><span class="in">```{r tbl_gtsum, message=FALSE, warning=FALSE}</span></span>
-<span id="cb4-78"><a href="#cb4-78"></a><span class="co"># Load Libraries &amp; Data</span></span>
-<span id="cb4-79"><a href="#cb4-79"></a><span class="fu">library</span>(falcon)</span>
+<span id="cb4-78"><a href="#cb4-78"></a><span class="in"># Load Libraries &amp; Data</span></span>
+<span id="cb4-79"><a href="#cb4-79"></a><span class="in">library(cardinal)</span></span>
 <span id="cb4-80"><a href="#cb4-80"></a></span>
-<span id="cb4-81"><a href="#cb4-81"></a>adsl <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadsl</span>
-<span id="cb4-82"><a href="#cb4-82"></a>advs <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadvs</span>
-<span id="cb4-83"><a href="#cb4-83"></a>advs<span class="sc">$</span>AVAL <span class="ot">&lt;-</span> advs<span class="sc">$</span>AVAL <span class="sc">-</span> <span class="dv">100</span></span>
+<span id="cb4-81"><a href="#cb4-81"></a><span class="in">adsl &lt;- random.cdisc.data::cadsl</span></span>
+<span id="cb4-82"><a href="#cb4-82"></a><span class="in">advs &lt;- random.cdisc.data::cadvs</span></span>
+<span id="cb4-83"><a href="#cb4-83"></a><span class="in">advs$AVAL &lt;- advs$AVAL - 100</span></span>
 <span id="cb4-84"><a href="#cb4-84"></a></span>
-<span id="cb4-85"><a href="#cb4-85"></a><span class="co"># Output table</span></span>
-<span id="cb4-86"><a href="#cb4-86"></a>tbl <span class="ot">&lt;-</span> <span class="fu">make_table_33_gtsum</span>(<span class="at">advs =</span> advs)</span>
-<span id="cb4-87"><a href="#cb4-87"></a>tbl</span>
+<span id="cb4-85"><a href="#cb4-85"></a><span class="in"># Output table</span></span>
+<span id="cb4-86"><a href="#cb4-86"></a><span class="in">tbl &lt;- make_table_33_gtsum(advs = advs)</span></span>
+<span id="cb4-87"><a href="#cb4-87"></a><span class="in">tbl</span></span>
 <span id="cb4-88"><a href="#cb4-88"></a><span class="in">```</span></span>
 <span id="cb4-89"><a href="#cb4-89"></a></span>
 <span id="cb4-90"><a href="#cb4-90"></a><span class="fu">## gtsummary Table Setup</span></span>
@@ -1502,7 +1720,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb4-116"><a href="#cb4-116"></a>| <span class="in">`lbl_overall`</span>   | (<span class="in">`character`</span>) If specified, an overall column will be added to the table with the given value as the column label. | <span class="in">`"Total Population"`</span> |</span>
 <span id="cb4-117"><a href="#cb4-117"></a>+-----------------+--------------------------------------------------------------------------------------------------------------------+----------------------+</span>
 <span id="cb4-118"><a href="#cb4-118"></a></span>
-<span id="cb4-119"><a href="#cb4-119"></a>Source code for this function is available <span class="co">[</span><span class="ot">here</span><span class="co">](https://github.com/pharmaverse/falcon/blob/main/R/fda-table_33.R#L84)</span>.</span>
+<span id="cb4-119"><a href="#cb4-119"></a>Source code for this function is available <span class="co">[</span><span class="ot">here</span><span class="co">](https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_33.R#L84)</span>.</span>
 <span id="cb4-120"><a href="#cb4-120"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
@@ -1526,7 +1744,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </a>
   </li>  
     <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/pharmaverse/falcon">
+    <a class="nav-link" href="https://github.com/pharmaverse/cardinal">
       <i class="bi bi-github" role="img" aria-label="GitHub">
 </i> 
     </a>
