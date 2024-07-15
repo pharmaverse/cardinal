@@ -164,6 +164,9 @@ make_ard_32 <- function(df,
       G110 = with_label(G110 == "true", ">110"),
       GE120 = with_label(GE120 == "true", ">=120")
     ) %>%
+    mutate(
+      ARM = as.character(ARM)
+    ) %>%
     select(L60, G60, G90, G110, GE120, AVALU, arm_var)
 
   avalu <- unique(df$AVALU)[1]
@@ -172,23 +175,24 @@ make_ard_32 <- function(df,
   ard <-
     ard_stack(
       data = df,
-      by = "ARM",
-      ard_categorical(variables = c("L60", "G60", "G90", "G110", "GE120"))
-    ) %>%
-    filter(variable_level == TRUE) %>%
-    mutate(
-      variable_level = case_when(
-        variable == "L60" ~ "<60",
-        variable == "G60" ~ ">60",
-        variable == "G90" ~ ">90",
-        variable == "G90" ~ ">90",
-        variable == "G110" ~ ">110",
-        variable == "GE120" ~ ">=120"
-      ),
-      variable = case_when(
-        variable != "ARM" ~ "DBP"
-      )
+      .by = ARM,
+      ard_categorical(variables = c("L60", "G60", "G90", "G110", "GE120")),
+      .attributes = TRUE
     )
+    # filter(variable_level == TRUE) %>%
+    # mutate(
+    #   variable_level = case_when(
+    #     variable == "L60" ~ "<60",
+    #     variable == "G60" ~ ">60",
+    #     variable == "G90" ~ ">90",
+    #     variable == "G90" ~ ">90",
+    #     variable == "G110" ~ ">110",
+    #     variable == "GE120" ~ ">=120"
+    #   ),
+    #   # variable = case_when(
+    #   #   variable != "ARM" ~ "DBP"
+    #   # )
+    # )
 
   return(ard)
 }
@@ -202,6 +206,9 @@ library(cards)
 library(dplyr)
 library(random.cdisc.data)
 library(gtsummary)
+library(checkmate)
+library(tern)
+source("R/utils.R")
 adsl <- random.cdisc.data::cadsl
 advs <- random.cdisc.data::cadvs
 
@@ -214,8 +221,14 @@ tbl_1 <-
   )
 tbl_1
 
-ard_1 <- make_ard_32(df = advs)
-ard_1
+# ard_1 <- make_ard_32(df = advs)
+# ard_1
+
+tbl <- make_table_32(data = advs, return_ard = FALSE)
+tbl
+z1 <- tbl[[1]]
+z2 <- tbl[[2]]
+z2
 
 
 tbl_2 <-
@@ -240,3 +253,5 @@ z1 <- ard_2[[1]]
 z1
 z2 <- ard_2[[2]]
 z2
+
+# z3 <- tbl_ard_summary(z2, by = ARM)

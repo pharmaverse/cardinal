@@ -180,11 +180,18 @@ make_table_32_gtsum <- function(df,
 
 adsl <- random.cdisc.data::cadsl
 advs <- random.cdisc.data::cadvs
+source("R/utils.R")
 library(cards)
+library(checkmate)
+library(dplyr)
+library(gtsummary)
 tbl_32_gtsum <- make_table_32_gtsum(df = advs, return_ard = FALSE)
 ard_32_gtsum <- make_table_32_gtsum(df = advs, return_ard = TRUE)
 tbl_32_gtsum
 print(ard_32_gtsum, n = 10000)
+
+
+
 
 #' @describeIn make_table_32_rtables Create FDA table 32 using functions from `rtables` and `tern`.
 #'
