@@ -130,7 +130,7 @@ make_ard_32 <- function(df,
 }
 
 #' @keywords Internal
-make_table_32_rtables <- function(advs,
+make_table_32_rtables <- function(df,
                           alt_counts_df = NULL,
                           show_colcounts = TRUE,
                           id_var = "USUBJID",
@@ -142,10 +142,10 @@ make_table_32_rtables <- function(advs,
                           annotations = NULL) {
   assert_subset(c(
     "AVISITN", "PARAMCD", "AVAL", "AVALU", arm_var, id_var, saffl_var
-  ), names(advs))
-  assert_flag_variables(advs, saffl_var)
+  ), names(df))
+  assert_flag_variables(df, saffl_var)
 
-  advs <- advs %>%
+  advs <- df %>%
     filter(
       .data[[saffl_var]] == "Y",
       AVISITN >= 1,
@@ -189,8 +189,8 @@ make_table_32_gtsum <- function(df,
                                 lbl_overall = NULL) {
   assert_subset(c(
     saffl_var, "AVISITN", "PARAMCD", "AVAL", "AVALU", arm_var, id_var
-  ), names(advs))
-  assert_flag_variables(advs, saffl_var)
+  ), names(df))
+  assert_flag_variables(df, saffl_var)
 
   advs <- df %>%
     filter(
