@@ -120,7 +120,6 @@ make_ard_32 <- function(df,
   ard <-
     ard_stack(
       data = df,
-      # .by = "ARM",
       .by = arm_var,
       ard_categorical(variables = c("L60", "G60", "G90", "G110", "GE120")),
       .attributes = TRUE
