@@ -120,16 +120,17 @@ make_ard_32 <- function(df,
   ard <-
     ard_stack(
       data = df,
-      by = arm_var,
+      # .by = "ARM",
+      .by = arm_var,
       ard_categorical(variables = c("L60", "G60", "G90", "G110", "GE120")),
-      # .attributes = TRUE
+      .attributes = TRUE
     )
 
   return(ard)
 }
 
 #' @keywords Internal
-make_table_32 <- function(advs,
+make_table_32_rtables <- function(advs,
                           alt_counts_df = NULL,
                           show_colcounts = TRUE,
                           id_var = "USUBJID",
@@ -180,7 +181,7 @@ make_table_32 <- function(advs,
 }
 
 #' @keywords Internal
-make_table_32_gtsum <- function(advs,
+make_table_32_gtsum <- function(df,
                                 alt_counts_df = NULL,
                                 id_var = "USUBJID",
                                 arm_var = "ARM",
@@ -191,7 +192,7 @@ make_table_32_gtsum <- function(advs,
   ), names(advs))
   assert_flag_variables(advs, saffl_var)
 
-  advs <- advs %>%
+  advs <- df %>%
     filter(
       .data[[saffl_var]] == "Y",
       AVISITN >= 1,
