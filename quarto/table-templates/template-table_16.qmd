@@ -12,11 +12,11 @@ editor:
 
 ![](../assets/images/screenshots/table_16.png){fig-align="center"}
 
-## rtables/tern Table
+## rtables Table
 
 ```{r tbl, message=FALSE, warning=FALSE}
 # Load Libraries & Data
-library(falcon)
+library(cardinal)
 
 adsl <- random.cdisc.data::cadsl
 adae <- random.cdisc.data::cadae
@@ -36,7 +36,7 @@ risk_diff <- list(arm_x = "B: Placebo", arm_y = "A: Drug X")
 make_table_16(adae = adae, alt_counts_df = adsl, risk_diff = risk_diff)
 ```
 
-## rtables/tern Table Setup
+## rtables Table Setup
 
 ```{r tbl, eval=FALSE, echo=TRUE}
 ```
@@ -119,5 +119,5 @@ Required variables:
 |                     | value.                                               |                     |
 +---------------------+------------------------------------------------------+---------------------+
 
-Source code for this function is available [here](https://github.com/pharmaverse/falcon/blob/main/R/fda-table_16.R).
+Source code for this function is available [here](https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_16.R).
 :::
