@@ -20,7 +20,7 @@ adae <- random.cdisc.data::cadae
 
 # Output Table
 risk_diff <- list(arm_x = "B: Placebo", arm_y = "A: Drug X") # optional
-make_table_36(adae = adae, alt_counts_df = adsl, risk_diff = risk_diff)
+make_table_36(adae = adae, alt_counts_df = adsl, risk_diff = risk_diff, prune_0 = TRUE)
 ```
 
 ## Table Setup
