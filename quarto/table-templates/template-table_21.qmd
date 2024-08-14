@@ -54,8 +54,8 @@ Required variables:
 
 `make_table_21()` inherits from `cardinal::a_count_occurrences_ser_ae()` function.
 
-| Argument         | Description                                                                                                                                                                                                                                            | Default                                                  |
-|:-------------|:-------------------------------------------|:-------------|
+| **Argument**     | **Description**                                                                                                                                                                                                                                        | **Default**                                              |
+|:-----------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------|
 | `df`             | (`data.frame`) Dataset (typically ADSL) required to build table.                                                                                                                                                                                       | *No default*                                             |
 | `alt_counts_df`  | (`character`) Alternative dataset used only to calculate column counts.                                                                                                                                                                                | `NULL`                                                   |
 | `show_colcounts` | (`flag`) Whether column counts should be printed.                                                                                                                                                                                                      | `TRUE`                                                   |

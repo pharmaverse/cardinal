@@ -54,7 +54,7 @@ Required variables:
 -   **`adsl`**: `USUBJID`, `ENRLDT`, `RANDDT`, and the variables specified by `arm_var`, `scrnfl_var`, `scrnfailfl_var`, and `scrnfail_var`.
 -   **`alt_counts_df`** (if specified): `USUBJID`, and the variable specified by `arm_var`.
 
-| Argument         | Description                                                                                                                                                                                                                                            | Default      |
+| **Argument**     | **Description**                                                                                                                                                                                                                                        | **Default**  |
 |:-----------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------|
 | `adsl`           | (`data.frame`) Dataset (typically ADSL) required to build table.                                                                                                                                                                                       | *No default* |
 | `alt_counts_df`  | (`character`) Alternative dataset used only to calculate column counts.                                                                                                                                                                                | `NULL`       |
