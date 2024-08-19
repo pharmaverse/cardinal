@@ -404,14 +404,14 @@ ETHNIC, n (%)
 <p><code>make_table_22()</code> inherits from <code><a href="https://rdrr.io/pkg/cardinal/man/a_count_occurrences_ser_ae.html">cardinal::a_count_occurrences_ser_ae()</a></code> function.</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 23%">
-<col style="width: 52%">
-<col style="width: 23%">
+<col style="width: 5%">
+<col style="width: 76%">
+<col style="width: 17%">
 </colgroup>
 <thead><tr class="header">
-<th style="text-align: left;">Argument</th>
-<th style="text-align: left;">Description</th>
-<th style="text-align: left;">Default</th>
+<th style="text-align: left;"><strong>Argument</strong></th>
+<th style="text-align: left;"><strong>Description</strong></th>
+<th style="text-align: left;"><strong>Default</strong></th>
 </tr></thead>
 <tbody>
 <tr class="odd">
@@ -1138,15 +1138,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb3-51"><a href="#cb3-51"></a></span>
 <span id="cb3-52"><a href="#cb3-52"></a><span class="in">`make_table_22()`</span> inherits from <span class="in">`cardinal::a_count_occurrences_ser_ae()`</span> function.</span>
 <span id="cb3-53"><a href="#cb3-53"></a></span>
-<span id="cb3-54"><a href="#cb3-54"></a>| Argument         | Description                                                                                                                                                                                                                                            | Default                                                  |</span>
-<span id="cb3-55"><a href="#cb3-55"></a>|:----------------|:-------------------------------------|:----------------|</span>
+<span id="cb3-54"><a href="#cb3-54"></a>| **Argument**     | **Description**                                                                                                                                                                                                                                        | **Default**                                              |</span>
+<span id="cb3-55"><a href="#cb3-55"></a>|:-----------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------|</span>
 <span id="cb3-56"><a href="#cb3-56"></a>| <span class="in">`df`</span>             | (<span class="in">`data.frame`</span>) Dataset (typically ADSL) required to build table.                                                                                                                                                                                       | *No default*                                             |</span>
 <span id="cb3-57"><a href="#cb3-57"></a>| <span class="in">`alt_counts_df`</span>  | (<span class="in">`character`</span>) Alternative dataset used only to calculate column counts.                                                                                                                                                                                | <span class="in">`NULL`</span>                                                   |</span>
 <span id="cb3-58"><a href="#cb3-58"></a>| <span class="in">`show_colcounts`</span> | (<span class="in">`flag`</span>) Whether column counts should be printed.                                                                                                                                                                                                      | <span class="in">`TRUE`</span>                                                   |</span>
 <span id="cb3-59"><a href="#cb3-59"></a>| <span class="in">`arm_var`</span>        | (<span class="in">`character`</span>) Arm variable used to split table into columns.                                                                                                                                                                                           | <span class="in">`"ARM"`</span>                                                  |</span>
 <span id="cb3-60"><a href="#cb3-60"></a>| <span class="in">`saffl_var`</span>      | (<span class="in">`character`</span>) Flag variable used to indicate inclusion in safety population.                                                                                                                                                                           | <span class="in">`"SAFFL"`</span>                                                |</span>
 <span id="cb3-61"><a href="#cb3-61"></a>| <span class="in">`vars`</span>           | (<span class="in">`character`</span>) Variables from <span class="in">`df`</span> to include in the table.                                                                                                                                                                                             | <span class="in">`c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY")`</span> |</span>
-<span id="cb3-62"><a href="#cb3-62"></a>| <span class="in">`denom`</span>          | (<span class="in">`character`</span>) Denominator choice (<span class="in">`N_col`</span> to get the total column, <span class="in">`n`</span> to have the total number of "Any AE" in the column, or <span class="in">`N_s`</span> to have the total number of participants of the category in the column as denominator).                           | <span class="in">`c("N_s", "N_col", "n")`</span>                                 |</span>
+<span id="cb3-62"><a href="#cb3-62"></a>| <span class="in">`denom`</span>          | (<span class="in">`character`</span>) Denominator choice (<span class="in">`N_col`</span> to get the total column, <span class="in">`n`</span> to have the total number of "Any AE" in the column, or <span class="in">`N_s`</span> to have the total number of participants of the category in the column as denominator).                            | <span class="in">`c("N_s", "N_col", "n")`</span>                                 |</span>
 <span id="cb3-63"><a href="#cb3-63"></a>| <span class="in">`lbl_vars`</span>       | (<span class="in">`character`</span>) Labels corresponding to variables in <span class="in">`vars`</span> to print in the table. Labels should be ordered according to the order of variables in <span class="in">`vars`</span>.                                                                                               | <span class="in">`formatters::var_labels(df, fill = TRUE)[vars]`</span>          |</span>
 <span id="cb3-64"><a href="#cb3-64"></a>| <span class="in">`lbl_overall`</span>    | (<span class="in">`character`</span>) If specified, an overall column will be added to the table with the given value as the column label.                                                                                                                                     | <span class="in">`NULL`</span>                                                   |</span>
 <span id="cb3-65"><a href="#cb3-65"></a>| <span class="in">`prune_0`</span>        | (<span class="in">`flag`</span>) Whether all-zero rows should be removed from the table.                                                                                                                                                                                       | <span class="in">`TRUE`</span>                                                   |</span>

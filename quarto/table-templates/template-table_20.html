@@ -398,84 +398,77 @@ Laboratory Assessment          89 (66.4%)    86 (64.2%)      90 (68.2%)         
 </ul>
 <table class="caption-top table"><tbody>
 <tr class="odd">
-<td>Argument :================= <code>adae</code>
-</td>
-<td>Description :============================================================================================================================================================================================================================================================= (<code>data.frame</code>) Dataset (typically ADAE) required to build table.</td>
-<td>Default :============= <em>No default</em>
-</td>
-<td></td>
+<td><strong>Argument</strong></td>
+<td><strong>Description</strong></td>
+<td><strong>Default</strong></td>
 </tr>
 <tr class="even">
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td><code>adae</code></td>
+<td>(<code>data.frame</code>) Dataset (typically ADAE) required to build table.</td>
+<td><em>No default</em></td>
 </tr>
 <tr class="odd">
 <td><code>alt_counts_df</code></td>
 <td>(<code>character</code>) Alternative dataset (typically ADSL) used only to calculate column counts.</td>
 <td><code>NULL</code></td>
-<td></td>
 </tr>
 <tr class="even">
 <td><code>show_colcounts</code></td>
 <td>(<code>flag</code>) Whether column counts should be printed.</td>
 <td><code>TRUE</code></td>
-<td></td>
 </tr>
 <tr class="odd">
 <td><code>arm_var</code></td>
 <td>(<code>character</code>) Arm variable used to split table into columns.</td>
 <td><code>"ARM"</code></td>
-<td></td>
 </tr>
 <tr class="even">
 <td><code>saffl_var</code></td>
 <td>(<code>character</code>) Flag variable used to indicate inclusion in safety population.</td>
 <td><code>"SAFFL"</code></td>
-<td></td>
 </tr>
 <tr class="odd">
 <td><code>pref_var</code></td>
 <td>(<code>character</code>) Preferred term variable from <code>adae</code> to include in the table.</td>
 <td><code>"AEDECOD"</code></td>
-<td></td>
 </tr>
 <tr class="even">
 <td><code>aesifl_var</code></td>
 <td>(<code>character</code>) Variable from <code>adae</code> that indicates adverse events of special interest.</td>
 <td><code>"AESIFL"</code></td>
-<td></td>
 </tr>
 <tr class="odd">
 <td><code>aelabfl_var</code></td>
 <td>(<code>character</code>) Variable from <code>adae</code> that indicates a laboratory assessment.</td>
 <td><code>"AELABFL"</code></td>
-<td></td>
 </tr>
 <tr class="even">
 <td><code>lbl_overall</code></td>
 <td>(<code>character</code>) If specified, an overall column will be added to the table with the given value as the column label.</td>
 <td><code>NULL</code></td>
-<td></td>
 </tr>
 <tr class="odd">
 <td><code>risk_diff</code></td>
-<td>(named <code>list</code>) List of settings to apply to add a risk difference column to the table. See <a href="https://insightsengineering.github.io/tern/main/reference/add_riskdiff.html"><code>tern::add_riskdiff()</code></a> for more details. List should contain the following elements: | <code>NULL</code> | | - <code>arm_x</code>: (required) the name of reference arm. | | | | - <code>arm_y</code>: (required) the name of the arm to compare to the reference arm. | | | | - <code>col_label</code>: (optional) label to use for the risk difference column. Defaults to <code>"Risk Difference (%) (95% CI)"</code>. | | | | - <code>pct</code>: (optional) whether the output should be returned as percentages. Defaults to <code>TRUE</code>. | |</td>
-<td></td>
-<td></td>
+<td>
+<p>(named <code>list</code>) List of settings to apply to add a risk difference column to the table. See <a href="https://insightsengineering.github.io/tern/main/reference/add_riskdiff.html"><code>tern::add_riskdiff()</code></a> for more details. List should contain the following elements:</p>
+<ul>
+<li><p><code>arm_x</code>: (required) the name of reference arm.</p></li>
+<li><p><code>arm_y</code>: (required) the name of the arm to compare to the reference arm.</p></li>
+<li><p><code>col_label</code>: (optional) label to use for the risk difference column. Defaults to <code>"Risk Difference (%) (95% CI)"</code>.</p></li>
+<li><p><code>pct</code>: (optional) whether the output should be returned as percentages. Defaults to <code>TRUE</code>.</p></li>
+</ul>
+</td>
+<td><code>NULL</code></td>
 </tr>
 <tr class="even">
 <td><code>prune_0</code></td>
 <td>(<code>flag</code>) Whether all-zero rows should be removed from the table.</td>
 <td><code>TRUE</code></td>
-<td></td>
 </tr>
 <tr class="odd">
 <td><code>annotations</code></td>
 <td>(named <code>list</code> of <code>character</code>) List of annotations to add to the table. Valid annotation types are <code>title</code>, <code>subtitles</code>, <code>main_footer</code>, and <code>prov_footer.</code> Each name-value pair should use the annotation type as name and the desired string as value.</td>
 <td><code>NULL</code></td>
-<td></td>
 </tr>
 </tbody></table>
 <p>Source code for this function is available <a href="https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_20.R">here</a>.</p>
@@ -1144,41 +1137,41 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb3-50"><a href="#cb3-50"></a><span class="ss">-   </span>**`adae`**: <span class="in">`USUBJID`</span>, <span class="in">`AESEV`</span>, <span class="in">`AESER`</span>, <span class="in">`AESDTH`</span>, <span class="in">`EOSSTT`</span>, <span class="in">`AEREL`</span>, and the variables specified by <span class="in">`pref_var`</span>, <span class="in">`aesifl_var`</span>, <span class="in">`aelabfl_var`</span>, <span class="in">`arm_var`</span>, and <span class="in">`saffl_var`</span>.</span>
 <span id="cb3-51"><a href="#cb3-51"></a><span class="ss">-   </span>**`alt_counts_df`** (if specified): <span class="in">`USUBJID`</span> and the variables specified by <span class="in">`arm_var`</span> and <span class="in">`saffl_var`</span>.</span>
 <span id="cb3-52"><a href="#cb3-52"></a></span>
-<span id="cb3-53"><a href="#cb3-53"></a>+------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
-<span id="cb3-54"><a href="#cb3-54"></a>| Argument         | Description                                                                                                                                                                                                                                                  | Default      |</span>
-<span id="cb3-55"><a href="#cb3-55"></a>+:=================+:=============================================================================================================================================================================================================================================================+:=============+</span>
-<span id="cb3-56"><a href="#cb3-56"></a>| <span class="in">`adae`</span>           | (<span class="in">`data.frame`</span>) Dataset (typically ADAE) required to build table.                                                                                                                                                                                             | *No default* |</span>
-<span id="cb3-57"><a href="#cb3-57"></a>+------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
-<span id="cb3-58"><a href="#cb3-58"></a>| <span class="in">`alt_counts_df`</span>  | (<span class="in">`character`</span>) Alternative dataset (typically ADSL) used only to calculate column counts.                                                                                                                                                                     | <span class="in">`NULL`</span>       |</span>
-<span id="cb3-59"><a href="#cb3-59"></a>+------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
-<span id="cb3-60"><a href="#cb3-60"></a>| <span class="in">`show_colcounts`</span> | (<span class="in">`flag`</span>) Whether column counts should be printed.                                                                                                                                                                                                            | <span class="in">`TRUE`</span>       |</span>
-<span id="cb3-61"><a href="#cb3-61"></a>+------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
-<span id="cb3-62"><a href="#cb3-62"></a>| <span class="in">`arm_var`</span>        | (<span class="in">`character`</span>) Arm variable used to split table into columns.                                                                                                                                                                                                 | <span class="in">`"ARM"`</span>      |</span>
-<span id="cb3-63"><a href="#cb3-63"></a>+------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
-<span id="cb3-64"><a href="#cb3-64"></a>| <span class="in">`saffl_var`</span>      | (<span class="in">`character`</span>) Flag variable used to indicate inclusion in safety population.                                                                                                                                                                                 | <span class="in">`"SAFFL"`</span>    |</span>
-<span id="cb3-65"><a href="#cb3-65"></a>+------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
-<span id="cb3-66"><a href="#cb3-66"></a>| <span class="in">`pref_var`</span>       | (<span class="in">`character`</span>) Preferred term variable from <span class="in">`adae`</span> to include in the table.                                                                                                                                                                                   | <span class="in">`"AEDECOD"`</span>  |</span>
-<span id="cb3-67"><a href="#cb3-67"></a>+------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
-<span id="cb3-68"><a href="#cb3-68"></a>| <span class="in">`aesifl_var`</span>     | (<span class="in">`character`</span>) Variable from <span class="in">`adae`</span> that indicates adverse events of special interest.                                                                                                                                                                        | <span class="in">`"AESIFL"`</span>   |</span>
-<span id="cb3-69"><a href="#cb3-69"></a>+------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
-<span id="cb3-70"><a href="#cb3-70"></a>| <span class="in">`aelabfl_var`</span>    | (<span class="in">`character`</span>) Variable from <span class="in">`adae`</span> that indicates a laboratory assessment.                                                                                                                                                                                   | <span class="in">`"AELABFL"`</span>  |</span>
-<span id="cb3-71"><a href="#cb3-71"></a>+------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
-<span id="cb3-72"><a href="#cb3-72"></a>| <span class="in">`lbl_overall`</span>    | (<span class="in">`character`</span>) If specified, an overall column will be added to the table with the given value as the column label.                                                                                                                                           | <span class="in">`NULL`</span>       |</span>
-<span id="cb3-73"><a href="#cb3-73"></a>+------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
+<span id="cb3-53"><a href="#cb3-53"></a>+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
+<span id="cb3-54"><a href="#cb3-54"></a>| **Argument**     | **Description**                                                                                                                                                                                                                                                | **Default**  |</span>
+<span id="cb3-55"><a href="#cb3-55"></a>+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
+<span id="cb3-56"><a href="#cb3-56"></a>| <span class="in">`adae`</span>           | (<span class="in">`data.frame`</span>) Dataset (typically ADAE) required to build table.                                                                                                                                                                                               | *No default* |</span>
+<span id="cb3-57"><a href="#cb3-57"></a>+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
+<span id="cb3-58"><a href="#cb3-58"></a>| <span class="in">`alt_counts_df`</span>  | (<span class="in">`character`</span>) Alternative dataset (typically ADSL) used only to calculate column counts.                                                                                                                                                                       | <span class="in">`NULL`</span>       |</span>
+<span id="cb3-59"><a href="#cb3-59"></a>+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
+<span id="cb3-60"><a href="#cb3-60"></a>| <span class="in">`show_colcounts`</span> | (<span class="in">`flag`</span>) Whether column counts should be printed.                                                                                                                                                                                                              | <span class="in">`TRUE`</span>       |</span>
+<span id="cb3-61"><a href="#cb3-61"></a>+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
+<span id="cb3-62"><a href="#cb3-62"></a>| <span class="in">`arm_var`</span>        | (<span class="in">`character`</span>) Arm variable used to split table into columns.                                                                                                                                                                                                   | <span class="in">`"ARM"`</span>      |</span>
+<span id="cb3-63"><a href="#cb3-63"></a>+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
+<span id="cb3-64"><a href="#cb3-64"></a>| <span class="in">`saffl_var`</span>      | (<span class="in">`character`</span>) Flag variable used to indicate inclusion in safety population.                                                                                                                                                                                   | <span class="in">`"SAFFL"`</span>    |</span>
+<span id="cb3-65"><a href="#cb3-65"></a>+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
+<span id="cb3-66"><a href="#cb3-66"></a>| <span class="in">`pref_var`</span>       | (<span class="in">`character`</span>) Preferred term variable from <span class="in">`adae`</span> to include in the table.                                                                                                                                                                                     | <span class="in">`"AEDECOD"`</span>  |</span>
+<span id="cb3-67"><a href="#cb3-67"></a>+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
+<span id="cb3-68"><a href="#cb3-68"></a>| <span class="in">`aesifl_var`</span>     | (<span class="in">`character`</span>) Variable from <span class="in">`adae`</span> that indicates adverse events of special interest.                                                                                                                                                                          | <span class="in">`"AESIFL"`</span>   |</span>
+<span id="cb3-69"><a href="#cb3-69"></a>+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
+<span id="cb3-70"><a href="#cb3-70"></a>| <span class="in">`aelabfl_var`</span>    | (<span class="in">`character`</span>) Variable from <span class="in">`adae`</span> that indicates a laboratory assessment.                                                                                                                                                                                     | <span class="in">`"AELABFL"`</span>  |</span>
+<span id="cb3-71"><a href="#cb3-71"></a>+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
+<span id="cb3-72"><a href="#cb3-72"></a>| <span class="in">`lbl_overall`</span>    | (<span class="in">`character`</span>) If specified, an overall column will be added to the table with the given value as the column label.                                                                                                                                             | <span class="in">`NULL`</span>       |</span>
+<span id="cb3-73"><a href="#cb3-73"></a>+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
 <span id="cb3-74"><a href="#cb3-74"></a>| <span class="in">`risk_diff`</span>      | (named <span class="in">`list`</span>) List of settings to apply to add a risk difference column to the table. See <span class="co">[</span><span class="ot">`tern::add_riskdiff()`</span><span class="co">](https://insightsengineering.github.io/tern/main/reference/add_riskdiff.html)</span> for more details. List should contain the following elements: | <span class="in">`NULL`</span>       |</span>
-<span id="cb3-75"><a href="#cb3-75"></a>|                  |                                                                                                                                                                                                                                                              |              |</span>
-<span id="cb3-76"><a href="#cb3-76"></a>|                  | -   <span class="in">`arm_x`</span>: (required) the name of reference arm.                                                                                                                                                                                                           |              |</span>
-<span id="cb3-77"><a href="#cb3-77"></a>|                  |                                                                                                                                                                                                                                                              |              |</span>
-<span id="cb3-78"><a href="#cb3-78"></a>|                  | -   <span class="in">`arm_y`</span>: (required) the name of the arm to compare to the reference arm.                                                                                                                                                                                 |              |</span>
-<span id="cb3-79"><a href="#cb3-79"></a>|                  |                                                                                                                                                                                                                                                              |              |</span>
-<span id="cb3-80"><a href="#cb3-80"></a>|                  | -   <span class="in">`col_label`</span>: (optional) label to use for the risk difference column. Defaults to <span class="in">`"Risk Difference (%) (95% CI)"`</span>.                                                                                                                                       |              |</span>
-<span id="cb3-81"><a href="#cb3-81"></a>|                  |                                                                                                                                                                                                                                                              |              |</span>
-<span id="cb3-82"><a href="#cb3-82"></a>|                  | -   <span class="in">`pct`</span>: (optional) whether the output should be returned as percentages. Defaults to <span class="in">`TRUE`</span>.                                                                                                                                                              |              |</span>
-<span id="cb3-83"><a href="#cb3-83"></a>+------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
-<span id="cb3-84"><a href="#cb3-84"></a>| <span class="in">`prune_0`</span>        | (<span class="in">`flag`</span>) Whether all-zero rows should be removed from the table.                                                                                                                                                                                             | <span class="in">`TRUE`</span>       |</span>
-<span id="cb3-85"><a href="#cb3-85"></a>+------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
-<span id="cb3-86"><a href="#cb3-86"></a>| <span class="in">`annotations`</span>    | (named <span class="in">`list`</span> of <span class="in">`character`</span>) List of annotations to add to the table. Valid annotation types are <span class="in">`title`</span>, <span class="in">`subtitles`</span>, <span class="in">`main_footer`</span>, and <span class="in">`prov_footer.`</span> Each name-value pair should use the annotation type as name and the desired string as value.       | <span class="in">`NULL`</span>       |</span>
-<span id="cb3-87"><a href="#cb3-87"></a>+------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
+<span id="cb3-75"><a href="#cb3-75"></a>|                  |                                                                                                                                                                                                                                                                |              |</span>
+<span id="cb3-76"><a href="#cb3-76"></a>|                  | -   <span class="in">`arm_x`</span>: (required) the name of reference arm.                                                                                                                                                                                                             |              |</span>
+<span id="cb3-77"><a href="#cb3-77"></a>|                  |                                                                                                                                                                                                                                                                |              |</span>
+<span id="cb3-78"><a href="#cb3-78"></a>|                  | -   <span class="in">`arm_y`</span>: (required) the name of the arm to compare to the reference arm.                                                                                                                                                                                   |              |</span>
+<span id="cb3-79"><a href="#cb3-79"></a>|                  |                                                                                                                                                                                                                                                                |              |</span>
+<span id="cb3-80"><a href="#cb3-80"></a>|                  | -   <span class="in">`col_label`</span>: (optional) label to use for the risk difference column. Defaults to <span class="in">`"Risk Difference (%) (95% CI)"`</span>.                                                                                                                                         |              |</span>
+<span id="cb3-81"><a href="#cb3-81"></a>|                  |                                                                                                                                                                                                                                                                |              |</span>
+<span id="cb3-82"><a href="#cb3-82"></a>|                  | -   <span class="in">`pct`</span>: (optional) whether the output should be returned as percentages. Defaults to <span class="in">`TRUE`</span>.                                                                                                                                                                |              |</span>
+<span id="cb3-83"><a href="#cb3-83"></a>+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
+<span id="cb3-84"><a href="#cb3-84"></a>| <span class="in">`prune_0`</span>        | (<span class="in">`flag`</span>) Whether all-zero rows should be removed from the table.                                                                                                                                                                                               | <span class="in">`TRUE`</span>       |</span>
+<span id="cb3-85"><a href="#cb3-85"></a>+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
+<span id="cb3-86"><a href="#cb3-86"></a>| <span class="in">`annotations`</span>    | (named <span class="in">`list`</span> of <span class="in">`character`</span>) List of annotations to add to the table. Valid annotation types are <span class="in">`title`</span>, <span class="in">`subtitles`</span>, <span class="in">`main_footer`</span>, and <span class="in">`prov_footer.`</span> Each name-value pair should use the annotation type as name and the desired string as value.         | <span class="in">`NULL`</span>       |</span>
+<span id="cb3-87"><a href="#cb3-87"></a>+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
 <span id="cb3-88"><a href="#cb3-88"></a></span>
 <span id="cb3-89"><a href="#cb3-89"></a>Source code for this function is available <span class="co">[</span><span class="ot">here</span><span class="co">](https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_20.R)</span>.</span>
 <span id="cb3-90"><a href="#cb3-90"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>

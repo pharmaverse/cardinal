@@ -378,66 +378,62 @@ DBP &lt;60          133 (99.3%)   134 (100%)     132 (100%)           0.7 (-0.7 
 </ul>
 <table class="caption-top table"><tbody>
 <tr class="odd">
-<td>Argument :================= <code>advs</code>
-</td>
-<td>Description :============================================================================================================================================================================================================================================================= (<code>data.frame</code>) Dataset (typically ADVS) required to build table.</td>
-<td>Default :============= <em>No default</em>
-</td>
-<td></td>
+<td><strong>Argument</strong></td>
+<td><strong>Description</strong></td>
+<td><strong>Default</strong></td>
 </tr>
 <tr class="even">
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td><code>advs</code></td>
+<td>(<code>data.frame</code>) Dataset (typically ADVS) required to build table.</td>
+<td><em>No default</em></td>
 </tr>
 <tr class="odd">
 <td><code>alt_counts_df</code></td>
 <td>(<code>character</code>) Alternative dataset (typically ADSL) used only to calculate column counts.</td>
 <td><code>NULL</code></td>
-<td></td>
 </tr>
 <tr class="even">
 <td><code>show_colcounts</code></td>
 <td>(<code>flag</code>) Whether column counts should be printed.</td>
 <td><code>TRUE</code></td>
-<td></td>
 </tr>
 <tr class="odd">
 <td><code>arm_var</code></td>
 <td>(<code>character</code>) Arm variable used to split table into columns.</td>
 <td><code>"ARM"</code></td>
-<td></td>
 </tr>
 <tr class="even">
 <td><code>saffl_var</code></td>
 <td>(<code>character</code>) Flag variable used to indicate inclusion in safety population.</td>
 <td><code>"SAFFL"</code></td>
-<td></td>
 </tr>
 <tr class="odd">
 <td><code>lbl_overall</code></td>
 <td>(<code>character</code>) If specified, an overall column will be added to the table with the given value as the column label.</td>
 <td><code>NULL</code></td>
-<td></td>
 </tr>
 <tr class="even">
 <td><code>risk_diff</code></td>
-<td>(named <code>list</code>) List of settings to apply to add a risk difference column to the table. See <a href="https://insightsengineering.github.io/tern/main/reference/add_riskdiff.html"><code>tern::add_riskdiff()</code></a> for more details. List should contain the following elements: | <code>NULL</code> | | - <code>arm_x</code>: (required) the name of reference arm. | | | | - <code>arm_y</code>: (required) the name of the arm to compare to the reference arm. | | | | - <code>col_label</code>: (optional) label to use for the risk difference column. Defaults to <code>"Risk Difference (%) (95% CI)"</code>. | | | | - <code>pct</code>: (optional) whether the output should be returned as percentages. Defaults to <code>TRUE</code>. | |</td>
-<td></td>
-<td></td>
+<td>
+<p>(named <code>list</code>) List of settings to apply to add a risk difference column to the table. See <a href="https://insightsengineering.github.io/tern/main/reference/add_riskdiff.html"><code>tern::add_riskdiff()</code></a> for more details. List should contain the following elements:</p>
+<ul>
+<li><p><code>arm_x</code>: (required) the name of reference arm.</p></li>
+<li><p><code>arm_y</code>: (required) the name of the arm to compare to the reference arm.</p></li>
+<li><p><code>col_label</code>: (optional) label to use for the risk difference column. Defaults to <code>"Risk Difference (%) (95% CI)"</code>.</p></li>
+<li><p><code>pct</code>: (optional) whether the output should be returned as percentages. Defaults to <code>TRUE</code>.</p></li>
+</ul>
+</td>
+<td><code>NULL</code></td>
 </tr>
 <tr class="odd">
 <td><code>prune_0</code></td>
 <td>(<code>flag</code>) Whether all-zero rows should be removed from the table.</td>
 <td><code>FALSE</code></td>
-<td></td>
 </tr>
 <tr class="even">
 <td><code>annotations</code></td>
 <td>(named <code>list</code> of <code>character</code>) List of annotations to add to the table. Valid annotation types are <code>title</code>, <code>subtitles</code>, <code>main_footer</code>, and <code>prov_footer.</code> Each name-value pair should use the annotation type as name and the desired string as value.</td>
 <td><code>NULL</code></td>
-<td></td>
 </tr>
 </tbody></table>
 <p>Source code for this function is available <a href="https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_33.R#L27">here</a>.</p>
@@ -446,23 +442,23 @@ DBP &lt;60          133 (99.3%)   134 (100%)     132 (100%)           0.7 (-0.7 
 <div id="tabset-1-5" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-5-tab">
 <div class="cell">
 <div class="cell-output-display">
-<div id="sobnqilsew" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#sobnqilsew table {
+<div id="mczetseima" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#mczetseima table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#sobnqilsew thead, #sobnqilsew tbody, #sobnqilsew tfoot, #sobnqilsew tr, #sobnqilsew td, #sobnqilsew th {
+#mczetseima thead, #mczetseima tbody, #mczetseima tfoot, #mczetseima tr, #mczetseima td, #mczetseima th {
   border-style: none;
 }
 
-#sobnqilsew p {
+#mczetseima p {
   margin: 0;
   padding: 0;
 }
 
-#sobnqilsew .gt_table {
+#mczetseima .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -488,12 +484,12 @@ DBP &lt;60          133 (99.3%)   134 (100%)     132 (100%)           0.7 (-0.7 
   border-left-color: #D3D3D3;
 }
 
-#sobnqilsew .gt_caption {
+#mczetseima .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#sobnqilsew .gt_title {
+#mczetseima .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -505,7 +501,7 @@ DBP &lt;60          133 (99.3%)   134 (100%)     132 (100%)           0.7 (-0.7 
   border-bottom-width: 0;
 }
 
-#sobnqilsew .gt_subtitle {
+#mczetseima .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -517,7 +513,7 @@ DBP &lt;60          133 (99.3%)   134 (100%)     132 (100%)           0.7 (-0.7 
   border-top-width: 0;
 }
 
-#sobnqilsew .gt_heading {
+#mczetseima .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -529,13 +525,13 @@ DBP &lt;60          133 (99.3%)   134 (100%)     132 (100%)           0.7 (-0.7 
   border-right-color: #D3D3D3;
 }
 
-#sobnqilsew .gt_bottom_border {
+#mczetseima .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#sobnqilsew .gt_col_headings {
+#mczetseima .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -550,7 +546,7 @@ DBP &lt;60          133 (99.3%)   134 (100%)     132 (100%)           0.7 (-0.7 
   border-right-color: #D3D3D3;
 }
 
-#sobnqilsew .gt_col_heading {
+#mczetseima .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -570,7 +566,7 @@ DBP &lt;60          133 (99.3%)   134 (100%)     132 (100%)           0.7 (-0.7 
   overflow-x: hidden;
 }
 
-#sobnqilsew .gt_column_spanner_outer {
+#mczetseima .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -582,15 +578,15 @@ DBP &lt;60          133 (99.3%)   134 (100%)     132 (100%)           0.7 (-0.7 
   padding-right: 4px;
 }
 
-#sobnqilsew .gt_column_spanner_outer:first-child {
+#mczetseima .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#sobnqilsew .gt_column_spanner_outer:last-child {
+#mczetseima .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#sobnqilsew .gt_column_spanner {
+#mczetseima .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -602,11 +598,11 @@ DBP &lt;60          133 (99.3%)   134 (100%)     132 (100%)           0.7 (-0.7 
   width: 100%;
 }
 
-#sobnqilsew .gt_spanner_row {
+#mczetseima .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#sobnqilsew .gt_group_heading {
+#mczetseima .gt_group_heading {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -632,7 +628,7 @@ DBP &lt;60          133 (99.3%)   134 (100%)     132 (100%)           0.7 (-0.7 
   text-align: left;
 }
 
-#sobnqilsew .gt_empty_group_heading {
+#mczetseima .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -647,15 +643,15 @@ DBP &lt;60          133 (99.3%)   134 (100%)     132 (100%)           0.7 (-0.7 
   vertical-align: middle;
 }
 
-#sobnqilsew .gt_from_md > :first-child {
+#mczetseima .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#sobnqilsew .gt_from_md > :last-child {
+#mczetseima .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#sobnqilsew .gt_row {
+#mczetseima .gt_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -674,7 +670,7 @@ DBP &lt;60          133 (99.3%)   134 (100%)     132 (100%)           0.7 (-0.7 
   overflow-x: hidden;
 }
 
-#sobnqilsew .gt_stub {
+#mczetseima .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -687,7 +683,7 @@ DBP &lt;60          133 (99.3%)   134 (100%)     132 (100%)           0.7 (-0.7 
   padding-right: 5px;
 }
 
-#sobnqilsew .gt_stub_row_group {
+#mczetseima .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -701,15 +697,15 @@ DBP &lt;60          133 (99.3%)   134 (100%)     132 (100%)           0.7 (-0.7 
   vertical-align: top;
 }
 
-#sobnqilsew .gt_row_group_first td {
+#mczetseima .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#sobnqilsew .gt_row_group_first th {
+#mczetseima .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#sobnqilsew .gt_summary_row {
+#mczetseima .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -719,16 +715,16 @@ DBP &lt;60          133 (99.3%)   134 (100%)     132 (100%)           0.7 (-0.7 
   padding-right: 5px;
 }
 
-#sobnqilsew .gt_first_summary_row {
+#mczetseima .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#sobnqilsew .gt_first_summary_row.thick {
+#mczetseima .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#sobnqilsew .gt_last_summary_row {
+#mczetseima .gt_last_summary_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -738,7 +734,7 @@ DBP &lt;60          133 (99.3%)   134 (100%)     132 (100%)           0.7 (-0.7 
   border-bottom-color: #D3D3D3;
 }
 
-#sobnqilsew .gt_grand_summary_row {
+#mczetseima .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -748,7 +744,7 @@ DBP &lt;60          133 (99.3%)   134 (100%)     132 (100%)           0.7 (-0.7 
   padding-right: 5px;
 }
 
-#sobnqilsew .gt_first_grand_summary_row {
+#mczetseima .gt_first_grand_summary_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -758,7 +754,7 @@ DBP &lt;60          133 (99.3%)   134 (100%)     132 (100%)           0.7 (-0.7 
   border-top-color: #D3D3D3;
 }
 
-#sobnqilsew .gt_last_grand_summary_row_top {
+#mczetseima .gt_last_grand_summary_row_top {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -768,11 +764,11 @@ DBP &lt;60          133 (99.3%)   134 (100%)     132 (100%)           0.7 (-0.7 
   border-bottom-color: #D3D3D3;
 }
 
-#sobnqilsew .gt_striped {
+#mczetseima .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#sobnqilsew .gt_table_body {
+#mczetseima .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -781,7 +777,7 @@ DBP &lt;60          133 (99.3%)   134 (100%)     132 (100%)           0.7 (-0.7 
   border-bottom-color: #D3D3D3;
 }
 
-#sobnqilsew .gt_footnotes {
+#mczetseima .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -795,7 +791,7 @@ DBP &lt;60          133 (99.3%)   134 (100%)     132 (100%)           0.7 (-0.7 
   border-right-color: #D3D3D3;
 }
 
-#sobnqilsew .gt_footnote {
+#mczetseima .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 1px;
@@ -804,7 +800,7 @@ DBP &lt;60          133 (99.3%)   134 (100%)     132 (100%)           0.7 (-0.7 
   padding-right: 5px;
 }
 
-#sobnqilsew .gt_sourcenotes {
+#mczetseima .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -818,7 +814,7 @@ DBP &lt;60          133 (99.3%)   134 (100%)     132 (100%)           0.7 (-0.7 
   border-right-color: #D3D3D3;
 }
 
-#sobnqilsew .gt_sourcenote {
+#mczetseima .gt_sourcenote {
   font-size: 90%;
   padding-top: 1px;
   padding-bottom: 1px;
@@ -826,72 +822,72 @@ DBP &lt;60          133 (99.3%)   134 (100%)     132 (100%)           0.7 (-0.7 
   padding-right: 5px;
 }
 
-#sobnqilsew .gt_left {
+#mczetseima .gt_left {
   text-align: left;
 }
 
-#sobnqilsew .gt_center {
+#mczetseima .gt_center {
   text-align: center;
 }
 
-#sobnqilsew .gt_right {
+#mczetseima .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#sobnqilsew .gt_font_normal {
+#mczetseima .gt_font_normal {
   font-weight: normal;
 }
 
-#sobnqilsew .gt_font_bold {
+#mczetseima .gt_font_bold {
   font-weight: bold;
 }
 
-#sobnqilsew .gt_font_italic {
+#mczetseima .gt_font_italic {
   font-style: italic;
 }
 
-#sobnqilsew .gt_super {
+#mczetseima .gt_super {
   font-size: 65%;
 }
 
-#sobnqilsew .gt_footnote_marks {
+#mczetseima .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#sobnqilsew .gt_asterisk {
+#mczetseima .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#sobnqilsew .gt_indent_1 {
+#mczetseima .gt_indent_1 {
   text-indent: 5px;
 }
 
-#sobnqilsew .gt_indent_2 {
+#mczetseima .gt_indent_2 {
   text-indent: 10px;
 }
 
-#sobnqilsew .gt_indent_3 {
+#mczetseima .gt_indent_3 {
   text-indent: 15px;
 }
 
-#sobnqilsew .gt_indent_4 {
+#mczetseima .gt_indent_4 {
   text-indent: 20px;
 }
 
-#sobnqilsew .gt_indent_5 {
+#mczetseima .gt_indent_5 {
   text-indent: 25px;
 }
 
-#sobnqilsew .katex-display {
+#mczetseima .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#sobnqilsew div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#mczetseima div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -961,14 +957,14 @@ N = 132</p></th>
 </ul>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 11%">
-<col style="width: 73%">
+<col style="width: 10%">
+<col style="width: 74%">
 <col style="width: 14%">
 </colgroup>
 <thead><tr class="header">
-<th style="text-align: left;">Argument</th>
-<th style="text-align: left;">Description</th>
-<th style="text-align: left;">Default</th>
+<th style="text-align: left;"><strong>Argument</strong></th>
+<th style="text-align: left;"><strong>Description</strong></th>
+<th style="text-align: left;"><strong>Default</strong></th>
 </tr></thead>
 <tbody>
 <tr class="odd">
@@ -1654,35 +1650,35 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb4-40"><a href="#cb4-40"></a><span class="ss">-   </span>**`advs`**: <span class="in">`USUBJID`</span>, <span class="in">`AVISITN`</span>, <span class="in">`PARAMCD`</span>, <span class="in">`AVAL`</span>, <span class="in">`AVALU`</span>, and the variables specified by <span class="in">`arm_var`</span> and <span class="in">`saffl_var`</span>.</span>
 <span id="cb4-41"><a href="#cb4-41"></a><span class="ss">-   </span>**`alt_counts_df`** (if specified): <span class="in">`USUBJID`</span> and the variables specified by <span class="in">`arm_var`</span> and <span class="in">`saffl_var`</span>.</span>
 <span id="cb4-42"><a href="#cb4-42"></a></span>
-<span id="cb4-43"><a href="#cb4-43"></a>+------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
-<span id="cb4-44"><a href="#cb4-44"></a>| Argument         | Description                                                                                                                                                                                                                                                  | Default      |</span>
-<span id="cb4-45"><a href="#cb4-45"></a>+:=================+:=============================================================================================================================================================================================================================================================+:=============+</span>
-<span id="cb4-46"><a href="#cb4-46"></a>| <span class="in">`advs`</span>           | (<span class="in">`data.frame`</span>) Dataset (typically ADVS) required to build table.                                                                                                                                                                                             | *No default* |</span>
-<span id="cb4-47"><a href="#cb4-47"></a>+------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
-<span id="cb4-48"><a href="#cb4-48"></a>| <span class="in">`alt_counts_df`</span>  | (<span class="in">`character`</span>) Alternative dataset (typically ADSL) used only to calculate column counts.                                                                                                                                                                     | <span class="in">`NULL`</span>       |</span>
-<span id="cb4-49"><a href="#cb4-49"></a>+------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
-<span id="cb4-50"><a href="#cb4-50"></a>| <span class="in">`show_colcounts`</span> | (<span class="in">`flag`</span>) Whether column counts should be printed.                                                                                                                                                                                                            | <span class="in">`TRUE`</span>       |</span>
-<span id="cb4-51"><a href="#cb4-51"></a>+------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
-<span id="cb4-52"><a href="#cb4-52"></a>| <span class="in">`arm_var`</span>        | (<span class="in">`character`</span>) Arm variable used to split table into columns.                                                                                                                                                                                                 | <span class="in">`"ARM"`</span>      |</span>
-<span id="cb4-53"><a href="#cb4-53"></a>+------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
-<span id="cb4-54"><a href="#cb4-54"></a>| <span class="in">`saffl_var`</span>      | (<span class="in">`character`</span>) Flag variable used to indicate inclusion in safety population.                                                                                                                                                                                 | <span class="in">`"SAFFL"`</span>    |</span>
-<span id="cb4-55"><a href="#cb4-55"></a>+------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
-<span id="cb4-56"><a href="#cb4-56"></a>| <span class="in">`lbl_overall`</span>    | (<span class="in">`character`</span>) If specified, an overall column will be added to the table with the given value as the column label.                                                                                                                                           | <span class="in">`NULL`</span>       |</span>
-<span id="cb4-57"><a href="#cb4-57"></a>+------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
+<span id="cb4-43"><a href="#cb4-43"></a>+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
+<span id="cb4-44"><a href="#cb4-44"></a>| **Argument**     | **Description**                                                                                                                                                                                                                                                | **Default**  |</span>
+<span id="cb4-45"><a href="#cb4-45"></a>+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
+<span id="cb4-46"><a href="#cb4-46"></a>| <span class="in">`advs`</span>           | (<span class="in">`data.frame`</span>) Dataset (typically ADVS) required to build table.                                                                                                                                                                                               | *No default* |</span>
+<span id="cb4-47"><a href="#cb4-47"></a>+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
+<span id="cb4-48"><a href="#cb4-48"></a>| <span class="in">`alt_counts_df`</span>  | (<span class="in">`character`</span>) Alternative dataset (typically ADSL) used only to calculate column counts.                                                                                                                                                                       | <span class="in">`NULL`</span>       |</span>
+<span id="cb4-49"><a href="#cb4-49"></a>+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
+<span id="cb4-50"><a href="#cb4-50"></a>| <span class="in">`show_colcounts`</span> | (<span class="in">`flag`</span>) Whether column counts should be printed.                                                                                                                                                                                                              | <span class="in">`TRUE`</span>       |</span>
+<span id="cb4-51"><a href="#cb4-51"></a>+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
+<span id="cb4-52"><a href="#cb4-52"></a>| <span class="in">`arm_var`</span>        | (<span class="in">`character`</span>) Arm variable used to split table into columns.                                                                                                                                                                                                   | <span class="in">`"ARM"`</span>      |</span>
+<span id="cb4-53"><a href="#cb4-53"></a>+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
+<span id="cb4-54"><a href="#cb4-54"></a>| <span class="in">`saffl_var`</span>      | (<span class="in">`character`</span>) Flag variable used to indicate inclusion in safety population.                                                                                                                                                                                   | <span class="in">`"SAFFL"`</span>    |</span>
+<span id="cb4-55"><a href="#cb4-55"></a>+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
+<span id="cb4-56"><a href="#cb4-56"></a>| <span class="in">`lbl_overall`</span>    | (<span class="in">`character`</span>) If specified, an overall column will be added to the table with the given value as the column label.                                                                                                                                             | <span class="in">`NULL`</span>       |</span>
+<span id="cb4-57"><a href="#cb4-57"></a>+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
 <span id="cb4-58"><a href="#cb4-58"></a>| <span class="in">`risk_diff`</span>      | (named <span class="in">`list`</span>) List of settings to apply to add a risk difference column to the table. See <span class="co">[</span><span class="ot">`tern::add_riskdiff()`</span><span class="co">](https://insightsengineering.github.io/tern/main/reference/add_riskdiff.html)</span> for more details. List should contain the following elements: | <span class="in">`NULL`</span>       |</span>
-<span id="cb4-59"><a href="#cb4-59"></a>|                  |                                                                                                                                                                                                                                                              |              |</span>
-<span id="cb4-60"><a href="#cb4-60"></a>|                  | -   <span class="in">`arm_x`</span>: (required) the name of reference arm.                                                                                                                                                                                                           |              |</span>
-<span id="cb4-61"><a href="#cb4-61"></a>|                  |                                                                                                                                                                                                                                                              |              |</span>
-<span id="cb4-62"><a href="#cb4-62"></a>|                  | -   <span class="in">`arm_y`</span>: (required) the name of the arm to compare to the reference arm.                                                                                                                                                                                 |              |</span>
-<span id="cb4-63"><a href="#cb4-63"></a>|                  |                                                                                                                                                                                                                                                              |              |</span>
-<span id="cb4-64"><a href="#cb4-64"></a>|                  | -   <span class="in">`col_label`</span>: (optional) label to use for the risk difference column. Defaults to <span class="in">`"Risk Difference (%) (95% CI)"`</span>.                                                                                                                                       |              |</span>
-<span id="cb4-65"><a href="#cb4-65"></a>|                  |                                                                                                                                                                                                                                                              |              |</span>
-<span id="cb4-66"><a href="#cb4-66"></a>|                  | -   <span class="in">`pct`</span>: (optional) whether the output should be returned as percentages. Defaults to <span class="in">`TRUE`</span>.                                                                                                                                                              |              |</span>
-<span id="cb4-67"><a href="#cb4-67"></a>+------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
-<span id="cb4-68"><a href="#cb4-68"></a>| <span class="in">`prune_0`</span>        | (<span class="in">`flag`</span>) Whether all-zero rows should be removed from the table.                                                                                                                                                                                             | <span class="in">`FALSE`</span>      |</span>
-<span id="cb4-69"><a href="#cb4-69"></a>+------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
-<span id="cb4-70"><a href="#cb4-70"></a>| <span class="in">`annotations`</span>    | (named <span class="in">`list`</span> of <span class="in">`character`</span>) List of annotations to add to the table. Valid annotation types are <span class="in">`title`</span>, <span class="in">`subtitles`</span>, <span class="in">`main_footer`</span>, and <span class="in">`prov_footer.`</span> Each name-value pair should use the annotation type as name and the desired string as value.       | <span class="in">`NULL`</span>       |</span>
-<span id="cb4-71"><a href="#cb4-71"></a>+------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
+<span id="cb4-59"><a href="#cb4-59"></a>|                  |                                                                                                                                                                                                                                                                |              |</span>
+<span id="cb4-60"><a href="#cb4-60"></a>|                  | -   <span class="in">`arm_x`</span>: (required) the name of reference arm.                                                                                                                                                                                                             |              |</span>
+<span id="cb4-61"><a href="#cb4-61"></a>|                  |                                                                                                                                                                                                                                                                |              |</span>
+<span id="cb4-62"><a href="#cb4-62"></a>|                  | -   <span class="in">`arm_y`</span>: (required) the name of the arm to compare to the reference arm.                                                                                                                                                                                   |              |</span>
+<span id="cb4-63"><a href="#cb4-63"></a>|                  |                                                                                                                                                                                                                                                                |              |</span>
+<span id="cb4-64"><a href="#cb4-64"></a>|                  | -   <span class="in">`col_label`</span>: (optional) label to use for the risk difference column. Defaults to <span class="in">`"Risk Difference (%) (95% CI)"`</span>.                                                                                                                                         |              |</span>
+<span id="cb4-65"><a href="#cb4-65"></a>|                  |                                                                                                                                                                                                                                                                |              |</span>
+<span id="cb4-66"><a href="#cb4-66"></a>|                  | -   <span class="in">`pct`</span>: (optional) whether the output should be returned as percentages. Defaults to <span class="in">`TRUE`</span>.                                                                                                                                                                |              |</span>
+<span id="cb4-67"><a href="#cb4-67"></a>+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
+<span id="cb4-68"><a href="#cb4-68"></a>| <span class="in">`prune_0`</span>        | (<span class="in">`flag`</span>) Whether all-zero rows should be removed from the table.                                                                                                                                                                                               | <span class="in">`FALSE`</span>      |</span>
+<span id="cb4-69"><a href="#cb4-69"></a>+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
+<span id="cb4-70"><a href="#cb4-70"></a>| <span class="in">`annotations`</span>    | (named <span class="in">`list`</span> of <span class="in">`character`</span>) List of annotations to add to the table. Valid annotation types are <span class="in">`title`</span>, <span class="in">`subtitles`</span>, <span class="in">`main_footer`</span>, and <span class="in">`prov_footer.`</span> Each name-value pair should use the annotation type as name and the desired string as value.         | <span class="in">`NULL`</span>       |</span>
+<span id="cb4-71"><a href="#cb4-71"></a>+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
 <span id="cb4-72"><a href="#cb4-72"></a></span>
 <span id="cb4-73"><a href="#cb4-73"></a>Source code for this function is available <span class="co">[</span><span class="ot">here</span><span class="co">](https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_33.R#L27)</span>.</span>
 <span id="cb4-74"><a href="#cb4-74"></a></span>
@@ -1716,22 +1712,16 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb4-102"><a href="#cb4-102"></a></span>
 <span id="cb4-103"><a href="#cb4-103"></a><span class="ss">-   </span>**`advs`**: <span class="in">`USUBJID`</span>, <span class="in">`AVISITN`</span>, <span class="in">`PARAMCD`</span>, <span class="in">`AVAL`</span>, <span class="in">`AVALU`</span>, and the variables specified by <span class="in">`arm_var`</span> and <span class="in">`saffl_var`</span>.</span>
 <span id="cb4-104"><a href="#cb4-104"></a></span>
-<span id="cb4-105"><a href="#cb4-105"></a>+-----------------+--------------------------------------------------------------------------------------------------------------------+----------------------+</span>
-<span id="cb4-106"><a href="#cb4-106"></a>| Argument        | Description                                                                                                        | Default              |</span>
-<span id="cb4-107"><a href="#cb4-107"></a>+:================+:===================================================================================================================+:=====================+</span>
-<span id="cb4-108"><a href="#cb4-108"></a>| <span class="in">`advs`</span>          | (<span class="in">`data.frame`</span>) Dataset (typically ADVS) required to build table.                                                   | *No default*         |</span>
-<span id="cb4-109"><a href="#cb4-109"></a>+-----------------+--------------------------------------------------------------------------------------------------------------------+----------------------+</span>
-<span id="cb4-110"><a href="#cb4-110"></a>| <span class="in">`alt_counts_df`</span> | (<span class="in">`character`</span>) Alternative dataset (typically ADSL) used only to calculate column counts.                           | <span class="in">`NULL`</span>               |</span>
-<span id="cb4-111"><a href="#cb4-111"></a>+-----------------+--------------------------------------------------------------------------------------------------------------------+----------------------+</span>
-<span id="cb4-112"><a href="#cb4-112"></a>| <span class="in">`arm_var`</span>       | (<span class="in">`character`</span>) Arm variable used to split table into columns.                                                       | <span class="in">`"ARM"`</span>              |</span>
-<span id="cb4-113"><a href="#cb4-113"></a>+-----------------+--------------------------------------------------------------------------------------------------------------------+----------------------+</span>
-<span id="cb4-114"><a href="#cb4-114"></a>| <span class="in">`saffl_var`</span>     | (<span class="in">`character`</span>) Flag variable used to indicate inclusion in safety population.                                       | <span class="in">`"SAFFL"`</span>            |</span>
-<span id="cb4-115"><a href="#cb4-115"></a>+-----------------+--------------------------------------------------------------------------------------------------------------------+----------------------+</span>
-<span id="cb4-116"><a href="#cb4-116"></a>| <span class="in">`lbl_overall`</span>   | (<span class="in">`character`</span>) If specified, an overall column will be added to the table with the given value as the column label. | <span class="in">`"Total Population"`</span> |</span>
-<span id="cb4-117"><a href="#cb4-117"></a>+-----------------+--------------------------------------------------------------------------------------------------------------------+----------------------+</span>
-<span id="cb4-118"><a href="#cb4-118"></a></span>
-<span id="cb4-119"><a href="#cb4-119"></a>Source code for this function is available <span class="co">[</span><span class="ot">here</span><span class="co">](https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_33.R#L84)</span>.</span>
-<span id="cb4-120"><a href="#cb4-120"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-105"><a href="#cb4-105"></a>| **Argument**    | **Description**                                                                                                    | **Default**          |</span>
+<span id="cb4-106"><a href="#cb4-106"></a>|:----------------|:-------------------------------------------------------------------------------------------------------------------|:---------------------|</span>
+<span id="cb4-107"><a href="#cb4-107"></a>| <span class="in">`advs`</span>          | (<span class="in">`data.frame`</span>) Dataset (typically ADVS) required to build table.                                                   | *No default*         |</span>
+<span id="cb4-108"><a href="#cb4-108"></a>| <span class="in">`alt_counts_df`</span> | (<span class="in">`character`</span>) Alternative dataset (typically ADSL) used only to calculate column counts.                           | <span class="in">`NULL`</span>               |</span>
+<span id="cb4-109"><a href="#cb4-109"></a>| <span class="in">`arm_var`</span>       | (<span class="in">`character`</span>) Arm variable used to split table into columns.                                                       | <span class="in">`"ARM"`</span>              |</span>
+<span id="cb4-110"><a href="#cb4-110"></a>| <span class="in">`saffl_var`</span>     | (<span class="in">`character`</span>) Flag variable used to indicate inclusion in safety population.                                       | <span class="in">`"SAFFL"`</span>            |</span>
+<span id="cb4-111"><a href="#cb4-111"></a>| <span class="in">`lbl_overall`</span>   | (<span class="in">`character`</span>) If specified, an overall column will be added to the table with the given value as the column label. | <span class="in">`"Total Population"`</span> |</span>
+<span id="cb4-112"><a href="#cb4-112"></a></span>
+<span id="cb4-113"><a href="#cb4-113"></a>Source code for this function is available <span class="co">[</span><span class="ot">here</span><span class="co">](https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_33.R#L84)</span>.</span>
+<span id="cb4-114"><a href="#cb4-114"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">

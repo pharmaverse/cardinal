@@ -344,10 +344,10 @@ cookieconsent.run({
 <pre><code>                          A: Drug X    B: Placebo   C: Combination   Risk Difference (%) (95% CI)
                            (N=134)      (N=134)        (N=132)                 (N=268)           
 —————————————————————————————————————————————————————————————————————————————————————————————————
-Patients randomized       65 (48.5%)   70 (52.2%)     63 (47.7%)          3.7 (-8.2 - 15.7)      
+Patients randomized       62 (46.3%)   68 (50.7%)     78 (59.1%)          4.5 (-7.5 - 16.4)      
 ITT/mITT population       134 (100%)   134 (100%)     132 (100%)           0.0 (0.0 - 0.0)       
 Safety population         134 (100%)   134 (100%)     132 (100%)           0.0 (0.0 - 0.0)       
-Per-protocol population   65 (48.5%)   70 (52.2%)     63 (47.7%)          3.7 (-8.2 - 15.7)      
+Per-protocol population   62 (46.3%)   68 (50.7%)     78 (59.1%)          4.5 (-7.5 - 16.4)      
 Discontinued study drug   42 (31.3%)   40 (29.9%)     38 (28.8%)          -1.5 (-12.5 - 9.5)     
   Adverse event            3 (2.2%)     6 (4.5%)       5 (3.8%)            2.2 (-2.1 - 6.5)      
   Lack of efficacy         2 (1.5%)     2 (1.5%)       3 (2.3%)            0.0 (-2.9 - 2.9)      
@@ -396,7 +396,11 @@ Discontinued study        42 (31.3%)   40 (29.9%)     38 (28.8%)          -1.5 (
 <div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
 <section id="make_table_04" class="level3"><h3 class="anchored" data-anchor-id="make_table_04"><code>make_table_04()</code></h3>
 <hr>
-<p>Required variables: - <strong><code>df</code></strong>: <code>USUBJID</code>, <code>EOTSTT</code>, <code>DCTREAS</code>, <code>EOSSTT</code>, <code>DCSREAS</code> and the variables specified by <code>arm_var</code> and <code>pop_var</code>. - <strong><code>alt_counts_df</code></strong> (if specified): <code>USUBJID</code>, and the variable specified by <code>arm_var</code> and <code>pop_var</code>.</p>
+<p>Required variables:</p>
+<ul>
+<li><p><strong><code>df</code></strong>: <code>USUBJID</code>, <code>EOTSTT</code>, <code>DCTREAS</code>, <code>EOSSTT</code>, <code>DCSREAS</code> and the variables specified by <code>arm_var</code> and <code>pop_var</code>.</p></li>
+<li><p><strong><code>alt_counts_df</code></strong> (if specified): <code>USUBJID</code>, and the variable specified by <code>arm_var</code> and <code>pop_var</code>.</p></li>
+</ul>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 26%">
@@ -404,9 +408,9 @@ Discontinued study        42 (31.3%)   40 (29.9%)     38 (28.8%)          -1.5 (
 <col style="width: 26%">
 </colgroup>
 <thead><tr class="header">
-<th style="text-align: left;">Argument</th>
-<th style="text-align: left;">Description</th>
-<th style="text-align: left;">Default</th>
+<th style="text-align: left;"><strong>Argument</strong></th>
+<th style="text-align: left;"><strong>Description</strong></th>
+<th style="text-align: left;"><strong>Default</strong></th>
 </tr></thead>
 <tbody>
 <tr class="odd">
@@ -1118,22 +1122,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb3-50"><a href="#cb3-50"></a>------------------------------------------------------------------------</span>
 <span id="cb3-51"><a href="#cb3-51"></a></span>
 <span id="cb3-52"><a href="#cb3-52"></a>Required variables:</span>
-<span id="cb3-53"><a href="#cb3-53"></a><span class="ss">-   </span>**`df`**: <span class="in">`USUBJID`</span>, <span class="in">`EOTSTT`</span>, <span class="in">`DCTREAS`</span>, <span class="in">`EOSSTT`</span>, <span class="in">`DCSREAS`</span> and the variables specified by <span class="in">`arm_var`</span> and <span class="in">`pop_var`</span>.</span>
-<span id="cb3-54"><a href="#cb3-54"></a><span class="ss">-   </span>**`alt_counts_df`** (if specified): <span class="in">`USUBJID`</span>, and the variable specified by <span class="in">`arm_var`</span> and <span class="in">`pop_var`</span>.</span>
+<span id="cb3-53"><a href="#cb3-53"></a></span>
+<span id="cb3-54"><a href="#cb3-54"></a><span class="ss">-   </span>**`df`**: <span class="in">`USUBJID`</span>, <span class="in">`EOTSTT`</span>, <span class="in">`DCTREAS`</span>, <span class="in">`EOSSTT`</span>, <span class="in">`DCSREAS`</span> and the variables specified by <span class="in">`arm_var`</span> and <span class="in">`pop_var`</span>.</span>
 <span id="cb3-55"><a href="#cb3-55"></a></span>
-<span id="cb3-56"><a href="#cb3-56"></a>| Argument        | Description                                                                                                                                                                                                                                            | Default      |</span>
-<span id="cb3-57"><a href="#cb3-57"></a>|:------------------|:---------------------------------|:------------------|</span>
-<span id="cb3-58"><a href="#cb3-58"></a>| <span class="in">`df`</span>            | (<span class="in">`data.frame`</span>) Dataset (typically ADSL) required to build table.                                                                                                                                                                                       | *No default*                                |</span>
-<span id="cb3-59"><a href="#cb3-59"></a>| <span class="in">`alt_counts_df`</span> | (<span class="in">`character`</span>) Alternative dataset used only to calculate column counts.                                                                                                                                                                                | <span class="in">`NULL`</span>                                      |</span>
-<span id="cb3-60"><a href="#cb3-60"></a>| <span class="in">`arm_var`</span>       | (<span class="in">`character`</span>) Arm variable used to split table into columns.                                                                                                                                                                                           | <span class="in">`"ARM"`</span>                                     |</span>
-<span id="cb3-61"><a href="#cb3-61"></a>| <span class="in">`pop_vars`</span>       | (named <span class="in">`list`</span> of <span class="in">`character`</span>) List of Population variables to use in Table                                                                                                                                                                              | <span class="in">`c("SAFFL")`</span>                               |</span>
-<span id="cb3-62"><a href="#cb3-62"></a>| <span class="in">`lbl_pop_vars`</span>   | (named <span class="in">`list`</span> of <span class="in">`character`</span>) List of row labels for populations defined by <span class="in">`pop_vars`</span>                                                                                                                                                                   | <span class="in">`c("Safety population")`</span>                   |</span>
-<span id="cb3-63"><a href="#cb3-63"></a>| <span class="in">`lbl_overall`</span>   | (<span class="in">`character`</span>) If specified, an overall column will be added to the table with the given value as the column label.                                                                                                                                       | <span class="in">`NULL`</span>                                      |</span>
-<span id="cb3-64"><a href="#cb3-64"></a>| <span class="in">`prune_0`</span>       | (<span class="in">`flag`</span>) Whether all-zero rows should be removed from the table.                                                                                                                                                                                       | <span class="in">`FALSE`</span>                                      |</span>
-<span id="cb3-65"><a href="#cb3-65"></a>| <span class="in">`annotations`</span>   | (named <span class="in">`list`</span> of <span class="in">`character`</span>) List of annotations to add to the table. Valid annotation types are <span class="in">`title`</span>, <span class="in">`subtitles`</span>, <span class="in">`main_footer`</span>, and <span class="in">`prov_footer.`</span> Each name-value pair should use the annotation type as name and the desired string as value. | <span class="in">`NULL`</span>                                      |</span>
-<span id="cb3-66"><a href="#cb3-66"></a></span>
-<span id="cb3-67"><a href="#cb3-67"></a>Source code for this function is available <span class="co">[</span><span class="ot">here</span><span class="co">](https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_04.R)</span>.</span>
-<span id="cb3-68"><a href="#cb3-68"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-56"><a href="#cb3-56"></a><span class="ss">-   </span>**`alt_counts_df`** (if specified): <span class="in">`USUBJID`</span>, and the variable specified by <span class="in">`arm_var`</span> and <span class="in">`pop_var`</span>.</span>
+<span id="cb3-57"><a href="#cb3-57"></a></span>
+<span id="cb3-58"><a href="#cb3-58"></a>| **Argument**    | **Description**                                                                                                                                                                                                                                        | **Default**              |</span>
+<span id="cb3-59"><a href="#cb3-59"></a>|:------------------|:---------------------------------|:------------------|</span>
+<span id="cb3-60"><a href="#cb3-60"></a>| <span class="in">`df`</span>            | (<span class="in">`data.frame`</span>) Dataset (typically ADSL) required to build table.                                                                                                                                                                                       | *No default*             |</span>
+<span id="cb3-61"><a href="#cb3-61"></a>| <span class="in">`alt_counts_df`</span> | (<span class="in">`character`</span>) Alternative dataset used only to calculate column counts.                                                                                                                                                                                | <span class="in">`NULL`</span>                   |</span>
+<span id="cb3-62"><a href="#cb3-62"></a>| <span class="in">`arm_var`</span>       | (<span class="in">`character`</span>) Arm variable used to split table into columns.                                                                                                                                                                                           | <span class="in">`"ARM"`</span>                  |</span>
+<span id="cb3-63"><a href="#cb3-63"></a>| <span class="in">`pop_vars`</span>      | (named <span class="in">`list`</span> of <span class="in">`character`</span>) List of Population variables to use in Table                                                                                                                                                                             | <span class="in">`c("SAFFL")`</span>             |</span>
+<span id="cb3-64"><a href="#cb3-64"></a>| <span class="in">`lbl_pop_vars`</span>  | (named <span class="in">`list`</span> of <span class="in">`character`</span>) List of row labels for populations defined by <span class="in">`pop_vars`</span>                                                                                                                                                                 | <span class="in">`c("Safety population")`</span> |</span>
+<span id="cb3-65"><a href="#cb3-65"></a>| <span class="in">`lbl_overall`</span>   | (<span class="in">`character`</span>) If specified, an overall column will be added to the table with the given value as the column label.                                                                                                                                     | <span class="in">`NULL`</span>                   |</span>
+<span id="cb3-66"><a href="#cb3-66"></a>| <span class="in">`prune_0`</span>       | (<span class="in">`flag`</span>) Whether all-zero rows should be removed from the table.                                                                                                                                                                                       | <span class="in">`FALSE`</span>                  |</span>
+<span id="cb3-67"><a href="#cb3-67"></a>| <span class="in">`annotations`</span>   | (named <span class="in">`list`</span> of <span class="in">`character`</span>) List of annotations to add to the table. Valid annotation types are <span class="in">`title`</span>, <span class="in">`subtitles`</span>, <span class="in">`main_footer`</span>, and <span class="in">`prov_footer.`</span> Each name-value pair should use the annotation type as name and the desired string as value. | <span class="in">`NULL`</span>                   |</span>
+<span id="cb3-68"><a href="#cb3-68"></a></span>
+<span id="cb3-69"><a href="#cb3-69"></a>Source code for this function is available <span class="co">[</span><span class="ot">here</span><span class="co">](https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_04.R)</span>.</span>
+<span id="cb3-70"><a href="#cb3-70"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
