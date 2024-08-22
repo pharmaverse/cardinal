@@ -59,19 +59,13 @@ make_fig_03 <- function(df,
 
   max_time <- max(df$TRTDUR)
 
-  formula <- as.formula(paste0("Surv(TRTDUR, STATUS) ~ ", arm_var))
-  fit <- survminer::surv_fit(formula, data = df)
-  survival_plot <- survminer::ggsurvplot(fit,
-    data = df,
-    fun = "event",
-    linetype = c(1, seq(2, length(levels(df[[arm_var]])))),
-    palette = c("blue", rep("grey", length(levels(df[[arm_var]])) - 1)),
-    surv.scale = "percent",
-    censor = FALSE,
-    legend.labs = levels(df[[arm_var]])
-  )
+  fit <- ggsurvfit::survfit2(Surv(TRTDUR, STATUS) ~ ARM, data = df)
 
-  g <- survival_plot$plot +
+  survival_plot <- ggsurvfit(fit, type = "risk", linetype_aes = TRUE) +
+    scale_color_manual(values = c("blue", rep("grey", length(levels(df[[arm_var]])) - 1))) +
+    scale_ggsurvfit(y_scales = list())
+
+  g <- survival_plot +
     labs(
       title = annotations[["title"]],
       subtitle = annotations[["subtitle"]],
