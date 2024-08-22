@@ -6,7 +6,7 @@
 #' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
 #'   flag variables are treated as `"N"`.
 #' * It is assumed that every record for a unique patient in `df` has the same treatment start and end datetime.
-#' * Values in the "Number ar risk" table are the number of patients at risk for each arm with treatment duration equal
+#' * Values in the "Number at risk" table are the number of patients at risk for each arm with treatment duration equal
 #'   to
 #'   or greater than the given time (times corresponding to the figure's x-ticks labels).
 #' * Values in the "Cumulative Number of Patients with Event" table are the cumulative number of patients given time to

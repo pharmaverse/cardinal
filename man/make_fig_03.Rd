@@ -65,7 +65,7 @@ FDA Figure 3: Time to Adverse Event Leading to Treatment Discontinuation, Safety
 \item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
 flag variables are treated as \code{"N"}.
 \item It is assumed that every record for a unique patient in \code{df} has the same treatment start and end datetime.
-\item Values in the "Number ar risk" table are the number of patients at risk for each arm with treatment duration equal
+\item Values in the "Number at risk" table are the number of patients at risk for each arm with treatment duration equal
 to
 or greater than the given time (times corresponding to the figure's x-ticks labels).
 \item Values in the "Cumulative Number of Patients with Event" table are the cumulative number of patients given time to
