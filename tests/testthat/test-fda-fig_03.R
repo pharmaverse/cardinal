@@ -28,7 +28,7 @@ test_that("Figure 03 generation works with custom values", {
       annotations = list(
         title = "Figure 3. Time to Adverse Event Leading to Treatment Discontinuation, Safety Population, Trial X"
       ),
-      xticks = c(0, 0.25, 0.5, 0.75, 1, 1.1)
+      xticks = c(0, 0.25, 0.5, 0.75, 1, 1.15)
     )
   )
 
