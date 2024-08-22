@@ -1,13 +1,17 @@
 #' FDA Figure 3: Time to Adverse Event Leading to Treatment Discontinuation, Safety Population, Trial X
 #'
 #' @details
-#' * `df` must contain the variables specified by `arm_var`, `id_var`, `saffl_var`, `trtsdtm_var`, `trtedtm_var` and `dctreas_var`.
+#' * `df` must contain the variables specified by `arm_var`, `id_var`, `saffl_var`, `trtsdtm_var`, `trtedtm_var` and
+#'   `dctreas_var`.
 #' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
 #'   flag variables are treated as `"N"`.
 #' * It is assumed that every record for a unique patient in `df` has the same treatment start and end datetime.
-#' * Values in the "Number ar risk" table are the number of patients at risk for each arm with treatment duration equal to
+#' * Values in the "Number ar risk" table are the number of patients at risk for each arm with treatment duration equal
+#'   to
 #'   or greater than the given time (times corresponding to the figure's x-ticks labels).
-#' * Values in the "Cumulative Number of Patients with Event" table are the cumulative number of patients given time to AEs leading to treatment discontinuation for each arm throughout the trial (times corresponding to the figure's x-ticks labels).
+#' * Values in the "Cumulative Number of Patients with Event" table are the cumulative number of patients given time to
+#'   AEs leading to treatment discontinuation for each arm throughout the trial (times corresponding to the figure's
+#'   x-ticks labels).
 #' * Records with missing treatment start and/or end datetime are excluded from all calculations.
 #'
 #' @inheritParams argument_convention

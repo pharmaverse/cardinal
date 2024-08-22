@@ -14,7 +14,7 @@ make_fig_03(
   u_trtdur = "days",
   dctreas_var = "DCTREAS",
   x_lab = paste0("Time from first dose (", u_trtdur, ")"),
-  y_lab = "Cumulative Incidence (\%)\\nAEs Leading to Treatment Discontinuation",
+  y_lab = "Cumulative Incidence (\%)\\nAEs Leading to Treatment\\nDiscontinuation",
   xticks = NA,
   ggtheme = NULL,
   add_table = TRUE,
@@ -60,13 +60,17 @@ FDA Figure 3: Time to Adverse Event Leading to Treatment Discontinuation, Safety
 }
 \details{
 \itemize{
-\item \code{df} must contain the variables specified by \code{arm_var}, \code{id_var}, \code{saffl_var}, \code{trtsdtm_var}, \code{trtedtm_var} and \code{dctreas_var}.
+\item \code{df} must contain the variables specified by \code{arm_var}, \code{id_var}, \code{saffl_var}, \code{trtsdtm_var}, \code{trtedtm_var} and
+\code{dctreas_var}.
 \item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
 flag variables are treated as \code{"N"}.
 \item It is assumed that every record for a unique patient in \code{df} has the same treatment start and end datetime.
-\item Values in the "Number ar risk" table are the number of patients at risk for each arm with treatment duration equal to
+\item Values in the "Number ar risk" table are the number of patients at risk for each arm with treatment duration equal
+to
 or greater than the given time (times corresponding to the figure's x-ticks labels).
-\item Values in the "Cumulative Number of Patients with Event" table are the cumulative number of patients given time to AEs leading to treatment discontinuation for each arm throughout the trial (times corresponding to the figure's x-ticks labels).
+\item Values in the "Cumulative Number of Patients with Event" table are the cumulative number of patients given time to
+AEs leading to treatment discontinuation for each arm throughout the trial (times corresponding to the figure's
+x-ticks labels).
 \item Records with missing treatment start and/or end datetime are excluded from all calculations.
 }
 }
