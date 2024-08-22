@@ -47,4 +47,3 @@ test_that("Figure 03 generation works with ggtheme argument specified", {
 
   expect_snapshot_ggplot("fig_03_theme", fig_03_theme, width = 10, height = 6)
 })
-
