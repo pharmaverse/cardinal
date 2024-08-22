@@ -34,7 +34,7 @@ make_fig_03 <- function(df,
                         u_trtdur = "days",
                         dctreas_var = "DCTREAS",
                         x_lab = paste0("Time from first dose (", u_trtdur, ")"),
-                        y_lab = "Cumulative Incidence (%)\nAEs Leading to Treatment Discontinuation",
+                        y_lab = "Cumulative Incidence (%)\nAEs Leading to Treatment\nDiscontinuation",
                         xticks = NA,
                         ggtheme = NULL,
                         add_table = TRUE,
@@ -59,11 +59,10 @@ make_fig_03 <- function(df,
 
   max_time <- max(df$TRTDUR)
 
-  fit <- ggsurvfit::survfit2(Surv(TRTDUR, STATUS) ~ ARM, data = df)
+  fit <- ggsurvfit::survfit2(ggsurvfit::Surv(TRTDUR, STATUS) ~ ARM, data = df)
 
-  survival_plot <- ggsurvfit(fit, type = "risk", linetype_aes = TRUE) +
-    scale_color_manual(values = c("blue", rep("grey", length(levels(df[[arm_var]])) - 1))) +
-    scale_ggsurvfit(y_scales = list())
+  survival_plot <- ggsurvfit::ggsurvfit(fit, type = "risk", linetype_aes = TRUE) +
+    scale_color_manual(values = c("blue", rep("darkgrey", length(levels(df[[arm_var]])) - 1)))
 
   g <- survival_plot +
     labs(
@@ -96,6 +95,7 @@ make_fig_03 <- function(df,
     xtick_lbls <- ggplot_build(g)$layout$panel_params[[1]]$x$breaks
     xtick_lbls <- xtick_lbls[!is.na(xtick_lbls)]
     xlims <- ggplot_build(g)$layout$panel_params[[1]]$x$limits
+    arm_colors <- c(rep("darkgrey", length(levels(df[[arm_var]])) - 1), "blue")
 
     tbl_n <- expand.grid(
       x = xtick_lbls,
@@ -104,25 +104,25 @@ make_fig_03 <- function(df,
     )
 
     g_tbl <- ggplot(tbl_n, aes(x = x, y = arm)) +
-      theme(
+      suppressWarnings(theme(
         axis.title.x = element_blank(),
         axis.title.y = element_blank(),
         axis.ticks.x = element_blank(),
         axis.ticks.y = element_blank(),
         panel.background = element_blank(),
         axis.text.x = element_blank(),
-        axis.text.y = element_text(colour = c(rep("grey", length(levels(df[[arm_var]])) - 1), "blue")),
+        axis.text.y = element_text(color = arm_colors),
         panel.border = element_rect(color = "black", fill = NA, linewidth = 0.5),
         plot.margin = unit(c(0.1, 0.05, 0, 0.025), "npc")
-      ) +
+      )) +
       labs(title = "Number at risk") +
       scale_x_continuous(breaks = xtick_lbls, limits = c(min(xlims, xtick_lbls), max(xlims, xtick_lbls)))
 
     for (i in seq_len(nrow(tbl_n))) {
       tbl_n$n[i] <- sum(df$ARM == tbl_n$arm[i] & df$TRTDUR >= tbl_n$x[i])
-      colours <- ifelse(tbl_n$arm[i] == levels(df[[arm_var]])[1], "blue", "grey")
+      colors <- ifelse(tbl_n$arm[i] == levels(df[[arm_var]])[1], "blue", "darkgrey")
       g_tbl <- g_tbl +
-        annotate("text", label = as.character(tbl_n$n[i]), x = tbl_n$x[i], y = tbl_n$arm[i], colour = colours)
+        annotate("text", label = as.character(tbl_n$n[i]), x = tbl_n$x[i], y = tbl_n$arm[i], color = colors)
     }
 
     tbl_n_cum <- expand.grid(
@@ -132,25 +132,25 @@ make_fig_03 <- function(df,
     )
 
     g_tbl_cum <- ggplot(tbl_n_cum, aes(x = x, y = arm)) +
-      theme(
+      suppressWarnings(theme(
         axis.title.x = element_blank(),
         axis.title.y = element_blank(),
         axis.ticks.x = element_blank(),
         axis.ticks.y = element_blank(),
         panel.background = element_blank(),
         axis.text.x = element_blank(),
-        axis.text.y = element_text(colour = c(rep("grey", length(levels(df[[arm_var]])) - 1), "blue")),
+        axis.text.y = element_text(color = arm_colors),
         panel.border = element_rect(color = "black", fill = NA, linewidth = 0.5),
         plot.margin = unit(c(0.1, 0.05, 0, 0.025), "npc")
-      ) +
+      )) +
       labs(title = "Cumulative Number of Patients with Event") +
       scale_x_continuous(breaks = xtick_lbls, limits = c(min(xlims, xtick_lbls), max(xlims, xtick_lbls)))
 
     for (i in seq_len(nrow(tbl_n_cum))) {
       tbl_n_cum$n[i] <- sum(df$ARM == tbl_n_cum$arm[i] & df$TRTDUR >= tbl_n_cum$x[i])
-      colours <- ifelse(tbl_n_cum$arm[i] == levels(df[[arm_var]])[1], "blue", "grey")
+      colors <- ifelse(tbl_n_cum$arm[i] == levels(df[[arm_var]])[1], "blue", "darkgrey")
       g_tbl_cum <- g_tbl_cum +
-        annotate("text", label = as.character(tbl_n_cum$n[i]), x = tbl_n_cum$x[i], y = tbl_n_cum$arm[i], colour = colours)
+        annotate("text", label = as.character(tbl_n_cum$n[i]), x = tbl_n_cum$x[i], y = tbl_n_cum$arm[i], color = colors)
     }
 
     if (!is.null(ggtheme)) {
