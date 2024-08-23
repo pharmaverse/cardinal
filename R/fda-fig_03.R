@@ -2,7 +2,7 @@
 #'
 #' @details
 #' * `df` must contain the variables specified by `arm_var`, `id_var`, `saffl_var`, `trtsdtm_var`, `trtedtm_var` and
-#'   `dctreas_var`.
+#'   `dcsreas_var`.
 #' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
 #'   flag variables are treated as `"N"`.
 #' * It is assumed that every record for a unique patient in `df` has the same treatment start and end datetime.
@@ -15,6 +15,7 @@
 #' * Records with missing treatment start and/or end datetime are excluded from all calculations.
 #'
 #' @inheritParams argument_convention
+#' @param dcsreas_var (`character`)\cr reason for treatment discontinuation variable used to split figure into lines.
 #' @param add_table (`flag`)\cr whether "Number of Patients" table should be printed under the plot.
 #' @param annotations (named `list` of `character`)\cr list of annotations to add to the figure. Valid annotation types
 #'   are `title`, `subtitles`, and `caption`. Each name-value pair should use the annotation type as name and the
@@ -25,7 +26,7 @@
 #' @examples
 #' adsl <- random.cdisc.data::cadsl
 #'
-#' fig <- make_fig_03(df = adsl, dctreas_var = DCSREAS)
+#' fig <- make_fig_03(df = adsl, dcsreas_var = "DCSREAS")
 #' fig
 #'
 #' @export
@@ -36,14 +37,14 @@ make_fig_03 <- function(df,
                         trtsdtm_var = "TRTSDTM",
                         trtedtm_var = "TRTEDTM",
                         u_trtdur = "days",
-                        dctreas_var = "DCTREAS",
+                        dcsreas_var = "DCSREAS",
                         x_lab = paste0("Time from first dose (", u_trtdur, ")"),
                         y_lab = "Cumulative Incidence (%)\nAEs Leading to Treatment\nDiscontinuation",
                         xticks = NA,
                         ggtheme = NULL,
                         add_table = TRUE,
                         annotations = NULL) {
-  assert_subset(c(arm_var, id_var, saffl_var, trtsdtm_var, trtedtm_var, dctreas_var), names(df))
+  assert_subset(c(arm_var, id_var, saffl_var, trtsdtm_var, trtedtm_var, dcsreas_var), names(df))
   assert_choice(u_trtdur, c("days", "weeks", "months", "years"))
   assert_flag_variables(df, saffl_var)
 
@@ -54,7 +55,7 @@ make_fig_03 <- function(df,
       TRTDUR = lubridate::interval(lubridate::ymd_hms(.data[[trtsdtm_var]]), lubridate::ymd_hms(.data[[trtedtm_var]])),
       TRTDUR = TRTDUR %>% as.numeric(u_trtdur),
       AVALU = u_trtdur,
-      STATUS = case_when(.data[[dctreas_var]] == "ADVERSE EVENT" ~ 1, TRUE ~ 0)
+      STATUS = case_when(.data[[dcsreas_var]] == "ADVERSE EVENT" ~ 1, TRUE ~ 0)
     ) %>%
     filter(!is.na(TRTDUR)) %>%
     select(all_of(c(id_var, arm_var)), TRTDUR, STATUS) %>%

@@ -3,7 +3,7 @@ adsl <- adsl_raw
 test_that("Figure 03 generation works with default values", {
   fig_03_default <- withr::with_options(
     opts_partial_match_old,
-    make_fig_03(adsl, dctreas_var = "DCSREAS")
+    make_fig_03(adsl, dcsreas_var = "DCSREAS")
   )
 
   expect_snapshot_ggplot("fig_03_default", fig_03_default, width = 8, height = 5)
@@ -12,7 +12,7 @@ test_that("Figure 03 generation works with default values", {
 test_that("Figure 03 generation works with no table", {
   fig_03_notbl <- withr::with_options(
     opts_partial_match_old,
-    make_fig_03(adsl, dctreas_var = "DCSREAS", add_table = FALSE)
+    make_fig_03(adsl, dcsreas_var = "DCSREAS", add_table = FALSE)
   )
 
   expect_snapshot_ggplot("fig_03_notbl", fig_03_notbl, width = 8, height = 3)
@@ -23,7 +23,7 @@ test_that("Figure 03 generation works with custom values", {
     opts_partial_match_old,
     make_fig_03(
       adsl,
-      dctreas_var = "DCSREAS",
+      dcsreas_var = "DCSREAS",
       u_trtdur = "years",
       annotations = list(
         title = "Figure 3. Time to Adverse Event Leading to Treatment Discontinuation, Safety Population, Trial X"
@@ -40,7 +40,7 @@ test_that("Figure 03 generation works with ggtheme argument specified", {
     opts_partial_match_old,
     make_fig_03(
       adsl,
-      dctreas_var = "DCSREAS",
+      dcsreas_var = "DCSREAS",
       ggtheme = theme_dark()
     )
   )

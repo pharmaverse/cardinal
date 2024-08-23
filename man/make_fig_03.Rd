@@ -12,7 +12,7 @@ make_fig_03(
   trtsdtm_var = "TRTSDTM",
   trtedtm_var = "TRTEDTM",
   u_trtdur = "days",
-  dctreas_var = "DCTREAS",
+  dcsreas_var = "DCSREAS",
   x_lab = paste0("Time from first dose (", u_trtdur, ")"),
   y_lab = "Cumulative Incidence (\%)\\nAEs Leading to Treatment\\nDiscontinuation",
   xticks = NA,
@@ -36,6 +36,8 @@ make_fig_03(
 
 \item{u_trtdur}{(\code{character})\cr unit for duration of treatment. Options are \code{"days"}, \code{"weeks"}, \code{"months"},
 and \code{"years"}.}
+
+\item{dcsreas_var}{(\code{character})\cr Name of the reason for discontinuation from study variable.}
 
 \item{x_lab}{(\code{character})\cr x-axis label.}
 
@@ -61,7 +63,7 @@ FDA Figure 3: Time to Adverse Event Leading to Treatment Discontinuation, Safety
 \details{
 \itemize{
 \item \code{df} must contain the variables specified by \code{arm_var}, \code{id_var}, \code{saffl_var}, \code{trtsdtm_var}, \code{trtedtm_var} and
-\code{dctreas_var}.
+\code{dcsreas_var}.
 \item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
 flag variables are treated as \code{"N"}.
 \item It is assumed that every record for a unique patient in \code{df} has the same treatment start and end datetime.
@@ -77,7 +79,7 @@ x-ticks labels).
 \examples{
 adsl <- random.cdisc.data::cadsl
 
-fig <- make_fig_03(df = adsl, dctreas_var = DCSREAS)
+fig <- make_fig_03(df = adsl, dcsreas_var = "DCSREAS")
 fig
 
 }

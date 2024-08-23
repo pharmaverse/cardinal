@@ -25,8 +25,7 @@ adsl <- random.cdisc.data::cadsl %>%
       "ADVERSE EVENT", "LACK OF EFFICACY", "PROTOCOL VIOLATION",
       "DEATH", "WITHDRAWAL BY PARENT/GUARDIAN"
     ), DCSREAS, "OTHER")
-  ) %>%
-  mutate(DCTREAS = DCSREAS)
+  )
 
 # Output Table
 risk_diff <- list(arm_x = "B: Placebo", arm_y = "A: Drug X") # optional
@@ -51,7 +50,7 @@ tbl
 
 Required variables:
 
--   **`df`**: `USUBJID`, `EOTSTT`, `DCTREAS`, `EOSSTT`, `DCSREAS` and the variables specified by `arm_var` and `pop_var`.
+-   **`df`**: `USUBJID`, `EOTSTT`, `DCSREAS`, `EOSSTT`, `DCSREAS` and the variables specified by `arm_var` and `pop_var`.
 
 -   **`alt_counts_df`** (if specified): `USUBJID`, and the variable specified by `arm_var` and `pop_var`.
 

@@ -18,7 +18,7 @@ library(cardinal)
 adsl <- random.cdisc.data::cadsl
 
 # Output Figure
-make_fig_03(df = adsl, dctreas_var = "DCSREAS")
+make_fig_03(df = adsl, dcsreas_var = "DCSREAS")
 ```
 
 ## Figure Setup
@@ -34,7 +34,7 @@ make_fig_03(df = adsl, dctreas_var = "DCSREAS")
 
 Required variables:
 
--   **`df`**: The variables specified by `arm_var`, `id_var`, `saffl_var`, `trtsdtm_var`, `trtedtm_var` and `dctreas_var`.
+-   **`df`**: The variables specified by `arm_var`, `id_var`, `saffl_var`, `trtsdtm_var`, `trtedtm_var` and `dcsreas_var`.
 
 | Argument      | Description                                                                                                                                                                                                                          | Default                                           |
 |:--------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------------------------------------------|
@@ -45,7 +45,7 @@ Required variables:
 | `trtsdtm_var` | (`character`) Treatment start datetime variable in df.                                                                                                                                                                               | `"TRTSDTM"`                                       |
 | `trtedtm_var` | (`character`) Treatment end datetime variable in df.                                                                                                                                                                                 | `"TRTEDTM"`                                       |
 | `u_trtdur`    | (`character`) Unit for duration of treatment. Options are `"days"`, `"weeks"`, `"months"` and `"years"`.                                                                                                                             | `"days"`                                          |
-| `dctreas_var` | (`character`) Reason for treatment discontinuation variable used to split figure into lines.                                                                                                                                         | `"DCTREAS"`                                       |
+| `dcsreas_var` | (`character`) Reason for treatment discontinuation variable used to split figure into lines.                                                                                                                                         | `"DCSREAS"`                                       |
 | `x_lab`       | (`character`) x-axis label.                                                                                                                                                                                                          | `paste0("Time from first dose (", u_trtdur, ")")` |
 | `y_lab`       | (`character`) y-axis label.                                                                                                                                                                                                          | `"Percent of Patients (%)"`                       |
 | `xticks`      | (`vector` of `numeric`) x-axis tick positions. If `NA` (default), tick mark positions are automatically calculated.                                                                                                                  | `NA`                                              |

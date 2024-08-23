@@ -41,6 +41,8 @@ that statistic. See \code{\link[formatters:list_formats]{formatters::list_valid_
 annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
 use the annotation type as name and the desired string as value.}
 
+\item{dcsreas_var}{(\code{character})\cr Name of the reason for discontinuation from study variable.}
+
 \item{df}{(\code{data.frame})\cr dataset required to build table.}
 
 \item{eosdy_var}{(\code{character})\cr variable denoting last recorded (relative) study day.}
