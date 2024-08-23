@@ -63,7 +63,7 @@ make_fig_01 <- function(df,
     geom_line() +
     labs(
       title = annotations[["title"]],
-      subtitle = annotations[["subtitle"]],
+      subtitle = annotations[["subtitles"]],
       caption = annotations[["caption"]],
       x = x_lab,
       y = y_lab

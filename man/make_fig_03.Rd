@@ -37,7 +37,7 @@ make_fig_03(
 \item{u_trtdur}{(\code{character})\cr unit for duration of treatment. Options are \code{"days"}, \code{"weeks"}, \code{"months"},
 and \code{"years"}.}
 
-\item{dcsreas_var}{(\code{character})\cr Name of the reason for discontinuation from study variable.}
+\item{dcsreas_var}{(\code{character})\cr reason for treatment discontinuation variable used to split figure into lines.}
 
 \item{x_lab}{(\code{character})\cr x-axis label.}
 
@@ -48,7 +48,7 @@ automatically calculated.}
 
 \item{ggtheme}{(\code{theme})\cr a graphical theme as provided by \code{ggplot2} to control styling of the \code{ggplot} object.}
 
-\item{add_table}{(\code{flag})\cr whether "Number of Patients" table should be printed under the plot.}
+\item{add_table}{(\code{flag})\cr whether tables should be printed under the plot.}
 
 \item{annotations}{(named \code{list} of \code{character})\cr list of annotations to add to the figure. Valid annotation types
 are \code{title}, \code{subtitles}, and \code{caption}. Each name-value pair should use the annotation type as name and the

@@ -16,7 +16,7 @@
 #'
 #' @inheritParams argument_convention
 #' @param dcsreas_var (`character`)\cr reason for treatment discontinuation variable used to split figure into lines.
-#' @param add_table (`flag`)\cr whether "Number of Patients" table should be printed under the plot.
+#' @param add_table (`flag`)\cr whether tables should be printed under the plot.
 #' @param annotations (named `list` of `character`)\cr list of annotations to add to the figure. Valid annotation types
 #'   are `title`, `subtitles`, and `caption`. Each name-value pair should use the annotation type as name and the
 #'   desired string as value.
@@ -72,7 +72,7 @@ make_fig_03 <- function(df,
   g <- survival_plot +
     labs(
       title = annotations[["title"]],
-      subtitle = annotations[["subtitle"]],
+      subtitle = annotations[["subtitles"]],
       caption = annotations[["caption"]],
       x = x_lab,
       y = y_lab
