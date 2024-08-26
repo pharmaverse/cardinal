@@ -152,7 +152,7 @@ make_fig_03 <- function(df,
       scale_x_continuous(breaks = xtick_lbls, limits = c(min(xlims, xtick_lbls), max(xlims, xtick_lbls)))
 
     for (i in seq_len(nrow(tbl_n_cum))) {
-      tbl_n_cum$n[i] <- sum(df$ARM == tbl_n_cum$arm[i] & df$TRTDUR >= tbl_n_cum$x[i])
+      tbl_n_cum$n[i] <- sum(df$ARM == tbl_n_cum$arm[i] & df$TRTDUR <= tbl_n_cum$x[i] & df$STATUS == 1)
       colors <- ifelse(tbl_n_cum$arm[i] == levels(df[[arm_var]])[1], "blue", "darkgrey")
       g_tbl_cum <- g_tbl_cum +
         annotate("text", label = as.character(tbl_n_cum$n[i]), x = tbl_n_cum$x[i], y = tbl_n_cum$arm[i], color = colors)
