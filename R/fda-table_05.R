@@ -45,6 +45,7 @@ make_table_05 <- function(df,
       "No object returned. Set a value for `table_engine` to return ",
       "a table or `return_ard = TRUE` to return an ARD."
     )
+    return(NULL)
   }
   if (!is.null(table_engine)) {
     if (!table_engine %in% formals()$table_engine) {
