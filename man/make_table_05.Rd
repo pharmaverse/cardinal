@@ -23,6 +23,11 @@ make_table_05(
 
 \item{alt_counts_df}{(\code{character})\cr alternative dataset (typically ADSL) used only to calculate column counts.}
 
+\item{table_engine}{(\code{string})\cr table engine used to generate the table. If \code{NULL}, no table is returned. If the
+given engine is not available for the table, no table is created and a warning is returned.}
+
+\item{return_ard}{(\code{flag})\cr whether an ARD should be returned. Defaults to \code{TRUE}.}
+
 \item{arm_var}{(\code{character})\cr Name of the treatment arm variable used to split table into columns.}
 
 \item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
@@ -36,7 +41,7 @@ make_table_05(
 \item{u_trtdur}{(\code{character})\cr unit for duration of treatment. Options are \code{"days"}, \code{"weeks"}, \code{"months"},
 and \code{"years"}.}
 
-\item{...}{arguments passed to table engine-specific functions. See \link{tbl_make_table_05}.}
+\item{...}{arguments passed to table engine-specific functions. See \link{tbl_make_table_05} for details.}
 }
 \value{
 A table, the class of which is determined by \code{table_engine} (if \code{table_engine} not \code{NULL}) and/or an ARD

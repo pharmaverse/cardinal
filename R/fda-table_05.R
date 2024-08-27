@@ -8,7 +8,8 @@
 #'   flag variables are treated as `"N"`.
 #'
 #' @inheritParams tbl_make_table_05
-#' @param ... arguments passed to table engine-specific functions. See [tbl_make_table_05].
+#' @inheritParams argument_convention
+#' @param ... arguments passed to table engine-specific functions. See [tbl_make_table_05] for details.
 #'
 #' @return A table, the class of which is determined by `table_engine` (if `table_engine` not `NULL`) and/or an ARD
 #'   (if `return_ard = TRUE`). If both are selected, they will be returned as a list with named elements `table` and
