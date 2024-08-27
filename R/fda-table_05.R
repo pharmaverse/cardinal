@@ -127,7 +127,7 @@ preproc_df_table_05 <- function(df,
 #'
 #' @examples
 #' adsl <- random.cdisc.data::cadsl
-#' df <- preproc_df_table_05(
+#' df <- cardinal:::preproc_df_table_05(
 #'   adsl,
 #'   saffl_var = "SAFFL",
 #'   trtsdtm_var = "TRTSDTM",
@@ -135,7 +135,7 @@ preproc_df_table_05 <- function(df,
 #'   u_trtdur = "days"
 #' )
 #'
-#' tbl <- ard_table_05(df = df)
+#' tbl <- cardinal:::ard_table_05(df = df)
 #' tbl
 #'
 #' @keywords internal
@@ -196,7 +196,7 @@ ard_table_05 <- function(df,
 #'
 #' @examples
 #' adsl <- random.cdisc.data::cadsl
-#' df <- preproc_df_table_05(
+#' df <- cardinal:::preproc_df_table_05(
 #'   adsl,
 #'   saffl_var = "SAFFL",
 #'   trtsdtm_var = "TRTSDTM",
@@ -204,7 +204,7 @@ ard_table_05 <- function(df,
 #'   u_trtdur = "days"
 #' )
 #'
-#' tbl <- make_table_05_rtables(df = df)
+#' tbl <- cardinal:::make_table_05_rtables(df = df)
 #' tbl
 #'
 #' @keywords internal

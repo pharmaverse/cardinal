@@ -20,7 +20,7 @@ Make ARD: Table 5
 }
 \examples{
 adsl <- random.cdisc.data::cadsl
-df <- preproc_df_table_05(
+df <- cardinal:::preproc_df_table_05(
   adsl,
   saffl_var = "SAFFL",
   trtsdtm_var = "TRTSDTM",
@@ -28,7 +28,7 @@ df <- preproc_df_table_05(
   u_trtdur = "days"
 )
 
-tbl <- ard_table_05(df = df)
+tbl <- cardinal:::ard_table_05(df = df)
 tbl
 
 }
