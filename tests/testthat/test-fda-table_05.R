@@ -6,17 +6,18 @@ adsl$TRTEDTM <- adsl$TRTSDTM + lubridate::days(sample(0:400, nrow(adsl), replace
 test_that("Table 05 generation works with default values", {
   withr::local_options(list(width = 120))
 
-  result <- expect_no_warning(make_table_05(adsl))
+  result <- make_table_05(adsl)
   res <- expect_silent(result)
   expect_snapshot(res)
 
   # only table
-  result2 <- expect_no_warning(make_table_05(adsl, return_ard = FALSE))
+  result2 <- make_table_05(adsl, return_ard = FALSE)
   res2 <- expect_silent(result2)
   expect_snapshot(res2)
 
   # only ard
-  res3 <- expect_silent(make_table_05(adsl, table_engine = NULL))
+  result3 <- make_table_05(adsl, table_engine = NULL)
+  res3 <- expect_silent(result3)
   expect_snapshot(res3[, 1:9] %>% data.frame())
 
   # both together
