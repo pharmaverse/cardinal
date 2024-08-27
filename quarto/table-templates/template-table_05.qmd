@@ -19,7 +19,7 @@ adsl <- random.cdisc.data::cadsl
 
 # Output Table
 risk_diff <- list(arm_x = "B: Placebo", arm_y = "A: Drug X") # optional
-make_table_05(df = adsl, risk_diff = risk_diff)
+make_table_05(df = adsl, risk_diff = risk_diff, return_ard = FALSE)
 ```
 
 ## rtables Table Setup
@@ -27,9 +27,35 @@ make_table_05(df = adsl, risk_diff = risk_diff)
 ```{r tbl, eval=FALSE, echo=TRUE}
 ```
 
-## Function Details
+## Function Details: ARD
 
 ### `make_table_05()`
+
+------------------------------------------------------------------------
+
+Required variables:
+
+-   **`df`**: The variables specified by `vars`, `arm_var`, and `saffl_var`.
+-   **`alt_counts_df`** (if specified): `USUBJID` and the variables specified by `arm_var` and `saffl_var`.
+
+|                 |                                                                                                          |              |
+|-----------------|----------------------------------------------------------------------------------------------------------|--------------|
+| **Argument**    | **Description**                                                                                          | **Default**  |
+| `df`            | (`data.frame`) Dataset (typically ADSL) required to build table.                                         | *No default* |
+| `alt_counts_df` | (`character`) Alternative dataset used only to calculate column counts.                                  | `NULL`       |
+| `arm_var`       | (`character`) Arm variable used to split table into columns.                                             | `"ARM"`      |
+| `saffl_var`     | (`character`) Flag variable used to indicate inclusion in safety population.                             | `"SAFFL"`    |
+| `id_var`        | (`character`) Identifier variable used to count the participants within each flag.                       | `"USUBJID"`  |
+| `trtsdtm_var`   | (`character`) Treatment start datetime variable in df.                                                   | `"TRTSDTM"`  |
+| `trtedtm_var`   | (`character`) Treatment end datetime variable in df.                                                     | `"TRTEDTM"`  |
+| `u_trtdur`      | (`character`) Unit for duration of treatment. Options are `"days"`, `"weeks"`, `"months"` and `"years"`. | `"days"`     |
+| `...`           | Arguments passed to table engine-specific functions.                                                     | `NULL`       |
+
+Source code for this function is available [here](https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_05.R).
+
+## Function Details: rtables Table
+
+### `make_table_05(table_engine = "rtables")`
 
 ------------------------------------------------------------------------
 
