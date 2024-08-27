@@ -38,8 +38,8 @@ Required variables:
 
 -   **`df`**: The variables specified by `arm_var`, `id_var`, `saffl_var`, `trtsdtm_var`, and `trtedtm_var`.
 
-| Argument      | Description                                                                                                                                                                                                                         | Default                                           |
-|:--------------|:------------------------------------------|:--------------|
+| **Argument**  | **Description**                                                                                                                                                                                                                     | **Default**                                       |
+|:--------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------------------------------------------|
 | `df`          | (`data.frame`) Dataset (typically ADSL) required to build table.                                                                                                                                                                    | *No default*                                      |
 | `arm_var`     | (`character`) Arm variable used to split table into columns.                                                                                                                                                                        | `"ARM"`                                           |
 | `saffl_var`   | (`character`) Flag variable used to indicate inclusion in safety population.                                                                                                                                                        | `"SAFFL"`                                         |

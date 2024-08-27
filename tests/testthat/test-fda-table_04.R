@@ -8,8 +8,7 @@ adsl <- adsl_raw %>%
       "ADVERSE EVENT", "LACK OF EFFICACY", "PROTOCOL VIOLATION",
       "DEATH", "WITHDRAWAL BY PARENT/GUARDIAN"
     ), DCSREAS, "OTHER")
-  ) %>%
-  mutate(DCTREAS = DCSREAS)
+  )
 
 test_that("Table 04 generation works with default values", {
   result <- make_table_04(adsl)

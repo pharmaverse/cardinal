@@ -1,8 +1,8 @@
 Type: Package
 Package: cardinal
 Title: FDA Safety Tables and Figures
-Version: 0.1.0.9059
-Date: 2024-07-04
+Version: 0.1.0.9061
+Date: 2024-08-19
 Authors@R:
     person("Pawel", "Rucki", , "pawel.rucki@roche.com", role = c("aut", "cre"))
 Description: R package with implementation of Safety Tables and Figures
@@ -14,15 +14,16 @@ Depends:
     R (>= 3.6),
     tern (>= 0.9.5)
 Imports:
-    cards (>= 0.1.0),
-    cardx (>= 0.1.0),
+    cards (>= 0.2.0),
+    cardx (>= 0.2.0),
     checkmate (>= 2.1.0),
     cowplot (>= 1.0.0),
     dplyr (>= 1.0.0),
     formatters (>= 0.5.8),
     ggplot2 (>= 3.5.0),
+    ggsurvfit (>= 1.1.0),
     gt (>= 0.10.1),
-    gtsummary (>= 1.7.2),
+    gtsummary (>= 2.0.0),
     lubridate (>= 1.7.10),
     magrittr (>= 1.5),
     purrr (>= 1.0.1),
