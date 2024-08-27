@@ -4,13 +4,44 @@ adsl$TRTSDTM <- adsl$TRTSDTM[1]
 adsl$TRTEDTM <- adsl$TRTSDTM + lubridate::days(sample(0:400, nrow(adsl), replace = TRUE))
 
 test_that("Table 05 generation works with default values", {
-  result <- make_table_05(adsl)
+  withr::local_options(list(width = 120))
 
+  result <- make_table_05(adsl)
   res <- expect_silent(result)
   expect_snapshot(res)
+
+  # only table
+  result2 <- make_table_05(adsl, return_ard = FALSE)
+  res2 <- expect_silent(result2)
+  expect_snapshot(res2)
+
+  # only ard
+  result3 <- make_table_05(adsl, table_engine = NULL)
+  res3 <- expect_silent(result3)
+  expect_snapshot(res3[, 1:9] %>% data.frame())
+
+  # both together
+  expect_equal(
+    result,
+    list(table = res2, ard = res3)
+  )
 })
 
-test_that("Table 05 generation works with custom values", {
+test_that("Table 05 warnings work", {
+  # invalid table engine
+  expect_warning(
+    make_table_05(adsl, table_engine = "gtsummary")
+  )
+
+  # no output selected
+  expect_warning(
+    make_table_05(adsl, table_engine = NULL, return_ard = FALSE)
+  )
+})
+
+# rtables ----
+
+test_that("Table 05 generation works with rtables engine with custom values", {
   result <- make_table_05(
     adsl,
     u_trtdur = "years",
@@ -34,7 +65,7 @@ test_that("Table 05 generation works with custom values", {
   expect_snapshot(res)
 })
 
-test_that("Table 05 generation works with NA values/pruned rows", {
+test_that("Table 05 generation works with rtables engine with NA values/pruned rows", {
   set.seed(1)
   adsl[lubridate::seconds(adsl$TRTEDTM - adsl$TRTSDTM) %>% as.numeric("days") > 180, c("TRTSDTM", "TRTEDTM")] <- NA
 
@@ -49,7 +80,7 @@ test_that("Table 05 generation works with NA values/pruned rows", {
   expect_snapshot(res)
 })
 
-test_that("Table 05 generation works with risk difference column", {
+test_that("Table 05 generation works with rtables engine with risk difference column", {
   risk_diff <- list(arm_x = "B: Placebo", arm_y = "A: Drug X")
   result <- make_table_05(adsl, risk_diff = risk_diff)
 
