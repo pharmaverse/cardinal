@@ -66,11 +66,12 @@ make_table_05 <- function(df,
       trtedtm_var = trtedtm_var,
       u_trtdur = u_trtdur
     )
-    if (is.null(table_engine)) return(ard)
+    if (is.null(table_engine)) {
+      return(ard)
+    }
   }
   if (!is.null(table_engine)) {
-    tbl <- switch(
-      table_engine,
+    tbl <- switch(table_engine,
       "rtables" = make_table_05_rtables(
         df = df,
         alt_counts_df = alt_counts_df,
@@ -83,7 +84,9 @@ make_table_05 <- function(df,
       ),
       NULL
     )
-    if (!return_ard) return(tbl)
+    if (!return_ard) {
+      return(tbl)
+    }
   }
 
   list(table = tbl, ard = ard)
@@ -149,7 +152,7 @@ ard_table_05 <- function(df,
     group_by(!!rlang::sym(arm_var)) |>
     ard_continuous(
       variables = "TRTDUR",
-      statistic = everything() ~  continuous_summary_fns(
+      statistic = everything() ~ continuous_summary_fns(
         summaries = c("mean", "sd", "median", "min", "max", "p25", "p75"),
         other_stats = list(
           tot_exposure = \(x) sum(x),
