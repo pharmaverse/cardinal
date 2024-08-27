@@ -69,7 +69,7 @@ make_table_05 <- function(df,
       u_trtdur = u_trtdur
     )
     if (is.null(table_engine)) {
-      return(ard) # nolint
+      return(ard) # nocov
     }
   }
   if (!is.null(table_engine)) {
@@ -87,7 +87,7 @@ make_table_05 <- function(df,
       NULL
     )
     if (!return_ard) {
-      return(tbl) # nolint
+      return(tbl) # nocov
     }
   }
 
