@@ -15,6 +15,8 @@
 #'   (if `return_ard = TRUE`). If both are selected, they will be returned as a list with named elements `table` and
 #'   `ard`.
 #'
+#' @seealso [tbl_make_table_05]
+#'
 #' @examples
 #' adsl <- random.cdisc.data::cadsl
 #'
@@ -177,7 +179,7 @@ ard_table_05 <- function(df,
   ard
 }
 
-#' Make Table: Table 5
+#' Engine-Specific Functions: Table 5
 #'
 #' @inheritParams argument_convention
 #' @param lbl_trtdur (`character`)\cr label for treatment duration variable.
@@ -190,6 +192,8 @@ ard_table_05 <- function(df,
 #'
 #' @return
 #' * `make_table_05_rtables()` returns an `rtable` object.
+#'
+#' @seealso [make_table_05()]
 #'
 #' @examples
 #' adsl <- random.cdisc.data::cadsl

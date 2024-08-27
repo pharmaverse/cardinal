@@ -3,7 +3,7 @@
 \name{tbl_make_table_05}
 \alias{tbl_make_table_05}
 \alias{make_table_05_rtables}
-\title{Make Table: Table 5}
+\title{Engine-Specific Functions: Table 5}
 \usage{
 make_table_05_rtables(
   df,
@@ -72,7 +72,7 @@ use the annotation type as name and the desired string as value.}
 }
 }
 \description{
-Make Table: Table 5
+Engine-Specific Functions: Table 5
 }
 \details{
 \itemize{
@@ -95,5 +95,8 @@ df <- preproc_df_table_05(
 tbl <- make_table_05_rtables(df = df)
 tbl
 
+}
+\seealso{
+\code{\link[=make_table_05]{make_table_05()}}
 }
 \keyword{internal}

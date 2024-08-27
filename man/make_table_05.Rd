@@ -67,3 +67,6 @@ tbl <- make_table_05(df = adsl)
 tbl
 
 }
+\seealso{
+\link{tbl_make_table_05}
+}
