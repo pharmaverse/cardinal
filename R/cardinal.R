@@ -24,5 +24,5 @@ utils::globalVariables(c(
   "ITTFL", "PPROTFL", "RANDFL", "TRTEMFL", "TRTSDT", "USUBJID", "column", "median", "ord_layer_1", "ord_layer_2",
   "ord_layer_index", "param", "pct", "row_label1", "row_label2", "sd", "tbl_lbl", "value", "ENRLDT", "RANDDT",
   "G110", "G60", "G90", "GE120", "L60", "N", "val", "id_var", "PT_PCT", "arm", "x", "TLSTFU", "se", "lower_ci",
-  "upper_ci", "SBP90", "DBP60", "STATUS"
+  "upper_ci", "SBP90", "DBP60", "STATUS", "D_ANY", "D_LT1", "D_GT1", "D_GT3", "D_GT6", "D_GT12"
 ))

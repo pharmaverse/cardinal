@@ -20,7 +20,7 @@ Make ARD: Table 5
 }
 \examples{
 adsl <- random.cdisc.data::cadsl
-df <- preproc_data_table_05(
+df <- preproc_df_table_05(
   adsl,
   saffl_var = "SAFFL",
   trtsdtm_var = "TRTSDTM",
