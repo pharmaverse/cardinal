@@ -8,16 +8,40 @@ advs_missing <- advs_missing %>%
   df_explicit_na()
 
 test_that("Table 32 generation works with default values", {
-  result <- make_table_32(advs, adsl)
+  withr::local_options(list(width = 120))
 
+  result <- make_table_32(advs, adsl, table_engine = "rtables")
   res <- expect_silent(result)
   expect_snapshot(res)
+
+  # only table
+  result2 <- make_table_32(
+    advs, adsl, return_ard = FALSE, table_engine = "rtables"
+  )
+  res2 <- expect_silent(result2)
+  expect_snapshot(res2)
+
+  # only ard
+  result3 <- make_table_32(
+    advs, adsl, table_engine = NULL
+  )
+  res3 <- expect_silent(result3)
+  expect_snapshot(res3)
+
+  # both together
+  expect_equal(
+    result,
+    list(table = res2, ard = res3)
+  )
 })
+
+# rtables -----
 
 test_that("Table 32 generation works with custom values", {
   result <- make_table_32(
     advs,
     adsl,
+    table_engine = "rtables",
     lbl_overall = "Total\nPopulation",
     annotations = list(
       title = paste(
@@ -37,7 +61,7 @@ test_that("Table 32 generation works with custom values", {
 })
 
 test_that("Table 32 generation works with pruned rows", {
-  result <- make_table_32(advs, adsl, prune_0 = TRUE)
+  result <- make_table_32(advs, adsl, prune_0 = TRUE, table_engine = "rtables")
 
   res <- expect_silent(result)
   expect_snapshot(res)
@@ -45,33 +69,53 @@ test_that("Table 32 generation works with pruned rows", {
 
 test_that("Table 32 generation works with risk difference column", {
   risk_diff <- list(arm_x = "B: Placebo", arm_y = "A: Drug X")
-  result <- make_table_32(advs, adsl, risk_diff = risk_diff)
-
-  res <- expect_silent(result)
-  expect_snapshot(res)
-})
-
-test_that("Table 32 (gtsum) generation works with default values", {
-  result <- suppressWarnings(make_table_32_gtsum(advs = advs) %>% gt::extract_body())
-  res <- expect_silent(result)
-  expect_snapshot(res)
-})
-
-test_that("Table 32 (gtsum) generation works with custom values", {
-  result <- suppressWarnings(
-    make_table_32_gtsum(advs = advs, lbl_overall = "Total Population") %>% gt::extract_body()
+  result <- make_table_32(
+    advs, adsl, risk_diff = risk_diff, table_engine = "rtables"
   )
 
   res <- expect_silent(result)
   expect_snapshot(res)
 })
 
-test_that("Table 32 (gtsum) generation missing values and ADSL", {
+# gtsummary -----
+
+test_that("Table 32 generation works with default values", {
+  result <-
+    suppressWarnings(
+      make_table_32(
+        df = advs,
+        table_engine = "gtsummary",
+        return_ard = FALSE
+      ) %>%
+        gt::extract_body()
+    )
+  res <- expect_silent(result)
+  expect_snapshot(res)
+})
+
+test_that("Table 32 generation works with custom values", {
   result <- suppressWarnings(
-    make_table_32_gtsum(
-      advs = advs_missing,
+    make_table_32(
+      df = advs,
+      table_engine = "gtsummary",
+      lbl_overall = "Total Population",
+      return_ard = FALSE
+    ) %>%
+      gt::extract_body()
+  )
+
+  res <- expect_silent(result)
+  expect_snapshot(res)
+})
+
+test_that("Table 32 generation missing values and ADSL", {
+  result <- suppressWarnings(
+    make_table_32(
+      table_engine = "gtsummary",
+      df = advs_missing,
       alt_counts_df = adsl,
-      lbl_overall = "Total Population"
+      lbl_overall = "Total Population",
+      return_ard = FALSE
     ) %>%
       gt::extract_body()
   )

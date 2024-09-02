@@ -31,25 +31,25 @@ make_table_32 <- function(df,
                           arm_var = "ARM",
                           saffl_var = "SAFFL",
                           lbl_overall = NULL,
-                          table_engine = "gtsummary",
+                          table_engine = c("rtables", "gtsummary"),
                           return_ard = TRUE,
                           ...) {
 
   # warnings
-  # if (is.null(table_engine) && !return_ard) {
-  #   warning(
-  #     "No object returned. Set a value for `table_engine` to return ",
-  #     "a table or `return_ard = TRUE` to return an ARD."
-  #   )
-  #   return(NULL)
-  # }
-  # if (!is.null(table_engine)) {
-  #   if (! (table_engine %in% formals()$table_engine)) {
-  #     warning("There is currently no `", table_engine, "` function available for FDA table 32.")
-  #   } else {
-  #     table_engine <- match.arg(table_engine)
-  #   }
-  # }
+  if (is.null(table_engine) && !return_ard) {
+    warning(
+      "No object returned. Set a value for `table_engine` to return ",
+      "a table or `return_ard = TRUE` to return an ARD."
+    )
+    return(NULL)
+  }
+  if (!is.null(table_engine)) {
+    if (! (table_engine %in% c("gtsummary", "rtables"))) {
+      warning("There is currently no `", table_engine, "` function available for FDA table 32.")
+    } else {
+      table_engine <- match.arg(table_engine)
+    }
+  }
 
   if (return_ard) {
     ard <- make_ard_32(
