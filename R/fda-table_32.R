@@ -21,37 +21,83 @@ NULL
 #' adsl <- random.cdisc.data::cadsl
 #' advs <- random.cdisc.data::cadvs
 #'
-#' tbl <- make_table_32(data = advs, alt_counts_df = adsl)
+#' tbl <- make_table_32(df = advs, alt_counts_df = adsl)
 #' tbl
 #'
 #' @export
-make_table_32 <- function(data,
-                          ...,
+make_table_32 <- function(df,
+                          alt_counts_df = NULL,
+                          id_var = "USUBJID",
+                          arm_var = "ARM",
+                          saffl_var = "SAFFL",
+                          lbl_overall = NULL,
                           tbl_engine = "gtsummary",
-                          return_ard = TRUE) {
+                          return_ard = TRUE,
+                          ...) {
 
   # check data viability
   # assert_subset(categorical_vars, names(data))
 
-  if (tbl_engine == "gtsummary") {
-    tbl <- make_table_32_gtsum(...)
-    ard <- make_ard_32(...)
+  # warnings
+  if (is.null(tbl_engine) && !return_ard) {
+    warning(
+      "No object returned. Set a value for `tbl_engine` to return ",
+      "a table or `return_ard = TRUE` to return an ARD."
+    )
+    return(NULL)
   }
-  if (tbl_engine == "rtables") {
-    ard <- "ARD not available for {rtables}"
-    tbl <- make_table_32_rtables(df = data)
-  }
-  if (tbl_engine == "tplyr") {
-    tbl <- make_table_32_tplyr(ard, ...)
+  if (!is.null(tbl_engine)) {
+    if (!tbl_engine %in% formals()$tbl_engine) {
+      warning("There is currently no `", tbl_engine, "` function available for FDA table 5.")
+    } else {
+      tbl_engine <- match.arg(tbl_engine)
+    }
   }
 
   if (return_ard) {
-    res <- list(tbl, ard)
-  } else {
-    res <- tbl
+    ard <- make_ard_32(
+      df = df,
+      alt_counts_df = alt_counts_df,
+      id_var = id_var,
+      arm_var = arm_var,
+      saffl_var = saffl_var,
+      lbl_overall = lbl_overall
+    )
+    if (is.null(tbl_engine)) {
+      return(ard) # nocov
+    }
+  }
+  if (!is.null(tbl_engine)) {
+    if (tbl_engine == "gtsummary") {
+      tbl <- make_table_32_gtsum(
+        df = df,
+        alt_counts_df = alt_counts_df,
+        id_var = id_var,
+        arm_var = arm_var,
+        saffl_var = saffl_var,
+        lbl_overall = lbl_overall
+      )
+    }
+    if(tbl_engine == "rtables") {
+      tbl <- make_table_32_rtables(
+        df = df,
+        alt_counts_df = alt_counts_df,
+        show_colcounts = show_colcounts,
+        id_var = id_var,
+        arm_var = arm_var,
+        saffl_var = saffl_var,
+        lbl_overall = lbl_overall,
+        risk_diff = risk_diff,
+        prune_0 = prune_0,
+        annotations = annotations
+      )
+    }
+    if (!return_ard) {
+      return(tbl) # nocov
+    }
   }
 
-  return(res)
+  list(table = tbl, ard = ard)
 }
 
 #' @keywords Internal
