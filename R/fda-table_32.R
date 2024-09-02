@@ -3,7 +3,7 @@
 #'
 #' @details
 #' * `data` must contain the variables specified by `continuous_vars`, and `categorical_vars`.
-#' * `tbl_engine` must be one of `gtsummary`, `rtables`, `tplyr`.
+#' * `table_engine` must be one of `gtsummary`, `rtables`, `tplyr`.
 #' * `return_ard` set to `TRUE` or `FALSE`; whether the intermediate ARD object should be returned.
 #'
 #' @inheritParams argument_convention
@@ -14,7 +14,7 @@ NULL
 #' @describeIn make_table_32 Create FDA table 32 using an ARD.
 #'
 #' @return
-#' * `make_table_32` returns an object matching the selected `tbl_engine` argument.
+#' * `make_table_32` returns an object matching the selected `table_engine` argument.
 #' The intermediary `ARD` object can also be returned with `return_ard` set to `TRUE`.
 #'
 #' @examples
@@ -31,28 +31,25 @@ make_table_32 <- function(df,
                           arm_var = "ARM",
                           saffl_var = "SAFFL",
                           lbl_overall = NULL,
-                          tbl_engine = "gtsummary",
+                          table_engine = "gtsummary",
                           return_ard = TRUE,
                           ...) {
 
-  # check data viability
-  # assert_subset(categorical_vars, names(data))
-
   # warnings
-  if (is.null(tbl_engine) && !return_ard) {
-    warning(
-      "No object returned. Set a value for `tbl_engine` to return ",
-      "a table or `return_ard = TRUE` to return an ARD."
-    )
-    return(NULL)
-  }
-  if (!is.null(tbl_engine)) {
-    if (!tbl_engine %in% formals()$tbl_engine) {
-      warning("There is currently no `", tbl_engine, "` function available for FDA table 5.")
-    } else {
-      tbl_engine <- match.arg(tbl_engine)
-    }
-  }
+  # if (is.null(table_engine) && !return_ard) {
+  #   warning(
+  #     "No object returned. Set a value for `table_engine` to return ",
+  #     "a table or `return_ard = TRUE` to return an ARD."
+  #   )
+  #   return(NULL)
+  # }
+  # if (!is.null(table_engine)) {
+  #   if (! (table_engine %in% formals()$table_engine)) {
+  #     warning("There is currently no `", table_engine, "` function available for FDA table 32.")
+  #   } else {
+  #     table_engine <- match.arg(table_engine)
+  #   }
+  # }
 
   if (return_ard) {
     ard <- make_ard_32(
@@ -63,12 +60,12 @@ make_table_32 <- function(df,
       saffl_var = saffl_var,
       lbl_overall = lbl_overall
     )
-    if (is.null(tbl_engine)) {
+    if (is.null(table_engine)) {
       return(ard) # nocov
     }
   }
-  if (!is.null(tbl_engine)) {
-    if (tbl_engine == "gtsummary") {
+  if (!is.null(table_engine)) {
+    if (table_engine == "gtsummary") {
       tbl <- make_table_32_gtsum(
         df = df,
         alt_counts_df = alt_counts_df,
@@ -78,18 +75,15 @@ make_table_32 <- function(df,
         lbl_overall = lbl_overall
       )
     }
-    if(tbl_engine == "rtables") {
+    if(table_engine == "rtables") {
       tbl <- make_table_32_rtables(
         df = df,
         alt_counts_df = alt_counts_df,
-        show_colcounts = show_colcounts,
         id_var = id_var,
         arm_var = arm_var,
         saffl_var = saffl_var,
         lbl_overall = lbl_overall,
-        risk_diff = risk_diff,
-        prune_0 = prune_0,
-        annotations = annotations
+        ...
       )
     }
     if (!return_ard) {
