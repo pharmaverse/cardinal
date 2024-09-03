@@ -30,6 +30,11 @@ make_table_32(
 
 \item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
 the given value as the column label.}
+
+\item{table_engine}{(\code{string})\cr table engine used to generate the table. If \code{NULL}, no table is returned. If the
+given engine is not available for the table, no table is created and a warning is returned.}
+
+\item{return_ard}{(\code{flag})\cr whether an ARD should be returned. Defaults to \code{TRUE}.}
 }
 \value{
 \itemize{
@@ -43,8 +48,8 @@ Postbaseline, Safety Population, Pooled Analysis
 }
 \details{
 \itemize{
-\item \code{data} must contain the variables specified by \code{continuous_vars}, and \code{categorical_vars}.
-\item \code{table_engine} must be one of \code{gtsummary}, \code{rtables}, \code{tplyr}.
+\item \code{df} must contain \code{AVISITN}, \code{PARAMCD}, \code{AVAL}, \code{AVALU}, and the variables specified by \code{saffl_var}, \code{arm_var}, and \code{id_var}. \code{saffl_var} must be a flag variable.
+\item \code{table_engine} must be one of \code{gtsummary} or \code{rtables}.
 \item \code{return_ard} set to \code{TRUE} or \code{FALSE}; whether the intermediate ARD object should be returned.
 }
 }
@@ -57,7 +62,11 @@ Postbaseline, Safety Population, Pooled Analysis
 adsl <- random.cdisc.data::cadsl
 advs <- random.cdisc.data::cadvs
 
-tbl <- make_table_32(df = advs, alt_counts_df = adsl)
+tbl <- make_table_32(
+  df = advs,
+  alt_counts_df = adsl,
+  table_engine = "gtsummary"
+)
 tbl
 
 }

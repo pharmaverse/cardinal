@@ -80,7 +80,7 @@
       # A tibble: 5 x 8
         variable var_type    row_type var_label label    stat_1       stat_2    stat_3
         <chr>    <chr>       <chr>    <chr>     <chr>    <chr>        <chr>     <chr> 
-      1 L60      dichotomous label    &lt;60    &lt;60   0 (0%)       0 (0%)    0 (0%)
+      1 L60      dichotomous label    &lt;60    &lt;60   0 (0.0%)     0 (0.0%)  0 (0.~
       2 G60      dichotomous label    &gt;60    &gt;60   134 (100.0%) 134 (100~ 132 (~
       3 G90      dichotomous label    &gt;90    &gt;90   134 (100.0%) 134 (100~ 131 (~
       4 G110     dichotomous label    &gt;110   &gt;110  123 (91.8%)  111 (82.~ 107 (~
@@ -142,7 +142,7 @@
       # A tibble: 5 x 9
         variable var_type    row_type var_label label    stat_1   stat_2 stat_3 stat_0
         <chr>    <chr>       <chr>    <chr>     <chr>    <chr>    <chr>  <chr>  <chr> 
-      1 L60      dichotomous label    &lt;60    &lt;60   0 (0%)   0 (0%) 0 (0%) 0 (0%)
+      1 L60      dichotomous label    &lt;60    &lt;60   0 (0.0%) 0 (0.~ 0 (0.~ 0 (0.~
       2 G60      dichotomous label    &gt;60    &gt;60   134 (10~ 134 (~ 132 (~ 400 (~
       3 G90      dichotomous label    &gt;90    &gt;90   134 (10~ 134 (~ 131 (~ 399 (~
       4 G110     dichotomous label    &gt;110   &gt;110  123 (91~ 111 (~ 107 (~ 341 (~
@@ -229,7 +229,7 @@
       # A tibble: 5 x 9
         variable var_type    row_type var_label label    stat_1   stat_2 stat_3 stat_0
         <chr>    <chr>       <chr>    <chr>     <chr>    <chr>    <chr>  <chr>  <chr> 
-      1 L60      dichotomous label    &lt;60    &lt;60   0 (0%)   0 (0%) 0 (0%) 0 (0%)
+      1 L60      dichotomous label    &lt;60    &lt;60   0 (0.0%) 0 (0.~ 0 (0.~ 0 (0.~
       2 G60      dichotomous label    &gt;60    &gt;60   114 (85~ 96 (7~ 96 (7~ 306 (~
       3 G90      dichotomous label    &gt;90    &gt;90   114 (85~ 96 (7~ 95 (7~ 305 (~
       4 G110     dichotomous label    &gt;110   &gt;110  103 (76~ 78 (5~ 78 (5~ 259 (~

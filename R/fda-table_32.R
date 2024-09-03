@@ -2,7 +2,7 @@
 #'   Postbaseline, Safety Population, Pooled Analysis
 #'
 #' @details
-#' * `df` must contain the variables specified by `continuous_vars`, and `categorical_vars`.
+#' * `df` must contain `AVISITN`, `PARAMCD`, `AVAL`, `AVALU`, and the variables specified by `saffl_var`, `arm_var`, and `id_var`. `saffl_var` must be a flag variable.
 #' * `table_engine` must be one of `gtsummary` or `rtables`.
 #' * `return_ard` set to `TRUE` or `FALSE`; whether the intermediate ARD object should be returned.
 #'
@@ -21,7 +21,11 @@ NULL
 #' adsl <- random.cdisc.data::cadsl
 #' advs <- random.cdisc.data::cadvs
 #'
-#' tbl <- make_table_32(df = advs, alt_counts_df = adsl)
+#' tbl <- make_table_32(
+#'   df = advs,
+#'   alt_counts_df = adsl,
+#'   table_engine = "gtsummary"
+#' )
 #' tbl
 #'
 #' @export
