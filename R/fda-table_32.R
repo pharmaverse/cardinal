@@ -2,8 +2,8 @@
 #'   Postbaseline, Safety Population, Pooled Analysis
 #'
 #' @details
-#' * `data` must contain the variables specified by `continuous_vars`, and `categorical_vars`.
-#' * `table_engine` must be one of `gtsummary`, `rtables`, `tplyr`.
+#' * `df` must contain the variables specified by `continuous_vars`, and `categorical_vars`.
+#' * `table_engine` must be one of `gtsummary` or `rtables`.
 #' * `return_ard` set to `TRUE` or `FALSE`; whether the intermediate ARD object should be returned.
 #'
 #' @inheritParams argument_convention
