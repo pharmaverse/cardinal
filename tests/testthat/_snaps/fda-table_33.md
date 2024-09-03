@@ -209,6 +209,6 @@
       # A tibble: 2 x 9
         variable var_type    row_type var_label  label     stat_1 stat_2 stat_3 stat_0
         <chr>    <chr>       <chr>    <chr>      <chr>     <chr>  <chr>  <chr>  <chr> 
-      1 SBP90    dichotomous label    SBP &lt;90 SBP &lt;~ 0 (NA~ 0 (NA~ 0 (NA~ 0 (NA~
-      2 DBP60    dichotomous label    DBP &lt;60 DBP &lt;~ 8 (6.~ 9 (6.~ 8 (6.~ 25 (6~
+      1 SBP90    dichotomous label    SBP &lt;90 SBP &lt;~ 9 (6.~ 21 (1~ 11 (8~ 41 (1~
+      2 DBP60    dichotomous label    DBP &lt;60 DBP &lt;~ 10 (7~ 13 (9~ 13 (9~ 36 (9~
 

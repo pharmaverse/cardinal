@@ -11,6 +11,7 @@ make_table_33(
   id_var = "USUBJID",
   arm_var = "ARM",
   saffl_var = "SAFFL",
+  subset,
   lbl_overall = NULL,
   table_engine = c("rtables", "gtsummary"),
   return_ard = TRUE,
@@ -27,6 +28,8 @@ make_table_33(
 \item{arm_var}{(\code{character})\cr Name of the treatment arm variable used to split table into columns.}
 
 \item{saffl_var}{(\code{character})\cr flag variable used to indicate inclusion in safety population.}
+
+\item{subset}{(\verb{filter condition})\cr selection of both PARAMCD and definition of baseline}
 
 \item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
 the given value as the column label.}
@@ -48,7 +51,7 @@ Safety Population, Pooled Analysis
 }
 \details{
 \itemize{
-\item \code{df} must contain \code{AVISITN}, \code{PARAMCD}, \code{AVAL}, \code{AVALU}, and the variables specified by \code{saffl_var}, \code{arm_var}, and \code{id_var}. \code{saffl_var} must be a flag variable.
+\item \code{df} must contain \code{PARAMCD}, \code{AVAL}, \code{AVALU}, and the variables specified by \code{saffl_var}, \code{arm_var}, and \code{id_var}. \code{saffl_var} must be a flag variable.
 \item \code{table_engine} must be one of \code{gtsummary} or \code{rtables}.
 \item \code{return_ard} set to \code{TRUE} or \code{FALSE}; whether the intermediate ARD object should be returned.
 }
@@ -66,6 +69,7 @@ tbl <- make_table_33(
   df = advs,
   alt_counts_df = adsl,
   table_engine = "gtsummary"
+  subset = (PARAMCD \%in\% c("DIABP", "SYSBP") & AVISITN >= 1)
 )
 tbl
 

@@ -2,11 +2,13 @@
 #'   Safety Population, Pooled Analysis
 #'
 #' @details
-#' * `df` must contain `AVISITN`, `PARAMCD`, `AVAL`, `AVALU`, and the variables specified by `saffl_var`, `arm_var`, and `id_var`. `saffl_var` must be a flag variable.
+#' * `df` must contain `PARAMCD`, `AVAL`, `AVALU`, and the variables specified by `saffl_var`, `arm_var`, and `id_var`. `saffl_var` must be a flag variable.
 #' * `table_engine` must be one of `gtsummary` or `rtables`.
 #' * `return_ard` set to `TRUE` or `FALSE`; whether the intermediate ARD object should be returned.
 #'
 #' @inheritParams argument_convention
+#'
+#' @param subset (`filter condition`)\cr selection of both PARAMCD and definition of baseline
 #'
 #' @name make_table_33
 NULL
@@ -24,7 +26,8 @@ NULL
 #' tbl <- make_table_33(
 #'   df = advs,
 #'   alt_counts_df = adsl,
-#'   table_engine = "gtsummary"
+#'   table_engine = "gtsummary",
+#'   subset = (PARAMCD %in% c("DIABP", "SYSBP") & AVISITN >= 1)
 #' )
 #' tbl
 #'
@@ -34,6 +37,7 @@ make_table_33 <- function(df,
                           id_var = "USUBJID",
                           arm_var = "ARM",
                           saffl_var = "SAFFL",
+                          subset,
                           lbl_overall = NULL,
                           table_engine = c("rtables", "gtsummary"),
                           return_ard = TRUE,
@@ -49,11 +53,13 @@ make_table_33 <- function(df,
   }
   if (!is.null(table_engine)) {
     if (! (table_engine %in% c("gtsummary", "rtables"))) {
-      warning("There is currently no `", table_engine, "` function available for FDA table 32.")
+      warning("There is currently no `", table_engine, "` function available for FDA table 33.")
     } else {
       table_engine <- match.arg(table_engine)
     }
   }
+
+  subset <- enquo(subset)
 
   if (return_ard) {
     ard <- make_ard_33(
@@ -62,6 +68,7 @@ make_table_33 <- function(df,
       id_var = id_var,
       arm_var = arm_var,
       saffl_var = saffl_var,
+      subset = !!subset,
       lbl_overall = lbl_overall
     )
     if (is.null(table_engine)) {
@@ -76,7 +83,9 @@ make_table_33 <- function(df,
         id_var = id_var,
         arm_var = arm_var,
         saffl_var = saffl_var,
-        lbl_overall = lbl_overall
+        subset = !!subset,
+        lbl_overall = lbl_overall,
+        ...
       )
     }
     if(table_engine == "rtables") {
@@ -86,6 +95,7 @@ make_table_33 <- function(df,
         id_var = id_var,
         arm_var = arm_var,
         saffl_var = saffl_var,
+        subset = !!subset,
         lbl_overall = lbl_overall,
         ...
       )
@@ -103,26 +113,21 @@ make_ard_33 <- function(df,
                         alt_counts_df = NULL,
                         id_var = "USUBJID",
                         arm_var = "ARM",
+                        subset,
                         saffl_var = "SAFFL",
                         lbl_overall = NULL) {
 
   assert_subset(c(
-    saffl_var, "AVISITN", "PARAMCD", "AVAL", "AVALU", arm_var, id_var
+    saffl_var, "PARAMCD", "AVAL", "AVALU", arm_var, id_var
   ), names(df))
   assert_flag_variables(df, saffl_var)
 
-
-  assert_subset(c(
-    saffl_var, "AVISITN", "PARAMCD", "AVAL", "AVALU", arm_var, id_var
-  ), names(df))
-  assert_flag_variables(df, saffl_var)
+  subset <-
+    admiraldev::assert_filter_cond(enexpr(subset), arg_name = "subset")
 
   advs_all <- df %>%
-    filter(
-      .data[[saffl_var]] == "Y",
-      AVISITN >= 1,
-      PARAMCD %in% c("DIABP", "SYSBP")
-    ) %>%
+    filter(.data[[saffl_var]] == "Y") %>%
+    filter(!!subset) %>%
     group_by(.data[[id_var]], PARAMCD) %>%
     mutate(
       MIN_DIABP = if_else(PARAMCD == "DIABP", min(AVAL), NA_real_),
@@ -188,19 +193,20 @@ make_table_33_rtables <- function(df,
                           id_var = "USUBJID",
                           arm_var = "ARM",
                           saffl_var = "SAFFL",
+                          subset,
                           lbl_overall = NULL,
                           risk_diff = NULL,
                           prune_0 = FALSE,
                           annotations = NULL) {
-  assert_subset(c("AVISITN", "PARAMCD", "AVAL", "AVALU", arm_var, id_var, saffl_var), names(df))
+  assert_subset(c("PARAMCD", "AVAL", "AVALU", arm_var, id_var, saffl_var), names(df))
   assert_flag_variables(df, saffl_var)
 
-  advs <- df %>%
-    filter(
-      .data[[saffl_var]] == "Y",
-      AVISITN >= 1,
-      PARAMCD %in% c("DIABP", "SYSBP")
-    ) %>%
+  subset <-
+    admiraldev::assert_filter_cond(enexpr(subset), arg_name = "subset")
+
+  df <- df %>%
+    filter(.data[[saffl_var]] == "Y") %>%
+    filter(!!subset) %>%
     group_by(.data[[id_var]], PARAMCD) %>%
     mutate(
       MIN_DIABP = if_else(PARAMCD == "DIABP", min(AVAL), NA_real_),
@@ -221,9 +227,9 @@ make_table_33_rtables <- function(df,
       flag_variables = c("SBP90", "DBP60"),
       riskdiff = !is.null(risk_diff)
     ) %>%
-    append_topleft(c("Blood Pressure", paste0("(", unique(advs$AVALU)[1], ")")))
+    append_topleft(c("Blood Pressure", paste0("(", unique(df$AVALU)[1], ")")))
 
-  tbl <- build_table(lyt, df = advs, alt_counts_df = alt_counts_df)
+  tbl <- build_table(lyt, df = df, alt_counts_df = alt_counts_df)
   if (prune_0) tbl <- prune_table(tbl)
 
   tbl
@@ -235,18 +241,19 @@ make_table_33_gtsum <- function(df,
                                 id_var = "USUBJID",
                                 arm_var = "ARM",
                                 saffl_var = "SAFFL",
+                                subset,
                                 lbl_overall = NULL) {
   assert_subset(c(
-    saffl_var, "AVISITN", "PARAMCD", "AVAL", "AVALU", arm_var, id_var
+    saffl_var, "PARAMCD", "AVAL", "AVALU", arm_var, id_var
   ), names(df))
   assert_flag_variables(df, saffl_var)
 
+  subset <-
+    admiraldev::assert_filter_cond(enexpr(subset), arg_name = "subset")
+
   advs_all <- df %>%
-    filter(
-      .data[[saffl_var]] == "Y",
-      AVISITN >= 1,
-      PARAMCD %in% c("DIABP", "SYSBP")
-    ) %>%
+    filter(.data[[saffl_var]] == "Y") %>%
+    filter(!!subset) %>%
     group_by(.data[[id_var]], PARAMCD) %>%
     mutate(
       MIN_DIABP = if_else(PARAMCD == "DIABP", min(AVAL), NA_real_),

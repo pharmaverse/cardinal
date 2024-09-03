@@ -25,6 +25,7 @@ make_table_33(
   df = advs, 
   alt_counts_df = adsl, 
   risk_diff = risk_diff,
+  subset = (PARAMCD %in% c("DIABP", "SYSBP") & AVISITN >= 1),
   return_ard = FALSE
 )
 ```
@@ -44,7 +45,12 @@ adsl <- random.cdisc.data::cadsl
 advs <- random.cdisc.data::cadvs
 
 # Output table
-make_table_33(table_engine = "gtsummary", df = advs, return_ard = FALSE)
+make_table_33(
+  table_engine = "gtsummary", 
+  df = advs, 
+  subset = (PARAMCD %in% c("DIABP", "SYSBP") & AVISITN >= 1),
+  return_ard = FALSE
+)
 ```
 
 ## gtsummary Table Setup
@@ -62,7 +68,12 @@ adsl <- random.cdisc.data::cadsl
 advs <- random.cdisc.data::cadvs
 
 # Output table
-make_table_33(table_engine = NULL, df = advs, return_ard = TRUE)
+make_table_33(
+  table_engine = NULL, 
+  df = advs, 
+  subset = (PARAMCD %in% c("DIABP", "SYSBP") & AVISITN >= 1),
+  return_ard = TRUE
+)
 ```
 
 ## ARD setup
@@ -89,6 +100,8 @@ make_table_33(table_engine = NULL, df = advs, return_ard = TRUE)
 | `arm_var`       | (`character`) Arm variable used to split table into columns.                                                                                                                            | `"ARM"`                     |
 +-----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------+
 | `saffl_var`     | (`character`) Flag variable used to indicate inclusion in safety population.                                                                                                            | `"SAFFL"`                   |
++-----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------+
+| `subset`        | (`filter`) Selection of both PARAMCD and definition of baseline                                                                                                                         | *No default*                |
 +-----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------+
 | `lbl_overall`   | (`character`) If specified, an overall column will be added to the table with the given value as the column label.                                                                      | `NULL`                      |
 +-----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------+
@@ -124,6 +137,8 @@ Required variables:
 | `arm_var`        | (`character`) Arm variable used to split table into columns.                                                                                                                                                                                                 | `"ARM"`      |
 +------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
 | `saffl_var`      | (`character`) Flag variable used to indicate inclusion in safety population.                                                                                                                                                                                 | `"SAFFL"`    |
++------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
+| `subset`         | (`filter`) Selection of both PARAMCD and definition of baseline                                                                                                                                                                                              | *No default* |
 +------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
 | `lbl_overall`    | (`character`) If specified, an overall column will be added to the table with the given value as the column label.                                                                                                                                           | `NULL`       |
 +------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
@@ -165,6 +180,8 @@ Required variables:
 | `arm_var`       | (`character`) Arm variable used to split table into columns.                                                       | `"ARM"`              |
 +-----------------+--------------------------------------------------------------------------------------------------------------------+----------------------+
 | `saffl_var`     | (`character`) Flag variable used to indicate inclusion in safety population.                                       | `"SAFFL"`            |
++-----------------+--------------------------------------------------------------------------------------------------------------------+----------------------+
+| `subset`        | (`filter`) Selection of both PARAMCD and definition of baseline                                                    | *No default*         |
 +-----------------+--------------------------------------------------------------------------------------------------------------------+----------------------+
 | `lbl_overall`   | (`character`) If specified, an overall column will be added to the table with the given value as the column label. | `"Total Population"` |
 +-----------------+--------------------------------------------------------------------------------------------------------------------+----------------------+
