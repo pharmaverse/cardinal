@@ -2,38 +2,25 @@
 % Please edit documentation in R/fda-table_32.R
 \name{make_table_32}
 \alias{make_table_32}
-\alias{make_table_32_gtsum}
 \title{FDA Table 32: Percentage of Patients With Maximum Diastolic Blood Pressure by Category of Blood Pressure
 Postbaseline, Safety Population, Pooled Analysis}
 \usage{
 make_table_32(
-  advs,
+  df,
   alt_counts_df = NULL,
-  show_colcounts = TRUE,
   id_var = "USUBJID",
   arm_var = "ARM",
   saffl_var = "SAFFL",
   lbl_overall = NULL,
-  risk_diff = NULL,
-  prune_0 = FALSE,
-  annotations = NULL
-)
-
-make_table_32_gtsum(
-  advs,
-  alt_counts_df = NULL,
-  id_var = "USUBJID",
-  arm_var = "ARM",
-  saffl_var = "SAFFL",
-  lbl_overall = NULL
+  table_engine = c("rtables", "gtsummary"),
+  return_ard = TRUE,
+  ...
 )
 }
 \arguments{
-\item{advs}{(\code{data.frame})\cr dataset (typically ADVS) required to build table.}
+\item{df}{(\code{data.frame})\cr dataset required to build table.}
 
 \item{alt_counts_df}{(\code{character})\cr alternative dataset (typically ADSL) used only to calculate column counts.}
-
-\item{show_colcounts}{(\code{flag})\cr Whether column counts should be printed. Boolean.}
 
 \item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
 
@@ -43,33 +30,11 @@ make_table_32_gtsum(
 
 \item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
 the given value as the column label.}
-
-\item{risk_diff}{(named \code{list})\cr list of settings to apply to add one or more risk difference columns to the table.
-Defaults to \code{NULL} (no risk difference column added). See \code{\link[tern:add_riskdiff]{tern::add_riskdiff()}} for more details. List should
-contain the following elements:
-\itemize{
-\item \code{arm_x}: (required) the name of reference arm.
-\item \code{arm_y}: (required) the names of the arms to compare to the reference arm. A new column will be added for each
-element of \code{arm_y}.
-\item \code{col_label}: (optional) labels to use for the risk difference columns. Defaults to
-\code{"Risk Difference (\%) (95\% CI)"}. For more than one risk difference column, \code{"arm x vs. arm y"} text will also
-be included in the column labels by default. The length of \code{col_label} must be equal to the length of \code{arm_y}.
-\item \code{pct}: (optional) whether the output should be returned as percentages. Defaults to \code{TRUE}.
-}}
-
-\item{prune_0}{(\code{flag})\cr Whether all-zero rows should be removed from the table. Boolean.}
-
-\item{annotations}{(named \code{list} of \code{character})\cr list of annotations to add to the table. Valid
-annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
-use the annotation type as name and the desired string as value.}
 }
 \value{
 \itemize{
-\item \code{make_table_32} returns an \code{rtables} table object.
-}
-
-\itemize{
-\item \code{make_table_32_gtsum} returns a \code{gt} object
+\item \code{make_table_32} returns an object matching the selected \code{table_engine} argument.
+The intermediary \code{ARD} object can also be returned with \code{return_ard} set to \code{TRUE}.
 }
 }
 \description{
@@ -78,31 +43,21 @@ Postbaseline, Safety Population, Pooled Analysis
 }
 \details{
 \itemize{
-\item \code{advs} must contain \code{AVISITN}, \code{PARAMCD}, \code{AVAL}, \code{AVALU}, and the variables specified by
-\code{arm_var}, \code{id_var}, and \code{saffl_var}.
-\item If specified, \code{alt_counts_df} must contain the variables specified by \code{arm_var}, \code{id_var}, and \code{saffl_var}.
-\item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
-flag variables are treated as \code{"N"}.
-\item Columns are split by arm. Overall population column is excluded by default (see \code{lbl_overall} argument).
-\item Numbers in table represent the absolute numbers of patients and fraction of \code{N}.
-\item All-zero rows are not removed by default (see \code{prune_0} argument).
+\item \code{data} must contain the variables specified by \code{continuous_vars}, and \code{categorical_vars}.
+\item \code{table_engine} must be one of \code{gtsummary}, \code{rtables}, \code{tplyr}.
+\item \code{return_ard} set to \code{TRUE} or \code{FALSE}; whether the intermediate ARD object should be returned.
 }
 }
 \section{Functions}{
 \itemize{
-\item \code{make_table_32()}: Create FDA table 32 using functions from \code{rtables} and \code{tern}.
-
-\item \code{make_table_32_gtsum()}: Create FDA table 32 using functions from \code{gtsummary}.
+\item \code{make_table_32()}: Create FDA table 32 using an ARD.
 
 }}
 \examples{
 adsl <- random.cdisc.data::cadsl
 advs <- random.cdisc.data::cadvs
 
-tbl <- make_table_32(advs = advs, alt_counts_df = adsl)
-tbl
-
-tbl <- make_table_32_gtsum(advs = advs)
+tbl <- make_table_32(df = advs, alt_counts_df = adsl)
 tbl
 
 }
