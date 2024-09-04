@@ -38,6 +38,8 @@ the given value as the column label.}
 given engine is not available for the table, no table is created and a warning is returned.}
 
 \item{return_ard}{(\code{flag})\cr whether an ARD should be returned. Defaults to \code{TRUE}.}
+
+\item{...}{arguments passed to table engine-specific functions.}
 }
 \value{
 \itemize{

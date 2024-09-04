@@ -10,6 +10,7 @@
 #' @inheritParams argument_convention
 #'
 #' @param subset (`filter condition`)\cr selection of both PARAMCD and definition of baseline
+#' @param ... arguments passed to table engine-specific functions.
 #'
 #' @name make_table_32
 NULL
