@@ -14,6 +14,7 @@
 #' @importFrom formatters with_label var_labels var_relabel
 #' @importFrom rlistings as_listing
 #' @importFrom cowplot plot_grid get_legend
+#' @importFrom admiraldev assert_filter_cond
 NULL
 
 # Fix R CMD check warning for missing global definitions
