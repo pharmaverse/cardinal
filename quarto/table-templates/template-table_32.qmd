@@ -22,8 +22,8 @@ advs <- random.cdisc.data::cadvs
 risk_diff <- list(arm_x = "B: Placebo", arm_y = "A: Drug X") # optional
 make_table_32(
   table_engine = "rtables",
-  df = advs, 
-  alt_counts_df = adsl, 
+  df = advs,
+  alt_counts_df = adsl,
   risk_diff = risk_diff,
   subset = (PARAMCD == "DIABP" & AVISITN >= 1),
   return_ard = FALSE
@@ -46,8 +46,8 @@ advs <- random.cdisc.data::cadvs
 
 # Output table
 make_table_32(
-  table_engine = "gtsummary", 
-  df = advs, 
+  table_engine = "gtsummary",
+  df = advs,
   subset = (PARAMCD == "DIABP" & AVISITN >= 1),
   return_ard = FALSE
 )
@@ -69,8 +69,8 @@ advs <- random.cdisc.data::cadvs
 
 # Output table
 make_table_32(
-  table_engine = NULL, 
-  df = advs, 
+  table_engine = NULL,
+  df = advs,
   subset = (PARAMCD == "DIABP" & AVISITN >= 1),
   return_ard = TRUE
 )

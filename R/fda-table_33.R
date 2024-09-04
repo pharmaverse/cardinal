@@ -42,7 +42,6 @@ make_table_33 <- function(df,
                           table_engine = c("rtables", "gtsummary"),
                           return_ard = TRUE,
                           ...) {
-
   # warnings
   if (is.null(table_engine) && !return_ard) {
     warning(
@@ -52,7 +51,7 @@ make_table_33 <- function(df,
     return(NULL)
   }
   if (!is.null(table_engine)) {
-    if (! (table_engine %in% c("gtsummary", "rtables"))) {
+    if (!(table_engine %in% c("gtsummary", "rtables"))) {
       warning("There is currently no `", table_engine, "` function available for FDA table 33.")
     } else {
       table_engine <- match.arg(table_engine)
@@ -88,7 +87,7 @@ make_table_33 <- function(df,
         ...
       )
     }
-    if(table_engine == "rtables") {
+    if (table_engine == "rtables") {
       tbl <- make_table_33_rtables(
         df = df,
         alt_counts_df = alt_counts_df,
@@ -116,7 +115,6 @@ make_ard_33 <- function(df,
                         subset,
                         saffl_var = "SAFFL",
                         lbl_overall = NULL) {
-
   assert_subset(c(
     saffl_var, "PARAMCD", "AVAL", "AVALU", arm_var, id_var
   ), names(df))
@@ -188,16 +186,16 @@ make_ard_33 <- function(df,
 
 #' @keywords Internal
 make_table_33_rtables <- function(df,
-                          alt_counts_df = NULL,
-                          show_colcounts = TRUE,
-                          id_var = "USUBJID",
-                          arm_var = "ARM",
-                          saffl_var = "SAFFL",
-                          subset,
-                          lbl_overall = NULL,
-                          risk_diff = NULL,
-                          prune_0 = FALSE,
-                          annotations = NULL) {
+                                  alt_counts_df = NULL,
+                                  show_colcounts = TRUE,
+                                  id_var = "USUBJID",
+                                  arm_var = "ARM",
+                                  saffl_var = "SAFFL",
+                                  subset,
+                                  lbl_overall = NULL,
+                                  risk_diff = NULL,
+                                  prune_0 = FALSE,
+                                  annotations = NULL) {
   assert_subset(c("PARAMCD", "AVAL", "AVALU", arm_var, id_var, saffl_var), names(df))
   assert_flag_variables(df, saffl_var)
 
