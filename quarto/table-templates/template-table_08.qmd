@@ -9,11 +9,11 @@ format: html
 
 ![](../assets/images/screenshots/table_08.png){fig-align="center" width="75%"}
 
-## rtables/tern Table
+## rtables Table
 
 ```{r tbl, message=FALSE, warning=FALSE}
 # Load Libraries & Data
-library(falcon)
+library(cardinal)
 
 adae <- random.cdisc.data::cadae
 adex <- random.cdisc.data::cadex
@@ -22,7 +22,7 @@ adex <- random.cdisc.data::cadex
 make_table_08(adae = adae, adex = adex)
 ```
 
-## rtables/tern Table Setup
+## rtables Table Setup
 
 ```{r tbl, eval=FALSE, echo=TRUE}
 ```
@@ -38,8 +38,8 @@ Required variables:
 -   **`adae`**: `USUBJID`, `AGE`, `SEX`, `AESDTH`, `DTHADY`, and the variables specified by `dth_vars`, `arm_var`, and `saffl_var`.
 -   **`adex`** (if specified): `USUBJID`, `PARAMCD`, `TRTSDT`, `TRTEDT`, `AVAL`, `AVALU`, and the variable specified by `saffl_var`.
 
-| Argument       | Description                                                                                                                                                                                                                                            | Default                                                                        |
-|:-----------------|:-----------------------------------|:-----------------|
+| **Argument**   | **Description**                                                                                                                                                                                                                                        | **Default**                                                                    |
+|:---------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------------------------------------------|
 | `adae`         | (`data.frame`) Dataset (typically ADAE) required to build table.                                                                                                                                                                                       | *No default*                                                                   |
 | `adex`         | (`data.frame`) Dataset (typically ADEX) required to build table.                                                                                                                                                                                       | *No default*                                                                   |
 | `arm_var`      | (`character`) Arm variable used to split table into columns.                                                                                                                                                                                           | `"ARM"`                                                                        |
@@ -49,5 +49,5 @@ Required variables:
 | `na_level`     | (`character`) String to represent missing values.                                                                                                                                                                                                      | `"NA"`                                                                         |
 | `annotations`  | (named `list` of `character`) List of annotations to add to the table. Valid annotation types are `title`, `subtitles`, `main_footer`, and `prov_footer.` Each name-value pair should use the annotation type as name and the desired string as value. | `NULL`                                                                         |
 
-Source code for this function is available [here](https://github.com/pharmaverse/falcon/blob/main/R/fda-table_08.R).
+Source code for this function is available [here](https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_08.R).
 :::
