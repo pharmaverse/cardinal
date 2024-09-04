@@ -51,7 +51,8 @@ Safety Population, Pooled Analysis
 }
 \details{
 \itemize{
-\item \code{df} must contain \code{PARAMCD}, \code{AVAL}, \code{AVALU}, and the variables specified by \code{saffl_var}, \code{arm_var}, and \code{id_var}. \code{saffl_var} must be a flag variable.
+\item \code{df} must contain \code{PARAMCD}, \code{AVAL}, \code{AVALU}, and the variables specified by \code{saffl_var}, \code{arm_var}, and \code{id_var}.
+\code{saffl_var} must be a flag variable.
 \item \code{table_engine} must be one of \code{gtsummary} or \code{rtables}.
 \item \code{return_ard} set to \code{TRUE} or \code{FALSE}; whether the intermediate ARD object should be returned.
 }
@@ -68,7 +69,7 @@ advs <- random.cdisc.data::cadvs
 tbl <- make_table_33(
   df = advs,
   alt_counts_df = adsl,
-  table_engine = "gtsummary"
+  table_engine = "gtsummary",
   subset = (PARAMCD \%in\% c("DIABP", "SYSBP") & AVISITN >= 1)
 )
 tbl
