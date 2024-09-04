@@ -9,7 +9,7 @@ format: html
 
 ![](../assets/images/screenshots/table_32.png){fig-align="center" width="70%"}
 
-## rtables/tern Table
+## rtables Table
 
 ```{r tbl, message=FALSE, warning=FALSE}
 # Load Libraries & Data
@@ -30,7 +30,7 @@ make_table_32(
 )
 ```
 
-## rtables/tern Table Setup
+## rtables Table Setup
 
 ```{r tbl, eval=FALSE, echo=TRUE}
 ```
@@ -170,21 +170,16 @@ Required variables:
 -   **`df`**: `USUBJID`, `AVISITN`, `PARAMCD`, `AVAL`, `AVALU`, and the variables specified by `arm_var` and `saffl_var`.
 -   **`alt_counts_df`** (if specified): `USUBJID` and the variables specified by `arm_var` and `saffl_var`.
 
-+-----------------+--------------------------------------------------------------------------------------------------------------------+----------------------+
-| Argument        | Description                                                                                                        | Default              |
-+:================+:===================================================================================================================+:=====================+
+| **Argument**    | **Description**                                                                                                    | **Default**          |
+|:----------------|:-------------------------------------------------------------------------------------------------------------------|:---------------------|
 | `advs`          | (`data.frame`) Dataset (typically ADVS) required to build table.                                                   | *No default*         |
-+-----------------+--------------------------------------------------------------------------------------------------------------------+----------------------+
 | `alt_counts_df` | (`character`) Alternative dataset (typically ADSL) used only to calculate column counts.                           | `NULL`               |
-+-----------------+--------------------------------------------------------------------------------------------------------------------+----------------------+
 | `arm_var`       | (`character`) Arm variable used to split table into columns.                                                       | `"ARM"`              |
-+-----------------+--------------------------------------------------------------------------------------------------------------------+----------------------+
 | `saffl_var`     | (`character`) Flag variable used to indicate inclusion in safety population.                                       | `"SAFFL"`            |
 +-----------------+--------------------------------------------------------------------------------------------------------------------+----------------------+
 | `subset`        | (`filter`) Selection of both PARAMCD and definition of baseline                                                    | *No default*         |
 +-----------------+--------------------------------------------------------------------------------------------------------------------+----------------------+
 | `lbl_overall`   | (`character`) If specified, an overall column will be added to the table with the given value as the column label. | `"Total Population"` |
-+-----------------+--------------------------------------------------------------------------------------------------------------------+----------------------+
 
 Source code for this function is available [here](https://github.com/pharmaverse/falcon/blob/main/R/fda-table_32.R).
 :::

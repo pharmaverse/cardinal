@@ -69,3 +69,10 @@ test_that("Table 36 generation works with custom values (SOC variable and label)
   res <- expect_silent(result)
   expect_snapshot(res)
 })
+
+test_that("Table 36 generation works with pruning", {
+  result <- make_table_36(adae, adsl, prune_0 = TRUE)
+
+  res <- expect_silent(result)
+  expect_snapshot(res)
+})

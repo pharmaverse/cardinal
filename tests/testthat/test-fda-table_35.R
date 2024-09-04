@@ -70,3 +70,11 @@ test_that("Table 35 generation works with custom values (SOC variable and label)
   res <- expect_silent(result)
   expect_snapshot(res)
 })
+
+test_that("Table 35 generation works with pruning", {
+  adae$AESOC[adae$AESOC == "cl C"] <- "cl A"
+  result <- make_table_35(adae, adsl, prune_0 = TRUE)
+
+  res <- expect_silent(result)
+  expect_snapshot(res)
+})
