@@ -68,7 +68,7 @@ advs <- random.cdisc.data::cadvs
 tbl <- make_table_33(
   df = advs,
   alt_counts_df = adsl,
-  table_engine = "gtsummary"
+  table_engine = "gtsummary",
   subset = (PARAMCD \%in\% c("DIABP", "SYSBP") & AVISITN >= 1)
 )
 tbl
