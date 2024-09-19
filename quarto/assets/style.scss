@@ -1,7 +1,7 @@
 /*-- scss:defaults --*/
 
-$primary:    #F0181E !default;
-$secondary:  #8F0407 !default;
+$primary:    #E21318 !default;
+$secondary:  #A3070B !default;
 $dark:       #212529 !default;
 $light:      #F8F9FA !default;
 $code-color: #212529 !default;
@@ -30,14 +30,14 @@ ul.nav.nav-tabs {
   width: 25%;
   font: bold 16px Arial;
   text-decoration: none;
-  background-color: #F0181E;
+  background-color: #E21318;
   color: #FFFFFF;
   margin: 5px;
   padding: 10px 14px 10px 14px;
-  border-top: 1px solid #8F0407;
-  border-right: 2px solid #8F0407;
-  border-bottom: 2px solid #8F0407;
-  border-left: 1px solid #8F0407;
+  border-top: 1px solid #A3070B;
+  border-right: 2px solid #A3070B;
+  border-bottom: 2px solid #A3070B;
+  border-left: 1px solid #A3070B;
   border-radius: 4px;
 }
 
@@ -49,11 +49,11 @@ ul.nav.nav-tabs {
 }
 
 a:link, a:visited {
-  color: #F0181E;
+  color: #E21318;
 }
 
 a:hover, a:active {
-  color: #8F0407;
+  color: #A3070B;
 }
 
 /***************************************/
@@ -101,7 +101,7 @@ a:hover, a:active {
 
 /* Style the back side */
 .flip-card-back {
-  background-color: #8F0407;
+  background-color: #A3070B;
   color: white;
   transform: rotateY(180deg);
 }

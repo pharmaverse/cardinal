@@ -1,6 +1,6 @@
 # cardinal
 
-<a href='https://pharmaverse.github.io/cardinal/'><img src="quarto/assets/images/cardinal.png" align="right" height="139" style="max-width: 100%;"/></a>
+<a href='https://pharmaverse.github.io/cardinal/'><img src="quarto/assets/images/logo/cardinal.png" align="right" height="139" style="max-width: 100%;"/></a>
 
 <!-- start badges -->
 [![Pharmaverse](https://pharmaverse.org/shields/cardinal.svg)](https://pharmaverse.org)
