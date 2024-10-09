@@ -13,8 +13,7 @@ make_table_05(
   saffl_var = "SAFFL",
   trtsdtm_var = "TRTSDTM",
   trtedtm_var = "TRTEDTM",
-  u_trtdur = "days",
-  ...
+  u_trtdur = "days"
 )
 }
 \arguments{

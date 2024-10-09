@@ -9,19 +9,9 @@
 make_table_05_gtsummary(
   df,
   ard,
-  alt_counts_df = NULL,
-  show_colcounts = TRUE,
   arm_var = "ARM",
-  id_var = "USUBJID",
-  saffl_var = "SAFFL",
-  trtsdtm_var = "TRTSDTM",
-  trtedtm_var = "TRTEDTM",
   u_trtdur = "days",
-  lbl_trtdur = paste("Duration of Treatment,", u_trtdur),
-  lbl_overall = NULL,
-  risk_diff = NULL,
-  prune_0 = FALSE,
-  annotations = NULL
+  lbl_trtdur = paste("Duration of Treatment,", u_trtdur)
 )
 
 make_table_05_rtables(
@@ -44,11 +34,16 @@ make_table_05_rtables(
 \arguments{
 \item{df}{(\code{data.frame})\cr dataset required to build table.}
 
+\item{arm_var}{(\code{character})\cr Name of the treatment arm variable used to split table into columns.}
+
+\item{u_trtdur}{(\code{character})\cr unit for duration of treatment. Options are \code{"days"}, \code{"weeks"}, \code{"months"},
+and \code{"years"}.}
+
+\item{lbl_trtdur}{(\code{character})\cr label for treatment duration variable.}
+
 \item{alt_counts_df}{(\code{character})\cr alternative dataset (typically ADSL) used only to calculate column counts.}
 
 \item{show_colcounts}{(\code{flag})\cr Whether column counts should be printed. Boolean.}
-
-\item{arm_var}{(\code{character})\cr Name of the treatment arm variable used to split table into columns.}
 
 \item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
 
@@ -57,11 +52,6 @@ make_table_05_rtables(
 \item{trtsdtm_var}{(\code{character})\cr treatment start datetime variable.}
 
 \item{trtedtm_var}{(\code{character})\cr treatment end datetime variable.}
-
-\item{u_trtdur}{(\code{character})\cr unit for duration of treatment. Options are \code{"days"}, \code{"weeks"}, \code{"months"},
-and \code{"years"}.}
-
-\item{lbl_trtdur}{(\code{character})\cr label for treatment duration variable.}
 
 \item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
 the given value as the column label.}
@@ -113,7 +103,8 @@ df <- cardinal:::preproc_df_table_05(
 )
 
 # gtsummary table --------------
-tbl_gtsummary <- cardinal:::make_table_05_gtsummary(df = df)
+ard <- cardinal:::ard_table_05(df = df)
+tbl_gtsummary <- cardinal:::make_table_05_gtsummary(df = df, ard = ard)
 tbl_gtsummary
 
 # rtables table ----------------

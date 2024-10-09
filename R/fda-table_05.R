@@ -31,8 +31,7 @@ make_table_05 <- function(df,
                           saffl_var = "SAFFL",
                           trtsdtm_var = "TRTSDTM",
                           trtedtm_var = "TRTEDTM",
-                          u_trtdur = "days",
-                          ...) {
+                          u_trtdur = "days") {
   assert_subset(c(id_var, arm_var, saffl_var, id_var, trtsdtm_var, trtedtm_var), names(df))
   assert_choice(u_trtdur, c("days", "weeks", "months", "years"))
   assert_flag_variables(df, saffl_var)
@@ -102,8 +101,8 @@ preproc_df_table_05 <- function(df,
 #'   u_trtdur = "days"
 #' )
 #'
-#' tbl <- cardinal:::ard_table_05(df = df)
-#' tbl
+#' ard <- cardinal:::ard_table_05(df = df)
+#' ard
 #'
 #' @keywords internal
 #' @name ard_make_table_05
@@ -173,7 +172,8 @@ ard_table_05 <- function(df,
 #' )
 #'
 #' # gtsummary table --------------
-#' tbl_gtsummary <- cardinal:::make_table_05_gtsummary(df = df)
+#' ard <- cardinal:::ard_table_05(df = df)
+#' tbl_gtsummary <- cardinal:::make_table_05_gtsummary(df = df, ard = ard)
 #' tbl_gtsummary
 #'
 #' # rtables table ----------------
@@ -184,19 +184,9 @@ ard_table_05 <- function(df,
 #' @name tbl_make_table_05
 make_table_05_gtsummary <- function(df,
                                     ard,
-                                    alt_counts_df = NULL,
-                                    show_colcounts = TRUE,
                                     arm_var = "ARM",
-                                    id_var = "USUBJID",
-                                    saffl_var = "SAFFL",
-                                    trtsdtm_var = "TRTSDTM",
-                                    trtedtm_var = "TRTEDTM",
                                     u_trtdur = "days",
-                                    lbl_trtdur = paste("Duration of Treatment,", u_trtdur),
-                                    lbl_overall = NULL,
-                                    risk_diff = NULL,
-                                    prune_0 = FALSE,
-                                    annotations = NULL) {
+                                    lbl_trtdur = paste("Duration of Treatment,", u_trtdur)) {
   stat_fun <- function(data, ...) {
     dplyr::tibble(
       mean = mean(data$TRTDUR),
@@ -214,12 +204,15 @@ make_table_05_gtsummary <- function(df,
   tbl_cts <- tbl_custom_summary(
     df,
     by = arm_var,
+    label = list(TRTDUR = lbl_trtdur),
     stat_fns = everything() ~ stat_fun,
     statistic = ~ c("{mean} ({sd})", "{median} ({min} - {max})", "{q25} - {q75}", "{tot_exp} ({tot_dur})"),
+    digits = ~ 2,
     type = list(TRTDUR = "continuous2"),
     include = TRTDUR,
     missing = "no"
   )
+  tbl_cts$table_body$label[4:5] <- c("Interquartile range", "Total exposure (person years)")
 
   tbl_cat <- tbl_ard_summary(ard, by = arm_var, include = -TRTDUR)
   tbl_cat$table_body <- dplyr::bind_rows(
@@ -232,8 +225,15 @@ make_table_05_gtsummary <- function(df,
       rows = !is.na(variable),
       indent = 4L
     )
+  tbl_cat$table_body$label[2:7] <- c(
+    "Any duration (at least 1 dose)", "<1 month", ">=1 month", ">=3 months", ">=6 months", ">=12 months"
+  )
 
-  tbl_stack(list(tbl_cts, tbl_cat), quiet = TRUE)
+  tbl_stack(list(tbl_cts, tbl_cat), quiet = TRUE) |>
+    modify_table_styling(
+      columns = label,
+      label = "**Parameter**"
+    )
 }
 
 #' @keywords internal

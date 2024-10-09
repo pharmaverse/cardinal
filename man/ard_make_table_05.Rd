@@ -28,8 +28,8 @@ df <- cardinal:::preproc_df_table_05(
   u_trtdur = "days"
 )
 
-tbl <- cardinal:::ard_table_05(df = df)
-tbl
+ard <- cardinal:::ard_table_05(df = df)
+ard
 
 }
 \keyword{internal}
