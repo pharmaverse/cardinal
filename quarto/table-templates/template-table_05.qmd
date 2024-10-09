@@ -9,8 +9,26 @@ format: html
 
 ![](../assets/images/screenshots/table_05.png){fig-align="center"}
 
-## Function Details: ARD
+## gtsummary Table
 
+```{r tbl1, message=FALSE, warning=FALSE}
+# Load Libraries & Data
+library(cardinal)
+
+adsl <- random.cdisc.data::cadsl
+
+# Output Table
+make_table_05(df = adsl, return_ard = FALSE)
+```
+
+<details>
+  <summary>gtsummary Table Setup</summary>
+```{r tbl1, eval=FALSE, echo=TRUE}
+```
+</details>
+
+<details>
+  <summary>Function Details</summary>
 ### `make_table_05()`
 
 ------------------------------------------------------------------------
@@ -18,26 +36,27 @@ format: html
 Required variables:
 
 -   **`df`**: The variables specified by `vars`, `arm_var`, and `saffl_var`.
--   **`alt_counts_df`** (if specified): `USUBJID` and the variables specified by `arm_var` and `saffl_var`.
+-   **`denominator`** (if specified): `USUBJID` and the variables specified by `arm_var` and `saffl_var`.
 
 |                 |                                                                                                          |              |
 |-----------------|----------------------------------------------------------------------------------------------------------|--------------|
 | **Argument**    | **Description**                                                                                          | **Default**  |
 | `df`            | (`data.frame`) Dataset (typically ADSL) required to build table.                                         | *No default* |
-| `alt_counts_df` | (`character`) Alternative dataset used only to calculate column counts.                                  | `NULL`       |
+| `return_ard`    | (`flag`) Whether an ARD should be returned.                                                              | `TRUE`       |
+| `denominator`   | (`character`) Alternative dataset used only to calculate column counts.                                  | `NULL`       |
 | `arm_var`       | (`character`) Arm variable used to split table into columns.                                             | `"ARM"`      |
 | `saffl_var`     | (`character`) Flag variable used to indicate inclusion in safety population.                             | `"SAFFL"`    |
 | `id_var`        | (`character`) Identifier variable used to count the participants within each flag.                       | `"USUBJID"`  |
 | `trtsdtm_var`   | (`character`) Treatment start datetime variable in df.                                                   | `"TRTSDTM"`  |
 | `trtedtm_var`   | (`character`) Treatment end datetime variable in df.                                                     | `"TRTEDTM"`  |
 | `u_trtdur`      | (`character`) Unit for duration of treatment. Options are `"days"`, `"weeks"`, `"months"` and `"years"`. | `"days"`     |
-| `...`           | Arguments passed to table engine-specific functions.                                                     | `NULL`       |
 
 Source code for this function is available [here](https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_05.R).
+</details>
 
 ## rtables Table
 
-```{r tbl, message=FALSE, warning=FALSE}
+```{r tbl2, message=FALSE, warning=FALSE}
 # Load Libraries & Data
 library(cardinal)
 
@@ -45,18 +64,18 @@ adsl <- random.cdisc.data::cadsl
 
 # Output Table
 risk_diff <- list(arm_x = "B: Placebo", arm_y = "A: Drug X") # optional
-make_table_05(df = adsl, risk_diff = risk_diff, return_ard = FALSE)
+make_table_05_rtables(df = adsl, risk_diff = risk_diff)
 ```
 
 <details>
   <summary>rtables Table Setup</summary>
-```{r tbl, eval=FALSE, echo=TRUE}
+```{r tbl2, eval=FALSE, echo=TRUE}
 ```
 </details>
 
 <details>
   <summary>Function Details</summary>
-### `make_table_05(table_engine = "rtables")`
+### `make_table_05_rtables()`
 
 ------------------------------------------------------------------------
 
@@ -103,7 +122,7 @@ Required variables:
 | `annotations`   | (named `list` of `character`) List of annotations to add to the table. Valid annotation types are `title`, `subtitles`, `main_footer`, and `prov_footer.` Each name-value pair should use the annotation type as name and the desired string as value.         | `NULL`                                      |
 +-----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------+
 
-Source code for this function is available [here](https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_05.R).
+Source code for this function is available [here](https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_05_rtables.R).
 </details> 
 
 :::

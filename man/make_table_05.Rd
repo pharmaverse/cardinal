@@ -6,7 +6,7 @@
 \usage{
 make_table_05(
   df,
-  alt_counts_df = NULL,
+  denominator = NULL,
   return_ard = TRUE,
   arm_var = "ARM",
   id_var = "USUBJID",
@@ -18,8 +18,6 @@ make_table_05(
 }
 \arguments{
 \item{df}{(\code{data.frame})\cr dataset required to build table.}
-
-\item{alt_counts_df}{(\code{character})\cr alternative dataset (typically ADSL) used only to calculate column counts.}
 
 \item{return_ard}{(\code{flag})\cr whether an ARD should be returned. Defaults to \code{TRUE}.}
 
@@ -35,8 +33,6 @@ make_table_05(
 
 \item{u_trtdur}{(\code{character})\cr unit for duration of treatment. Options are \code{"days"}, \code{"weeks"}, \code{"months"},
 and \code{"years"}.}
-
-\item{...}{arguments passed to table engine-specific functions. See \code{\link{tbl_make_table_05}} for details.}
 }
 \value{
 A \code{gtsummary} table and, if \code{return_ard = TRUE}, an ARD.
@@ -49,7 +45,7 @@ FDA Table 5: Duration of Treatment Exposure, Safety Population, Pooled Analyses
 \itemize{
 \item \code{df} must contain the variables specified by \code{arm_var}, \code{saffl_var}, \code{id_var}, \code{trtsdtm_var},
 and \code{trtedtm_var}.
-\item If specified, \code{alt_counts_df} must contain the variables specified by \code{arm_var}, \code{id_var} and \code{saffl_var}.
+\item If specified, \code{denominator} must contain the variables specified by \code{arm_var}, \code{id_var} and \code{saffl_var}.
 \item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
 flag variables are treated as \code{"N"}.
 }

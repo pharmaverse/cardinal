@@ -3,13 +3,12 @@
 #' @details
 #' * `df` must contain the variables specified by `arm_var`, `saffl_var`, `id_var`, `trtsdtm_var`,
 #'   and `trtedtm_var`.
-#' * If specified, `alt_counts_df` must contain the variables specified by `arm_var`, `id_var` and `saffl_var`.
+#' * If specified, `denominator` must contain the variables specified by `arm_var`, `id_var` and `saffl_var`.
 #' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
 #'   flag variables are treated as `"N"`.
 #'
 #' @inheritParams tbl_make_table_05
 #' @inheritParams argument_convention
-#' @param ... arguments passed to table engine-specific functions. See [`tbl_make_table_05`] for details.
 #'
 #' @return A `gtsummary` table and, if `return_ard = TRUE`, an ARD.
 #'   If `return_ard = TRUE`, they will be returned as a list with named elements `table` and `ard`.
@@ -24,7 +23,7 @@
 #'
 #' @export
 make_table_05 <- function(df,
-                          alt_counts_df = NULL,
+                          denominator = NULL,
                           return_ard = TRUE,
                           arm_var = "ARM",
                           id_var = "USUBJID",
@@ -36,13 +35,9 @@ make_table_05 <- function(df,
   assert_choice(u_trtdur, c("days", "weeks", "months", "years"))
   assert_flag_variables(df, saffl_var)
 
-  df <- preproc_df_table_05(df, saffl_var, trtsdtm_var, trtedtm_var, u_trtdur)
-  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, id_var, arm_var, saffl_var)
-
-
   ard <- ard_table_05(
     df = df,
-    alt_counts_df = alt_counts_df,
+    denominator = denominator,
     arm_var = arm_var,
     saffl_var = saffl_var,
     trtsdtm_var = trtsdtm_var,
@@ -50,7 +45,15 @@ make_table_05 <- function(df,
     u_trtdur = u_trtdur
   )
 
-  tbl <- make_table_05_gtsummary(df, ard, alt_counts_df)
+  tbl <- make_table_05_gtsummary(
+    df,
+    ard,
+    arm_var,
+    saffl_var,
+    trtsdtm_var,
+    trtedtm_var,
+    u_trtdur
+  )
 
   if (return_ard) {
     return(list(table = tbl, ard = ard))
@@ -107,13 +110,19 @@ preproc_df_table_05 <- function(df,
 #' @keywords internal
 #' @name ard_make_table_05
 ard_table_05 <- function(df,
-                         alt_counts_df = NULL,
+                         denominator = NULL,
                          arm_var = "ARM",
                          saffl_var = "SAFFL",
                          trtsdtm_var = "TRTSDTM",
                          trtedtm_var = "TRTEDTM",
                          u_trtdur = "days") {
-  if (is.null(alt_counts_df)) alt_counts_df <- df
+  df <- preproc_df_table_05(df, saffl_var, trtsdtm_var, trtedtm_var, u_trtdur)
+
+  if (is.null(denominator)) {
+    denominator <- df
+  } else {
+    denominator <- alt_counts_df_preproc(denominator, id_var, arm_var, saffl_var)
+  }
 
   stats_trtdur <- df |>
     group_by(!!rlang::sym(arm_var)) |>
@@ -136,7 +145,7 @@ ard_table_05 <- function(df,
       variables = c(D_ANY, D_LT1, D_GT1, D_GT3, D_GT6, D_GT12),
       value = list(D_ANY = TRUE, D_LT1 = TRUE, D_GT1 = TRUE, D_GT3 = TRUE, D_GT6 = TRUE, D_GT12 = TRUE),
       statistic = everything() ~ c("n", "p"),
-      denominator = alt_counts_df
+      denominator = denominator
     )
 
   ard <- bind_ard(stats_trtdur, stats_pt_cts)
@@ -163,13 +172,6 @@ ard_table_05 <- function(df,
 #'
 #' @examples
 #' adsl <- random.cdisc.data::cadsl
-#' df <- cardinal:::preproc_df_table_05(
-#'   adsl,
-#'   saffl_var = "SAFFL",
-#'   trtsdtm_var = "TRTSDTM",
-#'   trtedtm_var = "TRTEDTM",
-#'   u_trtdur = "days"
-#' )
 #'
 #' # gtsummary table --------------
 #' ard <- cardinal:::ard_table_05(df = df)
@@ -180,13 +182,17 @@ ard_table_05 <- function(df,
 #' tbl_rtables <- cardinal:::make_table_05_rtables(df = df)
 #' tbl_rtables
 #'
-#' @keywords internal
+#' @export
 #' @name tbl_make_table_05
 make_table_05_gtsummary <- function(df,
                                     ard,
                                     arm_var = "ARM",
-                                    u_trtdur = "days",
-                                    lbl_trtdur = paste("Duration of Treatment,", u_trtdur)) {
+                                    saffl_var = "SAFFL",
+                                    trtsdtm_var = "TRTSDTM",
+                                    trtedtm_var = "TRTEDTM",
+                                    u_trtdur = "days") {
+  df <- preproc_df_table_05(df, saffl_var, trtsdtm_var, trtedtm_var, u_trtdur)
+
   stat_fun <- function(data, ...) {
     dplyr::tibble(
       mean = mean(data$TRTDUR),
@@ -204,9 +210,9 @@ make_table_05_gtsummary <- function(df,
   tbl_cts <- tbl_custom_summary(
     df,
     by = arm_var,
-    label = list(TRTDUR = lbl_trtdur),
+    label = list(TRTDUR = paste("Duration of Treatment,", u_trtdur)),
     stat_fns = everything() ~ stat_fun,
-    statistic = ~ c("{mean} ({sd})", "{median} ({min} - {max})", "{q25} - {q75}", "{tot_exp} ({tot_dur})"),
+    statistic = ~ c("{mean} ({sd})", "{median} ({min}, {max})", "{q25} - {q75}", "{tot_exp} ({tot_dur})"),
     digits = ~ 2,
     type = list(TRTDUR = "continuous2"),
     include = TRTDUR,
@@ -236,7 +242,7 @@ make_table_05_gtsummary <- function(df,
     )
 }
 
-#' @keywords internal
+#' @export
 #' @rdname tbl_make_table_05
 make_table_05_rtables <- function(df,
                                   alt_counts_df = NULL,
@@ -252,6 +258,11 @@ make_table_05_rtables <- function(df,
                                   risk_diff = NULL,
                                   prune_0 = FALSE,
                                   annotations = NULL) {
+  df <- preproc_df_table_05(df, saffl_var, trtsdtm_var, trtedtm_var, u_trtdur)
+  if (!is.null(alt_counts_df)) {
+    alt_counts_df <- alt_counts_df_preproc(alt_counts_df, id_var, arm_var, saffl_var)
+  }
+
   lyt <- basic_table_annot(show_colcounts, annotations) %>%
     split_cols_by_arm(arm_var, lbl_overall, risk_diff) %>%
     analyze(

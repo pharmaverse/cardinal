@@ -10,8 +10,10 @@ make_table_05_gtsummary(
   df,
   ard,
   arm_var = "ARM",
-  u_trtdur = "days",
-  lbl_trtdur = paste("Duration of Treatment,", u_trtdur)
+  saffl_var = "SAFFL",
+  trtsdtm_var = "TRTSDTM",
+  trtedtm_var = "TRTEDTM",
+  u_trtdur = "days"
 )
 
 make_table_05_rtables(
@@ -36,10 +38,14 @@ make_table_05_rtables(
 
 \item{arm_var}{(\code{character})\cr Name of the treatment arm variable used to split table into columns.}
 
+\item{saffl_var}{(\code{character})\cr flag variable used to indicate inclusion in safety population.}
+
+\item{trtsdtm_var}{(\code{character})\cr treatment start datetime variable.}
+
+\item{trtedtm_var}{(\code{character})\cr treatment end datetime variable.}
+
 \item{u_trtdur}{(\code{character})\cr unit for duration of treatment. Options are \code{"days"}, \code{"weeks"}, \code{"months"},
 and \code{"years"}.}
-
-\item{lbl_trtdur}{(\code{character})\cr label for treatment duration variable.}
 
 \item{alt_counts_df}{(\code{character})\cr alternative dataset (typically ADSL) used only to calculate column counts.}
 
@@ -47,11 +53,7 @@ and \code{"years"}.}
 
 \item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
 
-\item{saffl_var}{(\code{character})\cr flag variable used to indicate inclusion in safety population.}
-
-\item{trtsdtm_var}{(\code{character})\cr treatment start datetime variable.}
-
-\item{trtedtm_var}{(\code{character})\cr treatment end datetime variable.}
+\item{lbl_trtdur}{(\code{character})\cr label for treatment duration variable.}
 
 \item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
 the given value as the column label.}
@@ -94,13 +96,6 @@ Engine-Specific Functions: Table 5
 }
 \examples{
 adsl <- random.cdisc.data::cadsl
-df <- cardinal:::preproc_df_table_05(
-  adsl,
-  saffl_var = "SAFFL",
-  trtsdtm_var = "TRTSDTM",
-  trtedtm_var = "TRTEDTM",
-  u_trtdur = "days"
-)
 
 # gtsummary table --------------
 ard <- cardinal:::ard_table_05(df = df)
@@ -115,4 +110,3 @@ tbl_rtables
 \seealso{
 \code{\link[=make_table_05]{make_table_05()}}
 }
-\keyword{internal}

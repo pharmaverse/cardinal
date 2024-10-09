@@ -7,7 +7,7 @@
 \usage{
 ard_table_05(
   df,
-  alt_counts_df = NULL,
+  denominator = NULL,
   arm_var = "ARM",
   saffl_var = "SAFFL",
   trtsdtm_var = "TRTSDTM",
