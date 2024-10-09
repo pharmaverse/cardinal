@@ -2,9 +2,28 @@
 % Please edit documentation in R/fda-table_05.R
 \name{tbl_make_table_05}
 \alias{tbl_make_table_05}
+\alias{make_table_05_gtsummary}
 \alias{make_table_05_rtables}
 \title{Engine-Specific Functions: Table 5}
 \usage{
+make_table_05_gtsummary(
+  df,
+  ard,
+  alt_counts_df = NULL,
+  show_colcounts = TRUE,
+  arm_var = "ARM",
+  id_var = "USUBJID",
+  saffl_var = "SAFFL",
+  trtsdtm_var = "TRTSDTM",
+  trtedtm_var = "TRTEDTM",
+  u_trtdur = "days",
+  lbl_trtdur = paste("Duration of Treatment,", u_trtdur),
+  lbl_overall = NULL,
+  risk_diff = NULL,
+  prune_0 = FALSE,
+  annotations = NULL
+)
+
 make_table_05_rtables(
   df,
   alt_counts_df = NULL,
@@ -68,6 +87,7 @@ use the annotation type as name and the desired string as value.}
 }
 \value{
 \itemize{
+\item \code{make_table_05_gtsummary()} returns a \code{gtsummary} object.
 \item \code{make_table_05_rtables()} returns an \code{rtable} object.
 }
 }
@@ -92,8 +112,13 @@ df <- cardinal:::preproc_df_table_05(
   u_trtdur = "days"
 )
 
-tbl <- cardinal:::make_table_05_rtables(df = df)
-tbl
+# gtsummary table --------------
+tbl_gtsummary <- cardinal:::make_table_05_gtsummary(df = df)
+tbl_gtsummary
+
+# rtables table ----------------
+tbl_rtables <- cardinal:::make_table_05_rtables(df = df)
+tbl_rtables
 
 }
 \seealso{

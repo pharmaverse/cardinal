@@ -9,13 +9,12 @@
 #'
 #' @inheritParams tbl_make_table_05
 #' @inheritParams argument_convention
-#' @param ... arguments passed to table engine-specific functions. See [tbl_make_table_05] for details.
+#' @param ... arguments passed to table engine-specific functions. See [`tbl_make_table_05`] for details.
 #'
-#' @return A table, the class of which is determined by `table_engine` (if `table_engine` not `NULL`) and/or an ARD
-#'   (if `return_ard = TRUE`). If both are selected, they will be returned as a list with named elements `table` and
-#'   `ard`.
+#' @return A `gtsummary` table and, if `return_ard = TRUE`, an ARD.
+#'   If `return_ard = TRUE`, they will be returned as a list with named elements `table` and `ard`.
 #'
-#' @seealso [tbl_make_table_05]
+#' @seealso [`tbl_make_table_05`]
 #'
 #' @examples
 #' adsl <- random.cdisc.data::cadsl
@@ -26,7 +25,6 @@
 #' @export
 make_table_05 <- function(df,
                           alt_counts_df = NULL,
-                          table_engine = "rtables",
                           return_ard = TRUE,
                           arm_var = "ARM",
                           id_var = "USUBJID",
@@ -39,59 +37,27 @@ make_table_05 <- function(df,
   assert_choice(u_trtdur, c("days", "weeks", "months", "years"))
   assert_flag_variables(df, saffl_var)
 
-  # warnings
-  if (is.null(table_engine) && !return_ard) {
-    warning(
-      "No object returned. Set a value for `table_engine` to return ",
-      "a table or `return_ard = TRUE` to return an ARD."
-    )
-    return(NULL)
-  }
-  if (!is.null(table_engine)) {
-    if (!table_engine %in% formals()$table_engine) {
-      warning("There is currently no `", table_engine, "` function available for FDA table 5.")
-    } else {
-      table_engine <- match.arg(table_engine)
-    }
-  }
-
   df <- preproc_df_table_05(df, saffl_var, trtsdtm_var, trtedtm_var, u_trtdur)
   alt_counts_df <- alt_counts_df_preproc(alt_counts_df, id_var, arm_var, saffl_var)
 
-  if (return_ard) {
-    ard <- ard_table_05(
-      df = df,
-      alt_counts_df = alt_counts_df,
-      arm_var = arm_var,
-      saffl_var = saffl_var,
-      trtsdtm_var = trtsdtm_var,
-      trtedtm_var = trtedtm_var,
-      u_trtdur = u_trtdur
-    )
-    if (is.null(table_engine)) {
-      return(ard) # nocov
-    }
-  }
-  if (!is.null(table_engine)) {
-    tbl <- switch(table_engine,
-      "rtables" = make_table_05_rtables(
-        df = df,
-        alt_counts_df = alt_counts_df,
-        arm_var = arm_var,
-        saffl_var = saffl_var,
-        trtsdtm_var = trtsdtm_var,
-        trtedtm_var = trtedtm_var,
-        u_trtdur = u_trtdur,
-        ...
-      ),
-      NULL
-    )
-    if (!return_ard) {
-      return(tbl) # nocov
-    }
-  }
 
-  list(table = tbl, ard = ard)
+  ard <- ard_table_05(
+    df = df,
+    alt_counts_df = alt_counts_df,
+    arm_var = arm_var,
+    saffl_var = saffl_var,
+    trtsdtm_var = trtsdtm_var,
+    trtedtm_var = trtedtm_var,
+    u_trtdur = u_trtdur
+  )
+
+  tbl <- make_table_05_gtsummary(df, ard, alt_counts_df)
+
+  if (return_ard) {
+    return(list(table = tbl, ard = ard))
+  } else {
+    return(tbl)
+  }
 }
 
 #' Pre-Process Data for Table 5 Creation
@@ -191,6 +157,7 @@ ard_table_05 <- function(df,
 #' * Records with missing treatment start and/or end datetime are excluded from all calculations.
 #'
 #' @return
+#' * `make_table_05_gtsummary()` returns a `gtsummary` object.
 #' * `make_table_05_rtables()` returns an `rtable` object.
 #'
 #' @seealso [make_table_05()]
@@ -205,11 +172,72 @@ ard_table_05 <- function(df,
 #'   u_trtdur = "days"
 #' )
 #'
-#' tbl <- cardinal:::make_table_05_rtables(df = df)
-#' tbl
+#' # gtsummary table --------------
+#' tbl_gtsummary <- cardinal:::make_table_05_gtsummary(df = df)
+#' tbl_gtsummary
+#'
+#' # rtables table ----------------
+#' tbl_rtables <- cardinal:::make_table_05_rtables(df = df)
+#' tbl_rtables
 #'
 #' @keywords internal
 #' @name tbl_make_table_05
+make_table_05_gtsummary <- function(df,
+                                    ard,
+                                    alt_counts_df = NULL,
+                                    show_colcounts = TRUE,
+                                    arm_var = "ARM",
+                                    id_var = "USUBJID",
+                                    saffl_var = "SAFFL",
+                                    trtsdtm_var = "TRTSDTM",
+                                    trtedtm_var = "TRTEDTM",
+                                    u_trtdur = "days",
+                                    lbl_trtdur = paste("Duration of Treatment,", u_trtdur),
+                                    lbl_overall = NULL,
+                                    risk_diff = NULL,
+                                    prune_0 = FALSE,
+                                    annotations = NULL) {
+  stat_fun <- function(data, ...) {
+    dplyr::tibble(
+      mean = mean(data$TRTDUR),
+      sd = sd(data$TRTDUR),
+      median = median(data$TRTDUR),
+      min = min(data$TRTDUR),
+      max = max(data$TRTDUR),
+      q25 = quantile(data$TRTDUR, 0.25),
+      q75 = quantile(data$TRTDUR, 0.75),
+      tot_exp = sum(data$TRTDUR),
+      tot_dur = as.numeric(lubridate::duration(sum(data$TRTDUR), u_trtdur), "years")
+    )
+  }
+
+  tbl_cts <- tbl_custom_summary(
+    df,
+    by = arm_var,
+    stat_fns = everything() ~ stat_fun,
+    statistic = ~ c("{mean} ({sd})", "{median} ({min} - {max})", "{q25} - {q75}", "{tot_exp} ({tot_dur})"),
+    type = list(TRTDUR = "continuous2"),
+    include = TRTDUR,
+    missing = "no"
+  )
+
+  tbl_cat <- tbl_ard_summary(ard, by = arm_var, include = -TRTDUR)
+  tbl_cat$table_body <- dplyr::bind_rows(
+    data.frame(row_type = "label", label = "Patients Treated, by duration"),
+    tbl_cat$table_body
+  )
+  tbl_cat <- tbl_cat |>
+    modify_column_indent(
+      columns = label,
+      rows = !is.na(variable),
+      indent = 4L
+    )
+
+  tbl_stack(list(tbl_cts, tbl_cat), quiet = TRUE)
+}
+
+#' @keywords internal
+#' @rdname tbl_make_table_05
 make_table_05_rtables <- function(df,
                                   alt_counts_df = NULL,
                                   show_colcounts = TRUE,
