@@ -176,12 +176,12 @@ ard_table_05 <- function(df,
 #' adsl <- random.cdisc.data::cadsl
 #'
 #' # gtsummary table --------------
-#' ard <- cardinal:::ard_table_05(df = df)
-#' tbl_gtsummary <- cardinal:::make_table_05_gtsummary(df = df, ard = ard)
+#' ard <- cardinal:::ard_table_05(df = adsl)
+#' tbl_gtsummary <- cardinal:::make_table_05_gtsummary(df = adsl, ard = ard)
 #' tbl_gtsummary
 #'
 #' # rtables table ----------------
-#' tbl_rtables <- cardinal:::make_table_05_rtables(df = df)
+#' tbl_rtables <- cardinal:::make_table_05_rtables(df = adsl)
 #' tbl_rtables
 #'
 #' @export
@@ -229,7 +229,7 @@ make_table_05_gtsummary <- function(df,
   )
   tbl_cat <- tbl_cat |>
     modify_column_indent(
-      columns = label,
+      columns = dplyr::all_of("label"),
       rows = !is.na(variable),
       indent = 4L
     )
@@ -239,7 +239,7 @@ make_table_05_gtsummary <- function(df,
 
   tbl_stack(list(tbl_cts, tbl_cat), quiet = TRUE) |>
     modify_table_styling(
-      columns = label,
+      columns = dplyr::all_of("label"),
       label = "**Parameter**"
     )
 }

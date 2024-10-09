@@ -36,6 +36,8 @@ make_table_05_rtables(
 \arguments{
 \item{df}{(\code{data.frame})\cr dataset required to build table.}
 
+\item{ard}{(\code{cards::card})\cr an ARD.}
+
 \item{arm_var}{(\code{character})\cr Name of the treatment arm variable used to split table into columns.}
 
 \item{saffl_var}{(\code{character})\cr flag variable used to indicate inclusion in safety population.}
@@ -98,12 +100,12 @@ The table engine used by each engine-specific function is identified by its suff
 adsl <- random.cdisc.data::cadsl
 
 # gtsummary table --------------
-ard <- cardinal:::ard_table_05(df = df)
-tbl_gtsummary <- cardinal:::make_table_05_gtsummary(df = df, ard = ard)
+ard <- cardinal:::ard_table_05(df = adsl)
+tbl_gtsummary <- cardinal:::make_table_05_gtsummary(df = adsl, ard = ard)
 tbl_gtsummary
 
 # rtables table ----------------
-tbl_rtables <- cardinal:::make_table_05_rtables(df = df)
+tbl_rtables <- cardinal:::make_table_05_rtables(df = adsl)
 tbl_rtables
 
 }

@@ -41,6 +41,10 @@ that statistic. See \code{\link[formatters:list_formats]{formatters::list_valid_
 annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
 use the annotation type as name and the desired string as value.}
 
+\item{ard}{(\code{cards::card})\cr an ARD.}
+
+\item{denominator}{(\code{data.frame})\cr alternative dataset (typically ADSL) used only to calculate denominator counts.}
+
 \item{df}{(\code{data.frame})\cr dataset required to build table.}
 
 \item{eosdy_var}{(\code{character})\cr variable denoting last recorded (relative) study day.}
