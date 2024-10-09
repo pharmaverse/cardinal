@@ -8,41 +8,35 @@ test_that("Table 05 generation works with default values", {
 
   result <- make_table_05(adsl)
   res <- expect_silent(result)
-  expect_snapshot(res)
+  expect_snapshot(res$table |> as.data.frame())
+  expect_snapshot(res$ard)
 
-  # only table
+  # no ARD
   result2 <- make_table_05(adsl, return_ard = FALSE)
   res2 <- expect_silent(result2)
-  expect_snapshot(res2)
 
-  # only ard
-  result3 <- make_table_05(adsl, table_engine = NULL)
-  res3 <- expect_silent(result3)
-  expect_snapshot(res3[, 1:9] %>% data.frame())
-
-  # both together
-  expect_equal(
-    result,
-    list(table = res2, ard = res3)
-  )
+  # tables the same
+  expect_identical(res$table, res2)
 })
 
-test_that("Table 05 warnings work", {
-  # invalid table engine
-  expect_warning(
-    make_table_05(adsl, table_engine = "gtsummary")
+# gtsummary ----
+
+test_that("Table 05 generation works with gtsummary with custom values", {
+  ard <- cardinal:::ard_table_05(df = adsl)
+  result <- make_table_05_gtsummary(
+    adsl,
+    ard = ard,
+    u_trtdur = "years"
   )
 
-  # no output selected
-  expect_warning(
-    make_table_05(adsl, table_engine = NULL, return_ard = FALSE)
-  )
+  res <- expect_silent(result)
+  expect_snapshot(res |> as.data.frame())
 })
 
 # rtables ----
 
-test_that("Table 05 generation works with rtables engine with custom values", {
-  result <- make_table_05(
+test_that("Table 05 generation works with rtables with custom values", {
+  result <- make_table_05_rtables(
     adsl,
     u_trtdur = "years",
     lbl_overall = "Total\nPopulation",
@@ -65,24 +59,24 @@ test_that("Table 05 generation works with rtables engine with custom values", {
   expect_snapshot(res)
 })
 
-test_that("Table 05 generation works with rtables engine with NA values/pruned rows", {
+test_that("Table 05 generation works with rtables with NA values/pruned rows", {
   set.seed(1)
   adsl[lubridate::seconds(adsl$TRTEDTM - adsl$TRTSDTM) %>% as.numeric("days") > 180, c("TRTSDTM", "TRTEDTM")] <- NA
 
-  result <- make_table_05(adsl)
+  result <- make_table_05_rtables(adsl)
 
   res <- expect_silent(result)
   expect_snapshot(res)
 
-  result <- make_table_05(adsl, prune_0 = TRUE)
+  result <- make_table_05_rtables(adsl, prune_0 = TRUE)
 
   res <- expect_silent(result)
   expect_snapshot(res)
 })
 
-test_that("Table 05 generation works with rtables engine with risk difference column", {
+test_that("Table 05 generation works with rtables with risk difference column", {
   risk_diff <- list(arm_x = "B: Placebo", arm_y = "A: Drug X")
-  result <- make_table_05(adsl, risk_diff = risk_diff)
+  result <- make_table_05_rtables(adsl, risk_diff = risk_diff)
 
   res <- expect_silent(result)
   expect_snapshot(res)
