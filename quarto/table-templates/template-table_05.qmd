@@ -11,7 +11,9 @@ format: html
 
 ## gtsummary Table
 
-```{r tbl1, message=FALSE, warning=FALSE}
+<details>
+  <summary>gtsummary Table Setup</summary>
+```{r tbl2, eval=FALSE, echo=TRUE}
 # Load Libraries & Data
 library(cardinal)
 
@@ -20,12 +22,10 @@ adsl <- random.cdisc.data::cadsl
 # Output Table
 make_table_05(df = adsl, return_ard = FALSE)
 ```
-
-<details>
-  <summary>gtsummary Table Setup</summary>
-```{r tbl1, eval=FALSE, echo=TRUE}
-```
 </details>
+
+```{r tbl2, message=FALSE, warning=FALSE, eval=TRUE}
+```
 
 <details>
   <summary>Function Details</summary>
@@ -54,9 +54,32 @@ Required variables:
 Source code for this function is available [here](https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_05.R).
 </details>
 
+## ARD
+
+<details>
+  <summary>ARD Setup</summary>
+```{r tbl1, eval=FALSE, echo=TRUE}
+# Load Libraries & Data
+library(cardinal)
+
+adsl <- random.cdisc.data::cadsl
+
+# Create Table & ARD
+result <- make_table_05(df = adsl)
+
+# Output ARD
+result$ard
+```
+</details>
+
+```{r tbl1, message=FALSE, warning=FALSE, eval=TRUE}
+```
+
 ## rtables Table
 
-```{r tbl2, message=FALSE, warning=FALSE}
+<details>
+  <summary>rtables Table Setup</summary>
+```{r tbl3, eval=FALSE, echo=TRUE}
 # Load Libraries & Data
 library(cardinal)
 
@@ -66,12 +89,10 @@ adsl <- random.cdisc.data::cadsl
 risk_diff <- list(arm_x = "B: Placebo", arm_y = "A: Drug X") # optional
 make_table_05_rtables(df = adsl, risk_diff = risk_diff)
 ```
-
-<details>
-  <summary>rtables Table Setup</summary>
-```{r tbl2, eval=FALSE, echo=TRUE}
-```
 </details>
+
+```{r tbl3, message=FALSE, warning=FALSE, eval=TRUE}
+```
 
 <details>
   <summary>Function Details</summary>
@@ -123,6 +144,6 @@ Required variables:
 +-----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------+
 
 Source code for this function is available [here](https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_05_rtables.R).
-</details> 
+</details>
 
 :::
