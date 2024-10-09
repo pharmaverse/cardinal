@@ -84,7 +84,7 @@ use the annotation type as name and the desired string as value.}
 }
 }
 \description{
-Engine-Specific Functions: Table 5
+The table engine used by each engine-specific function is identified by its suffix.
 }
 \details{
 \itemize{

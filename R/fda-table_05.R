@@ -155,6 +155,8 @@ ard_table_05 <- function(df,
 
 #' Engine-Specific Functions: Table 5
 #'
+#' The table engine used by each engine-specific function is identified by its suffix.
+#'
 #' @inheritParams argument_convention
 #' @param lbl_trtdur (`character`)\cr label for treatment duration variable.
 #'
@@ -209,7 +211,7 @@ make_table_05_gtsummary <- function(df,
 
   tbl_cts <- tbl_custom_summary(
     df,
-    by = arm_var,
+    by = all_of(arm_var),
     label = list(TRTDUR = paste("Duration of Treatment,", u_trtdur)),
     stat_fns = everything() ~ stat_fun,
     statistic = ~ c("{mean} ({sd})", "{median} ({min}, {max})", "{q25} - {q75}", "{tot_exp} ({tot_dur})"),
@@ -220,7 +222,7 @@ make_table_05_gtsummary <- function(df,
   )
   tbl_cts$table_body$label[4:5] <- c("Interquartile range", "Total exposure (person years)")
 
-  tbl_cat <- tbl_ard_summary(ard, by = arm_var, include = -TRTDUR)
+  tbl_cat <- tbl_ard_summary(ard, by = all_of(arm_var), include = -TRTDUR)
   tbl_cat$table_body <- dplyr::bind_rows(
     data.frame(row_type = "label", label = "Patients Treated, by duration"),
     tbl_cat$table_body
