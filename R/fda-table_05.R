@@ -215,7 +215,7 @@ make_table_05_gtsummary <- function(df,
     label = list(TRTDUR = paste("Duration of Treatment,", u_trtdur)),
     stat_fns = everything() ~ stat_fun,
     statistic = ~ c("{mean} ({sd})", "{median} ({min}, {max})", "{q25} - {q75}", "{tot_exp} ({tot_dur})"),
-    digits = ~ 2,
+    digits = ~2,
     type = list(TRTDUR = "continuous2"),
     include = TRTDUR,
     missing = "no"
