@@ -84,9 +84,14 @@ The table engine used by each engine-specific function is identified by its suff
 }
 \examples{
 adsl <- random.cdisc.data::cadsl
+advs <- random.cdisc.data::cadvs
 
 # gtsummary table --------------
-ard <- cardinal:::ard_table_32(df = adsl)
+ard <- cardinal:::ard_table_32(
+  df = advs,
+  alt_counts_df = adsl,
+  subset = (PARAMCD == "DIABP" & AVISITN >= 1)
+)
 tbl_gtsummary <- cardinal::make_table_32_gtsummary(
   df = advs,
   alt_counts_df = adsl,
