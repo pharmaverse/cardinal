@@ -38,6 +38,8 @@
 #' @param annotations (named `list` of `character`)\cr list of annotations to add to the table. Valid
 #'   annotation types are `title`, `subtitles`, `main_footer`, and `prov_footer`. Each name-value pair should
 #'   use the annotation type as name and the desired string as value.
+#' @param ard (`cards::card`)\cr an ARD.
+#' @param denominator (`data.frame`)\cr alternative dataset (typically ADSL) used only to calculate denominator counts.
 #' @param df (`data.frame`)\cr dataset required to build table.
 #' @param eosdy_var (`character`)\cr variable denoting last recorded (relative) study day.
 #' @param fmqsc_var (`character`)\cr FMQ scope variable to use in table.

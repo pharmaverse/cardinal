@@ -13,6 +13,9 @@ preproc_df_table_32(
   subset = "PARAMCD == 'DIABP' & AVISITN >= 1"
 )
 }
+\arguments{
+\item{subset}{(\code{string})\cr selection of both PARAMCD and definition of baseline.}
+}
 \description{
 Pre-Process Data for Table 32 Creation
 }

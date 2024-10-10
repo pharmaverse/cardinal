@@ -57,6 +57,8 @@ make_table_32 <- function(df,
 
 #' Pre-Process Data for Table 32 Creation
 #'
+#' @param subset (`string`)\cr selection of both PARAMCD and definition of baseline.
+#'
 #' @keywords internal
 preproc_df_table_32 <- function(df,
                                 denominator = NULL,
