@@ -124,7 +124,7 @@ ard_table_12 <- function(df,
 
   ard <- ard_hierarchical(
     data = df,
-    variables = c(AEBODSYS, pref_var),
+    variables = all_of(c("AEBODSYS", pref_var)),
     by = all_of(arm_var),
     denominator = denominator,
     id = all_of(id_var)
@@ -187,9 +187,9 @@ make_table_12_gtsummary <- function(df,
 
   tbl <- tbl_hierarchical(
     df,
-    variables = c(AEBODSYS, pref_var),
-    by = arm_var,
-    id = id_var,
+    variables = all_of(c("AEBODSYS", pref_var)),
+    by = all_of(arm_var),
+    id = all_of(id_var),
     denominator = denominator,
     overall_row = TRUE,
     label = list(overall = "Patients with at least one AE leading to discontinuation")

@@ -12,7 +12,7 @@ adae$DCSREAS[is.na(adae$DCSREAS)] <- "ADVERSE EVENT"
 adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
 
 test_that("Table 11 generation works with default values", {
-  withr::local_options(list(width = 120))
+  withr::local_options(list(width = 150))
 
   expect_warning(result <- make_table_11(adae, adsl))
   res <- expect_silent(result)
@@ -30,6 +30,8 @@ test_that("Table 11 generation works with default values", {
 # gtsummary ----
 
 test_that("Table 11 generation works with gtsummary with custom values", {
+  withr::local_options(list(width = 150))
+
   result <- make_table_11_gtsummary(
     df = adae,
     denominator = adsl
