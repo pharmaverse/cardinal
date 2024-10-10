@@ -41,6 +41,10 @@ that statistic. See \code{\link[formatters:list_formats]{formatters::list_valid_
 annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
 use the annotation type as name and the desired string as value.}
 
+\item{ard}{(\code{cards::card})\cr an ARD.}
+
+\item{denominator}{(\code{data.frame})\cr alternative dataset (typically ADSL) used only to calculate denominator counts.}
+
 \item{df}{(\code{data.frame})\cr dataset required to build table.}
 
 \item{eosdy_var}{(\code{character})\cr variable denoting last recorded (relative) study day.}
@@ -69,6 +73,8 @@ in the table. Labels should be ordered according to the order of variables in \c
 \item{na_level}{(\code{character})\cr string to represent missing values.}
 
 \item{na_rm}{(\code{flag})\cr whether \code{NA} levels should be removed from the table.}
+
+\item{return_ard}{(\code{flag})\cr whether an ARD should be returned. Defaults to \code{TRUE}.}
 
 \item{risk_diff}{(named \code{list})\cr list of settings to apply to add one or more risk difference columns to the table.
 Defaults to \code{NULL} (no risk difference column added). See \code{\link[tern:add_riskdiff]{tern::add_riskdiff()}} for more details. List should
