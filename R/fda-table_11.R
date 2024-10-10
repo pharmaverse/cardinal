@@ -168,7 +168,6 @@ ard_table_11 <- function(df,
 #' The table engine used by each engine-specific function is identified by its suffix.
 #'
 #' @inheritParams argument_convention
-#' @param lbl_trtdur (`character`)\cr label for treatment duration variable.
 #'
 #' @details
 #' * `df` must contain the variables `AEBODSYS`, `DCSREAS`, and the variables specified by

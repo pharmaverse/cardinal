@@ -70,7 +70,7 @@ preproc_df_table_12 <- function(df,
                                 pref_var = "AEDECOD") {
   assert_subset(c(
     "AEBODSYS", "DCSREAS", arm_var, id_var, saffl_var, pref_var
-  ), names(adae))
+  ), names(df))
   assert_flag_variables(df, saffl_var)
 
   id_dcsae <- df %>%
