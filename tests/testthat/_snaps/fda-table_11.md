@@ -1,38 +1,169 @@
 # Table 11 generation works with default values
 
     Code
-      res
+      as.data.frame(res$table)
     Output
-      Body System or Organ Class                                 A: Drug X    B: Placebo   C: Combination
-        FMQ (Narrow)                                              (N=134)      (N=134)        (N=132)    
-      ———————————————————————————————————————————————————————————————————————————————————————————————————
-      Patients with at least one AE leading to discontinuation   83 (61.9%)   90 (67.2%)     88 (66.7%)  
-      cl A.1                                                     53 (39.6%)   55 (41.0%)     69 (52.3%)  
-        FMQ1                                                     22 (16.4%)   21 (15.7%)     37 (28.0%)  
-        FMQ2                                                     24 (17.9%)   31 (23.1%)     33 (25.0%)  
-        FMQ3                                                     28 (20.9%)   25 (18.7%)     31 (23.5%)  
-      cl B.1                                                     35 (26.1%)   41 (30.6%)     36 (27.3%)  
-        FMQ1                                                     12 (9.0%)    17 (12.7%)     19 (14.4%)  
-        FMQ2                                                      9 (6.7%)    21 (15.7%)     20 (15.2%)  
-        FMQ3                                                     19 (14.2%)   11 (8.2%)       7 (5.3%)   
-      cl B.2                                                     36 (26.9%)   33 (24.6%)     35 (26.5%)  
-        FMQ1                                                     16 (11.9%)   15 (11.2%)     12 (9.1%)   
-        FMQ2                                                     17 (12.7%)   12 (9.0%)      16 (12.1%)  
-        FMQ3                                                     11 (8.2%)    13 (9.7%)      15 (11.4%)  
-      cl C.2                                                     26 (19.4%)   39 (29.1%)     43 (32.6%)  
-        FMQ1                                                     11 (8.2%)    12 (9.0%)      19 (14.4%)  
-        FMQ2                                                     11 (8.2%)    15 (11.2%)     14 (10.6%)  
-        FMQ3                                                      8 (6.0%)    14 (10.4%)     14 (10.6%)  
-      cl D.1                                                     51 (38.1%)   51 (38.1%)     60 (45.5%)  
-        FMQ1                                                     22 (16.4%)   22 (16.4%)     32 (24.2%)  
-        FMQ2                                                     24 (17.9%)   25 (18.7%)     33 (25.0%)  
-        FMQ3                                                     19 (14.2%)   24 (17.9%)     26 (19.7%)  
-      cl D.2                                                     35 (26.1%)   46 (34.3%)     44 (33.3%)  
-        FMQ1                                                     11 (8.2%)    23 (17.2%)     17 (12.9%)  
-        FMQ2                                                     18 (13.4%)   16 (11.9%)     18 (13.6%)  
-        FMQ3                                                     11 (8.2%)    16 (11.9%)     15 (11.4%)  
+           **Body System or Organ Class**  \n    **FMQ (Narrow)** **A: Drug X**  \nN = 134 **B: Placebo**  \nN = 134
+      1  Patients with at least one AE leading to discontinuation                83 (61.9)                 90 (67.2)
+      2                                                    cl A.1                53 (39.6)                 55 (41.0)
+      3                                                      FMQ1                22 (16.4)                 21 (15.7)
+      4                                                      FMQ2                24 (17.9)                 31 (23.1)
+      5                                                      FMQ3                28 (20.9)                 25 (18.7)
+      6                                                    cl B.1                35 (26.1)                 41 (30.6)
+      7                                                      FMQ1                 12 (9.0)                 17 (12.7)
+      8                                                      FMQ2                  9 (6.7)                 21 (15.7)
+      9                                                      FMQ3                19 (14.2)                  11 (8.2)
+      10                                                   cl B.2                36 (26.9)                 33 (24.6)
+      11                                                     FMQ1                16 (11.9)                 15 (11.2)
+      12                                                     FMQ2                17 (12.7)                  12 (9.0)
+      13                                                     FMQ3                 11 (8.2)                  13 (9.7)
+      14                                                   cl C.2                26 (19.4)                 39 (29.1)
+      15                                                     FMQ1                 11 (8.2)                  12 (9.0)
+      16                                                     FMQ2                 11 (8.2)                 15 (11.2)
+      17                                                     FMQ3                  8 (6.0)                 14 (10.4)
+      18                                                   cl D.1                51 (38.1)                 51 (38.1)
+      19                                                     FMQ1                22 (16.4)                 22 (16.4)
+      20                                                     FMQ2                24 (17.9)                 25 (18.7)
+      21                                                     FMQ3                19 (14.2)                 24 (17.9)
+      22                                                   cl D.2                35 (26.1)                 46 (34.3)
+      23                                                     FMQ1                 11 (8.2)                 23 (17.2)
+      24                                                     FMQ2                18 (13.4)                 16 (11.9)
+      25                                                     FMQ3                 11 (8.2)                 16 (11.9)
+         **C: Combination**  \nN = 132
+      1                      88 (66.7)
+      2                      69 (52.3)
+      3                      37 (28.0)
+      4                      33 (25.0)
+      5                      31 (23.5)
+      6                      36 (27.3)
+      7                      19 (14.4)
+      8                      20 (15.2)
+      9                        7 (5.3)
+      10                     35 (26.5)
+      11                      12 (9.1)
+      12                     16 (12.1)
+      13                     15 (11.4)
+      14                     43 (32.6)
+      15                     19 (14.4)
+      16                     14 (10.6)
+      17                     14 (10.6)
+      18                     60 (45.5)
+      19                     32 (24.2)
+      20                     33 (25.0)
+      21                     26 (19.7)
+      22                     44 (33.3)
+      23                     17 (12.9)
+      24                     18 (13.6)
+      25                     15 (11.4)
 
-# Table 11 generation works with custom values
+---
+
+    Code
+      res$ard
+    Message
+      {cards} data frame: 162 x 13
+    Output
+         group1 group1_level   group2 group2_level variable variable_level stat_name stat_label  stat
+      1     ARM    A: Drug X AEBODSYS       cl A.1 FMQ01NAM           FMQ1         n          n    29
+      2     ARM    A: Drug X AEBODSYS       cl A.1 FMQ01NAM           FMQ1         N          N   134
+      3     ARM    A: Drug X AEBODSYS       cl A.1 FMQ01NAM           FMQ1         p          % 0.216
+      4     ARM    B: Place… AEBODSYS       cl A.1 FMQ01NAM           FMQ1         n          n    28
+      5     ARM    B: Place… AEBODSYS       cl A.1 FMQ01NAM           FMQ1         N          N   134
+      6     ARM    B: Place… AEBODSYS       cl A.1 FMQ01NAM           FMQ1         p          % 0.209
+      7     ARM    C: Combi… AEBODSYS       cl A.1 FMQ01NAM           FMQ1         n          n    46
+      8     ARM    C: Combi… AEBODSYS       cl A.1 FMQ01NAM           FMQ1         N          N   132
+      9     ARM    C: Combi… AEBODSYS       cl A.1 FMQ01NAM           FMQ1         p          % 0.348
+      10    ARM    A: Drug X AEBODSYS       cl B.1 FMQ01NAM           FMQ1         n          n    13
+    Message
+      i 152 more rows
+      i Use `print(n = ...)` to see more rows
+      i 4 more variables: context, fmt_fn, warning, error
+
+# Table 11 generation works with gtsummary with custom values
+
+    Code
+      as.data.frame(res)
+    Output
+           **Body System or Organ Class**  \n    **FMQ (Narrow)**
+      1  Patients with at least one AE leading to discontinuation
+      2                                                    cl A.1
+      3                                                      FMQ1
+      4                                                      FMQ2
+      5                                                      FMQ3
+      6                                                    cl B.1
+      7                                                      FMQ1
+      8                                                      FMQ2
+      9                                                      FMQ3
+      10                                                   cl B.2
+      11                                                     FMQ1
+      12                                                     FMQ2
+      13                                                     FMQ3
+      14                                                   cl C.2
+      15                                                     FMQ1
+      16                                                     FMQ2
+      17                                                     FMQ3
+      18                                                   cl D.1
+      19                                                     FMQ1
+      20                                                     FMQ2
+      21                                                     FMQ3
+      22                                                   cl D.2
+      23                                                     FMQ1
+      24                                                     FMQ2
+      25                                                     FMQ3
+         **A: Drug X**  \nN = 134 **B: Placebo**  \nN = 134
+      1                 83 (61.9)                 90 (67.2)
+      2                 53 (39.6)                 55 (41.0)
+      3                 22 (16.4)                 21 (15.7)
+      4                 24 (17.9)                 31 (23.1)
+      5                 28 (20.9)                 25 (18.7)
+      6                 35 (26.1)                 41 (30.6)
+      7                  12 (9.0)                 17 (12.7)
+      8                   9 (6.7)                 21 (15.7)
+      9                 19 (14.2)                  11 (8.2)
+      10                36 (26.9)                 33 (24.6)
+      11                16 (11.9)                 15 (11.2)
+      12                17 (12.7)                  12 (9.0)
+      13                 11 (8.2)                  13 (9.7)
+      14                26 (19.4)                 39 (29.1)
+      15                 11 (8.2)                  12 (9.0)
+      16                 11 (8.2)                 15 (11.2)
+      17                  8 (6.0)                 14 (10.4)
+      18                51 (38.1)                 51 (38.1)
+      19                22 (16.4)                 22 (16.4)
+      20                24 (17.9)                 25 (18.7)
+      21                19 (14.2)                 24 (17.9)
+      22                35 (26.1)                 46 (34.3)
+      23                 11 (8.2)                 23 (17.2)
+      24                18 (13.4)                 16 (11.9)
+      25                 11 (8.2)                 16 (11.9)
+         **C: Combination**  \nN = 132
+      1                      88 (66.7)
+      2                      69 (52.3)
+      3                      37 (28.0)
+      4                      33 (25.0)
+      5                      31 (23.5)
+      6                      36 (27.3)
+      7                      19 (14.4)
+      8                      20 (15.2)
+      9                        7 (5.3)
+      10                     35 (26.5)
+      11                      12 (9.1)
+      12                     16 (12.1)
+      13                     15 (11.4)
+      14                     43 (32.6)
+      15                     19 (14.4)
+      16                     14 (10.6)
+      17                     14 (10.6)
+      18                     60 (45.5)
+      19                     32 (24.2)
+      20                     33 (25.0)
+      21                     26 (19.7)
+      22                     44 (33.3)
+      23                     17 (12.9)
+      24                     18 (13.6)
+      25                     15 (11.4)
+
+# Table 11 generation works with rtables with custom values
 
     Code
       res
@@ -65,7 +196,7 @@
       MedDRA, Medical Dictionary for Regulatory Activities; N, number of patients in treatment arm;
       n, number of patients with adverse event; SOC, System Organ Class
 
-# Table 11 generation works with risk difference column
+# Table 11 generation works with rtables with risk difference column
 
     Code
       res
