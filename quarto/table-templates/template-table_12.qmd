@@ -9,9 +9,89 @@ format: html
 
 ![](../assets/images/screenshots/table_12.png){fig-align="center"}
 
+## gtsummary Table
+
+<details>
+  <summary>gtsummary Table Setup</summary>
+```{r tbl2, eval=FALSE, echo=TRUE}
+# Load Libraries & Data
+library(cardinal)
+
+adsl <- random.cdisc.data::cadsl
+adae <- random.cdisc.data::cadae
+
+# Pre-Processing - Ensure required variable DCSREAS exist in adae
+adae$DCSREAS[is.na(adae$DCSREAS)] <- "ADVERSE EVENT"
+
+# Select Preferred Term Variable
+pref_var <- "AEDECOD"
+
+# Output Table
+make_table_12(df = adae, denominator = adsl, return_ard = FALSE, pref_var = pref_var)
+```
+</details>
+
+```{r tbl2, message=FALSE, warning=FALSE, eval=TRUE}
+```
+
+<details>
+  <summary>Function Details</summary>
+### `make_table_12()`
+
+------------------------------------------------------------------------
+
+Required variables:
+
+-   **`df`**: `USUBJID`, `AEBODSYS`, `DCSREAS`, and the variables specified by `pref_var`, `arm_var`, and `saffl_var`.
+-   **`alt_counts_df`** (if specified): `USUBJID` and the variables specified by `arm_var` and `saffl_var`.
+
+|                 |                                                                                                          |               |
+|-----------------|----------------------------------------------------------------------------------------------------------|---------------|
+| **Argument**    | **Description**                                                                                          | **Default**   |
+| `df`            | (`data.frame`) Dataset (typically ADSL) required to build table.                                         | *No default*  |
+| `return_ard`    | (`flag`) Whether an ARD should be returned.                                                              | `TRUE`        |
+| `denominator`   | (`character`) Alternative dataset used only to calculate column counts.                                  | `NULL`        |
+| `id_var`        | (`character`) Identifier variable used to count the participants within each flag.                       | `"USUBJID"`   |
+| `arm_var`       | (`character`) Arm variable used to split table into columns.                                             | `"ARM"`       |
+| `saffl_var`     | (`character`) Flag variable used to indicate inclusion in safety population.                             | `"SAFFL"`     |
+| `pref_var`      | (`character`) Name of the preferred term variable from adae to include in the table.                     | `"AEDECOD"`   |
+
+Source code for this function is available [here](https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_12.R).
+</details>
+
+## ARD
+
+<details>
+  <summary>ARD Setup</summary>
+```{r tbl1, eval=FALSE, echo=TRUE}
+# Load Libraries & Data
+library(cardinal)
+
+adsl <- random.cdisc.data::cadsl
+adae <- random.cdisc.data::cadae
+
+# Pre-Processing - Ensure required variable DCSREAS exist in adae
+adae$DCSREAS[is.na(adae$DCSREAS)] <- "ADVERSE EVENT"
+
+# Select Preferred Term Variable
+pref_var <- "AEDECOD"
+
+# Create Table & ARD
+result <- make_table_12(df = adae, denominator = adsl, pref_var = pref_var)
+
+# Output ARD
+result$ard
+```
+</details>
+
+```{r tbl1, message=FALSE, warning=FALSE, eval=TRUE}
+```
+
 ## rtables Table
 
-```{r tbl, message=FALSE, warning=FALSE}
+<details>
+  <summary>rtables Table Setup</summary>
+```{r tbl3, eval=FALSE, echo=TRUE}
 # Load Libraries & Data
 library(cardinal)
 
@@ -26,23 +106,20 @@ pref_var <- "AEDECOD"
 
 # Output Table
 risk_diff <- list(arm_x = "B: Placebo", arm_y = "A: Drug X") # optional
-make_table_12(adae = adae, alt_counts_df = adsl, pref_var = pref_var, risk_diff = risk_diff)
+make_table_12_rtables(df = adae, alt_counts_df = adsl, pref_var = pref_var, risk_diff = risk_diff)
+```
+</details>
+
+```{r tbl3, message=FALSE, warning=FALSE, eval=TRUE}
 ```
 
-## rtables Table Setup
-
-```{r tbl, eval=FALSE, echo=TRUE}
-```
-
-## Function Details
-
-### `make_table_12()`
-
-------------------------------------------------------------------------
+<details>
+  <summary>Function Details</summary>
+### `make_table_12_rtables()`
 
 Required variables:
 
--   **`adae`**: `USUBJID`, `AEBODSYS`, `DCSREAS`, and the variables specified by `pref_var`, `arm_var`, and `saffl_var`.
+-   **`df`**: `USUBJID`, `AEBODSYS`, `DCSREAS`, and the variables specified by `pref_var`, `arm_var`, and `saffl_var`.
 -   **`alt_counts_df`** (if specified): `USUBJID` and the variables specified by `arm_var` and `saffl_var`.
 
 +------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
@@ -78,4 +155,6 @@ Required variables:
 +------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
 
 Source code for this function is available [here](https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_12.R).
+</details>
+
 :::

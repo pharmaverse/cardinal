@@ -43,8 +43,6 @@ make_table_11(df = adae, denominator = adsl, return_ard = FALSE)
   <summary>Function Details</summary>
 ### `make_table_11()`
 
-------------------------------------------------------------------------
-
 Required variables:
 
 -   **`df`**: `USUBJID`, `AEBODSYS`, `AESER`, `DCSREAS`, and the variables specified by `arm_var`, `saffl_var`, `fmqsc_var`, and `fmqnam_var`.
@@ -136,8 +134,6 @@ make_table_11_rtables(df = adae, alt_counts_df = adsl, risk_diff = risk_diff)
   <summary>Function Details</summary>
 ### `make_table_11_rtables()`
 
-------------------------------------------------------------------------
-
 Required variables:
 
 -   **`df`**: `USUBJID`, `AEBODSYS`, `AESER`, `DCSREAS`, and the variables specified by `arm_var`, `saffl_var`, `fmqsc_var`, and `fmqnam_var`.
@@ -182,4 +178,6 @@ Required variables:
 +------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------+
 
 Source code for this function is available [here](https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_11.R).
+</details>
+
 :::
