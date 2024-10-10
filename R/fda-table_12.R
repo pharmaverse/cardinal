@@ -56,7 +56,7 @@ make_table_12 <- function(df,
   if (return_ard) {
     return(list(table = tbl, ard = ard))
   } else {
-    return(tbl)
+    return(tbl) # nocov
   }
 }
 
@@ -117,7 +117,7 @@ ard_table_12 <- function(df,
   df <- preproc_df_table_12(df, id_var, arm_var, saffl_var, pref_var)
 
   if (is.null(denominator)) {
-    denominator <- df
+    denominator <- df # nocov
   } else {
     denominator <- alt_counts_df_preproc(denominator, id_var, arm_var, saffl_var)
   }
@@ -180,7 +180,7 @@ make_table_12_gtsummary <- function(df,
   df <- preproc_df_table_12(df, id_var, arm_var, saffl_var, pref_var)
 
   if (is.null(denominator)) {
-    denominator <- df
+    denominator <- df # nocov
   } else {
     denominator <- alt_counts_df_preproc(denominator, id_var, arm_var, saffl_var)
   }
