@@ -95,7 +95,6 @@ ard <- cardinal:::ard_table_32(
 tbl_gtsummary <- cardinal::make_table_32_gtsummary(
   df = advs,
   alt_counts_df = adsl,
-  ard = ard,
   subset = (PARAMCD == "DIABP" & AVISITN >= 1)
 )
 tbl_gtsummary
