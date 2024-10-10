@@ -32,7 +32,7 @@ make_table_32(
 
 </details>
 
-```{r tbl1, eval=FALSE, echo=TRUE}
+```{r tbl1, message=FALSE, warning=FALSE, eval=TRUE}
 ```
 
 <details>
@@ -45,9 +45,11 @@ make_table_32(
 -   **`alt_counts_df`** (if specified): `USUBJID` and the variables specified by `arm_var` and `saffl_var`.
 
 +-----------------+--------------------------------------------------------------------------------------------------------------------+--------------+
-| Argument        | Description                                                                                                        | Default      |
-+=================+====================================================================================================================+==============+
+| # Argument      | # Description                                                                                                      | # Default    |
+|                 |                                                                                                                    |              |
 | `df`            | (`data.frame`) Dataset (typically ADVS) required to build table.                                                   | *No default* |
++-----------------+--------------------------------------------------------------------------------------------------------------------+--------------+
+|                 |                                                                                                                    |              |
 +-----------------+--------------------------------------------------------------------------------------------------------------------+--------------+
 | `alt_counts_df` | (`character`) Alternative dataset (typically ADSL) used only to calculate column counts.                           | `NULL`       |
 +-----------------+--------------------------------------------------------------------------------------------------------------------+--------------+
@@ -61,7 +63,7 @@ make_table_32(
 +-----------------+--------------------------------------------------------------------------------------------------------------------+--------------+
 | `lbl_overall`   | (`character`) If specified, an overall column will be added to the table with the given value as the column label. | `NULL`       |
 +-----------------+--------------------------------------------------------------------------------------------------------------------+--------------+
-| return_ard      | (`flag`) Whether an ARD should be returned.                                                                        | `TRUE`       |
+| `return_ard`    | (`flag`) Whether an ARD should be returned.                                                                        | `TRUE`       |
 +-----------------+--------------------------------------------------------------------------------------------------------------------+--------------+
 
 Source code for this function is available [here](https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_05.R).
@@ -70,10 +72,11 @@ Source code for this function is available [here](https://github.com/pharmaverse
 
 </details>
 
-## ARD 
+## ARD
 
 <details>
-  <summary>ARD Setup</summary>
+
+<summary>ARD Setup</summary>
 
 ```{r tbl2, eval=FALSE, echo=TRUE}
 # Load Libraries & Data
@@ -90,7 +93,10 @@ result <- make_table_32(
 )
 
 # Output ARD
-result$ard
+print(
+  result$ard,
+  n = 5000
+)
 ```
 
 </details>
@@ -98,11 +104,12 @@ result$ard
 ```{r tbl2, message=FALSE, warning=FALSE, eval=TRUE}
 ```
 
-
 ## rtables Table
 
 <details>
-  <summary>rtables Table Setup</summary>
+
+<summary>rtables Table Setup</summary>
+
 ```{r tbl3, eval=FALSE, echo=TRUE}
 # Load Libraries & Data
 library(cardinal)
@@ -116,19 +123,20 @@ make_table_32_rtables(
   df = advs,
   alt_counts_df = adsl,
   risk_diff = risk_diff,
-  subset = (PARAMCD == "DIABP" & AVISITN >= 1),
-  return_ard = FALSE
+  subset = (PARAMCD == "DIABP" & AVISITN >= 1)
 )
 ```
+
 </details>
 
 ```{r tbl3, message=FALSE, warning=FALSE, eval=TRUE}
 ```
 
 <details>
-  <summary>Function Details</summary>
-### `make_table_32_rtables()`
 
+<summary>Function Details</summary>
+
+### `make_table_32_rtables()`
 
 ------------------------------------------------------------------------
 
@@ -172,5 +180,4 @@ Required variables:
 Source code for this function is available [here](https://github.com/pharmaverse/falcon/blob/main/R/fda-table_32.R).
 
 </details>
-
 :::
