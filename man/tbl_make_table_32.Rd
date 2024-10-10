@@ -8,11 +8,11 @@
 \usage{
 make_table_32_gtsummary(
   df,
-  alt_counts_df = NULL,
+  ard,
+  denominator = NULL,
   id_var = "USUBJID",
   arm_var = "ARM",
   saffl_var = "SAFFL",
-  subset,
   lbl_overall = NULL
 )
 
@@ -23,7 +23,6 @@ make_table_32_rtables(
   id_var = "USUBJID",
   arm_var = "ARM",
   saffl_var = "SAFFL",
-  subset,
   lbl_overall = NULL,
   risk_diff = NULL,
   prune_0 = FALSE,
@@ -33,8 +32,6 @@ make_table_32_rtables(
 \arguments{
 \item{df}{(\code{data.frame})\cr dataset required to build table.}
 
-\item{alt_counts_df}{(\code{character})\cr alternative dataset (typically ADSL) used only to calculate column counts.}
-
 \item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
 
 \item{arm_var}{(\code{character})\cr Name of the treatment arm variable used to split table into columns.}
@@ -43,6 +40,8 @@ make_table_32_rtables(
 
 \item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
 the given value as the column label.}
+
+\item{alt_counts_df}{(\code{character})\cr alternative dataset (typically ADSL) used only to calculate column counts.}
 
 \item{show_colcounts}{(\code{flag})\cr Whether column counts should be printed. Boolean.}
 
@@ -87,24 +86,16 @@ adsl <- random.cdisc.data::cadsl
 advs <- random.cdisc.data::cadvs
 
 # gtsummary table --------------
-ard <- cardinal:::ard_table_32(
-  df = advs,
-  alt_counts_df = adsl,
-  subset = (PARAMCD == "DIABP" & AVISITN >= 1)
-)
+ard <- cardinal:::ard_table_32(df = advs, denominator = adsl)
 tbl_gtsummary <- cardinal::make_table_32_gtsummary(
   df = advs,
-  alt_counts_df = adsl,
-  subset = (PARAMCD == "DIABP" & AVISITN >= 1)
+  ard = ard,
+  denominator = adsl
 )
 tbl_gtsummary
 
 # rtables table ----------------
-tbl_rtables <- cardinal::make_table_32_rtables(
-  df = advs,
-  alt_counts_df = adsl,
-  subset = (PARAMCD == "DIABP" & AVISITN >= 1)
-)
+tbl_rtables <- cardinal::make_table_32_rtables(df = advs, alt_counts_df = adsl)
 tbl_rtables
 
 }

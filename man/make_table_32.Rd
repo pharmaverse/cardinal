@@ -7,19 +7,18 @@ Postbaseline, Safety Population, Pooled Analysis}
 \usage{
 make_table_32(
   df,
-  alt_counts_df = NULL,
+  denominator = NULL,
+  return_ard = TRUE,
   id_var = "USUBJID",
   arm_var = "ARM",
   saffl_var = "SAFFL",
-  subset,
-  lbl_overall = NULL,
-  return_ard = TRUE
+  lbl_overall = NULL
 )
 }
 \arguments{
 \item{df}{(\code{data.frame})\cr dataset required to build table.}
 
-\item{alt_counts_df}{(\code{character})\cr alternative dataset (typically ADSL) used only to calculate column counts.}
+\item{return_ard}{(\code{flag})\cr whether an ARD should be returned. Defaults to \code{TRUE}.}
 
 \item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
 
@@ -27,12 +26,8 @@ make_table_32(
 
 \item{saffl_var}{(\code{character})\cr flag variable used to indicate inclusion in safety population.}
 
-\item{subset}{(\verb{filter condition})\cr selection of both PARAMCD and definition of baseline}
-
 \item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
 the given value as the column label.}
-
-\item{return_ard}{(\code{flag})\cr whether an ARD should be returned. Defaults to \code{TRUE}.}
 }
 \value{
 A \code{gtsummary} table and, if \code{return_ard = TRUE}, an ARD.
@@ -53,11 +48,7 @@ Postbaseline, Safety Population, Pooled Analysis
 adsl <- random.cdisc.data::cadsl
 advs <- random.cdisc.data::cadvs
 
-tbl <- make_table_32(
-  df = advs,
-  alt_counts_df = adsl,
-  subset = (PARAMCD == "DIABP" & AVISITN >= 1)
-)
+tbl <- make_table_32(df = advs, denominator = adsl)
 tbl
 
 }

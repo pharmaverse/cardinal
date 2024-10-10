@@ -7,11 +7,10 @@
 \usage{
 ard_table_32(
   df,
-  alt_counts_df = NULL,
+  denominator = NULL,
   id_var = "USUBJID",
   arm_var = "ARM",
   saffl_var = "SAFFL",
-  subset,
   lbl_overall = NULL
 )
 }
@@ -22,11 +21,7 @@ Make ARD: Table 32
 adsl <- random.cdisc.data::cadsl
 advs <- random.cdisc.data::cadvs
 
-ard <- cardinal:::ard_table_32(
-  df = advs,
-  alt_counts_df = adsl,
-  subset = (PARAMCD == "DIABP" & AVISITN >= 1)
-)
+ard <- cardinal:::ard_table_32(df = advs, denominator = adsl)
 ard
 
 }
