@@ -227,6 +227,12 @@ make_table_11_gtsummary <- function(df,
                                     na_level = "<Missing>") {
   df <- preproc_df_table_11(df, id_var, arm_var, saffl_var, fmqsc_var, fmqnam_var, fmq_scope, na_level)
 
+  if (is.null(denominator)) {
+    denominator <- df
+  } else {
+    denominator <- alt_counts_df_preproc(denominator, id_var, arm_var, saffl_var)
+  }
+
   tbl <- tbl_hierarchical(
     df,
     variables = c(AEBODSYS, fmqnam_var),
