@@ -35,7 +35,6 @@ make_table_32 <- function(df,
                           subset,
                           lbl_overall = NULL,
                           return_ard = TRUE) {
-
   subset <- enquo(subset)
 
   ard <- ard_table_32(
@@ -81,12 +80,12 @@ make_table_32 <- function(df,
 #' @keywords internal
 #' @name ard_make_table_32
 ard_table_32 <- function(df,
-                        alt_counts_df = NULL,
-                        id_var = "USUBJID",
-                        arm_var = "ARM",
-                        saffl_var = "SAFFL",
-                        subset,
-                        lbl_overall = NULL) {
+                         alt_counts_df = NULL,
+                         id_var = "USUBJID",
+                         arm_var = "ARM",
+                         saffl_var = "SAFFL",
+                         subset,
+                         lbl_overall = NULL) {
   assert_subset(c(
     saffl_var, "PARAMCD", "AVAL", "AVALU", arm_var, id_var
   ), names(df))
@@ -333,4 +332,3 @@ make_table_32_rtables <- function(df,
 }
 
 #' @keywords Internal
-
