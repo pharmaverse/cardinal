@@ -125,9 +125,9 @@ ard_table_05 <- function(df,
   }
 
   stats_trtdur <- df |>
-    group_by(!!rlang::sym(arm_var)) |>
     ard_continuous(
       variables = "TRTDUR",
+      by = all_of(arm_var),
       statistic = everything() ~ continuous_summary_fns(
         summaries = c("mean", "sd", "median", "min", "max", "p25", "p75"),
         other_stats = list(
