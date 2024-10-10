@@ -132,4 +132,3 @@ test_that("Table 32 generation works with risk difference column", {
   res <- expect_silent(result)
   expect_snapshot(res)
 })
-
