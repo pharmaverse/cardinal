@@ -9,9 +9,101 @@ format: html
 
 ![](../assets/images/screenshots/table_32.png){fig-align="center" width="70%"}
 
+## gtsummary Table
+
+<details>
+
+<summary>gtsummary Table Setup</summary>
+
+```{r tbl1, eval=FALSE, echo=TRUE}
+# Load Libraries & Data
+library(cardinal)
+
+adsl <- random.cdisc.data::cadsl
+advs <- random.cdisc.data::cadvs
+
+# Output table
+make_table_32(
+  df = advs,
+  subset = (PARAMCD == "DIABP" & AVISITN >= 1),
+  return_ard = FALSE
+)
+```
+
+</details>
+
+```{r tbl1, eval=FALSE, echo=TRUE}
+```
+
+<details>
+
+<summary>Function Details</summary>
+
+### `make_table_32()`
+
+-   **`df`**: `USUBJID`, `AVISITN`, `PARAMCD`, `AVAL`, `AVALU`, and the variables specified by `arm_var` and `saffl_var`.
+-   **`alt_counts_df`** (if specified): `USUBJID` and the variables specified by `arm_var` and `saffl_var`.
+
++-----------------+--------------------------------------------------------------------------------------------------------------------+--------------+
+| Argument        | Description                                                                                                        | Default      |
++=================+====================================================================================================================+==============+
+| `df`            | (`data.frame`) Dataset (typically ADVS) required to build table.                                                   | *No default* |
++-----------------+--------------------------------------------------------------------------------------------------------------------+--------------+
+| `alt_counts_df` | (`character`) Alternative dataset (typically ADSL) used only to calculate column counts.                           | `NULL`       |
++-----------------+--------------------------------------------------------------------------------------------------------------------+--------------+
+| `id_vars`       | (`character`) Identifier required to count the number of events (typically calculated by USUBJID).                 | `"USUBJID"`  |
++-----------------+--------------------------------------------------------------------------------------------------------------------+--------------+
+| `arm_var`       | (`character`) Arm variable used to split table into columns.                                                       | `"ARM"`      |
++-----------------+--------------------------------------------------------------------------------------------------------------------+--------------+
+| `saffl_var`     | (`character`) Flag variable used to indicate inclusion in safety population.                                       | `"SAFFL"`    |
++-----------------+--------------------------------------------------------------------------------------------------------------------+--------------+
+| `subset`        | (`filter`) Selection of both PARAMCD and definition of baseline                                                    | *No default* |
++-----------------+--------------------------------------------------------------------------------------------------------------------+--------------+
+| `lbl_overall`   | (`character`) If specified, an overall column will be added to the table with the given value as the column label. | `NULL`       |
++-----------------+--------------------------------------------------------------------------------------------------------------------+--------------+
+| return_ard      | (`flag`) Whether an ARD should be returned.                                                                        | `TRUE`       |
++-----------------+--------------------------------------------------------------------------------------------------------------------+--------------+
+
+Source code for this function is available [here](https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_05.R).
+
+------------------------------------------------------------------------
+
+</details>
+
+## ARD 
+
+<details>
+  <summary>ARD Setup</summary>
+
+```{r tbl2, eval=FALSE, echo=TRUE}
+# Load Libraries & Data
+library(cardinal)
+
+adsl <- random.cdisc.data::cadsl
+advs <- random.cdisc.data::cadvs
+
+# Output Table & ARD
+result <- make_table_32(
+  df = advs,
+  subset = (PARAMCD == "DIABP" & AVISITN >= 1),
+  return_ard = TRUE
+)
+
+# Output ARD
+result$ard
+```
+
+</details>
+
+```{r tbl2, message=FALSE, warning=FALSE, eval=TRUE}
+```
+
+
 ## rtables Table
 
-```{r tbl, message=FALSE, warning=FALSE}
+<details>
+  <summary>rtables Table Setup</summary>
+```{r tbl3, eval=FALSE, echo=TRUE}
 # Load Libraries & Data
 library(cardinal)
 
@@ -20,8 +112,7 @@ advs <- random.cdisc.data::cadvs
 
 # Output Table
 risk_diff <- list(arm_x = "B: Placebo", arm_y = "A: Drug X") # optional
-make_table_32(
-  table_engine = "rtables",
+make_table_32_rtables(
   df = advs,
   alt_counts_df = adsl,
   risk_diff = risk_diff,
@@ -29,96 +120,17 @@ make_table_32(
   return_ard = FALSE
 )
 ```
+</details>
 
-## rtables Table Setup
-
-```{r tbl, eval=FALSE, echo=TRUE}
+```{r tbl3, message=FALSE, warning=FALSE, eval=TRUE}
 ```
 
-## gtsummary Table
+<details>
+  <summary>Function Details</summary>
+### `make_table_32_rtables()`
 
-```{r tbl_gtsum, message=FALSE, warning=FALSE}
-# Load Libraries & Data
-library(cardinal)
-
-adsl <- random.cdisc.data::cadsl
-advs <- random.cdisc.data::cadvs
-
-# Output table
-make_table_32(
-  table_engine = "gtsummary",
-  df = advs,
-  subset = (PARAMCD == "DIABP" & AVISITN >= 1),
-  return_ard = FALSE
-)
-```
-
-## gtsummary Table Setup
-
-```{r tbl_gtsum, eval=FALSE, echo=TRUE}
-```
-
-## ARD dataset
-
-```{r ard, message=FALSE, warning=FALSE}
-# Load Libraries & Data
-library(cardinal)
-
-adsl <- random.cdisc.data::cadsl
-advs <- random.cdisc.data::cadvs
-
-# Output table
-make_table_32(
-  table_engine = NULL,
-  df = advs,
-  subset = (PARAMCD == "DIABP" & AVISITN >= 1),
-  return_ard = TRUE
-)
-```
-
-## ARD setup
-
-```{r ard, eval=FALSE, echo=TRUE}
-```
-
-## Function Details: ARD
-
-### `make_table_32()`
-
--   **`df`**: `USUBJID`, `AVISITN`, `PARAMCD`, `AVAL`, `AVALU`, and the variables specified by `arm_var` and `saffl_var`.
--   **`alt_counts_df`** (if specified): `USUBJID` and the variables specified by `arm_var` and `saffl_var`.
-
-+-----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------+
-| Argument        | Description                                                                                                                                                                             | Default                     |
-+=================+=========================================================================================================================================================================================+=============================+
-| `df`            | (`data.frame`) Dataset (typically ADVS) required to build table.                                                                                                                        | *No default*                |
-+-----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------+
-| `alt_counts_df` | (`character`) Alternative dataset (typically ADSL) used only to calculate column counts.                                                                                                | `NULL`                      |
-+-----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------+
-| `id_vars`       | (`character`) Identifier required to count the number of events (typically calculated by USUBJID).                                                                                      | `"USUBJID"`                 |
-+-----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------+
-| `arm_var`       | (`character`) Arm variable used to split table into columns.                                                                                                                            | `"ARM"`                     |
-+-----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------+
-| `saffl_var`     | (`character`) Flag variable used to indicate inclusion in safety population.                                                                                                            | `"SAFFL"`                   |
-+-----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------+
-| `subset`        | (`filter`) Selection of both PARAMCD and definition of baseline                                                                                                                         | *No default*                |
-+-----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------+
-| `lbl_overall`   | (`character`) If specified, an overall column will be added to the table with the given value as the column label.                                                                      | `NULL`                      |
-+-----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------+
-| `table_engine`  | (`string`) Table engine used to generate the table. If `NULL`, no table is returned. If the given engine is not available for the table, no table is created and a warning is returned. | `c("rtables", "gtsummary")` |
-+-----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------+
-| return_ard      | (`flag`) Whether an ARD should be returned.                                                                                                                                             | `TRUE`                      |
-+-----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------+
-| `…`             | Arguments passed to table engine-specific functions.                                                                                                                                    | `NULL`                      |
-+-----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------+
-
-Source code for this function is available [here](https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_05.R).
 
 ------------------------------------------------------------------------
-
-## Function Details: rtables Table
-
-### `make_table_32(table_engine = "rtables")`
 
 Required variables:
 
@@ -159,30 +171,6 @@ Required variables:
 
 Source code for this function is available [here](https://github.com/pharmaverse/falcon/blob/main/R/fda-table_32.R).
 
-## Function Details: `gtsummary Table`
+</details>
 
-### `make_table_32(table_engine = "gtsummary")`
-
-------------------------------------------------------------------------
-
-Required variables:
-
--   **`df`**: `USUBJID`, `AVISITN`, `PARAMCD`, `AVAL`, `AVALU`, and the variables specified by `arm_var` and `saffl_var`.
--   **`alt_counts_df`** (if specified): `USUBJID` and the variables specified by `arm_var` and `saffl_var`.
-
-+-----------------+------------------------------------------------------------------------------------------+--------------+
-| **Argument**    | **Description**                                                                          | **Default**  |
-+:================+:=========================================================================================+:=============+
-| `df`            | (`data.frame`) Dataset (typically ADVS) required to build table.                         | *No default* |
-+-----------------+------------------------------------------------------------------------------------------+--------------+
-| `alt_counts_df` | (`character`) Alternative dataset (typically ADSL) used only to calculate column counts. | `NULL`       |
-+-----------------+------------------------------------------------------------------------------------------+--------------+
-| `arm_var`       | (`character`) Arm variable used to split table into columns.                             | `"ARM"`      |
-+-----------------+------------------------------------------------------------------------------------------+--------------+
-| `saffl_var`     | (`character`) Flag variable used to indicate inclusion in safety population.             | `"SAFFL"`    |
-+-----------------+------------------------------------------------------------------------------------------+--------------+
-| `subset`        | (`filter`) Selection of both PARAMCD and definition of baseline                          | *No default* |
-+-----------------+------------------------------------------------------------------------------------------+--------------+
-
-Source code for this function is available [here](https://github.com/pharmaverse/falcon/blob/main/R/fda-table_32.R).
 :::

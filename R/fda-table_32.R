@@ -4,22 +4,16 @@
 #' @details
 #' * `df` must contain `PARAMCD`, `AVAL`, `AVALU`, and the variables specified by `saffl_var`, `arm_var`, and `id_var`.
 #'   `saffl_var` must be a flag variable.
-#' * `table_engine` must be one of `gtsummary` or `rtables`.
 #' * `return_ard` set to `TRUE` or `FALSE`; whether the intermediate ARD object should be returned.
 #'
+#' @inheritParams tbl_make_table_32
 #' @inheritParams argument_convention
-#'
 #' @param subset (`filter condition`)\cr selection of both PARAMCD and definition of baseline
-#' @param ... arguments passed to table engine-specific functions.
 #'
-#' @name make_table_32
-NULL
-
-#' @describeIn make_table_32 Create FDA table 32 using an ARD.
+#' @return A `gtsummary` table and, if `return_ard = TRUE`, an ARD.
+#'   If `return_ard = TRUE`, they will be returned as a list with named elements `table` and `ard`.
 #'
-#' @return
-#' * `make_table_32` returns an object matching the selected `table_engine` argument.
-#' The intermediary `ARD` object can also be returned with `return_ard` set to `TRUE`.
+#' @seealso [`tbl_make_table_32`]
 #'
 #' @examples
 #' adsl <- random.cdisc.data::cadsl
@@ -28,7 +22,6 @@ NULL
 #' tbl <- make_table_32(
 #'   df = advs,
 #'   alt_counts_df = adsl,
-#'   table_engine = "gtsummary",
 #'   subset = (PARAMCD == "DIABP" & AVISITN >= 1)
 #' )
 #' tbl
@@ -41,76 +34,53 @@ make_table_32 <- function(df,
                           saffl_var = "SAFFL",
                           subset,
                           lbl_overall = NULL,
-                          table_engine = c("rtables", "gtsummary"),
-                          return_ard = TRUE,
-                          ...) {
-  # warnings
-  if (is.null(table_engine) && !return_ard) {
-    warning(
-      "No object returned. Set a value for `table_engine` to return ",
-      "a table or `return_ard = TRUE` to return an ARD."
-    )
-    return(NULL)
-  }
-  if (!is.null(table_engine)) {
-    if (!(table_engine %in% c("gtsummary", "rtables"))) {
-      warning("There is currently no `", table_engine, "` function available for FDA table 32.")
-    } else {
-      table_engine <- match.arg(table_engine)
-    }
-  }
+                          return_ard = TRUE) {
 
   subset <- enquo(subset)
 
-  if (return_ard) {
-    ard <- make_ard_32(
-      df = df,
-      alt_counts_df = alt_counts_df,
-      id_var = id_var,
-      arm_var = arm_var,
-      saffl_var = saffl_var,
-      subset = !!subset,
-      lbl_overall = lbl_overall
-    )
-    if (is.null(table_engine)) {
-      return(ard) # nocov
-    }
-  }
-  if (!is.null(table_engine)) {
-    if (table_engine == "gtsummary") {
-      tbl <- make_table_32_gtsum(
-        df = df,
-        alt_counts_df = alt_counts_df,
-        id_var = id_var,
-        arm_var = arm_var,
-        saffl_var = saffl_var,
-        subset = !!subset,
-        lbl_overall = lbl_overall,
-        ...
-      )
-    }
-    if (table_engine == "rtables") {
-      tbl <- make_table_32_rtables(
-        df = df,
-        alt_counts_df = alt_counts_df,
-        id_var = id_var,
-        arm_var = arm_var,
-        saffl_var = saffl_var,
-        subset = !!subset,
-        lbl_overall = lbl_overall,
-        ...
-      )
-    }
-    if (!return_ard) {
-      return(tbl) # nocov
-    }
-  }
+  ard <- ard_table_32(
+    df = df,
+    alt_counts_df = alt_counts_df,
+    id_var = id_var,
+    arm_var = arm_var,
+    saffl_var = saffl_var,
+    subset = !!subset,
+    lbl_overall = lbl_overall
+  )
 
-  list(table = tbl, ard = ard)
+  tbl <- make_table_32_gtsummary(
+    df = df,
+    alt_counts_df = alt_counts_df,
+    id_var = id_var,
+    arm_var = arm_var,
+    saffl_var = saffl_var,
+    subset = !!subset,
+    lbl_overall = lbl_overall
+  )
+
+  if (return_ard) {
+    return(list(table = tbl, ard = ard))
+  } else {
+    return(tbl)
+  }
 }
 
-#' @keywords Internal
-make_ard_32 <- function(df,
+#' Make ARD: Table 32
+#'
+#' @examples
+#' adsl <- random.cdisc.data::cadsl
+#' advs <- random.cdisc.data::cadvs
+#'
+#' ard <- cardinal::ard_table_32(
+#'   df = advs,
+#'   alt_counts_df = adsl,
+#'   subset = (PARAMCD == "DIABP" & AVISITN >= 1)
+#' )
+#' ard
+#'
+#' @keywords internal
+#' @name ard_make_table_32
+ard_table_32 <- function(df,
                         alt_counts_df = NULL,
                         id_var = "USUBJID",
                         arm_var = "ARM",
@@ -125,51 +95,51 @@ make_ard_32 <- function(df,
   subset <-
     admiraldev::assert_filter_cond(enexpr(subset), arg_name = "subset")
 
-  df <- df %>%
-    filter(.data[[saffl_var]] == "Y") %>%
-    filter(!!subset) %>%
-    df_explicit_na() %>%
-    group_by(.data[[id_var]], PARAMCD) %>%
-    mutate(MAX_DIABP = max(AVAL)) %>%
-    ungroup() %>%
-    distinct(.data[[id_var]], .keep_all = TRUE) %>%
+  df <- df |>
+    filter(.data[[saffl_var]] == "Y") |>
+    filter(!!subset) |>
+    df_explicit_na() |>
+    group_by(.data[[id_var]], PARAMCD) |>
+    mutate(MAX_DIABP = max(AVAL)) |>
+    ungroup() |>
+    distinct(.data[[id_var]], .keep_all = TRUE) |>
     select(all_of(id_var), MAX_DIABP, AVALU, all_of(arm_var))
 
   if (!is.null(alt_counts_df)) {
-    adsl <- alt_counts_df %>%
-      filter(.data[[saffl_var]] == "Y") %>%
+    adsl <- alt_counts_df |>
+      filter(.data[[saffl_var]] == "Y") |>
       select(all_of(id_var), all_of(arm_var), all_of(saffl_var))
 
-    df <- df %>% select(!all_of(arm_var))
+    df <- df |> select(!all_of(arm_var))
     df <-
-      adsl %>%
+      adsl |>
       left_join(df, by = id_var)
   } else {
     df <- df
   }
 
-  df <- df %>%
+  df <- df |>
     mutate(
       L60 = case_when(MAX_DIABP < 60 ~ "true", TRUE ~ "false"),
       G60 = case_when(MAX_DIABP > 60 ~ "true", TRUE ~ "false"),
       G90 = case_when(MAX_DIABP > 90 ~ "true", TRUE ~ "false"),
       G110 = case_when(MAX_DIABP > 110 ~ "true", TRUE ~ "false"),
       GE120 = case_when(MAX_DIABP >= 120 ~ "true", TRUE ~ "false")
-    ) %>%
+    ) |>
     mutate(
       L60 = with_label(L60 == "true", "<60"),
       G60 = with_label(G60 == "true", ">60"),
       G90 = with_label(G90 == "true", ">90"),
       G110 = with_label(G110 == "true", ">110"),
       GE120 = with_label(GE120 == "true", ">=120")
-    ) %>%
+    ) |>
     mutate(
       ARM = as.character(ARM)
-    ) %>%
+    ) |>
     select(L60, G60, G90, G110, GE120, AVALU, arm_var)
 
   avalu <- unique(df$AVALU)[1]
-  df <- df %>% select(-AVALU)
+  df <- df |> select(-AVALU)
 
   ard <-
     ard_stack(
@@ -182,7 +152,135 @@ make_ard_32 <- function(df,
   return(ard)
 }
 
-#' @keywords Internal
+
+
+
+
+#' Engine-Specific Functions: Table 32
+#'
+#' The table engine used by each engine-specific function is identified by its suffix.
+#'
+#' @inheritParams argument_convention
+#'
+#' @details
+#' * Columns are split by arm. Overall population column is excluded by default (see `lbl_overall` argument).
+#' * Numbers in table "Patients Treated" section are the absolute numbers of patients and fraction of `N`.
+#' * All-zero rows are not removed by default (see `prune_0` argument).
+#' * Records with missing treatment start and/or end datetime are excluded from all calculations.
+#'
+#' @return
+#' * `make_table_32_gtsummary()` returns a `gtsummary` object.
+#' * `make_table_32_rtables()` returns an `rtable` object.
+#'
+#' @seealso [make_table_32()]
+#'
+#' @examples
+#' adsl <- random.cdisc.data::cadsl
+#'
+#' # gtsummary table --------------
+#' ard <- cardinal::ard_table_32(df = adsl)
+#' tbl_gtsummary <- cardinal::make_table_32_gtsummary(
+#'   df = advs,
+#'   alt_counts_df = adsl,
+#'   ard = ard,
+#'   subset = (PARAMCD == "DIABP" & AVISITN >= 1)
+#' )
+#' tbl_gtsummary
+#'
+#' # rtables table ----------------
+#' tbl_rtables <- cardinal::make_table_32_rtables(
+#'   df = advs,
+#'   alt_counts_df = adsl,
+#'   subset = (PARAMCD == "DIABP" & AVISITN >= 1)
+#' )
+#' tbl_rtables
+#'
+#' @export
+#' @name tbl_make_table_32
+make_table_32_gtsummary <- function(df,
+                                    alt_counts_df = NULL,
+                                    id_var = "USUBJID",
+                                    arm_var = "ARM",
+                                    saffl_var = "SAFFL",
+                                    subset,
+                                    lbl_overall = NULL) {
+  assert_subset(c(
+    saffl_var, "PARAMCD", "AVAL", "AVALU", arm_var, id_var
+  ), names(df))
+  assert_flag_variables(df, saffl_var)
+
+  subset <-
+    admiraldev::assert_filter_cond(enexpr(subset), arg_name = "subset")
+
+  df <- df |>
+    filter(.data[[saffl_var]] == "Y") |>
+    filter(!!subset) |>
+    df_explicit_na() |>
+    group_by(.data[[id_var]], PARAMCD) |>
+    mutate(MAX_DIABP = max(AVAL)) |>
+    ungroup() |>
+    distinct(.data[[id_var]], .keep_all = TRUE) |>
+    select(all_of(id_var), MAX_DIABP, AVALU, all_of(arm_var))
+
+  if (!is.null(alt_counts_df)) {
+    adsl <- alt_counts_df |>
+      filter(.data[[saffl_var]] == "Y") |>
+      select(all_of(id_var), all_of(arm_var), all_of(saffl_var))
+
+    df <- df |> select(!all_of(arm_var))
+    df <-
+      adsl |>
+      left_join(df, by = id_var)
+  } else {
+    df <- df
+  }
+
+  df <- df |>
+    mutate(
+      L60 = case_when(MAX_DIABP < 60 ~ "true", TRUE ~ "false"),
+      G60 = case_when(MAX_DIABP > 60 ~ "true", TRUE ~ "false"),
+      G90 = case_when(MAX_DIABP > 90 ~ "true", TRUE ~ "false"),
+      G110 = case_when(MAX_DIABP > 110 ~ "true", TRUE ~ "false"),
+      GE120 = case_when(MAX_DIABP >= 120 ~ "true", TRUE ~ "false")
+    ) |>
+    mutate(
+      L60 = with_label(L60 == "true", "<60"),
+      G60 = with_label(G60 == "true", ">60"),
+      G90 = with_label(G90 == "true", ">90"),
+      G110 = with_label(G110 == "true", ">110"),
+      GE120 = with_label(GE120 == "true", ">=120")
+    ) |>
+    select(L60, G60, G90, G110, GE120, AVALU, arm_var)
+
+  avalu <- unique(df$AVALU)[1]
+  df <- df |> select(-AVALU)
+
+  tbl <- df |>
+    tbl_summary(
+      by = arm_var,
+      statistic = list(all_categorical() ~ "{n} ({p}%)"),
+      digits = everything() ~ c(0, 1),
+      missing = "no"
+    ) |>
+    modify_header(label ~ paste0("**Diastolic Blood Pressure (", avalu, ")**")) |>
+    modify_header(all_stat_cols() ~ "**{level}**  \nN = {n}") |>
+    gtsummary::modify_column_alignment(columns = all_stat_cols(), align = "right")
+
+  if (!is.null(lbl_overall)) {
+    tbl <- tbl |>
+      add_overall(last = TRUE, col_label = paste0("**", lbl_overall, "**  \n N = {n}"))
+  }
+
+  tbl <- tbl |> modify_footnote(update = everything() ~ NA)
+
+  gtsummary::with_gtsummary_theme(
+    x = gtsummary::theme_gtsummary_compact(),
+    expr = as_gt(tbl)
+  )
+}
+
+#' @export
+#' @rdname tbl_make_table_32
 make_table_32_rtables <- function(df,
                                   alt_counts_df = NULL,
                                   show_colcounts = TRUE,
@@ -202,13 +300,13 @@ make_table_32_rtables <- function(df,
   subset <-
     admiraldev::assert_filter_cond(enexpr(subset), arg_name = "subset")
 
-  df <- df %>%
-    filter(.data[[saffl_var]] == "Y") %>%
-    filter(!!subset) %>%
-    df_explicit_na() %>%
-    group_by(.data[[id_var]], PARAMCD) %>%
-    mutate(MAX_DIABP = max(AVAL)) %>%
-    ungroup() %>%
+  df <- df |>
+    filter(.data[[saffl_var]] == "Y") |>
+    filter(!!subset) |>
+    df_explicit_na() |>
+    group_by(.data[[id_var]], PARAMCD) |>
+    mutate(MAX_DIABP = max(AVAL)) |>
+    ungroup() |>
     mutate(
       L60 = with_label(MAX_DIABP < 60, "<60"),
       G60 = with_label(MAX_DIABP > 60, ">60"),
@@ -219,13 +317,13 @@ make_table_32_rtables <- function(df,
 
   alt_counts_df <- alt_counts_df_preproc(alt_counts_df, id_var, arm_var, saffl_var)
 
-  lyt <- basic_table_annot(show_colcounts, annotations) %>%
-    split_cols_by_arm(arm_var, lbl_overall, risk_diff) %>%
+  lyt <- basic_table_annot(show_colcounts, annotations) |>
+    split_cols_by_arm(arm_var, lbl_overall, risk_diff) |>
     count_patients_with_flags(
       var = id_var,
       flag_variables = c("L60", "G60", "G90", "G110", "GE120"),
       riskdiff = !is.null(risk_diff)
-    ) %>%
+    ) |>
     append_topleft(c("Diastolic Blood Pressure", paste0("(", unique(df$AVALU)[1], ")")))
 
   tbl <- build_table(lyt, df = df, alt_counts_df = alt_counts_df)
@@ -235,84 +333,4 @@ make_table_32_rtables <- function(df,
 }
 
 #' @keywords Internal
-make_table_32_gtsum <- function(df,
-                                alt_counts_df = NULL,
-                                id_var = "USUBJID",
-                                arm_var = "ARM",
-                                saffl_var = "SAFFL",
-                                subset,
-                                lbl_overall = NULL) {
-  assert_subset(c(
-    saffl_var, "PARAMCD", "AVAL", "AVALU", arm_var, id_var
-  ), names(df))
-  assert_flag_variables(df, saffl_var)
 
-  subset <-
-    admiraldev::assert_filter_cond(enexpr(subset), arg_name = "subset")
-
-  df <- df %>%
-    filter(.data[[saffl_var]] == "Y") %>%
-    filter(!!subset) %>%
-    df_explicit_na() %>%
-    group_by(.data[[id_var]], PARAMCD) %>%
-    mutate(MAX_DIABP = max(AVAL)) %>%
-    ungroup() %>%
-    distinct(.data[[id_var]], .keep_all = TRUE) %>%
-    select(all_of(id_var), MAX_DIABP, AVALU, all_of(arm_var))
-
-  if (!is.null(alt_counts_df)) {
-    adsl <- alt_counts_df %>%
-      filter(.data[[saffl_var]] == "Y") %>%
-      select(all_of(id_var), all_of(arm_var), all_of(saffl_var))
-
-    df <- df %>% select(!all_of(arm_var))
-    df <-
-      adsl %>%
-      left_join(df, by = id_var)
-  } else {
-    df <- df
-  }
-
-  df <- df %>%
-    mutate(
-      L60 = case_when(MAX_DIABP < 60 ~ "true", TRUE ~ "false"),
-      G60 = case_when(MAX_DIABP > 60 ~ "true", TRUE ~ "false"),
-      G90 = case_when(MAX_DIABP > 90 ~ "true", TRUE ~ "false"),
-      G110 = case_when(MAX_DIABP > 110 ~ "true", TRUE ~ "false"),
-      GE120 = case_when(MAX_DIABP >= 120 ~ "true", TRUE ~ "false")
-    ) %>%
-    mutate(
-      L60 = with_label(L60 == "true", "<60"),
-      G60 = with_label(G60 == "true", ">60"),
-      G90 = with_label(G90 == "true", ">90"),
-      G110 = with_label(G110 == "true", ">110"),
-      GE120 = with_label(GE120 == "true", ">=120")
-    ) %>%
-    select(L60, G60, G90, G110, GE120, AVALU, arm_var)
-
-  avalu <- unique(df$AVALU)[1]
-  df <- df %>% select(-AVALU)
-
-  tbl <- df %>%
-    tbl_summary(
-      by = arm_var,
-      statistic = list(all_categorical() ~ "{n} ({p}%)"),
-      digits = everything() ~ c(0, 1),
-      missing = "no"
-    ) %>%
-    modify_header(label ~ paste0("**Diastolic Blood Pressure (", avalu, ")**")) %>%
-    modify_header(all_stat_cols() ~ "**{level}**  \nN = {n}") %>%
-    gtsummary::modify_column_alignment(columns = all_stat_cols(), align = "right")
-
-  if (!is.null(lbl_overall)) {
-    tbl <- tbl %>%
-      add_overall(last = TRUE, col_label = paste0("**", lbl_overall, "**  \n N = {n}"))
-  }
-
-  tbl <- tbl %>% modify_footnote(update = everything() ~ NA)
-
-  gtsummary::with_gtsummary_theme(
-    x = gtsummary::theme_gtsummary_compact(),
-    expr = as_gt(tbl)
-  )
-}

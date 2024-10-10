@@ -1,10 +1,10 @@
 adsl <- adsl_raw
 advs <- advs_raw
-advs_missing <- advs %>%
+advs_missing <- advs |>
   filter(PARAMCD == "DIABP" & AVISITN >= 1)
 set.seed(2)
 advs_missing[sample(seq_len(nrow(advs_missing)), 100), "AVAL"] <- NA
-advs_missing <- advs_missing %>%
+advs_missing <- advs_missing |>
   df_explicit_na()
 
 test_that("Table 32 generation works with default values", {
@@ -13,47 +13,82 @@ test_that("Table 32 generation works with default values", {
   result <- make_table_32(
     advs,
     adsl,
-    table_engine = "rtables",
     subset = (PARAMCD == "DIABP" & AVISITN >= 1)
   )
   res <- expect_silent(result)
-  expect_snapshot(res)
+  expect_snapshot(res$table |> as.data.frame())
+  expect_snapshot(res$ard)
 
-  # only table
+  # no ARD
   result2 <- make_table_32(
     advs,
     adsl,
     return_ard = FALSE,
-    table_engine = "rtables",
     subset = (PARAMCD == "DIABP" & AVISITN >= 1)
   )
   res2 <- expect_silent(result2)
-  expect_snapshot(res2)
 
-  # only ard
-  result3 <- make_table_32(
-    advs,
-    adsl,
-    table_engine = NULL,
-    subset = (PARAMCD == "DIABP" & AVISITN >= 1)
-  )
-  res3 <- expect_silent(result3)
-  expect_snapshot(res3)
+  expect_identical(res$table, res2)
+})
 
-  # both together
-  expect_equal(
-    result,
-    list(table = res2, ard = res3)
-  )
+# gtsummary -----
+test_that("Table 32 generation works with default values", {
+  ard <-
+    cardinal:::ard_table_32(
+      df = advs,
+      subset = (PARAMCD == "DIABP" & AVISITN >= 1)
+    )
+
+  result <-
+    make_table_32(
+      df = advs,
+      subset = (PARAMCD == "DIABP" & AVISITN >= 1),
+      return_ard = FALSE
+    )
+  res <- expect_silent(result)
+  expect_snapshot(res |> as.data.frame())
+})
+
+test_that("Table 32 generation works with custom values", {
+  result <-
+    make_table_32(
+      df = advs,
+      lbl_overall = "Total Population",
+      return_ard = FALSE,
+      subset = (PARAMCD == "DIABP" & AVISITN >= 1)
+    )
+
+  res <- expect_silent(result)
+  expect_snapshot(res |> as.data.frame())
+})
+
+test_that("Table 32 generation missing values and ADSL", {
+  ard <-
+    cardinal:::ard_table_32(
+      df = advs_missing,
+      alt_counts_df = adsl,
+      subset = (PARAMCD == "DIABP" & AVISITN >= 1)
+    )
+
+  result <-
+    make_table_32(
+      df = advs_missing,
+      alt_counts_df = adsl,
+      lbl_overall = "Total Population",
+      return_ard = FALSE,
+      subset = (PARAMCD == "DIABP" & AVISITN >= 1)
+    )
+
+  res <- expect_silent(result)
+  expect_snapshot(res |> as.data.frame())
 })
 
 # rtables -----
 
 test_that("Table 32 generation works with custom values", {
-  result <- make_table_32(
+  result <- make_table_32_rtables(
     advs,
     adsl,
-    table_engine = "rtables",
     subset = (PARAMCD == "DIABP" & AVISITN >= 1),
     lbl_overall = "Total\nPopulation",
     annotations = list(
@@ -74,11 +109,10 @@ test_that("Table 32 generation works with custom values", {
 })
 
 test_that("Table 32 generation works with pruned rows", {
-  result <- make_table_32(
+  result <- make_table_32_rtables(
     advs,
     adsl,
     prune_0 = TRUE,
-    table_engine = "rtables",
     subset = (PARAMCD == "DIABP" & AVISITN >= 1)
   )
 
@@ -88,11 +122,10 @@ test_that("Table 32 generation works with pruned rows", {
 
 test_that("Table 32 generation works with risk difference column", {
   risk_diff <- list(arm_x = "B: Placebo", arm_y = "A: Drug X")
-  result <- make_table_32(
+  result <- make_table_32_rtables(
     advs,
     adsl,
     risk_diff = risk_diff,
-    table_engine = "rtables",
     subset = (PARAMCD == "DIABP" & AVISITN >= 1)
   )
 
@@ -100,52 +133,3 @@ test_that("Table 32 generation works with risk difference column", {
   expect_snapshot(res)
 })
 
-# gtsummary -----
-
-test_that("Table 32 generation works with default values", {
-  result <-
-    suppressWarnings(
-      make_table_32(
-        df = advs,
-        table_engine = "gtsummary",
-        subset = (PARAMCD == "DIABP" & AVISITN >= 1),
-        return_ard = FALSE
-      ) %>%
-        gt::extract_body()
-    )
-  res <- expect_silent(result)
-  expect_snapshot(res)
-})
-
-test_that("Table 32 generation works with custom values", {
-  result <- suppressWarnings(
-    make_table_32(
-      df = advs,
-      table_engine = "gtsummary",
-      lbl_overall = "Total Population",
-      return_ard = FALSE,
-      subset = (PARAMCD == "DIABP" & AVISITN >= 1)
-    ) %>%
-      gt::extract_body()
-  )
-
-  res <- expect_silent(result)
-  expect_snapshot(res)
-})
-
-test_that("Table 32 generation missing values and ADSL", {
-  result <- suppressWarnings(
-    make_table_32(
-      table_engine = "gtsummary",
-      df = advs_missing,
-      alt_counts_df = adsl,
-      lbl_overall = "Total Population",
-      return_ard = FALSE,
-      subset = (PARAMCD == "DIABP" & AVISITN >= 1)
-    ) %>%
-      gt::extract_body()
-  )
-
-  res <- expect_silent(result)
-  expect_snapshot(res)
-})
