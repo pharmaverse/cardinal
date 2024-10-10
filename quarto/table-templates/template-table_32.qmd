@@ -22,12 +22,8 @@ library(cardinal)
 adsl <- random.cdisc.data::cadsl
 advs <- random.cdisc.data::cadvs
 
-# Output table
-make_table_32(
-  df = advs,
-  subset = (PARAMCD == "DIABP" & AVISITN >= 1),
-  return_ard = FALSE
-)
+# Output Table
+make_table_32(df = advs, return_ard = FALSE)
 ```
 
 </details>
@@ -42,24 +38,20 @@ make_table_32(
 ### `make_table_32()`
 
 -   **`df`**: `USUBJID`, `AVISITN`, `PARAMCD`, `AVAL`, `AVALU`, and the variables specified by `arm_var` and `saffl_var`.
--   **`alt_counts_df`** (if specified): `USUBJID` and the variables specified by `arm_var` and `saffl_var`.
+-   **`denominator`** (if specified): `USUBJID` and the variables specified by `arm_var` and `saffl_var`.
 
 +-----------------+--------------------------------------------------------------------------------------------------------------------+--------------+
-| # Argument      | # Description                                                                                                      | # Default    |
-|                 |                                                                                                                    |              |
+| **Argument**    | **Description**                                                                                                    | **Default**  |
++:================+:===================================================================================================================+:=============+
 | `df`            | (`data.frame`) Dataset (typically ADVS) required to build table.                                                   | *No default* |
 +-----------------+--------------------------------------------------------------------------------------------------------------------+--------------+
-|                 |                                                                                                                    |              |
-+-----------------+--------------------------------------------------------------------------------------------------------------------+--------------+
-| `alt_counts_df` | (`character`) Alternative dataset (typically ADSL) used only to calculate column counts.                           | `NULL`       |
+| `denominator`   | (`character`) Alternative dataset (typically ADSL) used only to calculate column counts.                           | `NULL`       |
 +-----------------+--------------------------------------------------------------------------------------------------------------------+--------------+
 | `id_vars`       | (`character`) Identifier required to count the number of events (typically calculated by USUBJID).                 | `"USUBJID"`  |
 +-----------------+--------------------------------------------------------------------------------------------------------------------+--------------+
 | `arm_var`       | (`character`) Arm variable used to split table into columns.                                                       | `"ARM"`      |
 +-----------------+--------------------------------------------------------------------------------------------------------------------+--------------+
 | `saffl_var`     | (`character`) Flag variable used to indicate inclusion in safety population.                                       | `"SAFFL"`    |
-+-----------------+--------------------------------------------------------------------------------------------------------------------+--------------+
-| `subset`        | (`filter`) Selection of both PARAMCD and definition of baseline                                                    | *No default* |
 +-----------------+--------------------------------------------------------------------------------------------------------------------+--------------+
 | `lbl_overall`   | (`character`) If specified, an overall column will be added to the table with the given value as the column label. | `NULL`       |
 +-----------------+--------------------------------------------------------------------------------------------------------------------+--------------+
@@ -85,18 +77,11 @@ library(cardinal)
 adsl <- random.cdisc.data::cadsl
 advs <- random.cdisc.data::cadvs
 
-# Output Table & ARD
-result <- make_table_32(
-  df = advs,
-  subset = (PARAMCD == "DIABP" & AVISITN >= 1),
-  return_ard = TRUE
-)
+# Create Table & ARD
+result <- make_table_32(df = advs, return_ard = TRUE)
 
 # Output ARD
-print(
-  result$ard,
-  n = 5000
-)
+result$ard
 ```
 
 </details>
@@ -122,8 +107,7 @@ risk_diff <- list(arm_x = "B: Placebo", arm_y = "A: Drug X") # optional
 make_table_32_rtables(
   df = advs,
   alt_counts_df = adsl,
-  risk_diff = risk_diff,
-  subset = (PARAMCD == "DIABP" & AVISITN >= 1)
+  risk_diff = risk_diff
 )
 ```
 
@@ -157,8 +141,6 @@ Required variables:
 | `arm_var`        | (`character`) Arm variable used to split table into columns.                                                                                                                                                                                                 | `"ARM"`      |
 +------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
 | `saffl_var`      | (`character`) Flag variable used to indicate inclusion in safety population.                                                                                                                                                                                 | `"SAFFL"`    |
-+------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
-| `subset`         | (`filter`) Selection of both PARAMCD and definition of baseline                                                                                                                                                                                              | *No default* |
 +------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
 | `lbl_overall`    | (`character`) If specified, an overall column will be added to the table with the given value as the column label.                                                                                                                                           | `NULL`       |
 +------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
