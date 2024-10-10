@@ -22,7 +22,7 @@ Make ARD: Table 32
 adsl <- random.cdisc.data::cadsl
 advs <- random.cdisc.data::cadvs
 
-ard <- cardinal::ard_table_32(
+ard <- cardinal:::ard_table_32(
   df = advs,
   alt_counts_df = adsl,
   subset = (PARAMCD == "DIABP" & AVISITN >= 1)
