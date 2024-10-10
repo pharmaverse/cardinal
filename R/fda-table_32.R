@@ -135,7 +135,7 @@ ard_table_32 <- function(df,
     mutate(
       ARM = as.character(ARM)
     ) |>
-    select(L60, G60, G90, G110, GE120, AVALU, arm_var)
+    select(L60, G60, G90, G110, GE120, AVALU, all_of(arm_var))
 
   avalu <- unique(df$AVALU)[1]
   df <- df |> select(-AVALU)
@@ -150,10 +150,6 @@ ard_table_32 <- function(df,
 
   return(ard)
 }
-
-
-
-
 
 #' Engine-Specific Functions: Table 32
 #'
@@ -253,7 +249,7 @@ make_table_32_gtsummary <- function(df,
       G110 = with_label(G110 == "true", ">110"),
       GE120 = with_label(GE120 == "true", ">=120")
     ) |>
-    select(L60, G60, G90, G110, GE120, AVALU, arm_var)
+    select(L60, G60, G90, G110, GE120, AVALU, all_of(arm_var))
 
   avalu <- unique(df$AVALU)[1]
   df <- df |> select(-AVALU)
