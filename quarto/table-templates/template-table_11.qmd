@@ -15,6 +15,7 @@ format: html
   <summary>gtsummary Table Setup</summary>
 ```{r tbl2, eval=FALSE, echo=TRUE}
 # Load Libraries & Data
+library(dplyr)
 library(cardinal)
 
 adsl <- random.cdisc.data::cadsl
