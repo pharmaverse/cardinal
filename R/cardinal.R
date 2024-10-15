@@ -5,7 +5,7 @@
 #' @keywords internal
 "_PACKAGE"
 
-#' @import dplyr ggplot2 checkmate gt gtsummary rtables tern tfrmt Tplyr
+#' @import dplyr ggplot2 cards cardx checkmate gt gtsummary rtables tern tfrmt Tplyr
 #' @importFrom rlang .data :=
 #' @importFrom magrittr %>%
 #' @importFrom purrr walk

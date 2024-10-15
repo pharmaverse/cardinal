@@ -38,6 +38,8 @@
 #' @param annotations (named `list` of `character`)\cr list of annotations to add to the table. Valid
 #'   annotation types are `title`, `subtitles`, `main_footer`, and `prov_footer`. Each name-value pair should
 #'   use the annotation type as name and the desired string as value.
+#' @param ard (`cards::card`)\cr an ARD.
+#' @param denominator (`data.frame`)\cr alternative dataset (typically ADSL) used only to calculate denominator counts.
 #' @param df (`data.frame`)\cr dataset required to build table.
 #' @param eosdy_var (`character`)\cr variable denoting last recorded (relative) study day.
 #' @param fmqsc_var (`character`)\cr FMQ scope variable to use in table.
@@ -54,6 +56,7 @@
 #'   in the table. Labels should be ordered according to the order of variables in `vars`.
 #' @param na_level (`character`)\cr string to represent missing values.
 #' @param na_rm (`flag`)\cr whether `NA` levels should be removed from the table.
+#' @param return_ard (`flag`)\cr whether an ARD should be returned. Defaults to `TRUE`.
 #' @param risk_diff (named `list`)\cr list of settings to apply to add one or more risk difference columns to the table.
 #'   Defaults to `NULL` (no risk difference column added). See [tern::add_riskdiff()] for more details. List should
 #'   contain the following elements:

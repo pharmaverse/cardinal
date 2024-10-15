@@ -6,28 +6,24 @@
 Discontinuation, Safety Population, Pooled Analyses}
 \usage{
 make_table_11(
-  adae,
-  alt_counts_df = NULL,
-  show_colcounts = TRUE,
+  df,
+  denominator = NULL,
+  return_ard = TRUE,
   id_var = "USUBJID",
   arm_var = "ARM",
   saffl_var = "SAFFL",
   fmqsc_var = "FMQ01SC",
   fmqnam_var = "FMQ01NAM",
   fmq_scope = "NARROW",
-  lbl_overall = NULL,
-  risk_diff = NULL,
-  prune_0 = TRUE,
-  na_level = "<Missing>",
-  annotations = NULL
+  na_level = "<Missing>"
 )
 }
 \arguments{
-\item{adae}{(\code{data.frame})\cr dataset (typically ADAE) required to build table.}
+\item{df}{(\code{data.frame})\cr dataset required to build table.}
 
-\item{alt_counts_df}{(\code{character})\cr alternative dataset (typically ADSL) used only to calculate column counts.}
+\item{denominator}{(\code{data.frame})\cr alternative dataset (typically ADSL) used only to calculate denominator counts.}
 
-\item{show_colcounts}{(\code{flag})\cr Whether column counts should be printed. Boolean.}
+\item{return_ard}{(\code{flag})\cr whether an ARD should be returned. Defaults to \code{TRUE}.}
 
 \item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
 
@@ -41,32 +37,11 @@ make_table_11(
 
 \item{fmq_scope}{(\code{character})\cr FMQ scope ("NARROW" or "BROAD") to output in table.}
 
-\item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
-the given value as the column label.}
-
-\item{risk_diff}{(named \code{list})\cr list of settings to apply to add one or more risk difference columns to the table.
-Defaults to \code{NULL} (no risk difference column added). See \code{\link[tern:add_riskdiff]{tern::add_riskdiff()}} for more details. List should
-contain the following elements:
-\itemize{
-\item \code{arm_x}: (required) the name of reference arm.
-\item \code{arm_y}: (required) the names of the arms to compare to the reference arm. A new column will be added for each
-element of \code{arm_y}.
-\item \code{col_label}: (optional) labels to use for the risk difference columns. Defaults to
-\code{"Risk Difference (\%) (95\% CI)"}. For more than one risk difference column, \code{"arm x vs. arm y"} text will also
-be included in the column labels by default. The length of \code{col_label} must be equal to the length of \code{arm_y}.
-\item \code{pct}: (optional) whether the output should be returned as percentages. Defaults to \code{TRUE}.
-}}
-
-\item{prune_0}{(\code{flag})\cr Whether all-zero rows should be removed from the table. Boolean.}
-
 \item{na_level}{(\code{character})\cr string to represent missing values.}
-
-\item{annotations}{(named \code{list} of \code{character})\cr list of annotations to add to the table. Valid
-annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
-use the annotation type as name and the desired string as value.}
 }
 \value{
-An \code{rtable} object.
+A \code{gtsummary} table and, if \code{return_ard = TRUE}, an ARD.
+If \code{return_ard = TRUE}, they will be returned as a list with named elements \code{table} and \code{ard}.
 }
 \description{
 FDA Table 11: Patients with FDA Medical Query (Narrow) Leading to Treatment
@@ -74,18 +49,16 @@ Discontinuation, Safety Population, Pooled Analyses
 }
 \details{
 \itemize{
-\item \code{adae} must contain the variables \code{AEBODSYS}, \code{DCSREAS}, and the variables specified by
+\item \code{df} must contain the variables \code{AEBODSYS}, \code{DCSREAS}, and the variables specified by
 \code{arm_var}, \code{id_var}, \code{saffl_var}, \code{fmqsc_var}, and \code{fmqnam_var}.
-\item If specified, \code{alt_counts_df} must contain \code{USUBJID} and the variables specified by \code{arm_var} and \code{saffl_var}.
+\item If specified, \code{denominator} must contain \code{USUBJID} and the variables specified by \code{arm_var} and \code{saffl_var}.
 \item A patient is defined as having at least one adverse event leading to treatment discontinuation when they have at
 least one record with \code{DCSREAS = "ADVERSE EVENT"}.
 \item \code{fmqsc_var} must contain "BROAD" or "NARROW" values, one of which will be displayed in the table. Narrow is
 selected by default (see \code{fmq_scope} argument).
 \item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
 flag variables are treated as \code{"N"}.
-\item Columns are split by arm. Overall population column is excluded by default (see \code{lbl_overall} argument).
 \item Numbers in table represent the absolute numbers of patients and fraction of \code{N}.
-\item All-zero rows are removed by default (see \code{prune_0} argument).
 }
 }
 \examples{
@@ -104,7 +77,10 @@ adae <- adae \%>\%
 adae$DCSREAS[is.na(adae$DCSREAS)] <- "ADVERSE EVENT"
 adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
 
-tbl <- make_table_11(adae = adae, alt_counts_df = adsl)
+tbl <- make_table_11(df = adae, denominator = adsl)
 tbl
 
+}
+\seealso{
+\code{\link{tbl_make_table_11}}
 }

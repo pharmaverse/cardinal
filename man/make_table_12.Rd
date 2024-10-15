@@ -6,25 +6,21 @@
 by System Organ Class and Preferred Term, Safety Population, Pooled Analyses}
 \usage{
 make_table_12(
-  adae,
-  alt_counts_df = NULL,
-  show_colcounts = TRUE,
+  df,
+  denominator = NULL,
+  return_ard = TRUE,
   id_var = "USUBJID",
   arm_var = "ARM",
   saffl_var = "SAFFL",
-  pref_var = "AEDECOD",
-  lbl_overall = NULL,
-  risk_diff = NULL,
-  prune_0 = TRUE,
-  annotations = NULL
+  pref_var = "AEDECOD"
 )
 }
 \arguments{
-\item{adae}{(\code{data.frame})\cr dataset (typically ADAE) required to build table.}
+\item{df}{(\code{data.frame})\cr dataset required to build table.}
 
-\item{alt_counts_df}{(\code{character})\cr alternative dataset (typically ADSL) used only to calculate column counts.}
+\item{denominator}{(\code{data.frame})\cr alternative dataset (typically ADSL) used only to calculate denominator counts.}
 
-\item{show_colcounts}{(\code{flag})\cr Whether column counts should be printed. Boolean.}
+\item{return_ard}{(\code{flag})\cr whether an ARD should be returned. Defaults to \code{TRUE}.}
 
 \item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
 
@@ -33,31 +29,10 @@ make_table_12(
 \item{saffl_var}{(\code{character})\cr flag variable used to indicate inclusion in safety population.}
 
 \item{pref_var}{(\code{character})\cr Name of the preferred term variable from \code{adae} to include in the table.}
-
-\item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
-the given value as the column label.}
-
-\item{risk_diff}{(named \code{list})\cr list of settings to apply to add one or more risk difference columns to the table.
-Defaults to \code{NULL} (no risk difference column added). See \code{\link[tern:add_riskdiff]{tern::add_riskdiff()}} for more details. List should
-contain the following elements:
-\itemize{
-\item \code{arm_x}: (required) the name of reference arm.
-\item \code{arm_y}: (required) the names of the arms to compare to the reference arm. A new column will be added for each
-element of \code{arm_y}.
-\item \code{col_label}: (optional) labels to use for the risk difference columns. Defaults to
-\code{"Risk Difference (\%) (95\% CI)"}. For more than one risk difference column, \code{"arm x vs. arm y"} text will also
-be included in the column labels by default. The length of \code{col_label} must be equal to the length of \code{arm_y}.
-\item \code{pct}: (optional) whether the output should be returned as percentages. Defaults to \code{TRUE}.
-}}
-
-\item{prune_0}{(\code{flag})\cr Whether all-zero rows should be removed from the table. Boolean.}
-
-\item{annotations}{(named \code{list} of \code{character})\cr list of annotations to add to the table. Valid
-annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
-use the annotation type as name and the desired string as value.}
 }
 \value{
-An \code{rtable} object.
+A \code{gtsummary} table and, if \code{return_ard = TRUE}, an ARD.
+If \code{return_ard = TRUE}, they will be returned as a list with named elements \code{table} and \code{ard}.
 }
 \description{
 FDA Table 12: Patients With Adverse Events Leading to Treatment Discontinuation
@@ -65,16 +40,14 @@ by System Organ Class and Preferred Term, Safety Population, Pooled Analyses
 }
 \details{
 \itemize{
-\item \code{adae} must contain \code{DCSREAS}, \code{AESOC}, and the variables specified by \code{arm_var}, \code{id_var}, \code{saffl_var},
+\item \code{df} must contain \code{DCSREAS}, \code{AESOC}, and the variables specified by \code{arm_var}, \code{id_var}, \code{saffl_var},
 and \code{pref_var}.
-\item If specified, \code{alt_counts_df} must contain \code{USUBJID} and the variables specified by \code{arm_var} and \code{saffl_var}.
+\item If specified, \code{denominator} must contain \code{USUBJID} and the variables specified by \code{arm_var} and \code{saffl_var}.
 \item A patient is defined as having at least one adverse event leading to treatment discontinuation when they have at
 least one record with \code{DCSREAS = "ADVERSE EVENT"}.
 \item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
 flag variables are treated as \code{"N"}.
-\item Columns are split by arm. Overall population column is excluded by default (see \code{lbl_overall} argument).
 \item Numbers in table represent the absolute numbers of patients and fraction of \code{N}.
-\item All-zero rows are removed by default (see \code{prune_0} argument).
 }
 }
 \examples{
@@ -82,7 +55,10 @@ adsl <- random.cdisc.data::cadsl
 adae <- random.cdisc.data::cadae
 adae$DCSREAS[is.na(adae$DCSREAS)] <- "ADVERSE EVENT"
 
-tbl <- make_table_12(adae = adae, alt_counts_df = adsl)
+tbl <- make_table_12(df = adae, denominator = adsl)
 tbl
 
+}
+\seealso{
+\code{\link{tbl_make_table_12}}
 }

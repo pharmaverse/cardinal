@@ -3,7 +3,39 @@ adae <- adae_raw
 adae$DCSREAS[is.na(adae$DCSREAS)] <- "ADVERSE EVENT"
 
 test_that("Table 12 generation works with default values", {
-  result <- make_table_12(adae = adae, alt_counts_df = adsl)
+  withr::local_options(list(width = 150))
+
+  expect_warning(result <- make_table_12(adae, adsl))
+  res <- expect_silent(result)
+  expect_snapshot(res$table |> as.data.frame())
+  expect_snapshot(res$ard)
+
+  # no ARD
+  expect_warning(result2 <- make_table_12(adae, adsl, return_ard = FALSE))
+  res2 <- expect_silent(result2)
+
+  # tables the same
+  expect_identical(res$table, res2)
+})
+
+# gtsummary ----
+
+test_that("Table 12 generation works with gtsummary with custom values", {
+  withr::local_options(list(width = 150))
+
+  result <- make_table_12_gtsummary(
+    df = adae,
+    denominator = adsl
+  )
+
+  res <- expect_silent(result)
+  expect_snapshot(res |> as.data.frame())
+})
+
+# rtables ----
+
+test_that("Table 12 generation works with default values", {
+  result <- make_table_12_rtables(df = adae, alt_counts_df = adsl)
 
   res <- expect_silent(result)
   expect_snapshot(res)
@@ -11,8 +43,8 @@ test_that("Table 12 generation works with default values", {
 
 test_that("Table 12 generation works with custom values", {
   adae <- var_relabel(adae, AEDECOD = "Preferred Term")
-  result <- make_table_12(
-    adae = adae,
+  result <- make_table_12_rtables(
+    df = adae,
     alt_counts_df = adsl,
     annotations = list(
       title = paste(
@@ -41,7 +73,7 @@ test_that("Table 12 generation works with custom values", {
 
 test_that("Table 12 generation works with risk difference column", {
   risk_diff <- list(arm_x = "B: Placebo", arm_y = "A: Drug X")
-  result <- make_table_12(adae, adsl, risk_diff = risk_diff)
+  result <- make_table_12_rtables(adae, adsl, risk_diff = risk_diff)
 
   res <- expect_silent(result)
   expect_snapshot(res)
