@@ -15,7 +15,6 @@ format: html
   <summary>gtsummary Table Setup</summary>
 ```{r tbl2, eval=FALSE, echo=TRUE}
 # Load Libraries & Data
-library(dplyr)
 library(cardinal)
 
 adsl <- random.cdisc.data::cadsl
@@ -24,8 +23,8 @@ adae <- random.cdisc.data::cadae
 # Pre-Processing - Ensure required variables fmqsc_var and fmqnam_var exist in adae
 set.seed(1)
 adae <- adae |>
-  rename(FMQ01SC = SMQ01SC) |>
-  mutate(
+  dplyr::rename(FMQ01SC = SMQ01SC) |>
+  dplyr::mutate(
     AESER = sample(c("Y", "N"), size = nrow(adae), replace = TRUE),
     FMQ01NAM = sample(c("FMQ1", "FMQ2", "FMQ3"), size = nrow(adae), replace = TRUE)
   )
