@@ -11,7 +11,8 @@ ard_table_32(
   id_var = "USUBJID",
   arm_var = "ARM",
   saffl_var = "SAFFL",
-  lbl_overall = NULL
+  lbl_overall = NULL,
+  subset = NULL
 )
 }
 \description{

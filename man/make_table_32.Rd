@@ -12,7 +12,8 @@ make_table_32(
   id_var = "USUBJID",
   arm_var = "ARM",
   saffl_var = "SAFFL",
-  lbl_overall = NULL
+  lbl_overall = NULL,
+  subset = NULL
 )
 }
 \arguments{
@@ -30,6 +31,8 @@ make_table_32(
 
 \item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
 the given value as the column label.}
+
+\item{subset}{(\code{string})\cr selection of both PARAMCD and definition of baseline.}
 }
 \value{
 A \code{gtsummary} table and, if \code{return_ard = TRUE}, an ARD.

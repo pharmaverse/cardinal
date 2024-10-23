@@ -8,6 +8,7 @@
 #'
 #' @inheritParams tbl_make_table_32
 #' @inheritParams argument_convention
+#' @param subset (`string`)\cr selection of both PARAMCD and definition of baseline.
 #'
 #' @return A `gtsummary` table and, if `return_ard = TRUE`, an ARD.
 #'   If `return_ard = TRUE`, they will be returned as a list with named elements `table` and `ard`.
@@ -28,14 +29,20 @@ make_table_32 <- function(df,
                           id_var = "USUBJID",
                           arm_var = "ARM",
                           saffl_var = "SAFFL",
-                          lbl_overall = NULL) {
+                          lbl_overall = NULL,
+                          subset = NULL) {
+
+  if (is.null(subset)) {
+    subset <- as.character(formals(preproc_df_table_32)$subset)
+  }
   ard <- ard_table_32(
     df = df,
     denominator = denominator,
     id_var = id_var,
     arm_var = arm_var,
     saffl_var = saffl_var,
-    lbl_overall = lbl_overall
+    lbl_overall = lbl_overall,
+    subset = subset
   )
 
   tbl <- make_table_32_gtsummary(
@@ -45,7 +52,8 @@ make_table_32 <- function(df,
     id_var = id_var,
     arm_var = arm_var,
     saffl_var = saffl_var,
-    lbl_overall = lbl_overall
+    lbl_overall = lbl_overall,
+    subset = subset
   )
 
   if (return_ard) {
@@ -66,8 +74,13 @@ preproc_df_table_32 <- function(df,
                                 arm_var = "ARM",
                                 saffl_var = "SAFFL",
                                 subset = "PARAMCD == 'DIABP' & AVISITN >= 1") {
+  subset_c <-
+    sapply(
+      unlist(admiraldev::extract_vars(rlang::parse_exprs(subset))),
+      as.character
+    )
   assert_subset(c(
-    saffl_var, "PARAMCD", "AVAL", "AVALU", arm_var, id_var
+    saffl_var, "PARAMCD", "AVAL", "AVALU", arm_var, id_var, subset_c
   ), names(df))
   assert_flag_variables(df, saffl_var)
 
@@ -128,8 +141,12 @@ ard_table_32 <- function(df,
                          id_var = "USUBJID",
                          arm_var = "ARM",
                          saffl_var = "SAFFL",
-                         lbl_overall = NULL) {
-  df <- preproc_df_table_32(df, denominator, id_var, arm_var, saffl_var)
+                         lbl_overall = NULL,
+                         subset = NULL) {
+  if (is.null(subset)) {
+    subset <- as.character(formals(preproc_df_table_32)$subset)
+  }
+  df <- preproc_df_table_32(df, denominator, id_var, arm_var, saffl_var, subset)
 
   ard <-
     ard_stack(
@@ -186,8 +203,12 @@ make_table_32_gtsummary <- function(df,
                                     id_var = "USUBJID",
                                     arm_var = "ARM",
                                     saffl_var = "SAFFL",
-                                    lbl_overall = NULL) {
-  df <- preproc_df_table_32(df, denominator, id_var, arm_var, saffl_var)
+                                    lbl_overall = NULL,
+                                    subset = NULL) {
+  if (is.null(subset)) {
+    subset <- as.character(formals(preproc_df_table_32)$subset)
+  }
+  df <- preproc_df_table_32(df, denominator, id_var, arm_var, saffl_var, subset)
   avalu <- unique(df$AVALU)[1]
 
   tbl <- ard |>
@@ -212,8 +233,12 @@ make_table_32_rtables <- function(df,
                                   lbl_overall = NULL,
                                   risk_diff = NULL,
                                   prune_0 = FALSE,
-                                  annotations = NULL) {
-  df <- preproc_df_table_32(df, alt_counts_df, id_var, arm_var, saffl_var)
+                                  annotations = NULL,
+                                  subset = NULL) {
+  if (is.null(subset)) {
+    subset <- as.character(formals(preproc_df_table_32)$subset)
+  }
+  df <- preproc_df_table_32(df, alt_counts_df, id_var, arm_var, saffl_var, subset)
   alt_counts_df <- alt_counts_df_preproc(alt_counts_df, id_var, arm_var, saffl_var)
   avalu <- unique(df$AVALU)[1]
 

@@ -13,7 +13,8 @@ make_table_32_gtsummary(
   id_var = "USUBJID",
   arm_var = "ARM",
   saffl_var = "SAFFL",
-  lbl_overall = NULL
+  lbl_overall = NULL,
+  subset = NULL
 )
 
 make_table_32_rtables(
@@ -26,7 +27,8 @@ make_table_32_rtables(
   lbl_overall = NULL,
   risk_diff = NULL,
   prune_0 = FALSE,
-  annotations = NULL
+  annotations = NULL,
+  subset = NULL
 )
 }
 \arguments{
