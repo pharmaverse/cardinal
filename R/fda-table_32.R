@@ -31,7 +31,6 @@ make_table_32 <- function(df,
                           saffl_var = "SAFFL",
                           lbl_overall = NULL,
                           subset = NULL) {
-
   if (is.null(subset)) {
     subset <- as.character(formals(preproc_df_table_32)$subset)
   }
