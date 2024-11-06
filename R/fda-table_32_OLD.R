@@ -25,7 +25,7 @@
 #' @export
 make_table_32 <- function(df,
                           denominator = NULL,
-                          return_ard = FALSE,
+                          return_ard = TRUE,
                           id_var = "USUBJID",
                           arm_var = "ARM",
                           saffl_var = "SAFFL",
@@ -34,48 +34,32 @@ make_table_32 <- function(df,
   if (is.null(subset)) {
     subset <- as.character(formals(preproc_df_table_32)$subset)
   }
+  ard <- ard_table_32(
+    df = df,
+    denominator = denominator,
+    id_var = id_var,
+    arm_var = arm_var,
+    saffl_var = saffl_var,
+    lbl_overall = lbl_overall,
+    subset = subset
+  )
 
-  if (is.null(subset)) {
-    subset <- as.character(formals(preproc_df_table_32)$subset)
-  }
-  df <- preproc_df_table_32(df, denominator, id_var, arm_var, saffl_var, subset)
-  avalu <- unique(df$AVALU)[1]
-
-  df <- df %>% select(-id_var, -AVALU)
-
-  tbl_gts <- df %>%
-    tbl_summary(
-      by = arm_var,
-      statistic = list(all_categorical() ~ "{n} ({p}%)"),
-      digits = everything() ~ c(0, 1),
-      missing = "no"
-    ) %>%
-    modify_header(label ~ paste0("**Diastolic Blood Pressure (", avalu, ")**")) %>%
-    modify_header(all_stat_cols() ~ "**{level}**  \nN = {n}") %>%
-    gtsummary::modify_column_alignment(columns = all_stat_cols(), align = "right")
-
-  if (!is.null(lbl_overall)) {
-    tbl_gts <- tbl_gts %>%
-      add_overall(last = TRUE, col_label = paste0("**", lbl_overall, "**  \n N = {n}"))
-  }
-
-  tbl_gts <- tbl_gts %>% modify_footnote(update = everything() ~ NA)
-
-  tbl <- gtsummary::with_gtsummary_theme(
-    x = gtsummary::theme_gtsummary_compact(),
-    expr = as_gt(tbl_gts)
+  tbl <- make_table_32_gtsummary(
+    df = df,
+    ard = ard,
+    denominator = denominator,
+    id_var = id_var,
+    arm_var = arm_var,
+    saffl_var = saffl_var,
+    lbl_overall = lbl_overall,
+    subset = subset
   )
 
   if (return_ard) {
-    ard <- gtsummary::gather_ard(tbl_gts)
-    ard <- ard$tbl_summary
     return(list(table = tbl, ard = ard))
-  }
-
-  else {
+  } else {
     return(tbl)
   }
-
 }
 
 #' Pre-Process Data for Table 32 Creation
