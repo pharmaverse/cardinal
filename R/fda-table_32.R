@@ -68,7 +68,6 @@ make_table_32 <- function(df,
 
   if (return_ard) {
     ard <- gtsummary::gather_ard(tbl_gts)
-    ard <- ard$tbl_summary
     return(list(table = tbl, ard = ard))
   }
 
@@ -140,40 +139,6 @@ preproc_df_table_32 <- function(df,
   df
 }
 
-#' Make ARD: Table 32
-#'
-#' @examples
-#' adsl <- random.cdisc.data::cadsl
-#' advs <- random.cdisc.data::cadvs
-#'
-#' ard <- cardinal:::ard_table_32(df = advs, denominator = adsl)
-#' ard
-#'
-#' @keywords internal
-#' @name ard_make_table_32
-ard_table_32 <- function(df,
-                         denominator = NULL,
-                         id_var = "USUBJID",
-                         arm_var = "ARM",
-                         saffl_var = "SAFFL",
-                         lbl_overall = NULL,
-                         subset = NULL) {
-  if (is.null(subset)) {
-    subset <- as.character(formals(preproc_df_table_32)$subset)
-  }
-  df <- preproc_df_table_32(df, denominator, id_var, arm_var, saffl_var, subset)
-
-  ard <-
-    ard_stack(
-      data = df,
-      ard_dichotomous(variables = c("L60", "G60", "G90", "G110", "GE120")),
-      .by = all_of(arm_var),
-      .attributes = TRUE,
-      .total_n = TRUE
-    )
-
-  ard
-}
 
 #' Engine-Specific Functions: Table 32
 #'
@@ -197,46 +162,9 @@ ard_table_32 <- function(df,
 #' adsl <- random.cdisc.data::cadsl
 #' advs <- random.cdisc.data::cadvs
 #'
-#' # gtsummary table --------------
-#' ard <- cardinal:::ard_table_32(df = advs, denominator = adsl)
-#' tbl_gtsummary <- cardinal::make_table_32_gtsummary(
-#'   df = advs,
-#'   ard = ard,
-#'   denominator = adsl
-#' )
-#' tbl_gtsummary
-#'
 #' # rtables table ----------------
 #' tbl_rtables <- cardinal::make_table_32_rtables(df = advs, alt_counts_df = adsl)
 #' tbl_rtables
-#'
-#' @export
-#' @name tbl_make_table_32
-make_table_32_gtsummary <- function(df,
-                                    ard,
-                                    denominator = NULL,
-                                    id_var = "USUBJID",
-                                    arm_var = "ARM",
-                                    saffl_var = "SAFFL",
-                                    lbl_overall = NULL,
-                                    subset = NULL) {
-  if (is.null(subset)) {
-    subset <- as.character(formals(preproc_df_table_32)$subset)
-  }
-  df <- preproc_df_table_32(df, denominator, id_var, arm_var, saffl_var, subset)
-  avalu <- unique(df$AVALU)[1]
-
-  tbl <- ard |>
-    tbl_ard_summary(
-      by = all_of(arm_var),
-      missing = "no"
-    ) |>
-    modify_header(label ~ paste0("**Diastolic Blood Pressure  \n (", avalu, ")**")) |>
-    modify_header(all_stat_cols() ~ "**{level}**  \nN = {n}")
-
-  tbl
-}
-
 #' @export
 #' @rdname tbl_make_table_32
 make_table_32_rtables <- function(df,
