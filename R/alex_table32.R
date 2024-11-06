@@ -35,7 +35,7 @@ ard <- result_01$ard
 ## By groups -----
 ard_tbl_summary <- ard$tbl_summary
 ## Overall -----
-ard_overall     <- ard$add_overall
+ard_overall <- ard$add_overall
 
 ## Combine the ARDs
 ard_combined <-
