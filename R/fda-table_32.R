@@ -70,12 +70,9 @@ make_table_32 <- function(df,
     ard <- gtsummary::gather_ard(tbl_gts)
     ard <- ard$tbl_summary
     return(list(table = tbl, ard = ard))
-  }
-
-  else {
+  } else {
     return(tbl)
   }
-
 }
 
 #' Pre-Process Data for Table 32 Creation
