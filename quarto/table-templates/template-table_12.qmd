@@ -2,6 +2,11 @@
 title: FDA Table 12
 subtitle: Patients With Adverse Events Leading to Treatment Discontinuation by System Organ Class and Preferred Term, Safety Population, Pooled Analyses
 format: html
+knitr:
+  opts_chunk: 
+    R.options:
+      max.print: 999
+      width: 999
 ---
 
 ::: panel-tabset

@@ -2,6 +2,11 @@
 title: FDA Table 11
 subtitle: Patients with FDA Medical Query (Narrow) Leading to Treatment Discontinuation, Safety Population, Pooled Analyses
 format: html
+knitr:
+  opts_chunk: 
+    R.options:
+      max.print: 999
+      width: 999
 ---
 
 ::: panel-tabset
