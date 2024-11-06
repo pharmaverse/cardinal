@@ -1,7 +1,7 @@
 #' FDA Table 4: Patient Disposition, Pooled Analyses
 #'
 #' @details
-#' * `df` must contain `EOTSTT`, `DCTREAS`, `EOSSTT`, `DCSREAS` and the variables specified by `arm_var`, `id_var`,
+#' * `df` must contain `EOTSTT`, `DCSREAS`, `EOSSTT`, `DCSREAS` and the variables specified by `arm_var`, `id_var`,
 #'   and `pop_vars`.
 #' * If specified, `alt_counts_df` must contain the variable specified by `arm_var`, `id_var`, and `pop_vars`.
 #' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
@@ -28,8 +28,7 @@
 #'       "ADVERSE EVENT", "LACK OF EFFICACY", "PROTOCOL VIOLATION",
 #'       "DEATH", "WITHDRAWAL BY PARENT/GUARDIAN"
 #'     ), DCSREAS, "OTHER")
-#'   ) %>%
-#'   mutate(DCTREAS = DCSREAS)
+#'   )
 #'
 #' tbl <- make_table_04(
 #'   df = adsl, pop_vars = c("RANDFL", "ITTFL", "SAFFL", "PPROTFL"),
@@ -53,7 +52,7 @@ make_table_04 <- function(df,
                           annotations = NULL) {
   assert_subset(c(
     id_var, arm_var, pop_vars,
-    "EOTSTT", "DCTREAS", "EOSSTT", "DCSREAS"
+    "EOTSTT", "DCSREAS", "EOSSTT", "DCSREAS"
   ), names(df))
   assert_flag_variables(df, pop_vars)
 
@@ -64,12 +63,12 @@ make_table_04 <- function(df,
     mutate(
       across(all_of(pop_vars), ~ with_label(. == "Y", lbl_pop_vars[match(cur_column(), pop_vars)])),
       DISCSD = with_label(EOTSTT == "DISCONTINUED", "Discontinued study drug"),
-      DISCSD_AE = with_label(EOTSTT == "DISCONTINUED" & DCTREAS == "ADVERSE EVENT", "Adverse event"),
-      DISCSD_LOE = with_label(EOTSTT == "DISCONTINUED" & DCTREAS == "LACK OF EFFICACY", "Lack of efficacy"),
-      DISCSD_PD = with_label(EOTSTT == "DISCONTINUED" & DCTREAS == "PROTOCOL DEVIATION", "Protocol deviation"),
-      DISCSD_DT = with_label(EOTSTT == "DISCONTINUED" & DCTREAS == "DEATH", "Death"),
-      DISCSD_WBS = with_label(EOTSTT == "DISCONTINUED" & DCTREAS == "WITHDRAWAL BY SUBJECT", "Withdrawal by subject"),
-      DISCSD_OTH = with_label(EOTSTT == "DISCONTINUED" & DCTREAS == "OTHER", "Other"),
+      DISCSD_AE = with_label(EOTSTT == "DISCONTINUED" & DCSREAS == "ADVERSE EVENT", "Adverse event"),
+      DISCSD_LOE = with_label(EOTSTT == "DISCONTINUED" & DCSREAS == "LACK OF EFFICACY", "Lack of efficacy"),
+      DISCSD_PD = with_label(EOTSTT == "DISCONTINUED" & DCSREAS == "PROTOCOL DEVIATION", "Protocol deviation"),
+      DISCSD_DT = with_label(EOTSTT == "DISCONTINUED" & DCSREAS == "DEATH", "Death"),
+      DISCSD_WBS = with_label(EOTSTT == "DISCONTINUED" & DCSREAS == "WITHDRAWAL BY SUBJECT", "Withdrawal by subject"),
+      DISCSD_OTH = with_label(EOTSTT == "DISCONTINUED" & DCSREAS == "OTHER", "Other"),
       DISCS = with_label(EOSSTT == "DISCONTINUED", "Discontinued study"),
       DISCS_DT = with_label(EOSSTT == "DISCONTINUED" & DCSREAS == "DEATH", "Death"),
       DISCS_LFU = with_label(EOSSTT == "DISCONTINUED" & DCSREAS == "LOST TO FOLLOW-UP", "Lost to follow-up"),

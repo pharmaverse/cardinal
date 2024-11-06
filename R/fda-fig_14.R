@@ -103,7 +103,7 @@ make_fig_14 <- function(df,
     ) +
     labs(
       title = annotations[["title"]],
-      subtitle = annotations[["subtitle"]],
+      subtitle = annotations[["subtitles"]],
       caption = annotations[["caption"]],
       x = x_lab,
       y = y_lab

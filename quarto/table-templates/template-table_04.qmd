@@ -9,11 +9,11 @@ format: html
 
 ![](../assets/images/screenshots/table_04.png){fig-align="center"}
 
-## rtables/tern Table
+## rtables Table
 
 ```{r tbl, message=FALSE, warning=FALSE}
 # Load Libraries & Data
-library(falcon)
+library(cardinal)
 library(dplyr)
 
 adsl <- random.cdisc.data::cadsl %>%
@@ -25,8 +25,7 @@ adsl <- random.cdisc.data::cadsl %>%
       "ADVERSE EVENT", "LACK OF EFFICACY", "PROTOCOL VIOLATION",
       "DEATH", "WITHDRAWAL BY PARENT/GUARDIAN"
     ), DCSREAS, "OTHER")
-  ) %>%
-  mutate(DCTREAS = DCSREAS)
+  )
 
 # Output Table
 risk_diff <- list(arm_x = "B: Placebo", arm_y = "A: Drug X") # optional
@@ -38,7 +37,7 @@ tbl <- make_table_04(
 tbl
 ```
 
-## rtables/tern Table Setup
+## rtables Table Setup
 
 ```{r tbl, eval=FALSE, echo=TRUE}
 ```
@@ -50,19 +49,21 @@ tbl
 ------------------------------------------------------------------------
 
 Required variables:
--   **`df`**: `USUBJID`, `EOTSTT`, `DCTREAS`, `EOSSTT`, `DCSREAS` and the variables specified by `arm_var` and `pop_var`.
+
+-   **`df`**: `USUBJID`, `EOTSTT`, `DCSREAS`, `EOSSTT`, `DCSREAS` and the variables specified by `arm_var` and `pop_var`.
+
 -   **`alt_counts_df`** (if specified): `USUBJID`, and the variable specified by `arm_var` and `pop_var`.
 
-| Argument        | Description                                                                                                                                                                                                                                            | Default      |
+| **Argument**    | **Description**                                                                                                                                                                                                                                        | **Default**              |
 |:------------------|:---------------------------------|:------------------|
-| `df`            | (`data.frame`) Dataset (typically ADSL) required to build table.                                                                                                                                                                                       | *No default*                                |
-| `alt_counts_df` | (`character`) Alternative dataset used only to calculate column counts.                                                                                                                                                                                | `NULL`                                      |
-| `arm_var`       | (`character`) Arm variable used to split table into columns.                                                                                                                                                                                           | `"ARM"`                                     |
-| `pop_vars`       | (named `list` of `character`) List of Population variables to use in Table                                                                                                                                                                              | `c("SAFFL")`                               |
-| `lbl_pop_vars`   | (named `list` of `character`) List of row labels for populations defined by `pop_vars`                                                                                                                                                                   | `c("Safety population")`                   |
-| `lbl_overall`   | (`character`) If specified, an overall column will be added to the table with the given value as the column label.                                                                                                                                       | `NULL`                                      |
-| `prune_0`       | (`flag`) Whether all-zero rows should be removed from the table.                                                                                                                                                                                       | `FALSE`                                      |
-| `annotations`   | (named `list` of `character`) List of annotations to add to the table. Valid annotation types are `title`, `subtitles`, `main_footer`, and `prov_footer.` Each name-value pair should use the annotation type as name and the desired string as value. | `NULL`                                      |
+| `df`            | (`data.frame`) Dataset (typically ADSL) required to build table.                                                                                                                                                                                       | *No default*             |
+| `alt_counts_df` | (`character`) Alternative dataset used only to calculate column counts.                                                                                                                                                                                | `NULL`                   |
+| `arm_var`       | (`character`) Arm variable used to split table into columns.                                                                                                                                                                                           | `"ARM"`                  |
+| `pop_vars`      | (named `list` of `character`) List of Population variables to use in Table                                                                                                                                                                             | `c("SAFFL")`             |
+| `lbl_pop_vars`  | (named `list` of `character`) List of row labels for populations defined by `pop_vars`                                                                                                                                                                 | `c("Safety population")` |
+| `lbl_overall`   | (`character`) If specified, an overall column will be added to the table with the given value as the column label.                                                                                                                                     | `NULL`                   |
+| `prune_0`       | (`flag`) Whether all-zero rows should be removed from the table.                                                                                                                                                                                       | `FALSE`                  |
+| `annotations`   | (named `list` of `character`) List of annotations to add to the table. Valid annotation types are `title`, `subtitles`, `main_footer`, and `prov_footer.` Each name-value pair should use the annotation type as name and the desired string as value. | `NULL`                   |
 
-Source code for this function is available [here](https://github.com/pharmaverse/falcon/blob/main/R/fda-table_04.R).
+Source code for this function is available [here](https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_04.R).
 :::

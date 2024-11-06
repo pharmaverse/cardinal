@@ -64,7 +64,7 @@ FDA Table 4: Patient Disposition, Pooled Analyses
 }
 \details{
 \itemize{
-\item \code{df} must contain \code{EOTSTT}, \code{DCTREAS}, \code{EOSSTT}, \code{DCSREAS} and the variables specified by \code{arm_var}, \code{id_var},
+\item \code{df} must contain \code{EOTSTT}, \code{DCSREAS}, \code{EOSSTT}, \code{DCSREAS} and the variables specified by \code{arm_var}, \code{id_var},
 and \code{pop_vars}.
 \item If specified, \code{alt_counts_df} must contain the variable specified by \code{arm_var}, \code{id_var}, and \code{pop_vars}.
 \item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
@@ -85,8 +85,7 @@ adsl <- random.cdisc.data::cadsl \%>\%
       "ADVERSE EVENT", "LACK OF EFFICACY", "PROTOCOL VIOLATION",
       "DEATH", "WITHDRAWAL BY PARENT/GUARDIAN"
     ), DCSREAS, "OTHER")
-  ) \%>\%
-  mutate(DCTREAS = DCSREAS)
+  )
 
 tbl <- make_table_04(
   df = adsl, pop_vars = c("RANDFL", "ITTFL", "SAFFL", "PPROTFL"),

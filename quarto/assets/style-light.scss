@@ -1,15 +1,17 @@
 /*-- scss:defaults --*/
 
-$toc-color: #2E8B57;
+$toc-color: #A3070B;
+$navbar-bg: #F8F9FA;
+$navbar-fg: #212529;
 
 /*-- scss:rules --*/
 
 /* css styles */
-.navbar {
-  background-color: #F8F9FA;
+.navbar .navbar-brand {
+  color: #212529 !important;
 }
 
-.navbar .navbar-brand {
+.navbar .navbar-tools {
   color: #212529 !important;
 }
 
@@ -18,11 +20,9 @@ $toc-color: #2E8B57;
 }
 
 .panel-tabset li.nav-item a.nav-link {
-  color: #3CB371;
+  color: #E21318;
 }
 
 .panel-tabset li.nav-item a.nav-link.active {
-  color: #2E8B57;
+  color: #A3070B;
 }
-
-
