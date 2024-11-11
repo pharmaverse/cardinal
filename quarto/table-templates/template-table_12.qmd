@@ -2,11 +2,6 @@
 title: FDA Table 12
 subtitle: Patients With Adverse Events Leading to Treatment Discontinuation by System Organ Class and Preferred Term, Safety Population, Pooled Analyses
 format: html
-knitr:
-  opts_chunk: 
-    R.options:
-      max.print: 999
-      width: 999
 ---
 
 ::: panel-tabset
@@ -68,7 +63,7 @@ Source code for this function is available [here](https://github.com/pharmaverse
 
 <details>
   <summary>ARD Setup</summary>
-```{r tbl1, eval=FALSE, echo=TRUE}
+```{r tbl1, echo=TRUE, message=FALSE, warning=FALSE, results='hide'}
 # Load Libraries & Data
 library(cardinal)
 
@@ -89,7 +84,8 @@ result$ard
 ```
 </details>
 
-```{r tbl1, message=FALSE, warning=FALSE, eval=TRUE}
+```{r tbl1-print, echo=FALSE}
+print(result$ard, columns = "all", n = Inf)
 ```
 
 ## rtables Table
