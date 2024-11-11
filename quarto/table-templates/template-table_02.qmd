@@ -36,7 +36,7 @@ anl <- left_join(adsl, advs, by = "USUBJID")
 
 # Output Table
 make_table_02(
-  data = anl,
+  df = anl,
   vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY", "AVAL"),
   lbl_vars = c(
     "Sex", "Age, years", "Age Group, years", "Race", "Ethnicity",
@@ -94,7 +94,7 @@ make_table_02(
 
 Required variables:
 
--   **`data`**: `SAFFL` and the variables specified by `vars` and `arm_var`.
+-   **`df`**: `SAFFL` and the variables specified by `vars` and `arm_var`.
 -   **`alt_counts_df`** (if specified and `tplyr_raw = FALSE`): `SAFFL`, `USUBJID`, and the variable specified by `arm_var`.
 
 | **Argument**     | **Description**                                                                                                                                          | **Default**                                              |

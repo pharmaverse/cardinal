@@ -5,19 +5,20 @@
 \title{FDA Table 2: Baseline Demographic and Clinical Characteristics, Safety Population, Pooled Analyses}
 \usage{
 make_table_02(
-  data,
+  df,
   show_colcounts = TRUE,
   arm_var = "ARM",
   saffl_var = "SAFFL",
-  vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY"),
-  lbl_vars = formatters::var_labels(data, fill = TRUE)[vars],
+  vars = c("SEX", "AGE", "RACE", "ETHNIC", "COUNTRY"),
+  lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
   lbl_overall = "Total Population",
   na_rm = FALSE,
-  ...,
   return_ard = TRUE
 )
 }
 \arguments{
+\item{df}{(\code{data.frame})\cr dataset required to build table.}
+
 \item{show_colcounts}{(\code{flag})\cr Whether column counts should be printed. Boolean.}
 
 \item{arm_var}{(\code{character})\cr Name of the treatment arm variable used to split table into columns.}
@@ -33,10 +34,12 @@ in the table. Labels should be ordered according to the order of variables in \c
 the given value as the column label.}
 
 \item{na_rm}{(\code{flag})\cr whether \code{NA} levels should be removed from the table.}
+
+\item{return_ard}{(\code{flag})\cr whether an ARD should be returned. Defaults to \code{TRUE}.}
 }
 \value{
 \itemize{
-\item \code{make_table_02} returns a list containing a gtsummary table object.
+\item \code{make_table_02} returns a list containing a \code{gtsummary} table object.
 The intermediary \code{ARD} object can also be returned with \code{return_ard} set to \code{TRUE}.
 }
 }
@@ -45,7 +48,7 @@ FDA Table 2: Baseline Demographic and Clinical Characteristics, Safety Populatio
 }
 \details{
 \itemize{
-\item \code{data} must contain the variables specified by \code{vars}.
+\item \code{df} must contain the variables specified by \code{vars}.
 \item \code{return_ard} set to \code{TRUE} or \code{FALSE}; whether the intermediate ARD object should be returned.
 }
 }
@@ -65,7 +68,7 @@ adsl <- random.cdisc.data::cadsl \%>\%
     AGE >= 75 ~ ">=75"
   )))
 
-tbl <- make_table_02(data = adsl)
+tbl <- make_table_02(df = adsl)
 tbl
 
 }

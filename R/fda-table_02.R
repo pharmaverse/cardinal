@@ -1,7 +1,7 @@
 #' FDA Table 2: Baseline Demographic and Clinical Characteristics, Safety Population, Pooled Analyses
 #'
 #' @details
-#' * `data` must contain the variables specified by `vars`.
+#' * `df` must contain the variables specified by `vars`.
 #' * `return_ard` set to `TRUE` or `FALSE`; whether the intermediate ARD object should be returned.
 #'
 #' @inheritParams argument_convention
@@ -26,26 +26,25 @@ NULL
 #'     AGE >= 75 ~ ">=75"
 #'   )))
 #'
-#' tbl <- make_table_02(data = adsl)
+#' tbl <- make_table_02(df = adsl)
 #' tbl
 #'
 #' @export
 
-make_table_02 <- function(data,
+make_table_02 <- function(df,
                           show_colcounts = TRUE,
                           arm_var = "ARM",
                           saffl_var = "SAFFL",
                           vars = c("SEX", "AGE", "RACE", "ETHNIC", "COUNTRY"),
-                          lbl_vars = formatters::var_labels(data, fill = TRUE)[vars],
+                          lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
                           lbl_overall = "Total Population",
                           na_rm = FALSE,
-                          ...,
                           return_ard = TRUE) {
   # check data viability
-  checkmate::assert_subset(c(vars, arm_var, saffl_var), names(data))
-  assert_flag_variables(data, saffl_var)
+  checkmate::assert_subset(c(vars, arm_var, saffl_var), names(df))
+  assert_flag_variables(df, saffl_var)
 
-  df <- data %>%
+  df <- df %>%
     filter(.data[[saffl_var]] == "Y") %>%
     select(all_of(c(vars, arm_var)))
 
