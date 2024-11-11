@@ -118,16 +118,8 @@ tbl <- make_table_02(
   vars = c("SEX", "AGE", "RACE", "COUNTRY", "AVAL"),
   lbl_vars = c("Sex", "Age, years", "Race", "Country of Participation", "Baseline Temperature (C)"),
   lbl_overall = "Total\nPopulation",
-  na_rm = TRUE,
-  annotations = list(
-    title = "Table 2. Baseline Demographic and Clinical Characteristics Safety Population, Pooled Analyses",
-    main_footer = "Source: [include Applicant source, datasets and/or software tools used].",
-    prov_footer = paste(
-      "Abbreviations: N, number of patients in treatment arm;",
-      "n, number of patients with given characteristic; SD, standard deviation"
-    )
+  na_rm = TRUE
   )
-)
 tbl
 ```
 
