@@ -1,12 +1,6 @@
 ---
 title: FDA Table 5
 subtitle: Duration of Treatment Exposure, Safety Population, Pooled Analyses
-format: html
-knitr:
-  opts_chunk: 
-    R.options:
-      max.print: 999
-      width: 999
 ---
 
 ::: panel-tabset
@@ -63,7 +57,7 @@ Source code for this function is available [here](https://github.com/pharmaverse
 
 <details>
   <summary>ARD Setup</summary>
-```{r tbl1, eval=FALSE, echo=TRUE}
+```{r tbl1, echo=TRUE, message=FALSE, warning=FALSE, results='hide'}
 # Load Libraries & Data
 library(cardinal)
 
@@ -77,7 +71,9 @@ result$ard
 ```
 </details>
 
-```{r tbl1, message=FALSE, warning=FALSE, eval=TRUE}
+```{r tbl1-print, echo=FALSE}
+options(width = 9999)
+print(result$ard, columns = "all", n = Inf)
 ```
 
 ## rtables Table
