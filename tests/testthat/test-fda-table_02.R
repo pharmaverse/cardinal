@@ -7,7 +7,7 @@ test_that("Table 02 generation works with default values", {
 
   result <- make_table_02(adsl)
   expect_snapshot(result$tbl |> as.data.frame())
-  })
+})
 
 test_that("Table 02 generation works with custom values", {
   options(pillar.print_max = 50, width = 200)
