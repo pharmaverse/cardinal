@@ -9,7 +9,7 @@ make_table_02(
   show_colcounts = TRUE,
   arm_var = "ARM",
   saffl_var = "SAFFL",
-  vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY"),
+  vars = c("SEX", "AGE", "RACE", "ETHNIC", "COUNTRY"),
   lbl_vars = formatters::var_labels(data, fill = TRUE)[vars],
   lbl_overall = "Total Population",
   na_rm = FALSE,
@@ -36,7 +36,7 @@ the given value as the column label.}
 }
 \value{
 \itemize{
-\item \code{make_table_02} returns a list containing a gtsummary table object.
+\item \code{make_table_02} returns a list containing a \code{gtsummary} table object.
 The intermediary \code{ARD} object can also be returned with \code{return_ard} set to \code{TRUE}.
 }
 }
