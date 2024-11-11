@@ -36,7 +36,7 @@ anl <- left_join(adsl, advs, by = "USUBJID")
 
 # Output Table
 make_table_02(
-  df = anl,
+  data = anl,
   vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY", "AVAL"),
   lbl_vars = c(
     "Sex", "Age, years", "Age Group, years", "Race", "Ethnicity",
@@ -45,110 +45,7 @@ make_table_02(
 )
 ```
 
-## rtables Table Setup
-
-```{r tbl, eval=FALSE, echo=TRUE}
-```
-
-## Function Details: `make_table_02`
-
-### `make_table_02()`
-
-------------------------------------------------------------------------
-
-Required variables:
-
--   **`df`**: The variables specified by `vars`, `arm_var`, and `saffl_var`.
--   **`alt_counts_df`** (if specified): `USUBJID` and the variables specified by `arm_var` and `saffl_var`.
-
-| **Argument**     | **Description**                                                                                                                                                                                                                                                                                                                                                                                     | **Default**                                              |
-|:-----------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------|
-| `df`             | (`data.frame`) Dataset (typically ADSL) required to build table.                                                                                                                                                                                                                                                                                                                                    | *No default*                                             |
-| `alt_counts_df`  | (`character`) Alternative dataset used only to calculate column counts.                                                                                                                                                                                                                                                                                                                             | `NULL`                                                   |
-| `show_colcounts` | (`flag`) Whether column counts should be printed.                                                                                                                                                                                                                                                                                                                                                   | `TRUE`                                                   |
-| `arm_var`        | (`character`) Arm variable used to split table into columns.                                                                                                                                                                                                                                                                                                                                        | `"ARM"`                                                  |
-| `saffl_var`      | (`character`) Flag variable used to indicate inclusion in safety population.                                                                                                                                                                                                                                                                                                                        | `"SAFFL"`                                                |
-| `vars`           | (`character`) Variables from `df` to include in the table.                                                                                                                                                                                                                                                                                                                                          | `c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY")` |
-| `lbl_vars`       | (`character`) Labels corresponding to variables in `vars` to print in the table. Labels should be ordered according to the order of variables in `vars`.                                                                                                                                                                                                                                            | `formatters::var_labels(df, fill = TRUE)[vars]`          |
-| `lbl_overall`    | (`character`) If specified, an overall column will be added to the table with the given value as the column label.                                                                                                                                                                                                                                                                                  | `"Total Population"`                                     |
-| `.stats`         | (`character`) Statistics to include in the table. Includes statistics for all variable types (only the statistics that are valid for a given variable's type will be printed). See [`tern::analyze_vars()`](https://insightsengineering.github.io/tern/main/reference/analyze_variables.html#value) for options.                                                                                    | `c("mean_sd", "median_range", "count_fraction")`         |
-| `.formats`       | (named `list` of `character`) List of formats corresponding to each value in `.stats`. Each name is a value in `.stats` and the corresponding value is the format that should be applied to that statistic. See [`formatters::list_valid_format_labels()`](https://insightsengineering.github.io/formatters/main/reference/list_valid_format_labels.html#ref-examples) for a list of valid formats. | `NULL`                                                   |
-| `prune_0`        | (`flag`) Whether all-zero rows should be removed from the table.                                                                                                                                                                                                                                                                                                                                    | `TRUE`                                                   |
-| `na_rm`          | (`flag`) Whether `NA` levels should be removed from the table.                                                                                                                                                                                                                                                                                                                                      | `FALSE`                                                  |
-| `annotations`    | (named `list` of `character`) List of annotations to add to the table. Valid annotation types are `title`, `subtitles`, `main_footer`, and `prov_footer.` Each name-value pair should use the annotation type as name and the desired string as value.                                                                                                                                              | `NULL`                                                   |
-
-Source code for this function is available [here](https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_02.R#L39).
-
-## Tplyr Table
-
-```{r tbl_tplyr, message=FALSE, warning=FALSE}
-# Load Libraries & Data
-library(cardinal)
-library(dplyr)
-
-adsl <- random.cdisc.data::cadsl
-advs <- random.cdisc.data::cadvs
-
-# Pre-Processing - Add any variables needed in your table to df
-adsl <- adsl %>%
-  mutate(AGEGR1 = as.factor(case_when(
-    AGE >= 17 & AGE < 65 ~ ">=17 to <65",
-    AGE >= 65 ~ ">=65",
-    AGE >= 65 & AGE < 75 ~ ">=65 to <75",
-    AGE >= 75 ~ ">=75"
-  )))
-
-advs <- advs %>%
-  filter(AVISIT == "BASELINE", VSTESTCD == "TEMP") %>%
-  select("USUBJID", "AVAL")
-
-anl <- left_join(adsl, advs, by = "USUBJID")
-
-# Output Table
-make_table_02_tplyr(
-  df = anl,
-  vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY", "AVAL"),
-  lbl_vars = c(
-    "Sex", "Age, years", "Age Group, years", "Race", "Ethnicity",
-    "Country of Participation", "Baseline Temperature (C)"
-  )
-)
-```
-
-## Tplyr Table Setup
-
-```{r tbl_tplyr, eval=FALSE, echo=TRUE}
-```
-
-## Function Details: `make_table_02_tplyr`
-
-### `make_table_02_tplyr()`
-
-------------------------------------------------------------------------
-
-Required variables:
-
--   **`df`**: `SAFFL` and the variables specified by `vars` and `arm_var`.
--   **`alt_counts_df`** (if specified and `tplyr_raw = FALSE`): `SAFFL`, `USUBJID`, and the variable specified by `arm_var`.
-
-| **Argument**     | **Description**                                                                                                                                                                                                         | **Default**                                              |
-|:-----------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------|
-| `df`             | (`data.frame`) Dataset (typically ADSL) required to build table.                                                                                                                                                        | *No default*                                             |
-| `alt_counts_df`  | (`character`) Alternative dataset used only to calculate column counts.                                                                                                                                                 | `NULL`                                                   |
-| `show_colcounts` | (`flag`) Whether column counts should be printed.                                                                                                                                                                       | `TRUE`                                                   |
-| `arm_var`        | (`character`) Arm variable used to split table into columns.                                                                                                                                                            | `"ARM"`                                                  |
-| `saffl_var`      | (`character`) Flag variable used to indicate inclusion in safety population.                                                                                                                                            | `"SAFFL"`                                                |
-| `vars`           | (`character`) Variables from `df` to include in the table.                                                                                                                                                              | `c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY")` |
-| `lbl_vars`       | (`character`) Labels corresponding to variables in `vars` to print in the table. Labels should be ordered according to the order of variables in `vars`.                                                                | `formatters::var_labels(df, fill = TRUE)[vars]`          |
-| `lbl_overall`    | (`character`) If specified, an overall column will be added to the table with the given value as the column label.                                                                                                      | `"Total Population"`                                     |
-| `prune_0`        | (`flag`) Whether all-zero rows should be removed from the table.                                                                                                                                                        | `TRUE`                                                   |
-| `na_rm`          | (`flag`) Whether `NA` levels should be removed from the table.                                                                                                                                                          | `FALSE`                                                  |
-| `annotations`    | (named `list` of `character`) List of annotations to add to the table. Valid annotation types are `title` and `subtitles.` Each name-value pair should use the annotation type as name and the desired string as value. | `NULL`                                                   |
-| `tplyr_raw`      | (`flag`) Whether the raw `tibble` created using `Tplyr` functions should be returned, or the table formatted using functions from `tfrmt` should be returned (default).                                                 | `FALSE`                                                  |
-
-Source code for this function is available [here](https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_02.R#L94).
-
-## gtsummary Table
+## Table
 
 ```{r tbl_gtsummary, message=FALSE, warning=FALSE}
 # Load Libraries & Data
@@ -174,7 +71,7 @@ advs <- advs %>%
 anl <- left_join(adsl, advs, by = "USUBJID")
 
 # Output Table
-make_table_02_gtsum(
+make_table_02(
   df = anl,
   vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY", "AVAL"),
   lbl_vars = c(
@@ -189,15 +86,15 @@ make_table_02_gtsum(
 ```{r tbl_gtsummary, eval=FALSE, echo=TRUE}
 ```
 
-## Function Details: `make_table_02_gtsum`
+## Function Details: `make_table_02`
 
-### `make_table_02_gtsum()`
+### `make_table_02()`
 
 ------------------------------------------------------------------------
 
 Required variables:
 
--   **`df`**: `SAFFL` and the variables specified by `vars` and `arm_var`.
+-   **`data`**: `SAFFL` and the variables specified by `vars` and `arm_var`.
 -   **`alt_counts_df`** (if specified and `tplyr_raw = FALSE`): `SAFFL`, `USUBJID`, and the variable specified by `arm_var`.
 
 | **Argument**     | **Description**                                                                                                                                          | **Default**                                              |
@@ -211,5 +108,5 @@ Required variables:
 | `lbl_vars`       | (`character`) Labels corresponding to variables in `vars` to print in the table. Labels should be ordered according to the order of variables in `vars`. | `formatters::var_labels(df, fill = TRUE)[vars]`          |
 | `lbl_overall`    | (`character`) If specified, an overall column will be added to the table with the given value as the column label.                                       | `"Total Population"`                                     |
 
-Source code for this function is available [here](https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_02.R#L257).
+Source code for this function is available [here](https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_02.R#L34).
 :::
