@@ -2,43 +2,22 @@
 % Please edit documentation in R/fda-table_02.R
 \name{make_table_02}
 \alias{make_table_02}
-\alias{make_table_02_tplyr}
-\alias{make_table_02_gtsum}
 \title{FDA Table 2: Baseline Demographic and Clinical Characteristics, Safety Population, Pooled Analyses}
 \usage{
-make_table_02(data, ..., tbl_engine = "gtsummary", return_ard = TRUE)
-
-make_table_02_tplyr(
-  df,
-  alt_counts_df = NULL,
+make_table_02(
+  data,
   show_colcounts = TRUE,
   arm_var = "ARM",
   saffl_var = "SAFFL",
   vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY"),
-  lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
+  lbl_vars = formatters::var_labels(data, fill = TRUE)[vars],
   lbl_overall = "Total Population",
   na_rm = FALSE,
-  prune_0 = TRUE,
-  annotations = NULL,
-  tplyr_raw = FALSE
-)
-
-make_table_02_gtsum(
-  df,
-  show_colcounts = TRUE,
-  arm_var = "ARM",
-  saffl_var = "SAFFL",
-  vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY"),
-  lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
-  lbl_overall = "Total Population",
-  na_rm = FALSE
+  ...,
+  return_ard = TRUE
 )
 }
 \arguments{
-\item{df}{(\code{data.frame})\cr dataset required to build table.}
-
-\item{alt_counts_df}{(\code{character})\cr alternative dataset (typically ADSL) used only to calculate column counts.}
-
 \item{show_colcounts}{(\code{flag})\cr Whether column counts should be printed. Boolean.}
 
 \item{arm_var}{(\code{character})\cr Name of the treatment arm variable used to split table into columns.}
@@ -54,29 +33,11 @@ in the table. Labels should be ordered according to the order of variables in \c
 the given value as the column label.}
 
 \item{na_rm}{(\code{flag})\cr whether \code{NA} levels should be removed from the table.}
-
-\item{prune_0}{(\code{flag})\cr Whether all-zero rows should be removed from the table. Boolean.}
-
-\item{annotations}{(named \code{list} of \code{character})\cr list of annotations to add to the table. Valid
-annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
-use the annotation type as name and the desired string as value.}
-
-\item{tplyr_raw}{(\code{flag})\cr whether the raw \code{tibble} created using \code{Tplyr} functions should be returned, or the
-table formatted using functions from \code{tfrmt} should be returned (default).}
 }
 \value{
 \itemize{
-\item \code{make_table_02} returns an object matching the selected \code{tbl_engine} argument.
+\item \code{make_table_02} returns a list containing a gtsummary table object.
 The intermediary \code{ARD} object can also be returned with \code{return_ard} set to \code{TRUE}.
-}
-
-\itemize{
-\item \code{make_table_02_tplyr} returns a \code{gt_tbl} object when \code{tplyr_raw = FALSE} (default) and
-a \code{tibble} object when \code{tplyr_raw = TRUE}.
-}
-
-\itemize{
-\item \code{make_table_02_gtsum} returns a \code{tbl_summary} object.
 }
 }
 \description{
@@ -84,25 +45,15 @@ FDA Table 2: Baseline Demographic and Clinical Characteristics, Safety Populatio
 }
 \details{
 \itemize{
-\item \code{data} must contain the variables specified by \code{continuous_vars}, and \code{categorical_vars}.
-\item \code{tbl_engine} must be one of \code{gtsummary}, \code{rtables}, \code{tplyr}.
+\item \code{data} must contain the variables specified by \code{vars}.
+\item \code{return_ard} set to \code{TRUE} or \code{FALSE}; whether the intermediate ARD object should be returned.
 }
 }
 \section{Functions}{
 \itemize{
-\item \code{make_table_02()}: Create FDA table 2 using functions from \code{rtables} and \code{tern}.
-
-\item \code{make_table_02_tplyr()}: Create FDA table 2 using functions from \code{Tplyr} and \code{tfrmt}.
-
-\item \code{make_table_02_gtsum()}: Create FDA table 2 using functions from \code{gtsummary}.
+\item \code{make_table_02()}: Create FDA table 2 using an ARD.
 
 }}
-\note{
-\itemize{
-\item \code{make_table_02_tplyr} does not currently support footnote annotations
-\item \code{make_table_02_tplyr} does not currently support \code{alt_counts_df} when \code{tplyr_raw = TRUE}.
-}
-}
 \examples{
 library(dplyr)
 
@@ -112,16 +63,9 @@ adsl <- random.cdisc.data::cadsl \%>\%
     AGE >= 65 ~ ">=65",
     AGE >= 65 & AGE < 75 ~ ">=65 to <75",
     AGE >= 75 ~ ">=75"
-  ))
+  )))
 
 tbl <- make_table_02(data = adsl)
 tbl
 
-tbl <- make_table_02_tplyr(df = adsl)
-tbl
-
-tbl <- make_table_02_gtsum(df = adsl)
-tbl
-
 }
-\keyword{Internal}
