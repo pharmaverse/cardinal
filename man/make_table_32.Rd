@@ -8,7 +8,7 @@ Postbaseline, Safety Population, Pooled Analysis}
 make_table_32(
   df,
   denominator = NULL,
-  return_ard = FALSE,
+  return_ard = TRUE,
   id_var = "USUBJID",
   arm_var = "ARM",
   saffl_var = "SAFFL",
