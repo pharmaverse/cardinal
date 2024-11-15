@@ -7,10 +7,27 @@ advs_missing[sample(seq_len(nrow(advs_missing)), 100), "AVAL"] <- NA
 advs_missing <- advs_missing |>
   df_explicit_na()
 
+# gtsummary -----
+
 test_that("Table 32 generation works with default values", {
   withr::local_options(list(width = 120))
 
-  result <- make_table_32(advs, adsl)
+  result <- make_table_32(advs)
+  res <- expect_silent(result)
+  expect_snapshot(res$table |> as.data.frame())
+  expect_snapshot(res$ard)
+
+  # no ARD
+  result2 <- make_table_32(advs, return_ard = FALSE)
+  res2 <- expect_silent(result2)
+
+  expect_identical(res$table, res2)
+})
+
+test_that("Table 32 generation works with custom values", {
+  withr::local_options(list(width = 120))
+
+  result <- make_table_32(advs, adsl, lbl_overall = "Overall")
   res <- expect_silent(result)
   expect_snapshot(res$table |> as.data.frame())
   expect_snapshot(res$ard)
@@ -22,42 +39,19 @@ test_that("Table 32 generation works with default values", {
   expect_identical(res$table, res2)
 })
 
-# gtsummary -----
-test_that("Table 32 generation works with default values", {
-  ard <-
-    cardinal:::ard_table_32(df = advs)
-
-  result <-
-    make_table_32(df = advs, return_ard = FALSE)
-  res <- expect_silent(result)
-  expect_snapshot(res |> as.data.frame())
-})
-
-test_that("Table 32 generation works with custom values", {
-  result <-
-    make_table_32(
-      df = advs,
-      lbl_overall = "Total Population",
-      return_ard = FALSE
-    )
-
-  res <- expect_silent(result)
-  expect_snapshot(res |> as.data.frame())
-})
-
 test_that("Table 32 generation missing values and ADSL", {
-  ard <- cardinal:::ard_table_32(df = advs_missing, denominator = adsl)
+  withr::local_options(list(width = 120))
 
-  result <-
-    make_table_32(
-      df = advs_missing,
-      denominator = adsl,
-      lbl_overall = "Total Population",
-      return_ard = FALSE
-    )
-
+  result <- make_table_32(advs_missing, adsl)
   res <- expect_silent(result)
-  expect_snapshot(res |> as.data.frame())
+  expect_snapshot(res$table |> as.data.frame())
+  expect_snapshot(res$ard)
+
+  # no ARD
+  result2 <- make_table_32(advs, return_ard = FALSE)
+  res2 <- expect_silent(result2)
+
+  expect_identical(res$table, res2)
 })
 
 # rtables -----

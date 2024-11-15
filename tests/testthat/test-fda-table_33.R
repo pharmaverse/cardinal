@@ -7,45 +7,53 @@ advs_missing[sample(seq_len(nrow(advs_missing)), 100), "AVAL"] <- NA
 advs_missing <- advs_missing %>%
   df_explicit_na()
 
+# gtsummary -----
+
 test_that("Table 33 generation works with default values", {
   withr::local_options(list(width = 120))
 
-  result <- make_table_33(
-    advs,
-    adsl,
-    table_engine = "rtables",
-    subset = (PARAMCD %in% c("DIABP", "SYSBP") & AVISITN >= 1)
-  )
+  result <- make_table_33(advs)
   res <- expect_silent(result)
-  expect_snapshot(res)
+  expect_snapshot(res$table |> as.data.frame())
+  expect_snapshot(res$ard)
 
-  # only table
-  result2 <- make_table_33(
-    advs,
-    adsl,
-    return_ard = FALSE,
-    table_engine = "rtables",
-    subset = (PARAMCD %in% c("DIABP", "SYSBP") & AVISITN >= 1)
-  )
+  # no ARD
+  result2 <- make_table_33(advs, return_ard = FALSE)
   res2 <- expect_silent(result2)
-  expect_snapshot(res2)
 
-  # only ard
-  result3 <- make_table_33(
-    advs,
-    adsl,
-    table_engine = NULL,
-    subset = (PARAMCD %in% c("DIABP", "SYSBP") & AVISITN >= 1)
-  )
-  res3 <- expect_silent(result3)
-  expect_snapshot(res3)
-
-  # both together
-  expect_equal(
-    result,
-    list(table = res2, ard = res3)
-  )
+  expect_identical(res$table, res2)
 })
+
+test_that("Table 33 generation works with custom values", {
+  withr::local_options(list(width = 120))
+
+  result <- make_table_33(advs, adsl, lbl_overall = "Overall")
+  res <- expect_silent(result)
+  expect_snapshot(res$table |> as.data.frame())
+  expect_snapshot(res$ard)
+
+  # no ARD
+  result2 <- make_table_33(advs, adsl, return_ard = FALSE)
+  res2 <- expect_silent(result2)
+
+  expect_identical(res$table, res2)
+})
+
+test_that("Table 33 generation missing values and ADSL", {
+  withr::local_options(list(width = 120))
+
+  result <- make_table_33(advs_missing, adsl)
+  res <- expect_silent(result)
+  expect_snapshot(res$table |> as.data.frame())
+  expect_snapshot(res$ard)
+
+  # no ARD
+  result2 <- make_table_33(advs, return_ard = FALSE)
+  res2 <- expect_silent(result2)
+
+  expect_identical(res$table, res2)
+})
+
 
 # rtables -----
 
@@ -79,7 +87,7 @@ test_that("Table 33 generation works with pruned rows", {
     adsl,
     prune_0 = TRUE,
     table_engine = "rtables",
-    subset = (PARAMCD %in% c("DIABP", "SYSBP") & AVISITN >= 1)
+    subset = "PARAMCD %in% c('DIABP', 'SYSBP') & AVISITN >= 1"
   )
 
   res <- expect_silent(result)
@@ -93,57 +101,7 @@ test_that("Table 33 generation works with risk difference column", {
     adsl,
     risk_diff = risk_diff,
     table_engine = "rtables",
-    subset = (PARAMCD %in% c("DIABP", "SYSBP") & AVISITN >= 1)
-  )
-
-  res <- expect_silent(result)
-  expect_snapshot(res)
-})
-
-# gtsummary -----
-
-test_that("Table 33 generation works with default values", {
-  result <-
-    suppressWarnings(
-      make_table_33(
-        df = advs,
-        table_engine = "gtsummary",
-        subset = (PARAMCD %in% c("DIABP", "SYSBP") & AVISITN >= 1),
-        return_ard = FALSE
-      ) %>%
-        gt::extract_body()
-    )
-  res <- expect_silent(result)
-  expect_snapshot(res)
-})
-
-test_that("Table 33 generation works with custom values", {
-  result <- suppressWarnings(
-    make_table_33(
-      df = advs,
-      table_engine = "gtsummary",
-      lbl_overall = "Total Population",
-      return_ard = FALSE,
-      subset = (PARAMCD %in% c("DIABP", "SYSBP") & AVISITN >= 1)
-    ) %>%
-      gt::extract_body()
-  )
-
-  res <- expect_silent(result)
-  expect_snapshot(res)
-})
-
-test_that("Table 33 generation missing values and ADSL", {
-  result <- suppressWarnings(
-    make_table_33(
-      table_engine = "gtsummary",
-      df = advs_missing,
-      alt_counts_df = adsl,
-      lbl_overall = "Total Population",
-      return_ard = FALSE,
-      subset = (PARAMCD %in% c("DIABP", "SYSBP") & AVISITN >= 1)
-    ) %>%
-      gt::extract_body()
+    subset = "PARAMCD %in% c('DIABP', 'SYSBP') & AVISITN >= 1"
   )
 
   res <- expect_silent(result)

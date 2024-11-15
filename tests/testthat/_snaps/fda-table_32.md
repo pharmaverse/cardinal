@@ -3,139 +3,136 @@
     Code
       as.data.frame(res$table)
     Output
-        **Diastolic Blood Pressure  \n(Pa)** **A: Drug X**  \nN = 134 **B: Placebo**  \nN = 134 **C: Combination**  \nN = 132
-      1                                  <60                 0 (0.0%)                  0 (0.0%)                      0 (0.0%)
-      2                                  >60             134 (100.0%)              134 (100.0%)                  132 (100.0%)
-      3                                  >90             134 (100.0%)              134 (100.0%)                   131 (99.2%)
-      4                                 >110              123 (91.8%)               111 (82.8%)                   107 (81.1%)
-      5                                >=120               88 (65.7%)                70 (52.2%)                    76 (57.6%)
+        variable    var_type row_type var_label    label       stat_1       stat_2       stat_3
+      1      L60 dichotomous    label    &lt;60   &lt;60     0 (0.0%)     0 (0.0%)     0 (0.0%)
+      2      G60 dichotomous    label    &gt;60   &gt;60 134 (100.0%) 134 (100.0%) 132 (100.0%)
+      3      G90 dichotomous    label    &gt;90   &gt;90 134 (100.0%) 134 (100.0%)  131 (99.2%)
+      4     G110 dichotomous    label   &gt;110  &gt;110  123 (91.8%)  111 (82.8%)  107 (81.1%)
+      5    GE120 dichotomous    label  &gt;=120 &gt;=120   88 (65.7%)   70 (52.2%)   76 (57.6%)
 
 ---
 
     Code
       res$ard
-    Message
-      {cards} data frame: 67 x 11
     Output
-         group1 group1_level variable variable_level stat_name stat_label stat
-      1     ARM    A: Drug X      L60           TRUE         n          n    0
-      2     ARM    A: Drug X      L60           TRUE         N          N  134
-      3     ARM    A: Drug X      L60           TRUE         p          %    0
-      4     ARM    B: Place…      L60           TRUE         n          n    0
-      5     ARM    B: Place…      L60           TRUE         N          N  134
-      6     ARM    B: Place…      L60           TRUE         p          %    0
-      7     ARM    C: Combi…      L60           TRUE         n          n    0
-      8     ARM    C: Combi…      L60           TRUE         N          N  132
-      9     ARM    C: Combi…      L60           TRUE         p          %    0
-      10   <NA>                   L60                    label  Variable…  <60
+      $tbl_summary
     Message
-      i 57 more rows
+      {cards} data frame: 142 x 12
+    Output
+         group1 group1_level variable variable_level stat_name stat_label stat gts_column
+      1     ARM    A: Drug X      L60           TRUE         n          n    0     stat_1
+      2     ARM    A: Drug X      L60           TRUE         N          N  134     stat_1
+      3     ARM    A: Drug X      L60           TRUE         p          %    0     stat_1
+      4     ARM    B: Place…      L60           TRUE         n          n    0     stat_2
+      5     ARM    B: Place…      L60           TRUE         N          N  134     stat_2
+      6     ARM    B: Place…      L60           TRUE         p          %    0     stat_2
+      7     ARM    C: Combi…      L60           TRUE         n          n    0     stat_3
+      8     ARM    C: Combi…      L60           TRUE         N          N  132     stat_3
+      9     ARM    C: Combi…      L60           TRUE         p          %    0     stat_3
+      10    ARM    A: Drug X      G60           TRUE         n          n  134     stat_1
+    Message
+      i 132 more rows
       i Use `print(n = ...)` to see more rows
       i 4 more variables: context, fmt_fn, warning, error
-
----
-
-    Code
-      as.data.frame(res)
     Output
-        **Diastolic Blood Pressure  \n(Pa)** **A: Drug X**  \nN = 134
-      1                                  <60                 0 (0.0%)
-      2                                  >60             134 (100.0%)
-      3                                  >90             134 (100.0%)
-      4                                 >110              123 (91.8%)
-      5                                >=120               88 (65.7%)
-        **B: Placebo**  \nN = 134 **C: Combination**  \nN = 132
-      1                  0 (0.0%)                      0 (0.0%)
-      2              134 (100.0%)                  132 (100.0%)
-      3              134 (100.0%)                   131 (99.2%)
-      4               111 (82.8%)                   107 (81.1%)
-      5                70 (52.2%)                    76 (57.6%)
+      
 
 # Table 32 generation works with custom values
 
     Code
-      as.data.frame(res)
+      as.data.frame(res$table)
     Output
-        **Diastolic Blood Pressure  \n(Pa)** **A: Drug X**  \nN = 134
-      1                                  <60                 0 (0.0%)
-      2                                  >60             134 (100.0%)
-      3                                  >90             134 (100.0%)
-      4                                 >110              123 (91.8%)
-      5                                >=120               88 (65.7%)
-        **B: Placebo**  \nN = 134 **C: Combination**  \nN = 132
-      1                  0 (0.0%)                      0 (0.0%)
-      2              134 (100.0%)                  132 (100.0%)
-      3              134 (100.0%)                   131 (99.2%)
-      4               111 (82.8%)                   107 (81.1%)
-      5                70 (52.2%)                    76 (57.6%)
+        variable    var_type row_type var_label    label       stat_1       stat_2       stat_3       stat_0
+      1      L60 dichotomous    label    &lt;60   &lt;60     0 (0.0%)     0 (0.0%)     0 (0.0%)     0 (0.0%)
+      2      G60 dichotomous    label    &gt;60   &gt;60 134 (100.0%) 134 (100.0%) 132 (100.0%) 400 (100.0%)
+      3      G90 dichotomous    label    &gt;90   &gt;90 134 (100.0%) 134 (100.0%)  131 (99.2%)  399 (99.8%)
+      4     G110 dichotomous    label   &gt;110  &gt;110  123 (91.8%)  111 (82.8%)  107 (81.1%)  341 (85.3%)
+      5    GE120 dichotomous    label  &gt;=120 &gt;=120   88 (65.7%)   70 (52.2%)   76 (57.6%)  234 (58.5%)
 
 ---
 
     Code
-      res
+      res$ard
     Output
-      Table 32. Percentage of Patients With Maximum Diastolic Blood Pressure by Category
-       of Blood Pressure Postbaseline, Safety Population, Pooled Analysis
+      $tbl_summary
+    Message
+      {cards} data frame: 142 x 12
+    Output
+         group1 group1_level variable variable_level stat_name stat_label stat gts_column
+      1     ARM    A: Drug X      L60           TRUE         n          n    0     stat_1
+      2     ARM    A: Drug X      L60           TRUE         N          N  134     stat_1
+      3     ARM    A: Drug X      L60           TRUE         p          %    0     stat_1
+      4     ARM    B: Place…      L60           TRUE         n          n    0     stat_2
+      5     ARM    B: Place…      L60           TRUE         N          N  134     stat_2
+      6     ARM    B: Place…      L60           TRUE         p          %    0     stat_2
+      7     ARM    C: Combi…      L60           TRUE         n          n    0     stat_3
+      8     ARM    C: Combi…      L60           TRUE         N          N  132     stat_3
+      9     ARM    C: Combi…      L60           TRUE         p          %    0     stat_3
+      10    ARM    A: Drug X      G60           TRUE         n          n  134     stat_1
+    Message
+      i 132 more rows
+      i Use `print(n = ...)` to see more rows
+      i 4 more variables: context, fmt_fn, warning, error
+    Output
       
-      ———————————————————————————————————————————————————————————————————————————————————
-                                                                                 Total   
-      Diastolic Blood Pressure    A: Drug X    C: Combination   B: Placebo    Population 
-      (Pa)                         (N=134)        (N=132)         (N=134)       (N=400)  
-      ———————————————————————————————————————————————————————————————————————————————————
-      <60                             0              0               0             0     
-      >60                        134 (100%)      132 (100%)     134 (100%)    400 (100%) 
-      >90                        134 (100%)     131 (99.2%)     134 (100%)    399 (99.8%)
-      >110                       123 (91.8%)    107 (81.1%)     111 (82.8%)   341 (85.2%)
-      >=120                      88 (65.7%)      76 (57.6%)     70 (52.2%)    234 (58.5%)
-      ———————————————————————————————————————————————————————————————————————————————————
+      $add_overall
+    Message
+      {cards} data frame: 51 x 10
+    Output
+         variable variable_level stat_name stat_label  stat gts_column
+      1       L60           TRUE         n          n     0     stat_0
+      2       L60           TRUE         N          N   400     stat_0
+      3       L60           TRUE         p          %     0     stat_0
+      4       G60           TRUE         n          n   400     stat_0
+      5       G60           TRUE         N          N   400     stat_0
+      6       G60           TRUE         p          %     1     stat_0
+      7       G90           TRUE         n          n   399     stat_0
+      8       G90           TRUE         N          N   400     stat_0
+      9       G90           TRUE         p          % 0.998     stat_0
+      10     G110           TRUE         n          n   341     stat_0
+    Message
+      i 41 more rows
+      i Use `print(n = ...)` to see more rows
+      i 4 more variables: context, fmt_fn, warning, error
+    Output
       
-      Source: [include Applicant source, datasets and/or software tools used].
-      
-      Abbreviations: CI, confidence interval; n, number of patients with indicated blood pressure;
-      N, number of patients in treatment arm with available blood pressure data
 
 # Table 32 generation missing values and ADSL
 
     Code
-      as.data.frame(res)
+      as.data.frame(res$table)
     Output
-        **Diastolic Blood Pressure  \n(Pa)** **A: Drug X**  \nN = 134
-      1                                  <60                 0 (0.0%)
-      2                                  >60              114 (85.1%)
-      3                                  >90              114 (85.1%)
-      4                                 >110              103 (76.9%)
-      5                                >=120               71 (53.0%)
-        **B: Placebo**  \nN = 134 **C: Combination**  \nN = 132
-      1                  0 (0.0%)                      0 (0.0%)
-      2                96 (71.6%)                    96 (72.7%)
-      3                96 (71.6%)                    95 (72.0%)
-      4                78 (58.2%)                    78 (59.1%)
-      5                52 (38.8%)                    53 (40.2%)
+        variable    var_type row_type var_label    label      stat_1     stat_2     stat_3
+      1      L60 dichotomous    label    &lt;60   &lt;60    0 (0.0%)   0 (0.0%)   0 (0.0%)
+      2      G60 dichotomous    label    &gt;60   &gt;60 114 (85.1%) 96 (71.6%) 96 (72.7%)
+      3      G90 dichotomous    label    &gt;90   &gt;90 114 (85.1%) 96 (71.6%) 95 (72.0%)
+      4     G110 dichotomous    label   &gt;110  &gt;110 103 (76.9%) 78 (58.2%) 78 (59.1%)
+      5    GE120 dichotomous    label  &gt;=120 &gt;=120  71 (53.0%) 52 (38.8%) 53 (40.2%)
 
-# Table 32 generation works with pruned rows
+---
 
     Code
-      res
+      res$ard
     Output
-      Diastolic Blood Pressure    A: Drug X    C: Combination   B: Placebo 
-      (Pa)                         (N=134)        (N=132)         (N=134)  
-      —————————————————————————————————————————————————————————————————————
-      >60                        134 (100%)      132 (100%)     134 (100%) 
-      >90                        134 (100%)     131 (99.2%)     134 (100%) 
-      >110                       123 (91.8%)    107 (81.1%)     111 (82.8%)
-      >=120                      88 (65.7%)      76 (57.6%)     70 (52.2%) 
-
-# Table 32 generation works with risk difference column
-
-    Code
-      res
+      $tbl_summary
+    Message
+      {cards} data frame: 142 x 12
     Output
-      Diastolic Blood Pressure    A: Drug X    C: Combination   B: Placebo    Risk Difference (%) (95% CI)
-      (Pa)                         (N=134)        (N=132)         (N=134)               (N=268)           
-      ————————————————————————————————————————————————————————————————————————————————————————————————————
-      <60                             0              0               0              0.0 (0.0 - 0.0)       
-      >60                        134 (100%)      132 (100%)     134 (100%)          0.0 (0.0 - 0.0)       
-      >90                        134 (100%)     131 (99.2%)     134 (100%)          0.0 (0.0 - 0.0)       
-      >110                       123 (91.8%)    107 (81.1%)     111 (82.8%)       -9.0 (-16.9 - -1.1)     
-      >=120                      88 (65.7%)      76 (57.6%)     70 (52.2%)        -13.4 (-25.1 - -1.8)    
+         group1 group1_level variable variable_level stat_name stat_label stat gts_column
+      1     ARM    A: Drug X      L60           TRUE         n          n    0     stat_1
+      2     ARM    A: Drug X      L60           TRUE         N          N  134     stat_1
+      3     ARM    A: Drug X      L60           TRUE         p          %    0     stat_1
+      4     ARM    B: Place…      L60           TRUE         n          n    0     stat_2
+      5     ARM    B: Place…      L60           TRUE         N          N  134     stat_2
+      6     ARM    B: Place…      L60           TRUE         p          %    0     stat_2
+      7     ARM    C: Combi…      L60           TRUE         n          n    0     stat_3
+      8     ARM    C: Combi…      L60           TRUE         N          N  132     stat_3
+      9     ARM    C: Combi…      L60           TRUE         p          %    0     stat_3
+      10    ARM    A: Drug X      G60           TRUE         n          n  114     stat_1
+    Message
+      i 132 more rows
+      i Use `print(n = ...)` to see more rows
+      i 4 more variables: context, fmt_fn, warning, error
+    Output
+      
 
