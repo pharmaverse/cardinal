@@ -81,8 +81,7 @@ preproc_df_table_33 <- function(df,
                                 arm_var = "ARM",
                                 saffl_var = "SAFFL",
                                 subset =
-                                  "PARAMCD %in% c('DIABP', 'SYSBP') & AVISITN >= 1"
-                                ) {
+                                  "PARAMCD %in% c('DIABP', 'SYSBP') & AVISITN >= 1") {
   subset_c <-
     sapply(
       unlist(admiraldev::extract_vars(rlang::parse_exprs(subset))),
