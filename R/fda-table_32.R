@@ -6,7 +6,6 @@
 #'   `saffl_var` must be a flag variable.
 #' * `return_ard` set to `TRUE` or `FALSE`; whether the intermediate ARD object should be returned.
 #'
-#' @inheritParams tbl_make_table_32
 #' @inheritParams argument_convention
 #' @param subset (`string`)\cr selection of both PARAMCD and definition of baseline.
 #'
@@ -25,15 +24,12 @@
 #' @export
 make_table_32 <- function(df,
                           denominator = NULL,
-                          return_ard = FALSE,
+                          return_ard = TRUE,
                           id_var = "USUBJID",
                           arm_var = "ARM",
                           saffl_var = "SAFFL",
                           lbl_overall = NULL,
                           subset = NULL) {
-  if (is.null(subset)) {
-    subset <- as.character(formals(preproc_df_table_32)$subset)
-  }
 
   if (is.null(subset)) {
     subset <- as.character(formals(preproc_df_table_32)$subset)
@@ -178,7 +174,7 @@ make_table_32_rtables <- function(df,
   if (is.null(subset)) {
     subset <- as.character(formals(preproc_df_table_32)$subset)
   }
-  df <- preproc_df_table_32(df, alt_counts_df, id_var, arm_var, saffl_var, subset)
+  df <- preproc_df_table_32(df, denominator, id_var, arm_var, saffl_var, subset)
   alt_counts_df <- alt_counts_df_preproc(alt_counts_df, id_var, arm_var, saffl_var)
   avalu <- unique(df$AVALU)[1]
 
