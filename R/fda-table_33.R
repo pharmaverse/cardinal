@@ -43,7 +43,7 @@ make_table_33 <- function(df,
     tbl_summary(
       by = arm_var,
       statistic = list(all_categorical() ~ "{n} ({p}%)"),
-      digits = everything() ~ c(0, 1),
+      digits = list(all_continuous() ~ c(0, 1), all_categorical() ~ c(0, 1)),
       missing = "no"
     ) |>
     modify_header(label ~ paste0("**Diastolic Blood Pressure (", avalu, ")**")) |>

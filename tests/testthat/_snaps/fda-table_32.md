@@ -97,6 +97,31 @@
     Output
       
 
+---
+
+    Code
+      res
+    Output
+      Table 32. Percentage of Patients With Maximum Diastolic Blood Pressure by Category
+       of Blood Pressure Postbaseline, Safety Population, Pooled Analysis
+      
+      ———————————————————————————————————————————————————————————————————————————————————
+                                                                                 Total   
+      Diastolic Blood Pressure    A: Drug X    C: Combination   B: Placebo    Population 
+      (Pa)                         (N=134)        (N=132)         (N=134)       (N=400)  
+      ———————————————————————————————————————————————————————————————————————————————————
+      <60                             0              0               0             0     
+      >60                        134 (100%)      132 (100%)     134 (100%)    400 (100%) 
+      >90                        134 (100%)     131 (99.2%)     134 (100%)    399 (99.8%)
+      >110                       123 (91.8%)    107 (81.1%)     111 (82.8%)   341 (85.2%)
+      >=120                      88 (65.7%)      76 (57.6%)     70 (52.2%)    234 (58.5%)
+      ———————————————————————————————————————————————————————————————————————————————————
+      
+      Source: [include Applicant source, datasets and/or software tools used].
+      
+      Abbreviations: CI, confidence interval; n, number of patients with indicated blood pressure;
+      N, number of patients in treatment arm with available blood pressure data
+
 # Table 32 generation missing values and ADSL
 
     Code
@@ -135,4 +160,31 @@
       i 4 more variables: context, fmt_fn, warning, error
     Output
       
+
+# Table 32 generation works with pruned rows
+
+    Code
+      res
+    Output
+      Diastolic Blood Pressure    A: Drug X    C: Combination   B: Placebo 
+      (Pa)                         (N=134)        (N=132)         (N=134)  
+      —————————————————————————————————————————————————————————————————————
+      >60                        134 (100%)      132 (100%)     134 (100%) 
+      >90                        134 (100%)     131 (99.2%)     134 (100%) 
+      >110                       123 (91.8%)    107 (81.1%)     111 (82.8%)
+      >=120                      88 (65.7%)      76 (57.6%)     70 (52.2%) 
+
+# Table 32 generation works with risk difference column
+
+    Code
+      res
+    Output
+      Diastolic Blood Pressure    A: Drug X    C: Combination   B: Placebo    Risk Difference (%) (95% CI)
+      (Pa)                         (N=134)        (N=132)         (N=134)               (N=268)           
+      ————————————————————————————————————————————————————————————————————————————————————————————————————
+      <60                             0              0               0              0.0 (0.0 - 0.0)       
+      >60                        134 (100%)      132 (100%)     134 (100%)          0.0 (0.0 - 0.0)       
+      >90                        134 (100%)     131 (99.2%)     134 (100%)          0.0 (0.0 - 0.0)       
+      >110                       123 (91.8%)    107 (81.1%)     111 (82.8%)       -9.0 (-16.9 - -1.1)     
+      >=120                      88 (65.7%)      76 (57.6%)     70 (52.2%)        -13.4 (-25.1 - -1.8)    
 

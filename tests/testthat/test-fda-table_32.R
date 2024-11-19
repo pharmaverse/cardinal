@@ -10,15 +10,15 @@ advs_missing <- advs_missing |>
 # gtsummary -----
 
 test_that("Table 32 generation works with default values", {
-  withr::local_options(list(width = 120))
+  withr::local_options(list(width = 150))
 
-  result <- make_table_32(advs)
+  expect_warning(result <- make_table_32(advs))
   res <- expect_silent(result)
   expect_snapshot(res$table |> as.data.frame())
   expect_snapshot(res$ard)
 
   # no ARD
-  result2 <- make_table_32(advs, return_ard = FALSE)
+  expect_warning(result2 <- make_table_32(advs, return_ard = FALSE))
   res2 <- expect_silent(result2)
 
   expect_identical(res$table, res2)
@@ -27,13 +27,13 @@ test_that("Table 32 generation works with default values", {
 test_that("Table 32 generation works with custom values", {
   withr::local_options(list(width = 120))
 
-  result <- make_table_32(advs, adsl, lbl_overall = "Overall")
+  expect_warning(result <- make_table_32(advs, adsl, lbl_overall = "Overall"))
   res <- expect_silent(result)
   expect_snapshot(res$table |> as.data.frame())
   expect_snapshot(res$ard)
 
   # no ARD
-  result2 <- make_table_32(advs, adsl, return_ard = FALSE)
+  expect_warning(result2 <- make_table_32(advs, adsl, return_ard = FALSE))
   res2 <- expect_silent(result2)
 
   expect_identical(res$table, res2)
@@ -42,13 +42,13 @@ test_that("Table 32 generation works with custom values", {
 test_that("Table 32 generation missing values and ADSL", {
   withr::local_options(list(width = 120))
 
-  result <- make_table_32(advs_missing, adsl)
+  expect_warning(expect_warning(result <- make_table_32(advs_missing, adsl)))
   res <- expect_silent(result)
   expect_snapshot(res$table |> as.data.frame())
   expect_snapshot(res$ard)
 
   # no ARD
-  result2 <- make_table_32(advs, return_ard = FALSE)
+  expect_warning(result2 <- make_table_32(advs, return_ard = FALSE))
   res2 <- expect_silent(result2)
 
   expect_identical(res$table, res2)

@@ -12,13 +12,13 @@ advs_missing <- advs_missing %>%
 test_that("Table 33 generation works with default values", {
   withr::local_options(list(width = 120))
 
-  result <- make_table_33(advs)
+  expect_warning(result <- make_table_33(advs))
   res <- expect_silent(result)
   expect_snapshot(res$table |> as.data.frame())
   expect_snapshot(res$ard)
 
   # no ARD
-  result2 <- make_table_33(advs, return_ard = FALSE)
+  expect_warning(result2 <- make_table_33(advs, return_ard = FALSE))
   res2 <- expect_silent(result2)
 
   expect_identical(res$table, res2)
@@ -27,13 +27,13 @@ test_that("Table 33 generation works with default values", {
 test_that("Table 33 generation works with custom values", {
   withr::local_options(list(width = 120))
 
-  result <- make_table_33(advs, adsl, lbl_overall = "Overall")
+  expect_warning(result <- make_table_33(advs, adsl, lbl_overall = "Overall"))
   res <- expect_silent(result)
   expect_snapshot(res$table |> as.data.frame())
   expect_snapshot(res$ard)
 
   # no ARD
-  result2 <- make_table_33(advs, adsl, return_ard = FALSE)
+  expect_warning(result2 <- make_table_33(advs, adsl, return_ard = FALSE))
   res2 <- expect_silent(result2)
 
   expect_identical(res$table, res2)
@@ -42,7 +42,7 @@ test_that("Table 33 generation works with custom values", {
 test_that("Table 33 generation missing values and ADSL", {
   withr::local_options(list(width = 120))
 
-  result <- make_table_33(advs_missing, adsl)
+  expect_warning(result <- make_table_33(advs_missing, adsl))
   res <- expect_silent(result)
   expect_snapshot(res$table |> as.data.frame())
   expect_snapshot(res$ard)
@@ -58,11 +58,10 @@ test_that("Table 33 generation missing values and ADSL", {
 # rtables -----
 
 test_that("Table 33 generation works with custom values", {
-  result <- make_table_33(
+  result <- make_table_33_rtables(
     advs,
     adsl,
-    table_engine = "rtables",
-    subset = (PARAMCD %in% c("DIABP", "SYSBP") & AVISITN >= 1),
+    subset = "PARAMCD %in% c('DIABP', 'SYSBP') & AVISITN >= 1",
     lbl_overall = "Total\nPopulation",
     annotations = list(
       title = paste(
@@ -82,11 +81,10 @@ test_that("Table 33 generation works with custom values", {
 })
 
 test_that("Table 33 generation works with pruned rows", {
-  result <- make_table_33(
+  result <- make_table_33_rtables(
     advs,
     adsl,
     prune_0 = TRUE,
-    table_engine = "rtables",
     subset = "PARAMCD %in% c('DIABP', 'SYSBP') & AVISITN >= 1"
   )
 
@@ -96,11 +94,10 @@ test_that("Table 33 generation works with pruned rows", {
 
 test_that("Table 33 generation works with risk difference column", {
   risk_diff <- list(arm_x = "B: Placebo", arm_y = "A: Drug X")
-  result <- make_table_33(
+  result <- make_table_33_rtables(
     advs,
     adsl,
     risk_diff = risk_diff,
-    table_engine = "rtables",
     subset = "PARAMCD %in% c('DIABP', 'SYSBP') & AVISITN >= 1"
   )
 
