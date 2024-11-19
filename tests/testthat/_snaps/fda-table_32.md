@@ -122,6 +122,31 @@
       Abbreviations: CI, confidence interval; n, number of patients with indicated blood pressure;
       N, number of patients in treatment arm with available blood pressure data
 
+---
+
+    Code
+      res
+    Output
+      Table 32. Percentage of Patients With Maximum Diastolic Blood Pressure by Category
+       of Blood Pressure Postbaseline, Safety Population, Pooled Analysis
+      
+      ———————————————————————————————————————————————————————————————————————————————————
+                                                                                 Total   
+      Diastolic Blood Pressure    A: Drug X    C: Combination   B: Placebo    Population 
+      (Pa)                         (N=134)        (N=132)         (N=134)       (N=400)  
+      ———————————————————————————————————————————————————————————————————————————————————
+      <60                             0              0               0             0     
+      >60                        134 (100%)      132 (100%)     134 (100%)    400 (100%) 
+      >90                        134 (100%)     131 (99.2%)     134 (100%)    399 (99.8%)
+      >110                       123 (91.8%)    107 (81.1%)     111 (82.8%)   341 (85.2%)
+      >=120                      88 (65.7%)      76 (57.6%)     70 (52.2%)    234 (58.5%)
+      ———————————————————————————————————————————————————————————————————————————————————
+      
+      Source: [include Applicant source, datasets and/or software tools used].
+      
+      Abbreviations: CI, confidence interval; n, number of patients with indicated blood pressure;
+      N, number of patients in treatment arm with available blood pressure data
+
 # Table 32 generation missing values and ADSL
 
     Code
