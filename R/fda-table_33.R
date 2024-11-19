@@ -141,23 +141,47 @@ preproc_df_table_33 <- function(df,
     select(SBP90, DBP60, AVALU, all_of(arm_var), all_of(id_var))
 }
 
-#' @keywords Internal
+#' Engine-Specific Functions: Table 32
+#'
+#' The table engine used by each engine-specific function is identified by its suffix.
+#'
+#' @inheritParams argument_convention
+#'
+#' @details
+#' * Columns are split by arm. Overall population column is excluded by default (see `lbl_overall` argument).
+#' * Numbers in table "Patients Treated" section are the absolute numbers of patients and fraction of `N`.
+#' * All-zero rows are not removed by default (see `prune_0` argument).
+#' * Records with missing treatment start and/or end datetime are excluded from all calculations.
+#'
+#' @return
+#' * `make_table_33_rtables()` returns an `rtable` object.
+#'
+#' @seealso [make_table_33()]
+#'
+#' @examples
+#' adsl <- random.cdisc.data::cadsl
+#' advs <- random.cdisc.data::cadvs
+#'
+#' # rtables table ----------------
+#' tbl_rtables <- cardinal::make_table_33_rtables(df = advs, alt_counts_df = adsl)
+#' tbl_rtables
+#' @export
+#' @rdname tbl_make_table_33
 make_table_33_rtables <- function(df,
                                   alt_counts_df = NULL,
                                   show_colcounts = TRUE,
                                   id_var = "USUBJID",
                                   arm_var = "ARM",
                                   saffl_var = "SAFFL",
-                                  subset,
+                                  subset = NULL,
                                   lbl_overall = NULL,
                                   risk_diff = NULL,
                                   prune_0 = FALSE,
                                   annotations = NULL) {
   if (is.null(subset)) {
-    subset <- as.character(formals(preproc_df_table_32)$subset)
+    subset <- as.character(formals(preproc_df_table_33)$subset)
   }
-  df <- preproc_df_table_32(df, denominator, id_var, arm_var, saffl_var, subset)
-  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, id_var, arm_var, saffl_var)
+  df <- preproc_df_table_33(df, denominator = alt_counts_df, id_var, arm_var, saffl_var, subset)
   avalu <- unique(df$AVALU)[1]
 
   lyt <- basic_table_annot(show_colcounts, annotations) |>

@@ -173,8 +173,7 @@ make_table_32_rtables <- function(df,
   if (is.null(subset)) {
     subset <- as.character(formals(preproc_df_table_32)$subset)
   }
-  df <- preproc_df_table_32(df, denominator, id_var, arm_var, saffl_var, subset)
-  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, id_var, arm_var, saffl_var)
+  df <- preproc_df_table_32(df, denominator = alt_counts_df, id_var, arm_var, saffl_var, subset)
   avalu <- unique(df$AVALU)[1]
 
   lyt <- basic_table_annot(show_colcounts, annotations) |>

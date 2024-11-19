@@ -39,24 +39,27 @@ make_table_32(df = advs, return_ard = FALSE)
 
 -   **`df`**: `USUBJID`, `AVISITN`, `PARAMCD`, `AVAL`, `AVALU`, and the variables specified by `arm_var` and `saffl_var`.
 -   **`denominator`** (if specified): `USUBJID` and the variables specified by `arm_var` and `saffl_var`.
+-   If both the ARD (`return_ard = "Y"`) and an overall column (`lbl_overall` not missing) are requested, a list of two ARDs will be returned: `ard$tbl_summary` for the table by groups, and `ard$add_overall` for the overal column.
 
-+-----------------+--------------------------------------------------------------------------------------------------------------------+--------------+
-| **Argument**    | **Description**                                                                                                    | **Default**  |
-+:================+:===================================================================================================================+:=============+
-| `df`            | (`data.frame`) Dataset (typically ADVS) required to build table.                                                   | *No default* |
-+-----------------+--------------------------------------------------------------------------------------------------------------------+--------------+
-| `denominator`   | (`character`) Alternative dataset (typically ADSL) used only to calculate column counts.                           | `NULL`       |
-+-----------------+--------------------------------------------------------------------------------------------------------------------+--------------+
-| `id_vars`       | (`character`) Identifier required to count the number of events (typically calculated by USUBJID).                 | `"USUBJID"`  |
-+-----------------+--------------------------------------------------------------------------------------------------------------------+--------------+
-| `arm_var`       | (`character`) Arm variable used to split table into columns.                                                       | `"ARM"`      |
-+-----------------+--------------------------------------------------------------------------------------------------------------------+--------------+
-| `saffl_var`     | (`character`) Flag variable used to indicate inclusion in safety population.                                       | `"SAFFL"`    |
-+-----------------+--------------------------------------------------------------------------------------------------------------------+--------------+
-| `lbl_overall`   | (`character`) If specified, an overall column will be added to the table with the given value as the column label. | `NULL`       |
-+-----------------+--------------------------------------------------------------------------------------------------------------------+--------------+
-| `return_ard`    | (`flag`) Whether an ARD should be returned.                                                                        | `TRUE`       |
-+-----------------+--------------------------------------------------------------------------------------------------------------------+--------------+
++---------------+--------------------------------------------------------------------------------------------------------------------+--------------+
+| **Argument**  | **Description**                                                                                                    | **Default**  |
++:==============+:===================================================================================================================+:=============+
+| `df`          | (`data.frame`) Dataset (typically ADVS) required to build table.                                                   | *No default* |
++---------------+--------------------------------------------------------------------------------------------------------------------+--------------+
+| `denominator` | (`character`) Alternative dataset (typically ADSL) used only to calculate column counts.                           | `NULL`       |
++---------------+--------------------------------------------------------------------------------------------------------------------+--------------+
+| `return_ard`  | (`flag`) Whether an ARD should be returned.                                                                        | `TRUE`       |
++---------------+--------------------------------------------------------------------------------------------------------------------+--------------+
+| `id_vars`     | (`character`) Identifier required to count the number of events (typically calculated by USUBJID).                 | `"USUBJID"`  |
++---------------+--------------------------------------------------------------------------------------------------------------------+--------------+
+| `arm_var`     | (`character`) Arm variable used to split table into columns.                                                       | `"ARM"`      |
++---------------+--------------------------------------------------------------------------------------------------------------------+--------------+
+| `saffl_var`   | (`character`) Flag variable used to indicate inclusion in safety population.                                       | `"SAFFL"`    |
++---------------+--------------------------------------------------------------------------------------------------------------------+--------------+
+| `lbl_overall` | (`character`) If specified, an overall column will be added to the table with the given value as the column label. | `NULL`       |
++---------------+--------------------------------------------------------------------------------------------------------------------+--------------+
+| `subset`      | (`character`) If specified, the calculations will be done on the selected subset of `df`.                          | `NULL`       |
++---------------+--------------------------------------------------------------------------------------------------------------------+--------------+
 
 Source code for this function is available [here](https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_05.R).
 
