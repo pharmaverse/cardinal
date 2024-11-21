@@ -56,6 +56,13 @@ test_that("Table 32 generation missing values and ADSL", {
 
 # rtables -----
 
+test_that("Table 32 generation works with default values", {
+  result <- make_table_32_rtables(advs)
+
+  res <- expect_silent(result)
+  expect_snapshot(res)
+})
+
 test_that("Table 32 generation works with custom values", {
   result <- make_table_32_rtables(
     advs,
