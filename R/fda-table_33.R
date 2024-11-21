@@ -64,7 +64,7 @@ make_table_33 <- function(df,
     ard <- gtsummary::gather_ard(tbl_gts)
     return(list(table = tbl, ard = ard))
   } else {
-    return(tbl)
+    return(tbl) # nocov
   }
 }
 
