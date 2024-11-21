@@ -55,8 +55,6 @@ make_table_33 <- function(df,
       add_overall(last = TRUE, col_label = paste0("**", lbl_overall, "**  \n N = {n}"))
   }
 
-  tbl_gts <- tbl_gts |> modify_footnote(update = everything() ~ NA)
-
   tbl <- gtsummary::with_gtsummary_theme(
     x = gtsummary::theme_gtsummary_compact(),
     expr = as_gt(tbl_gts)
