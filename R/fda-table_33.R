@@ -144,6 +144,7 @@ preproc_df_table_33 <- function(df,
 #' The table engine used by each engine-specific function is identified by its suffix.
 #'
 #' @inheritParams argument_convention
+#' @param subset (`string`)\cr selection of both PARAMCD and definition of baseline.
 #'
 #' @details
 #' * Columns are split by arm. Overall population column is excluded by default (see `lbl_overall` argument).
@@ -164,7 +165,7 @@ preproc_df_table_33 <- function(df,
 #' tbl_rtables <- cardinal::make_table_33_rtables(df = advs, alt_counts_df = adsl)
 #' tbl_rtables
 #' @export
-#' @rdname tbl_make_table_33
+#' @name tbl_make_table_33
 make_table_33_rtables <- function(df,
                                   alt_counts_df = NULL,
                                   show_colcounts = TRUE,
