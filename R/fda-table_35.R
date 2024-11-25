@@ -2,23 +2,75 @@
 #'   Safety Population, Pooled Analysis (or Trial X)
 #'
 #' @details
-#' * `adae` must contain the variables specified by
+#' * `df` must contain the variables specified by
 #'   `arm_var`, `id_var`, `soc_var` and `saffl_var`.
-#' * If specified, `alt_counts_df` must contain the variables specified by `arm_var`, `id_var`, and `saffl_var`.
-#' * Columns are split by arm. Overall population column is excluded by default (see `lbl_overall` argument).
-#' * All-zero rows are removed by default (see `prune_0` argument).
+#' * `return_ard` set to `TRUE` or `FALSE`; whether the intermediate ARD object should be returned.
 #'
 #' @inheritParams argument_convention
+#' @param soc_var (`character`)\cr Name of the variable that contains the SOC to describe.
+#'
+#' @return A `gtsummary` table and, if `return_ard = TRUE`, an ARD.
+#'   If `return_ard = TRUE`, they will be returned as a list with named elements `table` and `ard`.
+#'
+#' @seealso [`tbl_make_table_35`]
 #'
 #' @examples
 #' adsl <- random.cdisc.data::cadsl
 #' adae <- random.cdisc.data::cadae
 #'
-#' tbl <- make_table_35(adae = adae, alt_counts_df = adsl)
+#' tbl <- make_table_35(df = adae, denominator = adsl)
 #' tbl
 #'
 #' @export
-make_table_35 <- function(adae,
+make_table_35 <- function(df,
+                          denominator,
+                          return_ard = TRUE,
+                          id_var = "USUBJID",
+                          arm_var = "ARM",
+                          saffl_var = "SAFFL",
+                          soc_var = "AESOC",
+                          lbl_overall = NULL) {
+
+assert_subset(c(soc_var, arm_var, id_var, saffl_var), names(df))
+assert_flag_variables(df, saffl_var)
+assert_subset(c(arm_var, id_var, saffl_var), names(denominator))
+assert_flag_variables(denominator, saffl_var)
+
+df <- df %>%
+  filter(.data[[saffl_var]] == "Y") %>%
+  arrange(soc_var) %>%
+  df_explicit_na()
+
+df_denom <- denominator %>% filter(.data[[saffl_var]] == "Y")
+
+tbl_gts <-
+  tbl_hierarchical(
+    data = df,
+    variables = soc_var,
+    by = arm_var,
+    denominator = df_denom,
+    id = id_var
+  )
+
+  if (!is.null(lbl_overall)) {
+    tbl_gts <- tbl_gts %>%
+      add_overall(last = TRUE, col_label = paste0("**", lbl_overall, "**  \n N = {n}"))
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+make_table_35_rtables <- function(adae,
                           alt_counts_df = NULL,
                           show_colcounts = TRUE,
                           id_var = "USUBJID",

@@ -33,7 +33,7 @@ make_table_35(
 
 \item{saffl_var}{(\code{character})\cr flag variable used to indicate inclusion in safety population.}
 
-\item{soc_var}{(\code{character})\cr Name of the system organ class variable from \code{adae} to include in the table.}
+\item{soc_var}{(\code{character})\cr Name of the variable that contains the SOC to describe.}
 
 \item{lbl_soc_var}{(\code{character})\cr label corresponding to system organ class variable \code{soc_var} to print in the
 table.}
@@ -60,24 +60,29 @@ be included in the column labels by default. The length of \code{col_label} must
 annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
 use the annotation type as name and the desired string as value.}
 }
+\value{
+A \code{gtsummary} table and, if \code{return_ard = TRUE}, an ARD.
+If \code{return_ard = TRUE}, they will be returned as a list with named elements \code{table} and \code{ard}.
+}
 \description{
 Table 35. Patients With Adverse Events by System Organ Class,
 Safety Population, Pooled Analysis (or Trial X)
 }
 \details{
 \itemize{
-\item \code{adae} must contain the variables specified by
+\item \code{df} must contain the variables specified by
 \code{arm_var}, \code{id_var}, \code{soc_var} and \code{saffl_var}.
-\item If specified, \code{alt_counts_df} must contain the variables specified by \code{arm_var}, \code{id_var}, and \code{saffl_var}.
-\item Columns are split by arm. Overall population column is excluded by default (see \code{lbl_overall} argument).
-\item All-zero rows are removed by default (see \code{prune_0} argument).
+\item \code{return_ard} set to \code{TRUE} or \code{FALSE}; whether the intermediate ARD object should be returned.
 }
 }
 \examples{
 adsl <- random.cdisc.data::cadsl
 adae <- random.cdisc.data::cadae
 
-tbl <- make_table_35(adae = adae, alt_counts_df = adsl)
+tbl <- make_table_35(df = adae, denominator = adsl)
 tbl
 
+}
+\seealso{
+\code{\link{tbl_make_table_35}}
 }
