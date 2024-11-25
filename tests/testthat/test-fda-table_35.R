@@ -2,14 +2,47 @@ adsl <- adsl_raw
 adae <- adae_raw
 
 test_that("Table 35 generation works with default values", {
-  result <- make_table_35(adae, adsl)
+  withr::local_options(list(width = 150))
 
+  expect_warning(result <- make_table_35(adae))
   res <- expect_silent(result)
-  expect_snapshot(res)
+  expect_snapshot(res$table |> as.data.frame())
+  expect_snapshot(res$ard)
+
+  # no ARD
+  expect_warning(result2 <- make_table_35(adae, adsl, return_ard = FALSE))
+  res2 <- expect_silent(result2)
+
+  # tables the same
+  expect_identical(res$table, res2)
 })
 
+# gtsummary ----
+
+test_that("Table 35 generation works with gtsummary with custom values", {
+  withr::local_options(list(width = 150))
+
+  result <- make_table_35_gtsummary(df = adae, denominator = adsl)
+
+  res <- expect_silent(result)
+  expect_snapshot(res |> as.data.frame())
+})
+
+test_that("Table 35 generation works with gtsummary missing values", {
+  withr::local_options(list(width = 150))
+
+  set.seed(5)
+  adae[sample(seq_len(nrow(adae)), 10), "AEBODSYS"] <- NA
+
+  result <- make_table_35_gtsummary(df = adae, denominator = adsl)
+  res <- expect_silent(result)
+  expect_snapshot(res |> as.data.frame())
+})
+
+# rtables -----
+
 test_that("Table 35 generation works with custom values", {
-  result <- make_table_35(
+  result <- make_table_35_rtables(
     adae,
     adsl,
     lbl_overall = "Total\nPopulation",
@@ -41,7 +74,7 @@ test_that("Table 35 generation works with custom values", {
 
 test_that("Table 35 generation works with risk difference column", {
   risk_diff <- list(arm_x = "B: Placebo", arm_y = "A: Drug X")
-  result <- make_table_35(adae, adsl, risk_diff = risk_diff)
+  result <- make_table_35_rtables(adae, adsl, risk_diff = risk_diff)
 
   res <- expect_silent(result)
   expect_snapshot(res)
@@ -52,14 +85,14 @@ test_that("Table 35 generation works with some NA values", {
   adae[sample(seq_len(nrow(adae)), 10), "AEBODSYS"] <- NA
 
   adae <- adae %>% df_explicit_na()
-  result <- make_table_35(adae, adsl)
+  result <- make_table_35_rtables(adae, adsl)
 
   res <- expect_silent(result)
   expect_snapshot(res)
 })
 
 test_that("Table 35 generation works with custom values (SOC variable and label)", {
-  result <- make_table_35(
+  result <- make_table_35_rtables(
     adae,
     adsl,
     lbl_overall = "Total\nPopulation",
@@ -73,7 +106,7 @@ test_that("Table 35 generation works with custom values (SOC variable and label)
 
 test_that("Table 35 generation works with pruning", {
   adae$AESOC[adae$AESOC == "cl C"] <- "cl A"
-  result <- make_table_35(adae, adsl, prune_0 = TRUE)
+  result <- make_table_35_rtables(adae, adsl, prune_0 = TRUE)
 
   res <- expect_silent(result)
   expect_snapshot(res)

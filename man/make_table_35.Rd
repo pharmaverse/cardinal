@@ -6,26 +6,19 @@
 Safety Population, Pooled Analysis (or Trial X)}
 \usage{
 make_table_35(
-  adae,
-  alt_counts_df = NULL,
-  show_colcounts = TRUE,
+  df,
+  denominator,
+  return_ard = TRUE,
   id_var = "USUBJID",
   arm_var = "ARM",
   saffl_var = "SAFFL",
-  soc_var = "AESOC",
-  lbl_soc_var = formatters::var_labels(adae, fill = TRUE)[soc_var],
+  soc_var = "AEBODSYS",
   lbl_overall = NULL,
-  risk_diff = NULL,
-  prune_0 = FALSE,
-  annotations = NULL
+  na_level = "<Missing>"
 )
 }
 \arguments{
-\item{adae}{(\code{data.frame})\cr dataset (typically ADAE) required to build table.}
-
-\item{alt_counts_df}{(\code{character})\cr alternative dataset (typically ADSL) used only to calculate column counts.}
-
-\item{show_colcounts}{(\code{flag})\cr Whether column counts should be printed. Boolean.}
+\item{df}{(\code{data.frame})\cr dataset required to build table.}
 
 \item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
 
@@ -35,30 +28,10 @@ make_table_35(
 
 \item{soc_var}{(\code{character})\cr Name of the variable that contains the SOC to describe.}
 
-\item{lbl_soc_var}{(\code{character})\cr label corresponding to system organ class variable \code{soc_var} to print in the
-table.}
-
 \item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
 the given value as the column label.}
 
-\item{risk_diff}{(named \code{list})\cr list of settings to apply to add one or more risk difference columns to the table.
-Defaults to \code{NULL} (no risk difference column added). See \code{\link[tern:add_riskdiff]{tern::add_riskdiff()}} for more details. List should
-contain the following elements:
-\itemize{
-\item \code{arm_x}: (required) the name of reference arm.
-\item \code{arm_y}: (required) the names of the arms to compare to the reference arm. A new column will be added for each
-element of \code{arm_y}.
-\item \code{col_label}: (optional) labels to use for the risk difference columns. Defaults to
-\code{"Risk Difference (\%) (95\% CI)"}. For more than one risk difference column, \code{"arm x vs. arm y"} text will also
-be included in the column labels by default. The length of \code{col_label} must be equal to the length of \code{arm_y}.
-\item \code{pct}: (optional) whether the output should be returned as percentages. Defaults to \code{TRUE}.
-}}
-
-\item{prune_0}{(\code{flag})\cr Whether all-zero rows should be removed from the table. Boolean.}
-
-\item{annotations}{(named \code{list} of \code{character})\cr list of annotations to add to the table. Valid
-annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
-use the annotation type as name and the desired string as value.}
+\item{na_level}{(\code{character})\cr string to represent missing values.}
 }
 \value{
 A \code{gtsummary} table and, if \code{return_ard = TRUE}, an ARD.

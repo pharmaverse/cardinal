@@ -28,81 +28,251 @@ make_table_35 <- function(df,
                           id_var = "USUBJID",
                           arm_var = "ARM",
                           saffl_var = "SAFFL",
-                          soc_var = "AESOC",
-                          lbl_overall = NULL) {
+                          soc_var = "AEBODSYS",
+                          lbl_overall = NULL,
+                          na_level = "<Missing>") {
 
-assert_subset(c(soc_var, arm_var, id_var, saffl_var), names(df))
-assert_flag_variables(df, saffl_var)
-assert_subset(c(arm_var, id_var, saffl_var), names(denominator))
-assert_flag_variables(denominator, saffl_var)
-
-df <- df %>%
-  filter(.data[[saffl_var]] == "Y") %>%
-  arrange(soc_var) %>%
-  df_explicit_na()
-
-df_denom <- denominator %>% filter(.data[[saffl_var]] == "Y")
-
-tbl_gts <-
-  tbl_hierarchical(
-    data = df,
-    variables = soc_var,
-    by = arm_var,
-    denominator = df_denom,
-    id = id_var
+  ard <- ard_table_35(
+    df = df,
+    denominator = denominator,
+    id_var = id_var,
+    arm_var = arm_var,
+    saffl_var = saffl_var,
+    soc_var = soc_var,
+    na_level = na_level
   )
 
+  tbl <- make_table_35_gtsummary(
+    df = df,
+    denominator = denominator,
+    id_var = id_var,
+    arm_var = arm_var,
+    saffl_var = saffl_var,
+    soc_var = soc_var,
+    na_level = na_level
+  )
+
+  if (return_ard) {
+    return(list(table = tbl, ard = ard))
+  } else {
+    return(tbl) # nocov
+  }
+
+}
+
+#' Pre-Process Data for Table 35 Creation
+#'
+#' @keywords internal
+preproc_df_table_35 <- function(df,
+                                id_var = "USUBJID",
+                                arm_var = "ARM",
+                                saffl_var = "SAFFL",
+                                soc_var = "AEBODSYS",
+                                na_level = "<Missing>") {
+
+  assert_subset(c(soc_var, arm_var, id_var, saffl_var), names(df))
+  assert_flag_variables(df, saffl_var)
+
+  df <- df |>
+    filter(.data[[saffl_var]] == "Y") |>
+    arrange(soc_var) |>
+    df_explicit_na(na_level = na_level)
+
+  df
+}
+
+#' Make ARD: Table 35
+#'
+#' @examples
+#' library(dplyr)
+#'
+#' adsl <- random.cdisc.data::cadsl
+#' adae <- random.cdisc.data::cadae
+#'
+#' ard <- cardinal:::ard_table_35(adae, adsl)
+#' ard
+#'
+#' @keywords internal
+#' @name ard_make_table_35
+ard_table_35 <- function(df,
+                         denominator = NULL,
+                         id_var = "USUBJID",
+                         arm_var = "ARM",
+                         saffl_var = "SAFFL",
+                         soc_var = "AEBODSYS",
+                         lbl_overall = NULL,
+                         na_level = "<Missing>") {
+
+  df <- preproc_df_table_35(df, id_var, arm_var, saffl_var, soc_var, na_level)
+
+  if (is.null(denominator)) {
+    denominator <- df # nocov
+  }
+  else {
+    denominator <-
+      alt_counts_df_preproc(denominator, id_var, arm_var, saffl_var)
+  }
+
+  ard <-
+    cards::ard_stack_hierarchical(
+      data = df,
+      variables = all_of(soc_var),
+      by = all_of(arm_var),
+      denominator = denominator,
+      id = all_of(id_var),
+      overall = !is.null(lbl_overall)
+    )
+
+  ard
+}
+
+#' Engine-Specific Functions: Table 35
+#'
+#' The table engine used by each engine-specific function is identified by its suffix.
+#'
+#' @inheritParams argument_convention
+#'
+#' @details
+#' * `df` must contain the variables the variables specified by
+#'   `arm_var`, `id_var`, `saffl_var`, and `soc_var`.
+#' * If specified, `denominator` (or `alt_counts_df`) must contain `USUBJID` and the variables specified by `arm_var`
+#'   and `saffl_var`.
+#' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
+#'   flag variables are treated as `"N"`.
+#' * Numbers in table represent the absolute numbers of patients and fraction of `N`.
+#' * All-zero rows are removed by default by `make_table_35_rtables()` (see `prune_0` argument).
+#'
+#' @return
+#' * `make_table_35_gtsummary()` returns a `gtsummary` object.
+#' * `make_table_35_rtables()` returns an `rtable` object.
+#'
+#' @seealso [make_table_35()]
+#'
+#' @examples
+#' library(dplyr)
+#'
+#' adsl <- random.cdisc.data::cadsl
+#' adae <- random.cdisc.data::cadae
+#'
+#' # gtsummary table --------------
+#' tbl_gtsummary <- cardinal:::make_table_35_gtsummary(df = adae, denominator = adsl)
+#' tbl_gtsummary
+#'
+#' # rtables table ----------------
+#' tbl_rtables <- cardinal:::make_table_35_rtables(df = adae, alt_counts_df = adsl)
+#' tbl_rtables
+#'
+#' @export
+#' @name tbl_make_table_35
+make_table_35_gtsummary <- function(df,
+                                    denominator = NULL,
+                                    id_var = "USUBJID",
+                                    arm_var = "ARM",
+                                    saffl_var = "SAFFL",
+                                    soc_var = "AEBODSYS",
+                                    lbl_overall = NULL,
+                                    na_level = "<Missing>") {
+
+  df <- preproc_df_table_35(df, id_var, arm_var, saffl_var, soc_var, na_level)
+
+  if (is.null(denominator)) {
+    denominator <- df # nocov
+  }
+  else {
+    denominator <-
+      alt_counts_df_preproc(denominator, id_var, arm_var, saffl_var)
+  }
+
+  tbl_gts <-
+    tbl_hierarchical(
+      data = df,
+      variables = soc_var,
+      by = arm_var,
+      denominator = denominator,
+      id = id_var
+    ) |>
+    modify_header(label ~ paste0("**System Organ Class**")) |>
+    modify_header(all_stat_cols() ~ "**{level}**  \nN = {n}") |>
+    gtsummary::modify_column_alignment(columns = all_stat_cols(), align = "right")
+
   if (!is.null(lbl_overall)) {
-    tbl_gts <- tbl_gts %>%
-      add_overall(last = TRUE, col_label = paste0("**", lbl_overall, "**  \n N = {n}"))
+    tbl_gts_ovrl <-
+      tbl_hierarchical(
+        data = df,
+        variables = soc_var,
+        denominator = df_denom,
+        id = id_var
+      ) |>
+      modify_header(label ~ paste0("**System Organ Class**")) |>
+      modify_header(
+        all_stat_cols() ~ paste0("**", lbl_overall, "**  \nN = {n}")
+      ) |>
+      gtsummary::modify_column_alignment(columns = all_stat_cols(), align = "right")
+
+    tbl_gts_df <- as.data.frame(tbl_gts)
+    tbl_gts_ovrl_df <- as.data.frame(tbl_gts_ovrl)
+
+    tbl_gts_all_df <-
+      left_join(
+        x = tbl_gts_df,
+        y = tbl_gts_ovrl_df,
+        by = "**System Organ Class**"
+      )
+
+    cols_names <- colnames(tbl_gts_all_df)
+
+    tbl_gts <-
+      tbl_gts_all_df |>
+      gt() |>
+      cols_label(
+        .list = setNames(lapply(cols_names, md), cols_names)
+      )
+
+    tbl <- gtsummary::with_gtsummary_theme(
+      x = gtsummary::theme_gtsummary_compact(),
+      expr = tbl_gts
+    )
+  }
+
+  else {
+    tbl_gts <- tbl_gts
+
+    tbl <- gtsummary::with_gtsummary_theme(
+      x = gtsummary::theme_gtsummary_compact(),
+      expr = as_gt(tbl_gts)
+    )
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-make_table_35_rtables <- function(adae,
-                          alt_counts_df = NULL,
-                          show_colcounts = TRUE,
-                          id_var = "USUBJID",
-                          arm_var = "ARM",
-                          saffl_var = "SAFFL",
-                          soc_var = "AESOC",
-                          lbl_soc_var = formatters::var_labels(adae, fill = TRUE)[soc_var],
-                          lbl_overall = NULL,
-                          risk_diff = NULL,
-                          prune_0 = FALSE,
-                          annotations = NULL) {
-  assert_subset(c(soc_var, arm_var, id_var, saffl_var), names(adae))
-  assert_flag_variables(adae, saffl_var)
-
-  adae <- adae %>%
-    filter(.data[[saffl_var]] == "Y") %>%
-    arrange(soc_var) %>%
-    df_explicit_na()
-
+#' @export
+#' @rdname tbl_make_table_35
+make_table_35_rtables <- function(df,
+                                  alt_counts_df = NULL,
+                                  show_colcounts = TRUE,
+                                  id_var = "USUBJID",
+                                  arm_var = "ARM",
+                                  saffl_var = "SAFFL",
+                                  soc_var = "AEBODSYS",
+                                  lbl_soc_var = formatters::var_labels(adae, fill = TRUE)[soc_var],
+                                  lbl_overall = NULL,
+                                  risk_diff = NULL,
+                                  prune_0 = FALSE,
+                                  na_level = "<Missing>",
+                                  annotations = NULL) {
+  df <- preproc_df_table_35(df, id_var, arm_var, saffl_var, soc_var, na_level)
   alt_counts_df <-
     alt_counts_df_preproc(alt_counts_df, id_var, arm_var, saffl_var)
 
-  lyt <- basic_table_annot(show_colcounts, annotations) %>%
-    split_cols_by_arm(arm_var, lbl_overall, risk_diff) %>%
+  lyt <- basic_table_annot(show_colcounts, annotations) |>
+    split_cols_by_arm(arm_var, lbl_overall, risk_diff) |>
     count_occurrences(
       vars = soc_var,
       drop = FALSE,
       riskdiff = !is.null(risk_diff)
-    ) %>%
+    ) |>
     append_topleft(c("", lbl_soc_var))
 
-  tbl <- build_table(lyt, df = adae, alt_counts_df = alt_counts_df) %>%
+  tbl <- build_table(lyt, df = adae, alt_counts_df = alt_counts_df) |>
     sort_at_path(
       path = c(soc_var),
       scorefun = score_occurrences_cols(col_names = levels(adae[[arm_var]]))
