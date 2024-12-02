@@ -93,6 +93,9 @@ be included in the column labels by default. The length of \code{col_label} must
 
 \item{sex_scope}{(\code{character})\cr Level of \code{SEX} to output in table.}
 
+\item{table_engine}{(\code{string})\cr table engine used to generate the table. If \code{NULL}, no table is returned. If the
+given engine is not available for the table, no table is created and a warning is returned.}
+
 \item{trtedtm_var}{(\code{character})\cr treatment end datetime variable.}
 
 \item{trtemfl_var}{(\code{character})\cr flag variable used to identify Treatment-emergent AE.}
