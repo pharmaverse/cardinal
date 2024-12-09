@@ -33,17 +33,17 @@ NULL
 #'
 #' @export
 make_table_09_rtables <- function(adae,
-                          alt_counts_df = NULL,
-                          show_colcounts = TRUE,
-                          id_var = "USUBJID",
-                          arm_var = "ARM",
-                          saffl_var = "SAFFL",
-                          pref_var = "AEDECOD",
-                          lbl_pref_var = formatters::var_labels(adae, fill = TRUE)[pref_var],
-                          lbl_overall = NULL,
-                          risk_diff = NULL,
-                          prune_0 = TRUE,
-                          annotations = NULL) {
+                                  alt_counts_df = NULL,
+                                  show_colcounts = TRUE,
+                                  id_var = "USUBJID",
+                                  arm_var = "ARM",
+                                  saffl_var = "SAFFL",
+                                  pref_var = "AEDECOD",
+                                  lbl_pref_var = formatters::var_labels(adae, fill = TRUE)[pref_var],
+                                  lbl_overall = NULL,
+                                  risk_diff = NULL,
+                                  prune_0 = TRUE,
+                                  annotations = NULL) {
   assert_subset(c("AESER", "AESOC", arm_var, id_var, saffl_var, pref_var), names(adae))
   assert_flag_variables(adae, saffl_var)
 
@@ -714,9 +714,7 @@ make_table_09_gtsummary <- function(
     pref_var = "AEDECOD",
     id_var = "USUBJID",
     soc_var = "AESOC",
-    lbl_overall = NULL
-) {
-
+    lbl_overall = NULL) {
   assert_data_frame(df)
   assert_subset(c(saffl_var, id_var, ser_var, soc_var, arm_var, pref_var), names(df))
   assert_flag_variables(df, saffl_var)
@@ -787,9 +785,7 @@ make_table_09 <- function(
     pref_var = "AEDECOD",
     id_var = "USUBJID",
     soc_var = "AESOC",
-    lbl_overall = NULL
-) {
-
+    lbl_overall = NULL) {
   tbl <- make_table_09_gtsummary(
     df = df,
     denominator = denominator,
