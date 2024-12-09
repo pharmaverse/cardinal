@@ -1,4 +1,4 @@
-# Table 09 generation works with default values
+# Table 09 (rtables) generation works with default values
 
     Code
       res
@@ -15,7 +15,7 @@
       cl D                        50 (37.3%)    42 (31.3%)      51 (38.6%)  
         dcd D.1.1.1.1             50 (37.3%)    42 (31.3%)      51 (38.6%)  
 
-# Table 09 generation works with custom values
+# Table 09 (rtables) generation works with custom values
 
     Code
       res
@@ -48,7 +48,7 @@
       n, number of patients with adverse event; PT, preferred term; SAE, serious adverse event;
       SOC, System Organ Class
 
-# Table 09 (gt) generation works with risk difference column
+# Table 09 generation works with risk difference column
 
     Code
       res
@@ -209,4 +209,95 @@
       6 dcd B.2.2.3.1 " 48 (46.2%)"    " 54 (53.5%)"     " 51 (51.5%)"        
       7 cl D          " 50 (48.1%)"    " 42 (41.6%)"     " 51 (51.5%)"        
       8 dcd D.1.1.1.1 " 50 (48.1%)"    " 42 (41.6%)"     " 51 (51.5%)"        
+
+# Table 09 generation works with default values
+
+    Code
+      as.data.frame(res$table)
+    Output
+        **Primary System Organ Class**  \n    **Dictionary-Derived Term**
+      1                                                           Any SAE
+      2                                                              cl A
+      3                                                     dcd A.1.1.1.2
+      4                                                              cl B
+      5                                                     dcd B.1.1.1.1
+      6                                                     dcd B.2.2.3.1
+      7                                                              cl D
+      8                                                     dcd D.1.1.1.1
+        **A: Drug X**  \nN = 134 **B: Placebo**  \nN = 134
+      1              104 (77.6%)               101 (75.4%)
+      2               48 (35.8%)                48 (35.8%)
+      3               48 (35.8%)                48 (35.8%)
+      4               79 (59.0%)                78 (58.2%)
+      5               47 (35.1%)                49 (36.6%)
+      6               48 (35.8%)                54 (40.3%)
+      7               50 (37.3%)                42 (31.3%)
+      8               50 (37.3%)                42 (31.3%)
+        **C: Combination**  \nN = 132
+      1                    99 (75.0%)
+      2                    50 (37.9%)
+      3                    50 (37.9%)
+      4                    76 (57.6%)
+      5                    43 (32.6%)
+      6                    51 (38.6%)
+      7                    51 (38.6%)
+      8                    51 (38.6%)
+
+---
+
+    Code
+      res$ard
+    Output
+      $tbl_hierarchical
+      # A tibble: 81 x 14
+      # Groups:   group1_level [4]
+         group1 group1_level group2 group2_level variable variable_level context     
+         <chr>  <list>       <chr>  <list>       <chr>    <list>         <chr>       
+       1 ARM    <fct [1]>    <NA>   <NULL>       AESOC    <fct [1]>      hierarchical
+       2 ARM    <fct [1]>    <NA>   <NULL>       AESOC    <fct [1]>      hierarchical
+       3 ARM    <fct [1]>    <NA>   <NULL>       AESOC    <fct [1]>      hierarchical
+       4 ARM    <fct [1]>    <NA>   <NULL>       AESOC    <fct [1]>      hierarchical
+       5 ARM    <fct [1]>    <NA>   <NULL>       AESOC    <fct [1]>      hierarchical
+       6 ARM    <fct [1]>    <NA>   <NULL>       AESOC    <fct [1]>      hierarchical
+       7 ARM    <fct [1]>    <NA>   <NULL>       AESOC    <fct [1]>      hierarchical
+       8 ARM    <fct [1]>    <NA>   <NULL>       AESOC    <fct [1]>      hierarchical
+       9 ARM    <fct [1]>    <NA>   <NULL>       AESOC    <fct [1]>      hierarchical
+      10 ARM    <fct [1]>    <NA>   <NULL>       AESOC    <fct [1]>      hierarchical
+      # i 71 more rows
+      # i 7 more variables: stat_name <chr>, stat_label <chr>, stat <list>,
+      #   fmt_fn <list>, warning <list>, error <list>, gts_column <chr>
+      
+
+# Table 09 generation works with gtsummary with custom values
+
+    Code
+      as.data.frame(res)
+    Output
+        **Primary System Organ Class**  \n    **Dictionary-Derived Term**
+      1                                                           Any SAE
+      2                                                              cl A
+      3                                                     dcd A.1.1.1.2
+      4                                                              cl B
+      5                                                     dcd B.1.1.1.1
+      6                                                     dcd B.2.2.3.1
+      7                                                              cl D
+      8                                                     dcd D.1.1.1.1
+        **A: Drug X**  \nN = 134 **B: Placebo**  \nN = 134
+      1              104 (77.6%)               101 (75.4%)
+      2               48 (35.8%)                48 (35.8%)
+      3               48 (35.8%)                48 (35.8%)
+      4               79 (59.0%)                78 (58.2%)
+      5               47 (35.1%)                49 (36.6%)
+      6               48 (35.8%)                54 (40.3%)
+      7               50 (37.3%)                42 (31.3%)
+      8               50 (37.3%)                42 (31.3%)
+        **C: Combination**  \nN = 132
+      1                    99 (75.0%)
+      2                    50 (37.9%)
+      3                    50 (37.9%)
+      4                    76 (57.6%)
+      5                    43 (32.6%)
+      6                    51 (38.6%)
+      7                    51 (38.6%)
+      8                    51 (38.6%)
 
