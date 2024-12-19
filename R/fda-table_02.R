@@ -79,3 +79,44 @@ make_table_02 <- function(df,
     res <- list(tbl = tbl)
   }
 }
+
+#' @rdname make_table_02
+#' @export
+make_table_02_rtables <- function(df,
+                          alt_counts_df = NULL,
+                          show_colcounts = TRUE,
+                          arm_var = "ARM",
+                          saffl_var = "SAFFL",
+                          vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY"),
+                          lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
+                          lbl_overall = "Total Population",
+                          na_rm = FALSE,
+                          prune_0 = TRUE,
+                          annotations = NULL) {
+  assert_subset(c(vars, arm_var, saffl_var), names(df))
+  assert_flag_variables(df, saffl_var)
+
+  df <- df %>%
+    filter(.data[[saffl_var]] == "Y") %>%
+    df_explicit_na()
+
+  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, id_var, arm_var, saffl_var)
+
+  lyt <- basic_table_annot(show_colcounts, annotations) %>%
+    split_cols_by_arm(arm_var, lbl_overall) %>%
+    analyze_vars(
+      vars = vars,
+      var_labels = lbl_vars,
+      show_labels = "visible",
+      .stats = c("mean_sd", "median_range", "count_fraction"),
+      .formats = NULL,
+      na.rm = na_rm
+    ) %>%
+    append_topleft("Characteristic")
+
+  tbl <- build_table(lyt, df = df, alt_counts_df = alt_counts_df)
+  if (prune_0) tbl <- prune_table(tbl)
+
+  tbl
+}
+

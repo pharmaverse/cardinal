@@ -9,9 +9,11 @@ format: html
 
 ![](../assets/images/screenshots/table_02.png){fig-align="center"}
 
-## rtables Table
+## gtsummary Table
 
-```{r tbl, message=FALSE, warning=FALSE}
+<details>
+  <summary>gtsummary Table Setup</summary>
+```{r tbl2, eval=FALSE, echo=TRUE}
 # Load Libraries & Data
 library(cardinal)
 library(dplyr)
@@ -44,6 +46,11 @@ make_table_02(
   )
 )
 ```
+</details>
+
+```{r tbl2, message=FALSE, warning=FALSE, eval=TRUE}
+```
+
 
 ## Table
 
