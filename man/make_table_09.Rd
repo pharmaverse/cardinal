@@ -47,12 +47,12 @@ make_table_09(
   df,
   denominator = NULL,
   return_ard = TRUE,
+  id_var = "USUBJID",
+  arm_var = "ARM",
   saffl_var = "SAFFL",
   ser_var = "AESER",
-  arm_var = "ARM",
-  pref_var = "AEDECOD",
-  id_var = "USUBJID",
   soc_var = "AESOC",
+  pref_var = "AEDECOD",
   lbl_overall = NULL
 )
 }
