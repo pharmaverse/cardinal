@@ -351,7 +351,6 @@ test_that("make_table_09_tplyr() considers annotations if tplyr_raw = FALSE", {
 
 
 test_that("Table 09 generation works with default values", {
-
   res <- make_table_09(adae, adsl)
   expect_snapshot(res$table |> as.data.frame())
   expect_snapshot(res$ard)
@@ -365,7 +364,6 @@ test_that("Table 09 generation works with default values", {
 
 
 test_that("Table 09 generation works with gtsummary with custom values", {
-
   res <- make_table_09_gtsummary(
     df = adae,
     denominator = adsl
