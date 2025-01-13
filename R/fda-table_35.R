@@ -23,7 +23,7 @@
 #'
 #' @export
 make_table_35 <- function(df,
-                          denominator,
+                          denominator = NULL,
                           return_ard = TRUE,
                           id_var = "USUBJID",
                           arm_var = "ARM",
