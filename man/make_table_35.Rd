@@ -7,7 +7,7 @@ Safety Population, Pooled Analysis (or Trial X)}
 \usage{
 make_table_35(
   df,
-  denominator,
+  denominator = NULL,
   return_ard = TRUE,
   id_var = "USUBJID",
   arm_var = "ARM",
