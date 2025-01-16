@@ -91,7 +91,7 @@ flag variables are treated as \code{"N"}.
 adsl <- random.cdisc.data::cadsl
 adae <- random.cdisc.data::cadae
 
-tbl <- make_table_09(adae = adae, alt_counts_df = adsl)
+tbl <- make_table_09_rtables(adae = adae, alt_counts_df = adsl)
 tbl
 
 }
