@@ -739,8 +739,7 @@ make_table_09_gtsummary <- function(
       id = id_var,
       denominator = denominator,
       overall_row = TRUE,
-      statistic = "{n} ({p}%)",
-      label = "overall" ~ "Any SAE"
+      label = "..ard_hierarchical_overall.." ~ "Any SAE"
     )
   if (!is.null(lbl_overall)) {
     total <- df |>
@@ -748,8 +747,7 @@ make_table_09_gtsummary <- function(
         variables = c(soc_var, pref_var),
         id = id_var,
         denominator = denominator,
-        overall_row = TRUE,
-        statistic = "{n} ({p}%)"
+        overall_row = TRUE
       )
 
     tbl <- tbl_merge(list(tbl, total), tab_spanner = FALSE)
