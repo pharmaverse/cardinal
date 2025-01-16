@@ -739,7 +739,7 @@ make_table_09_gtsummary <- function(
       id = id_var,
       denominator = denominator,
       overall_row = TRUE,
-      label = "..ard_hierarchical_overall.." ~ "Any SAE"
+      label = "overall" ~ "Any SAE"
     )
   if (!is.null(lbl_overall)) {
     total <- df |>
