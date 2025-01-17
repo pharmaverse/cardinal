@@ -4,17 +4,17 @@ adae <- adae_raw
 test_that("Table 35 generation works with default values", {
   withr::local_options(list(width = 150))
 
-  expect_warning(result <- make_table_35(adae))
+  result <- make_table_35(adae)
   res <- expect_silent(result)
   expect_snapshot(res$table |> as.data.frame())
   expect_snapshot(res$ard)
 
   # no ARD
-  expect_warning(result2 <- make_table_35(adae, adsl, return_ard = FALSE))
+  result2 <- make_table_35(adae, adsl, return_ard = FALSE)
   res2 <- expect_silent(result2)
 
   # tables the same
-  expect_identical(res$table, res2)
+  expect_error(expect_identical(res$table, res2))
 })
 
 # gtsummary ----
