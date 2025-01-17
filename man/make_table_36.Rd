@@ -86,7 +86,7 @@ and \code{pref_var}.
 adsl <- random.cdisc.data::cadsl
 adae <- random.cdisc.data::cadae
 
-tbl <- make_table_35(adae = adae, alt_counts_df = adsl)
+tbl <- make_table_36(adae = adae, alt_counts_df = adsl)
 tbl
 
 }
