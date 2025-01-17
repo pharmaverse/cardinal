@@ -31,7 +31,6 @@ make_table_35 <- function(df,
                           soc_var = "AEBODSYS",
                           lbl_overall = NULL,
                           na_level = "<Missing>") {
-
   ard <- ard_table_35(
     df = df,
     denominator = denominator,
@@ -57,7 +56,6 @@ make_table_35 <- function(df,
   } else {
     return(tbl) # nocov
   }
-
 }
 
 #' Pre-Process Data for Table 35 Creation
@@ -69,7 +67,6 @@ preproc_df_table_35 <- function(df,
                                 saffl_var = "SAFFL",
                                 soc_var = "AEBODSYS",
                                 na_level = "<Missing>") {
-
   assert_subset(c(soc_var, arm_var, id_var, saffl_var), names(df))
   assert_flag_variables(df, saffl_var)
 
@@ -102,13 +99,11 @@ ard_table_35 <- function(df,
                          soc_var = "AEBODSYS",
                          lbl_overall = NULL,
                          na_level = "<Missing>") {
-
   df <- preproc_df_table_35(df, id_var, arm_var, saffl_var, soc_var, na_level)
 
   if (is.null(denominator)) {
     denominator <- df # nocov
-  }
-  else {
+  } else {
     denominator <-
       alt_counts_df_preproc(denominator, id_var, arm_var, saffl_var)
   }
@@ -172,13 +167,11 @@ make_table_35_gtsummary <- function(df,
                                     soc_var = "AEBODSYS",
                                     lbl_overall = NULL,
                                     na_level = "<Missing>") {
-
   df <- preproc_df_table_35(df, id_var, arm_var, saffl_var, soc_var, na_level)
 
   if (is.null(denominator)) {
     denominator <- df # nocov
-  }
-  else {
+  } else {
     denominator <-
       alt_counts_df_preproc(denominator, id_var, arm_var, saffl_var)
   }
@@ -232,9 +225,7 @@ make_table_35_gtsummary <- function(df,
       x = gtsummary::theme_gtsummary_compact(),
       expr = tbl_gts
     )
-  }
-
-  else {
+  } else {
     tbl_gts <- tbl_gts
 
     tbl <- gtsummary::with_gtsummary_theme(
