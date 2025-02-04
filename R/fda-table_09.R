@@ -734,17 +734,17 @@ make_table_09_gtsummary <- function(
 
   tbl <- df |>
     tbl_hierarchical(
-      variables = c(soc_var, pref_var),
-      by = arm_var,
-      id = id_var,
+      variables = all_of(c(soc_var, pref_var)),
+      by = all_of(arm_var),
+      id = all_of(id_var),
       denominator = denominator,
       overall_row = TRUE,
-      label = "overall" ~ "Any SAE"
+      label = "..ard_hierarchical_overall.." ~ "Any SAE"
     )
   if (!is.null(lbl_overall)) {
     total <- df |>
       tbl_hierarchical(
-        variables = c(soc_var, pref_var),
+        variables = all_of(c(soc_var, pref_var)),
         id = id_var,
         denominator = denominator,
         overall_row = TRUE

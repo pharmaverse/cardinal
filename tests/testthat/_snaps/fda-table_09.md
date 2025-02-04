@@ -199,7 +199,7 @@
       tbl_out %>% gt::extract_body()
     Output
       # A tibble: 8 x 4
-        row_label1    `var1_A: Drug X` `var1_B: Placebo` `var1_C: Combination`
+        `::rowname::` `var1_A: Drug X` `var1_B: Placebo` `var1_C: Combination`
         <chr>         <chr>            <chr>             <chr>                
       1 Any SAE       "104 (100.0%)"   "101 (100.0%)"    " 99 (100.0%)"       
       2 cl A          " 48 (46.2%)"    " 48 (47.5%)"     " 50 (50.5%)"        
@@ -210,38 +210,20 @@
       7 cl D          " 50 (48.1%)"    " 42 (41.6%)"     " 51 (51.5%)"        
       8 dcd D.1.1.1.1 " 50 (48.1%)"    " 42 (41.6%)"     " 51 (51.5%)"        
 
-# Table 09 generation works with default values
+# Table 09 generation works with gtsummary with default values
 
     Code
       as.data.frame(res$table)
     Output
-        **Primary System Organ Class**  \n    **Dictionary-Derived Term**
-      1                                                           Any SAE
-      2                                                              cl A
-      3                                                     dcd A.1.1.1.2
-      4                                                              cl B
-      5                                                     dcd B.1.1.1.1
-      6                                                     dcd B.2.2.3.1
-      7                                                              cl D
-      8                                                     dcd D.1.1.1.1
-        **A: Drug X**  \nN = 134 **B: Placebo**  \nN = 134
-      1              104 (77.6%)               101 (75.4%)
-      2               48 (35.8%)                48 (35.8%)
-      3               48 (35.8%)                48 (35.8%)
-      4               79 (59.0%)                78 (58.2%)
-      5               47 (35.1%)                49 (36.6%)
-      6               48 (35.8%)                54 (40.3%)
-      7               50 (37.3%)                42 (31.3%)
-      8               50 (37.3%)                42 (31.3%)
-        **C: Combination**  \nN = 132
-      1                    99 (75.0%)
-      2                    50 (37.9%)
-      3                    50 (37.9%)
-      4                    76 (57.6%)
-      5                    43 (32.6%)
-      6                    51 (38.6%)
-      7                    51 (38.6%)
-      8                    51 (38.6%)
+        **Primary System Organ Class**  \n    **Dictionary-Derived Term** **A: Drug X**  \nN = 134 **B: Placebo**  \nN = 134 **C: Combination**  \nN = 132
+      1                                                           Any SAE                104 (78%)                 101 (75%)                      99 (75%)
+      2                                                              cl A                 48 (36%)                  48 (36%)                      50 (38%)
+      3                                                     dcd A.1.1.1.2                 48 (36%)                  48 (36%)                      50 (38%)
+      4                                                              cl B                 79 (59%)                  78 (58%)                      76 (58%)
+      5                                                     dcd B.1.1.1.1                 47 (35%)                  49 (37%)                      43 (33%)
+      6                                                     dcd B.2.2.3.1                 48 (36%)                  54 (40%)                      51 (39%)
+      7                                                              cl D                 50 (37%)                  42 (31%)                      51 (39%)
+      8                                                     dcd D.1.1.1.1                 50 (37%)                  42 (31%)                      51 (39%)
 
 ---
 
@@ -249,23 +231,25 @@
       res$ard
     Output
       $tbl_hierarchical
-      # A tibble: 81 x 14
-      # Groups:   group1_level [4]
-         group1 group1_level group2 group2_level variable variable_level context     
-         <chr>  <list>       <chr>  <list>       <chr>    <list>         <chr>       
-       1 ARM    <fct [1]>    <NA>   <NULL>       AESOC    <fct [1]>      hierarchical
-       2 ARM    <fct [1]>    <NA>   <NULL>       AESOC    <fct [1]>      hierarchical
-       3 ARM    <fct [1]>    <NA>   <NULL>       AESOC    <fct [1]>      hierarchical
-       4 ARM    <fct [1]>    <NA>   <NULL>       AESOC    <fct [1]>      hierarchical
-       5 ARM    <fct [1]>    <NA>   <NULL>       AESOC    <fct [1]>      hierarchical
-       6 ARM    <fct [1]>    <NA>   <NULL>       AESOC    <fct [1]>      hierarchical
-       7 ARM    <fct [1]>    <NA>   <NULL>       AESOC    <fct [1]>      hierarchical
-       8 ARM    <fct [1]>    <NA>   <NULL>       AESOC    <fct [1]>      hierarchical
-       9 ARM    <fct [1]>    <NA>   <NULL>       AESOC    <fct [1]>      hierarchical
-      10 ARM    <fct [1]>    <NA>   <NULL>       AESOC    <fct [1]>      hierarchical
-      # i 71 more rows
-      # i 7 more variables: stat_name <chr>, stat_label <chr>, stat <list>,
-      #   fmt_fn <list>, warning <list>, error <list>, gts_column <chr>
+    Message
+      {cards} data frame: 81 x 15
+    Output
+         group1 group1_level group2 group2_level                     variable variable_level stat_name stat_label  stat stat_fmt
+      1     ARM    A: Drug X   <NA>                                     AESOC           cl A         n          n    48       48
+      2     ARM    A: Drug X   <NA>                                     AESOC           cl A         N          N   134      134
+      3     ARM    A: Drug X   <NA>                                     AESOC           cl A         p          % 0.358       36
+      4     ARM    A: Drug X   <NA>                                     AESOC           cl B         n          n    79       79
+      5     ARM    A: Drug X   <NA>                                     AESOC           cl B         N          N   134      134
+      6     ARM    A: Drug X   <NA>                                     AESOC           cl B         p          %  0.59       59
+      7     ARM    A: Drug X   <NA>                                     AESOC           cl D         n          n    50       50
+      8     ARM    A: Drug X   <NA>                                     AESOC           cl D         N          N   134      134
+      9     ARM    A: Drug X   <NA>                                     AESOC           cl D         p          % 0.373       37
+      10    ARM    A: Drug X   <NA>              ..ard_hierarchical_overall..           TRUE         n          n   104      104
+    Message
+      i 71 more rows
+      i Use `print(n = ...)` to see more rows
+      i 5 more variables: context, fmt_fn, warning, error, gts_column
+    Output
       
 
 # Table 09 generation works with gtsummary with custom values
@@ -273,31 +257,13 @@
     Code
       as.data.frame(res)
     Output
-        **Primary System Organ Class**  \n    **Dictionary-Derived Term**
-      1                                                           Any SAE
-      2                                                              cl A
-      3                                                     dcd A.1.1.1.2
-      4                                                              cl B
-      5                                                     dcd B.1.1.1.1
-      6                                                     dcd B.2.2.3.1
-      7                                                              cl D
-      8                                                     dcd D.1.1.1.1
-        **A: Drug X**  \nN = 134 **B: Placebo**  \nN = 134
-      1              104 (77.6%)               101 (75.4%)
-      2               48 (35.8%)                48 (35.8%)
-      3               48 (35.8%)                48 (35.8%)
-      4               79 (59.0%)                78 (58.2%)
-      5               47 (35.1%)                49 (36.6%)
-      6               48 (35.8%)                54 (40.3%)
-      7               50 (37.3%)                42 (31.3%)
-      8               50 (37.3%)                42 (31.3%)
-        **C: Combination**  \nN = 132
-      1                    99 (75.0%)
-      2                    50 (37.9%)
-      3                    50 (37.9%)
-      4                    76 (57.6%)
-      5                    43 (32.6%)
-      6                    51 (38.6%)
-      7                    51 (38.6%)
-      8                    51 (38.6%)
+        **Primary System Organ Class**  \n    **Dictionary-Derived Term** **A: Drug X**  \nN = 134 **B: Placebo**  \nN = 134 **C: Combination**  \nN = 132
+      1                                                           Any SAE                104 (78%)                 101 (75%)                      99 (75%)
+      2                                                              cl A                 48 (36%)                  48 (36%)                      50 (38%)
+      3                                                     dcd A.1.1.1.2                 48 (36%)                  48 (36%)                      50 (38%)
+      4                                                              cl B                 79 (59%)                  78 (58%)                      76 (58%)
+      5                                                     dcd B.1.1.1.1                 47 (35%)                  49 (37%)                      43 (33%)
+      6                                                     dcd B.2.2.3.1                 48 (36%)                  54 (40%)                      51 (39%)
+      7                                                              cl D                 50 (37%)                  42 (31%)                      51 (39%)
+      8                                                     dcd D.1.1.1.1                 50 (37%)                  42 (31%)                      51 (39%)
 
