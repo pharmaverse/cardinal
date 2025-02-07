@@ -2,6 +2,7 @@
 % Please edit documentation in R/fda-table_02.R
 \name{make_table_02}
 \alias{make_table_02}
+\alias{make_table_02_rtables}
 \title{FDA Table 2: Baseline Demographic and Clinical Characteristics, Safety Population, Pooled Analyses}
 \usage{
 make_table_02(
@@ -14,6 +15,20 @@ make_table_02(
   lbl_overall = "Total Population",
   na_rm = FALSE,
   return_ard = TRUE
+)
+
+make_table_02_rtables(
+  df,
+  alt_counts_df = NULL,
+  show_colcounts = TRUE,
+  arm_var = "ARM",
+  saffl_var = "SAFFL",
+  vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY"),
+  lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
+  lbl_overall = "Total Population",
+  na_rm = FALSE,
+  prune_0 = TRUE,
+  annotations = NULL
 )
 }
 \arguments{
@@ -36,6 +51,14 @@ the given value as the column label.}
 \item{na_rm}{(\code{flag})\cr whether \code{NA} levels should be removed from the table.}
 
 \item{return_ard}{(\code{flag})\cr whether an ARD should be returned. Defaults to \code{TRUE}.}
+
+\item{alt_counts_df}{(\code{character})\cr alternative dataset (typically ADSL) used only to calculate column counts.}
+
+\item{prune_0}{(\code{flag})\cr Whether all-zero rows should be removed from the table. Boolean.}
+
+\item{annotations}{(named \code{list} of \code{character})\cr list of annotations to add to the table. Valid
+annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
+use the annotation type as name and the desired string as value.}
 }
 \value{
 \itemize{
