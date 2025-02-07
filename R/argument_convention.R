@@ -69,6 +69,8 @@
 #'    * `pct`: (optional) whether the output should be returned as percentages. Defaults to `TRUE`.
 #' @param saffl_var (`character`)\cr flag variable used to indicate inclusion in safety population.
 #' @param sex_scope (`character`)\cr Level of `SEX` to output in table.
+#' @param table_engine (`string`)\cr table engine used to generate the table. If `NULL`, no table is returned. If the
+#'   given engine is not available for the table, no table is created and a warning is returned.
 #' @param trtedtm_var (`character`)\cr treatment end datetime variable.
 #' @param trtemfl_var (`character`)\cr flag variable used to identify Treatment-emergent AE.
 #' @param trtsdtm_var (`character`)\cr treatment start datetime variable.
