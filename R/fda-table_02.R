@@ -83,16 +83,16 @@ make_table_02 <- function(df,
 #' @rdname make_table_02
 #' @export
 make_table_02_rtables <- function(df,
-                          alt_counts_df = NULL,
-                          show_colcounts = TRUE,
-                          arm_var = "ARM",
-                          saffl_var = "SAFFL",
-                          vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY"),
-                          lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
-                          lbl_overall = "Total Population",
-                          na_rm = FALSE,
-                          prune_0 = TRUE,
-                          annotations = NULL) {
+                                  alt_counts_df = NULL,
+                                  show_colcounts = TRUE,
+                                  arm_var = "ARM",
+                                  saffl_var = "SAFFL",
+                                  vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY"),
+                                  lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
+                                  lbl_overall = "Total Population",
+                                  na_rm = FALSE,
+                                  prune_0 = TRUE,
+                                  annotations = NULL) {
   assert_subset(c(vars, arm_var, saffl_var), names(df))
   assert_flag_variables(df, saffl_var)
 
@@ -119,4 +119,3 @@ make_table_02_rtables <- function(df,
 
   tbl
 }
-
