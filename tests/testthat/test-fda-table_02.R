@@ -1,12 +1,27 @@
 adsl <- adsl_raw %>%
   filter(SAFFL == "Y") %>%
+    mutate(AGEGR1 = as.factor(case_when(
+    AGE >= 17 & AGE < 65 ~ ">=17 to <65",
+    AGE >= 65 ~ ">=65",
+    AGE >= 65 & AGE < 75 ~ ">=65 to <75",
+    AGE >= 75 ~ ">=75"
+    ))) %>%
   df_explicit_na()
 
 test_that("Table 02 generation works with default values", {
   options(pillar.print_max = 50, width = 200)
 
   result <- make_table_02(adsl)
-  expect_snapshot(result$tbl |> as.data.frame())
+  res <- expect_silent(result)
+  expect_snapshot(res$tbl |> as.data.frame())
+  expect_snapshot(res$ard)
+
+  # no ARD
+  result2 <- make_table_05(adsl, return_ard = FALSE)
+  res2 <- expect_silent(result2)
+
+  # tables the same
+  expect_identical(res$tbl, res2)
 })
 
 test_that("Table 02 generation works with custom values", {
