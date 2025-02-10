@@ -53,7 +53,8 @@ make_table_02 <- function(df,
   # create a table using gtsummary
   df %>%
     gtsummary::tbl_summary(
-      by = arm_var)
+      by = arm_var
+    )
 
   tbl <- df %>%
     gtsummary::tbl_summary(
@@ -67,7 +68,8 @@ make_table_02 <- function(df,
         all_categorical() ~ "{n} ({p}%)"
       ),
       digits = all_continuous() ~ 2,
-      missing = "no") %>%
+      missing = "no"
+    ) %>%
     gtsummary::bold_labels() %>%
     gtsummary::modify_header(all_stat_cols() ~ "**{level}**  \nN = {n}") %>%
     gtsummary::add_overall(last = TRUE, col_label = paste0("**", "Total Population", "**  \nN = {n}")) %>%
