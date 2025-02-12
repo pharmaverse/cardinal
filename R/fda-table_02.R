@@ -8,13 +8,13 @@
 #' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
 #'   flag variables are treated as `"N"`.
 #'
-#' @inheritParams tbl_make_table_02
+#' @inheritParams make_table_02
 #' @inheritParams argument_convention
 #'
 #' @return A `gtsummary` table and, if `return_ard = TRUE`, an ARD.
 #'   If `return_ard = TRUE`, they will be returned as a list with named elements `table` and `ard`.
 #'
-#' @seealso [`tbl_make_table_02`]
+#' @seealso [`make_table_02`]
 #'
 #' @examples
 #' library(dplyr)
@@ -32,7 +32,6 @@
 #'
 #' @export
 make_table_02 <- function(df,
-                          denominator = NULL,
                           return_ard = TRUE,
                           arm_var = "ARM",
                           saffl_var = "SAFFL",
@@ -112,12 +111,11 @@ make_table_02 <- function(df,
 #'     AGE >= 65 & AGE < 75 ~ ">=65 to <75",
 #'     AGE >= 75 ~ ">=75"
 #'   )))
-#' tbl_rtables <- cardinal:::make_table_05_rtables(df = adsl)
+#' tbl_rtables <- make_table_02_rtables(df = adsl)
 #' tbl_rtables
 #' @rdname make_table_02
 #' @export
 make_table_02_rtables <- function(df,
-                                  alt_counts_df = NULL,
                                   show_colcounts = TRUE,
                                   arm_var = "ARM",
                                   saffl_var = "SAFFL",
@@ -134,8 +132,6 @@ make_table_02_rtables <- function(df,
     filter(.data[[saffl_var]] == "Y") %>%
     df_explicit_na()
 
-  alt_counts_df <- alt_counts_df_preproc(alt_counts_df, id_var, arm_var, saffl_var)
-
   lyt <- basic_table_annot(show_colcounts, annotations) %>%
     split_cols_by_arm(arm_var, lbl_overall) %>%
     analyze_vars(
@@ -148,7 +144,7 @@ make_table_02_rtables <- function(df,
     ) %>%
     append_topleft("Characteristic")
 
-  tbl <- build_table(lyt, df = df, alt_counts_df = alt_counts_df)
+  tbl <- build_table(lyt, df = df)
   if (prune_0) tbl <- prune_table(tbl)
 
   tbl

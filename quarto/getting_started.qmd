@@ -17,6 +17,9 @@ The `cardinal` package requires several packages available on CRAN.
 To use the `cardinal` package, ensure you have these necessary package dependencies installed by running the following code:
 
 ```{r, echo=TRUE, eval=FALSE}
+if (!require("gtsummary")) install.packages("gtsummary")
+if (!require("cards")) install.packages("cards")
+if (!require("cardx")) install.packages("cardx")
 if (!require("formatters")) install.packages("formatters")
 if (!require("rtables")) install.packages("rtables")
 if (!require("rlistings")) install.packages("rlistings")
@@ -63,7 +66,7 @@ Each template provided is associated with a function available within the `cardi
 
 ![](./assets/images/getting-started/gs-pan3.png){fig-align="center" width="90%"}
 
--   **Function Details**: This tab includes details on the table-generating function used for this template. Table functions use the naming convention `make_table_XX()` where `XX` is the table number taken from the FDA Standard Safety Table and Figures document (preceded by a 0 if the number is a single digit). Any required variables for the input datasets are listed along with a description of all function arguments. This information is mirrored by the function's help page accessible within R (i.e. `?make_table_XX`).
+-   **Function Details**: This tab includes details on the table-generating function used for this template. Table functions use the naming convention `make_table_XX()` where `XX` is the table number taken from the FDA Standard Safety Table and Figures document (preceded by a 0 if the number is a single digit). Any required variables for the input datasets are listed along with a description of all function arguments. This information is mirrored by the function's help page accessible within R (i.e. `?make_table_XX`). By default, all table generating functions use the {gtsummary} package - though we do support rtables functionality. To specify the use of which table engine is being used, engine specific functions can be called (`make_table_02_rtables`, for example).
 
 ![](./assets/images/getting-started/gs-pan4.png){fig-align="center" width="90%"}
 
@@ -90,8 +93,7 @@ adsl <- random.cdisc.data::cadsl %>%
     AGE >= 65 ~ ">=65",
     AGE >= 65 & AGE < 75 ~ ">=65 to <75",
     AGE >= 75 ~ ">=75"
-  )) %>% formatters::with_label("Age Group, years")) %>%
-  formatters::var_relabel(AGE = "Age, years")
+  ))) 
 
 # Create table
 tbl <- make_table_02(df = adsl)
@@ -115,18 +117,15 @@ anl <- left_join(adsl, advs, by = "USUBJID") %>% tern::df_explicit_na()
 
 tbl <- make_table_02(
   df = anl,
-  vars = c("SEX", "AGE", "RACE", "COUNTRY", "AVAL"),
-  lbl_vars = c("Sex", "Age, years", "Race", "Country of Participation", "Baseline Temperature (C)"),
-  lbl_overall = "Total\nPopulation",
-  na_rm = TRUE
+  vars = c("SEX", "AGE", "RACE", "COUNTRY", "AVAL")
 )
-tbl
+tbl$tbl
 ```
 
 Note that the `prune_0` argument can be set to specify whether all-zero rows should be included in a table. For example, see that the demographics table below includes rows for `OTHER` and `UNKNOWN` for which all values are zero, whereas these two rows were excluded from the previous tables (`prune_0` defaults to `TRUE` in `make_table_02()`).
 
 ```{r, echo=TRUE}
-make_table_02(df = anl, vars = "RACE", prune_0 = FALSE)
+make_table_02_rtables(df = anl, vars = "RACE", prune_0 = FALSE)
 ```
 
 ### Feature Requests

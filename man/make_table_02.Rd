@@ -7,7 +7,6 @@
 \usage{
 make_table_02(
   df,
-  denominator = NULL,
   return_ard = TRUE,
   arm_var = "ARM",
   saffl_var = "SAFFL",
@@ -16,7 +15,6 @@ make_table_02(
 
 make_table_02_rtables(
   df,
-  alt_counts_df = NULL,
   show_colcounts = TRUE,
   arm_var = "ARM",
   saffl_var = "SAFFL",
@@ -31,8 +29,6 @@ make_table_02_rtables(
 \arguments{
 \item{df}{(\code{data.frame})\cr dataset required to build table.}
 
-\item{denominator}{(\code{data.frame})\cr alternative dataset (typically ADSL) used only to calculate denominator counts.}
-
 \item{return_ard}{(\code{flag})\cr whether an ARD should be returned. Defaults to \code{TRUE}.}
 
 \item{arm_var}{(\code{character})\cr Name of the treatment arm variable used to split table into columns.}
@@ -40,8 +36,6 @@ make_table_02_rtables(
 \item{saffl_var}{(\code{character})\cr flag variable used to indicate inclusion in safety population.}
 
 \item{vars}{(\code{vector} of \code{character})\cr Variables from \code{df} to include in the table.}
-
-\item{alt_counts_df}{(\code{character})\cr alternative dataset (typically ADSL) used only to calculate column counts.}
 
 \item{show_colcounts}{(\code{flag})\cr Whether column counts should be printed. Boolean.}
 
@@ -110,11 +104,11 @@ adsl <- random.cdisc.data::cadsl \%>\%
     AGE >= 65 & AGE < 75 ~ ">=65 to <75",
     AGE >= 75 ~ ">=75"
   )))
-tbl_rtables <- cardinal:::make_table_05_rtables(df = adsl)
+tbl_rtables <- make_table_02_rtables(df = adsl)
 tbl_rtables
 }
 \seealso{
-\code{\link{tbl_make_table_02}}
+\code{\link{make_table_02}}
 
 \code{\link[=make_table_02]{make_table_02()}}
 }

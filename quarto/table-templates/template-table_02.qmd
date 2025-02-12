@@ -35,7 +35,7 @@ adsl <- adsl %>%
 # Output Table
 make_table_02(
   df = adsl,
-  vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY", "AVAL"),
+  vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY"),
   return_ard = FALSE
 )
 ```
@@ -59,7 +59,7 @@ Required variables:
 -   **`denominator`** (if specified): `USUBJID` and the variables specified by `arm_var` and `saffl_var`.
 
 |  |  |  |
-|----|----|----|
+|------------------------|------------------------|------------------------|
 | **Argument** | **Description** | **Default** |
 | `df` | (`data.frame`) Dataset (typically ADSL) required to build table. | *No default* |
 | `return_ard` | (`flag`) Whether an ARD should be returned. | `TRUE` |
@@ -98,7 +98,7 @@ adsl <- adsl %>%
 # Create Table & ARD
 result <- make_table_02(
   df = adsl,
-  vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY", "AVAL")
+  vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY")
 )
 
 # Output ARD
@@ -109,7 +109,7 @@ result$ard
 
 ```{r tbl1-print, echo=FALSE}
 options(width = 9999)
-print(result$ard, columns = "all", n = Inf)
+print(result$ard, columns = "all")
 ```
 
 ## rtables Table
@@ -143,7 +143,7 @@ advs <- advs %>%
 anl <- left_join(adsl, advs, by = "USUBJID")
 
 # Output Table
-make_table_02(
+make_table_02_rtables(
   df = anl,
   vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY", "AVAL"),
   lbl_vars = c(
@@ -172,7 +172,7 @@ Required variables:
 -   **`alt_counts_df`** (if specified): `USUBJID` and the variables specified by `arm_var` and `saffl_var`.
 
 | **Argument** | **Description** | **Default** |
-|:---|:---|:---|
+|:-----------------------|:-----------------------|:-----------------------|
 | `df` | (`data.frame`) Dataset (typically ADSL) required to build table. | *No default* |
 | `alt_counts_df` | (`character`) Alternative dataset used only to calculate column counts. | `NULL` |
 | `show_colcounts` | (`flag`) Whether column counts should be printed. | `TRUE` |
