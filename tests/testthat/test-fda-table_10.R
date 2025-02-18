@@ -10,17 +10,32 @@ adae <- adae %>%
   )
 adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
 
-test_that("Table 10 generation works with default values", {
-  result <- make_table_10(adae = adae, alt_counts_df = adsl)
+test_that("Table 10 generation(gtsummary) works with default values", {
+  result <- make_table_10(df = adae, denominator = adsl, )
 
   res <- expect_silent(result)
   expect_snapshot(res)
 })
 
-test_that("Table 10 generation works with custom values", {
+test_that("Table 10 generation(gtsummary) works with default values", {
+  result <- make_table_10(df = adae, denominator = adsl, )
+
+  res <- expect_silent(result)
+  expect_snapshot(res)
+})
+
+
+test_that("Table 10 generation(rtables) works with default values, BROAD", {
+  result <- make_table_10_rtables(df = adae, alt_counts_df = adsl, fmq_scope = "BROAD")
+
+  res <- expect_silent(result)
+  expect_snapshot(res)
+})
+
+test_that("Table 10 generation(rtables) works with default values", {
   adae <- formatters::var_relabel(adae, AEBODSYS = "Body System or Organ Class(3)")
-  result <- make_table_10(
-    adae = adae,
+  result <- make_table_10_rtables(
+    df = adae,
     alt_counts_df = adsl,
     fmq_scope = "BROAD",
     annotations = list(
@@ -52,9 +67,9 @@ test_that("Table 10 generation works with custom values", {
   expect_snapshot(res)
 })
 
-test_that("Table 10 generation works with risk difference column", {
+test_that("Table 10 generation (rtables) works with risk difference column", {
   risk_diff <- list(arm_x = "B: Placebo", arm_y = "A: Drug X")
-  result <- make_table_10(adae, adsl, risk_diff = risk_diff)
+  result <- make_table_10_rtables(adae, adsl, risk_diff = risk_diff)
 
   res <- expect_silent(result)
   expect_snapshot(res)
