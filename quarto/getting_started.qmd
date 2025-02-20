@@ -93,7 +93,7 @@ adsl <- random.cdisc.data::cadsl %>%
     AGE >= 65 ~ ">=65",
     AGE >= 65 & AGE < 75 ~ ">=65 to <75",
     AGE >= 75 ~ ">=75"
-  ))) 
+  )))
 
 # Create table
 tbl <- make_table_02(df = adsl)
