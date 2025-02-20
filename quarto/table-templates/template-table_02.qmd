@@ -30,7 +30,7 @@ adsl <- adsl %>%
     AGE >= 65 & AGE < 75 ~ ">=65 to <75",
     AGE >= 75 ~ ">=75"
   )))
-
+attr(adsl$AGEGR1, "label") <- "Age Group"
 
 # Output Table
 make_table_02(
@@ -63,7 +63,6 @@ Required variables:
 | **Argument** | **Description** | **Default** |
 | `df` | (`data.frame`) Dataset (typically ADSL) required to build table. | *No default* |
 | `return_ard` | (`flag`) Whether an ARD should be returned. | `TRUE` |
-| `denominator` | (`character`) Alternative dataset used only to calculate column counts. | `NULL` |
 | `arm_var` | (`character`) Arm variable used to split table into columns. | `"ARM"` |
 | `saffl_var` | (`character`) Flag variable used to indicate inclusion in safety population. | `"SAFFL"` |
 | `id_var` | (`character`) Identifier variable used to count the participants within each flag. | `"USUBJID"` |
@@ -174,15 +173,12 @@ Required variables:
 | **Argument** | **Description** | **Default** |
 |:-----------------------|:-----------------------|:-----------------------|
 | `df` | (`data.frame`) Dataset (typically ADSL) required to build table. | *No default* |
-| `alt_counts_df` | (`character`) Alternative dataset used only to calculate column counts. | `NULL` |
 | `show_colcounts` | (`flag`) Whether column counts should be printed. | `TRUE` |
 | `arm_var` | (`character`) Arm variable used to split table into columns. | `"ARM"` |
 | `saffl_var` | (`character`) Flag variable used to indicate inclusion in safety population. | `"SAFFL"` |
 | `vars` | (`character`) Variables from `df` to include in the table. | `c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY")` |
 | `lbl_vars` | (`character`) Labels corresponding to variables in `vars` to print in the table. Labels should be ordered according to the order of variables in `vars`. | `formatters::var_labels(df, fill = TRUE)[vars]` |
 | `lbl_overall` | (`character`) If specified, an overall column will be added to the table with the given value as the column label. | `"Total Population"` |
-| `.stats` | (`character`) Statistics to include in the table. Includes statistics for all variable types (only the statistics that are valid for a given variable's type will be printed). See [`tern::analyze_vars()`](https://insightsengineering.github.io/tern/main/reference/analyze_variables.html#value) for options. | `c("mean_sd", "median_range", "count_fraction")` |
-| `.formats` | (named `list` of `character`) List of formats corresponding to each value in `.stats`. Each name is a value in `.stats` and the corresponding value is the format that should be applied to that statistic. See [`formatters::list_valid_format_labels()`](https://insightsengineering.github.io/formatters/main/reference/list_valid_format_labels.html#ref-examples) for a list of valid formats. | `NULL` |
 | `prune_0` | (`flag`) Whether all-zero rows should be removed from the table. | `TRUE` |
 | `na_rm` | (`flag`) Whether `NA` levels should be removed from the table. | `FALSE` |
 | `annotations` | (named `list` of `character`) List of annotations to add to the table. Valid annotation types are `title`, `subtitles`, `main_footer`, and `prov_footer.` Each name-value pair should use the annotation type as name and the desired string as value. | `NULL` |

@@ -78,9 +78,9 @@ make_table_02 <- function(df,
 
   if (return_ard) {
     ard <- gtsummary::gather_ard(tbl)
-    res <- list(tbl = tbl, ard = ard)
+    return(list(table = tbl, ard = ard))
   } else {
-    res <- list(tbl = tbl)
+    return(tbl)
   }
 }
 
