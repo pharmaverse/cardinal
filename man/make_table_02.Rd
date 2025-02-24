@@ -66,7 +66,8 @@ The table engine used by each engine-specific function is identified by its suff
 }
 \details{
 \itemize{
-\item \code{df} must contain the variables specified by \code{arm_var}, \code{saffl_var}, and variables specified by the \code{vars} argument.
+\item \code{df} must contain the variables specified by \code{arm_var}, \code{saffl_var}, and
+variables specified by the \code{vars} argument.
 \item \code{vars} must be a character vector specifying the variables to evaluate.
 \item \code{return_ard} set to \code{TRUE} or \code{FALSE}; whether the intermediate ARD
 object should be returned.
