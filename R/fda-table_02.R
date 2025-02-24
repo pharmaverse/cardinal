@@ -1,7 +1,8 @@
 #' FDA Table 2: Baseline Demographic and Clinical Characteristics, Safety Population, Pooled Analyses
 #'
 #' @details
-#' * `df` must contain the variables specified by `arm_var`, `saffl_var`, and variables specified by the `vars` argument.
+#' * `df` must contain the variables specified by `arm_var`, `saffl_var`, and
+#' variables specified by the `vars` argument.
 #' * `vars` must be a character vector specifying the variables to evaluate.
 #' * `return_ard` set to `TRUE` or `FALSE`; whether the intermediate ARD
 #' object should be returned.
