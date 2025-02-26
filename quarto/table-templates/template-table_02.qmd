@@ -21,6 +21,7 @@ library(cardinal)
 library(dplyr)
 
 adsl <- random.cdisc.data::cadsl
+advs <- random.cdisc.data::cadvs
 
 # Pre-Processing - Add any variables needed in your table to df
 adsl <- adsl %>%
@@ -32,10 +33,17 @@ adsl <- adsl %>%
   )))
 attr(adsl$AGEGR1, "label") <- "Age Group"
 
+advs <- advs %>%
+  filter(AVISIT == "BASELINE", VSTESTCD == "TEMP") %>%
+  select("USUBJID", "AVAL")
+
+anl <- left_join(adsl, advs, by = "USUBJID")
+attr(anl$AVAL, "label") <- "Baseline Temperature (C)"
+
 # Output Table
 make_table_02(
-  df = adsl,
-  vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY"),
+  df = anl,
+  vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY", "AVAL"),
   return_ard = FALSE
 )
 ```
@@ -84,6 +92,7 @@ library(cardinal)
 library(dplyr)
 
 adsl <- random.cdisc.data::cadsl
+advs <- random.cdisc.data::cadvs
 
 # Pre-Processing - Add any variables needed in your table to df
 adsl <- adsl %>%
@@ -94,10 +103,17 @@ adsl <- adsl %>%
     AGE >= 75 ~ ">=75"
   )))
 
+advs <- advs %>%
+  filter(AVISIT == "BASELINE", VSTESTCD == "TEMP") %>%
+  select("USUBJID", "AVAL")
+
+anl <- left_join(adsl, advs, by = "USUBJID")
+attr(anl$AVAL, "label") <- "Baseline Temperature (C)"
+
 # Create Table & ARD
 result <- make_table_02(
-  df = adsl,
-  vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY")
+  df = anl,
+  vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY", "AVAL")
 )
 
 # Output ARD
