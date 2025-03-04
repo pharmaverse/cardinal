@@ -148,7 +148,7 @@ ard_table_10 <- function(df,
     denominator <- alt_counts_df_preproc(denominator, id_var, arm_var, saffl_var)
   }
 
-  ard <- ard_hierarchical(
+  ard <- cards::ard_hierarchical(
     data = df,
     variables = all_of(c("AEBODSYS", fmqnam_var)),
     by = all_of(arm_var),
