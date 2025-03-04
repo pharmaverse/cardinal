@@ -6,7 +6,7 @@ adsl <- adsl_raw %>%
     AGE >= 65 & AGE < 75 ~ ">=65 to <75",
     AGE >= 75 ~ ">=75"
   ))) %>%
-  df_explicit_na()
+  tern::df_explicit_na()
 
 test_that("Table 02 generation works with default values", {
   options(pillar.print_max = 50, width = 200)
