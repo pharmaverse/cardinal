@@ -23,7 +23,7 @@ test_that("Table 06 generation works with custom labels", {
     sae_cat_vars = list(
       `My test label 1` = "AESDTH",
       `Life-threatening SAEs` =
-                          "AESLIFE",
+        "AESLIFE",
       `My test label 2` = "AESHOSP",
       `SAEs resulting in substantial disruption of normal life functions` = "AESDISAB",
       `Congenital anomaly or birth defect` = "AESCONG", Other = "AESMIE"

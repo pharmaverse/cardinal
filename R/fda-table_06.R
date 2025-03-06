@@ -22,12 +22,11 @@ make_table_06_gtsummary <- function(df,
                                     dose_mod_var = "AEACN",
                                     dose_mod_cat_labels = list(
                                       "DRUG INTERRUPTED" = "AE leading to interruption of study drug",
-                                      "DOSE REDUCED" = "AE leading to reduction of study drug" ,
+                                      "DOSE REDUCED" = "AE leading to reduction of study drug",
                                       "DOSE RATE REDUCED" = "AE leading to dose delay of study drug",
                                       "DOSE INCREASED" = "Other"
                                     ),
                                     sev_var = "AESEV") {
-
   # Use safety population only
   s_df <- df |>
     filter(.data[[saffl_var]] == "Y")
@@ -46,13 +45,12 @@ make_table_06_gtsummary <- function(df,
     by = all_of(arm_var),
     variables = all_of(sae_var),
     label = sae_var ~ "Event",
-    statistic = ~ "{n} ({p}%)"
+    statistic = ~"{n} ({p}%)"
   )
 
   # Summarize SAEs per category
   # This is necessary as adae usually has one extra column per SAE category
   tbl_sae_cat_list <- mapply(function(categ, label) {
-
     data <- sae |>
       filter(.data[[categ]] == "Y") |>
       mutate(
@@ -65,7 +63,7 @@ make_table_06_gtsummary <- function(df,
       id = id_var,
       by = all_of(arm_var),
       variables = all_of(categ),
-      statistic = ~ "{n} ({p}%)",
+      statistic = ~"{n} ({p}%)",
       label = categ ~ "Event"
     )
   }, categ = sae_cat_vars, label = names(sae_cat_vars), SIMPLIFY = FALSE)
@@ -91,7 +89,7 @@ make_table_06_gtsummary <- function(df,
     by = all_of(arm_var),
     variables = all_of(disc_var),
     label = disc_var ~ "Event",
-    statistic = ~ "{n} ({p}%)"
+    statistic = ~"{n} ({p}%)"
   )
 
 
@@ -114,7 +112,7 @@ make_table_06_gtsummary <- function(df,
     by = all_of(arm_var),
     variables = all_of(dose_mod_var),
     label = list(dose_mod_var ~ "Event", ..ard_hierarchical_overall.. = "AE leading to dose modification of study drug"),
-    statistic = ~ "{n} ({p}%)",
+    statistic = ~"{n} ({p}%)",
     overall_row = TRUE
   )
 
@@ -127,7 +125,7 @@ make_table_06_gtsummary <- function(df,
     by = all_of(arm_var),
     variables = all_of(sev_var),
     label = list(sev_var ~ "Event", ..ard_hierarchical_overall.. = "Any AE"),
-    statistic = ~ "{n} ({p}%)",
+    statistic = ~"{n} ({p}%)",
     overall_row = TRUE
   )
 
@@ -195,12 +193,11 @@ make_table_06 <- function(df,
                           dose_mod_var = "AEACN",
                           dose_mod_cat_labels = list(
                             "DRUG INTERRUPTED" = "AE leading to interruption of study drug",
-                            "DOSE REDUCED" = "AE leading to reduction of study drug" ,
+                            "DOSE REDUCED" = "AE leading to reduction of study drug",
                             "DOSE RATE REDUCED" = "AE leading to dose delay of study drug",
                             "DOSE INCREASED" = "Other"
                           ),
-                          sev_var = "AESEV"){
-
+                          sev_var = "AESEV") {
   assert_subset(c(id_var, arm_var), names(denominator))
   assert_subset(c(arm_var, saffl_var, sae_var, unlist(sae_cat_vars), disc_var, dose_mod_var, sev_var), names(df))
   assert_flag_variables(df, c(saffl_var, sae_var, unlist(sae_cat_vars)))
@@ -258,15 +255,15 @@ make_table_06 <- function(df,
 #'
 #' @export
 make_table_06_rtables <- function(adae,
-                          alt_counts_df = NULL,
-                          show_colcounts = TRUE,
-                          arm_var = "ARM",
-                          id_var = "USUBJID",
-                          saffl_var = "SAFFL",
-                          lbl_overall = NULL,
-                          risk_diff = NULL,
-                          prune_0 = FALSE,
-                          annotations = NULL) {
+                                  alt_counts_df = NULL,
+                                  show_colcounts = TRUE,
+                                  arm_var = "ARM",
+                                  id_var = "USUBJID",
+                                  saffl_var = "SAFFL",
+                                  lbl_overall = NULL,
+                                  risk_diff = NULL,
+                                  prune_0 = FALSE,
+                                  annotations = NULL) {
   assert_subset(c(
     "TRTEMFL", "AESEV", "AESER", "AESDTH", "AESLIFE", "AESHOSP",
     "AESDISAB", "AESCONG", "AESMIE", "AEACN", arm_var, id_var, saffl_var
