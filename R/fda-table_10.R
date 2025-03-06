@@ -228,12 +228,13 @@ make_table_10_gtsummary <- function(df,
   }
 
   tbl <- tbl_hierarchical(df,
-                          variables = all_of(c("AEBODSYS", fmqnam_var)),
-                          by = all_of(arm_var),
-                          id = all_of(id_var),
-                          include = fmqnam_var,
-                          denominator = denominator,
-                          overall_row = FALSE)
+    variables = all_of(c("AEBODSYS", fmqnam_var)),
+    by = all_of(arm_var),
+    id = all_of(id_var),
+    include = fmqnam_var,
+    denominator = denominator,
+    overall_row = FALSE
+  )
 
   tbl
 }

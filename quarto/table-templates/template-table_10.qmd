@@ -35,7 +35,6 @@ adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
 
 # Output Table
 make_table_10(df = adae, denominator = adsl, return_ard = FALSE)
-
 ```
 
 ## gtsummary Table Setup
@@ -132,7 +131,6 @@ adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
 
 # Output Table
 make_table_10_rtables(df = adae, alt_counts_df = adsl)
-
 ```
 ## rtables Setup
 
