@@ -1,18 +1,99 @@
 ---
 title: FDA Table 6
 subtitle: Overview of Adverse Events, Safety Population, Pooled Analyses
-format: html
 ---
+
+```{r setup, echo=FALSE}
+```
 
 ::: panel-tabset
 ## Spec. Screenshot
 
 ![](../assets/images/screenshots/table_06.png){fig-align="center"}
 
+## gtsummary Table
+
 ## rtables Table
 
-```{r tbl, message=FALSE, warning=FALSE}
-# Load Libraries & Data
+<details>
+  <summary>gtsummary Table Setup</summary>
+```{r tbl2, eval=FALSE, echo=TRUE}
+# Load package and data
+library(cardinal)
+
+adsl <- random.cdisc.data::cadsl
+adae <- random.cdisc.data::cadae
+
+# Output Table
+make_table_06(df = adae, denominator = adsl, return_ard = FALSE)
+```
+</details>
+
+```{r tbl2, message=FALSE, warning=FALSE, eval=TRUE}
+```
+
+<details>
+  <summary>Function Details</summary>
+### `make_table_06()`
+
+------------------------------------------------------------------------
+
+Required variables:
+
+-   **`df`**: The variables specified by `id_var` and `arm_var`.
+-   **`denominator`** : The variables specified by `saffl_var`, `arm_var`, `sae_var`, `sae_cat_vars`, `disc_var`, `dose_mod_var`, and `sev_var`.
+
+|                 |                                                                                                          |               |
+|-----------------|----------------------------------------------------------------------------------------------------------|---------------|
+| **Argument**    | **Description**                                                                                          | **Default**   |
+| `df`            | (`data.frame`) Dataset (typically ADAE) required to build the table.                                         | *No default*  |
+| `return_ard`    | (`flag`) Whether an ARD should be returned.                                                              | `TRUE`        |
+| `denominator`   | (`character`) Alternative dataset (typically ADSL) used only to calculate column counts.                                  | *No default*        |
+| `id_var`        | (`character`) Identifier variable used to count the participants within each category.                       | `"USUBJID"`   |
+| `arm_var`       | (`character`) Arm variable used to split table into columns.                                             | `"ARM"`       |
+| `saffl_var`     | (`character`) Flag variable used to indicate inclusion in safety population.                             | `"SAFFL"`     |
+| `sae_var`     | (`character`) Flag variable used to indicate whether an adverse event is serious or not.                                                        | `"AESER"`   |
+| `sae_cat_vars`    | (`character list`) Named list of flag variables for categories of serious adverse events. List names represent the labels in the table.                                               | `"list("SAEs with fatal outcome" = "AESDTH", "Life-threatening SAEs" = "AESLIFE", "SAEs requiring hospitalization" = "AESHOSP", "SAEs resulting in substantial disruption of normal life functions" = "AESDISAB", "Congenital anomaly or birth defect" = "AESCONG", "Other" = "AESMIE")"`  |
+| `disc_var`     | (`character`) Flag variable used to indicate whether the subject was discontinued from the study as result of an adverse event.                                                 | `"AEACNOTH"`    |
+| `dose_mod_var`     | (`character`) Flag variable used to indicate whether the dose was modified as result of an adverse event.                                                 | `"AEACN"`    |
+| `dose_mod_cat_labels`     | (`character list`) Named list of labels. Names may be "DRUG INTERRUPTED", "DOSE REDUCED", "DOSE RATE REDUCED", "DOSE INCREASED".                                              | `"list("DRUG INTERRUPTED" = "AE leading to interruption of study drug", "DOSE REDUCED" = "AE leading to reduction of study drug" , "DOSE RATE REDUCED" = "AE leading to dose delay of study drug", "DOSE INCREASED" = "Other")"`    |
+| `sev_var`     | (`character`) Variable containing the severity of an adverse event.                                                 | `"AESEV"`    |
+| `na_level`      | (`character`) String to represent missing values.                                                        | `"<Missing>"` |
+
+Source code for this function is available [here](https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_06.R).
+</details>
+  
+  
+## ARD
+
+<details>
+  <summary>ARD Setup</summary>
+```{r tbl1, echo=TRUE, message=FALSE, warning=FALSE, results='hide'}
+# Load package and data
+library(cardinal)
+
+adsl <- random.cdisc.data::cadsl
+adae <- random.cdisc.data::cadae
+
+# Create table & ARD
+result <- make_table_06(df = adae, denominator = adsl)
+
+# Output ARD
+result$ard
+```
+</details>
+
+```{r tbl1-print, echo=FALSE}
+withr::local_options(width = 9999)
+print(result$ard, columns = "all")
+```
+
+## rtables Table
+
+<details>
+  <summary>rtables Table Setup</summary>
+```{r tbl3, eval=FALSE, echo=TRUE}
+# Load package and data
 library(cardinal)
 
 adsl <- random.cdisc.data::cadsl
@@ -20,17 +101,16 @@ adae <- random.cdisc.data::cadae
 
 # Output Table
 risk_diff <- list(arm_x = "B: Placebo", arm_y = "A: Drug X") # optional
-make_table_06(adae = adae, alt_counts_df = adsl, risk_diff = risk_diff)
+make_table_06_rtables(adae = adae, alt_counts_df = adsl, risk_diff = risk_diff)
+```
+</details>
+
+```{r tbl3, message=FALSE, warning=FALSE, eval=TRUE}
 ```
 
-## rtables Table Setup
-
-```{r tbl, eval=FALSE, echo=TRUE}
-```
-
-## Function Details
-
-### `make_table_06()`
+<details>
+  <summary>Function Details</summary>
+### `make_table_11_rtables()`
 
 ------------------------------------------------------------------------
 
