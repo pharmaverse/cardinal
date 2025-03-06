@@ -62,7 +62,7 @@ make_table_06_gtsummary <- function(df,
       id = id_var,
       by = all_of(arm_var),
       variables = all_of(categ),
-      statistic = ~ "{n} ({p}%)",
+      statistic = ~"{n} ({p}%)",
       label = categ ~ "Event"
     )
   }, categ = sae_cat_vars, label = names(sae_cat_vars), SIMPLIFY = FALSE)
@@ -88,7 +88,7 @@ make_table_06_gtsummary <- function(df,
     by = all_of(arm_var),
     variables = all_of(disc_var),
     label = disc_var ~ "Event",
-    statistic = ~ "{n} ({p}%)"
+    statistic = ~"{n} ({p}%)"
   )
 
 
@@ -114,7 +114,7 @@ make_table_06_gtsummary <- function(df,
       dose_mod_var ~ "Event",
       ..ard_hierarchical_overall.. = "AE leading to dose modification of study drug"
     ),
-    statistic = ~ "{n} ({p}%)",
+    statistic = ~"{n} ({p}%)",
     overall_row = TRUE
   )
 
@@ -127,7 +127,7 @@ make_table_06_gtsummary <- function(df,
     by = all_of(arm_var),
     variables = all_of(sev_var),
     label = list(sev_var ~ "Event", ..ard_hierarchical_overall.. = "Any AE"),
-    statistic = ~ "{n} ({p}%)",
+    statistic = ~"{n} ({p}%)",
     overall_row = TRUE
   )
 
@@ -209,7 +209,6 @@ make_table_06 <- function(df,
                             "DOSE INCREASED" = "Other"
                           ),
                           sev_var = "AESEV") {
-
   assert_subset(c(id_var, arm_var), names(denominator))
   assert_subset(c(arm_var, saffl_var, sae_var, unlist(sae_cat_vars), disc_var, dose_mod_var, sev_var), names(df))
   assert_flag_variables(df, c(saffl_var, sae_var, unlist(sae_cat_vars)))
