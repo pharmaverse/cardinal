@@ -38,17 +38,24 @@ make_table_06_gtsummary(
 
 \item{saffl_var}{(\code{character})\cr flag variable used to indicate inclusion in safety population.}
 
-\item{sae_var}{(\code{character})\cr Name of the flag variable indicating whether an adverse event is serious ("Y") or not ("N"). Defaults to AESER from an ADAE ADaM dataset.}
+\item{sae_var}{(\code{character})\cr Name of the flag variable indicating whether an adverse event is serious ("Y") or
+not ("N"). Defaults to AESER from an ADAE ADaM dataset.}
 
-\item{sae_cat_vars}{(named \code{list} of \code{character}) \cr List of names of flag variables for categories of serious adverse events. These variables may contain "Y" or "No". Defaults to AESDTH, AESLIFE, AESHOSP, AESDISAB, AESCONG, and AESMIE from an ADAE ADaM dataset. Provide labels through names of the list elements.}
+\item{sae_cat_vars}{(named \code{list} of \code{character}) \cr List of names of flag variables for categories of serious
+adverse events. These variables may contain "Y" or "No". Defaults to AESDTH, AESLIFE, AESHOSP, AESDISAB, AESCONG,
+and AESMIE from an ADAE ADaM dataset. Provide labels through names of the list elements.}
 
-\item{disc_var}{(\code{character}) \cr Name of the variable containing information whether a subject discontinued from the study as result of an adverse event. Defaults to AEACNOTH from an ADAE ADaM dataset.}
+\item{disc_var}{(\code{character}) \cr Name of the variable containing information whether a subject discontinued from
+the study as result of an adverse event. Defaults to AEACNOTH from an ADAE ADaM dataset.}
 
-\item{dose_mod_var}{(\code{character}) \cr Name of the variable containing information about dose modification for a subject due to an adverse event. Defaults to AEACN from an ADAE ADaM dataset.}
+\item{dose_mod_var}{(\code{character}) \cr Name of the variable containing information about dose modification for a
+subject due to an adverse event. Defaults to AEACN from an ADAE ADaM dataset.}
 
-\item{dose_mod_cat_labels}{(named \code{list} of \code{character}) \cr List of labels for the dose modification categories as listed in the details section.}
+\item{dose_mod_cat_labels}{(named \code{list} of \code{character}) \cr List of labels for the dose modification categories as
+listed in the details section.}
 
-\item{sev_var}{Name of the variable containing information about the severity of an adverse event. Defaults to AESEV from an ADAE ADaM dataset.}
+\item{sev_var}{Name of the variable containing information about the severity of an adverse event. Defaults to AESEV
+from an ADAE ADaM dataset.}
 }
 \value{
 A \code{gtsummary} table
