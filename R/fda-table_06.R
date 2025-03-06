@@ -27,7 +27,6 @@ make_table_06_gtsummary <- function(df,
                                       "DOSE INCREASED" = "Other"
                                     ),
                                     sev_var = "AESEV") {
-
   # Use safety population only
   s_df <- df |>
     filter(.data[[saffl_var]] == "Y")
@@ -46,13 +45,11 @@ make_table_06_gtsummary <- function(df,
     by = all_of(arm_var),
     variables = all_of(sae_var),
     label = sae_var ~ "Event",
-    statistic = ~ "{n} ({p}%)"
   )
 
   # Summarize SAEs per category
   # This is necessary as adae usually has one extra column per SAE category
   tbl_sae_cat_list <- mapply(function(categ, label) {
-
     data <- sae |>
       filter(.data[[categ]] == "Y") |>
       mutate(
