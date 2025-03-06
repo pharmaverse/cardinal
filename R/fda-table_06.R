@@ -22,7 +22,7 @@ make_table_06_gtsummary <- function(df,
                                     dose_mod_var = "AEACN",
                                     dose_mod_cat_labels = list(
                                       "DRUG INTERRUPTED" = "AE leading to interruption of study drug",
-                                      "DOSE REDUCED" = "AE leading to reduction of study drug" ,
+                                      "DOSE REDUCED" = "AE leading to reduction of study drug",
                                       "DOSE RATE REDUCED" = "AE leading to dose delay of study drug",
                                       "DOSE INCREASED" = "Other"
                                     ),
@@ -61,7 +61,7 @@ make_table_06_gtsummary <- function(df,
 
     tbl_hierarchical(
       data = data,
-      denominator = adsl,
+      denominator = denominator,
       id = id_var,
       by = all_of(arm_var),
       variables = all_of(categ),
@@ -113,7 +113,10 @@ make_table_06_gtsummary <- function(df,
     id = id_var,
     by = all_of(arm_var),
     variables = all_of(dose_mod_var),
-    label = list(dose_mod_var ~ "Event", ..ard_hierarchical_overall.. = "AE leading to dose modification of study drug"),
+    label = list(
+      dose_mod_var ~ "Event",
+      ..ard_hierarchical_overall.. = "AE leading to dose modification of study drug"
+    ),
     statistic = ~ "{n} ({p}%)",
     overall_row = TRUE
   )
@@ -148,21 +151,30 @@ make_table_06_gtsummary <- function(df,
 #'
 #' @inheritParams argument_convention
 #'
-#' @param sae_var (`character`)\cr Name of the flag variable indicating whether an adverse event is serious ("Y") or not ("N"). Defaults to AESER from an ADAE ADaM dataset.
-#' @param sae_cat_vars (named `list` of `character`) \cr List of names of flag variables for categories of serious adverse events. These variables may contain "Y" or "No". Defaults to AESDTH, AESLIFE, AESHOSP, AESDISAB, AESCONG, and AESMIE from an ADAE ADaM dataset. Provide labels through names of the list elements.
-#' @param disc_var (`character`) \cr Name of the variable containing information whether a subject discontinued from the study as result of an adverse event. Defaults to AEACNOTH from an ADAE ADaM dataset.
-#' @param dose_mod_var (`character`) \cr Name of the variable containing information about dose modification for a subject due to an adverse event. Defaults to AEACN from an ADAE ADaM dataset.
-#' @param dose_mod_cat_labels (named `list` of `character`) \cr List of labels for the dose modification categories as listed in the details section.
-#' @param sev_var Name of the variable containing information about the severity of an adverse event. Defaults to AESEV from an ADAE ADaM dataset.
+#' @param sae_var (`character`)\cr Name of the flag variable indicating whether an adverse event is serious ("Y") or
+#'  not ("N"). Defaults to AESER from an ADAE ADaM dataset.
+#' @param sae_cat_vars (named `list` of `character`) \cr List of names of flag variables for categories of serious
+#'  adverse events. These variables may contain "Y" or "No". Defaults to AESDTH, AESLIFE, AESHOSP, AESDISAB, AESCONG,
+#'  and AESMIE from an ADAE ADaM dataset. Provide labels through names of the list elements.
+#' @param disc_var (`character`) \cr Name of the variable containing information whether a subject discontinued from
+#'  the study as result of an adverse event. Defaults to AEACNOTH from an ADAE ADaM dataset.
+#' @param dose_mod_var (`character`) \cr Name of the variable containing information about dose modification for a
+#'  subject due to an adverse event. Defaults to AEACN from an ADAE ADaM dataset.
+#' @param dose_mod_cat_labels (named `list` of `character`) \cr List of labels for the dose modification categories as
+#'  listed in the details section.
+#' @param sev_var Name of the variable containing information about the severity of an adverse event. Defaults to AESEV
+#'  from an ADAE ADaM dataset.
 #'
 #' @details
 #' Typically, an ADAE ADaM dataset is passed to `df`. \cr
 #' Typically, an ADSL ADaM dataset is passed to `denominator`. \cr
 #'
 #' The values passed through `id_var` and `arm_var` must be present in `names(denominator)`. \cr
-#' The values passed through `saffl_var`, `arm_var`, `sae_var`, `sae_cat_vars`, `disc_var`, `dose_mod_var`, and `sev_var` must be present in `names(df)`. \cr
+#' The values passed through `saffl_var`, `arm_var`, `sae_var`, `sae_cat_vars`, `disc_var`, `dose_mod_var`, and
+#'  `sev_var` must be present in `names(df)`. \cr
 #'
-#' Discontinuation from the study needs to be indicated by the value "SUBJECT DISCONTINUED FROM STUDY" in the `disc_var` variable. \cr
+#' Discontinuation from the study needs to be indicated by the value "SUBJECT DISCONTINUED FROM STUDY" in the `disc_var`
+#'  variable. \cr
 #' Dose modification may be "DRUG INTERRUPTED", "DOSE REDUCED", "DOSE RATE REDUCED", "DOSE INCREASED".
 #'
 #' @return A `gtsummary` table and, if `return_ard = TRUE`, an ARD.
@@ -195,11 +207,11 @@ make_table_06 <- function(df,
                           dose_mod_var = "AEACN",
                           dose_mod_cat_labels = list(
                             "DRUG INTERRUPTED" = "AE leading to interruption of study drug",
-                            "DOSE REDUCED" = "AE leading to reduction of study drug" ,
+                            "DOSE REDUCED" = "AE leading to reduction of study drug",
                             "DOSE RATE REDUCED" = "AE leading to dose delay of study drug",
                             "DOSE INCREASED" = "Other"
                           ),
-                          sev_var = "AESEV"){
+                          sev_var = "AESEV") {
 
   assert_subset(c(id_var, arm_var), names(denominator))
   assert_subset(c(arm_var, saffl_var, sae_var, unlist(sae_cat_vars), disc_var, dose_mod_var, sev_var), names(df))
@@ -258,15 +270,15 @@ make_table_06 <- function(df,
 #'
 #' @export
 make_table_06_rtables <- function(adae,
-                          alt_counts_df = NULL,
-                          show_colcounts = TRUE,
-                          arm_var = "ARM",
-                          id_var = "USUBJID",
-                          saffl_var = "SAFFL",
-                          lbl_overall = NULL,
-                          risk_diff = NULL,
-                          prune_0 = FALSE,
-                          annotations = NULL) {
+                                  alt_counts_df = NULL,
+                                  show_colcounts = TRUE,
+                                  arm_var = "ARM",
+                                  id_var = "USUBJID",
+                                  saffl_var = "SAFFL",
+                                  lbl_overall = NULL,
+                                  risk_diff = NULL,
+                                  prune_0 = FALSE,
+                                  annotations = NULL) {
   assert_subset(c(
     "TRTEMFL", "AESEV", "AESER", "AESDTH", "AESLIFE", "AESHOSP",
     "AESDISAB", "AESCONG", "AESMIE", "AEACN", arm_var, id_var, saffl_var

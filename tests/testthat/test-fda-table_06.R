@@ -3,6 +3,8 @@ adae <- adae_raw
 
 # Test common function ----
 test_that("Table 06 generation works with default values", {
+  withr::local_options(list(width = 200))
+
   result <- make_table_06(adae, adsl)
 
   res <- expect_silent(result)
@@ -10,6 +12,8 @@ test_that("Table 06 generation works with default values", {
 })
 
 test_that("Table 06 returns ARD if specified", {
+  withr::local_options(list(width = 200))
+
   result <- make_table_06(adae, adsl, return_ard = TRUE)
 
   res <- expect_silent(result)
@@ -17,13 +21,14 @@ test_that("Table 06 returns ARD if specified", {
 })
 
 test_that("Table 06 generation works with custom labels", {
+  withr::local_options(list(width = 200))
+
   result <- make_table_06(
     adae,
     adsl,
     sae_cat_vars = list(
       `My test label 1` = "AESDTH",
-      `Life-threatening SAEs` =
-                          "AESLIFE",
+      `Life-threatening SAEs` = "AESLIFE",
       `My test label 2` = "AESHOSP",
       `SAEs resulting in substantial disruption of normal life functions` = "AESDISAB",
       `Congenital anomaly or birth defect` = "AESCONG", Other = "AESMIE"
