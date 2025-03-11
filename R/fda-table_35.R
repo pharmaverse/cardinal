@@ -31,15 +31,6 @@ make_table_35 <- function(df,
                           soc_var = "AEBODSYS",
                           lbl_overall = NULL,
                           na_level = "<Missing>") {
-  ard <- ard_table_35(
-    df = df,
-    denominator = denominator,
-    id_var = id_var,
-    arm_var = arm_var,
-    saffl_var = saffl_var,
-    soc_var = soc_var,
-    na_level = na_level
-  )
 
   tbl <- make_table_35_gtsummary(
     df = df,
@@ -48,10 +39,12 @@ make_table_35 <- function(df,
     arm_var = arm_var,
     saffl_var = saffl_var,
     soc_var = soc_var,
+    lbl_overall = lbl_overall,
     na_level = na_level
   )
 
   if (return_ard) {
+    ard <- gather_ard(tbl)
     return(list(table = tbl, ard = ard))
   } else {
     return(tbl) # nocov
@@ -78,48 +71,6 @@ preproc_df_table_35 <- function(df,
   df
 }
 
-#' Make ARD: Table 35
-#'
-#' @examples
-#' library(dplyr)
-#'
-#' adsl <- random.cdisc.data::cadsl
-#' adae <- random.cdisc.data::cadae
-#'
-#' ard <- cardinal:::ard_table_35(adae, adsl)
-#' ard
-#'
-#' @keywords internal
-#' @name ard_make_table_35
-ard_table_35 <- function(df,
-                         denominator = NULL,
-                         id_var = "USUBJID",
-                         arm_var = "ARM",
-                         saffl_var = "SAFFL",
-                         soc_var = "AEBODSYS",
-                         lbl_overall = NULL,
-                         na_level = "<Missing>") {
-  df <- preproc_df_table_35(df, id_var, arm_var, saffl_var, soc_var, na_level)
-
-  if (is.null(denominator)) {
-    denominator <- df # nocov
-  } else {
-    denominator <-
-      alt_counts_df_preproc(denominator, id_var, arm_var, saffl_var)
-  }
-
-  ard <-
-    cards::ard_stack_hierarchical(
-      data = df,
-      variables = all_of(soc_var),
-      by = all_of(arm_var),
-      denominator = denominator,
-      id = all_of(id_var),
-      overall = !is.null(lbl_overall)
-    )
-
-  ard
-}
 
 #' Engine-Specific Functions: Table 35
 #'
@@ -167,17 +118,21 @@ make_table_35_gtsummary <- function(df,
                                     soc_var = "AEBODSYS",
                                     lbl_overall = NULL,
                                     na_level = "<Missing>") {
+
   df <- preproc_df_table_35(df, id_var, arm_var, saffl_var, soc_var, na_level)
 
   if (is.null(denominator)) {
     denominator <- df # nocov
   } else {
-    denominator <-
-      alt_counts_df_preproc(denominator, id_var, arm_var, saffl_var)
+    denominator <- alt_counts_df_preproc(
+      denominator,
+      id_var,
+      arm_var,
+      saffl_var
+    )
   }
 
-  tbl_gts <-
-    tbl_hierarchical(
+  tbl_gts <- tbl_hierarchical(
       data = df,
       variables = soc_var,
       by = arm_var,
@@ -186,53 +141,36 @@ make_table_35_gtsummary <- function(df,
     ) |>
     modify_header(label ~ paste0("**System Organ Class**")) |>
     modify_header(all_stat_cols() ~ "**{level}**  \nN = {n}") |>
-    gtsummary::modify_column_alignment(columns = all_stat_cols(), align = "right")
+    modify_column_alignment(columns = all_stat_cols(), align = "right")
 
   if (!is.null(lbl_overall)) {
-    tbl_gts_ovrl <-
-      tbl_hierarchical(
+    tbl_gts_ovrl <- tbl_hierarchical(
         data = df,
         variables = soc_var,
-        denominator = df_denom,
+        denominator = denominator,
         id = id_var
       ) |>
       modify_header(label ~ paste0("**System Organ Class**")) |>
       modify_header(
         all_stat_cols() ~ paste0("**", lbl_overall, "**  \nN = {n}")
       ) |>
-      gtsummary::modify_column_alignment(columns = all_stat_cols(), align = "right")
+      modify_column_alignment(columns = all_stat_cols(), align = "right")
 
-    tbl_gts_df <- as.data.frame(tbl_gts)
-    tbl_gts_ovrl_df <- as.data.frame(tbl_gts_ovrl)
-
-    tbl_gts_all_df <-
-      left_join(
-        x = tbl_gts_df,
-        y = tbl_gts_ovrl_df,
-        by = "**System Organ Class**"
-      )
-
-    cols_names <- colnames(tbl_gts_all_df)
-
-    tbl_gts <-
-      tbl_gts_all_df |>
-      gt() |>
-      cols_label(
-        .list = setNames(lapply(cols_names, md), cols_names)
-      )
+    tbl_merged <- tbl_merge(list(tbl_gts, tbl_gts_ovrl), tab_spanner = FALSE)
 
     tbl <- gtsummary::with_gtsummary_theme(
       x = gtsummary::theme_gtsummary_compact(),
-      expr = tbl_gts
+      expr = tbl_merged
     )
   } else {
-    tbl_gts <- tbl_gts
 
-    tbl <- gtsummary::with_gtsummary_theme(
-      x = gtsummary::theme_gtsummary_compact(),
-      expr = as_gt(tbl_gts)
+    tbl <- with_gtsummary_theme(
+      x = theme_gtsummary_compact(),
+      expr = tbl_gts
     )
   }
+
+  return(tbl)
 }
 
 #' @export
