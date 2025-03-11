@@ -25,7 +25,7 @@ make_table_35_rtables(
   arm_var = "ARM",
   saffl_var = "SAFFL",
   soc_var = "AEBODSYS",
-  lbl_soc_var = formatters::var_labels(adae, fill = TRUE)[soc_var],
+  lbl_soc_var = formatters::var_labels(df, fill = TRUE)[soc_var],
   lbl_overall = NULL,
   risk_diff = NULL,
   prune_0 = FALSE,
