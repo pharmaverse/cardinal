@@ -4,7 +4,7 @@
 #' @details
 #' * `df` must contain the variables specified by
 #'   `arm_var`, `id_var`, `soc_var` and `saffl_var`.
-#' * `return_ard` set to `TRUE` or `FALSE`; whether the intermediate ARD object should be returned.
+#' * `return_ard` set to `TRUE` (default) or `FALSE`; whether the intermediate ARD object should be returned.
 #'
 #' @inheritParams argument_convention
 #' @param soc_var (`character`)\cr Name of the variable that contains the SOC to describe.
@@ -95,17 +95,16 @@ preproc_df_table_35 <- function(df,
 #' @seealso [make_table_35()]
 #'
 #' @examples
-#' library(dplyr)
 #'
 #' adsl <- random.cdisc.data::cadsl
 #' adae <- random.cdisc.data::cadae
 #'
 #' # gtsummary table --------------
-#' tbl_gtsummary <- cardinal:::make_table_35_gtsummary(df = adae, denominator = adsl)
+#' tbl_gtsummary <- make_table_35_gtsummary(df = adae, denominator = adsl)
 #' tbl_gtsummary
 #'
 #' # rtables table ----------------
-#' tbl_rtables <- cardinal:::make_table_35_rtables(df = adae, alt_counts_df = adsl)
+#' tbl_rtables <- make_table_35_rtables(df = adae, alt_counts_df = adsl)
 #' tbl_rtables
 #'
 #' @export
