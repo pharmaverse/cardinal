@@ -43,7 +43,7 @@ Required variables:
 
 -   **`df`**: The variables specified by `id_var`, `arm_var`, `saffl_var`, and `soc_var`.
 -   **`denominator`** (if specified): `USUBJID` and the variables specified by `arm_var` and `saffl_var`
--   If both the ARD (`return_ard = "Y"`) and an overall column (`lbl_overall` not missing) are requested, a list of two ARDs will be returned: `ard$tbl_summary` for the table by groups, and `ard$add_overall` for the overal column.
+-   If both the ARD (`return_ard = TRUE`) and an overall column (`lbl_overall` not missing) are requested, a list of two ARDs will be returned: one for the table by groups, and the other for the overall column.
 
 +---------------+------------------------------------------------------------------------------------+---------------+
 | **Argument**  | **Description**                                                                    | **Default**   |
@@ -64,8 +64,10 @@ Required variables:
 +---------------+------------------------------------------------------------------------------------+---------------+
 | `na_level`    | (`character`) String to represent missing values.                                  | `"<Missing>"` |
 +---------------+------------------------------------------------------------------------------------+---------------+
+| `lbl_overall` | (`character`) String to represent the label of an overall column.                  | `NULL`        |
++---------------+------------------------------------------------------------------------------------+---------------+
 
-Source code for this function is available [here](https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_11.R).
+Source code for this function is available [here](https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_35.R).
 
 </details>
 
@@ -91,7 +93,7 @@ result$ard
 
 ```{r tbl2-print, echo=FALSE}
 withr::local_options(width = 9999)
-print(result$ard, columns = "all", n = Inf)
+print(result$ard, columns = "all")
 ```
 
 </details>
@@ -124,23 +126,25 @@ make_table_35_rtables(df = adae, alt_counts_df = adsl, risk_diff = risk_diff)
 
 <summary>Function Details</summary>
 
-### `make_table_35()`
+### `make_table_35_rtables()`
 
 ------------------------------------------------------------------------
 
 Required variables:
 
--   **`adae`**: `USUBJID` and the variables specified by `arm_var`, `saffl_var` and `soc_var`.
+-   **`df`**: `USUBJID` and the variables specified by `arm_var`, `saffl_var` and `soc_var`.
 -   **`alt_counts_df`** (if specified): `USUBJID` and the variables specified by `arm_var` and `saffl_var`.
 
 +------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------+
 | **Argument**     | **Description**                                                                                                                                                                                                                                                | **Default**                                          |
 +------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------+
-| `adae`           | (`data.frame`) Dataset (typically ADAE) required to build table.                                                                                                                                                                                               | *No default*                                         |
+| `df`             | (`data.frame`) Dataset (typically ADAE) required to build table.                                                                                                                                                                                               | *No default*                                         |
 +------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------+
 | `alt_counts_df`  | (`character`) Alternative dataset (typically ADSL) used only to calculate column counts.                                                                                                                                                                       | `NULL`                                               |
 +------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------+
 | `show_colcounts` | (`flag`) Whether column counts should be printed.                                                                                                                                                                                                              | `TRUE`                                               |
++------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------+
+| `id_var`         | (`character`) Subject identifier variable       .                                                                                                                                                                                                              | `USUBJID`                                            |
 +------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------+
 | `arm_var`        | (`character`) Arm variable used to split table into columns.                                                                                                                                                                                                   | `"ARM"`                                              |
 +------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------+
