@@ -132,23 +132,23 @@ make_table_35_gtsummary <- function(df,
   }
 
   tbl_gts <- tbl_hierarchical(
-      data = df,
-      variables = soc_var,
-      by = arm_var,
-      denominator = denominator,
-      id = id_var
-    ) |>
+    data = df,
+    variables = soc_var,
+    by = arm_var,
+    denominator = denominator,
+    id = id_var
+  ) |>
     modify_header(label ~ paste0("**System Organ Class**")) |>
     modify_header(all_stat_cols() ~ "**{level}**  \nN = {n}") |>
     modify_column_alignment(columns = all_stat_cols(), align = "right")
 
   if (!is.null(lbl_overall)) {
     tbl_gts_ovrl <- tbl_hierarchical(
-        data = df,
-        variables = soc_var,
-        denominator = denominator,
-        id = id_var
-      ) |>
+      data = df,
+      variables = soc_var,
+      denominator = denominator,
+      id = id_var
+    ) |>
       modify_header(label ~ paste0("**System Organ Class**")) |>
       modify_header(
         all_stat_cols() ~ paste0("**", lbl_overall, "**  \nN = {n}")
