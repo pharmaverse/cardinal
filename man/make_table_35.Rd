@@ -49,7 +49,7 @@ Safety Population, Pooled Analysis (or Trial X)
 \itemize{
 \item \code{df} must contain the variables specified by
 \code{arm_var}, \code{id_var}, \code{soc_var} and \code{saffl_var}.
-\item \code{return_ard} set to \code{TRUE} or \code{FALSE}; whether the intermediate ARD object should be returned.
+\item \code{return_ard} set to \code{TRUE} (default) or \code{FALSE}; whether the intermediate ARD object should be returned.
 }
 }
 \examples{
