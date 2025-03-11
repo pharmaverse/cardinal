@@ -31,7 +31,6 @@ make_table_35 <- function(df,
                           soc_var = "AEBODSYS",
                           lbl_overall = NULL,
                           na_level = "<Missing>") {
-
   tbl <- make_table_35_gtsummary(
     df = df,
     denominator = denominator,
@@ -117,7 +116,6 @@ make_table_35_gtsummary <- function(df,
                                     soc_var = "AEBODSYS",
                                     lbl_overall = NULL,
                                     na_level = "<Missing>") {
-
   df <- preproc_df_table_35(df, id_var, arm_var, saffl_var, soc_var, na_level)
 
   if (is.null(denominator)) {
@@ -132,23 +130,23 @@ make_table_35_gtsummary <- function(df,
   }
 
   tbl_gts <- tbl_hierarchical(
-      data = df,
-      variables = soc_var,
-      by = arm_var,
-      denominator = denominator,
-      id = id_var
-    ) |>
+    data = df,
+    variables = soc_var,
+    by = arm_var,
+    denominator = denominator,
+    id = id_var
+  ) |>
     modify_header(label ~ paste0("**System Organ Class**")) |>
     modify_header(all_stat_cols() ~ "**{level}**  \nN = {n}") |>
     modify_column_alignment(columns = all_stat_cols(), align = "right")
 
   if (!is.null(lbl_overall)) {
     tbl_gts_ovrl <- tbl_hierarchical(
-        data = df,
-        variables = soc_var,
-        denominator = denominator,
-        id = id_var
-      ) |>
+      data = df,
+      variables = soc_var,
+      denominator = denominator,
+      id = id_var
+    ) |>
       modify_header(label ~ paste0("**System Organ Class**")) |>
       modify_header(
         all_stat_cols() ~ paste0("**", lbl_overall, "**  \nN = {n}")
@@ -162,7 +160,6 @@ make_table_35_gtsummary <- function(df,
       expr = tbl_merged
     )
   } else {
-
     tbl <- with_gtsummary_theme(
       x = theme_gtsummary_compact(),
       expr = tbl_gts
