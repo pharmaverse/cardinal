@@ -31,7 +31,6 @@ make_table_35 <- function(df,
                           soc_var = "AEBODSYS",
                           lbl_overall = NULL,
                           na_level = "<Missing>") {
-
   tbl <- make_table_35_gtsummary(
     df = df,
     denominator = denominator,
@@ -117,7 +116,6 @@ make_table_35_gtsummary <- function(df,
                                     soc_var = "AEBODSYS",
                                     lbl_overall = NULL,
                                     na_level = "<Missing>") {
-
   df <- preproc_df_table_35(df, id_var, arm_var, saffl_var, soc_var, na_level)
 
   if (is.null(denominator)) {
@@ -162,7 +160,6 @@ make_table_35_gtsummary <- function(df,
       expr = tbl_merged
     )
   } else {
-
     tbl <- with_gtsummary_theme(
       x = theme_gtsummary_compact(),
       expr = tbl_gts
