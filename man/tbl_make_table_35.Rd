@@ -99,17 +99,16 @@ flag variables are treated as \code{"N"}.
 }
 }
 \examples{
-library(dplyr)
 
 adsl <- random.cdisc.data::cadsl
 adae <- random.cdisc.data::cadae
 
 # gtsummary table --------------
-tbl_gtsummary <- cardinal:::make_table_35_gtsummary(df = adae, denominator = adsl)
+tbl_gtsummary <- make_table_35_gtsummary(df = adae, denominator = adsl)
 tbl_gtsummary
 
 # rtables table ----------------
-tbl_rtables <- cardinal:::make_table_35_rtables(df = adae, alt_counts_df = adsl)
+tbl_rtables <- make_table_35_rtables(df = adae, alt_counts_df = adsl)
 tbl_rtables
 
 }
