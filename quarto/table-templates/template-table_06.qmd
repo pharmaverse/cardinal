@@ -13,8 +13,6 @@ subtitle: Overview of Adverse Events, Safety Population, Pooled Analyses
 
 ## gtsummary Table
 
-## rtables Table
-
 <details>
   <summary>gtsummary Table Setup</summary>
 ```{r tbl2, eval=FALSE, echo=TRUE}
@@ -110,7 +108,7 @@ make_table_06_rtables(adae = adae, alt_counts_df = adsl, risk_diff = risk_diff)
 
 <details>
   <summary>Function Details</summary>
-### `make_table_11_rtables()`
+### `make_table_06_rtables()`
 
 ------------------------------------------------------------------------
 
@@ -150,4 +148,5 @@ Required variables:
 +------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
 
 Source code for this function is available [here](https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_06.R).
+</details>
 :::
