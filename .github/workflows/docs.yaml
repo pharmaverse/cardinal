@@ -68,7 +68,7 @@ jobs:
 
       - name: Upload Docs ⬆️
         if: github.event_name != 'push'
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: site
           path: ./_site
