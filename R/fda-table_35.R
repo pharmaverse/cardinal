@@ -197,10 +197,10 @@ make_table_35_rtables <- function(df,
     ) |>
     append_topleft(c("", lbl_soc_var))
 
-  tbl <- build_table(lyt, df = adae, alt_counts_df = alt_counts_df) |>
+  tbl <- build_table(lyt, df = df, alt_counts_df = alt_counts_df) |>
     sort_at_path(
       path = c(soc_var),
-      scorefun = score_occurrences_cols(col_names = levels(adae[[arm_var]]))
+      scorefun = score_occurrences_cols(col_names = levels(df[[arm_var]]))
     )
   if (prune_0) tbl <- prune_table(tbl)
 
