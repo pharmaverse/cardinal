@@ -358,10 +358,13 @@ cookieconsent.run({
 <p>The <code>cardinal</code> package requires several packages available on CRAN.</p>
 <p>To use the <code>cardinal</code> package, ensure you have these necessary package dependencies installed by running the following code:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"formatters"</span>)) <span class="fu">install.packages</span>(<span class="st">"formatters"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"rtables"</span>)) <span class="fu">install.packages</span>(<span class="st">"rtables"</span>)</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"rlistings"</span>)) <span class="fu">install.packages</span>(<span class="st">"rlistings"</span>)</span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"tern"</span>)) <span class="fu">install.packages</span>(<span class="st">"tern"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"gtsummary"</span>)) <span class="fu">install.packages</span>(<span class="st">"gtsummary"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"cards"</span>)) <span class="fu">install.packages</span>(<span class="st">"cards"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"cardx"</span>)) <span class="fu">install.packages</span>(<span class="st">"cardx"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"formatters"</span>)) <span class="fu">install.packages</span>(<span class="st">"formatters"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"rtables"</span>)) <span class="fu">install.packages</span>(<span class="st">"rtables"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"rlistings"</span>)) <span class="fu">install.packages</span>(<span class="st">"rlistings"</span>)</span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"tern"</span>)) <span class="fu">install.packages</span>(<span class="st">"tern"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Optionally, to run the examples provided within the <code>cardinal</code> package and on this site you can also install the random CDISC data package, which contains example datasets, by running the following:</p>
 <div class="cell">
@@ -405,7 +408,7 @@ cookieconsent.run({
 </div>
 <ul>
 <li>
-<strong>Function Details</strong>: This tab includes details on the table-generating function used for this template. Table functions use the naming convention <code>make_table_XX()</code> where <code>XX</code> is the table number taken from the FDA Standard Safety Table and Figures document (preceded by a 0 if the number is a single digit). Any required variables for the input datasets are listed along with a description of all function arguments. This information is mirrored by the function’s help page accessible within R (i.e.&nbsp;<code>?make_table_XX</code>).</li>
+<strong>Function Details</strong>: This tab includes details on the table-generating function used for this template. Table functions use the naming convention <code>make_table_XX()</code> where <code>XX</code> is the table number taken from the FDA Standard Safety Table and Figures document (preceded by a 0 if the number is a single digit). Any required variables for the input datasets are listed along with a description of all function arguments. This information is mirrored by the function’s help page accessible within R (i.e.&nbsp;<code>?make_table_XX</code>). By default, all table generating functions use the {gtsummary} package - though we do support rtables functionality. To specify the use of which table engine is being used, engine specific functions can be called (<code>make_table_02_rtables</code>, for example).</li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="./assets/images/getting-started/gs-pan4.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%"></p>
@@ -431,47 +434,679 @@ cookieconsent.run({
 <span id="cb4-8"><a href="#cb4-8"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"&gt;=65"</span>,</span>
 <span id="cb4-9"><a href="#cb4-9"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">75</span> <span class="sc">~</span> <span class="st">"&gt;=65 to &lt;75"</span>,</span>
 <span id="cb4-10"><a href="#cb4-10"></a>    AGE <span class="sc">&gt;=</span> <span class="dv">75</span> <span class="sc">~</span> <span class="st">"&gt;=75"</span></span>
-<span id="cb4-11"><a href="#cb4-11"></a>  )) <span class="sc">%&gt;%</span> formatters<span class="sc">::</span><span class="fu">with_label</span>(<span class="st">"Age Group, years"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb4-12"><a href="#cb4-12"></a>  formatters<span class="sc">::</span><span class="fu">var_relabel</span>(<span class="at">AGE =</span> <span class="st">"Age, years"</span>)</span>
-<span id="cb4-13"><a href="#cb4-13"></a></span>
-<span id="cb4-14"><a href="#cb4-14"></a><span class="co"># Create table</span></span>
-<span id="cb4-15"><a href="#cb4-15"></a>tbl <span class="ot">&lt;-</span> <span class="fu">make_table_02</span>(<span class="at">df =</span> adsl)</span>
-<span id="cb4-16"><a href="#cb4-16"></a>tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-11"><a href="#cb4-11"></a>  )))</span>
+<span id="cb4-12"><a href="#cb4-12"></a></span>
+<span id="cb4-13"><a href="#cb4-13"></a><span class="co"># Create table</span></span>
+<span id="cb4-14"><a href="#cb4-14"></a>tbl <span class="ot">&lt;-</span> <span class="fu">make_table_02</span>(<span class="at">df =</span> adsl)</span>
+<span id="cb4-15"><a href="#cb4-15"></a>tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>                                                  A: Drug X            B: Placebo         C: Combination      Total Population 
-Characteristic                                     (N=134)              (N=134)              (N=132)              (N=400)      
-———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-Sex                                                                                                                            
-  F                                                79 (59%)            82 (61.2%)            70 (53%)           231 (57.8%)    
-  M                                                55 (41%)            52 (38.8%)            62 (47%)           169 (42.2%)    
-Age, years                                                                                                                     
-  Mean (SD)                                       33.8 (6.6)           35.4 (7.9)           35.4 (7.7)           34.9 (7.4)    
-  Median (Min - Max)                          33.0 (21.0 - 50.0)   35.0 (21.0 - 62.0)   35.0 (20.0 - 69.0)   34.0 (20.0 - 69.0)
-Age Group, years                                                                                                               
-  &gt;=17 to &lt;65                                     134 (100%)           134 (100%)          131 (99.2%)          399 (99.8%)    
-  &gt;=65                                                0                    0                 1 (0.8%)             1 (0.2%)     
-Race                                                                                                                           
-  ASIAN                                           68 (50.7%)            67 (50%)            73 (55.3%)           208 (52%)     
-  BLACK OR AFRICAN AMERICAN                       31 (23.1%)           28 (20.9%)           32 (24.2%)           91 (22.8%)    
-  WHITE                                           27 (20.1%)           26 (19.4%)           21 (15.9%)           74 (18.5%)    
-  AMERICAN INDIAN OR ALASKA NATIVE                  8 (6%)             11 (8.2%)             6 (4.5%)            25 (6.2%)     
-  MULTIPLE                                            0                 1 (0.7%)                0                 1 (0.2%)     
-  NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER           0                 1 (0.7%)                0                 1 (0.2%)     
-Ethnicity                                                                                                                      
-  HISPANIC OR LATINO                              15 (11.2%)           18 (13.4%)           15 (11.4%)            48 (12%)     
-  NOT HISPANIC OR LATINO                         104 (77.6%)          103 (76.9%)          101 (76.5%)           308 (77%)     
-  NOT REPORTED                                     6 (4.5%)            10 (7.5%)            11 (8.3%)            27 (6.8%)     
-  UNKNOWN                                          9 (6.7%)             3 (2.2%)             5 (3.8%)            17 (4.2%)     
-Country                                                                                                                        
-  CHN                                             74 (55.2%)           81 (60.4%)           64 (48.5%)          219 (54.8%)    
-  USA                                             10 (7.5%)            13 (9.7%)            17 (12.9%)            40 (10%)     
-  BRA                                             13 (9.7%)             7 (5.2%)            10 (7.6%)            30 (7.5%)     
-  PAK                                              12 (9%)              9 (6.7%)            10 (7.6%)            31 (7.8%)     
-  NGA                                               8 (6%)              7 (5.2%)            11 (8.3%)            26 (6.5%)     
-  RUS                                              5 (3.7%)              8 (6%)              6 (4.5%)            19 (4.8%)     
-  JPN                                              5 (3.7%)              4 (3%)              9 (6.8%)            18 (4.5%)     
-  GBR                                               4 (3%)              3 (2.2%)             2 (1.5%)             9 (2.2%)     
-  CAN                                              3 (2.2%)             2 (1.5%)             3 (2.3%)              8 (2%)      </code></pre>
+<pre><code>$table
+&lt;div id="pcqbpbacmk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;"&gt;
+  &lt;style&gt;#pcqbpbacmk table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#pcqbpbacmk thead, #pcqbpbacmk tbody, #pcqbpbacmk tfoot, #pcqbpbacmk tr, #pcqbpbacmk td, #pcqbpbacmk th {
+  border-style: none;
+}
+
+#pcqbpbacmk p {
+  margin: 0;
+  padding: 0;
+}
+
+#pcqbpbacmk .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#pcqbpbacmk .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#pcqbpbacmk .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#pcqbpbacmk .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#pcqbpbacmk .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#pcqbpbacmk .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pcqbpbacmk .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#pcqbpbacmk .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#pcqbpbacmk .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#pcqbpbacmk .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#pcqbpbacmk .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#pcqbpbacmk .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#pcqbpbacmk .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#pcqbpbacmk .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#pcqbpbacmk .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#pcqbpbacmk .gt_from_md &gt; :first-child {
+  margin-top: 0;
+}
+
+#pcqbpbacmk .gt_from_md &gt; :last-child {
+  margin-bottom: 0;
+}
+
+#pcqbpbacmk .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#pcqbpbacmk .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pcqbpbacmk .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#pcqbpbacmk .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#pcqbpbacmk .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#pcqbpbacmk .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pcqbpbacmk .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#pcqbpbacmk .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#pcqbpbacmk .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pcqbpbacmk .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pcqbpbacmk .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#pcqbpbacmk .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pcqbpbacmk .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#pcqbpbacmk .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pcqbpbacmk .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#pcqbpbacmk .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pcqbpbacmk .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#pcqbpbacmk .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pcqbpbacmk .gt_left {
+  text-align: left;
+}
+
+#pcqbpbacmk .gt_center {
+  text-align: center;
+}
+
+#pcqbpbacmk .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#pcqbpbacmk .gt_font_normal {
+  font-weight: normal;
+}
+
+#pcqbpbacmk .gt_font_bold {
+  font-weight: bold;
+}
+
+#pcqbpbacmk .gt_font_italic {
+  font-style: italic;
+}
+
+#pcqbpbacmk .gt_super {
+  font-size: 65%;
+}
+
+#pcqbpbacmk .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#pcqbpbacmk .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#pcqbpbacmk .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#pcqbpbacmk .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#pcqbpbacmk .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#pcqbpbacmk .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#pcqbpbacmk .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#pcqbpbacmk .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#pcqbpbacmk div.Reactable &gt; div.rt-table &gt; div.rt-thead &gt; div.rt-tr.rt-tr-group-header &gt; div.rt-th-group:after {
+  height: 0px !important;
+}
+&lt;/style&gt;
+  &lt;table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false"&gt;
+  &lt;thead&gt;
+    &lt;tr class="gt_col_headings"&gt;
+      &lt;th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="label"&gt;&lt;span data-qmd-base64="PHN0cm9uZz5DaGFyYWN0ZXJpc3RpYzwvc3Ryb25nPg=="&gt;&lt;span class='gt_from_md'&gt;&lt;strong&gt;Characteristic&lt;/strong&gt;&lt;/span&gt;&lt;/span&gt;&lt;/th&gt;
+      &lt;th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="stat_1"&gt;&lt;span data-qmd-base64="PHN0cm9uZz5BOiBEcnVnIFg8L3N0cm9uZz48YnIgLz4KTiA9IDEzNA=="&gt;&lt;span class='gt_from_md'&gt;&lt;strong&gt;A: Drug X&lt;/strong&gt;&lt;br /&gt;
+N = 134&lt;/span&gt;&lt;/span&gt;&lt;/th&gt;
+      &lt;th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="stat_2"&gt;&lt;span data-qmd-base64="PHN0cm9uZz5COiBQbGFjZWJvPC9zdHJvbmc+PGJyIC8+Ck4gPSAxMzQ="&gt;&lt;span class='gt_from_md'&gt;&lt;strong&gt;B: Placebo&lt;/strong&gt;&lt;br /&gt;
+N = 134&lt;/span&gt;&lt;/span&gt;&lt;/th&gt;
+      &lt;th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="stat_3"&gt;&lt;span data-qmd-base64="PHN0cm9uZz5DOiBDb21iaW5hdGlvbjwvc3Ryb25nPjxiciAvPgpOID0gMTMy"&gt;&lt;span class='gt_from_md'&gt;&lt;strong&gt;C: Combination&lt;/strong&gt;&lt;br /&gt;
+N = 132&lt;/span&gt;&lt;/span&gt;&lt;/th&gt;
+      &lt;th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="stat_0"&gt;&lt;span data-qmd-base64="PHN0cm9uZz5Ub3RhbCBQb3B1bGF0aW9uPC9zdHJvbmc+PGJyIC8+Ck4gPSA0MDA="&gt;&lt;span class='gt_from_md'&gt;&lt;strong&gt;Total Population&lt;/strong&gt;&lt;br /&gt;
+N = 400&lt;/span&gt;&lt;/span&gt;&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody class="gt_table_body"&gt;
+    &lt;tr&gt;&lt;td headers="label" class="gt_row gt_left" style="font-weight: bold;"&gt;Sex, n (%)&lt;/td&gt;
+&lt;td headers="stat_1" class="gt_row gt_right"&gt;&lt;br /&gt;&lt;/td&gt;
+&lt;td headers="stat_2" class="gt_row gt_right"&gt;&lt;br /&gt;&lt;/td&gt;
+&lt;td headers="stat_3" class="gt_row gt_right"&gt;&lt;br /&gt;&lt;/td&gt;
+&lt;td headers="stat_0" class="gt_row gt_right"&gt;&lt;br /&gt;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td headers="label" class="gt_row gt_left"&gt;&nbsp;&nbsp;&nbsp;&nbsp;F&lt;/td&gt;
+&lt;td headers="stat_1" class="gt_row gt_right"&gt;79 (59%)&lt;/td&gt;
+&lt;td headers="stat_2" class="gt_row gt_right"&gt;82 (61%)&lt;/td&gt;
+&lt;td headers="stat_3" class="gt_row gt_right"&gt;70 (53%)&lt;/td&gt;
+&lt;td headers="stat_0" class="gt_row gt_right"&gt;231 (58%)&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td headers="label" class="gt_row gt_left"&gt;&nbsp;&nbsp;&nbsp;&nbsp;M&lt;/td&gt;
+&lt;td headers="stat_1" class="gt_row gt_right"&gt;55 (41%)&lt;/td&gt;
+&lt;td headers="stat_2" class="gt_row gt_right"&gt;52 (39%)&lt;/td&gt;
+&lt;td headers="stat_3" class="gt_row gt_right"&gt;62 (47%)&lt;/td&gt;
+&lt;td headers="stat_0" class="gt_row gt_right"&gt;169 (42%)&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td headers="label" class="gt_row gt_left" style="font-weight: bold;"&gt;Age&lt;/td&gt;
+&lt;td headers="stat_1" class="gt_row gt_right"&gt;&lt;br /&gt;&lt;/td&gt;
+&lt;td headers="stat_2" class="gt_row gt_right"&gt;&lt;br /&gt;&lt;/td&gt;
+&lt;td headers="stat_3" class="gt_row gt_right"&gt;&lt;br /&gt;&lt;/td&gt;
+&lt;td headers="stat_0" class="gt_row gt_right"&gt;&lt;br /&gt;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td headers="label" class="gt_row gt_left"&gt;&nbsp;&nbsp;&nbsp;&nbsp;Mean (SD)&lt;/td&gt;
+&lt;td headers="stat_1" class="gt_row gt_right"&gt;33.77 (6.55)&lt;/td&gt;
+&lt;td headers="stat_2" class="gt_row gt_right"&gt;35.43 (7.90)&lt;/td&gt;
+&lt;td headers="stat_3" class="gt_row gt_right"&gt;35.43 (7.72)&lt;/td&gt;
+&lt;td headers="stat_0" class="gt_row gt_right"&gt;34.88 (7.44)&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td headers="label" class="gt_row gt_left"&gt;&nbsp;&nbsp;&nbsp;&nbsp;Median (min - max)&lt;/td&gt;
+&lt;td headers="stat_1" class="gt_row gt_right"&gt;33.00 (21.00 - 50.00)&lt;/td&gt;
+&lt;td headers="stat_2" class="gt_row gt_right"&gt;35.00 (21.00 - 62.00)&lt;/td&gt;
+&lt;td headers="stat_3" class="gt_row gt_right"&gt;35.00 (20.00 - 69.00)&lt;/td&gt;
+&lt;td headers="stat_0" class="gt_row gt_right"&gt;34.00 (20.00 - 69.00)&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td headers="label" class="gt_row gt_left" style="font-weight: bold;"&gt;AGEGR1, n (%)&lt;/td&gt;
+&lt;td headers="stat_1" class="gt_row gt_right"&gt;&lt;br /&gt;&lt;/td&gt;
+&lt;td headers="stat_2" class="gt_row gt_right"&gt;&lt;br /&gt;&lt;/td&gt;
+&lt;td headers="stat_3" class="gt_row gt_right"&gt;&lt;br /&gt;&lt;/td&gt;
+&lt;td headers="stat_0" class="gt_row gt_right"&gt;&lt;br /&gt;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td headers="label" class="gt_row gt_left"&gt;&nbsp;&nbsp;&nbsp;&nbsp;&amp;gt;=17 to &amp;lt;65&lt;/td&gt;
+&lt;td headers="stat_1" class="gt_row gt_right"&gt;134 (100%)&lt;/td&gt;
+&lt;td headers="stat_2" class="gt_row gt_right"&gt;134 (100%)&lt;/td&gt;
+&lt;td headers="stat_3" class="gt_row gt_right"&gt;131 (99%)&lt;/td&gt;
+&lt;td headers="stat_0" class="gt_row gt_right"&gt;399 (100%)&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td headers="label" class="gt_row gt_left"&gt;&nbsp;&nbsp;&nbsp;&nbsp;&amp;gt;=65&lt;/td&gt;
+&lt;td headers="stat_1" class="gt_row gt_right"&gt;0 (0%)&lt;/td&gt;
+&lt;td headers="stat_2" class="gt_row gt_right"&gt;0 (0%)&lt;/td&gt;
+&lt;td headers="stat_3" class="gt_row gt_right"&gt;1 (0.8%)&lt;/td&gt;
+&lt;td headers="stat_0" class="gt_row gt_right"&gt;1 (0.3%)&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td headers="label" class="gt_row gt_left" style="font-weight: bold;"&gt;Race, n (%)&lt;/td&gt;
+&lt;td headers="stat_1" class="gt_row gt_right"&gt;&lt;br /&gt;&lt;/td&gt;
+&lt;td headers="stat_2" class="gt_row gt_right"&gt;&lt;br /&gt;&lt;/td&gt;
+&lt;td headers="stat_3" class="gt_row gt_right"&gt;&lt;br /&gt;&lt;/td&gt;
+&lt;td headers="stat_0" class="gt_row gt_right"&gt;&lt;br /&gt;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td headers="label" class="gt_row gt_left"&gt;&nbsp;&nbsp;&nbsp;&nbsp;ASIAN&lt;/td&gt;
+&lt;td headers="stat_1" class="gt_row gt_right"&gt;68 (51%)&lt;/td&gt;
+&lt;td headers="stat_2" class="gt_row gt_right"&gt;67 (50%)&lt;/td&gt;
+&lt;td headers="stat_3" class="gt_row gt_right"&gt;73 (55%)&lt;/td&gt;
+&lt;td headers="stat_0" class="gt_row gt_right"&gt;208 (52%)&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td headers="label" class="gt_row gt_left"&gt;&nbsp;&nbsp;&nbsp;&nbsp;BLACK OR AFRICAN AMERICAN&lt;/td&gt;
+&lt;td headers="stat_1" class="gt_row gt_right"&gt;31 (23%)&lt;/td&gt;
+&lt;td headers="stat_2" class="gt_row gt_right"&gt;28 (21%)&lt;/td&gt;
+&lt;td headers="stat_3" class="gt_row gt_right"&gt;32 (24%)&lt;/td&gt;
+&lt;td headers="stat_0" class="gt_row gt_right"&gt;91 (23%)&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td headers="label" class="gt_row gt_left"&gt;&nbsp;&nbsp;&nbsp;&nbsp;WHITE&lt;/td&gt;
+&lt;td headers="stat_1" class="gt_row gt_right"&gt;27 (20%)&lt;/td&gt;
+&lt;td headers="stat_2" class="gt_row gt_right"&gt;26 (19%)&lt;/td&gt;
+&lt;td headers="stat_3" class="gt_row gt_right"&gt;21 (16%)&lt;/td&gt;
+&lt;td headers="stat_0" class="gt_row gt_right"&gt;74 (19%)&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td headers="label" class="gt_row gt_left"&gt;&nbsp;&nbsp;&nbsp;&nbsp;AMERICAN INDIAN OR ALASKA NATIVE&lt;/td&gt;
+&lt;td headers="stat_1" class="gt_row gt_right"&gt;8 (6.0%)&lt;/td&gt;
+&lt;td headers="stat_2" class="gt_row gt_right"&gt;11 (8.2%)&lt;/td&gt;
+&lt;td headers="stat_3" class="gt_row gt_right"&gt;6 (4.5%)&lt;/td&gt;
+&lt;td headers="stat_0" class="gt_row gt_right"&gt;25 (6.3%)&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td headers="label" class="gt_row gt_left"&gt;&nbsp;&nbsp;&nbsp;&nbsp;MULTIPLE&lt;/td&gt;
+&lt;td headers="stat_1" class="gt_row gt_right"&gt;0 (0%)&lt;/td&gt;
+&lt;td headers="stat_2" class="gt_row gt_right"&gt;1 (0.7%)&lt;/td&gt;
+&lt;td headers="stat_3" class="gt_row gt_right"&gt;0 (0%)&lt;/td&gt;
+&lt;td headers="stat_0" class="gt_row gt_right"&gt;1 (0.3%)&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td headers="label" class="gt_row gt_left"&gt;&nbsp;&nbsp;&nbsp;&nbsp;NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER&lt;/td&gt;
+&lt;td headers="stat_1" class="gt_row gt_right"&gt;0 (0%)&lt;/td&gt;
+&lt;td headers="stat_2" class="gt_row gt_right"&gt;1 (0.7%)&lt;/td&gt;
+&lt;td headers="stat_3" class="gt_row gt_right"&gt;0 (0%)&lt;/td&gt;
+&lt;td headers="stat_0" class="gt_row gt_right"&gt;1 (0.3%)&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td headers="label" class="gt_row gt_left"&gt;&nbsp;&nbsp;&nbsp;&nbsp;OTHER&lt;/td&gt;
+&lt;td headers="stat_1" class="gt_row gt_right"&gt;0 (0%)&lt;/td&gt;
+&lt;td headers="stat_2" class="gt_row gt_right"&gt;0 (0%)&lt;/td&gt;
+&lt;td headers="stat_3" class="gt_row gt_right"&gt;0 (0%)&lt;/td&gt;
+&lt;td headers="stat_0" class="gt_row gt_right"&gt;0 (0%)&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td headers="label" class="gt_row gt_left"&gt;&nbsp;&nbsp;&nbsp;&nbsp;UNKNOWN&lt;/td&gt;
+&lt;td headers="stat_1" class="gt_row gt_right"&gt;0 (0%)&lt;/td&gt;
+&lt;td headers="stat_2" class="gt_row gt_right"&gt;0 (0%)&lt;/td&gt;
+&lt;td headers="stat_3" class="gt_row gt_right"&gt;0 (0%)&lt;/td&gt;
+&lt;td headers="stat_0" class="gt_row gt_right"&gt;0 (0%)&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td headers="label" class="gt_row gt_left" style="font-weight: bold;"&gt;Ethnicity, n (%)&lt;/td&gt;
+&lt;td headers="stat_1" class="gt_row gt_right"&gt;&lt;br /&gt;&lt;/td&gt;
+&lt;td headers="stat_2" class="gt_row gt_right"&gt;&lt;br /&gt;&lt;/td&gt;
+&lt;td headers="stat_3" class="gt_row gt_right"&gt;&lt;br /&gt;&lt;/td&gt;
+&lt;td headers="stat_0" class="gt_row gt_right"&gt;&lt;br /&gt;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td headers="label" class="gt_row gt_left"&gt;&nbsp;&nbsp;&nbsp;&nbsp;HISPANIC OR LATINO&lt;/td&gt;
+&lt;td headers="stat_1" class="gt_row gt_right"&gt;15 (11%)&lt;/td&gt;
+&lt;td headers="stat_2" class="gt_row gt_right"&gt;18 (13%)&lt;/td&gt;
+&lt;td headers="stat_3" class="gt_row gt_right"&gt;15 (11%)&lt;/td&gt;
+&lt;td headers="stat_0" class="gt_row gt_right"&gt;48 (12%)&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td headers="label" class="gt_row gt_left"&gt;&nbsp;&nbsp;&nbsp;&nbsp;NOT HISPANIC OR LATINO&lt;/td&gt;
+&lt;td headers="stat_1" class="gt_row gt_right"&gt;104 (78%)&lt;/td&gt;
+&lt;td headers="stat_2" class="gt_row gt_right"&gt;103 (77%)&lt;/td&gt;
+&lt;td headers="stat_3" class="gt_row gt_right"&gt;101 (77%)&lt;/td&gt;
+&lt;td headers="stat_0" class="gt_row gt_right"&gt;308 (77%)&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td headers="label" class="gt_row gt_left"&gt;&nbsp;&nbsp;&nbsp;&nbsp;NOT REPORTED&lt;/td&gt;
+&lt;td headers="stat_1" class="gt_row gt_right"&gt;6 (4.5%)&lt;/td&gt;
+&lt;td headers="stat_2" class="gt_row gt_right"&gt;10 (7.5%)&lt;/td&gt;
+&lt;td headers="stat_3" class="gt_row gt_right"&gt;11 (8.3%)&lt;/td&gt;
+&lt;td headers="stat_0" class="gt_row gt_right"&gt;27 (6.8%)&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td headers="label" class="gt_row gt_left"&gt;&nbsp;&nbsp;&nbsp;&nbsp;UNKNOWN&lt;/td&gt;
+&lt;td headers="stat_1" class="gt_row gt_right"&gt;9 (6.7%)&lt;/td&gt;
+&lt;td headers="stat_2" class="gt_row gt_right"&gt;3 (2.2%)&lt;/td&gt;
+&lt;td headers="stat_3" class="gt_row gt_right"&gt;5 (3.8%)&lt;/td&gt;
+&lt;td headers="stat_0" class="gt_row gt_right"&gt;17 (4.3%)&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td headers="label" class="gt_row gt_left" style="font-weight: bold;"&gt;Country, n (%)&lt;/td&gt;
+&lt;td headers="stat_1" class="gt_row gt_right"&gt;&lt;br /&gt;&lt;/td&gt;
+&lt;td headers="stat_2" class="gt_row gt_right"&gt;&lt;br /&gt;&lt;/td&gt;
+&lt;td headers="stat_3" class="gt_row gt_right"&gt;&lt;br /&gt;&lt;/td&gt;
+&lt;td headers="stat_0" class="gt_row gt_right"&gt;&lt;br /&gt;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td headers="label" class="gt_row gt_left"&gt;&nbsp;&nbsp;&nbsp;&nbsp;CHN&lt;/td&gt;
+&lt;td headers="stat_1" class="gt_row gt_right"&gt;74 (55%)&lt;/td&gt;
+&lt;td headers="stat_2" class="gt_row gt_right"&gt;81 (60%)&lt;/td&gt;
+&lt;td headers="stat_3" class="gt_row gt_right"&gt;64 (48%)&lt;/td&gt;
+&lt;td headers="stat_0" class="gt_row gt_right"&gt;219 (55%)&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td headers="label" class="gt_row gt_left"&gt;&nbsp;&nbsp;&nbsp;&nbsp;USA&lt;/td&gt;
+&lt;td headers="stat_1" class="gt_row gt_right"&gt;10 (7.5%)&lt;/td&gt;
+&lt;td headers="stat_2" class="gt_row gt_right"&gt;13 (9.7%)&lt;/td&gt;
+&lt;td headers="stat_3" class="gt_row gt_right"&gt;17 (13%)&lt;/td&gt;
+&lt;td headers="stat_0" class="gt_row gt_right"&gt;40 (10%)&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td headers="label" class="gt_row gt_left"&gt;&nbsp;&nbsp;&nbsp;&nbsp;BRA&lt;/td&gt;
+&lt;td headers="stat_1" class="gt_row gt_right"&gt;13 (9.7%)&lt;/td&gt;
+&lt;td headers="stat_2" class="gt_row gt_right"&gt;7 (5.2%)&lt;/td&gt;
+&lt;td headers="stat_3" class="gt_row gt_right"&gt;10 (7.6%)&lt;/td&gt;
+&lt;td headers="stat_0" class="gt_row gt_right"&gt;30 (7.5%)&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td headers="label" class="gt_row gt_left"&gt;&nbsp;&nbsp;&nbsp;&nbsp;PAK&lt;/td&gt;
+&lt;td headers="stat_1" class="gt_row gt_right"&gt;12 (9.0%)&lt;/td&gt;
+&lt;td headers="stat_2" class="gt_row gt_right"&gt;9 (6.7%)&lt;/td&gt;
+&lt;td headers="stat_3" class="gt_row gt_right"&gt;10 (7.6%)&lt;/td&gt;
+&lt;td headers="stat_0" class="gt_row gt_right"&gt;31 (7.8%)&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td headers="label" class="gt_row gt_left"&gt;&nbsp;&nbsp;&nbsp;&nbsp;NGA&lt;/td&gt;
+&lt;td headers="stat_1" class="gt_row gt_right"&gt;8 (6.0%)&lt;/td&gt;
+&lt;td headers="stat_2" class="gt_row gt_right"&gt;7 (5.2%)&lt;/td&gt;
+&lt;td headers="stat_3" class="gt_row gt_right"&gt;11 (8.3%)&lt;/td&gt;
+&lt;td headers="stat_0" class="gt_row gt_right"&gt;26 (6.5%)&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td headers="label" class="gt_row gt_left"&gt;&nbsp;&nbsp;&nbsp;&nbsp;RUS&lt;/td&gt;
+&lt;td headers="stat_1" class="gt_row gt_right"&gt;5 (3.7%)&lt;/td&gt;
+&lt;td headers="stat_2" class="gt_row gt_right"&gt;8 (6.0%)&lt;/td&gt;
+&lt;td headers="stat_3" class="gt_row gt_right"&gt;6 (4.5%)&lt;/td&gt;
+&lt;td headers="stat_0" class="gt_row gt_right"&gt;19 (4.8%)&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td headers="label" class="gt_row gt_left"&gt;&nbsp;&nbsp;&nbsp;&nbsp;JPN&lt;/td&gt;
+&lt;td headers="stat_1" class="gt_row gt_right"&gt;5 (3.7%)&lt;/td&gt;
+&lt;td headers="stat_2" class="gt_row gt_right"&gt;4 (3.0%)&lt;/td&gt;
+&lt;td headers="stat_3" class="gt_row gt_right"&gt;9 (6.8%)&lt;/td&gt;
+&lt;td headers="stat_0" class="gt_row gt_right"&gt;18 (4.5%)&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td headers="label" class="gt_row gt_left"&gt;&nbsp;&nbsp;&nbsp;&nbsp;GBR&lt;/td&gt;
+&lt;td headers="stat_1" class="gt_row gt_right"&gt;4 (3.0%)&lt;/td&gt;
+&lt;td headers="stat_2" class="gt_row gt_right"&gt;3 (2.2%)&lt;/td&gt;
+&lt;td headers="stat_3" class="gt_row gt_right"&gt;2 (1.5%)&lt;/td&gt;
+&lt;td headers="stat_0" class="gt_row gt_right"&gt;9 (2.3%)&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td headers="label" class="gt_row gt_left"&gt;&nbsp;&nbsp;&nbsp;&nbsp;CAN&lt;/td&gt;
+&lt;td headers="stat_1" class="gt_row gt_right"&gt;3 (2.2%)&lt;/td&gt;
+&lt;td headers="stat_2" class="gt_row gt_right"&gt;2 (1.5%)&lt;/td&gt;
+&lt;td headers="stat_3" class="gt_row gt_right"&gt;3 (2.3%)&lt;/td&gt;
+&lt;td headers="stat_0" class="gt_row gt_right"&gt;8 (2.0%)&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td headers="label" class="gt_row gt_left"&gt;&nbsp;&nbsp;&nbsp;&nbsp;CHE&lt;/td&gt;
+&lt;td headers="stat_1" class="gt_row gt_right"&gt;0 (0%)&lt;/td&gt;
+&lt;td headers="stat_2" class="gt_row gt_right"&gt;0 (0%)&lt;/td&gt;
+&lt;td headers="stat_3" class="gt_row gt_right"&gt;0 (0%)&lt;/td&gt;
+&lt;td headers="stat_0" class="gt_row gt_right"&gt;0 (0%)&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+  
+  
+&lt;/table&gt;
+&lt;/div&gt;
+
+$ard
+$ard$tbl_summary
+   group1 group1_level variable variable_level stat_name stat_label stat
+1     ARM    A: Drug X      SEX              F         n          n   79
+2     ARM    A: Drug X      SEX              F         N          N  134
+3     ARM    A: Drug X      SEX              F         p          % 0.59
+4     ARM    A: Drug X      SEX              M         n          n   55
+5     ARM    A: Drug X      SEX              M         N          N  134
+6     ARM    A: Drug X      SEX              M         p          % 0.41
+7     ARM    A: Drug X   AGEGR1      &gt;=17 to …         n          n  134
+8     ARM    A: Drug X   AGEGR1      &gt;=17 to …         N          N  134
+9     ARM    A: Drug X   AGEGR1      &gt;=17 to …         p          %    1
+10    ARM    A: Drug X   AGEGR1           &gt;=65         n          n    0
+
+$ard$add_overall
+   variable variable_level   context stat_name stat_label  stat
+1       SEX              F categori…         n          n   231
+2       SEX              F categori…         N          N   400
+3       SEX              F categori…         p          % 0.578
+4       SEX              M categori…         n          n   169
+5       SEX              M categori…         N          N   400
+6       SEX              M categori…         p          % 0.423
+7    AGEGR1      &gt;=17 to … categori…         n          n   399
+8    AGEGR1      &gt;=17 to … categori…         N          N   400
+9    AGEGR1      &gt;=17 to … categori…         p          % 0.998
+10   AGEGR1           &gt;=65 categori…         n          n     1</code></pre>
 </div>
 </div>
 <p>The above table is created using the default settings. You can customize tables by specifying function parameter values to set input data, variables to include in the table, table annotations, etc.</p>
@@ -487,64 +1122,16 @@ Country
 <span id="cb6-6"><a href="#cb6-6"></a></span>
 <span id="cb6-7"><a href="#cb6-7"></a>tbl <span class="ot">&lt;-</span> <span class="fu">make_table_02</span>(</span>
 <span id="cb6-8"><a href="#cb6-8"></a>  <span class="at">df =</span> anl,</span>
-<span id="cb6-9"><a href="#cb6-9"></a>  <span class="at">vars =</span> <span class="fu">c</span>(<span class="st">"SEX"</span>, <span class="st">"AGE"</span>, <span class="st">"RACE"</span>, <span class="st">"COUNTRY"</span>, <span class="st">"AVAL"</span>),</span>
-<span id="cb6-10"><a href="#cb6-10"></a>  <span class="at">lbl_vars =</span> <span class="fu">c</span>(<span class="st">"Sex"</span>, <span class="st">"Age, years"</span>, <span class="st">"Race"</span>, <span class="st">"Country of Participation"</span>, <span class="st">"Baseline Temperature (C)"</span>),</span>
-<span id="cb6-11"><a href="#cb6-11"></a>  <span class="at">lbl_overall =</span> <span class="st">"Total</span><span class="sc">\n</span><span class="st">Population"</span>,</span>
-<span id="cb6-12"><a href="#cb6-12"></a>  <span class="at">na_rm =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb6-13"><a href="#cb6-13"></a>  <span class="at">annotations =</span> <span class="fu">list</span>(</span>
-<span id="cb6-14"><a href="#cb6-14"></a>    <span class="at">title =</span> <span class="st">"Table 2. Baseline Demographic and Clinical Characteristics Safety Population, Pooled Analyses"</span>,</span>
-<span id="cb6-15"><a href="#cb6-15"></a>    <span class="at">main_footer =</span> <span class="st">"Source: [include Applicant source, datasets and/or software tools used]."</span>,</span>
-<span id="cb6-16"><a href="#cb6-16"></a>    <span class="at">prov_footer =</span> <span class="fu">paste</span>(</span>
-<span id="cb6-17"><a href="#cb6-17"></a>      <span class="st">"Abbreviations: N, number of patients in treatment arm;"</span>,</span>
-<span id="cb6-18"><a href="#cb6-18"></a>      <span class="st">"n, number of patients with given characteristic; SD, standard deviation"</span></span>
-<span id="cb6-19"><a href="#cb6-19"></a>    )</span>
-<span id="cb6-20"><a href="#cb6-20"></a>  )</span>
-<span id="cb6-21"><a href="#cb6-21"></a>)</span>
-<span id="cb6-22"><a href="#cb6-22"></a>tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-9"><a href="#cb6-9"></a>  <span class="at">vars =</span> <span class="fu">c</span>(<span class="st">"SEX"</span>, <span class="st">"AGE"</span>, <span class="st">"RACE"</span>, <span class="st">"COUNTRY"</span>, <span class="st">"AVAL"</span>)</span>
+<span id="cb6-10"><a href="#cb6-10"></a>)</span>
+<span id="cb6-11"><a href="#cb6-11"></a>tbl<span class="sc">$</span>tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Table 2. Baseline Demographic and Clinical Characteristics Safety Population, Pooled Analyses
-
-———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-                                                                                                                   Total       
-                                                  A: Drug X            B: Placebo         C: Combination         Population    
-Characteristic                                     (N=134)              (N=134)              (N=132)              (N=400)      
-———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-Sex                                                                                                                            
-  F                                                79 (59%)            82 (61.2%)            70 (53%)           231 (57.8%)    
-  M                                                55 (41%)            52 (38.8%)            62 (47%)           169 (42.2%)    
-Age, years                                                                                                                     
-  Mean (SD)                                       33.8 (6.6)           35.4 (7.9)           35.4 (7.7)           34.9 (7.4)    
-  Median (Min - Max)                          33.0 (21.0 - 50.0)   35.0 (21.0 - 62.0)   35.0 (20.0 - 69.0)   34.0 (20.0 - 69.0)
-Race                                                                                                                           
-  ASIAN                                           68 (50.7%)            67 (50%)            73 (55.3%)           208 (52%)     
-  BLACK OR AFRICAN AMERICAN                       31 (23.1%)           28 (20.9%)           32 (24.2%)           91 (22.8%)    
-  WHITE                                           27 (20.1%)           26 (19.4%)           21 (15.9%)           74 (18.5%)    
-  AMERICAN INDIAN OR ALASKA NATIVE                  8 (6%)             11 (8.2%)             6 (4.5%)            25 (6.2%)     
-  MULTIPLE                                            0                 1 (0.7%)                0                 1 (0.2%)     
-  NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER           0                 1 (0.7%)                0                 1 (0.2%)     
-Country of Participation                                                                                                       
-  CHN                                             74 (55.2%)           81 (60.4%)           64 (48.5%)          219 (54.8%)    
-  USA                                             10 (7.5%)            13 (9.7%)            17 (12.9%)            40 (10%)     
-  BRA                                             13 (9.7%)             7 (5.2%)            10 (7.6%)            30 (7.5%)     
-  PAK                                              12 (9%)              9 (6.7%)            10 (7.6%)            31 (7.8%)     
-  NGA                                               8 (6%)              7 (5.2%)            11 (8.3%)            26 (6.5%)     
-  RUS                                              5 (3.7%)              8 (6%)              6 (4.5%)            19 (4.8%)     
-  JPN                                              5 (3.7%)              4 (3%)              9 (6.8%)            18 (4.5%)     
-  GBR                                               4 (3%)              3 (2.2%)             2 (1.5%)             9 (2.2%)     
-  CAN                                              3 (2.2%)             2 (1.5%)             3 (2.3%)              8 (2%)      
-Baseline Temperature (C)                                                                                                       
-  Mean (SD)                                       36.7 (1.0)           36.6 (1.1)           36.5 (1.0)           36.6 (1.0)    
-  Median (Min - Max)                          36.7 (34.0 - 39.3)   36.6 (33.6 - 38.9)   36.5 (34.2 - 38.9)   36.6 (33.6 - 39.3)
-———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-Source: [include Applicant source, datasets and/or software tools used].
-
-Abbreviations: N, number of patients in treatment arm; n, number of patients with given characteristic; SD, standard deviation</code></pre>
+<pre><code>NULL</code></pre>
 </div>
 </div>
 <p>Note that the <code>prune_0</code> argument can be set to specify whether all-zero rows should be included in a table. For example, see that the demographics table below includes rows for <code>OTHER</code> and <code>UNKNOWN</code> for which all values are zero, whereas these two rows were excluded from the previous tables (<code>prune_0</code> defaults to <code>TRUE</code> in <code>make_table_02()</code>).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">make_table_02</span>(<span class="at">df =</span> anl, <span class="at">vars =</span> <span class="st">"RACE"</span>, <span class="at">prune_0 =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">make_table_02_rtables</span>(<span class="at">df =</span> anl, <span class="at">vars =</span> <span class="st">"RACE"</span>, <span class="at">prune_0 =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                                              A: Drug X    B: Placebo   C: Combination   Total Population
 Characteristic                                 (N=134)      (N=134)        (N=132)           (N=400)     
@@ -1204,141 +1791,132 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb10-17"><a href="#cb10-17"></a>To use the <span class="in">`cardinal`</span> package, ensure you have these necessary package dependencies installed by running the following code:</span>
 <span id="cb10-18"><a href="#cb10-18"></a></span>
 <span id="cb10-19"><a href="#cb10-19"></a><span class="in">```{r, echo=TRUE, eval=FALSE}</span></span>
-<span id="cb10-20"><a href="#cb10-20"></a><span class="in">if (!require("formatters")) install.packages("formatters")</span></span>
-<span id="cb10-21"><a href="#cb10-21"></a><span class="in">if (!require("rtables")) install.packages("rtables")</span></span>
-<span id="cb10-22"><a href="#cb10-22"></a><span class="in">if (!require("rlistings")) install.packages("rlistings")</span></span>
-<span id="cb10-23"><a href="#cb10-23"></a><span class="in">if (!require("tern")) install.packages("tern")</span></span>
-<span id="cb10-24"><a href="#cb10-24"></a><span class="in">```</span></span>
-<span id="cb10-25"><a href="#cb10-25"></a></span>
-<span id="cb10-26"><a href="#cb10-26"></a>Optionally, to run the examples provided within the <span class="in">`cardinal`</span> package and on this site you can also install the random CDISC data package, which contains example datasets, by running the following:</span>
-<span id="cb10-27"><a href="#cb10-27"></a></span>
-<span id="cb10-28"><a href="#cb10-28"></a><span class="in">```{r, echo=TRUE, eval=FALSE}</span></span>
-<span id="cb10-29"><a href="#cb10-29"></a><span class="in">if (!require("random.cdisc.data")) install.packages("random.cdisc.data")</span></span>
-<span id="cb10-30"><a href="#cb10-30"></a><span class="in">```</span></span>
-<span id="cb10-31"><a href="#cb10-31"></a></span>
-<span id="cb10-32"><a href="#cb10-32"></a>For more information on these packages, see the <span class="co">[</span><span class="ot">Additional Resources</span><span class="co">](#additional-resources)</span> section below.</span>
-<span id="cb10-33"><a href="#cb10-33"></a></span>
-<span id="cb10-34"><a href="#cb10-34"></a><span class="fu">#### Installing the cardinal Package</span></span>
-<span id="cb10-35"><a href="#cb10-35"></a></span>
-<span id="cb10-36"><a href="#cb10-36"></a>To install the <span class="in">`cardinal`</span> package, run the following line of code:</span>
-<span id="cb10-37"><a href="#cb10-37"></a></span>
-<span id="cb10-38"><a href="#cb10-38"></a><span class="in">```{r, echo=TRUE, eval=FALSE}</span></span>
-<span id="cb10-39"><a href="#cb10-39"></a><span class="in">if (!require("cardinal")) remotes::install_github("pharmaverse/cardinal")</span></span>
-<span id="cb10-40"><a href="#cb10-40"></a><span class="in">```</span></span>
-<span id="cb10-41"><a href="#cb10-41"></a></span>
-<span id="cb10-42"><a href="#cb10-42"></a><span class="fu">### Loading Data</span></span>
-<span id="cb10-43"><a href="#cb10-43"></a></span>
-<span id="cb10-44"><a href="#cb10-44"></a>The table functions provided by <span class="in">`cardinal`</span> are designed to work with any datasets which adhere to CDISC standards. If you have access to CDISC data, load this into your R environment as usual to use when generating tables.</span>
-<span id="cb10-45"><a href="#cb10-45"></a></span>
-<span id="cb10-46"><a href="#cb10-46"></a>If you do not have access to CDISC data, or want to run the examples provided within the package, you can use the <span class="in">`random.cdisc.data`</span> package to load a selection of datasets containing example synthetic randomized CDISC data. Datasets are stored in the package by name, prefixed by the letter <span class="in">`"c"`</span> (for "cached"). For example, after loading the <span class="in">`random.cdisc.data`</span> package you can access an ADSL dataset by running <span class="in">`cadsl`</span>, or ADAE with <span class="in">`cadae`</span>. This data is loaded in where necessary as part of the provided examples.</span>
-<span id="cb10-47"><a href="#cb10-47"></a></span>
-<span id="cb10-48"><a href="#cb10-48"></a><span class="fu">### Template Navigation</span></span>
-<span id="cb10-49"><a href="#cb10-49"></a></span>
-<span id="cb10-50"><a href="#cb10-50"></a>A list of all templates currently available in <span class="in">`cardinal`</span> is provided in the <span class="co">[</span><span class="ot">Template Library Index</span><span class="co">](index-templates.qmd)</span>, with tables designed based on the <span class="co">[</span><span class="ot">FDA Standard Safety Tables and Figures: Integrated Guide</span><span class="co">](https://downloads.regulations.gov/FDA-2022-N-1961-0046/attachment_1.pdf)</span>.</span>
-<span id="cb10-51"><a href="#cb10-51"></a></span>
-<span id="cb10-52"><a href="#cb10-52"></a>Each template provided is associated with a function available within the <span class="in">`cardinal`</span> package, and contains 4 sections:</span>
-<span id="cb10-53"><a href="#cb10-53"></a></span>
-<span id="cb10-54"><a href="#cb10-54"></a><span class="ss">-   </span>**Spec. Screenshot**: This tab provides a screenshot of the given table coming from the FDA Standard Safety Table and Figures document.</span>
-<span id="cb10-55"><a href="#cb10-55"></a></span>
-<span id="cb10-56"><a href="#cb10-56"></a><span class="al">![](./assets/images/getting-started/gs-pan1.png)</span>{fig-align="center" width="90%"}</span>
-<span id="cb10-57"><a href="#cb10-57"></a></span>
-<span id="cb10-58"><a href="#cb10-58"></a><span class="ss">-   </span>**Table**: This tab displays the output table corresponding to the screenshot in the previous tab, generated using the associated <span class="in">`cardinal`</span> table function. You can expect a similar output table when using the table function with your own data, depending on pre-processing and the customizations that you apply via the table function parameters.</span>
-<span id="cb10-59"><a href="#cb10-59"></a></span>
-<span id="cb10-60"><a href="#cb10-60"></a><span class="al">![](./assets/images/getting-started/gs-pan2.png)</span>{fig-align="center" width="90%"}</span>
-<span id="cb10-61"><a href="#cb10-61"></a></span>
-<span id="cb10-62"><a href="#cb10-62"></a><span class="ss">-   </span>**Table Setup**: This tab provides the code used to generate the example table displayed in the previous tab, including the loading of necessary libraries and example datasets, and any pre-processing steps applied prior to generating the table.</span>
-<span id="cb10-63"><a href="#cb10-63"></a></span>
-<span id="cb10-64"><a href="#cb10-64"></a><span class="al">![](./assets/images/getting-started/gs-pan3.png)</span>{fig-align="center" width="90%"}</span>
-<span id="cb10-65"><a href="#cb10-65"></a></span>
-<span id="cb10-66"><a href="#cb10-66"></a><span class="ss">-   </span>**Function Details**: This tab includes details on the table-generating function used for this template. Table functions use the naming convention <span class="in">`make_table_XX()`</span> where <span class="in">`XX`</span> is the table number taken from the FDA Standard Safety Table and Figures document (preceded by a 0 if the number is a single digit). Any required variables for the input datasets are listed along with a description of all function arguments. This information is mirrored by the function's help page accessible within R (i.e. <span class="in">`?make_table_XX`</span>).</span>
-<span id="cb10-67"><a href="#cb10-67"></a></span>
-<span id="cb10-68"><a href="#cb10-68"></a><span class="al">![](./assets/images/getting-started/gs-pan4.png)</span>{fig-align="center" width="90%"}</span>
-<span id="cb10-69"><a href="#cb10-69"></a></span>
-<span id="cb10-70"><a href="#cb10-70"></a>|           A link to the function's source code can be found at the bottom of the page in this tab:</span>
-<span id="cb10-71"><a href="#cb10-71"></a></span>
-<span id="cb10-72"><a href="#cb10-72"></a><span class="al">![](./assets/images/getting-started/gs-pan4b.png)</span>{fig-align="center" width="90%"}</span>
-<span id="cb10-73"><a href="#cb10-73"></a></span>
-<span id="cb10-74"><a href="#cb10-74"></a><span class="fu">### Creating Tables</span></span>
-<span id="cb10-75"><a href="#cb10-75"></a></span>
-<span id="cb10-76"><a href="#cb10-76"></a>There are many table-generating functions available within the <span class="in">`cardinal`</span> package, each of which is used to generate a different FDA standard safety table using R. These functions create <span class="in">`rtables`</span> table objects which can then be further customized, paginated, etc. if required using functions from the <span class="co">[</span><span class="ot">`rtables`</span><span class="co">](https://insightsengineering.github.io/rtables/)</span> package.</span>
-<span id="cb10-77"><a href="#cb10-77"></a></span>
-<span id="cb10-78"><a href="#cb10-78"></a><span class="fu">#### Using the Table Functions</span></span>
-<span id="cb10-79"><a href="#cb10-79"></a></span>
-<span id="cb10-80"><a href="#cb10-80"></a>To use the table functions you will need to load the <span class="in">`cardinal`</span> package and then call the appropriate table function. For example, to create FDA Safety Table 2, you can run the following code:</span>
-<span id="cb10-81"><a href="#cb10-81"></a></span>
-<span id="cb10-82"><a href="#cb10-82"></a><span class="in">```{r, echo=TRUE, warning=FALSE, message=FALSE}</span></span>
-<span id="cb10-83"><a href="#cb10-83"></a><span class="in">library(dplyr)</span></span>
-<span id="cb10-84"><a href="#cb10-84"></a><span class="in">library(cardinal)</span></span>
-<span id="cb10-85"><a href="#cb10-85"></a></span>
-<span id="cb10-86"><a href="#cb10-86"></a><span class="in"># Data pre-processing - ensure all necessary variables are present in the data</span></span>
-<span id="cb10-87"><a href="#cb10-87"></a><span class="in">adsl &lt;- random.cdisc.data::cadsl %&gt;%</span></span>
-<span id="cb10-88"><a href="#cb10-88"></a><span class="in">  mutate(AGEGR1 = as.factor(case_when(</span></span>
-<span id="cb10-89"><a href="#cb10-89"></a><span class="in">    AGE &gt;= 17 &amp; AGE &lt; 65 ~ "&gt;=17 to &lt;65",</span></span>
-<span id="cb10-90"><a href="#cb10-90"></a><span class="in">    AGE &gt;= 65 ~ "&gt;=65",</span></span>
-<span id="cb10-91"><a href="#cb10-91"></a><span class="in">    AGE &gt;= 65 &amp; AGE &lt; 75 ~ "&gt;=65 to &lt;75",</span></span>
-<span id="cb10-92"><a href="#cb10-92"></a><span class="in">    AGE &gt;= 75 ~ "&gt;=75"</span></span>
-<span id="cb10-93"><a href="#cb10-93"></a><span class="in">  )) %&gt;% formatters::with_label("Age Group, years")) %&gt;%</span></span>
-<span id="cb10-94"><a href="#cb10-94"></a><span class="in">  formatters::var_relabel(AGE = "Age, years")</span></span>
-<span id="cb10-95"><a href="#cb10-95"></a></span>
-<span id="cb10-96"><a href="#cb10-96"></a><span class="in"># Create table</span></span>
-<span id="cb10-97"><a href="#cb10-97"></a><span class="in">tbl &lt;- make_table_02(df = adsl)</span></span>
-<span id="cb10-98"><a href="#cb10-98"></a><span class="in">tbl</span></span>
-<span id="cb10-99"><a href="#cb10-99"></a><span class="in">```</span></span>
-<span id="cb10-100"><a href="#cb10-100"></a></span>
-<span id="cb10-101"><a href="#cb10-101"></a>The above table is created using the default settings. You can customize tables by specifying function parameter values to set input data, variables to include in the table, table annotations, etc.</span>
+<span id="cb10-20"><a href="#cb10-20"></a><span class="in">if (!require("gtsummary")) install.packages("gtsummary")</span></span>
+<span id="cb10-21"><a href="#cb10-21"></a><span class="in">if (!require("cards")) install.packages("cards")</span></span>
+<span id="cb10-22"><a href="#cb10-22"></a><span class="in">if (!require("cardx")) install.packages("cardx")</span></span>
+<span id="cb10-23"><a href="#cb10-23"></a><span class="in">if (!require("formatters")) install.packages("formatters")</span></span>
+<span id="cb10-24"><a href="#cb10-24"></a><span class="in">if (!require("rtables")) install.packages("rtables")</span></span>
+<span id="cb10-25"><a href="#cb10-25"></a><span class="in">if (!require("rlistings")) install.packages("rlistings")</span></span>
+<span id="cb10-26"><a href="#cb10-26"></a><span class="in">if (!require("tern")) install.packages("tern")</span></span>
+<span id="cb10-27"><a href="#cb10-27"></a><span class="in">```</span></span>
+<span id="cb10-28"><a href="#cb10-28"></a></span>
+<span id="cb10-29"><a href="#cb10-29"></a>Optionally, to run the examples provided within the <span class="in">`cardinal`</span> package and on this site you can also install the random CDISC data package, which contains example datasets, by running the following:</span>
+<span id="cb10-30"><a href="#cb10-30"></a></span>
+<span id="cb10-31"><a href="#cb10-31"></a><span class="in">```{r, echo=TRUE, eval=FALSE}</span></span>
+<span id="cb10-32"><a href="#cb10-32"></a><span class="in">if (!require("random.cdisc.data")) install.packages("random.cdisc.data")</span></span>
+<span id="cb10-33"><a href="#cb10-33"></a><span class="in">```</span></span>
+<span id="cb10-34"><a href="#cb10-34"></a></span>
+<span id="cb10-35"><a href="#cb10-35"></a>For more information on these packages, see the <span class="co">[</span><span class="ot">Additional Resources</span><span class="co">](#additional-resources)</span> section below.</span>
+<span id="cb10-36"><a href="#cb10-36"></a></span>
+<span id="cb10-37"><a href="#cb10-37"></a><span class="fu">#### Installing the cardinal Package</span></span>
+<span id="cb10-38"><a href="#cb10-38"></a></span>
+<span id="cb10-39"><a href="#cb10-39"></a>To install the <span class="in">`cardinal`</span> package, run the following line of code:</span>
+<span id="cb10-40"><a href="#cb10-40"></a></span>
+<span id="cb10-41"><a href="#cb10-41"></a><span class="in">```{r, echo=TRUE, eval=FALSE}</span></span>
+<span id="cb10-42"><a href="#cb10-42"></a><span class="in">if (!require("cardinal")) remotes::install_github("pharmaverse/cardinal")</span></span>
+<span id="cb10-43"><a href="#cb10-43"></a><span class="in">```</span></span>
+<span id="cb10-44"><a href="#cb10-44"></a></span>
+<span id="cb10-45"><a href="#cb10-45"></a><span class="fu">### Loading Data</span></span>
+<span id="cb10-46"><a href="#cb10-46"></a></span>
+<span id="cb10-47"><a href="#cb10-47"></a>The table functions provided by <span class="in">`cardinal`</span> are designed to work with any datasets which adhere to CDISC standards. If you have access to CDISC data, load this into your R environment as usual to use when generating tables.</span>
+<span id="cb10-48"><a href="#cb10-48"></a></span>
+<span id="cb10-49"><a href="#cb10-49"></a>If you do not have access to CDISC data, or want to run the examples provided within the package, you can use the <span class="in">`random.cdisc.data`</span> package to load a selection of datasets containing example synthetic randomized CDISC data. Datasets are stored in the package by name, prefixed by the letter <span class="in">`"c"`</span> (for "cached"). For example, after loading the <span class="in">`random.cdisc.data`</span> package you can access an ADSL dataset by running <span class="in">`cadsl`</span>, or ADAE with <span class="in">`cadae`</span>. This data is loaded in where necessary as part of the provided examples.</span>
+<span id="cb10-50"><a href="#cb10-50"></a></span>
+<span id="cb10-51"><a href="#cb10-51"></a><span class="fu">### Template Navigation</span></span>
+<span id="cb10-52"><a href="#cb10-52"></a></span>
+<span id="cb10-53"><a href="#cb10-53"></a>A list of all templates currently available in <span class="in">`cardinal`</span> is provided in the <span class="co">[</span><span class="ot">Template Library Index</span><span class="co">](index-templates.qmd)</span>, with tables designed based on the <span class="co">[</span><span class="ot">FDA Standard Safety Tables and Figures: Integrated Guide</span><span class="co">](https://downloads.regulations.gov/FDA-2022-N-1961-0046/attachment_1.pdf)</span>.</span>
+<span id="cb10-54"><a href="#cb10-54"></a></span>
+<span id="cb10-55"><a href="#cb10-55"></a>Each template provided is associated with a function available within the <span class="in">`cardinal`</span> package, and contains 4 sections:</span>
+<span id="cb10-56"><a href="#cb10-56"></a></span>
+<span id="cb10-57"><a href="#cb10-57"></a><span class="ss">-   </span>**Spec. Screenshot**: This tab provides a screenshot of the given table coming from the FDA Standard Safety Table and Figures document.</span>
+<span id="cb10-58"><a href="#cb10-58"></a></span>
+<span id="cb10-59"><a href="#cb10-59"></a><span class="al">![](./assets/images/getting-started/gs-pan1.png)</span>{fig-align="center" width="90%"}</span>
+<span id="cb10-60"><a href="#cb10-60"></a></span>
+<span id="cb10-61"><a href="#cb10-61"></a><span class="ss">-   </span>**Table**: This tab displays the output table corresponding to the screenshot in the previous tab, generated using the associated <span class="in">`cardinal`</span> table function. You can expect a similar output table when using the table function with your own data, depending on pre-processing and the customizations that you apply via the table function parameters.</span>
+<span id="cb10-62"><a href="#cb10-62"></a></span>
+<span id="cb10-63"><a href="#cb10-63"></a><span class="al">![](./assets/images/getting-started/gs-pan2.png)</span>{fig-align="center" width="90%"}</span>
+<span id="cb10-64"><a href="#cb10-64"></a></span>
+<span id="cb10-65"><a href="#cb10-65"></a><span class="ss">-   </span>**Table Setup**: This tab provides the code used to generate the example table displayed in the previous tab, including the loading of necessary libraries and example datasets, and any pre-processing steps applied prior to generating the table.</span>
+<span id="cb10-66"><a href="#cb10-66"></a></span>
+<span id="cb10-67"><a href="#cb10-67"></a><span class="al">![](./assets/images/getting-started/gs-pan3.png)</span>{fig-align="center" width="90%"}</span>
+<span id="cb10-68"><a href="#cb10-68"></a></span>
+<span id="cb10-69"><a href="#cb10-69"></a><span class="ss">-   </span>**Function Details**: This tab includes details on the table-generating function used for this template. Table functions use the naming convention <span class="in">`make_table_XX()`</span> where <span class="in">`XX`</span> is the table number taken from the FDA Standard Safety Table and Figures document (preceded by a 0 if the number is a single digit). Any required variables for the input datasets are listed along with a description of all function arguments. This information is mirrored by the function's help page accessible within R (i.e. <span class="in">`?make_table_XX`</span>). By default, all table generating functions use the {gtsummary} package - though we do support rtables functionality. To specify the use of which table engine is being used, engine specific functions can be called (<span class="in">`make_table_02_rtables`</span>, for example).</span>
+<span id="cb10-70"><a href="#cb10-70"></a></span>
+<span id="cb10-71"><a href="#cb10-71"></a><span class="al">![](./assets/images/getting-started/gs-pan4.png)</span>{fig-align="center" width="90%"}</span>
+<span id="cb10-72"><a href="#cb10-72"></a></span>
+<span id="cb10-73"><a href="#cb10-73"></a>|           A link to the function's source code can be found at the bottom of the page in this tab:</span>
+<span id="cb10-74"><a href="#cb10-74"></a></span>
+<span id="cb10-75"><a href="#cb10-75"></a><span class="al">![](./assets/images/getting-started/gs-pan4b.png)</span>{fig-align="center" width="90%"}</span>
+<span id="cb10-76"><a href="#cb10-76"></a></span>
+<span id="cb10-77"><a href="#cb10-77"></a><span class="fu">### Creating Tables</span></span>
+<span id="cb10-78"><a href="#cb10-78"></a></span>
+<span id="cb10-79"><a href="#cb10-79"></a>There are many table-generating functions available within the <span class="in">`cardinal`</span> package, each of which is used to generate a different FDA standard safety table using R. These functions create <span class="in">`rtables`</span> table objects which can then be further customized, paginated, etc. if required using functions from the <span class="co">[</span><span class="ot">`rtables`</span><span class="co">](https://insightsengineering.github.io/rtables/)</span> package.</span>
+<span id="cb10-80"><a href="#cb10-80"></a></span>
+<span id="cb10-81"><a href="#cb10-81"></a><span class="fu">#### Using the Table Functions</span></span>
+<span id="cb10-82"><a href="#cb10-82"></a></span>
+<span id="cb10-83"><a href="#cb10-83"></a>To use the table functions you will need to load the <span class="in">`cardinal`</span> package and then call the appropriate table function. For example, to create FDA Safety Table 2, you can run the following code:</span>
+<span id="cb10-84"><a href="#cb10-84"></a></span>
+<span id="cb10-85"><a href="#cb10-85"></a><span class="in">```{r, echo=TRUE, warning=FALSE, message=FALSE}</span></span>
+<span id="cb10-86"><a href="#cb10-86"></a><span class="in">library(dplyr)</span></span>
+<span id="cb10-87"><a href="#cb10-87"></a><span class="in">library(cardinal)</span></span>
+<span id="cb10-88"><a href="#cb10-88"></a></span>
+<span id="cb10-89"><a href="#cb10-89"></a><span class="in"># Data pre-processing - ensure all necessary variables are present in the data</span></span>
+<span id="cb10-90"><a href="#cb10-90"></a><span class="in">adsl &lt;- random.cdisc.data::cadsl %&gt;%</span></span>
+<span id="cb10-91"><a href="#cb10-91"></a><span class="in">  mutate(AGEGR1 = as.factor(case_when(</span></span>
+<span id="cb10-92"><a href="#cb10-92"></a><span class="in">    AGE &gt;= 17 &amp; AGE &lt; 65 ~ "&gt;=17 to &lt;65",</span></span>
+<span id="cb10-93"><a href="#cb10-93"></a><span class="in">    AGE &gt;= 65 ~ "&gt;=65",</span></span>
+<span id="cb10-94"><a href="#cb10-94"></a><span class="in">    AGE &gt;= 65 &amp; AGE &lt; 75 ~ "&gt;=65 to &lt;75",</span></span>
+<span id="cb10-95"><a href="#cb10-95"></a><span class="in">    AGE &gt;= 75 ~ "&gt;=75"</span></span>
+<span id="cb10-96"><a href="#cb10-96"></a><span class="in">  )))</span></span>
+<span id="cb10-97"><a href="#cb10-97"></a></span>
+<span id="cb10-98"><a href="#cb10-98"></a><span class="in"># Create table</span></span>
+<span id="cb10-99"><a href="#cb10-99"></a><span class="in">tbl &lt;- make_table_02(df = adsl)</span></span>
+<span id="cb10-100"><a href="#cb10-100"></a><span class="in">tbl</span></span>
+<span id="cb10-101"><a href="#cb10-101"></a><span class="in">```</span></span>
 <span id="cb10-102"><a href="#cb10-102"></a></span>
-<span id="cb10-103"><a href="#cb10-103"></a><span class="fu">#### Table Customization</span></span>
+<span id="cb10-103"><a href="#cb10-103"></a>The above table is created using the default settings. You can customize tables by specifying function parameter values to set input data, variables to include in the table, table annotations, etc.</span>
 <span id="cb10-104"><a href="#cb10-104"></a></span>
-<span id="cb10-105"><a href="#cb10-105"></a>Each template takes several arguments that can be set to generate a table that meets your requirements. A brief overview of the parameters for each template is provided in the **Function Details** section of each table template page (see the Function Details section above) and the function's help page within R (i.e. <span class="in">`?make_table_XX`</span>), with many of these parameters being standard across table functions.</span>
+<span id="cb10-105"><a href="#cb10-105"></a><span class="fu">#### Table Customization</span></span>
 <span id="cb10-106"><a href="#cb10-106"></a></span>
-<span id="cb10-107"><a href="#cb10-107"></a>To customize the output table, you can modify the values of these arguments as per your requirements. For example, table 2 can be customized as follows:</span>
+<span id="cb10-107"><a href="#cb10-107"></a>Each template takes several arguments that can be set to generate a table that meets your requirements. A brief overview of the parameters for each template is provided in the **Function Details** section of each table template page (see the Function Details section above) and the function's help page within R (i.e. <span class="in">`?make_table_XX`</span>), with many of these parameters being standard across table functions.</span>
 <span id="cb10-108"><a href="#cb10-108"></a></span>
-<span id="cb10-109"><a href="#cb10-109"></a><span class="in">```{r, echo=TRUE, warning=FALSE, message=FALSE}</span></span>
-<span id="cb10-110"><a href="#cb10-110"></a><span class="in">advs &lt;- random.cdisc.data::cadvs %&gt;%</span></span>
-<span id="cb10-111"><a href="#cb10-111"></a><span class="in">  filter(AVISIT == "BASELINE", VSTESTCD == "TEMP") %&gt;%</span></span>
-<span id="cb10-112"><a href="#cb10-112"></a><span class="in">  select("USUBJID", "AVAL")</span></span>
-<span id="cb10-113"><a href="#cb10-113"></a></span>
-<span id="cb10-114"><a href="#cb10-114"></a><span class="in">anl &lt;- left_join(adsl, advs, by = "USUBJID") %&gt;% tern::df_explicit_na()</span></span>
+<span id="cb10-109"><a href="#cb10-109"></a>To customize the output table, you can modify the values of these arguments as per your requirements. For example, table 2 can be customized as follows:</span>
+<span id="cb10-110"><a href="#cb10-110"></a></span>
+<span id="cb10-111"><a href="#cb10-111"></a><span class="in">```{r, echo=TRUE, warning=FALSE, message=FALSE}</span></span>
+<span id="cb10-112"><a href="#cb10-112"></a><span class="in">advs &lt;- random.cdisc.data::cadvs %&gt;%</span></span>
+<span id="cb10-113"><a href="#cb10-113"></a><span class="in">  filter(AVISIT == "BASELINE", VSTESTCD == "TEMP") %&gt;%</span></span>
+<span id="cb10-114"><a href="#cb10-114"></a><span class="in">  select("USUBJID", "AVAL")</span></span>
 <span id="cb10-115"><a href="#cb10-115"></a></span>
-<span id="cb10-116"><a href="#cb10-116"></a><span class="in">tbl &lt;- make_table_02(</span></span>
-<span id="cb10-117"><a href="#cb10-117"></a><span class="in">  df = anl,</span></span>
-<span id="cb10-118"><a href="#cb10-118"></a><span class="in">  vars = c("SEX", "AGE", "RACE", "COUNTRY", "AVAL"),</span></span>
-<span id="cb10-119"><a href="#cb10-119"></a><span class="in">  lbl_vars = c("Sex", "Age, years", "Race", "Country of Participation", "Baseline Temperature (C)"),</span></span>
-<span id="cb10-120"><a href="#cb10-120"></a><span class="in">  lbl_overall = "Total\nPopulation",</span></span>
-<span id="cb10-121"><a href="#cb10-121"></a><span class="in">  na_rm = TRUE,</span></span>
-<span id="cb10-122"><a href="#cb10-122"></a><span class="in">  annotations = list(</span></span>
-<span id="cb10-123"><a href="#cb10-123"></a><span class="in">    title = "Table 2. Baseline Demographic and Clinical Characteristics Safety Population, Pooled Analyses",</span></span>
-<span id="cb10-124"><a href="#cb10-124"></a><span class="in">    main_footer = "Source: [include Applicant source, datasets and/or software tools used].",</span></span>
-<span id="cb10-125"><a href="#cb10-125"></a><span class="in">    prov_footer = paste(</span></span>
-<span id="cb10-126"><a href="#cb10-126"></a><span class="in">      "Abbreviations: N, number of patients in treatment arm;",</span></span>
-<span id="cb10-127"><a href="#cb10-127"></a><span class="in">      "n, number of patients with given characteristic; SD, standard deviation"</span></span>
-<span id="cb10-128"><a href="#cb10-128"></a><span class="in">    )</span></span>
-<span id="cb10-129"><a href="#cb10-129"></a><span class="in">  )</span></span>
-<span id="cb10-130"><a href="#cb10-130"></a><span class="in">)</span></span>
-<span id="cb10-131"><a href="#cb10-131"></a><span class="in">tbl</span></span>
-<span id="cb10-132"><a href="#cb10-132"></a><span class="in">```</span></span>
-<span id="cb10-133"><a href="#cb10-133"></a></span>
-<span id="cb10-134"><a href="#cb10-134"></a>Note that the <span class="in">`prune_0`</span> argument can be set to specify whether all-zero rows should be included in a table. For example, see that the demographics table below includes rows for <span class="in">`OTHER`</span> and <span class="in">`UNKNOWN`</span> for which all values are zero, whereas these two rows were excluded from the previous tables (<span class="in">`prune_0`</span> defaults to <span class="in">`TRUE`</span> in <span class="in">`make_table_02()`</span>).</span>
-<span id="cb10-135"><a href="#cb10-135"></a></span>
-<span id="cb10-136"><a href="#cb10-136"></a><span class="in">```{r, echo=TRUE}</span></span>
-<span id="cb10-137"><a href="#cb10-137"></a><span class="in">make_table_02(df = anl, vars = "RACE", prune_0 = FALSE)</span></span>
-<span id="cb10-138"><a href="#cb10-138"></a><span class="in">```</span></span>
-<span id="cb10-139"><a href="#cb10-139"></a></span>
-<span id="cb10-140"><a href="#cb10-140"></a><span class="fu">### Feature Requests</span></span>
-<span id="cb10-141"><a href="#cb10-141"></a></span>
-<span id="cb10-142"><a href="#cb10-142"></a>If you would like to request the addition of a new feature to a pre-existing function within <span class="in">`cardinal`</span>, or would like a specific table template to be added, please file an issue on GitHub <span class="co">[</span><span class="ot">here</span><span class="co">](https://github.com/pharmaverse/cardinal/issues)</span> or reach out to the cardinal team directly via our Slack channel <span class="co">[</span><span class="ot">here</span><span class="co">](https://app.slack.com/client/T028PB489D3/C04MQS12MND)</span>.</span>
-<span id="cb10-143"><a href="#cb10-143"></a></span>
-<span id="cb10-144"><a href="#cb10-144"></a>You can access the source code for all currently available functions in the <span class="in">`cardinal`</span> GitHub repository <span class="co">[</span><span class="ot">here</span><span class="co">](https://github.com/pharmaverse/cardinal/tree/main/R)</span>.</span>
-<span id="cb10-145"><a href="#cb10-145"></a></span>
-<span id="cb10-146"><a href="#cb10-146"></a><span class="fu">### Additional Resources {#additional-resources}</span></span>
-<span id="cb10-147"><a href="#cb10-147"></a></span>
-<span id="cb10-148"><a href="#cb10-148"></a>See the following packages used by <span class="in">`cardinal`</span> for more information:</span>
-<span id="cb10-149"><a href="#cb10-149"></a></span>
-<span id="cb10-150"><a href="#cb10-150"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">`tern`</span><span class="co">](https://insightsengineering.github.io/tern)</span>: Clinical trials analysis functions</span>
-<span id="cb10-151"><a href="#cb10-151"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">`rtables`</span><span class="co">](https://insightsengineering.github.io/rtables)</span>: Table creation</span>
-<span id="cb10-152"><a href="#cb10-152"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">`rlistings`</span><span class="co">](https://insightsengineering.github.io/rlistings)</span>: Listing creation</span>
-<span id="cb10-153"><a href="#cb10-153"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">`formatters`</span><span class="co">](https://insightsengineering.github.io/formatters)</span>: Additional rendering formatting</span>
-<span id="cb10-154"><a href="#cb10-154"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">`random.cdisc.data`</span><span class="co">](https://insightsengineering.github.io/random.cdisc.data)</span>: Example synthetic randomized CDISC datasets (required for examples only)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-116"><a href="#cb10-116"></a><span class="in">anl &lt;- left_join(adsl, advs, by = "USUBJID") %&gt;% tern::df_explicit_na()</span></span>
+<span id="cb10-117"><a href="#cb10-117"></a></span>
+<span id="cb10-118"><a href="#cb10-118"></a><span class="in">tbl &lt;- make_table_02(</span></span>
+<span id="cb10-119"><a href="#cb10-119"></a><span class="in">  df = anl,</span></span>
+<span id="cb10-120"><a href="#cb10-120"></a><span class="in">  vars = c("SEX", "AGE", "RACE", "COUNTRY", "AVAL")</span></span>
+<span id="cb10-121"><a href="#cb10-121"></a><span class="in">)</span></span>
+<span id="cb10-122"><a href="#cb10-122"></a><span class="in">tbl$tbl</span></span>
+<span id="cb10-123"><a href="#cb10-123"></a><span class="in">```</span></span>
+<span id="cb10-124"><a href="#cb10-124"></a></span>
+<span id="cb10-125"><a href="#cb10-125"></a>Note that the <span class="in">`prune_0`</span> argument can be set to specify whether all-zero rows should be included in a table. For example, see that the demographics table below includes rows for <span class="in">`OTHER`</span> and <span class="in">`UNKNOWN`</span> for which all values are zero, whereas these two rows were excluded from the previous tables (<span class="in">`prune_0`</span> defaults to <span class="in">`TRUE`</span> in <span class="in">`make_table_02()`</span>).</span>
+<span id="cb10-126"><a href="#cb10-126"></a></span>
+<span id="cb10-127"><a href="#cb10-127"></a><span class="in">```{r, echo=TRUE}</span></span>
+<span id="cb10-128"><a href="#cb10-128"></a><span class="in">make_table_02_rtables(df = anl, vars = "RACE", prune_0 = FALSE)</span></span>
+<span id="cb10-129"><a href="#cb10-129"></a><span class="in">```</span></span>
+<span id="cb10-130"><a href="#cb10-130"></a></span>
+<span id="cb10-131"><a href="#cb10-131"></a><span class="fu">### Feature Requests</span></span>
+<span id="cb10-132"><a href="#cb10-132"></a></span>
+<span id="cb10-133"><a href="#cb10-133"></a>If you would like to request the addition of a new feature to a pre-existing function within <span class="in">`cardinal`</span>, or would like a specific table template to be added, please file an issue on GitHub <span class="co">[</span><span class="ot">here</span><span class="co">](https://github.com/pharmaverse/cardinal/issues)</span> or reach out to the cardinal team directly via our Slack channel <span class="co">[</span><span class="ot">here</span><span class="co">](https://app.slack.com/client/T028PB489D3/C04MQS12MND)</span>.</span>
+<span id="cb10-134"><a href="#cb10-134"></a></span>
+<span id="cb10-135"><a href="#cb10-135"></a>You can access the source code for all currently available functions in the <span class="in">`cardinal`</span> GitHub repository <span class="co">[</span><span class="ot">here</span><span class="co">](https://github.com/pharmaverse/cardinal/tree/main/R)</span>.</span>
+<span id="cb10-136"><a href="#cb10-136"></a></span>
+<span id="cb10-137"><a href="#cb10-137"></a><span class="fu">### Additional Resources {#additional-resources}</span></span>
+<span id="cb10-138"><a href="#cb10-138"></a></span>
+<span id="cb10-139"><a href="#cb10-139"></a>See the following packages used by <span class="in">`cardinal`</span> for more information:</span>
+<span id="cb10-140"><a href="#cb10-140"></a></span>
+<span id="cb10-141"><a href="#cb10-141"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">`tern`</span><span class="co">](https://insightsengineering.github.io/tern)</span>: Clinical trials analysis functions</span>
+<span id="cb10-142"><a href="#cb10-142"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">`rtables`</span><span class="co">](https://insightsengineering.github.io/rtables)</span>: Table creation</span>
+<span id="cb10-143"><a href="#cb10-143"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">`rlistings`</span><span class="co">](https://insightsengineering.github.io/rlistings)</span>: Listing creation</span>
+<span id="cb10-144"><a href="#cb10-144"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">`formatters`</span><span class="co">](https://insightsengineering.github.io/formatters)</span>: Additional rendering formatting</span>
+<span id="cb10-145"><a href="#cb10-145"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">`random.cdisc.data`</span><span class="co">](https://insightsengineering.github.io/random.cdisc.data)</span>: Example synthetic randomized CDISC datasets (required for examples only)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
