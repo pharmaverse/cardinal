@@ -9,9 +9,82 @@ format: html
 
 ![](../assets/images/screenshots/table_09.png){fig-align="center" width="78%"}
 
+## gtsummary Table
+
+<details>
+  <summary>gtsummary Table Setup</summary>
+```{r tbl_gtsummary, eval=FALSE, echo=TRUE}
+# Load Libraries & Data
+library(cardinal)
+
+adsl <- random.cdisc.data::cadsl
+adae <- random.cdisc.data::cadae
+
+# Output Table
+make_table_09(df = adae, denominator = adsl, return_ard = FALSE)
+```
+</details>
+
+```{r tbl_gtsummary, message=FALSE, warning=FALSE, eval=TRUE}
+```
+
+<details>
+  <summary>Function Details</summary>
+### `make_table_09()`
+
+------------------------------------------------------------------------
+
+Required variables:
+
+-   **`df`**: must contain the variables specified by `id_var`, `arm_var`, `saffl_var`, `ser_var`, `soc_var`, and `pref_var`.
+-   **`denominator`** (if specified): must contain the variables specified by `id_var`, `saffl_var`, and `arm_var`.
+
+|                 |                                                                                                                      |              |
+|-----------------|----------------------------------------------------------------------------------------------------------------------|--------------|
+| **Argument**    | **Description**                                                                                                      | **Default**  |
+| `df`            | (`data.frame`) Dataset (typically ADSL) required to build table.                                                     | *No default* |
+| `denominator`   | (`character`) Alternative dataset used only to calculate column counts.                                              | `NULL`       |
+| `return_ard`    | (`flag`) Whether an ARD should be returned.                                                                          | `TRUE`       |
+| `id_var`        | (`character`) Identifier variable used to count the participants within each flag.                                   | `"USUBJID"`  |
+| `arm_var`       | (`character`) Arm variable used to split table into columns.                                                         | `"ARM"`      |
+| `saffl_var`     | (`character`) Flag variable used to indicate inclusion in safety population.                                         | `"SAFFL"`    |
+| `ser_var`       | (`character`) FMQ scope variable to use in table.                                                                    | `"AESER"`    |
+| `soc_var`       | (`character`) FMQ reference name variable to use in table.                                                           | `"AESOC"`    |
+| `pref_var`      | (`character`) FMQ scope, can be '"NARROW"' or '"BROAD"'.                                                             | `"AEDECOD"`  |
+| `lbl_overall`   | (`character`) (if specified): an overall column will be added to the table with the given value as the column label. | `NULL`       |
+
+Source code for this function is available [here](https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_09.R).
+</details>
+
+## ARD
+
+<details>
+  <summary>ARD Setup</summary>
+```{r ard, echo=TRUE, message=FALSE, warning=FALSE, results='hide'}
+# Load Libraries & Data
+library(cardinal)
+
+adsl <- random.cdisc.data::cadsl
+adae <- random.cdisc.data::cadae
+
+# Create Table & ARD
+result <- make_table_09(df = adae, denominator = adsl)
+
+# Output ARD
+result$ard
+```
+</details>
+
+```{r ard_print, echo=FALSE}
+withr::local_options(width = 9999)
+print(result$ard, columns = "all")
+```
+
 ## rtables Table
 
-```{r tbl, message=FALSE, warning=FALSE}
+<details>
+  <summary>rtables Table Setup</summary>
+```{r tbl_rtables, echo=TRUE, eval=FALSE}
 # Load Libraries & Data
 library(cardinal)
 
@@ -23,17 +96,18 @@ pref_var <- "AEDECOD"
 
 # Output Table
 risk_diff <- list(arm_x = "B: Placebo", arm_y = "A: Drug X") # optional
-make_table_09(adae = adae, alt_counts_df = adsl, pref_var = pref_var, risk_diff = risk_diff)
+make_table_09_rtables(adae = adae, alt_counts_df = adsl, pref_var = pref_var, risk_diff = risk_diff)
 ```
 
-## rtables Table Setup
+</details>
 
-```{r tbl, eval=FALSE, echo=TRUE}
+
+```{r tbl_rtables, message=FALSE, warning=FALSE, eval=TRUE}
 ```
 
-## Function Details: `make_table_09`
-
-### `make_table_09()`
+<details>
+  <summary>Function Details</summary>
+### `make_table_09()_rtables`
 
 ------------------------------------------------------------------------
 
@@ -77,10 +151,13 @@ Required variables:
 +------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------+
 
 Source code for this function is available [here](https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_09.R#L24).
+</details>
 
 ## gt Table
 
-```{r tbl_gt, message=FALSE, warning=FALSE}
+<details>
+  <summary>gt Table Setup</summary>
+```{r tbl_gt, echo=TRUE, eval=FALSE}
 # Load Libraries & Data
 library(cardinal)
 
@@ -91,21 +168,22 @@ adae <- random.cdisc.data::cadae
 make_table_09_gtsum(adae = adae, alt_counts_df = adsl)
 ```
 
-## gt Table Setup
+</details>
 
-```{r tbl_gt, eval=FALSE, echo=TRUE}
+
+```{r tbl_gt, message=FALSE, warning=FALSE, eval=TRUE}
 ```
 
-## Function Details: `make_table_09_gtsum`
-
+<details>
+  <summary>Function Details</summary>
 ### `make_table_09_gtsum()`
 
 ------------------------------------------------------------------------
 
 Required variables:
 
--   **`adae`**: `SAFFL`, `USUBJID`, `AESER`, `AESOC`, and the variables specified by `pref_var` and `arm_var`.
--   **`alt_counts_df`** (if specified): `SAFFL`, `USUBJID`, and the variable specified by `arm_var`.
+-   **`adae`**: must contain the variables specified by `id_var`, `arm_var`, `saffl_var`, `ser_var`, `soc_var`, and `pref_var`.
+-   **`alt_counts_df`** (if specified): must contain the variables specified by `id_var`, `saffl_var`, and `arm_var`.
 
 | **Argument**     | **Description**                                                                                                                                                                                                                                                       | **Default**                                           |
 |:-----------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------------------------------------------------|
@@ -113,6 +191,7 @@ Required variables:
 | `alt_counts_df`  | (`character`) Alternative dataset (typically ADSL) used only to calculate column counts.                                                                                                                                                                              | `NULL`                                                |
 | `show_colcounts` | (`flag`) Whether column counts should be printed.                                                                                                                                                                                                                     | `TRUE`                                                |
 | `arm_var`        | (`character`) Arm variable used to split table into columns.                                                                                                                                                                                                          | `"ARM"`                                               |
+| `id_var`         | (`character`) Name of the unique subject identifiers variable.                                                                                                                                                                                                        | `"USUBJID"`                                           |
 | `saffl_var`      | (`character`) Safety population flag variable from `adae` to include in the table.                                                                                                                                                                                    | `"SAFFL"`                                             |
 | `ser_var`        | (`character`) Serious Event variable from `adae` to include in the table.                                                                                                                                                                                             | `"AESER"`                                             |
 | `pref_var`       | (`character`) Preferred term variable from `adae` to include in the table.                                                                                                                                                                                            | `"AEDECOD"`                                           |
@@ -125,10 +204,13 @@ Required variables:
 | `risk_diff`      | (`list` of `character` vectors) List of character vectors. Each vector must be of length 2 and contain the name of treatment arms to calculate risk difference and its 95% CI for. Those names must exist in the `arm_var` column of the dataset specified in `adae`. | `NULL`                                                |
 
 Source code for this function is available [here](https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_09.R).
+</details>
 
 ## Tplyr Table
 
-```{r tbl_tplyr, message=FALSE, warning=FALSE}
+<details>
+  <summary>Tplyr Table Setup</summary>
+```{r tbl_typlr, echo=TRUE, eval=FALSE}
 # Load Libraries & Data
 library(cardinal)
 
@@ -139,13 +221,14 @@ adae <- random.cdisc.data::cadae
 make_table_09_tplyr(adae = adae, alt_counts_df = adsl, tplyr_raw = TRUE)
 ```
 
-## Tplyr Table Setup
+</details>
 
-```{r tbl_tplyr, eval=FALSE, echo=TRUE}
+
+```{r tbl_typlr, message=FALSE, warning=FALSE, eval=TRUE}
 ```
 
-## Function Details: `make_table_09_tplyr`
-
+<details>
+  <summary>Function Details</summary>
 ### `make_table_09_tplyr()`
 
 ------------------------------------------------------------------------
@@ -175,4 +258,6 @@ Required variables:
 | `annotations`     | (named `list` of `character`) List of annotations to add to the table. Valid annotation types are `title`, `subtitles`, `main_footer`, and `prov_footer`. Each name-value pair should use the annotation type as name and the desired string as value. | `NULL`                              |
 
 Source code for this function is available [here](https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_09.R).
+</details>
+
 :::
