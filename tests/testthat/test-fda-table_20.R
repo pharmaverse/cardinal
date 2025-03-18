@@ -42,23 +42,23 @@ test_that("Table 20 generation works with custom values", {
 
   fnotes_at_path(
     result,
-    rowpath = c("tbl_aesi", "AE grouping related to AESI") # nolint
+    rowpath = c("ma_tbl_aesi_AEDECOD_AESEV_tbl_ser_tbl_death_tbl_dis_tbl_rel_tbl_lab", "tbl_aesi", "count_fraction.AESIFL") # nolint
   ) <- c("Use FMQ grouping if appropriate.")
   fnotes_at_path(
     result,
-    rowpath = c("AESEV") # nolint
+    rowpath = c("ma_tbl_aesi_AEDECOD_AESEV_tbl_ser_tbl_death_tbl_dis_tbl_rel_tbl_lab", "AESEV") # nolint
   ) <- c("Use FMQ grouping if appropriate.")
   fnotes_at_path(
     result,
-    rowpath = c("tbl_ser", "count_fraction")
+    rowpath = c("ma_tbl_aesi_AEDECOD_AESEV_tbl_ser_tbl_death_tbl_dis_tbl_rel_tbl_lab", "tbl_ser", "count_fraction") # nolint
   ) <- c("Use FMQ grouping if appropriate.")
   fnotes_at_path(
     result,
-    rowpath = c("tbl_rel", "count_fraction")
+    rowpath = c("ma_tbl_aesi_AEDECOD_AESEV_tbl_ser_tbl_death_tbl_dis_tbl_rel_tbl_lab", "tbl_rel", "count_fraction") # nolint
   ) <- c("As determined by investigator.")
   fnotes_at_path(
     result,
-    rowpath = c("tbl_lab", "Laboratory Assessment") # nolint
+    rowpath = c("ma_tbl_aesi_AEDECOD_AESEV_tbl_ser_tbl_death_tbl_dis_tbl_rel_tbl_lab", "tbl_lab", "count_fraction.AELABFL") # nolint
   ) <- c("Include relevant laboratory results as appropriate for AESI evaluation.")
 
   res <- expect_silent(result)
