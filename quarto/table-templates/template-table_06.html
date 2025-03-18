@@ -331,9 +331,9 @@ cookieconsent.run({
 </header><div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
 <li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Spec. Screenshot</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">rtables Table</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">rtables Table Setup</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false">Function Details</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">gtsummary Table</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">ARD</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false">rtables Table</a></li>
 </ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
@@ -343,7 +343,1005 @@ cookieconsent.run({
 </div>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<div class="cell">
+<details><summary>
+gtsummary Table Setup
+</summary><div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Load package and data</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(cardinal)</span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a>adsl <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadsl</span>
+<span id="cb1-5"><a href="#cb1-5"></a>adae <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadae</span>
+<span id="cb1-6"><a href="#cb1-6"></a></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="co"># Output Table</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="fu">make_table_06</span>(<span class="at">df =</span> adae, <span class="at">denominator =</span> adsl, <span class="at">return_ard =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</details><div class="cell">
+<div class="cell-output-display">
+<div id="vhlbfefdaz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#vhlbfefdaz table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#vhlbfefdaz thead, #vhlbfefdaz tbody, #vhlbfefdaz tfoot, #vhlbfefdaz tr, #vhlbfefdaz td, #vhlbfefdaz th {
+  border-style: none;
+}
+
+#vhlbfefdaz p {
+  margin: 0;
+  padding: 0;
+}
+
+#vhlbfefdaz .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#vhlbfefdaz .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#vhlbfefdaz .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#vhlbfefdaz .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#vhlbfefdaz .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#vhlbfefdaz .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vhlbfefdaz .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#vhlbfefdaz .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#vhlbfefdaz .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#vhlbfefdaz .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#vhlbfefdaz .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#vhlbfefdaz .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#vhlbfefdaz .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#vhlbfefdaz .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#vhlbfefdaz .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#vhlbfefdaz .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#vhlbfefdaz .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#vhlbfefdaz .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#vhlbfefdaz .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vhlbfefdaz .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#vhlbfefdaz .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#vhlbfefdaz .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#vhlbfefdaz .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vhlbfefdaz .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#vhlbfefdaz .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#vhlbfefdaz .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vhlbfefdaz .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vhlbfefdaz .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#vhlbfefdaz .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vhlbfefdaz .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#vhlbfefdaz .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vhlbfefdaz .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#vhlbfefdaz .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vhlbfefdaz .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#vhlbfefdaz .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vhlbfefdaz .gt_left {
+  text-align: left;
+}
+
+#vhlbfefdaz .gt_center {
+  text-align: center;
+}
+
+#vhlbfefdaz .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#vhlbfefdaz .gt_font_normal {
+  font-weight: normal;
+}
+
+#vhlbfefdaz .gt_font_bold {
+  font-weight: bold;
+}
+
+#vhlbfefdaz .gt_font_italic {
+  font-style: italic;
+}
+
+#vhlbfefdaz .gt_super {
+  font-size: 65%;
+}
+
+#vhlbfefdaz .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#vhlbfefdaz .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#vhlbfefdaz .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#vhlbfefdaz .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#vhlbfefdaz .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#vhlbfefdaz .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#vhlbfefdaz .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#vhlbfefdaz .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#vhlbfefdaz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead><tr class="header gt_col_headings">
+<th id="label" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Event</strong></th>
+<th id="stat_1" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">
+<strong>A: Drug X</strong><br> N = 134<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
+</th>
+<th id="stat_2" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">
+<strong>B: Placebo</strong><br> N = 134<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
+</th>
+<th id="stat_3" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">
+<strong>C: Combination</strong><br> N = 132<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
+</th>
+</tr></thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">SAE</td>
+<td class="gt_row gt_center" headers="stat_1">104 (78%)</td>
+<td class="gt_row gt_center" headers="stat_2">101 (75%)</td>
+<td class="gt_row gt_center" headers="stat_3">99 (75%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;SAEs with fatal outcome</td>
+<td class="gt_row gt_center" headers="stat_1">76 (57%)</td>
+<td class="gt_row gt_center" headers="stat_2">70 (52%)</td>
+<td class="gt_row gt_center" headers="stat_3">75 (57%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Life-threatening SAEs</td>
+<td class="gt_row gt_center" headers="stat_1">9 (6.7%)</td>
+<td class="gt_row gt_center" headers="stat_2">13 (9.7%)</td>
+<td class="gt_row gt_center" headers="stat_3">19 (14%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;SAEs requiring hospitalization</td>
+<td class="gt_row gt_center" headers="stat_1">24 (18%)</td>
+<td class="gt_row gt_center" headers="stat_2">28 (21%)</td>
+<td class="gt_row gt_center" headers="stat_3">30 (23%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;SAEs resulting in substantial disruption of normal life functions</td>
+<td class="gt_row gt_center" headers="stat_1">28 (21%)</td>
+<td class="gt_row gt_center" headers="stat_2">21 (16%)</td>
+<td class="gt_row gt_center" headers="stat_3">23 (17%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Congenital anomaly or birth defect</td>
+<td class="gt_row gt_center" headers="stat_1">26 (19%)</td>
+<td class="gt_row gt_center" headers="stat_2">27 (20%)</td>
+<td class="gt_row gt_center" headers="stat_3">20 (15%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Other</td>
+<td class="gt_row gt_center" headers="stat_1">30 (22%)</td>
+<td class="gt_row gt_center" headers="stat_2">37 (28%)</td>
+<td class="gt_row gt_center" headers="stat_3">32 (24%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">AE leading to permanent discontinuation of study drug</td>
+<td class="gt_row gt_center" headers="stat_1">75 (56%)</td>
+<td class="gt_row gt_center" headers="stat_2">73 (54%)</td>
+<td class="gt_row gt_center" headers="stat_3">83 (63%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">AE leading to dose modification of study drug</td>
+<td class="gt_row gt_center" headers="stat_1">71 (53%)</td>
+<td class="gt_row gt_center" headers="stat_2">86 (64%)</td>
+<td class="gt_row gt_center" headers="stat_3">83 (63%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;AE leading to dose delay of study drug</td>
+<td class="gt_row gt_center" headers="stat_1">20 (15%)</td>
+<td class="gt_row gt_center" headers="stat_2">28 (21%)</td>
+<td class="gt_row gt_center" headers="stat_3">30 (23%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;AE leading to interruption of study drug</td>
+<td class="gt_row gt_center" headers="stat_1">4 (3.0%)</td>
+<td class="gt_row gt_center" headers="stat_2">4 (3.0%)</td>
+<td class="gt_row gt_center" headers="stat_3">3 (2.3%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;AE leading to reduction of study drug</td>
+<td class="gt_row gt_center" headers="stat_1">46 (34%)</td>
+<td class="gt_row gt_center" headers="stat_2">46 (34%)</td>
+<td class="gt_row gt_center" headers="stat_3">51 (39%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Other</td>
+<td class="gt_row gt_center" headers="stat_1">34 (25%)</td>
+<td class="gt_row gt_center" headers="stat_2">48 (36%)</td>
+<td class="gt_row gt_center" headers="stat_3">46 (35%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">Any AE</td>
+<td class="gt_row gt_center" headers="stat_1">122 (91%)</td>
+<td class="gt_row gt_center" headers="stat_2">123 (92%)</td>
+<td class="gt_row gt_center" headers="stat_3">120 (91%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;MILD</td>
+<td class="gt_row gt_center" headers="stat_1">88 (66%)</td>
+<td class="gt_row gt_center" headers="stat_2">95 (71%)</td>
+<td class="gt_row gt_center" headers="stat_3">102 (77%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;MODERATE</td>
+<td class="gt_row gt_center" headers="stat_1">99 (74%)</td>
+<td class="gt_row gt_center" headers="stat_2">100 (75%)</td>
+<td class="gt_row gt_center" headers="stat_3">103 (78%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;SEVERE</td>
+<td class="gt_row gt_center" headers="stat_1">91 (68%)</td>
+<td class="gt_row gt_center" headers="stat_2">90 (67%)</td>
+<td class="gt_row gt_center" headers="stat_3">93 (70%)</td>
+</tr>
+</tbody>
+<tfoot class="gt_footnotes"><tr class="even">
+<td colspan="4" class="gt_footnote">
+<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> n (%)</td>
+</tr></tfoot>
+</table>
+</div>
+</div>
+</div>
+<details><summary>
+Function Details
+</summary><section id="make_table_06" class="level3"><h3 class="anchored" data-anchor-id="make_table_06"><code>make_table_06()</code></h3>
+<hr>
+<p>Required variables:</p>
+<ul>
+<li>
+<strong><code>df</code></strong>: The variables specified by <code>id_var</code> and <code>arm_var</code>.</li>
+<li>
+<strong><code>denominator</code></strong> : The variables specified by <code>saffl_var</code>, <code>arm_var</code>, <code>sae_var</code>, <code>sae_cat_vars</code>, <code>disc_var</code>, <code>dose_mod_var</code>, and <code>sev_var</code>.</li>
+</ul>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 76%">
+<col style="width: 10%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><strong>Argument</strong></td>
+<td><strong>Description</strong></td>
+<td><strong>Default</strong></td>
+</tr>
+<tr class="even">
+<td><code>df</code></td>
+<td>(<code>data.frame</code>) Dataset (typically ADAE) required to build the table.</td>
+<td><em>No default</em></td>
+</tr>
+<tr class="odd">
+<td><code>return_ard</code></td>
+<td>(<code>flag</code>) Whether an ARD should be returned.</td>
+<td><code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td><code>denominator</code></td>
+<td>(<code>character</code>) Alternative dataset (typically ADSL) used only to calculate column counts.</td>
+<td><em>No default</em></td>
+</tr>
+<tr class="odd">
+<td><code>id_var</code></td>
+<td>(<code>character</code>) Identifier variable used to count the participants within each category.</td>
+<td><code>"USUBJID"</code></td>
+</tr>
+<tr class="even">
+<td><code>arm_var</code></td>
+<td>(<code>character</code>) Arm variable used to split table into columns.</td>
+<td><code>"ARM"</code></td>
+</tr>
+<tr class="odd">
+<td><code>saffl_var</code></td>
+<td>(<code>character</code>) Flag variable used to indicate inclusion in safety population.</td>
+<td><code>"SAFFL"</code></td>
+</tr>
+<tr class="even">
+<td><code>sae_var</code></td>
+<td>(<code>character</code>) Flag variable used to indicate whether an adverse event is serious or not.</td>
+<td><code>"AESER"</code></td>
+</tr>
+<tr class="odd">
+<td><code>sae_cat_vars</code></td>
+<td>(<code>character list</code>) Named list of flag variables for categories of serious adverse events. List names represent the labels in the table.</td>
+<td><code>"list("SAEs with fatal outcome" = "AESDTH", "Life-threatening SAEs" = "AESLIFE", "SAEs requiring hospitalization" = "AESHOSP", "SAEs resulting in substantial disruption of normal life functions" = "AESDISAB", "Congenital anomaly or birth defect" = "AESCONG", "Other" = "AESMIE")"</code></td>
+</tr>
+<tr class="even">
+<td><code>disc_var</code></td>
+<td>(<code>character</code>) Flag variable used to indicate whether the subject was discontinued from the study as result of an adverse event.</td>
+<td><code>"AEACNOTH"</code></td>
+</tr>
+<tr class="odd">
+<td><code>dose_mod_var</code></td>
+<td>(<code>character</code>) Flag variable used to indicate whether the dose was modified as result of an adverse event.</td>
+<td><code>"AEACN"</code></td>
+</tr>
+<tr class="even">
+<td><code>dose_mod_cat_labels</code></td>
+<td>(<code>character list</code>) Named list of labels. Names may be “DRUG INTERRUPTED”, “DOSE REDUCED”, “DOSE RATE REDUCED”, “DOSE INCREASED”.</td>
+<td><code>"list("DRUG INTERRUPTED" = "AE leading to interruption of study drug", "DOSE REDUCED" = "AE leading to reduction of study drug" , "DOSE RATE REDUCED" = "AE leading to dose delay of study drug", "DOSE INCREASED" = "Other")"</code></td>
+</tr>
+<tr class="odd">
+<td><code>sev_var</code></td>
+<td>(<code>character</code>) Variable containing the severity of an adverse event.</td>
+<td><code>"AESEV"</code></td>
+</tr>
+<tr class="even">
+<td><code>na_level</code></td>
+<td>(<code>character</code>) String to represent missing values.</td>
+<td><code>"&lt;Missing&gt;"</code></td>
+</tr>
+</tbody>
+</table>
+Source code for this function is available <a href="https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_06.R">here</a>.
+</section></details>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<details><summary>
+ARD Setup
+</summary><div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Load package and data</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">library</span>(cardinal)</span>
+<span id="cb2-3"><a href="#cb2-3"></a></span>
+<span id="cb2-4"><a href="#cb2-4"></a>adsl <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadsl</span>
+<span id="cb2-5"><a href="#cb2-5"></a>adae <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadae</span>
+<span id="cb2-6"><a href="#cb2-6"></a></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="co"># Create table &amp; ARD</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a>result <span class="ot">&lt;-</span> <span class="fu">make_table_06</span>(<span class="at">df =</span> adae, <span class="at">denominator =</span> adsl)</span>
+<span id="cb2-9"><a href="#cb2-9"></a></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="co"># Output ARD</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a>result<span class="sc">$</span>ard</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</details><div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[[1]][[1]]
+[[1]][[1]]$tbl_hierarchical</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>{cards} data frame: 18 x 13</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   group1 group1_level variable variable_level   context stat_name stat_label  stat stat_fmt fmt_fn warning error gts_column
+1     ARM    A: Drug X    AESER            SAE hierarch…         n          n   104      104   &lt;fn&gt;                   stat_1
+2     ARM    A: Drug X    AESER            SAE hierarch…         N          N   134      134   &lt;fn&gt;                   stat_1
+3     ARM    A: Drug X    AESER            SAE hierarch…         p          % 0.776       78   &lt;fn&gt;                   stat_1
+4     ARM    B: Place…    AESER            SAE hierarch…         n          n   101      101   &lt;fn&gt;                   stat_2
+5     ARM    B: Place…    AESER            SAE hierarch…         N          N   134      134   &lt;fn&gt;                   stat_2
+6     ARM    B: Place…    AESER            SAE hierarch…         p          % 0.754       75   &lt;fn&gt;                   stat_2
+7     ARM    C: Combi…    AESER            SAE hierarch…         n          n    99       99   &lt;fn&gt;                   stat_3
+8     ARM    C: Combi…    AESER            SAE hierarch…         N          N   132      132   &lt;fn&gt;                   stat_3
+9     ARM    C: Combi…    AESER            SAE hierarch…         p          %  0.75       75   &lt;fn&gt;                   stat_3
+10   &lt;NA&gt;                   ARM      A: Drug X categori…         n          n   134      134      0                   stat_1
+11   &lt;NA&gt;                   ARM      A: Drug X categori…         N          N   400      400      0                   stat_1
+12   &lt;NA&gt;                   ARM      A: Drug X categori…         p          % 0.335     33.5   &lt;fn&gt;                   stat_1
+13   &lt;NA&gt;                   ARM      B: Place… categori…         n          n   134      134      0                   stat_2
+14   &lt;NA&gt;                   ARM      B: Place… categori…         N          N   400      400      0                   stat_2
+15   &lt;NA&gt;                   ARM      B: Place… categori…         p          % 0.335     33.5   &lt;fn&gt;                   stat_2
+16   &lt;NA&gt;                   ARM      C: Combi… categori…         n          n   132      132      0                   stat_3
+17   &lt;NA&gt;                   ARM      C: Combi… categori…         N          N   400      400      0                   stat_3
+18   &lt;NA&gt;                   ARM      C: Combi… categori…         p          %  0.33     33.0   &lt;fn&gt;                   stat_3
+
+
+[[1]]$`SAEs with fatal outcome`
+[[1]]$`SAEs with fatal outcome`$tbl_hierarchical</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>{cards} data frame: 18 x 13</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   group1 group1_level variable variable_level   context stat_name stat_label  stat stat_fmt fmt_fn warning error gts_column
+1     ARM    A: Drug X   AESDTH      SAEs wit… hierarch…         n          n    76       76   &lt;fn&gt;                   stat_1
+2     ARM    A: Drug X   AESDTH      SAEs wit… hierarch…         N          N   134      134   &lt;fn&gt;                   stat_1
+3     ARM    A: Drug X   AESDTH      SAEs wit… hierarch…         p          % 0.567       57   &lt;fn&gt;                   stat_1
+4     ARM    B: Place…   AESDTH      SAEs wit… hierarch…         n          n    70       70   &lt;fn&gt;                   stat_2
+5     ARM    B: Place…   AESDTH      SAEs wit… hierarch…         N          N   134      134   &lt;fn&gt;                   stat_2
+6     ARM    B: Place…   AESDTH      SAEs wit… hierarch…         p          % 0.522       52   &lt;fn&gt;                   stat_2
+7     ARM    C: Combi…   AESDTH      SAEs wit… hierarch…         n          n    75       75   &lt;fn&gt;                   stat_3
+8     ARM    C: Combi…   AESDTH      SAEs wit… hierarch…         N          N   132      132   &lt;fn&gt;                   stat_3
+9     ARM    C: Combi…   AESDTH      SAEs wit… hierarch…         p          % 0.568       57   &lt;fn&gt;                   stat_3
+10   &lt;NA&gt;                   ARM      A: Drug X categori…         n          n   134      134      0                   stat_1
+11   &lt;NA&gt;                   ARM      A: Drug X categori…         N          N   400      400      0                   stat_1
+12   &lt;NA&gt;                   ARM      A: Drug X categori…         p          % 0.335     33.5   &lt;fn&gt;                   stat_1
+13   &lt;NA&gt;                   ARM      B: Place… categori…         n          n   134      134      0                   stat_2
+14   &lt;NA&gt;                   ARM      B: Place… categori…         N          N   400      400      0                   stat_2
+15   &lt;NA&gt;                   ARM      B: Place… categori…         p          % 0.335     33.5   &lt;fn&gt;                   stat_2
+16   &lt;NA&gt;                   ARM      C: Combi… categori…         n          n   132      132      0                   stat_3
+17   &lt;NA&gt;                   ARM      C: Combi… categori…         N          N   400      400      0                   stat_3
+18   &lt;NA&gt;                   ARM      C: Combi… categori…         p          %  0.33     33.0   &lt;fn&gt;                   stat_3
+
+
+[[1]]$`Life-threatening SAEs`
+[[1]]$`Life-threatening SAEs`$tbl_hierarchical</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>{cards} data frame: 18 x 13</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   group1 group1_level variable variable_level   context stat_name stat_label  stat stat_fmt fmt_fn warning error gts_column
+1     ARM    A: Drug X  AESLIFE      Life-thr… hierarch…         n          n     9        9   &lt;fn&gt;                   stat_1
+2     ARM    A: Drug X  AESLIFE      Life-thr… hierarch…         N          N   134      134   &lt;fn&gt;                   stat_1
+3     ARM    A: Drug X  AESLIFE      Life-thr… hierarch…         p          % 0.067      6.7   &lt;fn&gt;                   stat_1
+4     ARM    B: Place…  AESLIFE      Life-thr… hierarch…         n          n    13       13   &lt;fn&gt;                   stat_2
+5     ARM    B: Place…  AESLIFE      Life-thr… hierarch…         N          N   134      134   &lt;fn&gt;                   stat_2
+6     ARM    B: Place…  AESLIFE      Life-thr… hierarch…         p          % 0.097      9.7   &lt;fn&gt;                   stat_2
+7     ARM    C: Combi…  AESLIFE      Life-thr… hierarch…         n          n    19       19   &lt;fn&gt;                   stat_3
+8     ARM    C: Combi…  AESLIFE      Life-thr… hierarch…         N          N   132      132   &lt;fn&gt;                   stat_3
+9     ARM    C: Combi…  AESLIFE      Life-thr… hierarch…         p          % 0.144       14   &lt;fn&gt;                   stat_3
+10   &lt;NA&gt;                   ARM      A: Drug X categori…         n          n   134      134      0                   stat_1
+11   &lt;NA&gt;                   ARM      A: Drug X categori…         N          N   400      400      0                   stat_1
+12   &lt;NA&gt;                   ARM      A: Drug X categori…         p          % 0.335     33.5   &lt;fn&gt;                   stat_1
+13   &lt;NA&gt;                   ARM      B: Place… categori…         n          n   134      134      0                   stat_2
+14   &lt;NA&gt;                   ARM      B: Place… categori…         N          N   400      400      0                   stat_2
+15   &lt;NA&gt;                   ARM      B: Place… categori…         p          % 0.335     33.5   &lt;fn&gt;                   stat_2
+16   &lt;NA&gt;                   ARM      C: Combi… categori…         n          n   132      132      0                   stat_3
+17   &lt;NA&gt;                   ARM      C: Combi… categori…         N          N   400      400      0                   stat_3
+18   &lt;NA&gt;                   ARM      C: Combi… categori…         p          %  0.33     33.0   &lt;fn&gt;                   stat_3
+
+
+[[1]]$`SAEs requiring hospitalization`
+[[1]]$`SAEs requiring hospitalization`$tbl_hierarchical</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>{cards} data frame: 18 x 13</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   group1 group1_level variable variable_level   context stat_name stat_label  stat stat_fmt fmt_fn warning error gts_column
+1     ARM    A: Drug X  AESHOSP      SAEs req… hierarch…         n          n    24       24   &lt;fn&gt;                   stat_1
+2     ARM    A: Drug X  AESHOSP      SAEs req… hierarch…         N          N   134      134   &lt;fn&gt;                   stat_1
+3     ARM    A: Drug X  AESHOSP      SAEs req… hierarch…         p          % 0.179       18   &lt;fn&gt;                   stat_1
+4     ARM    B: Place…  AESHOSP      SAEs req… hierarch…         n          n    28       28   &lt;fn&gt;                   stat_2
+5     ARM    B: Place…  AESHOSP      SAEs req… hierarch…         N          N   134      134   &lt;fn&gt;                   stat_2
+6     ARM    B: Place…  AESHOSP      SAEs req… hierarch…         p          % 0.209       21   &lt;fn&gt;                   stat_2
+7     ARM    C: Combi…  AESHOSP      SAEs req… hierarch…         n          n    30       30   &lt;fn&gt;                   stat_3
+8     ARM    C: Combi…  AESHOSP      SAEs req… hierarch…         N          N   132      132   &lt;fn&gt;                   stat_3
+9     ARM    C: Combi…  AESHOSP      SAEs req… hierarch…         p          % 0.227       23   &lt;fn&gt;                   stat_3
+10   &lt;NA&gt;                   ARM      A: Drug X categori…         n          n   134      134      0                   stat_1
+11   &lt;NA&gt;                   ARM      A: Drug X categori…         N          N   400      400      0                   stat_1
+12   &lt;NA&gt;                   ARM      A: Drug X categori…         p          % 0.335     33.5   &lt;fn&gt;                   stat_1
+13   &lt;NA&gt;                   ARM      B: Place… categori…         n          n   134      134      0                   stat_2
+14   &lt;NA&gt;                   ARM      B: Place… categori…         N          N   400      400      0                   stat_2
+15   &lt;NA&gt;                   ARM      B: Place… categori…         p          % 0.335     33.5   &lt;fn&gt;                   stat_2
+16   &lt;NA&gt;                   ARM      C: Combi… categori…         n          n   132      132      0                   stat_3
+17   &lt;NA&gt;                   ARM      C: Combi… categori…         N          N   400      400      0                   stat_3
+18   &lt;NA&gt;                   ARM      C: Combi… categori…         p          %  0.33     33.0   &lt;fn&gt;                   stat_3
+
+
+[[1]]$`SAEs resulting in substantial disruption of normal life functions`
+[[1]]$`SAEs resulting in substantial disruption of normal life functions`$tbl_hierarchical</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>{cards} data frame: 18 x 13</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   group1 group1_level variable variable_level   context stat_name stat_label  stat stat_fmt fmt_fn warning error gts_column
+1     ARM    A: Drug X AESDISAB      SAEs res… hierarch…         n          n    28       28   &lt;fn&gt;                   stat_1
+2     ARM    A: Drug X AESDISAB      SAEs res… hierarch…         N          N   134      134   &lt;fn&gt;                   stat_1
+3     ARM    A: Drug X AESDISAB      SAEs res… hierarch…         p          % 0.209       21   &lt;fn&gt;                   stat_1
+4     ARM    B: Place… AESDISAB      SAEs res… hierarch…         n          n    21       21   &lt;fn&gt;                   stat_2
+5     ARM    B: Place… AESDISAB      SAEs res… hierarch…         N          N   134      134   &lt;fn&gt;                   stat_2
+6     ARM    B: Place… AESDISAB      SAEs res… hierarch…         p          % 0.157       16   &lt;fn&gt;                   stat_2
+7     ARM    C: Combi… AESDISAB      SAEs res… hierarch…         n          n    23       23   &lt;fn&gt;                   stat_3
+8     ARM    C: Combi… AESDISAB      SAEs res… hierarch…         N          N   132      132   &lt;fn&gt;                   stat_3
+9     ARM    C: Combi… AESDISAB      SAEs res… hierarch…         p          % 0.174       17   &lt;fn&gt;                   stat_3
+10   &lt;NA&gt;                   ARM      A: Drug X categori…         n          n   134      134      0                   stat_1
+11   &lt;NA&gt;                   ARM      A: Drug X categori…         N          N   400      400      0                   stat_1
+12   &lt;NA&gt;                   ARM      A: Drug X categori…         p          % 0.335     33.5   &lt;fn&gt;                   stat_1
+13   &lt;NA&gt;                   ARM      B: Place… categori…         n          n   134      134      0                   stat_2
+14   &lt;NA&gt;                   ARM      B: Place… categori…         N          N   400      400      0                   stat_2
+15   &lt;NA&gt;                   ARM      B: Place… categori…         p          % 0.335     33.5   &lt;fn&gt;                   stat_2
+16   &lt;NA&gt;                   ARM      C: Combi… categori…         n          n   132      132      0                   stat_3
+17   &lt;NA&gt;                   ARM      C: Combi… categori…         N          N   400      400      0                   stat_3
+18   &lt;NA&gt;                   ARM      C: Combi… categori…         p          %  0.33     33.0   &lt;fn&gt;                   stat_3
+
+
+[[1]]$`Congenital anomaly or birth defect`
+[[1]]$`Congenital anomaly or birth defect`$tbl_hierarchical</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>{cards} data frame: 18 x 13</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   group1 group1_level variable variable_level   context stat_name stat_label  stat stat_fmt fmt_fn warning error gts_column
+1     ARM    A: Drug X  AESCONG      Congenit… hierarch…         n          n    26       26   &lt;fn&gt;                   stat_1
+2     ARM    A: Drug X  AESCONG      Congenit… hierarch…         N          N   134      134   &lt;fn&gt;                   stat_1
+3     ARM    A: Drug X  AESCONG      Congenit… hierarch…         p          % 0.194       19   &lt;fn&gt;                   stat_1
+4     ARM    B: Place…  AESCONG      Congenit… hierarch…         n          n    27       27   &lt;fn&gt;                   stat_2
+5     ARM    B: Place…  AESCONG      Congenit… hierarch…         N          N   134      134   &lt;fn&gt;                   stat_2
+6     ARM    B: Place…  AESCONG      Congenit… hierarch…         p          % 0.201       20   &lt;fn&gt;                   stat_2
+7     ARM    C: Combi…  AESCONG      Congenit… hierarch…         n          n    20       20   &lt;fn&gt;                   stat_3
+8     ARM    C: Combi…  AESCONG      Congenit… hierarch…         N          N   132      132   &lt;fn&gt;                   stat_3
+9     ARM    C: Combi…  AESCONG      Congenit… hierarch…         p          % 0.152       15   &lt;fn&gt;                   stat_3
+10   &lt;NA&gt;                   ARM      A: Drug X categori…         n          n   134      134      0                   stat_1
+11   &lt;NA&gt;                   ARM      A: Drug X categori…         N          N   400      400      0                   stat_1
+12   &lt;NA&gt;                   ARM      A: Drug X categori…         p          % 0.335     33.5   &lt;fn&gt;                   stat_1
+13   &lt;NA&gt;                   ARM      B: Place… categori…         n          n   134      134      0                   stat_2
+14   &lt;NA&gt;                   ARM      B: Place… categori…         N          N   400      400      0                   stat_2
+15   &lt;NA&gt;                   ARM      B: Place… categori…         p          % 0.335     33.5   &lt;fn&gt;                   stat_2
+16   &lt;NA&gt;                   ARM      C: Combi… categori…         n          n   132      132      0                   stat_3
+17   &lt;NA&gt;                   ARM      C: Combi… categori…         N          N   400      400      0                   stat_3
+18   &lt;NA&gt;                   ARM      C: Combi… categori…         p          %  0.33     33.0   &lt;fn&gt;                   stat_3
+
+
+[[1]]$Other
+[[1]]$Other$tbl_hierarchical</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>{cards} data frame: 18 x 13</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   group1 group1_level variable variable_level   context stat_name stat_label  stat stat_fmt fmt_fn warning error gts_column
+1     ARM    A: Drug X   AESMIE          Other hierarch…         n          n    30       30   &lt;fn&gt;                   stat_1
+2     ARM    A: Drug X   AESMIE          Other hierarch…         N          N   134      134   &lt;fn&gt;                   stat_1
+3     ARM    A: Drug X   AESMIE          Other hierarch…         p          % 0.224       22   &lt;fn&gt;                   stat_1
+4     ARM    B: Place…   AESMIE          Other hierarch…         n          n    37       37   &lt;fn&gt;                   stat_2
+5     ARM    B: Place…   AESMIE          Other hierarch…         N          N   134      134   &lt;fn&gt;                   stat_2
+6     ARM    B: Place…   AESMIE          Other hierarch…         p          % 0.276       28   &lt;fn&gt;                   stat_2
+7     ARM    C: Combi…   AESMIE          Other hierarch…         n          n    32       32   &lt;fn&gt;                   stat_3
+8     ARM    C: Combi…   AESMIE          Other hierarch…         N          N   132      132   &lt;fn&gt;                   stat_3
+9     ARM    C: Combi…   AESMIE          Other hierarch…         p          % 0.242       24   &lt;fn&gt;                   stat_3
+10   &lt;NA&gt;                   ARM      A: Drug X categori…         n          n   134      134      0                   stat_1
+11   &lt;NA&gt;                   ARM      A: Drug X categori…         N          N   400      400      0                   stat_1
+12   &lt;NA&gt;                   ARM      A: Drug X categori…         p          % 0.335     33.5   &lt;fn&gt;                   stat_1
+13   &lt;NA&gt;                   ARM      B: Place… categori…         n          n   134      134      0                   stat_2
+14   &lt;NA&gt;                   ARM      B: Place… categori…         N          N   400      400      0                   stat_2
+15   &lt;NA&gt;                   ARM      B: Place… categori…         p          % 0.335     33.5   &lt;fn&gt;                   stat_2
+16   &lt;NA&gt;                   ARM      C: Combi… categori…         n          n   132      132      0                   stat_3
+17   &lt;NA&gt;                   ARM      C: Combi… categori…         N          N   400      400      0                   stat_3
+18   &lt;NA&gt;                   ARM      C: Combi… categori…         p          %  0.33     33.0   &lt;fn&gt;                   stat_3
+
+
+
+[[2]]
+[[2]]$tbl_hierarchical</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>{cards} data frame: 18 x 13</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   group1 group1_level variable variable_level   context stat_name stat_label  stat stat_fmt fmt_fn warning error gts_column
+1     ARM    A: Drug X AEACNOTH      AE leadi… hierarch…         n          n    75       75   &lt;fn&gt;                   stat_1
+2     ARM    A: Drug X AEACNOTH      AE leadi… hierarch…         N          N   134      134   &lt;fn&gt;                   stat_1
+3     ARM    A: Drug X AEACNOTH      AE leadi… hierarch…         p          %  0.56       56   &lt;fn&gt;                   stat_1
+4     ARM    B: Place… AEACNOTH      AE leadi… hierarch…         n          n    73       73   &lt;fn&gt;                   stat_2
+5     ARM    B: Place… AEACNOTH      AE leadi… hierarch…         N          N   134      134   &lt;fn&gt;                   stat_2
+6     ARM    B: Place… AEACNOTH      AE leadi… hierarch…         p          % 0.545       54   &lt;fn&gt;                   stat_2
+7     ARM    C: Combi… AEACNOTH      AE leadi… hierarch…         n          n    83       83   &lt;fn&gt;                   stat_3
+8     ARM    C: Combi… AEACNOTH      AE leadi… hierarch…         N          N   132      132   &lt;fn&gt;                   stat_3
+9     ARM    C: Combi… AEACNOTH      AE leadi… hierarch…         p          % 0.629       63   &lt;fn&gt;                   stat_3
+10   &lt;NA&gt;                   ARM      A: Drug X categori…         n          n   134      134      0                   stat_1
+11   &lt;NA&gt;                   ARM      A: Drug X categori…         N          N   400      400      0                   stat_1
+12   &lt;NA&gt;                   ARM      A: Drug X categori…         p          % 0.335     33.5   &lt;fn&gt;                   stat_1
+13   &lt;NA&gt;                   ARM      B: Place… categori…         n          n   134      134      0                   stat_2
+14   &lt;NA&gt;                   ARM      B: Place… categori…         N          N   400      400      0                   stat_2
+15   &lt;NA&gt;                   ARM      B: Place… categori…         p          % 0.335     33.5   &lt;fn&gt;                   stat_2
+16   &lt;NA&gt;                   ARM      C: Combi… categori…         n          n   132      132      0                   stat_3
+17   &lt;NA&gt;                   ARM      C: Combi… categori…         N          N   400      400      0                   stat_3
+18   &lt;NA&gt;                   ARM      C: Combi… categori…         p          %  0.33     33.0   &lt;fn&gt;                   stat_3
+
+
+[[3]]
+[[3]]$tbl_hierarchical</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>{cards} data frame: 54 x 13</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   group1 group1_level variable variable_level   context stat_name stat_label  stat stat_fmt fmt_fn warning error gts_column
+1     ARM    A: Drug X    AEACN      AE leadi… hierarch…         n          n    20       20   &lt;fn&gt;                   stat_1
+2     ARM    A: Drug X    AEACN      AE leadi… hierarch…         N          N   134      134   &lt;fn&gt;                   stat_1
+3     ARM    A: Drug X    AEACN      AE leadi… hierarch…         p          % 0.149       15   &lt;fn&gt;                   stat_1
+4     ARM    A: Drug X    AEACN      AE leadi… hierarch…         n          n     4        4   &lt;fn&gt;                   stat_1
+5     ARM    A: Drug X    AEACN      AE leadi… hierarch…         N          N   134      134   &lt;fn&gt;                   stat_1
+6     ARM    A: Drug X    AEACN      AE leadi… hierarch…         p          %  0.03      3.0   &lt;fn&gt;                   stat_1
+7     ARM    A: Drug X    AEACN      AE leadi… hierarch…         n          n    46       46   &lt;fn&gt;                   stat_1
+8     ARM    A: Drug X    AEACN      AE leadi… hierarch…         N          N   134      134   &lt;fn&gt;                   stat_1
+9     ARM    A: Drug X    AEACN      AE leadi… hierarch…         p          % 0.343       34   &lt;fn&gt;                   stat_1
+10    ARM    A: Drug X    AEACN          Other hierarch…         n          n    34       34   &lt;fn&gt;                   stat_1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ℹ 44 more rows</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ℹ Use `print(n = ...)` to see more rows</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+
+[[4]]
+[[4]]$tbl_hierarchical</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>{cards} data frame: 45 x 13</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   group1 group1_level                     variable variable_level   context stat_name stat_label  stat stat_fmt fmt_fn warning error gts_column
+1     ARM    A: Drug X                        AESEV           MILD hierarch…         n          n    88       88   &lt;fn&gt;                   stat_1
+2     ARM    A: Drug X                        AESEV           MILD hierarch…         N          N   134      134   &lt;fn&gt;                   stat_1
+3     ARM    A: Drug X                        AESEV           MILD hierarch…         p          % 0.657       66   &lt;fn&gt;                   stat_1
+4     ARM    A: Drug X                        AESEV       MODERATE hierarch…         n          n    99       99   &lt;fn&gt;                   stat_1
+5     ARM    A: Drug X                        AESEV       MODERATE hierarch…         N          N   134      134   &lt;fn&gt;                   stat_1
+6     ARM    A: Drug X                        AESEV       MODERATE hierarch…         p          % 0.739       74   &lt;fn&gt;                   stat_1
+7     ARM    A: Drug X                        AESEV         SEVERE hierarch…         n          n    91       91   &lt;fn&gt;                   stat_1
+8     ARM    A: Drug X                        AESEV         SEVERE hierarch…         N          N   134      134   &lt;fn&gt;                   stat_1
+9     ARM    A: Drug X                        AESEV         SEVERE hierarch…         p          % 0.679       68   &lt;fn&gt;                   stat_1
+10    ARM    A: Drug X ..ard_hierarchical_overall..           TRUE hierarch…         n          n   122      122   &lt;fn&gt;                   stat_1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ℹ 35 more rows
+ℹ Use `print(n = ...)` to see more rows</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
+<details><summary>
+rtables Table Setup
+</summary><div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="co"># Load package and data</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a><span class="fu">library</span>(cardinal)</span>
+<span id="cb28-3"><a href="#cb28-3"></a></span>
+<span id="cb28-4"><a href="#cb28-4"></a>adsl <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadsl</span>
+<span id="cb28-5"><a href="#cb28-5"></a>adae <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadae</span>
+<span id="cb28-6"><a href="#cb28-6"></a></span>
+<span id="cb28-7"><a href="#cb28-7"></a><span class="co"># Output Table</span></span>
+<span id="cb28-8"><a href="#cb28-8"></a>risk_diff <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">arm_x =</span> <span class="st">"B: Placebo"</span>, <span class="at">arm_y =</span> <span class="st">"A: Drug X"</span>) <span class="co"># optional</span></span>
+<span id="cb28-9"><a href="#cb28-9"></a><span class="fu">make_table_06_rtables</span>(<span class="at">adae =</span> adae, <span class="at">alt_counts_df =</span> adsl, <span class="at">risk_diff =</span> risk_diff)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</details><div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>                                                                       A: Drug X    B: Placebo    C: Combination   Risk Difference (%) (95% CI)
 Event                                                                   (N=134)       (N=134)        (N=132)                 (N=268)           
@@ -367,22 +1365,9 @@ Any AE                                                                122 (91.0%
   SEVERE                                                              91 (67.9%)    90 (67.2%)      93 (70.5%)         -0.7 (-12.0 - 10.5)     </code></pre>
 </div>
 </div>
-</div>
-<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Load Libraries &amp; Data</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">library</span>(cardinal)</span>
-<span id="cb2-3"><a href="#cb2-3"></a></span>
-<span id="cb2-4"><a href="#cb2-4"></a>adsl <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadsl</span>
-<span id="cb2-5"><a href="#cb2-5"></a>adae <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadae</span>
-<span id="cb2-6"><a href="#cb2-6"></a></span>
-<span id="cb2-7"><a href="#cb2-7"></a><span class="co"># Output Table</span></span>
-<span id="cb2-8"><a href="#cb2-8"></a>risk_diff <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">arm_x =</span> <span class="st">"B: Placebo"</span>, <span class="at">arm_y =</span> <span class="st">"A: Drug X"</span>) <span class="co"># optional</span></span>
-<span id="cb2-9"><a href="#cb2-9"></a><span class="fu">make_table_06</span>(<span class="at">adae =</span> adae, <span class="at">alt_counts_df =</span> adsl, <span class="at">risk_diff =</span> risk_diff)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-<div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
-<section id="make_table_06" class="level3"><h3 class="anchored" data-anchor-id="make_table_06"><code>make_table_06()</code></h3>
+<details><summary>
+Function Details
+</summary><section id="make_table_06_rtables" class="level3"><h3 class="anchored" data-anchor-id="make_table_06_rtables"><code>make_table_06_rtables()</code></h3>
 <hr>
 <p>Required variables:</p>
 <ul>
@@ -451,8 +1436,8 @@ Any AE                                                                122 (91.0%
 <td><code>NULL</code></td>
 </tr>
 </tbody></table>
-<p>Source code for this function is available <a href="https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_06.R">here</a>.</p>
-</section>
+Source code for this function is available <a href="https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_06.R">here</a>.
+</section></details>
 </div>
 </div>
 </div>
@@ -1065,79 +2050,158 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb3" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1"></a><span class="co">---</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="an">title:</span><span class="co"> FDA Table 6</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="an">subtitle:</span><span class="co"> Overview of Adverse Events, Safety Population, Pooled Analyses</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="an">format:</span><span class="co"> html</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="co">---</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a></span>
-<span id="cb3-7"><a href="#cb3-7"></a>::: panel-tabset</span>
-<span id="cb3-8"><a href="#cb3-8"></a><span class="fu">## Spec. Screenshot</span></span>
-<span id="cb3-9"><a href="#cb3-9"></a></span>
-<span id="cb3-10"><a href="#cb3-10"></a><span class="al">![](../assets/images/screenshots/table_06.png)</span>{fig-align="center"}</span>
-<span id="cb3-11"><a href="#cb3-11"></a></span>
-<span id="cb3-12"><a href="#cb3-12"></a><span class="fu">## rtables Table</span></span>
-<span id="cb3-13"><a href="#cb3-13"></a></span>
-<span id="cb3-14"><a href="#cb3-14"></a><span class="in">```{r tbl, message=FALSE, warning=FALSE}</span></span>
-<span id="cb3-15"><a href="#cb3-15"></a><span class="in"># Load Libraries &amp; Data</span></span>
-<span id="cb3-16"><a href="#cb3-16"></a><span class="in">library(cardinal)</span></span>
-<span id="cb3-17"><a href="#cb3-17"></a></span>
-<span id="cb3-18"><a href="#cb3-18"></a><span class="in">adsl &lt;- random.cdisc.data::cadsl</span></span>
-<span id="cb3-19"><a href="#cb3-19"></a><span class="in">adae &lt;- random.cdisc.data::cadae</span></span>
-<span id="cb3-20"><a href="#cb3-20"></a></span>
-<span id="cb3-21"><a href="#cb3-21"></a><span class="in"># Output Table</span></span>
-<span id="cb3-22"><a href="#cb3-22"></a><span class="in">risk_diff &lt;- list(arm_x = "B: Placebo", arm_y = "A: Drug X") # optional</span></span>
-<span id="cb3-23"><a href="#cb3-23"></a><span class="in">make_table_06(adae = adae, alt_counts_df = adsl, risk_diff = risk_diff)</span></span>
-<span id="cb3-24"><a href="#cb3-24"></a><span class="in">```</span></span>
-<span id="cb3-25"><a href="#cb3-25"></a></span>
-<span id="cb3-26"><a href="#cb3-26"></a><span class="fu">## rtables Table Setup</span></span>
-<span id="cb3-27"><a href="#cb3-27"></a></span>
-<span id="cb3-28"><a href="#cb3-28"></a><span class="in">```{r tbl, eval=FALSE, echo=TRUE}</span></span>
-<span id="cb3-29"><a href="#cb3-29"></a><span class="in">```</span></span>
-<span id="cb3-30"><a href="#cb3-30"></a></span>
-<span id="cb3-31"><a href="#cb3-31"></a><span class="fu">## Function Details</span></span>
-<span id="cb3-32"><a href="#cb3-32"></a></span>
-<span id="cb3-33"><a href="#cb3-33"></a><span class="fu">### `make_table_06()`</span></span>
-<span id="cb3-34"><a href="#cb3-34"></a></span>
-<span id="cb3-35"><a href="#cb3-35"></a>------------------------------------------------------------------------</span>
-<span id="cb3-36"><a href="#cb3-36"></a></span>
-<span id="cb3-37"><a href="#cb3-37"></a>Required variables:</span>
-<span id="cb3-38"><a href="#cb3-38"></a></span>
-<span id="cb3-39"><a href="#cb3-39"></a><span class="ss">-   </span>**`adae`**: <span class="in">`USUBJID`</span>, <span class="in">`TRTEMFL`</span>, <span class="in">`AESEV`</span>, <span class="in">`AESER`</span>, <span class="in">`AESDTH`</span>, <span class="in">`AESLIFE`</span>, <span class="in">`AESHOSP`</span>, <span class="in">`AESDISAB`</span>, <span class="in">`AESCONG`</span>, <span class="in">`AESMIE`</span>, <span class="in">`AEACN`</span>, and the variables specified by <span class="in">`arm_var`</span> and <span class="in">`saffl_var`</span>.</span>
-<span id="cb3-40"><a href="#cb3-40"></a><span class="ss">-   </span>**`alt_counts_df`** (if specified): <span class="in">`USUBJID`</span> and the variables specified by <span class="in">`arm_var`</span> and <span class="in">`saffl_var`</span>.</span>
-<span id="cb3-41"><a href="#cb3-41"></a></span>
-<span id="cb3-42"><a href="#cb3-42"></a>+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
-<span id="cb3-43"><a href="#cb3-43"></a>| **Argument**     | **Description**                                                                                                                                                                                                                                                | **Default**  |</span>
-<span id="cb3-44"><a href="#cb3-44"></a>+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
-<span id="cb3-45"><a href="#cb3-45"></a>| <span class="in">`adae`</span>           | (<span class="in">`data.frame`</span>) Dataset (typically ADAE) required to build table.                                                                                                                                                                                               | *No default* |</span>
-<span id="cb3-46"><a href="#cb3-46"></a>+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
-<span id="cb3-47"><a href="#cb3-47"></a>| <span class="in">`alt_counts_df`</span>  | (<span class="in">`character`</span>) Alternative dataset (typically ADSL) used only to calculate column counts.                                                                                                                                                                       | <span class="in">`NULL`</span>       |</span>
-<span id="cb3-48"><a href="#cb3-48"></a>+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
-<span id="cb3-49"><a href="#cb3-49"></a>| <span class="in">`show_colcounts`</span> | (<span class="in">`flag`</span>) Whether column counts should be printed.                                                                                                                                                                                                              | <span class="in">`TRUE`</span>       |</span>
-<span id="cb3-50"><a href="#cb3-50"></a>+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
-<span id="cb3-51"><a href="#cb3-51"></a>| <span class="in">`arm_var`</span>        | (<span class="in">`character`</span>) Arm variable used to split table into columns.                                                                                                                                                                                                   | <span class="in">`"ARM"`</span>      |</span>
-<span id="cb3-52"><a href="#cb3-52"></a>+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
-<span id="cb3-53"><a href="#cb3-53"></a>| <span class="in">`saffl_var`</span>      | (<span class="in">`character`</span>) Flag variable used to indicate inclusion in safety population.                                                                                                                                                                                   | <span class="in">`"SAFFL"`</span>    |</span>
-<span id="cb3-54"><a href="#cb3-54"></a>+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
-<span id="cb3-55"><a href="#cb3-55"></a>| <span class="in">`lbl_overall`</span>    | (<span class="in">`character`</span>) If specified, an overall column will be added to the table with the given value as the column label.                                                                                                                                             | <span class="in">`NULL`</span>       |</span>
-<span id="cb3-56"><a href="#cb3-56"></a>+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
-<span id="cb3-57"><a href="#cb3-57"></a>| <span class="in">`risk_diff`</span>      | (named <span class="in">`list`</span>) List of settings to apply to add a risk difference column to the table. See <span class="co">[</span><span class="ot">`tern::add_riskdiff()`</span><span class="co">](https://insightsengineering.github.io/tern/main/reference/add_riskdiff.html)</span> for more details. List should contain the following elements: | <span class="in">`NULL`</span>       |</span>
-<span id="cb3-58"><a href="#cb3-58"></a>|                  |                                                                                                                                                                                                                                                                |              |</span>
-<span id="cb3-59"><a href="#cb3-59"></a>|                  | -   <span class="in">`arm_x`</span>: (required) the name of reference arm.                                                                                                                                                                                                             |              |</span>
-<span id="cb3-60"><a href="#cb3-60"></a>|                  |                                                                                                                                                                                                                                                                |              |</span>
-<span id="cb3-61"><a href="#cb3-61"></a>|                  | -   <span class="in">`arm_y`</span>: (required) the name of the arm to compare to the reference arm.                                                                                                                                                                                   |              |</span>
-<span id="cb3-62"><a href="#cb3-62"></a>|                  |                                                                                                                                                                                                                                                                |              |</span>
-<span id="cb3-63"><a href="#cb3-63"></a>|                  | -   <span class="in">`col_label`</span>: (optional) label to use for the risk difference column. Defaults to <span class="in">`"Risk Difference (%) (95% CI)"`</span>.                                                                                                                                         |              |</span>
-<span id="cb3-64"><a href="#cb3-64"></a>|                  |                                                                                                                                                                                                                                                                |              |</span>
-<span id="cb3-65"><a href="#cb3-65"></a>|                  | -   <span class="in">`pct`</span>: (optional) whether the output should be returned as percentages. Defaults to <span class="in">`TRUE`</span>.                                                                                                                                                                |              |</span>
-<span id="cb3-66"><a href="#cb3-66"></a>+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
-<span id="cb3-67"><a href="#cb3-67"></a>| <span class="in">`prune_0`</span>        | (<span class="in">`flag`</span>) Whether all-zero rows should be removed from the table.                                                                                                                                                                                               | <span class="in">`FALSE`</span>      |</span>
-<span id="cb3-68"><a href="#cb3-68"></a>+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
-<span id="cb3-69"><a href="#cb3-69"></a>| <span class="in">`annotations`</span>    | (named <span class="in">`list`</span> of <span class="in">`character`</span>) List of annotations to add to the table. Valid annotation types are <span class="in">`title`</span>, <span class="in">`subtitles`</span>, <span class="in">`main_footer`</span>, and <span class="in">`prov_footer.`</span> Each name-value pair should use the annotation type as name and the desired string as value.         | <span class="in">`NULL`</span>       |</span>
-<span id="cb3-70"><a href="#cb3-70"></a>+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
-<span id="cb3-71"><a href="#cb3-71"></a></span>
-<span id="cb3-72"><a href="#cb3-72"></a>Source code for this function is available <span class="co">[</span><span class="ot">here</span><span class="co">](https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_06.R)</span>.</span>
-<span id="cb3-73"><a href="#cb3-73"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb30" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb30-1"><a href="#cb30-1"></a><span class="co">---</span></span>
+<span id="cb30-2"><a href="#cb30-2"></a><span class="an">title:</span><span class="co"> FDA Table 6</span></span>
+<span id="cb30-3"><a href="#cb30-3"></a><span class="an">subtitle:</span><span class="co"> Overview of Adverse Events, Safety Population, Pooled Analyses</span></span>
+<span id="cb30-4"><a href="#cb30-4"></a><span class="co">---</span></span>
+<span id="cb30-5"><a href="#cb30-5"></a></span>
+<span id="cb30-6"><a href="#cb30-6"></a><span class="in">```{r setup, echo=FALSE}</span></span>
+<span id="cb30-7"><a href="#cb30-7"></a><span class="in">```</span></span>
+<span id="cb30-8"><a href="#cb30-8"></a></span>
+<span id="cb30-9"><a href="#cb30-9"></a>::: panel-tabset</span>
+<span id="cb30-10"><a href="#cb30-10"></a><span class="fu">## Spec. Screenshot</span></span>
+<span id="cb30-11"><a href="#cb30-11"></a></span>
+<span id="cb30-12"><a href="#cb30-12"></a><span class="al">![](../assets/images/screenshots/table_06.png)</span>{fig-align="center"}</span>
+<span id="cb30-13"><a href="#cb30-13"></a></span>
+<span id="cb30-14"><a href="#cb30-14"></a><span class="fu">## gtsummary Table</span></span>
+<span id="cb30-15"><a href="#cb30-15"></a></span>
+<span id="cb30-16"><a href="#cb30-16"></a>&lt;details&gt;</span>
+<span id="cb30-17"><a href="#cb30-17"></a>  &lt;summary&gt;gtsummary Table Setup&lt;/summary&gt;</span>
+<span id="cb30-18"><a href="#cb30-18"></a><span class="in">```{r tbl2, eval=FALSE, echo=TRUE}</span></span>
+<span id="cb30-19"><a href="#cb30-19"></a><span class="in"># Load package and data</span></span>
+<span id="cb30-20"><a href="#cb30-20"></a><span class="in">library(cardinal)</span></span>
+<span id="cb30-21"><a href="#cb30-21"></a></span>
+<span id="cb30-22"><a href="#cb30-22"></a><span class="in">adsl &lt;- random.cdisc.data::cadsl</span></span>
+<span id="cb30-23"><a href="#cb30-23"></a><span class="in">adae &lt;- random.cdisc.data::cadae</span></span>
+<span id="cb30-24"><a href="#cb30-24"></a></span>
+<span id="cb30-25"><a href="#cb30-25"></a><span class="in"># Output Table</span></span>
+<span id="cb30-26"><a href="#cb30-26"></a><span class="in">make_table_06(df = adae, denominator = adsl, return_ard = FALSE)</span></span>
+<span id="cb30-27"><a href="#cb30-27"></a><span class="in">```</span></span>
+<span id="cb30-28"><a href="#cb30-28"></a>&lt;/details&gt;</span>
+<span id="cb30-29"><a href="#cb30-29"></a></span>
+<span id="cb30-30"><a href="#cb30-30"></a><span class="in">```{r tbl2, message=FALSE, warning=FALSE, eval=TRUE}</span></span>
+<span id="cb30-31"><a href="#cb30-31"></a><span class="in">```</span></span>
+<span id="cb30-32"><a href="#cb30-32"></a></span>
+<span id="cb30-33"><a href="#cb30-33"></a>&lt;details&gt;</span>
+<span id="cb30-34"><a href="#cb30-34"></a>  &lt;summary&gt;Function Details&lt;/summary&gt;</span>
+<span id="cb30-35"><a href="#cb30-35"></a><span class="fu">### `make_table_06()`</span></span>
+<span id="cb30-36"><a href="#cb30-36"></a></span>
+<span id="cb30-37"><a href="#cb30-37"></a>------------------------------------------------------------------------</span>
+<span id="cb30-38"><a href="#cb30-38"></a></span>
+<span id="cb30-39"><a href="#cb30-39"></a>Required variables:</span>
+<span id="cb30-40"><a href="#cb30-40"></a></span>
+<span id="cb30-41"><a href="#cb30-41"></a><span class="ss">-   </span>**`df`**: The variables specified by <span class="in">`id_var`</span> and <span class="in">`arm_var`</span>.</span>
+<span id="cb30-42"><a href="#cb30-42"></a><span class="ss">-   </span>**`denominator`** : The variables specified by <span class="in">`saffl_var`</span>, <span class="in">`arm_var`</span>, <span class="in">`sae_var`</span>, <span class="in">`sae_cat_vars`</span>, <span class="in">`disc_var`</span>, <span class="in">`dose_mod_var`</span>, and <span class="in">`sev_var`</span>.</span>
+<span id="cb30-43"><a href="#cb30-43"></a></span>
+<span id="cb30-44"><a href="#cb30-44"></a>|                 |                                                                                                          |               |</span>
+<span id="cb30-45"><a href="#cb30-45"></a>|-----------------|----------------------------------------------------------------------------------------------------------|---------------|</span>
+<span id="cb30-46"><a href="#cb30-46"></a>| **Argument**    | **Description**                                                                                          | **Default**   |</span>
+<span id="cb30-47"><a href="#cb30-47"></a>| <span class="in">`df`</span>            | (<span class="in">`data.frame`</span>) Dataset (typically ADAE) required to build the table.                                         | *No default*  |</span>
+<span id="cb30-48"><a href="#cb30-48"></a>| <span class="in">`return_ard`</span>    | (<span class="in">`flag`</span>) Whether an ARD should be returned.                                                              | <span class="in">`TRUE`</span>        |</span>
+<span id="cb30-49"><a href="#cb30-49"></a>| <span class="in">`denominator`</span>   | (<span class="in">`character`</span>) Alternative dataset (typically ADSL) used only to calculate column counts.                                  | *No default*        |</span>
+<span id="cb30-50"><a href="#cb30-50"></a>| <span class="in">`id_var`</span>        | (<span class="in">`character`</span>) Identifier variable used to count the participants within each category.                       | <span class="in">`"USUBJID"`</span>   |</span>
+<span id="cb30-51"><a href="#cb30-51"></a>| <span class="in">`arm_var`</span>       | (<span class="in">`character`</span>) Arm variable used to split table into columns.                                             | <span class="in">`"ARM"`</span>       |</span>
+<span id="cb30-52"><a href="#cb30-52"></a>| <span class="in">`saffl_var`</span>     | (<span class="in">`character`</span>) Flag variable used to indicate inclusion in safety population.                             | <span class="in">`"SAFFL"`</span>     |</span>
+<span id="cb30-53"><a href="#cb30-53"></a>| <span class="in">`sae_var`</span>     | (<span class="in">`character`</span>) Flag variable used to indicate whether an adverse event is serious or not.                                                        | <span class="in">`"AESER"`</span>   |</span>
+<span id="cb30-54"><a href="#cb30-54"></a>| <span class="in">`sae_cat_vars`</span>    | (<span class="in">`character list`</span>) Named list of flag variables for categories of serious adverse events. List names represent the labels in the table.                                               | <span class="in">`"list("SAEs with fatal outcome" = "AESDTH", "Life-threatening SAEs" = "AESLIFE", "SAEs requiring hospitalization" = "AESHOSP", "SAEs resulting in substantial disruption of normal life functions" = "AESDISAB", "Congenital anomaly or birth defect" = "AESCONG", "Other" = "AESMIE")"`</span>  |</span>
+<span id="cb30-55"><a href="#cb30-55"></a>| <span class="in">`disc_var`</span>     | (<span class="in">`character`</span>) Flag variable used to indicate whether the subject was discontinued from the study as result of an adverse event.                                                 | <span class="in">`"AEACNOTH"`</span>    |</span>
+<span id="cb30-56"><a href="#cb30-56"></a>| <span class="in">`dose_mod_var`</span>     | (<span class="in">`character`</span>) Flag variable used to indicate whether the dose was modified as result of an adverse event.                                                 | <span class="in">`"AEACN"`</span>    |</span>
+<span id="cb30-57"><a href="#cb30-57"></a>| <span class="in">`dose_mod_cat_labels`</span>     | (<span class="in">`character list`</span>) Named list of labels. Names may be "DRUG INTERRUPTED", "DOSE REDUCED", "DOSE RATE REDUCED", "DOSE INCREASED".                                              | <span class="in">`"list("DRUG INTERRUPTED" = "AE leading to interruption of study drug", "DOSE REDUCED" = "AE leading to reduction of study drug" , "DOSE RATE REDUCED" = "AE leading to dose delay of study drug", "DOSE INCREASED" = "Other")"`</span>    |</span>
+<span id="cb30-58"><a href="#cb30-58"></a>| <span class="in">`sev_var`</span>     | (<span class="in">`character`</span>) Variable containing the severity of an adverse event.                                                 | <span class="in">`"AESEV"`</span>    |</span>
+<span id="cb30-59"><a href="#cb30-59"></a>| <span class="in">`na_level`</span>      | (<span class="in">`character`</span>) String to represent missing values.                                                        | <span class="in">`"&lt;Missing&gt;"`</span> |</span>
+<span id="cb30-60"><a href="#cb30-60"></a></span>
+<span id="cb30-61"><a href="#cb30-61"></a>Source code for this function is available <span class="co">[</span><span class="ot">here</span><span class="co">](https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_06.R)</span>.</span>
+<span id="cb30-62"><a href="#cb30-62"></a>&lt;/details&gt;</span>
+<span id="cb30-63"><a href="#cb30-63"></a>  </span>
+<span id="cb30-64"><a href="#cb30-64"></a>  </span>
+<span id="cb30-65"><a href="#cb30-65"></a><span class="fu">## ARD</span></span>
+<span id="cb30-66"><a href="#cb30-66"></a></span>
+<span id="cb30-67"><a href="#cb30-67"></a>&lt;details&gt;</span>
+<span id="cb30-68"><a href="#cb30-68"></a>  &lt;summary&gt;ARD Setup&lt;/summary&gt;</span>
+<span id="cb30-69"><a href="#cb30-69"></a><span class="in">```{r tbl1, echo=TRUE, message=FALSE, warning=FALSE, results='hide'}</span></span>
+<span id="cb30-70"><a href="#cb30-70"></a><span class="in"># Load package and data</span></span>
+<span id="cb30-71"><a href="#cb30-71"></a><span class="in">library(cardinal)</span></span>
+<span id="cb30-72"><a href="#cb30-72"></a></span>
+<span id="cb30-73"><a href="#cb30-73"></a><span class="in">adsl &lt;- random.cdisc.data::cadsl</span></span>
+<span id="cb30-74"><a href="#cb30-74"></a><span class="in">adae &lt;- random.cdisc.data::cadae</span></span>
+<span id="cb30-75"><a href="#cb30-75"></a></span>
+<span id="cb30-76"><a href="#cb30-76"></a><span class="in"># Create table &amp; ARD</span></span>
+<span id="cb30-77"><a href="#cb30-77"></a><span class="in">result &lt;- make_table_06(df = adae, denominator = adsl)</span></span>
+<span id="cb30-78"><a href="#cb30-78"></a></span>
+<span id="cb30-79"><a href="#cb30-79"></a><span class="in"># Output ARD</span></span>
+<span id="cb30-80"><a href="#cb30-80"></a><span class="in">result$ard</span></span>
+<span id="cb30-81"><a href="#cb30-81"></a><span class="in">```</span></span>
+<span id="cb30-82"><a href="#cb30-82"></a>&lt;/details&gt;</span>
+<span id="cb30-83"><a href="#cb30-83"></a></span>
+<span id="cb30-84"><a href="#cb30-84"></a><span class="in">```{r tbl1-print, echo=FALSE}</span></span>
+<span id="cb30-85"><a href="#cb30-85"></a><span class="in">withr::local_options(width = 9999)</span></span>
+<span id="cb30-86"><a href="#cb30-86"></a><span class="in">print(result$ard, columns = "all")</span></span>
+<span id="cb30-87"><a href="#cb30-87"></a><span class="in">```</span></span>
+<span id="cb30-88"><a href="#cb30-88"></a></span>
+<span id="cb30-89"><a href="#cb30-89"></a><span class="fu">## rtables Table</span></span>
+<span id="cb30-90"><a href="#cb30-90"></a></span>
+<span id="cb30-91"><a href="#cb30-91"></a>&lt;details&gt;</span>
+<span id="cb30-92"><a href="#cb30-92"></a>  &lt;summary&gt;rtables Table Setup&lt;/summary&gt;</span>
+<span id="cb30-93"><a href="#cb30-93"></a><span class="in">```{r tbl3, eval=FALSE, echo=TRUE}</span></span>
+<span id="cb30-94"><a href="#cb30-94"></a><span class="in"># Load package and data</span></span>
+<span id="cb30-95"><a href="#cb30-95"></a><span class="in">library(cardinal)</span></span>
+<span id="cb30-96"><a href="#cb30-96"></a></span>
+<span id="cb30-97"><a href="#cb30-97"></a><span class="in">adsl &lt;- random.cdisc.data::cadsl</span></span>
+<span id="cb30-98"><a href="#cb30-98"></a><span class="in">adae &lt;- random.cdisc.data::cadae</span></span>
+<span id="cb30-99"><a href="#cb30-99"></a></span>
+<span id="cb30-100"><a href="#cb30-100"></a><span class="in"># Output Table</span></span>
+<span id="cb30-101"><a href="#cb30-101"></a><span class="in">risk_diff &lt;- list(arm_x = "B: Placebo", arm_y = "A: Drug X") # optional</span></span>
+<span id="cb30-102"><a href="#cb30-102"></a><span class="in">make_table_06_rtables(adae = adae, alt_counts_df = adsl, risk_diff = risk_diff)</span></span>
+<span id="cb30-103"><a href="#cb30-103"></a><span class="in">```</span></span>
+<span id="cb30-104"><a href="#cb30-104"></a>&lt;/details&gt;</span>
+<span id="cb30-105"><a href="#cb30-105"></a></span>
+<span id="cb30-106"><a href="#cb30-106"></a><span class="in">```{r tbl3, message=FALSE, warning=FALSE, eval=TRUE}</span></span>
+<span id="cb30-107"><a href="#cb30-107"></a><span class="in">```</span></span>
+<span id="cb30-108"><a href="#cb30-108"></a></span>
+<span id="cb30-109"><a href="#cb30-109"></a>&lt;details&gt;</span>
+<span id="cb30-110"><a href="#cb30-110"></a>  &lt;summary&gt;Function Details&lt;/summary&gt;</span>
+<span id="cb30-111"><a href="#cb30-111"></a><span class="fu">### `make_table_06_rtables()`</span></span>
+<span id="cb30-112"><a href="#cb30-112"></a></span>
+<span id="cb30-113"><a href="#cb30-113"></a>------------------------------------------------------------------------</span>
+<span id="cb30-114"><a href="#cb30-114"></a></span>
+<span id="cb30-115"><a href="#cb30-115"></a>Required variables:</span>
+<span id="cb30-116"><a href="#cb30-116"></a></span>
+<span id="cb30-117"><a href="#cb30-117"></a><span class="ss">-   </span>**`adae`**: <span class="in">`USUBJID`</span>, <span class="in">`TRTEMFL`</span>, <span class="in">`AESEV`</span>, <span class="in">`AESER`</span>, <span class="in">`AESDTH`</span>, <span class="in">`AESLIFE`</span>, <span class="in">`AESHOSP`</span>, <span class="in">`AESDISAB`</span>, <span class="in">`AESCONG`</span>, <span class="in">`AESMIE`</span>, <span class="in">`AEACN`</span>, and the variables specified by <span class="in">`arm_var`</span> and <span class="in">`saffl_var`</span>.</span>
+<span id="cb30-118"><a href="#cb30-118"></a><span class="ss">-   </span>**`alt_counts_df`** (if specified): <span class="in">`USUBJID`</span> and the variables specified by <span class="in">`arm_var`</span> and <span class="in">`saffl_var`</span>.</span>
+<span id="cb30-119"><a href="#cb30-119"></a></span>
+<span id="cb30-120"><a href="#cb30-120"></a>+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
+<span id="cb30-121"><a href="#cb30-121"></a>| **Argument**     | **Description**                                                                                                                                                                                                                                                | **Default**  |</span>
+<span id="cb30-122"><a href="#cb30-122"></a>+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
+<span id="cb30-123"><a href="#cb30-123"></a>| <span class="in">`adae`</span>           | (<span class="in">`data.frame`</span>) Dataset (typically ADAE) required to build table.                                                                                                                                                                                               | *No default* |</span>
+<span id="cb30-124"><a href="#cb30-124"></a>+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
+<span id="cb30-125"><a href="#cb30-125"></a>| <span class="in">`alt_counts_df`</span>  | (<span class="in">`character`</span>) Alternative dataset (typically ADSL) used only to calculate column counts.                                                                                                                                                                       | <span class="in">`NULL`</span>       |</span>
+<span id="cb30-126"><a href="#cb30-126"></a>+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
+<span id="cb30-127"><a href="#cb30-127"></a>| <span class="in">`show_colcounts`</span> | (<span class="in">`flag`</span>) Whether column counts should be printed.                                                                                                                                                                                                              | <span class="in">`TRUE`</span>       |</span>
+<span id="cb30-128"><a href="#cb30-128"></a>+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
+<span id="cb30-129"><a href="#cb30-129"></a>| <span class="in">`arm_var`</span>        | (<span class="in">`character`</span>) Arm variable used to split table into columns.                                                                                                                                                                                                   | <span class="in">`"ARM"`</span>      |</span>
+<span id="cb30-130"><a href="#cb30-130"></a>+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
+<span id="cb30-131"><a href="#cb30-131"></a>| <span class="in">`saffl_var`</span>      | (<span class="in">`character`</span>) Flag variable used to indicate inclusion in safety population.                                                                                                                                                                                   | <span class="in">`"SAFFL"`</span>    |</span>
+<span id="cb30-132"><a href="#cb30-132"></a>+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
+<span id="cb30-133"><a href="#cb30-133"></a>| <span class="in">`lbl_overall`</span>    | (<span class="in">`character`</span>) If specified, an overall column will be added to the table with the given value as the column label.                                                                                                                                             | <span class="in">`NULL`</span>       |</span>
+<span id="cb30-134"><a href="#cb30-134"></a>+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
+<span id="cb30-135"><a href="#cb30-135"></a>| <span class="in">`risk_diff`</span>      | (named <span class="in">`list`</span>) List of settings to apply to add a risk difference column to the table. See <span class="co">[</span><span class="ot">`tern::add_riskdiff()`</span><span class="co">](https://insightsengineering.github.io/tern/main/reference/add_riskdiff.html)</span> for more details. List should contain the following elements: | <span class="in">`NULL`</span>       |</span>
+<span id="cb30-136"><a href="#cb30-136"></a>|                  |                                                                                                                                                                                                                                                                |              |</span>
+<span id="cb30-137"><a href="#cb30-137"></a>|                  | -   <span class="in">`arm_x`</span>: (required) the name of reference arm.                                                                                                                                                                                                             |              |</span>
+<span id="cb30-138"><a href="#cb30-138"></a>|                  |                                                                                                                                                                                                                                                                |              |</span>
+<span id="cb30-139"><a href="#cb30-139"></a>|                  | -   <span class="in">`arm_y`</span>: (required) the name of the arm to compare to the reference arm.                                                                                                                                                                                   |              |</span>
+<span id="cb30-140"><a href="#cb30-140"></a>|                  |                                                                                                                                                                                                                                                                |              |</span>
+<span id="cb30-141"><a href="#cb30-141"></a>|                  | -   <span class="in">`col_label`</span>: (optional) label to use for the risk difference column. Defaults to <span class="in">`"Risk Difference (%) (95% CI)"`</span>.                                                                                                                                         |              |</span>
+<span id="cb30-142"><a href="#cb30-142"></a>|                  |                                                                                                                                                                                                                                                                |              |</span>
+<span id="cb30-143"><a href="#cb30-143"></a>|                  | -   <span class="in">`pct`</span>: (optional) whether the output should be returned as percentages. Defaults to <span class="in">`TRUE`</span>.                                                                                                                                                                |              |</span>
+<span id="cb30-144"><a href="#cb30-144"></a>+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
+<span id="cb30-145"><a href="#cb30-145"></a>| <span class="in">`prune_0`</span>        | (<span class="in">`flag`</span>) Whether all-zero rows should be removed from the table.                                                                                                                                                                                               | <span class="in">`FALSE`</span>      |</span>
+<span id="cb30-146"><a href="#cb30-146"></a>+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
+<span id="cb30-147"><a href="#cb30-147"></a>| <span class="in">`annotations`</span>    | (named <span class="in">`list`</span> of <span class="in">`character`</span>) List of annotations to add to the table. Valid annotation types are <span class="in">`title`</span>, <span class="in">`subtitles`</span>, <span class="in">`main_footer`</span>, and <span class="in">`prov_footer.`</span> Each name-value pair should use the annotation type as name and the desired string as value.         | <span class="in">`NULL`</span>       |</span>
+<span id="cb30-148"><a href="#cb30-148"></a>+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+</span>
+<span id="cb30-149"><a href="#cb30-149"></a></span>
+<span id="cb30-150"><a href="#cb30-150"></a>Source code for this function is available <span class="co">[</span><span class="ot">here</span><span class="co">](https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_06.R)</span>.</span>
+<span id="cb30-151"><a href="#cb30-151"></a>&lt;/details&gt;</span>
+<span id="cb30-152"><a href="#cb30-152"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
