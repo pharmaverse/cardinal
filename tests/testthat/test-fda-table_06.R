@@ -1,15 +1,63 @@
 adsl <- adsl_raw
 adae <- adae_raw
 
+# Test common function ----
 test_that("Table 06 generation works with default values", {
+  withr::local_options(list(width = 200))
+
   result <- make_table_06(adae, adsl)
 
   res <- expect_silent(result)
   expect_snapshot(res)
 })
 
-test_that("Table 06 generation works with custom values", {
+test_that("Table 06 returns ARD if specified", {
+  withr::local_options(list(width = 200))
+
+  result <- make_table_06(adae, adsl, return_ard = TRUE)
+
+  res <- expect_silent(result)
+  expect_snapshot(res)
+})
+
+test_that("Table 06 generation works with custom labels", {
+  withr::local_options(list(width = 200))
+
   result <- make_table_06(
+    adae,
+    adsl,
+    sae_cat_vars = list(
+      `My test label 1` = "AESDTH",
+      `Life-threatening SAEs` = "AESLIFE",
+      `My test label 2` = "AESHOSP",
+      `SAEs resulting in substantial disruption of normal life functions` = "AESDISAB",
+      `Congenital anomaly or birth defect` = "AESCONG", Other = "AESMIE"
+    ),
+    dose_mod_cat_labels = list(
+      `DRUG INTERRUPTED` = "My test label 3",
+      `DOSE REDUCED` = "AE leading to reduction of study drug",
+      `DOSE RATE REDUCED` = "AE leading to dose delay of study drug",
+      `DOSE INCREASED` = "Some other label"
+    )
+  )
+
+  res <- expect_silent(result)
+  expect_snapshot(res)
+})
+
+
+
+# Test rtables function ----
+
+test_that("Table 06 rtables generation works with default values", {
+  result <- make_table_06_rtables(adae, adsl)
+
+  res <- expect_silent(result)
+  expect_snapshot(res)
+})
+
+test_that("Table 06 rtables generation works with custom values", {
+  result <- make_table_06_rtables(
     adae,
     adsl,
     lbl_overall = "Total",
@@ -40,9 +88,9 @@ test_that("Table 06 generation works with custom values", {
   expect_snapshot(res)
 })
 
-test_that("Table 06 generation works with risk difference column", {
+test_that("Table 06 rtables generation works with risk difference column", {
   risk_diff <- list(arm_x = "B: Placebo", arm_y = "A: Drug X")
-  result <- make_table_06(adae, adsl, risk_diff = risk_diff)
+  result <- make_table_06_rtables(adae, adsl, risk_diff = risk_diff)
 
   res <- expect_silent(result)
   expect_snapshot(res)
