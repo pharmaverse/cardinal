@@ -1,17 +1,110 @@
 ---
 title: FDA Table 35
 subtitle: Patients With Adverse Events by System Organ Class, Safety Population, Pooled Analysis (or Trial X)
-format: html
 ---
 
+```{r setup, echo=FALSE}
+```
+
 ::: panel-tabset
+
 ## Spec. Screenshot
 
 ![](../assets/images/screenshots/table_35.png){fig-align="center" width="70%"}
 
-## Table
+## gtsummary Table
 
-```{r tbl, message=FALSE, warning=FALSE}
+<details>
+
+<summary>gtsummary Table Setup</summary>
+
+```{r tbl1, eval=FALSE, echo=TRUE}
+# Load Libraries & Data
+library(cardinal)
+
+adsl <- random.cdisc.data::cadsl
+adae <- random.cdisc.data::cadae
+
+# Output Table
+make_table_35(df = adae, denominator = adsl, return_ard = FALSE)
+```
+
+</details>
+
+<details>
+
+<summary>Function Details</summary>
+
+### `make_table_35()`
+
+------------------------------------------------------------------------
+
+Required variables:
+
+-   **`df`**: The variables specified by `id_var`, `arm_var`, `saffl_var`, and `soc_var`.
+-   **`denominator`** (if specified): `USUBJID` and the variables specified by `arm_var` and `saffl_var`
+-   If both the ARD (`return_ard = TRUE`) and an overall column (`lbl_overall` not missing) are requested, a list of two ARDs will be returned: one for the table by groups, and the other for the overall column.
+
++---------------+------------------------------------------------------------------------------------+---------------+
+| **Argument**  | **Description**                                                                    | **Default**   |
++---------------+------------------------------------------------------------------------------------+---------------+
+| `df`          | (`data.frame`) Dataset (typically ADSL) required to build table.                   | *No default*  |
++---------------+------------------------------------------------------------------------------------+---------------+
+| `return_ard`  | (`flag`) Whether an ARD should be returned.                                        | `TRUE`        |
++---------------+------------------------------------------------------------------------------------+---------------+
+| `denominator` | (`character`) Alternative dataset used only to calculate column counts.            | `NULL`        |
++---------------+------------------------------------------------------------------------------------+---------------+
+| `id_var`      | (`character`) Identifier variable used to count the participants within each flag. | `"USUBJID"`   |
++---------------+------------------------------------------------------------------------------------+---------------+
+| `arm_var`     | (`character`) Arm variable used to split table into columns.                       | `"ARM"`       |
++---------------+------------------------------------------------------------------------------------+---------------+
+| `saffl_var`   | (`character`) Flag variable used to indicate inclusion in safety population.       | `"SAFFL"`     |
++---------------+------------------------------------------------------------------------------------+---------------+
+| `soc_var`     | (`character`) SOC variable from `adae` to include in the table.                    | `"ARBODSYS"`  |
++---------------+------------------------------------------------------------------------------------+---------------+
+| `na_level`    | (`character`) String to represent missing values.                                  | `"<Missing>"` |
++---------------+------------------------------------------------------------------------------------+---------------+
+| `lbl_overall` | (`character`) String to represent the label of an overall column.                  | `NULL`        |
++---------------+------------------------------------------------------------------------------------+---------------+
+
+Source code for this function is available [here](https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_35.R).
+
+</details>
+
+## ARD
+
+<details>
+
+<summary>ARD Setup</summary>
+
+```{r tbl2, echo=TRUE, message=FALSE, warning=FALSE, results='hide'}
+# Load Libraries & Data
+library(cardinal)
+
+adsl <- random.cdisc.data::cadsl
+adae <- random.cdisc.data::cadae
+
+# Create Table and ARD
+result <- make_table_35(df = adae, denominator = adsl)
+
+# Output ARD
+result$ard
+```
+
+```{r tbl2-print, echo=FALSE}
+withr::local_options(width = 9999)
+print(result$ard, columns = "all")
+```
+
+</details>
+
+## rtables Table
+
+<details>
+
+<summary>rtables Table Setup</summary>
+
+```{r tbl3, eval=FALSE, echo=TRUE}
 # Load Libraries & Data
 library(random.cdisc.data)
 library(cardinal)
@@ -21,33 +114,37 @@ adae <- random.cdisc.data::cadae
 
 # Output Table
 risk_diff <- list(arm_x = "B: Placebo", arm_y = "A: Drug X") # optional
-make_table_35(adae = adae, alt_counts_df = adsl, risk_diff = risk_diff)
+make_table_35_rtables(df = adae, alt_counts_df = adsl, risk_diff = risk_diff)
 ```
 
-## Table Setup
+</details>
 
-```{r tbl, eval=FALSE, echo=TRUE}
+```{r tbl3, message=FALSE, warning=FALSE, eval=TRUE}
 ```
 
-## Function Details
+<details>
 
-### `make_table_35()`
+<summary>Function Details</summary>
+
+### `make_table_35_rtables()`
 
 ------------------------------------------------------------------------
 
 Required variables:
 
--   **`adae`**: `USUBJID` and the variables specified by `arm_var`, `saffl_var` and `soc_var`.
+-   **`df`**: `USUBJID` and the variables specified by `arm_var`, `saffl_var` and `soc_var`.
 -   **`alt_counts_df`** (if specified): `USUBJID` and the variables specified by `arm_var` and `saffl_var`.
 
 +------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------+
 | **Argument**     | **Description**                                                                                                                                                                                                                                                | **Default**                                          |
 +------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------+
-| `adae`           | (`data.frame`) Dataset (typically ADAE) required to build table.                                                                                                                                                                                               | *No default*                                         |
+| `df`             | (`data.frame`) Dataset (typically ADAE) required to build table.                                                                                                                                                                                               | *No default*                                         |
 +------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------+
 | `alt_counts_df`  | (`character`) Alternative dataset (typically ADSL) used only to calculate column counts.                                                                                                                                                                       | `NULL`                                               |
 +------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------+
 | `show_colcounts` | (`flag`) Whether column counts should be printed.                                                                                                                                                                                                              | `TRUE`                                               |
++------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------+
+| `id_var`         | (`character`) Subject identifier variable       .                                                                                                                                                                                                              | `USUBJID`                                            |
 +------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------+
 | `arm_var`        | (`character`) Arm variable used to split table into columns.                                                                                                                                                                                                   | `"ARM"`                                              |
 +------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------+
@@ -75,4 +172,5 @@ Required variables:
 +------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------+
 
 Source code for this function is available [here](https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_35.R).
+</details>
 :::
