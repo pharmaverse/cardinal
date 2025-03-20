@@ -38,6 +38,8 @@
 #' @param annotations (named `list` of `character`)\cr list of annotations to add to the table. Valid
 #'   annotation types are `title`, `subtitles`, `main_footer`, and `prov_footer`. Each name-value pair should
 #'   use the annotation type as name and the desired string as value.
+#' @param ard (`cards::card`)\cr an ARD.
+#' @param denominator (`data.frame`)\cr alternative dataset (typically ADSL) used only to calculate denominator counts.
 #' @param df (`data.frame`)\cr dataset required to build table.
 #' @param eosdy_var (`character`)\cr variable denoting last recorded (relative) study day.
 #' @param fmqsc_var (`character`)\cr FMQ scope variable to use in table.
@@ -54,6 +56,7 @@
 #'   in the table. Labels should be ordered according to the order of variables in `vars`.
 #' @param na_level (`character`)\cr string to represent missing values.
 #' @param na_rm (`flag`)\cr whether `NA` levels should be removed from the table.
+#' @param return_ard (`flag`)\cr whether an ARD should be returned. Defaults to `TRUE`.
 #' @param risk_diff (named `list`)\cr list of settings to apply to add one or more risk difference columns to the table.
 #'   Defaults to `NULL` (no risk difference column added). See [tern::add_riskdiff()] for more details. List should
 #'   contain the following elements:
@@ -66,6 +69,8 @@
 #'    * `pct`: (optional) whether the output should be returned as percentages. Defaults to `TRUE`.
 #' @param saffl_var (`character`)\cr flag variable used to indicate inclusion in safety population.
 #' @param sex_scope (`character`)\cr Level of `SEX` to output in table.
+#' @param table_engine (`string`)\cr table engine used to generate the table. If `NULL`, no table is returned. If the
+#'   given engine is not available for the table, no table is created and a warning is returned.
 #' @param trtedtm_var (`character`)\cr treatment end datetime variable.
 #' @param trtemfl_var (`character`)\cr flag variable used to identify Treatment-emergent AE.
 #' @param trtsdtm_var (`character`)\cr treatment start datetime variable.

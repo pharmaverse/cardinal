@@ -31,6 +31,7 @@ format:
     number-sections: false
     lang: en-US
     page-layout: full
+    df-print: kable
 
 execute:
   freeze: auto
@@ -48,7 +49,7 @@ highlight-style: github
 website:
   title: cardinal
   open-graph: true
-  favicon: quarto/assets/images/cardinal.png
+  favicon: quarto/assets/images/logo/cardinal.png
   search:
     location: navbar
     type: overlay
@@ -72,7 +73,7 @@ website:
   navbar:
     pinned: true
     collapse: true
-    logo: quarto/assets/images/cardinal.png
+    logo: quarto/assets/images/logo/cardinal.png
     search: true
     left:
       - text: Home
@@ -106,6 +107,7 @@ website:
           - quarto/table-templates/template-table_36.qmd
           - quarto/figure-templates/template-fig_01.qmd
           - quarto/figure-templates/template-fig_02.qmd
+          - quarto/figure-templates/template-fig_03.qmd
           - quarto/figure-templates/template-fig_14.qmd
       - text: About
         file: quarto/about.qmd
