@@ -1,15 +1,15 @@
 adsl <- adsl_raw
 adae <- adae_raw
 
-test_that("Table 09 generation works with default values", {
-  result <- make_table_09(adae, adsl)
+test_that("Table 09 (rtables) generation works with default values", {
+  result <- make_table_09_rtables(adae, adsl)
 
   res <- expect_silent(result)
   expect_snapshot(res)
 })
 
-test_that("Table 09 generation works with custom values", {
-  result <- make_table_09(
+test_that("Table 09 (rtables) generation works with custom values", {
+  result <- make_table_09_rtables(
     adae,
     adsl,
     lbl_overall = "Total",
@@ -39,9 +39,9 @@ test_that("Table 09 generation works with custom values", {
   expect_snapshot(res)
 })
 
-test_that("Table 09 (gt) generation works with risk difference column", {
+test_that("Table 09 generation works with risk difference column", {
   risk_diff <- list(arm_x = "B: Placebo", arm_y = "A: Drug X")
-  result <- make_table_09(adae, adsl, risk_diff = risk_diff)
+  result <- make_table_09_rtables(adae, adsl, risk_diff = risk_diff)
 
   res <- expect_silent(result)
   expect_snapshot(res)
@@ -347,4 +347,31 @@ test_that("make_table_09_tplyr() considers annotations if tplyr_raw = FALSE", {
   expect_true(grepl(annot[["main_footer"]][[2]], main_footer_out))
   expect_true(grepl(annot[["prov_footer"]][[1]], prov_footer_out))
   expect_true(grepl(annot[["prov_footer"]][[2]], prov_footer_out))
+})
+
+
+test_that("Table 09 generation works with gtsummary with default values", {
+  withr::local_options(list(width = 200))
+
+  res <- make_table_09(adae, adsl)
+  expect_snapshot(res$table |> as.data.frame())
+  expect_snapshot(res$ard)
+
+  # no ARD
+  res2 <- make_table_09(adae, adsl, return_ard = FALSE)
+
+  # tables the same
+  expect_identical(res$table, res2)
+})
+
+
+test_that("Table 09 generation works with gtsummary with custom values", {
+  withr::local_options(list(width = 200))
+
+  res <- make_table_09_gtsummary(
+    df = adae,
+    denominator = adsl
+  )
+
+  expect_snapshot(res |> as.data.frame())
 })

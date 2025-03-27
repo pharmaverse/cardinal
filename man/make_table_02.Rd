@@ -2,13 +2,19 @@
 % Please edit documentation in R/fda-table_02.R
 \name{make_table_02}
 \alias{make_table_02}
-\alias{make_table_02_tplyr}
-\alias{make_table_02_gtsum}
+\alias{make_table_02_rtables}
 \title{FDA Table 2: Baseline Demographic and Clinical Characteristics, Safety Population, Pooled Analyses}
 \usage{
 make_table_02(
   df,
-  alt_counts_df = NULL,
+  return_ard = TRUE,
+  arm_var = "ARM",
+  saffl_var = "SAFFL",
+  vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY")
+)
+
+make_table_02_rtables(
+  df,
   show_colcounts = TRUE,
   arm_var = "ARM",
   saffl_var = "SAFFL",
@@ -19,45 +25,19 @@ make_table_02(
   prune_0 = TRUE,
   annotations = NULL
 )
-
-make_table_02_tplyr(
-  df,
-  alt_counts_df = NULL,
-  show_colcounts = TRUE,
-  arm_var = "ARM",
-  saffl_var = "SAFFL",
-  vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY"),
-  lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
-  lbl_overall = "Total Population",
-  na_rm = FALSE,
-  prune_0 = TRUE,
-  annotations = NULL,
-  tplyr_raw = FALSE
-)
-
-make_table_02_gtsum(
-  df,
-  show_colcounts = TRUE,
-  arm_var = "ARM",
-  saffl_var = "SAFFL",
-  vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC", "COUNTRY"),
-  lbl_vars = formatters::var_labels(df, fill = TRUE)[vars],
-  lbl_overall = "Total Population",
-  na_rm = FALSE
-)
 }
 \arguments{
 \item{df}{(\code{data.frame})\cr dataset required to build table.}
 
-\item{alt_counts_df}{(\code{character})\cr alternative dataset (typically ADSL) used only to calculate column counts.}
-
-\item{show_colcounts}{(\code{flag})\cr Whether column counts should be printed. Boolean.}
+\item{return_ard}{(\code{flag})\cr whether an ARD should be returned. Defaults to \code{TRUE}.}
 
 \item{arm_var}{(\code{character})\cr Name of the treatment arm variable used to split table into columns.}
 
 \item{saffl_var}{(\code{character})\cr flag variable used to indicate inclusion in safety population.}
 
 \item{vars}{(\code{vector} of \code{character})\cr Variables from \code{df} to include in the table.}
+
+\item{show_colcounts}{(\code{flag})\cr Whether column counts should be printed. Boolean.}
 
 \item{lbl_vars}{(\code{vector} of \code{character})\cr labels corresponding to variables in \code{vars} to print
 in the table. Labels should be ordered according to the order of variables in \code{vars}.}
@@ -72,52 +52,32 @@ the given value as the column label.}
 \item{annotations}{(named \code{list} of \code{character})\cr list of annotations to add to the table. Valid
 annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
 use the annotation type as name and the desired string as value.}
-
-\item{tplyr_raw}{(\code{flag})\cr whether the raw \code{tibble} created using \code{Tplyr} functions should be returned, or the
-table formatted using functions from \code{tfrmt} should be returned (default).}
 }
 \value{
-\itemize{
-\item \code{make_table_02} returns an \code{rtable} object.
-}
+A \code{gtsummary} table and, if \code{return_ard = TRUE}, an ARD.
+If \code{return_ard = TRUE}, they will be returned as a list with named elements \code{table} and \code{ard}.
 
 \itemize{
-\item \code{make_table_02_tplyr} returns a \code{gt_tbl} object when \code{tplyr_raw = FALSE} (default) and
-a \code{tibble} object when \code{tplyr_raw = TRUE}.
-}
-
-\itemize{
-\item \code{make_table_02_gtsum} returns a \code{tbl_summary} object.
+\item \code{make_table_02_rtables()} returns an \code{rtable} object.
 }
 }
 \description{
-FDA Table 2: Baseline Demographic and Clinical Characteristics, Safety Population, Pooled Analyses
+The table engine used by each engine-specific function is identified by its suffix.
 }
 \details{
 \itemize{
-\item \code{df} must contain the variables specified by \code{vars}, \code{arm_var}, and \code{saffl_var}.
-\item If specified, \code{alt_counts_df} must contain the variables specified by \code{arm_var}, \code{id_var}, and \code{saffl_var}.
+\item \code{df} must contain the variables specified by \code{arm_var}, \code{saffl_var}, and
+variables specified by the \code{vars} argument.
+\item \code{vars} must be a character vector specifying the variables to evaluate.
+\item \code{return_ard} set to \code{TRUE} or \code{FALSE}; whether the intermediate ARD
+object should be returned.
 \item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
 flag variables are treated as \code{"N"}.
-\item Columns are split by arm. Overall population column is included by default (see \code{lbl_overall} argument).
-\item Information from either ADSUB or ADVS is generally included into \code{df} prior to analysis.
-\item Numbers in table for non-numeric variables represent the absolute numbers of patients and fraction of \code{N}.
-\item All-zero rows are removed by default (see \code{prune_0} argument).
 }
-}
-\section{Functions}{
+
 \itemize{
-\item \code{make_table_02()}: Create FDA table 2 using functions from \code{rtables} and \code{tern}.
-
-\item \code{make_table_02_tplyr()}: Create FDA table 2 using functions from \code{Tplyr} and \code{tfrmt}.
-
-\item \code{make_table_02_gtsum()}: Create FDA table 2 using functions from \code{gtsummary}.
-
-}}
-\note{
-\itemize{
-\item \code{make_table_02_tplyr} does not currently support footnote annotations
-\item \code{make_table_02_tplyr} does not currently support \code{alt_counts_df} when \code{tplyr_raw = TRUE}.
+\item Columns are split by arm. Overall population column is excluded by default (see \code{lbl_overall} argument).
+\item All-zero rows are not removed by default (see \code{prune_0} argument).
 }
 }
 \examples{
@@ -129,16 +89,27 @@ adsl <- random.cdisc.data::cadsl \%>\%
     AGE >= 65 ~ ">=65",
     AGE >= 65 & AGE < 75 ~ ">=65 to <75",
     AGE >= 75 ~ ">=75"
-  )) \%>\% formatters::with_label("Age Group, years")) \%>\%
-  formatters::var_relabel(AGE = "Age, years")
+  )))
 
 tbl <- make_table_02(df = adsl)
 tbl
 
-tbl <- make_table_02_tplyr(df = adsl)
-tbl
+adsl <- random.cdisc.data::cadsl
 
-tbl <- make_table_02_gtsum(df = adsl)
-tbl
 
+# rtables table ----------------
+adsl <- random.cdisc.data::cadsl \%>\%
+  mutate(AGEGR1 = as.factor(case_when(
+    AGE >= 17 & AGE < 65 ~ ">=17 to <65",
+    AGE >= 65 ~ ">=65",
+    AGE >= 65 & AGE < 75 ~ ">=65 to <75",
+    AGE >= 75 ~ ">=75"
+  )))
+tbl_rtables <- make_table_02_rtables(df = adsl)
+tbl_rtables
+}
+\seealso{
+\code{\link{make_table_02}}
+
+\code{\link[=make_table_02]{make_table_02()}}
 }

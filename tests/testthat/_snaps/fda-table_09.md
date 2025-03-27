@@ -1,4 +1,4 @@
-# Table 09 generation works with default values
+# Table 09 (rtables) generation works with default values
 
     Code
       res
@@ -15,7 +15,7 @@
       cl D                        50 (37.3%)    42 (31.3%)      51 (38.6%)  
         dcd D.1.1.1.1             50 (37.3%)    42 (31.3%)      51 (38.6%)  
 
-# Table 09 generation works with custom values
+# Table 09 (rtables) generation works with custom values
 
     Code
       res
@@ -48,7 +48,7 @@
       n, number of patients with adverse event; PT, preferred term; SAE, serious adverse event;
       SOC, System Organ Class
 
-# Table 09 (gt) generation works with risk difference column
+# Table 09 generation works with risk difference column
 
     Code
       res
@@ -199,7 +199,7 @@
       tbl_out %>% gt::extract_body()
     Output
       # A tibble: 8 x 4
-        row_label1    `var1_A: Drug X` `var1_B: Placebo` `var1_C: Combination`
+        `::rowname::` `var1_A: Drug X` `var1_B: Placebo` `var1_C: Combination`
         <chr>         <chr>            <chr>             <chr>                
       1 Any SAE       "104 (100.0%)"   "101 (100.0%)"    " 99 (100.0%)"       
       2 cl A          " 48 (46.2%)"    " 48 (47.5%)"     " 50 (50.5%)"        
@@ -209,4 +209,61 @@
       6 dcd B.2.2.3.1 " 48 (46.2%)"    " 54 (53.5%)"     " 51 (51.5%)"        
       7 cl D          " 50 (48.1%)"    " 42 (41.6%)"     " 51 (51.5%)"        
       8 dcd D.1.1.1.1 " 50 (48.1%)"    " 42 (41.6%)"     " 51 (51.5%)"        
+
+# Table 09 generation works with gtsummary with default values
+
+    Code
+      as.data.frame(res$table)
+    Output
+        **Primary System Organ Class**  \n    **Dictionary-Derived Term** **A: Drug X**  \nN = 134 **B: Placebo**  \nN = 134 **C: Combination**  \nN = 132
+      1                                                           Any SAE                104 (78%)                 101 (75%)                      99 (75%)
+      2                                                              cl A                 48 (36%)                  48 (36%)                      50 (38%)
+      3                                                     dcd A.1.1.1.2                 48 (36%)                  48 (36%)                      50 (38%)
+      4                                                              cl B                 79 (59%)                  78 (58%)                      76 (58%)
+      5                                                     dcd B.1.1.1.1                 47 (35%)                  49 (37%)                      43 (33%)
+      6                                                     dcd B.2.2.3.1                 48 (36%)                  54 (40%)                      51 (39%)
+      7                                                              cl D                 50 (37%)                  42 (31%)                      51 (39%)
+      8                                                     dcd D.1.1.1.1                 50 (37%)                  42 (31%)                      51 (39%)
+
+---
+
+    Code
+      res$ard
+    Output
+      $tbl_hierarchical
+    Message
+      {cards} data frame: 81 x 15
+    Output
+         group1 group1_level group2 group2_level                     variable variable_level stat_name stat_label  stat stat_fmt
+      1     ARM    A: Drug X   <NA>                                     AESOC           cl A         n          n    48       48
+      2     ARM    A: Drug X   <NA>                                     AESOC           cl A         N          N   134      134
+      3     ARM    A: Drug X   <NA>                                     AESOC           cl A         p          % 0.358       36
+      4     ARM    A: Drug X   <NA>                                     AESOC           cl B         n          n    79       79
+      5     ARM    A: Drug X   <NA>                                     AESOC           cl B         N          N   134      134
+      6     ARM    A: Drug X   <NA>                                     AESOC           cl B         p          %  0.59       59
+      7     ARM    A: Drug X   <NA>                                     AESOC           cl D         n          n    50       50
+      8     ARM    A: Drug X   <NA>                                     AESOC           cl D         N          N   134      134
+      9     ARM    A: Drug X   <NA>                                     AESOC           cl D         p          % 0.373       37
+      10    ARM    A: Drug X   <NA>              ..ard_hierarchical_overall..           TRUE         n          n   104      104
+    Message
+      i 71 more rows
+      i Use `print(n = ...)` to see more rows
+      i 5 more variables: context, fmt_fn, warning, error, gts_column
+    Output
+      
+
+# Table 09 generation works with gtsummary with custom values
+
+    Code
+      as.data.frame(res)
+    Output
+        **Primary System Organ Class**  \n    **Dictionary-Derived Term** **A: Drug X**  \nN = 134 **B: Placebo**  \nN = 134 **C: Combination**  \nN = 132
+      1                                                           Any SAE                104 (78%)                 101 (75%)                      99 (75%)
+      2                                                              cl A                 48 (36%)                  48 (36%)                      50 (38%)
+      3                                                     dcd A.1.1.1.2                 48 (36%)                  48 (36%)                      50 (38%)
+      4                                                              cl B                 79 (59%)                  78 (58%)                      76 (58%)
+      5                                                     dcd B.1.1.1.1                 47 (35%)                  49 (37%)                      43 (33%)
+      6                                                     dcd B.2.2.3.1                 48 (36%)                  54 (40%)                      51 (39%)
+      7                                                              cl D                 50 (37%)                  42 (31%)                      51 (39%)
+      8                                                     dcd D.1.1.1.1                 50 (37%)                  42 (31%)                      51 (39%)
 
