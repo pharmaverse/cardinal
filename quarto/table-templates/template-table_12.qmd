@@ -1,7 +1,6 @@
 ---
 title: FDA Table 12
 subtitle: Patients With Adverse Events Leading to Treatment Discontinuation by System Organ Class and Preferred Term, Safety Population, Pooled Analyses
-format: html
 ---
 
 ::: panel-tabset
@@ -9,11 +8,93 @@ format: html
 
 ![](../assets/images/screenshots/table_12.png){fig-align="center"}
 
-## rtables/tern Table
+## gtsummary Table
 
-```{r tbl, message=FALSE, warning=FALSE}
+<details>
+  <summary>gtsummary Table Setup</summary>
+```{r tbl2, eval=FALSE, echo=TRUE}
 # Load Libraries & Data
-library(falcon)
+library(cardinal)
+
+adsl <- random.cdisc.data::cadsl
+adae <- random.cdisc.data::cadae
+
+# Pre-Processing - Ensure required variable DCSREAS exist in adae
+adae$DCSREAS[is.na(adae$DCSREAS)] <- "ADVERSE EVENT"
+
+# Select Preferred Term Variable
+pref_var <- "AEDECOD"
+
+# Output Table
+make_table_12(df = adae, denominator = adsl, return_ard = FALSE, pref_var = pref_var)
+```
+</details>
+
+```{r tbl2, message=FALSE, warning=FALSE, eval=TRUE}
+```
+
+<details>
+  <summary>Function Details</summary>
+### `make_table_12()`
+
+------------------------------------------------------------------------
+
+Required variables:
+
+-   **`df`**: `USUBJID`, `AEBODSYS`, `DCSREAS`, and the variables specified by `pref_var`, `arm_var`, and `saffl_var`.
+-   **`alt_counts_df`** (if specified): `USUBJID` and the variables specified by `arm_var` and `saffl_var`.
+
+|                 |                                                                                                          |               |
+|-----------------|----------------------------------------------------------------------------------------------------------|---------------|
+| **Argument**    | **Description**                                                                                          | **Default**   |
+| `df`            | (`data.frame`) Dataset (typically ADSL) required to build table.                                         | *No default*  |
+| `return_ard`    | (`flag`) Whether an ARD should be returned.                                                              | `TRUE`        |
+| `denominator`   | (`character`) Alternative dataset used only to calculate column counts.                                  | `NULL`        |
+| `id_var`        | (`character`) Identifier variable used to count the participants within each flag.                       | `"USUBJID"`   |
+| `arm_var`       | (`character`) Arm variable used to split table into columns.                                             | `"ARM"`       |
+| `saffl_var`     | (`character`) Flag variable used to indicate inclusion in safety population.                             | `"SAFFL"`     |
+| `pref_var`      | (`character`) Name of the preferred term variable from adae to include in the table.                     | `"AEDECOD"`   |
+
+Source code for this function is available [here](https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_12.R).
+</details>
+
+## ARD
+
+<details>
+  <summary>ARD Setup</summary>
+```{r tbl1, echo=TRUE, message=FALSE, warning=FALSE, results='hide'}
+# Load Libraries & Data
+library(cardinal)
+
+adsl <- random.cdisc.data::cadsl
+adae <- random.cdisc.data::cadae
+
+# Pre-Processing - Ensure required variable DCSREAS exist in adae
+adae$DCSREAS[is.na(adae$DCSREAS)] <- "ADVERSE EVENT"
+
+# Select Preferred Term Variable
+pref_var <- "AEDECOD"
+
+# Create Table & ARD
+result <- make_table_12(df = adae, denominator = adsl, pref_var = pref_var)
+
+# Output ARD
+result$ard
+```
+</details>
+
+```{r tbl1-print, echo=FALSE}
+withr::local_options(width = 9999)
+print(result$ard, columns = "all", n = Inf)
+```
+
+## rtables Table
+
+<details>
+  <summary>rtables Table Setup</summary>
+```{r tbl3, eval=FALSE, echo=TRUE}
+# Load Libraries & Data
+library(cardinal)
 
 adsl <- random.cdisc.data::cadsl
 adae <- random.cdisc.data::cadae
@@ -26,56 +107,57 @@ pref_var <- "AEDECOD"
 
 # Output Table
 risk_diff <- list(arm_x = "B: Placebo", arm_y = "A: Drug X") # optional
-make_table_12(adae = adae, alt_counts_df = adsl, pref_var = pref_var, risk_diff = risk_diff)
+make_table_12_rtables(df = adae, alt_counts_df = adsl, pref_var = pref_var, risk_diff = risk_diff)
+```
+</details>
+
+```{r tbl3, message=FALSE, warning=FALSE, eval=TRUE}
 ```
 
-## rtables/tern Table Setup
-
-```{r tbl, eval=FALSE, echo=TRUE}
-```
-
-## Function Details
-
-### `make_table_12()`
+<details>
+  <summary>Function Details</summary>
+### `make_table_12_rtables()`
 
 ------------------------------------------------------------------------
 
 Required variables:
 
--   **`adae`**: `USUBJID`, `AEBODSYS`, `DCSREAS`, and the variables specified by `pref_var`, `arm_var`, and `saffl_var`.
+-   **`df`**: `USUBJID`, `AEBODSYS`, `DCSREAS`, and the variables specified by `pref_var`, `arm_var`, and `saffl_var`.
 -   **`alt_counts_df`** (if specified): `USUBJID` and the variables specified by `arm_var` and `saffl_var`.
 
-+------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
-| Argument         | Description                                                                                                                                                                                                                                                  | Default      |
-+:=================+:=============================================================================================================================================================================================================================================================+:=============+
-| `adae`           | (`data.frame`) Dataset (typically ADAE) required to build table.                                                                                                                                                                                             | *No default* |
-+------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
-| `alt_counts_df`  | (`character`) Alternative dataset used only to calculate column counts.                                                                                                                                                                                      | `NULL`       |
-+------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
-| `show_colcounts` | (`flag`) Whether column counts should be printed.                                                                                                                                                                                                            | `TRUE`       |
-+------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
-| `arm_var`        | (`character`) Arm variable used to split table into columns.                                                                                                                                                                                                 | `"ARM"`      |
-+------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
-| `saffl_var`      | (`character`) Flag variable used to indicate inclusion in safety population.                                                                                                                                                                                 | `"SAFFL"`    |
-+------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
-| `pref_var`       | (`character`) Preferred term variable from `adae` to include in the table.                                                                                                                                                                                   | `"AEDECOD"`  |
-+------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
-| `lbl_overall`    | (`character`) If specified, an overall column will be added to the table with the given value as the column label.                                                                                                                                           | `NULL`       |
-+------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
-| `risk_diff`      | (named `list`) List of settings to apply to add a risk difference column to the table. See [tern::add_riskdiff()](https://insightsengineering.github.io/tern/main/reference/add_riskdiff.html) for more details. List should contain the following elements: | `NULL`       |
-|                  |                                                                                                                                                                                                                                                              |              |
-|                  | -   `arm_x`: (required) the name of reference arm.                                                                                                                                                                                                           |              |
-|                  |                                                                                                                                                                                                                                                              |              |
-|                  | -   `arm_y`: (required) the name of the arm to compare to the reference arm.                                                                                                                                                                                 |              |
-|                  |                                                                                                                                                                                                                                                              |              |
-|                  | -   `col_label`: (optional) label to use for the risk difference column. Defaults to `"Risk Difference (%) (95% CI)"`.                                                                                                                                       |              |
-|                  |                                                                                                                                                                                                                                                              |              |
-|                  | -   `pct`: (optional) whether the output should be returned as percentages. Defaults to `TRUE`.                                                                                                                                                              |              |
-+------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
-| `prune_0`        | (`flag`) Whether all-zero rows should be removed from the table.                                                                                                                                                                                             | `FALSE`      |
-+------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
-| `annotations`    | (named `list` of `character`) List of annotations to add to the table. Valid annotation types are `title`, `subtitles`, `main_footer`, and `prov_footer.` Each name-value pair should use the annotation type as name and the desired string as value.       | `NULL`       |
-+------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
++------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
+| **Argument**     | **Description**                                                                                                                                                                                                                                                | **Default**  |
++------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
+| `adae`           | (`data.frame`) Dataset (typically ADAE) required to build table.                                                                                                                                                                                               | *No default* |
++------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
+| `alt_counts_df`  | (`character`) Alternative dataset used only to calculate column counts.                                                                                                                                                                                        | `NULL`       |
++------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
+| `show_colcounts` | (`flag`) Whether column counts should be printed.                                                                                                                                                                                                              | `TRUE`       |
++------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
+| `arm_var`        | (`character`) Arm variable used to split table into columns.                                                                                                                                                                                                   | `"ARM"`      |
++------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
+| `saffl_var`      | (`character`) Flag variable used to indicate inclusion in safety population.                                                                                                                                                                                   | `"SAFFL"`    |
++------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
+| `pref_var`       | (`character`) Preferred term variable from `adae` to include in the table.                                                                                                                                                                                     | `"AEDECOD"`  |
++------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
+| `lbl_overall`    | (`character`) If specified, an overall column will be added to the table with the given value as the column label.                                                                                                                                             | `NULL`       |
++------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
+| `risk_diff`      | (named `list`) List of settings to apply to add a risk difference column to the table. See [`tern::add_riskdiff()`](https://insightsengineering.github.io/tern/main/reference/add_riskdiff.html) for more details. List should contain the following elements: | `NULL`       |
+|                  |                                                                                                                                                                                                                                                                |              |
+|                  | -   `arm_x`: (required) the name of reference arm.                                                                                                                                                                                                             |              |
+|                  |                                                                                                                                                                                                                                                                |              |
+|                  | -   `arm_y`: (required) the name of the arm to compare to the reference arm.                                                                                                                                                                                   |              |
+|                  |                                                                                                                                                                                                                                                                |              |
+|                  | -   `col_label`: (optional) label to use for the risk difference column. Defaults to `"Risk Difference (%) (95% CI)"`.                                                                                                                                         |              |
+|                  |                                                                                                                                                                                                                                                                |              |
+|                  | -   `pct`: (optional) whether the output should be returned as percentages. Defaults to `TRUE`.                                                                                                                                                                |              |
++------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
+| `prune_0`        | (`flag`) Whether all-zero rows should be removed from the table.                                                                                                                                                                                               | `FALSE`      |
++------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
+| `annotations`    | (named `list` of `character`) List of annotations to add to the table. Valid annotation types are `title`, `subtitles`, `main_footer`, and `prov_footer.` Each name-value pair should use the annotation type as name and the desired string as value.         | `NULL`       |
++------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
 
-Source code for this function is available [here](https://github.com/pharmaverse/falcon/blob/main/R/fda-table_12.R).
+Source code for this function is available [here](https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_12.R).
+</details>
+
 :::

@@ -44,20 +44,19 @@ jobs:
     name: Quarto Docs 📕
     runs-on: ubuntu-latest
     container:
-      image: rocker/verse:4.3.0
+      image: rocker/verse:4.4.0
     permissions:
       contents: write
     steps:
       - name: Check out repository 🛎️
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4.1.1
 
       - name: Run Staged dependencies 🎦
-        uses: insightsengineering/staged-dependencies-action@fix-remotes-self-install
+        uses: insightsengineering/staged-dependencies-action@v1
         env:
           GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
         with:
           enable-check: false
-          run-system-dependencies: true
           direction: upstream
 
       - name: Install package 📦
@@ -69,7 +68,7 @@ jobs:
 
       - name: Upload Docs ⬆️
         if: github.event_name != 'push'
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: site
           path: ./_site

@@ -3,11 +3,11 @@
 #'
 #' @inheritParams argument_convention
 #'
-#' @name make_table_09
+#' @name make_table_09_rtables
 NULL
 
 
-#' @describeIn make_table_09 Create FDA table 9 using functions from `rtables` and `tern`.
+#' @describeIn make_table_09_rtables Create FDA table 9 using functions from `rtables` and `tern`.
 #'
 #' @details
 #' * `adae` must contain `AESER`, `AESOC`, and the variables specified by `pref_var`, `id_var`, `arm_var`,
@@ -20,7 +20,7 @@ NULL
 #' * All-zero rows are removed by default (see `prune_0` argument).
 #'
 #' @return
-#' * `make_table_09` returns an `rtables` table object.
+#' * `make_table_09_rtables` returns an `rtables` table object.
 #'
 #' @return An `rtable` object.
 #'
@@ -28,22 +28,22 @@ NULL
 #' adsl <- random.cdisc.data::cadsl
 #' adae <- random.cdisc.data::cadae
 #'
-#' tbl <- make_table_09(adae = adae, alt_counts_df = adsl)
+#' tbl <- make_table_09_rtables(adae = adae, alt_counts_df = adsl)
 #' tbl
 #'
 #' @export
-make_table_09 <- function(adae,
-                          alt_counts_df = NULL,
-                          show_colcounts = TRUE,
-                          id_var = "USUBJID",
-                          arm_var = "ARM",
-                          saffl_var = "SAFFL",
-                          pref_var = "AEDECOD",
-                          lbl_pref_var = formatters::var_labels(adae, fill = TRUE)[pref_var],
-                          lbl_overall = NULL,
-                          risk_diff = NULL,
-                          prune_0 = TRUE,
-                          annotations = NULL) {
+make_table_09_rtables <- function(adae,
+                                  alt_counts_df = NULL,
+                                  show_colcounts = TRUE,
+                                  id_var = "USUBJID",
+                                  arm_var = "ARM",
+                                  saffl_var = "SAFFL",
+                                  pref_var = "AEDECOD",
+                                  lbl_pref_var = formatters::var_labels(adae, fill = TRUE)[pref_var],
+                                  lbl_overall = NULL,
+                                  risk_diff = NULL,
+                                  prune_0 = TRUE,
+                                  annotations = NULL) {
   assert_subset(c("AESER", "AESOC", arm_var, id_var, saffl_var, pref_var), names(adae))
   assert_flag_variables(adae, saffl_var)
 
@@ -250,13 +250,13 @@ make_table_09_tplyr <- function(
   if (add_rd_col) {
     if (TRUE) {
       warning("Risk difference is currently not supported for this function.") # due to {Tplyr} issue
-    } else { # park code until risk difference issue of {Tplyr} is fixed
+    } else { # nocov start - park code until risk difference issue of {Tplyr} is fixed
       layer1 <- do.call(Tplyr::add_risk_diff, args = append(list(layer = layer1), risk_diff_pairs))
       layer2 <- do.call(Tplyr::add_risk_diff, args = append(list(layer = layer2), risk_diff_pairs))
 
       rd_part <- sapply(risk_diff_pairs, function(pair) paste("|RD:", paste0(pair, collapse = " - ")))
       header_string <- paste0(header_string, paste0(rd_part, collapse = ""))
-    }
+    } # nocov end
   }
   # Build table
   table <- structure %>%
@@ -682,4 +682,124 @@ calculate_riskdiff <- function(x, y, n_x, n_y) {
     conf_int <- format(pt$conf.int, digits = 2, nsmall = 2)
     paste0(val, " (", conf_int[[1]], ", ", conf_int[[2]], ")")
   })
+}
+
+
+
+#' Engine-Specific Functions: Table 09
+#'
+#' The table engine used by each engine-specific function is identified by its suffix.
+#'
+#' @inheritParams argument_convention
+#'
+#' @return
+#' * `make_table_09_gtsummary()` returns a `gtsummary` object.
+#'
+#' @seealso [make_table_09()]
+#'
+#' @export
+#'
+#' @examples
+#' adsl <- random.cdisc.data::cadsl
+#' adae <- random.cdisc.data::cadae
+#'
+#' tbl_gtsummary <- make_table_09_gtsummary(df = adae, denominator = adsl)
+#' tbl_gtsummary
+make_table_09_gtsummary <- function(
+    df,
+    denominator = NULL,
+    saffl_var = "SAFFL",
+    ser_var = "AESER",
+    arm_var = "ARM",
+    pref_var = "AEDECOD",
+    id_var = "USUBJID",
+    soc_var = "AESOC",
+    lbl_overall = NULL) {
+  assert_data_frame(df)
+  assert_subset(c(saffl_var, id_var, ser_var, soc_var, arm_var, pref_var), names(df))
+  assert_flag_variables(df, saffl_var)
+  assert_factor(df[[arm_var]])
+
+  if (!is.null(denominator)) {
+    assert_data_frame(denominator)
+    assert_subset(c(id_var, arm_var), names(denominator))
+  }
+
+  if (is.null(denominator)) {
+    denominator <- df
+  }
+
+  df <- df %>%
+    dplyr::filter(.data[[saffl_var]] == "Y", .data[[ser_var]] == "Y")
+
+  tbl <- df |>
+    tbl_hierarchical(
+      variables = all_of(c(soc_var, pref_var)),
+      by = all_of(arm_var),
+      id = all_of(id_var),
+      denominator = denominator,
+      overall_row = TRUE,
+      label = "..ard_hierarchical_overall.." ~ "Any SAE"
+    )
+  if (!is.null(lbl_overall)) {
+    total <- df |>
+      tbl_hierarchical(
+        variables = all_of(c(soc_var, pref_var)),
+        id = id_var,
+        denominator = denominator,
+        overall_row = TRUE
+      )
+
+    tbl <- tbl_merge(list(tbl, total), tab_spanner = FALSE)
+  }
+
+
+  return(tbl)
+}
+
+
+#' FDA Table 9: Patients With Serious Adverse Events by System Organ Class and Preferred Term,
+#'   Safety Population, Pooled Analyses
+#'
+#' @inheritParams argument_convention
+#'
+#' @return A `gtsummary` table and, if `return_ard = TRUE`, an ARD.
+#'   If `return_ard = TRUE`, they will be returned as a list with named elements `table` and `ard`.
+#' @export
+#'
+#' @examples
+#' adsl <- random.cdisc.data::cadsl
+#' adae <- random.cdisc.data::cadae
+#'
+#' tbl <- make_table_09(df = adae, denominator = adsl)
+#' tbl
+make_table_09 <- function(
+    df,
+    denominator = NULL,
+    return_ard = TRUE,
+    id_var = "USUBJID",
+    arm_var = "ARM",
+    saffl_var = "SAFFL",
+    ser_var = "AESER",
+    soc_var = "AESOC",
+    pref_var = "AEDECOD",
+    lbl_overall = NULL) {
+  tbl <- make_table_09_gtsummary(
+    df = df,
+    denominator = denominator,
+    saffl_var = saffl_var,
+    ser_var = ser_var,
+    arm_var = arm_var,
+    pref_var = pref_var,
+    id_var = id_var,
+    soc_var = soc_var,
+    lbl_overall = lbl_overall
+  )
+
+  if (return_ard) {
+    ard <- gather_ard(tbl)
+    return(list(table = tbl, ard = ard))
+  } else {
+    return(tbl)
+  }
 }
