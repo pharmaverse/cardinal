@@ -24,16 +24,16 @@ make_table_08(
 
 \item{arm_var}{(\code{character})\cr Name of the treatment arm variable used to split table into columns.}
 
-\item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
+\item{id_var}{(\code{character})\cr Name of the unique subject identifiers variable.}
 
-\item{saffl_var}{(\code{character})\cr flag variable used to indicate inclusion in safety population.}
+\item{saffl_var}{(\code{character})\cr Name of the safety flag variable which must contain at least "Y" for "Yes".}
 
 \item{dth_vars}{(\code{vector} of \code{character})\cr additional death variables from \code{adae} to include in the table.}
 
 \item{lbl_dth_vars}{(\code{vector} of \code{character})\cr labels corresponding to variables in \code{dth_vars} to print
 in the table. Labels should be ordered according to the order of variables in \code{dth_vars}.}
 
-\item{na_level}{(\code{character})\cr string to represent missing values.}
+\item{na_level}{(\code{character})\cr String to represent missing values.}
 
 \item{annotations}{(named \code{list} of \code{character})\cr list of annotations to add to the table. Valid
 annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should

@@ -32,11 +32,11 @@ make_table_38(
 
 \item{show_colcounts}{(\code{flag})\cr Whether column counts should be printed. Boolean.}
 
-\item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
+\item{id_var}{(\code{character})\cr Name of the unique subject identifiers variable.}
 
 \item{arm_var}{(\code{character})\cr Name of the treatment arm variable used to split table into columns.}
 
-\item{saffl_var}{(\code{character})\cr flag variable used to indicate inclusion in safety population.}
+\item{saffl_var}{(\code{character})\cr Name of the safety flag variable which must contain at least "Y" for "Yes".}
 
 \item{trtemfl_var}{(\code{character})\cr flag variable used to identify Treatment-emergent AE.}
 
@@ -48,10 +48,10 @@ make_table_38(
 
 \item{pref_var}{(\code{character})\cr Name of the preferred term variable from \code{adae} to include in the table.}
 
-\item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
+\item{lbl_overall}{(\code{character})\cr Optional. If specified, an overall column will be added to the table with
 the given value as the column label.}
 
-\item{lbl_pref_var}{(\code{character})\cr label corresponding to preferred term variable \code{pref_var} to print in the table.}
+\item{lbl_pref_var}{(\code{character})\cr Label corresponding to preferred term variable \code{pref_var} to print in the table.}
 
 \item{risk_diff}{(named \code{list})\cr list of settings to apply to add one or more risk difference columns to the table.
 Defaults to \code{NULL} (no risk difference column added). See \code{\link[tern:add_riskdiff]{tern::add_riskdiff()}} for more details. List should
@@ -68,7 +68,7 @@ be included in the column labels by default. The length of \code{col_label} must
 
 \item{prune_0}{(\code{flag})\cr Whether all-zero rows should be removed from the table. Boolean.}
 
-\item{na_level}{(\code{character})\cr string to represent missing values.}
+\item{na_level}{(\code{character})\cr String to represent missing values.}
 
 \item{annotations}{(named \code{list} of \code{character})\cr list of annotations to add to the table. Valid
 annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
