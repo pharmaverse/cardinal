@@ -81,6 +81,8 @@ For more information on the `make_table_02` function and parameters you can use 
 * [`rtables`](https://insightsengineering.github.io/rtables/main/) - table engine used for standard tables.
 * [`rlistings`](https://insightsengineering.github.io/rlistings/main/) - listing engine used for standard listings.
 * [`gtsummary`](https://www.danieldsjoberg.com/gtsummary/) - table functions used to build select non-standard tables.
+* [`cards`](https://insightsengineering.github.io/cards/) - ARD creation functions.
+* [`cardx`](https://insightsengineering.github.io/cardx/) - Additional ARD creation functions.
 * [`Tplyr`](https://github.com/atorus-research/Tplyr) - table functions used to build select non-standard tables.
 
 ## Contact
