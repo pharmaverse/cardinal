@@ -27,14 +27,14 @@ make_table_04(
 
 \item{arm_var}{(\code{character})\cr Name of the treatment arm variable used to split table into columns.}
 
-\item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
+\item{id_var}{(\code{character})\cr Name of the unique subject identifiers variable.}
 
 \item{pop_vars}{(\code{vector} of \code{character})\cr population variables from \code{df} to include in the table.}
 
 \item{lbl_pop_vars}{(\code{vector} of \code{character})\cr labels corresponding to variables in \code{pop_vars} to print
 in the table. Labels should be ordered according to the order of variables in \code{pop_vars}.}
 
-\item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
+\item{lbl_overall}{(\code{character})\cr Optional. If specified, an overall column will be added to the table with
 the given value as the column label.}
 
 \item{prune_0}{(\code{flag})\cr Whether all-zero rows should be removed from the table. Boolean.}

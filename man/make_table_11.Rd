@@ -25,11 +25,11 @@ make_table_11(
 
 \item{return_ard}{(\code{flag})\cr whether an ARD should be returned. Defaults to \code{TRUE}.}
 
-\item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
+\item{id_var}{(\code{character})\cr Name of the unique subject identifiers variable.}
 
 \item{arm_var}{(\code{character})\cr Name of the treatment arm variable used to split table into columns.}
 
-\item{saffl_var}{(\code{character})\cr flag variable used to indicate inclusion in safety population.}
+\item{saffl_var}{(\code{character})\cr Name of the safety flag variable which must contain at least "Y" for "Yes".}
 
 \item{fmqsc_var}{(\code{character})\cr FMQ scope variable to use in table.}
 
@@ -37,7 +37,7 @@ make_table_11(
 
 \item{fmq_scope}{(\code{character})\cr FMQ scope ("NARROW" or "BROAD") to output in table.}
 
-\item{na_level}{(\code{character})\cr string to represent missing values.}
+\item{na_level}{(\code{character})\cr String to represent missing values.}
 }
 \value{
 A \code{gtsummary} table and, if \code{return_ard = TRUE}, an ARD.
