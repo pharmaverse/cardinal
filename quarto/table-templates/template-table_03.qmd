@@ -1,7 +1,6 @@
 ---
 title: FDA Table 3
 subtitle: Patient Screening and Enrollment, Trials A and B
-format: html
 ---
 
 ::: panel-tabset
@@ -9,54 +8,157 @@ format: html
 
 ![](../assets/images/screenshots/table_03.png){fig-align="center"}
 
-## rtables Table
+## gtsummary Table
 
-```{r tbl, message=FALSE, warning=FALSE}
+<details>
+  <summary>gtsummary Table Setup</summary>
+```{r tbl_gtsummary, eval=FALSE, echo=TRUE}
 # Load Libraries & Data
-library(dplyr)
 library(cardinal)
+library(dplyr)
 
 adsl <- random.cdisc.data::cadsl
 
-# Pre-Processing - Add all required screening variables are in df
 set.seed(1)
-adsl <- random.cdisc.data::cadsl
 adsl$RANDDT[sample(seq_len(nrow(adsl)), 100)] <- NA
+scrnfail_reas_lvls <- c(
+  "Inclusion/exclusion criteria not met", "Patient noncompliance", "Consent withdrawn", "Other"
+)
 adsl <- adsl %>%
   mutate(
     ENRLDT = RANDDT,
     SCRNFL = "Y",
-    SCRNFRS = factor(sample(
-      c("Inclusion/exclusion criteria not met", "Patient noncompliance", "Consent withdrawn", "Other"),
-      size = nrow(adsl), replace = TRUE
-    ), levels = c("Inclusion/exclusion criteria not met", "Patient noncompliance", "Consent withdrawn", "Other")),
+    SCRNFRS = factor(sample(scrnfail_reas_lvls, size = nrow(adsl), replace = TRUE),
+                     levels = scrnfail_reas_lvls
+    ),
     SCRNFAILFL = ifelse(is.na(ENRLDT), "Y", "N")
   )
 adsl$SCRNFRS[adsl$SCRNFL == "N" | !is.na(adsl$ENRLDT)] <- NA
 
 # Output Table
-make_table_03(df = adsl, scrnfl_var = "SCRNFL", scrnfailfl_var = "SCRNFAILFL", scrnfail_var = "SCRNFRS")
+make_table_03(df = adsl, scrnfl_var = "SCRNFL", scrnfailfl_var = "SCRNFAILFL", scrnfail_var = "SCRNFRS", return_ard = FALSE)
+```
+</details>
+
+```{r tbl_gtsummary, message=FALSE, warning=FALSE, eval=TRUE}
 ```
 
-## rtables Table Setup
-
-```{r tbl, eval=FALSE, echo=TRUE}
-```
-
-## Function Details
-
-### `make_table_3()`
+<details>
+  <summary>Function Details</summary>
+### `make_table_03()`
 
 ------------------------------------------------------------------------
 
 Required variables:
 
--   **`adsl`**: `USUBJID`, `ENRLDT`, `RANDDT`, and the variables specified by `arm_var`, `scrnfl_var`, `scrnfailfl_var`, and `scrnfail_var`.
+-   **`df`**: `USUBJID`, `ENRLDT`, `RANDDT`, and the variables specified by `arm_var`, `scrnfl_var`, `scrnfailfl_var`, and `scrnfail_var`.
+-   **`denominator`** (if specified): `USUBJID`, and the variable specified by `arm_var`.
+
+|                  |                                                                                    |              |
+|------------------|------------------------------------------------------------------------------------|--------------|
+| **Argument**     | **Description**                                                                    | **Default**  |
+| `df`             | (`data.frame`) Dataset (typically ADSL) required to build table.                   | *No default* |
+| `return_ard`     | (`flag`) Whether an ARD should be returned.                                        | `TRUE`       |
+| `denominator`    | (`character`) Alternative dataset used only to calculate column counts.            | `NULL`       |
+| `arm_var`        | (`character`) Arm variable used to split table into columns.                       | `"ARM"`      |
+| `id_var`         | (`character`) Identifier variable used to count the participants within each flag. | `"USUBJID"`  |
+| `scrnfl_var`     | (`character`) Variable from `df` that indicates whether patients were screened.    | *No default* |
+| `scrnfailfl_var` | (`character`) Variable from `df` that indicates screening failure.                 | *No default* |
+| `scrnfail_var`   | (`character`) Variable from `df` that contains reasons for screening failure.      | *No default* |
+
+Source code for this function is available [here](https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_03.R).
+</details>
+
+## ARD
+
+<details>
+  <summary>ARD Setup</summary>
+```{r tbl_ard, echo=TRUE, message=FALSE, warning=FALSE, results='hide'}
+# Load Libraries & Data
+library(cardinal)
+library(dplyr)
+
+adsl <- random.cdisc.data::cadsl
+
+set.seed(1)
+adsl$RANDDT[sample(seq_len(nrow(adsl)), 100)] <- NA
+scrnfail_reas_lvls <- c(
+  "Inclusion/exclusion criteria not met", "Patient noncompliance", "Consent withdrawn", "Other"
+)
+adsl <- adsl %>%
+  mutate(
+    ENRLDT = RANDDT,
+    SCRNFL = "Y",
+    SCRNFRS = factor(sample(scrnfail_reas_lvls, size = nrow(adsl), replace = TRUE),
+                     levels = scrnfail_reas_lvls
+    ),
+    SCRNFAILFL = ifelse(is.na(ENRLDT), "Y", "N")
+  )
+adsl$SCRNFRS[adsl$SCRNFL == "N" | !is.na(adsl$ENRLDT)] <- NA
+
+# Create Table & ARD
+result <- make_table_03(df = adsl, scrnfl_var = "SCRNFL", scrnfailfl_var = "SCRNFAILFL", scrnfail_var = "SCRNFRS")
+
+# Output ARD
+result$ard
+```
+</details>
+
+```{r tbl_ard_print, echo=FALSE}
+options(width = 9999)
+print(result$ard, columns = "all", n = Inf)
+```
+
+## rtables Table
+
+<details>
+  <summary>rtables Table Setup</summary>
+```{r tbl_rtables, eval=FALSE, echo=TRUE}
+# Load Libraries & Data
+library(cardinal)
+library(dplyr)
+
+adsl <- random.cdisc.data::cadsl
+
+set.seed(1)
+adsl$RANDDT[sample(seq_len(nrow(adsl)), 100)] <- NA
+scrnfail_reas_lvls <- c(
+  "Inclusion/exclusion criteria not met", "Patient noncompliance", "Consent withdrawn", "Other"
+)
+adsl <- adsl %>%
+  mutate(
+    ENRLDT = RANDDT,
+    SCRNFL = "Y",
+    SCRNFRS = factor(sample(scrnfail_reas_lvls, size = nrow(adsl), replace = TRUE),
+                     levels = scrnfail_reas_lvls
+    ),
+    SCRNFAILFL = ifelse(is.na(ENRLDT), "Y", "N")
+  )
+adsl$SCRNFRS[adsl$SCRNFL == "N" | !is.na(adsl$ENRLDT)] <- NA
+
+# Output Table
+make_table_03_rtables(df = adsl, scrnfl_var = "SCRNFL", scrnfailfl_var = "SCRNFAILFL", scrnfail_var = "SCRNFRS")
+```
+</details>
+
+```{r tbl_rtables, message=FALSE, warning=FALSE, eval=TRUE}
+```
+
+<details>
+  <summary>Function Details</summary>
+### `make_table_03_rtables()`
+
+------------------------------------------------------------------------
+
+Required variables:
+
+-   **`df`**: `USUBJID`, `ENRLDT`, `RANDDT`, and the variables specified by `arm_var`, `scrnfl_var`, `scrnfailfl_var`, and `scrnfail_var`.
 -   **`alt_counts_df`** (if specified): `USUBJID`, and the variable specified by `arm_var`.
 
+|                  |                                                                                                                                                                                                                                                        |              |
+|------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------|
 | **Argument**     | **Description**                                                                                                                                                                                                                                        | **Default**  |
-|:-----------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------|
-| `adsl`           | (`data.frame`) Dataset (typically ADSL) required to build table.                                                                                                                                                                                       | *No default* |
+| `df`             | (`data.frame`) Dataset (typically ADSL) required to build table.                                                                                                                                                                                       | *No default* |
 | `alt_counts_df`  | (`character`) Alternative dataset used only to calculate column counts.                                                                                                                                                                                | `NULL`       |
 | `show_colcounts` | (`flag`) Whether column counts should be printed.                                                                                                                                                                                                      | `FALSE`      |
 | `arm_var`        | (`character`) Arm variable used to split table into columns.                                                                                                                                                                                           | `"ARM"`      |
@@ -68,4 +170,6 @@ Required variables:
 | `annotations`    | (named `list` of `character`) List of annotations to add to the table. Valid annotation types are `title`, `subtitles`, `main_footer`, and `prov_footer.` Each name-value pair should use the annotation type as name and the desired string as value. | `NULL`       |
 
 Source code for this function is available [here](https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_03.R).
+</details>
+
 :::

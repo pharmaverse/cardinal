@@ -68,6 +68,9 @@
 #'      be included in the column labels by default. The length of `col_label` must be equal to the length of `arm_y`.
 #'    * `pct`: (optional) whether the output should be returned as percentages. Defaults to `TRUE`.
 #' @param saffl_var (`character`)\cr flag variable used to indicate inclusion in safety population.
+#' @param scrnfl_var (`character`)\cr variable from `df` that indicates whether patients were screened.
+#' @param scrnfailfl_var (`character`)\cr variable from `df` that indicates screening failure.
+#' @param scrnfail_var (`character`)\cr variable from `df` that contains reasons for screening failure.
 #' @param sex_scope (`character`)\cr Level of `SEX` to output in table.
 #' @param table_engine (`string`)\cr table engine used to generate the table. If `NULL`, no table is returned. If the
 #'   given engine is not available for the table, no table is created and a warning is returned.

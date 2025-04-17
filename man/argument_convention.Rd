@@ -91,6 +91,12 @@ be included in the column labels by default. The length of \code{col_label} must
 
 \item{saffl_var}{(\code{character})\cr flag variable used to indicate inclusion in safety population.}
 
+\item{scrnfl_var}{(\code{character})\cr variable from \code{df} that indicates whether patients were screened.}
+
+\item{scrnfailfl_var}{(\code{character})\cr variable from \code{df} that indicates screening failure.}
+
+\item{scrnfail_var}{(\code{character})\cr variable from \code{df} that contains reasons for screening failure.}
+
 \item{sex_scope}{(\code{character})\cr Level of \code{SEX} to output in table.}
 
 \item{table_engine}{(\code{string})\cr table engine used to generate the table. If \code{NULL}, no table is returned. If the
