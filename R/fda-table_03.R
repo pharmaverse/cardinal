@@ -1,16 +1,20 @@
 #' FDA Table 3: Patient Screening and Enrollment, Trials A and B
 #'
 #' @details
-#' * `df` must contain `ENRLDT`, `RANDDT`, and the variables specified by `id_var`, `arm_var`, `scrnfl_var`, `scrnfailfl_var`, and `scrnfail_var`.
+#' * `df` must contain `ENRLDT`, `RANDDT`, and the variables specified by `id_var`, `arm_var`, `scrnfl_var`,
+#'   `scrnfailfl_var`, and `scrnfail_var`.
 #' * If specified, `denominator` must contain the variables specified by `id_var` and `arm_var`.
-#' * Patients are considered enrolled in they have an enrollment date (`ENRLDT` is not missing), and are considered randomized if they have a randomization date (`RANDDT` is not missing).
-#' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in flag variables are treated as `"N"`.
+#' * Patients are considered enrolled in they have an enrollment date (`ENRLDT` is not missing), and are considered
+#'   randomized if they have a randomization date (`RANDDT` is not missing).
+#' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
+#'   flag variables are treated as `"N"`.
 #' * Numbers in table represent the absolute numbers of patients and fraction of `N`.
 #'
 #' @inheritParams tbl_make_table_03
 #' @inheritParams argument_convention
 #'
-#' @return A `gtsummary` table and, if `return_ard = TRUE`, an ARD. If `return_ard = TRUE`, they will be returned as a list with named elements `table` and `ard`.
+#' @return A `gtsummary` table and, if `return_ard = TRUE`, an ARD. If `return_ard = TRUE`, they will be returned as a
+#'   list with named elements `table` and `ard`.
 #'
 #' @seealso [`tbl_make_table_03`]
 #'
@@ -176,10 +180,13 @@ ard_table_03 <- function(df,
 #' @inheritParams argument_convention
 #'
 #' @details
-#' * `df` must contain `ENRLDT`, `RANDDT`, and the variables specified by `id_var`, `arm_var`, `scrnfl_var`, `scrnfailfl_var`, and `scrnfail_var`.
+#' * `df` must contain `ENRLDT`, `RANDDT`, and the variables specified by `id_var`, `arm_var`, `scrnfl_var`,
+#'   `scrnfailfl_var`, and `scrnfail_var`.
 #' * If specified, `alt_counts_df` must contain the variables specified by `id_var` and `arm_var`.
-#' * Patients are considered enrolled in they have an enrollment date (`ENRLDT` is not missing), and are considered randomized if they have a randomization date (`RANDDT` is not missing).
-#' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in flag variables are treated as `"N"`.
+#' * Patients are considered enrolled in they have an enrollment date (`ENRLDT` is not missing), and are considered
+#'   randomized if they have a randomization date (`RANDDT` is not missing).
+#' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false). Missing values in
+#'   flag variables are treated as `"N"`.
 #' * Numbers in table represent the absolute numbers of patients and fraction of `N`.
 #' * All-zero rows are removed by default (see `prune_0` argument).
 #'
@@ -213,11 +220,13 @@ ard_table_03 <- function(df,
 #' adsl$SCRNFRS[adsl$SCRNFL == "N" | !is.na(adsl$ENRLDT)] <- NA
 #'
 #' # gtsummary table --------------
-#' tbl_gtsummary <- cardinal:::make_table_03_gtsummary(df = adsl, scrnfl_var = "SCRNFL", scrnfailfl_var = "SCRNFAILFL", scrnfail_var = "SCRNFRS")
+#' tbl_gtsummary <- cardinal:::make_table_03_gtsummary(df = adsl, scrnfl_var = "SCRNFL", scrnfailfl_var = "SCRNFAILFL",
+#'   scrnfail_var = "SCRNFRS")
 #' tbl_gtsummary
 #'
 #' # rtables table ----------------
-#' tbl_rtables <- cardinal:::make_table_03_rtables(df = adsl, scrnfl_var = "SCRNFL", scrnfailfl_var = "SCRNFAILFL", scrnfail_var = "SCRNFRS")
+#' tbl_rtables <- cardinal:::make_table_03_rtables(df = adsl, scrnfl_var = "SCRNFL", scrnfailfl_var = "SCRNFAILFL",
+#'   scrnfail_var = "SCRNFRS")
 #' tbl_rtables
 #'
 #' @export
