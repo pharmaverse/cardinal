@@ -6,66 +6,51 @@
 \usage{
 make_table_03(
   df,
-  alt_counts_df = NULL,
-  show_colcounts = FALSE,
+  denominator = NULL,
+  return_ard = TRUE,
   arm_var = "ARM",
   id_var = "USUBJID",
-  scrnfl_var,
-  scrnfailfl_var,
-  scrnfail_var,
-  lbl_overall = NULL,
-  prune_0 = TRUE,
-  annotations = NULL
+  scrnfl_var = "SCRNFL",
+  scrnfailfl_var = "SCRNFAILFL",
+  scrnfail_var = "SCRNFRS"
 )
 }
 \arguments{
 \item{df}{(\code{data.frame})\cr dataset required to build table.}
 
-\item{alt_counts_df}{(\code{character})\cr alternative dataset (typically ADSL) used only to calculate column counts.}
+\item{denominator}{(\code{data.frame})\cr alternative dataset (typically ADSL) used only to calculate denominator counts.}
 
-\item{show_colcounts}{(\code{flag})\cr Whether column counts should be printed. Boolean.}
+\item{return_ard}{(\code{flag})\cr whether an ARD should be returned. Defaults to \code{TRUE}.}
 
 \item{arm_var}{(\code{character})\cr Name of the treatment arm variable used to split table into columns.}
 
 \item{id_var}{(\code{character})\cr Name of the unique subject identifiers variable.}
-
-\item{scrnfl_var}{(\code{character})\cr variable from \code{df} that indicates whether patients were screened.}
-
-\item{scrnfailfl_var}{(\code{character})\cr variable from \code{df} that indicates screening failure.}
-
-\item{scrnfail_var}{(\code{character})\cr variable from \code{df} that contains reasons for screening failure.}
-
-\item{lbl_overall}{(\code{character})\cr Optional. If specified, an overall column will be added to the table with
-the given value as the column label.}
-
-\item{prune_0}{(\code{flag})\cr Whether all-zero rows should be removed from the table. Boolean.}
-
-\item{annotations}{(named \code{list} of \code{character})\cr list of annotations to add to the table. Valid
-annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
-use the annotation type as name and the desired string as value.}
+}
+\value{
+A \code{gtsummary} table and, if \code{return_ard = TRUE}, an ARD. If \code{return_ard = TRUE}, they will be returned as a
+list with named elements \code{table} and \code{ard}.
 }
 \description{
 FDA Table 3: Patient Screening and Enrollment, Trials A and B
 }
 \details{
 \itemize{
-\item \code{adsl} must contain \code{ENRLDT}, \code{RANDDT}, and the variables specified by \code{id_var}, \code{arm_var}, \code{scrnfl_var},
+\item \code{df} must contain \code{ENRLDT}, \code{RANDDT}, and the variables specified by \code{id_var}, \code{arm_var}, \code{scrnfl_var},
 \code{scrnfailfl_var}, and \code{scrnfail_var}.
-\item If specified, \code{alt_counts_df} must contain the variables specified by \code{arm_var} and \code{id_var}.
+\item If specified, \code{denominator} must contain the variables specified by \code{id_var} and \code{arm_var}.
 \item Patients are considered enrolled in they have an enrollment date (\code{ENRLDT} is not missing), and are considered
 randomized if they have a randomization date (\code{RANDDT} is not missing).
 \item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
 flag variables are treated as \code{"N"}.
-\item Columns are split by arm.
 \item Numbers in table represent the absolute numbers of patients and fraction of \code{N}.
-\item All-zero rows are removed by default (see \code{prune_0} argument).
 }
 }
 \examples{
 library(dplyr)
 
-set.seed(1)
 adsl <- random.cdisc.data::cadsl
+
+set.seed(1)
 adsl$RANDDT[sample(seq_len(nrow(adsl)), 100)] <- NA
 scrnfail_reas_lvls <- c(
   "Inclusion/exclusion criteria not met", "Patient noncompliance", "Consent withdrawn", "Other"
@@ -81,9 +66,10 @@ adsl <- adsl \%>\%
   )
 adsl$SCRNFRS[adsl$SCRNFL == "N" | !is.na(adsl$ENRLDT)] <- NA
 
-tbl <- make_table_03(
-  df = adsl, scrnfl_var = "SCRNFL", scrnfailfl_var = "SCRNFAILFL", scrnfail_var = "SCRNFRS"
-)
+tbl <- make_table_03(df = adsl, denominator = adsl)
 tbl
 
+}
+\seealso{
+\code{\link{tbl_make_table_03}}
 }

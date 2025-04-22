@@ -1,6 +1,5 @@
-adsl <- adsl_raw
-
 set.seed(1)
+adsl <- adsl_raw
 adsl$RANDDT[sample(seq_len(nrow(adsl)), 100)] <- NA
 adsl <- adsl %>%
   mutate(
@@ -15,14 +14,34 @@ adsl <- adsl %>%
 adsl$SCRNFRS[adsl$SCRNFL == "N" | !is.na(adsl$ENRLDT)] <- NA
 
 test_that("Table 3 generation works with default values", {
-  result <- make_table_03(adsl, scrnfl_var = "SCRNFL", scrnfailfl_var = "SCRNFAILFL", scrnfail_var = "SCRNFRS")
+  withr::local_options(list(width = 120))
 
+  result <- make_table_03(adsl)
   res <- expect_silent(result)
-  expect_snapshot(res)
+  expect_snapshot(res$table |> as.data.frame())
+  expect_snapshot(res$ard)
+
+  # no ARD
+  result2 <- make_table_03(adsl, return_ard = FALSE)
+  res2 <- expect_silent(result2)
+
+  # tables the same
+  expect_identical(res$table, res2)
 })
 
+# gtsummary ----
+
+test_that("Table 03 generation works with gtsummary with custom values", {
+  result <- make_table_03_gtsummary(adsl)
+
+  res <- expect_silent(result)
+  expect_snapshot(res |> as.data.frame())
+})
+
+# rtables ----
+
 test_that("Table 3 generation works with custom values", {
-  result <- make_table_03(
+  result <- make_table_03_rtables(
     adsl,
     scrnfl_var = "SCRNFL", scrnfailfl_var = "SCRNFAILFL", scrnfail_var = "SCRNFRS",
     show_colcounts = TRUE,
