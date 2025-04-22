@@ -27,7 +27,7 @@ make_table_22(
 
 \item{arm_var}{(\code{character})\cr Name of the treatment arm variable used to split table into columns.}
 
-\item{saffl_var}{(\code{character})\cr flag variable used to indicate inclusion in safety population.}
+\item{saffl_var}{(\code{character})\cr Name of the safety flag variable which must contain at least "Y" for "Yes".}
 
 \item{vars}{(\code{vector} of \code{character})\cr Variables from \code{df} to include in the table.}
 
@@ -35,10 +35,10 @@ make_table_22(
 subgroup/row counts), \code{"N_col"} (total \code{df} column counts), or \code{"n"} (total \code{df} overall patient count).
 Note that \code{df} is filtered to only include treatment-emergent adverse events (\code{TRTEMFL == "Y"}).}
 
-\item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
+\item{lbl_overall}{(\code{character})\cr Optional. If specified, an overall column will be added to the table with
 the given value as the column label.}
 
-\item{lbl_vars}{(\code{vector} of \code{character})\cr labels corresponding to variables in \code{vars} to print
+\item{lbl_vars}{(\code{vector} of \code{character})\cr Labels corresponding to variables in \code{vars} to print
 in the table. Labels should be ordered according to the order of variables in \code{vars}.}
 
 \item{prune_0}{(\code{flag})\cr Whether all-zero rows should be removed from the table. Boolean.}

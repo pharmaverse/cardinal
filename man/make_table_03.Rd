@@ -24,7 +24,7 @@ make_table_03(
 
 \item{arm_var}{(\code{character})\cr Name of the treatment arm variable used to split table into columns.}
 
-\item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
+\item{id_var}{(\code{character})\cr Name of the unique subject identifiers variable.}
 
 \item{scrnfl_var}{(\code{character})\cr variable from \code{df} that indicates whether patients were screened.}
 
@@ -34,6 +34,15 @@ make_table_03(
 }
 \value{
 A \code{gtsummary} table and, if \code{return_ard = TRUE}, an ARD. If \code{return_ard = TRUE}, they will be returned as a list with named elements \code{table} and \code{ard}.
+
+\item{lbl_overall}{(\code{character})\cr Optional. If specified, an overall column will be added to the table with
+the given value as the column label.}
+
+\item{prune_0}{(\code{flag})\cr Whether all-zero rows should be removed from the table. Boolean.}
+
+\item{annotations}{(named \code{list} of \code{character})\cr list of annotations to add to the table. Valid
+annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
+use the annotation type as name and the desired string as value.}
 }
 \description{
 FDA Table 3: Patient Screening and Enrollment, Trials A and B

@@ -9,11 +9,15 @@ format: html
 
 ![](../assets/images/screenshots/table_10.png){fig-align="center"}
 
-## rtables Table
+
+
+
+## gtsummary Table
 
 ```{r tbl, message=FALSE, warning=FALSE}
 # Load Libraries & Data
 library(dplyr)
+library(cards)
 library(cardinal)
 
 adsl <- random.cdisc.data::cadsl
@@ -30,16 +34,15 @@ adae <- adae %>%
 adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
 
 # Output Table
-risk_diff <- list(arm_x = "B: Placebo", arm_y = "A: Drug X") # optional
-make_table_10(adae = adae, alt_counts_df = adsl, risk_diff = risk_diff)
+make_table_10(df = adae, denominator = adsl, return_ard = FALSE)
 ```
 
-## rtables Table Setup
+## gtsummary Table Setup
 
 ```{r tbl, eval=FALSE, echo=TRUE}
 ```
 
-## Function Details
+## Function Details: make_table_10
 
 ### `make_table_10()`
 
@@ -47,17 +50,115 @@ make_table_10(adae = adae, alt_counts_df = adsl, risk_diff = risk_diff)
 
 Required variables:
 
--   **`adae`**: `USUBJID`, `AEBODSYS`, `AESER`, and the variables specified by `arm_var`, `saffl_var`, `fmqsc_var`, and `fmqnam_var`.
--   **`alt_counts_df`** (if specified): `USUBJID` and the variables specified by `arm_var` and `saffl_var`.
+-   **`df`**: `AEBODSYS`, `AESER`, and the variables specified by `id_var`, `arm_var`, `saffl_var`, `fmqsc_var`, and `fmqnam_var`.
+-   **`denominator`** (if specified): The variables specified by `id_var`, `arm_var` and `saffl_var`.
 
 +------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------+
 | **Argument**     | **Description**                                                                                                                                                                                                                                                | **Default**   |
 +------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------+
-| `adae`           | (`data.frame`) Dataset (typically ADAE) required to build table.                                                                                                                                                                                               | *No default*  |
+| `df`             | (`data.frame`) Dataset (typically ADAE) required to build table.                                                                                                                                                                                               | *No default*  |
++------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------+
+| `denominator`    | (`character`) Alternative dataset used only to calculate column counts.                                                                                                                                                                                        | `NULL`        |
++------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------+
+| `return_ard`     | (`flag`) Whether column counts should be printed.                                                                                                                                                                                                              | `TRUE`        |
++------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------+
+| `id_var`         | (`character`) Name of the unique subject identifiers variable.                                                                                                                                                                                                 | `"USUBJID"`   |
++------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------+
+| `arm_var`        | (`character`) Arm variable used to split table into columns.                                                                                                                                                                                                   | `"ARM"`       |
++------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------+
+| `saffl_var`      | (`character`) Flag variable used to indicate inclusion in safety population.                                                                                                                                                                                   | `"SAFFL"`     |
++------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------+
+| `fmqsc_var`      | (`character`) FMQ scope variable to use in table.                                                                                                                                                                                                              | `"FMQ01SC"`   |
++------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------+
+| `fmqnam_var`     | (`character`) FMQ reference name variable to use in table.                                                                                                                                                                                                     | `"FMQ01NAM"`  |
++------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------+
+| `fmq_scope`      | (`character`) FMQ scope, can be '"NARROW"' or '"BROAD"'.                                                                                                                                                                                                       | `"NARROW"`    |
++------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------+
+| `na_level`       | (`character`) String to represent missing values.                                                                                                                                                                                                              | `"<Missing>"` |
++------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------+
+
+Source code for this function is available [here](https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_10.R).
+
+## ARD
+
+```{r tbl1, message=FALSE, warning=FALSE}
+# Load Libraries & Data
+library(dplyr)
+library(cards)
+library(cardinal)
+
+adsl <- random.cdisc.data::cadsl
+adae <- random.cdisc.data::cadae
+
+# Pre-Processing - Ensure required variables fmqsc_var and fmqnam_var exist in adae
+set.seed(1)
+adae <- adae %>%
+  rename(FMQ01SC = SMQ01SC) %>%
+  mutate(
+    AESER = sample(c("Y", "N"), size = nrow(adae), replace = TRUE),
+    FMQ01NAM = sample(c("FMQ1", "FMQ2", "FMQ3"), size = nrow(adae), replace = TRUE)
+  )
+adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
+
+# Output ARD
+output <- make_table_10(df = adae, denominator = adsl)
+output$ard
+```
+
+## ARD Setup
+
+```{r tbl1, eval=FALSE, echo=TRUE}
+```
+
+## rtables Table
+```{r tbl2, message=FALSE, warning=FALSE}
+# Load Libraries & Data
+# library(dplyr)
+library(cardinal)
+
+adsl <- random.cdisc.data::cadsl
+adae <- random.cdisc.data::cadae
+
+# Pre-Processing - Ensure required variables fmqsc_var and fmqnam_var exist in adae
+set.seed(1)
+adae <- adae %>%
+  rename(FMQ01SC = SMQ01SC) %>%
+  mutate(
+    AESER = sample(c("Y", "N"), size = nrow(adae), replace = TRUE),
+    FMQ01NAM = sample(c("FMQ1", "FMQ2", "FMQ3"), size = nrow(adae), replace = TRUE)
+  )
+adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
+
+# Output Table
+make_table_10_rtables(df = adae, alt_counts_df = adsl)
+```
+## rtables Setup
+
+```{r tbl2, eval=FALSE, echo=TRUE}
+```
+
+
+## Function Details: make_table_10_rtables
+
+### `make_table_10_rtables()`
+
+------------------------------------------------------------------------
+
+Required variables:
+
+-   **`df`**: `AEBODSYS`, `AESER`, and the variables specified by `id_var`, `arm_var`, `saffl_var`, `fmqsc_var`, and `fmqnam_var`.
+-   **`alt_counts_df`** (if specified): The variables specified by `id_var`, `arm_var` and `saffl_var`.
+
++------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------+
+| **Argument**     | **Description**                                                                                                                                                                                                                                                | **Default**   |
++------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------+
+| `df`             | (`data.frame`) Dataset (typically ADAE) required to build table.                                                                                                                                                                                               | *No default*  |
 +------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------+
 | `alt_counts_df`  | (`character`) Alternative dataset used only to calculate column counts.                                                                                                                                                                                        | `NULL`        |
 +------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------+
 | `show_colcounts` | (`flag`) Whether column counts should be printed.                                                                                                                                                                                                              | `TRUE`        |
++------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------+
+| `id_var`         | (`character`) Name of the unique subject identifiers variable.                                                                                                                                                                                                 | `"ARM"`       |
 +------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------+
 | `arm_var`        | (`character`) Arm variable used to split table into columns.                                                                                                                                                                                                   | `"ARM"`       |
 +------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------+

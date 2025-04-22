@@ -11,7 +11,7 @@ split_cols_by_arm(lyt, arm_var = "ARM", lbl_overall = NULL, risk_diff = NULL)
 
 \item{arm_var}{(\code{character})\cr Name of the treatment arm variable used to split table into columns.}
 
-\item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
+\item{lbl_overall}{(\code{character})\cr Optional. If specified, an overall column will be added to the table with
 the given value as the column label.}
 
 \item{risk_diff}{(named \code{list})\cr list of settings to apply to add one or more risk difference columns to the table.

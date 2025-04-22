@@ -26,9 +26,6 @@
 #'   that statistic. See [`formatters::list_valid_format_labels()`] for a list of valid formats.
 #' @param na_rm (`flag`)\cr Whether `NA` levels should be removed from the table.
 #' @param prune_0 (`flag`)\cr Whether all-zero rows should be removed from the table. Boolean.
-#' @param annotations (named `list` of `character`)\cr List of annotations to add to the table. Valid
-#'   annotation types are `title`, `subtitles`, `main_footer`, and `prov_footer`. Each name-value pair should
-#'   use the annotation type as name and the desired string as value.
 #' @param na_level (`character`)\cr String to represent missing values.
 #' @param adae (`data.frame`)\cr dataset (typically ADAE) required to build table.
 #' @param adex (`data.frame`)\cr dataset (typically ADEX) required to build table.
@@ -46,16 +43,6 @@
 #' @param fmqnam_var (`character`)\cr FMQ reference name variable to use in table.
 #' @param fmq_scope (`character`)\cr FMQ scope ("NARROW" or "BROAD") to output in table.
 #' @param ggtheme (`theme`)\cr a graphical theme as provided by `ggplot2` to control styling of the `ggplot` object.
-#' @param id_var (`character`)\cr variable used as unique subject identifier.
-#' @param lbl_overall (`character`)\cr if specified, an overall column will be added to the table with
-#'   the given value as the column label.
-#' @param lbl_pref_var (`character`)\cr label corresponding to preferred term variable `pref_var` to print in the table.
-#' @param lbl_soc_var (`character`)\cr label corresponding to system organ class variable `soc_var` to print in the
-#'   table.
-#' @param lbl_vars (`vector` of `character`)\cr labels corresponding to variables in `vars` to print
-#'   in the table. Labels should be ordered according to the order of variables in `vars`.
-#' @param na_level (`character`)\cr string to represent missing values.
-#' @param na_rm (`flag`)\cr whether `NA` levels should be removed from the table.
 #' @param return_ard (`flag`)\cr whether an ARD should be returned. Defaults to `TRUE`.
 #' @param risk_diff (named `list`)\cr list of settings to apply to add one or more risk difference columns to the table.
 #'   Defaults to `NULL` (no risk difference column added). See [tern::add_riskdiff()] for more details. List should
@@ -67,10 +54,6 @@
 #'      `"Risk Difference (%) (95% CI)"`. For more than one risk difference column, `"arm x vs. arm y"` text will also
 #'      be included in the column labels by default. The length of `col_label` must be equal to the length of `arm_y`.
 #'    * `pct`: (optional) whether the output should be returned as percentages. Defaults to `TRUE`.
-#' @param saffl_var (`character`)\cr flag variable used to indicate inclusion in safety population.
-#' @param scrnfl_var (`character`)\cr variable from `df` that indicates whether patients were screened.
-#' @param scrnfailfl_var (`character`)\cr variable from `df` that indicates screening failure.
-#' @param scrnfail_var (`character`)\cr variable from `df` that contains reasons for screening failure.
 #' @param sex_scope (`character`)\cr Level of `SEX` to output in table.
 #' @param table_engine (`string`)\cr table engine used to generate the table. If `NULL`, no table is returned. If the
 #'   given engine is not available for the table, no table is created and a warning is returned.

@@ -61,7 +61,7 @@ make_table_09(
 
 \item{alt_counts_df}{(\code{character})\cr alternative dataset (typically ADSL) used only to calculate column counts.}
 
-\item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
+\item{id_var}{(\code{character})\cr Name of the unique subject identifiers variable.}
 
 \item{arm_var}{(\code{character})\cr Name of the treatment arm variable used to split table into columns.}
 
@@ -76,7 +76,7 @@ make_table_09(
 \item{lbl_soc_var}{(\code{character})\cr label corresponding to system organ class variable
 \code{soc_var} to print in the table.}
 
-\item{lbl_pref_var}{(\code{character})\cr label corresponding to preferred term variable \code{pref_var} to print in the table.}
+\item{lbl_pref_var}{(\code{character})\cr Label corresponding to preferred term variable \code{pref_var} to print in the table.}
 
 \item{risk_diff_pairs}{(\code{list} of \code{character} vectors)\cr Optional. List of character vectors. Each vector must be
 of length 2 and contain the name of treatment arms to calculate risk difference and its 95\% CI for. Those names
@@ -84,7 +84,7 @@ must exist in the \code{arm_var} column of the dataset specified in \code{adae}.
 
 \item{show_colcounts}{(\code{flag})\cr Whether column counts should be printed. Boolean.}
 
-\item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
+\item{lbl_overall}{(\code{character})\cr Optional. If specified, an overall column will be added to the table with
 the given value as the column label.}
 
 \item{prune_0}{(\code{flag})\cr Whether all-zero rows should be removed from the table. Boolean.}

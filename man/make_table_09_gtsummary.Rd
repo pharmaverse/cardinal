@@ -21,7 +21,7 @@ make_table_09_gtsummary(
 
 \item{denominator}{(\code{data.frame})\cr alternative dataset (typically ADSL) used only to calculate denominator counts.}
 
-\item{saffl_var}{(\code{character})\cr flag variable used to indicate inclusion in safety population.}
+\item{saffl_var}{(\code{character})\cr Name of the safety flag variable which must contain at least "Y" for "Yes".}
 
 \item{ser_var}{(\code{character})\cr Name of the serious adverse event flag variable which must contain at least
 "Y" for "Yes".}
@@ -30,11 +30,11 @@ make_table_09_gtsummary(
 
 \item{pref_var}{(\code{character})\cr Name of the preferred term variable from \code{adae} to include in the table.}
 
-\item{id_var}{(\code{character})\cr variable used as unique subject identifier.}
+\item{id_var}{(\code{character})\cr Name of the unique subject identifiers variable.}
 
 \item{soc_var}{(\code{character})\cr Name of the system organ class variable from \code{adae} to include in the table.}
 
-\item{lbl_overall}{(\code{character})\cr if specified, an overall column will be added to the table with
+\item{lbl_overall}{(\code{character})\cr Optional. If specified, an overall column will be added to the table with
 the given value as the column label.}
 }
 \value{
