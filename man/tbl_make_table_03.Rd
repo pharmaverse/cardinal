@@ -63,10 +63,13 @@ The table engine used by each engine-specific function is identified by its suff
 }
 \details{
 \itemize{
-\item \code{df} must contain \code{ENRLDT}, \code{RANDDT}, and the variables specified by \code{id_var}, \code{arm_var}, \code{scrnfl_var}, \code{scrnfailfl_var}, and \code{scrnfail_var}.
+\item \code{df} must contain \code{ENRLDT}, \code{RANDDT}, and the variables specified by \code{id_var}, \code{arm_var}, \code{scrnfl_var},
+\code{scrnfailfl_var}, and \code{scrnfail_var}.
 \item If specified, \code{alt_counts_df} must contain the variables specified by \code{id_var} and \code{arm_var}.
-\item Patients are considered enrolled in they have an enrollment date (\code{ENRLDT} is not missing), and are considered randomized if they have a randomization date (\code{RANDDT} is not missing).
-\item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in flag variables are treated as \code{"N"}.
+\item Patients are considered enrolled in they have an enrollment date (\code{ENRLDT} is not missing), and are considered
+randomized if they have a randomization date (\code{RANDDT} is not missing).
+\item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
+flag variables are treated as \code{"N"}.
 \item Numbers in table represent the absolute numbers of patients and fraction of \code{N}.
 \item All-zero rows are removed by default (see \code{prune_0} argument).
 }
@@ -93,11 +96,13 @@ adsl <- adsl \%>\%
 adsl$SCRNFRS[adsl$SCRNFL == "N" | !is.na(adsl$ENRLDT)] <- NA
 
 # gtsummary table --------------
-tbl_gtsummary <- cardinal:::make_table_03_gtsummary(df = adsl, scrnfl_var = "SCRNFL", scrnfailfl_var = "SCRNFAILFL", scrnfail_var = "SCRNFRS")
+tbl_gtsummary <- cardinal:::make_table_03_gtsummary(df = adsl, scrnfl_var = "SCRNFL", scrnfailfl_var = "SCRNFAILFL",
+  scrnfail_var = "SCRNFRS")
 tbl_gtsummary
 
 # rtables table ----------------
-tbl_rtables <- cardinal:::make_table_03_rtables(df = adsl, scrnfl_var = "SCRNFL", scrnfailfl_var = "SCRNFAILFL", scrnfail_var = "SCRNFRS")
+tbl_rtables <- cardinal:::make_table_03_rtables(df = adsl, scrnfl_var = "SCRNFL", scrnfailfl_var = "SCRNFAILFL",
+  scrnfail_var = "SCRNFRS")
 tbl_rtables
 
 }

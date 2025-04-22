@@ -27,17 +27,21 @@ make_table_03(
 \item{id_var}{(\code{character})\cr Name of the unique subject identifiers variable.}
 }
 \value{
-A \code{gtsummary} table and, if \code{return_ard = TRUE}, an ARD. If \code{return_ard = TRUE}, they will be returned as a list with named elements \code{table} and \code{ard}.
+A \code{gtsummary} table and, if \code{return_ard = TRUE}, an ARD. If \code{return_ard = TRUE}, they will be returned as a
+list with named elements \code{table} and \code{ard}.
 }
 \description{
 FDA Table 3: Patient Screening and Enrollment, Trials A and B
 }
 \details{
 \itemize{
-\item \code{df} must contain \code{ENRLDT}, \code{RANDDT}, and the variables specified by \code{id_var}, \code{arm_var}, \code{scrnfl_var}, \code{scrnfailfl_var}, and \code{scrnfail_var}.
+\item \code{df} must contain \code{ENRLDT}, \code{RANDDT}, and the variables specified by \code{id_var}, \code{arm_var}, \code{scrnfl_var},
+\code{scrnfailfl_var}, and \code{scrnfail_var}.
 \item If specified, \code{denominator} must contain the variables specified by \code{id_var} and \code{arm_var}.
-\item Patients are considered enrolled in they have an enrollment date (\code{ENRLDT} is not missing), and are considered randomized if they have a randomization date (\code{RANDDT} is not missing).
-\item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in flag variables are treated as \code{"N"}.
+\item Patients are considered enrolled in they have an enrollment date (\code{ENRLDT} is not missing), and are considered
+randomized if they have a randomization date (\code{RANDDT} is not missing).
+\item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
+flag variables are treated as \code{"N"}.
 \item Numbers in table represent the absolute numbers of patients and fraction of \code{N}.
 }
 }
