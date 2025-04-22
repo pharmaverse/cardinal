@@ -47,7 +47,6 @@ make_table_03 <- function(df,
                           scrnfl_var = "SCRNFL",
                           scrnfailfl_var = "SCRNFAILFL",
                           scrnfail_var = "SCRNFRS") {
-
   ard <- ard_table_03(
     df = df,
     denominator = denominator,
@@ -242,8 +241,10 @@ make_table_03_gtsummary <- function(df,
     select("ARM", scrnfl_var, scrnfail_var, "ENRLFL", "RANDFL") %>%
     tbl_summary(
       by = arm_var,
-      label = list(scrnfl_var ~ "Patients screened",
-                   scrnfail_var ~ "Screening failures"),
+      label = list(
+        scrnfl_var ~ "Patients screened",
+        scrnfail_var ~ "Screening failures"
+      ),
       missing = "no"
     ) %>%
     modify_header(label ~ "**Disposition**")
