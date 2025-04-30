@@ -7,6 +7,10 @@ project:
     watch-inputs: true
     navigate: true
     timeout: 300
+  render:
+    - "*.qmd"
+    - "!quarto/figure-templates/"
+    - "!quarto/table-templates/"
 
 format:
   html:
