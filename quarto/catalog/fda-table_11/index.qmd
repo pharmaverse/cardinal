@@ -79,8 +79,7 @@ tbl <- tbl_hierarchical(
 tbl
 ```
 
-```{r include=FALSE}
-options(chromote.headless = "new")
+```{r eval=FALSE, include=FALSE}
 gt::gtsave(as_gt(tbl), filename = "result.png")
 ```
 
