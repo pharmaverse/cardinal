@@ -80,7 +80,7 @@ tbl
 ```
 
 ```{r include=FALSE}
-gt::gtsave(as_gt(tbl), filename = "result.png", expand = 5)
+gt::gtsave(as_gt(tbl), filename = "result.png")
 ```
 
 ```{r img, echo=FALSE, fig.align='center', out.width='60%'}
