@@ -15,8 +15,10 @@ on:
       - "LICENSE.*"
       - NAMESPACE
       - "_quarto.yml"
-      - "quarto/**"
       - "index.qmd"
+      - "quarto/**.qmd"
+      - "quarto/assets/**"
+      - "quarto/catalog/**"
   pull_request:
     types:
       - opened
@@ -35,8 +37,10 @@ on:
       - "LICENSE.*"
       - NAMESPACE
       - "_quarto.yml"
-      - "quarto/**"
       - "index.qmd"
+      - "quarto/**.qmd"
+      - "quarto/assets/**"
+      - "quarto/catalog/**"
   workflow_dispatch:
 
 jobs:
