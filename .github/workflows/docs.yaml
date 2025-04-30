@@ -44,20 +44,12 @@ jobs:
     name: Quarto Docs 📕
     runs-on: ubuntu-latest
     container:
-      image: rocker/verse:4.4.0
+      image: rocker/tidyverse:4.5.0
     permissions:
       contents: write
     steps:
       - name: Check out repository 🛎️
         uses: actions/checkout@v4.1.1
-
-      - name: Run Staged dependencies 🎦
-        uses: insightsengineering/staged-dependencies-action@v1
-        env:
-          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          enable-check: false
-          direction: upstream
 
       - name: Install package 📦
         run: R CMD INSTALL .
