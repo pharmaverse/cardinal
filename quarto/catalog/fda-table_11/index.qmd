@@ -32,12 +32,12 @@ adae$DCSREAS[is.na(adae$DCSREAS)] <- "ADVERSE EVENT"
 adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
 
 # Pre-processing --------------------------------------------
-data <- adae %>% 
+data <- adae %>%
   filter(
     # safety population
     SAFFL == "Y",
     # narrow FMQ
-    FMQ01SC == "NARROW", 
+    FMQ01SC == "NARROW",
     # discontinuation due to AE
     DCSREAS == "ADVERSE EVENT"
   )
