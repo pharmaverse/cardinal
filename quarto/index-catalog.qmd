@@ -3,6 +3,7 @@ title: "Template Catalog"
 listing:
   contents: "catalog/*/index.qmd"
   type: grid
+  image-placeholder: assets/images/image-placeholder.png
   categories: true
   fields: [image, title, subtitle, categories]
   sort-ui: [title]
