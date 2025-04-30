@@ -70,6 +70,7 @@ tbl
 ```
 
 ```{r include=FALSE}
+options(chromote.headless = "new")
 gt::gtsave(as_gt(tbl), filename = "result.png")
 ```
 
