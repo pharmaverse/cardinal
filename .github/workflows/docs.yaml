@@ -44,7 +44,7 @@ jobs:
     name: Quarto Docs 📕
     runs-on: ubuntu-latest
     container:
-      image: rocker/verse:4.5.0
+      image: rocker/verse:4.4.0
     permissions:
       contents: write
     steps:
