@@ -70,6 +70,7 @@ tbl
 ```
 
 ```{r eval=FALSE, include=FALSE}
+# Run chunk locally to generate image file
 gt::gtsave(as_gt(tbl), filename = "result.png")
 ```
 
