@@ -44,7 +44,7 @@ jobs:
     name: Quarto Docs 📕
     runs-on: ubuntu-latest
     container:
-      image: rocker/tidyverse:4.5.0
+      image: ghcr.io/insightsengineering/rstudio:latest
     permissions:
       contents: write
     steps:
