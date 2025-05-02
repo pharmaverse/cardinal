@@ -32,7 +32,7 @@ adae <- random.cdisc.data::cadae
 # Use safety population only
 saf_adae <- adae |>
   filter(SAFFL == "Y")
-  
+
 # --- PART 1: Create first of four table parts (Overview of serious AEs)
 
 # Summarize SAEs in an overall manner
@@ -90,7 +90,7 @@ tbl_sae <- append(list(tbl_any_sae), tbl_sae_cat_list) |>
 
 disc_ae <- adae |>
   filter(AEACNOTH == "SUBJECT DISCONTINUED FROM STUDY") |>
-  mutate( 
+  mutate(
     # convert label to a more meaningful value
     AEACNOTH = "AE leading to permanent discontinuation of study drug"
   )
