@@ -25,8 +25,7 @@ adae <- random.cdisc.data::cadae %>%
   rename(FMQ01SC = SMQ01SC) %>%
   mutate(
     AESER = sample(c("Y", "N"), size = nrow(.), replace = TRUE),
-    FMQ01NAM = sample(c("FMQ1", "FMQ2", "FMQ3"), size = nrow(.), replace = TRUE) %>%
-      `attr<-`("label", "FMQ (Narrow)")
+    FMQ01NAM = sample(c("FMQ1", "FMQ2", "FMQ3"), size = nrow(.), replace = TRUE)
   )
 adae$DCSREAS[is.na(adae$DCSREAS)] <- "ADVERSE EVENT"
 adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
@@ -74,7 +73,8 @@ tbl <- tbl_hierarchical(
   denominator = adsl,
   overall_row = TRUE,
   label = list(..ard_hierarchical_overall.. = "Patients with at least one AE leading to discontinuation")
-)
+) %>%
+  modify_header(FMQ01NAM = "FMQ (Narrow)")
 
 tbl
 ```
