@@ -48,9 +48,9 @@ ard
 ```
 
 ```{r, echo=FALSE}
-# Print full ARD
+# Print ARD
 withr::local_options(width = 9999)
-print(ard, columns = "all", n = Inf)
+print(ard, columns = "all", n = 40)
 ```
 
 ## Build Table
