@@ -1,0 +1,66 @@
+---
+title: Your TLG Title
+subtitle: (Optional Field) Short Description of TLG
+categories: [table, FDA, safety] ## ** REPLACE WITH RELEVANT TAGS **
+---
+
+::: panel-tabset
+## Table Preview
+
+```{r img, echo=FALSE, fig.align='center', out.width='60%'}
+## ** (OPTIONAL) INCLUDE AN IMAGE OF YOUR TLG HERE **
+## If no image to show, the `Table Preview` section can be removed
+knitr::include_graphics("result.png")
+```
+
+## Setup
+
+```{r setup, message=FALSE}
+# Load libraries & data -------------------------------------
+library(dplyr)
+library(cards)
+library(gtsummary)
+
+## ** LOAD ADDITIONAL PACKAGES USED HERE **
+
+## ** LOAD ALL DATASETS USED IN EXAMPLES HERE **
+
+# Pre-processing --------------------------------------------
+
+## ** ADD CODE FOR ANY NECESSARY DATA PRE-PROCESSING HERE **
+```
+
+## Build ARD
+
+```{r ard, message=FALSE, warning=FALSE, results='hide'}
+## ** INSERT YOUR ARD CODE HERE **
+## `ard` should return an ARD of class `card`
+ard <- NULL
+
+ard
+```
+
+```{r, echo=FALSE}
+# Print ARD
+withr::local_options(width = 9999)
+print(ard, columns = "all", n = 40)
+```
+
+## Build Table
+
+```{r tbl, results = 'hide'}
+## ** INSERT YOUR TABLE CODE HERE **
+## `tbl` should return a `gtsummary` table
+tbl <- NULL
+
+tbl
+```
+
+```{r eval=FALSE, include=FALSE}
+## ** (OPTIONAL) RUN THIS CHUNK LOCALLY TO GENERATE AN IMAGE FILE **
+gt::gtsave(as_gt(tbl), filename = "result.png")
+```
+
+```{r img, echo=FALSE, fig.align='center', out.width='60%'}
+```
+:::

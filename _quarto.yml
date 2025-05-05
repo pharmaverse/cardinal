@@ -7,6 +7,11 @@ project:
     watch-inputs: true
     navigate: true
     timeout: 300
+  render:
+    - "*.qmd"
+    - "!inst/"
+    - "!quarto/figure-templates/"
+    - "!quarto/table-templates/"
 
 format:
   html:
@@ -40,7 +45,8 @@ execute:
 
 knitr:
   opts_chunk:
-    echo: false
+    echo: true
+    code-fold: show
     fig.width: 15
 
 editor: source
@@ -63,13 +69,6 @@ website:
   page-footer:
     center:
       - text: "This website as well as code examples are licensed under the Apache License, Version 2.0." # nolint
-    right:
-      - aria-label: Slack
-        href: https://app.slack.com/client/T028PB489D3/C04MQS12MND
-        icon: slack
-      - aria-label: GitHub
-        href: https://github.com/pharmaverse/cardinal
-        icon: github
   navbar:
     pinned: true
     collapse: true
@@ -78,37 +77,9 @@ website:
     left:
       - text: Home
         file: index.qmd
-      - text: Template Library
-        menu:
-          - quarto/table-templates/template-table_02.qmd
-          - quarto/table-templates/template-table_03.qmd
-          - quarto/table-templates/template-table_04.qmd
-          - quarto/table-templates/template-table_05.qmd
-          - quarto/table-templates/template-table_06.qmd
-          - quarto/table-templates/template-table_07.qmd
-          - quarto/table-templates/template-table_08.qmd
-          - quarto/table-templates/template-table_09.qmd
-          - quarto/table-templates/template-table_10.qmd
-          - quarto/table-templates/template-table_11.qmd
-          - quarto/table-templates/template-table_12.qmd
-          - quarto/table-templates/template-table_13.qmd
-          - quarto/table-templates/template-table_14.qmd
-          - quarto/table-templates/template-table_15.qmd
-          - quarto/table-templates/template-table_16.qmd
-          - quarto/table-templates/template-table_17.qmd
-          - quarto/table-templates/template-table_18.qmd
-          - quarto/table-templates/template-table_20.qmd
-          - quarto/table-templates/template-table_21.qmd
-          - quarto/table-templates/template-table_22.qmd
-          - quarto/table-templates/template-table_32.qmd
-          - quarto/table-templates/template-table_33.qmd
-          - quarto/table-templates/template-table_34.qmd
-          - quarto/table-templates/template-table_35.qmd
-          - quarto/table-templates/template-table_36.qmd
-          - quarto/figure-templates/template-fig_01.qmd
-          - quarto/figure-templates/template-fig_02.qmd
-          - quarto/figure-templates/template-fig_03.qmd
-          - quarto/figure-templates/template-fig_14.qmd
+      - text: Template Catalog
+        file: quarto/index-catalog.qmd
+    right:
       - text: About
         file: quarto/about.qmd
       - text: Resources
@@ -120,3 +91,9 @@ website:
             url: https://github.com/pharmaverse/cardinal/issues/new/choose
           - text: FAQ
             file: quarto/faq.qmd
+      - aria-label: GitHub
+        href: https://github.com/pharmaverse/cardinal
+        icon: github
+      - aria-label: Slack
+        href: https://app.slack.com/client/T028PB489D3/C04MQS12MND
+        icon: slack
