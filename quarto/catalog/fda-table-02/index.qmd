@@ -1,0 +1,75 @@
+---
+title: FDA Table 02
+subtitle: Baseline Demographic and Clinical Characteristics, Safety Population, Pooled Analyses
+categories: [table, FDA, safety, demographics]
+---
+
+::: panel-tabset
+## Table Preview
+
+```{r img, echo=FALSE, fig.align='center', out.width='60%'}
+knitr::include_graphics("result.png")
+```
+
+## Setup
+
+```{r setup, message=FALSE}
+# Load libraries & data -------------------------------------
+library(dplyr)
+library(gtsummary)
+
+set.seed(1)
+adsl <- random.cdisc.data::cadsl
+
+# Pre-processing --------------------------------------------
+data <- adsl |>
+  filter(SAFFL == "Y") |>
+  mutate(
+    AGEGR1 = dplyr::case_when(
+      AGE >= 17 & AGE < 65 ~ ">=17 to <65",
+      AGE >= 65 ~ ">=65"
+    ),
+    AGEGR1_v2 = (AGE >= 65 & AGE < 75) %>%
+      formatters::with_label(">=65 to <75"),
+    AGEGRP_v3 = (AGE >= 75) %>%
+      formatters::with_label(">=75")
+  )
+```
+
+## Build Table
+
+```{r tbl, results='hide'}
+tbl <- data |>
+  tbl_summary(
+    by = "ARM",
+    include = c("AGE", "AGEGR1", "AGEGR1_v2", "AGEGRP_v3", "SEX", "ETHNIC", "RACE", "BMRKR1"),
+    label = list(AGEGR1 = "Age Group, Years")
+  ) |>
+  modify_table_styling(
+    columns = label,
+    rows = variable %in% c("AGEGR1_v2", "AGEGRP_v3"),
+    text_format = "indent"
+  )
+```
+
+```{r eval=FALSE, include=FALSE}
+# Run chunk locally to generate image file
+gt::gtsave(as_gt(tbl), filename = "result.png")
+```
+
+```{r img, echo=FALSE, fig.align='center', out.width='60%'}
+```
+
+## Build ARD
+
+```{r ard, message=FALSE, warning=FALSE, results='hide'}
+ard <- gather_ard(tbl)
+ard
+```
+
+```{r, echo=FALSE}
+# Print full ARD
+withr::local_options(width = 9999)
+print(ard, columns = "all")
+```
+:::
