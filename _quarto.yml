@@ -9,6 +9,7 @@ project:
     timeout: 300
   render:
     - "*.qmd"
+    - "!inst/"
     - "!quarto/figure-templates/"
     - "!quarto/table-templates/"
 
