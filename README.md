@@ -31,50 +31,6 @@ remotes::install_github("pharmaverse/cardinal")
 
 See the [Getting Started page](https://pharmaverse.github.io/cardinal/quarto/getting_started.html) on the cardinal website for additional details on getting started with the `cardinal` package.
 
-## Usage
-
-In the following example, Table 2 (Baseline Demographic and Clinical Characteristics) from the [FDA Safety Tables and Figures Integrated Guide](https://downloads.regulations.gov/FDA-2022-N-1961-0046/attachment_1.pdf) is generated using the `make_table_02` function from the `cardinal` package.
-
-First we will load the `cardinal` package and use the [`random.cdisc.data`](https://github.com/insightsengineering/random.cdisc.data) package to load an example ADSL dataset. The `cardinal` package works with standard CDISC datasets and variable names while allowing users to set custom variable names & labels where necessary.
-
-```r
-library(cardinal)
-adsl <- random.cdisc.data::cadsl
-```
-
-With data now loaded, the `make_table_02` function can be used to generate the FDA standard table.
-
-```r
-make_table_02(
-  df = adsl,
-  vars = c("SEX", "AGE", "RACE"),
-  lbl_vars = c("Sex", "Age, years", "Race")
-)
-```
-
-<!-- markdownlint-disable -->
-```
-                                                  A: Drug X            B: Placebo         C: Combination      Total Population 
-Characteristic                                     (N=134)              (N=134)              (N=132)              (N=400)      
-———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-Sex                                                                                                                            
-  F                                                79 (59%)            82 (61.2%)            70 (53%)           231 (57.8%)    
-  M                                                55 (41%)            52 (38.8%)            62 (47%)           169 (42.2%)    
-Age, years                                                                                                                     
-  Mean (SD)                                       33.8 (6.6)           35.4 (7.9)           35.4 (7.7)           34.9 (7.4)    
-  Median (Min - Max)                          33.0 (21.0 - 50.0)   35.0 (21.0 - 62.0)   35.0 (20.0 - 69.0)   34.0 (20.0 - 69.0)
-Race                                                                                                                           
-  ASIAN                                           68 (50.7%)            67 (50%)            73 (55.3%)           208 (52%)     
-  BLACK OR AFRICAN AMERICAN                       31 (23.1%)           28 (20.9%)           32 (24.2%)           91 (22.8%)    
-  WHITE                                           27 (20.1%)           26 (19.4%)           21 (15.9%)           74 (18.5%)    
-  AMERICAN INDIAN OR ALASKA NATIVE                  8 (6%)             11 (8.2%)             6 (4.5%)            25 (6.2%)     
-  MULTIPLE                                            0                 1 (0.7%)                0                 1 (0.2%)     
-  NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER           0                 1 (0.7%)                0                 1 (0.2%)     
-```
-<!-- markdownlint-restore -->
-
-For more information on the `make_table_02` function and parameters you can use to customize the output table, see the [FDA Table 2 page](https://pharmaverse.github.io/cardinal/quarto/table-templates/template-table_02.html) on the cardinal website.
-
 ## Related Packages
 
 * [`tern`](https://insightsengineering.github.io/tern/main/) - analysis functions used to build standard tables.
