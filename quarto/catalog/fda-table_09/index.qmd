@@ -1,0 +1,93 @@
+---
+title: FDA Table 09
+subtitle: Patients With Serious Adverse Events by System Organ Class and Preferred Term, Safety Population, Pooled Analyses
+categories: [table, FDA, safety]
+---
+
+::: panel-tabset
+## Table Preview
+
+```{r}
+#| label: img
+#| echo: false
+#| fig-align: center
+#| out-width: '60%'
+knitr::include_graphics("result.png")
+```
+
+## Setup
+
+```{r}
+#| label: setup
+#| message: false
+# Load libraries & data -------------------------------------
+library(dplyr)
+library(gtsummary)
+
+adsl <- random.cdisc.data::cadsl
+adae <- random.cdisc.data::cadae
+
+# Pre-processing --------------------------------------------
+
+adae <- adae %>%
+  dplyr::filter(
+    # safety population
+    SAFFL == "Y", 
+    # serious adverse events
+    AESER == "Y"
+  )
+
+```
+
+
+## Build Table
+
+```{r}
+#| label: tbl
+#| result: 'hide'
+tbl <- adae |>
+  tbl_hierarchical(
+    variables = c(AESOC, AEDECOD),
+    by = ARM,
+    id = USUBJID,
+    denominator = adsl,
+    overall_row = TRUE,
+    label = "..ard_hierarchical_overall.." ~ "Any SAE"
+  )
+tbl
+```
+
+```{r}
+#| eval: false
+#| include: false
+## ** (OPTIONAL) RUN THIS CHUNK LOCALLY TO GENERATE AN IMAGE FILE **
+gt::gtsave(as_gt(tbl), filename = "result.png")
+```
+
+```{r}
+#| label: img
+#| echo: false
+#| fig-align: center
+#| out-width: '60%'
+```
+
+## Build ARD
+
+```{r}
+#| label: ard
+#| echo: true
+#| message: false
+#| warning: false
+#| result: 'hide'
+ard <- gather_ard(tbl)
+
+ard
+```
+
+```{r}
+#| echo: false
+# Print ARD
+withr::local_options(width = 9999)
+print(ard, columns = "all")
+```
+:::
