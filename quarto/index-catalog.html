@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>cardinal - Resources</title>
+<title>cardinal - Template Catalog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,6 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../quarto/assets/images/logo/cardinal.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-listing/list.min.js"></script>
+<script src="../site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="../site_libs/cookie-consent/cookie-consent.js"></script>
 <link href="../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
 <script src="../site_libs/quarto-html/quarto.js"></script>
@@ -103,6 +105,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script>
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-image','listing-title','listing-subtitle','listing-categories',{ data: ['index'] },{ data: ['categories'] }],
+      
+      searchColumns: ["listing-title","listing-subtitle","listing-categories"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
 
 <script type="text/plain" cookie-consent="tracking">
 
@@ -137,17 +168,45 @@ cookieconsent.run({
   
 <style>html{ scroll-behavior: smooth; }</style>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../quarto/assets/style.scss">
-<meta property="og:title" content="cardinal - Resources">
-<meta property="og:description" content="">
+<meta property="og:title" content="cardinal - Template Catalog">
 <meta property="og:site_name" content="cardinal">
 </head>
 
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
@@ -169,7 +228,7 @@ cookieconsent.run({
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../quarto/index-catalog.html"> 
+    <a class="nav-link active" href="../quarto/index-catalog.html" aria-current="page"> 
 <span class="menu-text">Template Catalog</span></a>
   </li>  
 </ul>
@@ -179,7 +238,7 @@ cookieconsent.run({
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../quarto/resources.html" aria-current="page"> 
+    <a class="nav-link" href="../quarto/resources.html"> 
 <span class="menu-text">Resources</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -220,60 +279,115 @@ cookieconsent.run({
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-page-left">
+      <div class="quarto-title-block"><div><h1 class="title">Template Catalog</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta column-page-left">
+
+      
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(2)</span></div><div class="category" data-category="FDA">FDA <span class="quarto-category-count">(2)</span></div><div class="category" data-category="safety">safety <span class="quarto-category-count">(2)</span></div><div class="category" data-category="table">table <span class="quarto-category-count">(2)</span></div></div></div>
 <!-- main -->
-<main class="content column-page" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Resources</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
-</div>
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
 
 
-<div class="quarto-title-meta column-page">
-
-    
-  
-    
-  </div>
-  
 
 
-</header>
 
-
-<section id="fda-standard-safety-tables-and-figures-integrated-guide" class="level4">
-<h4 class="anchored" data-anchor-id="fda-standard-safety-tables-and-figures-integrated-guide">FDA Standard Safety Tables and Figures: Integrated Guide</h4>
-<p>Click <a href="assets/resources/FDA-STF-IG-2022-N-1961-0002.pdf">here</a> to download.</p>
-<hr>
-</section>
-<section id="past-talks-presentations" class="level4">
-<h4 class="anchored" data-anchor-id="past-talks-presentations">Past Talks &amp; Presentations</h4>
-<section id="phuse-eu-connect-presentation" class="level5">
-<h5 class="anchored" data-anchor-id="phuse-eu-connect-presentation">PHUSE EU Connect Presentation</h5>
-<ul>
-<li>Date: November 6, 2023</li>
-<li>Click <a href="assets/resources/cardinal_PHUSE_EU_2023.pptx">here</a> to download the presentation slide deck.</li>
-</ul>
-</section>
-<section id="rpharma-online-workshop" class="level5">
-<h5 class="anchored" data-anchor-id="rpharma-online-workshop">R/Pharma Online Workshop</h5>
-<ul>
-<li>Date: October 20, 2023</li>
-<li>Click <a href="assets/resources/cardinal_RinPharma_Workshop_2023.pptx">here</a> to download the workshop slide deck.</li>
-</ul>
 
 
 <!-- -->
 
-</section>
-</section>
 
-</main> <!-- /main -->
+<div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
+<div class="listing-actions-group">
+   <div class="input-group input-group-sm quarto-listing-sort">
+     <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
+     <select id="listing-listing-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-listing'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
+       <option value="" disabled="" selected="" hidden="">Order By</option>
+       <option value="index" data-direction="asc">Default</option>
+         <option value="listing-title" data-direction="asc">
+          Title
+        </option>
+     </select>
+  </div>
+    <div class="input-group input-group-sm quarto-listing-filter">
+      <span class="input-group-text"><i class="bi bi-search"></i></span>
+      <input type="text" class="search form-control" placeholder="Filter">
+    </div>
+</div>
+<div class="list grid quarto-listing-cols-3">
+<div class="g-col-1" data-index="0" data-categories="table,FDA,safety" data-listing-file-modified-sort="1747147054616" data-listing-reading-time-sort="2" data-listing-word-count-sort="213">
+<a href="../quarto/catalog/fda-table_11/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top"><img src="catalog/fda-table_11/result.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+FDA Table 11
+</h5>
+<div class="card-subtitle listing-subtitle">
+Patients with FDA Medical Query (Narrow) Leading to Treatment Discontinuation, Safety Population, Pooled Analyses
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('table'); return false;">
+table
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('FDA'); return false;">
+FDA
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('safety'); return false;">
+safety
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="g-col-1" data-index="1" data-categories="table,FDA,safety" data-listing-file-modified-sort="1747147054617" data-listing-reading-time-sort="1" data-listing-word-count-sort="156">
+<a href="../quarto/catalog/fda-table_12/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top"><img src="catalog/fda-table_12/result.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+FDA Table 12
+</h5>
+<div class="card-subtitle listing-subtitle">
+Patients With Adverse Events Leading to Treatment Discontinuation by System Organ Class and Preferred Term, Safety Population, Pooled Analyses
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('table'); return false;">
+table
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('FDA'); return false;">
+FDA
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('safety'); return false;">
+safety
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -879,26 +993,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="an">title:</span><span class="co"> Resources</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="co">---</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">#### FDA Standard Safety Tables and Figures: Integrated Guide</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a></span>
-<span id="cb1-7"><a href="#cb1-7"></a>Click <span class="co">[</span><span class="ot">here</span><span class="co">](assets/resources/FDA-STF-IG-2022-N-1961-0002.pdf)</span> to download.</span>
-<span id="cb1-8"><a href="#cb1-8"></a></span>
-<span id="cb1-9"><a href="#cb1-9"></a>---</span>
-<span id="cb1-10"><a href="#cb1-10"></a></span>
-<span id="cb1-11"><a href="#cb1-11"></a><span class="fu">#### Past Talks &amp; Presentations</span></span>
-<span id="cb1-12"><a href="#cb1-12"></a></span>
-<span id="cb1-13"><a href="#cb1-13"></a><span class="fu">##### PHUSE EU Connect Presentation</span></span>
-<span id="cb1-14"><a href="#cb1-14"></a></span>
-<span id="cb1-15"><a href="#cb1-15"></a><span class="ss">- </span>Date: November 6, 2023</span>
-<span id="cb1-16"><a href="#cb1-16"></a><span class="ss">- </span>Click <span class="co">[</span><span class="ot">here</span><span class="co">](assets/resources/cardinal_PHUSE_EU_2023.pptx)</span> to download the presentation slide deck.</span>
-<span id="cb1-17"><a href="#cb1-17"></a></span>
-<span id="cb1-18"><a href="#cb1-18"></a><span class="fu">##### R/Pharma Online Workshop</span></span>
-<span id="cb1-19"><a href="#cb1-19"></a></span>
-<span id="cb1-20"><a href="#cb1-20"></a><span class="ss">- </span>Date: October 20, 2023</span>
-<span id="cb1-21"><a href="#cb1-21"></a><span class="ss">- </span>Click <span class="co">[</span><span class="ot">here</span><span class="co">](assets/resources/cardinal_RinPharma_Workshop_2023.pptx)</span> to download the workshop slide deck.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="an">title:</span><span class="co"> "Template Catalog"</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="an">listing:</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="co">  contents: "catalog/*/index.qmd"</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="co">  type: grid</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="co">  image-placeholder: assets/images/image-placeholder.png</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="co">  categories: true</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="co">  fields: [image, title, subtitle, categories]</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="co">  sort-ui: [title]</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="co">  filter-ui: [title, subtitle, categories]</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="an">title-block-banner:</span><span class="co"> true</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="co">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
