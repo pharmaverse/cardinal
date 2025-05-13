@@ -34,21 +34,21 @@ adae <- adae %>%
 
 # Use safety population, Serious Adverse Event only and Narrow FMQ
 adae <- adae %>%
-  dplyr::filter(SAFFL == "Y", AESER == "Y", FMQ01SC == "NARROW" )
+  dplyr::filter(SAFFL == "Y", AESER == "Y", FMQ01SC == "NARROW")
 
 # Build Table
-tbl <- adae %>% 
-  tbl_hierarchical(variables = c(AEBODSYS, FMQ01NAM),
-                   by = ARM,
-                   id = USUBJID,
-                   include = FMQ01NAM,
-                   denominator = adsl,
-                   overall_row = FALSE,
-) %>% 
+tbl <- adae %>%
+  tbl_hierarchical(
+    variables = c(AEBODSYS, FMQ01NAM),
+    by = ARM,
+    id = USUBJID,
+    include = FMQ01NAM,
+    denominator = adsl,
+    overall_row = FALSE,
+  ) %>%
   gtsummary::remove_footnote_header(columns = everything())
 
 tbl
-
 ```
 
 </details>
