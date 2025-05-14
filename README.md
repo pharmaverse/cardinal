@@ -73,8 +73,6 @@ Race
 ```
 <!-- markdownlint-restore -->
 
-
-
 ## Related Packages
 
 * [`tern`](https://insightsengineering.github.io/tern/main/) - analysis functions used to build standard tables.
