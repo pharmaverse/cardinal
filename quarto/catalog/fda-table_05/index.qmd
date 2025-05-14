@@ -51,7 +51,7 @@ data <- adsl %>%
 ard <- data |>
   ard_stack(
     .by = TRT01A,
-    
+
     # Analysis of treatment duration ----------------------
     ard_continuous(
       variables = TRTDUR,
@@ -67,7 +67,7 @@ ard <- data |>
         )
       )
     ),
-    
+
     # Analysis of patients treated ------------------------
     ard_dichotomous(
       variables = c(D_ANY, D_LT1, D_GT1, D_GT3, D_GT6, D_GT12),
@@ -90,16 +90,17 @@ print(ard, columns = "all", n = 40)
 ```{r tbl, results = 'hide'}
 # Use info from the ARD previously generated to create a table
 tbl <- tbl_ard_summary(
-  ard, 
+  ard,
   by = TRT01A,
   # Use type "continuous2" to display statistics on separate lines
   type = list(TRTDUR = "continuous2"),
   # Specify summary statistics to display for treatment duration variable
   statistic = all_continuous() ~ c(
-    "{mean} ({sd})", "{median} ({min}, {max})", iqr = "{p25} - {p75}", "{tot_exposure} ({person_yrs})"
+    "{mean} ({sd})", "{median} ({min}, {max})",
+    iqr = "{p25} - {p75}", "{tot_exposure} ({person_yrs})"
   ),
   # Add descriptive labels for each variable
-  label = 
+  label =
     list(
       TRTDUR = "Duration of Treatment, days",
       D_ANY = "Any duration (at least 1 dose)",
@@ -109,7 +110,7 @@ tbl <- tbl_ard_summary(
       D_GT6 = ">=6 months",
       D_GT12 = ">=12 months"
     )
-  ) |>
+) |>
   # Add custom statistic labels for treatment duration variable, keep other stat labels as is
   add_stat_label(
     label = list(
