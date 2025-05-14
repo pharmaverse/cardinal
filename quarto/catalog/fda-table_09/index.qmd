@@ -32,11 +32,10 @@ adae <- random.cdisc.data::cadae
 adae <- adae %>%
   dplyr::filter(
     # safety population
-    SAFFL == "Y", 
+    SAFFL == "Y",
     # serious adverse events
     AESER == "Y"
   )
-
 ```
 
 
