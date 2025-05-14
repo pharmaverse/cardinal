@@ -44,7 +44,8 @@ adae <- adae %>%
 
 ```{r}
 #| label: tbl
-#| output: false
+#| results: hide
+
 tbl <- adae |>
   tbl_hierarchical(
     variables = c(AESOC, AEDECOD),
@@ -78,9 +79,8 @@ gt::gtsave(as_gt(tbl), filename = "result.png")
 #| echo: true
 #| message: false
 #| warning: false
-#| output: false
+#| results: hide
 ard <- gather_ard(tbl)
-
 ard
 ```
 
