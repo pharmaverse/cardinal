@@ -7,7 +7,8 @@ categories: [table, FDA, safety, adverse events]
 ::: panel-tabset
 ## Table Preview
 
-```{r img}
+```{r}
+#| label: img
 #| echo: false
 #| fig-align: center
 #| out-width: "60%"
@@ -18,7 +19,8 @@ knitr::include_graphics("result.png")
 
 ## Setup
 
-```{r setup}
+```{r}
+#| label: setup
 #| message: false
 
 # Load package and data
@@ -37,7 +39,8 @@ saf_adae <- adae |>
 
 ## Build Table
 
-```{r tbl}
+```{r}
+#| label: tbl
 #| results: hide
 
 # --- PART 1: Create first of four table parts (Overview of serious AEs)
@@ -170,7 +173,8 @@ tbl6
 gt::gtsave(as_gt(tbl6), filename = "result.png")
 ```
 
-```{r img}
+```{r}
+#| label: img
 #| echo: false
 #| fig-align: center
 #| out-width: "60%"
@@ -178,7 +182,8 @@ gt::gtsave(as_gt(tbl6), filename = "result.png")
 
 ## Build ARD
 
-```{r ard}
+```{r}
+#| label: ard
 #| message: false
 #| warning: false
 #| results: hide
