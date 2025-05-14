@@ -73,7 +73,7 @@ Race
 ```
 <!-- markdownlint-restore -->
 
-For more information on the `make_table_02` function and parameters you can use to customize the output table, see the [FDA Table 2 page](https://pharmaverse.github.io/cardinal/quarto/table-templates/template-table_02.html) on the cardinal website.
+
 
 ## Related Packages
 
