@@ -33,13 +33,13 @@ data <- adae |>
 
 ```{r tbl, results = 'hide'}
 tbl <- tbl_hierarchical(
-    data = data,
-    variables = AEBODSYS, # specify SOC variable
-    by = TRT01A,
-    id = USUBJID,
-    denominator = adsl,
-    label = AEBODSYS ~ "**System Organ Class**" # update variable label
-  )
+  data = data,
+  variables = AEBODSYS, # specify SOC variable
+  by = TRT01A,
+  id = USUBJID,
+  denominator = adsl,
+  label = AEBODSYS ~ "**System Organ Class**" # update variable label
+)
 
 tbl
 ```
