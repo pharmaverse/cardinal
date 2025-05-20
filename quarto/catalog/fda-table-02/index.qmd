@@ -27,12 +27,13 @@ adsl <- random.cdisc.data::cadsl |>
         AGE >= 75 ~ ">=75"
       ),
       levels = c(">=17 to <65", "65-74", ">=75")
-    ))
+    )
+  )
 
 # Pre-processing --------------------------------------------
 # Filter for the safety population, x
 data <- adsl |>
-  filter(SAFFL == "Y") 
+  filter(SAFFL == "Y")
 ```
 
 ## Build Table
