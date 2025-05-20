@@ -18,12 +18,7 @@ knitr::include_graphics("result.png")
 library(dplyr)
 library(gtsummary)
 
-adsl <- random.cdisc.data::cadsl
-
-# Pre-processing --------------------------------------------
-# Filter for the safety population, create the `Age Group` variable
-data <- adsl |>
-  filter(SAFFL == "Y") |>
+adsl <- random.cdisc.data::cadsl |>
   mutate(
     AGEGR1 = factor(
       dplyr::case_when(
@@ -32,8 +27,12 @@ data <- adsl |>
         AGE >= 75 ~ ">=75"
       ),
       levels = c(">=17 to <65", "65-74", ">=75")
-    )
-  )
+    ))
+
+# Pre-processing --------------------------------------------
+# Filter for the safety population, x
+data <- adsl |>
+  filter(SAFFL == "Y") 
 ```
 
 ## Build Table
@@ -53,7 +52,7 @@ tbl <- data |>
     ),
     label = list(AGEGR1 = "Age Group, Years")
   ) |>
-  add_overall(last = TRUE, col_label = "Total Population \nN = {N}") |>
+  add_overall(last = TRUE, col_label = "**Total Population**  \nN = {N}") |>
   # remove default footnote
   gtsummary::remove_footnote_header(columns = everything())
 ```
