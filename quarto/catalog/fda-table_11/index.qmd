@@ -1,0 +1,89 @@
+---
+title: FDA Table 11
+subtitle: Patients with FDA Medical Query (Narrow) Leading to Treatment Discontinuation, Safety Population, Pooled Analyses
+categories: [table, FDA, safety]
+---
+
+::: panel-tabset
+## Table Preview
+
+```{r img, echo=FALSE, fig.align='center', out.width='60%'}
+knitr::include_graphics("result.png")
+```
+
+## Setup
+
+```{r setup, message=FALSE}
+# Load libraries & data -------------------------------------
+library(dplyr)
+library(cards)
+library(gtsummary)
+
+set.seed(1)
+adsl <- random.cdisc.data::cadsl
+adae <- random.cdisc.data::cadae %>%
+  rename(FMQ01SC = SMQ01SC) %>%
+  mutate(
+    AESER = sample(c("Y", "N"), size = nrow(.), replace = TRUE),
+    FMQ01NAM = sample(c("FMQ1", "FMQ2", "FMQ3"), size = nrow(.), replace = TRUE)
+  )
+adae$DCSREAS[is.na(adae$DCSREAS)] <- "ADVERSE EVENT"
+adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
+
+# Pre-processing --------------------------------------------
+data <- adae %>%
+  filter(
+    # safety population
+    SAFFL == "Y",
+    # narrow FMQ
+    FMQ01SC == "NARROW",
+    # discontinuation due to AE
+    DCSREAS == "ADVERSE EVENT"
+  )
+```
+
+## Build ARD
+
+```{r ard, message=FALSE, warning=FALSE, results='hide'}
+ard <- ard_stack_hierarchical(
+  data,
+  variables = c(AEBODSYS, FMQ01NAM),
+  by = TRT01A,
+  denominator = adsl,
+  id = USUBJID
+)
+
+ard
+```
+
+```{r, echo=FALSE}
+# Print ARD
+withr::local_options(width = 9999)
+print(ard, columns = "all", n = 40)
+```
+
+## Build Table
+
+```{r tbl, results = 'hide'}
+tbl <- tbl_hierarchical(
+  data,
+  variables = c(AEBODSYS, FMQ01NAM),
+  by = TRT01A,
+  id = USUBJID,
+  denominator = adsl,
+  overall_row = TRUE,
+  label = list(..ard_hierarchical_overall.. = "Patients with at least one AE leading to discontinuation")
+) %>%
+  modify_header(FMQ01NAM = "FMQ (Narrow)")
+
+tbl
+```
+
+```{r eval=FALSE, include=FALSE}
+# Run chunk locally to generate image file
+gt::gtsave(as_gt(tbl), filename = "result.png")
+```
+
+```{r img, echo=FALSE, fig.align='center', out.width='60%'}
+```
+:::
