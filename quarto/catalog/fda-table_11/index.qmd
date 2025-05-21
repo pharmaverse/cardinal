@@ -31,6 +31,9 @@ adae$DCSREAS[is.na(adae$DCSREAS)] <- "ADVERSE EVENT"
 adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
 
 # Pre-processing --------------------------------------------
+adsl <- adsl %>%
+  filter(SAFFL == "Y") # safety population
+
 data <- adae %>%
   filter(
     # safety population
