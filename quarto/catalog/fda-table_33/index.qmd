@@ -23,6 +23,8 @@ adsl <- random.cdisc.data::cadsl
 advs <- random.cdisc.data::cadvs
 
 # Pre-processing --------------------------------------------
+adsl <- adsl |>
+  filter(SAFFL == "Y") # safety population
 
 data <- advs |>
   filter(
