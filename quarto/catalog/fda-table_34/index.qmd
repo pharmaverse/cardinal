@@ -32,7 +32,7 @@ adae <- adae %>%
 adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
 
 # Pre-processing --------------------------------------------
-adsl <- adsl |> 
+adsl <- adsl |>
   filter(SAFFL == "Y") # safety population
 
 data <- adae |>
@@ -40,7 +40,7 @@ data <- adae |>
     # safety population
     SAFFL == "Y",
     # serious AEs
-    AESER == "Y", 
+    AESER == "Y",
     # treatment-emergent
     TRTEMFL == "Y",
     # narrow FMQ scope
@@ -74,7 +74,7 @@ print(ard, columns = "all", n = 40)
 
 ```{r tbl, results = 'hide'}
 # create table using ARD-first approach (ARD -> table)
-tbl <- 
+tbl <-
   tbl_ard_hierarchical(
     ard,
     variables = c(AEBODSYS, FMQ01NAM, AEDECOD),
