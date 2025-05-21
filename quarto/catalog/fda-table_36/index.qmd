@@ -1,0 +1,78 @@
+---
+title: FDA Table 36
+subtitle: Patients With Adverse Events by System Organ Class and Preferred Term, Safety Population, Pooled Analysis (or Trial X)
+categories: [table, FDA, safety, adverse events]
+---
+
+::: panel-tabset
+## Table Preview
+
+```{r img, echo=FALSE, fig.align='center', out.width='45%'}
+knitr::include_graphics("result.png")
+```
+
+## Setup
+
+```{r setup, message=FALSE}
+# Load libraries & data -------------------------------------
+library(dplyr)
+library(cards)
+library(gtsummary)
+
+adae <- random.cdisc.data::cadae
+adsl <- random.cdisc.data::cadsl
+
+# Pre-processing --------------------------------------------
+adsl <- adsl |>
+  filter(SAFFL == "Y") # safety population
+
+data <- adae |> 
+  filter(SAFFL == "Y") # safety population
+```
+
+## Build ARD
+
+```{r ard, message=FALSE, warning=FALSE, results='hide'}
+ard <- ard_stack_hierarchical(
+  data,
+  variables = c(AESOC, AEDECOD),
+  by = ARM,
+  id = USUBJID,
+  denominator = adsl
+)
+
+ard
+```
+
+```{r, echo=FALSE}
+# Print ARD
+withr::local_options(width = 9999)
+print(ard, columns = "all", n = 40)
+```
+
+## Build Table
+
+```{r tbl, results = 'hide'}
+# create table using ARD-first approach (ARD -> table)
+tbl <- 
+  tbl_ard_hierarchical(
+    ard,
+    variables = c(AESOC, AEDECOD),
+    by = ARM,
+    # add custom variable labels
+    label = list(
+      AESOC = "System Organ Class",
+      AEDECOD = "Preferred Term"
+    )
+  )
+
+tbl
+```
+
+```{r eval=FALSE, include=FALSE}
+gt::gtsave(as_gt(tbl), filename = "result.png")
+```
+
+```{r img, echo=FALSE, fig.align='center', out.width='45%'}
+```
+:::
