@@ -66,8 +66,8 @@ tbl <- data %>%
     include = FMQ01NAM,
     denominator = adsl,
     overall_row = FALSE,
-  ) %>% 
-  modify_header(label = "**Body System or Organ Class**  \n    **FMQ(Narrow)**")%>%
+  ) %>%
+  modify_header(label = "**Body System or Organ Class**  \n    **FMQ(Narrow)**") %>%
   remove_footnote_header(columns = everything())
 
 tbl
