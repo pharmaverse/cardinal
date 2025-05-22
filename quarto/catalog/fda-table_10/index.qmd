@@ -1,0 +1,83 @@
+---
+title: FDA Table 10
+subtitle: Patients With Serious Adverse Events by System Organ Class and FDA Medical Query (Narrow), Safety Population, Pooled Analyses
+categories: [table, FDA, safety, exposure]
+---
+
+::: panel-tabset
+## Table Preview
+
+```{r img, echo=FALSE, fig.align='center', out.width='60%'}
+knitr::include_graphics("result.png")
+```
+
+## Setup
+
+```{r setup, message=FALSE}
+# Load libraries & data -------------------------------------
+library(dplyr)
+library(cards)
+library(gtsummary)
+
+adsl <- random.cdisc.data::cadsl
+adae <- random.cdisc.data::cadae
+
+# Pre-Processing - FMQ information
+set.seed(1)
+adae <- adae %>%
+  mutate(
+    FMQ01SC = sample(c("NARROW", "BROAD"), size = nrow(adae), replace = TRUE),
+    FMQ01NAM = sample(c("FMQ1", "FMQ2", "FMQ3"), size = nrow(adae), replace = TRUE)
+  )
+# Use safety population, Serious Adverse Event only and Narrow FMQ
+data <- adae %>%
+  dplyr::filter(SAFFL == "Y", AESER == "Y", FMQ01SC == "NARROW")
+```
+
+## Build ARD
+
+```{r ard, message=FALSE, warning=FALSE, results='hide'}
+# Stack ARD results of two analyses
+ard <- ard_stack_hierarchical(
+  data,
+  variables = c(AEBODSYS, FMQ01NAM),
+  by = TRT01A,
+  denominator = adsl,
+  id = USUBJID
+)
+
+ard
+```
+
+```{r, echo=FALSE}
+# Print ARD
+withr::local_options(width = 9999)
+print(ard, columns = "all", n = 40)
+```
+
+## Build Table
+
+```{r tbl, results = 'hide'}
+tbl <- data %>%
+  tbl_hierarchical(
+    variables = c(AEBODSYS, FMQ01NAM),
+    by = TRT01A,
+    id = USUBJID,
+    include = FMQ01NAM,
+    denominator = adsl,
+    overall_row = FALSE,
+  ) %>% 
+  modify_header(label = "**Body System or Organ Class**  \n    **FMQ(Narrow)**")%>%
+  remove_footnote_header(columns = everything())
+
+tbl
+```
+
+```{r eval=FALSE, include=FALSE}
+# Run chunk locally to generate image file
+gt::gtsave(as_gt(tbl), filename = "result.png")
+```
+
+```{r img, echo=FALSE, fig.align='center', out.width='60%'}
+```
+:::
