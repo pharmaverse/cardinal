@@ -1,8 +1,8 @@
 Type: Package
 Package: cardinal
 Title: FDA Safety Tables and Figures
-Version: 0.1.0.9065
-Date: 2025-05-13
+Version: 0.1.0.9066
+Date: 2025-05-22
 Authors@R:
     person("Pawel", "Rucki", , "pawel.rucki@roche.com", role = c("aut", "cre"))
 Description: R package with implementation of Safety Tables and Figures
@@ -36,6 +36,7 @@ Imports:
     Tplyr (>= 1.2.1)
 Suggests:
     knitr (>= 1.42),
+    pharmaverseadam (>= 1.1.0),
     random.cdisc.data (>= 0.3.15),
     svglite (>= 2.1.2),
     testthat (>= 3.1.9),
