@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.4.555">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>cardinal - FDA Table 11</title>
+<title>cardinal - FDA Table 36</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -126,8 +126,8 @@ cookieconsent.run({
 });
 </script><style>html{ scroll-behavior: smooth; }</style>
 <link rel="stylesheet" href="../../../quarto/assets/style.scss">
-<meta property="og:title" content="cardinal - FDA Table 11">
-<meta property="og:description" content="Patients with FDA Medical Query (Narrow) Leading to Treatment Discontinuation, Safety Population, Pooled Analyses">
+<meta property="og:title" content="cardinal - FDA Table 36">
+<meta property="og:description" content="Patients With Adverse Events by System Organ Class and Preferred Term, Safety Population, Pooled Analysis (or Trial X)">
 <meta property="og:site_name" content="cardinal">
 </head>
 <body class="nav-fixed">
@@ -206,12 +206,13 @@ cookieconsent.run({
     
 <!-- main -->
 <main class="content column-page" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">FDA Table 11</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
-<p class="subtitle lead">Patients with FDA Medical Query (Narrow) Leading to Treatment Discontinuation, Safety Population, Pooled Analyses</p>
+<div class="quarto-title-block"><div><h1 class="title">FDA Table 36</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
+<p class="subtitle lead">Patients With Adverse Events by System Organ Class and Preferred Term, Safety Population, Pooled Analysis (or Trial X)</p>
   <div class="quarto-categories">
     <div class="quarto-category">table</div>
     <div class="quarto-category">FDA</div>
     <div class="quarto-category">safety</div>
+    <div class="quarto-category">adverse events</div>
   </div>
   </div>
 
@@ -238,7 +239,7 @@ cookieconsent.run({
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="result.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+<figure class="figure"><p><img src="result.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:45.0%"></p>
 </figure>
 </div>
 </div>
@@ -251,30 +252,15 @@ cookieconsent.run({
 <span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(cards)</span>
 <span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(gtsummary)</span>
 <span id="cb1-5"><a href="#cb1-5"></a></span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb1-6"><a href="#cb1-6"></a>adae <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadae</span>
 <span id="cb1-7"><a href="#cb1-7"></a>adsl <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadsl</span>
-<span id="cb1-8"><a href="#cb1-8"></a>adae <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadae <span class="sc">%&gt;%</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a>  <span class="fu">rename</span>(<span class="at">FMQ01SC =</span> SMQ01SC) <span class="sc">%&gt;%</span></span>
-<span id="cb1-10"><a href="#cb1-10"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb1-11"><a href="#cb1-11"></a>    <span class="at">AESER =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"Y"</span>, <span class="st">"N"</span>), <span class="at">size =</span> <span class="fu">nrow</span>(.), <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb1-12"><a href="#cb1-12"></a>    <span class="at">FMQ01NAM =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"FMQ1"</span>, <span class="st">"FMQ2"</span>, <span class="st">"FMQ3"</span>), <span class="at">size =</span> <span class="fu">nrow</span>(.), <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-13"><a href="#cb1-13"></a>  )</span>
-<span id="cb1-14"><a href="#cb1-14"></a>adae<span class="sc">$</span>DCSREAS[<span class="fu">is.na</span>(adae<span class="sc">$</span>DCSREAS)] <span class="ot">&lt;-</span> <span class="st">"ADVERSE EVENT"</span></span>
-<span id="cb1-15"><a href="#cb1-15"></a>adae<span class="sc">$</span>FMQ01SC[<span class="fu">is.na</span>(adae<span class="sc">$</span>FMQ01SC)] <span class="ot">&lt;-</span> <span class="st">"NARROW"</span></span>
-<span id="cb1-16"><a href="#cb1-16"></a></span>
-<span id="cb1-17"><a href="#cb1-17"></a><span class="co"># Pre-processing --------------------------------------------</span></span>
-<span id="cb1-18"><a href="#cb1-18"></a>adsl <span class="ot">&lt;-</span> adsl <span class="sc">%&gt;%</span></span>
-<span id="cb1-19"><a href="#cb1-19"></a>  <span class="fu">filter</span>(SAFFL <span class="sc">==</span> <span class="st">"Y"</span>) <span class="co"># safety population</span></span>
-<span id="cb1-20"><a href="#cb1-20"></a></span>
-<span id="cb1-21"><a href="#cb1-21"></a>data <span class="ot">&lt;-</span> adae <span class="sc">%&gt;%</span></span>
-<span id="cb1-22"><a href="#cb1-22"></a>  <span class="fu">filter</span>(</span>
-<span id="cb1-23"><a href="#cb1-23"></a>    <span class="co"># safety population</span></span>
-<span id="cb1-24"><a href="#cb1-24"></a>    SAFFL <span class="sc">==</span> <span class="st">"Y"</span>,</span>
-<span id="cb1-25"><a href="#cb1-25"></a>    <span class="co"># narrow FMQ</span></span>
-<span id="cb1-26"><a href="#cb1-26"></a>    FMQ01SC <span class="sc">==</span> <span class="st">"NARROW"</span>,</span>
-<span id="cb1-27"><a href="#cb1-27"></a>    <span class="co"># discontinuation due to AE</span></span>
-<span id="cb1-28"><a href="#cb1-28"></a>    DCSREAS <span class="sc">==</span> <span class="st">"ADVERSE EVENT"</span></span>
-<span id="cb1-29"><a href="#cb1-29"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-8"><a href="#cb1-8"></a></span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="co"># Pre-processing --------------------------------------------</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a>adsl <span class="ot">&lt;-</span> adsl <span class="sc">|&gt;</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a>  <span class="fu">filter</span>(SAFFL <span class="sc">==</span> <span class="st">"Y"</span>) <span class="co"># safety population</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a></span>
+<span id="cb1-13"><a href="#cb1-13"></a>data <span class="ot">&lt;-</span> adae <span class="sc">|&gt;</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a>  <span class="fu">filter</span>(SAFFL <span class="sc">==</span> <span class="st">"Y"</span>) <span class="co"># safety population</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </div>
@@ -282,10 +268,10 @@ cookieconsent.run({
 <div class="cell">
 <details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>ard <span class="ot">&lt;-</span> <span class="fu">ard_stack_hierarchical</span>(</span>
 <span id="cb2-2"><a href="#cb2-2"></a>  data,</span>
-<span id="cb2-3"><a href="#cb2-3"></a>  <span class="at">variables =</span> <span class="fu">c</span>(AEBODSYS, FMQ01NAM),</span>
-<span id="cb2-4"><a href="#cb2-4"></a>  <span class="at">by =</span> TRT01A,</span>
-<span id="cb2-5"><a href="#cb2-5"></a>  <span class="at">denominator =</span> adsl,</span>
-<span id="cb2-6"><a href="#cb2-6"></a>  <span class="at">id =</span> USUBJID</span>
+<span id="cb2-3"><a href="#cb2-3"></a>  <span class="at">variables =</span> <span class="fu">c</span>(AESOC, AEDECOD),</span>
+<span id="cb2-4"><a href="#cb2-4"></a>  <span class="at">by =</span> ARM,</span>
+<span id="cb2-5"><a href="#cb2-5"></a>  <span class="at">id =</span> USUBJID,</span>
+<span id="cb2-6"><a href="#cb2-6"></a>  <span class="at">denominator =</span> adsl</span>
 <span id="cb2-7"><a href="#cb2-7"></a>)</span>
 <span id="cb2-8"><a href="#cb2-8"></a></span>
 <span id="cb2-9"><a href="#cb2-9"></a>ard</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -293,53 +279,53 @@ cookieconsent.run({
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stderr">
-<pre><code>{cards} data frame: 225 x 13</code></pre>
+<pre><code>{cards} data frame: 135 x 13</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   group1 group1_level   group2 group2_level variable variable_level   context stat_name stat_label  stat fmt_fn warning error
-1    &lt;NA&gt;                  &lt;NA&gt;                TRT01A      A: Drug X categori…         n          n   134      0              
-2    &lt;NA&gt;                  &lt;NA&gt;                TRT01A      A: Drug X categori…         N          N   400      0              
-3    &lt;NA&gt;                  &lt;NA&gt;                TRT01A      A: Drug X categori…         p          % 0.335   &lt;fn&gt;              
-4    &lt;NA&gt;                  &lt;NA&gt;                TRT01A      B: Place… categori…         n          n   134      0              
-5    &lt;NA&gt;                  &lt;NA&gt;                TRT01A      B: Place… categori…         N          N   400      0              
-6    &lt;NA&gt;                  &lt;NA&gt;                TRT01A      B: Place… categori…         p          % 0.335   &lt;fn&gt;              
-7    &lt;NA&gt;                  &lt;NA&gt;                TRT01A      C: Combi… categori…         n          n   132      0              
-8    &lt;NA&gt;                  &lt;NA&gt;                TRT01A      C: Combi… categori…         N          N   400      0              
-9    &lt;NA&gt;                  &lt;NA&gt;                TRT01A      C: Combi… categori…         p          %  0.33   &lt;fn&gt;              
-10 TRT01A    A: Drug X     &lt;NA&gt;              AEBODSYS         cl A.1 hierarch…         n          n    53      0              
-11 TRT01A    A: Drug X     &lt;NA&gt;              AEBODSYS         cl A.1 hierarch…         N          N   134      0              
-12 TRT01A    A: Drug X     &lt;NA&gt;              AEBODSYS         cl A.1 hierarch…         p          % 0.396   &lt;fn&gt;              
-13 TRT01A    B: Place…     &lt;NA&gt;              AEBODSYS         cl A.1 hierarch…         n          n    55      0              
-14 TRT01A    B: Place…     &lt;NA&gt;              AEBODSYS         cl A.1 hierarch…         N          N   134      0              
-15 TRT01A    B: Place…     &lt;NA&gt;              AEBODSYS         cl A.1 hierarch…         p          %  0.41   &lt;fn&gt;              
-16 TRT01A    C: Combi…     &lt;NA&gt;              AEBODSYS         cl A.1 hierarch…         n          n    69      0              
-17 TRT01A    C: Combi…     &lt;NA&gt;              AEBODSYS         cl A.1 hierarch…         N          N   132      0              
-18 TRT01A    C: Combi…     &lt;NA&gt;              AEBODSYS         cl A.1 hierarch…         p          % 0.523   &lt;fn&gt;              
-19 TRT01A    A: Drug X AEBODSYS       cl A.1 FMQ01NAM           FMQ1 hierarch…         n          n    22      0              
-20 TRT01A    A: Drug X AEBODSYS       cl A.1 FMQ01NAM           FMQ1 hierarch…         N          N   134      0              
-21 TRT01A    A: Drug X AEBODSYS       cl A.1 FMQ01NAM           FMQ1 hierarch…         p          % 0.164   &lt;fn&gt;              
-22 TRT01A    B: Place… AEBODSYS       cl A.1 FMQ01NAM           FMQ1 hierarch…         n          n    21      0              
-23 TRT01A    B: Place… AEBODSYS       cl A.1 FMQ01NAM           FMQ1 hierarch…         N          N   134      0              
-24 TRT01A    B: Place… AEBODSYS       cl A.1 FMQ01NAM           FMQ1 hierarch…         p          % 0.157   &lt;fn&gt;              
-25 TRT01A    C: Combi… AEBODSYS       cl A.1 FMQ01NAM           FMQ1 hierarch…         n          n    37      0              
-26 TRT01A    C: Combi… AEBODSYS       cl A.1 FMQ01NAM           FMQ1 hierarch…         N          N   132      0              
-27 TRT01A    C: Combi… AEBODSYS       cl A.1 FMQ01NAM           FMQ1 hierarch…         p          %  0.28   &lt;fn&gt;              
-28 TRT01A    A: Drug X AEBODSYS       cl A.1 FMQ01NAM           FMQ2 hierarch…         n          n    24      0              
-29 TRT01A    A: Drug X AEBODSYS       cl A.1 FMQ01NAM           FMQ2 hierarch…         N          N   134      0              
-30 TRT01A    A: Drug X AEBODSYS       cl A.1 FMQ01NAM           FMQ2 hierarch…         p          % 0.179   &lt;fn&gt;              
-31 TRT01A    B: Place… AEBODSYS       cl A.1 FMQ01NAM           FMQ2 hierarch…         n          n    31      0              
-32 TRT01A    B: Place… AEBODSYS       cl A.1 FMQ01NAM           FMQ2 hierarch…         N          N   134      0              
-33 TRT01A    B: Place… AEBODSYS       cl A.1 FMQ01NAM           FMQ2 hierarch…         p          % 0.231   &lt;fn&gt;              
-34 TRT01A    C: Combi… AEBODSYS       cl A.1 FMQ01NAM           FMQ2 hierarch…         n          n    33      0              
-35 TRT01A    C: Combi… AEBODSYS       cl A.1 FMQ01NAM           FMQ2 hierarch…         N          N   132      0              
-36 TRT01A    C: Combi… AEBODSYS       cl A.1 FMQ01NAM           FMQ2 hierarch…         p          %  0.25   &lt;fn&gt;              
-37 TRT01A    A: Drug X AEBODSYS       cl A.1 FMQ01NAM           FMQ3 hierarch…         n          n    28      0              
-38 TRT01A    A: Drug X AEBODSYS       cl A.1 FMQ01NAM           FMQ3 hierarch…         N          N   134      0              
-39 TRT01A    A: Drug X AEBODSYS       cl A.1 FMQ01NAM           FMQ3 hierarch…         p          % 0.209   &lt;fn&gt;              
-40 TRT01A    B: Place… AEBODSYS       cl A.1 FMQ01NAM           FMQ3 hierarch…         n          n    25      0              </code></pre>
+<pre><code>   group1 group1_level group2 group2_level variable variable_level   context stat_name stat_label  stat fmt_fn warning error
+1    &lt;NA&gt;                &lt;NA&gt;                   ARM      A: Drug X categori…         n          n   134      0              
+2    &lt;NA&gt;                &lt;NA&gt;                   ARM      A: Drug X categori…         N          N   400      0              
+3    &lt;NA&gt;                &lt;NA&gt;                   ARM      A: Drug X categori…         p          % 0.335   &lt;fn&gt;              
+4    &lt;NA&gt;                &lt;NA&gt;                   ARM      B: Place… categori…         n          n   134      0              
+5    &lt;NA&gt;                &lt;NA&gt;                   ARM      B: Place… categori…         N          N   400      0              
+6    &lt;NA&gt;                &lt;NA&gt;                   ARM      B: Place… categori…         p          % 0.335   &lt;fn&gt;              
+7    &lt;NA&gt;                &lt;NA&gt;                   ARM      C: Combi… categori…         n          n   132      0              
+8    &lt;NA&gt;                &lt;NA&gt;                   ARM      C: Combi… categori…         N          N   400      0              
+9    &lt;NA&gt;                &lt;NA&gt;                   ARM      C: Combi… categori…         p          %  0.33   &lt;fn&gt;              
+10    ARM    A: Drug X   &lt;NA&gt;                 AESOC           cl A hierarch…         n          n    78      0              
+11    ARM    A: Drug X   &lt;NA&gt;                 AESOC           cl A hierarch…         N          N   134      0              
+12    ARM    A: Drug X   &lt;NA&gt;                 AESOC           cl A hierarch…         p          % 0.582   &lt;fn&gt;              
+13    ARM    B: Place…   &lt;NA&gt;                 AESOC           cl A hierarch…         n          n    75      0              
+14    ARM    B: Place…   &lt;NA&gt;                 AESOC           cl A hierarch…         N          N   134      0              
+15    ARM    B: Place…   &lt;NA&gt;                 AESOC           cl A hierarch…         p          %  0.56   &lt;fn&gt;              
+16    ARM    C: Combi…   &lt;NA&gt;                 AESOC           cl A hierarch…         n          n    89      0              
+17    ARM    C: Combi…   &lt;NA&gt;                 AESOC           cl A hierarch…         N          N   132      0              
+18    ARM    C: Combi…   &lt;NA&gt;                 AESOC           cl A hierarch…         p          % 0.674   &lt;fn&gt;              
+19    ARM    A: Drug X  AESOC         cl A  AEDECOD      dcd A.1.… hierarch…         n          n    50      0              
+20    ARM    A: Drug X  AESOC         cl A  AEDECOD      dcd A.1.… hierarch…         N          N   134      0              
+21    ARM    A: Drug X  AESOC         cl A  AEDECOD      dcd A.1.… hierarch…         p          % 0.373   &lt;fn&gt;              
+22    ARM    B: Place…  AESOC         cl A  AEDECOD      dcd A.1.… hierarch…         n          n    45      0              
+23    ARM    B: Place…  AESOC         cl A  AEDECOD      dcd A.1.… hierarch…         N          N   134      0              
+24    ARM    B: Place…  AESOC         cl A  AEDECOD      dcd A.1.… hierarch…         p          % 0.336   &lt;fn&gt;              
+25    ARM    C: Combi…  AESOC         cl A  AEDECOD      dcd A.1.… hierarch…         n          n    63      0              
+26    ARM    C: Combi…  AESOC         cl A  AEDECOD      dcd A.1.… hierarch…         N          N   132      0              
+27    ARM    C: Combi…  AESOC         cl A  AEDECOD      dcd A.1.… hierarch…         p          % 0.477   &lt;fn&gt;              
+28    ARM    A: Drug X  AESOC         cl A  AEDECOD      dcd A.1.… hierarch…         n          n    48      0              
+29    ARM    A: Drug X  AESOC         cl A  AEDECOD      dcd A.1.… hierarch…         N          N   134      0              
+30    ARM    A: Drug X  AESOC         cl A  AEDECOD      dcd A.1.… hierarch…         p          % 0.358   &lt;fn&gt;              
+31    ARM    B: Place…  AESOC         cl A  AEDECOD      dcd A.1.… hierarch…         n          n    48      0              
+32    ARM    B: Place…  AESOC         cl A  AEDECOD      dcd A.1.… hierarch…         N          N   134      0              
+33    ARM    B: Place…  AESOC         cl A  AEDECOD      dcd A.1.… hierarch…         p          % 0.358   &lt;fn&gt;              
+34    ARM    C: Combi…  AESOC         cl A  AEDECOD      dcd A.1.… hierarch…         n          n    50      0              
+35    ARM    C: Combi…  AESOC         cl A  AEDECOD      dcd A.1.… hierarch…         N          N   132      0              
+36    ARM    C: Combi…  AESOC         cl A  AEDECOD      dcd A.1.… hierarch…         p          % 0.379   &lt;fn&gt;              
+37    ARM    A: Drug X   &lt;NA&gt;                 AESOC           cl B hierarch…         n          n    96      0              
+38    ARM    A: Drug X   &lt;NA&gt;                 AESOC           cl B hierarch…         N          N   134      0              
+39    ARM    A: Drug X   &lt;NA&gt;                 AESOC           cl B hierarch…         p          % 0.716   &lt;fn&gt;              
+40    ARM    B: Place…   &lt;NA&gt;                 AESOC           cl B hierarch…         n          n    89      0              </code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>ℹ 185 more rows</code></pre>
+<pre><code>ℹ 95 more rows</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>ℹ Use `print(n = ...)` to see more rows</code></pre>
@@ -348,24 +334,26 @@ cookieconsent.run({
 </div>
 <div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
 <div class="cell">
-<details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>tbl <span class="ot">&lt;-</span> <span class="fu">tbl_hierarchical</span>(</span>
-<span id="cb7-2"><a href="#cb7-2"></a>  data,</span>
-<span id="cb7-3"><a href="#cb7-3"></a>  <span class="at">variables =</span> <span class="fu">c</span>(AEBODSYS, FMQ01NAM),</span>
-<span id="cb7-4"><a href="#cb7-4"></a>  <span class="at">by =</span> TRT01A,</span>
-<span id="cb7-5"><a href="#cb7-5"></a>  <span class="at">id =</span> USUBJID,</span>
-<span id="cb7-6"><a href="#cb7-6"></a>  <span class="at">denominator =</span> adsl,</span>
-<span id="cb7-7"><a href="#cb7-7"></a>  <span class="at">overall_row =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb7-8"><a href="#cb7-8"></a>  <span class="at">label =</span> <span class="fu">list</span>(<span class="at">..ard_hierarchical_overall.. =</span> <span class="st">"Patients with at least one AE leading to discontinuation"</span>)</span>
-<span id="cb7-9"><a href="#cb7-9"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb7-10"><a href="#cb7-10"></a>  <span class="fu">modify_header</span>(<span class="at">FMQ01NAM =</span> <span class="st">"FMQ (Narrow)"</span>)</span>
-<span id="cb7-11"><a href="#cb7-11"></a></span>
-<span id="cb7-12"><a href="#cb7-12"></a>tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># create table using ARD-first approach (ARD -&gt; table)</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>tbl <span class="ot">&lt;-</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">tbl_ard_hierarchical</span>(</span>
+<span id="cb7-4"><a href="#cb7-4"></a>    ard,</span>
+<span id="cb7-5"><a href="#cb7-5"></a>    <span class="at">variables =</span> <span class="fu">c</span>(AESOC, AEDECOD),</span>
+<span id="cb7-6"><a href="#cb7-6"></a>    <span class="at">by =</span> ARM,</span>
+<span id="cb7-7"><a href="#cb7-7"></a>    <span class="co"># add custom variable labels</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a>    <span class="at">label =</span> <span class="fu">list</span>(</span>
+<span id="cb7-9"><a href="#cb7-9"></a>      <span class="at">AESOC =</span> <span class="st">"System Organ Class"</span>,</span>
+<span id="cb7-10"><a href="#cb7-10"></a>      <span class="at">AEDECOD =</span> <span class="st">"Preferred Term"</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a>    )</span>
+<span id="cb7-12"><a href="#cb7-12"></a>  )</span>
+<span id="cb7-13"><a href="#cb7-13"></a></span>
+<span id="cb7-14"><a href="#cb7-14"></a>tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="result.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+<figure class="figure"><p><img src="result.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:45.0%"></p>
 </figure>
 </div>
 </div>
@@ -983,15 +971,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb8" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1"></a><span class="co">---</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="an">title:</span><span class="co"> FDA Table 11</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="an">subtitle:</span><span class="co"> Patients with FDA Medical Query (Narrow) Leading to Treatment Discontinuation, Safety Population, Pooled Analyses</span></span>
-<span id="cb8-4"><a href="#cb8-4"></a><span class="an">categories:</span><span class="co"> [table, FDA, safety]</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="an">title:</span><span class="co"> FDA Table 36</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="an">subtitle:</span><span class="co"> Patients With Adverse Events by System Organ Class and Preferred Term, Safety Population, Pooled Analysis (or Trial X)</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="an">categories:</span><span class="co"> [table, FDA, safety, adverse events]</span></span>
 <span id="cb8-5"><a href="#cb8-5"></a><span class="co">---</span></span>
 <span id="cb8-6"><a href="#cb8-6"></a></span>
 <span id="cb8-7"><a href="#cb8-7"></a>::: panel-tabset</span>
 <span id="cb8-8"><a href="#cb8-8"></a><span class="fu">## Table Preview</span></span>
 <span id="cb8-9"><a href="#cb8-9"></a></span>
-<span id="cb8-10"><a href="#cb8-10"></a><span class="in">```{r img, echo=FALSE, fig.align='center', out.width='60%'}</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a><span class="in">```{r img, echo=FALSE, fig.align='center', out.width='45%'}</span></span>
 <span id="cb8-11"><a href="#cb8-11"></a><span class="in">knitr::include_graphics("result.png")</span></span>
 <span id="cb8-12"><a href="#cb8-12"></a><span class="in">```</span></span>
 <span id="cb8-13"><a href="#cb8-13"></a></span>
@@ -1003,77 +991,63 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb8-19"><a href="#cb8-19"></a><span class="in">library(cards)</span></span>
 <span id="cb8-20"><a href="#cb8-20"></a><span class="in">library(gtsummary)</span></span>
 <span id="cb8-21"><a href="#cb8-21"></a></span>
-<span id="cb8-22"><a href="#cb8-22"></a><span class="in">set.seed(1)</span></span>
+<span id="cb8-22"><a href="#cb8-22"></a><span class="in">adae &lt;- random.cdisc.data::cadae</span></span>
 <span id="cb8-23"><a href="#cb8-23"></a><span class="in">adsl &lt;- random.cdisc.data::cadsl</span></span>
-<span id="cb8-24"><a href="#cb8-24"></a><span class="in">adae &lt;- random.cdisc.data::cadae %&gt;%</span></span>
-<span id="cb8-25"><a href="#cb8-25"></a><span class="in">  rename(FMQ01SC = SMQ01SC) %&gt;%</span></span>
-<span id="cb8-26"><a href="#cb8-26"></a><span class="in">  mutate(</span></span>
-<span id="cb8-27"><a href="#cb8-27"></a><span class="in">    AESER = sample(c("Y", "N"), size = nrow(.), replace = TRUE),</span></span>
-<span id="cb8-28"><a href="#cb8-28"></a><span class="in">    FMQ01NAM = sample(c("FMQ1", "FMQ2", "FMQ3"), size = nrow(.), replace = TRUE)</span></span>
-<span id="cb8-29"><a href="#cb8-29"></a><span class="in">  )</span></span>
-<span id="cb8-30"><a href="#cb8-30"></a><span class="in">adae$DCSREAS[is.na(adae$DCSREAS)] &lt;- "ADVERSE EVENT"</span></span>
-<span id="cb8-31"><a href="#cb8-31"></a><span class="in">adae$FMQ01SC[is.na(adae$FMQ01SC)] &lt;- "NARROW"</span></span>
+<span id="cb8-24"><a href="#cb8-24"></a></span>
+<span id="cb8-25"><a href="#cb8-25"></a><span class="in"># Pre-processing --------------------------------------------</span></span>
+<span id="cb8-26"><a href="#cb8-26"></a><span class="in">adsl &lt;- adsl |&gt;</span></span>
+<span id="cb8-27"><a href="#cb8-27"></a><span class="in">  filter(SAFFL == "Y") # safety population</span></span>
+<span id="cb8-28"><a href="#cb8-28"></a></span>
+<span id="cb8-29"><a href="#cb8-29"></a><span class="in">data &lt;- adae |&gt;</span></span>
+<span id="cb8-30"><a href="#cb8-30"></a><span class="in">  filter(SAFFL == "Y") # safety population</span></span>
+<span id="cb8-31"><a href="#cb8-31"></a><span class="in">```</span></span>
 <span id="cb8-32"><a href="#cb8-32"></a></span>
-<span id="cb8-33"><a href="#cb8-33"></a><span class="in"># Pre-processing --------------------------------------------</span></span>
-<span id="cb8-34"><a href="#cb8-34"></a><span class="in">adsl &lt;- adsl %&gt;%</span></span>
-<span id="cb8-35"><a href="#cb8-35"></a><span class="in">  filter(SAFFL == "Y") # safety population</span></span>
-<span id="cb8-36"><a href="#cb8-36"></a></span>
-<span id="cb8-37"><a href="#cb8-37"></a><span class="in">data &lt;- adae %&gt;%</span></span>
-<span id="cb8-38"><a href="#cb8-38"></a><span class="in">  filter(</span></span>
-<span id="cb8-39"><a href="#cb8-39"></a><span class="in">    # safety population</span></span>
-<span id="cb8-40"><a href="#cb8-40"></a><span class="in">    SAFFL == "Y",</span></span>
-<span id="cb8-41"><a href="#cb8-41"></a><span class="in">    # narrow FMQ</span></span>
-<span id="cb8-42"><a href="#cb8-42"></a><span class="in">    FMQ01SC == "NARROW",</span></span>
-<span id="cb8-43"><a href="#cb8-43"></a><span class="in">    # discontinuation due to AE</span></span>
-<span id="cb8-44"><a href="#cb8-44"></a><span class="in">    DCSREAS == "ADVERSE EVENT"</span></span>
-<span id="cb8-45"><a href="#cb8-45"></a><span class="in">  )</span></span>
-<span id="cb8-46"><a href="#cb8-46"></a><span class="in">```</span></span>
-<span id="cb8-47"><a href="#cb8-47"></a></span>
-<span id="cb8-48"><a href="#cb8-48"></a><span class="fu">## Build ARD</span></span>
-<span id="cb8-49"><a href="#cb8-49"></a></span>
-<span id="cb8-50"><a href="#cb8-50"></a><span class="in">```{r ard, message=FALSE, warning=FALSE, results='hide'}</span></span>
-<span id="cb8-51"><a href="#cb8-51"></a><span class="in">ard &lt;- ard_stack_hierarchical(</span></span>
-<span id="cb8-52"><a href="#cb8-52"></a><span class="in">  data,</span></span>
-<span id="cb8-53"><a href="#cb8-53"></a><span class="in">  variables = c(AEBODSYS, FMQ01NAM),</span></span>
-<span id="cb8-54"><a href="#cb8-54"></a><span class="in">  by = TRT01A,</span></span>
-<span id="cb8-55"><a href="#cb8-55"></a><span class="in">  denominator = adsl,</span></span>
-<span id="cb8-56"><a href="#cb8-56"></a><span class="in">  id = USUBJID</span></span>
-<span id="cb8-57"><a href="#cb8-57"></a><span class="in">)</span></span>
-<span id="cb8-58"><a href="#cb8-58"></a></span>
-<span id="cb8-59"><a href="#cb8-59"></a><span class="in">ard</span></span>
-<span id="cb8-60"><a href="#cb8-60"></a><span class="in">```</span></span>
-<span id="cb8-61"><a href="#cb8-61"></a></span>
-<span id="cb8-62"><a href="#cb8-62"></a><span class="in">```{r, echo=FALSE}</span></span>
-<span id="cb8-63"><a href="#cb8-63"></a><span class="in"># Print ARD</span></span>
-<span id="cb8-64"><a href="#cb8-64"></a><span class="in">withr::local_options(width = 9999)</span></span>
-<span id="cb8-65"><a href="#cb8-65"></a><span class="in">print(ard, columns = "all", n = 40)</span></span>
-<span id="cb8-66"><a href="#cb8-66"></a><span class="in">```</span></span>
-<span id="cb8-67"><a href="#cb8-67"></a></span>
-<span id="cb8-68"><a href="#cb8-68"></a><span class="fu">## Build Table</span></span>
-<span id="cb8-69"><a href="#cb8-69"></a></span>
-<span id="cb8-70"><a href="#cb8-70"></a><span class="in">```{r tbl, results = 'hide'}</span></span>
-<span id="cb8-71"><a href="#cb8-71"></a><span class="in">tbl &lt;- tbl_hierarchical(</span></span>
-<span id="cb8-72"><a href="#cb8-72"></a><span class="in">  data,</span></span>
-<span id="cb8-73"><a href="#cb8-73"></a><span class="in">  variables = c(AEBODSYS, FMQ01NAM),</span></span>
-<span id="cb8-74"><a href="#cb8-74"></a><span class="in">  by = TRT01A,</span></span>
-<span id="cb8-75"><a href="#cb8-75"></a><span class="in">  id = USUBJID,</span></span>
-<span id="cb8-76"><a href="#cb8-76"></a><span class="in">  denominator = adsl,</span></span>
-<span id="cb8-77"><a href="#cb8-77"></a><span class="in">  overall_row = TRUE,</span></span>
-<span id="cb8-78"><a href="#cb8-78"></a><span class="in">  label = list(..ard_hierarchical_overall.. = "Patients with at least one AE leading to discontinuation")</span></span>
-<span id="cb8-79"><a href="#cb8-79"></a><span class="in">) %&gt;%</span></span>
-<span id="cb8-80"><a href="#cb8-80"></a><span class="in">  modify_header(FMQ01NAM = "FMQ (Narrow)")</span></span>
-<span id="cb8-81"><a href="#cb8-81"></a></span>
-<span id="cb8-82"><a href="#cb8-82"></a><span class="in">tbl</span></span>
-<span id="cb8-83"><a href="#cb8-83"></a><span class="in">```</span></span>
-<span id="cb8-84"><a href="#cb8-84"></a></span>
-<span id="cb8-85"><a href="#cb8-85"></a><span class="in">```{r eval=FALSE, include=FALSE}</span></span>
-<span id="cb8-86"><a href="#cb8-86"></a><span class="in"># Run chunk locally to generate image file</span></span>
-<span id="cb8-87"><a href="#cb8-87"></a><span class="in">gt::gtsave(as_gt(tbl), filename = "result.png")</span></span>
-<span id="cb8-88"><a href="#cb8-88"></a><span class="in">```</span></span>
-<span id="cb8-89"><a href="#cb8-89"></a></span>
-<span id="cb8-90"><a href="#cb8-90"></a><span class="in">```{r img, echo=FALSE, fig.align='center', out.width='60%'}</span></span>
-<span id="cb8-91"><a href="#cb8-91"></a><span class="in">```</span></span>
-<span id="cb8-92"><a href="#cb8-92"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-33"><a href="#cb8-33"></a><span class="fu">## Build ARD</span></span>
+<span id="cb8-34"><a href="#cb8-34"></a></span>
+<span id="cb8-35"><a href="#cb8-35"></a><span class="in">```{r ard, message=FALSE, warning=FALSE, results='hide'}</span></span>
+<span id="cb8-36"><a href="#cb8-36"></a><span class="in">ard &lt;- ard_stack_hierarchical(</span></span>
+<span id="cb8-37"><a href="#cb8-37"></a><span class="in">  data,</span></span>
+<span id="cb8-38"><a href="#cb8-38"></a><span class="in">  variables = c(AESOC, AEDECOD),</span></span>
+<span id="cb8-39"><a href="#cb8-39"></a><span class="in">  by = ARM,</span></span>
+<span id="cb8-40"><a href="#cb8-40"></a><span class="in">  id = USUBJID,</span></span>
+<span id="cb8-41"><a href="#cb8-41"></a><span class="in">  denominator = adsl</span></span>
+<span id="cb8-42"><a href="#cb8-42"></a><span class="in">)</span></span>
+<span id="cb8-43"><a href="#cb8-43"></a></span>
+<span id="cb8-44"><a href="#cb8-44"></a><span class="in">ard</span></span>
+<span id="cb8-45"><a href="#cb8-45"></a><span class="in">```</span></span>
+<span id="cb8-46"><a href="#cb8-46"></a></span>
+<span id="cb8-47"><a href="#cb8-47"></a><span class="in">```{r, echo=FALSE}</span></span>
+<span id="cb8-48"><a href="#cb8-48"></a><span class="in"># Print ARD</span></span>
+<span id="cb8-49"><a href="#cb8-49"></a><span class="in">withr::local_options(width = 9999)</span></span>
+<span id="cb8-50"><a href="#cb8-50"></a><span class="in">print(ard, columns = "all", n = 40)</span></span>
+<span id="cb8-51"><a href="#cb8-51"></a><span class="in">```</span></span>
+<span id="cb8-52"><a href="#cb8-52"></a></span>
+<span id="cb8-53"><a href="#cb8-53"></a><span class="fu">## Build Table</span></span>
+<span id="cb8-54"><a href="#cb8-54"></a></span>
+<span id="cb8-55"><a href="#cb8-55"></a><span class="in">```{r tbl, results = 'hide'}</span></span>
+<span id="cb8-56"><a href="#cb8-56"></a><span class="in"># create table using ARD-first approach (ARD -&gt; table)</span></span>
+<span id="cb8-57"><a href="#cb8-57"></a><span class="in">tbl &lt;-</span></span>
+<span id="cb8-58"><a href="#cb8-58"></a><span class="in">  tbl_ard_hierarchical(</span></span>
+<span id="cb8-59"><a href="#cb8-59"></a><span class="in">    ard,</span></span>
+<span id="cb8-60"><a href="#cb8-60"></a><span class="in">    variables = c(AESOC, AEDECOD),</span></span>
+<span id="cb8-61"><a href="#cb8-61"></a><span class="in">    by = ARM,</span></span>
+<span id="cb8-62"><a href="#cb8-62"></a><span class="in">    # add custom variable labels</span></span>
+<span id="cb8-63"><a href="#cb8-63"></a><span class="in">    label = list(</span></span>
+<span id="cb8-64"><a href="#cb8-64"></a><span class="in">      AESOC = "System Organ Class",</span></span>
+<span id="cb8-65"><a href="#cb8-65"></a><span class="in">      AEDECOD = "Preferred Term"</span></span>
+<span id="cb8-66"><a href="#cb8-66"></a><span class="in">    )</span></span>
+<span id="cb8-67"><a href="#cb8-67"></a><span class="in">  )</span></span>
+<span id="cb8-68"><a href="#cb8-68"></a></span>
+<span id="cb8-69"><a href="#cb8-69"></a><span class="in">tbl</span></span>
+<span id="cb8-70"><a href="#cb8-70"></a><span class="in">```</span></span>
+<span id="cb8-71"><a href="#cb8-71"></a></span>
+<span id="cb8-72"><a href="#cb8-72"></a><span class="in">```{r eval=FALSE, include=FALSE}</span></span>
+<span id="cb8-73"><a href="#cb8-73"></a><span class="in">gt::gtsave(as_gt(tbl), filename = "result.png")</span></span>
+<span id="cb8-74"><a href="#cb8-74"></a><span class="in">```</span></span>
+<span id="cb8-75"><a href="#cb8-75"></a></span>
+<span id="cb8-76"><a href="#cb8-76"></a><span class="in">```{r img, echo=FALSE, fig.align='center', out.width='45%'}</span></span>
+<span id="cb8-77"><a href="#cb8-77"></a><span class="in">```</span></span>
+<span id="cb8-78"><a href="#cb8-78"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">

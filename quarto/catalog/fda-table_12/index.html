@@ -256,13 +256,16 @@ cookieconsent.run({
 <span id="cb1-8"><a href="#cb1-8"></a>adae<span class="sc">$</span>DCSREAS[<span class="fu">is.na</span>(adae<span class="sc">$</span>DCSREAS)] <span class="ot">&lt;-</span> <span class="st">"ADVERSE EVENT"</span></span>
 <span id="cb1-9"><a href="#cb1-9"></a></span>
 <span id="cb1-10"><a href="#cb1-10"></a><span class="co"># Pre-processing --------------------------------------------</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a>data <span class="ot">&lt;-</span> adae <span class="sc">%&gt;%</span></span>
-<span id="cb1-12"><a href="#cb1-12"></a>  <span class="fu">filter</span>(</span>
-<span id="cb1-13"><a href="#cb1-13"></a>    <span class="co"># safety population</span></span>
-<span id="cb1-14"><a href="#cb1-14"></a>    SAFFL <span class="sc">==</span> <span class="st">"Y"</span>,</span>
-<span id="cb1-15"><a href="#cb1-15"></a>    <span class="co"># discontinuation due to AE</span></span>
-<span id="cb1-16"><a href="#cb1-16"></a>    DCSREAS <span class="sc">==</span> <span class="st">"ADVERSE EVENT"</span></span>
-<span id="cb1-17"><a href="#cb1-17"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-11"><a href="#cb1-11"></a>adsl <span class="ot">&lt;-</span> adsl <span class="sc">%&gt;%</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a>  <span class="fu">filter</span>(SAFFL <span class="sc">==</span> <span class="st">"Y"</span>) <span class="co"># safety population</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a></span>
+<span id="cb1-14"><a href="#cb1-14"></a>data <span class="ot">&lt;-</span> adae <span class="sc">%&gt;%</span></span>
+<span id="cb1-15"><a href="#cb1-15"></a>  <span class="fu">filter</span>(</span>
+<span id="cb1-16"><a href="#cb1-16"></a>    <span class="co"># safety population</span></span>
+<span id="cb1-17"><a href="#cb1-17"></a>    SAFFL <span class="sc">==</span> <span class="st">"Y"</span>,</span>
+<span id="cb1-18"><a href="#cb1-18"></a>    <span class="co"># discontinuation due to AE</span></span>
+<span id="cb1-19"><a href="#cb1-19"></a>    DCSREAS <span class="sc">==</span> <span class="st">"ADVERSE EVENT"</span></span>
+<span id="cb1-20"><a href="#cb1-20"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </div>
@@ -995,59 +998,62 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb8-24"><a href="#cb8-24"></a><span class="in">adae$DCSREAS[is.na(adae$DCSREAS)] &lt;- "ADVERSE EVENT"</span></span>
 <span id="cb8-25"><a href="#cb8-25"></a></span>
 <span id="cb8-26"><a href="#cb8-26"></a><span class="in"># Pre-processing --------------------------------------------</span></span>
-<span id="cb8-27"><a href="#cb8-27"></a><span class="in">data &lt;- adae %&gt;%</span></span>
-<span id="cb8-28"><a href="#cb8-28"></a><span class="in">  filter(</span></span>
-<span id="cb8-29"><a href="#cb8-29"></a><span class="in">    # safety population</span></span>
-<span id="cb8-30"><a href="#cb8-30"></a><span class="in">    SAFFL == "Y",</span></span>
-<span id="cb8-31"><a href="#cb8-31"></a><span class="in">    # discontinuation due to AE</span></span>
-<span id="cb8-32"><a href="#cb8-32"></a><span class="in">    DCSREAS == "ADVERSE EVENT"</span></span>
-<span id="cb8-33"><a href="#cb8-33"></a><span class="in">  )</span></span>
-<span id="cb8-34"><a href="#cb8-34"></a><span class="in">```</span></span>
-<span id="cb8-35"><a href="#cb8-35"></a></span>
-<span id="cb8-36"><a href="#cb8-36"></a><span class="fu">## Build ARD</span></span>
-<span id="cb8-37"><a href="#cb8-37"></a></span>
-<span id="cb8-38"><a href="#cb8-38"></a><span class="in">```{r ard, message=FALSE, warning=FALSE, results='hide'}</span></span>
-<span id="cb8-39"><a href="#cb8-39"></a><span class="in">ard &lt;- ard_stack_hierarchical(</span></span>
-<span id="cb8-40"><a href="#cb8-40"></a><span class="in">  data,</span></span>
-<span id="cb8-41"><a href="#cb8-41"></a><span class="in">  variables = c(AEBODSYS, AEDECOD),</span></span>
-<span id="cb8-42"><a href="#cb8-42"></a><span class="in">  by = TRT01A,</span></span>
-<span id="cb8-43"><a href="#cb8-43"></a><span class="in">  denominator = adsl,</span></span>
-<span id="cb8-44"><a href="#cb8-44"></a><span class="in">  id = USUBJID</span></span>
-<span id="cb8-45"><a href="#cb8-45"></a><span class="in">)</span></span>
-<span id="cb8-46"><a href="#cb8-46"></a></span>
-<span id="cb8-47"><a href="#cb8-47"></a><span class="in">ard</span></span>
-<span id="cb8-48"><a href="#cb8-48"></a><span class="in">```</span></span>
+<span id="cb8-27"><a href="#cb8-27"></a><span class="in">adsl &lt;- adsl %&gt;%</span></span>
+<span id="cb8-28"><a href="#cb8-28"></a><span class="in">  filter(SAFFL == "Y") # safety population</span></span>
+<span id="cb8-29"><a href="#cb8-29"></a></span>
+<span id="cb8-30"><a href="#cb8-30"></a><span class="in">data &lt;- adae %&gt;%</span></span>
+<span id="cb8-31"><a href="#cb8-31"></a><span class="in">  filter(</span></span>
+<span id="cb8-32"><a href="#cb8-32"></a><span class="in">    # safety population</span></span>
+<span id="cb8-33"><a href="#cb8-33"></a><span class="in">    SAFFL == "Y",</span></span>
+<span id="cb8-34"><a href="#cb8-34"></a><span class="in">    # discontinuation due to AE</span></span>
+<span id="cb8-35"><a href="#cb8-35"></a><span class="in">    DCSREAS == "ADVERSE EVENT"</span></span>
+<span id="cb8-36"><a href="#cb8-36"></a><span class="in">  )</span></span>
+<span id="cb8-37"><a href="#cb8-37"></a><span class="in">```</span></span>
+<span id="cb8-38"><a href="#cb8-38"></a></span>
+<span id="cb8-39"><a href="#cb8-39"></a><span class="fu">## Build ARD</span></span>
+<span id="cb8-40"><a href="#cb8-40"></a></span>
+<span id="cb8-41"><a href="#cb8-41"></a><span class="in">```{r ard, message=FALSE, warning=FALSE, results='hide'}</span></span>
+<span id="cb8-42"><a href="#cb8-42"></a><span class="in">ard &lt;- ard_stack_hierarchical(</span></span>
+<span id="cb8-43"><a href="#cb8-43"></a><span class="in">  data,</span></span>
+<span id="cb8-44"><a href="#cb8-44"></a><span class="in">  variables = c(AEBODSYS, AEDECOD),</span></span>
+<span id="cb8-45"><a href="#cb8-45"></a><span class="in">  by = TRT01A,</span></span>
+<span id="cb8-46"><a href="#cb8-46"></a><span class="in">  denominator = adsl,</span></span>
+<span id="cb8-47"><a href="#cb8-47"></a><span class="in">  id = USUBJID</span></span>
+<span id="cb8-48"><a href="#cb8-48"></a><span class="in">)</span></span>
 <span id="cb8-49"><a href="#cb8-49"></a></span>
-<span id="cb8-50"><a href="#cb8-50"></a><span class="in">```{r, echo=FALSE}</span></span>
-<span id="cb8-51"><a href="#cb8-51"></a><span class="in"># Print ARD</span></span>
-<span id="cb8-52"><a href="#cb8-52"></a><span class="in">withr::local_options(width = 9999)</span></span>
-<span id="cb8-53"><a href="#cb8-53"></a><span class="in">print(ard, columns = "all", n = 40)</span></span>
-<span id="cb8-54"><a href="#cb8-54"></a><span class="in">```</span></span>
-<span id="cb8-55"><a href="#cb8-55"></a></span>
-<span id="cb8-56"><a href="#cb8-56"></a><span class="fu">## Build Table</span></span>
-<span id="cb8-57"><a href="#cb8-57"></a></span>
-<span id="cb8-58"><a href="#cb8-58"></a><span class="in">```{r tbl, results = 'hide'}</span></span>
-<span id="cb8-59"><a href="#cb8-59"></a><span class="in">tbl &lt;- tbl_hierarchical(</span></span>
-<span id="cb8-60"><a href="#cb8-60"></a><span class="in">  data,</span></span>
-<span id="cb8-61"><a href="#cb8-61"></a><span class="in">  variables = c(AEBODSYS, AEDECOD),</span></span>
-<span id="cb8-62"><a href="#cb8-62"></a><span class="in">  by = TRT01A,</span></span>
-<span id="cb8-63"><a href="#cb8-63"></a><span class="in">  id = USUBJID,</span></span>
-<span id="cb8-64"><a href="#cb8-64"></a><span class="in">  denominator = adsl,</span></span>
-<span id="cb8-65"><a href="#cb8-65"></a><span class="in">  overall_row = TRUE,</span></span>
-<span id="cb8-66"><a href="#cb8-66"></a><span class="in">  label = list(..ard_hierarchical_overall.. = "Patients with at least one AE leading to discontinuation")</span></span>
-<span id="cb8-67"><a href="#cb8-67"></a><span class="in">)</span></span>
-<span id="cb8-68"><a href="#cb8-68"></a></span>
-<span id="cb8-69"><a href="#cb8-69"></a><span class="in">tbl</span></span>
-<span id="cb8-70"><a href="#cb8-70"></a><span class="in">```</span></span>
+<span id="cb8-50"><a href="#cb8-50"></a><span class="in">ard</span></span>
+<span id="cb8-51"><a href="#cb8-51"></a><span class="in">```</span></span>
+<span id="cb8-52"><a href="#cb8-52"></a></span>
+<span id="cb8-53"><a href="#cb8-53"></a><span class="in">```{r, echo=FALSE}</span></span>
+<span id="cb8-54"><a href="#cb8-54"></a><span class="in"># Print ARD</span></span>
+<span id="cb8-55"><a href="#cb8-55"></a><span class="in">withr::local_options(width = 9999)</span></span>
+<span id="cb8-56"><a href="#cb8-56"></a><span class="in">print(ard, columns = "all", n = 40)</span></span>
+<span id="cb8-57"><a href="#cb8-57"></a><span class="in">```</span></span>
+<span id="cb8-58"><a href="#cb8-58"></a></span>
+<span id="cb8-59"><a href="#cb8-59"></a><span class="fu">## Build Table</span></span>
+<span id="cb8-60"><a href="#cb8-60"></a></span>
+<span id="cb8-61"><a href="#cb8-61"></a><span class="in">```{r tbl, results = 'hide'}</span></span>
+<span id="cb8-62"><a href="#cb8-62"></a><span class="in">tbl &lt;- tbl_hierarchical(</span></span>
+<span id="cb8-63"><a href="#cb8-63"></a><span class="in">  data,</span></span>
+<span id="cb8-64"><a href="#cb8-64"></a><span class="in">  variables = c(AEBODSYS, AEDECOD),</span></span>
+<span id="cb8-65"><a href="#cb8-65"></a><span class="in">  by = TRT01A,</span></span>
+<span id="cb8-66"><a href="#cb8-66"></a><span class="in">  id = USUBJID,</span></span>
+<span id="cb8-67"><a href="#cb8-67"></a><span class="in">  denominator = adsl,</span></span>
+<span id="cb8-68"><a href="#cb8-68"></a><span class="in">  overall_row = TRUE,</span></span>
+<span id="cb8-69"><a href="#cb8-69"></a><span class="in">  label = list(..ard_hierarchical_overall.. = "Patients with at least one AE leading to discontinuation")</span></span>
+<span id="cb8-70"><a href="#cb8-70"></a><span class="in">)</span></span>
 <span id="cb8-71"><a href="#cb8-71"></a></span>
-<span id="cb8-72"><a href="#cb8-72"></a><span class="in">```{r eval=FALSE, include=FALSE}</span></span>
-<span id="cb8-73"><a href="#cb8-73"></a><span class="in"># Run chunk locally to generate image file</span></span>
-<span id="cb8-74"><a href="#cb8-74"></a><span class="in">gt::gtsave(as_gt(tbl), filename = "result.png")</span></span>
-<span id="cb8-75"><a href="#cb8-75"></a><span class="in">```</span></span>
-<span id="cb8-76"><a href="#cb8-76"></a></span>
-<span id="cb8-77"><a href="#cb8-77"></a><span class="in">```{r img, echo=FALSE, fig.align='center', out.width='70%'}</span></span>
+<span id="cb8-72"><a href="#cb8-72"></a><span class="in">tbl</span></span>
+<span id="cb8-73"><a href="#cb8-73"></a><span class="in">```</span></span>
+<span id="cb8-74"><a href="#cb8-74"></a></span>
+<span id="cb8-75"><a href="#cb8-75"></a><span class="in">```{r eval=FALSE, include=FALSE}</span></span>
+<span id="cb8-76"><a href="#cb8-76"></a><span class="in"># Run chunk locally to generate image file</span></span>
+<span id="cb8-77"><a href="#cb8-77"></a><span class="in">gt::gtsave(as_gt(tbl), filename = "result.png")</span></span>
 <span id="cb8-78"><a href="#cb8-78"></a><span class="in">```</span></span>
-<span id="cb8-79"><a href="#cb8-79"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-79"><a href="#cb8-79"></a></span>
+<span id="cb8-80"><a href="#cb8-80"></a><span class="in">```{r img, echo=FALSE, fig.align='center', out.width='70%'}</span></span>
+<span id="cb8-81"><a href="#cb8-81"></a><span class="in">```</span></span>
+<span id="cb8-82"><a href="#cb8-82"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">

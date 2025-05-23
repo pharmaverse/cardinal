@@ -255,8 +255,11 @@ cookieconsent.run({
 <span id="cb1-6"><a href="#cb1-6"></a>adae <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadae</span>
 <span id="cb1-7"><a href="#cb1-7"></a></span>
 <span id="cb1-8"><a href="#cb1-8"></a><span class="co"># Use safety population only</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a>saf_adae <span class="ot">&lt;-</span> adae <span class="sc">|&gt;</span></span>
-<span id="cb1-10"><a href="#cb1-10"></a>  <span class="fu">filter</span>(SAFFL <span class="sc">==</span> <span class="st">"Y"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-9"><a href="#cb1-9"></a>adsl <span class="ot">&lt;-</span> adsl <span class="sc">|&gt;</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a>  <span class="fu">filter</span>(SAFFL <span class="sc">==</span> <span class="st">"Y"</span>)</span>
+<span id="cb1-11"><a href="#cb1-11"></a></span>
+<span id="cb1-12"><a href="#cb1-12"></a>saf_adae <span class="ot">&lt;-</span> adae <span class="sc">|&gt;</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a>  <span class="fu">filter</span>(SAFFL <span class="sc">==</span> <span class="st">"Y"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </div>
@@ -1332,181 +1335,184 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb29-35"><a href="#cb29-35"></a>adae <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadae</span>
 <span id="cb29-36"><a href="#cb29-36"></a></span>
 <span id="cb29-37"><a href="#cb29-37"></a><span class="co"># Use safety population only</span></span>
-<span id="cb29-38"><a href="#cb29-38"></a>saf_adae <span class="ot">&lt;-</span> adae <span class="sc">|&gt;</span></span>
+<span id="cb29-38"><a href="#cb29-38"></a>adsl <span class="ot">&lt;-</span> adsl <span class="sc">|&gt;</span></span>
 <span id="cb29-39"><a href="#cb29-39"></a>  <span class="fu">filter</span>(SAFFL <span class="sc">==</span> <span class="st">"Y"</span>)</span>
-<span id="cb29-40"><a href="#cb29-40"></a><span class="in">```</span></span>
-<span id="cb29-41"><a href="#cb29-41"></a></span>
-<span id="cb29-42"><a href="#cb29-42"></a></span>
-<span id="cb29-43"><a href="#cb29-43"></a></span>
-<span id="cb29-44"><a href="#cb29-44"></a><span class="fu">## Build Table</span></span>
+<span id="cb29-40"><a href="#cb29-40"></a></span>
+<span id="cb29-41"><a href="#cb29-41"></a>saf_adae <span class="ot">&lt;-</span> adae <span class="sc">|&gt;</span></span>
+<span id="cb29-42"><a href="#cb29-42"></a>  <span class="fu">filter</span>(SAFFL <span class="sc">==</span> <span class="st">"Y"</span>)</span>
+<span id="cb29-43"><a href="#cb29-43"></a><span class="in">```</span></span>
+<span id="cb29-44"><a href="#cb29-44"></a></span>
 <span id="cb29-45"><a href="#cb29-45"></a></span>
-<span id="cb29-48"><a href="#cb29-48"></a><span class="in">```{r}</span></span>
-<span id="cb29-49"><a href="#cb29-49"></a><span class="co">#| label: tbl</span></span>
-<span id="cb29-50"><a href="#cb29-50"></a><span class="co">#| results: hide</span></span>
-<span id="cb29-51"><a href="#cb29-51"></a></span>
-<span id="cb29-52"><a href="#cb29-52"></a><span class="co"># --- PART 1: Create first of four table parts (Overview of serious AEs)</span></span>
-<span id="cb29-53"><a href="#cb29-53"></a></span>
-<span id="cb29-54"><a href="#cb29-54"></a><span class="co"># Summarize SAEs in an overall manner</span></span>
-<span id="cb29-55"><a href="#cb29-55"></a>sae <span class="ot">&lt;-</span> saf_adae <span class="sc">|&gt;</span></span>
-<span id="cb29-56"><a href="#cb29-56"></a>  <span class="fu">filter</span>(AESER <span class="sc">==</span> <span class="st">"Y"</span>) <span class="sc">|&gt;</span> <span class="co"># keep only serious AEs</span></span>
-<span id="cb29-57"><a href="#cb29-57"></a>  <span class="fu">mutate</span>(<span class="at">AESER =</span> <span class="st">"SAE"</span>) <span class="co"># convert flag to a meaningful value</span></span>
-<span id="cb29-58"><a href="#cb29-58"></a></span>
-<span id="cb29-59"><a href="#cb29-59"></a>tbl_any_sae <span class="ot">&lt;-</span> <span class="fu">tbl_hierarchical</span>(</span>
-<span id="cb29-60"><a href="#cb29-60"></a>  <span class="at">data =</span> sae,</span>
-<span id="cb29-61"><a href="#cb29-61"></a>  <span class="at">denominator =</span> adsl,</span>
-<span id="cb29-62"><a href="#cb29-62"></a>  <span class="at">id =</span> <span class="st">"USUBJID"</span>,</span>
-<span id="cb29-63"><a href="#cb29-63"></a>  <span class="at">by =</span> <span class="st">"ARM"</span>,</span>
-<span id="cb29-64"><a href="#cb29-64"></a>  <span class="at">variables =</span> <span class="st">"AESER"</span>,</span>
-<span id="cb29-65"><a href="#cb29-65"></a>  <span class="at">label =</span> AESER <span class="sc">~</span> <span class="st">"Event"</span>,</span>
-<span id="cb29-66"><a href="#cb29-66"></a>)</span>
-<span id="cb29-67"><a href="#cb29-67"></a></span>
-<span id="cb29-68"><a href="#cb29-68"></a><span class="co"># Summarize SAEs per category</span></span>
-<span id="cb29-69"><a href="#cb29-69"></a><span class="co"># This is necessary as adae usually has one extra column per SAE category</span></span>
+<span id="cb29-46"><a href="#cb29-46"></a></span>
+<span id="cb29-47"><a href="#cb29-47"></a><span class="fu">## Build Table</span></span>
+<span id="cb29-48"><a href="#cb29-48"></a></span>
+<span id="cb29-51"><a href="#cb29-51"></a><span class="in">```{r}</span></span>
+<span id="cb29-52"><a href="#cb29-52"></a><span class="co">#| label: tbl</span></span>
+<span id="cb29-53"><a href="#cb29-53"></a><span class="co">#| results: hide</span></span>
+<span id="cb29-54"><a href="#cb29-54"></a></span>
+<span id="cb29-55"><a href="#cb29-55"></a><span class="co"># --- PART 1: Create first of four table parts (Overview of serious AEs)</span></span>
+<span id="cb29-56"><a href="#cb29-56"></a></span>
+<span id="cb29-57"><a href="#cb29-57"></a><span class="co"># Summarize SAEs in an overall manner</span></span>
+<span id="cb29-58"><a href="#cb29-58"></a>sae <span class="ot">&lt;-</span> saf_adae <span class="sc">|&gt;</span></span>
+<span id="cb29-59"><a href="#cb29-59"></a>  <span class="fu">filter</span>(AESER <span class="sc">==</span> <span class="st">"Y"</span>) <span class="sc">|&gt;</span> <span class="co"># keep only serious AEs</span></span>
+<span id="cb29-60"><a href="#cb29-60"></a>  <span class="fu">mutate</span>(<span class="at">AESER =</span> <span class="st">"SAE"</span>) <span class="co"># convert flag to a meaningful value</span></span>
+<span id="cb29-61"><a href="#cb29-61"></a></span>
+<span id="cb29-62"><a href="#cb29-62"></a>tbl_any_sae <span class="ot">&lt;-</span> <span class="fu">tbl_hierarchical</span>(</span>
+<span id="cb29-63"><a href="#cb29-63"></a>  <span class="at">data =</span> sae,</span>
+<span id="cb29-64"><a href="#cb29-64"></a>  <span class="at">denominator =</span> adsl,</span>
+<span id="cb29-65"><a href="#cb29-65"></a>  <span class="at">id =</span> <span class="st">"USUBJID"</span>,</span>
+<span id="cb29-66"><a href="#cb29-66"></a>  <span class="at">by =</span> <span class="st">"ARM"</span>,</span>
+<span id="cb29-67"><a href="#cb29-67"></a>  <span class="at">variables =</span> <span class="st">"AESER"</span>,</span>
+<span id="cb29-68"><a href="#cb29-68"></a>  <span class="at">label =</span> AESER <span class="sc">~</span> <span class="st">"Event"</span>,</span>
+<span id="cb29-69"><a href="#cb29-69"></a>)</span>
 <span id="cb29-70"><a href="#cb29-70"></a></span>
-<span id="cb29-71"><a href="#cb29-71"></a><span class="co"># Assign a label to each SAE category</span></span>
-<span id="cb29-72"><a href="#cb29-72"></a>sae_cat_vars <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb29-73"><a href="#cb29-73"></a>  <span class="st">"SAEs with fatal outcome"</span> <span class="ot">=</span> <span class="st">"AESDTH"</span>,</span>
-<span id="cb29-74"><a href="#cb29-74"></a>  <span class="st">"Life-threatening SAEs"</span> <span class="ot">=</span> <span class="st">"AESLIFE"</span>,</span>
-<span id="cb29-75"><a href="#cb29-75"></a>  <span class="st">"SAEs requiring hospitalization"</span> <span class="ot">=</span> <span class="st">"AESHOSP"</span>,</span>
-<span id="cb29-76"><a href="#cb29-76"></a>  <span class="st">"SAEs resulting in substantial disruption of normal life functions"</span> <span class="ot">=</span> <span class="st">"AESDISAB"</span>,</span>
-<span id="cb29-77"><a href="#cb29-77"></a>  <span class="st">"Congenital anomaly or birth defect"</span> <span class="ot">=</span> <span class="st">"AESCONG"</span>,</span>
-<span id="cb29-78"><a href="#cb29-78"></a>  <span class="st">"Other"</span> <span class="ot">=</span> <span class="st">"AESMIE"</span></span>
-<span id="cb29-79"><a href="#cb29-79"></a>)</span>
-<span id="cb29-80"><a href="#cb29-80"></a></span>
-<span id="cb29-81"><a href="#cb29-81"></a>tbl_sae_cat_list <span class="ot">&lt;-</span> <span class="fu">mapply</span>(<span class="cf">function</span>(categ, label) { <span class="co"># allows to apply per category</span></span>
-<span id="cb29-82"><a href="#cb29-82"></a>  data <span class="ot">&lt;-</span> sae <span class="sc">|&gt;</span></span>
-<span id="cb29-83"><a href="#cb29-83"></a>    <span class="fu">filter</span>(.data[[categ]] <span class="sc">==</span> <span class="st">"Y"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb29-84"><a href="#cb29-84"></a>    <span class="fu">mutate</span>(</span>
-<span id="cb29-85"><a href="#cb29-85"></a>      <span class="sc">!!</span><span class="at">categ :=</span> label <span class="co"># convert flag to a meaningful value</span></span>
-<span id="cb29-86"><a href="#cb29-86"></a>    )</span>
-<span id="cb29-87"><a href="#cb29-87"></a></span>
-<span id="cb29-88"><a href="#cb29-88"></a>  <span class="fu">tbl_hierarchical</span>( <span class="co"># calculate rates</span></span>
-<span id="cb29-89"><a href="#cb29-89"></a>    <span class="at">data =</span> data,</span>
-<span id="cb29-90"><a href="#cb29-90"></a>    <span class="at">denominator =</span> adsl,</span>
-<span id="cb29-91"><a href="#cb29-91"></a>    <span class="at">id =</span> <span class="st">"USUBJID"</span>,</span>
-<span id="cb29-92"><a href="#cb29-92"></a>    <span class="at">by =</span> <span class="st">"ARM"</span>,</span>
-<span id="cb29-93"><a href="#cb29-93"></a>    <span class="at">variables =</span> <span class="fu">all_of</span>(categ),</span>
-<span id="cb29-94"><a href="#cb29-94"></a>    <span class="at">statistic =</span> <span class="sc">~</span><span class="st">"{n} ({p}%)"</span>,</span>
-<span id="cb29-95"><a href="#cb29-95"></a>    <span class="at">label =</span> <span class="fu">all_of</span>(categ) <span class="sc">~</span> <span class="st">"Event"</span></span>
-<span id="cb29-96"><a href="#cb29-96"></a>  )</span>
-<span id="cb29-97"><a href="#cb29-97"></a>}, <span class="at">categ =</span> sae_cat_vars, <span class="at">label =</span> <span class="fu">names</span>(sae_cat_vars), <span class="at">SIMPLIFY =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb29-98"><a href="#cb29-98"></a></span>
-<span id="cb29-99"><a href="#cb29-99"></a><span class="co"># Put first part together</span></span>
-<span id="cb29-100"><a href="#cb29-100"></a>tbl_sae <span class="ot">&lt;-</span> <span class="fu">append</span>(<span class="fu">list</span>(tbl_any_sae), tbl_sae_cat_list) <span class="sc">|&gt;</span></span>
-<span id="cb29-101"><a href="#cb29-101"></a>  <span class="fu">tbl_stack</span>() <span class="sc">|&gt;</span></span>
-<span id="cb29-102"><a href="#cb29-102"></a>  <span class="fu">modify_column_indent</span>(<span class="st">"label"</span>, <span class="at">rows =</span> variable <span class="sc">%in%</span> sae_cat_vars)</span>
-<span id="cb29-103"><a href="#cb29-103"></a></span>
-<span id="cb29-104"><a href="#cb29-104"></a></span>
-<span id="cb29-105"><a href="#cb29-105"></a><span class="co"># --- PART 2: Create second of four table parts (Permanent discontinuation)</span></span>
+<span id="cb29-71"><a href="#cb29-71"></a><span class="co"># Summarize SAEs per category</span></span>
+<span id="cb29-72"><a href="#cb29-72"></a><span class="co"># This is necessary as adae usually has one extra column per SAE category</span></span>
+<span id="cb29-73"><a href="#cb29-73"></a></span>
+<span id="cb29-74"><a href="#cb29-74"></a><span class="co"># Assign a label to each SAE category</span></span>
+<span id="cb29-75"><a href="#cb29-75"></a>sae_cat_vars <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb29-76"><a href="#cb29-76"></a>  <span class="st">"SAEs with fatal outcome"</span> <span class="ot">=</span> <span class="st">"AESDTH"</span>,</span>
+<span id="cb29-77"><a href="#cb29-77"></a>  <span class="st">"Life-threatening SAEs"</span> <span class="ot">=</span> <span class="st">"AESLIFE"</span>,</span>
+<span id="cb29-78"><a href="#cb29-78"></a>  <span class="st">"SAEs requiring hospitalization"</span> <span class="ot">=</span> <span class="st">"AESHOSP"</span>,</span>
+<span id="cb29-79"><a href="#cb29-79"></a>  <span class="st">"SAEs resulting in substantial disruption of normal life functions"</span> <span class="ot">=</span> <span class="st">"AESDISAB"</span>,</span>
+<span id="cb29-80"><a href="#cb29-80"></a>  <span class="st">"Congenital anomaly or birth defect"</span> <span class="ot">=</span> <span class="st">"AESCONG"</span>,</span>
+<span id="cb29-81"><a href="#cb29-81"></a>  <span class="st">"Other"</span> <span class="ot">=</span> <span class="st">"AESMIE"</span></span>
+<span id="cb29-82"><a href="#cb29-82"></a>)</span>
+<span id="cb29-83"><a href="#cb29-83"></a></span>
+<span id="cb29-84"><a href="#cb29-84"></a>tbl_sae_cat_list <span class="ot">&lt;-</span> <span class="fu">mapply</span>(<span class="cf">function</span>(categ, label) { <span class="co"># allows to apply per category</span></span>
+<span id="cb29-85"><a href="#cb29-85"></a>  data <span class="ot">&lt;-</span> sae <span class="sc">|&gt;</span></span>
+<span id="cb29-86"><a href="#cb29-86"></a>    <span class="fu">filter</span>(.data[[categ]] <span class="sc">==</span> <span class="st">"Y"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb29-87"><a href="#cb29-87"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb29-88"><a href="#cb29-88"></a>      <span class="sc">!!</span><span class="at">categ :=</span> label <span class="co"># convert flag to a meaningful value</span></span>
+<span id="cb29-89"><a href="#cb29-89"></a>    )</span>
+<span id="cb29-90"><a href="#cb29-90"></a></span>
+<span id="cb29-91"><a href="#cb29-91"></a>  <span class="fu">tbl_hierarchical</span>( <span class="co"># calculate rates</span></span>
+<span id="cb29-92"><a href="#cb29-92"></a>    <span class="at">data =</span> data,</span>
+<span id="cb29-93"><a href="#cb29-93"></a>    <span class="at">denominator =</span> adsl,</span>
+<span id="cb29-94"><a href="#cb29-94"></a>    <span class="at">id =</span> <span class="st">"USUBJID"</span>,</span>
+<span id="cb29-95"><a href="#cb29-95"></a>    <span class="at">by =</span> <span class="st">"ARM"</span>,</span>
+<span id="cb29-96"><a href="#cb29-96"></a>    <span class="at">variables =</span> <span class="fu">all_of</span>(categ),</span>
+<span id="cb29-97"><a href="#cb29-97"></a>    <span class="at">statistic =</span> <span class="sc">~</span><span class="st">"{n} ({p}%)"</span>,</span>
+<span id="cb29-98"><a href="#cb29-98"></a>    <span class="at">label =</span> <span class="fu">all_of</span>(categ) <span class="sc">~</span> <span class="st">"Event"</span></span>
+<span id="cb29-99"><a href="#cb29-99"></a>  )</span>
+<span id="cb29-100"><a href="#cb29-100"></a>}, <span class="at">categ =</span> sae_cat_vars, <span class="at">label =</span> <span class="fu">names</span>(sae_cat_vars), <span class="at">SIMPLIFY =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb29-101"><a href="#cb29-101"></a></span>
+<span id="cb29-102"><a href="#cb29-102"></a><span class="co"># Put first part together</span></span>
+<span id="cb29-103"><a href="#cb29-103"></a>tbl_sae <span class="ot">&lt;-</span> <span class="fu">append</span>(<span class="fu">list</span>(tbl_any_sae), tbl_sae_cat_list) <span class="sc">|&gt;</span></span>
+<span id="cb29-104"><a href="#cb29-104"></a>  <span class="fu">tbl_stack</span>() <span class="sc">|&gt;</span></span>
+<span id="cb29-105"><a href="#cb29-105"></a>  <span class="fu">modify_column_indent</span>(<span class="st">"label"</span>, <span class="at">rows =</span> variable <span class="sc">%in%</span> sae_cat_vars)</span>
 <span id="cb29-106"><a href="#cb29-106"></a></span>
-<span id="cb29-107"><a href="#cb29-107"></a>disc_ae <span class="ot">&lt;-</span> adae <span class="sc">|&gt;</span></span>
-<span id="cb29-108"><a href="#cb29-108"></a>  <span class="fu">filter</span>(AEACNOTH <span class="sc">==</span> <span class="st">"SUBJECT DISCONTINUED FROM STUDY"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb29-109"><a href="#cb29-109"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb29-110"><a href="#cb29-110"></a>    <span class="co"># convert label to a more meaningful value</span></span>
-<span id="cb29-111"><a href="#cb29-111"></a>    <span class="at">AEACNOTH =</span> <span class="st">"AE leading to permanent discontinuation of study drug"</span></span>
-<span id="cb29-112"><a href="#cb29-112"></a>  )</span>
-<span id="cb29-113"><a href="#cb29-113"></a></span>
-<span id="cb29-114"><a href="#cb29-114"></a>tbl_disc_ae <span class="ot">&lt;-</span> <span class="fu">tbl_hierarchical</span>( <span class="co"># calculate rates</span></span>
-<span id="cb29-115"><a href="#cb29-115"></a>  <span class="at">data =</span> disc_ae,</span>
-<span id="cb29-116"><a href="#cb29-116"></a>  <span class="at">denominator =</span> adsl,</span>
-<span id="cb29-117"><a href="#cb29-117"></a>  <span class="at">id =</span> <span class="st">"USUBJID"</span>,</span>
-<span id="cb29-118"><a href="#cb29-118"></a>  <span class="at">by =</span> <span class="st">"ARM"</span>,</span>
-<span id="cb29-119"><a href="#cb29-119"></a>  <span class="at">variables =</span> <span class="st">"AEACNOTH"</span>,</span>
-<span id="cb29-120"><a href="#cb29-120"></a>  <span class="at">label =</span> AEACNOTH <span class="sc">~</span> <span class="st">"Event"</span>,</span>
-<span id="cb29-121"><a href="#cb29-121"></a>  <span class="at">statistic =</span> <span class="sc">~</span><span class="st">"{n} ({p}%)"</span></span>
-<span id="cb29-122"><a href="#cb29-122"></a>)</span>
-<span id="cb29-123"><a href="#cb29-123"></a></span>
-<span id="cb29-124"><a href="#cb29-124"></a></span>
-<span id="cb29-125"><a href="#cb29-125"></a><span class="co"># -- PART 3: Create third of four table parts (Dose modification)</span></span>
-<span id="cb29-126"><a href="#cb29-126"></a>dose_mod_ae <span class="ot">&lt;-</span> adae <span class="sc">|&gt;</span></span>
-<span id="cb29-127"><a href="#cb29-127"></a>  <span class="fu">filter</span>(AEACN <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"DRUG INTERRUPTED"</span>, <span class="st">"DOSE REDUCED"</span>, <span class="st">"DOSE RATE REDUCED"</span>, <span class="st">"DOSE INCREASED"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb29-128"><a href="#cb29-128"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb29-129"><a href="#cb29-129"></a>    <span class="at">AEACN =</span> <span class="fu">case_when</span>( <span class="co"># convert to meaningful labels</span></span>
-<span id="cb29-130"><a href="#cb29-130"></a>      AEACN <span class="sc">==</span> <span class="st">"DRUG INTERRUPTED"</span> <span class="sc">~</span> <span class="st">"AE leading to interruption of study drug"</span>,</span>
-<span id="cb29-131"><a href="#cb29-131"></a>      AEACN <span class="sc">==</span> <span class="st">"DOSE REDUCED"</span> <span class="sc">~</span> <span class="st">"AE leading to reduction of study drug"</span>,</span>
-<span id="cb29-132"><a href="#cb29-132"></a>      AEACN <span class="sc">==</span> <span class="st">"DOSE RATE REDUCED"</span> <span class="sc">~</span> <span class="st">"AE leading to dose delay of study drug"</span>,</span>
-<span id="cb29-133"><a href="#cb29-133"></a>      AEACN <span class="sc">==</span> <span class="st">"DOSE INCREASED"</span> <span class="sc">~</span> <span class="st">"Other"</span>,</span>
-<span id="cb29-134"><a href="#cb29-134"></a>      <span class="at">.default =</span> <span class="st">"Other"</span></span>
-<span id="cb29-135"><a href="#cb29-135"></a>    )</span>
-<span id="cb29-136"><a href="#cb29-136"></a>  )</span>
-<span id="cb29-137"><a href="#cb29-137"></a></span>
-<span id="cb29-138"><a href="#cb29-138"></a>tbl_dose_mod_ae <span class="ot">&lt;-</span> <span class="fu">tbl_hierarchical</span>( <span class="co"># calculate rates</span></span>
-<span id="cb29-139"><a href="#cb29-139"></a>  <span class="at">data =</span> dose_mod_ae,</span>
-<span id="cb29-140"><a href="#cb29-140"></a>  <span class="at">denominator =</span> adsl,</span>
-<span id="cb29-141"><a href="#cb29-141"></a>  <span class="at">id =</span> <span class="st">"USUBJID"</span>,</span>
-<span id="cb29-142"><a href="#cb29-142"></a>  <span class="at">by =</span> <span class="st">"ARM"</span>,</span>
-<span id="cb29-143"><a href="#cb29-143"></a>  <span class="at">variables =</span> <span class="st">"AEACN"</span>,</span>
-<span id="cb29-144"><a href="#cb29-144"></a>  <span class="at">label =</span> <span class="fu">list</span>(</span>
-<span id="cb29-145"><a href="#cb29-145"></a>    AEACN <span class="sc">~</span> <span class="st">"Event"</span>,</span>
-<span id="cb29-146"><a href="#cb29-146"></a>    <span class="co"># Specify overall label</span></span>
-<span id="cb29-147"><a href="#cb29-147"></a>    <span class="at">..ard_hierarchical_overall.. =</span> <span class="st">"AE leading to dose modification of study drug"</span></span>
-<span id="cb29-148"><a href="#cb29-148"></a>  ),</span>
-<span id="cb29-149"><a href="#cb29-149"></a>  <span class="at">statistic =</span> <span class="sc">~</span><span class="st">"{n} ({p}%)"</span>,</span>
-<span id="cb29-150"><a href="#cb29-150"></a>  <span class="at">overall_row =</span> <span class="cn">TRUE</span></span>
-<span id="cb29-151"><a href="#cb29-151"></a>)</span>
-<span id="cb29-152"><a href="#cb29-152"></a></span>
-<span id="cb29-153"><a href="#cb29-153"></a></span>
-<span id="cb29-154"><a href="#cb29-154"></a><span class="co"># -- PART 4: Create fourth of four table parts (Any AE)</span></span>
+<span id="cb29-107"><a href="#cb29-107"></a></span>
+<span id="cb29-108"><a href="#cb29-108"></a><span class="co"># --- PART 2: Create second of four table parts (Permanent discontinuation)</span></span>
+<span id="cb29-109"><a href="#cb29-109"></a></span>
+<span id="cb29-110"><a href="#cb29-110"></a>disc_ae <span class="ot">&lt;-</span> adae <span class="sc">|&gt;</span></span>
+<span id="cb29-111"><a href="#cb29-111"></a>  <span class="fu">filter</span>(AEACNOTH <span class="sc">==</span> <span class="st">"SUBJECT DISCONTINUED FROM STUDY"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb29-112"><a href="#cb29-112"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb29-113"><a href="#cb29-113"></a>    <span class="co"># convert label to a more meaningful value</span></span>
+<span id="cb29-114"><a href="#cb29-114"></a>    <span class="at">AEACNOTH =</span> <span class="st">"AE leading to permanent discontinuation of study drug"</span></span>
+<span id="cb29-115"><a href="#cb29-115"></a>  )</span>
+<span id="cb29-116"><a href="#cb29-116"></a></span>
+<span id="cb29-117"><a href="#cb29-117"></a>tbl_disc_ae <span class="ot">&lt;-</span> <span class="fu">tbl_hierarchical</span>( <span class="co"># calculate rates</span></span>
+<span id="cb29-118"><a href="#cb29-118"></a>  <span class="at">data =</span> disc_ae,</span>
+<span id="cb29-119"><a href="#cb29-119"></a>  <span class="at">denominator =</span> adsl,</span>
+<span id="cb29-120"><a href="#cb29-120"></a>  <span class="at">id =</span> <span class="st">"USUBJID"</span>,</span>
+<span id="cb29-121"><a href="#cb29-121"></a>  <span class="at">by =</span> <span class="st">"ARM"</span>,</span>
+<span id="cb29-122"><a href="#cb29-122"></a>  <span class="at">variables =</span> <span class="st">"AEACNOTH"</span>,</span>
+<span id="cb29-123"><a href="#cb29-123"></a>  <span class="at">label =</span> AEACNOTH <span class="sc">~</span> <span class="st">"Event"</span>,</span>
+<span id="cb29-124"><a href="#cb29-124"></a>  <span class="at">statistic =</span> <span class="sc">~</span><span class="st">"{n} ({p}%)"</span></span>
+<span id="cb29-125"><a href="#cb29-125"></a>)</span>
+<span id="cb29-126"><a href="#cb29-126"></a></span>
+<span id="cb29-127"><a href="#cb29-127"></a></span>
+<span id="cb29-128"><a href="#cb29-128"></a><span class="co"># -- PART 3: Create third of four table parts (Dose modification)</span></span>
+<span id="cb29-129"><a href="#cb29-129"></a>dose_mod_ae <span class="ot">&lt;-</span> adae <span class="sc">|&gt;</span></span>
+<span id="cb29-130"><a href="#cb29-130"></a>  <span class="fu">filter</span>(AEACN <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"DRUG INTERRUPTED"</span>, <span class="st">"DOSE REDUCED"</span>, <span class="st">"DOSE RATE REDUCED"</span>, <span class="st">"DOSE INCREASED"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb29-131"><a href="#cb29-131"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb29-132"><a href="#cb29-132"></a>    <span class="at">AEACN =</span> <span class="fu">case_when</span>( <span class="co"># convert to meaningful labels</span></span>
+<span id="cb29-133"><a href="#cb29-133"></a>      AEACN <span class="sc">==</span> <span class="st">"DRUG INTERRUPTED"</span> <span class="sc">~</span> <span class="st">"AE leading to interruption of study drug"</span>,</span>
+<span id="cb29-134"><a href="#cb29-134"></a>      AEACN <span class="sc">==</span> <span class="st">"DOSE REDUCED"</span> <span class="sc">~</span> <span class="st">"AE leading to reduction of study drug"</span>,</span>
+<span id="cb29-135"><a href="#cb29-135"></a>      AEACN <span class="sc">==</span> <span class="st">"DOSE RATE REDUCED"</span> <span class="sc">~</span> <span class="st">"AE leading to dose delay of study drug"</span>,</span>
+<span id="cb29-136"><a href="#cb29-136"></a>      AEACN <span class="sc">==</span> <span class="st">"DOSE INCREASED"</span> <span class="sc">~</span> <span class="st">"Other"</span>,</span>
+<span id="cb29-137"><a href="#cb29-137"></a>      <span class="at">.default =</span> <span class="st">"Other"</span></span>
+<span id="cb29-138"><a href="#cb29-138"></a>    )</span>
+<span id="cb29-139"><a href="#cb29-139"></a>  )</span>
+<span id="cb29-140"><a href="#cb29-140"></a></span>
+<span id="cb29-141"><a href="#cb29-141"></a>tbl_dose_mod_ae <span class="ot">&lt;-</span> <span class="fu">tbl_hierarchical</span>( <span class="co"># calculate rates</span></span>
+<span id="cb29-142"><a href="#cb29-142"></a>  <span class="at">data =</span> dose_mod_ae,</span>
+<span id="cb29-143"><a href="#cb29-143"></a>  <span class="at">denominator =</span> adsl,</span>
+<span id="cb29-144"><a href="#cb29-144"></a>  <span class="at">id =</span> <span class="st">"USUBJID"</span>,</span>
+<span id="cb29-145"><a href="#cb29-145"></a>  <span class="at">by =</span> <span class="st">"ARM"</span>,</span>
+<span id="cb29-146"><a href="#cb29-146"></a>  <span class="at">variables =</span> <span class="st">"AEACN"</span>,</span>
+<span id="cb29-147"><a href="#cb29-147"></a>  <span class="at">label =</span> <span class="fu">list</span>(</span>
+<span id="cb29-148"><a href="#cb29-148"></a>    AEACN <span class="sc">~</span> <span class="st">"Event"</span>,</span>
+<span id="cb29-149"><a href="#cb29-149"></a>    <span class="co"># Specify overall label</span></span>
+<span id="cb29-150"><a href="#cb29-150"></a>    <span class="at">..ard_hierarchical_overall.. =</span> <span class="st">"AE leading to dose modification of study drug"</span></span>
+<span id="cb29-151"><a href="#cb29-151"></a>  ),</span>
+<span id="cb29-152"><a href="#cb29-152"></a>  <span class="at">statistic =</span> <span class="sc">~</span><span class="st">"{n} ({p}%)"</span>,</span>
+<span id="cb29-153"><a href="#cb29-153"></a>  <span class="at">overall_row =</span> <span class="cn">TRUE</span></span>
+<span id="cb29-154"><a href="#cb29-154"></a>)</span>
 <span id="cb29-155"><a href="#cb29-155"></a></span>
-<span id="cb29-156"><a href="#cb29-156"></a>tbl_any_ae <span class="ot">&lt;-</span> <span class="fu">tbl_hierarchical</span>(</span>
-<span id="cb29-157"><a href="#cb29-157"></a>  <span class="at">data =</span> adae,</span>
-<span id="cb29-158"><a href="#cb29-158"></a>  <span class="at">denominator =</span> adsl,</span>
-<span id="cb29-159"><a href="#cb29-159"></a>  <span class="at">id =</span> <span class="st">"USUBJID"</span>,</span>
-<span id="cb29-160"><a href="#cb29-160"></a>  <span class="at">by =</span> <span class="st">"ARM"</span>,</span>
-<span id="cb29-161"><a href="#cb29-161"></a>  <span class="at">variables =</span> <span class="st">"AESEV"</span>,</span>
-<span id="cb29-162"><a href="#cb29-162"></a>  <span class="at">label =</span> <span class="fu">list</span>(AESEV <span class="sc">~</span> <span class="st">"Event"</span>, <span class="at">..ard_hierarchical_overall.. =</span> <span class="st">"Any AE"</span>),</span>
-<span id="cb29-163"><a href="#cb29-163"></a>  <span class="at">statistic =</span> <span class="sc">~</span><span class="st">"{n} ({p}%)"</span>,</span>
-<span id="cb29-164"><a href="#cb29-164"></a>  <span class="at">overall_row =</span> <span class="cn">TRUE</span></span>
-<span id="cb29-165"><a href="#cb29-165"></a>)</span>
-<span id="cb29-166"><a href="#cb29-166"></a></span>
-<span id="cb29-167"><a href="#cb29-167"></a><span class="co"># Put it all together</span></span>
-<span id="cb29-168"><a href="#cb29-168"></a>tbl6 <span class="ot">&lt;-</span> <span class="fu">list</span>(tbl_sae, tbl_disc_ae, tbl_dose_mod_ae, tbl_any_ae) <span class="sc">|&gt;</span></span>
-<span id="cb29-169"><a href="#cb29-169"></a>  <span class="fu">tbl_stack</span>() <span class="sc">|&gt;</span></span>
-<span id="cb29-170"><a href="#cb29-170"></a>  <span class="fu">modify_column_indent</span>(<span class="st">"label"</span>, <span class="at">rows =</span> <span class="sc">!</span>(variable <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"..ard_hierarchical_overall.."</span>, <span class="st">"AESER"</span>, <span class="st">"AEACNOTH"</span>)))</span>
-<span id="cb29-171"><a href="#cb29-171"></a></span>
-<span id="cb29-172"><a href="#cb29-172"></a>tbl6</span>
-<span id="cb29-173"><a href="#cb29-173"></a><span class="in">```</span></span>
+<span id="cb29-156"><a href="#cb29-156"></a></span>
+<span id="cb29-157"><a href="#cb29-157"></a><span class="co"># -- PART 4: Create fourth of four table parts (Any AE)</span></span>
+<span id="cb29-158"><a href="#cb29-158"></a></span>
+<span id="cb29-159"><a href="#cb29-159"></a>tbl_any_ae <span class="ot">&lt;-</span> <span class="fu">tbl_hierarchical</span>(</span>
+<span id="cb29-160"><a href="#cb29-160"></a>  <span class="at">data =</span> adae,</span>
+<span id="cb29-161"><a href="#cb29-161"></a>  <span class="at">denominator =</span> adsl,</span>
+<span id="cb29-162"><a href="#cb29-162"></a>  <span class="at">id =</span> <span class="st">"USUBJID"</span>,</span>
+<span id="cb29-163"><a href="#cb29-163"></a>  <span class="at">by =</span> <span class="st">"ARM"</span>,</span>
+<span id="cb29-164"><a href="#cb29-164"></a>  <span class="at">variables =</span> <span class="st">"AESEV"</span>,</span>
+<span id="cb29-165"><a href="#cb29-165"></a>  <span class="at">label =</span> <span class="fu">list</span>(AESEV <span class="sc">~</span> <span class="st">"Event"</span>, <span class="at">..ard_hierarchical_overall.. =</span> <span class="st">"Any AE"</span>),</span>
+<span id="cb29-166"><a href="#cb29-166"></a>  <span class="at">statistic =</span> <span class="sc">~</span><span class="st">"{n} ({p}%)"</span>,</span>
+<span id="cb29-167"><a href="#cb29-167"></a>  <span class="at">overall_row =</span> <span class="cn">TRUE</span></span>
+<span id="cb29-168"><a href="#cb29-168"></a>)</span>
+<span id="cb29-169"><a href="#cb29-169"></a></span>
+<span id="cb29-170"><a href="#cb29-170"></a><span class="co"># Put it all together</span></span>
+<span id="cb29-171"><a href="#cb29-171"></a>tbl6 <span class="ot">&lt;-</span> <span class="fu">list</span>(tbl_sae, tbl_disc_ae, tbl_dose_mod_ae, tbl_any_ae) <span class="sc">|&gt;</span></span>
+<span id="cb29-172"><a href="#cb29-172"></a>  <span class="fu">tbl_stack</span>() <span class="sc">|&gt;</span></span>
+<span id="cb29-173"><a href="#cb29-173"></a>  <span class="fu">modify_column_indent</span>(<span class="st">"label"</span>, <span class="at">rows =</span> <span class="sc">!</span>(variable <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"..ard_hierarchical_overall.."</span>, <span class="st">"AESER"</span>, <span class="st">"AEACNOTH"</span>)))</span>
 <span id="cb29-174"><a href="#cb29-174"></a></span>
-<span id="cb29-177"><a href="#cb29-177"></a><span class="in">```{r}</span></span>
-<span id="cb29-178"><a href="#cb29-178"></a><span class="co">#| eval: false</span></span>
-<span id="cb29-179"><a href="#cb29-179"></a><span class="co">#| include: false</span></span>
-<span id="cb29-180"><a href="#cb29-180"></a></span>
-<span id="cb29-181"><a href="#cb29-181"></a>gt<span class="sc">::</span><span class="fu">gtsave</span>(<span class="fu">as_gt</span>(tbl6), <span class="at">filename =</span> <span class="st">"result.png"</span>)</span>
-<span id="cb29-182"><a href="#cb29-182"></a><span class="in">```</span></span>
+<span id="cb29-175"><a href="#cb29-175"></a>tbl6</span>
+<span id="cb29-176"><a href="#cb29-176"></a><span class="in">```</span></span>
+<span id="cb29-177"><a href="#cb29-177"></a></span>
+<span id="cb29-180"><a href="#cb29-180"></a><span class="in">```{r}</span></span>
+<span id="cb29-181"><a href="#cb29-181"></a><span class="co">#| eval: false</span></span>
+<span id="cb29-182"><a href="#cb29-182"></a><span class="co">#| include: false</span></span>
 <span id="cb29-183"><a href="#cb29-183"></a></span>
-<span id="cb29-186"><a href="#cb29-186"></a><span class="in">```{r}</span></span>
-<span id="cb29-187"><a href="#cb29-187"></a><span class="co">#| label: img</span></span>
-<span id="cb29-188"><a href="#cb29-188"></a><span class="co">#| echo: false</span></span>
-<span id="cb29-189"><a href="#cb29-189"></a><span class="co">#| fig-align: center</span></span>
-<span id="cb29-190"><a href="#cb29-190"></a><span class="co">#| out-width: "60%"</span></span>
-<span id="cb29-191"><a href="#cb29-191"></a><span class="in">```</span></span>
-<span id="cb29-192"><a href="#cb29-192"></a></span>
-<span id="cb29-193"><a href="#cb29-193"></a><span class="fu">## Build ARD</span></span>
-<span id="cb29-194"><a href="#cb29-194"></a></span>
-<span id="cb29-197"><a href="#cb29-197"></a><span class="in">```{r}</span></span>
-<span id="cb29-198"><a href="#cb29-198"></a><span class="co">#| label: ard</span></span>
-<span id="cb29-199"><a href="#cb29-199"></a><span class="co">#| message: false</span></span>
-<span id="cb29-200"><a href="#cb29-200"></a><span class="co">#| warning: false</span></span>
-<span id="cb29-201"><a href="#cb29-201"></a><span class="co">#| results: hide</span></span>
-<span id="cb29-202"><a href="#cb29-202"></a><span class="co">#|</span></span>
-<span id="cb29-203"><a href="#cb29-203"></a><span class="co"># Load package and data</span></span>
-<span id="cb29-204"><a href="#cb29-204"></a><span class="fu">library</span>(gtsummary)</span>
-<span id="cb29-205"><a href="#cb29-205"></a></span>
-<span id="cb29-206"><a href="#cb29-206"></a><span class="co"># Extract ARD from previously created gtsummary table (refer to "Build Table")</span></span>
-<span id="cb29-207"><a href="#cb29-207"></a>ard <span class="ot">&lt;-</span> <span class="fu">gather_ard</span>(tbl6)</span>
+<span id="cb29-184"><a href="#cb29-184"></a>gt<span class="sc">::</span><span class="fu">gtsave</span>(<span class="fu">as_gt</span>(tbl6), <span class="at">filename =</span> <span class="st">"result.png"</span>)</span>
+<span id="cb29-185"><a href="#cb29-185"></a><span class="in">```</span></span>
+<span id="cb29-186"><a href="#cb29-186"></a></span>
+<span id="cb29-189"><a href="#cb29-189"></a><span class="in">```{r}</span></span>
+<span id="cb29-190"><a href="#cb29-190"></a><span class="co">#| label: img</span></span>
+<span id="cb29-191"><a href="#cb29-191"></a><span class="co">#| echo: false</span></span>
+<span id="cb29-192"><a href="#cb29-192"></a><span class="co">#| fig-align: center</span></span>
+<span id="cb29-193"><a href="#cb29-193"></a><span class="co">#| out-width: "60%"</span></span>
+<span id="cb29-194"><a href="#cb29-194"></a><span class="in">```</span></span>
+<span id="cb29-195"><a href="#cb29-195"></a></span>
+<span id="cb29-196"><a href="#cb29-196"></a><span class="fu">## Build ARD</span></span>
+<span id="cb29-197"><a href="#cb29-197"></a></span>
+<span id="cb29-200"><a href="#cb29-200"></a><span class="in">```{r}</span></span>
+<span id="cb29-201"><a href="#cb29-201"></a><span class="co">#| label: ard</span></span>
+<span id="cb29-202"><a href="#cb29-202"></a><span class="co">#| message: false</span></span>
+<span id="cb29-203"><a href="#cb29-203"></a><span class="co">#| warning: false</span></span>
+<span id="cb29-204"><a href="#cb29-204"></a><span class="co">#| results: hide</span></span>
+<span id="cb29-205"><a href="#cb29-205"></a><span class="co">#|</span></span>
+<span id="cb29-206"><a href="#cb29-206"></a><span class="co"># Load package and data</span></span>
+<span id="cb29-207"><a href="#cb29-207"></a><span class="fu">library</span>(gtsummary)</span>
 <span id="cb29-208"><a href="#cb29-208"></a></span>
-<span id="cb29-209"><a href="#cb29-209"></a><span class="co"># Output ARD</span></span>
-<span id="cb29-210"><a href="#cb29-210"></a>ard</span>
-<span id="cb29-211"><a href="#cb29-211"></a><span class="in">```</span></span>
-<span id="cb29-212"><a href="#cb29-212"></a></span>
-<span id="cb29-215"><a href="#cb29-215"></a><span class="in">```{r}</span></span>
-<span id="cb29-216"><a href="#cb29-216"></a><span class="co">#| echo: false</span></span>
-<span id="cb29-217"><a href="#cb29-217"></a></span>
-<span id="cb29-218"><a href="#cb29-218"></a><span class="co"># Print ARD</span></span>
-<span id="cb29-219"><a href="#cb29-219"></a>withr<span class="sc">::</span><span class="fu">local_options</span>(<span class="at">width =</span> <span class="dv">9999</span>)</span>
-<span id="cb29-220"><a href="#cb29-220"></a><span class="fu">print</span>(ard, <span class="at">columns =</span> <span class="st">"all"</span>)</span>
-<span id="cb29-221"><a href="#cb29-221"></a><span class="in">```</span></span>
-<span id="cb29-222"><a href="#cb29-222"></a>:::</span>
+<span id="cb29-209"><a href="#cb29-209"></a><span class="co"># Extract ARD from previously created gtsummary table (refer to "Build Table")</span></span>
+<span id="cb29-210"><a href="#cb29-210"></a>ard <span class="ot">&lt;-</span> <span class="fu">gather_ard</span>(tbl6)</span>
+<span id="cb29-211"><a href="#cb29-211"></a></span>
+<span id="cb29-212"><a href="#cb29-212"></a><span class="co"># Output ARD</span></span>
+<span id="cb29-213"><a href="#cb29-213"></a>ard</span>
+<span id="cb29-214"><a href="#cb29-214"></a><span class="in">```</span></span>
+<span id="cb29-215"><a href="#cb29-215"></a></span>
+<span id="cb29-218"><a href="#cb29-218"></a><span class="in">```{r}</span></span>
+<span id="cb29-219"><a href="#cb29-219"></a><span class="co">#| echo: false</span></span>
+<span id="cb29-220"><a href="#cb29-220"></a></span>
+<span id="cb29-221"><a href="#cb29-221"></a><span class="co"># Print ARD</span></span>
+<span id="cb29-222"><a href="#cb29-222"></a>withr<span class="sc">::</span><span class="fu">local_options</span>(<span class="at">width =</span> <span class="dv">9999</span>)</span>
+<span id="cb29-223"><a href="#cb29-223"></a><span class="fu">print</span>(ard, <span class="at">columns =</span> <span class="st">"all"</span>)</span>
+<span id="cb29-224"><a href="#cb29-224"></a><span class="in">```</span></span>
+<span id="cb29-225"><a href="#cb29-225"></a>:::</span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
