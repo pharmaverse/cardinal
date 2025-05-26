@@ -76,7 +76,8 @@ make_table_04 <- function(df,
 #'  Default is `c("SAFFL", "ITTFL")`.
 #' @param lbl_pop_vars A character vector of labels corresponding to `pop_vars`.
 #'  Default is `c("Safety population", "ITT/mITT population")`.
-#' @param display_all_column Logical indicating whether to include an "All Patients" column in the summary. Default is `FALSE`.
+#' @param display_all_column Logical indicating whether to include an "All Patients" column in the summary.
+#' Default is `FALSE`.
 #'
 #' @return A `gtsummary::tbl_summary` object with formatted output:
 #' - Summarizes population flags and discontinuation reasons,
@@ -88,7 +89,8 @@ make_table_04 <- function(df,
 #' The function:
 #' - Validates the presence of required columns,
 #' - Applies flag logic (e.g., `"Y"` to `TRUE`) and attaches variable labels using `with_label`,
-#' - Constructs derived variables for study drug and study discontinuations based on `EOTSTT`, `EOSSTT`, and `DCSREAS`,
+#' - Constructs derived variables for study drug and study discontinuations
+#'   based on `EOTSTT`, `EOSSTT`, and `DCSREAS`,
 #' - Uses `gtsummary::tbl_summary()` to build a formatted table grouped by `arm_var`,
 #' - Indents sub-reasons (e.g., "Adverse event", "Death") under their respective parent categories,
 #' - Optionally adds an "All Patients" summary column.
@@ -179,7 +181,7 @@ make_table_04_gtsummary <- function(df,
         ))
     )
 
-  return(result_tbl)
+  result_tbl
 }
 
 #' Convert a `gtsummary::tbl_summary` Object into an ARD (Analysis Results Display) Format
@@ -255,7 +257,7 @@ create_ard_from_gtsummary <- function(tbl_summary_obj) {
       statistic_type, n, pct, formatted_result
     )
 
-  return(ard_data)
+  ard_data
 }
 
 #' Create an ARD Table Summarizing Disposition and Population Flags by Treatment Arm
@@ -271,7 +273,8 @@ create_ard_from_gtsummary <- function(tbl_summary_obj) {
 #' @param reason_var Character string indicating the variable containing discontinuation reasons.
 #'  Default is `"DCSREAS"`.
 #' @param pop_vars Character vector of population flag variables (e.g., `"SAFFL"`, `"ITTFL"`).
-#' @param lbl_pop_vars Character vector of labels corresponding to `pop_vars`, used for output labeling.
+#' @param lbl_pop_vars Character vector of labels corresponding to `pop_vars`,
+#' used for output labeling.
 #'
 #' @return A data frame containing a structured summary of population flags and treatment/study
 #' discontinuation reasons, including:
@@ -374,7 +377,7 @@ create_ard_table_4 <- function(df,
       treatment_group, statistic_type, n_total, n_event, pct, formatted_result
     )
 
-  return(ard_results)
+  ard_results
 }
 
 #' Create an ARD (Analysis Results Display) using `gtsummary` with `cards` package
@@ -389,7 +392,8 @@ create_ard_table_4 <- function(df,
 #' @param arm_var Character string specifying the treatment arm variable. Default is `"ARM"`.
 #' @param pop_vars Character vector of population flag variables (e.g., `"SAFFL"`, `"ITTFL"`).
 #'  These should be binary flags (typically `"Y"` or `NA`).
-#' @param lbl_pop_vars Character vector of labels corresponding to `pop_vars`, used for labelling in the output.
+#' @param lbl_pop_vars Character vector of labels corresponding to `pop_vars`,
+#'  used for labelling in the output.
 #'
 #' @return A `gtsummary`-styled ARD (Analysis Results Display) object created using `cards::ard_categorical()`,
 #' summarizing the specified disposition flags by treatment arm.
@@ -444,7 +448,7 @@ create_ard_with_gtsummary_cards <- function(df,
       statistic = ~ c("n", "p")
     )
 
-  return(ard)
+  ard
 }
 
 #' FDA Table 4: Patient Disposition, Pooled Analyses
