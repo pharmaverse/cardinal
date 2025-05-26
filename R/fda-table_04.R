@@ -27,8 +27,8 @@
 #' @examples
 #' \dontrun{
 #' result <- make_table_04(my_disposition_data)
-#' result$table  # gtsummary table
-#' result$ard    # ARD format data
+#' result$table # gtsummary table
+#' result$ard # ARD format data
 #' }
 #'
 #' @export
@@ -40,8 +40,6 @@ make_table_04 <- function(df,
                           pop_vars = c("SAFFL", "ITTFL"),
                           lbl_pop_vars = c("Safety population", "ITT/mITT population"),
                           display_all_column = FALSE) {
-
-
   tbl <- make_table_04_gtsummary(
     df,
     id_var = "USUBJID",
@@ -136,9 +134,11 @@ make_table_04_gtsummary <- function(df,
     gtsummary::tbl_summary(
       by = arm_var,
       statistic = list(all_dichotomous() ~ "{n} ({p}%)"),
-      include = all_of(c(pop_vars,
-                         "DISCSD", "DISCSD_AE", "DISCSD_LOE", "DISCSD_PD", "DISCSD_DT", "DISCSD_WBS", "DISCSD_OTH",
-                         "DISCS", "DISCS_DT", "DISCS_LFU", "DISCS_WBS", "DISCS_PHD", "DISCS_PD", "DISCS_OTH")),
+      include = all_of(c(
+        pop_vars,
+        "DISCSD", "DISCSD_AE", "DISCSD_LOE", "DISCSD_PD", "DISCSD_DT", "DISCSD_WBS", "DISCSD_OTH",
+        "DISCS", "DISCS_DT", "DISCS_LFU", "DISCS_WBS", "DISCS_PHD", "DISCS_PD", "DISCS_OTH"
+      )),
       digits = list(gtsummary::all_categorical() ~ c(0, 1))
     )
 
@@ -152,19 +152,23 @@ make_table_04_gtsummary <- function(df,
     # Define which variables are children of parent variables
     modify_table_styling(
       columns = "label",
-      rows = variable %in% c("DISCSD_AE", "DISCSD_LOE", "DISCSD_PD", "DISCSD_DT",
-                             "DISCSD_WBS", "DISCSD_OTH"),
+      rows = variable %in% c(
+        "DISCSD_AE", "DISCSD_LOE", "DISCSD_PD", "DISCSD_DT",
+        "DISCSD_WBS", "DISCSD_OTH"
+      ),
       text_format = "indent"
     ) %>%
     modify_table_styling(
       columns = "label",
-      rows = variable %in% c("DISCS_DT", "DISCS_LFU", "DISCS_WBS", "DISCS_PHD",
-                             "DISCS_PD", "DISCS_OTH"),
+      rows = variable %in% c(
+        "DISCS_DT", "DISCS_LFU", "DISCS_WBS", "DISCS_PHD",
+        "DISCS_PD", "DISCS_OTH"
+      ),
       text_format = "indent"
     ) %>%
     # Make all but main categories display as levels
     modify_table_body(
-      ~.x %>%
+      ~ .x %>%
         mutate(row_type = case_when(
           variable %in% c(pop_vars, "DISCSD", "DISCS") ~ "label",
           TRUE ~ "level"
@@ -210,8 +214,10 @@ make_table_04_gtsummary <- function(df,
 create_ard_from_gtsummary <- function(tbl_summary_obj) {
   # Extract the underlying data from gtsummary object
   ard_data <- tbl_summary_obj$table_body %>%
-    select(variable, var_type, var_label, label, row_type,
-           starts_with("stat_")) %>%
+    select(
+      variable, var_type, var_label, label, row_type,
+      starts_with("stat_")
+    ) %>%
     # Reshape to long format for ARD structure
     pivot_longer(
       cols = starts_with("stat_"),
@@ -240,8 +246,10 @@ create_ard_from_gtsummary <- function(tbl_summary_obj) {
       n = as.numeric(str_extract(formatted_result, "^\\d+")),
       pct = as.numeric(str_extract(formatted_result, "\\((\\d+\\.\\d+)%\\)", group = 1))
     ) %>%
-    select(analysis_var, analysis_var_label, group_level, treatment_group,
-           statistic_type, n, pct, formatted_result)
+    select(
+      analysis_var, analysis_var_label, group_level, treatment_group,
+      statistic_type, n, pct, formatted_result
+    )
 
   return(ard_data)
 }
@@ -288,7 +296,6 @@ create_ard_table_4 <- function(df,
                                reason_var = "DCSREAS",
                                pop_vars = c("SAFFL", "ITTFL"),
                                lbl_pop_vars = c("Safety population", "ITT/mITT population")) {
-
   # Prepare data similar to your original function
   df_processed <- df %>%
     df_explicit_na() %>%
@@ -357,8 +364,10 @@ create_ard_table_4 <- function(df,
         TRUE ~ "secondary"
       )
     ) %>%
-    select(analysis_var, analysis_var_label, parent_var, variable_level,
-           treatment_group, statistic_type, n_total, n_event, pct, formatted_result)
+    select(
+      analysis_var, analysis_var_label, parent_var, variable_level,
+      treatment_group, statistic_type, n_total, n_event, pct, formatted_result
+    )
 
   return(ard_results)
 }
@@ -395,7 +404,6 @@ create_ard_with_gtsummary_cards <- function(df,
                                             arm_var = "ARM",
                                             pop_vars = c("SAFFL", "ITTFL"),
                                             lbl_pop_vars = c("Safety population", "ITT/mITT population")) {
-
   # This uses the newer gtsummary approach with cards package
   # First create the processed data
   df_processed <- df %>%
@@ -422,9 +430,11 @@ create_ard_with_gtsummary_cards <- function(df,
   ard <- df_processed %>%
     cards::ard_categorical(
       by = all_of(arm_var),
-      variables = all_of(c(pop_vars,
-                           "DISCSD", "DISCSD_AE", "DISCSD_LOE", "DISCSD_PD", "DISCSD_DT", "DISCSD_WBS", "DISCSD_OTH",
-                           "DISCS", "DISCS_DT", "DISCS_LFU", "DISCS_WBS", "DISCS_PHD", "DISCS_PD", "DISCS_OTH")),
+      variables = all_of(c(
+        pop_vars,
+        "DISCSD", "DISCSD_AE", "DISCSD_LOE", "DISCSD_PD", "DISCSD_DT", "DISCSD_WBS", "DISCSD_OTH",
+        "DISCS", "DISCS_DT", "DISCS_LFU", "DISCS_WBS", "DISCS_PHD", "DISCS_PD", "DISCS_OTH"
+      )),
       statistic = ~ c("n", "p")
     )
 
