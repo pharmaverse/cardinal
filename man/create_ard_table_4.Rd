@@ -25,7 +25,8 @@ Default is \code{"DCSREAS"}.}
 
 \item{pop_vars}{Character vector of population flag variables (e.g., \code{"SAFFL"}, \code{"ITTFL"}).}
 
-\item{lbl_pop_vars}{Character vector of labels corresponding to \code{pop_vars}, used for output labeling.}
+\item{lbl_pop_vars}{Character vector of labels corresponding to \code{pop_vars},
+used for output labeling.}
 }
 \value{
 A data frame containing a structured summary of population flags and treatment/study

@@ -22,7 +22,8 @@ create_ard_with_gtsummary_cards(
 \item{pop_vars}{Character vector of population flag variables (e.g., \code{"SAFFL"}, \code{"ITTFL"}).
 These should be binary flags (typically \code{"Y"} or \code{NA}).}
 
-\item{lbl_pop_vars}{Character vector of labels corresponding to \code{pop_vars}, used for labelling in the output.}
+\item{lbl_pop_vars}{Character vector of labels corresponding to \code{pop_vars},
+used for labelling in the output.}
 }
 \value{
 A \code{gtsummary}-styled ARD (Analysis Results Display) object created using \code{cards::ard_categorical()},

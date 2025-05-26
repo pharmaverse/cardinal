@@ -31,7 +31,8 @@ Default is \code{c("SAFFL", "ITTFL")}.}
 \item{lbl_pop_vars}{A character vector of labels corresponding to \code{pop_vars}.
 Default is \code{c("Safety population", "ITT/mITT population")}.}
 
-\item{display_all_column}{Logical indicating whether to include an "All Patients" column in the summary. Default is \code{FALSE}.}
+\item{display_all_column}{Logical indicating whether to include an "All Patients" column in the summary.
+Default is \code{FALSE}.}
 }
 \value{
 A \code{gtsummary::tbl_summary} object with formatted output:
@@ -52,7 +53,8 @@ The function:
 \itemize{
 \item Validates the presence of required columns,
 \item Applies flag logic (e.g., \code{"Y"} to \code{TRUE}) and attaches variable labels using \code{with_label},
-\item Constructs derived variables for study drug and study discontinuations based on \code{EOTSTT}, \code{EOSSTT}, and \code{DCSREAS},
+\item Constructs derived variables for study drug and study discontinuations
+based on \code{EOTSTT}, \code{EOSSTT}, and \code{DCSREAS},
 \item Uses \code{gtsummary::tbl_summary()} to build a formatted table grouped by \code{arm_var},
 \item Indents sub-reasons (e.g., "Adverse event", "Death") under their respective parent categories,
 \item Optionally adds an "All Patients" summary column.
