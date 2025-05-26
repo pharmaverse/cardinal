@@ -409,11 +409,12 @@ create_ard_table_4 <- function(df,
 #' # ard_tbl <- create_ard_with_gtsummary_cards(adsl_data)
 #'
 #' @export
-create_ard_with_gtsummary_cards <- function(df,
-                                            id_var = "USUBJID",
-                                            arm_var = "ARM",
-                                            pop_vars = c("SAFFL", "ITTFL"),
-                                            lbl_pop_vars = c("Safety population", "ITT/mITT population")) {
+create_ard_with_cards <- function(df,
+                                  id_var = "USUBJID",
+                                  arm_var = "ARM",
+                                  pop_vars = c("SAFFL", "ITTFL"),
+                                  lbl_pop_vars = c("Safety population", "ITT/mITT population")) {
+
   # This uses the newer gtsummary approach with cards package
   # First create the processed data
   df_processed <- df %>%
@@ -483,7 +484,7 @@ create_ard_with_gtsummary_cards <- function(df,
 #'     ), DCSREAS, "OTHER")
 #'   )
 #'
-#' tbl <- make_table_04_rtables(
+#' tbl <- cardinal::make_table_04_rtables(
 #'   df = adsl, pop_vars = c("RANDFL", "ITTFL", "SAFFL", "PPROTFL"),
 #'   lbl_pop_vars = c(
 #'     "Patients randomized", "ITT/mITT population", "Safety population", "Per-protocol population"
