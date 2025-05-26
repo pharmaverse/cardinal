@@ -463,7 +463,7 @@ create_ard_with_gtsummary_cards <- function(df,
 #'     ), DCSREAS, "OTHER")
 #'   )
 #'
-#' tbl <- make_table_04(
+#' tbl <- make_table_04_rtables(
 #'   df = adsl, pop_vars = c("RANDFL", "ITTFL", "SAFFL", "PPROTFL"),
 #'   lbl_pop_vars = c(
 #'     "Patients randomized", "ITT/mITT population", "Safety population", "Per-protocol population"
@@ -472,7 +472,7 @@ create_ard_with_gtsummary_cards <- function(df,
 #' tbl
 #'
 #' @export
-make_table_04 <- function(df,
+make_table_04_rtables <- function(df,
                           alt_counts_df = NULL,
                           show_colcounts = TRUE,
                           arm_var = "ARM",
