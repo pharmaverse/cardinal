@@ -87,7 +87,7 @@ adsl <- random.cdisc.data::cadsl \%>\%
     ), DCSREAS, "OTHER")
   )
 
-tbl <- make_table_04_rtables(
+tbl <- cardinal::make_table_04_rtables(
   df = adsl, pop_vars = c("RANDFL", "ITTFL", "SAFFL", "PPROTFL"),
   lbl_pop_vars = c(
     "Patients randomized", "ITT/mITT population", "Safety population", "Per-protocol population"
