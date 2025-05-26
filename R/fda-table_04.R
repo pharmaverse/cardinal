@@ -483,16 +483,16 @@ create_ard_with_gtsummary_cards <- function(df,
 #'
 #' @export
 make_table_04_rtables <- function(df,
-                          alt_counts_df = NULL,
-                          show_colcounts = TRUE,
-                          arm_var = "ARM",
-                          id_var = "USUBJID",
-                          pop_vars = c("SAFFL"),
-                          lbl_pop_vars = c("Safety population"),
-                          lbl_overall = NULL,
-                          prune_0 = FALSE,
-                          risk_diff = NULL,
-                          annotations = NULL) {
+                                  alt_counts_df = NULL,
+                                  show_colcounts = TRUE,
+                                  arm_var = "ARM",
+                                  id_var = "USUBJID",
+                                  pop_vars = c("SAFFL"),
+                                  lbl_pop_vars = c("Safety population"),
+                                  lbl_overall = NULL,
+                                  prune_0 = FALSE,
+                                  risk_diff = NULL,
+                                  annotations = NULL) {
   assert_subset(c(
     id_var, arm_var, pop_vars,
     "EOTSTT", "DCSREAS", "EOSSTT", "DCSREAS"
