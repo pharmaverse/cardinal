@@ -13,7 +13,8 @@
 #' @param pop_vars Character vector of population flag variable names. Default is `c("SAFFL", "ITTFL")`.
 #' @param lbl_pop_vars Character vector of human-readable labels corresponding to `pop_vars`.
 #' Must be the same length and order. Default is `c("Safety population", "ITT/mITT population")`.
-#' @param display_all_column Logical flag to indicate whether to include an overall column across all treatment groups. Default is `FALSE`.
+#' @param display_all_column Logical flag to indicate whether to include an overall column
+#'  across all treatment groups. Default is `FALSE`.
 #'
 #' @return If `return_ard = TRUE`, returns a list with two elements:
 #' \describe{
@@ -69,9 +70,12 @@ make_table_04 <- function(df,
 #' `EOTSTT`, `EOSSTT`, and `DCSREAS`, in addition to the specified `id_var`, `arm_var`, and `pop_vars`.
 #' @param id_var A string indicating the subject ID variable name. Default is `"USUBJID"`.
 #' @param arm_var A string indicating the treatment arm variable name. Default is `"ARM"`.
-#' @param reason_var A string indicating the discontinuation reason variable. Default is `"DCSREAS"`.
-#' @param pop_vars A character vector of population flag variables (e.g., `"SAFFL"`, `"ITTFL"`). Default is `c("SAFFL", "ITTFL")`.
-#' @param lbl_pop_vars A character vector of labels corresponding to `pop_vars`. Default is `c("Safety population", "ITT/mITT population")`.
+#' @param reason_var A string indicating the discontinuation reason variable.
+#'  Default is `"DCSREAS"`.
+#' @param pop_vars A character vector of population flag variables (e.g., `"SAFFL"`, `"ITTFL"`).
+#'  Default is `c("SAFFL", "ITTFL")`.
+#' @param lbl_pop_vars A character vector of labels corresponding to `pop_vars`.
+#'  Default is `c("Safety population", "ITT/mITT population")`.
 #' @param display_all_column Logical indicating whether to include an "All Patients" column in the summary. Default is `FALSE`.
 #'
 #' @return A `gtsummary::tbl_summary` object with formatted output:
@@ -264,7 +268,8 @@ create_ard_from_gtsummary <- function(tbl_summary_obj) {
 #' @param df A data frame containing subject-level disposition and population flag variables.
 #' @param id_var Character string indicating the subject ID variable. Default is `"USUBJID"`.
 #' @param arm_var Character string indicating the treatment arm variable. Default is `"ARM"`.
-#' @param reason_var Character string indicating the variable containing discontinuation reasons. Default is `"DCSREAS"`.
+#' @param reason_var Character string indicating the variable containing discontinuation reasons.
+#'  Default is `"DCSREAS"`.
 #' @param pop_vars Character vector of population flag variables (e.g., `"SAFFL"`, `"ITTFL"`).
 #' @param lbl_pop_vars Character vector of labels corresponding to `pop_vars`, used for output labeling.
 #'
@@ -382,7 +387,8 @@ create_ard_table_4 <- function(df,
 #' @param df A data frame containing the subject-level disposition data.
 #' @param id_var Character string specifying the subject ID variable. Default is `"USUBJID"`.
 #' @param arm_var Character string specifying the treatment arm variable. Default is `"ARM"`.
-#' @param pop_vars Character vector of population flag variables (e.g., `"SAFFL"`, `"ITTFL"`). These should be binary flags (typically `"Y"` or `NA`).
+#' @param pop_vars Character vector of population flag variables (e.g., `"SAFFL"`, `"ITTFL"`).
+#'  These should be binary flags (typically `"Y"` or `NA`).
 #' @param lbl_pop_vars Character vector of labels corresponding to `pop_vars`, used for labelling in the output.
 #'
 #' @return A `gtsummary`-styled ARD (Analysis Results Display) object created using `cards::ard_categorical()`,
