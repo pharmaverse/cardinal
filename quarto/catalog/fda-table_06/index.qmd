@@ -31,6 +31,9 @@ adsl <- random.cdisc.data::cadsl
 adae <- random.cdisc.data::cadae
 
 # Use safety population only
+adsl <- adsl |>
+  filter(SAFFL == "Y")
+
 saf_adae <- adae |>
   filter(SAFFL == "Y")
 ```
