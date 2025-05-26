@@ -414,7 +414,6 @@ create_ard_with_cards <- function(df,
                                   arm_var = "ARM",
                                   pop_vars = c("SAFFL", "ITTFL"),
                                   lbl_pop_vars = c("Safety population", "ITT/mITT population")) {
-
   # This uses the newer gtsummary approach with cards package
   # First create the processed data
   df_processed <- df %>%
