@@ -33,7 +33,8 @@ or only the formatted table (\code{FALSE}).}
 \item{lbl_pop_vars}{Character vector of human-readable labels corresponding to \code{pop_vars}.
 Must be the same length and order. Default is \code{c("Safety population", "ITT/mITT population")}.}
 
-\item{display_all_column}{Logical flag to indicate whether to include an overall column across all treatment groups. Default is \code{FALSE}.}
+\item{display_all_column}{Logical flag to indicate whether to include an overall column
+across all treatment groups. Default is \code{FALSE}.}
 }
 \value{
 If \code{return_ard = TRUE}, returns a list with two elements:

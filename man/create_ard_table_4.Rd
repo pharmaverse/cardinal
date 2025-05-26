@@ -20,7 +20,8 @@ create_ard_table_4(
 
 \item{arm_var}{Character string indicating the treatment arm variable. Default is \code{"ARM"}.}
 
-\item{reason_var}{Character string indicating the variable containing discontinuation reasons. Default is \code{"DCSREAS"}.}
+\item{reason_var}{Character string indicating the variable containing discontinuation reasons.
+Default is \code{"DCSREAS"}.}
 
 \item{pop_vars}{Character vector of population flag variables (e.g., \code{"SAFFL"}, \code{"ITTFL"}).}
 

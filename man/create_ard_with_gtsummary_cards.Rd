@@ -19,7 +19,8 @@ create_ard_with_gtsummary_cards(
 
 \item{arm_var}{Character string specifying the treatment arm variable. Default is \code{"ARM"}.}
 
-\item{pop_vars}{Character vector of population flag variables (e.g., \code{"SAFFL"}, \code{"ITTFL"}). These should be binary flags (typically \code{"Y"} or \code{NA}).}
+\item{pop_vars}{Character vector of population flag variables (e.g., \code{"SAFFL"}, \code{"ITTFL"}).
+These should be binary flags (typically \code{"Y"} or \code{NA}).}
 
 \item{lbl_pop_vars}{Character vector of labels corresponding to \code{pop_vars}, used for labelling in the output.}
 }

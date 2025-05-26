@@ -22,11 +22,14 @@ make_table_04_gtsummary(
 
 \item{arm_var}{A string indicating the treatment arm variable name. Default is \code{"ARM"}.}
 
-\item{reason_var}{A string indicating the discontinuation reason variable. Default is \code{"DCSREAS"}.}
+\item{reason_var}{A string indicating the discontinuation reason variable.
+Default is \code{"DCSREAS"}.}
 
-\item{pop_vars}{A character vector of population flag variables (e.g., \code{"SAFFL"}, \code{"ITTFL"}). Default is \code{c("SAFFL", "ITTFL")}.}
+\item{pop_vars}{A character vector of population flag variables (e.g., \code{"SAFFL"}, \code{"ITTFL"}).
+Default is \code{c("SAFFL", "ITTFL")}.}
 
-\item{lbl_pop_vars}{A character vector of labels corresponding to \code{pop_vars}. Default is \code{c("Safety population", "ITT/mITT population")}.}
+\item{lbl_pop_vars}{A character vector of labels corresponding to \code{pop_vars}.
+Default is \code{c("Safety population", "ITT/mITT population")}.}
 
 \item{display_all_column}{Logical indicating whether to include an "All Patients" column in the summary. Default is \code{FALSE}.}
 }
