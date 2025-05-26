@@ -2,8 +2,22 @@
 % Please edit documentation in R/fda-table_04.R
 \name{make_table_04}
 \alias{make_table_04}
-\title{FDA Table 4: Patient Disposition, Pooled Analyses}
+\title{Wrapper to Generate Disposition Table and ARD Structure}
 \usage{
+make_table_04(
+  df,
+  alt_counts_df = NULL,
+  show_colcounts = TRUE,
+  arm_var = "ARM",
+  id_var = "USUBJID",
+  pop_vars = c("SAFFL"),
+  lbl_pop_vars = c("Safety population"),
+  lbl_overall = NULL,
+  prune_0 = FALSE,
+  risk_diff = NULL,
+  annotations = NULL
+)
+
 make_table_04(
   df,
   alt_counts_df = NULL,
@@ -19,15 +33,16 @@ make_table_04(
 )
 }
 \arguments{
-\item{df}{(\code{data.frame})\cr dataset required to build table.}
+\item{df}{A data frame containing subject-level disposition data, including \code{EOTSTT}, \code{EOSSTT}, \code{DCSREAS},
+the population flags (\code{pop_vars}), and treatment arm (\code{arm_var}).}
 
 \item{alt_counts_df}{(\code{character})\cr alternative dataset (typically ADSL) used only to calculate column counts.}
 
 \item{show_colcounts}{(\code{flag})\cr Whether column counts should be printed. Boolean.}
 
-\item{arm_var}{(\code{character})\cr Name of the treatment arm variable used to split table into columns.}
+\item{arm_var}{A string indicating the treatment arm variable. Default is \code{"ARM"}.}
 
-\item{id_var}{(\code{character})\cr Name of the unique subject identifiers variable.}
+\item{id_var}{A string indicating the subject ID variable. Default is \code{"USUBJID"}.}
 
 \item{pop_vars}{(\code{vector} of \code{character})\cr population variables from \code{df} to include in the table.}
 
@@ -55,12 +70,27 @@ be included in the column labels by default. The length of \code{col_label} must
 \item{annotations}{(named \code{list} of \code{character})\cr list of annotations to add to the table. Valid
 annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
 use the annotation type as name and the desired string as value.}
+
+\item{return_ard}{Logical flag indicating whether to return both the table and the ARD structure (\code{TRUE}, default),
+or only the formatted table (\code{FALSE}).}
+
+\item{reason_var}{A string indicating the variable for reason of discontinuation. Default is \code{"DCSREAS"}.}
+
+\item{display_all_column}{Logical flag to indicate whether to include an overall column across all treatment groups. Default is \code{FALSE}.}
 }
 \value{
+If \code{return_ard = TRUE}, returns a list with two elements:
+\describe{
+\item{\code{table}}{A \code{gtsummary::tbl_summary} object for display}
+\item{\code{ard}}{A data frame in ARD format containing parsed statistics by treatment group}
+}
+If \code{return_ard = FALSE}, returns only the \code{gtsummary::tbl_summary} object.
+
 An \code{rtable} object.
 }
 \description{
-FDA Table 4: Patient Disposition, Pooled Analyses
+This function wraps \code{make_table_04_gtsummary()} and \code{create_ard_from_gtsummary()} to generate a formatted
+disposition summary table and optionally return the corresponding Analysis Results Dataset (ARD) structure.
 }
 \details{
 \itemize{
@@ -74,6 +104,12 @@ flag variables are treated as \code{"N"}.
 }
 }
 \examples{
+\dontrun{
+result <- make_table_04(my_disposition_data)
+result$table  # gtsummary table
+result$ard    # ARD format data
+}
+
 library(dplyr)
 
 adsl <- random.cdisc.data::cadsl \%>\%
@@ -95,4 +131,7 @@ tbl <- make_table_04(
 )
 tbl
 
+}
+\seealso{
+\code{\link[=make_table_04_gtsummary]{make_table_04_gtsummary()}}, \code{\link[=create_ard_from_gtsummary]{create_ard_from_gtsummary()}}
 }
