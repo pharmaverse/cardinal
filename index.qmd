@@ -2,7 +2,13 @@
 title: cardinal
 ---
 
-```{css}
+::: {.callout-warning}
+Please note that the cardinal project is currently undergoing major structural changes and is subject to change without notice.
+
+Some informational pages may show outdated information while the restructuring is in progress.
+:::
+
+```{css, echo=FALSE}
 h3 {
   text-align: center;
 }
@@ -12,11 +18,12 @@ h3 {
 
 #### 
 
-```{r}
+```{r, echo=FALSE}
 #| fig-align: "center"
 #| out-width: "2.0in"
 knitr::include_graphics("quarto/assets/images/logo/cardinal.png")
 ```
+
 
 #### What is cardinal?
 
@@ -25,7 +32,7 @@ The cardinal initiative (formerly "falcon") is an industry collaborative effort 
 ```{=html}
 <div class="divButton">
 <button onclick="window.location.href = 'quarto/getting_started.html';" class="button">Getting Started</button>
-<button onclick="window.location.href = 'quarto/index-templates.html';" class="button">Template Library Index</button> 
+<button onclick="window.location.href = 'quarto/index-catalog.html';" class="button">Template Catalog</button> 
 </div> 
 
 <div class="divButton">
@@ -77,8 +84,9 @@ Korbinian Matthias
 :::
 
 ::: flip-card-back
-Alex Assuied\
-Huan Lu
+Huan Lu\
+Harsha Kalikivayi\
+Alex Assuied
 :::
 :::
 :::
