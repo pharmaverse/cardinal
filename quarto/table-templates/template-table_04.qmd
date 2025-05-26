@@ -9,6 +9,83 @@ format: html
 
 ![](../assets/images/screenshots/table_04.png){fig-align="center"}
 
+## gtsummary Table
+
+```{r tbl, message=FALSE, warning=FALSE}
+# Load Libraries & Data
+library(dplyr)
+library(cards)
+library(cardinal)
+
+adsl <- random.cdisc.data::cadsl
+adae <- random.cdisc.data::cadae
+
+# Output Table
+make_table_04(
+  df = adsl,
+  return_ard = TRUE,
+  id_var = "USUBJID",
+  arm_var = "ARM",
+  reason_var = "DCSREAS",
+  pop_vars = c("SAFFL", "ITTFL"),
+  lbl_pop_vars = c("Safety population", "ITT/mITT population"),
+  display_all_column = FALSE
+)
+```
+
+## gtsummary Table Setup
+
+```{r tbl, eval=FALSE, echo=TRUE}
+```
+
+## Function Details
+
+### `make_table_04()`
+
+------------------------------------------------------------------------
+
+Required variables:
+
+-   **`df`**: `USUBJID`, `EOTSTT`, `DCSREAS`, `EOSSTT`, `DCSREAS` and the variables specified by `arm_var` and `pop_var`.
+
+| **Argument**    | **Description**                                                                                                                                                                                                                                        | **Default**              |
+|:------------------|:---------------------------------|:------------------|
+| `df`            | (`data.frame`) Dataset (typically ADSL) required to build table.                                                                                                                                                                                       | *No default*             |
+| `arm_var`       | (`character`) Arm variable used to split table into columns.                                                                                                                                                                                           | `"ARM"`                  |
+| `pop_vars`      | (named `list` of `character`) List of Population variables to use in Table                                                                                                                                                                             | `c("SAFFL")`             |
+| `lbl_pop_vars`  | (named `list` of `character`) List of row labels for populations defined by `pop_vars`                                                                                                                                                                 | `c("Safety population")` |
+| `display_all_column`   | (`logical`) If specified, an overall column will be added to the table .                                                                                                                                     | `NULL`                   |
+| `reason_var`       | (`flag`) variable that describes the reason for discontinuation from the study.                                                                                                                                                                                       | `DCSREAS`                  |
+
+Source code for this function is available [here](https://github.com/pharmaverse/cardinal/blob/main/R/fda-table_04.R).
+
+## ARD
+
+```{r tbl1, message=FALSE, warning=FALSE}
+# Load Libraries & Data
+library(dplyr)
+library(cards)
+library(cardinal)
+
+adsl <- random.cdisc.data::cadsl
+
+output <- make_table_04(df = adsl,
+                          return_ard = TRUE,
+                          id_var = "USUBJID",
+                          arm_var = "ARM",
+                          reason_var = "DCSREAS",
+                          pop_vars = c("SAFFL", "ITTFL"),
+                          lbl_pop_vars = c("Safety population", "ITT/mITT population"),
+                          display_all_column = FALSE)
+  
+output$ard
+```
+
+## ARD Setup
+
+```{r tbl1, eval=FALSE, echo=TRUE}
+```
+
 ## rtables Table
 
 ```{r tbl, message=FALSE, warning=FALSE}
