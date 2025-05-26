@@ -6,75 +6,32 @@
 \usage{
 make_table_04(
   df,
-  alt_counts_df = NULL,
-  show_colcounts = TRUE,
-  arm_var = "ARM",
+  return_ard = TRUE,
   id_var = "USUBJID",
-  pop_vars = c("SAFFL"),
-  lbl_pop_vars = c("Safety population"),
-  lbl_overall = NULL,
-  prune_0 = FALSE,
-  risk_diff = NULL,
-  annotations = NULL
-)
-
-make_table_04(
-  df,
-  alt_counts_df = NULL,
-  show_colcounts = TRUE,
   arm_var = "ARM",
-  id_var = "USUBJID",
-  pop_vars = c("SAFFL"),
-  lbl_pop_vars = c("Safety population"),
-  lbl_overall = NULL,
-  prune_0 = FALSE,
-  risk_diff = NULL,
-  annotations = NULL
+  reason_var = "DCSREAS",
+  pop_vars = c("SAFFL", "ITTFL"),
+  lbl_pop_vars = c("Safety population", "ITT/mITT population"),
+  display_all_column = FALSE
 )
 }
 \arguments{
 \item{df}{A data frame containing subject-level disposition data, including \code{EOTSTT}, \code{EOSSTT}, \code{DCSREAS},
 the population flags (\code{pop_vars}), and treatment arm (\code{arm_var}).}
 
-\item{alt_counts_df}{(\code{character})\cr alternative dataset (typically ADSL) used only to calculate column counts.}
-
-\item{show_colcounts}{(\code{flag})\cr Whether column counts should be printed. Boolean.}
-
-\item{arm_var}{A string indicating the treatment arm variable. Default is \code{"ARM"}.}
-
-\item{id_var}{A string indicating the subject ID variable. Default is \code{"USUBJID"}.}
-
-\item{pop_vars}{(\code{vector} of \code{character})\cr population variables from \code{df} to include in the table.}
-
-\item{lbl_pop_vars}{(\code{vector} of \code{character})\cr labels corresponding to variables in \code{pop_vars} to print
-in the table. Labels should be ordered according to the order of variables in \code{pop_vars}.}
-
-\item{lbl_overall}{(\code{character})\cr Optional. If specified, an overall column will be added to the table with
-the given value as the column label.}
-
-\item{prune_0}{(\code{flag})\cr Whether all-zero rows should be removed from the table. Boolean.}
-
-\item{risk_diff}{(named \code{list})\cr list of settings to apply to add one or more risk difference columns to the table.
-Defaults to \code{NULL} (no risk difference column added). See \code{\link[tern:add_riskdiff]{tern::add_riskdiff()}} for more details. List should
-contain the following elements:
-\itemize{
-\item \code{arm_x}: (required) the name of reference arm.
-\item \code{arm_y}: (required) the names of the arms to compare to the reference arm. A new column will be added for each
-element of \code{arm_y}.
-\item \code{col_label}: (optional) labels to use for the risk difference columns. Defaults to
-\code{"Risk Difference (\%) (95\% CI)"}. For more than one risk difference column, \code{"arm x vs. arm y"} text will also
-be included in the column labels by default. The length of \code{col_label} must be equal to the length of \code{arm_y}.
-\item \code{pct}: (optional) whether the output should be returned as percentages. Defaults to \code{TRUE}.
-}}
-
-\item{annotations}{(named \code{list} of \code{character})\cr list of annotations to add to the table. Valid
-annotation types are \code{title}, \code{subtitles}, \code{main_footer}, and \code{prov_footer}. Each name-value pair should
-use the annotation type as name and the desired string as value.}
-
 \item{return_ard}{Logical flag indicating whether to return both the table and the ARD structure (\code{TRUE}, default),
 or only the formatted table (\code{FALSE}).}
 
+\item{id_var}{A string indicating the subject ID variable. Default is \code{"USUBJID"}.}
+
+\item{arm_var}{A string indicating the treatment arm variable. Default is \code{"ARM"}.}
+
 \item{reason_var}{A string indicating the variable for reason of discontinuation. Default is \code{"DCSREAS"}.}
+
+\item{pop_vars}{Character vector of population flag variable names. Default is \code{c("SAFFL", "ITTFL")}.}
+
+\item{lbl_pop_vars}{Character vector of human-readable labels corresponding to \code{pop_vars}.
+Must be the same length and order. Default is \code{c("Safety population", "ITT/mITT population")}.}
 
 \item{display_all_column}{Logical flag to indicate whether to include an overall column across all treatment groups. Default is \code{FALSE}.}
 }
@@ -85,51 +42,17 @@ If \code{return_ard = TRUE}, returns a list with two elements:
 \item{\code{ard}}{A data frame in ARD format containing parsed statistics by treatment group}
 }
 If \code{return_ard = FALSE}, returns only the \code{gtsummary::tbl_summary} object.
-
-An \code{rtable} object.
 }
 \description{
 This function wraps \code{make_table_04_gtsummary()} and \code{create_ard_from_gtsummary()} to generate a formatted
 disposition summary table and optionally return the corresponding Analysis Results Dataset (ARD) structure.
 }
-\details{
-\itemize{
-\item \code{df} must contain \code{EOTSTT}, \code{DCSREAS}, \code{EOSSTT}, \code{DCSREAS} and the variables specified by \code{arm_var}, \code{id_var},
-and \code{pop_vars}.
-\item If specified, \code{alt_counts_df} must contain the variable specified by \code{arm_var}, \code{id_var}, and \code{pop_vars}.
-\item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false). Missing values in
-flag variables are treated as \code{"N"}.
-\item Columns are split by arm. Overall population column is excluded by default (see \code{lbl_overall} argument).
-\item All-zero rows are not removed by default (see \code{prune_0} argument).
-}
-}
 \examples{
 \dontrun{
 result <- make_table_04(my_disposition_data)
-result$table  # gtsummary table
-result$ard    # ARD format data
+result$table # gtsummary table
+result$ard # ARD format data
 }
-
-library(dplyr)
-
-adsl <- random.cdisc.data::cadsl \%>\%
-  mutate(test = rbinom(400, 1, 0.5)) \%>\%
-  mutate(
-    RANDFL = ifelse(test == 0, "N", "Y"),
-    PPROTFL = ifelse(test == 0, "N", "Y"),
-    DCSREAS = if_else(DCSREAS \%in\% c(
-      "ADVERSE EVENT", "LACK OF EFFICACY", "PROTOCOL VIOLATION",
-      "DEATH", "WITHDRAWAL BY PARENT/GUARDIAN"
-    ), DCSREAS, "OTHER")
-  )
-
-tbl <- make_table_04(
-  df = adsl, pop_vars = c("RANDFL", "ITTFL", "SAFFL", "PPROTFL"),
-  lbl_pop_vars = c(
-    "Patients randomized", "ITT/mITT population", "Safety population", "Per-protocol population"
-  )
-)
-tbl
 
 }
 \seealso{
