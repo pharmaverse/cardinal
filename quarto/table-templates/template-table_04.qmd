@@ -69,15 +69,17 @@ library(cardinal)
 
 adsl <- random.cdisc.data::cadsl
 
-output <- make_table_04(df = adsl,
-                          return_ard = TRUE,
-                          id_var = "USUBJID",
-                          arm_var = "ARM",
-                          reason_var = "DCSREAS",
-                          pop_vars = c("SAFFL", "ITTFL"),
-                          lbl_pop_vars = c("Safety population", "ITT/mITT population"),
-                          display_all_column = FALSE)
-  
+output <- make_table_04(
+  df = adsl,
+  return_ard = TRUE,
+  id_var = "USUBJID",
+  arm_var = "ARM",
+  reason_var = "DCSREAS",
+  pop_vars = c("SAFFL", "ITTFL"),
+  lbl_pop_vars = c("Safety population", "ITT/mITT population"),
+  display_all_column = FALSE
+)
+
 output$ard
 ```
 
