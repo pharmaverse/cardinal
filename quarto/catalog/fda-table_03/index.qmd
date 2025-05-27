@@ -30,7 +30,7 @@ adsl <- adsl %>%
     ENRLDT = RANDDT,
     SCRNFL = "Y",
     SCRNFRS = factor(sample(scrnfail_reas_lvls, size = nrow(adsl), replace = TRUE),
-                     levels = scrnfail_reas_lvls
+      levels = scrnfail_reas_lvls
     ),
     SCRNFAILFL = ifelse(is.na(ENRLDT), "Y", "N"),
     SCRNFL = with_label(SCRNFL == "Y", "Patients screened"),
@@ -86,32 +86,32 @@ ard_table_03 <- function(df,
                          scrnfl_var = "SCRNFL",
                          scrnfailfl_var = "SCRNFAILFL",
                          scrnfail_var = "SCRNFRS") {
-
   if (is.null(denominator)) {
     denominator <- df
   } else {
     denominator <- alt_counts_df_preproc(denominator, id_var, arm_var)
   }
-  
+
   ard <- df |>
     ard_stack(
       .by = (!!rlang::sym(arm_var)),
       ard_dichotomous(
-      variables = SCRNFL,
-      value = list(SCRNFL = TRUE),
-      statistic = everything() ~ c("n"),
-      denominator = denominator
-    ),
-    ard_categorical(
-      variables = SCRNFRS,
-      statistic = everything() ~ c("n", "p")
-    ),
-    ard_dichotomous(
-      variables = c(ENRLFL, RANDFL),
-      value = list(ENRLFL = TRUE, RANDFL = TRUE),
-      statistic = everything() ~ c("n", "p"),
-      denominator = denominator
-    ))
+        variables = SCRNFL,
+        value = list(SCRNFL = TRUE),
+        statistic = everything() ~ c("n"),
+        denominator = denominator
+      ),
+      ard_categorical(
+        variables = SCRNFRS,
+        statistic = everything() ~ c("n", "p")
+      ),
+      ard_dichotomous(
+        variables = c(ENRLFL, RANDFL),
+        value = list(ENRLFL = TRUE, RANDFL = TRUE),
+        statistic = everything() ~ c("n", "p"),
+        denominator = denominator
+      )
+    )
 
   ard
 }
@@ -161,7 +161,6 @@ print(ard, columns = "all", n = 40)
 tbl <- make_table_03(df = adsl)$table
 
 tbl
-
 ```
 
 ```{r eval=FALSE, include=FALSE}
