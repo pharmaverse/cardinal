@@ -30,9 +30,13 @@ adsl <- adsl %>%
     ENRLDT = RANDDT,
     SCRNFL = "Y",
     SCRNFRS = factor(sample(scrnfail_reas_lvls, size = nrow(adsl), replace = TRUE),
-      levels = scrnfail_reas_lvls
+                     levels = scrnfail_reas_lvls
     ),
-    SCRNFAILFL = ifelse(is.na(ENRLDT), "Y", "N")
+    SCRNFAILFL = ifelse(is.na(ENRLDT), "Y", "N"),
+    SCRNFL = with_label(SCRNFL == "Y", "Patients screened"),
+    SCRNFL = with_label(!is.na(SCRNFRS), "Screnning failures"),
+    ENRLFL = with_label(!is.na(ENRLDT), "Patients enrolled"),
+    RANDFL = with_label(!is.na(RANDDT), "Patients randomized")
   )
 adsl$SCRNFRS[adsl$SCRNFL == "N" | !is.na(adsl$ENRLDT)] <- NA
 ```
@@ -75,22 +79,6 @@ make_table_03 <- function(df,
   }
 }
 
-preproc_df_table_03 <- function(df,
-                                arm_var = "ARM",
-                                id_var = "USUBJID",
-                                scrnfl_var = "SCRNFL",
-                                scrnfailfl_var = "SCRNFAILFL",
-                                scrnfail_var = "SCRNFRS") {
-  df %>%
-    df_explicit_na() %>%
-    mutate(
-      SCRNFL = with_label(.data[[scrnfl_var]] == "Y", "Patients screened"),
-      SCRNFL = with_label(!is.na(scrnfail_var), "Screnning failures"),
-      ENRLFL = with_label(!is.na(ENRLDT), "Patients enrolled"),
-      RANDFL = with_label(!is.na(RANDDT), "Patients randomized")
-    )
-}
-
 ard_table_03 <- function(df,
                          denominator = NULL,
                          arm_var = "ARM",
@@ -98,40 +86,32 @@ ard_table_03 <- function(df,
                          scrnfl_var = "SCRNFL",
                          scrnfailfl_var = "SCRNFAILFL",
                          scrnfail_var = "SCRNFRS") {
-  df <- preproc_df_table_03(df, arm_var, id_var, scrnfl_var, scrnfailfl_var, scrnfail_var)
 
   if (is.null(denominator)) {
     denominator <- df
   } else {
     denominator <- alt_counts_df_preproc(denominator, id_var, arm_var)
   }
-
-  scrn_ard <- df |>
-    group_by(!!rlang::sym(arm_var)) |>
-    ard_dichotomous(
+  
+  ard <- df |>
+    ard_stack(
+      .by = (!!rlang::sym(arm_var)),
+      ard_dichotomous(
       variables = SCRNFL,
       value = list(SCRNFL = TRUE),
       statistic = everything() ~ c("n"),
       denominator = denominator
-    )
-
-  scrnfail_ard <- df |>
-    group_by(!!rlang::sym(arm_var)) |>
+    ),
     ard_categorical(
       variables = SCRNFRS,
       statistic = everything() ~ c("n", "p")
-    )
-
-  enrl_rand_ard <- df |>
-    group_by(!!rlang::sym(arm_var)) |>
+    ),
     ard_dichotomous(
       variables = c(ENRLFL, RANDFL),
       value = list(ENRLFL = TRUE, RANDFL = TRUE),
       statistic = everything() ~ c("n", "p"),
       denominator = denominator
-    )
-
-  ard <- bind_ard(scrn_ard, scrnfail_ard, enrl_rand_ard)
+    ))
 
   ard
 }
@@ -143,8 +123,6 @@ make_table_03_gtsummary <- function(df,
                                     scrnfl_var = "SCRNFL",
                                     scrnfailfl_var = "SCRNFAILFL",
                                     scrnfail_var = "SCRNFRS") {
-  df <- preproc_df_table_03(df, arm_var, id_var, scrnfl_var, scrnfailfl_var, scrnfail_var)
-
   if (is.null(denominator)) {
     denominator <- df
   } else {
@@ -183,6 +161,7 @@ print(ard, columns = "all", n = 40)
 tbl <- make_table_03(df = adsl)$table
 
 tbl
+
 ```
 
 ```{r eval=FALSE, include=FALSE}
