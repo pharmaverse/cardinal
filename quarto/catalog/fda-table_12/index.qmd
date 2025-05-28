@@ -24,6 +24,9 @@ adae <- random.cdisc.data::cadae
 adae$DCSREAS[is.na(adae$DCSREAS)] <- "ADVERSE EVENT"
 
 # Pre-processing --------------------------------------------
+adsl <- adsl %>%
+  filter(SAFFL == "Y") # safety population
+
 data <- adae %>%
   filter(
     # safety population

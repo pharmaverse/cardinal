@@ -23,10 +23,11 @@ adsl <- random.cdisc.data::cadsl
 adae <- random.cdisc.data::cadae
 
 # Pre-processing --------------------------------------------
+adsl <- adsl %>%
+  filter(SAFFL == "Y") # safety population
 
 data <- adae |>
-  # safety population
-  filter(SAFFL == "Y")
+  filter(SAFFL == "Y") # safety population
 ```
 
 ## Build Table
