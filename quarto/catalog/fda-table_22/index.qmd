@@ -29,7 +29,7 @@ data <- adae |>
   filter(
     SAFFL == "Y",
     TRTEMFL == "Y"
-  ) |> 
+  ) |>
   mutate(
     AGEGR1 = factor(
       dplyr::case_when(
@@ -44,7 +44,6 @@ data <- adae |>
 data_any_ae <- adae |>
   filter(AESEV != "") |>
   mutate(AESEV = "Any AE, n(%)")
-
 ```
 
 ## Build Table
@@ -56,7 +55,7 @@ tbl_any_ae <- tbl_hierarchical(
   id = "USUBJID",
   by = "ARM",
   variables = "AESEV",
-  statistic = ~ "{n}/{N} ({p}%)",
+  statistic = ~"{n}/{N} ({p}%)",
   label = AESEV ~ "Characteristic"
 )
 
@@ -66,7 +65,7 @@ tbl_sex <- tbl_hierarchical(
   id = "USUBJID",
   by = "ARM",
   variables = "SEX",
-  statistic = ~ "{n}/{N} ({p}%)",
+  statistic = ~"{n}/{N} ({p}%)",
   label = list(SEX ~ "Characteristic", ..ard_hierarchical_overall.. = "Sex, n(%)"),
   overall_row = TRUE
 )
@@ -77,7 +76,7 @@ tbl_agegr1 <- tbl_hierarchical(
   id = "USUBJID",
   by = "ARM",
   variables = "AGEGR1",
-  statistic = ~ "{n}/{N} ({p}%)",
+  statistic = ~"{n}/{N} ({p}%)",
   label = list(AGEGR1 ~ "Characteristic", ..ard_hierarchical_overall.. = "Age group, years, n(%)"),
   overall_row = TRUE
 )
@@ -88,7 +87,7 @@ tbl_race <- tbl_hierarchical(
   id = "USUBJID",
   by = "ARM",
   variables = "RACE",
-  statistic = ~ "{n}/{N} ({p}%)",
+  statistic = ~"{n}/{N} ({p}%)",
   label = list(RACE ~ "Characteristic", ..ard_hierarchical_overall.. = "Race, n(%)"),
   overall_row = TRUE
 )
@@ -99,7 +98,7 @@ tbl_ethnic <- tbl_hierarchical(
   id = "USUBJID",
   by = "ARM",
   variables = "ETHNIC",
-  statistic = ~ "{n}/{N} ({p}%)",
+  statistic = ~"{n}/{N} ({p}%)",
   label = list(ETHNIC ~ "Characteristic", ..ard_hierarchical_overall.. = "Ethnicity, n(%)"),
   overall_row = TRUE
 )
