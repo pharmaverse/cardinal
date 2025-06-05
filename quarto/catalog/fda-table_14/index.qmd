@@ -30,19 +30,19 @@ adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
 # Pre-processing --------------------------------------------
 adae <- adae |>
   # safety population
-  filter(SAFFL == "Y") 
+  filter(SAFFL == "Y")
 ```
 
 ## Build Table
 
 ```{r tbl, results = 'hide'}
-tbl <- 
+tbl <-
   adae |>
   select(FMQ01SC, ARM, FMQ01NAM, AEBODSYS, USUBJID) |>
   mutate(across(everything(), ~ fct_explicit_na(as.factor(.), na_level = "<Missing>"))) |>
   tbl_strata(
     strata = FMQ01SC,
-    ~tbl_hierarchical(
+    ~ tbl_hierarchical(
       .x,
       by = ARM,
       variables = c(AEBODSYS, FMQ01NAM),
