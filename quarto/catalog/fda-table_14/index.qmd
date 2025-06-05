@@ -29,21 +29,25 @@ adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
 adae <- adae |>
   filter(
     # safety population
-    SAFFL == "Y")|>
-  mutate(FMQ01SC = as.factor(FMQ01SC),
-         FMQ01NAM = as.factor(FMQ01NAM)) |>
+    SAFFL == "Y"
+  ) |>
+  mutate(
+    FMQ01SC = as.factor(FMQ01SC),
+    FMQ01NAM = as.factor(FMQ01NAM)
+  ) |>
   mutate_all(as.factor)
 ```
 
 ## Build Table
 
 ```{r tbl, results = 'hide'}
-tbl <- 
+tbl <-
   adae |>
-  select(FMQ01SC, ARM, FMQ01NAM, AEBODSYS)|>
+  select(FMQ01SC, ARM, FMQ01NAM, AEBODSYS) |>
   tbl_strata(
     strata = FMQ01SC,
-    ~tbl_hierarchical_count(.x, by=ARM, variables = c(AEBODSYS,FMQ01NAM)))
+    ~ tbl_hierarchical_count(.x, by = ARM, variables = c(AEBODSYS, FMQ01NAM))
+  )
 
 tbl
 ```
