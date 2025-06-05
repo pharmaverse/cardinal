@@ -22,17 +22,15 @@ library(gtsummary)
 adae <- random.cdisc.data::cadae |>
   dplyr::rename(FMQ01SC = SMQ01SC, FMQ01NAM = SMQ01NAM)
 
+adsl <- random.cdisc.data::cadsl
+
 levels(adae$FMQ01SC) <- c("BROAD", "NARROW")
 adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
 
 # Pre-processing --------------------------------------------
 adae <- adae |>
-  filter(
-    # safety population
-    SAFFL == "Y")|>
-  mutate(FMQ01SC = as.factor(FMQ01SC),
-         FMQ01NAM = as.factor(FMQ01NAM)) |>
-  mutate_all(as.factor)
+  # safety population
+  filter(SAFFL == "Y") 
 ```
 
 ## Build Table
@@ -40,11 +38,18 @@ adae <- adae |>
 ```{r tbl, results = 'hide'}
 tbl <- 
   adae |>
-  select(FMQ01SC, ARM, FMQ01NAM, AEBODSYS)|>
+  select(FMQ01SC, ARM, FMQ01NAM, AEBODSYS, USUBJID) |>
+  mutate(across(everything(), ~ fct_explicit_na(as.factor(.), na_level = "<Missing>"))) |>
   tbl_strata(
     strata = FMQ01SC,
-    ~tbl_hierarchical_count(.x, by=ARM, variables = c(AEBODSYS,FMQ01NAM)))
-
+    ~tbl_hierarchical(
+      .x,
+      by = ARM,
+      variables = c(AEBODSYS, FMQ01NAM),
+      id = USUBJID,
+      denominator = adsl
+    )
+  )
 tbl
 ```
 
