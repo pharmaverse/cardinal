@@ -31,14 +31,18 @@ adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
 adae <- adae |>
   # safety population
   filter(SAFFL == "Y")
+
+adsl <- adsl |>
+  filter(SAFFL == "Y") # safety population
 ```
 
 ## Build Table
 
 ```{r tbl, results = 'hide'}
 tbl <-
-  adae |>
+ adae |>
   select(FMQ01SC, ARM, FMQ01NAM, AEBODSYS, USUBJID) |>
+  # setting an explicit level for NA values so empty strata combinations are shown.
   mutate(across(everything(), ~ fct_explicit_na(as.factor(.), na_level = "<Missing>"))) |>
   tbl_strata(
     strata = FMQ01SC,
@@ -47,9 +51,11 @@ tbl <-
       by = ARM,
       variables = c(AEBODSYS, FMQ01NAM),
       id = USUBJID,
-      denominator = adsl
-    )
-  )
+      denominator = adsl,
+      # variables to calculate rates for
+      include = c(FMQ01NAM),
+      label = list(FMQ01NAM ~ "FMQ", AEBODSYS ~ "System Organ Class")
+    ))
 tbl
 ```
 
