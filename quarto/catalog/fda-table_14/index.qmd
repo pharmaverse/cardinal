@@ -40,7 +40,7 @@ adsl <- adsl |>
 
 ```{r tbl, results = 'hide'}
 tbl <-
- adae |>
+  adae |>
   select(FMQ01SC, ARM, FMQ01NAM, AEBODSYS, USUBJID) |>
   # setting an explicit level for NA values so empty strata combinations are shown.
   mutate(across(everything(), ~ fct_explicit_na(as.factor(.), na_level = "<Missing>"))) |>
@@ -55,7 +55,8 @@ tbl <-
       # variables to calculate rates for
       include = c(FMQ01NAM),
       label = list(FMQ01NAM ~ "FMQ", AEBODSYS ~ "System Organ Class")
-    ))
+    )
+  )
 tbl
 ```
 
