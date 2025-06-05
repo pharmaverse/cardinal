@@ -1,0 +1,71 @@
+---
+title: FDA Table 14
+subtitle: Patients With Adverse Events by System Organ Class and FDA Medical Query, Safety Population, Pooled Analyses
+categories: [table, FDA, safety, adverse events]
+---
+
+::: panel-tabset
+## Table Preview
+
+```{r img, echo=FALSE, fig.align='center', out.width='45%'}
+knitr::include_graphics("result.png")
+```
+
+## Setup
+
+```{r setup, message=FALSE}
+# Load libraries & data -------------------------------------
+library(dplyr)
+library(cards)
+library(gtsummary)
+
+adae <- random.cdisc.data::cadae |>
+  dplyr::rename(FMQ01SC = SMQ01SC, FMQ01NAM = SMQ01NAM)
+
+levels(adae$FMQ01SC) <- c("BROAD", "NARROW")
+adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
+
+# Pre-processing --------------------------------------------
+adae <- adae |>
+  filter(
+    # safety population
+    SAFFL == "Y")|>
+  mutate(FMQ01SC = as.factor(FMQ01SC),
+         FMQ01NAM = as.factor(FMQ01NAM)) |>
+  mutate_all(as.factor)
+```
+
+## Build Table
+
+```{r tbl, results = 'hide'}
+tbl <- 
+  adae |>
+  select(FMQ01SC, ARM, FMQ01NAM, AEBODSYS)|>
+  tbl_strata(
+    strata = FMQ01SC,
+    ~tbl_hierarchical_count(.x, by=ARM, variables = c(AEBODSYS,FMQ01NAM)))
+
+tbl
+```
+
+```{r eval=FALSE, include=FALSE}
+gt::gtsave(as_gt(tbl), filename = "result.png")
+```
+
+```{r img, echo=FALSE, fig.align='center', out.width='45%'}
+```
+
+## Build ARD
+
+```{r ard, message=FALSE, warning=FALSE, results='hide'}
+ard <- gather_ard(tbl)
+
+ard
+```
+
+```{r, echo=FALSE}
+# Print ARD
+withr::local_options(width = 9999)
+print(ard, columns = "all", n = 40)
+```
+:::
