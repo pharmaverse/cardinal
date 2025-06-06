@@ -1,0 +1,81 @@
+---
+title: FDA Table 02
+subtitle: Baseline Demographic and Clinical Characteristics, Safety Population, Pooled Analyses
+categories: [table, FDA, safety, demographics]
+---
+
+::: panel-tabset
+## Table Preview
+
+```{r img, echo=FALSE, fig.align='center', out.width='60%'}
+knitr::include_graphics("result.png")
+```
+
+## Setup
+
+```{r setup, message=FALSE}
+# Load libraries & data -------------------------------------
+library(dplyr)
+library(gtsummary)
+
+adsl <- random.cdisc.data::cadsl |>
+  mutate(
+    AGEGR1 = factor(
+      dplyr::case_when(
+        AGE >= 17 & AGE < 65 ~ ">=17 to <65",
+        AGE >= 65 & AGE < 75 ~ "65-74",
+        AGE >= 75 ~ ">=75"
+      ),
+      levels = c(">=17 to <65", "65-74", ">=75")
+    )
+  )
+
+# Pre-processing --------------------------------------------
+# Filter for the safety population, x
+data <- adsl |>
+  filter(SAFFL == "Y")
+```
+
+## Build Table
+
+```{r tbl, results='hide'}
+tbl <- data |>
+  tbl_summary(
+    by = "ARM",
+    include = c("SEX", "AGE", "AGEGR1", "ETHNIC", "RACE", "BMRKR1", "BMRKR2"),
+    type = all_continuous() ~ "continuous2", # arranges statistics into multiple lines
+    statistic = list(
+      all_continuous() ~ c(
+        "{mean} ({sd})",
+        "{median} ({min}, {max})"
+      ),
+      all_categorical() ~ "{n} ({p}%)"
+    ),
+    label = list(AGEGR1 = "Age Group, Years")
+  ) |>
+  add_overall(last = TRUE, col_label = "**Total Population**  \nN = {N}") |>
+  # remove default footnote
+  gtsummary::remove_footnote_header(columns = everything())
+```
+
+```{r eval=FALSE, include=FALSE}
+# Run chunk locally to generate image file
+gt::gtsave(as_gt(tbl), filename = "result.png")
+```
+
+```{r img, echo=FALSE, fig.align='center', out.width='60%'}
+```
+
+## Build ARD
+
+```{r ard, message=FALSE, warning=FALSE, results='hide'}
+ard <- gather_ard(tbl)
+ard
+```
+
+```{r, echo=FALSE}
+# Print full ARD
+withr::local_options(width = 9999)
+print(ard, columns = "all")
+```
+:::
