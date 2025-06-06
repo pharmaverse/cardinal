@@ -121,7 +121,7 @@ ard
 ```{r, echo=FALSE}
 # Print ARD
 withr::local_options(width = 9999)
-print(ard, columns = "all", n = 40, na.print = NUL)
+print(ard, columns = "all", n = 40, na.print = NULL)
 ```
 
 
