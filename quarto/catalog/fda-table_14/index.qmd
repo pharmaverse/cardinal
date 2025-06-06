@@ -39,11 +39,16 @@ adsl <- adsl |>
 ## Build Table
 
 ```{r tbl, results = 'hide'}
-tbl <-
-  adae |>
+tbl <- adae |>
   select(FMQ01SC, ARM, FMQ01NAM, AEBODSYS, USUBJID) |>
   # setting an explicit level for NA values so empty strata combinations are shown.
-  mutate(across(everything(), ~ fct_explicit_na(as.factor(.), na_level = "<Missing>"))) |>
+  mutate(across(everything(), ~ {
+    if (anyNA(.)) {
+      forcats::fct_na_value_to_level(as.factor(.), level = "<Missing>")
+    } else {
+      .
+    }
+  })) |>
   tbl_strata(
     strata = FMQ01SC,
     ~ tbl_hierarchical(
