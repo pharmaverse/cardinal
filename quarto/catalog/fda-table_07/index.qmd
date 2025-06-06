@@ -37,14 +37,14 @@ data <- adae |>
     DTHFL == "Y"
   ) |>
   mutate(
-    # treatment-emergent deaths categorization
+    # treatment-emergent deaths categories
     TRTEMFL = ifelse(TRTEMFL == "Y", "Treatment-emergent deaths", "Nontreatment-emergent deaths")
   )
 
 data <- data |>
   bind_rows(
-    data |> 
-      mutate(TRTEMFL = "Total deaths")
+    # duplicate all data to create "Total deaths" section
+    data |> mutate(TRTEMFL = "Total deaths")
   )
 ```
 
