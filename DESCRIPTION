@@ -24,7 +24,7 @@ Imports:
     ggplot2 (>= 3.5.0),
     ggsurvfit (>= 1.1.0),
     gt (>= 0.10.1),
-    gtsummary (>= 2.0.4),
+    gtsummary (>= 2.2.0.9017),
     lubridate (>= 1.7.10),
     magrittr (>= 1.5),
     purrr (>= 1.0.1),
@@ -41,6 +41,8 @@ Suggests:
     svglite (>= 2.1.2),
     testthat (>= 3.1.9),
     withr (>= 2.0.0)
+Remotes: 
+    ddsjoberg/gtsummary
 biocViews:
 Config/testthat/edition: 3
 Encoding: UTF-8
