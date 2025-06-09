@@ -48,7 +48,7 @@ data_any_ae <- adae |>
 
 ## Build Table
 
-```{r tbl, message=FALSE, warning=FALSE, results = 'hide'}
+```{r tbl, message=FALSE, warning=FALSE}
 tbl_any_ae <- tbl_hierarchical(
   data = data_any_ae,
   denominator = adsl,
