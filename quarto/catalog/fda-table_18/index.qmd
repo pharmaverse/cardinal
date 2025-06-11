@@ -29,18 +29,21 @@ adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
 adae$FMQ01NAM <- factor(adae$FMQ01NAM, levels = c(
   unique(adae$FMQ01NAM), "Abnormal Uterine Bleeding", "Amenorrhea",
   "Bacterial Vaginosis", "Decreased Menstrual Bleeding"
-  ))
+))
 adae$FMQ01NAM[adae$SEX == "F"] <- as.factor(
   sample(c(
     "Abnormal Uterine Bleeding", "Amenorrhea",
     "Bacterial Vaginosis", "Decreased Menstrual Bleeding"
-    ), sum(adae$SEX == "F"), replace = TRUE))
+  ), sum(adae$SEX == "F"), replace = TRUE)
+)
 
 # Pre-processing --------------------------------------------
 adae <- adae |>
-  filter(SAFFL == "Y",
-         SEX == "F",
-         FMQ01SC == "BROAD")
+  filter(
+    SAFFL == "Y",
+    SEX == "F",
+    FMQ01SC == "BROAD"
+  )
 
 adsl <- adsl |>
   filter(SAFFL == "Y") # safety population
@@ -50,7 +53,7 @@ adsl <- adsl |>
 
 ```{r tbl, results = 'hide'}
 tbl <- adae |>
-  select(FMQ01SC, ARM, FMQ01NAM,AEDECOD, USUBJID) |>
+  select(FMQ01SC, ARM, FMQ01NAM, AEDECOD, USUBJID) |>
   # setting an explicit level for NA values so empty strata combinations are shown.
   mutate(across(everything(), ~ {
     if (anyNA(.)) {
@@ -58,15 +61,16 @@ tbl <- adae |>
     } else {
       .
     }
-  })) |> tbl_hierarchical(
-      by = ARM,
-      variables = c(FMQ01NAM, AEDECOD),
-      id = USUBJID,
-      denominator = adsl,
-      # variables to calculate rates for
-      include = c(AEDECOD),
-      label = list(FMQ01NAM ~ "FMQ (Broad)", AEDECOD ~ "Preferred Term")
-      )
+  })) |>
+  tbl_hierarchical(
+    by = ARM,
+    variables = c(FMQ01NAM, AEDECOD),
+    id = USUBJID,
+    denominator = adsl,
+    # variables to calculate rates for
+    include = c(AEDECOD),
+    label = list(FMQ01NAM ~ "FMQ (Broad)", AEDECOD ~ "Preferred Term")
+  )
 tbl
 ```
 
