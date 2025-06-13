@@ -77,7 +77,7 @@ print(ard, columns = "all", n = 40)
 
 ## Build Table
 
-```{r tbl, message=FALSE, warning=FALSE}
+```{r tbl, message=FALSE, warning=FALSE, results='hide'}
 tbl <- adsl %>%
   select("SCRNFL", "SCRNFRS", "ENRLFL", "RANDFL") %>%
   tbl_summary(
@@ -90,6 +90,8 @@ tbl <- adsl %>%
   ) %>%
   modify_header(label = "**Disposition**", stat_0 = "**Trial A**") %>%
   remove_footnote_header(columns = everything())
+
+tbl
 ```
 
 ```{r eval=FALSE, include=FALSE}
