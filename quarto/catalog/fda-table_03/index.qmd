@@ -16,6 +16,7 @@ knitr::include_graphics("result.png")
 ```{r setup, message=FALSE}
 # Load libraries & data -------------------------------------
 library(dplyr)
+library(formatters)
 library(cards)
 library(gtsummary)
 
@@ -89,8 +90,6 @@ tbl <- adsl %>%
   ) %>%
   modify_header(label = "**Disposition**", stat_0 = "**Trial A**") %>%
   remove_footnote_header(columns = everything())
-
-tbl
 ```
 
 ```{r eval=FALSE, include=FALSE}
