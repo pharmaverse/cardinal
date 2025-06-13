@@ -16,6 +16,7 @@ knitr::include_graphics("result.png")
 ```{r setup, message=FALSE}
 # Load libraries & data -------------------------------------
 library(dplyr)
+library(cards)
 library(gtsummary)
 
 adsl <- random.cdisc.data::cadsl
@@ -44,107 +45,25 @@ adsl$SCRNFRS[adsl$SCRNFL == "N" | !is.na(adsl$ENRLDT)] <- NA
 ## Build ARD
 
 ```{r ard, message=FALSE, warning=FALSE, results='hide'}
-make_table_03 <- function(df,
-                          denominator = NULL,
-                          return_ard = TRUE,
-                          arm_var = "ARM",
-                          id_var = "USUBJID",
-                          scrnfl_var = "SCRNFL",
-                          scrnfailfl_var = "SCRNFAILFL",
-                          scrnfail_var = "SCRNFRS") {
-  ard <- ard_table_03(
-    df = df,
-    denominator = denominator,
-    arm_var = arm_var,
-    id_var = id_var,
-    scrnfl_var = scrnfl_var,
-    scrnfailfl_var = scrnfailfl_var,
-    scrnfail_var = scrnfail_var
-  )
-
-  tbl <- make_table_03_gtsummary(
-    df = df,
-    denominator = denominator,
-    arm_var = arm_var,
-    id_var = id_var,
-    scrnfl_var = scrnfl_var,
-    scrnfailfl_var = scrnfailfl_var,
-    scrnfail_var = scrnfail_var
-  )
-
-  if (return_ard) {
-    return(list(table = tbl, ard = ard))
-  } else {
-    return(tbl)
-  }
-}
-
-ard_table_03 <- function(df,
-                         denominator = NULL,
-                         arm_var = "ARM",
-                         id_var = "USUBJID",
-                         scrnfl_var = "SCRNFL",
-                         scrnfailfl_var = "SCRNFAILFL",
-                         scrnfail_var = "SCRNFRS") {
-  if (is.null(denominator)) {
-    denominator <- df
-  } else {
-    denominator <- alt_counts_df_preproc(denominator, id_var, arm_var)
-  }
-
-  ard <- df |>
-    ard_stack(
-      .by = (!!rlang::sym(arm_var)),
-      ard_dichotomous(
-        variables = SCRNFL,
-        value = list(SCRNFL = TRUE),
-        statistic = everything() ~ c("n"),
-        denominator = denominator
-      ),
-      ard_categorical(
-        variables = SCRNFRS,
-        statistic = everything() ~ c("n", "p")
-      ),
-      ard_dichotomous(
-        variables = c(ENRLFL, RANDFL),
-        value = list(ENRLFL = TRUE, RANDFL = TRUE),
-        statistic = everything() ~ c("n", "p"),
-        denominator = denominator
-      )
+ard <- adsl |>
+  ard_stack(
+    ard_dichotomous(
+      variables = SCRNFL,
+      value = list(SCRNFL = TRUE),
+      statistic = everything() ~ c("n"),
+      denominator = adsl
+    ),
+    ard_categorical(
+      variables = SCRNFRS,
+      statistic = everything() ~ c("n", "p")
+    ),
+    ard_dichotomous(
+      variables = c(ENRLFL, RANDFL),
+      value = list(ENRLFL = TRUE, RANDFL = TRUE),
+      statistic = everything() ~ c("n", "p"),
+      denominator = adsl
     )
-
-  ard
-}
-
-make_table_03_gtsummary <- function(df,
-                                    denominator = NULL,
-                                    arm_var = "ARM",
-                                    id_var = "USUBJID",
-                                    scrnfl_var = "SCRNFL",
-                                    scrnfailfl_var = "SCRNFAILFL",
-                                    scrnfail_var = "SCRNFRS") {
-  if (is.null(denominator)) {
-    denominator <- df
-  } else {
-    denominator <- alt_counts_df_preproc(denominator, id_var, arm_var)
-  }
-
-  tbl <- df %>%
-    select("ARM", scrnfl_var, scrnfail_var, "ENRLFL", "RANDFL") %>%
-    tbl_summary(
-      by = arm_var,
-      label = list(
-        scrnfl_var ~ "Patients screened",
-        scrnfail_var ~ "Screening failures"
-      ),
-      missing = "no"
-    ) %>%
-    modify_header(label ~ "**Disposition**")
-
-  tbl
-}
-
-ard <- make_table_03(df = adsl, return_ard = TRUE)$ard
+  )
 
 ard
 ```
@@ -157,8 +76,19 @@ print(ard, columns = "all", n = 40)
 
 ## Build Table
 
-```{r tbl, message=FALSE, warning=FALSE, results = 'hide'}
-tbl <- make_table_03(df = adsl)$table
+```{r tbl, message=FALSE, warning=FALSE}
+tbl <- adsl %>%
+  select("SCRNFL", "SCRNFRS", "ENRLFL", "RANDFL") %>%
+  tbl_summary(
+    statistic = SCRNFL ~ "{n}",
+    label = list(
+      SCRNFL ~ "Patients screened",
+      SCRNFRS ~ "Screening failures"
+    ),
+    missing = "no"
+  ) %>%
+  modify_header(label = "**Disposition**", stat_0 = "**Trial A**") %>%
+  remove_footnote_header(columns = everything())
 
 tbl
 ```
