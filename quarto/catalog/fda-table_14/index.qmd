@@ -1,0 +1,88 @@
+---
+title: FDA Table 14
+subtitle: Patients With Adverse Events by System Organ Class and FDA Medical Query, Safety Population, Pooled Analyses
+categories: [table, FDA, safety, adverse events]
+---
+
+::: panel-tabset
+## Table Preview
+
+```{r img, echo=FALSE, fig.align='center', out.width='45%'}
+knitr::include_graphics("result.png")
+```
+
+## Setup
+
+```{r setup, message=FALSE}
+# Load libraries & data -------------------------------------
+library(dplyr)
+library(cards)
+library(gtsummary)
+
+adae <- random.cdisc.data::cadae |>
+  dplyr::rename(FMQ01SC = SMQ01SC, FMQ01NAM = SMQ01NAM)
+
+adsl <- random.cdisc.data::cadsl
+
+levels(adae$FMQ01SC) <- c("BROAD", "NARROW")
+adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
+
+# Pre-processing --------------------------------------------
+adae <- adae |>
+  # safety population
+  filter(SAFFL == "Y")
+
+adsl <- adsl |>
+  filter(SAFFL == "Y") # safety population
+```
+
+## Build Table
+
+```{r tbl, results = 'hide'}
+tbl <- adae |>
+  select(FMQ01SC, ARM, FMQ01NAM, AEBODSYS, USUBJID) |>
+  # setting an explicit level for NA values so empty strata combinations are shown.
+  mutate(across(everything(), ~ {
+    if (anyNA(.)) {
+      forcats::fct_na_value_to_level(as.factor(.), level = "<Missing>")
+    } else {
+      .
+    }
+  })) |>
+  tbl_strata(
+    strata = FMQ01SC,
+    ~ tbl_hierarchical(
+      .x,
+      by = ARM,
+      variables = c(AEBODSYS, FMQ01NAM),
+      id = USUBJID,
+      denominator = adsl,
+      # variables to calculate rates for
+      include = c(FMQ01NAM),
+      label = list(FMQ01NAM ~ "FMQ", AEBODSYS ~ "System Organ Class")
+    )
+  )
+tbl
+```
+
+```{r eval=FALSE, include=FALSE}
+gt::gtsave(as_gt(tbl), filename = "result.png")
+```
+
+```{r img, echo=FALSE, fig.align='center', out.width='45%'}
+```
+
+## Build ARD
+
+```{r ard, message=FALSE, warning=FALSE, results='hide'}
+ard <- gather_ard(tbl)
+
+ard
+```
+
+```{r, echo=FALSE}
+# Print ARD
+withr::local_options(width = 9999)
+print(ard, columns = "all")
+```
+:::
