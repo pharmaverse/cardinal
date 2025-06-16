@@ -63,14 +63,14 @@ tbl <- tbl_hierarchical(
   id = USUBJID,
   denominator = adsl,
   overall_row = FALSE
-) %>% 
+) %>%
   modify_header(label = "Preferred Term") %>%
   # filter with >=5% Frequency
   modify_table_body(
-  ~ .x %>% filter(as.numeric(gsub(".*\\((\\d+)%\\)", "\\1", stat_1)) >= 5
-                  | as.numeric(gsub(".*\\((\\d+)%\\)", "\\1", stat_2)) >= 5
-                  | as.numeric(gsub(".*\\((\\d+)%\\)", "\\1", stat_3)) >= 5)
-  ) %>% 
+    ~ .x %>% filter(as.numeric(gsub(".*\\((\\d+)%\\)", "\\1", stat_1)) >= 5 |
+      as.numeric(gsub(".*\\((\\d+)%\\)", "\\1", stat_2)) >= 5 |
+      as.numeric(gsub(".*\\((\\d+)%\\)", "\\1", stat_3)) >= 5)
+  ) %>%
   remove_footnote_header(columns = everything())
 
 tbl
