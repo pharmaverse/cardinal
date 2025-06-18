@@ -100,7 +100,7 @@ tbl_enrl_rand <- tbl_summary(
 
 tbl <- list(tbl_scrn, tbl_scrnfrs, tbl_enrl_rand) |>
   tbl_stack() |>
-  modify_header(label = "**Disposition**", stat_0 = "**Trial A**")  |> 
+  modify_header(label = "**Disposition**", stat_0 = "**Trial A**") |>
   modify_column_indent("label", rows = !(variable %in% c("..ard_hierarchical_overall..", "SCRNFL", "ENRLFL", "RANDFL"))) |>
   remove_footnote_header(columns = everything())
 
