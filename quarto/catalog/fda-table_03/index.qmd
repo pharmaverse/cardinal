@@ -27,32 +27,29 @@ adsl$RANDDT[sample(seq_len(nrow(adsl)), 100)] <- NA
 scrnfail_reas_lvls <- c(
   "Inclusion/exclusion criteria not met", "Patient noncompliance", "Consent withdrawn", "Other"
 )
-adsl <- adsl %>%
+data <- adsl |>
   mutate(
     ENRLDT = RANDDT,
-    SCRNFL = "Y",
+    SCRNFL = with_label(TRUE, "Patients screened"),
     SCRNFRS = factor(sample(scrnfail_reas_lvls, size = nrow(adsl), replace = TRUE),
       levels = scrnfail_reas_lvls
     ),
-    SCRNFAILFL = ifelse(is.na(ENRLDT), "Y", "N"),
-    SCRNFL = with_label(SCRNFL == "Y", "Patients screened"),
-    SCRNFL = with_label(!is.na(SCRNFRS), "Screnning failures"),
     ENRLFL = with_label(!is.na(ENRLDT), "Patients enrolled"),
     RANDFL = with_label(!is.na(RANDDT), "Patients randomized")
   )
-adsl$SCRNFRS[adsl$SCRNFL == "N" | !is.na(adsl$ENRLDT)] <- NA
+data$SCRNFRS[data$SCRNFL == "N" | !is.na(data$ENRLDT)] <- NA
 ```
 
 ## Build ARD
 
 ```{r ard, message=FALSE, warning=FALSE, results='hide'}
-ard <- adsl |>
+ard <- data |>
   ard_stack(
     ard_dichotomous(
       variables = SCRNFL,
       value = list(SCRNFL = TRUE),
       statistic = everything() ~ c("n"),
-      denominator = adsl
+      denominator = data
     ),
     ard_categorical(
       variables = SCRNFRS,
@@ -62,7 +59,7 @@ ard <- adsl |>
       variables = c(ENRLFL, RANDFL),
       value = list(ENRLFL = TRUE, RANDFL = TRUE),
       statistic = everything() ~ c("n", "p"),
-      denominator = adsl
+      denominator = data
     )
   )
 
@@ -78,17 +75,33 @@ print(ard, columns = "all", n = 40)
 ## Build Table
 
 ```{r tbl, message=FALSE, warning=FALSE, results='hide'}
-tbl <- adsl %>%
-  select("SCRNFL", "SCRNFRS", "ENRLFL", "RANDFL") %>%
-  tbl_summary(
-    statistic = SCRNFL ~ "{n}",
-    label = list(
-      SCRNFL ~ "Patients screened",
-      SCRNFRS ~ "Screening failures"
-    ),
-    missing = "no"
-  ) %>%
-  modify_header(label = "**Disposition**", stat_0 = "**Trial A**") %>%
+tbl_scrn <- tbl_summary(
+  data = data,
+  include = "SCRNFL",
+  statistic = SCRNFL ~ "{n}",
+  missing = "no"
+)
+
+tbl_scrnfrs <- tbl_hierarchical(
+  data = data,
+  denominator = adsl,
+  id = USUBJID,
+  variables = "SCRNFRS",
+  statistic = ~"{n} ({p}%)",
+  label = list(..ard_hierarchical_overall.. = "Screening failures"),
+  overall_row = TRUE
+)
+
+tbl_enrl_rand <- tbl_summary(
+  data = data,
+  include = c("ENRLFL", "RANDFL"),
+  missing = "no"
+)
+
+tbl <- list(tbl_scrn, tbl_scrnfrs, tbl_enrl_rand) |>
+  tbl_stack() |>
+  modify_header(label = "**Disposition**", stat_0 = "**Trial A**")  |> 
+  modify_column_indent("label", rows = !(variable %in% c("..ard_hierarchical_overall..", "SCRNFL", "ENRLFL", "RANDFL"))) |>
   remove_footnote_header(columns = everything())
 
 tbl
