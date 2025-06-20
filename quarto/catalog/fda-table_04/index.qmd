@@ -27,69 +27,69 @@ pop_vars <- c("SAFFL", "ITTFL")
 lbl_pop_vars <- c("Safety population", "ITT/mITT population")
 
 adsl <- adsl %>%
-    mutate(across(everything(), ~ case_when(
-      is.na(.) ~ "Missing",
-      TRUE ~ as.character(.)
-    ))) %>%
-    mutate(
-      across(all_of(pop_vars), ~ with_label(. == "Y", lbl_pop_vars[match(cur_column(), pop_vars)])),
-      DISCSD = with_label(EOTSTT == "DISCONTINUED", "Discontinued study drug"),
-      DISCSD_AE = with_label(EOTSTT == "DISCONTINUED" & DCSREAS == "ADVERSE EVENT", "Adverse event"),
-      DISCSD_LOE = with_label(EOTSTT == "DISCONTINUED" & DCSREAS == "LACK OF EFFICACY", "Lack of efficacy"),
-      DISCSD_PD = with_label(EOTSTT == "DISCONTINUED" & DCSREAS == "PROTOCOL DEVIATION", "Protocol deviation"),
-      DISCSD_DT = with_label(EOTSTT == "DISCONTINUED" & DCSREAS == "DEATH", "Death"),
-      DISCSD_WBS = with_label(EOTSTT == "DISCONTINUED" & DCSREAS == "WITHDRAWAL BY SUBJECT", "Withdrawal by subject"),
-      DISCSD_OTH = with_label(EOTSTT == "DISCONTINUED" & DCSREAS == "OTHER", "Other"),
-      DISCS = with_label(EOSSTT == "DISCONTINUED", "Discontinued study"),
-      DISCS_DT = with_label(EOSSTT == "DISCONTINUED" & DCSREAS == "DEATH", "Death"),
-      DISCS_LFU = with_label(EOSSTT == "DISCONTINUED" & DCSREAS == "LOST TO FOLLOW-UP", "Lost to follow-up"),
-      DISCS_WBS = with_label(EOSSTT == "DISCONTINUED" & DCSREAS == "WITHDRAWAL BY SUBJECT", "Withdrawal by subject"),
-      DISCS_PHD = with_label(EOSSTT == "DISCONTINUED" & DCSREAS == "PHYSICIAN DECISION", "Physician decision"),
-      DISCS_PD = with_label(EOSSTT == "DISCONTINUED" & DCSREAS == "PROTOCOL VIOLATION", "Protocol deviation"),
-      DISCS_OTH = with_label(EOSSTT == "DISCONTINUED" & DCSREAS == "OTHER", "Other")
-    )
+  mutate(across(everything(), ~ case_when(
+    is.na(.) ~ "Missing",
+    TRUE ~ as.character(.)
+  ))) %>%
+  mutate(
+    across(all_of(pop_vars), ~ with_label(. == "Y", lbl_pop_vars[match(cur_column(), pop_vars)])),
+    DISCSD = with_label(EOTSTT == "DISCONTINUED", "Discontinued study drug"),
+    DISCSD_AE = with_label(EOTSTT == "DISCONTINUED" & DCSREAS == "ADVERSE EVENT", "Adverse event"),
+    DISCSD_LOE = with_label(EOTSTT == "DISCONTINUED" & DCSREAS == "LACK OF EFFICACY", "Lack of efficacy"),
+    DISCSD_PD = with_label(EOTSTT == "DISCONTINUED" & DCSREAS == "PROTOCOL DEVIATION", "Protocol deviation"),
+    DISCSD_DT = with_label(EOTSTT == "DISCONTINUED" & DCSREAS == "DEATH", "Death"),
+    DISCSD_WBS = with_label(EOTSTT == "DISCONTINUED" & DCSREAS == "WITHDRAWAL BY SUBJECT", "Withdrawal by subject"),
+    DISCSD_OTH = with_label(EOTSTT == "DISCONTINUED" & DCSREAS == "OTHER", "Other"),
+    DISCS = with_label(EOSSTT == "DISCONTINUED", "Discontinued study"),
+    DISCS_DT = with_label(EOSSTT == "DISCONTINUED" & DCSREAS == "DEATH", "Death"),
+    DISCS_LFU = with_label(EOSSTT == "DISCONTINUED" & DCSREAS == "LOST TO FOLLOW-UP", "Lost to follow-up"),
+    DISCS_WBS = with_label(EOSSTT == "DISCONTINUED" & DCSREAS == "WITHDRAWAL BY SUBJECT", "Withdrawal by subject"),
+    DISCS_PHD = with_label(EOSSTT == "DISCONTINUED" & DCSREAS == "PHYSICIAN DECISION", "Physician decision"),
+    DISCS_PD = with_label(EOSSTT == "DISCONTINUED" & DCSREAS == "PROTOCOL VIOLATION", "Protocol deviation"),
+    DISCS_OTH = with_label(EOSSTT == "DISCONTINUED" & DCSREAS == "OTHER", "Other")
+  )
 ```
 
 ## Build Table
 
 ```{r tbl, results='hide'}
 tbl <- adsl %>%
-    gtsummary::tbl_summary(
-      by = "ARM",
-      statistic = list(all_dichotomous() ~ "{n} ({p}%)"),
-      include = all_of(c(
-        pop_vars,
-        "DISCSD", "DISCSD_AE", "DISCSD_LOE", "DISCSD_PD", "DISCSD_DT", "DISCSD_WBS", "DISCSD_OTH",
-        "DISCS", "DISCS_DT", "DISCS_LFU", "DISCS_WBS", "DISCS_PHD", "DISCS_PD", "DISCS_OTH"
-      )),
-      digits = list(gtsummary::all_categorical() ~ c(0, 1))
-    ) %>% 
-    add_overall(last = TRUE)%>%
-    # Define which variables are children of parent variables
-    modify_table_styling(
-      columns = "label",
-      rows = variable %in% c(
-        "DISCSD_AE", "DISCSD_LOE", "DISCSD_PD", "DISCSD_DT",
-        "DISCSD_WBS", "DISCSD_OTH"
-      ),
-      text_format = "indent"
-    ) %>%
-    modify_table_styling(
-      columns = "label",
-      rows = variable %in% c(
-        "DISCS_DT", "DISCS_LFU", "DISCS_WBS", "DISCS_PHD",
-        "DISCS_PD", "DISCS_OTH"
-      ),
-      text_format = "indent"
-    ) %>%
-    # Make all but main categories display as levels
-    modify_table_body(
-      ~ .x %>%
-        mutate(row_type = case_when(
-          variable %in% c(pop_vars, "DISCSD", "DISCS") ~ "label",
-          TRUE ~ "level"
-        ))
-    )
+  gtsummary::tbl_summary(
+    by = "ARM",
+    statistic = list(all_dichotomous() ~ "{n} ({p}%)"),
+    include = all_of(c(
+      pop_vars,
+      "DISCSD", "DISCSD_AE", "DISCSD_LOE", "DISCSD_PD", "DISCSD_DT", "DISCSD_WBS", "DISCSD_OTH",
+      "DISCS", "DISCS_DT", "DISCS_LFU", "DISCS_WBS", "DISCS_PHD", "DISCS_PD", "DISCS_OTH"
+    )),
+    digits = list(gtsummary::all_categorical() ~ c(0, 1))
+  ) %>%
+  add_overall(last = TRUE) %>%
+  # Define which variables are children of parent variables
+  modify_table_styling(
+    columns = "label",
+    rows = variable %in% c(
+      "DISCSD_AE", "DISCSD_LOE", "DISCSD_PD", "DISCSD_DT",
+      "DISCSD_WBS", "DISCSD_OTH"
+    ),
+    text_format = "indent"
+  ) %>%
+  modify_table_styling(
+    columns = "label",
+    rows = variable %in% c(
+      "DISCS_DT", "DISCS_LFU", "DISCS_WBS", "DISCS_PHD",
+      "DISCS_PD", "DISCS_OTH"
+    ),
+    text_format = "indent"
+  ) %>%
+  # Make all but main categories display as levels
+  modify_table_body(
+    ~ .x %>%
+      mutate(row_type = case_when(
+        variable %in% c(pop_vars, "DISCSD", "DISCS") ~ "label",
+        TRUE ~ "level"
+      ))
+  )
 ```
 
 ```{r eval=FALSE, include=FALSE}
