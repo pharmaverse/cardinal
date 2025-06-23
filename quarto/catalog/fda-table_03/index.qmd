@@ -48,12 +48,12 @@ ard <- data |>
     ard_dichotomous(
       variables = SCRNFL,
       value = list(SCRNFL = TRUE),
-      statistic = everything() ~ c("n"),
-      denominator = data
+      statistic = everything() ~ c("n")
     ),
     ard_categorical(
       variables = SCRNFRS,
-      statistic = everything() ~ c("n", "p")
+      statistic = everything() ~ c("n", "p"),
+      denominator = data
     ),
     ard_dichotomous(
       variables = c(ENRLFL, RANDFL),
