@@ -1,0 +1,107 @@
+---
+title: FDA Table 08
+subtitle: All Individual Patient Deaths, Safety Population, Pooled Analyses
+categories: [table, FDA, safety, adverse events]
+---
+
+::: panel-tabset
+## Table Preview
+
+```{r img, echo=FALSE, fig.align='center', out.width='60%'}
+knitr::include_graphics("result.png")
+```
+
+## Setup
+
+```{r setup, message=FALSE}
+# Load libraries & data -------------------------------------
+library(dplyr)
+library(cards)
+library(gtsummary)
+
+adae <- pharmaverseadam::adae
+adex <- pharmaverseadam::adex
+
+# Pre-processing --------------------------------------------
+# deaths
+adae <- adae |>
+  filter(
+    # safety population
+    SAFFL == "Y",
+    # deaths
+    DTHFL == "Y"
+  ) |>
+  # select variables from `adae` to include in final result
+  select(USUBJID, TRT01A, AGE, SEX, DTHADY, DTHCAUS) |>
+  # derive formatted "Age/Gender" column values
+  mutate(
+    AGE_SEX = paste(AGE, SEX, sep = "/")
+  ) |>
+  # keep one row per unique ID
+  distinct(USUBJID, DTHCAUS, DTHADY, .keep_all = TRUE)
+
+# dosing
+adex <- adex |>
+  filter(
+    # safety population
+    SAFFL == "Y",
+    # total dosages
+    PARAMCD == "TDOSE"
+  ) |>
+  # select variables from `adex` to include in final result
+  select(USUBJID, AVAL, TRTSDT, TRTEDT) |>
+  mutate(
+    # derive dosage duration
+    DOSDUR = (TRTEDT - TRTSDT + 1) |> as.character(),
+    # format dosage values
+    DOSAGE = paste0(AVAL, " mg")
+  )
+
+# combine all data
+data <- left_join(adae, adex, by = "USUBJID") |>
+  select(TRT01A, USUBJID, AGE_SEX, DOSAGE, DOSDUR, DTHADY, DTHCAUS) |>
+  arrange()
+```
+
+## Build Table
+
+```{r tbl, results = 'hide'}
+tbl <- as_gtsummary(data) |>
+  # set table header labels
+  modify_header(
+    TRT01A = "**Study Arm**",
+    USUBJID = "**Patient ID**",
+    AGE_SEX = "**Age/Gender**",
+    DOSAGE = "**Dosage**",
+    DOSDUR = "**Dosing**  \n **Duration**  \n **(Days)**",
+    DTHADY = "**Study**  \n **Day of**  \n **Death**",
+    DTHCAUS = "**Cause of Death**"
+  ) |>
+  # align all columns left
+  modify_column_alignment(everything(), align = "left")
+
+tbl
+```
+
+```{r eval=FALSE, include=FALSE}
+gt::gtsave(as_gt(tbl), filename = "result.png")
+```
+
+```{r img, echo=FALSE, fig.align='center', out.width='60%'}
+```
+
+## Build ARD
+
+```{r ard, message=FALSE, warning=FALSE, results='hide'}
+# For this table we do not build an ARD since we are returning the complete 
+# dataset as our result, so there are no statistics to display in an ARD.
+# The full unformatted dataset (`data`) can be used instead if needed
+data
+```
+
+```{r, echo=FALSE}
+# Print data
+withr::local_options(width = 9999)
+print(data, columns = "all", n = 40)
+```
+:::
