@@ -93,7 +93,7 @@ gt::gtsave(as_gt(tbl), filename = "result.png")
 ## Build ARD
 
 ```{r ard, message=FALSE, warning=FALSE, results='hide'}
-# For this table we do not build an ARD since we are returning the complete 
+# For this table we do not build an ARD since we are returning the complete
 # dataset as our result, so there are no statistics to display in an ARD.
 # The full unformatted dataset (`data`) can be used instead if needed
 data
