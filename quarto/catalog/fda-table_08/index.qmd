@@ -71,7 +71,7 @@ tbl <- as_gtsummary(data) |>
   modify_header(
     TRT01A = "**Study Arm**",
     USUBJID = "**Patient ID**",
-    AGE_SEX = "**Age/Gender**",
+    AGE_SEX = "**Age/**  \n **Gender**",
     DOSAGE = "**Dosage**",
     DOSDUR = "**Dosing**  \n **Duration**  \n **(Days)**",
     DTHADY = "**Study**  \n **Day of**  \n **Death**",
