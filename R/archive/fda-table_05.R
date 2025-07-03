@@ -135,9 +135,9 @@ ard_table_05 <- function(df,
           person_yrs = \(x) as.numeric(lubridate::duration(sum(x), u_trtdur), "years")
         )
       ),
-      fmt_fn = ~ list(~ \(x) round5(x, digits = 2))
+      fmt_fun = ~ list(~ \(x) round5(x, digits = 2))
     ) |>
-    apply_fmt_fn()
+    apply_fmt_fun()
 
   stats_pt_cts <- df |>
     group_by(!!rlang::sym(arm_var)) |>
