@@ -86,7 +86,7 @@ tbl_agegr1 <- tbl_hierarchical(
 
 tbl_race <- tbl_hierarchical(
   data = data,
-  denominator = data_any_ae |> slice_head(by = c(USUBJID,)),
+  denominator = data_any_ae |> slice_head(by = c(USUBJID, )),
   id = "USUBJID",
   by = "ARM",
   variables = "RACEGR1",
