@@ -31,6 +31,7 @@ data <- adae |>
     TRTEMFL == "Y"
   ) |>
   mutate(
+    SEXGR1 = as.factor(SEX),
     AGEGR1 = factor(
       dplyr::case_when(
         AGE >= 17 & AGE < 65 ~ ">=17 to <65",
@@ -38,7 +39,9 @@ data <- adae |>
         AGE >= 75 ~ ">=75"
       ),
       levels = c(">=17 to <65", "65-74", ">=75")
-    )
+    ),
+    RACEGR1 = as.factor(RACE),
+    ETHNICGR1 = as.factor(ETHNIC)
   )
 
 data_any_ae <- adae |>
@@ -55,24 +58,24 @@ tbl_any_ae <- tbl_hierarchical(
   id = "USUBJID",
   by = "ARM",
   variables = "AESEV",
-  statistic = ~"{n}/{N} ({p}%)",
+  statistic = ~"{n} ({p}%)",
   label = AESEV ~ "Characteristic"
 )
 
 tbl_sex <- tbl_hierarchical(
   data = data,
-  denominator = adsl,
+  denominator = data_any_ae |> slice_head(by = c(USUBJID)),
   id = "USUBJID",
   by = "ARM",
-  variables = "SEX",
+  variables = "SEXGR1",
   statistic = ~"{n}/{N} ({p}%)",
-  label = list(SEX ~ "Characteristic", ..ard_hierarchical_overall.. = "Sex, n(%)"),
+  label = list(SEXGR1 ~ "Characteristic", ..ard_hierarchical_overall.. = "Sex, n(%)"),
   overall_row = TRUE
 )
 
 tbl_agegr1 <- tbl_hierarchical(
   data = data,
-  denominator = adsl,
+  denominator = data_any_ae |> slice_head(by = c(USUBJID)),
   id = "USUBJID",
   by = "ARM",
   variables = "AGEGR1",
@@ -83,23 +86,23 @@ tbl_agegr1 <- tbl_hierarchical(
 
 tbl_race <- tbl_hierarchical(
   data = data,
-  denominator = adsl,
+  denominator = data_any_ae |> slice_head(by = c(USUBJID,)),
   id = "USUBJID",
   by = "ARM",
-  variables = "RACE",
+  variables = "RACEGR1",
   statistic = ~"{n}/{N} ({p}%)",
-  label = list(RACE ~ "Characteristic", ..ard_hierarchical_overall.. = "Race, n(%)"),
+  label = list(RACEGR1 ~ "Characteristic", ..ard_hierarchical_overall.. = "Race, n(%)"),
   overall_row = TRUE
 )
 
 tbl_ethnic <- tbl_hierarchical(
   data = data,
-  denominator = adsl,
+  denominator = data_any_ae |> slice_head(by = c(USUBJID)),
   id = "USUBJID",
   by = "ARM",
-  variables = "ETHNIC",
+  variables = "ETHNICGR1",
   statistic = ~"{n}/{N} ({p}%)",
-  label = list(ETHNIC ~ "Characteristic", ..ard_hierarchical_overall.. = "Ethnicity, n(%)"),
+  label = list(ETHNICGR1 ~ "Characteristic", ..ard_hierarchical_overall.. = "Ethnicity, n(%)"),
   overall_row = TRUE
 )
 
