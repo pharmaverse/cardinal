@@ -46,7 +46,7 @@ tbl <- tbl_hierarchical(
   overall_row = FALSE
 ) %>%
   # filter with >=5% Frequency
-  filter_hierarchical(sum(n) / sum(N) >= 0.05) %>% 
+  filter_hierarchical(sum(n) / sum(N) >= 0.05) %>%
   modify_header(label = "Preferred Term") %>%
   remove_footnote_header(columns = everything())
 
