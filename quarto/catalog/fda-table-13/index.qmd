@@ -33,25 +33,6 @@ data <- adae %>%
   )
 ```
 
-## Build ARD
-
-```{r ard, message=FALSE, warning=FALSE, results='hide'}
-ard <- ard_stack_hierarchical(
-  data,
-  variables = c(AEDECOD),
-  by = TRT01A,
-  denominator = adsl,
-  id = USUBJID
-)
-
-ard
-```
-
-```{r, echo=FALSE}
-# Print ARD
-withr::local_options(width = 9999)
-print(ard, columns = "all", n = 40)
-```
 
 ## Build Table
 
@@ -64,13 +45,9 @@ tbl <- tbl_hierarchical(
   denominator = adsl,
   overall_row = FALSE
 ) %>%
-  modify_header(label = "Preferred Term") %>%
   # filter with >=5% Frequency
-  modify_table_body(
-    ~ .x %>% filter(as.numeric(gsub(".*\\((\\d+)%\\)", "\\1", stat_1)) >= 5 |
-      as.numeric(gsub(".*\\((\\d+)%\\)", "\\1", stat_2)) >= 5 |
-      as.numeric(gsub(".*\\((\\d+)%\\)", "\\1", stat_3)) >= 5)
-  ) %>%
+  filter_hierarchical(sum(n) / sum(N) >= 0.05) %>% 
+  modify_header(label = "Preferred Term") %>%
   remove_footnote_header(columns = everything())
 
 tbl
@@ -83,4 +60,18 @@ gt::gtsave(as_gt(tbl), filename = "result.png")
 
 ```{r img, echo=FALSE, fig.align='center', out.width='60%'}
 ```
+
+## Build ARD
+
+```{r ard, message=FALSE, warning=FALSE, results='hide'}
+ard <- gather_ard(tbl)
+ard
+```
+
+```{r, echo=FALSE}
+# Print full ARD
+withr::local_options(width = 9999)
+print(ard, columns = "all")
+```
+
 :::
