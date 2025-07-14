@@ -1,0 +1,77 @@
+---
+title: FDA Table 13
+subtitle: Patients With Common Adverse Events Occurring at >=XX% Frequency, Safety Population, Pooled Analyses
+categories: [table, FDA, safety, adverse event]
+---
+
+::: panel-tabset
+## Table Preview
+
+```{r img, echo=FALSE, fig.align='center', out.width='60%'}
+knitr::include_graphics("result.png")
+```
+
+## Setup
+
+```{r setup, message=FALSE}
+# Load libraries & data -------------------------------------
+library(dplyr)
+library(cards)
+library(gtsummary)
+
+adsl <- random.cdisc.data::cadsl
+adae <- random.cdisc.data::cadae
+
+# Pre-processing --------------------------------------------
+adsl <- adsl %>%
+  filter(SAFFL == "Y") # safety population
+
+data <- adae %>%
+  filter(
+    # safety population
+    SAFFL == "Y"
+  )
+```
+
+
+## Build Table
+
+```{r tbl, results = 'hide'}
+tbl <- tbl_hierarchical(
+  data,
+  variables = c(AEDECOD),
+  by = TRT01A,
+  id = USUBJID,
+  denominator = adsl,
+  overall_row = FALSE
+) %>%
+  # filter with >=5% Frequency
+  filter_hierarchical(sum(n) / sum(N) >= 0.05) %>%
+  modify_header(label = "Preferred Term") %>%
+  remove_footnote_header(columns = everything())
+
+tbl
+```
+
+```{r eval=FALSE, include=FALSE}
+# Run chunk locally to generate image file
+gt::gtsave(as_gt(tbl), filename = "result.png")
+```
+
+```{r img, echo=FALSE, fig.align='center', out.width='60%'}
+```
+
+## Build ARD
+
+```{r ard, message=FALSE, warning=FALSE, results='hide'}
+ard <- gather_ard(tbl)
+ard
+```
+
+```{r, echo=FALSE}
+# Print full ARD
+withr::local_options(width = 9999)
+print(ard, columns = "all")
+```
+
+:::
