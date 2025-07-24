@@ -108,7 +108,7 @@ tbl_ethnic <- tbl_hierarchical(
 
 tbl <- list(tbl_any_ae, tbl_sex, tbl_agegr1, tbl_race, tbl_ethnic) |>
   tbl_stack() |>
-  modify_column_indent("label", rows = !(variable %in% c("..ard_hierarchical_overall..", "AESER", "SEXGR", "AGEGR", "RACEGR", "ETHNICGR"))) |>
+  modify_column_indent("label", rows = !(variable %in% c("..ard_hierarchical_overall..", "AESEV", "SEXGR", "AGEGR", "RACEGR", "ETHNICGR"))) |>
   remove_footnote_header(columns = everything())
 
 tbl
