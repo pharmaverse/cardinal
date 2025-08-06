@@ -1,13 +1,13 @@
 ---
-title: FDA Table 33
-subtitle: Subjects With Adverse Events by Male-Specific OCMQ (Narrow) and Preferred Term, Male Safety Population, Pooled Analysis (or Trial X)
+title: FDA Table 15
+subtitle: Subjects With Common Adverse Events Occurring at ≥X% Frequency by Preferred Term, Safety Population, Pooled Analysis (or Trial X) 
 categories: [table, FDA, safety, adverse events]
 ---
 
 ::: panel-tabset
 ## Table Preview
 
-```{r img, echo=FALSE, fig.align='center', out.width='45%'}
+```{r img, echo=FALSE, fig.align='center', out.width='60%'}
 knitr::include_graphics("result.png")
 ```
 
@@ -22,68 +22,56 @@ library(gtsummary)
 adsl <- random.cdisc.data::cadsl
 adae <- random.cdisc.data::cadae
 
-set.seed(1)
-adae <- dplyr::rename(adae, FMQ01SC = SMQ01SC, FMQ01NAM = SMQ01NAM)
-levels(adae$FMQ01SC) <- c("BROAD", "NARROW")
-adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
-adae$FMQ01NAM <- factor(adae$FMQ01NAM, levels = c(unique(adae$FMQ01NAM), "Erectile Dysfunction", "Gynecomastia"))
-adae$FMQ01NAM[adae$SEX == "M"] <- as.factor(sample(c("Erectile Dysfunction", "Gynecomastia"), sum(adae$SEX == "M"), replace = TRUE))
-
 # Pre-processing --------------------------------------------
-adae <- adae |>
-  filter(
-    SAFFL == "Y",
-    SEX == "M",
-    FMQ01SC == "NARROW"
-  )
-
-adsl <- adsl |>
+adsl <- adsl %>%
   filter(SAFFL == "Y") # safety population
+
+data <- adae %>%
+  filter(
+    # safety population
+    SAFFL == "Y"
+  )
 ```
+
 
 ## Build Table
 
 ```{r tbl, results = 'hide'}
-tbl <- adae |>
-  select(FMQ01SC, ARM, FMQ01NAM, AEDECOD, USUBJID) |>
-  # setting an explicit level for NA values so empty strata combinations are shown.
-  mutate(across(everything(), ~ {
-    if (anyNA(.)) {
-      forcats::fct_na_value_to_level(as.factor(.), level = "<Missing>")
-    } else {
-      .
-    }
-  })) |>
-  tbl_hierarchical(
-    by = ARM,
-    variables = c(FMQ01NAM, AEDECOD),
-    id = USUBJID,
-    denominator = adsl,
-    # variables to calculate rates for
-    include = c(AEDECOD),
-    label = list(FMQ01NAM ~ "FMQ (Narrow)", AEDECOD ~ "Preferred Term")
-  )
+tbl <- tbl_hierarchical(
+  data,
+  variables = c(AEDECOD),
+  by = TRT01A,
+  id = USUBJID,
+  denominator = adsl,
+  overall_row = FALSE
+) %>%
+  # filter with >=5% Frequency
+  filter_hierarchical(sum(n) / sum(N) >= 0.05) %>%
+  modify_header(label = "Preferred Term") %>%
+  remove_footnote_header(columns = everything())
+
 tbl
 ```
 
 ```{r eval=FALSE, include=FALSE}
+# Run chunk locally to generate image file
 gt::gtsave(as_gt(tbl), filename = "result.png")
 ```
 
-```{r img, echo=FALSE, fig.align='center', out.width='45%'}
+```{r img, echo=FALSE, fig.align='center', out.width='60%'}
 ```
 
 ## Build ARD
 
 ```{r ard, message=FALSE, warning=FALSE, results='hide'}
 ard <- gather_ard(tbl)
-
 ard
 ```
 
 ```{r, echo=FALSE}
-# Print ARD
+# Print full ARD
 withr::local_options(width = 9999)
 print(ard, columns = "all")
 ```
+
 :::

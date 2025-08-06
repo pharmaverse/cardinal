@@ -1,6 +1,6 @@
 ---
-title: FDA Table 17
-subtitle: Subjects With Adverse Events by Organ System and OCMQ, Safety Population, Pooled Analysis (or Trial X) 
+title: FDA Table 45
+subtitle: Subjects With Adverse Events by Female-Specific OCMQ (Broad) and Preferred Term, Female Safety Population, Pooled Analysis (or Trial X)
 categories: [table, FDA, safety, adverse events]
 ---
 
@@ -19,18 +19,31 @@ library(dplyr)
 library(cards)
 library(gtsummary)
 
-adae <- random.cdisc.data::cadae |>
-  dplyr::rename(FMQ01SC = SMQ01SC, FMQ01NAM = SMQ01NAM)
-
 adsl <- random.cdisc.data::cadsl
+adae <- random.cdisc.data::cadae
 
+set.seed(1)
+adae <- dplyr::rename(adae, FMQ01SC = SMQ01SC, FMQ01NAM = SMQ01NAM)
 levels(adae$FMQ01SC) <- c("BROAD", "NARROW")
 adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
+adae$FMQ01NAM <- factor(adae$FMQ01NAM, levels = c(
+  unique(adae$FMQ01NAM), "Abnormal Uterine Bleeding", "Amenorrhea",
+  "Bacterial Vaginosis", "Decreased Menstrual Bleeding"
+))
+adae$FMQ01NAM[adae$SEX == "F"] <- as.factor(
+  sample(c(
+    "Abnormal Uterine Bleeding", "Amenorrhea",
+    "Bacterial Vaginosis", "Decreased Menstrual Bleeding"
+  ), sum(adae$SEX == "F"), replace = TRUE)
+)
 
 # Pre-processing --------------------------------------------
 adae <- adae |>
-  # safety population
-  filter(SAFFL == "Y")
+  filter(
+    SAFFL == "Y",
+    SEX == "F",
+    FMQ01SC == "BROAD"
+  )
 
 adsl <- adsl |>
   filter(SAFFL == "Y") # safety population
@@ -40,7 +53,7 @@ adsl <- adsl |>
 
 ```{r tbl, results = 'hide'}
 tbl <- adae |>
-  select(FMQ01SC, ARM, FMQ01NAM, AEBODSYS, USUBJID) |>
+  select(FMQ01SC, ARM, FMQ01NAM, AEDECOD, USUBJID) |>
   # setting an explicit level for NA values so empty strata combinations are shown.
   mutate(across(everything(), ~ {
     if (anyNA(.)) {
@@ -49,18 +62,14 @@ tbl <- adae |>
       .
     }
   })) |>
-  tbl_strata(
-    strata = FMQ01SC,
-    ~ tbl_hierarchical(
-      .x,
-      by = ARM,
-      variables = c(AEBODSYS, FMQ01NAM),
-      id = USUBJID,
-      denominator = adsl,
-      # variables to calculate rates for
-      include = c(FMQ01NAM),
-      label = list(FMQ01NAM ~ "FMQ", AEBODSYS ~ "System Organ Class")
-    )
+  tbl_hierarchical(
+    by = ARM,
+    variables = c(FMQ01NAM, AEDECOD),
+    id = USUBJID,
+    denominator = adsl,
+    # variables to calculate rates for
+    include = c(AEDECOD),
+    label = list(FMQ01NAM ~ "FMQ (Broad)", AEDECOD ~ "Preferred Term")
   )
 tbl
 ```

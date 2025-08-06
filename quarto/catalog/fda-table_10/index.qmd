@@ -1,83 +1,92 @@
 ---
-title: FDA Table 11
-subtitle: Subjects With Serious Adverse Events by Organ System and OCMQ (Narrow), Safety Population, Pooled Analysis (or Trial X) 
+title: FDA Table 10
+subtitle: Subjects With Serious Adverse Events by System Organ Class and Preferred Term, Safety Population, Pooled Analysis (or Trial X)
 categories: [table, FDA, safety, adverse events]
 ---
 
 ::: panel-tabset
 ## Table Preview
 
-```{r img, echo=FALSE, fig.align='center', out.width='60%'}
+```{r}
+#| label: img
+#| echo: false
+#| fig-align: center
+#| out-width: '60%'
 knitr::include_graphics("result.png")
 ```
 
 ## Setup
 
-```{r setup, message=FALSE}
+```{r}
+#| label: setup
+#| message: false
 # Load libraries & data -------------------------------------
 library(dplyr)
-library(cards)
 library(gtsummary)
 
 adsl <- random.cdisc.data::cadsl
 adae <- random.cdisc.data::cadae
 
-# Pre-Processing - FMQ information
-set.seed(1)
+# Pre-processing --------------------------------------------
+
 adae <- adae %>%
-  mutate(
-    FMQ01SC = sample(c("NARROW", "BROAD"), size = nrow(adae), replace = TRUE),
-    FMQ01NAM = sample(c("FMQ1", "FMQ2", "FMQ3"), size = nrow(adae), replace = TRUE)
+  dplyr::filter(
+    # safety population
+    SAFFL == "Y",
+    # serious adverse events
+    AESER == "Y"
   )
-# Use safety population, Serious Adverse Event only and Narrow FMQ
-data <- adae %>%
-  dplyr::filter(SAFFL == "Y", AESER == "Y", FMQ01SC == "NARROW")
+```
+
+
+## Build Table
+
+```{r}
+#| label: tbl
+#| results: hide
+
+tbl <- adae |>
+  tbl_hierarchical(
+    variables = c(AESOC, AEDECOD),
+    by = ARM,
+    id = USUBJID,
+    denominator = adsl,
+    overall_row = TRUE,
+    label = "..ard_hierarchical_overall.." ~ "Any SAE"
+  )
+tbl
+```
+
+```{r}
+#| eval: false
+#| include: false
+## ** (OPTIONAL) RUN THIS CHUNK LOCALLY TO GENERATE AN IMAGE FILE **
+gt::gtsave(as_gt(tbl), filename = "result.png")
+```
+
+```{r}
+#| label: img
+#| echo: false
+#| fig-align: center
+#| out-width: '60%'
 ```
 
 ## Build ARD
 
-```{r ard, message=FALSE, warning=FALSE, results='hide'}
-# Stack ARD results of two analyses
-ard <- ard_stack_hierarchical(
-  data,
-  variables = c(AEBODSYS, FMQ01NAM),
-  by = TRT01A,
-  denominator = adsl,
-  id = USUBJID
-)
-
+```{r}
+#| label: ard
+#| echo: true
+#| message: false
+#| warning: false
+#| results: hide
+ard <- gather_ard(tbl)
 ard
 ```
 
-```{r, echo=FALSE}
+```{r}
+#| echo: false
 # Print ARD
 withr::local_options(width = 9999)
-print(ard, columns = "all", n = 40)
-```
-
-## Build Table
-
-```{r tbl, results = 'hide'}
-tbl <- data %>%
-  tbl_hierarchical(
-    variables = c(AEBODSYS, FMQ01NAM),
-    by = TRT01A,
-    id = USUBJID,
-    include = FMQ01NAM,
-    denominator = adsl,
-    overall_row = FALSE,
-  ) %>%
-  modify_header(label = "**Body System or Organ Class**  \n    **FMQ(Narrow)**") %>%
-  remove_footnote_header(columns = everything())
-
-tbl
-```
-
-```{r eval=FALSE, include=FALSE}
-# Run chunk locally to generate image file
-gt::gtsave(as_gt(tbl), filename = "result.png")
-```
-
-```{r img, echo=FALSE, fig.align='center', out.width='60%'}
+print(ard, columns = "all")
 ```
 :::

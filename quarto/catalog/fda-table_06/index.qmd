@@ -1,211 +1,144 @@
 ---
-title: FDA Table 07
-subtitle: Overview of Adverse Events, Safety Population, Pooled Analysis (or Trial X) 
-categories: [table, FDA, safety, adverse events] 
+title: FDA Table 06
+subtitle: Duration of Treatment Exposure, Safety Population, Pooled Analysis (or Trial X)
+categories: [table, FDA, safety, exposure]
 ---
 
 ::: panel-tabset
 ## Table Preview
 
-```{r}
-#| label: img
-#| echo: false
-#| fig-align: center
-#| out-width: "60%"
-
-## If no image to show, the `Table Preview` section can be removed
+```{r img, echo=FALSE, fig.align='center', out.width='60%'}
 knitr::include_graphics("result.png")
 ```
 
 ## Setup
 
-```{r}
-#| label: setup
-#| message: false
-
-# Load package and data
-library(gtsummary)
+```{r setup, message=FALSE}
+# Load libraries & data -------------------------------------
 library(dplyr)
+library(cards)
+library(gtsummary)
 
-adsl <- random.cdisc.data::cadsl
-adae <- random.cdisc.data::cadae
+adsl <- pharmaverseadam::adsl
 
-# Use safety population only
-adsl <- adsl |>
-  filter(SAFFL == "Y")
-
-saf_adae <- adae |>
-  filter(SAFFL == "Y")
-```
-
-
-
-## Build Table
-
-```{r}
-#| label: tbl
-#| results: hide
-
-# --- PART 1: Create first of four table parts (Overview of serious AEs)
-
-# Summarize SAEs in an overall manner
-sae <- saf_adae |>
-  filter(AESER == "Y") |> # keep only serious AEs
-  mutate(AESER = "SAE") # convert flag to a meaningful value
-
-tbl_any_sae <- tbl_hierarchical(
-  data = sae,
-  denominator = adsl,
-  id = "USUBJID",
-  by = "ARM",
-  variables = "AESER",
-  label = AESER ~ "Event",
-)
-
-# Summarize SAEs per category
-# This is necessary as adae usually has one extra column per SAE category
-
-# Assign a label to each SAE category
-sae_cat_vars <- list(
-  "SAEs with fatal outcome" = "AESDTH",
-  "Life-threatening SAEs" = "AESLIFE",
-  "SAEs requiring hospitalization" = "AESHOSP",
-  "SAEs resulting in substantial disruption of normal life functions" = "AESDISAB",
-  "Congenital anomaly or birth defect" = "AESCONG",
-  "Other" = "AESMIE"
-)
-
-tbl_sae_cat_list <- mapply(function(categ, label) { # allows to apply per category
-  data <- sae |>
-    filter(.data[[categ]] == "Y") |>
-    mutate(
-      !!categ := label # convert flag to a meaningful value
-    )
-
-  tbl_hierarchical( # calculate rates
-    data = data,
-    denominator = adsl,
-    id = "USUBJID",
-    by = "ARM",
-    variables = all_of(categ),
-    statistic = ~"{n} ({p}%)",
-    label = all_of(categ) ~ "Event"
-  )
-}, categ = sae_cat_vars, label = names(sae_cat_vars), SIMPLIFY = FALSE)
-
-# Put first part together
-tbl_sae <- append(list(tbl_any_sae), tbl_sae_cat_list) |>
-  tbl_stack() |>
-  modify_column_indent("label", rows = variable %in% sae_cat_vars)
-
-
-# --- PART 2: Create second of four table parts (Permanent discontinuation)
-
-disc_ae <- adae |>
-  filter(AEACNOTH == "SUBJECT DISCONTINUED FROM STUDY") |>
+# Pre-processing --------------------------------------------
+data <- adsl %>%
+  # Filter for the safety population
+  filter(SAFFL == "Y") %>%
+  # Calculate treatment duration values
+  mutate(TRTDUR = lubridate::interval(.data[["TRTSDTM"]], .data[["TRTEDTM"]])) %>%
   mutate(
-    # convert label to a more meaningful value
-    AEACNOTH = "AE leading to permanent discontinuation of study drug"
-  )
-
-tbl_disc_ae <- tbl_hierarchical( # calculate rates
-  data = disc_ae,
-  denominator = adsl,
-  id = "USUBJID",
-  by = "ARM",
-  variables = "AEACNOTH",
-  label = AEACNOTH ~ "Event",
-  statistic = ~"{n} ({p}%)"
-)
-
-
-# -- PART 3: Create third of four table parts (Dose modification)
-dose_mod_ae <- adae |>
-  filter(AEACN %in% c("DRUG INTERRUPTED", "DOSE REDUCED", "DOSE RATE REDUCED", "DOSE INCREASED")) |>
+    # Get treatment duration values in months (for analysis of patients treated)
+    TRTDUR_MONTHS = TRTDUR %>% as.numeric("months"),
+    # Specify unit to use for duration of treatment (for analysis of treatment duration)
+    TRTDUR = TRTDUR %>% as.numeric("days")
+  ) %>%
+  # Add one flag variable for each treatment duration range
   mutate(
-    AEACN = case_when( # convert to meaningful labels
-      AEACN == "DRUG INTERRUPTED" ~ "AE leading to interruption of study drug",
-      AEACN == "DOSE REDUCED" ~ "AE leading to reduction of study drug",
-      AEACN == "DOSE RATE REDUCED" ~ "AE leading to dose delay of study drug",
-      AEACN == "DOSE INCREASED" ~ "Other",
-      .default = "Other"
-    )
+    D_ANY = TRTDUR_MONTHS > 0, # any duration (at least 1 dose)
+    D_LT1 = TRTDUR_MONTHS < 1, # duration <1 month
+    D_GT1 = TRTDUR_MONTHS >= 1, # duration >=1 month
+    D_GT3 = TRTDUR_MONTHS >= 3, # duration >=3 months
+    D_GT6 = TRTDUR_MONTHS >= 6, # duration >=6 months
+    D_GT12 = TRTDUR_MONTHS >= 12 # duration >=12 months
   )
-
-tbl_dose_mod_ae <- tbl_hierarchical( # calculate rates
-  data = dose_mod_ae,
-  denominator = adsl,
-  id = "USUBJID",
-  by = "ARM",
-  variables = "AEACN",
-  label = list(
-    AEACN ~ "Event",
-    # Specify overall label
-    ..ard_hierarchical_overall.. = "AE leading to dose modification of study drug"
-  ),
-  statistic = ~"{n} ({p}%)",
-  overall_row = TRUE
-)
-
-
-# -- PART 4: Create fourth of four table parts (Any AE)
-
-tbl_any_ae <- tbl_hierarchical(
-  data = adae,
-  denominator = adsl,
-  id = "USUBJID",
-  by = "ARM",
-  variables = "AESEV",
-  label = list(AESEV ~ "Event", ..ard_hierarchical_overall.. = "Any AE"),
-  statistic = ~"{n} ({p}%)",
-  overall_row = TRUE
-)
-
-# Put it all together
-tbl6 <- list(tbl_sae, tbl_disc_ae, tbl_dose_mod_ae, tbl_any_ae) |>
-  tbl_stack() |>
-  modify_column_indent("label", rows = !(variable %in% c("..ard_hierarchical_overall..", "AESER", "AEACNOTH")))
-
-tbl6
-```
-
-```{r}
-#| eval: false
-#| include: false
-
-gt::gtsave(as_gt(tbl6), filename = "result.png")
-```
-
-```{r}
-#| label: img
-#| echo: false
-#| fig-align: center
-#| out-width: "60%"
 ```
 
 ## Build ARD
 
-```{r}
-#| label: ard
-#| message: false
-#| warning: false
-#| results: hide
-#|
-# Load package and data
-library(gtsummary)
+```{r ard, message=FALSE, warning=FALSE, results='hide'}
+# Stack ARD results of two analyses
+ard <- data |>
+  ard_stack(
+    .by = TRT01A,
 
-# Extract ARD from previously created gtsummary table (refer to "Build Table")
-ard <- gather_ard(tbl6)
+    # Analysis of treatment duration ----------------------
+    ard_continuous(
+      variables = TRTDUR,
+      statistic = everything() ~ continuous_summary_fns(
+        # Specify which default statistics to include
+        summaries = c("mean", "sd", "median", "min", "max", "p25", "p75"),
+        # Specify custom statistics to include
+        other_stats = list(
+          # Add total exposure statistic
+          tot_exposure = \(x) sum(x),
+          # Add total person years statistic (using same unit specified in pre-processing)
+          person_yrs = \(x) as.numeric(lubridate::duration(sum(x), "days"), "years")
+        )
+      )
+    ),
 
-# Output ARD
+    # Analysis of patients treated ------------------------
+    ard_dichotomous(
+      variables = c(D_ANY, D_LT1, D_GT1, D_GT3, D_GT6, D_GT12),
+      # Calculate the n and % statistics for each flag variable
+      statistic = everything() ~ c("n", "p")
+    )
+  )
+
 ard
 ```
 
-```{r}
-#| echo: false
-
+```{r, echo=FALSE}
 # Print ARD
 withr::local_options(width = 9999)
-print(ard, columns = "all")
+print(ard, columns = "all", n = 40)
+```
+
+## Build Table
+
+```{r tbl, results = 'hide'}
+# Use info from the ARD previously generated to create a table
+tbl <- tbl_ard_summary(
+  ard,
+  by = TRT01A,
+  # Use type "continuous2" to display statistics on separate lines
+  type = list(TRTDUR = "continuous2"),
+  # Specify summary statistics to display for treatment duration variable
+  statistic = all_continuous() ~ c(
+    "{mean} ({sd})", "{median} ({min}, {max})",
+    iqr = "{p25} - {p75}", "{tot_exposure} ({person_yrs})"
+  ),
+  # Add descriptive labels for each variable
+  label =
+    list(
+      TRTDUR = "Duration of Treatment, days",
+      D_ANY = "Any duration (at least 1 dose)",
+      D_LT1 = "<1 month",
+      D_GT1 = ">=1 month",
+      D_GT3 = ">=3 months",
+      D_GT6 = ">=6 months",
+      D_GT12 = ">=12 months"
+    )
+) |>
+  # Add custom statistic labels for treatment duration variable, keep other stat labels as is
+  add_stat_label(
+    label = list(
+      TRTDUR ~ c("Mean (SD)", "Median (min, max)", "Interquartile range", "Total exposure (person years)"),
+      all_dichotomous() ~ NA_character_
+    )
+  ) |>
+  # Add label over analysis of group of flag variables
+  add_variable_group_header("Patients Treated, by duration", all_dichotomous()) |>
+  # Update header labels
+  modify_header(
+    label ~ "**Parameter**",
+    all_stat_cols() ~ "**{level}**  \nN = {n}"
+  ) |>
+  # bold text in the two label rows
+  modify_bold(
+    rows = (variable == "TRTDUR" & row_type == "label") | (row_type == "variable_group"),
+    columns = label
+  )
+
+tbl
+```
+
+```{r eval=FALSE, include=FALSE}
+# Run chunk locally to generate image file
+gt::gtsave(as_gt(tbl), filename = "result.png")
+```
+
+```{r img, echo=FALSE, fig.align='center', out.width='60%'}
 ```
 :::
