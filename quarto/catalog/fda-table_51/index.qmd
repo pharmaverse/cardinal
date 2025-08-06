@@ -78,7 +78,7 @@ ard_Ns <- adsl |>
   mutate(stat_name = "N_s")
 
 # generate ARD for `p` statistic
-ard_p <- 
+ard_p <-
   cards::bind_ard(
     ard_summary,
     ard_Ns
@@ -99,9 +99,9 @@ ard <- cards::bind_ard(ard_summary, ard_Ns, ard_p, ard_categorical(adsl, variabl
   cards::tidy_ard_row_order()
 
 # generate table from ARDs
-tbl <- 
+tbl <-
   tbl_ard_summary(
-    ard, 
+    ard,
     by = ARM,
     # set variable labels
     label = list(
