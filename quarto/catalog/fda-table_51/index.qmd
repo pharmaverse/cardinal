@@ -7,7 +7,7 @@ categories: [table, FDA, safety, adverse events]
 ::: panel-tabset
 ## Table Preview
 
-```{r img, echo=FALSE, fig.align='center', out.width='60%'}
+```{r img, echo=FALSE, fig.align='center', out.width='65%'}
 knitr::include_graphics("result.png")
 ```
 
@@ -23,17 +23,8 @@ adae <- random.cdisc.data::cadae
 adsl <- random.cdisc.data::cadsl
 
 adsl <- adsl |>
-  filter(SAFFL == "Y")
-
-data <- adae |>
-  filter(
-    SAFFL == "Y",
-    TRTEMFL == "Y"
-  ) |>
+  filter(SAFFL == "Y") |>
   mutate(
-    SEXGR = "Sex, n (%)",
-    SEXGR1 = as.factor(SEX),
-    AGEGR = "Age group, years, n(%)",
     AGEGR1 = factor(
       dplyr::case_when(
         AGE >= 17 & AGE < 65 ~ ">=17 to <65",
@@ -41,77 +32,105 @@ data <- adae |>
         AGE >= 75 ~ ">=75"
       ),
       levels = c(">=17 to <65", "65-74", ">=75")
-    ),
-    RACEGR = "Race, n(%)",
-    RACEGR1 = as.factor(RACE),
-    ETHNICGR = "Ethnicity, n(%)",
-    ETHNICGR1 = as.factor(RACE)
-  )
+    )
+  ) |>
+  mutate(any_ae = "Any AE")
 
-data_any_ae <- adae |>
-  filter(AESEV != "") |>
-  mutate(AESEV = "Any AE, n(%)")
+data <- adae |>
+  filter(
+    SAFFL == "Y",
+    TRTEMFL == "Y"
+  ) |>
+  mutate(
+    AGEGR1 = factor(
+      dplyr::case_when(
+        AGE >= 17 & AGE < 65 ~ ">=17 to <65",
+        AGE >= 65 & AGE < 75 ~ "65-74",
+        AGE >= 75 ~ ">=75"
+      ),
+      levels = c(">=17 to <65", "65-74", ">=75")
+    )
+  ) |>
+  mutate(any_ae = "Any AE") |>
+  # subset to one AE per subject
+  dplyr::slice_tail(n = 1L, by = all_of(c("USUBJID", "ARM")))
 ```
 
 ## Build Table
 
 ```{r tbl, message=FALSE, warning=FALSE}
-tbl_any_ae <- tbl_hierarchical(
-  data = data_any_ae,
-  denominator = adsl,
-  id = "USUBJID",
-  by = "ARM",
-  variables = "AESEV",
-  statistic = ~"{n} ({p}%)",
-  label = AESEV ~ "Characteristic"
-)
+# generate ARD for `n` statistic
+ard_summary <- data |>
+  ard_categorical(
+    variables = c(any_ae, SEX, AGEGR1, RACE, ETHNIC),
+    by = ARM,
+    statistic = ~"n"
+  )
 
-tbl_sex <- tbl_hierarchical(
-  data = data,
-  denominator = data_any_ae |> slice_head(by = c(USUBJID)),
-  id = "USUBJID",
-  by = "ARM",
-  variables = c(SEXGR, SEXGR1),
-  include = SEXGR1,
-  statistic = ~"{n}/{N} ({p}%)"
-)
+# generate ARD for `N_s` statistic
+ard_Ns <- adsl |>
+  ard_categorical(
+    variables = c(any_ae, SEX, AGEGR1, RACE, ETHNIC),
+    by = ARM,
+    statistic = ~"n",
+    stat_label = ~ list(n = "N_s")
+  ) |>
+  mutate(stat_name = "N_s")
 
-tbl_agegr1 <- tbl_hierarchical(
-  data = data,
-  denominator = data_any_ae |> slice_head(by = c(USUBJID)),
-  id = "USUBJID",
-  by = "ARM",
-  variables = c(AGEGR, AGEGR1),
-  include = AGEGR1,
-  statistic = ~"{n}/{N} ({p}%)"
-)
+# generate ARD for `p` statistic
+ard_p <- 
+  cards::bind_ard(
+    ard_summary,
+    ard_Ns
+  ) |>
+  select(-stat_label) |>
+  tidyr::pivot_wider(names_from = stat_name, values_from = stat, values_fn = unlist) |>
+  rowwise() |>
+  mutate(
+    stat_name = "p",
+    stat_label = "%",
+    stat = if_else(n > 0, list(n / N_s), list(0)),
+    fmt_fun = list(label_round(digits = 1, scale = 100))
+  ) |>
+  select(-n, -N_s)
 
-tbl_race <- tbl_hierarchical(
-  data = data,
-  denominator = data_any_ae |> slice_head(by = c(USUBJID)),
-  id = "USUBJID",
-  by = "ARM",
-  variables = c(RACEGR, RACEGR1),
-  include = RACEGR1,
-  statistic = ~"{n}/{N} ({p}%)"
-)
+# combine all ARDs
+ard <- cards::bind_ard(ard_summary, ard_Ns, ard_p, ard_categorical(adsl, variables = ARM, statistic = ~"n")) |>
+  cards::tidy_ard_row_order()
 
-tbl_ethnic <- tbl_hierarchical(
-  data = data,
-  denominator = data_any_ae |> slice_head(by = c(USUBJID)),
-  id = "USUBJID",
-  by = "ARM",
-  variables = c(ETHNICGR, ETHNICGR1),
-  include = ETHNICGR1,
-  statistic = ~"{n}/{N} ({p}%)"
-)
-
-tbl <- list(tbl_any_ae, tbl_sex, tbl_agegr1, tbl_race, tbl_ethnic) |>
-  tbl_stack() |>
-  modify_column_indent("label", rows = !(variable %in% c("..ard_hierarchical_overall..", "AESEV", "SEXGR", "AGEGR", "RACEGR", "ETHNICGR"))) |>
-  remove_footnote_header(columns = everything())
+# generate table from ARDs
+tbl <- 
+  tbl_ard_summary(
+    ard, 
+    by = ARM,
+    # set variable labels
+    label = list(
+      SEX = "Sex",
+      AGEGR1 = "Age Group, years",
+      RACE = "Race",
+      ETHNIC = "Ethnicity"
+    )
+  ) |>
+  gtsummary::modify_table_body(
+    \(x) x |> filter(!label %in% "any_ae")
+  ) |>
+  gtsummary::modify_indent(columns = label, rows = variable == "any_ae", indent = 0L) |>
+  # update statistic footnote
+  gtsummary::modify_footnote_header(
+    footnote = "n/N_s (%)",
+    columns = all_stat_cols()
+  ) |>
+  gtsummary::modify_header(all_stat_cols() ~ "**{level}**  \n N = {n}")
 
 tbl
+```
+
+```{r eval=FALSE, include=FALSE}
+# Run chunk locally to generate image file
+gt::gtsave(as_gt(tbl), filename = "result.png")
+```
+
+```{r img, echo=FALSE, fig.align='center', out.width='65%'}
 ```
 
 ## Build ARD
@@ -128,12 +147,4 @@ withr::local_options(width = 9999)
 print(ard, columns = "all", n = 40, na.print = NULL)
 ```
 
-
-```{r eval=FALSE, include=FALSE}
-# Run chunk locally to generate image file
-gt::gtsave(as_gt(tbl), filename = "result.png")
-```
-
-```{r img, echo=FALSE, fig.align='center', out.width='60%'}
-```
 :::
