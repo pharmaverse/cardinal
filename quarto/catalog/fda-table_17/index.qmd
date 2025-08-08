@@ -61,7 +61,9 @@ tbl <- adae |>
       include = c(FMQ01NAM),
       label = list(FMQ01NAM ~ "FMQ", AEBODSYS ~ "System Organ Class")
     )
-  )
+  ) |>
+  gtsummary::modify_missing_symbol("NA", columns = everything(), rows = row_type == "level")
+
 tbl
 ```
 
@@ -76,7 +78,6 @@ gt::gtsave(as_gt(tbl), filename = "result.png")
 
 ```{r ard, message=FALSE, warning=FALSE, results='hide'}
 ard <- gather_ard(tbl)
-
 ard
 ```
 

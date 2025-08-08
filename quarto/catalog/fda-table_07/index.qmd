@@ -7,23 +7,14 @@ categories: [table, FDA, safety, adverse events]
 ::: panel-tabset
 ## Table Preview
 
-```{r}
-#| label: img
-#| echo: false
-#| fig-align: center
-#| out-width: "60%"
-
-## If no image to show, the `Table Preview` section can be removed
+```{r img, echo=FALSE, fig.align='center', out.width='60%'}
 knitr::include_graphics("result.png")
 ```
 
 ## Setup
 
-```{r}
-#| label: setup
-#| message: false
-
-# Load package and data
+```{r setup, message=FALSE}
+# Load libraries & data -------------------------------------
 library(gtsummary)
 library(dplyr)
 
@@ -34,7 +25,7 @@ adae <- random.cdisc.data::cadae
 adsl <- adsl |>
   filter(SAFFL == "Y")
 
-saf_adae <- adae |>
+data <- adae |>
   filter(SAFFL == "Y")
 ```
 
@@ -42,84 +33,58 @@ saf_adae <- adae |>
 
 ## Build Table
 
-```{r}
-#| label: tbl
-#| results: hide
-
-# --- PART 1: Create first of four table parts (Overview of serious AEs)
-
-# Summarize SAEs in an overall manner
-sae <- saf_adae |>
-  filter(AESER == "Y") |> # keep only serious AEs
-  mutate(AESER = "SAE") # convert flag to a meaningful value
-
-tbl_any_sae <- tbl_hierarchical(
-  data = sae,
-  denominator = adsl,
-  id = "USUBJID",
-  by = "ARM",
-  variables = "AESER",
-  label = AESER ~ "Event",
-)
-
-# Summarize SAEs per category
-# This is necessary as adae usually has one extra column per SAE category
-
+```{r tbl, results='hide'}
+# --- PART 1: Overview of serious AEs
 # Assign a label to each SAE category
-sae_cat_vars <- list(
-  "SAEs with fatal outcome" = "AESDTH",
-  "Life-threatening SAEs" = "AESLIFE",
-  "SAEs requiring hospitalization" = "AESHOSP",
-  "SAEs resulting in substantial disruption of normal life functions" = "AESDISAB",
+sae_vars <- list(
+  "SAE" = "AESER",
+  "Death" = "AESDTH",
+  "Life-threatening" = "AESLIFE",
+  "Initial or prolonged hospitalization" = "AESHOSP",
+  "Disability or permanent damage" = "AESDISAB",
   "Congenital anomaly or birth defect" = "AESCONG",
   "Other" = "AESMIE"
 )
 
-tbl_sae_cat_list <- mapply(function(categ, label) { # allows to apply per category
-  data <- sae |>
-    filter(.data[[categ]] == "Y") |>
-    mutate(
-      !!categ := label # convert flag to a meaningful value
-    )
-
-  tbl_hierarchical( # calculate rates
-    data = data,
-    denominator = adsl,
-    id = "USUBJID",
-    by = "ARM",
-    variables = all_of(categ),
-    statistic = ~"{n} ({p}%)",
-    label = all_of(categ) ~ "Event"
-  )
-}, categ = sae_cat_vars, label = names(sae_cat_vars), SIMPLIFY = FALSE)
-
-# Put first part together
-tbl_sae <- append(list(tbl_any_sae), tbl_sae_cat_list) |>
+# Summarize SAEs per category
+tbl_sae <- 
+  lapply(
+    seq_along(sae_vars),
+    function(i) { # apply per category
+      data <- data |>
+        filter(.data[[sae_vars[[i]]]] == "Y") |>
+        mutate(!!sae_vars[[i]] := names(sae_vars)[i]) # convert flag to a meaningful value
+      tbl_hierarchical( # calculate rates
+        data = data,
+        variables = all_of(sae_vars[[i]]),
+        by = ARM,
+        id = USUBJID,
+        denominator = adsl,
+        label = sae_vars[[i]] ~ "Event"
+      )
+    }
+  ) |>
   tbl_stack() |>
-  modify_column_indent("label", rows = variable %in% sae_cat_vars)
+  modify_indent("label", rows = tbl_id1 != 1, indent = 4L)
 
-
-# --- PART 2: Create second of four table parts (Permanent discontinuation)
-
+# --- PART 2: Permanent discontinuation
 disc_ae <- adae |>
   filter(AEACNOTH == "SUBJECT DISCONTINUED FROM STUDY") |>
   mutate(
     # convert label to a more meaningful value
-    AEACNOTH = "AE leading to permanent discontinuation of study drug"
+    AEACNOTH = "AE leading to permanent discontinuation of treatment"
   )
 
 tbl_disc_ae <- tbl_hierarchical( # calculate rates
   data = disc_ae,
+  variables = AEACNOTH,
+  by = ARM,
+  id = USUBJID,
   denominator = adsl,
-  id = "USUBJID",
-  by = "ARM",
-  variables = "AEACNOTH",
-  label = AEACNOTH ~ "Event",
-  statistic = ~"{n} ({p}%)"
+  label = AEACNOTH ~ "Event"
 )
 
-
-# -- PART 3: Create third of four table parts (Dose modification)
+# -- PART 3: Dose modification
 dose_mod_ae <- adae |>
   filter(AEACN %in% c("DRUG INTERRUPTED", "DOSE REDUCED", "DOSE RATE REDUCED", "DOSE INCREASED")) |>
   mutate(
@@ -138,73 +103,49 @@ tbl_dose_mod_ae <- tbl_hierarchical( # calculate rates
   id = "USUBJID",
   by = "ARM",
   variables = "AEACN",
-  label = list(
-    AEACN ~ "Event",
-    # Specify overall label
-    ..ard_hierarchical_overall.. = "AE leading to dose modification of study drug"
-  ),
-  statistic = ~"{n} ({p}%)",
+  label = list(AEACN ~ "Event", ..ard_hierarchical_overall.. = "AE leading to action taken of treatment"),
   overall_row = TRUE
-)
+) |>
+  modify_indent(columns = label, rows = variable == "AEACN", indent = 4L)
 
 
-# -- PART 4: Create fourth of four table parts (Any AE)
-
+# -- PART 4: Any AE
 tbl_any_ae <- tbl_hierarchical(
-  data = adae,
+  data = adae |> mutate(AESEV = factor(.data$AESEV, ordered = TRUE)),
+  variables = AESEV,
+  by = ARM,
+  id = USUBJID,
   denominator = adsl,
-  id = "USUBJID",
-  by = "ARM",
-  variables = "AESEV",
   label = list(AESEV ~ "Event", ..ard_hierarchical_overall.. = "Any AE"),
-  statistic = ~"{n} ({p}%)",
   overall_row = TRUE
-)
+) |>
+  modify_indent(columns = label, rows = variable == "AESEV", indent = 4L)
 
 # Put it all together
-tbl6 <- list(tbl_sae, tbl_disc_ae, tbl_dose_mod_ae, tbl_any_ae) |>
+tbl <- list(tbl_sae, tbl_disc_ae, tbl_dose_mod_ae, tbl_any_ae) |>
   tbl_stack() |>
-  modify_column_indent("label", rows = !(variable %in% c("..ard_hierarchical_overall..", "AESER", "AEACNOTH")))
+  modify_header(label = "**Adverse Event Category**")
 
-tbl6
+tbl
 ```
 
-```{r}
-#| eval: false
-#| include: false
-
-gt::gtsave(as_gt(tbl6), filename = "result.png")
+```{r eval=FALSE, include=FALSE}
+# Run chunk locally to generate image file
+gt::gtsave(as_gt(tbl), filename = "result.png")
 ```
 
-```{r}
-#| label: img
-#| echo: false
-#| fig-align: center
-#| out-width: "60%"
+```{r img, echo=FALSE, fig.align='center', out.width='60%'}
 ```
 
 ## Build ARD
 
-```{r}
-#| label: ard
-#| message: false
-#| warning: false
-#| results: hide
-#|
-# Load package and data
-library(gtsummary)
-
-# Extract ARD from previously created gtsummary table (refer to "Build Table")
-ard <- gather_ard(tbl6)
-
-# Output ARD
+```{r ard, message=FALSE, warning=FALSE, results='hide'}
+ard <- gather_ard(tbl)
 ard
 ```
 
-```{r}
-#| echo: false
-
-# Print ARD
+```{r, echo=FALSE}
+# Print full ARD
 withr::local_options(width = 9999)
 print(ard, columns = "all")
 ```

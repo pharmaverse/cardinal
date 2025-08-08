@@ -25,17 +25,17 @@ adsl <- random.cdisc.data::cadsl
 set.seed(1)
 adsl$RANDDT[sample(seq_len(nrow(adsl)), 100)] <- NA
 scrnfail_reas_lvls <- c(
-  "Inclusion/exclusion criteria not met", "Patient noncompliance", "Consent withdrawn", "Other"
+  "Inclusion/exclusion criteria not met", "Subject noncompliance", "Consent withdrawn", "Other"
 )
 data <- adsl |>
   mutate(
     ENRLDT = RANDDT,
-    SCRNFL = with_label(TRUE, "Patients screened"),
+    SCRNFL = with_label(TRUE, "Subjects screened"),
     SCRNFRS = factor(sample(scrnfail_reas_lvls, size = nrow(adsl), replace = TRUE),
       levels = scrnfail_reas_lvls
     ),
-    ENRLFL = with_label(!is.na(ENRLDT), "Patients enrolled"),
-    RANDFL = with_label(!is.na(RANDDT), "Patients randomized")
+    ENRLFL = with_label(!is.na(ENRLDT), "Subjects enrolled"),
+    RANDFL = with_label(!is.na(RANDDT), "Subjects randomized")
   )
 data$SCRNFRS[data$SCRNFL == "N" | !is.na(data$ENRLDT)] <- NA
 ```
@@ -77,8 +77,8 @@ print(ard, columns = "all", n = 40)
 ```{r tbl, message=FALSE, warning=FALSE, results='hide'}
 tbl_scrn <- tbl_summary(
   data = data,
+  by = ARM,
   include = "SCRNFL",
-  statistic = SCRNFL ~ "{n}",
   missing = "no"
 )
 
@@ -86,23 +86,24 @@ tbl_scrnfrs <- tbl_hierarchical(
   data = data,
   denominator = adsl,
   id = USUBJID,
+  by = ARM,
   variables = "SCRNFRS",
-  statistic = ~"{n} ({p}%)",
   label = list(..ard_hierarchical_overall.. = "Screening failures"),
   overall_row = TRUE
-)
+) |>
+  modify_indent(columns = label, rows = row_type == "level", indent = 4L) |>
+  modify_indent(columns = label, rows = variable == "SCRNFRS", indent = 8L)
 
 tbl_enrl_rand <- tbl_summary(
   data = data,
+  by = ARM,
   include = c("ENRLFL", "RANDFL"),
   missing = "no"
 )
 
 tbl <- list(tbl_scrn, tbl_scrnfrs, tbl_enrl_rand) |>
   tbl_stack() |>
-  modify_header(label = "**Disposition**", stat_0 = "**Trial A**") |>
-  modify_column_indent("label", rows = !(variable %in% c("..ard_hierarchical_overall..", "SCRNFL", "ENRLFL", "RANDFL"))) |>
-  remove_footnote_header(columns = everything())
+  modify_header(label = "**Disposition**")
 
 tbl
 ```

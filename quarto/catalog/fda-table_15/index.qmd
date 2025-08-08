@@ -23,10 +23,10 @@ adsl <- random.cdisc.data::cadsl
 adae <- random.cdisc.data::cadae
 
 # Pre-processing --------------------------------------------
-adsl <- adsl %>%
+adsl <- adsl |>
   filter(SAFFL == "Y") # safety population
 
-data <- adae %>%
+data <- adae |>
   filter(
     # safety population
     SAFFL == "Y"
@@ -37,18 +37,17 @@ data <- adae %>%
 ## Build Table
 
 ```{r tbl, results = 'hide'}
-tbl <- tbl_hierarchical(
-  data,
-  variables = c(AEDECOD),
-  by = TRT01A,
-  id = USUBJID,
-  denominator = adsl,
-  overall_row = FALSE
-) %>%
-  # filter with >=5% Frequency
-  filter_hierarchical(sum(n) / sum(N) >= 0.05) %>%
-  modify_header(label = "Preferred Term") %>%
-  remove_footnote_header(columns = everything())
+tbl <- 
+  tbl_hierarchical(
+    data,
+    variables = c(AEDECOD),
+    by = TRT01A,
+    id = USUBJID,
+    denominator = adsl,
+    label = AEDECOD ~ "**Preferred Term**"
+  ) |>
+  # filter for >=5% frequency
+  filter_hierarchical(p_overall >= 0.05)
 
 tbl
 ```

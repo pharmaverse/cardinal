@@ -25,7 +25,6 @@ adae <- random.cdisc.data::cadae
 
 set.seed(1)
 adae$AESIFL <- ifelse(adae$AESOC %in% c("cl A", "cl D"), "Y", "N")
-adae$AELABFL <- sample(c("Y", "N"), nrow(adae), replace = TRUE)
 
 # Pre-processing --------------------------------------------
 adsl <- adsl |>
@@ -44,18 +43,19 @@ data_ae_fl <-
   # create subject-level flags from adae data
   left_join(
     data |>
-      select(USUBJID, AESER, AESDTH, AEACN, AEREL, AELABFL) |>
+      select(USUBJID, AESER, AESDTH, AESLIFE, AESHOSP, AESDISAB, AESCONG, AESMIE, AEACN) |>
       mutate(
         # Serious AE
         ae_ser = any(AESER == "Y"),
         # Serious AE leading to death
         ae_ser_death = any(AESER == "Y" & AESDTH == "Y"),
+        ae_ser_life = any(AESER == "Y" & AESLIFE == "Y"),
+        ae_ser_hosp = any(AESER == "Y" & AESHOSP == "Y"),
+        ae_ser_disab = any(AESER == "Y" & AESDISAB == "Y"),
+        ae_ser_cong = any(AESER == "Y" & AESCONG == "Y"),
+        ae_ser_oth = any(AESER == "Y" & AESMIE == "Y"),
         # AE resulting in discontinuation
         ae_withdraw = any(AEACN == "DRUG WITHDRAWN"),
-        # Related AE
-        ae_rel = any(AEREL == "Y"),
-        # Laboratory assessment
-        ae_lab = any(AELABFL == "Y"),
         .by = USUBJID
       ),
     by = "USUBJID"
@@ -81,8 +81,8 @@ tbl_ae_gp <- data |>
     by = TRT01A,
     overall_row = TRUE,
     label = list(
-      ..ard_hierarchical_overall.. = "AE grouping related to AESI",
-      AEDECOD = "AESI Assessment"
+      ..ard_hierarchical_overall.. = "[Insert AE of Interest]",
+      AEDECOD = "AE of Interest Assessment"
     )
   ) |>
   modify_indent(columns = label, rows = variable != "..ard_hierarchical_overall..", indent = 4L)
@@ -96,21 +96,26 @@ tbl_ae_sev <- data |>
 tbl_ae_fl <- data_ae_fl |>
   tbl_summary(
     by = "TRT01A",
-    include = c(ae_ser, ae_ser_death, ae_withdraw, ae_rel, ae_lab),
+    include = c(ae_ser, ae_ser_death, ae_ser_life, ae_ser_hosp, ae_ser_disab, ae_ser_cong, ae_ser_oth, ae_withdraw),
     missing = "no",
     percent = adsl,
     label = list(
-      ae_ser = "Serious",
-      ae_ser_death = "Deaths",
-      ae_withdraw = "Resulting in discontinuation",
-      ae_rel = "Relatedness",
-      ae_lab = "Laboratory Assessment"
+      ae_ser = "SAE",
+      ae_ser_death = "Death",
+      ae_ser_life = "Life-threatening",
+      ae_ser_hosp = "Initial or prolonged hospitalization",
+      ae_ser_disab = "Disability or permanent damage",
+      ae_ser_cong = "Congenital anomaly or birth defect",
+      ae_ser_oth = "Other",
+      ae_withdraw = "Resulting in treatment discontinuation"
     )
   ) |>
-  modify_indent(columns = label, rows = label == "Deaths", indent = 4L)
+  modify_indent(columns = label, rows = !variable %in% c("ae_ser", "ae_withdraw"), indent = 4L)
 
 ## Build table ----------------------
 tbl <- tbl_stack(list(tbl_ae_gp, tbl_ae_sev, tbl_ae_fl), quiet = TRUE)
+
+tbl
 ```
 
 ```{r eval=FALSE, include=FALSE}
@@ -123,10 +128,7 @@ gt::gtsave(as_gt(tbl), filename = "result.png")
 ## Build ARD
 
 ```{r ard, message=FALSE, warning=FALSE, results='hide'}
-ard <- gather_ard(tbl) |>
-  unlist(recursive = FALSE) |>
-  bind_ard(.quiet = TRUE)
-
+ard <- gather_ard(tbl)
 ard
 ```
 

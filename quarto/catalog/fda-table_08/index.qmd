@@ -22,9 +22,6 @@ library(gtsummary)
 adsl <- random.cdisc.data::cadsl
 adae <- random.cdisc.data::cadae
 
-set.seed(1)
-adae$TRTEMFL <- ifelse(adae$USUBJID %in% sample(adsl$USUBJID, size = as.integer(nrow(adsl) / 3)), "N", "Y")
-
 # Pre-processing --------------------------------------------
 adsl <- adsl |>
   filter(SAFFL == "Y") # safety population
@@ -35,31 +32,39 @@ data <- adae |>
     SAFFL == "Y",
     # deaths
     DTHFL == "Y"
-  ) |>
-  mutate(
-    # treatment-emergent deaths categories
-    TRTEMFL = ifelse(TRTEMFL == "Y", "Treatment-emergent deaths", "Nontreatment-emergent deaths")
-  )
-
-data <- data |>
-  bind_rows(
-    # duplicate all data to create "Total deaths" section
-    data |> mutate(TRTEMFL = "Total deaths")
   )
 ```
 
 ## Build Table
 
 ```{r tbl, results = 'hide'}
-tbl <- data |>
+
+tbl_dthcaus <- data |>
   tbl_hierarchical(
-    variables = c(TRTEMFL, DTHCAUS),
+    variables = DTHCAUS,
     id = USUBJID,
+    by = TRT01A,
     denominator = adsl,
-    by = TRT01A
+    overall_row = TRUE,
+    label = list("..ard_hierarchical_overall.." = "Death details", DTHCAUS = "**Deaths**")
   ) |>
   sort_hierarchical() |>
-  modify_header(label = "**Deaths**")
+  modify_indent(columns = label, rows = variable == "DTHCAUS", indent = 4L)
+
+tbl_aesdth <- data |>
+  filter(AESDTH == "Y") |>
+  tbl_hierarchical(
+    variables = AEDECOD,
+    id = USUBJID,
+    by = TRT01A,
+    denominator = adsl,
+    overall_row = TRUE,
+    label = list("..ard_hierarchical_overall.." = "Adverse events with an outcome of death", AEDECOD = "**Deaths**")
+  ) |>
+  sort_hierarchical() |>
+  modify_indent(columns = label, rows = variable == "AEDECOD", indent = 4L)
+
+tbl <- tbl_stack(list(tbl_dthcaus, tbl_aesdth))
 
 tbl
 ```
@@ -74,8 +79,7 @@ gt::gtsave(as_gt(tbl), filename = "result.png")
 ## Build ARD
 
 ```{r ard, message=FALSE, warning=FALSE, results='hide'}
-ard <- gather_ard(tbl)[[1]]
-
+ard <- gather_ard(tbl)
 ard
 ```
 

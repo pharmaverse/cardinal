@@ -24,10 +24,10 @@ adae <- random.cdisc.data::cadae
 adae$DCSREAS[is.na(adae$DCSREAS)] <- "ADVERSE EVENT"
 
 # Pre-processing --------------------------------------------
-adsl <- adsl %>%
+adsl <- adsl |>
   filter(SAFFL == "Y") # safety population
 
-data <- adae %>%
+data <- adae |>
   filter(
     # safety population
     SAFFL == "Y",
@@ -66,7 +66,7 @@ tbl <- tbl_hierarchical(
   id = USUBJID,
   denominator = adsl,
   overall_row = TRUE,
-  label = list(..ard_hierarchical_overall.. = "Patients with at least one AE leading to discontinuation")
+  label = list(..ard_hierarchical_overall.. = "Subjects with at least one AE leading to treatment discontinuation")
 )
 
 tbl
