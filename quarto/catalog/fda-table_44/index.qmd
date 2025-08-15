@@ -62,7 +62,7 @@ tbl <- data |>
     # variables to calculate rates for
     include = c(AEDECOD),
     label = list(
-      FMQ01NAM ~ "FMQ (Broad)", 
+      FMQ01NAM ~ "FMQ (Broad)",
       AEDECOD ~ "Preferred Term"
     )
   )

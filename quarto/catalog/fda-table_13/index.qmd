@@ -21,7 +21,7 @@ library(gtsummary)
 
 set.seed(1)
 adsl <- random.cdisc.data::cadsl
-adae <- random.cdisc.data::cadae 
+adae <- random.cdisc.data::cadae
 
 adae <- adae |>
   rename(FMQ01SC = SMQ01SC) |>
@@ -70,7 +70,7 @@ print(ard, columns = "all", n = 40)
 ## Build Table
 
 ```{r tbl, results = 'hide'}
-tbl <- 
+tbl <-
   tbl_hierarchical(
     data,
     variables = c(AEBODSYS, FMQ01NAM),

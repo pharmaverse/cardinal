@@ -47,7 +47,7 @@ sae_vars <- list(
 )
 
 # Summarize SAEs per category
-tbl_sae <- 
+tbl_sae <-
   lapply(
     seq_along(sae_vars),
     function(i) { # apply per category

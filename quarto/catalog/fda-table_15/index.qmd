@@ -37,7 +37,7 @@ data <- adae |>
 ## Build Table
 
 ```{r tbl, results = 'hide'}
-tbl <- 
+tbl <-
   tbl_hierarchical(
     data,
     variables = c(AEDECOD),
