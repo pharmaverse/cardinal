@@ -53,7 +53,8 @@ ard <- bind_ard(
     variables = c(SBP90, DBP60),
     by = TRT01A,
     statistic = ~ c("n", "p"),
-    denominator = adsl
+    # denominator values are number of subjects in arm with BP data
+    denominator = data |> distinct(USUBJID, TRT01A)
   ),
   # ARD for header N values
   ard_categorical(adsl, variables = TRT01A)
@@ -82,7 +83,7 @@ tbl <- tbl_ard_summary(
 ) |>
   modify_header(
     # Update label, add analysis value units
-    label ~ paste0("**Blood Pressure  \n(", data$AVALU[1], ")**"),
+    label ~ paste0("**Blood Pressure (", data$AVALU[1], ")**"),
     # Add N values to `by` variable labels
     all_stat_cols() ~ "**{level}**  \nN = {n}"
   )

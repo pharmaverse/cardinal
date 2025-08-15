@@ -23,8 +23,8 @@ adae <- random.cdisc.data::cadae
 adsl <- random.cdisc.data::cadsl
 
 set.seed(1)
-adae <- adae %>%
-  rename(FMQ01SC = SMQ01SC) %>%
+adae <- adae |>
+  rename(FMQ01SC = SMQ01SC) |>
   mutate(
     AESER = sample(c("Y", "N"), size = nrow(adae), replace = TRUE),
     FMQ01NAM = sample(c("FMQ1", "FMQ2", "FMQ3"), size = nrow(adae), replace = TRUE)
@@ -80,14 +80,10 @@ tbl <-
     variables = c(AEBODSYS, FMQ01NAM, AEDECOD),
     by = ARM,
     # variables to display AE rates for
-    include = c(FMQ01NAM, AEDECOD),
-    # add custom variable labels
-    label = list(
-      AEBODSYS = "Body System or Organ Class",
-      FMQ01NAM = "FMQ (Narrow)",
-      AEDECOD = "Dictionary-Derived Term"
-    )
-  )
+    include = c(FMQ01NAM, AEDECOD)
+  ) |>
+  # add custom variable label
+  modify_header(label = "**Organ System**")
 
 tbl
 ```

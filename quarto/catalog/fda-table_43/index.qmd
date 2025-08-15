@@ -23,8 +23,8 @@ adae <- random.cdisc.data::cadae
 adsl <- random.cdisc.data::cadsl
 
 set.seed(1)
-adae <- adae %>%
-  rename(FMQ01SC = SMQ01SC) %>%
+adae <- adae |>
+  rename(FMQ01SC = SMQ01SC) |>
   mutate(
     AESER = sample(c("Y", "N"), size = nrow(adae), replace = TRUE),
     FMQ01NAM = sample(c("FMQ1", "FMQ2", "FMQ3"), size = nrow(adae), replace = TRUE)
@@ -81,9 +81,9 @@ tbl <-
     include = c(FMQ01NAM, AEDECOD),
     # Add custom variable labels
     label = list(
-      AEBODSYS = "Body System or Organ Class",
+      AEBODSYS = "Organ System",
       FMQ01NAM = "FMQ (Broad)",
-      AEDECOD = "Dictionary-Derived Term"
+      AEDECOD = "Preferred Term"
     )
   )
 

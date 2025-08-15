@@ -38,21 +38,12 @@ adae$FMQ01NAM[adae$SEX == "F"] <- as.factor(
 )
 
 # Pre-processing --------------------------------------------
-adae <- adae |>
+data <- adae |>
   filter(
     SAFFL == "Y",
     SEX == "F",
     FMQ01SC == "NARROW"
-  )
-
-adsl <- adsl |>
-  filter(SAFFL == "Y") # safety population
-```
-
-## Build Table
-
-```{r tbl, results = 'hide'}
-tbl <- adae |>
+  ) |>
   select(FMQ01SC, ARM, FMQ01NAM, AEDECOD, USUBJID) |>
   # setting an explicit level for NA values so empty strata combinations are shown.
   mutate(across(everything(), ~ {
@@ -61,16 +52,29 @@ tbl <- adae |>
     } else {
       .
     }
-  })) |>
+  }))
+
+# denominator values include only Female subjects in the arm with AEs
+denom <- data |> distinct(USUBJID, ARM)
+```
+
+## Build Table
+
+```{r tbl, results = 'hide'}
+tbl <- data |>
   tbl_hierarchical(
     by = ARM,
     variables = c(FMQ01NAM, AEDECOD),
     id = USUBJID,
-    denominator = adsl,
+    denominator = denom,
     # variables to calculate rates for
     include = c(AEDECOD),
-    label = list(FMQ01NAM ~ "FMQ (Narrow)", AEDECOD ~ "Preferred Term")
+    label = list(
+      FMQ01NAM ~ "FMQ (Narrow)", 
+      AEDECOD ~ "Preferred Term"
+    )
   )
+
 tbl
 ```
 

@@ -40,10 +40,10 @@ data <- advs |>
   # define analysis value cutoffs
   mutate(
     L90 = AVAL < 90, # SYSBP <90
-    GE90 = AVAL >= 90 & AVAL < 120, # SYSBP >=90
-    GE120 = AVAL >= 120 & AVAL < 140, # SYSBP >=120
-    GE140 = AVAL >= 140 & AVAL < 160, # SYSBP >=140
-    GE160 = AVAL >= 160 & AVAL < 180, # SYSBP >=160
+    GE90 = AVAL >= 90, # SYSBP >=90
+    GE120 = AVAL >= 120, # SYSBP >=120
+    GE140 = AVAL >= 140, # SYSBP >=140
+    GE160 = AVAL >= 160, # SYSBP >=160
     GE180 = AVAL >= 180 # SYSBP >=180
   )
 ```
@@ -57,7 +57,8 @@ ard <- bind_ard(
     variables = c(L90, GE90, GE120, GE140, GE160, GE180),
     by = TRT01A,
     statistic = ~ c("n", "p"),
-    denominator = adsl
+    # denominator values are number of subjects in arm with BP data
+    denominator = data |> distinct(USUBJID, TRT01A)
   ),
   # ARD for header N values
   ard_categorical(adsl, variables = TRT01A)
@@ -90,7 +91,7 @@ tbl <- tbl_ard_summary(
 ) |>
   modify_header(
     # Update label, add analysis value units
-    label ~ paste0("**Systolic Blood Pressure  \n(", data$AVALU[1], ")**"),
+    label ~ paste0("**Systolic Blood Pressure (", data$AVALU[1], ")**"),
     # Add N values to `by` variable labels
     all_stat_cols() ~ "**{level}**  \nN = {n}"
   )
