@@ -37,7 +37,7 @@ adae <- adae |>
 tbl <- adae |>
   tbl_hierarchical(
     variables = c(AESOC, AEDECOD),
-    by = ARM,
+    by = TRT01A,
     id = USUBJID,
     denominator = adsl,
     overall_row = TRUE,

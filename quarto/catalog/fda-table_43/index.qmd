@@ -52,7 +52,7 @@ data <- adae |>
 ard <- ard_stack_hierarchical(
   data,
   variables = c(AEBODSYS, FMQ01NAM, AEDECOD),
-  by = ARM,
+  by = TRT01A,
   id = USUBJID,
   denominator = adsl,
   # variables to include AE rates for
@@ -76,7 +76,7 @@ tbl <-
   tbl_ard_hierarchical(
     ard,
     variables = c(AEBODSYS, FMQ01NAM, AEDECOD),
-    by = ARM,
+    by = TRT01A,
     # variables to display AE rates for
     include = c(FMQ01NAM, AEDECOD),
     # Add custom variable labels

@@ -41,7 +41,7 @@ data <- adsl |>
 ```{r tbl, results='hide'}
 tbl <- data |>
   tbl_summary(
-    by = "ARM",
+    by = "TRT01A",
     include = c("SEX", "AGE", "AGEGR1", "ETHNIC", "RACE", "BMRKR1", "BMRKR2"),
     type = all_continuous() ~ "continuous2", # arranges statistics into multiple lines
     statistic = list(

@@ -57,7 +57,7 @@ tbl_sae <-
       tbl_hierarchical( # calculate rates
         data = data,
         variables = all_of(sae_vars[[i]]),
-        by = ARM,
+        by = TRT01A,
         id = USUBJID,
         denominator = adsl,
         label = sae_vars[[i]] ~ "Event"
@@ -78,7 +78,7 @@ disc_ae <- adae |>
 tbl_disc_ae <- tbl_hierarchical( # calculate rates
   data = disc_ae,
   variables = AEACNOTH,
-  by = ARM,
+  by = TRT01A,
   id = USUBJID,
   denominator = adsl,
   label = AEACNOTH ~ "Event"
@@ -101,7 +101,7 @@ tbl_dose_mod_ae <- tbl_hierarchical( # calculate rates
   data = dose_mod_ae,
   denominator = adsl,
   id = "USUBJID",
-  by = "ARM",
+  by = "TRT01A",
   variables = "AEACN",
   label = list(AEACN ~ "Event", ..ard_hierarchical_overall.. = "AE leading to action taken of treatment"),
   overall_row = TRUE
@@ -113,7 +113,7 @@ tbl_dose_mod_ae <- tbl_hierarchical( # calculate rates
 tbl_any_ae <- tbl_hierarchical(
   data = adae |> mutate(AESEV = factor(.data$AESEV, ordered = TRUE)),
   variables = AESEV,
-  by = ARM,
+  by = TRT01A,
   id = USUBJID,
   denominator = adsl,
   label = list(AESEV ~ "Event", ..ard_hierarchical_overall.. = "Any AE"),

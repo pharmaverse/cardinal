@@ -77,7 +77,7 @@ print(ard, columns = "all", n = 40)
 ```{r tbl, message=FALSE, warning=FALSE, results='hide'}
 tbl_scrn <- tbl_summary(
   data = data,
-  by = ARM,
+  by = TRT01A,
   include = "SCRNFL",
   missing = "no"
 )
@@ -86,7 +86,7 @@ tbl_scrnfrs <- tbl_hierarchical(
   data = data,
   denominator = adsl,
   id = USUBJID,
-  by = ARM,
+  by = TRT01A,
   variables = "SCRNFRS",
   label = list(..ard_hierarchical_overall.. = "Screening failures"),
   overall_row = TRUE
@@ -96,7 +96,7 @@ tbl_scrnfrs <- tbl_hierarchical(
 
 tbl_enrl_rand <- tbl_summary(
   data = data,
-  by = ARM,
+  by = TRT01A,
   include = c("ENRLFL", "RANDFL"),
   missing = "no"
 )

@@ -44,7 +44,7 @@ data <- adae |>
     SEX == "F",
     FMQ01SC == "NARROW"
   ) |>
-  select(FMQ01SC, ARM, FMQ01NAM, AEDECOD, USUBJID) |>
+  select(FMQ01SC, TRT01A, FMQ01NAM, AEDECOD, USUBJID) |>
   # setting an explicit level for NA values so empty strata combinations are shown.
   mutate(across(everything(), ~ {
     if (anyNA(.)) {
@@ -55,7 +55,7 @@ data <- adae |>
   }))
 
 # denominator values include only Female subjects in the arm with AEs
-denom <- data |> distinct(USUBJID, ARM)
+denom <- data |> distinct(USUBJID, TRT01A)
 ```
 
 ## Build Table
@@ -63,7 +63,7 @@ denom <- data |> distinct(USUBJID, ARM)
 ```{r tbl, results = 'hide'}
 tbl <- data |>
   tbl_hierarchical(
-    by = ARM,
+    by = TRT01A,
     variables = c(FMQ01NAM, AEDECOD),
     id = USUBJID,
     denominator = denom,

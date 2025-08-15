@@ -40,7 +40,7 @@ adsl <- adsl |>
 
 ```{r tbl, results = 'hide'}
 tbl <- adae |>
-  select(FMQ01SC, ARM, FMQ01NAM, AEBODSYS, USUBJID) |>
+  select(FMQ01SC, TRT01A, FMQ01NAM, AEBODSYS, USUBJID) |>
   # setting an explicit level for NA values so empty strata combinations are shown.
   mutate(across(everything(), ~ {
     if (anyNA(.)) {
@@ -53,7 +53,7 @@ tbl <- adae |>
     strata = FMQ01SC,
     ~ tbl_hierarchical(
       .x,
-      by = ARM,
+      by = TRT01A,
       variables = c(AEBODSYS, FMQ01NAM),
       id = USUBJID,
       denominator = adsl,

@@ -36,7 +36,7 @@ data <- adae |>
 ard <- ard_stack_hierarchical(
   data,
   variables = c(AESOC, AEDECOD),
-  by = ARM,
+  by = TRT01A,
   id = USUBJID,
   denominator = adsl
 )
@@ -58,7 +58,7 @@ tbl <-
   tbl_ard_hierarchical(
     ard,
     variables = c(AESOC, AEDECOD),
-    by = ARM,
+    by = TRT01A,
     # add custom variable labels
     label = list(
       AESOC = "System Organ Class",
