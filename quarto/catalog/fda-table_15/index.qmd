@@ -47,7 +47,7 @@ tbl <-
     label = AEDECOD ~ "**Preferred Term**"
   ) |>
   # filter for >=5% frequency
-  filter_hierarchical(p_overall >= 0.05)
+  filter_hierarchical(sum(n) / sum(N) >= 0.05)
 
 tbl
 ```
