@@ -20,12 +20,12 @@ library(cards)
 library(gtsummary)
 
 adae <- random.cdisc.data::cadae |>
-  rename(FMQ01SC = SMQ01SC, FMQ01NAM = SMQ01NAM)
+  rename(OCMQ01SC = SMQ01SC, OCMQ01NAM = SMQ01NAM)
 
 adsl <- random.cdisc.data::cadsl
 
-levels(adae$FMQ01SC) <- c("BROAD", "NARROW")
-adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
+levels(adae$OCMQ01SC) <- c("BROAD", "NARROW")
+adae$OCMQ01SC[is.na(adae$OCMQ01SC)] <- "NARROW"
 
 # Pre-processing --------------------------------------------
 adae <- adae |>
@@ -40,7 +40,7 @@ adsl <- adsl |>
 
 ```{r tbl, results = 'hide'}
 tbl <- adae |>
-  select(FMQ01SC, TRT01A, FMQ01NAM, AEBODSYS, USUBJID) |>
+  select(OCMQ01SC, TRT01A, OCMQ01NAM, AEBODSYS, USUBJID) |>
   # setting an explicit level for NA values so empty strata combinations are shown.
   mutate(across(everything(), ~ {
     if (anyNA(.)) {
@@ -50,16 +50,16 @@ tbl <- adae |>
     }
   })) |>
   tbl_strata(
-    strata = FMQ01SC,
+    strata = OCMQ01SC,
     ~ tbl_hierarchical(
       .x,
       by = TRT01A,
-      variables = c(AEBODSYS, FMQ01NAM),
+      variables = c(AEBODSYS, OCMQ01NAM),
       id = USUBJID,
       denominator = adsl,
       # variables to calculate rates for
-      include = c(FMQ01NAM),
-      label = list(FMQ01NAM ~ "FMQ", AEBODSYS ~ "System Organ Class")
+      include = c(OCMQ01NAM),
+      label = list(OCMQ01NAM ~ "OCMQ", AEBODSYS ~ "System Organ Class")
     )
   ) |>
   modify_missing_symbol("NA", columns = everything(), rows = row_type == "level")

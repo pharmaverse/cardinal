@@ -23,14 +23,14 @@ adsl <- random.cdisc.data::cadsl
 adae <- random.cdisc.data::cadae
 
 set.seed(1)
-adae <- rename(adae, FMQ01SC = SMQ01SC, FMQ01NAM = SMQ01NAM)
-levels(adae$FMQ01SC) <- c("BROAD", "NARROW")
-adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
-adae$FMQ01NAM <- factor(adae$FMQ01NAM, levels = c(
-  unique(adae$FMQ01NAM), "Abnormal Uterine Bleeding", "Amenorrhea",
+adae <- rename(adae, OCMQ01SC = SMQ01SC, OCMQ01NAM = SMQ01NAM)
+levels(adae$OCMQ01SC) <- c("BROAD", "NARROW")
+adae$OCMQ01SC[is.na(adae$OCMQ01SC)] <- "NARROW"
+adae$OCMQ01NAM <- factor(adae$OCMQ01NAM, levels = c(
+  unique(adae$OCMQ01NAM), "Abnormal Uterine Bleeding", "Amenorrhea",
   "Bacterial Vaginosis", "Decreased Menstrual Bleeding"
 ))
-adae$FMQ01NAM[adae$SEX == "F"] <- as.factor(
+adae$OCMQ01NAM[adae$SEX == "F"] <- as.factor(
   sample(c(
     "Abnormal Uterine Bleeding", "Amenorrhea",
     "Bacterial Vaginosis", "Decreased Menstrual Bleeding"
@@ -42,9 +42,9 @@ data <- adae |>
   filter(
     SAFFL == "Y",
     SEX == "F",
-    FMQ01SC == "NARROW"
+    OCMQ01SC == "NARROW"
   ) |>
-  select(FMQ01SC, TRT01A, FMQ01NAM, AEDECOD, USUBJID) |>
+  select(OCMQ01SC, TRT01A, OCMQ01NAM, AEDECOD, USUBJID) |>
   # setting an explicit level for NA values so empty strata combinations are shown.
   mutate(across(everything(), ~ {
     if (anyNA(.)) {
@@ -64,13 +64,13 @@ denom <- data |> distinct(USUBJID, TRT01A)
 tbl <- data |>
   tbl_hierarchical(
     by = TRT01A,
-    variables = c(FMQ01NAM, AEDECOD),
+    variables = c(OCMQ01NAM, AEDECOD),
     id = USUBJID,
     denominator = denom,
     # variables to calculate rates for
     include = c(AEDECOD),
     label = list(
-      FMQ01NAM ~ "FMQ (Narrow)",
+      OCMQ01NAM ~ "OCMQ (Narrow)",
       AEDECOD ~ "Preferred Term"
     )
   )

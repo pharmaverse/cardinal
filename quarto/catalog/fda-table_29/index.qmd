@@ -24,12 +24,12 @@ adsl <- random.cdisc.data::cadsl
 
 set.seed(1)
 adae <- adae |>
-  rename(FMQ01SC = SMQ01SC) |>
+  rename(OCMQ01SC = SMQ01SC) |>
   mutate(
     AESER = sample(c("Y", "N"), size = nrow(adae), replace = TRUE),
-    FMQ01NAM = sample(c("FMQ1", "FMQ2", "FMQ3"), size = nrow(adae), replace = TRUE)
+    OCMQ01NAM = sample(c("OCMQ1", "OCMQ2", "OCMQ3"), size = nrow(adae), replace = TRUE)
   )
-adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
+adae$OCMQ01SC[is.na(adae$OCMQ01SC)] <- "NARROW"
 
 # Pre-processing --------------------------------------------
 adsl <- adsl |>
@@ -43,8 +43,8 @@ data <- adae |>
     AESER == "Y",
     # treatment-emergent
     TRTEMFL == "Y",
-    # narrow FMQ scope
-    FMQ01SC == "NARROW"
+    # narrow OCMQ scope
+    OCMQ01SC == "NARROW"
   )
 ```
 
@@ -53,12 +53,12 @@ data <- adae |>
 ```{r ard, message=FALSE, warning=FALSE, results='hide'}
 ard <- ard_stack_hierarchical(
   data,
-  variables = c(AEBODSYS, FMQ01NAM, AEDECOD),
+  variables = c(AEBODSYS, OCMQ01NAM, AEDECOD),
   by = TRT01A,
   id = USUBJID,
   denominator = adsl,
   # variables to include AE rates for
-  include = c(FMQ01NAM, AEDECOD)
+  include = c(OCMQ01NAM, AEDECOD)
 )
 
 ard
@@ -77,10 +77,10 @@ print(ard, columns = "all", n = 40)
 tbl <-
   tbl_ard_hierarchical(
     ard,
-    variables = c(AEBODSYS, FMQ01NAM, AEDECOD),
+    variables = c(AEBODSYS, OCMQ01NAM, AEDECOD),
     by = TRT01A,
     # variables to display AE rates for
-    include = c(FMQ01NAM, AEDECOD)
+    include = c(OCMQ01NAM, AEDECOD)
   ) |>
   # add custom variable label
   modify_header(label = "**Organ System**")

@@ -24,13 +24,13 @@ adsl <- random.cdisc.data::cadsl
 adae <- random.cdisc.data::cadae
 
 adae <- adae |>
-  rename(FMQ01SC = SMQ01SC) |>
+  rename(OCMQ01SC = SMQ01SC) |>
   mutate(
     AESER = sample(c("Y", "N"), size = nrow(adae), replace = TRUE),
-    FMQ01NAM = sample(c("FMQ1", "FMQ2", "FMQ3"), size = nrow(adae), replace = TRUE)
+    OCMQ01NAM = sample(c("OCMQ1", "OCMQ2", "OCMQ3"), size = nrow(adae), replace = TRUE)
   )
 adae$DCSREAS[is.na(adae$DCSREAS)] <- "ADVERSE EVENT"
-adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
+adae$OCMQ01SC[is.na(adae$OCMQ01SC)] <- "NARROW"
 
 # Pre-processing --------------------------------------------
 adsl <- adsl |>
@@ -40,8 +40,8 @@ data <- adae |>
   filter(
     # safety population
     SAFFL == "Y",
-    # narrow FMQ
-    FMQ01SC == "NARROW",
+    # narrow OCMQ
+    OCMQ01SC == "NARROW",
     # discontinuation due to AE
     DCSREAS == "ADVERSE EVENT"
   )
@@ -52,7 +52,7 @@ data <- adae |>
 ```{r ard, message=FALSE, warning=FALSE, results='hide'}
 ard <- ard_stack_hierarchical(
   data,
-  variables = c(AEBODSYS, FMQ01NAM),
+  variables = c(AEBODSYS, OCMQ01NAM),
   by = TRT01A,
   denominator = adsl,
   id = USUBJID
@@ -73,11 +73,11 @@ print(ard, columns = "all", n = 40)
 tbl <-
   tbl_hierarchical(
     data,
-    variables = c(AEBODSYS, FMQ01NAM),
+    variables = c(AEBODSYS, OCMQ01NAM),
     by = TRT01A,
     id = USUBJID,
     denominator = adsl,
-    label = list(AEBODSYS = "Organ System", FMQ01NAM = "FMQ (Narrow)")
+    label = list(AEBODSYS = "Organ System", OCMQ01NAM = "OCMQ (Narrow)")
   )
 
 tbl
