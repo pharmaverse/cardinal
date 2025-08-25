@@ -37,11 +37,11 @@ data <- adsl |>
 
 ```{r tbl, results='hide'}
 tbl <- data |>
-  gtsummary::tbl_summary(
+  tbl_summary(
     by = "TRT01A",
     statistic = list(all_dichotomous() ~ "{n} ({p}%)"),
     include = all_of(pop_vars),
-    digits = list(gtsummary::all_categorical() ~ c(0, 1)),
+    digits = list(all_categorical() ~ c(0, 1)),
     label = as.list(lbl_pop_vars) |> setNames(pop_vars)
   ) |>
   # Define which variables are children of parent variables

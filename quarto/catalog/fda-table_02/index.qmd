@@ -55,7 +55,7 @@ tbl <- data |>
   ) |>
   add_overall(last = TRUE, col_label = "**Total Population**  \nN = {N}") |>
   # remove default footnote
-  gtsummary::remove_footnote_header(columns = everything())
+  remove_footnote_header(columns = everything())
 
 tbl
 ```

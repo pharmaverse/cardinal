@@ -62,7 +62,7 @@ tbl <- adae |>
       label = list(FMQ01NAM ~ "FMQ", AEBODSYS ~ "System Organ Class")
     )
   ) |>
-  gtsummary::modify_missing_symbol("NA", columns = everything(), rows = row_type == "level")
+  modify_missing_symbol("NA", columns = everything(), rows = row_type == "level")
 
 tbl
 ```
