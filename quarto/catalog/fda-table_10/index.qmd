@@ -23,7 +23,7 @@ adae <- random.cdisc.data::cadae
 
 # Pre-processing --------------------------------------------
 adae <- adae |>
-  dplyr::filter(
+  filter(
     # safety population
     SAFFL == "Y",
     # serious adverse events

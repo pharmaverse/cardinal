@@ -21,7 +21,7 @@ library(gtsummary)
 adsl <- random.cdisc.data::cadsl |>
   mutate(
     AGEGR1 = factor(
-      dplyr::case_when(
+      case_when(
         AGE >= 17 & AGE < 65 ~ ">=17 to <65",
         AGE >= 65 & AGE < 75 ~ "65-74",
         AGE >= 75 ~ ">=75"

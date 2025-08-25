@@ -31,7 +31,7 @@ adae <- adae |>
   )
 # Use safety population, Serious Adverse Event only and Narrow FMQ
 data <- adae |>
-  dplyr::filter(SAFFL == "Y", AESER == "Y", FMQ01SC == "NARROW")
+  filter(SAFFL == "Y", AESER == "Y", FMQ01SC == "NARROW")
 ```
 
 ## Build ARD

@@ -20,7 +20,7 @@ library(cards)
 library(gtsummary)
 
 adae <- random.cdisc.data::cadae |>
-  dplyr::rename(FMQ01SC = SMQ01SC, FMQ01NAM = SMQ01NAM)
+  rename(FMQ01SC = SMQ01SC, FMQ01NAM = SMQ01NAM)
 
 adsl <- random.cdisc.data::cadsl
 
