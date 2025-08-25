@@ -1,0 +1,109 @@
+---
+title: LBT01
+subtitle: Laboratory Test Results and Change from Baseline by Visit
+categories: [table, parallel-group,] 
+---
+
+::: panel-tabset
+## Table Preview
+
+```{r}
+#| label: img
+#| echo: false
+#| fig-align: center
+#| out-width: "60%"
+
+## If no image to show, the `Table Preview` section can be removed
+knitr::include_graphics("result.png")
+```
+
+## Setup
+
+```{r}
+#| label: setup
+#| message: false
+
+# Load package and data
+library(gtsummary)
+library(dplyr)
+library(crane)
+
+adsl <- random.cdisc.data::cadsl
+adlb <- random.cdisc.data::cadlb
+
+# Filter for a specific test
+adlb <- adlb |>
+  dplyr::filter(
+    SAFFL == "Y",
+    PARAMCD == "ALT",
+    AVISITN >= 0
+  ) |>
+  # retain the "WEEK *" portion of the visit
+  dplyr::mutate(AVISIT = if_else(stringr::str_detect(AVISIT, "WEEK"),
+    stringr::str_extract(AVISIT, "WEEK \\d+"),
+    AVISIT
+  ))
+```
+
+
+
+## Build Table
+
+```{r}
+#| label: tbl
+#| results: hide
+
+lbt01 <- crane::tbl_baseline_chg(
+  data = adlb,
+  by = "ARM",
+  baseline_level = "BASELINE",
+  denominator = adsl,
+  digits = list(
+    all_continuous() ~ list(
+      mean = 2, sd = 2, median = 2,
+      min = 1, max = 1
+    )
+  )
+)
+```
+
+```{r}
+#| eval: false
+#| include: false
+
+gt::gtsave(as_gt(lbt01), filename = "result.png")
+```
+
+```{r}
+#| label: img
+#| echo: false
+#| fig-align: center
+#| out-width: "60%"
+```
+
+## Build ARD
+
+```{r}
+#| label: ard
+#| message: false
+#| warning: false
+#| results: hide
+#|
+# Load package and data
+library(gtsummary)
+
+# Extract ARD from previously created gtsummary table (refer to "Build Table")
+ard <- gather_ard(lbt01)
+
+# Output ARD
+ard
+```
+
+```{r}
+#| echo: false
+
+# Print ARD
+withr::local_options(width = 9999)
+print(ard, columns = "all")
+```
+:::
