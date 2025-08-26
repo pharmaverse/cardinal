@@ -89,7 +89,6 @@ gt::gtsave(as_gt(tbl), filename = "result.png")
 
 ```{r ard, message=FALSE, warning=FALSE, results='hide'}
 ard <- gather_ard(tbl)
-
 ard
 ```
 
