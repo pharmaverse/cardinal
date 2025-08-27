@@ -1,6 +1,6 @@
 ---
-title: FDA Table 33
-subtitle: Subjects With Adverse Events by Male-Specific OCMQ (Narrow) and Preferred Term, Male Safety Population, Pooled Analysis (or Trial X)
+title: FDA Table 44
+subtitle: Subjects With Adverse Events by Male-Specific OCMQ (Broad) and Preferred Term, Male Safety Population, Pooled Analysis (or Trial X)
 categories: [table, FDA, safety, adverse events]
 ---
 
@@ -34,7 +34,7 @@ data <- adae |>
   filter(
     SAFFL == "Y",
     SEX == "M",
-    OCMQ01SC == "NARROW"
+    OCMQ01SC == "BROAD"
   ) |>
   select(OCMQ01SC, TRT01A, OCMQ01NAM, AEDECOD, USUBJID) |>
   # setting an explicit level for NA values so empty strata combinations are shown.
@@ -62,7 +62,7 @@ tbl <- data |>
     # variables to calculate rates for
     include = c(AEDECOD),
     label = list(
-      OCMQ01NAM ~ "OCMQ (Narrow)",
+      OCMQ01NAM ~ "OCMQ (Broad)",
       AEDECOD ~ "Preferred Term"
     )
   )

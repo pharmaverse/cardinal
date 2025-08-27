@@ -1,6 +1,6 @@
 ---
 title: FDA Table 02
-subtitle: Baseline Demographic and Clinical Characteristics, Safety Population, Pooled Analyses
+subtitle: Demographics and Baseline Clinical Characteristics, Safety Population, Pooled Analysis (or Trial X)
 categories: [table, FDA, safety, demographics]
 ---
 
@@ -21,7 +21,7 @@ library(gtsummary)
 adsl <- random.cdisc.data::cadsl |>
   mutate(
     AGEGR1 = factor(
-      dplyr::case_when(
+      case_when(
         AGE >= 17 & AGE < 65 ~ ">=17 to <65",
         AGE >= 65 & AGE < 75 ~ "65-74",
         AGE >= 75 ~ ">=75"
@@ -41,7 +41,7 @@ data <- adsl |>
 ```{r tbl, results='hide'}
 tbl <- data |>
   tbl_summary(
-    by = "ARM",
+    by = "TRT01A",
     include = c("SEX", "AGE", "AGEGR1", "ETHNIC", "RACE", "BMRKR1", "BMRKR2"),
     type = all_continuous() ~ "continuous2", # arranges statistics into multiple lines
     statistic = list(
@@ -55,7 +55,9 @@ tbl <- data |>
   ) |>
   add_overall(last = TRUE, col_label = "**Total Population**  \nN = {N}") |>
   # remove default footnote
-  gtsummary::remove_footnote_header(columns = everything())
+  remove_footnote_header(columns = everything())
+
+tbl
 ```
 
 ```{r eval=FALSE, include=FALSE}

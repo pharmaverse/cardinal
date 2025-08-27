@@ -1,6 +1,6 @@
 ---
-title: FDA Table 14
-subtitle: Subjects With Adverse Events by System Organ Class and Preferred Term, Safety Population, Pooled Analysis (or Trial X)
+title: FDA Table 43
+subtitle: Subjects With Adverse Events by Organ System, OCMQ (Broad) and Preferred Term, Safety Population, Pooled Analysis (or Trial X)
 categories: [table, FDA, safety, adverse events]
 ---
 
@@ -22,12 +22,28 @@ library(gtsummary)
 adae <- random.cdisc.data::cadae
 adsl <- random.cdisc.data::cadsl
 
+set.seed(1)
+adae <- adae |>
+  rename(OCMQ01SC = SMQ01SC) |>
+  mutate(
+    AESER = sample(c("Y", "N"), size = nrow(adae), replace = TRUE),
+    OCMQ01NAM = sample(c("OCMQ1", "OCMQ2", "OCMQ3"), size = nrow(adae), replace = TRUE)
+  )
+adae$OCMQ01SC[is.na(adae$OCMQ01SC)] <- "BROAD"
+
 # Pre-processing --------------------------------------------
 adsl <- adsl |>
   filter(SAFFL == "Y") # safety population
 
 data <- adae |>
-  filter(SAFFL == "Y") # safety population
+  filter(
+    # safety population
+    SAFFL == "Y",
+    # treatment-emergent
+    TRTEMFL == "Y",
+    # broad OCMQ scope
+    OCMQ01SC == "BROAD"
+  )
 ```
 
 ## Build ARD
@@ -35,10 +51,12 @@ data <- adae |>
 ```{r ard, message=FALSE, warning=FALSE, results='hide'}
 ard <- ard_stack_hierarchical(
   data,
-  variables = c(AESOC, AEDECOD),
+  variables = c(AEBODSYS, OCMQ01NAM, AEDECOD),
   by = TRT01A,
   id = USUBJID,
-  denominator = adsl
+  denominator = adsl,
+  # variables to include AE rates for
+  include = c(OCMQ01NAM, AEDECOD)
 )
 
 ard
@@ -57,11 +75,14 @@ print(ard, columns = "all", n = 40)
 tbl <-
   tbl_ard_hierarchical(
     ard,
-    variables = c(AESOC, AEDECOD),
+    variables = c(AEBODSYS, OCMQ01NAM, AEDECOD),
     by = TRT01A,
-    # add custom variable labels
+    # variables to display AE rates for
+    include = c(OCMQ01NAM, AEDECOD),
+    # Add custom variable labels
     label = list(
-      AESOC = "System Organ Class",
+      AEBODSYS = "Organ System",
+      OCMQ01NAM = "OCMQ (Broad)",
       AEDECOD = "Preferred Term"
     )
   )
