@@ -1,15 +1,13 @@
 ---
-title: Your TLG Title
-subtitle: (Optional Field) Short Description of TLG
-categories: [table, FDA, safety] ## ** REPLACE WITH RELEVANT TAGS **
+title: <Title/Short Description of TLG>
+subtitle: <TLG Identifier>
+categories: [table, FDA, safety] ## TODO: Replace with relevant tags
 ---
 
 ::: panel-tabset
 ## Table Preview
 
 ```{r img, echo=FALSE, fig.align='center', out.width='60%'}
-## ** (OPTIONAL) INCLUDE AN IMAGE OF YOUR TLG HERE **
-## If no image to show, the `Table Preview` section can be removed
 knitr::include_graphics("result.png")
 ```
 
@@ -20,22 +18,37 @@ knitr::include_graphics("result.png")
 library(dplyr)
 library(cards)
 library(gtsummary)
+## TODO: Load any additional packages needed
 
-## ** LOAD ADDITIONAL PACKAGES USED HERE **
-
-## ** LOAD ALL DATASETS USED IN EXAMPLES HERE **
+## TODO: Load all datasets used in example TLG
 
 # Pre-processing --------------------------------------------
 
-## ** ADD CODE FOR ANY NECESSARY DATA PRE-PROCESSING HERE **
+## TODO: Insert code for all necessary data pre-processing steps
+```
+
+## Build Table
+
+```{r tbl, results = 'hide'}
+## TODO: Insert your TLG code - `tbl` should return a `gtsummary` object
+tbl <- NULL
+
+tbl
+```
+
+```{r eval=FALSE, include=FALSE}
+## Run this chunk locally to generate an image file
+gt::gtsave(as_gt(tbl), filename = "result.png")
+```
+
+```{r img, echo=FALSE, fig.align='center', out.width='60%'}
 ```
 
 ## Build ARD
 
 ```{r ard, message=FALSE, warning=FALSE, results='hide'}
-## ** INSERT YOUR ARD CODE HERE **
-## `ard` should return an ARD of class `card`
-ard <- NULL
+## TODO: Replace with your ARD code and reorder tabs if using an ARD-first approach - `ard` should return an ARD of class `card`
+ard <- gather_ard(tbl)
 
 ard
 ```
@@ -43,24 +56,7 @@ ard
 ```{r, echo=FALSE}
 # Print ARD
 withr::local_options(width = 9999)
-print(ard, columns = "all", n = 40)
+print(ard, columns = "all", n = 40) ## TODO: Replace with `print(ard)` if `ard` is a list of ARDs
 ```
 
-## Build Table
-
-```{r tbl, results = 'hide'}
-## ** INSERT YOUR TABLE CODE HERE **
-## `tbl` should return a `gtsummary` table
-tbl <- NULL
-
-tbl
-```
-
-```{r eval=FALSE, include=FALSE}
-## ** (OPTIONAL) RUN THIS CHUNK LOCALLY TO GENERATE AN IMAGE FILE **
-gt::gtsave(as_gt(tbl), filename = "result.png")
-```
-
-```{r img, echo=FALSE, fig.align='center', out.width='60%'}
-```
 :::
