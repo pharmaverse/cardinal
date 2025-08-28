@@ -4,7 +4,7 @@
 \name{cardinal-package}
 \alias{cardinal}
 \alias{cardinal-package}
-\title{cardinal}
+\title{cardinal Package}
 \description{
 Implementation of FDA Safety Tables and Figures
 }
