@@ -45,17 +45,17 @@ data$SCRNFRS[data$SCRNFL == "N" | !is.na(data$ENRLDT)] <- NA
 ```{r ard, message=FALSE, warning=FALSE, results='hide'}
 ard <- data |>
   ard_stack(
-    ard_dichotomous(
+    ard_tabulate_value(
       variables = SCRNFL,
       value = list(SCRNFL = TRUE),
       statistic = everything() ~ c("n")
     ),
-    ard_categorical(
+    ard_tabulate(
       variables = SCRNFRS,
       statistic = everything() ~ c("n", "p"),
       denominator = data
     ),
-    ard_dichotomous(
+    ard_tabulate_value(
       variables = c(ENRLFL, RANDFL),
       value = list(ENRLFL = TRUE, RANDFL = TRUE),
       statistic = everything() ~ c("n", "p"),
