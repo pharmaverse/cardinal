@@ -5,9 +5,6 @@
 <!-- start badges -->
 [![Pharmaverse](https://pharmaverse.org/shields/cardinal.svg)](https://pharmaverse.org)
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-![Check](https://github.com/pharmaverse/cardinal/actions/workflows/check.yaml/badge.svg)
-![Test Coverage](https://raw.githubusercontent.com/pharmaverse/cardinal/_xml_coverage_reports/data/main/badge.svg)
-
 ![GitHub contributors](https://img.shields.io/github/contributors/pharmaverse/cardinal)
 ![GitHub stars](https://img.shields.io/github/stars/pharmaverse/cardinal?style=social)
 ![GitHub forks](https://img.shields.io/github/forks/pharmaverse/cardinal?style=social)
