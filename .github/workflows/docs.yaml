@@ -51,6 +51,9 @@ jobs:
       - name: Check out repository 🛎️
         uses: actions/checkout@v4.1.1
 
+      - name: Install package 📦
+        run: R CMD INSTALL .
+
       - name: Render Quarto Project 📑
         run: quarto render --output-dir _site
         shell: bash
