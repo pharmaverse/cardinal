@@ -12,7 +12,7 @@ Please ensure that R version 4.2 or higher is installed on your computer. This i
 
 #### Installing Packages for Template Creation
 
-To create your TLG template the {gtsummary}, {cards}, {cardx}, and {pharmaverseadam} packages available on CRAN are required.
+To create your TLG template the {gtsummary}, {cards}, and {cardx} packages available on CRAN are required.
 
 Please ensure you have these necessary packages installed by running the following code:
 
@@ -20,12 +20,12 @@ Please ensure you have these necessary packages installed by running the followi
 if (!require("cards")) install.packages("cards")
 if (!require("cardx")) install.packages("cardx")
 if (!require("gtsummary")) install.packages("gtsummary")
-if (!require("pharmaverseadam")) install.packages("pharmaverseadam")
 ```
 
-Optionally, you may want to also install the {crane} package which contains several helpful pharmaceutical-specific table creation functions:
+To create your example TLG/ARD, we recommend using datasets from the {pharmaverseadam} package (or the {random.cdisc.data} package) which contains example synthetic ADaM datasets and is available on CRAN. Optionally, you may want to also install the {crane} package which contains several helpful pharmaceutical-specific table creation functions:
 
 ```{r, echo=TRUE, eval=FALSE}
+if (!require("pharmaverseadam")) install.packages("pharmaverseadam")
 if (!require("crane")) install.packages("crane")
 ```
 
