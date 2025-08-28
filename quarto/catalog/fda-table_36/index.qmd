@@ -52,7 +52,7 @@ data <- advs |>
 
 ```{r ard, message=FALSE, warning=FALSE, results='hide'}
 ard <- bind_ard(
-  ard_dichotomous(
+  ard_tabulate_value(
     data,
     variables = c(L90, GE90, GE120, GE140, GE160, GE180),
     by = TRT01A,
@@ -61,7 +61,7 @@ ard <- bind_ard(
     denominator = data |> distinct(USUBJID, TRT01A)
   ),
   # ARD for header N values
-  ard_categorical(adsl, variables = TRT01A)
+  ard_tabulate(adsl, variables = TRT01A)
 )
 
 ard
