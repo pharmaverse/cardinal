@@ -18,11 +18,11 @@ See the [Getting Started page](https://pharmaverse.github.io/cardinal/quarto/get
 
 ## Related Packages
 
--   [{gtsummary}](https://www.danieldsjoberg.com/gtsummary/): Table creation functions.
--   [{cards}](https://insightsengineering.github.io/cards/): ARD creation functions.
--   [{cardx}](https://insightsengineering.github.io/cardx/): Extended ARD creation functions.
--   [{crane}](https://insightsengineering.github.io/crane/): Pharmaceutical-specific table creation functions.
--   [{pharmaverseadam}](https://pharmaverse.github.io/pharmaverseadam/): Example synthetic ADaM datasets.
+* [{gtsummary}](https://www.danieldsjoberg.com/gtsummary/): Table creation functions.
+* [{cards}](https://insightsengineering.github.io/cards/): ARD creation functions.
+* [{cardx}](https://insightsengineering.github.io/cardx/): Extended ARD creation functions.
+* [{crane}](https://insightsengineering.github.io/crane/): Pharmaceutical-specific table creation functions.
+* [{pharmaverseadam}](https://pharmaverse.github.io/pharmaverseadam/): Example synthetic ADaM datasets.
 
 ## Contact
 
