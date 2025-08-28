@@ -79,7 +79,7 @@ tbl_scrn <- tbl_summary(
   by = TRT01A,
   include = "SCRNFL",
   missing = "no",
-  label = ~ "Subjects screened"
+  label = ~"Subjects screened"
 )
 
 tbl_scrnfrs <- tbl_hierarchical(
