@@ -5,7 +5,9 @@
 Closes #nnn
 
 ## Include a Screenshot of the TLG
-#### Screenshot of TLG template from source document (e.g. FDA integrated guide)
+
+### Screenshot of TLG template from source document (e.g. FDA integrated guide)
+
 TODO: Add screenshot here
 
 ## Developer To-Dos
@@ -22,4 +24,3 @@ TODO: Add screenshot here
 - [ ] Confirm that the TLG screenshot above matches the template output screenshot (`result.png`).
 - [ ] Confirm that branch has all updates from the `main` branch.
 - [ ] Approve PR once all of the above have been confirmed.
-
