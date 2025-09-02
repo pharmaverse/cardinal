@@ -86,8 +86,7 @@ website:
         file: quarto/resources.qmd
       - text: Help
         menu:
-          - text: Getting Started
-            file: quarto/getting_started.qmd
+          - quarto/getting_started.qmd
           - text: Report a Bug
             url: https://github.com/pharmaverse/cardinal/issues/new/choose
           - text: FAQ

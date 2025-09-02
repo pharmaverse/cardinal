@@ -1,12 +1,59 @@
 ---
-name: 🔨 New TLG Template
-description: Add a new TLG template
-title: "[New TLG]: <title>"
+name: 🔨 New Table Template
+description: Add a new table template
+title: "[New Table]: Table XX"
 labels: ["new template"]
 projects: ["cardinal"]
 body:
   - type: textarea
+    id: table-layout
     attributes:
-      label: TLG Title/Description
-      description: Title and/or a description of the TLG.
-      placeholder: TLG title/description
+      label: Table Layout & Design
+      description: Take a screenshot of the table and paste it here.
+      value: |
+        [Replace this line with your table screenshot by dragging the file here.]
+
+        Please refer to page XX of the [FDA guideline document](https://github.com/pharmaverse/cardinal/files/10744259/FDA-2022-N-1961-0002_attachment_1.pdf) for more details.
+  - type: textarea
+    id: table-description
+    attributes:
+      label: Table Description
+      description: Full title/description of the table.
+      placeholder: Table title
+  - type: textarea
+    id: analysis-datasets
+    attributes:
+      label: Analysis Datasets
+      description: Datasets that are used to generate the table.
+      value: |
+        [List required datasets here]
+
+        Data from the `random.cdisc.data` package, can be retrieved by `random.cdisc.data::c` followed by your
+        dataset name.
+  - type: textarea
+    id: analysis-filters
+    attributes:
+      label: Analysis Filters
+      description: Filters applied to the data to generate the table.
+      value: |
+        Safety population: `SAFFL == "Y"`
+        [List any additional filters here]
+  - type: textarea
+    id: additional-considerations
+    attributes:
+      label: Additional Information
+      description: Any additional information that the developer should know before creating the table function.
+      placeholder: Additional info
+  - type: textarea
+    id: todo
+    attributes:
+      label: Developer To Dos
+      description: Steps to complete as a developer when creating your pull request.
+      value: |
+        - [ ] **Table Function:** Create `R/fda-table_XX.R` file with your table-generating function.
+          - [ ] **Roxygen Documentation:** title, `@details`, document all parameters, `@return`, `@examples`, `@export`.
+        - [ ] **Tests:** Create `tests/testthat/test-table_XX.R` file with tests for the table function and then run these tests.
+        - [ ] **Quarto Template:** Create `quarto/table-templates/template-table_XX.qmd` file your table template.
+        - [ ] **Screenshot:** Add table screenshot as `table_XX.png` to the `quarto/assets/images/screenshots` folder.
+        - [ ] **_quarto.yml:** Add template to the "Template Library" section of the `_quarto.yml` file.
+        - [ ] **Template Index:** Run `quarto/assets/generate-template_index.R` script to update the template index.
