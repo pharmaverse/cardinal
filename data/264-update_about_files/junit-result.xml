@@ -1,92 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="fda-fig_01" timestamp="2025-08-28T22:25:26Z" hostname="e841e6f7f64f" tests="8" skipped="4" failures="0" errors="0" time="1.559">
-    <testcase time="0.0329999999999999" classname="fda_fig_01" name="Figure_01_generation_works_with_default_values"/>
-    <testcase time="0.526" classname="fda_fig_01" name="Figure_01_generation_works_with_default_values">
+  <testsuite name="fda-fig_01" timestamp="2025-09-02T21:10:18Z" hostname="f9b3e28b4af8" tests="8" skipped="4" failures="0" errors="0" time="1.619">
+    <testcase time="0.0369999999999999" classname="fda_fig_01" name="Figure_01_generation_works_with_default_values"/>
+    <testcase time="0.546" classname="fda_fig_01" name="Figure_01_generation_works_with_default_values">
       <skipped message="Reason: On CI ('test-fda-fig_01.R:12:3')"/>
     </testcase>
-    <testcase time="0.0349999999999997" classname="fda_fig_01" name="Figure_01_generation_works_with_no_table"/>
+    <testcase time="0.0369999999999999" classname="fda_fig_01" name="Figure_01_generation_works_with_no_table"/>
     <testcase time="0.04" classname="fda_fig_01" name="Figure_01_generation_works_with_no_table">
       <skipped message="Reason: On CI ('test-fda-fig_01.R:21:3')"/>
     </testcase>
-    <testcase time="0.0260000000000002" classname="fda_fig_01" name="Figure_01_generation_works_with_custom_values"/>
-    <testcase time="0.503" classname="fda_fig_01" name="Figure_01_generation_works_with_custom_values">
+    <testcase time="0.028" classname="fda_fig_01" name="Figure_01_generation_works_with_custom_values"/>
+    <testcase time="0.522" classname="fda_fig_01" name="Figure_01_generation_works_with_custom_values">
       <skipped message="Reason: On CI ('test-fda-fig_01.R:37:3')"/>
     </testcase>
-    <testcase time="0.0130000000000003" classname="fda_fig_01" name="Figure_01_generation_works_with_ggtheme_argument_specified"/>
-    <testcase time="0.383" classname="fda_fig_01" name="Figure_01_generation_works_with_ggtheme_argument_specified">
+    <testcase time="0.0140000000000002" classname="fda_fig_01" name="Figure_01_generation_works_with_ggtheme_argument_specified"/>
+    <testcase time="0.395" classname="fda_fig_01" name="Figure_01_generation_works_with_ggtheme_argument_specified">
       <skipped message="Reason: On CI ('test-fda-fig_01.R:49:3')"/>
     </testcase>
   </testsuite>
-  <testsuite name="fda-fig_02" timestamp="2025-08-28T22:25:27Z" hostname="e841e6f7f64f" tests="8" skipped="4" failures="0" errors="0" time="1.219">
-    <testcase time="0.0229999999999997" classname="fda_fig_02" name="Figure_02_generation_works_with_default_values"/>
-    <testcase time="0.358" classname="fda_fig_02" name="Figure_02_generation_works_with_default_values">
+  <testsuite name="fda-fig_02" timestamp="2025-09-02T21:10:20Z" hostname="f9b3e28b4af8" tests="8" skipped="4" failures="0" errors="0" time="1.274">
+    <testcase time="0.0230000000000001" classname="fda_fig_02" name="Figure_02_generation_works_with_default_values"/>
+    <testcase time="0.371" classname="fda_fig_02" name="Figure_02_generation_works_with_default_values">
       <skipped message="Reason: On CI ('test-fda-fig_02.R:11:3')"/>
     </testcase>
-    <testcase time="0.0170000000000003" classname="fda_fig_02" name="Figure_02_generation_works_with_no_table"/>
-    <testcase time="0.0270000000000001" classname="fda_fig_02" name="Figure_02_generation_works_with_no_table">
+    <testcase time="0.0179999999999998" classname="fda_fig_02" name="Figure_02_generation_works_with_no_table"/>
+    <testcase time="0.0289999999999999" classname="fda_fig_02" name="Figure_02_generation_works_with_no_table">
       <skipped message="Reason: On CI ('test-fda-fig_02.R:20:3')"/>
     </testcase>
-    <testcase time="0.0129999999999999" classname="fda_fig_02" name="Figure_02_generation_works_with_custom_values"/>
-    <testcase time="0.401" classname="fda_fig_02" name="Figure_02_generation_works_with_custom_values">
+    <testcase time="0.0140000000000002" classname="fda_fig_02" name="Figure_02_generation_works_with_custom_values"/>
+    <testcase time="0.422" classname="fda_fig_02" name="Figure_02_generation_works_with_custom_values">
       <skipped message="Reason: On CI ('test-fda-fig_02.R:36:3')"/>
     </testcase>
-    <testcase time="0.0129999999999999" classname="fda_fig_02" name="Figure_02_generation_works_with_ggtheme_argument_specified"/>
-    <testcase time="0.367" classname="fda_fig_02" name="Figure_02_generation_works_with_ggtheme_argument_specified">
+    <testcase time="0.0150000000000006" classname="fda_fig_02" name="Figure_02_generation_works_with_ggtheme_argument_specified"/>
+    <testcase time="0.382" classname="fda_fig_02" name="Figure_02_generation_works_with_ggtheme_argument_specified">
       <skipped message="Reason: On CI ('test-fda-fig_02.R:48:3')"/>
     </testcase>
   </testsuite>
-  <testsuite name="fda-fig_03" timestamp="2025-08-28T22:25:29Z" hostname="e841e6f7f64f" tests="8" skipped="4" failures="0" errors="0" time="2.118">
-    <testcase time="0.0259999999999998" classname="fda_fig_03" name="Figure_03_generation_works_with_default_values"/>
-    <testcase time="0.649" classname="fda_fig_03" name="Figure_03_generation_works_with_default_values">
+  <testsuite name="fda-fig_03" timestamp="2025-09-02T21:10:21Z" hostname="f9b3e28b4af8" tests="8" skipped="4" failures="0" errors="0" time="2.209">
+    <testcase time="0.0270000000000001" classname="fda_fig_03" name="Figure_03_generation_works_with_default_values"/>
+    <testcase time="0.685" classname="fda_fig_03" name="Figure_03_generation_works_with_default_values">
       <skipped message="Reason: On CI ('test-fda-fig_03.R:9:3')"/>
     </testcase>
     <testcase time="0.0140000000000002" classname="fda_fig_03" name="Figure_03_generation_works_with_no_table"/>
-    <testcase time="0.077" classname="fda_fig_03" name="Figure_03_generation_works_with_no_table">
+    <testcase time="0.0810000000000004" classname="fda_fig_03" name="Figure_03_generation_works_with_no_table">
       <skipped message="Reason: On CI ('test-fda-fig_03.R:18:3')"/>
     </testcase>
     <testcase time="0.0149999999999997" classname="fda_fig_03" name="Figure_03_generation_works_with_custom_values"/>
-    <testcase time="0.73" classname="fda_fig_03" name="Figure_03_generation_works_with_custom_values">
+    <testcase time="0.755" classname="fda_fig_03" name="Figure_03_generation_works_with_custom_values">
       <skipped message="Reason: On CI ('test-fda-fig_03.R:35:3')"/>
     </testcase>
-    <testcase time="0.0129999999999999" classname="fda_fig_03" name="Figure_03_generation_works_with_ggtheme_argument_specified"/>
-    <testcase time="0.594" classname="fda_fig_03" name="Figure_03_generation_works_with_ggtheme_argument_specified">
+    <testcase time="0.0140000000000002" classname="fda_fig_03" name="Figure_03_generation_works_with_ggtheme_argument_specified"/>
+    <testcase time="0.617999999999999" classname="fda_fig_03" name="Figure_03_generation_works_with_ggtheme_argument_specified">
       <skipped message="Reason: On CI ('test-fda-fig_03.R:48:3')"/>
     </testcase>
   </testsuite>
-  <testsuite name="fda-fig_14" timestamp="2025-08-28T22:25:31Z" hostname="e841e6f7f64f" tests="8" skipped="4" failures="0" errors="0" time="2.344">
-    <testcase time="0.0169999999999995" classname="fda_fig_14" name="Figure_14_generation_works_with_default_values"/>
-    <testcase time="0.727" classname="fda_fig_14" name="Figure_14_generation_works_with_default_values">
+  <testsuite name="fda-fig_14" timestamp="2025-09-02T21:10:24Z" hostname="f9b3e28b4af8" tests="8" skipped="4" failures="0" errors="0" time="2.445">
+    <testcase time="0.0170000000000003" classname="fda_fig_14" name="Figure_14_generation_works_with_default_values"/>
+    <testcase time="0.759" classname="fda_fig_14" name="Figure_14_generation_works_with_default_values">
       <skipped message="Reason: On CI ('test-fda-fig_14.R:7:3')"/>
     </testcase>
-    <testcase time="0.0140000000000002" classname="fda_fig_14" name="Figure_14_generation_works_with_no_table"/>
-    <testcase time="0.0489999999999995" classname="fda_fig_14" name="Figure_14_generation_works_with_no_table">
+    <testcase time="0.0150000000000006" classname="fda_fig_14" name="Figure_14_generation_works_with_no_table"/>
+    <testcase time="0.0499999999999989" classname="fda_fig_14" name="Figure_14_generation_works_with_no_table">
       <skipped message="Reason: On CI ('test-fda-fig_14.R:16:3')"/>
     </testcase>
-    <testcase time="0.0200000000000005" classname="fda_fig_14" name="Figure_14_generation_works_with_custom_values"/>
-    <testcase time="0.816999999999999" classname="fda_fig_14" name="Figure_14_generation_works_with_custom_values">
+    <testcase time="0.0220000000000002" classname="fda_fig_14" name="Figure_14_generation_works_with_custom_values"/>
+    <testcase time="0.859" classname="fda_fig_14" name="Figure_14_generation_works_with_custom_values">
       <skipped message="Reason: On CI ('test-fda-fig_14.R:40:3')"/>
     </testcase>
-    <testcase time="0.0170000000000012" classname="fda_fig_14" name="Figure_14_generation_works_with_ggtheme_argument_specified"/>
-    <testcase time="0.683" classname="fda_fig_14" name="Figure_14_generation_works_with_ggtheme_argument_specified">
+    <testcase time="0.0180000000000007" classname="fda_fig_14" name="Figure_14_generation_works_with_ggtheme_argument_specified"/>
+    <testcase time="0.705" classname="fda_fig_14" name="Figure_14_generation_works_with_ggtheme_argument_specified">
       <skipped message="Reason: On CI ('test-fda-fig_14.R:52:3')"/>
     </testcase>
   </testsuite>
-  <testsuite name="fda-table_22" timestamp="2025-08-28T22:25:33Z" hostname="e841e6f7f64f" tests="8" skipped="4" failures="0" errors="0" time="2.076">
-    <testcase time="0.522" classname="fda_table_22" name="Table_22_generation_works_with_default_values"/>
-    <testcase time="0.114999999999998" classname="fda_table_22" name="Table_22_generation_works_with_default_values">
+  <testsuite name="fda-table_22" timestamp="2025-09-02T21:10:26Z" hostname="f9b3e28b4af8" tests="8" skipped="4" failures="0" errors="0" time="2.157">
+    <testcase time="0.546999999999999" classname="fda_table_22" name="Table_22_generation_works_with_default_values"/>
+    <testcase time="0.125" classname="fda_table_22" name="Table_22_generation_works_with_default_values">
       <skipped message="Reason: On CRAN ('test-fda-table_22.R:21:3')"/>
     </testcase>
-    <testcase time="0.533000000000001" classname="fda_table_22" name="Table_22_generation_works_with_custom_values_N_s_denominator_and_overall_column"/>
-    <testcase time="0.18" classname="fda_table_22" name="Table_22_generation_works_with_custom_values_N_s_denominator_and_overall_column">
+    <testcase time="0.549000000000001" classname="fda_table_22" name="Table_22_generation_works_with_custom_values_N_s_denominator_and_overall_column"/>
+    <testcase time="0.183999999999999" classname="fda_table_22" name="Table_22_generation_works_with_custom_values_N_s_denominator_and_overall_column">
       <skipped message="Reason: On CRAN ('test-fda-table_22.R:33:3')"/>
     </testcase>
-    <testcase time="0.27" classname="fda_table_22" name="Table_22_generation_works_with_custom_values_N_col_denominator_and_no_overall_column"/>
-    <testcase time="0.0990000000000002" classname="fda_table_22" name="Table_22_generation_works_with_custom_values_N_col_denominator_and_no_overall_column">
+    <testcase time="0.276" classname="fda_table_22" name="Table_22_generation_works_with_custom_values_N_col_denominator_and_no_overall_column"/>
+    <testcase time="0.102" classname="fda_table_22" name="Table_22_generation_works_with_custom_values_N_col_denominator_and_no_overall_column">
       <skipped message="Reason: On CRAN ('test-fda-table_22.R:61:3')"/>
     </testcase>
-    <testcase time="0.279" classname="fda_table_22" name="Table_22_generation_works_with_some_NA_values"/>
-    <testcase time="0.0779999999999994" classname="fda_table_22" name="Table_22_generation_works_with_some_NA_values">
+    <testcase time="0.292" classname="fda_table_22" name="Table_22_generation_works_with_some_NA_values"/>
+    <testcase time="0.0820000000000007" classname="fda_table_22" name="Table_22_generation_works_with_some_NA_values">
       <skipped message="Reason: On CRAN ('test-fda-table_22.R:81:3')"/>
     </testcase>
   </testsuite>
