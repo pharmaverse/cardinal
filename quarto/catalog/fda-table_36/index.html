@@ -127,7 +127,7 @@ cookieconsent.run({
 </script><style>html{ scroll-behavior: smooth; }</style>
 <link rel="stylesheet" href="../../../quarto/assets/style.scss">
 <meta property="og:title" content="cardinal - FDA Table 36">
-<meta property="og:description" content="Patients With Adverse Events by System Organ Class and Preferred Term, Safety Population, Pooled Analysis (or Trial X)">
+<meta property="og:description" content="Subjects With Maximum Postbaseline Systolic Blood Pressure by Category of Blood Pressure, Safety Population, Pooled Analysis (or Trial X)">
 <meta property="og:site_name" content="cardinal">
 </head>
 <body class="nav-fixed">
@@ -207,12 +207,12 @@ cookieconsent.run({
 <!-- main -->
 <main class="content column-page" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">FDA Table 36</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
-<p class="subtitle lead">Patients With Adverse Events by System Organ Class and Preferred Term, Safety Population, Pooled Analysis (or Trial X)</p>
+<p class="subtitle lead">Subjects With Maximum Postbaseline Systolic Blood Pressure by Category of Blood Pressure, Safety Population, Pooled Analysis (or Trial X)</p>
   <div class="quarto-categories">
     <div class="quarto-category">table</div>
     <div class="quarto-category">FDA</div>
     <div class="quarto-category">safety</div>
-    <div class="quarto-category">adverse events</div>
+    <div class="quarto-category">vital signs</div>
   </div>
   </div>
 
@@ -252,80 +252,103 @@ cookieconsent.run({
 <span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(cards)</span>
 <span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(gtsummary)</span>
 <span id="cb1-5"><a href="#cb1-5"></a></span>
-<span id="cb1-6"><a href="#cb1-6"></a>adae <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadae</span>
-<span id="cb1-7"><a href="#cb1-7"></a>adsl <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadsl</span>
+<span id="cb1-6"><a href="#cb1-6"></a>adsl <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadsl</span>
+<span id="cb1-7"><a href="#cb1-7"></a>advs <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadvs</span>
 <span id="cb1-8"><a href="#cb1-8"></a></span>
 <span id="cb1-9"><a href="#cb1-9"></a><span class="co"># Pre-processing --------------------------------------------</span></span>
 <span id="cb1-10"><a href="#cb1-10"></a>adsl <span class="ot">&lt;-</span> adsl <span class="sc">|&gt;</span></span>
 <span id="cb1-11"><a href="#cb1-11"></a>  <span class="fu">filter</span>(SAFFL <span class="sc">==</span> <span class="st">"Y"</span>) <span class="co"># safety population</span></span>
 <span id="cb1-12"><a href="#cb1-12"></a></span>
-<span id="cb1-13"><a href="#cb1-13"></a>data <span class="ot">&lt;-</span> adae <span class="sc">|&gt;</span></span>
-<span id="cb1-14"><a href="#cb1-14"></a>  <span class="fu">filter</span>(SAFFL <span class="sc">==</span> <span class="st">"Y"</span>) <span class="co"># safety population</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-13"><a href="#cb1-13"></a>data <span class="ot">&lt;-</span> advs <span class="sc">|&gt;</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a>  <span class="fu">filter</span>(</span>
+<span id="cb1-15"><a href="#cb1-15"></a>    <span class="co"># safety population</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a>    SAFFL <span class="sc">==</span> <span class="st">"Y"</span>,</span>
+<span id="cb1-17"><a href="#cb1-17"></a>    <span class="co"># systolic blood pressure</span></span>
+<span id="cb1-18"><a href="#cb1-18"></a>    PARAMCD <span class="sc">==</span> <span class="st">"SYSBP"</span>,</span>
+<span id="cb1-19"><a href="#cb1-19"></a>    <span class="co"># post-baseline visits</span></span>
+<span id="cb1-20"><a href="#cb1-20"></a>    AVISITN <span class="sc">&gt;=</span> <span class="dv">1</span></span>
+<span id="cb1-21"><a href="#cb1-21"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb1-22"><a href="#cb1-22"></a>  <span class="co"># analyze maximum values of each subject</span></span>
+<span id="cb1-23"><a href="#cb1-23"></a>  <span class="fu">slice_max</span>(AVAL, <span class="at">n =</span> <span class="dv">1</span>L, <span class="at">by =</span> USUBJID) <span class="sc">|&gt;</span></span>
+<span id="cb1-24"><a href="#cb1-24"></a>  <span class="co"># define analysis value cutoffs</span></span>
+<span id="cb1-25"><a href="#cb1-25"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb1-26"><a href="#cb1-26"></a>    <span class="at">L90 =</span> AVAL <span class="sc">&lt;</span> <span class="dv">90</span>, <span class="co"># SYSBP &lt;90</span></span>
+<span id="cb1-27"><a href="#cb1-27"></a>    <span class="at">GE90 =</span> AVAL <span class="sc">&gt;=</span> <span class="dv">90</span>, <span class="co"># SYSBP &gt;=90</span></span>
+<span id="cb1-28"><a href="#cb1-28"></a>    <span class="at">GE120 =</span> AVAL <span class="sc">&gt;=</span> <span class="dv">120</span>, <span class="co"># SYSBP &gt;=120</span></span>
+<span id="cb1-29"><a href="#cb1-29"></a>    <span class="at">GE140 =</span> AVAL <span class="sc">&gt;=</span> <span class="dv">140</span>, <span class="co"># SYSBP &gt;=140</span></span>
+<span id="cb1-30"><a href="#cb1-30"></a>    <span class="at">GE160 =</span> AVAL <span class="sc">&gt;=</span> <span class="dv">160</span>, <span class="co"># SYSBP &gt;=160</span></span>
+<span id="cb1-31"><a href="#cb1-31"></a>    <span class="at">GE180 =</span> AVAL <span class="sc">&gt;=</span> <span class="dv">180</span> <span class="co"># SYSBP &gt;=180</span></span>
+<span id="cb1-32"><a href="#cb1-32"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </div>
 <div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
 <div class="cell">
-<details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>ard <span class="ot">&lt;-</span> <span class="fu">ard_stack_hierarchical</span>(</span>
-<span id="cb2-2"><a href="#cb2-2"></a>  data,</span>
-<span id="cb2-3"><a href="#cb2-3"></a>  <span class="at">variables =</span> <span class="fu">c</span>(AESOC, AEDECOD),</span>
-<span id="cb2-4"><a href="#cb2-4"></a>  <span class="at">by =</span> ARM,</span>
-<span id="cb2-5"><a href="#cb2-5"></a>  <span class="at">id =</span> USUBJID,</span>
-<span id="cb2-6"><a href="#cb2-6"></a>  <span class="at">denominator =</span> adsl</span>
-<span id="cb2-7"><a href="#cb2-7"></a>)</span>
-<span id="cb2-8"><a href="#cb2-8"></a></span>
-<span id="cb2-9"><a href="#cb2-9"></a>ard</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>ard <span class="ot">&lt;-</span> <span class="fu">bind_ard</span>(</span>
+<span id="cb2-2"><a href="#cb2-2"></a>  <span class="fu">ard_dichotomous</span>(</span>
+<span id="cb2-3"><a href="#cb2-3"></a>    data,</span>
+<span id="cb2-4"><a href="#cb2-4"></a>    <span class="at">variables =</span> <span class="fu">c</span>(L90, GE90, GE120, GE140, GE160, GE180),</span>
+<span id="cb2-5"><a href="#cb2-5"></a>    <span class="at">by =</span> TRT01A,</span>
+<span id="cb2-6"><a href="#cb2-6"></a>    <span class="at">statistic =</span> <span class="sc">~</span> <span class="fu">c</span>(<span class="st">"n"</span>, <span class="st">"p"</span>),</span>
+<span id="cb2-7"><a href="#cb2-7"></a>    <span class="co"># denominator values are number of subjects in arm with BP data</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a>    <span class="at">denominator =</span> data <span class="sc">|&gt;</span> <span class="fu">distinct</span>(USUBJID, TRT01A)</span>
+<span id="cb2-9"><a href="#cb2-9"></a>  ),</span>
+<span id="cb2-10"><a href="#cb2-10"></a>  <span class="co"># ARD for header N values</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a>  <span class="fu">ard_categorical</span>(adsl, <span class="at">variables =</span> TRT01A)</span>
+<span id="cb2-12"><a href="#cb2-12"></a>)</span>
+<span id="cb2-13"><a href="#cb2-13"></a></span>
+<span id="cb2-14"><a href="#cb2-14"></a>ard</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stderr">
-<pre><code>{cards} data frame: 135 x 13</code></pre>
+<pre><code>{cards} data frame: 45 x 11</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   group1 group1_level group2 group2_level variable variable_level   context stat_name stat_label  stat fmt_fun warning error
-1    &lt;NA&gt;                &lt;NA&gt;                   ARM      A: Drug X categori…         n          n   134       0              
-2    &lt;NA&gt;                &lt;NA&gt;                   ARM      A: Drug X categori…         N          N   400       0              
-3    &lt;NA&gt;                &lt;NA&gt;                   ARM      A: Drug X categori…         p          % 0.335    &lt;fn&gt;              
-4    &lt;NA&gt;                &lt;NA&gt;                   ARM      B: Place… categori…         n          n   134       0              
-5    &lt;NA&gt;                &lt;NA&gt;                   ARM      B: Place… categori…         N          N   400       0              
-6    &lt;NA&gt;                &lt;NA&gt;                   ARM      B: Place… categori…         p          % 0.335    &lt;fn&gt;              
-7    &lt;NA&gt;                &lt;NA&gt;                   ARM      C: Combi… categori…         n          n   132       0              
-8    &lt;NA&gt;                &lt;NA&gt;                   ARM      C: Combi… categori…         N          N   400       0              
-9    &lt;NA&gt;                &lt;NA&gt;                   ARM      C: Combi… categori…         p          %  0.33    &lt;fn&gt;              
-10    ARM    A: Drug X   &lt;NA&gt;                 AESOC           cl A hierarch…         n          n    78       0              
-11    ARM    A: Drug X   &lt;NA&gt;                 AESOC           cl A hierarch…         N          N   134       0              
-12    ARM    A: Drug X   &lt;NA&gt;                 AESOC           cl A hierarch…         p          % 0.582    &lt;fn&gt;              
-13    ARM    B: Place…   &lt;NA&gt;                 AESOC           cl A hierarch…         n          n    75       0              
-14    ARM    B: Place…   &lt;NA&gt;                 AESOC           cl A hierarch…         N          N   134       0              
-15    ARM    B: Place…   &lt;NA&gt;                 AESOC           cl A hierarch…         p          %  0.56    &lt;fn&gt;              
-16    ARM    C: Combi…   &lt;NA&gt;                 AESOC           cl A hierarch…         n          n    89       0              
-17    ARM    C: Combi…   &lt;NA&gt;                 AESOC           cl A hierarch…         N          N   132       0              
-18    ARM    C: Combi…   &lt;NA&gt;                 AESOC           cl A hierarch…         p          % 0.674    &lt;fn&gt;              
-19    ARM    A: Drug X  AESOC         cl A  AEDECOD      dcd A.1.… hierarch…         n          n    50       0              
-20    ARM    A: Drug X  AESOC         cl A  AEDECOD      dcd A.1.… hierarch…         N          N   134       0              
-21    ARM    A: Drug X  AESOC         cl A  AEDECOD      dcd A.1.… hierarch…         p          % 0.373    &lt;fn&gt;              
-22    ARM    B: Place…  AESOC         cl A  AEDECOD      dcd A.1.… hierarch…         n          n    45       0              
-23    ARM    B: Place…  AESOC         cl A  AEDECOD      dcd A.1.… hierarch…         N          N   134       0              
-24    ARM    B: Place…  AESOC         cl A  AEDECOD      dcd A.1.… hierarch…         p          % 0.336    &lt;fn&gt;              
-25    ARM    C: Combi…  AESOC         cl A  AEDECOD      dcd A.1.… hierarch…         n          n    63       0              
-26    ARM    C: Combi…  AESOC         cl A  AEDECOD      dcd A.1.… hierarch…         N          N   132       0              
-27    ARM    C: Combi…  AESOC         cl A  AEDECOD      dcd A.1.… hierarch…         p          % 0.477    &lt;fn&gt;              
-28    ARM    A: Drug X  AESOC         cl A  AEDECOD      dcd A.1.… hierarch…         n          n    48       0              
-29    ARM    A: Drug X  AESOC         cl A  AEDECOD      dcd A.1.… hierarch…         N          N   134       0              
-30    ARM    A: Drug X  AESOC         cl A  AEDECOD      dcd A.1.… hierarch…         p          % 0.358    &lt;fn&gt;              
-31    ARM    B: Place…  AESOC         cl A  AEDECOD      dcd A.1.… hierarch…         n          n    48       0              
-32    ARM    B: Place…  AESOC         cl A  AEDECOD      dcd A.1.… hierarch…         N          N   134       0              
-33    ARM    B: Place…  AESOC         cl A  AEDECOD      dcd A.1.… hierarch…         p          % 0.358    &lt;fn&gt;              
-34    ARM    C: Combi…  AESOC         cl A  AEDECOD      dcd A.1.… hierarch…         n          n    50       0              
-35    ARM    C: Combi…  AESOC         cl A  AEDECOD      dcd A.1.… hierarch…         N          N   132       0              
-36    ARM    C: Combi…  AESOC         cl A  AEDECOD      dcd A.1.… hierarch…         p          % 0.379    &lt;fn&gt;              
-37    ARM    A: Drug X   &lt;NA&gt;                 AESOC           cl B hierarch…         n          n    96       0              
-38    ARM    A: Drug X   &lt;NA&gt;                 AESOC           cl B hierarch…         N          N   134       0              
-39    ARM    A: Drug X   &lt;NA&gt;                 AESOC           cl B hierarch…         p          % 0.716    &lt;fn&gt;              
-40    ARM    B: Place…   &lt;NA&gt;                 AESOC           cl B hierarch…         n          n    89       0              </code></pre>
+<pre><code>   group1 group1_level variable variable_level   context stat_name stat_label  stat fmt_fun warning error
+1  TRT01A    A: Drug X      L90           TRUE dichotom…         n          n     0       0              
+2  TRT01A    A: Drug X      L90           TRUE dichotom…         p          %     0    &lt;fn&gt;              
+3  TRT01A    A: Drug X     GE90           TRUE dichotom…         n          n   134       0              
+4  TRT01A    A: Drug X     GE90           TRUE dichotom…         p          %     1    &lt;fn&gt;              
+5  TRT01A    A: Drug X    GE120           TRUE dichotom…         n          n   134       0              
+6  TRT01A    A: Drug X    GE120           TRUE dichotom…         p          %     1    &lt;fn&gt;              
+7  TRT01A    A: Drug X    GE140           TRUE dichotom…         n          n   133       0              
+8  TRT01A    A: Drug X    GE140           TRUE dichotom…         p          % 0.993    &lt;fn&gt;              
+9  TRT01A    A: Drug X    GE160           TRUE dichotom…         n          n   126       0              
+10 TRT01A    A: Drug X    GE160           TRUE dichotom…         p          %  0.94    &lt;fn&gt;              
+11 TRT01A    A: Drug X    GE180           TRUE dichotom…         n          n    78       0              
+12 TRT01A    A: Drug X    GE180           TRUE dichotom…         p          % 0.582    &lt;fn&gt;              
+13 TRT01A    B: Place…      L90           TRUE dichotom…         n          n     0       0              
+14 TRT01A    B: Place…      L90           TRUE dichotom…         p          %     0    &lt;fn&gt;              
+15 TRT01A    B: Place…     GE90           TRUE dichotom…         n          n   134       0              
+16 TRT01A    B: Place…     GE90           TRUE dichotom…         p          %     1    &lt;fn&gt;              
+17 TRT01A    B: Place…    GE120           TRUE dichotom…         n          n   133       0              
+18 TRT01A    B: Place…    GE120           TRUE dichotom…         p          % 0.993    &lt;fn&gt;              
+19 TRT01A    B: Place…    GE140           TRUE dichotom…         n          n   132       0              
+20 TRT01A    B: Place…    GE140           TRUE dichotom…         p          % 0.985    &lt;fn&gt;              
+21 TRT01A    B: Place…    GE160           TRUE dichotom…         n          n   120       0              
+22 TRT01A    B: Place…    GE160           TRUE dichotom…         p          % 0.896    &lt;fn&gt;              
+23 TRT01A    B: Place…    GE180           TRUE dichotom…         n          n    74       0              
+24 TRT01A    B: Place…    GE180           TRUE dichotom…         p          % 0.552    &lt;fn&gt;              
+25 TRT01A    C: Combi…      L90           TRUE dichotom…         n          n     0       0              
+26 TRT01A    C: Combi…      L90           TRUE dichotom…         p          %     0    &lt;fn&gt;              
+27 TRT01A    C: Combi…     GE90           TRUE dichotom…         n          n   132       0              
+28 TRT01A    C: Combi…     GE90           TRUE dichotom…         p          %     1    &lt;fn&gt;              
+29 TRT01A    C: Combi…    GE120           TRUE dichotom…         n          n   132       0              
+30 TRT01A    C: Combi…    GE120           TRUE dichotom…         p          %     1    &lt;fn&gt;              
+31 TRT01A    C: Combi…    GE140           TRUE dichotom…         n          n   132       0              
+32 TRT01A    C: Combi…    GE140           TRUE dichotom…         p          %     1    &lt;fn&gt;              
+33 TRT01A    C: Combi…    GE160           TRUE dichotom…         n          n   121       0              
+34 TRT01A    C: Combi…    GE160           TRUE dichotom…         p          % 0.917    &lt;fn&gt;              
+35 TRT01A    C: Combi…    GE180           TRUE dichotom…         n          n    73       0              
+36 TRT01A    C: Combi…    GE180           TRUE dichotom…         p          % 0.553    &lt;fn&gt;              
+37   &lt;NA&gt;                TRT01A      A: Drug X categori…         n          n   134       0              
+38   &lt;NA&gt;                TRT01A      A: Drug X categori…         N          N   400       0              
+39   &lt;NA&gt;                TRT01A      A: Drug X categori…         p          % 0.335    &lt;fn&gt;              
+40   &lt;NA&gt;                TRT01A      B: Place… categori…         n          n   134       0              </code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>ℹ 95 more rows</code></pre>
+<pre><code>ℹ 5 more rows</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>ℹ Use `print(n = ...)` to see more rows</code></pre>
@@ -334,20 +357,27 @@ cookieconsent.run({
 </div>
 <div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
 <div class="cell">
-<details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># create table using ARD-first approach (ARD -&gt; table)</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a>tbl <span class="ot">&lt;-</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">tbl_ard_hierarchical</span>(</span>
-<span id="cb7-4"><a href="#cb7-4"></a>    ard,</span>
-<span id="cb7-5"><a href="#cb7-5"></a>    <span class="at">variables =</span> <span class="fu">c</span>(AESOC, AEDECOD),</span>
-<span id="cb7-6"><a href="#cb7-6"></a>    <span class="at">by =</span> ARM,</span>
-<span id="cb7-7"><a href="#cb7-7"></a>    <span class="co"># add custom variable labels</span></span>
-<span id="cb7-8"><a href="#cb7-8"></a>    <span class="at">label =</span> <span class="fu">list</span>(</span>
-<span id="cb7-9"><a href="#cb7-9"></a>      <span class="at">AESOC =</span> <span class="st">"System Organ Class"</span>,</span>
-<span id="cb7-10"><a href="#cb7-10"></a>      <span class="at">AEDECOD =</span> <span class="st">"Preferred Term"</span></span>
-<span id="cb7-11"><a href="#cb7-11"></a>    )</span>
+<details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>tbl <span class="ot">&lt;-</span> <span class="fu">tbl_ard_summary</span>(</span>
+<span id="cb7-2"><a href="#cb7-2"></a>  ard,</span>
+<span id="cb7-3"><a href="#cb7-3"></a>  <span class="at">by =</span> TRT01A,</span>
+<span id="cb7-4"><a href="#cb7-4"></a>  <span class="co"># Add labels for each range</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a>  <span class="at">label =</span> <span class="fu">list</span>(</span>
+<span id="cb7-6"><a href="#cb7-6"></a>    <span class="at">L90 =</span> <span class="st">"&lt;90"</span>,</span>
+<span id="cb7-7"><a href="#cb7-7"></a>    <span class="at">GE90 =</span> <span class="st">"&gt;=90"</span>,</span>
+<span id="cb7-8"><a href="#cb7-8"></a>    <span class="at">GE120 =</span> <span class="st">"&gt;=120"</span>,</span>
+<span id="cb7-9"><a href="#cb7-9"></a>    <span class="at">GE140 =</span> <span class="st">"&gt;=140"</span>,</span>
+<span id="cb7-10"><a href="#cb7-10"></a>    <span class="at">GE160 =</span> <span class="st">"&gt;=160"</span>,</span>
+<span id="cb7-11"><a href="#cb7-11"></a>    <span class="at">GE180 =</span> <span class="st">"&gt;=180"</span></span>
 <span id="cb7-12"><a href="#cb7-12"></a>  )</span>
-<span id="cb7-13"><a href="#cb7-13"></a></span>
-<span id="cb7-14"><a href="#cb7-14"></a>tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-13"><a href="#cb7-13"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a>  <span class="fu">modify_header</span>(</span>
+<span id="cb7-15"><a href="#cb7-15"></a>    <span class="co"># Update label, add analysis value units</span></span>
+<span id="cb7-16"><a href="#cb7-16"></a>    label <span class="sc">~</span> <span class="fu">paste0</span>(<span class="st">"**Systolic Blood Pressure ("</span>, data<span class="sc">$</span>AVALU[<span class="dv">1</span>], <span class="st">")**"</span>),</span>
+<span id="cb7-17"><a href="#cb7-17"></a>    <span class="co"># Add N values to `by` variable labels</span></span>
+<span id="cb7-18"><a href="#cb7-18"></a>    <span class="fu">all_stat_cols</span>() <span class="sc">~</span> <span class="st">"**{level}**  </span><span class="sc">\n</span><span class="st">N = {n}"</span></span>
+<span id="cb7-19"><a href="#cb7-19"></a>  )</span>
+<span id="cb7-20"><a href="#cb7-20"></a></span>
+<span id="cb7-21"><a href="#cb7-21"></a>tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell" data-layout-align="center">
@@ -972,8 +1002,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb8" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1"></a><span class="co">---</span></span>
 <span id="cb8-2"><a href="#cb8-2"></a><span class="an">title:</span><span class="co"> FDA Table 36</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="an">subtitle:</span><span class="co"> Patients With Adverse Events by System Organ Class and Preferred Term, Safety Population, Pooled Analysis (or Trial X)</span></span>
-<span id="cb8-4"><a href="#cb8-4"></a><span class="an">categories:</span><span class="co"> [table, FDA, safety, adverse events]</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="an">subtitle:</span><span class="co"> Subjects With Maximum Postbaseline Systolic Blood Pressure by Category of Blood Pressure, Safety Population, Pooled Analysis (or Trial X)</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="an">categories:</span><span class="co"> [table, FDA, safety, vital signs]</span></span>
 <span id="cb8-5"><a href="#cb8-5"></a><span class="co">---</span></span>
 <span id="cb8-6"><a href="#cb8-6"></a></span>
 <span id="cb8-7"><a href="#cb8-7"></a>::: panel-tabset</span>
@@ -991,63 +1021,93 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb8-19"><a href="#cb8-19"></a><span class="in">library(cards)</span></span>
 <span id="cb8-20"><a href="#cb8-20"></a><span class="in">library(gtsummary)</span></span>
 <span id="cb8-21"><a href="#cb8-21"></a></span>
-<span id="cb8-22"><a href="#cb8-22"></a><span class="in">adae &lt;- random.cdisc.data::cadae</span></span>
-<span id="cb8-23"><a href="#cb8-23"></a><span class="in">adsl &lt;- random.cdisc.data::cadsl</span></span>
+<span id="cb8-22"><a href="#cb8-22"></a><span class="in">adsl &lt;- random.cdisc.data::cadsl</span></span>
+<span id="cb8-23"><a href="#cb8-23"></a><span class="in">advs &lt;- random.cdisc.data::cadvs</span></span>
 <span id="cb8-24"><a href="#cb8-24"></a></span>
 <span id="cb8-25"><a href="#cb8-25"></a><span class="in"># Pre-processing --------------------------------------------</span></span>
 <span id="cb8-26"><a href="#cb8-26"></a><span class="in">adsl &lt;- adsl |&gt;</span></span>
 <span id="cb8-27"><a href="#cb8-27"></a><span class="in">  filter(SAFFL == "Y") # safety population</span></span>
 <span id="cb8-28"><a href="#cb8-28"></a></span>
-<span id="cb8-29"><a href="#cb8-29"></a><span class="in">data &lt;- adae |&gt;</span></span>
-<span id="cb8-30"><a href="#cb8-30"></a><span class="in">  filter(SAFFL == "Y") # safety population</span></span>
-<span id="cb8-31"><a href="#cb8-31"></a><span class="in">```</span></span>
-<span id="cb8-32"><a href="#cb8-32"></a></span>
-<span id="cb8-33"><a href="#cb8-33"></a><span class="fu">## Build ARD</span></span>
-<span id="cb8-34"><a href="#cb8-34"></a></span>
-<span id="cb8-35"><a href="#cb8-35"></a><span class="in">```{r ard, message=FALSE, warning=FALSE, results='hide'}</span></span>
-<span id="cb8-36"><a href="#cb8-36"></a><span class="in">ard &lt;- ard_stack_hierarchical(</span></span>
-<span id="cb8-37"><a href="#cb8-37"></a><span class="in">  data,</span></span>
-<span id="cb8-38"><a href="#cb8-38"></a><span class="in">  variables = c(AESOC, AEDECOD),</span></span>
-<span id="cb8-39"><a href="#cb8-39"></a><span class="in">  by = ARM,</span></span>
-<span id="cb8-40"><a href="#cb8-40"></a><span class="in">  id = USUBJID,</span></span>
-<span id="cb8-41"><a href="#cb8-41"></a><span class="in">  denominator = adsl</span></span>
-<span id="cb8-42"><a href="#cb8-42"></a><span class="in">)</span></span>
-<span id="cb8-43"><a href="#cb8-43"></a></span>
-<span id="cb8-44"><a href="#cb8-44"></a><span class="in">ard</span></span>
-<span id="cb8-45"><a href="#cb8-45"></a><span class="in">```</span></span>
-<span id="cb8-46"><a href="#cb8-46"></a></span>
-<span id="cb8-47"><a href="#cb8-47"></a><span class="in">```{r, echo=FALSE}</span></span>
-<span id="cb8-48"><a href="#cb8-48"></a><span class="in"># Print ARD</span></span>
-<span id="cb8-49"><a href="#cb8-49"></a><span class="in">withr::local_options(width = 9999)</span></span>
-<span id="cb8-50"><a href="#cb8-50"></a><span class="in">print(ard, columns = "all", n = 40)</span></span>
-<span id="cb8-51"><a href="#cb8-51"></a><span class="in">```</span></span>
+<span id="cb8-29"><a href="#cb8-29"></a><span class="in">data &lt;- advs |&gt;</span></span>
+<span id="cb8-30"><a href="#cb8-30"></a><span class="in">  filter(</span></span>
+<span id="cb8-31"><a href="#cb8-31"></a><span class="in">    # safety population</span></span>
+<span id="cb8-32"><a href="#cb8-32"></a><span class="in">    SAFFL == "Y",</span></span>
+<span id="cb8-33"><a href="#cb8-33"></a><span class="in">    # systolic blood pressure</span></span>
+<span id="cb8-34"><a href="#cb8-34"></a><span class="in">    PARAMCD == "SYSBP",</span></span>
+<span id="cb8-35"><a href="#cb8-35"></a><span class="in">    # post-baseline visits</span></span>
+<span id="cb8-36"><a href="#cb8-36"></a><span class="in">    AVISITN &gt;= 1</span></span>
+<span id="cb8-37"><a href="#cb8-37"></a><span class="in">  ) |&gt;</span></span>
+<span id="cb8-38"><a href="#cb8-38"></a><span class="in">  # analyze maximum values of each subject</span></span>
+<span id="cb8-39"><a href="#cb8-39"></a><span class="in">  slice_max(AVAL, n = 1L, by = USUBJID) |&gt;</span></span>
+<span id="cb8-40"><a href="#cb8-40"></a><span class="in">  # define analysis value cutoffs</span></span>
+<span id="cb8-41"><a href="#cb8-41"></a><span class="in">  mutate(</span></span>
+<span id="cb8-42"><a href="#cb8-42"></a><span class="in">    L90 = AVAL &lt; 90, # SYSBP &lt;90</span></span>
+<span id="cb8-43"><a href="#cb8-43"></a><span class="in">    GE90 = AVAL &gt;= 90, # SYSBP &gt;=90</span></span>
+<span id="cb8-44"><a href="#cb8-44"></a><span class="in">    GE120 = AVAL &gt;= 120, # SYSBP &gt;=120</span></span>
+<span id="cb8-45"><a href="#cb8-45"></a><span class="in">    GE140 = AVAL &gt;= 140, # SYSBP &gt;=140</span></span>
+<span id="cb8-46"><a href="#cb8-46"></a><span class="in">    GE160 = AVAL &gt;= 160, # SYSBP &gt;=160</span></span>
+<span id="cb8-47"><a href="#cb8-47"></a><span class="in">    GE180 = AVAL &gt;= 180 # SYSBP &gt;=180</span></span>
+<span id="cb8-48"><a href="#cb8-48"></a><span class="in">  )</span></span>
+<span id="cb8-49"><a href="#cb8-49"></a><span class="in">```</span></span>
+<span id="cb8-50"><a href="#cb8-50"></a></span>
+<span id="cb8-51"><a href="#cb8-51"></a><span class="fu">## Build ARD</span></span>
 <span id="cb8-52"><a href="#cb8-52"></a></span>
-<span id="cb8-53"><a href="#cb8-53"></a><span class="fu">## Build Table</span></span>
-<span id="cb8-54"><a href="#cb8-54"></a></span>
-<span id="cb8-55"><a href="#cb8-55"></a><span class="in">```{r tbl, results = 'hide'}</span></span>
-<span id="cb8-56"><a href="#cb8-56"></a><span class="in"># create table using ARD-first approach (ARD -&gt; table)</span></span>
-<span id="cb8-57"><a href="#cb8-57"></a><span class="in">tbl &lt;-</span></span>
-<span id="cb8-58"><a href="#cb8-58"></a><span class="in">  tbl_ard_hierarchical(</span></span>
-<span id="cb8-59"><a href="#cb8-59"></a><span class="in">    ard,</span></span>
-<span id="cb8-60"><a href="#cb8-60"></a><span class="in">    variables = c(AESOC, AEDECOD),</span></span>
-<span id="cb8-61"><a href="#cb8-61"></a><span class="in">    by = ARM,</span></span>
-<span id="cb8-62"><a href="#cb8-62"></a><span class="in">    # add custom variable labels</span></span>
-<span id="cb8-63"><a href="#cb8-63"></a><span class="in">    label = list(</span></span>
-<span id="cb8-64"><a href="#cb8-64"></a><span class="in">      AESOC = "System Organ Class",</span></span>
-<span id="cb8-65"><a href="#cb8-65"></a><span class="in">      AEDECOD = "Preferred Term"</span></span>
-<span id="cb8-66"><a href="#cb8-66"></a><span class="in">    )</span></span>
-<span id="cb8-67"><a href="#cb8-67"></a><span class="in">  )</span></span>
-<span id="cb8-68"><a href="#cb8-68"></a></span>
-<span id="cb8-69"><a href="#cb8-69"></a><span class="in">tbl</span></span>
-<span id="cb8-70"><a href="#cb8-70"></a><span class="in">```</span></span>
-<span id="cb8-71"><a href="#cb8-71"></a></span>
-<span id="cb8-72"><a href="#cb8-72"></a><span class="in">```{r eval=FALSE, include=FALSE}</span></span>
-<span id="cb8-73"><a href="#cb8-73"></a><span class="in">gt::gtsave(as_gt(tbl), filename = "result.png")</span></span>
+<span id="cb8-53"><a href="#cb8-53"></a><span class="in">```{r ard, message=FALSE, warning=FALSE, results='hide'}</span></span>
+<span id="cb8-54"><a href="#cb8-54"></a><span class="in">ard &lt;- bind_ard(</span></span>
+<span id="cb8-55"><a href="#cb8-55"></a><span class="in">  ard_dichotomous(</span></span>
+<span id="cb8-56"><a href="#cb8-56"></a><span class="in">    data,</span></span>
+<span id="cb8-57"><a href="#cb8-57"></a><span class="in">    variables = c(L90, GE90, GE120, GE140, GE160, GE180),</span></span>
+<span id="cb8-58"><a href="#cb8-58"></a><span class="in">    by = TRT01A,</span></span>
+<span id="cb8-59"><a href="#cb8-59"></a><span class="in">    statistic = ~ c("n", "p"),</span></span>
+<span id="cb8-60"><a href="#cb8-60"></a><span class="in">    # denominator values are number of subjects in arm with BP data</span></span>
+<span id="cb8-61"><a href="#cb8-61"></a><span class="in">    denominator = data |&gt; distinct(USUBJID, TRT01A)</span></span>
+<span id="cb8-62"><a href="#cb8-62"></a><span class="in">  ),</span></span>
+<span id="cb8-63"><a href="#cb8-63"></a><span class="in">  # ARD for header N values</span></span>
+<span id="cb8-64"><a href="#cb8-64"></a><span class="in">  ard_categorical(adsl, variables = TRT01A)</span></span>
+<span id="cb8-65"><a href="#cb8-65"></a><span class="in">)</span></span>
+<span id="cb8-66"><a href="#cb8-66"></a></span>
+<span id="cb8-67"><a href="#cb8-67"></a><span class="in">ard</span></span>
+<span id="cb8-68"><a href="#cb8-68"></a><span class="in">```</span></span>
+<span id="cb8-69"><a href="#cb8-69"></a></span>
+<span id="cb8-70"><a href="#cb8-70"></a><span class="in">```{r, echo=FALSE}</span></span>
+<span id="cb8-71"><a href="#cb8-71"></a><span class="in"># Print ARD</span></span>
+<span id="cb8-72"><a href="#cb8-72"></a><span class="in">withr::local_options(width = 9999)</span></span>
+<span id="cb8-73"><a href="#cb8-73"></a><span class="in">print(ard, columns = "all", n = 40)</span></span>
 <span id="cb8-74"><a href="#cb8-74"></a><span class="in">```</span></span>
 <span id="cb8-75"><a href="#cb8-75"></a></span>
-<span id="cb8-76"><a href="#cb8-76"></a><span class="in">```{r img, echo=FALSE, fig.align='center', out.width='45%'}</span></span>
-<span id="cb8-77"><a href="#cb8-77"></a><span class="in">```</span></span>
-<span id="cb8-78"><a href="#cb8-78"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-76"><a href="#cb8-76"></a><span class="fu">## Build Table</span></span>
+<span id="cb8-77"><a href="#cb8-77"></a></span>
+<span id="cb8-78"><a href="#cb8-78"></a><span class="in">```{r tbl, results = 'hide'}</span></span>
+<span id="cb8-79"><a href="#cb8-79"></a><span class="in">tbl &lt;- tbl_ard_summary(</span></span>
+<span id="cb8-80"><a href="#cb8-80"></a><span class="in">  ard,</span></span>
+<span id="cb8-81"><a href="#cb8-81"></a><span class="in">  by = TRT01A,</span></span>
+<span id="cb8-82"><a href="#cb8-82"></a><span class="in">  # Add labels for each range</span></span>
+<span id="cb8-83"><a href="#cb8-83"></a><span class="in">  label = list(</span></span>
+<span id="cb8-84"><a href="#cb8-84"></a><span class="in">    L90 = "&lt;90",</span></span>
+<span id="cb8-85"><a href="#cb8-85"></a><span class="in">    GE90 = "&gt;=90",</span></span>
+<span id="cb8-86"><a href="#cb8-86"></a><span class="in">    GE120 = "&gt;=120",</span></span>
+<span id="cb8-87"><a href="#cb8-87"></a><span class="in">    GE140 = "&gt;=140",</span></span>
+<span id="cb8-88"><a href="#cb8-88"></a><span class="in">    GE160 = "&gt;=160",</span></span>
+<span id="cb8-89"><a href="#cb8-89"></a><span class="in">    GE180 = "&gt;=180"</span></span>
+<span id="cb8-90"><a href="#cb8-90"></a><span class="in">  )</span></span>
+<span id="cb8-91"><a href="#cb8-91"></a><span class="in">) |&gt;</span></span>
+<span id="cb8-92"><a href="#cb8-92"></a><span class="in">  modify_header(</span></span>
+<span id="cb8-93"><a href="#cb8-93"></a><span class="in">    # Update label, add analysis value units</span></span>
+<span id="cb8-94"><a href="#cb8-94"></a><span class="in">    label ~ paste0("**Systolic Blood Pressure (", data$AVALU[1], ")**"),</span></span>
+<span id="cb8-95"><a href="#cb8-95"></a><span class="in">    # Add N values to `by` variable labels</span></span>
+<span id="cb8-96"><a href="#cb8-96"></a><span class="in">    all_stat_cols() ~ "**{level}**  \nN = {n}"</span></span>
+<span id="cb8-97"><a href="#cb8-97"></a><span class="in">  )</span></span>
+<span id="cb8-98"><a href="#cb8-98"></a></span>
+<span id="cb8-99"><a href="#cb8-99"></a><span class="in">tbl</span></span>
+<span id="cb8-100"><a href="#cb8-100"></a><span class="in">```</span></span>
+<span id="cb8-101"><a href="#cb8-101"></a></span>
+<span id="cb8-102"><a href="#cb8-102"></a><span class="in">```{r eval=FALSE, include=FALSE}</span></span>
+<span id="cb8-103"><a href="#cb8-103"></a><span class="in">gt::gtsave(as_gt(tbl), filename = "result.png")</span></span>
+<span id="cb8-104"><a href="#cb8-104"></a><span class="in">```</span></span>
+<span id="cb8-105"><a href="#cb8-105"></a></span>
+<span id="cb8-106"><a href="#cb8-106"></a><span class="in">```{r img, echo=FALSE, fig.align='center', out.width='45%'}</span></span>
+<span id="cb8-107"><a href="#cb8-107"></a><span class="in">```</span></span>
+<span id="cb8-108"><a href="#cb8-108"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">

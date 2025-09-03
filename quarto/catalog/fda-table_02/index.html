@@ -127,7 +127,7 @@ cookieconsent.run({
 </script><style>html{ scroll-behavior: smooth; }</style>
 <link rel="stylesheet" href="../../../quarto/assets/style.scss">
 <meta property="og:title" content="cardinal - FDA Table 02">
-<meta property="og:description" content="Baseline Demographic and Clinical Characteristics, Safety Population, Pooled Analyses">
+<meta property="og:description" content="Demographics and Baseline Clinical Characteristics, Safety Population, Pooled Analysis (or Trial X)">
 <meta property="og:site_name" content="cardinal">
 </head>
 <body class="nav-fixed">
@@ -207,7 +207,7 @@ cookieconsent.run({
 <!-- main -->
 <main class="content column-page" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">FDA Table 02</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
-<p class="subtitle lead">Baseline Demographic and Clinical Characteristics, Safety Population, Pooled Analyses</p>
+<p class="subtitle lead">Demographics and Baseline Clinical Characteristics, Safety Population, Pooled Analysis (or Trial X)</p>
   <div class="quarto-categories">
     <div class="quarto-category">table</div>
     <div class="quarto-category">FDA</div>
@@ -254,7 +254,7 @@ cookieconsent.run({
 <span id="cb1-5"><a href="#cb1-5"></a>adsl <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadsl <span class="sc">|&gt;</span></span>
 <span id="cb1-6"><a href="#cb1-6"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb1-7"><a href="#cb1-7"></a>    <span class="at">AGEGR1 =</span> <span class="fu">factor</span>(</span>
-<span id="cb1-8"><a href="#cb1-8"></a>      dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
+<span id="cb1-8"><a href="#cb1-8"></a>      <span class="fu">case_when</span>(</span>
 <span id="cb1-9"><a href="#cb1-9"></a>        AGE <span class="sc">&gt;=</span> <span class="dv">17</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"&gt;=17 to &lt;65"</span>,</span>
 <span id="cb1-10"><a href="#cb1-10"></a>        AGE <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">75</span> <span class="sc">~</span> <span class="st">"65-74"</span>,</span>
 <span id="cb1-11"><a href="#cb1-11"></a>        AGE <span class="sc">&gt;=</span> <span class="dv">75</span> <span class="sc">~</span> <span class="st">"&gt;=75"</span></span>
@@ -274,7 +274,7 @@ cookieconsent.run({
 <div class="cell">
 <details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>tbl <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a>  <span class="fu">tbl_summary</span>(</span>
-<span id="cb2-3"><a href="#cb2-3"></a>    <span class="at">by =</span> <span class="st">"ARM"</span>,</span>
+<span id="cb2-3"><a href="#cb2-3"></a>    <span class="at">by =</span> <span class="st">"TRT01A"</span>,</span>
 <span id="cb2-4"><a href="#cb2-4"></a>    <span class="at">include =</span> <span class="fu">c</span>(<span class="st">"SEX"</span>, <span class="st">"AGE"</span>, <span class="st">"AGEGR1"</span>, <span class="st">"ETHNIC"</span>, <span class="st">"RACE"</span>, <span class="st">"BMRKR1"</span>, <span class="st">"BMRKR2"</span>),</span>
 <span id="cb2-5"><a href="#cb2-5"></a>    <span class="at">type =</span> <span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="st">"continuous2"</span>, <span class="co"># arranges statistics into multiple lines</span></span>
 <span id="cb2-6"><a href="#cb2-6"></a>    <span class="at">statistic =</span> <span class="fu">list</span>(</span>
@@ -288,7 +288,9 @@ cookieconsent.run({
 <span id="cb2-14"><a href="#cb2-14"></a>  ) <span class="sc">|&gt;</span></span>
 <span id="cb2-15"><a href="#cb2-15"></a>  <span class="fu">add_overall</span>(<span class="at">last =</span> <span class="cn">TRUE</span>, <span class="at">col_label =</span> <span class="st">"**Total Population**  </span><span class="sc">\n</span><span class="st">N = {N}"</span>) <span class="sc">|&gt;</span></span>
 <span id="cb2-16"><a href="#cb2-16"></a>  <span class="co"># remove default footnote</span></span>
-<span id="cb2-17"><a href="#cb2-17"></a>  gtsummary<span class="sc">::</span><span class="fu">remove_footnote_header</span>(<span class="at">columns =</span> <span class="fu">everything</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-17"><a href="#cb2-17"></a>  <span class="fu">remove_footnote_header</span>(<span class="at">columns =</span> <span class="fu">everything</span>())</span>
+<span id="cb2-18"><a href="#cb2-18"></a></span>
+<span id="cb2-19"><a href="#cb2-19"></a>tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell" data-layout-align="center">
@@ -314,17 +316,17 @@ cookieconsent.run({
 <pre><code>{cards} data frame: 347 x 12</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   group1 group1_level variable variable_level   context stat_name stat_label  stat fmt_fun warning error gts_column
-1     ARM    A: Drug X      SEX              F categori…         n          n    79    &lt;fn&gt;                   stat_1
-2     ARM    A: Drug X      SEX              F categori…         N          N   134    &lt;fn&gt;                   stat_1
-3     ARM    A: Drug X      SEX              F categori…         p          %  0.59    &lt;fn&gt;                   stat_1
-4     ARM    A: Drug X      SEX              M categori…         n          n    55    &lt;fn&gt;                   stat_1
-5     ARM    A: Drug X      SEX              M categori…         N          N   134    &lt;fn&gt;                   stat_1
-6     ARM    A: Drug X      SEX              M categori…         p          %  0.41    &lt;fn&gt;                   stat_1
-7     ARM    A: Drug X     RACE          ASIAN categori…         n          n    68    &lt;fn&gt;                   stat_1
-8     ARM    A: Drug X     RACE          ASIAN categori…         N          N   134    &lt;fn&gt;                   stat_1
-9     ARM    A: Drug X     RACE          ASIAN categori…         p          % 0.507    &lt;fn&gt;                   stat_1
-10    ARM    A: Drug X     RACE      BLACK OR… categori…         n          n    31    &lt;fn&gt;                   stat_1</code></pre>
+<pre><code>   group1 group1_level variable variable_level  context stat_name stat_label  stat fmt_fun warning error gts_column
+1  TRT01A    A: Drug X      SEX              F tabulate         n          n    79    &lt;fn&gt;                   stat_1
+2  TRT01A    A: Drug X      SEX              F tabulate         N          N   134    &lt;fn&gt;                   stat_1
+3  TRT01A    A: Drug X      SEX              F tabulate         p          %  0.59    &lt;fn&gt;                   stat_1
+4  TRT01A    A: Drug X      SEX              M tabulate         n          n    55    &lt;fn&gt;                   stat_1
+5  TRT01A    A: Drug X      SEX              M tabulate         N          N   134    &lt;fn&gt;                   stat_1
+6  TRT01A    A: Drug X      SEX              M tabulate         p          %  0.41    &lt;fn&gt;                   stat_1
+7  TRT01A    A: Drug X     RACE          ASIAN tabulate         n          n    68    &lt;fn&gt;                   stat_1
+8  TRT01A    A: Drug X     RACE          ASIAN tabulate         N          N   134    &lt;fn&gt;                   stat_1
+9  TRT01A    A: Drug X     RACE          ASIAN tabulate         p          % 0.507    &lt;fn&gt;                   stat_1
+10 TRT01A    A: Drug X     RACE      BLACK OR… tabulate         n          n    31    &lt;fn&gt;                   stat_1</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>ℹ 337 more rows</code></pre>
@@ -340,17 +342,17 @@ $add_overall</code></pre>
 <pre><code>{cards} data frame: 125 x 10</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   variable variable_level   context stat_name stat_label  stat fmt_fun warning error gts_column
-1       SEX              F categori…         n          n   231    &lt;fn&gt;                   stat_0
-2       SEX              F categori…         N          N   400    &lt;fn&gt;                   stat_0
-3       SEX              F categori…         p          % 0.578    &lt;fn&gt;                   stat_0
-4       SEX              M categori…         n          n   169    &lt;fn&gt;                   stat_0
-5       SEX              M categori…         N          N   400    &lt;fn&gt;                   stat_0
-6       SEX              M categori…         p          % 0.423    &lt;fn&gt;                   stat_0
-7      RACE          ASIAN categori…         n          n   208    &lt;fn&gt;                   stat_0
-8      RACE          ASIAN categori…         N          N   400    &lt;fn&gt;                   stat_0
-9      RACE          ASIAN categori…         p          %  0.52    &lt;fn&gt;                   stat_0
-10     RACE      BLACK OR… categori…         n          n    91    &lt;fn&gt;                   stat_0</code></pre>
+<pre><code>   variable variable_level  context stat_name stat_label  stat fmt_fun warning error gts_column
+1       SEX              F tabulate         n          n   231    &lt;fn&gt;                   stat_0
+2       SEX              F tabulate         N          N   400    &lt;fn&gt;                   stat_0
+3       SEX              F tabulate         p          % 0.578    &lt;fn&gt;                   stat_0
+4       SEX              M tabulate         n          n   169    &lt;fn&gt;                   stat_0
+5       SEX              M tabulate         N          N   400    &lt;fn&gt;                   stat_0
+6       SEX              M tabulate         p          % 0.423    &lt;fn&gt;                   stat_0
+7      RACE          ASIAN tabulate         n          n   208    &lt;fn&gt;                   stat_0
+8      RACE          ASIAN tabulate         N          N   400    &lt;fn&gt;                   stat_0
+9      RACE          ASIAN tabulate         p          %  0.52    &lt;fn&gt;                   stat_0
+10     RACE      BLACK OR… tabulate         n          n    91    &lt;fn&gt;                   stat_0</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>ℹ 115 more rows
@@ -971,7 +973,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb13" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb13-1"><a href="#cb13-1"></a><span class="co">---</span></span>
 <span id="cb13-2"><a href="#cb13-2"></a><span class="an">title:</span><span class="co"> FDA Table 02</span></span>
-<span id="cb13-3"><a href="#cb13-3"></a><span class="an">subtitle:</span><span class="co"> Baseline Demographic and Clinical Characteristics, Safety Population, Pooled Analyses</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="an">subtitle:</span><span class="co"> Demographics and Baseline Clinical Characteristics, Safety Population, Pooled Analysis (or Trial X)</span></span>
 <span id="cb13-4"><a href="#cb13-4"></a><span class="an">categories:</span><span class="co"> [table, FDA, safety, demographics]</span></span>
 <span id="cb13-5"><a href="#cb13-5"></a><span class="co">---</span></span>
 <span id="cb13-6"><a href="#cb13-6"></a></span>
@@ -992,7 +994,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb13-21"><a href="#cb13-21"></a><span class="in">adsl &lt;- random.cdisc.data::cadsl |&gt;</span></span>
 <span id="cb13-22"><a href="#cb13-22"></a><span class="in">  mutate(</span></span>
 <span id="cb13-23"><a href="#cb13-23"></a><span class="in">    AGEGR1 = factor(</span></span>
-<span id="cb13-24"><a href="#cb13-24"></a><span class="in">      dplyr::case_when(</span></span>
+<span id="cb13-24"><a href="#cb13-24"></a><span class="in">      case_when(</span></span>
 <span id="cb13-25"><a href="#cb13-25"></a><span class="in">        AGE &gt;= 17 &amp; AGE &lt; 65 ~ "&gt;=17 to &lt;65",</span></span>
 <span id="cb13-26"><a href="#cb13-26"></a><span class="in">        AGE &gt;= 65 &amp; AGE &lt; 75 ~ "65-74",</span></span>
 <span id="cb13-27"><a href="#cb13-27"></a><span class="in">        AGE &gt;= 75 ~ "&gt;=75"</span></span>
@@ -1012,7 +1014,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb13-41"><a href="#cb13-41"></a><span class="in">```{r tbl, results='hide'}</span></span>
 <span id="cb13-42"><a href="#cb13-42"></a><span class="in">tbl &lt;- data |&gt;</span></span>
 <span id="cb13-43"><a href="#cb13-43"></a><span class="in">  tbl_summary(</span></span>
-<span id="cb13-44"><a href="#cb13-44"></a><span class="in">    by = "ARM",</span></span>
+<span id="cb13-44"><a href="#cb13-44"></a><span class="in">    by = "TRT01A",</span></span>
 <span id="cb13-45"><a href="#cb13-45"></a><span class="in">    include = c("SEX", "AGE", "AGEGR1", "ETHNIC", "RACE", "BMRKR1", "BMRKR2"),</span></span>
 <span id="cb13-46"><a href="#cb13-46"></a><span class="in">    type = all_continuous() ~ "continuous2", # arranges statistics into multiple lines</span></span>
 <span id="cb13-47"><a href="#cb13-47"></a><span class="in">    statistic = list(</span></span>
@@ -1026,30 +1028,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb13-55"><a href="#cb13-55"></a><span class="in">  ) |&gt;</span></span>
 <span id="cb13-56"><a href="#cb13-56"></a><span class="in">  add_overall(last = TRUE, col_label = "**Total Population**  \nN = {N}") |&gt;</span></span>
 <span id="cb13-57"><a href="#cb13-57"></a><span class="in">  # remove default footnote</span></span>
-<span id="cb13-58"><a href="#cb13-58"></a><span class="in">  gtsummary::remove_footnote_header(columns = everything())</span></span>
-<span id="cb13-59"><a href="#cb13-59"></a><span class="in">```</span></span>
-<span id="cb13-60"><a href="#cb13-60"></a></span>
-<span id="cb13-61"><a href="#cb13-61"></a><span class="in">```{r eval=FALSE, include=FALSE}</span></span>
-<span id="cb13-62"><a href="#cb13-62"></a><span class="in"># Run chunk locally to generate image file</span></span>
-<span id="cb13-63"><a href="#cb13-63"></a><span class="in">gt::gtsave(as_gt(tbl), filename = "result.png")</span></span>
-<span id="cb13-64"><a href="#cb13-64"></a><span class="in">```</span></span>
-<span id="cb13-65"><a href="#cb13-65"></a></span>
-<span id="cb13-66"><a href="#cb13-66"></a><span class="in">```{r img, echo=FALSE, fig.align='center', out.width='60%'}</span></span>
-<span id="cb13-67"><a href="#cb13-67"></a><span class="in">```</span></span>
-<span id="cb13-68"><a href="#cb13-68"></a></span>
-<span id="cb13-69"><a href="#cb13-69"></a><span class="fu">## Build ARD</span></span>
+<span id="cb13-58"><a href="#cb13-58"></a><span class="in">  remove_footnote_header(columns = everything())</span></span>
+<span id="cb13-59"><a href="#cb13-59"></a></span>
+<span id="cb13-60"><a href="#cb13-60"></a><span class="in">tbl</span></span>
+<span id="cb13-61"><a href="#cb13-61"></a><span class="in">```</span></span>
+<span id="cb13-62"><a href="#cb13-62"></a></span>
+<span id="cb13-63"><a href="#cb13-63"></a><span class="in">```{r eval=FALSE, include=FALSE}</span></span>
+<span id="cb13-64"><a href="#cb13-64"></a><span class="in"># Run chunk locally to generate image file</span></span>
+<span id="cb13-65"><a href="#cb13-65"></a><span class="in">gt::gtsave(as_gt(tbl), filename = "result.png")</span></span>
+<span id="cb13-66"><a href="#cb13-66"></a><span class="in">```</span></span>
+<span id="cb13-67"><a href="#cb13-67"></a></span>
+<span id="cb13-68"><a href="#cb13-68"></a><span class="in">```{r img, echo=FALSE, fig.align='center', out.width='60%'}</span></span>
+<span id="cb13-69"><a href="#cb13-69"></a><span class="in">```</span></span>
 <span id="cb13-70"><a href="#cb13-70"></a></span>
-<span id="cb13-71"><a href="#cb13-71"></a><span class="in">```{r ard, message=FALSE, warning=FALSE, results='hide'}</span></span>
-<span id="cb13-72"><a href="#cb13-72"></a><span class="in">ard &lt;- gather_ard(tbl)</span></span>
-<span id="cb13-73"><a href="#cb13-73"></a><span class="in">ard</span></span>
-<span id="cb13-74"><a href="#cb13-74"></a><span class="in">```</span></span>
-<span id="cb13-75"><a href="#cb13-75"></a></span>
-<span id="cb13-76"><a href="#cb13-76"></a><span class="in">```{r, echo=FALSE}</span></span>
-<span id="cb13-77"><a href="#cb13-77"></a><span class="in"># Print full ARD</span></span>
-<span id="cb13-78"><a href="#cb13-78"></a><span class="in">withr::local_options(width = 9999)</span></span>
-<span id="cb13-79"><a href="#cb13-79"></a><span class="in">print(ard, columns = "all")</span></span>
-<span id="cb13-80"><a href="#cb13-80"></a><span class="in">```</span></span>
-<span id="cb13-81"><a href="#cb13-81"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-71"><a href="#cb13-71"></a><span class="fu">## Build ARD</span></span>
+<span id="cb13-72"><a href="#cb13-72"></a></span>
+<span id="cb13-73"><a href="#cb13-73"></a><span class="in">```{r ard, message=FALSE, warning=FALSE, results='hide'}</span></span>
+<span id="cb13-74"><a href="#cb13-74"></a><span class="in">ard &lt;- gather_ard(tbl)</span></span>
+<span id="cb13-75"><a href="#cb13-75"></a><span class="in">ard</span></span>
+<span id="cb13-76"><a href="#cb13-76"></a><span class="in">```</span></span>
+<span id="cb13-77"><a href="#cb13-77"></a></span>
+<span id="cb13-78"><a href="#cb13-78"></a><span class="in">```{r, echo=FALSE}</span></span>
+<span id="cb13-79"><a href="#cb13-79"></a><span class="in"># Print full ARD</span></span>
+<span id="cb13-80"><a href="#cb13-80"></a><span class="in">withr::local_options(width = 9999)</span></span>
+<span id="cb13-81"><a href="#cb13-81"></a><span class="in">print(ard, columns = "all")</span></span>
+<span id="cb13-82"><a href="#cb13-82"></a><span class="in">```</span></span>
+<span id="cb13-83"><a href="#cb13-83"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">

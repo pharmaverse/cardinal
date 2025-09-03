@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.4.555">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>cardinal - FDA Table 3</title>
+<title>cardinal - FDA Table 03</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -126,8 +126,8 @@ cookieconsent.run({
 });
 </script><style>html{ scroll-behavior: smooth; }</style>
 <link rel="stylesheet" href="../../../quarto/assets/style.scss">
-<meta property="og:title" content="cardinal - FDA Table 3">
-<meta property="og:description" content="Patient Screening and Enrollment, Trials A and B">
+<meta property="og:title" content="cardinal - FDA Table 03">
+<meta property="og:description" content="Subject Screening and Enrollment, Screening Population, Trials A and B">
 <meta property="og:site_name" content="cardinal">
 </head>
 <body class="nav-fixed">
@@ -206,8 +206,8 @@ cookieconsent.run({
     
 <!-- main -->
 <main class="content column-page" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">FDA Table 3</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
-<p class="subtitle lead">Patient Screening and Enrollment, Trials A and B</p>
+<div class="quarto-title-block"><div><h1 class="title">FDA Table 03</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
+<p class="subtitle lead">Subject Screening and Enrollment, Screening Population, Trials A and B</p>
   <div class="quarto-categories">
     <div class="quarto-category">table</div>
     <div class="quarto-category">FDA</div>
@@ -231,8 +231,8 @@ cookieconsent.run({
 <ul class="nav nav-tabs" role="tablist">
 <li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Table Preview</a></li>
 <li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Setup</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Build ARD</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false">Build Table</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Build Table</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false">Build ARD</a></li>
 </ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
@@ -253,106 +253,53 @@ cookieconsent.run({
 <span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(cards)</span>
 <span id="cb1-5"><a href="#cb1-5"></a><span class="fu">library</span>(gtsummary)</span>
 <span id="cb1-6"><a href="#cb1-6"></a></span>
-<span id="cb1-7"><a href="#cb1-7"></a>adsl <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadsl</span>
+<span id="cb1-7"><a href="#cb1-7"></a>adsl <span class="ot">&lt;-</span> pharmaverseadam<span class="sc">::</span>adsl</span>
 <span id="cb1-8"><a href="#cb1-8"></a></span>
 <span id="cb1-9"><a href="#cb1-9"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
 <span id="cb1-10"><a href="#cb1-10"></a>adsl<span class="sc">$</span>RANDDT[<span class="fu">sample</span>(<span class="fu">seq_len</span>(<span class="fu">nrow</span>(adsl)), <span class="dv">100</span>)] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
 <span id="cb1-11"><a href="#cb1-11"></a>scrnfail_reas_lvls <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb1-12"><a href="#cb1-12"></a>  <span class="st">"Inclusion/exclusion criteria not met"</span>, <span class="st">"Patient noncompliance"</span>, <span class="st">"Consent withdrawn"</span>, <span class="st">"Other"</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a>  <span class="st">"Inclusion/exclusion criteria not met"</span>, <span class="st">"Subject noncompliance"</span>, <span class="st">"Consent withdrawn"</span>, <span class="st">"Other"</span></span>
 <span id="cb1-13"><a href="#cb1-13"></a>)</span>
 <span id="cb1-14"><a href="#cb1-14"></a>data <span class="ot">&lt;-</span> adsl <span class="sc">|&gt;</span></span>
 <span id="cb1-15"><a href="#cb1-15"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb1-16"><a href="#cb1-16"></a>    <span class="at">ENRLDT =</span> RANDDT,</span>
-<span id="cb1-17"><a href="#cb1-17"></a>    <span class="at">SCRNFL =</span> <span class="fu">with_label</span>(<span class="cn">TRUE</span>, <span class="st">"Patients screened"</span>),</span>
+<span id="cb1-17"><a href="#cb1-17"></a>    <span class="at">SCRNFL =</span> <span class="fu">with_label</span>(<span class="cn">TRUE</span>, <span class="st">"Subjects screened"</span>),</span>
 <span id="cb1-18"><a href="#cb1-18"></a>    <span class="at">SCRNFRS =</span> <span class="fu">factor</span>(<span class="fu">sample</span>(scrnfail_reas_lvls, <span class="at">size =</span> <span class="fu">nrow</span>(adsl), <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
 <span id="cb1-19"><a href="#cb1-19"></a>      <span class="at">levels =</span> scrnfail_reas_lvls</span>
 <span id="cb1-20"><a href="#cb1-20"></a>    ),</span>
-<span id="cb1-21"><a href="#cb1-21"></a>    <span class="at">ENRLFL =</span> <span class="fu">with_label</span>(<span class="sc">!</span><span class="fu">is.na</span>(ENRLDT), <span class="st">"Patients enrolled"</span>),</span>
-<span id="cb1-22"><a href="#cb1-22"></a>    <span class="at">RANDFL =</span> <span class="fu">with_label</span>(<span class="sc">!</span><span class="fu">is.na</span>(RANDDT), <span class="st">"Patients randomized"</span>)</span>
-<span id="cb1-23"><a href="#cb1-23"></a>  )</span>
-<span id="cb1-24"><a href="#cb1-24"></a>data<span class="sc">$</span>SCRNFRS[data<span class="sc">$</span>SCRNFL <span class="sc">==</span> <span class="st">"N"</span> <span class="sc">|</span> <span class="sc">!</span><span class="fu">is.na</span>(data<span class="sc">$</span>ENRLDT)] <span class="ot">&lt;-</span> <span class="cn">NA</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-21"><a href="#cb1-21"></a>    <span class="at">ENRLFL =</span> <span class="fu">with_label</span>(<span class="sc">!</span><span class="fu">is.na</span>(ENRLDT), <span class="st">"Subjects enrolled"</span>),</span>
+<span id="cb1-22"><a href="#cb1-22"></a>    <span class="at">RANDFL =</span> <span class="fu">with_label</span>(<span class="sc">!</span><span class="fu">is.na</span>(RANDDT), <span class="st">"Subjects randomized"</span>),</span>
+<span id="cb1-23"><a href="#cb1-23"></a>    <span class="at">screen_fail =</span> <span class="sc">!</span>ENRLFL <span class="co"># create a flag for screen failure</span></span>
+<span id="cb1-24"><a href="#cb1-24"></a>  )</span>
+<span id="cb1-25"><a href="#cb1-25"></a>data<span class="sc">$</span>SCRNFRS[data<span class="sc">$</span>SCRNFL <span class="sc">==</span> <span class="st">"N"</span> <span class="sc">|</span> <span class="sc">!</span><span class="fu">is.na</span>(data<span class="sc">$</span>ENRLDT)] <span class="ot">&lt;-</span> <span class="cn">NA</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </div>
 <div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
 <div class="cell">
-<details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>ard <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>  <span class="fu">ard_stack</span>(</span>
-<span id="cb2-3"><a href="#cb2-3"></a>    <span class="fu">ard_dichotomous</span>(</span>
-<span id="cb2-4"><a href="#cb2-4"></a>      <span class="at">variables =</span> SCRNFL,</span>
-<span id="cb2-5"><a href="#cb2-5"></a>      <span class="at">value =</span> <span class="fu">list</span>(<span class="at">SCRNFL =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb2-6"><a href="#cb2-6"></a>      <span class="at">statistic =</span> <span class="fu">everything</span>() <span class="sc">~</span> <span class="fu">c</span>(<span class="st">"n"</span>)</span>
-<span id="cb2-7"><a href="#cb2-7"></a>    ),</span>
-<span id="cb2-8"><a href="#cb2-8"></a>    <span class="fu">ard_categorical</span>(</span>
-<span id="cb2-9"><a href="#cb2-9"></a>      <span class="at">variables =</span> SCRNFRS,</span>
-<span id="cb2-10"><a href="#cb2-10"></a>      <span class="at">statistic =</span> <span class="fu">everything</span>() <span class="sc">~</span> <span class="fu">c</span>(<span class="st">"n"</span>, <span class="st">"p"</span>),</span>
-<span id="cb2-11"><a href="#cb2-11"></a>      <span class="at">denominator =</span> data</span>
-<span id="cb2-12"><a href="#cb2-12"></a>    ),</span>
-<span id="cb2-13"><a href="#cb2-13"></a>    <span class="fu">ard_dichotomous</span>(</span>
-<span id="cb2-14"><a href="#cb2-14"></a>      <span class="at">variables =</span> <span class="fu">c</span>(ENRLFL, RANDFL),</span>
-<span id="cb2-15"><a href="#cb2-15"></a>      <span class="at">value =</span> <span class="fu">list</span>(<span class="at">ENRLFL =</span> <span class="cn">TRUE</span>, <span class="at">RANDFL =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb2-16"><a href="#cb2-16"></a>      <span class="at">statistic =</span> <span class="fu">everything</span>() <span class="sc">~</span> <span class="fu">c</span>(<span class="st">"n"</span>, <span class="st">"p"</span>),</span>
-<span id="cb2-17"><a href="#cb2-17"></a>      <span class="at">denominator =</span> data</span>
-<span id="cb2-18"><a href="#cb2-18"></a>    )</span>
-<span id="cb2-19"><a href="#cb2-19"></a>  )</span>
-<span id="cb2-20"><a href="#cb2-20"></a></span>
-<span id="cb2-21"><a href="#cb2-21"></a>ard</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell">
-<div class="cell-output cell-output-stderr">
-<pre><code>{cards} data frame: 13 x 9</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>   variable variable_level   context stat_name stat_label  stat fmt_fun warning error
-1    SCRNFL           TRUE dichotom…         n          n   400       0              
-2   SCRNFRS      Inclusio… categori…         n          n    26       0              
-3   SCRNFRS      Inclusio… categori…         p          % 0.065    &lt;fn&gt;              
-4   SCRNFRS      Patient … categori…         n          n    20       0              
-5   SCRNFRS      Patient … categori…         p          %  0.05    &lt;fn&gt;              
-6   SCRNFRS      Consent … categori…         n          n    30       0              
-7   SCRNFRS      Consent … categori…         p          % 0.075    &lt;fn&gt;              
-8   SCRNFRS          Other categori…         n          n    24       0              
-9   SCRNFRS          Other categori…         p          %  0.06    &lt;fn&gt;              
-10   ENRLFL           TRUE dichotom…         n          n   300       0              
-11   ENRLFL           TRUE dichotom…         p          %  0.75    &lt;fn&gt;              
-12   RANDFL           TRUE dichotom…         n          n   300       0              
-13   RANDFL           TRUE dichotom…         p          %  0.75    &lt;fn&gt;              </code></pre>
-</div>
-</div>
-</div>
-<div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
-<div class="cell">
-<details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>tbl_scrn <span class="ot">&lt;-</span> <span class="fu">tbl_summary</span>(</span>
-<span id="cb5-2"><a href="#cb5-2"></a>  <span class="at">data =</span> data,</span>
-<span id="cb5-3"><a href="#cb5-3"></a>  <span class="at">include =</span> <span class="st">"SCRNFL"</span>,</span>
-<span id="cb5-4"><a href="#cb5-4"></a>  <span class="at">statistic =</span> SCRNFL <span class="sc">~</span> <span class="st">"{n}"</span>,</span>
-<span id="cb5-5"><a href="#cb5-5"></a>  <span class="at">missing =</span> <span class="st">"no"</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a>)</span>
-<span id="cb5-7"><a href="#cb5-7"></a></span>
-<span id="cb5-8"><a href="#cb5-8"></a>tbl_scrnfrs <span class="ot">&lt;-</span> <span class="fu">tbl_hierarchical</span>(</span>
-<span id="cb5-9"><a href="#cb5-9"></a>  <span class="at">data =</span> data,</span>
-<span id="cb5-10"><a href="#cb5-10"></a>  <span class="at">denominator =</span> adsl,</span>
-<span id="cb5-11"><a href="#cb5-11"></a>  <span class="at">id =</span> USUBJID,</span>
-<span id="cb5-12"><a href="#cb5-12"></a>  <span class="at">variables =</span> <span class="st">"SCRNFRS"</span>,</span>
-<span id="cb5-13"><a href="#cb5-13"></a>  <span class="at">statistic =</span> <span class="sc">~</span><span class="st">"{n} ({p}%)"</span>,</span>
-<span id="cb5-14"><a href="#cb5-14"></a>  <span class="at">label =</span> <span class="fu">list</span>(<span class="at">..ard_hierarchical_overall.. =</span> <span class="st">"Screening failures"</span>),</span>
-<span id="cb5-15"><a href="#cb5-15"></a>  <span class="at">overall_row =</span> <span class="cn">TRUE</span></span>
-<span id="cb5-16"><a href="#cb5-16"></a>)</span>
-<span id="cb5-17"><a href="#cb5-17"></a></span>
-<span id="cb5-18"><a href="#cb5-18"></a>tbl_enrl_rand <span class="ot">&lt;-</span> <span class="fu">tbl_summary</span>(</span>
-<span id="cb5-19"><a href="#cb5-19"></a>  <span class="at">data =</span> data,</span>
-<span id="cb5-20"><a href="#cb5-20"></a>  <span class="at">include =</span> <span class="fu">c</span>(<span class="st">"ENRLFL"</span>, <span class="st">"RANDFL"</span>),</span>
-<span id="cb5-21"><a href="#cb5-21"></a>  <span class="at">missing =</span> <span class="st">"no"</span></span>
-<span id="cb5-22"><a href="#cb5-22"></a>)</span>
-<span id="cb5-23"><a href="#cb5-23"></a></span>
-<span id="cb5-24"><a href="#cb5-24"></a>tbl <span class="ot">&lt;-</span> <span class="fu">list</span>(tbl_scrn, tbl_scrnfrs, tbl_enrl_rand) <span class="sc">|&gt;</span></span>
-<span id="cb5-25"><a href="#cb5-25"></a>  <span class="fu">tbl_stack</span>() <span class="sc">|&gt;</span></span>
-<span id="cb5-26"><a href="#cb5-26"></a>  <span class="fu">modify_header</span>(<span class="at">label =</span> <span class="st">"**Disposition**"</span>, <span class="at">stat_0 =</span> <span class="st">"**Trial A**"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb5-27"><a href="#cb5-27"></a>  <span class="fu">modify_column_indent</span>(<span class="st">"label"</span>, <span class="at">rows =</span> <span class="sc">!</span>(variable <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"..ard_hierarchical_overall.."</span>, <span class="st">"SCRNFL"</span>, <span class="st">"ENRLFL"</span>, <span class="st">"RANDFL"</span>))) <span class="sc">|&gt;</span></span>
-<span id="cb5-28"><a href="#cb5-28"></a>  <span class="fu">remove_footnote_header</span>(<span class="at">columns =</span> <span class="fu">everything</span>())</span>
-<span id="cb5-29"><a href="#cb5-29"></a></span>
-<span id="cb5-30"><a href="#cb5-30"></a>tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>tbl <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>  <span class="fu">tbl_summary</span>(</span>
+<span id="cb2-3"><a href="#cb2-3"></a>    <span class="at">include =</span> <span class="fu">c</span>(SCRNFL, screen_fail, SCRNFRS, ENRLFL, RANDFL),</span>
+<span id="cb2-4"><a href="#cb2-4"></a>    <span class="co"># suppress number of missing observations</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>    <span class="at">missing =</span> <span class="st">"no"</span>,</span>
+<span id="cb2-6"><a href="#cb2-6"></a>    <span class="co"># specify the denominator is always the no. obs. in `data`</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a>    <span class="at">percent =</span> data,</span>
+<span id="cb2-8"><a href="#cb2-8"></a>    <span class="co"># present SCRNFRS in descending order of frequency</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a>    <span class="at">sort =</span> SCRNFRS <span class="sc">~</span> <span class="st">"frequency"</span>,</span>
+<span id="cb2-10"><a href="#cb2-10"></a>    <span class="co"># update default screen failure label</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a>    <span class="at">label =</span> <span class="fu">list</span>(<span class="at">screen_fail =</span> <span class="st">"Screening failures"</span>)</span>
+<span id="cb2-12"><a href="#cb2-12"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a>  <span class="co"># remove the blank header row for SCRNFRS</span></span>
+<span id="cb2-14"><a href="#cb2-14"></a>  <span class="fu">remove_row_type</span>(SCRNFRS, <span class="at">type =</span> <span class="st">"header"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-15"><a href="#cb2-15"></a>  <span class="fu">modify_header</span>(</span>
+<span id="cb2-16"><a href="#cb2-16"></a>    <span class="at">label =</span> <span class="st">"**Disposition**"</span>,</span>
+<span id="cb2-17"><a href="#cb2-17"></a>    <span class="at">stat_0 =</span> <span class="st">"**Trial A**  </span><span class="sc">\n</span><span class="st"> N = {n}"</span></span>
+<span id="cb2-18"><a href="#cb2-18"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb2-19"><a href="#cb2-19"></a>  <span class="co"># update indentation for screening failures subsection</span></span>
+<span id="cb2-20"><a href="#cb2-20"></a>  <span class="fu">modify_indent</span>(<span class="at">columns =</span> label, <span class="at">rows =</span> variable <span class="sc">==</span> <span class="st">"screen_fail"</span>, <span class="at">indent =</span> <span class="dv">4</span>L) <span class="sc">|&gt;</span></span>
+<span id="cb2-21"><a href="#cb2-21"></a>  <span class="fu">modify_indent</span>(<span class="at">columns =</span> label, <span class="at">rows =</span> variable <span class="sc">==</span> <span class="st">"SCRNFRS"</span>, <span class="at">indent =</span> <span class="dv">8</span>L)</span>
+<span id="cb2-22"><a href="#cb2-22"></a></span>
+<span id="cb2-23"><a href="#cb2-23"></a>tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell" data-layout-align="center">
@@ -361,6 +308,44 @@ cookieconsent.run({
 <figure class="figure"><p><img src="result.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
 </figure>
 </div>
+</div>
+</div>
+</div>
+<div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>ard <span class="ot">&lt;-</span> <span class="fu">gather_ard</span>(tbl)</span>
+<span id="cb3-2"><a href="#cb3-2"></a></span>
+<span id="cb3-3"><a href="#cb3-3"></a>ard</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>$tbl_summary</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>{cards} data frame: 61 x 10</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   variable variable_level  context stat_name stat_label  stat
+1   SCRNFRS      Inclusio… tabulate         n          n    40
+2   SCRNFRS      Inclusio… tabulate         N          N   306
+3   SCRNFRS      Inclusio… tabulate         p          % 0.131
+4   SCRNFRS          Other tabulate         n          n    35
+5   SCRNFRS          Other tabulate         N          N   306
+6   SCRNFRS          Other tabulate         p          % 0.114
+7   SCRNFRS      Consent … tabulate         n          n    33
+8   SCRNFRS      Consent … tabulate         N          N   306
+9   SCRNFRS      Consent … tabulate         p          % 0.108
+10  SCRNFRS      Subject … tabulate         n          n    27</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ℹ 51 more rows</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ℹ Use `print(n = ...)` to see more rows</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ℹ 4 more variables: fmt_fun, warning, error, gts_column</code></pre>
 </div>
 </div>
 </div>
@@ -975,123 +960,99 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb6" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1"></a><span class="co">---</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="an">title:</span><span class="co"> FDA Table 3</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="an">subtitle:</span><span class="co"> Patient Screening and Enrollment, Trials A and B</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="an">categories:</span><span class="co"> [table, FDA, safety, disposition]</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a><span class="co">---</span></span>
-<span id="cb6-6"><a href="#cb6-6"></a></span>
-<span id="cb6-7"><a href="#cb6-7"></a>::: panel-tabset</span>
-<span id="cb6-8"><a href="#cb6-8"></a><span class="fu">## Table Preview</span></span>
-<span id="cb6-9"><a href="#cb6-9"></a></span>
-<span id="cb6-10"><a href="#cb6-10"></a><span class="in">```{r img, echo=FALSE, fig.align='center', out.width='60%'}</span></span>
-<span id="cb6-11"><a href="#cb6-11"></a><span class="in">knitr::include_graphics("result.png")</span></span>
-<span id="cb6-12"><a href="#cb6-12"></a><span class="in">```</span></span>
-<span id="cb6-13"><a href="#cb6-13"></a></span>
-<span id="cb6-14"><a href="#cb6-14"></a><span class="fu">## Setup</span></span>
-<span id="cb6-15"><a href="#cb6-15"></a></span>
-<span id="cb6-16"><a href="#cb6-16"></a><span class="in">```{r setup, message=FALSE}</span></span>
-<span id="cb6-17"><a href="#cb6-17"></a><span class="in"># Load libraries &amp; data -------------------------------------</span></span>
-<span id="cb6-18"><a href="#cb6-18"></a><span class="in">library(dplyr)</span></span>
-<span id="cb6-19"><a href="#cb6-19"></a><span class="in">library(formatters)</span></span>
-<span id="cb6-20"><a href="#cb6-20"></a><span class="in">library(cards)</span></span>
-<span id="cb6-21"><a href="#cb6-21"></a><span class="in">library(gtsummary)</span></span>
-<span id="cb6-22"><a href="#cb6-22"></a></span>
-<span id="cb6-23"><a href="#cb6-23"></a><span class="in">adsl &lt;- random.cdisc.data::cadsl</span></span>
-<span id="cb6-24"><a href="#cb6-24"></a></span>
-<span id="cb6-25"><a href="#cb6-25"></a><span class="in">set.seed(1)</span></span>
-<span id="cb6-26"><a href="#cb6-26"></a><span class="in">adsl$RANDDT[sample(seq_len(nrow(adsl)), 100)] &lt;- NA</span></span>
-<span id="cb6-27"><a href="#cb6-27"></a><span class="in">scrnfail_reas_lvls &lt;- c(</span></span>
-<span id="cb6-28"><a href="#cb6-28"></a><span class="in">  "Inclusion/exclusion criteria not met", "Patient noncompliance", "Consent withdrawn", "Other"</span></span>
-<span id="cb6-29"><a href="#cb6-29"></a><span class="in">)</span></span>
-<span id="cb6-30"><a href="#cb6-30"></a><span class="in">data &lt;- adsl |&gt;</span></span>
-<span id="cb6-31"><a href="#cb6-31"></a><span class="in">  mutate(</span></span>
-<span id="cb6-32"><a href="#cb6-32"></a><span class="in">    ENRLDT = RANDDT,</span></span>
-<span id="cb6-33"><a href="#cb6-33"></a><span class="in">    SCRNFL = with_label(TRUE, "Patients screened"),</span></span>
-<span id="cb6-34"><a href="#cb6-34"></a><span class="in">    SCRNFRS = factor(sample(scrnfail_reas_lvls, size = nrow(adsl), replace = TRUE),</span></span>
-<span id="cb6-35"><a href="#cb6-35"></a><span class="in">      levels = scrnfail_reas_lvls</span></span>
-<span id="cb6-36"><a href="#cb6-36"></a><span class="in">    ),</span></span>
-<span id="cb6-37"><a href="#cb6-37"></a><span class="in">    ENRLFL = with_label(!is.na(ENRLDT), "Patients enrolled"),</span></span>
-<span id="cb6-38"><a href="#cb6-38"></a><span class="in">    RANDFL = with_label(!is.na(RANDDT), "Patients randomized")</span></span>
-<span id="cb6-39"><a href="#cb6-39"></a><span class="in">  )</span></span>
-<span id="cb6-40"><a href="#cb6-40"></a><span class="in">data$SCRNFRS[data$SCRNFL == "N" | !is.na(data$ENRLDT)] &lt;- NA</span></span>
-<span id="cb6-41"><a href="#cb6-41"></a><span class="in">```</span></span>
-<span id="cb6-42"><a href="#cb6-42"></a></span>
-<span id="cb6-43"><a href="#cb6-43"></a><span class="fu">## Build ARD</span></span>
-<span id="cb6-44"><a href="#cb6-44"></a></span>
-<span id="cb6-45"><a href="#cb6-45"></a><span class="in">```{r ard, message=FALSE, warning=FALSE, results='hide'}</span></span>
-<span id="cb6-46"><a href="#cb6-46"></a><span class="in">ard &lt;- data |&gt;</span></span>
-<span id="cb6-47"><a href="#cb6-47"></a><span class="in">  ard_stack(</span></span>
-<span id="cb6-48"><a href="#cb6-48"></a><span class="in">    ard_dichotomous(</span></span>
-<span id="cb6-49"><a href="#cb6-49"></a><span class="in">      variables = SCRNFL,</span></span>
-<span id="cb6-50"><a href="#cb6-50"></a><span class="in">      value = list(SCRNFL = TRUE),</span></span>
-<span id="cb6-51"><a href="#cb6-51"></a><span class="in">      statistic = everything() ~ c("n")</span></span>
-<span id="cb6-52"><a href="#cb6-52"></a><span class="in">    ),</span></span>
-<span id="cb6-53"><a href="#cb6-53"></a><span class="in">    ard_categorical(</span></span>
-<span id="cb6-54"><a href="#cb6-54"></a><span class="in">      variables = SCRNFRS,</span></span>
-<span id="cb6-55"><a href="#cb6-55"></a><span class="in">      statistic = everything() ~ c("n", "p"),</span></span>
-<span id="cb6-56"><a href="#cb6-56"></a><span class="in">      denominator = data</span></span>
-<span id="cb6-57"><a href="#cb6-57"></a><span class="in">    ),</span></span>
-<span id="cb6-58"><a href="#cb6-58"></a><span class="in">    ard_dichotomous(</span></span>
-<span id="cb6-59"><a href="#cb6-59"></a><span class="in">      variables = c(ENRLFL, RANDFL),</span></span>
-<span id="cb6-60"><a href="#cb6-60"></a><span class="in">      value = list(ENRLFL = TRUE, RANDFL = TRUE),</span></span>
-<span id="cb6-61"><a href="#cb6-61"></a><span class="in">      statistic = everything() ~ c("n", "p"),</span></span>
-<span id="cb6-62"><a href="#cb6-62"></a><span class="in">      denominator = data</span></span>
-<span id="cb6-63"><a href="#cb6-63"></a><span class="in">    )</span></span>
-<span id="cb6-64"><a href="#cb6-64"></a><span class="in">  )</span></span>
-<span id="cb6-65"><a href="#cb6-65"></a></span>
-<span id="cb6-66"><a href="#cb6-66"></a><span class="in">ard</span></span>
-<span id="cb6-67"><a href="#cb6-67"></a><span class="in">```</span></span>
-<span id="cb6-68"><a href="#cb6-68"></a></span>
-<span id="cb6-69"><a href="#cb6-69"></a><span class="in">```{r, echo=FALSE}</span></span>
-<span id="cb6-70"><a href="#cb6-70"></a><span class="in"># Print ARD</span></span>
-<span id="cb6-71"><a href="#cb6-71"></a><span class="in">withr::local_options(width = 9999)</span></span>
-<span id="cb6-72"><a href="#cb6-72"></a><span class="in">print(ard, columns = "all", n = 40)</span></span>
-<span id="cb6-73"><a href="#cb6-73"></a><span class="in">```</span></span>
-<span id="cb6-74"><a href="#cb6-74"></a></span>
-<span id="cb6-75"><a href="#cb6-75"></a><span class="fu">## Build Table</span></span>
-<span id="cb6-76"><a href="#cb6-76"></a></span>
-<span id="cb6-77"><a href="#cb6-77"></a><span class="in">```{r tbl, message=FALSE, warning=FALSE, results='hide'}</span></span>
-<span id="cb6-78"><a href="#cb6-78"></a><span class="in">tbl_scrn &lt;- tbl_summary(</span></span>
-<span id="cb6-79"><a href="#cb6-79"></a><span class="in">  data = data,</span></span>
-<span id="cb6-80"><a href="#cb6-80"></a><span class="in">  include = "SCRNFL",</span></span>
-<span id="cb6-81"><a href="#cb6-81"></a><span class="in">  statistic = SCRNFL ~ "{n}",</span></span>
-<span id="cb6-82"><a href="#cb6-82"></a><span class="in">  missing = "no"</span></span>
-<span id="cb6-83"><a href="#cb6-83"></a><span class="in">)</span></span>
-<span id="cb6-84"><a href="#cb6-84"></a></span>
-<span id="cb6-85"><a href="#cb6-85"></a><span class="in">tbl_scrnfrs &lt;- tbl_hierarchical(</span></span>
-<span id="cb6-86"><a href="#cb6-86"></a><span class="in">  data = data,</span></span>
-<span id="cb6-87"><a href="#cb6-87"></a><span class="in">  denominator = adsl,</span></span>
-<span id="cb6-88"><a href="#cb6-88"></a><span class="in">  id = USUBJID,</span></span>
-<span id="cb6-89"><a href="#cb6-89"></a><span class="in">  variables = "SCRNFRS",</span></span>
-<span id="cb6-90"><a href="#cb6-90"></a><span class="in">  statistic = ~"{n} ({p}%)",</span></span>
-<span id="cb6-91"><a href="#cb6-91"></a><span class="in">  label = list(..ard_hierarchical_overall.. = "Screening failures"),</span></span>
-<span id="cb6-92"><a href="#cb6-92"></a><span class="in">  overall_row = TRUE</span></span>
-<span id="cb6-93"><a href="#cb6-93"></a><span class="in">)</span></span>
-<span id="cb6-94"><a href="#cb6-94"></a></span>
-<span id="cb6-95"><a href="#cb6-95"></a><span class="in">tbl_enrl_rand &lt;- tbl_summary(</span></span>
-<span id="cb6-96"><a href="#cb6-96"></a><span class="in">  data = data,</span></span>
-<span id="cb6-97"><a href="#cb6-97"></a><span class="in">  include = c("ENRLFL", "RANDFL"),</span></span>
-<span id="cb6-98"><a href="#cb6-98"></a><span class="in">  missing = "no"</span></span>
-<span id="cb6-99"><a href="#cb6-99"></a><span class="in">)</span></span>
-<span id="cb6-100"><a href="#cb6-100"></a></span>
-<span id="cb6-101"><a href="#cb6-101"></a><span class="in">tbl &lt;- list(tbl_scrn, tbl_scrnfrs, tbl_enrl_rand) |&gt;</span></span>
-<span id="cb6-102"><a href="#cb6-102"></a><span class="in">  tbl_stack() |&gt;</span></span>
-<span id="cb6-103"><a href="#cb6-103"></a><span class="in">  modify_header(label = "**Disposition**", stat_0 = "**Trial A**") |&gt;</span></span>
-<span id="cb6-104"><a href="#cb6-104"></a><span class="in">  modify_column_indent("label", rows = !(variable %in% c("..ard_hierarchical_overall..", "SCRNFL", "ENRLFL", "RANDFL"))) |&gt;</span></span>
-<span id="cb6-105"><a href="#cb6-105"></a><span class="in">  remove_footnote_header(columns = everything())</span></span>
-<span id="cb6-106"><a href="#cb6-106"></a></span>
-<span id="cb6-107"><a href="#cb6-107"></a><span class="in">tbl</span></span>
-<span id="cb6-108"><a href="#cb6-108"></a><span class="in">```</span></span>
-<span id="cb6-109"><a href="#cb6-109"></a></span>
-<span id="cb6-110"><a href="#cb6-110"></a><span class="in">```{r eval=FALSE, include=FALSE}</span></span>
-<span id="cb6-111"><a href="#cb6-111"></a><span class="in"># Run chunk locally to generate image file</span></span>
-<span id="cb6-112"><a href="#cb6-112"></a><span class="in">gt::gtsave(as_gt(tbl), filename = "result.png")</span></span>
-<span id="cb6-113"><a href="#cb6-113"></a><span class="in">```</span></span>
-<span id="cb6-114"><a href="#cb6-114"></a></span>
-<span id="cb6-115"><a href="#cb6-115"></a><span class="in">```{r img, echo=FALSE, fig.align='center', out.width='60%'}</span></span>
-<span id="cb6-116"><a href="#cb6-116"></a><span class="in">```</span></span>
-<span id="cb6-117"><a href="#cb6-117"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1"></a><span class="co">---</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="an">title:</span><span class="co"> FDA Table 03</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="an">subtitle:</span><span class="co"> Subject Screening and Enrollment, Screening Population, Trials A and B</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="an">categories:</span><span class="co"> [table, FDA, safety, disposition]</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="co">---</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a></span>
+<span id="cb10-7"><a href="#cb10-7"></a>::: panel-tabset</span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="fu">## Table Preview</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a></span>
+<span id="cb10-10"><a href="#cb10-10"></a><span class="in">```{r img, echo=FALSE, fig.align='center', out.width='60%'}</span></span>
+<span id="cb10-11"><a href="#cb10-11"></a><span class="in">knitr::include_graphics("result.png")</span></span>
+<span id="cb10-12"><a href="#cb10-12"></a><span class="in">```</span></span>
+<span id="cb10-13"><a href="#cb10-13"></a></span>
+<span id="cb10-14"><a href="#cb10-14"></a><span class="fu">## Setup</span></span>
+<span id="cb10-15"><a href="#cb10-15"></a></span>
+<span id="cb10-16"><a href="#cb10-16"></a><span class="in">```{r setup, message=FALSE}</span></span>
+<span id="cb10-17"><a href="#cb10-17"></a><span class="in"># Load libraries &amp; data -------------------------------------</span></span>
+<span id="cb10-18"><a href="#cb10-18"></a><span class="in">library(dplyr)</span></span>
+<span id="cb10-19"><a href="#cb10-19"></a><span class="in">library(formatters)</span></span>
+<span id="cb10-20"><a href="#cb10-20"></a><span class="in">library(cards)</span></span>
+<span id="cb10-21"><a href="#cb10-21"></a><span class="in">library(gtsummary)</span></span>
+<span id="cb10-22"><a href="#cb10-22"></a></span>
+<span id="cb10-23"><a href="#cb10-23"></a><span class="in">adsl &lt;- pharmaverseadam::adsl</span></span>
+<span id="cb10-24"><a href="#cb10-24"></a></span>
+<span id="cb10-25"><a href="#cb10-25"></a><span class="in">set.seed(1)</span></span>
+<span id="cb10-26"><a href="#cb10-26"></a><span class="in">adsl$RANDDT[sample(seq_len(nrow(adsl)), 100)] &lt;- NA</span></span>
+<span id="cb10-27"><a href="#cb10-27"></a><span class="in">scrnfail_reas_lvls &lt;- c(</span></span>
+<span id="cb10-28"><a href="#cb10-28"></a><span class="in">  "Inclusion/exclusion criteria not met", "Subject noncompliance", "Consent withdrawn", "Other"</span></span>
+<span id="cb10-29"><a href="#cb10-29"></a><span class="in">)</span></span>
+<span id="cb10-30"><a href="#cb10-30"></a><span class="in">data &lt;- adsl |&gt;</span></span>
+<span id="cb10-31"><a href="#cb10-31"></a><span class="in">  mutate(</span></span>
+<span id="cb10-32"><a href="#cb10-32"></a><span class="in">    ENRLDT = RANDDT,</span></span>
+<span id="cb10-33"><a href="#cb10-33"></a><span class="in">    SCRNFL = with_label(TRUE, "Subjects screened"),</span></span>
+<span id="cb10-34"><a href="#cb10-34"></a><span class="in">    SCRNFRS = factor(sample(scrnfail_reas_lvls, size = nrow(adsl), replace = TRUE),</span></span>
+<span id="cb10-35"><a href="#cb10-35"></a><span class="in">      levels = scrnfail_reas_lvls</span></span>
+<span id="cb10-36"><a href="#cb10-36"></a><span class="in">    ),</span></span>
+<span id="cb10-37"><a href="#cb10-37"></a><span class="in">    ENRLFL = with_label(!is.na(ENRLDT), "Subjects enrolled"),</span></span>
+<span id="cb10-38"><a href="#cb10-38"></a><span class="in">    RANDFL = with_label(!is.na(RANDDT), "Subjects randomized"),</span></span>
+<span id="cb10-39"><a href="#cb10-39"></a><span class="in">    screen_fail = !ENRLFL # create a flag for screen failure</span></span>
+<span id="cb10-40"><a href="#cb10-40"></a><span class="in">  )</span></span>
+<span id="cb10-41"><a href="#cb10-41"></a><span class="in">data$SCRNFRS[data$SCRNFL == "N" | !is.na(data$ENRLDT)] &lt;- NA</span></span>
+<span id="cb10-42"><a href="#cb10-42"></a><span class="in">```</span></span>
+<span id="cb10-43"><a href="#cb10-43"></a></span>
+<span id="cb10-44"><a href="#cb10-44"></a><span class="fu">## Build Table</span></span>
+<span id="cb10-45"><a href="#cb10-45"></a></span>
+<span id="cb10-46"><a href="#cb10-46"></a><span class="in">```{r tbl, message=FALSE, warning=FALSE, results='hide'}</span></span>
+<span id="cb10-47"><a href="#cb10-47"></a><span class="in">tbl &lt;- data |&gt;</span></span>
+<span id="cb10-48"><a href="#cb10-48"></a><span class="in">  tbl_summary(</span></span>
+<span id="cb10-49"><a href="#cb10-49"></a><span class="in">    include = c(SCRNFL, screen_fail, SCRNFRS, ENRLFL, RANDFL),</span></span>
+<span id="cb10-50"><a href="#cb10-50"></a><span class="in">    # suppress number of missing observations</span></span>
+<span id="cb10-51"><a href="#cb10-51"></a><span class="in">    missing = "no",</span></span>
+<span id="cb10-52"><a href="#cb10-52"></a><span class="in">    # specify the denominator is always the no. obs. in `data`</span></span>
+<span id="cb10-53"><a href="#cb10-53"></a><span class="in">    percent = data,</span></span>
+<span id="cb10-54"><a href="#cb10-54"></a><span class="in">    # present SCRNFRS in descending order of frequency</span></span>
+<span id="cb10-55"><a href="#cb10-55"></a><span class="in">    sort = SCRNFRS ~ "frequency",</span></span>
+<span id="cb10-56"><a href="#cb10-56"></a><span class="in">    # update default screen failure label</span></span>
+<span id="cb10-57"><a href="#cb10-57"></a><span class="in">    label = list(screen_fail = "Screening failures")</span></span>
+<span id="cb10-58"><a href="#cb10-58"></a><span class="in">  ) |&gt;</span></span>
+<span id="cb10-59"><a href="#cb10-59"></a><span class="in">  # remove the blank header row for SCRNFRS</span></span>
+<span id="cb10-60"><a href="#cb10-60"></a><span class="in">  remove_row_type(SCRNFRS, type = "header") |&gt;</span></span>
+<span id="cb10-61"><a href="#cb10-61"></a><span class="in">  modify_header(</span></span>
+<span id="cb10-62"><a href="#cb10-62"></a><span class="in">    label = "**Disposition**",</span></span>
+<span id="cb10-63"><a href="#cb10-63"></a><span class="in">    stat_0 = "**Trial A**  \n N = {n}"</span></span>
+<span id="cb10-64"><a href="#cb10-64"></a><span class="in">  ) |&gt;</span></span>
+<span id="cb10-65"><a href="#cb10-65"></a><span class="in">  # update indentation for screening failures subsection</span></span>
+<span id="cb10-66"><a href="#cb10-66"></a><span class="in">  modify_indent(columns = label, rows = variable == "screen_fail", indent = 4L) |&gt;</span></span>
+<span id="cb10-67"><a href="#cb10-67"></a><span class="in">  modify_indent(columns = label, rows = variable == "SCRNFRS", indent = 8L)</span></span>
+<span id="cb10-68"><a href="#cb10-68"></a></span>
+<span id="cb10-69"><a href="#cb10-69"></a><span class="in">tbl</span></span>
+<span id="cb10-70"><a href="#cb10-70"></a><span class="in">```</span></span>
+<span id="cb10-71"><a href="#cb10-71"></a></span>
+<span id="cb10-72"><a href="#cb10-72"></a><span class="in">```{r eval=FALSE, include=FALSE}</span></span>
+<span id="cb10-73"><a href="#cb10-73"></a><span class="in"># Run chunk locally to generate image file</span></span>
+<span id="cb10-74"><a href="#cb10-74"></a><span class="in">gt::gtsave(as_gt(tbl), filename = "result.png")</span></span>
+<span id="cb10-75"><a href="#cb10-75"></a><span class="in">```</span></span>
+<span id="cb10-76"><a href="#cb10-76"></a></span>
+<span id="cb10-77"><a href="#cb10-77"></a><span class="in">```{r img, echo=FALSE, fig.align='center', out.width='60%'}</span></span>
+<span id="cb10-78"><a href="#cb10-78"></a><span class="in">```</span></span>
+<span id="cb10-79"><a href="#cb10-79"></a></span>
+<span id="cb10-80"><a href="#cb10-80"></a><span class="fu">## Build ARD</span></span>
+<span id="cb10-81"><a href="#cb10-81"></a></span>
+<span id="cb10-82"><a href="#cb10-82"></a><span class="in">```{r ard, message=FALSE, warning=FALSE, results='hide'}</span></span>
+<span id="cb10-83"><a href="#cb10-83"></a><span class="in">ard &lt;- gather_ard(tbl)</span></span>
+<span id="cb10-84"><a href="#cb10-84"></a></span>
+<span id="cb10-85"><a href="#cb10-85"></a><span class="in">ard</span></span>
+<span id="cb10-86"><a href="#cb10-86"></a><span class="in">```</span></span>
+<span id="cb10-87"><a href="#cb10-87"></a></span>
+<span id="cb10-88"><a href="#cb10-88"></a><span class="in">```{r, echo=FALSE}</span></span>
+<span id="cb10-89"><a href="#cb10-89"></a><span class="in"># Print ARD</span></span>
+<span id="cb10-90"><a href="#cb10-90"></a><span class="in">withr::local_options(width = 9999)</span></span>
+<span id="cb10-91"><a href="#cb10-91"></a><span class="in">print(ard)</span></span>
+<span id="cb10-92"><a href="#cb10-92"></a><span class="in">```</span></span>
+<span id="cb10-93"><a href="#cb10-93"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">

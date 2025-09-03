@@ -127,7 +127,7 @@ cookieconsent.run({
 </script><style>html{ scroll-behavior: smooth; }</style>
 <link rel="stylesheet" href="../../../quarto/assets/style.scss">
 <meta property="og:title" content="cardinal - FDA Table 04">
-<meta property="og:description" content="Patient Disposition, Pooled Analyses">
+<meta property="og:description" content="Subject Populations, Randomized Population, Pooled Analysis (or Trial X)">
 <meta property="og:site_name" content="cardinal">
 </head>
 <body class="nav-fixed">
@@ -207,7 +207,7 @@ cookieconsent.run({
 <!-- main -->
 <main class="content column-page" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">FDA Table 04</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
-<p class="subtitle lead">Patient Disposition, Pooled Analyses</p>
+<p class="subtitle lead">Subject Populations, Randomized Population, Pooled Analysis (or Trial X)</p>
   <div class="quarto-categories">
     <div class="quarto-category">table</div>
     <div class="quarto-category">FDA</div>
@@ -255,88 +255,38 @@ cookieconsent.run({
 <span id="cb1-6"><a href="#cb1-6"></a>adsl <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadsl</span>
 <span id="cb1-7"><a href="#cb1-7"></a></span>
 <span id="cb1-8"><a href="#cb1-8"></a><span class="co"># Pre-processing --------------------------------------------</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a></span>
-<span id="cb1-10"><a href="#cb1-10"></a>pop_vars <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"SAFFL"</span>, <span class="st">"ITTFL"</span>)</span>
-<span id="cb1-11"><a href="#cb1-11"></a>lbl_pop_vars <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Safety population"</span>, <span class="st">"ITT/mITT population"</span>)</span>
-<span id="cb1-12"><a href="#cb1-12"></a></span>
-<span id="cb1-13"><a href="#cb1-13"></a>adsl <span class="ot">&lt;-</span> adsl <span class="sc">%&gt;%</span></span>
-<span id="cb1-14"><a href="#cb1-14"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), <span class="sc">~</span> <span class="fu">case_when</span>(</span>
-<span id="cb1-15"><a href="#cb1-15"></a>    <span class="fu">is.na</span>(.) <span class="sc">~</span> <span class="st">"Missing"</span>,</span>
-<span id="cb1-16"><a href="#cb1-16"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="fu">as.character</span>(.)</span>
-<span id="cb1-17"><a href="#cb1-17"></a>  ))) <span class="sc">%&gt;%</span></span>
-<span id="cb1-18"><a href="#cb1-18"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb1-19"><a href="#cb1-19"></a>    <span class="fu">across</span>(<span class="fu">all_of</span>(pop_vars), <span class="sc">~</span> <span class="fu">with_label</span>(. <span class="sc">==</span> <span class="st">"Y"</span>, lbl_pop_vars[<span class="fu">match</span>(<span class="fu">cur_column</span>(), pop_vars)])),</span>
-<span id="cb1-20"><a href="#cb1-20"></a>    <span class="at">DISCSD =</span> <span class="fu">with_label</span>(EOTSTT <span class="sc">==</span> <span class="st">"DISCONTINUED"</span>, <span class="st">"Discontinued study drug"</span>),</span>
-<span id="cb1-21"><a href="#cb1-21"></a>    <span class="at">DISCSD_AE =</span> <span class="fu">with_label</span>(EOTSTT <span class="sc">==</span> <span class="st">"DISCONTINUED"</span> <span class="sc">&amp;</span> DCSREAS <span class="sc">==</span> <span class="st">"ADVERSE EVENT"</span>, <span class="st">"Adverse event"</span>),</span>
-<span id="cb1-22"><a href="#cb1-22"></a>    <span class="at">DISCSD_LOE =</span> <span class="fu">with_label</span>(EOTSTT <span class="sc">==</span> <span class="st">"DISCONTINUED"</span> <span class="sc">&amp;</span> DCSREAS <span class="sc">==</span> <span class="st">"LACK OF EFFICACY"</span>, <span class="st">"Lack of efficacy"</span>),</span>
-<span id="cb1-23"><a href="#cb1-23"></a>    <span class="at">DISCSD_PD =</span> <span class="fu">with_label</span>(EOTSTT <span class="sc">==</span> <span class="st">"DISCONTINUED"</span> <span class="sc">&amp;</span> DCSREAS <span class="sc">==</span> <span class="st">"PROTOCOL DEVIATION"</span>, <span class="st">"Protocol deviation"</span>),</span>
-<span id="cb1-24"><a href="#cb1-24"></a>    <span class="at">DISCSD_DT =</span> <span class="fu">with_label</span>(EOTSTT <span class="sc">==</span> <span class="st">"DISCONTINUED"</span> <span class="sc">&amp;</span> DCSREAS <span class="sc">==</span> <span class="st">"DEATH"</span>, <span class="st">"Death"</span>),</span>
-<span id="cb1-25"><a href="#cb1-25"></a>    <span class="at">DISCSD_WBS =</span> <span class="fu">with_label</span>(EOTSTT <span class="sc">==</span> <span class="st">"DISCONTINUED"</span> <span class="sc">&amp;</span> DCSREAS <span class="sc">==</span> <span class="st">"WITHDRAWAL BY SUBJECT"</span>, <span class="st">"Withdrawal by subject"</span>),</span>
-<span id="cb1-26"><a href="#cb1-26"></a>    <span class="at">DISCSD_OTH =</span> <span class="fu">with_label</span>(EOTSTT <span class="sc">==</span> <span class="st">"DISCONTINUED"</span> <span class="sc">&amp;</span> DCSREAS <span class="sc">==</span> <span class="st">"OTHER"</span>, <span class="st">"Other"</span>),</span>
-<span id="cb1-27"><a href="#cb1-27"></a>    <span class="at">DISCS =</span> <span class="fu">with_label</span>(EOSSTT <span class="sc">==</span> <span class="st">"DISCONTINUED"</span>, <span class="st">"Discontinued study"</span>),</span>
-<span id="cb1-28"><a href="#cb1-28"></a>    <span class="at">DISCS_DT =</span> <span class="fu">with_label</span>(EOSSTT <span class="sc">==</span> <span class="st">"DISCONTINUED"</span> <span class="sc">&amp;</span> DCSREAS <span class="sc">==</span> <span class="st">"DEATH"</span>, <span class="st">"Death"</span>),</span>
-<span id="cb1-29"><a href="#cb1-29"></a>    <span class="at">DISCS_LFU =</span> <span class="fu">with_label</span>(EOSSTT <span class="sc">==</span> <span class="st">"DISCONTINUED"</span> <span class="sc">&amp;</span> DCSREAS <span class="sc">==</span> <span class="st">"LOST TO FOLLOW-UP"</span>, <span class="st">"Lost to follow-up"</span>),</span>
-<span id="cb1-30"><a href="#cb1-30"></a>    <span class="at">DISCS_WBS =</span> <span class="fu">with_label</span>(EOSSTT <span class="sc">==</span> <span class="st">"DISCONTINUED"</span> <span class="sc">&amp;</span> DCSREAS <span class="sc">==</span> <span class="st">"WITHDRAWAL BY SUBJECT"</span>, <span class="st">"Withdrawal by subject"</span>),</span>
-<span id="cb1-31"><a href="#cb1-31"></a>    <span class="at">DISCS_PHD =</span> <span class="fu">with_label</span>(EOSSTT <span class="sc">==</span> <span class="st">"DISCONTINUED"</span> <span class="sc">&amp;</span> DCSREAS <span class="sc">==</span> <span class="st">"PHYSICIAN DECISION"</span>, <span class="st">"Physician decision"</span>),</span>
-<span id="cb1-32"><a href="#cb1-32"></a>    <span class="at">DISCS_PD =</span> <span class="fu">with_label</span>(EOSSTT <span class="sc">==</span> <span class="st">"DISCONTINUED"</span> <span class="sc">&amp;</span> DCSREAS <span class="sc">==</span> <span class="st">"PROTOCOL VIOLATION"</span>, <span class="st">"Protocol deviation"</span>),</span>
-<span id="cb1-33"><a href="#cb1-33"></a>    <span class="at">DISCS_OTH =</span> <span class="fu">with_label</span>(EOSSTT <span class="sc">==</span> <span class="st">"DISCONTINUED"</span> <span class="sc">&amp;</span> DCSREAS <span class="sc">==</span> <span class="st">"OTHER"</span>, <span class="st">"Other"</span>)</span>
-<span id="cb1-34"><a href="#cb1-34"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-9"><a href="#cb1-9"></a>pop_vars <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"rand_fl"</span>, <span class="st">"ITTFL"</span>, <span class="st">"SAFFL"</span>, <span class="st">"prot_fl"</span>)</span>
+<span id="cb1-10"><a href="#cb1-10"></a>lbl_pop_vars <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Subjects randomized"</span>, <span class="st">"ITT population"</span>, <span class="st">"Safety population"</span>, <span class="st">"Per-protocol population"</span>)</span>
+<span id="cb1-11"><a href="#cb1-11"></a></span>
+<span id="cb1-12"><a href="#cb1-12"></a>data <span class="ot">&lt;-</span> adsl <span class="sc">|&gt;</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb1-14"><a href="#cb1-14"></a>    <span class="fu">across</span>(<span class="fu">all_of</span>(<span class="fu">c</span>(<span class="st">"ITTFL"</span>, <span class="st">"SAFFL"</span>)), <span class="sc">~</span> <span class="fu">with_label</span>(. <span class="sc">==</span> <span class="st">"Y"</span>, lbl_pop_vars[<span class="fu">match</span>(<span class="fu">cur_column</span>(), pop_vars)])),</span>
+<span id="cb1-15"><a href="#cb1-15"></a>    <span class="at">rand_fl =</span> <span class="sc">!</span><span class="fu">is.na</span>(RANDDT),</span>
+<span id="cb1-16"><a href="#cb1-16"></a>    <span class="at">prot_fl =</span> <span class="fu">is.na</span>(DCSREAS)</span>
+<span id="cb1-17"><a href="#cb1-17"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </div>
 <div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
 <div class="cell">
-<details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>tbl <span class="ot">&lt;-</span> adsl <span class="sc">%&gt;%</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>  gtsummary<span class="sc">::</span><span class="fu">tbl_summary</span>(</span>
-<span id="cb2-3"><a href="#cb2-3"></a>    <span class="at">by =</span> <span class="st">"ARM"</span>,</span>
+<details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>tbl <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>  <span class="fu">tbl_summary</span>(</span>
+<span id="cb2-3"><a href="#cb2-3"></a>    <span class="at">by =</span> <span class="st">"TRT01A"</span>,</span>
 <span id="cb2-4"><a href="#cb2-4"></a>    <span class="at">statistic =</span> <span class="fu">list</span>(<span class="fu">all_dichotomous</span>() <span class="sc">~</span> <span class="st">"{n} ({p}%)"</span>),</span>
-<span id="cb2-5"><a href="#cb2-5"></a>    <span class="at">include =</span> <span class="fu">all_of</span>(<span class="fu">c</span>(</span>
-<span id="cb2-6"><a href="#cb2-6"></a>      pop_vars,</span>
-<span id="cb2-7"><a href="#cb2-7"></a>      <span class="st">"DISCSD"</span>, <span class="st">"DISCSD_AE"</span>, <span class="st">"DISCSD_LOE"</span>, <span class="st">"DISCSD_PD"</span>, <span class="st">"DISCSD_DT"</span>, <span class="st">"DISCSD_WBS"</span>, <span class="st">"DISCSD_OTH"</span>,</span>
-<span id="cb2-8"><a href="#cb2-8"></a>      <span class="st">"DISCS"</span>, <span class="st">"DISCS_DT"</span>, <span class="st">"DISCS_LFU"</span>, <span class="st">"DISCS_WBS"</span>, <span class="st">"DISCS_PHD"</span>, <span class="st">"DISCS_PD"</span>, <span class="st">"DISCS_OTH"</span></span>
-<span id="cb2-9"><a href="#cb2-9"></a>    )),</span>
-<span id="cb2-10"><a href="#cb2-10"></a>    <span class="at">digits =</span> <span class="fu">list</span>(gtsummary<span class="sc">::</span><span class="fu">all_categorical</span>() <span class="sc">~</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
-<span id="cb2-11"><a href="#cb2-11"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb2-12"><a href="#cb2-12"></a>  <span class="fu">add_overall</span>(<span class="at">last =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb2-13"><a href="#cb2-13"></a>  <span class="co"># Define which variables are children of parent variables</span></span>
-<span id="cb2-14"><a href="#cb2-14"></a>  <span class="fu">modify_table_styling</span>(</span>
-<span id="cb2-15"><a href="#cb2-15"></a>    <span class="at">columns =</span> <span class="st">"label"</span>,</span>
-<span id="cb2-16"><a href="#cb2-16"></a>    <span class="at">rows =</span> variable <span class="sc">%in%</span> <span class="fu">c</span>(</span>
-<span id="cb2-17"><a href="#cb2-17"></a>      <span class="st">"DISCSD_AE"</span>, <span class="st">"DISCSD_LOE"</span>, <span class="st">"DISCSD_PD"</span>, <span class="st">"DISCSD_DT"</span>,</span>
-<span id="cb2-18"><a href="#cb2-18"></a>      <span class="st">"DISCSD_WBS"</span>, <span class="st">"DISCSD_OTH"</span></span>
-<span id="cb2-19"><a href="#cb2-19"></a>    ),</span>
-<span id="cb2-20"><a href="#cb2-20"></a>    <span class="at">text_format =</span> <span class="st">"indent"</span></span>
-<span id="cb2-21"><a href="#cb2-21"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb2-22"><a href="#cb2-22"></a>  <span class="fu">modify_table_styling</span>(</span>
-<span id="cb2-23"><a href="#cb2-23"></a>    <span class="at">columns =</span> <span class="st">"label"</span>,</span>
-<span id="cb2-24"><a href="#cb2-24"></a>    <span class="at">rows =</span> variable <span class="sc">%in%</span> <span class="fu">c</span>(</span>
-<span id="cb2-25"><a href="#cb2-25"></a>      <span class="st">"DISCS_DT"</span>, <span class="st">"DISCS_LFU"</span>, <span class="st">"DISCS_WBS"</span>, <span class="st">"DISCS_PHD"</span>,</span>
-<span id="cb2-26"><a href="#cb2-26"></a>      <span class="st">"DISCS_PD"</span>, <span class="st">"DISCS_OTH"</span></span>
-<span id="cb2-27"><a href="#cb2-27"></a>    ),</span>
-<span id="cb2-28"><a href="#cb2-28"></a>    <span class="at">text_format =</span> <span class="st">"indent"</span></span>
-<span id="cb2-29"><a href="#cb2-29"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb2-30"><a href="#cb2-30"></a>  <span class="co"># Make all but main categories display as levels</span></span>
-<span id="cb2-31"><a href="#cb2-31"></a>  <span class="fu">modify_table_body</span>(</span>
-<span id="cb2-32"><a href="#cb2-32"></a>    <span class="sc">~</span> .x <span class="sc">%&gt;%</span></span>
-<span id="cb2-33"><a href="#cb2-33"></a>      <span class="fu">mutate</span>(<span class="at">row_type =</span> <span class="fu">case_when</span>(</span>
-<span id="cb2-34"><a href="#cb2-34"></a>        variable <span class="sc">%in%</span> <span class="fu">c</span>(pop_vars, <span class="st">"DISCSD"</span>, <span class="st">"DISCS"</span>) <span class="sc">~</span> <span class="st">"label"</span>,</span>
-<span id="cb2-35"><a href="#cb2-35"></a>        <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"level"</span></span>
-<span id="cb2-36"><a href="#cb2-36"></a>      ))</span>
-<span id="cb2-37"><a href="#cb2-37"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-stderr">
-<pre><code>Warning: The `text_format` argument of `modify_table_styling()` must be one of "bold" or
-"italic" as of gtsummary 2.0.0.
-ℹ Update function call to `modify_table_styling(x = ., columns = "label", rows
-  = variable %in% c("DISCSD_AE", "DISCSD_LOE", "DISCSD_PD", "DISCSD_DT",
-  "DISCSD_WBS", "DISCSD_OTH"), indent = 4L)`.</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: The `text_format` argument of `modify_table_styling()` must be one of "bold" or
-"italic" as of gtsummary 2.0.0.
-ℹ Update function call to `modify_table_styling(x = ., columns = "label", rows
-  = variable %in% c("DISCS_DT", "DISCS_LFU", "DISCS_WBS", "DISCS_PHD",
-  "DISCS_PD", "DISCS_OTH"), indent = 4L)`.</code></pre>
-</div>
+<span id="cb2-5"><a href="#cb2-5"></a>    <span class="at">include =</span> <span class="fu">all_of</span>(pop_vars),</span>
+<span id="cb2-6"><a href="#cb2-6"></a>    <span class="at">digits =</span> <span class="fu">list</span>(<span class="fu">all_categorical</span>() <span class="sc">~</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)),</span>
+<span id="cb2-7"><a href="#cb2-7"></a>    <span class="at">label =</span> <span class="fu">as.list</span>(lbl_pop_vars) <span class="sc">|&gt;</span> <span class="fu">setNames</span>(pop_vars)</span>
+<span id="cb2-8"><a href="#cb2-8"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a>  <span class="co"># Define which variables are children of parent variables</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a>  <span class="fu">modify_indent</span>(</span>
+<span id="cb2-11"><a href="#cb2-11"></a>    <span class="at">columns =</span> <span class="st">"label"</span>,</span>
+<span id="cb2-12"><a href="#cb2-12"></a>    <span class="at">rows =</span> variable <span class="sc">!=</span> <span class="st">"rand_fl"</span>,</span>
+<span id="cb2-13"><a href="#cb2-13"></a>    <span class="at">indent =</span> <span class="dv">4</span>L</span>
+<span id="cb2-14"><a href="#cb2-14"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb2-15"><a href="#cb2-15"></a>  <span class="fu">modify_header</span>(<span class="at">label =</span> <span class="st">"**Population**"</span>)</span>
+<span id="cb2-16"><a href="#cb2-16"></a></span>
+<span id="cb2-17"><a href="#cb2-17"></a>tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -349,8 +299,8 @@ cookieconsent.run({
 </div>
 <div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
 <div class="cell">
-<details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>ard <span class="ot">&lt;-</span> <span class="fu">gather_ard</span>(tbl)</span>
-<span id="cb5-2"><a href="#cb5-2"></a>ard</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>ard <span class="ot">&lt;-</span> <span class="fu">gather_ard</span>(tbl)</span>
+<span id="cb3-2"><a href="#cb3-2"></a>ard</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
@@ -358,50 +308,26 @@ cookieconsent.run({
 <pre><code>$tbl_summary</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>{cards} data frame: 428 x 12</code></pre>
+<pre><code>{cards} data frame: 117 x 12</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   group1 group1_level  variable variable_level   context stat_name stat_label  stat fmt_fun warning error gts_column
-1     ARM    A: Drug X     ITTFL           TRUE dichotom…         n          n   134    &lt;fn&gt;                   stat_1
-2     ARM    A: Drug X     ITTFL           TRUE dichotom…         N          N   134       0                   stat_1
-3     ARM    A: Drug X     ITTFL           TRUE dichotom…         p          %     1    &lt;fn&gt;                   stat_1
-4     ARM    A: Drug X     SAFFL           TRUE dichotom…         n          n   134    &lt;fn&gt;                   stat_1
-5     ARM    A: Drug X     SAFFL           TRUE dichotom…         N          N   134       0                   stat_1
-6     ARM    A: Drug X     SAFFL           TRUE dichotom…         p          %     1    &lt;fn&gt;                   stat_1
-7     ARM    A: Drug X    DISCSD           TRUE dichotom…         n          n    42    &lt;fn&gt;                   stat_1
-8     ARM    A: Drug X    DISCSD           TRUE dichotom…         N          N   134       0                   stat_1
-9     ARM    A: Drug X    DISCSD           TRUE dichotom…         p          % 0.313    &lt;fn&gt;                   stat_1
-10    ARM    A: Drug X DISCSD_AE           TRUE dichotom…         n          n     3    &lt;fn&gt;                   stat_1</code></pre>
+<pre><code>   group1 group1_level variable variable_level   context stat_name stat_label stat fmt_fun warning error gts_column
+1  TRT01A    A: Drug X    ITTFL           TRUE tabulate…         n          n  134    &lt;fn&gt;                   stat_1
+2  TRT01A    A: Drug X    ITTFL           TRUE tabulate…         N          N  134       0                   stat_1
+3  TRT01A    A: Drug X    ITTFL           TRUE tabulate…         p          %    1    &lt;fn&gt;                   stat_1
+4  TRT01A    A: Drug X    SAFFL           TRUE tabulate…         n          n  134    &lt;fn&gt;                   stat_1
+5  TRT01A    A: Drug X    SAFFL           TRUE tabulate…         N          N  134       0                   stat_1
+6  TRT01A    A: Drug X    SAFFL           TRUE tabulate…         p          %    1    &lt;fn&gt;                   stat_1
+7  TRT01A    A: Drug X  rand_fl           TRUE tabulate…         n          n  134    &lt;fn&gt;                   stat_1
+8  TRT01A    A: Drug X  rand_fl           TRUE tabulate…         N          N  134       0                   stat_1
+9  TRT01A    A: Drug X  rand_fl           TRUE tabulate…         p          %    1    &lt;fn&gt;                   stat_1
+10 TRT01A    A: Drug X  prot_fl           TRUE tabulate…         n          n   92    &lt;fn&gt;                   stat_1</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>ℹ 418 more rows</code></pre>
+<pre><code>ℹ 107 more rows</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>ℹ Use `print(n = ...)` to see more rows</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-$add_overall</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>{cards} data frame: 161 x 10</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>    variable variable_level   context stat_name stat_label stat fmt_fun warning error gts_column
-1      ITTFL           TRUE dichotom…         n          n  400    &lt;fn&gt;                   stat_0
-2      ITTFL           TRUE dichotom…         N          N  400    &lt;fn&gt;                   stat_0
-3      ITTFL           TRUE dichotom…         p          %    1    &lt;fn&gt;                   stat_0
-4      SAFFL           TRUE dichotom…         n          n  400    &lt;fn&gt;                   stat_0
-5      SAFFL           TRUE dichotom…         N          N  400    &lt;fn&gt;                   stat_0
-6      SAFFL           TRUE dichotom…         p          %    1    &lt;fn&gt;                   stat_0
-7     DISCSD           TRUE dichotom…         n          n  120    &lt;fn&gt;                   stat_0
-8     DISCSD           TRUE dichotom…         N          N  400    &lt;fn&gt;                   stat_0
-9     DISCSD           TRUE dichotom…         p          %  0.3    &lt;fn&gt;                   stat_0
-10 DISCSD_AE           TRUE dichotom…         n          n   14    &lt;fn&gt;                   stat_0</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>ℹ 151 more rows
-ℹ Use `print(n = ...)` to see more rows</code></pre>
 </div>
 </div>
 </div>
@@ -1016,121 +942,84 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb15" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb15-1"><a href="#cb15-1"></a><span class="co">---</span></span>
-<span id="cb15-2"><a href="#cb15-2"></a><span class="an">title:</span><span class="co"> FDA Table 04</span></span>
-<span id="cb15-3"><a href="#cb15-3"></a><span class="an">subtitle:</span><span class="co"> Patient Disposition, Pooled Analyses</span></span>
-<span id="cb15-4"><a href="#cb15-4"></a><span class="an">categories:</span><span class="co"> [table, FDA, safety, disposition]</span></span>
-<span id="cb15-5"><a href="#cb15-5"></a><span class="co">---</span></span>
-<span id="cb15-6"><a href="#cb15-6"></a></span>
-<span id="cb15-7"><a href="#cb15-7"></a>::: panel-tabset</span>
-<span id="cb15-8"><a href="#cb15-8"></a><span class="fu">## Table Preview</span></span>
-<span id="cb15-9"><a href="#cb15-9"></a></span>
-<span id="cb15-10"><a href="#cb15-10"></a><span class="in">```{r img, echo=FALSE, fig.align='center', out.width='60%'}</span></span>
-<span id="cb15-11"><a href="#cb15-11"></a><span class="in">knitr::include_graphics("result.png")</span></span>
-<span id="cb15-12"><a href="#cb15-12"></a><span class="in">```</span></span>
-<span id="cb15-13"><a href="#cb15-13"></a></span>
-<span id="cb15-14"><a href="#cb15-14"></a><span class="fu">## Setup</span></span>
-<span id="cb15-15"><a href="#cb15-15"></a></span>
-<span id="cb15-16"><a href="#cb15-16"></a><span class="in">```{r setup, message=FALSE}</span></span>
-<span id="cb15-17"><a href="#cb15-17"></a><span class="in"># Load libraries &amp; data -------------------------------------</span></span>
-<span id="cb15-18"><a href="#cb15-18"></a><span class="in">library(dplyr)</span></span>
-<span id="cb15-19"><a href="#cb15-19"></a><span class="in">library(gtsummary)</span></span>
-<span id="cb15-20"><a href="#cb15-20"></a><span class="in">library(formatters)</span></span>
-<span id="cb15-21"><a href="#cb15-21"></a></span>
-<span id="cb15-22"><a href="#cb15-22"></a><span class="in">adsl &lt;- random.cdisc.data::cadsl</span></span>
-<span id="cb15-23"><a href="#cb15-23"></a></span>
-<span id="cb15-24"><a href="#cb15-24"></a><span class="in"># Pre-processing --------------------------------------------</span></span>
-<span id="cb15-25"><a href="#cb15-25"></a></span>
-<span id="cb15-26"><a href="#cb15-26"></a><span class="in">pop_vars &lt;- c("SAFFL", "ITTFL")</span></span>
-<span id="cb15-27"><a href="#cb15-27"></a><span class="in">lbl_pop_vars &lt;- c("Safety population", "ITT/mITT population")</span></span>
-<span id="cb15-28"><a href="#cb15-28"></a></span>
-<span id="cb15-29"><a href="#cb15-29"></a><span class="in">adsl &lt;- adsl %&gt;%</span></span>
-<span id="cb15-30"><a href="#cb15-30"></a><span class="in">  mutate(across(everything(), ~ case_when(</span></span>
-<span id="cb15-31"><a href="#cb15-31"></a><span class="in">    is.na(.) ~ "Missing",</span></span>
-<span id="cb15-32"><a href="#cb15-32"></a><span class="in">    TRUE ~ as.character(.)</span></span>
-<span id="cb15-33"><a href="#cb15-33"></a><span class="in">  ))) %&gt;%</span></span>
-<span id="cb15-34"><a href="#cb15-34"></a><span class="in">  mutate(</span></span>
-<span id="cb15-35"><a href="#cb15-35"></a><span class="in">    across(all_of(pop_vars), ~ with_label(. == "Y", lbl_pop_vars[match(cur_column(), pop_vars)])),</span></span>
-<span id="cb15-36"><a href="#cb15-36"></a><span class="in">    DISCSD = with_label(EOTSTT == "DISCONTINUED", "Discontinued study drug"),</span></span>
-<span id="cb15-37"><a href="#cb15-37"></a><span class="in">    DISCSD_AE = with_label(EOTSTT == "DISCONTINUED" &amp; DCSREAS == "ADVERSE EVENT", "Adverse event"),</span></span>
-<span id="cb15-38"><a href="#cb15-38"></a><span class="in">    DISCSD_LOE = with_label(EOTSTT == "DISCONTINUED" &amp; DCSREAS == "LACK OF EFFICACY", "Lack of efficacy"),</span></span>
-<span id="cb15-39"><a href="#cb15-39"></a><span class="in">    DISCSD_PD = with_label(EOTSTT == "DISCONTINUED" &amp; DCSREAS == "PROTOCOL DEVIATION", "Protocol deviation"),</span></span>
-<span id="cb15-40"><a href="#cb15-40"></a><span class="in">    DISCSD_DT = with_label(EOTSTT == "DISCONTINUED" &amp; DCSREAS == "DEATH", "Death"),</span></span>
-<span id="cb15-41"><a href="#cb15-41"></a><span class="in">    DISCSD_WBS = with_label(EOTSTT == "DISCONTINUED" &amp; DCSREAS == "WITHDRAWAL BY SUBJECT", "Withdrawal by subject"),</span></span>
-<span id="cb15-42"><a href="#cb15-42"></a><span class="in">    DISCSD_OTH = with_label(EOTSTT == "DISCONTINUED" &amp; DCSREAS == "OTHER", "Other"),</span></span>
-<span id="cb15-43"><a href="#cb15-43"></a><span class="in">    DISCS = with_label(EOSSTT == "DISCONTINUED", "Discontinued study"),</span></span>
-<span id="cb15-44"><a href="#cb15-44"></a><span class="in">    DISCS_DT = with_label(EOSSTT == "DISCONTINUED" &amp; DCSREAS == "DEATH", "Death"),</span></span>
-<span id="cb15-45"><a href="#cb15-45"></a><span class="in">    DISCS_LFU = with_label(EOSSTT == "DISCONTINUED" &amp; DCSREAS == "LOST TO FOLLOW-UP", "Lost to follow-up"),</span></span>
-<span id="cb15-46"><a href="#cb15-46"></a><span class="in">    DISCS_WBS = with_label(EOSSTT == "DISCONTINUED" &amp; DCSREAS == "WITHDRAWAL BY SUBJECT", "Withdrawal by subject"),</span></span>
-<span id="cb15-47"><a href="#cb15-47"></a><span class="in">    DISCS_PHD = with_label(EOSSTT == "DISCONTINUED" &amp; DCSREAS == "PHYSICIAN DECISION", "Physician decision"),</span></span>
-<span id="cb15-48"><a href="#cb15-48"></a><span class="in">    DISCS_PD = with_label(EOSSTT == "DISCONTINUED" &amp; DCSREAS == "PROTOCOL VIOLATION", "Protocol deviation"),</span></span>
-<span id="cb15-49"><a href="#cb15-49"></a><span class="in">    DISCS_OTH = with_label(EOSSTT == "DISCONTINUED" &amp; DCSREAS == "OTHER", "Other")</span></span>
-<span id="cb15-50"><a href="#cb15-50"></a><span class="in">  )</span></span>
-<span id="cb15-51"><a href="#cb15-51"></a><span class="in">```</span></span>
-<span id="cb15-52"><a href="#cb15-52"></a></span>
-<span id="cb15-53"><a href="#cb15-53"></a><span class="fu">## Build Table</span></span>
-<span id="cb15-54"><a href="#cb15-54"></a></span>
-<span id="cb15-55"><a href="#cb15-55"></a><span class="in">```{r tbl, results='hide'}</span></span>
-<span id="cb15-56"><a href="#cb15-56"></a><span class="in">tbl &lt;- adsl %&gt;%</span></span>
-<span id="cb15-57"><a href="#cb15-57"></a><span class="in">  gtsummary::tbl_summary(</span></span>
-<span id="cb15-58"><a href="#cb15-58"></a><span class="in">    by = "ARM",</span></span>
-<span id="cb15-59"><a href="#cb15-59"></a><span class="in">    statistic = list(all_dichotomous() ~ "{n} ({p}%)"),</span></span>
-<span id="cb15-60"><a href="#cb15-60"></a><span class="in">    include = all_of(c(</span></span>
-<span id="cb15-61"><a href="#cb15-61"></a><span class="in">      pop_vars,</span></span>
-<span id="cb15-62"><a href="#cb15-62"></a><span class="in">      "DISCSD", "DISCSD_AE", "DISCSD_LOE", "DISCSD_PD", "DISCSD_DT", "DISCSD_WBS", "DISCSD_OTH",</span></span>
-<span id="cb15-63"><a href="#cb15-63"></a><span class="in">      "DISCS", "DISCS_DT", "DISCS_LFU", "DISCS_WBS", "DISCS_PHD", "DISCS_PD", "DISCS_OTH"</span></span>
-<span id="cb15-64"><a href="#cb15-64"></a><span class="in">    )),</span></span>
-<span id="cb15-65"><a href="#cb15-65"></a><span class="in">    digits = list(gtsummary::all_categorical() ~ c(0, 1))</span></span>
-<span id="cb15-66"><a href="#cb15-66"></a><span class="in">  ) %&gt;%</span></span>
-<span id="cb15-67"><a href="#cb15-67"></a><span class="in">  add_overall(last = TRUE) %&gt;%</span></span>
-<span id="cb15-68"><a href="#cb15-68"></a><span class="in">  # Define which variables are children of parent variables</span></span>
-<span id="cb15-69"><a href="#cb15-69"></a><span class="in">  modify_table_styling(</span></span>
-<span id="cb15-70"><a href="#cb15-70"></a><span class="in">    columns = "label",</span></span>
-<span id="cb15-71"><a href="#cb15-71"></a><span class="in">    rows = variable %in% c(</span></span>
-<span id="cb15-72"><a href="#cb15-72"></a><span class="in">      "DISCSD_AE", "DISCSD_LOE", "DISCSD_PD", "DISCSD_DT",</span></span>
-<span id="cb15-73"><a href="#cb15-73"></a><span class="in">      "DISCSD_WBS", "DISCSD_OTH"</span></span>
-<span id="cb15-74"><a href="#cb15-74"></a><span class="in">    ),</span></span>
-<span id="cb15-75"><a href="#cb15-75"></a><span class="in">    text_format = "indent"</span></span>
-<span id="cb15-76"><a href="#cb15-76"></a><span class="in">  ) %&gt;%</span></span>
-<span id="cb15-77"><a href="#cb15-77"></a><span class="in">  modify_table_styling(</span></span>
-<span id="cb15-78"><a href="#cb15-78"></a><span class="in">    columns = "label",</span></span>
-<span id="cb15-79"><a href="#cb15-79"></a><span class="in">    rows = variable %in% c(</span></span>
-<span id="cb15-80"><a href="#cb15-80"></a><span class="in">      "DISCS_DT", "DISCS_LFU", "DISCS_WBS", "DISCS_PHD",</span></span>
-<span id="cb15-81"><a href="#cb15-81"></a><span class="in">      "DISCS_PD", "DISCS_OTH"</span></span>
-<span id="cb15-82"><a href="#cb15-82"></a><span class="in">    ),</span></span>
-<span id="cb15-83"><a href="#cb15-83"></a><span class="in">    text_format = "indent"</span></span>
-<span id="cb15-84"><a href="#cb15-84"></a><span class="in">  ) %&gt;%</span></span>
-<span id="cb15-85"><a href="#cb15-85"></a><span class="in">  # Make all but main categories display as levels</span></span>
-<span id="cb15-86"><a href="#cb15-86"></a><span class="in">  modify_table_body(</span></span>
-<span id="cb15-87"><a href="#cb15-87"></a><span class="in">    ~ .x %&gt;%</span></span>
-<span id="cb15-88"><a href="#cb15-88"></a><span class="in">      mutate(row_type = case_when(</span></span>
-<span id="cb15-89"><a href="#cb15-89"></a><span class="in">        variable %in% c(pop_vars, "DISCSD", "DISCS") ~ "label",</span></span>
-<span id="cb15-90"><a href="#cb15-90"></a><span class="in">        TRUE ~ "level"</span></span>
-<span id="cb15-91"><a href="#cb15-91"></a><span class="in">      ))</span></span>
-<span id="cb15-92"><a href="#cb15-92"></a><span class="in">  )</span></span>
-<span id="cb15-93"><a href="#cb15-93"></a><span class="in">```</span></span>
-<span id="cb15-94"><a href="#cb15-94"></a></span>
-<span id="cb15-95"><a href="#cb15-95"></a><span class="in">```{r eval=FALSE, include=FALSE}</span></span>
-<span id="cb15-96"><a href="#cb15-96"></a><span class="in"># Run chunk locally to generate image file</span></span>
-<span id="cb15-97"><a href="#cb15-97"></a><span class="in">gt::gtsave(as_gt(tbl), filename = "result.png")</span></span>
-<span id="cb15-98"><a href="#cb15-98"></a><span class="in">```</span></span>
-<span id="cb15-99"><a href="#cb15-99"></a></span>
-<span id="cb15-100"><a href="#cb15-100"></a><span class="in">```{r img, echo=FALSE, fig.align='center', out.width='60%'}</span></span>
-<span id="cb15-101"><a href="#cb15-101"></a><span class="in">```</span></span>
-<span id="cb15-102"><a href="#cb15-102"></a></span>
-<span id="cb15-103"><a href="#cb15-103"></a><span class="fu">## Build ARD</span></span>
-<span id="cb15-104"><a href="#cb15-104"></a></span>
-<span id="cb15-105"><a href="#cb15-105"></a><span class="in">```{r ard, message=FALSE, warning=FALSE, results='hide'}</span></span>
-<span id="cb15-106"><a href="#cb15-106"></a><span class="in">ard &lt;- gather_ard(tbl)</span></span>
-<span id="cb15-107"><a href="#cb15-107"></a><span class="in">ard</span></span>
-<span id="cb15-108"><a href="#cb15-108"></a><span class="in">```</span></span>
-<span id="cb15-109"><a href="#cb15-109"></a></span>
-<span id="cb15-110"><a href="#cb15-110"></a><span class="in">```{r, echo=FALSE}</span></span>
-<span id="cb15-111"><a href="#cb15-111"></a><span class="in"># Print full ARD</span></span>
-<span id="cb15-112"><a href="#cb15-112"></a><span class="in">withr::local_options(width = 9999)</span></span>
-<span id="cb15-113"><a href="#cb15-113"></a><span class="in">print(ard, columns = "all")</span></span>
-<span id="cb15-114"><a href="#cb15-114"></a><span class="in">```</span></span>
-<span id="cb15-115"><a href="#cb15-115"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1"></a><span class="co">---</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="an">title:</span><span class="co"> FDA Table 04</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="an">subtitle:</span><span class="co"> Subject Populations, Randomized Population, Pooled Analysis (or Trial X) </span></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="an">categories:</span><span class="co"> [table, FDA, safety, disposition]</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="co">---</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a></span>
+<span id="cb9-7"><a href="#cb9-7"></a>::: panel-tabset</span>
+<span id="cb9-8"><a href="#cb9-8"></a><span class="fu">## Table Preview</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a></span>
+<span id="cb9-10"><a href="#cb9-10"></a><span class="in">```{r img, echo=FALSE, fig.align='center', out.width='60%'}</span></span>
+<span id="cb9-11"><a href="#cb9-11"></a><span class="in">knitr::include_graphics("result.png")</span></span>
+<span id="cb9-12"><a href="#cb9-12"></a><span class="in">```</span></span>
+<span id="cb9-13"><a href="#cb9-13"></a></span>
+<span id="cb9-14"><a href="#cb9-14"></a><span class="fu">## Setup</span></span>
+<span id="cb9-15"><a href="#cb9-15"></a></span>
+<span id="cb9-16"><a href="#cb9-16"></a><span class="in">```{r setup, message=FALSE}</span></span>
+<span id="cb9-17"><a href="#cb9-17"></a><span class="in"># Load libraries &amp; data -------------------------------------</span></span>
+<span id="cb9-18"><a href="#cb9-18"></a><span class="in">library(dplyr)</span></span>
+<span id="cb9-19"><a href="#cb9-19"></a><span class="in">library(gtsummary)</span></span>
+<span id="cb9-20"><a href="#cb9-20"></a><span class="in">library(formatters)</span></span>
+<span id="cb9-21"><a href="#cb9-21"></a></span>
+<span id="cb9-22"><a href="#cb9-22"></a><span class="in">adsl &lt;- random.cdisc.data::cadsl</span></span>
+<span id="cb9-23"><a href="#cb9-23"></a></span>
+<span id="cb9-24"><a href="#cb9-24"></a><span class="in"># Pre-processing --------------------------------------------</span></span>
+<span id="cb9-25"><a href="#cb9-25"></a><span class="in">pop_vars &lt;- c("rand_fl", "ITTFL", "SAFFL", "prot_fl")</span></span>
+<span id="cb9-26"><a href="#cb9-26"></a><span class="in">lbl_pop_vars &lt;- c("Subjects randomized", "ITT population", "Safety population", "Per-protocol population")</span></span>
+<span id="cb9-27"><a href="#cb9-27"></a></span>
+<span id="cb9-28"><a href="#cb9-28"></a><span class="in">data &lt;- adsl |&gt;</span></span>
+<span id="cb9-29"><a href="#cb9-29"></a><span class="in">  mutate(</span></span>
+<span id="cb9-30"><a href="#cb9-30"></a><span class="in">    across(all_of(c("ITTFL", "SAFFL")), ~ with_label(. == "Y", lbl_pop_vars[match(cur_column(), pop_vars)])),</span></span>
+<span id="cb9-31"><a href="#cb9-31"></a><span class="in">    rand_fl = !is.na(RANDDT),</span></span>
+<span id="cb9-32"><a href="#cb9-32"></a><span class="in">    prot_fl = is.na(DCSREAS)</span></span>
+<span id="cb9-33"><a href="#cb9-33"></a><span class="in">  )</span></span>
+<span id="cb9-34"><a href="#cb9-34"></a><span class="in">```</span></span>
+<span id="cb9-35"><a href="#cb9-35"></a></span>
+<span id="cb9-36"><a href="#cb9-36"></a><span class="fu">## Build Table</span></span>
+<span id="cb9-37"><a href="#cb9-37"></a></span>
+<span id="cb9-38"><a href="#cb9-38"></a><span class="in">```{r tbl, results='hide'}</span></span>
+<span id="cb9-39"><a href="#cb9-39"></a><span class="in">tbl &lt;- data |&gt;</span></span>
+<span id="cb9-40"><a href="#cb9-40"></a><span class="in">  tbl_summary(</span></span>
+<span id="cb9-41"><a href="#cb9-41"></a><span class="in">    by = "TRT01A",</span></span>
+<span id="cb9-42"><a href="#cb9-42"></a><span class="in">    statistic = list(all_dichotomous() ~ "{n} ({p}%)"),</span></span>
+<span id="cb9-43"><a href="#cb9-43"></a><span class="in">    include = all_of(pop_vars),</span></span>
+<span id="cb9-44"><a href="#cb9-44"></a><span class="in">    digits = list(all_categorical() ~ c(0, 1)),</span></span>
+<span id="cb9-45"><a href="#cb9-45"></a><span class="in">    label = as.list(lbl_pop_vars) |&gt; setNames(pop_vars)</span></span>
+<span id="cb9-46"><a href="#cb9-46"></a><span class="in">  ) |&gt;</span></span>
+<span id="cb9-47"><a href="#cb9-47"></a><span class="in">  # Define which variables are children of parent variables</span></span>
+<span id="cb9-48"><a href="#cb9-48"></a><span class="in">  modify_indent(</span></span>
+<span id="cb9-49"><a href="#cb9-49"></a><span class="in">    columns = "label",</span></span>
+<span id="cb9-50"><a href="#cb9-50"></a><span class="in">    rows = variable != "rand_fl",</span></span>
+<span id="cb9-51"><a href="#cb9-51"></a><span class="in">    indent = 4L</span></span>
+<span id="cb9-52"><a href="#cb9-52"></a><span class="in">  ) |&gt;</span></span>
+<span id="cb9-53"><a href="#cb9-53"></a><span class="in">  modify_header(label = "**Population**")</span></span>
+<span id="cb9-54"><a href="#cb9-54"></a></span>
+<span id="cb9-55"><a href="#cb9-55"></a><span class="in">tbl</span></span>
+<span id="cb9-56"><a href="#cb9-56"></a><span class="in">```</span></span>
+<span id="cb9-57"><a href="#cb9-57"></a></span>
+<span id="cb9-58"><a href="#cb9-58"></a><span class="in">```{r eval=FALSE, include=FALSE}</span></span>
+<span id="cb9-59"><a href="#cb9-59"></a><span class="in"># Run chunk locally to generate image file</span></span>
+<span id="cb9-60"><a href="#cb9-60"></a><span class="in">gt::gtsave(as_gt(tbl), filename = "result.png")</span></span>
+<span id="cb9-61"><a href="#cb9-61"></a><span class="in">```</span></span>
+<span id="cb9-62"><a href="#cb9-62"></a></span>
+<span id="cb9-63"><a href="#cb9-63"></a><span class="in">```{r img, echo=FALSE, fig.align='center', out.width='60%'}</span></span>
+<span id="cb9-64"><a href="#cb9-64"></a><span class="in">```</span></span>
+<span id="cb9-65"><a href="#cb9-65"></a></span>
+<span id="cb9-66"><a href="#cb9-66"></a><span class="fu">## Build ARD</span></span>
+<span id="cb9-67"><a href="#cb9-67"></a></span>
+<span id="cb9-68"><a href="#cb9-68"></a><span class="in">```{r ard, message=FALSE, warning=FALSE, results='hide'}</span></span>
+<span id="cb9-69"><a href="#cb9-69"></a><span class="in">ard &lt;- gather_ard(tbl)</span></span>
+<span id="cb9-70"><a href="#cb9-70"></a><span class="in">ard</span></span>
+<span id="cb9-71"><a href="#cb9-71"></a><span class="in">```</span></span>
+<span id="cb9-72"><a href="#cb9-72"></a></span>
+<span id="cb9-73"><a href="#cb9-73"></a><span class="in">```{r, echo=FALSE}</span></span>
+<span id="cb9-74"><a href="#cb9-74"></a><span class="in"># Print full ARD</span></span>
+<span id="cb9-75"><a href="#cb9-75"></a><span class="in">withr::local_options(width = 9999)</span></span>
+<span id="cb9-76"><a href="#cb9-76"></a><span class="in">print(ard, columns = "all")</span></span>
+<span id="cb9-77"><a href="#cb9-77"></a><span class="in">```</span></span>
+<span id="cb9-78"><a href="#cb9-78"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">

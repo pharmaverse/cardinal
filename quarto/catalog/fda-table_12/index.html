@@ -127,7 +127,7 @@ cookieconsent.run({
 </script><style>html{ scroll-behavior: smooth; }</style>
 <link rel="stylesheet" href="../../../quarto/assets/style.scss">
 <meta property="og:title" content="cardinal - FDA Table 12">
-<meta property="og:description" content="Patients With Adverse Events Leading to Treatment Discontinuation by System Organ Class and Preferred Term, Safety Population, Pooled Analyses">
+<meta property="og:description" content="Subjects With Adverse Events Leading to Treatment Discontinuation by System Organ Class and Preferred Term, Safety Population, Pooled Analysis (or Trial X)">
 <meta property="og:site_name" content="cardinal">
 </head>
 <body class="nav-fixed">
@@ -207,7 +207,7 @@ cookieconsent.run({
 <!-- main -->
 <main class="content column-page" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">FDA Table 12</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
-<p class="subtitle lead">Patients With Adverse Events Leading to Treatment Discontinuation by System Organ Class and Preferred Term, Safety Population, Pooled Analyses</p>
+<p class="subtitle lead">Subjects With Adverse Events Leading to Treatment Discontinuation by System Organ Class and Preferred Term, Safety Population, Pooled Analysis (or Trial X)</p>
   <div class="quarto-categories">
     <div class="quarto-category">table</div>
     <div class="quarto-category">FDA</div>
@@ -257,10 +257,10 @@ cookieconsent.run({
 <span id="cb1-8"><a href="#cb1-8"></a>adae<span class="sc">$</span>DCSREAS[<span class="fu">is.na</span>(adae<span class="sc">$</span>DCSREAS)] <span class="ot">&lt;-</span> <span class="st">"ADVERSE EVENT"</span></span>
 <span id="cb1-9"><a href="#cb1-9"></a></span>
 <span id="cb1-10"><a href="#cb1-10"></a><span class="co"># Pre-processing --------------------------------------------</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a>adsl <span class="ot">&lt;-</span> adsl <span class="sc">%&gt;%</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a>adsl <span class="ot">&lt;-</span> adsl <span class="sc">|&gt;</span></span>
 <span id="cb1-12"><a href="#cb1-12"></a>  <span class="fu">filter</span>(SAFFL <span class="sc">==</span> <span class="st">"Y"</span>) <span class="co"># safety population</span></span>
 <span id="cb1-13"><a href="#cb1-13"></a></span>
-<span id="cb1-14"><a href="#cb1-14"></a>data <span class="ot">&lt;-</span> adae <span class="sc">%&gt;%</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a>data <span class="ot">&lt;-</span> adae <span class="sc">|&gt;</span></span>
 <span id="cb1-15"><a href="#cb1-15"></a>  <span class="fu">filter</span>(</span>
 <span id="cb1-16"><a href="#cb1-16"></a>    <span class="co"># safety population</span></span>
 <span id="cb1-17"><a href="#cb1-17"></a>    SAFFL <span class="sc">==</span> <span class="st">"Y"</span>,</span>
@@ -289,15 +289,15 @@ cookieconsent.run({
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   group1 group1_level   group2 group2_level variable variable_level   context stat_name stat_label  stat fmt_fun warning error
-1    &lt;NA&gt;                  &lt;NA&gt;                TRT01A      A: Drug X categori…         n          n   134       0              
-2    &lt;NA&gt;                  &lt;NA&gt;                TRT01A      A: Drug X categori…         N          N   400       0              
-3    &lt;NA&gt;                  &lt;NA&gt;                TRT01A      A: Drug X categori…         p          % 0.335    &lt;fn&gt;              
-4    &lt;NA&gt;                  &lt;NA&gt;                TRT01A      B: Place… categori…         n          n   134       0              
-5    &lt;NA&gt;                  &lt;NA&gt;                TRT01A      B: Place… categori…         N          N   400       0              
-6    &lt;NA&gt;                  &lt;NA&gt;                TRT01A      B: Place… categori…         p          % 0.335    &lt;fn&gt;              
-7    &lt;NA&gt;                  &lt;NA&gt;                TRT01A      C: Combi… categori…         n          n   132       0              
-8    &lt;NA&gt;                  &lt;NA&gt;                TRT01A      C: Combi… categori…         N          N   400       0              
-9    &lt;NA&gt;                  &lt;NA&gt;                TRT01A      C: Combi… categori…         p          %  0.33    &lt;fn&gt;              
+1    &lt;NA&gt;                  &lt;NA&gt;                TRT01A      A: Drug X  tabulate         n          n   134       0              
+2    &lt;NA&gt;                  &lt;NA&gt;                TRT01A      A: Drug X  tabulate         N          N   400       0              
+3    &lt;NA&gt;                  &lt;NA&gt;                TRT01A      A: Drug X  tabulate         p          % 0.335    &lt;fn&gt;              
+4    &lt;NA&gt;                  &lt;NA&gt;                TRT01A      B: Place…  tabulate         n          n   134       0              
+5    &lt;NA&gt;                  &lt;NA&gt;                TRT01A      B: Place…  tabulate         N          N   400       0              
+6    &lt;NA&gt;                  &lt;NA&gt;                TRT01A      B: Place…  tabulate         p          % 0.335    &lt;fn&gt;              
+7    &lt;NA&gt;                  &lt;NA&gt;                TRT01A      C: Combi…  tabulate         n          n   132       0              
+8    &lt;NA&gt;                  &lt;NA&gt;                TRT01A      C: Combi…  tabulate         N          N   400       0              
+9    &lt;NA&gt;                  &lt;NA&gt;                TRT01A      C: Combi…  tabulate         p          %  0.33    &lt;fn&gt;              
 10 TRT01A    A: Drug X     &lt;NA&gt;              AEBODSYS         cl A.1 hierarch…         n          n    53       0              
 11 TRT01A    A: Drug X     &lt;NA&gt;              AEBODSYS         cl A.1 hierarch…         N          N   134       0              
 12 TRT01A    A: Drug X     &lt;NA&gt;              AEBODSYS         cl A.1 hierarch…         p          % 0.396    &lt;fn&gt;              
@@ -347,7 +347,7 @@ cookieconsent.run({
 <span id="cb7-5"><a href="#cb7-5"></a>  <span class="at">id =</span> USUBJID,</span>
 <span id="cb7-6"><a href="#cb7-6"></a>  <span class="at">denominator =</span> adsl,</span>
 <span id="cb7-7"><a href="#cb7-7"></a>  <span class="at">overall_row =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb7-8"><a href="#cb7-8"></a>  <span class="at">label =</span> <span class="fu">list</span>(<span class="at">..ard_hierarchical_overall.. =</span> <span class="st">"Patients with at least one AE leading to discontinuation"</span>)</span>
+<span id="cb7-8"><a href="#cb7-8"></a>  <span class="at">label =</span> <span class="fu">list</span>(<span class="at">..ard_hierarchical_overall.. =</span> <span class="st">"Subjects with at least one AE leading to treatment discontinuation"</span>)</span>
 <span id="cb7-9"><a href="#cb7-9"></a>)</span>
 <span id="cb7-10"><a href="#cb7-10"></a></span>
 <span id="cb7-11"><a href="#cb7-11"></a>tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -975,7 +975,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb8" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1"></a><span class="co">---</span></span>
 <span id="cb8-2"><a href="#cb8-2"></a><span class="an">title:</span><span class="co"> FDA Table 12</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="an">subtitle:</span><span class="co"> Patients With Adverse Events Leading to Treatment Discontinuation by System Organ Class and Preferred Term, Safety Population, Pooled Analyses</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="an">subtitle:</span><span class="co"> Subjects With Adverse Events Leading to Treatment Discontinuation by System Organ Class and Preferred Term, Safety Population, Pooled Analysis (or Trial X) </span></span>
 <span id="cb8-4"><a href="#cb8-4"></a><span class="an">categories:</span><span class="co"> [table, FDA, safety, adverse events]</span></span>
 <span id="cb8-5"><a href="#cb8-5"></a><span class="co">---</span></span>
 <span id="cb8-6"><a href="#cb8-6"></a></span>
@@ -999,10 +999,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb8-24"><a href="#cb8-24"></a><span class="in">adae$DCSREAS[is.na(adae$DCSREAS)] &lt;- "ADVERSE EVENT"</span></span>
 <span id="cb8-25"><a href="#cb8-25"></a></span>
 <span id="cb8-26"><a href="#cb8-26"></a><span class="in"># Pre-processing --------------------------------------------</span></span>
-<span id="cb8-27"><a href="#cb8-27"></a><span class="in">adsl &lt;- adsl %&gt;%</span></span>
+<span id="cb8-27"><a href="#cb8-27"></a><span class="in">adsl &lt;- adsl |&gt;</span></span>
 <span id="cb8-28"><a href="#cb8-28"></a><span class="in">  filter(SAFFL == "Y") # safety population</span></span>
 <span id="cb8-29"><a href="#cb8-29"></a></span>
-<span id="cb8-30"><a href="#cb8-30"></a><span class="in">data &lt;- adae %&gt;%</span></span>
+<span id="cb8-30"><a href="#cb8-30"></a><span class="in">data &lt;- adae |&gt;</span></span>
 <span id="cb8-31"><a href="#cb8-31"></a><span class="in">  filter(</span></span>
 <span id="cb8-32"><a href="#cb8-32"></a><span class="in">    # safety population</span></span>
 <span id="cb8-33"><a href="#cb8-33"></a><span class="in">    SAFFL == "Y",</span></span>
@@ -1041,7 +1041,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb8-66"><a href="#cb8-66"></a><span class="in">  id = USUBJID,</span></span>
 <span id="cb8-67"><a href="#cb8-67"></a><span class="in">  denominator = adsl,</span></span>
 <span id="cb8-68"><a href="#cb8-68"></a><span class="in">  overall_row = TRUE,</span></span>
-<span id="cb8-69"><a href="#cb8-69"></a><span class="in">  label = list(..ard_hierarchical_overall.. = "Patients with at least one AE leading to discontinuation")</span></span>
+<span id="cb8-69"><a href="#cb8-69"></a><span class="in">  label = list(..ard_hierarchical_overall.. = "Subjects with at least one AE leading to treatment discontinuation")</span></span>
 <span id="cb8-70"><a href="#cb8-70"></a><span class="in">)</span></span>
 <span id="cb8-71"><a href="#cb8-71"></a></span>
 <span id="cb8-72"><a href="#cb8-72"></a><span class="in">tbl</span></span>
