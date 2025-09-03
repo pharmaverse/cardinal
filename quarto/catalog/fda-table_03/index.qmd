@@ -20,7 +20,7 @@ library(formatters)
 library(cards)
 library(gtsummary)
 
-adsl <- random.cdisc.data::cadsl
+adsl <- pharmaverseadam::adsl
 
 set.seed(1)
 adsl$RANDDT[sample(seq_len(nrow(adsl)), 100)] <- NA
@@ -35,7 +35,8 @@ data <- adsl |>
       levels = scrnfail_reas_lvls
     ),
     ENRLFL = with_label(!is.na(ENRLDT), "Subjects enrolled"),
-    RANDFL = with_label(!is.na(RANDDT), "Subjects randomized")
+    RANDFL = with_label(!is.na(RANDDT), "Subjects randomized"),
+    screen_fail = !ENRLFL  # create a flag for screen failure
   )
 data$SCRNFRS[data$SCRNFL == "N" | !is.na(data$ENRLDT)] <- NA
 ```
@@ -76,28 +77,26 @@ print(ard, columns = "all", n = 40)
 
 ```{r tbl, message=FALSE, warning=FALSE, results='hide'}
 tbl <- data |>
-  # create a flag for screen failure
-  mutate(screen_fail = !ENRLFL) |>
   tbl_summary(
     include = c(SCRNFL, screen_fail, SCRNFRS, ENRLFL, RANDFL),
-    # only show count for number of screened subjects
-    statistic = SCRNFL ~ "{n}",
     # suppress number of missing observations
     missing = "no",
     # specify the denominator is always the no. obs. in `data`
     percent = data,
     # present SCRNFRS in descending order of frequency
     sort = SCRNFRS ~ "frequency",
-    # udpate default screen failure label
+    # update default screen failure label
     label = list(screen_fail = "Screening failures")
   ) |>
   # remove the blank header row for SCRNFRS
   remove_row_type(SCRNFRS, type = "header") |>
-  remove_footnote_header() |>
   modify_header(
     label = "**Disposition**",
-    stat_0 = "**Trial A**"
-  )
+    stat_0 = "**Trial A**  \n N = {n}"
+  ) |>
+  # update indentation for screening failures subsection
+  modify_indent(columns = label, rows = variable == "screen_fail", indent = 4L) |>
+  modify_indent(columns = label, rows = variable == "SCRNFRS", indent = 8L)
 
 tbl
 ```
