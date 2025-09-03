@@ -36,7 +36,7 @@ data <- adsl |>
     ),
     ENRLFL = with_label(!is.na(ENRLDT), "Subjects enrolled"),
     RANDFL = with_label(!is.na(RANDDT), "Subjects randomized"),
-    screen_fail = !ENRLFL  # create a flag for screen failure
+    screen_fail = !ENRLFL # create a flag for screen failure
   )
 data$SCRNFRS[data$SCRNFL == "N" | !is.na(data$ENRLDT)] <- NA
 ```
