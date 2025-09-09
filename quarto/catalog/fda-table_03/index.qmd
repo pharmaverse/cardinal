@@ -1,6 +1,6 @@
 ---
-title: FDA Table 03
-subtitle: Subject Screening and Enrollment, Screening Population, Trials A and B
+title: Subject Screening and Enrollment, Screening Population, Trials A and B
+subtitle: FDA Table 03
 categories: [table, FDA, safety, disposition]
 ---
 
@@ -16,7 +16,6 @@ knitr::include_graphics("result.png")
 ```{r setup, message=FALSE}
 # Load libraries & data -------------------------------------
 library(dplyr)
-library(formatters)
 library(cards)
 library(gtsummary)
 
@@ -30,12 +29,12 @@ scrnfail_reas_lvls <- c(
 data <- adsl |>
   mutate(
     ENRLDT = RANDDT,
-    SCRNFL = with_label(TRUE, "Subjects screened"),
+    SCRNFL = TRUE,
     SCRNFRS = factor(sample(scrnfail_reas_lvls, size = nrow(adsl), replace = TRUE),
       levels = scrnfail_reas_lvls
     ),
-    ENRLFL = with_label(!is.na(ENRLDT), "Subjects enrolled"),
-    RANDFL = with_label(!is.na(RANDDT), "Subjects randomized")
+    ENRLFL = !is.na(ENRLDT),
+    RANDFL = !is.na(RANDDT)
   )
 data$SCRNFRS[data$SCRNFL == "N" | !is.na(data$ENRLDT)] <- NA
 ```
@@ -45,17 +44,17 @@ data$SCRNFRS[data$SCRNFL == "N" | !is.na(data$ENRLDT)] <- NA
 ```{r ard, message=FALSE, warning=FALSE, results='hide'}
 ard <- data |>
   ard_stack(
-    ard_dichotomous(
+    ard_tabulate_value(
       variables = SCRNFL,
       value = list(SCRNFL = TRUE),
       statistic = everything() ~ c("n")
     ),
-    ard_categorical(
+    ard_tabulate(
       variables = SCRNFRS,
       statistic = everything() ~ c("n", "p"),
       denominator = data
     ),
-    ard_dichotomous(
+    ard_tabulate_value(
       variables = c(ENRLFL, RANDFL),
       value = list(ENRLFL = TRUE, RANDFL = TRUE),
       statistic = everything() ~ c("n", "p"),
@@ -79,7 +78,8 @@ tbl_scrn <- tbl_summary(
   data = data,
   by = TRT01A,
   include = "SCRNFL",
-  missing = "no"
+  missing = "no",
+  label = ~"Subjects screened"
 )
 
 tbl_scrnfrs <- tbl_hierarchical(
@@ -98,7 +98,8 @@ tbl_enrl_rand <- tbl_summary(
   data = data,
   by = TRT01A,
   include = c("ENRLFL", "RANDFL"),
-  missing = "no"
+  missing = "no",
+  label = list(ENRLFL = "Subjects enrolled", RANDFL = "Subjects randomized")
 )
 
 tbl <- list(tbl_scrn, tbl_scrnfrs, tbl_enrl_rand) |>

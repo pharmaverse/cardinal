@@ -1,6 +1,6 @@
 ---
-title: FDA Table 04
-subtitle: Subject Populations, Randomized Population, Pooled Analysis (or Trial X) 
+title: Subject Populations, Randomized Population, Pooled Analysis (or Trial X) 
+subtitle: FDA Table 04
 categories: [table, FDA, safety, disposition]
 ---
 
@@ -17,7 +17,6 @@ knitr::include_graphics("result.png")
 # Load libraries & data -------------------------------------
 library(dplyr)
 library(gtsummary)
-library(formatters)
 
 adsl <- random.cdisc.data::cadsl
 
@@ -27,7 +26,7 @@ lbl_pop_vars <- c("Subjects randomized", "ITT population", "Safety population", 
 
 data <- adsl |>
   mutate(
-    across(all_of(c("ITTFL", "SAFFL")), ~ with_label(. == "Y", lbl_pop_vars[match(cur_column(), pop_vars)])),
+    across(all_of(c("ITTFL", "SAFFL")), ~ . == "Y"),
     rand_fl = !is.na(RANDDT),
     prot_fl = is.na(DCSREAS)
   )
