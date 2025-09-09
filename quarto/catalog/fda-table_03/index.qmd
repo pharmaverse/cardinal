@@ -19,7 +19,7 @@ library(dplyr)
 library(cards)
 library(gtsummary)
 
-adsl <- random.cdisc.data::cadsl
+adsl <- pharmaverseadam::adsl
 
 set.seed(1)
 adsl$RANDDT[sample(seq_len(nrow(adsl)), 100)] <- NA
@@ -115,5 +115,19 @@ gt::gtsave(as_gt(tbl), filename = "result.png")
 ```
 
 ```{r img, echo=FALSE, fig.align='center', out.width='60%'}
+```
+
+## Build ARD
+
+```{r ard, message=FALSE, warning=FALSE, results='hide'}
+ard <- gather_ard(tbl)
+
+ard
+```
+
+```{r, echo=FALSE}
+# Print ARD
+withr::local_options(width = 9999)
+print(ard)
 ```
 :::
