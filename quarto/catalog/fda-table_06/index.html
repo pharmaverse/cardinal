@@ -301,7 +301,7 @@ cookieconsent.run({
 <span id="cb2-20"><a href="#cb2-20"></a>    ),</span>
 <span id="cb2-21"><a href="#cb2-21"></a></span>
 <span id="cb2-22"><a href="#cb2-22"></a>    <span class="co"># Analysis of subjects treated ------------------------</span></span>
-<span id="cb2-23"><a href="#cb2-23"></a>    <span class="fu">ard_dichotomous</span>(</span>
+<span id="cb2-23"><a href="#cb2-23"></a>    <span class="fu">ard_tabulate_value</span>(</span>
 <span id="cb2-24"><a href="#cb2-24"></a>      <span class="at">variables =</span> <span class="fu">c</span>(D_ANY, D_GT1, D_GT3, D_GT6, D_GT12),</span>
 <span id="cb2-25"><a href="#cb2-25"></a>      <span class="co"># Calculate the n and % statistics for each flag variable</span></span>
 <span id="cb2-26"><a href="#cb2-26"></a>      <span class="at">statistic =</span> <span class="fu">everything</span>() <span class="sc">~</span> <span class="fu">c</span>(<span class="st">"n"</span>, <span class="st">"p"</span>)</span>
@@ -326,16 +326,16 @@ cookieconsent.run({
 7  TRT01A      Placebo   TRTDUR                continuo…          p75         Q3      183       1              
 8  TRT01A      Placebo   TRTDUR                continuo… tot_exposure  tot_expo…    12711       1              
 9  TRT01A      Placebo   TRTDUR                continuo…   person_yrs  person_y…   34.801       1              
-10 TRT01A      Placebo    D_ANY           TRUE dichotom…            n          n       85       0              
-11 TRT01A      Placebo    D_ANY           TRUE dichotom…            p          %        1    &lt;fn&gt;              
-12 TRT01A      Placebo    D_GT1           TRUE dichotom…            n          n       77       0              
-13 TRT01A      Placebo    D_GT1           TRUE dichotom…            p          %    0.906    &lt;fn&gt;              
-14 TRT01A      Placebo    D_GT3           TRUE dichotom…            n          n       67       0              
-15 TRT01A      Placebo    D_GT3           TRUE dichotom…            p          %    0.788    &lt;fn&gt;              
-16 TRT01A      Placebo    D_GT6           TRUE dichotom…            n          n       40       0              
-17 TRT01A      Placebo    D_GT6           TRUE dichotom…            p          %    0.471    &lt;fn&gt;              
-18 TRT01A      Placebo   D_GT12           TRUE dichotom…            n          n        0       0              
-19 TRT01A      Placebo   D_GT12           TRUE dichotom…            p          %        0    &lt;fn&gt;              
+10 TRT01A      Placebo    D_ANY           TRUE tabulate…            n          n       85       0              
+11 TRT01A      Placebo    D_ANY           TRUE tabulate…            p          %        1    &lt;fn&gt;              
+12 TRT01A      Placebo    D_GT1           TRUE tabulate…            n          n       77       0              
+13 TRT01A      Placebo    D_GT1           TRUE tabulate…            p          %    0.906    &lt;fn&gt;              
+14 TRT01A      Placebo    D_GT3           TRUE tabulate…            n          n       67       0              
+15 TRT01A      Placebo    D_GT3           TRUE tabulate…            p          %    0.788    &lt;fn&gt;              
+16 TRT01A      Placebo    D_GT6           TRUE tabulate…            n          n       40       0              
+17 TRT01A      Placebo    D_GT6           TRUE tabulate…            p          %    0.471    &lt;fn&gt;              
+18 TRT01A      Placebo   D_GT12           TRUE tabulate…            n          n        0       0              
+19 TRT01A      Placebo   D_GT12           TRUE tabulate…            p          %        0    &lt;fn&gt;              
 20 TRT01A    Xanomeli…   TRTDUR                continuo…         mean       Mean  112.222       1              
 21 TRT01A    Xanomeli…   TRTDUR                continuo…           sd         SD   65.523       1              
 22 TRT01A    Xanomeli…   TRTDUR                continuo…       median     Median     96.5       1              
@@ -345,16 +345,16 @@ cookieconsent.run({
 26 TRT01A    Xanomeli…   TRTDUR                continuo…          p75         Q3      183       1              
 27 TRT01A    Xanomeli…   TRTDUR                continuo… tot_exposure  tot_expo… 8079.999       1              
 28 TRT01A    Xanomeli…   TRTDUR                continuo…   person_yrs  person_y…   22.122       1              
-29 TRT01A    Xanomeli…    D_ANY           TRUE dichotom…            n          n       72       0              
-30 TRT01A    Xanomeli…    D_ANY           TRUE dichotom…            p          %        1    &lt;fn&gt;              
-31 TRT01A    Xanomeli…    D_GT1           TRUE dichotom…            n          n       67       0              
-32 TRT01A    Xanomeli…    D_GT1           TRUE dichotom…            p          %    0.931    &lt;fn&gt;              
-33 TRT01A    Xanomeli…    D_GT3           TRUE dichotom…            n          n       38       0              
-34 TRT01A    Xanomeli…    D_GT3           TRUE dichotom…            p          %    0.528    &lt;fn&gt;              
-35 TRT01A    Xanomeli…    D_GT6           TRUE dichotom…            n          n       20       0              
-36 TRT01A    Xanomeli…    D_GT6           TRUE dichotom…            p          %    0.278    &lt;fn&gt;              
-37 TRT01A    Xanomeli…   D_GT12           TRUE dichotom…            n          n        0       0              
-38 TRT01A    Xanomeli…   D_GT12           TRUE dichotom…            p          %        0    &lt;fn&gt;              
+29 TRT01A    Xanomeli…    D_ANY           TRUE tabulate…            n          n       72       0              
+30 TRT01A    Xanomeli…    D_ANY           TRUE tabulate…            p          %        1    &lt;fn&gt;              
+31 TRT01A    Xanomeli…    D_GT1           TRUE tabulate…            n          n       67       0              
+32 TRT01A    Xanomeli…    D_GT1           TRUE tabulate…            p          %    0.931    &lt;fn&gt;              
+33 TRT01A    Xanomeli…    D_GT3           TRUE tabulate…            n          n       38       0              
+34 TRT01A    Xanomeli…    D_GT3           TRUE tabulate…            p          %    0.528    &lt;fn&gt;              
+35 TRT01A    Xanomeli…    D_GT6           TRUE tabulate…            n          n       20       0              
+36 TRT01A    Xanomeli…    D_GT6           TRUE tabulate…            p          %    0.278    &lt;fn&gt;              
+37 TRT01A    Xanomeli…   D_GT12           TRUE tabulate…            n          n        0       0              
+38 TRT01A    Xanomeli…   D_GT12           TRUE tabulate…            p          %        0    &lt;fn&gt;              
 39 TRT01A    Xanomeli…   TRTDUR                continuo…         mean       Mean   86.811       1              
 40 TRT01A    Xanomeli…   TRTDUR                continuo…           sd         SD   70.474       1              </code></pre>
 </div>
@@ -1098,7 +1098,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb8-68"><a href="#cb8-68"></a><span class="in">    ),</span></span>
 <span id="cb8-69"><a href="#cb8-69"></a></span>
 <span id="cb8-70"><a href="#cb8-70"></a><span class="in">    # Analysis of subjects treated ------------------------</span></span>
-<span id="cb8-71"><a href="#cb8-71"></a><span class="in">    ard_dichotomous(</span></span>
+<span id="cb8-71"><a href="#cb8-71"></a><span class="in">    ard_tabulate_value(</span></span>
 <span id="cb8-72"><a href="#cb8-72"></a><span class="in">      variables = c(D_ANY, D_GT1, D_GT3, D_GT6, D_GT12),</span></span>
 <span id="cb8-73"><a href="#cb8-73"></a><span class="in">      # Calculate the n and % statistics for each flag variable</span></span>
 <span id="cb8-74"><a href="#cb8-74"></a><span class="in">      statistic = everything() ~ c("n", "p")</span></span>

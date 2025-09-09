@@ -250,20 +250,19 @@ cookieconsent.run({
 <details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Load libraries &amp; data -------------------------------------</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(gtsummary)</span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(formatters)</span>
-<span id="cb1-5"><a href="#cb1-5"></a></span>
-<span id="cb1-6"><a href="#cb1-6"></a>adsl <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadsl</span>
-<span id="cb1-7"><a href="#cb1-7"></a></span>
-<span id="cb1-8"><a href="#cb1-8"></a><span class="co"># Pre-processing --------------------------------------------</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a>pop_vars <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"rand_fl"</span>, <span class="st">"ITTFL"</span>, <span class="st">"SAFFL"</span>, <span class="st">"prot_fl"</span>)</span>
-<span id="cb1-10"><a href="#cb1-10"></a>lbl_pop_vars <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Subjects randomized"</span>, <span class="st">"ITT population"</span>, <span class="st">"Safety population"</span>, <span class="st">"Per-protocol population"</span>)</span>
-<span id="cb1-11"><a href="#cb1-11"></a></span>
-<span id="cb1-12"><a href="#cb1-12"></a>data <span class="ot">&lt;-</span> adsl <span class="sc">|&gt;</span></span>
-<span id="cb1-13"><a href="#cb1-13"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb1-14"><a href="#cb1-14"></a>    <span class="fu">across</span>(<span class="fu">all_of</span>(<span class="fu">c</span>(<span class="st">"ITTFL"</span>, <span class="st">"SAFFL"</span>)), <span class="sc">~</span> <span class="fu">with_label</span>(. <span class="sc">==</span> <span class="st">"Y"</span>, lbl_pop_vars[<span class="fu">match</span>(<span class="fu">cur_column</span>(), pop_vars)])),</span>
-<span id="cb1-15"><a href="#cb1-15"></a>    <span class="at">rand_fl =</span> <span class="sc">!</span><span class="fu">is.na</span>(RANDDT),</span>
-<span id="cb1-16"><a href="#cb1-16"></a>    <span class="at">prot_fl =</span> <span class="fu">is.na</span>(DCSREAS)</span>
-<span id="cb1-17"><a href="#cb1-17"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a>adsl <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadsl</span>
+<span id="cb1-6"><a href="#cb1-6"></a></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="co"># Pre-processing --------------------------------------------</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>pop_vars <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"rand_fl"</span>, <span class="st">"ITTFL"</span>, <span class="st">"SAFFL"</span>, <span class="st">"prot_fl"</span>)</span>
+<span id="cb1-9"><a href="#cb1-9"></a>lbl_pop_vars <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Subjects randomized"</span>, <span class="st">"ITT population"</span>, <span class="st">"Safety population"</span>, <span class="st">"Per-protocol population"</span>)</span>
+<span id="cb1-10"><a href="#cb1-10"></a></span>
+<span id="cb1-11"><a href="#cb1-11"></a>data <span class="ot">&lt;-</span> adsl <span class="sc">|&gt;</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb1-13"><a href="#cb1-13"></a>    <span class="fu">across</span>(<span class="fu">all_of</span>(<span class="fu">c</span>(<span class="st">"ITTFL"</span>, <span class="st">"SAFFL"</span>)), <span class="sc">~</span> . <span class="sc">==</span> <span class="st">"Y"</span>),</span>
+<span id="cb1-14"><a href="#cb1-14"></a>    <span class="at">rand_fl =</span> <span class="sc">!</span><span class="fu">is.na</span>(RANDDT),</span>
+<span id="cb1-15"><a href="#cb1-15"></a>    <span class="at">prot_fl =</span> <span class="fu">is.na</span>(DCSREAS)</span>
+<span id="cb1-16"><a href="#cb1-16"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </div>
@@ -961,65 +960,64 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb9-17"><a href="#cb9-17"></a><span class="in"># Load libraries &amp; data -------------------------------------</span></span>
 <span id="cb9-18"><a href="#cb9-18"></a><span class="in">library(dplyr)</span></span>
 <span id="cb9-19"><a href="#cb9-19"></a><span class="in">library(gtsummary)</span></span>
-<span id="cb9-20"><a href="#cb9-20"></a><span class="in">library(formatters)</span></span>
-<span id="cb9-21"><a href="#cb9-21"></a></span>
-<span id="cb9-22"><a href="#cb9-22"></a><span class="in">adsl &lt;- random.cdisc.data::cadsl</span></span>
-<span id="cb9-23"><a href="#cb9-23"></a></span>
-<span id="cb9-24"><a href="#cb9-24"></a><span class="in"># Pre-processing --------------------------------------------</span></span>
-<span id="cb9-25"><a href="#cb9-25"></a><span class="in">pop_vars &lt;- c("rand_fl", "ITTFL", "SAFFL", "prot_fl")</span></span>
-<span id="cb9-26"><a href="#cb9-26"></a><span class="in">lbl_pop_vars &lt;- c("Subjects randomized", "ITT population", "Safety population", "Per-protocol population")</span></span>
-<span id="cb9-27"><a href="#cb9-27"></a></span>
-<span id="cb9-28"><a href="#cb9-28"></a><span class="in">data &lt;- adsl |&gt;</span></span>
-<span id="cb9-29"><a href="#cb9-29"></a><span class="in">  mutate(</span></span>
-<span id="cb9-30"><a href="#cb9-30"></a><span class="in">    across(all_of(c("ITTFL", "SAFFL")), ~ with_label(. == "Y", lbl_pop_vars[match(cur_column(), pop_vars)])),</span></span>
-<span id="cb9-31"><a href="#cb9-31"></a><span class="in">    rand_fl = !is.na(RANDDT),</span></span>
-<span id="cb9-32"><a href="#cb9-32"></a><span class="in">    prot_fl = is.na(DCSREAS)</span></span>
-<span id="cb9-33"><a href="#cb9-33"></a><span class="in">  )</span></span>
-<span id="cb9-34"><a href="#cb9-34"></a><span class="in">```</span></span>
-<span id="cb9-35"><a href="#cb9-35"></a></span>
-<span id="cb9-36"><a href="#cb9-36"></a><span class="fu">## Build Table</span></span>
-<span id="cb9-37"><a href="#cb9-37"></a></span>
-<span id="cb9-38"><a href="#cb9-38"></a><span class="in">```{r tbl, results='hide'}</span></span>
-<span id="cb9-39"><a href="#cb9-39"></a><span class="in">tbl &lt;- data |&gt;</span></span>
-<span id="cb9-40"><a href="#cb9-40"></a><span class="in">  tbl_summary(</span></span>
-<span id="cb9-41"><a href="#cb9-41"></a><span class="in">    by = "TRT01A",</span></span>
-<span id="cb9-42"><a href="#cb9-42"></a><span class="in">    statistic = list(all_dichotomous() ~ "{n} ({p}%)"),</span></span>
-<span id="cb9-43"><a href="#cb9-43"></a><span class="in">    include = all_of(pop_vars),</span></span>
-<span id="cb9-44"><a href="#cb9-44"></a><span class="in">    digits = list(all_categorical() ~ c(0, 1)),</span></span>
-<span id="cb9-45"><a href="#cb9-45"></a><span class="in">    label = as.list(lbl_pop_vars) |&gt; setNames(pop_vars)</span></span>
-<span id="cb9-46"><a href="#cb9-46"></a><span class="in">  ) |&gt;</span></span>
-<span id="cb9-47"><a href="#cb9-47"></a><span class="in">  # Define which variables are children of parent variables</span></span>
-<span id="cb9-48"><a href="#cb9-48"></a><span class="in">  modify_indent(</span></span>
-<span id="cb9-49"><a href="#cb9-49"></a><span class="in">    columns = "label",</span></span>
-<span id="cb9-50"><a href="#cb9-50"></a><span class="in">    rows = variable != "rand_fl",</span></span>
-<span id="cb9-51"><a href="#cb9-51"></a><span class="in">    indent = 4L</span></span>
-<span id="cb9-52"><a href="#cb9-52"></a><span class="in">  ) |&gt;</span></span>
-<span id="cb9-53"><a href="#cb9-53"></a><span class="in">  modify_header(label = "**Population**")</span></span>
-<span id="cb9-54"><a href="#cb9-54"></a></span>
-<span id="cb9-55"><a href="#cb9-55"></a><span class="in">tbl</span></span>
-<span id="cb9-56"><a href="#cb9-56"></a><span class="in">```</span></span>
-<span id="cb9-57"><a href="#cb9-57"></a></span>
-<span id="cb9-58"><a href="#cb9-58"></a><span class="in">```{r eval=FALSE, include=FALSE}</span></span>
-<span id="cb9-59"><a href="#cb9-59"></a><span class="in"># Run chunk locally to generate image file</span></span>
-<span id="cb9-60"><a href="#cb9-60"></a><span class="in">gt::gtsave(as_gt(tbl), filename = "result.png")</span></span>
-<span id="cb9-61"><a href="#cb9-61"></a><span class="in">```</span></span>
-<span id="cb9-62"><a href="#cb9-62"></a></span>
-<span id="cb9-63"><a href="#cb9-63"></a><span class="in">```{r img, echo=FALSE, fig.align='center', out.width='60%'}</span></span>
-<span id="cb9-64"><a href="#cb9-64"></a><span class="in">```</span></span>
-<span id="cb9-65"><a href="#cb9-65"></a></span>
-<span id="cb9-66"><a href="#cb9-66"></a><span class="fu">## Build ARD</span></span>
-<span id="cb9-67"><a href="#cb9-67"></a></span>
-<span id="cb9-68"><a href="#cb9-68"></a><span class="in">```{r ard, message=FALSE, warning=FALSE, results='hide'}</span></span>
-<span id="cb9-69"><a href="#cb9-69"></a><span class="in">ard &lt;- gather_ard(tbl)</span></span>
-<span id="cb9-70"><a href="#cb9-70"></a><span class="in">ard</span></span>
-<span id="cb9-71"><a href="#cb9-71"></a><span class="in">```</span></span>
-<span id="cb9-72"><a href="#cb9-72"></a></span>
-<span id="cb9-73"><a href="#cb9-73"></a><span class="in">```{r, echo=FALSE}</span></span>
-<span id="cb9-74"><a href="#cb9-74"></a><span class="in"># Print full ARD</span></span>
-<span id="cb9-75"><a href="#cb9-75"></a><span class="in">withr::local_options(width = 9999)</span></span>
-<span id="cb9-76"><a href="#cb9-76"></a><span class="in">print(ard, columns = "all")</span></span>
-<span id="cb9-77"><a href="#cb9-77"></a><span class="in">```</span></span>
-<span id="cb9-78"><a href="#cb9-78"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-20"><a href="#cb9-20"></a></span>
+<span id="cb9-21"><a href="#cb9-21"></a><span class="in">adsl &lt;- random.cdisc.data::cadsl</span></span>
+<span id="cb9-22"><a href="#cb9-22"></a></span>
+<span id="cb9-23"><a href="#cb9-23"></a><span class="in"># Pre-processing --------------------------------------------</span></span>
+<span id="cb9-24"><a href="#cb9-24"></a><span class="in">pop_vars &lt;- c("rand_fl", "ITTFL", "SAFFL", "prot_fl")</span></span>
+<span id="cb9-25"><a href="#cb9-25"></a><span class="in">lbl_pop_vars &lt;- c("Subjects randomized", "ITT population", "Safety population", "Per-protocol population")</span></span>
+<span id="cb9-26"><a href="#cb9-26"></a></span>
+<span id="cb9-27"><a href="#cb9-27"></a><span class="in">data &lt;- adsl |&gt;</span></span>
+<span id="cb9-28"><a href="#cb9-28"></a><span class="in">  mutate(</span></span>
+<span id="cb9-29"><a href="#cb9-29"></a><span class="in">    across(all_of(c("ITTFL", "SAFFL")), ~ . == "Y"),</span></span>
+<span id="cb9-30"><a href="#cb9-30"></a><span class="in">    rand_fl = !is.na(RANDDT),</span></span>
+<span id="cb9-31"><a href="#cb9-31"></a><span class="in">    prot_fl = is.na(DCSREAS)</span></span>
+<span id="cb9-32"><a href="#cb9-32"></a><span class="in">  )</span></span>
+<span id="cb9-33"><a href="#cb9-33"></a><span class="in">```</span></span>
+<span id="cb9-34"><a href="#cb9-34"></a></span>
+<span id="cb9-35"><a href="#cb9-35"></a><span class="fu">## Build Table</span></span>
+<span id="cb9-36"><a href="#cb9-36"></a></span>
+<span id="cb9-37"><a href="#cb9-37"></a><span class="in">```{r tbl, results='hide'}</span></span>
+<span id="cb9-38"><a href="#cb9-38"></a><span class="in">tbl &lt;- data |&gt;</span></span>
+<span id="cb9-39"><a href="#cb9-39"></a><span class="in">  tbl_summary(</span></span>
+<span id="cb9-40"><a href="#cb9-40"></a><span class="in">    by = "TRT01A",</span></span>
+<span id="cb9-41"><a href="#cb9-41"></a><span class="in">    statistic = list(all_dichotomous() ~ "{n} ({p}%)"),</span></span>
+<span id="cb9-42"><a href="#cb9-42"></a><span class="in">    include = all_of(pop_vars),</span></span>
+<span id="cb9-43"><a href="#cb9-43"></a><span class="in">    digits = list(all_categorical() ~ c(0, 1)),</span></span>
+<span id="cb9-44"><a href="#cb9-44"></a><span class="in">    label = as.list(lbl_pop_vars) |&gt; setNames(pop_vars)</span></span>
+<span id="cb9-45"><a href="#cb9-45"></a><span class="in">  ) |&gt;</span></span>
+<span id="cb9-46"><a href="#cb9-46"></a><span class="in">  # Define which variables are children of parent variables</span></span>
+<span id="cb9-47"><a href="#cb9-47"></a><span class="in">  modify_indent(</span></span>
+<span id="cb9-48"><a href="#cb9-48"></a><span class="in">    columns = "label",</span></span>
+<span id="cb9-49"><a href="#cb9-49"></a><span class="in">    rows = variable != "rand_fl",</span></span>
+<span id="cb9-50"><a href="#cb9-50"></a><span class="in">    indent = 4L</span></span>
+<span id="cb9-51"><a href="#cb9-51"></a><span class="in">  ) |&gt;</span></span>
+<span id="cb9-52"><a href="#cb9-52"></a><span class="in">  modify_header(label = "**Population**")</span></span>
+<span id="cb9-53"><a href="#cb9-53"></a></span>
+<span id="cb9-54"><a href="#cb9-54"></a><span class="in">tbl</span></span>
+<span id="cb9-55"><a href="#cb9-55"></a><span class="in">```</span></span>
+<span id="cb9-56"><a href="#cb9-56"></a></span>
+<span id="cb9-57"><a href="#cb9-57"></a><span class="in">```{r eval=FALSE, include=FALSE}</span></span>
+<span id="cb9-58"><a href="#cb9-58"></a><span class="in"># Run chunk locally to generate image file</span></span>
+<span id="cb9-59"><a href="#cb9-59"></a><span class="in">gt::gtsave(as_gt(tbl), filename = "result.png")</span></span>
+<span id="cb9-60"><a href="#cb9-60"></a><span class="in">```</span></span>
+<span id="cb9-61"><a href="#cb9-61"></a></span>
+<span id="cb9-62"><a href="#cb9-62"></a><span class="in">```{r img, echo=FALSE, fig.align='center', out.width='60%'}</span></span>
+<span id="cb9-63"><a href="#cb9-63"></a><span class="in">```</span></span>
+<span id="cb9-64"><a href="#cb9-64"></a></span>
+<span id="cb9-65"><a href="#cb9-65"></a><span class="fu">## Build ARD</span></span>
+<span id="cb9-66"><a href="#cb9-66"></a></span>
+<span id="cb9-67"><a href="#cb9-67"></a><span class="in">```{r ard, message=FALSE, warning=FALSE, results='hide'}</span></span>
+<span id="cb9-68"><a href="#cb9-68"></a><span class="in">ard &lt;- gather_ard(tbl)</span></span>
+<span id="cb9-69"><a href="#cb9-69"></a><span class="in">ard</span></span>
+<span id="cb9-70"><a href="#cb9-70"></a><span class="in">```</span></span>
+<span id="cb9-71"><a href="#cb9-71"></a></span>
+<span id="cb9-72"><a href="#cb9-72"></a><span class="in">```{r, echo=FALSE}</span></span>
+<span id="cb9-73"><a href="#cb9-73"></a><span class="in"># Print full ARD</span></span>
+<span id="cb9-74"><a href="#cb9-74"></a><span class="in">withr::local_options(width = 9999)</span></span>
+<span id="cb9-75"><a href="#cb9-75"></a><span class="in">print(ard, columns = "all")</span></span>
+<span id="cb9-76"><a href="#cb9-76"></a><span class="in">```</span></span>
+<span id="cb9-77"><a href="#cb9-77"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">

@@ -284,7 +284,7 @@ cookieconsent.run({
 <div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
 <div class="cell">
 <details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>ard <span class="ot">&lt;-</span> <span class="fu">bind_ard</span>(</span>
-<span id="cb2-2"><a href="#cb2-2"></a>  <span class="fu">ard_dichotomous</span>(</span>
+<span id="cb2-2"><a href="#cb2-2"></a>  <span class="fu">ard_tabulate_value</span>(</span>
 <span id="cb2-3"><a href="#cb2-3"></a>    data,</span>
 <span id="cb2-4"><a href="#cb2-4"></a>    <span class="at">variables =</span> <span class="fu">c</span>(L60, G60, G90, G110, GE120),</span>
 <span id="cb2-5"><a href="#cb2-5"></a>    <span class="at">by =</span> TRT01A,</span>
@@ -293,7 +293,7 @@ cookieconsent.run({
 <span id="cb2-8"><a href="#cb2-8"></a>    <span class="at">denominator =</span> data <span class="sc">|&gt;</span> <span class="fu">distinct</span>(USUBJID, TRT01A)</span>
 <span id="cb2-9"><a href="#cb2-9"></a>  ),</span>
 <span id="cb2-10"><a href="#cb2-10"></a>  <span class="co"># ARD for header N values</span></span>
-<span id="cb2-11"><a href="#cb2-11"></a>  <span class="fu">ard_categorical</span>(adsl, <span class="at">variables =</span> TRT01A)</span>
+<span id="cb2-11"><a href="#cb2-11"></a>  <span class="fu">ard_tabulate</span>(adsl, <span class="at">variables =</span> TRT01A)</span>
 <span id="cb2-12"><a href="#cb2-12"></a>)</span>
 <span id="cb2-13"><a href="#cb2-13"></a></span>
 <span id="cb2-14"><a href="#cb2-14"></a>ard</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -305,45 +305,45 @@ cookieconsent.run({
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   group1 group1_level variable variable_level   context stat_name stat_label  stat fmt_fun warning error
-1  TRT01A    A: Drug X      L60           TRUE dichotom…         n          n     0       0              
-2  TRT01A    A: Drug X      L60           TRUE dichotom…         p          %     0    &lt;fn&gt;              
-3  TRT01A    A: Drug X      G60           TRUE dichotom…         n          n   134       0              
-4  TRT01A    A: Drug X      G60           TRUE dichotom…         p          %     1    &lt;fn&gt;              
-5  TRT01A    A: Drug X      G90           TRUE dichotom…         n          n   134       0              
-6  TRT01A    A: Drug X      G90           TRUE dichotom…         p          %     1    &lt;fn&gt;              
-7  TRT01A    A: Drug X     G110           TRUE dichotom…         n          n   123       0              
-8  TRT01A    A: Drug X     G110           TRUE dichotom…         p          % 0.918    &lt;fn&gt;              
-9  TRT01A    A: Drug X    GE120           TRUE dichotom…         n          n    88       0              
-10 TRT01A    A: Drug X    GE120           TRUE dichotom…         p          % 0.657    &lt;fn&gt;              
-11 TRT01A    B: Place…      L60           TRUE dichotom…         n          n     0       0              
-12 TRT01A    B: Place…      L60           TRUE dichotom…         p          %     0    &lt;fn&gt;              
-13 TRT01A    B: Place…      G60           TRUE dichotom…         n          n   134       0              
-14 TRT01A    B: Place…      G60           TRUE dichotom…         p          %     1    &lt;fn&gt;              
-15 TRT01A    B: Place…      G90           TRUE dichotom…         n          n   134       0              
-16 TRT01A    B: Place…      G90           TRUE dichotom…         p          %     1    &lt;fn&gt;              
-17 TRT01A    B: Place…     G110           TRUE dichotom…         n          n   111       0              
-18 TRT01A    B: Place…     G110           TRUE dichotom…         p          % 0.828    &lt;fn&gt;              
-19 TRT01A    B: Place…    GE120           TRUE dichotom…         n          n    70       0              
-20 TRT01A    B: Place…    GE120           TRUE dichotom…         p          % 0.522    &lt;fn&gt;              
-21 TRT01A    C: Combi…      L60           TRUE dichotom…         n          n     0       0              
-22 TRT01A    C: Combi…      L60           TRUE dichotom…         p          %     0    &lt;fn&gt;              
-23 TRT01A    C: Combi…      G60           TRUE dichotom…         n          n   132       0              
-24 TRT01A    C: Combi…      G60           TRUE dichotom…         p          %     1    &lt;fn&gt;              
-25 TRT01A    C: Combi…      G90           TRUE dichotom…         n          n   131       0              
-26 TRT01A    C: Combi…      G90           TRUE dichotom…         p          % 0.992    &lt;fn&gt;              
-27 TRT01A    C: Combi…     G110           TRUE dichotom…         n          n   107       0              
-28 TRT01A    C: Combi…     G110           TRUE dichotom…         p          % 0.811    &lt;fn&gt;              
-29 TRT01A    C: Combi…    GE120           TRUE dichotom…         n          n    76       0              
-30 TRT01A    C: Combi…    GE120           TRUE dichotom…         p          % 0.576    &lt;fn&gt;              
-31   &lt;NA&gt;                TRT01A      A: Drug X categori…         n          n   134       0              
-32   &lt;NA&gt;                TRT01A      A: Drug X categori…         N          N   400       0              
-33   &lt;NA&gt;                TRT01A      A: Drug X categori…         p          % 0.335    &lt;fn&gt;              
-34   &lt;NA&gt;                TRT01A      B: Place… categori…         n          n   134       0              
-35   &lt;NA&gt;                TRT01A      B: Place… categori…         N          N   400       0              
-36   &lt;NA&gt;                TRT01A      B: Place… categori…         p          % 0.335    &lt;fn&gt;              
-37   &lt;NA&gt;                TRT01A      C: Combi… categori…         n          n   132       0              
-38   &lt;NA&gt;                TRT01A      C: Combi… categori…         N          N   400       0              
-39   &lt;NA&gt;                TRT01A      C: Combi… categori…         p          %  0.33    &lt;fn&gt;              </code></pre>
+1  TRT01A    A: Drug X      L60           TRUE tabulate…         n          n     0       0              
+2  TRT01A    A: Drug X      L60           TRUE tabulate…         p          %     0    &lt;fn&gt;              
+3  TRT01A    A: Drug X      G60           TRUE tabulate…         n          n   134       0              
+4  TRT01A    A: Drug X      G60           TRUE tabulate…         p          %     1    &lt;fn&gt;              
+5  TRT01A    A: Drug X      G90           TRUE tabulate…         n          n   134       0              
+6  TRT01A    A: Drug X      G90           TRUE tabulate…         p          %     1    &lt;fn&gt;              
+7  TRT01A    A: Drug X     G110           TRUE tabulate…         n          n   123       0              
+8  TRT01A    A: Drug X     G110           TRUE tabulate…         p          % 0.918    &lt;fn&gt;              
+9  TRT01A    A: Drug X    GE120           TRUE tabulate…         n          n    88       0              
+10 TRT01A    A: Drug X    GE120           TRUE tabulate…         p          % 0.657    &lt;fn&gt;              
+11 TRT01A    B: Place…      L60           TRUE tabulate…         n          n     0       0              
+12 TRT01A    B: Place…      L60           TRUE tabulate…         p          %     0    &lt;fn&gt;              
+13 TRT01A    B: Place…      G60           TRUE tabulate…         n          n   134       0              
+14 TRT01A    B: Place…      G60           TRUE tabulate…         p          %     1    &lt;fn&gt;              
+15 TRT01A    B: Place…      G90           TRUE tabulate…         n          n   134       0              
+16 TRT01A    B: Place…      G90           TRUE tabulate…         p          %     1    &lt;fn&gt;              
+17 TRT01A    B: Place…     G110           TRUE tabulate…         n          n   111       0              
+18 TRT01A    B: Place…     G110           TRUE tabulate…         p          % 0.828    &lt;fn&gt;              
+19 TRT01A    B: Place…    GE120           TRUE tabulate…         n          n    70       0              
+20 TRT01A    B: Place…    GE120           TRUE tabulate…         p          % 0.522    &lt;fn&gt;              
+21 TRT01A    C: Combi…      L60           TRUE tabulate…         n          n     0       0              
+22 TRT01A    C: Combi…      L60           TRUE tabulate…         p          %     0    &lt;fn&gt;              
+23 TRT01A    C: Combi…      G60           TRUE tabulate…         n          n   132       0              
+24 TRT01A    C: Combi…      G60           TRUE tabulate…         p          %     1    &lt;fn&gt;              
+25 TRT01A    C: Combi…      G90           TRUE tabulate…         n          n   131       0              
+26 TRT01A    C: Combi…      G90           TRUE tabulate…         p          % 0.992    &lt;fn&gt;              
+27 TRT01A    C: Combi…     G110           TRUE tabulate…         n          n   107       0              
+28 TRT01A    C: Combi…     G110           TRUE tabulate…         p          % 0.811    &lt;fn&gt;              
+29 TRT01A    C: Combi…    GE120           TRUE tabulate…         n          n    76       0              
+30 TRT01A    C: Combi…    GE120           TRUE tabulate…         p          % 0.576    &lt;fn&gt;              
+31   &lt;NA&gt;                TRT01A      A: Drug X  tabulate         n          n   134       0              
+32   &lt;NA&gt;                TRT01A      A: Drug X  tabulate         N          N   400       0              
+33   &lt;NA&gt;                TRT01A      A: Drug X  tabulate         p          % 0.335    &lt;fn&gt;              
+34   &lt;NA&gt;                TRT01A      B: Place…  tabulate         n          n   134       0              
+35   &lt;NA&gt;                TRT01A      B: Place…  tabulate         N          N   400       0              
+36   &lt;NA&gt;                TRT01A      B: Place…  tabulate         p          % 0.335    &lt;fn&gt;              
+37   &lt;NA&gt;                TRT01A      C: Combi…  tabulate         n          n   132       0              
+38   &lt;NA&gt;                TRT01A      C: Combi…  tabulate         N          N   400       0              
+39   &lt;NA&gt;                TRT01A      C: Combi…  tabulate         p          %  0.33    &lt;fn&gt;              </code></pre>
 </div>
 </div>
 </div>
@@ -1044,7 +1044,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb6-51"><a href="#cb6-51"></a></span>
 <span id="cb6-52"><a href="#cb6-52"></a><span class="in">```{r ard, message=FALSE, warning=FALSE, results='hide'}</span></span>
 <span id="cb6-53"><a href="#cb6-53"></a><span class="in">ard &lt;- bind_ard(</span></span>
-<span id="cb6-54"><a href="#cb6-54"></a><span class="in">  ard_dichotomous(</span></span>
+<span id="cb6-54"><a href="#cb6-54"></a><span class="in">  ard_tabulate_value(</span></span>
 <span id="cb6-55"><a href="#cb6-55"></a><span class="in">    data,</span></span>
 <span id="cb6-56"><a href="#cb6-56"></a><span class="in">    variables = c(L60, G60, G90, G110, GE120),</span></span>
 <span id="cb6-57"><a href="#cb6-57"></a><span class="in">    by = TRT01A,</span></span>
@@ -1053,7 +1053,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb6-60"><a href="#cb6-60"></a><span class="in">    denominator = data |&gt; distinct(USUBJID, TRT01A)</span></span>
 <span id="cb6-61"><a href="#cb6-61"></a><span class="in">  ),</span></span>
 <span id="cb6-62"><a href="#cb6-62"></a><span class="in">  # ARD for header N values</span></span>
-<span id="cb6-63"><a href="#cb6-63"></a><span class="in">  ard_categorical(adsl, variables = TRT01A)</span></span>
+<span id="cb6-63"><a href="#cb6-63"></a><span class="in">  ard_tabulate(adsl, variables = TRT01A)</span></span>
 <span id="cb6-64"><a href="#cb6-64"></a><span class="in">)</span></span>
 <span id="cb6-65"><a href="#cb6-65"></a></span>
 <span id="cb6-66"><a href="#cb6-66"></a><span class="in">ard</span></span>
