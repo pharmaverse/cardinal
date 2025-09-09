@@ -154,7 +154,7 @@ ard_table_03 <- function(df,
 
   scrnfail_ard <- df |>
     group_by(!!rlang::sym(arm_var)) |>
-    ard_categorical(
+    ard_tabulate(
       variables = SCRNFRS,
       statistic = everything() ~ c("n", "p")
     )
