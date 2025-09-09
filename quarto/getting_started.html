@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.4.555">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>cardinal - Getting Started</title>
+<title>cardinal - Adding a New Template</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -126,7 +126,7 @@ cookieconsent.run({
 });
 </script><style>html{ scroll-behavior: smooth; }</style>
 <link rel="stylesheet" href="../quarto/assets/style.scss">
-<meta property="og:title" content="cardinal - Getting Started">
+<meta property="og:title" content="cardinal - Adding a New Template">
 <meta property="og:description" content="">
 <meta property="og:site_name" content="cardinal">
 </head>
@@ -211,19 +211,18 @@ cookieconsent.run({
 <a href="#environment-setup-and-package-installation" id="toc-environment-setup-and-package-installation" class="nav-link active" data-scroll-target="#environment-setup-and-package-installation">Environment Setup and Package Installation</a>
   <ul>
 <li><a href="#environment-setup" id="toc-environment-setup" class="nav-link" data-scroll-target="#environment-setup">Environment Setup</a></li>
-  <li><a href="#installing-package-dependencies" id="toc-installing-package-dependencies" class="nav-link" data-scroll-target="#installing-package-dependencies">Installing Package Dependencies</a></li>
-  <li><a href="#installing-the-cardinal-package" id="toc-installing-the-cardinal-package" class="nav-link" data-scroll-target="#installing-the-cardinal-package">Installing the cardinal Package</a></li>
+  <li><a href="#installing-packages-for-template-creation" id="toc-installing-packages-for-template-creation" class="nav-link" data-scroll-target="#installing-packages-for-template-creation">Installing Packages for Template Creation</a></li>
+  <li><a href="#creating-your-tlg-template" id="toc-creating-your-tlg-template" class="nav-link" data-scroll-target="#creating-your-tlg-template">Creating Your TLG Template</a></li>
   </ul>
 </li>
-  <li><a href="#loading-data" id="toc-loading-data" class="nav-link" data-scroll-target="#loading-data">Loading Data</a></li>
+  <li><a href="#finalizing-your-tlg-template" id="toc-finalizing-your-tlg-template" class="nav-link" data-scroll-target="#finalizing-your-tlg-template">Finalizing Your TLG Template</a></li>
   <li><a href="#template-navigation" id="toc-template-navigation" class="nav-link" data-scroll-target="#template-navigation">Template Navigation</a></li>
-  <li><a href="#feature-requests" id="toc-feature-requests" class="nav-link" data-scroll-target="#feature-requests">Feature Requests</a></li>
   <li><a href="#additional-resources" id="toc-additional-resources" class="nav-link" data-scroll-target="#additional-resources">Additional Resources</a></li>
   </ul></nav>
     </div>
 <!-- main -->
 <main class="content column-page-left" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Getting Started</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
+<div class="quarto-title-block"><div><h1 class="title">Adding a New Template</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
 </div>
 
 
@@ -239,53 +238,51 @@ cookieconsent.run({
 
 </header><section id="environment-setup-and-package-installation" class="level3"><h3 class="anchored" data-anchor-id="environment-setup-and-package-installation">Environment Setup and Package Installation</h3>
 <section id="environment-setup" class="level4"><h4 class="anchored" data-anchor-id="environment-setup">Environment Setup</h4>
-<p>Please ensure that R version 3.6 or higher is installed on your computer. This is required to install the <code>cardinal</code> package and its dependencies. You can check your current version of R by running <code><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo()</a></code> within the R console.</p>
-</section><section id="installing-package-dependencies" class="level4"><h4 class="anchored" data-anchor-id="installing-package-dependencies">Installing Package Dependencies</h4>
-<p>The <code>cardinal</code> package requires several packages available on CRAN.</p>
-<p>To use the <code>cardinal</code> package, ensure you have these necessary package dependencies installed by running the following code:</p>
+<p>Please ensure that R version 4.2 or higher is installed on your computer. This is required to install the packages you will need to create your TLG template. You can check your current version of R by running <code><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo()</a></code> within the R console.</p>
+</section><section id="installing-packages-for-template-creation" class="level4"><h4 class="anchored" data-anchor-id="installing-packages-for-template-creation">Installing Packages for Template Creation</h4>
+<p>To create your TLG template the {gtsummary}, {cards}, and {cardx} packages available on CRAN are required.</p>
+<p>Please ensure you have these necessary packages installed by running the following code:</p>
 <div class="cell">
-<details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"gtsummary"</span>)) <span class="fu">install.packages</span>(<span class="st">"gtsummary"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"cards"</span>)) <span class="fu">install.packages</span>(<span class="st">"cards"</span>)</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"cardx"</span>)) <span class="fu">install.packages</span>(<span class="st">"cardx"</span>)</span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"formatters"</span>)) <span class="fu">install.packages</span>(<span class="st">"formatters"</span>)</span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"rtables"</span>)) <span class="fu">install.packages</span>(<span class="st">"rtables"</span>)</span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"rlistings"</span>)) <span class="fu">install.packages</span>(<span class="st">"rlistings"</span>)</span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"tern"</span>)) <span class="fu">install.packages</span>(<span class="st">"tern"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"cards"</span>)) <span class="fu">install.packages</span>(<span class="st">"cards"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"cardx"</span>)) <span class="fu">install.packages</span>(<span class="st">"cardx"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"gtsummary"</span>)) <span class="fu">install.packages</span>(<span class="st">"gtsummary"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>Optionally, to run the examples provided within the <code>cardinal</code> package and on this site you can also install the random CDISC data package, which contains example datasets, by running the following:</p>
+<p>To create your example TLG/ARD, we recommend using datasets from the {pharmaverseadam} package (or the {random.cdisc.data} package) which contains example synthetic ADaM datasets and is available on CRAN. Optionally, you may want to also install the {crane} package which contains several helpful pharmaceutical-specific table creation functions:</p>
 <div class="cell">
-<details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"random.cdisc.data"</span>)) <span class="fu">install.packages</span>(<span class="st">"random.cdisc.data"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"pharmaverseadam"</span>)) <span class="fu">install.packages</span>(<span class="st">"pharmaverseadam"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"crane"</span>)) <span class="fu">install.packages</span>(<span class="st">"crane"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>For more information on these packages, see the <a href="#additional-resources">Additional Resources</a> section below.</p>
-</section><section id="installing-the-cardinal-package" class="level4"><h4 class="anchored" data-anchor-id="installing-the-cardinal-package">Installing the cardinal Package</h4>
-<p>To install the <code>cardinal</code> package, run the following line of code:</p>
-<div class="cell">
-<details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"cardinal"</span>)) remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"pharmaverse/cardinal"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-</section></section><section id="loading-data" class="level3"><h3 class="anchored" data-anchor-id="loading-data">Loading Data</h3>
-<p>The table functions provided by <code>cardinal</code> are designed to work with any datasets which adhere to CDISC standards. If you have access to CDISC data, load this into your R environment as usual to use when generating tables.</p>
-<p>If you do not have access to CDISC data, or want to run the examples provided within the package, you can use the <code>random.cdisc.data</code> package to load a selection of datasets containing example synthetic randomized CDISC data. Datasets are stored in the package by name, prefixed by the letter <code>"c"</code> (for “cached”). For example, after loading the <code>random.cdisc.data</code> package you can access an ADSL dataset by running <code>cadsl</code>, or ADAE with <code>cadae</code>. This data is loaded in where necessary as part of the provided examples.</p>
+</section><section id="creating-your-tlg-template" class="level4"><h4 class="anchored" data-anchor-id="creating-your-tlg-template">Creating Your TLG Template</h4>
+<p>When adding a new template, start by initializing a new folder in the <code>quarto/catalog</code> folder with a name that uniquely identifies your TLG (e.g.&nbsp;<code>fda-table_01</code>, <code>lab-tests-summary</code>). Within this folder, add a file named <code>index.qmd</code> which will contain your new TLG template. To simplify the template-creation process we have provided an empty template file (<code>inst/empty-template.qmd</code>) which can be copied into your new <code>index.qmd</code> file and then modified.</p>
+<p>We recommend using datasets from the <code>pharmaverseadam</code> package to run your template code and generate a sample output TLG and ARD.</p>
+<p>Ensure that your template file contains four main sections in separate tabs. If, for example, you are creating a template for a table, these tabs should be named:</p>
+<ol type="1">
+<li>Table Preview - provides a preview of the table that is created in the template.</li>
+<li>Setup - lists the data set-up and pre-processing steps needed prior to creating the table.</li>
+<li>Build Table - provides the code needed to build the table.</li>
+<li>Build ARD - provides the code needed to build the ARD associated with the table. If an ARD-first approach was used to create the table this section should appear prior to the “Build Table” tab.</li>
+</ol></section></section><section id="finalizing-your-tlg-template" class="level3"><h3 class="anchored" data-anchor-id="finalizing-your-tlg-template">Finalizing Your TLG Template</h3>
+<p>Once you have created your template and ensured that all code runs without error, generate an image file named <code>result.png</code> containing a snapshot of your table. Confirm that the output image looks correct.</p>
+<p>Once you have finalized your TLG template, open a pull request in the cardinal <a href="https://github.com/pharmaverse/cardinal/">GitHub repository</a>.</p>
 </section><section id="template-navigation" class="level3"><h3 class="anchored" data-anchor-id="template-navigation">Template Navigation</h3>
-<p>A list of all templates currently available in <code>cardinal</code> is provided in the <a href="../quarto/index-catalog.html">Template Catalog</a>, with tables designed based on the <a href="https://downloads.regulations.gov/FDA-2022-N-1961-0046/attachment_1.pdf">FDA Standard Safety Tables and Figures: Integrated Guide</a>.</p>
-</section><section id="feature-requests" class="level3"><h3 class="anchored" data-anchor-id="feature-requests">Feature Requests</h3>
-<p>If you would like to request the addition of a new feature to a pre-existing function within <code>cardinal</code>, or would like a specific table template to be added, please file an issue on GitHub <a href="https://github.com/pharmaverse/cardinal/issues">here</a> or reach out to the cardinal team directly via our Slack channel <a href="https://app.slack.com/client/T028PB489D3/C04MQS12MND">here</a>.</p>
-<p>You can access the source code for all currently available functions in the <code>cardinal</code> GitHub repository <a href="https://github.com/pharmaverse/cardinal/tree/main/R">here</a>.</p>
+<p>A list of all templates currently available in cardinal is provided in the <a href="../quarto/index-catalog.html">Template Catalog</a>.</p>
+<p>You can access the files for all currently available templates in the cardinal GitHub repository <a href="https://github.com/pharmaverse/cardinal/tree/main/quarto/catalog">here</a>.</p>
 </section><section id="additional-resources" class="level3"><h3 class="anchored" data-anchor-id="additional-resources">Additional Resources</h3>
-<p>See the following packages used by <code>cardinal</code> for more information:</p>
+<p>See the following sites for more information on packages leveraged by the cardinal team for TLG template development:</p>
 <ul>
 <li>
-<a href="https://insightsengineering.github.io/tern"><code>tern</code></a>: Clinical trials analysis functions</li>
+<a href="https://www.danieldsjoberg.com/gtsummary/">{gtsummary}</a>: Table creation</li>
 <li>
-<a href="https://insightsengineering.github.io/rtables"><code>rtables</code></a>: Table creation</li>
+<a href="https://insightsengineering.github.io/cards/">{cards}</a>: ARD creation</li>
 <li>
-<a href="https://insightsengineering.github.io/rlistings"><code>rlistings</code></a>: Listing creation</li>
+<a href="https://insightsengineering.github.io/cardx/">{cardx}</a>: Extended ARD creation functions</li>
 <li>
-<a href="https://insightsengineering.github.io/formatters"><code>formatters</code></a>: Additional rendering formatting</li>
+<a href="https://insightsengineering.github.io/crane/">{crane}</a>: Pharmaceutical-specific table creation functions</li>
 <li>
-<a href="https://insightsengineering.github.io/random.cdisc.data"><code>random.cdisc.data</code></a>: Example synthetic randomized CDISC datasets (required for examples only)</li>
+<a href="https://pharmaverse.github.io/pharmaverseadam/">{pharmaverseadam}</a>: Example synthetic ADaM datasets</li>
 </ul>
 
 
@@ -895,75 +892,73 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb4" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1"></a><span class="co">---</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="an">title:</span><span class="co"> "Getting Started"</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="an">toc:</span><span class="co"> true</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="an">toc-depth:</span><span class="co"> 4</span></span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="co">---</span></span>
-<span id="cb4-6"><a href="#cb4-6"></a></span>
-<span id="cb4-7"><a href="#cb4-7"></a><span class="fu">### Environment Setup and Package Installation</span></span>
-<span id="cb4-8"><a href="#cb4-8"></a></span>
-<span id="cb4-9"><a href="#cb4-9"></a><span class="fu">#### Environment Setup</span></span>
-<span id="cb4-10"><a href="#cb4-10"></a></span>
-<span id="cb4-11"><a href="#cb4-11"></a>Please ensure that R version 3.6 or higher is installed on your computer. This is required to install the <span class="in">`cardinal`</span> package and its dependencies. You can check your current version of R by running <span class="in">`sessionInfo()`</span> within the R console.</span>
-<span id="cb4-12"><a href="#cb4-12"></a></span>
-<span id="cb4-13"><a href="#cb4-13"></a><span class="fu">#### Installing Package Dependencies</span></span>
-<span id="cb4-14"><a href="#cb4-14"></a></span>
-<span id="cb4-15"><a href="#cb4-15"></a>The <span class="in">`cardinal`</span> package requires several packages available on CRAN.</span>
-<span id="cb4-16"><a href="#cb4-16"></a></span>
-<span id="cb4-17"><a href="#cb4-17"></a>To use the <span class="in">`cardinal`</span> package, ensure you have these necessary package dependencies installed by running the following code:</span>
-<span id="cb4-18"><a href="#cb4-18"></a></span>
-<span id="cb4-19"><a href="#cb4-19"></a><span class="in">```{r, echo=TRUE, eval=FALSE}</span></span>
-<span id="cb4-20"><a href="#cb4-20"></a><span class="in">if (!require("gtsummary")) install.packages("gtsummary")</span></span>
-<span id="cb4-21"><a href="#cb4-21"></a><span class="in">if (!require("cards")) install.packages("cards")</span></span>
-<span id="cb4-22"><a href="#cb4-22"></a><span class="in">if (!require("cardx")) install.packages("cardx")</span></span>
-<span id="cb4-23"><a href="#cb4-23"></a><span class="in">if (!require("formatters")) install.packages("formatters")</span></span>
-<span id="cb4-24"><a href="#cb4-24"></a><span class="in">if (!require("rtables")) install.packages("rtables")</span></span>
-<span id="cb4-25"><a href="#cb4-25"></a><span class="in">if (!require("rlistings")) install.packages("rlistings")</span></span>
-<span id="cb4-26"><a href="#cb4-26"></a><span class="in">if (!require("tern")) install.packages("tern")</span></span>
-<span id="cb4-27"><a href="#cb4-27"></a><span class="in">```</span></span>
-<span id="cb4-28"><a href="#cb4-28"></a></span>
-<span id="cb4-29"><a href="#cb4-29"></a>Optionally, to run the examples provided within the <span class="in">`cardinal`</span> package and on this site you can also install the random CDISC data package, which contains example datasets, by running the following:</span>
-<span id="cb4-30"><a href="#cb4-30"></a></span>
-<span id="cb4-31"><a href="#cb4-31"></a><span class="in">```{r, echo=TRUE, eval=FALSE}</span></span>
-<span id="cb4-32"><a href="#cb4-32"></a><span class="in">if (!require("random.cdisc.data")) install.packages("random.cdisc.data")</span></span>
-<span id="cb4-33"><a href="#cb4-33"></a><span class="in">```</span></span>
-<span id="cb4-34"><a href="#cb4-34"></a></span>
-<span id="cb4-35"><a href="#cb4-35"></a>For more information on these packages, see the <span class="co">[</span><span class="ot">Additional Resources</span><span class="co">](#additional-resources)</span> section below.</span>
-<span id="cb4-36"><a href="#cb4-36"></a></span>
-<span id="cb4-37"><a href="#cb4-37"></a><span class="fu">#### Installing the cardinal Package</span></span>
-<span id="cb4-38"><a href="#cb4-38"></a></span>
-<span id="cb4-39"><a href="#cb4-39"></a>To install the <span class="in">`cardinal`</span> package, run the following line of code:</span>
-<span id="cb4-40"><a href="#cb4-40"></a></span>
-<span id="cb4-41"><a href="#cb4-41"></a><span class="in">```{r, echo=TRUE, eval=FALSE}</span></span>
-<span id="cb4-42"><a href="#cb4-42"></a><span class="in">if (!require("cardinal")) remotes::install_github("pharmaverse/cardinal")</span></span>
-<span id="cb4-43"><a href="#cb4-43"></a><span class="in">```</span></span>
-<span id="cb4-44"><a href="#cb4-44"></a></span>
-<span id="cb4-45"><a href="#cb4-45"></a><span class="fu">### Loading Data</span></span>
-<span id="cb4-46"><a href="#cb4-46"></a></span>
-<span id="cb4-47"><a href="#cb4-47"></a>The table functions provided by <span class="in">`cardinal`</span> are designed to work with any datasets which adhere to CDISC standards. If you have access to CDISC data, load this into your R environment as usual to use when generating tables.</span>
-<span id="cb4-48"><a href="#cb4-48"></a></span>
-<span id="cb4-49"><a href="#cb4-49"></a>If you do not have access to CDISC data, or want to run the examples provided within the package, you can use the <span class="in">`random.cdisc.data`</span> package to load a selection of datasets containing example synthetic randomized CDISC data. Datasets are stored in the package by name, prefixed by the letter <span class="in">`"c"`</span> (for "cached"). For example, after loading the <span class="in">`random.cdisc.data`</span> package you can access an ADSL dataset by running <span class="in">`cadsl`</span>, or ADAE with <span class="in">`cadae`</span>. This data is loaded in where necessary as part of the provided examples.</span>
-<span id="cb4-50"><a href="#cb4-50"></a></span>
-<span id="cb4-51"><a href="#cb4-51"></a><span class="fu">### Template Navigation</span></span>
-<span id="cb4-52"><a href="#cb4-52"></a></span>
-<span id="cb4-53"><a href="#cb4-53"></a>A list of all templates currently available in <span class="in">`cardinal`</span> is provided in the <span class="co">[</span><span class="ot">Template Catalog</span><span class="co">](index-catalog.qmd)</span>, with tables designed based on the <span class="co">[</span><span class="ot">FDA Standard Safety Tables and Figures: Integrated Guide</span><span class="co">](https://downloads.regulations.gov/FDA-2022-N-1961-0046/attachment_1.pdf)</span>.</span>
-<span id="cb4-54"><a href="#cb4-54"></a></span>
-<span id="cb4-55"><a href="#cb4-55"></a><span class="fu">### Feature Requests</span></span>
-<span id="cb4-56"><a href="#cb4-56"></a></span>
-<span id="cb4-57"><a href="#cb4-57"></a>If you would like to request the addition of a new feature to a pre-existing function within <span class="in">`cardinal`</span>, or would like a specific table template to be added, please file an issue on GitHub <span class="co">[</span><span class="ot">here</span><span class="co">](https://github.com/pharmaverse/cardinal/issues)</span> or reach out to the cardinal team directly via our Slack channel <span class="co">[</span><span class="ot">here</span><span class="co">](https://app.slack.com/client/T028PB489D3/C04MQS12MND)</span>.</span>
-<span id="cb4-58"><a href="#cb4-58"></a></span>
-<span id="cb4-59"><a href="#cb4-59"></a>You can access the source code for all currently available functions in the <span class="in">`cardinal`</span> GitHub repository <span class="co">[</span><span class="ot">here</span><span class="co">](https://github.com/pharmaverse/cardinal/tree/main/R)</span>.</span>
-<span id="cb4-60"><a href="#cb4-60"></a></span>
-<span id="cb4-61"><a href="#cb4-61"></a><span class="fu">### Additional Resources {#additional-resources}</span></span>
-<span id="cb4-62"><a href="#cb4-62"></a></span>
-<span id="cb4-63"><a href="#cb4-63"></a>See the following packages used by <span class="in">`cardinal`</span> for more information:</span>
-<span id="cb4-64"><a href="#cb4-64"></a></span>
-<span id="cb4-65"><a href="#cb4-65"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">`tern`</span><span class="co">](https://insightsengineering.github.io/tern)</span>: Clinical trials analysis functions</span>
-<span id="cb4-66"><a href="#cb4-66"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">`rtables`</span><span class="co">](https://insightsengineering.github.io/rtables)</span>: Table creation</span>
-<span id="cb4-67"><a href="#cb4-67"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">`rlistings`</span><span class="co">](https://insightsengineering.github.io/rlistings)</span>: Listing creation</span>
-<span id="cb4-68"><a href="#cb4-68"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">`formatters`</span><span class="co">](https://insightsengineering.github.io/formatters)</span>: Additional rendering formatting</span>
-<span id="cb4-69"><a href="#cb4-69"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">`random.cdisc.data`</span><span class="co">](https://insightsengineering.github.io/random.cdisc.data)</span>: Example synthetic randomized CDISC datasets (required for examples only)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1"></a><span class="co">---</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="an">title:</span><span class="co"> "Adding a New Template"</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="an">toc:</span><span class="co"> true</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="an">toc-depth:</span><span class="co"> 4</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="co">---</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="fu">### Environment Setup and Package Installation</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a></span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="fu">#### Environment Setup</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a></span>
+<span id="cb3-11"><a href="#cb3-11"></a>Please ensure that R version 4.2 or higher is installed on your computer. This is required to install the packages you will need to create your TLG template. You can check your current version of R by running <span class="in">`sessionInfo()`</span> within the R console.</span>
+<span id="cb3-12"><a href="#cb3-12"></a></span>
+<span id="cb3-13"><a href="#cb3-13"></a><span class="fu">#### Installing Packages for Template Creation</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a></span>
+<span id="cb3-15"><a href="#cb3-15"></a>To create your TLG template the {gtsummary}, {cards}, and {cardx} packages available on CRAN are required.</span>
+<span id="cb3-16"><a href="#cb3-16"></a></span>
+<span id="cb3-17"><a href="#cb3-17"></a>Please ensure you have these necessary packages installed by running the following code:</span>
+<span id="cb3-18"><a href="#cb3-18"></a></span>
+<span id="cb3-19"><a href="#cb3-19"></a><span class="in">```{r, echo=TRUE, eval=FALSE}</span></span>
+<span id="cb3-20"><a href="#cb3-20"></a><span class="in">if (!require("cards")) install.packages("cards")</span></span>
+<span id="cb3-21"><a href="#cb3-21"></a><span class="in">if (!require("cardx")) install.packages("cardx")</span></span>
+<span id="cb3-22"><a href="#cb3-22"></a><span class="in">if (!require("gtsummary")) install.packages("gtsummary")</span></span>
+<span id="cb3-23"><a href="#cb3-23"></a><span class="in">```</span></span>
+<span id="cb3-24"><a href="#cb3-24"></a></span>
+<span id="cb3-25"><a href="#cb3-25"></a>To create your example TLG/ARD, we recommend using datasets from the {pharmaverseadam} package (or the {random.cdisc.data} package) which contains example synthetic ADaM datasets and is available on CRAN. Optionally, you may want to also install the {crane} package which contains several helpful pharmaceutical-specific table creation functions:</span>
+<span id="cb3-26"><a href="#cb3-26"></a></span>
+<span id="cb3-27"><a href="#cb3-27"></a><span class="in">```{r, echo=TRUE, eval=FALSE}</span></span>
+<span id="cb3-28"><a href="#cb3-28"></a><span class="in">if (!require("pharmaverseadam")) install.packages("pharmaverseadam")</span></span>
+<span id="cb3-29"><a href="#cb3-29"></a><span class="in">if (!require("crane")) install.packages("crane")</span></span>
+<span id="cb3-30"><a href="#cb3-30"></a><span class="in">```</span></span>
+<span id="cb3-31"><a href="#cb3-31"></a></span>
+<span id="cb3-32"><a href="#cb3-32"></a>For more information on these packages, see the <span class="co">[</span><span class="ot">Additional Resources</span><span class="co">](#additional-resources)</span> section below.</span>
+<span id="cb3-33"><a href="#cb3-33"></a></span>
+<span id="cb3-34"><a href="#cb3-34"></a><span class="fu">#### Creating Your TLG Template</span></span>
+<span id="cb3-35"><a href="#cb3-35"></a></span>
+<span id="cb3-36"><a href="#cb3-36"></a>When adding a new template, start by initializing a new folder in the <span class="in">`quarto/catalog`</span> folder with a name that uniquely identifies your TLG (e.g. <span class="in">`fda-table_01`</span>, <span class="in">`lab-tests-summary`</span>). Within this folder, add a file named <span class="in">`index.qmd`</span> which will contain your new TLG template. To simplify the template-creation process we have provided an empty template file (<span class="in">`inst/empty-template.qmd`</span>) which can be copied into your new <span class="in">`index.qmd`</span> file and then modified.</span>
+<span id="cb3-37"><a href="#cb3-37"></a></span>
+<span id="cb3-38"><a href="#cb3-38"></a>We recommend using datasets from the <span class="in">`pharmaverseadam`</span> package to run your template code and generate a sample output TLG and ARD.</span>
+<span id="cb3-39"><a href="#cb3-39"></a></span>
+<span id="cb3-40"><a href="#cb3-40"></a>Ensure that your template file contains four main sections in separate tabs. If, for example, you are creating a template for a table, these tabs should be named:</span>
+<span id="cb3-41"><a href="#cb3-41"></a></span>
+<span id="cb3-42"><a href="#cb3-42"></a><span class="ss">1. </span>Table Preview - provides a preview of the table that is created in the template.</span>
+<span id="cb3-43"><a href="#cb3-43"></a><span class="ss">2. </span>Setup - lists the data set-up and pre-processing steps needed prior to creating the table.</span>
+<span id="cb3-44"><a href="#cb3-44"></a><span class="ss">3. </span>Build Table - provides the code needed to build the table.</span>
+<span id="cb3-45"><a href="#cb3-45"></a><span class="ss">4. </span>Build ARD - provides the code needed to build the ARD associated with the table. If an ARD-first approach was used to create the table this section should appear prior to the "Build Table" tab.</span>
+<span id="cb3-46"><a href="#cb3-46"></a></span>
+<span id="cb3-47"><a href="#cb3-47"></a><span class="fu">### Finalizing Your TLG Template</span></span>
+<span id="cb3-48"><a href="#cb3-48"></a></span>
+<span id="cb3-49"><a href="#cb3-49"></a>Once you have created your template and ensured that all code runs without error, generate an image file named <span class="in">`result.png`</span> containing a snapshot of your table. Confirm that the output image looks correct.</span>
+<span id="cb3-50"><a href="#cb3-50"></a></span>
+<span id="cb3-51"><a href="#cb3-51"></a>Once you have finalized your TLG template, open a pull request in the cardinal <span class="co">[</span><span class="ot">GitHub repository</span><span class="co">](https://github.com/pharmaverse/cardinal/)</span>.</span>
+<span id="cb3-52"><a href="#cb3-52"></a></span>
+<span id="cb3-53"><a href="#cb3-53"></a><span class="fu">### Template Navigation</span></span>
+<span id="cb3-54"><a href="#cb3-54"></a></span>
+<span id="cb3-55"><a href="#cb3-55"></a>A list of all templates currently available in cardinal is provided in the <span class="co">[</span><span class="ot">Template Catalog</span><span class="co">](index-catalog.qmd)</span>.</span>
+<span id="cb3-56"><a href="#cb3-56"></a></span>
+<span id="cb3-57"><a href="#cb3-57"></a>You can access the files for all currently available templates in the cardinal GitHub repository <span class="co">[</span><span class="ot">here</span><span class="co">](https://github.com/pharmaverse/cardinal/tree/main/quarto/catalog)</span>.</span>
+<span id="cb3-58"><a href="#cb3-58"></a></span>
+<span id="cb3-59"><a href="#cb3-59"></a><span class="fu">### Additional Resources {#additional-resources}</span></span>
+<span id="cb3-60"><a href="#cb3-60"></a></span>
+<span id="cb3-61"><a href="#cb3-61"></a>See the following sites for more information on packages leveraged by the cardinal team for TLG template development:</span>
+<span id="cb3-62"><a href="#cb3-62"></a></span>
+<span id="cb3-63"><a href="#cb3-63"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">{gtsummary}</span><span class="co">](https://www.danieldsjoberg.com/gtsummary/)</span>: Table creation</span>
+<span id="cb3-64"><a href="#cb3-64"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">{cards}</span><span class="co">](https://insightsengineering.github.io/cards/)</span>: ARD creation</span>
+<span id="cb3-65"><a href="#cb3-65"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">{cardx}</span><span class="co">](https://insightsengineering.github.io/cardx/)</span>: Extended ARD creation functions</span>
+<span id="cb3-66"><a href="#cb3-66"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">{crane}</span><span class="co">](https://insightsengineering.github.io/crane/)</span>: Pharmaceutical-specific table creation functions</span>
+<span id="cb3-67"><a href="#cb3-67"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">{pharmaverseadam}</span><span class="co">](https://pharmaverse.github.io/pharmaverseadam/)</span>: Example synthetic ADaM datasets</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">

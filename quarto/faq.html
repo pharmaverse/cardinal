@@ -249,34 +249,29 @@ cookieconsent.run({
 <nav id="TOC" role="doc-toc">
    
   <ul>
-  <li><a href="#how-do-i-install-the-cardinal-package" id="toc-how-do-i-install-the-cardinal-package">1. &nbsp;How do I install the cardinal package?</a></li>
-  <li><a href="#how-can-i-join-this-initiative" id="toc-how-can-i-join-this-initiative">2. &nbsp;How can I join this initiative?</a></li>
-  <li><a href="#i-copied-the-example-table-setup-code-for-one-of-the-cardinal-tables.-how-can-i-customize-the-table" id="toc-i-copied-the-example-table-setup-code-for-one-of-the-cardinal-tables.-how-can-i-customize-the-table">3. &nbsp;I copied the example “Table Setup” code for one of the cardinal tables. How can I customize the table?</a></li>
-  <li><a href="#i-need-a-table-that-isnt-available-on-the-cardinal-website.-can-i-request-a-table-be-added" id="toc-i-need-a-table-that-isnt-available-on-the-cardinal-website.-can-i-request-a-table-be-added">4. &nbsp;I need a table that isn’t available on the cardinal website. Can I request a table be added?</a></li>
-  <li><a href="#i-dont-know-the-number-of-the-fda-safety-table-i-am-interested-in.-is-there-a-list-of-tables-by-title" id="toc-i-dont-know-the-number-of-the-fda-safety-table-i-am-interested-in.-is-there-a-list-of-tables-by-title">5. &nbsp;I don’t know the number of the FDA safety table I am interested in. Is there a list of tables by title?</a></li>
+  <li><a href="#how-can-i-join-this-initiative" id="toc-how-can-i-join-this-initiative">1. &nbsp;How can I join this initiative?</a></li>
+  <li><a href="#i-copied-the-example-code-for-one-of-the-cardinal-tlgs.-how-can-i-customize-the-tlg" id="toc-i-copied-the-example-code-for-one-of-the-cardinal-tlgs.-how-can-i-customize-the-tlg">2. &nbsp;I copied the example code for one of the cardinal TLGs. How can I customize the TLG?</a></li>
+  <li><a href="#i-need-a-tlg-that-isnt-available-on-the-cardinal-website.-can-i-request-a-table-be-added" id="toc-i-need-a-tlg-that-isnt-available-on-the-cardinal-website.-can-i-request-a-table-be-added">3. &nbsp;I need a TLG that isn’t available on the cardinal website. Can I request a table be added?</a></li>
+  <li><a href="#i-dont-know-the-id-of-the-table-i-am-interested-in.-is-there-a-list-of-tlgs-by-description" id="toc-i-dont-know-the-id-of-the-table-i-am-interested-in.-is-there-a-list-of-tlgs-by-description">4. &nbsp;I don’t know the ID of the table I am interested in. Is there a list of TLGs by description?</a></li>
   <li><a href="#other-questions---contact-us" id="toc-other-questions---contact-us">Other Questions - Contact Us</a></li>
   </ul>
 </nav>
 <hr>
-<section id="how-do-i-install-the-cardinal-package" class="level4">
-<h4 class="anchored" data-anchor-id="how-do-i-install-the-cardinal-package">1. &nbsp;How do I install the cardinal package?</h4>
-<p>For instructions on installing the cardinal package please see the <a href="https://pharmaverse.github.io/cardinal/quarto/getting_started.html#environment-setup-and-package-installation">Environment Setup and Package Installation</a> section of the Getting Started page. <br><br></p>
-</section>
 <section id="how-can-i-join-this-initiative" class="level4">
-<h4 class="anchored" data-anchor-id="how-can-i-join-this-initiative">2. &nbsp;How can I join this initiative?</h4>
+<h4 class="anchored" data-anchor-id="how-can-i-join-this-initiative">1. &nbsp;How can I join this initiative?</h4>
 <p>For information on how to join the cardinal initiative please see the <a href="https://pharmaverse.github.io/cardinal/quarto/about.html#joining-as-a-collaborator">Joining as a Collaborator</a> section of the About page. <br><br></p>
 </section>
-<section id="i-copied-the-example-table-setup-code-for-one-of-the-cardinal-tables.-how-can-i-customize-the-table" class="level4">
-<h4 class="anchored" data-anchor-id="i-copied-the-example-table-setup-code-for-one-of-the-cardinal-tables.-how-can-i-customize-the-table">3. &nbsp;I copied the example “Table Setup” code for one of the cardinal tables. How can I customize the table?</h4>
-<p>For each table template page, next to the “Table Setup” tab is the “Function Details” tab. This tab contains information about each of the customizable parameters available for the table, and what the default settings for each are. If you require a customization option that is not available for a given table, please file a Feature Request issue on GitHub <a href="https://github.com/pharmaverse/cardinal/issues/new/choose">here</a>. <br><br></p>
+<section id="i-copied-the-example-code-for-one-of-the-cardinal-tlgs.-how-can-i-customize-the-tlg" class="level4">
+<h4 class="anchored" data-anchor-id="i-copied-the-example-code-for-one-of-the-cardinal-tlgs.-how-can-i-customize-the-tlg">2. &nbsp;I copied the example code for one of the cardinal TLGs. How can I customize the TLG?</h4>
+<p>Every template in the catalog generates a <code>gtsummary</code> object (or <code>ggplot2</code> object for graphs) which can be customized using the standard modification functions available in the {gtsummary} (or {ggplot2} for graphs) package. Please see this package for more information on customization and formatting options. <br><br></p>
 </section>
-<section id="i-need-a-table-that-isnt-available-on-the-cardinal-website.-can-i-request-a-table-be-added" class="level4">
-<h4 class="anchored" data-anchor-id="i-need-a-table-that-isnt-available-on-the-cardinal-website.-can-i-request-a-table-be-added">4. &nbsp;I need a table that isn’t available on the cardinal website. Can I request a table be added?</h4>
-<p>The cardinal team is actively maintaining and adding new table functions to the package. If you would like an FDA safety table that is not listed on the cardinal website, please file a New Table Template issue on GitHub <a href="https://github.com/pharmaverse/cardinal/issues/new/choose">here</a> with the table number and the team will work on adding it to the package. <br><br></p>
+<section id="i-need-a-tlg-that-isnt-available-on-the-cardinal-website.-can-i-request-a-table-be-added" class="level4">
+<h4 class="anchored" data-anchor-id="i-need-a-tlg-that-isnt-available-on-the-cardinal-website.-can-i-request-a-table-be-added">3. &nbsp;I need a TLG that isn’t available on the cardinal website. Can I request a table be added?</h4>
+<p>The cardinal team is actively maintaining and adding new TLG templates to the project catalog. If you would like to see a TLG that is not listed on the cardinal website, please file a New TLG Template issue on GitHub <a href="https://github.com/pharmaverse/cardinal/issues/new/choose">here</a> and the team will work on adding it to the catalog. Please also consider adding the template to the catalog yourself! We are always happy to have new contributors join the initiative (even if you can only add a single TLG!) - for information on how to add a new template yourself see the <a href="../quarto/getting_started.html">Getting Started</a> page. <br><br></p>
 </section>
-<section id="i-dont-know-the-number-of-the-fda-safety-table-i-am-interested-in.-is-there-a-list-of-tables-by-title" class="level4">
-<h4 class="anchored" data-anchor-id="i-dont-know-the-number-of-the-fda-safety-table-i-am-interested-in.-is-there-a-list-of-tables-by-title">5. &nbsp;I don’t know the number of the FDA safety table I am interested in. Is there a list of tables by title?</h4>
-<p>A list of all available tables by title is available on the <a href="../quarto/index-catalog.html">Template Catalog</a> page. <br><br></p>
+<section id="i-dont-know-the-id-of-the-table-i-am-interested-in.-is-there-a-list-of-tlgs-by-description" class="level4">
+<h4 class="anchored" data-anchor-id="i-dont-know-the-id-of-the-table-i-am-interested-in.-is-there-a-list-of-tlgs-by-description">4. &nbsp;I don’t know the ID of the table I am interested in. Is there a list of TLGs by description?</h4>
+<p>A list of all available TLGs by both description and ID/source is available on the <a href="../quarto/index-catalog.html">Template Catalog</a> page, and can be sorted/filtered accordingly. The category tags on the right-hand side of the page can be used to filter for specific TLGs. <br><br></p>
 <hr>
 </section>
 <section id="other-questions---contact-us" class="level4">
@@ -905,42 +900,36 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-10"><a href="#cb1-10"></a></span>
 <span id="cb1-11"><a href="#cb1-11"></a>------------------------------------------------------------------------</span>
 <span id="cb1-12"><a href="#cb1-12"></a></span>
-<span id="cb1-13"><a href="#cb1-13"></a><span class="fu">#### 1. \ How do I install the cardinal package?</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="fu">#### 1. \ How can I join this initiative?</span></span>
 <span id="cb1-14"><a href="#cb1-14"></a></span>
-<span id="cb1-15"><a href="#cb1-15"></a>For instructions on installing the cardinal package please see the <span class="co">[</span><span class="ot">Environment Setup and Package Installation</span><span class="co">](https://pharmaverse.github.io/cardinal/quarto/getting_started.html#environment-setup-and-package-installation)</span> section of the Getting Started page.</span>
+<span id="cb1-15"><a href="#cb1-15"></a>For information on how to join the cardinal initiative please see the <span class="co">[</span><span class="ot">Joining as a Collaborator</span><span class="co">](https://pharmaverse.github.io/cardinal/quarto/about.html#joining-as-a-collaborator)</span> section of the About page.</span>
 <span id="cb1-16"><a href="#cb1-16"></a>&lt;br/&gt;&lt;br/&gt;</span>
 <span id="cb1-17"><a href="#cb1-17"></a></span>
 <span id="cb1-18"><a href="#cb1-18"></a></span>
-<span id="cb1-19"><a href="#cb1-19"></a><span class="fu">#### 2. \ How can I join this initiative?</span></span>
+<span id="cb1-19"><a href="#cb1-19"></a><span class="fu">#### 2. \ I copied the example code for one of the cardinal TLGs. How can I customize the TLG?</span></span>
 <span id="cb1-20"><a href="#cb1-20"></a></span>
-<span id="cb1-21"><a href="#cb1-21"></a>For information on how to join the cardinal initiative please see the <span class="co">[</span><span class="ot">Joining as a Collaborator</span><span class="co">](https://pharmaverse.github.io/cardinal/quarto/about.html#joining-as-a-collaborator)</span> section of the About page.</span>
+<span id="cb1-21"><a href="#cb1-21"></a>Every template in the catalog generates a <span class="in">`gtsummary`</span> object (or <span class="in">`ggplot2`</span> object for graphs) which can be customized using the standard modification functions available in the {gtsummary} (or {ggplot2} for graphs) package. Please see this package for more information on customization and formatting options.</span>
 <span id="cb1-22"><a href="#cb1-22"></a>&lt;br/&gt;&lt;br/&gt;</span>
 <span id="cb1-23"><a href="#cb1-23"></a></span>
 <span id="cb1-24"><a href="#cb1-24"></a></span>
-<span id="cb1-25"><a href="#cb1-25"></a><span class="fu">#### 3. \ I copied the example "Table Setup" code for one of the cardinal tables. How can I customize the table?</span></span>
+<span id="cb1-25"><a href="#cb1-25"></a><span class="fu">#### 3. \ I need a TLG that isn't available on the cardinal website. Can I request a table be added?</span></span>
 <span id="cb1-26"><a href="#cb1-26"></a></span>
-<span id="cb1-27"><a href="#cb1-27"></a>For each table template page, next to the "Table Setup" tab is the "Function Details" tab. This tab contains information about each of the customizable parameters available for the table, and what the default settings for each are. If you require a customization option that is not available for a given table, please file a Feature Request issue on GitHub <span class="co">[</span><span class="ot">here</span><span class="co">](https://github.com/pharmaverse/cardinal/issues/new/choose)</span>.</span>
+<span id="cb1-27"><a href="#cb1-27"></a>The cardinal team is actively maintaining and adding new TLG templates to the project catalog. If you would like to see a TLG that is not listed on the cardinal website, please file a New TLG Template issue on GitHub <span class="co">[</span><span class="ot">here</span><span class="co">](https://github.com/pharmaverse/cardinal/issues/new/choose)</span> and the team will work on adding it to the catalog. Please also consider adding the template to the catalog yourself! We are always happy to have new contributors join the initiative (even if you can only add a single TLG!) - for information on how to add a new template yourself see the <span class="co">[</span><span class="ot">Getting Started</span><span class="co">](getting_started.qmd)</span> page.</span>
 <span id="cb1-28"><a href="#cb1-28"></a>&lt;br/&gt;&lt;br/&gt;</span>
 <span id="cb1-29"><a href="#cb1-29"></a></span>
 <span id="cb1-30"><a href="#cb1-30"></a></span>
-<span id="cb1-31"><a href="#cb1-31"></a><span class="fu">#### 4. \ I need a table that isn't available on the cardinal website. Can I request a table be added?</span></span>
+<span id="cb1-31"><a href="#cb1-31"></a><span class="fu">#### 4. \ I don't know the ID of the table I am interested in. Is there a list of TLGs by description?</span></span>
 <span id="cb1-32"><a href="#cb1-32"></a></span>
-<span id="cb1-33"><a href="#cb1-33"></a>The cardinal team is actively maintaining and adding new table functions to the package. If you would like an FDA safety table that is not listed on the cardinal website, please file a New Table Template issue on GitHub <span class="co">[</span><span class="ot">here</span><span class="co">](https://github.com/pharmaverse/cardinal/issues/new/choose)</span> with the table number and the team will work on adding it to the package.</span>
+<span id="cb1-33"><a href="#cb1-33"></a>A list of all available TLGs by both description and ID/source is available on the <span class="co">[</span><span class="ot">Template Catalog</span><span class="co">](index-catalog.qmd)</span> page, and can be sorted/filtered accordingly. The category tags on the right-hand side of the page can be used to filter for specific TLGs.</span>
 <span id="cb1-34"><a href="#cb1-34"></a>&lt;br/&gt;&lt;br/&gt;</span>
 <span id="cb1-35"><a href="#cb1-35"></a></span>
 <span id="cb1-36"><a href="#cb1-36"></a></span>
-<span id="cb1-37"><a href="#cb1-37"></a><span class="fu">#### 5. \ I don't know the number of the FDA safety table I am interested in. Is there a list of tables by title?</span></span>
+<span id="cb1-37"><a href="#cb1-37"></a>------------------------------------------------------------------------</span>
 <span id="cb1-38"><a href="#cb1-38"></a></span>
-<span id="cb1-39"><a href="#cb1-39"></a>A list of all available tables by title is available on the <span class="co">[</span><span class="ot">Template Catalog</span><span class="co">](index-catalog.qmd)</span> page.</span>
-<span id="cb1-40"><a href="#cb1-40"></a>&lt;br/&gt;&lt;br/&gt;</span>
+<span id="cb1-39"><a href="#cb1-39"></a></span>
+<span id="cb1-40"><a href="#cb1-40"></a><span class="fu">#### Other Questions - Contact Us</span></span>
 <span id="cb1-41"><a href="#cb1-41"></a></span>
-<span id="cb1-42"><a href="#cb1-42"></a></span>
-<span id="cb1-43"><a href="#cb1-43"></a>------------------------------------------------------------------------</span>
-<span id="cb1-44"><a href="#cb1-44"></a></span>
-<span id="cb1-45"><a href="#cb1-45"></a></span>
-<span id="cb1-46"><a href="#cb1-46"></a><span class="fu">#### Other Questions - Contact Us</span></span>
-<span id="cb1-47"><a href="#cb1-47"></a></span>
-<span id="cb1-48"><a href="#cb1-48"></a>If you have questions not listed above please contact us by filing an issue on GitHub <span class="co">[</span><span class="ot">here</span><span class="co">](https://github.com/pharmaverse/cardinal/issues/new/choose)</span> or reaching out to the cardinal team directly via our Slack channel <span class="co">[</span><span class="ot">here</span><span class="co">](https://app.slack.com/client/T028PB489D3/C04MQS12MND)</span>.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-42"><a href="#cb1-42"></a>If you have questions not listed above please contact us by filing an issue on GitHub <span class="co">[</span><span class="ot">here</span><span class="co">](https://github.com/pharmaverse/cardinal/issues/new/choose)</span> or reaching out to the cardinal team directly via our Slack channel <span class="co">[</span><span class="ot">here</span><span class="co">](https://app.slack.com/client/T028PB489D3/C04MQS12MND)</span>.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
