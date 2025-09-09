@@ -13,7 +13,7 @@
 ![GitHub forks](https://img.shields.io/github/forks/pharmaverse/cardinal?style=social)
 <!-- end badges -->
 
-The `cardinal` R package contains table-generating functions to implement standard FDA Safety Tables according to the guidelines published in the [FDA Safety Tables and Figures Integrated Guide](https://downloads.regulations.gov/FDA-2022-N-1961-0046/attachment_1.pdf). The cardinal project aims to build and open-source a catalog of harmonized templates for generating tables, listings, and graphs (TLGs) in clinical study reporting. Details on package usage and the variety of functions currently available in the package are available on [the cardinal website](https://pharmaverse.github.io/cardinal/).
+The `cardinal` R package contains table-generating functions to implement standard FDA Safety Tables according to the guidelines published in the [FDA Safety Tables and Figures Integrated Guide](quarto/assets/resources/2025_FDA-STF-IG.pdf). The cardinal project aims to build and open-source a catalog of harmonized templates for generating tables, listings, and graphs (TLGs) in clinical study reporting. Details on package usage and the variety of functions currently available in the package are available on [the cardinal website](https://pharmaverse.github.io/cardinal/).
 
 ## Installation
 
@@ -33,7 +33,7 @@ See the [Getting Started page](https://pharmaverse.github.io/cardinal/quarto/get
 
 ## Usage
 
-In the following example, Table 2 (Baseline Demographic and Clinical Characteristics) from the [FDA Safety Tables and Figures Integrated Guide](https://downloads.regulations.gov/FDA-2022-N-1961-0046/attachment_1.pdf) is generated using the `make_table_02` function from the `cardinal` package.
+In the following example, Table 2 (Baseline Demographic and Clinical Characteristics) from the [FDA Safety Tables and Figures Integrated Guide](quarto/assets/resources/2025_FDA-STF-IG.pdf) is generated using the `make_table_02` function from the `cardinal` package.
 
 First we will load the `cardinal` package and use the [`random.cdisc.data`](https://github.com/insightsengineering/random.cdisc.data) package to load an example ADSL dataset. The `cardinal` package works with standard CDISC datasets and variable names while allowing users to set custom variable names & labels where necessary.
 
