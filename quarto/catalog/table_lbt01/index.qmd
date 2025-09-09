@@ -72,8 +72,7 @@ lbt01 <- adlb |>
   ) |>
   gtsummary::modify_bold(columns = label, rows = tbl_indent_id1 > 0L) |>
   gtsummary::modify_spanning_header(gtsummary::all_stat_cols() ~ "**{level}**  \nN = {n}") |>
-  gtsummary::modify_header(label = "**Lab  \n\U00A0\U00A0\U00A0\U00A0 Visit**") |>
-  gtsummary::modify_source_note("Printing a few illustrative rows from the full table.")
+  gtsummary::modify_header(label = "**Lab  \n\U00A0\U00A0\U00A0\U00A0 Visit**")
 ```
 
 ```{r}
