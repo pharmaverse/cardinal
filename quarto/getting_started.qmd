@@ -1,5 +1,5 @@
 ---
-title: "Getting Started"
+title: "Adding a New Template"
 toc: true
 toc-depth: 4
 ---
@@ -8,62 +8,60 @@ toc-depth: 4
 
 #### Environment Setup
 
-Please ensure that R version 3.6 or higher is installed on your computer. This is required to install the `cardinal` package and its dependencies. You can check your current version of R by running `sessionInfo()` within the R console.
+Please ensure that R version 4.2 or higher is installed on your computer. This is required to install the packages you will need to create your TLG template. You can check your current version of R by running `sessionInfo()` within the R console.
 
-#### Installing Package Dependencies
+#### Installing Packages for Template Creation
 
-The `cardinal` package requires several packages available on CRAN.
+To create your TLG template the {gtsummary}, {cards}, and {cardx} packages available on CRAN are required.
 
-To use the `cardinal` package, ensure you have these necessary package dependencies installed by running the following code:
+Please ensure you have these necessary packages installed by running the following code:
 
 ```{r, echo=TRUE, eval=FALSE}
-if (!require("gtsummary")) install.packages("gtsummary")
 if (!require("cards")) install.packages("cards")
 if (!require("cardx")) install.packages("cardx")
-if (!require("formatters")) install.packages("formatters")
-if (!require("rtables")) install.packages("rtables")
-if (!require("rlistings")) install.packages("rlistings")
-if (!require("tern")) install.packages("tern")
+if (!require("gtsummary")) install.packages("gtsummary")
 ```
 
-Optionally, to run the examples provided within the `cardinal` package and on this site you can also install the random CDISC data package, which contains example datasets, by running the following:
+To create your example TLG/ARD, we recommend using datasets from the {pharmaverseadam} package (or the {random.cdisc.data} package) which contains example synthetic ADaM datasets and is available on CRAN. Optionally, you may want to also install the {crane} package which contains several helpful pharmaceutical-specific table creation functions:
 
 ```{r, echo=TRUE, eval=FALSE}
-if (!require("random.cdisc.data")) install.packages("random.cdisc.data")
+if (!require("pharmaverseadam")) install.packages("pharmaverseadam")
+if (!require("crane")) install.packages("crane")
 ```
 
 For more information on these packages, see the [Additional Resources](#additional-resources) section below.
 
-#### Installing the cardinal Package
+#### Creating Your TLG Template
 
-To install the `cardinal` package, run the following line of code:
+When adding a new template, start by initializing a new folder in the `quarto/catalog` folder with a name that uniquely identifies your TLG (e.g. `fda-table_01`, `lab-tests-summary`). Within this folder, add a file named `index.qmd` which will contain your new TLG template. To simplify the template-creation process we have provided an empty template file (`inst/empty-template.qmd`) which can be copied into your new `index.qmd` file and then modified.
 
-```{r, echo=TRUE, eval=FALSE}
-if (!require("cardinal")) remotes::install_github("pharmaverse/cardinal")
-```
+We recommend using datasets from the `pharmaverseadam` package to run your template code and generate a sample output TLG and ARD.
 
-### Loading Data
+Ensure that your template file contains four main sections in separate tabs. If, for example, you are creating a template for a table, these tabs should be named:
 
-The table functions provided by `cardinal` are designed to work with any datasets which adhere to CDISC standards. If you have access to CDISC data, load this into your R environment as usual to use when generating tables.
+1. Table Preview - provides a preview of the table that is created in the template.
+2. Setup - lists the data set-up and pre-processing steps needed prior to creating the table.
+3. Build Table - provides the code needed to build the table.
+4. Build ARD - provides the code needed to build the ARD associated with the table. If an ARD-first approach was used to create the table this section should appear prior to the "Build Table" tab.
 
-If you do not have access to CDISC data, or want to run the examples provided within the package, you can use the `random.cdisc.data` package to load a selection of datasets containing example synthetic randomized CDISC data. Datasets are stored in the package by name, prefixed by the letter `"c"` (for "cached"). For example, after loading the `random.cdisc.data` package you can access an ADSL dataset by running `cadsl`, or ADAE with `cadae`. This data is loaded in where necessary as part of the provided examples.
+### Finalizing Your TLG Template
+
+Once you have created your template and ensured that all code runs without error, generate an image file named `result.png` containing a snapshot of your table. Confirm that the output image looks correct.
+
+Once you have finalized your TLG template, open a pull request in the cardinal [GitHub repository](https://github.com/pharmaverse/cardinal/).
 
 ### Template Navigation
 
-A list of all templates currently available in `cardinal` is provided in the [Template Catalog](index-catalog.qmd), with tables designed based on the [FDA Standard Safety Tables and Figures: Integrated Guide](https://downloads.regulations.gov/FDA-2022-N-1961-0046/attachment_1.pdf).
+A list of all templates currently available in cardinal is provided in the [Template Catalog](index-catalog.qmd).
 
-### Feature Requests
-
-If you would like to request the addition of a new feature to a pre-existing function within `cardinal`, or would like a specific table template to be added, please file an issue on GitHub [here](https://github.com/pharmaverse/cardinal/issues) or reach out to the cardinal team directly via our Slack channel [here](https://app.slack.com/client/T028PB489D3/C04MQS12MND).
-
-You can access the source code for all currently available functions in the `cardinal` GitHub repository [here](https://github.com/pharmaverse/cardinal/tree/main/R).
+You can access the files for all currently available templates in the cardinal GitHub repository [here](https://github.com/pharmaverse/cardinal/tree/main/quarto/catalog).
 
 ### Additional Resources {#additional-resources}
 
-See the following packages used by `cardinal` for more information:
+See the following sites for more information on packages leveraged by the cardinal team for TLG template development:
 
--   [`tern`](https://insightsengineering.github.io/tern): Clinical trials analysis functions
--   [`rtables`](https://insightsengineering.github.io/rtables): Table creation
--   [`rlistings`](https://insightsengineering.github.io/rlistings): Listing creation
--   [`formatters`](https://insightsengineering.github.io/formatters): Additional rendering formatting
--   [`random.cdisc.data`](https://insightsengineering.github.io/random.cdisc.data): Example synthetic randomized CDISC datasets (required for examples only)
+-   [{gtsummary}](https://www.danieldsjoberg.com/gtsummary/): Table creation
+-   [{cards}](https://insightsengineering.github.io/cards/): ARD creation
+-   [{cardx}](https://insightsengineering.github.io/cardx/): Extended ARD creation functions
+-   [{crane}](https://insightsengineering.github.io/crane/): Pharmaceutical-specific table creation functions
+-   [{pharmaverseadam}](https://pharmaverse.github.io/pharmaverseadam/): Example synthetic ADaM datasets

@@ -1,6 +1,6 @@
 ---
-title: FDA Table 17
-subtitle: Patients With Adverse Events by Female-Specific FDA Medical Query (Narrow) and Preferred Term, Female Safety Population, Pooled Analyses
+title: Subjects With Adverse Events by Organ System and OCMQ, Safety Population, Pooled Analysis (or Trial X) 
+subtitle: FDA Table 17
 categories: [table, FDA, safety, adverse events]
 ---
 
@@ -19,31 +19,18 @@ library(dplyr)
 library(cards)
 library(gtsummary)
 
-adsl <- random.cdisc.data::cadsl
-adae <- random.cdisc.data::cadae
+adae <- random.cdisc.data::cadae |>
+  rename(OCMQ01SC = SMQ01SC, OCMQ01NAM = SMQ01NAM)
 
-set.seed(1)
-adae <- dplyr::rename(adae, FMQ01SC = SMQ01SC, FMQ01NAM = SMQ01NAM)
-levels(adae$FMQ01SC) <- c("BROAD", "NARROW")
-adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
-adae$FMQ01NAM <- factor(adae$FMQ01NAM, levels = c(
-  unique(adae$FMQ01NAM), "Abnormal Uterine Bleeding", "Amenorrhea",
-  "Bacterial Vaginosis", "Decreased Menstrual Bleeding"
-))
-adae$FMQ01NAM[adae$SEX == "F"] <- as.factor(
-  sample(c(
-    "Abnormal Uterine Bleeding", "Amenorrhea",
-    "Bacterial Vaginosis", "Decreased Menstrual Bleeding"
-  ), sum(adae$SEX == "F"), replace = TRUE)
-)
+adsl <- random.cdisc.data::cadsl
+
+levels(adae$OCMQ01SC) <- c("BROAD", "NARROW")
+adae$OCMQ01SC[is.na(adae$OCMQ01SC)] <- "NARROW"
 
 # Pre-processing --------------------------------------------
 adae <- adae |>
-  filter(
-    SAFFL == "Y",
-    SEX == "F",
-    FMQ01SC == "NARROW"
-  )
+  # safety population
+  filter(SAFFL == "Y")
 
 adsl <- adsl |>
   filter(SAFFL == "Y") # safety population
@@ -53,7 +40,7 @@ adsl <- adsl |>
 
 ```{r tbl, results = 'hide'}
 tbl <- adae |>
-  select(FMQ01SC, ARM, FMQ01NAM, AEDECOD, USUBJID) |>
+  select(OCMQ01SC, TRT01A, OCMQ01NAM, AEBODSYS, USUBJID) |>
   # setting an explicit level for NA values so empty strata combinations are shown.
   mutate(across(everything(), ~ {
     if (anyNA(.)) {
@@ -62,15 +49,21 @@ tbl <- adae |>
       .
     }
   })) |>
-  tbl_hierarchical(
-    by = ARM,
-    variables = c(FMQ01NAM, AEDECOD),
-    id = USUBJID,
-    denominator = adsl,
-    # variables to calculate rates for
-    include = c(AEDECOD),
-    label = list(FMQ01NAM ~ "FMQ (Narrow)", AEDECOD ~ "Preferred Term")
-  )
+  tbl_strata(
+    strata = OCMQ01SC,
+    ~ tbl_hierarchical(
+      .x,
+      by = TRT01A,
+      variables = c(AEBODSYS, OCMQ01NAM),
+      id = USUBJID,
+      denominator = adsl,
+      # variables to calculate rates for
+      include = c(OCMQ01NAM),
+      label = list(OCMQ01NAM ~ "OCMQ", AEBODSYS ~ "System Organ Class")
+    )
+  ) |>
+  modify_missing_symbol("NA", columns = everything(), rows = row_type == "level")
+
 tbl
 ```
 
@@ -85,7 +78,6 @@ gt::gtsave(as_gt(tbl), filename = "result.png")
 
 ```{r ard, message=FALSE, warning=FALSE, results='hide'}
 ard <- gather_ard(tbl)
-
 ard
 ```
 

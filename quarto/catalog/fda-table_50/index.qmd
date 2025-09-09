@@ -1,0 +1,138 @@
+---
+title: Overview of Serious Adverse Events by Demographic Subgroup, Safety Population, Pooled Analysis (or Trial X)
+subtitle: FDA Table 50
+categories: [table, FDA, safety, adverse events]
+---
+
+::: panel-tabset
+## Table Preview
+
+```{r img, echo=FALSE, fig.align='center', out.width='60%'}
+knitr::include_graphics("result.png")
+```
+
+## Setup
+
+```{r setup, message=FALSE}
+# Load libraries & data -------------------------------------
+library(dplyr)
+library(cards)
+library(gtsummary)
+
+adae <- random.cdisc.data::cadae
+adsl <- random.cdisc.data::cadsl
+
+adsl <- adsl |>
+  filter(SAFFL == "Y")
+
+data <- adae |>
+  filter(
+    SAFFL == "Y",
+    TRTEMFL == "Y",
+    AESER == "Y"
+  ) |>
+  mutate(
+    SEXGR = "Sex, n (%)",
+    SEXGR1 = as.factor(SEX),
+    AGEGR = "Age group, years, n(%)",
+    AGEGR1 = factor(
+      case_when(
+        AGE >= 17 & AGE < 65 ~ ">=17 to <65",
+        AGE >= 65 & AGE < 75 ~ "65-74",
+        AGE >= 75 ~ ">=75"
+      ),
+      levels = c(">=17 to <65", "65-74", ">=75")
+    ),
+    RACEGR = "Race, n(%)",
+    RACEGR1 = as.factor(RACE),
+    ETHNICGR = "Ethnicity, n(%)",
+    ETHNICGR1 = as.factor(RACE)
+  )
+
+data_any_sae <- adae |>
+  filter(AESER == "Y") |>
+  mutate(AESER = "Any SAE, n(%)")
+```
+
+## Build Table
+
+```{r tbl, message=FALSE, warning=FALSE}
+tbl_any_sae <- tbl_hierarchical(
+  data = data_any_sae,
+  denominator = adsl,
+  id = "USUBJID",
+  by = "TRT01A",
+  variables = "AESER",
+  statistic = ~"{n} ({p}%)",
+  label = AESER ~ "Characteristic"
+)
+
+tbl_sex <- tbl_hierarchical(
+  data = data,
+  denominator = data_any_sae |> slice_head(by = c(USUBJID)),
+  id = "USUBJID",
+  by = "TRT01A",
+  variables = c(SEXGR, SEXGR1),
+  include = SEXGR1,
+  statistic = ~"{n}/{N} ({p}%)"
+)
+
+tbl_agegr1 <- tbl_hierarchical(
+  data = data,
+  denominator = data_any_sae |> slice_head(by = c(USUBJID)),
+  id = "USUBJID",
+  by = "TRT01A",
+  variables = c(AGEGR, AGEGR1),
+  include = AGEGR1,
+  statistic = ~"{n}/{N} ({p}%)"
+)
+
+tbl_race <- tbl_hierarchical(
+  data = data,
+  denominator = data_any_sae |> slice_head(by = c(USUBJID)),
+  id = "USUBJID",
+  by = "TRT01A",
+  variables = c(RACEGR, RACEGR1),
+  include = RACEGR1,
+  statistic = ~"{n}/{N} ({p}%)"
+)
+
+tbl_ethnic <- tbl_hierarchical(
+  data = data,
+  denominator = data_any_sae |> slice_head(by = c(USUBJID)),
+  id = "USUBJID",
+  by = "TRT01A",
+  variables = c(ETHNICGR, ETHNICGR1),
+  include = ETHNICGR1,
+  statistic = ~"{n}/{N} ({p}%)"
+)
+
+tbl <- list(tbl_any_sae, tbl_sex, tbl_agegr1, tbl_race, tbl_ethnic) |>
+  tbl_stack() |>
+  modify_indent("label", rows = !(variable %in% c("..ard_hierarchical_overall..", "AESER", "SEXGR", "AGEGR", "RACEGR", "ETHNICGR"))) |>
+  remove_footnote_header(columns = everything())
+
+tbl
+```
+
+```{r eval=FALSE, include=FALSE}
+# Run chunk locally to generate image file
+gt::gtsave(as_gt(tbl), filename = "result.png")
+```
+
+```{r img, echo=FALSE, fig.align='center', out.width='60%'}
+```
+
+## Build ARD
+
+```{r ard, message=FALSE, warning=FALSE, results='hide'}
+ard <- gather_ard(tbl)
+ard
+```
+
+```{r, echo=FALSE}
+# Print ARD
+withr::local_options(width = 9999)
+print(ard, columns = "all", n = 40, na.print = NULL)
+```
+:::

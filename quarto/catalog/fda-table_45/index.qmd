@@ -1,0 +1,100 @@
+---
+title: Subjects With Adverse Events by Female-Specific OCMQ (Broad) and Preferred Term, Female Safety Population, Pooled Analysis (or Trial X)
+subtitle: FDA Table 45
+categories: [table, FDA, safety, adverse events]
+---
+
+::: panel-tabset
+## Table Preview
+
+```{r img, echo=FALSE, fig.align='center', out.width='45%'}
+knitr::include_graphics("result.png")
+```
+
+## Setup
+
+```{r setup, message=FALSE}
+# Load libraries & data -------------------------------------
+library(dplyr)
+library(cards)
+library(gtsummary)
+
+adsl <- random.cdisc.data::cadsl
+adae <- random.cdisc.data::cadae
+
+set.seed(1)
+adae <- rename(adae, OCMQ01SC = SMQ01SC, OCMQ01NAM = SMQ01NAM)
+levels(adae$OCMQ01SC) <- c("BROAD", "NARROW")
+adae$OCMQ01SC[is.na(adae$OCMQ01SC)] <- "NARROW"
+adae$OCMQ01NAM <- factor(adae$OCMQ01NAM, levels = c(
+  unique(adae$OCMQ01NAM), "Abnormal Uterine Bleeding", "Amenorrhea",
+  "Bacterial Vaginosis", "Decreased Menstrual Bleeding"
+))
+adae$OCMQ01NAM[adae$SEX == "F"] <- as.factor(
+  sample(c(
+    "Abnormal Uterine Bleeding", "Amenorrhea",
+    "Bacterial Vaginosis", "Decreased Menstrual Bleeding"
+  ), sum(adae$SEX == "F"), replace = TRUE)
+)
+
+# Pre-processing --------------------------------------------
+data <- adae |>
+  filter(
+    SAFFL == "Y",
+    SEX == "F",
+    OCMQ01SC == "BROAD"
+  ) |>
+  select(OCMQ01SC, TRT01A, OCMQ01NAM, AEDECOD, USUBJID) |>
+  # setting an explicit level for NA values so empty strata combinations are shown.
+  mutate(across(everything(), ~ {
+    if (anyNA(.)) {
+      forcats::fct_na_value_to_level(as.factor(.), level = "<Missing>")
+    } else {
+      .
+    }
+  }))
+
+# denominator values include only Female subjects in the arm with AEs
+denom <- data |> distinct(USUBJID, TRT01A)
+```
+
+## Build Table
+
+```{r tbl, results = 'hide'}
+tbl <- data |>
+  tbl_hierarchical(
+    by = TRT01A,
+    variables = c(OCMQ01NAM, AEDECOD),
+    id = USUBJID,
+    denominator = denom,
+    # variables to calculate rates for
+    include = c(AEDECOD),
+    label = list(
+      OCMQ01NAM ~ "OCMQ (Broad)",
+      AEDECOD ~ "Preferred Term"
+    )
+  )
+
+tbl
+```
+
+```{r eval=FALSE, include=FALSE}
+gt::gtsave(as_gt(tbl), filename = "result.png")
+```
+
+```{r img, echo=FALSE, fig.align='center', out.width='45%'}
+```
+
+## Build ARD
+
+```{r ard, message=FALSE, warning=FALSE, results='hide'}
+ard <- gather_ard(tbl)
+ard
+```
+
+```{r, echo=FALSE}
+# Print ARD
+withr::local_options(width = 9999)
+print(ard, columns = "all")
+```
+:::

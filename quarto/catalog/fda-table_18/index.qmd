@@ -1,6 +1,6 @@
 ---
-title: FDA Table 18
-subtitle: Patients With Adverse Events by Female-Specific FDA Medical Query (Broad) and Preferred Term, Female Safety Population, Pooled Analyses
+title: Summary Assessment of [Insert AE of Interest], Safety Population, Pooled Analysis (or Trial X)
+subtitle: FDA Table 18
 categories: [table, FDA, safety, adverse events]
 ---
 
@@ -17,60 +17,104 @@ knitr::include_graphics("result.png")
 # Load libraries & data -------------------------------------
 library(dplyr)
 library(cards)
+library(cardx)
 library(gtsummary)
 
 adsl <- random.cdisc.data::cadsl
 adae <- random.cdisc.data::cadae
 
 set.seed(1)
-adae <- dplyr::rename(adae, FMQ01SC = SMQ01SC, FMQ01NAM = SMQ01NAM)
-levels(adae$FMQ01SC) <- c("BROAD", "NARROW")
-adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
-adae$FMQ01NAM <- factor(adae$FMQ01NAM, levels = c(
-  unique(adae$FMQ01NAM), "Abnormal Uterine Bleeding", "Amenorrhea",
-  "Bacterial Vaginosis", "Decreased Menstrual Bleeding"
-))
-adae$FMQ01NAM[adae$SEX == "F"] <- as.factor(
-  sample(c(
-    "Abnormal Uterine Bleeding", "Amenorrhea",
-    "Bacterial Vaginosis", "Decreased Menstrual Bleeding"
-  ), sum(adae$SEX == "F"), replace = TRUE)
-)
+adae$AESIFL <- ifelse(adae$AESOC %in% c("cl A", "cl D"), "Y", "N")
 
 # Pre-processing --------------------------------------------
-adae <- adae |>
-  filter(
-    SAFFL == "Y",
-    SEX == "F",
-    FMQ01SC == "BROAD"
-  )
-
 adsl <- adsl |>
   filter(SAFFL == "Y") # safety population
+
+data <- adae |>
+  filter(
+    SAFFL == "Y", # safety population
+    AESIFL == "Y" # AESI assessment
+  )
+
+# dataset of AE flag variable counts by subject
+data_ae_fl <-
+  adsl |>
+  select(USUBJID, TRT01A) |>
+  # create subject-level flags from adae data
+  left_join(
+    data |>
+      select(USUBJID, AESER, AESDTH, AESLIFE, AESHOSP, AESDISAB, AESCONG, AESMIE, AEACN) |>
+      mutate(
+        # Serious AE
+        ae_ser = any(AESER == "Y"),
+        # Serious AE leading to death
+        ae_ser_death = any(AESER == "Y" & AESDTH == "Y"),
+        ae_ser_life = any(AESER == "Y" & AESLIFE == "Y"),
+        ae_ser_hosp = any(AESER == "Y" & AESHOSP == "Y"),
+        ae_ser_disab = any(AESER == "Y" & AESDISAB == "Y"),
+        ae_ser_cong = any(AESER == "Y" & AESCONG == "Y"),
+        ae_ser_oth = any(AESER == "Y" & AESMIE == "Y"),
+        # AE resulting in discontinuation
+        ae_withdraw = any(AEACN == "DRUG WITHDRAWN"),
+        .by = USUBJID
+      ),
+    by = "USUBJID"
+  ) |>
+  distinct(USUBJID, .keep_all = TRUE) |>
+  # add number of AEs
+  left_join(
+    data |> summarise(.by = USUBJID, ae_count = n()),
+    by = "USUBJID",
+    relationship = "one-to-one"
+  )
 ```
 
 ## Build Table
 
 ```{r tbl, results = 'hide'}
-tbl <- adae |>
-  select(FMQ01SC, ARM, FMQ01NAM, AEDECOD, USUBJID) |>
-  # setting an explicit level for NA values so empty strata combinations are shown.
-  mutate(across(everything(), ~ {
-    if (anyNA(.)) {
-      forcats::fct_na_value_to_level(as.factor(.), level = "<Missing>")
-    } else {
-      .
-    }
-  })) |>
+## AE grouping flags section --------
+tbl_ae_gp <- data |>
   tbl_hierarchical(
-    by = ARM,
-    variables = c(FMQ01NAM, AEDECOD),
+    variables = AEDECOD,
     id = USUBJID,
     denominator = adsl,
-    # variables to calculate rates for
-    include = c(AEDECOD),
-    label = list(FMQ01NAM ~ "FMQ (Broad)", AEDECOD ~ "Preferred Term")
-  )
+    by = TRT01A,
+    overall_row = TRUE,
+    label = list(
+      ..ard_hierarchical_overall.. = "[Insert AE of Interest]",
+      AEDECOD = "AE of Interest Assessment"
+    )
+  ) |>
+  modify_indent(columns = label, rows = variable != "..ard_hierarchical_overall..", indent = 4L)
+
+## Maximum severity section ---------
+tbl_ae_sev <- data |>
+  ard_tabulate_max(variables = AESEV, id = USUBJID, by = TRT01A, denominator = adsl, quiet = TRUE) |>
+  tbl_ard_summary(by = TRT01A, label = list(AESEV = "Maximum severity"))
+
+## Events section -------------------
+tbl_ae_fl <- data_ae_fl |>
+  tbl_summary(
+    by = "TRT01A",
+    include = c(ae_ser, ae_ser_death, ae_ser_life, ae_ser_hosp, ae_ser_disab, ae_ser_cong, ae_ser_oth, ae_withdraw),
+    missing = "no",
+    percent = adsl,
+    label = list(
+      ae_ser = "SAE",
+      ae_ser_death = "Death",
+      ae_ser_life = "Life-threatening",
+      ae_ser_hosp = "Initial or prolonged hospitalization",
+      ae_ser_disab = "Disability or permanent damage",
+      ae_ser_cong = "Congenital anomaly or birth defect",
+      ae_ser_oth = "Other",
+      ae_withdraw = "Resulting in treatment discontinuation"
+    )
+  ) |>
+  modify_indent(columns = label, rows = !variable %in% c("ae_ser", "ae_withdraw"), indent = 4L)
+
+## Build table ----------------------
+tbl <- tbl_stack(list(tbl_ae_gp, tbl_ae_sev, tbl_ae_fl), quiet = TRUE)
+
 tbl
 ```
 
@@ -85,13 +129,12 @@ gt::gtsave(as_gt(tbl), filename = "result.png")
 
 ```{r ard, message=FALSE, warning=FALSE, results='hide'}
 ard <- gather_ard(tbl)
-
 ard
 ```
 
 ```{r, echo=FALSE}
 # Print ARD
 withr::local_options(width = 9999)
-print(ard, columns = "all")
+print(ard)
 ```
 :::

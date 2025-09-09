@@ -1,6 +1,6 @@
 ---
-title: FDA Table 3
-subtitle: Patient Screening and Enrollment, Trials A and B
+title: Subject Screening and Enrollment, Screening Population, Trials A and B
+subtitle: FDA Table 03
 categories: [table, FDA, safety, disposition]
 ---
 
@@ -16,7 +16,6 @@ knitr::include_graphics("result.png")
 ```{r setup, message=FALSE}
 # Load libraries & data -------------------------------------
 library(dplyr)
-library(formatters)
 library(cards)
 library(gtsummary)
 
@@ -25,17 +24,17 @@ adsl <- random.cdisc.data::cadsl
 set.seed(1)
 adsl$RANDDT[sample(seq_len(nrow(adsl)), 100)] <- NA
 scrnfail_reas_lvls <- c(
-  "Inclusion/exclusion criteria not met", "Patient noncompliance", "Consent withdrawn", "Other"
+  "Inclusion/exclusion criteria not met", "Subject noncompliance", "Consent withdrawn", "Other"
 )
 data <- adsl |>
   mutate(
     ENRLDT = RANDDT,
-    SCRNFL = with_label(TRUE, "Patients screened"),
+    SCRNFL = TRUE,
     SCRNFRS = factor(sample(scrnfail_reas_lvls, size = nrow(adsl), replace = TRUE),
       levels = scrnfail_reas_lvls
     ),
-    ENRLFL = with_label(!is.na(ENRLDT), "Patients enrolled"),
-    RANDFL = with_label(!is.na(RANDDT), "Patients randomized")
+    ENRLFL = !is.na(ENRLDT),
+    RANDFL = !is.na(RANDDT)
   )
 data$SCRNFRS[data$SCRNFL == "N" | !is.na(data$ENRLDT)] <- NA
 ```
@@ -45,17 +44,17 @@ data$SCRNFRS[data$SCRNFL == "N" | !is.na(data$ENRLDT)] <- NA
 ```{r ard, message=FALSE, warning=FALSE, results='hide'}
 ard <- data |>
   ard_stack(
-    ard_dichotomous(
+    ard_tabulate_value(
       variables = SCRNFL,
       value = list(SCRNFL = TRUE),
       statistic = everything() ~ c("n")
     ),
-    ard_categorical(
+    ard_tabulate(
       variables = SCRNFRS,
       statistic = everything() ~ c("n", "p"),
       denominator = data
     ),
-    ard_dichotomous(
+    ard_tabulate_value(
       variables = c(ENRLFL, RANDFL),
       value = list(ENRLFL = TRUE, RANDFL = TRUE),
       statistic = everything() ~ c("n", "p"),
@@ -77,32 +76,35 @@ print(ard, columns = "all", n = 40)
 ```{r tbl, message=FALSE, warning=FALSE, results='hide'}
 tbl_scrn <- tbl_summary(
   data = data,
+  by = TRT01A,
   include = "SCRNFL",
-  statistic = SCRNFL ~ "{n}",
-  missing = "no"
+  missing = "no",
+  label = ~"Subjects screened"
 )
 
 tbl_scrnfrs <- tbl_hierarchical(
   data = data,
   denominator = adsl,
   id = USUBJID,
+  by = TRT01A,
   variables = "SCRNFRS",
-  statistic = ~"{n} ({p}%)",
   label = list(..ard_hierarchical_overall.. = "Screening failures"),
   overall_row = TRUE
-)
+) |>
+  modify_indent(columns = label, rows = row_type == "level", indent = 4L) |>
+  modify_indent(columns = label, rows = variable == "SCRNFRS", indent = 8L)
 
 tbl_enrl_rand <- tbl_summary(
   data = data,
+  by = TRT01A,
   include = c("ENRLFL", "RANDFL"),
-  missing = "no"
+  missing = "no",
+  label = list(ENRLFL = "Subjects enrolled", RANDFL = "Subjects randomized")
 )
 
 tbl <- list(tbl_scrn, tbl_scrnfrs, tbl_enrl_rand) |>
   tbl_stack() |>
-  modify_header(label = "**Disposition**", stat_0 = "**Trial A**") |>
-  modify_column_indent("label", rows = !(variable %in% c("..ard_hierarchical_overall..", "SCRNFL", "ENRLFL", "RANDFL"))) |>
-  remove_footnote_header(columns = everything())
+  modify_header(label = "**Disposition**")
 
 tbl
 ```
