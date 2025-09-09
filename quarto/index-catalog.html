@@ -115,9 +115,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
 
     const options = {
-      valueNames: ['listing-image','listing-title','listing-subtitle','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      page: 18,
-    pagination: { item: "<li class='page-item'><a class='page page-link' href='#'></a></li>" },
+      valueNames: ['listing-title','listing-subtitle','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-title-sort'] }],
+      
       searchColumns: ["listing-title","listing-subtitle","listing-categories"],
     };
 
@@ -207,7 +206,7 @@ window.Quarto = {
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+  <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
@@ -280,32 +279,31 @@ window.Quarto = {
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <div class="quarto-title-block"><div><h1 class="title">Template Catalog</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
-                      </div>
-  </div>
-    
-  
-  <div class="quarto-title-meta column-page-left">
-
-      
-    
-      
-    </div>
-    
-  
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
     <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(25)</span></div><div class="category" data-category="FDA">FDA <span class="quarto-category-count">(25)</span></div><div class="category" data-category="adverse events">adverse events <span class="quarto-category-count">(17)</span></div><div class="category" data-category="deaths">deaths <span class="quarto-category-count">(1)</span></div><div class="category" data-category="demographics">demographics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="disposition">disposition <span class="quarto-category-count">(2)</span></div><div class="category" data-category="exposure">exposure <span class="quarto-category-count">(1)</span></div><div class="category" data-category="safety">safety <span class="quarto-category-count">(25)</span></div><div class="category" data-category="table">table <span class="quarto-category-count">(25)</span></div><div class="category" data-category="vital signs">vital signs <span class="quarto-category-count">(3)</span></div></div></div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content column-page-left" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Template Catalog</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
+</div>
 
 
 
+<div class="quarto-title-meta column-page-left">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
 
 
 
@@ -314,746 +312,346 @@ window.Quarto = {
 <!-- -->
 
 
-<div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
+<div class="quarto-listing quarto-listing-container-table" id="listing-listing">
 <div class="listing-actions-group">
+   <div class="input-group input-group-sm quarto-listing-sort">
+     <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
+     <select id="listing-listing-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-listing'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
+       <option value="" disabled="" selected="" hidden="">Order By</option>
+       <option value="index" data-direction="asc">Default</option>
+         <option value="listing-subtitle" data-direction="asc">
+          Source
+        </option>
+         <option value="listing-title-sort" data-direction="asc">
+          TLG Description
+        </option>
+     </select>
+  </div>
     <div class="input-group input-group-sm quarto-listing-filter">
       <span class="input-group-text"><i class="bi bi-search"></i></span>
       <input type="text" class="search form-control" placeholder="Filter">
     </div>
 </div>
-<div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-categories="table,FDA,safety,demographics" data-listing-file-modified-sort="1757427775707" data-listing-reading-time-sort="2" data-listing-word-count-sort="277">
-<a href="../quarto/catalog/fda-table_02/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="catalog/fda-table_02/result.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-FDA Table 02
-</h5>
-<div class="card-subtitle listing-subtitle">
-Demographics and Baseline Clinical Characteristics, Safety Population, Pooled Analysis (or Trial X)
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('table'); return false;">
-table
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('FDA'); return false;">
-FDA
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('safety'); return false;">
-safety
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('demographics'); return false;">
-demographics
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="1" data-categories="table,FDA,safety,disposition" data-listing-file-modified-sort="1757427775708" data-listing-reading-time-sort="2" data-listing-word-count-sort="382">
-<a href="../quarto/catalog/fda-table_03/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="catalog/fda-table_03/result.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-FDA Table 03
-</h5>
-<div class="card-subtitle listing-subtitle">
-Subject Screening and Enrollment, Screening Population, Trials A and B
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('table'); return false;">
-table
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('FDA'); return false;">
-FDA
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('safety'); return false;">
-safety
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('disposition'); return false;">
-disposition
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="2" data-categories="table,FDA,safety,disposition" data-listing-file-modified-sort="1757427775709" data-listing-reading-time-sort="1" data-listing-word-count-sort="182">
-<a href="../quarto/catalog/fda-table_04/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="catalog/fda-table_04/result.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-FDA Table 04
-</h5>
-<div class="card-subtitle listing-subtitle">
-Subject Populations, Randomized Population, Pooled Analysis (or Trial X)
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('table'); return false;">
-table
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('FDA'); return false;">
-FDA
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('safety'); return false;">
-safety
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('disposition'); return false;">
-disposition
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="3" data-categories="table,FDA,safety,exposure" data-listing-file-modified-sort="1757427775709" data-listing-reading-time-sort="4" data-listing-word-count-sort="703">
-<a href="../quarto/catalog/fda-table_06/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="catalog/fda-table_06/result.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-FDA Table 06
-</h5>
-<div class="card-subtitle listing-subtitle">
-Duration of Treatment Exposure, Safety Population, Pooled Analysis (or Trial X)
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('table'); return false;">
-table
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('FDA'); return false;">
-FDA
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('safety'); return false;">
-safety
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('exposure'); return false;">
-exposure
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="4" data-categories="table,FDA,safety,adverse events" data-listing-file-modified-sort="1757427775709" data-listing-reading-time-sort="4" data-listing-word-count-sort="604">
-<a href="../quarto/catalog/fda-table_07/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="catalog/fda-table_07/result.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-FDA Table 07
-</h5>
-<div class="card-subtitle listing-subtitle">
-Overview of Adverse Events, Safety Population, Pooled Analysis (or Trial X)
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('table'); return false;">
-table
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('FDA'); return false;">
-FDA
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('safety'); return false;">
-safety
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('adverse events'); return false;">
-adverse events
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="5" data-categories="table,FDA,safety,deaths" data-listing-file-modified-sort="1757427775710" data-listing-reading-time-sort="2" data-listing-word-count-sort="231">
-<a href="../quarto/catalog/fda-table_08/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="catalog/fda-table_08/result.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-FDA Table 08
-</h5>
-<div class="card-subtitle listing-subtitle">
-Deaths, Safety Population, Pooled Analysis (or Trial X)
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('table'); return false;">
-table
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('FDA'); return false;">
-FDA
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('safety'); return false;">
-safety
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('deaths'); return false;">
-deaths
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="6" data-categories="table,FDA,safety,adverse events" data-listing-file-modified-sort="1757427775711" data-listing-reading-time-sort="2" data-listing-word-count-sort="339">
-<a href="../quarto/catalog/fda-table_09/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="catalog/fda-table_09/result.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-FDA Table 09
-</h5>
-<div class="card-subtitle listing-subtitle">
-All Individual Subject Deaths, Safety Population, Pooled Analysis (or Trial X)
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('table'); return false;">
-table
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('FDA'); return false;">
-FDA
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('safety'); return false;">
-safety
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('adverse events'); return false;">
-adverse events
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="7" data-categories="table,FDA,safety,adverse events" data-listing-file-modified-sort="1757427775711" data-listing-reading-time-sort="1" data-listing-word-count-sort="136">
-<a href="../quarto/catalog/fda-table_10/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="catalog/fda-table_10/result.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-FDA Table 10
-</h5>
-<div class="card-subtitle listing-subtitle">
-Subjects With Serious Adverse Events by System Organ Class and Preferred Term, Safety Population, Pooled Analysis (or Trial X)
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('table'); return false;">
-table
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('FDA'); return false;">
-FDA
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('safety'); return false;">
-safety
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('adverse events'); return false;">
-adverse events
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="8" data-categories="table,FDA,safety,adverse events" data-listing-file-modified-sort="1757427775712" data-listing-reading-time-sort="2" data-listing-word-count-sort="217">
-<a href="../quarto/catalog/fda-table_11/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="catalog/fda-table_11/result.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-FDA Table 11
-</h5>
-<div class="card-subtitle listing-subtitle">
-Subjects With Serious Adverse Events by Organ System and OCMQ (Narrow), Safety Population, Pooled Analysis (or Trial X)
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('table'); return false;">
-table
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('FDA'); return false;">
-FDA
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('safety'); return false;">
-safety
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('adverse events'); return false;">
-adverse events
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="9" data-categories="table,FDA,safety,adverse events" data-listing-file-modified-sort="1757427775712" data-listing-reading-time-sort="1" data-listing-word-count-sort="167">
-<a href="../quarto/catalog/fda-table_12/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="catalog/fda-table_12/result.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-FDA Table 12
-</h5>
-<div class="card-subtitle listing-subtitle">
-Subjects With Adverse Events Leading to Treatment Discontinuation by System Organ Class and Preferred Term, Safety Population, Pooled Analysis (or Trial X)
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('table'); return false;">
-table
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('FDA'); return false;">
-FDA
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('safety'); return false;">
-safety
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('adverse events'); return false;">
-adverse events
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="10" data-categories="table,FDA,safety,adverse events" data-listing-file-modified-sort="1757427775713" data-listing-reading-time-sort="2" data-listing-word-count-sort="227">
-<a href="../quarto/catalog/fda-table_13/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="catalog/fda-table_13/result.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-FDA Table 13
-</h5>
-<div class="card-subtitle listing-subtitle">
-Subjects With Adverse Events Leading to Treatment Discontinuation by Organ System and OCMQ (Narrow), Safety Population, Pooled Analysis (or Trial X)
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('table'); return false;">
-table
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('FDA'); return false;">
-FDA
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('safety'); return false;">
-safety
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('adverse events'); return false;">
-adverse events
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="11" data-categories="table,FDA,safety,adverse events" data-listing-file-modified-sort="1757427775714" data-listing-reading-time-sort="1" data-listing-word-count-sort="160">
-<a href="../quarto/catalog/fda-table_14/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="catalog/fda-table_14/result.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-FDA Table 14
-</h5>
-<div class="card-subtitle listing-subtitle">
-Subjects With Adverse Events by System Organ Class and Preferred Term, Safety Population, Pooled Analysis (or Trial X)
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('table'); return false;">
-table
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('FDA'); return false;">
-FDA
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('safety'); return false;">
-safety
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('adverse events'); return false;">
-adverse events
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="12" data-categories="table,FDA,safety,adverse events" data-listing-file-modified-sort="1757427775714" data-listing-reading-time-sort="1" data-listing-word-count-sort="143">
-<a href="../quarto/catalog/fda-table_15/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="catalog/fda-table_15/result.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-FDA Table 15
-</h5>
-<div class="card-subtitle listing-subtitle">
-Subjects With Common Adverse Events Occurring at ≥X% Frequency by Preferred Term, Safety Population, Pooled Analysis (or Trial X)
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('table'); return false;">
-table
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('FDA'); return false;">
-FDA
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('safety'); return false;">
-safety
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('adverse events'); return false;">
-adverse events
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="13" data-categories="table,FDA,safety,adverse events" data-listing-file-modified-sort="1757427775715" data-listing-reading-time-sort="2" data-listing-word-count-sort="251">
-<a href="../quarto/catalog/fda-table_17/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="catalog/fda-table_17/result.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-FDA Table 17
-</h5>
-<div class="card-subtitle listing-subtitle">
-Subjects With Adverse Events by Organ System and OCMQ, Safety Population, Pooled Analysis (or Trial X)
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('table'); return false;">
-table
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('FDA'); return false;">
-FDA
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('safety'); return false;">
-safety
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('adverse events'); return false;">
-adverse events
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="14" data-categories="table,FDA,safety,adverse events" data-listing-file-modified-sort="1757427775716" data-listing-reading-time-sort="4" data-listing-word-count-sort="637">
-<a href="../quarto/catalog/fda-table_18/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="catalog/fda-table_18/result.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-FDA Table 18
-</h5>
-<div class="card-subtitle listing-subtitle">
-Summary Assessment of [Insert AE of Interest], Safety Population, Pooled Analysis (or Trial X)
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('table'); return false;">
-table
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('FDA'); return false;">
-FDA
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('safety'); return false;">
-safety
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('adverse events'); return false;">
-adverse events
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="15" data-categories="table,FDA,safety,adverse events" data-listing-file-modified-sort="1757427775716" data-listing-reading-time-sort="2" data-listing-word-count-sort="253">
-<a href="../quarto/catalog/fda-table_29/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="catalog/fda-table_29/result.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-FDA Table 29
-</h5>
-<div class="card-subtitle listing-subtitle">
-Subjects With Serious Adverse Events by Organ System, OCMQ (Narrow) and Preferred Term, Safety Population, Pooled Analysis (or Trial X)
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('table'); return false;">
-table
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('FDA'); return false;">
-FDA
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('safety'); return false;">
-safety
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('adverse events'); return false;">
-adverse events
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="16" data-categories="table,FDA,safety,adverse events" data-listing-file-modified-sort="1757427775718" data-listing-reading-time-sort="2" data-listing-word-count-sort="260">
-<a href="../quarto/catalog/fda-table_33/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="catalog/fda-table_33/result.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-FDA Table 33
-</h5>
-<div class="card-subtitle listing-subtitle">
-Subjects With Adverse Events by Male-Specific OCMQ (Narrow) and Preferred Term, Male Safety Population, Pooled Analysis (or Trial X)
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('table'); return false;">
-table
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('FDA'); return false;">
-FDA
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('safety'); return false;">
-safety
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('adverse events'); return false;">
-adverse events
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="17" data-categories="table,FDA,safety,adverse events" data-listing-file-modified-sort="1757427775719" data-listing-reading-time-sort="2" data-listing-word-count-sort="286">
-<a href="../quarto/catalog/fda-table_34/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="catalog/fda-table_34/result.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-FDA Table 34
-</h5>
-<div class="card-subtitle listing-subtitle">
-Subjects With Adverse Events by Female-Specific OCMQ (Narrow) and Preferred Term, Female Safety Population, Pooled Analysis (or Trial X)
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('table'); return false;">
-table
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('FDA'); return false;">
-FDA
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('safety'); return false;">
-safety
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('adverse events'); return false;">
-adverse events
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="18" data-categories="table,FDA,safety,vital signs" data-listing-file-modified-sort="1757427775720" data-listing-reading-time-sort="2" data-listing-word-count-sort="375">
-<a href="../quarto/catalog/fda-table_36/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img data-src="catalog/fda-table_36/result.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-FDA Table 36
-</h5>
-<div class="card-subtitle listing-subtitle">
-Subjects With Maximum Postbaseline Systolic Blood Pressure by Category of Blood Pressure, Safety Population, Pooled Analysis (or Trial X)
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('table'); return false;">
-table
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('FDA'); return false;">
-FDA
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('safety'); return false;">
-safety
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('vital signs'); return false;">
-vital signs
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="19" data-categories="table,FDA,safety,vital signs" data-listing-file-modified-sort="1757427775720" data-listing-reading-time-sort="2" data-listing-word-count-sort="357">
-<a href="../quarto/catalog/fda-table_37/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img data-src="catalog/fda-table_37/result.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-FDA Table 37
-</h5>
-<div class="card-subtitle listing-subtitle">
-Subjects With Maximum Postbaseline Diastolic Blood Pressure by Category of Blood Pressure, Safety Population, Pooled Analysis (or Trial X)
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('table'); return false;">
-table
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('FDA'); return false;">
-FDA
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('safety'); return false;">
-safety
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('vital signs'); return false;">
-vital signs
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="20" data-categories="table,FDA,safety,vital signs" data-listing-file-modified-sort="1757427775720" data-listing-reading-time-sort="2" data-listing-word-count-sort="318">
-<a href="../quarto/catalog/fda-table_38/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img data-src="catalog/fda-table_38/result.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-FDA Table 38
-</h5>
-<div class="card-subtitle listing-subtitle">
-Subjects Meeting Specific Postbaseline Hypotension Levels, Safety Population, Pooled Analysis (or Trial X)
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('table'); return false;">
-table
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('FDA'); return false;">
-FDA
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('safety'); return false;">
-safety
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('vital signs'); return false;">
-vital signs
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="21" data-categories="table,FDA,safety,adverse events" data-listing-file-modified-sort="1757427775721" data-listing-reading-time-sort="2" data-listing-word-count-sort="274">
-<a href="../quarto/catalog/fda-table_43/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img data-src="catalog/fda-table_43/result.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-FDA Table 43
-</h5>
-<div class="card-subtitle listing-subtitle">
-Subjects With Adverse Events by Organ System, OCMQ (Broad) and Preferred Term, Safety Population, Pooled Analysis (or Trial X)
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('table'); return false;">
-table
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('FDA'); return false;">
-FDA
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('safety'); return false;">
-safety
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('adverse events'); return false;">
-adverse events
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="22" data-categories="table,FDA,safety,adverse events" data-listing-file-modified-sort="1757427775722" data-listing-reading-time-sort="2" data-listing-word-count-sort="260">
-<a href="../quarto/catalog/fda-table_44/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img data-src="catalog/fda-table_44/result.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-FDA Table 44
-</h5>
-<div class="card-subtitle listing-subtitle">
-Subjects With Adverse Events by Male-Specific OCMQ (Broad) and Preferred Term, Male Safety Population, Pooled Analysis (or Trial X)
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('table'); return false;">
-table
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('FDA'); return false;">
-FDA
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('safety'); return false;">
-safety
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('adverse events'); return false;">
-adverse events
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="23" data-categories="table,FDA,safety,adverse events" data-listing-file-modified-sort="1757427775723" data-listing-reading-time-sort="2" data-listing-word-count-sort="286">
-<a href="../quarto/catalog/fda-table_45/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img data-src="catalog/fda-table_45/result.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-FDA Table 45
-</h5>
-<div class="card-subtitle listing-subtitle">
-Subjects With Adverse Events by Female-Specific OCMQ (Broad) and Preferred Term, Female Safety Population, Pooled Analysis (or Trial X)
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('table'); return false;">
-table
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('FDA'); return false;">
-FDA
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('safety'); return false;">
-safety
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('adverse events'); return false;">
-adverse events
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="24" data-categories="table,FDA,safety,adverse events" data-listing-file-modified-sort="1757427775723" data-listing-reading-time-sort="3" data-listing-word-count-sort="445">
-<a href="../quarto/catalog/fda-table_50/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img data-src="catalog/fda-table_50/result.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-FDA Table 50
-</h5>
-<div class="card-subtitle listing-subtitle">
-Overview of Serious Adverse Events by Demographic Subgroup, Safety Population, Pooled Analysis (or Trial X)
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('table'); return false;">
-table
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('FDA'); return false;">
-FDA
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('safety'); return false;">
-safety
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('adverse events'); return false;">
-adverse events
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-</div>
+<table class="quarto-listing-table table table-hover">
+<thead>
+<tr>
+<th>
+<a class="sort" data-sort="listing-title-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">TLG Description</a>
+</th>
+<th>
+<a class="sort" data-sort="listing-subtitle" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Source</a>
+</th>
+<th>
+Categories
+</th>
+</tr>
+</thead>
+<tbody class="list">
+<tr data-index="0" data-categories="table,FDA,safety,adverse events" data-listing-file-modified-sort="1757428308423" data-listing-reading-time-sort="2" data-listing-word-count-sort="339" data-listing-title-sort="All Individual Subject Deaths, Safety Population, Pooled Analysis (or Trial X)" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td>
+<a href="../quarto/catalog/fda-table_09/index.html" class="title listing-title">All Individual Subject Deaths, Safety Population, Pooled Analysis (or Trial X)</a>
+</td>
+<td>
+<span class="listing-subtitle">FDA Table 09</span>
+</td>
+<td>
+<span class="listing-categories">table, FDA, safety, adverse events</span>
+</td>
+</tr>
+<tr data-index="1" data-categories="table,FDA,safety,deaths" data-listing-file-modified-sort="1757428308422" data-listing-reading-time-sort="2" data-listing-word-count-sort="231" data-listing-title-sort="Deaths, Safety Population, Pooled Analysis (or Trial X)" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td>
+<a href="../quarto/catalog/fda-table_08/index.html" class="title listing-title">Deaths, Safety Population, Pooled Analysis (or Trial X)</a>
+</td>
+<td>
+<span class="listing-subtitle">FDA Table 08</span>
+</td>
+<td>
+<span class="listing-categories">table, FDA, safety, deaths</span>
+</td>
+</tr>
+<tr data-index="2" data-categories="table,FDA,safety,demographics" data-listing-file-modified-sort="1757428308419" data-listing-reading-time-sort="2" data-listing-word-count-sort="277" data-listing-title-sort="Demographics and Baseline Clinical Characteristics, Safety Population, Pooled Analysis (or Trial X)" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td>
+<a href="../quarto/catalog/fda-table_02/index.html" class="title listing-title">Demographics and Baseline Clinical Characteristics, Safety Population, Pooled Analysis (or Trial X)</a>
+</td>
+<td>
+<span class="listing-subtitle">FDA Table 02</span>
+</td>
+<td>
+<span class="listing-categories">table, FDA, safety, demographics</span>
+</td>
+</tr>
+<tr data-index="3" data-categories="table,FDA,safety,exposure" data-listing-file-modified-sort="1757428308421" data-listing-reading-time-sort="4" data-listing-word-count-sort="703" data-listing-title-sort="Duration of Treatment Exposure, Safety Population, Pooled Analysis (or Trial X)" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td>
+<a href="../quarto/catalog/fda-table_06/index.html" class="title listing-title">Duration of Treatment Exposure, Safety Population, Pooled Analysis (or Trial X)</a>
+</td>
+<td>
+<span class="listing-subtitle">FDA Table 06</span>
+</td>
+<td>
+<span class="listing-categories">table, FDA, safety, exposure</span>
+</td>
+</tr>
+<tr data-index="4" data-categories="table,FDA,safety,adverse events" data-listing-file-modified-sort="1757428308422" data-listing-reading-time-sort="4" data-listing-word-count-sort="604" data-listing-title-sort="Overview of Adverse Events, Safety Population, Pooled Analysis (or Trial X)" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td>
+<a href="../quarto/catalog/fda-table_07/index.html" class="title listing-title">Overview of Adverse Events, Safety Population, Pooled Analysis (or Trial X)</a>
+</td>
+<td>
+<span class="listing-subtitle">FDA Table 07</span>
+</td>
+<td>
+<span class="listing-categories">table, FDA, safety, adverse events</span>
+</td>
+</tr>
+<tr data-index="5" data-categories="table,FDA,safety,adverse events" data-listing-file-modified-sort="1757428308435" data-listing-reading-time-sort="3" data-listing-word-count-sort="445" data-listing-title-sort="Overview of Serious Adverse Events by Demographic Subgroup, Safety Population, Pooled Analysis (or Trial X)" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td>
+<a href="../quarto/catalog/fda-table_50/index.html" class="title listing-title">Overview of Serious Adverse Events by Demographic Subgroup, Safety Population, Pooled Analysis (or Trial X)</a>
+</td>
+<td>
+<span class="listing-subtitle">FDA Table 50</span>
+</td>
+<td>
+<span class="listing-categories">table, FDA, safety, adverse events</span>
+</td>
+</tr>
+<tr data-index="6" data-categories="table,FDA,safety,disposition" data-listing-file-modified-sort="1757428308421" data-listing-reading-time-sort="1" data-listing-word-count-sort="182" data-listing-title-sort="Subject Populations, Randomized Population, Pooled Analysis (or Trial X)" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td>
+<a href="../quarto/catalog/fda-table_04/index.html" class="title listing-title">Subject Populations, Randomized Population, Pooled Analysis (or Trial X)</a>
+</td>
+<td>
+<span class="listing-subtitle">FDA Table 04</span>
+</td>
+<td>
+<span class="listing-categories">table, FDA, safety, disposition</span>
+</td>
+</tr>
+<tr data-index="7" data-categories="table,FDA,safety,disposition" data-listing-file-modified-sort="1757428308420" data-listing-reading-time-sort="2" data-listing-word-count-sort="382" data-listing-title-sort="Subject Screening and Enrollment, Screening Population, Trials A and B" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td>
+<a href="../quarto/catalog/fda-table_03/index.html" class="title listing-title">Subject Screening and Enrollment, Screening Population, Trials A and B</a>
+</td>
+<td>
+<span class="listing-subtitle">FDA Table 03</span>
+</td>
+<td>
+<span class="listing-categories">table, FDA, safety, disposition</span>
+</td>
+</tr>
+<tr data-index="8" data-categories="table,FDA,safety,vital signs" data-listing-file-modified-sort="1757428308433" data-listing-reading-time-sort="2" data-listing-word-count-sort="318" data-listing-title-sort="Subjects Meeting Specific Postbaseline Hypotension Levels, Safety Population, Pooled Analysis (or Trial X)" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td>
+<a href="../quarto/catalog/fda-table_38/index.html" class="title listing-title">Subjects Meeting Specific Postbaseline Hypotension Levels, Safety Population, Pooled Analysis (or Trial X)</a>
+</td>
+<td>
+<span class="listing-subtitle">FDA Table 38</span>
+</td>
+<td>
+<span class="listing-categories">table, FDA, safety, vital signs</span>
+</td>
+</tr>
+<tr data-index="9" data-categories="table,FDA,safety,adverse events" data-listing-file-modified-sort="1757428308425" data-listing-reading-time-sort="2" data-listing-word-count-sort="227" data-listing-title-sort="Subjects With Adverse Events Leading to Treatment Discontinuation by Organ System and OCMQ (Narrow), Safety Population, Pooled Analysis (or Trial X)" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td>
+<a href="../quarto/catalog/fda-table_13/index.html" class="title listing-title">Subjects With Adverse Events Leading to Treatment Discontinuation by Organ System and OCMQ (Narrow), Safety Population, Pooled Analysis (or Trial X)</a>
+</td>
+<td>
+<span class="listing-subtitle">FDA Table 13</span>
+</td>
+<td>
+<span class="listing-categories">table, FDA, safety, adverse events</span>
+</td>
+</tr>
+<tr data-index="10" data-categories="table,FDA,safety,adverse events" data-listing-file-modified-sort="1757428308424" data-listing-reading-time-sort="1" data-listing-word-count-sort="167" data-listing-title-sort="Subjects With Adverse Events Leading to Treatment Discontinuation by System Organ Class and Preferred Term, Safety Population, Pooled Analysis (or Trial X)" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td>
+<a href="../quarto/catalog/fda-table_12/index.html" class="title listing-title">Subjects With Adverse Events Leading to Treatment Discontinuation by System Organ Class and Preferred Term, Safety Population, Pooled Analysis (or Trial X)</a>
+</td>
+<td>
+<span class="listing-subtitle">FDA Table 12</span>
+</td>
+<td>
+<span class="listing-categories">table, FDA, safety, adverse events</span>
+</td>
+</tr>
+<tr data-index="11" data-categories="table,FDA,safety,adverse events" data-listing-file-modified-sort="1757428308435" data-listing-reading-time-sort="2" data-listing-word-count-sort="286" data-listing-title-sort="Subjects With Adverse Events by Female-Specific OCMQ (Broad) and Preferred Term, Female Safety Population, Pooled Analysis (or Trial X)" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td>
+<a href="../quarto/catalog/fda-table_45/index.html" class="title listing-title">Subjects With Adverse Events by Female-Specific OCMQ (Broad) and Preferred Term, Female Safety Population, Pooled Analysis (or Trial X)</a>
+</td>
+<td>
+<span class="listing-subtitle">FDA Table 45</span>
+</td>
+<td>
+<span class="listing-categories">table, FDA, safety, adverse events</span>
+</td>
+</tr>
+<tr data-index="12" data-categories="table,FDA,safety,adverse events" data-listing-file-modified-sort="1757428308431" data-listing-reading-time-sort="2" data-listing-word-count-sort="286" data-listing-title-sort="Subjects With Adverse Events by Female-Specific OCMQ (Narrow) and Preferred Term, Female Safety Population, Pooled Analysis (or Trial X)" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td>
+<a href="../quarto/catalog/fda-table_34/index.html" class="title listing-title">Subjects With Adverse Events by Female-Specific OCMQ (Narrow) and Preferred Term, Female Safety Population, Pooled Analysis (or Trial X)</a>
+</td>
+<td>
+<span class="listing-subtitle">FDA Table 34</span>
+</td>
+<td>
+<span class="listing-categories">table, FDA, safety, adverse events</span>
+</td>
+</tr>
+<tr data-index="13" data-categories="table,FDA,safety,adverse events" data-listing-file-modified-sort="1757428308434" data-listing-reading-time-sort="2" data-listing-word-count-sort="260" data-listing-title-sort="Subjects With Adverse Events by Male-Specific OCMQ (Broad) and Preferred Term, Male Safety Population, Pooled Analysis (or Trial X)" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td>
+<a href="../quarto/catalog/fda-table_44/index.html" class="title listing-title">Subjects With Adverse Events by Male-Specific OCMQ (Broad) and Preferred Term, Male Safety Population, Pooled Analysis (or Trial X)</a>
+</td>
+<td>
+<span class="listing-subtitle">FDA Table 44</span>
+</td>
+<td>
+<span class="listing-categories">table, FDA, safety, adverse events</span>
+</td>
+</tr>
+<tr data-index="14" data-categories="table,FDA,safety,adverse events" data-listing-file-modified-sort="1757428308430" data-listing-reading-time-sort="2" data-listing-word-count-sort="260" data-listing-title-sort="Subjects With Adverse Events by Male-Specific OCMQ (Narrow) and Preferred Term, Male Safety Population, Pooled Analysis (or Trial X)" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td>
+<a href="../quarto/catalog/fda-table_33/index.html" class="title listing-title">Subjects With Adverse Events by Male-Specific OCMQ (Narrow) and Preferred Term, Male Safety Population, Pooled Analysis (or Trial X)</a>
+</td>
+<td>
+<span class="listing-subtitle">FDA Table 33</span>
+</td>
+<td>
+<span class="listing-categories">table, FDA, safety, adverse events</span>
+</td>
+</tr>
+<tr data-index="15" data-categories="table,FDA,safety,adverse events" data-listing-file-modified-sort="1757428308427" data-listing-reading-time-sort="2" data-listing-word-count-sort="251" data-listing-title-sort="Subjects With Adverse Events by Organ System and OCMQ, Safety Population, Pooled Analysis (or Trial X)" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td>
+<a href="../quarto/catalog/fda-table_17/index.html" class="title listing-title">Subjects With Adverse Events by Organ System and OCMQ, Safety Population, Pooled Analysis (or Trial X)</a>
+</td>
+<td>
+<span class="listing-subtitle">FDA Table 17</span>
+</td>
+<td>
+<span class="listing-categories">table, FDA, safety, adverse events</span>
+</td>
+</tr>
+<tr data-index="16" data-categories="table,FDA,safety,adverse events" data-listing-file-modified-sort="1757428308433" data-listing-reading-time-sort="2" data-listing-word-count-sort="274" data-listing-title-sort="Subjects With Adverse Events by Organ System, OCMQ (Broad) and Preferred Term, Safety Population, Pooled Analysis (or Trial X)" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td>
+<a href="../quarto/catalog/fda-table_43/index.html" class="title listing-title">Subjects With Adverse Events by Organ System, OCMQ (Broad) and Preferred Term, Safety Population, Pooled Analysis (or Trial X)</a>
+</td>
+<td>
+<span class="listing-subtitle">FDA Table 43</span>
+</td>
+<td>
+<span class="listing-categories">table, FDA, safety, adverse events</span>
+</td>
+</tr>
+<tr data-index="17" data-categories="table,FDA,safety,adverse events" data-listing-file-modified-sort="1757428308426" data-listing-reading-time-sort="1" data-listing-word-count-sort="160" data-listing-title-sort="Subjects With Adverse Events by System Organ Class and Preferred Term, Safety Population, Pooled Analysis (or Trial X)" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td>
+<a href="../quarto/catalog/fda-table_14/index.html" class="title listing-title">Subjects With Adverse Events by System Organ Class and Preferred Term, Safety Population, Pooled Analysis (or Trial X)</a>
+</td>
+<td>
+<span class="listing-subtitle">FDA Table 14</span>
+</td>
+<td>
+<span class="listing-categories">table, FDA, safety, adverse events</span>
+</td>
+</tr>
+<tr data-index="18" data-categories="table,FDA,safety,adverse events" data-listing-file-modified-sort="1757428308427" data-listing-reading-time-sort="1" data-listing-word-count-sort="143" data-listing-title-sort="Subjects With Common Adverse Events Occurring at ≥X% Frequency by Preferred Term, Safety Population, Pooled Analysis (or Trial X)" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td>
+<a href="../quarto/catalog/fda-table_15/index.html" class="title listing-title">Subjects With Common Adverse Events Occurring at ≥X% Frequency by Preferred Term, Safety Population, Pooled Analysis (or Trial X)</a>
+</td>
+<td>
+<span class="listing-subtitle">FDA Table 15</span>
+</td>
+<td>
+<span class="listing-categories">table, FDA, safety, adverse events</span>
+</td>
+</tr>
+<tr data-index="19" data-categories="table,FDA,safety,vital signs" data-listing-file-modified-sort="1757428308432" data-listing-reading-time-sort="2" data-listing-word-count-sort="357" data-listing-title-sort="Subjects With Maximum Postbaseline Diastolic Blood Pressure by Category of Blood Pressure, Safety Population, Pooled Analysis (or Trial X)" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td>
+<a href="../quarto/catalog/fda-table_37/index.html" class="title listing-title">Subjects With Maximum Postbaseline Diastolic Blood Pressure by Category of Blood Pressure, Safety Population, Pooled Analysis (or Trial X)</a>
+</td>
+<td>
+<span class="listing-subtitle">FDA Table 37</span>
+</td>
+<td>
+<span class="listing-categories">table, FDA, safety, vital signs</span>
+</td>
+</tr>
+<tr data-index="20" data-categories="table,FDA,safety,vital signs" data-listing-file-modified-sort="1757428308432" data-listing-reading-time-sort="2" data-listing-word-count-sort="375" data-listing-title-sort="Subjects With Maximum Postbaseline Systolic Blood Pressure by Category of Blood Pressure, Safety Population, Pooled Analysis (or Trial X)" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td>
+<a href="../quarto/catalog/fda-table_36/index.html" class="title listing-title">Subjects With Maximum Postbaseline Systolic Blood Pressure by Category of Blood Pressure, Safety Population, Pooled Analysis (or Trial X)</a>
+</td>
+<td>
+<span class="listing-subtitle">FDA Table 36</span>
+</td>
+<td>
+<span class="listing-categories">table, FDA, safety, vital signs</span>
+</td>
+</tr>
+<tr data-index="21" data-categories="table,FDA,safety,adverse events" data-listing-file-modified-sort="1757428308424" data-listing-reading-time-sort="2" data-listing-word-count-sort="217" data-listing-title-sort="Subjects With Serious Adverse Events by Organ System and OCMQ (Narrow), Safety Population, Pooled Analysis (or Trial X)" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td>
+<a href="../quarto/catalog/fda-table_11/index.html" class="title listing-title">Subjects With Serious Adverse Events by Organ System and OCMQ (Narrow), Safety Population, Pooled Analysis (or Trial X)</a>
+</td>
+<td>
+<span class="listing-subtitle">FDA Table 11</span>
+</td>
+<td>
+<span class="listing-categories">table, FDA, safety, adverse events</span>
+</td>
+</tr>
+<tr data-index="22" data-categories="table,FDA,safety,adverse events" data-listing-file-modified-sort="1757428308428" data-listing-reading-time-sort="2" data-listing-word-count-sort="253" data-listing-title-sort="Subjects With Serious Adverse Events by Organ System, OCMQ (Narrow) and Preferred Term, Safety Population, Pooled Analysis (or Trial X)" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td>
+<a href="../quarto/catalog/fda-table_29/index.html" class="title listing-title">Subjects With Serious Adverse Events by Organ System, OCMQ (Narrow) and Preferred Term, Safety Population, Pooled Analysis (or Trial X)</a>
+</td>
+<td>
+<span class="listing-subtitle">FDA Table 29</span>
+</td>
+<td>
+<span class="listing-categories">table, FDA, safety, adverse events</span>
+</td>
+</tr>
+<tr data-index="23" data-categories="table,FDA,safety,adverse events" data-listing-file-modified-sort="1757428308423" data-listing-reading-time-sort="1" data-listing-word-count-sort="136" data-listing-title-sort="Subjects With Serious Adverse Events by System Organ Class and Preferred Term, Safety Population, Pooled Analysis (or Trial X)" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td>
+<a href="../quarto/catalog/fda-table_10/index.html" class="title listing-title">Subjects With Serious Adverse Events by System Organ Class and Preferred Term, Safety Population, Pooled Analysis (or Trial X)</a>
+</td>
+<td>
+<span class="listing-subtitle">FDA Table 10</span>
+</td>
+<td>
+<span class="listing-categories">table, FDA, safety, adverse events</span>
+</td>
+</tr>
+<tr data-index="24" data-categories="table,FDA,safety,adverse events" data-listing-file-modified-sort="1757428308428" data-listing-reading-time-sort="4" data-listing-word-count-sort="637" data-listing-title-sort="Summary Assessment of [Insert AE of Interest], Safety Population, Pooled Analysis (or Trial X)" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td>
+<a href="../quarto/catalog/fda-table_18/index.html" class="title listing-title">Summary Assessment of [Insert AE of Interest], Safety Population, Pooled Analysis (or Trial X)</a>
+</td>
+<td>
+<span class="listing-subtitle">FDA Table 18</span>
+</td>
+<td>
+<span class="listing-categories">table, FDA, safety, adverse events</span>
+</td>
+</tr>
+</tbody>
+</table>
 <div class="listing-no-matching d-none">
 No matching items
 </div>
-<nav id="listing-pagination" class="listing-pagination" aria-label="Page Navigation">
-  <ul class="pagination"></ul>
-</nav>
 </div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -1663,14 +1261,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-2"><a href="#cb1-2"></a><span class="an">title:</span><span class="co"> "Template Catalog"</span></span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="an">listing:</span></span>
 <span id="cb1-4"><a href="#cb1-4"></a><span class="co">  contents: "catalog/*/index.qmd"</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="co">  type: grid</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="co">  image-placeholder: assets/images/image-placeholder.png</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="co">  type: table</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="co">  table-hover: true</span></span>
 <span id="cb1-7"><a href="#cb1-7"></a><span class="co">  categories: true</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a><span class="co">  fields: [image, title, subtitle, categories]</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a><span class="co">  sort-ui: false</span></span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="co">  filter-ui: [title, subtitle, categories]</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a><span class="an">title-block-banner:</span><span class="co"> true</span></span>
-<span id="cb1-12"><a href="#cb1-12"></a><span class="co">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="co">  sort: true</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="co">  fields: [title, subtitle, categories]</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="co">  sort-ui: [subtitle, title]</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="co">  filter-ui: [title, subtitle, categories]</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="co">  field-display-names:</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="co">    title: "TLG Description"</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a><span class="co">    subtitle: "Source"</span></span>
+<span id="cb1-15"><a href="#cb1-15"></a><span class="co">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
