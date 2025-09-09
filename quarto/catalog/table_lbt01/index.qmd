@@ -1,7 +1,7 @@
 ---
-title: LBT01
-subtitle: Laboratory Test Results and Change from Baseline by Visit
-categories: [table, parallel-group,] 
+title: Laboratory Test Results and Change from Baseline by Visit
+subtitle: Roche LBT01
+categories: [table, parallel-group, change from baseline] 
 ---
 
 ::: panel-tabset
@@ -25,6 +25,7 @@ knitr::include_graphics("result.png")
 
 # Load package and data
 library(gtsummary)
+library(cards)
 library(dplyr)
 library(crane)
 
@@ -35,7 +36,6 @@ adlb <- random.cdisc.data::cadlb
 adlb <- adlb |>
   dplyr::filter(
     SAFFL == "Y",
-    PARAMCD == "ALT",
     AVISITN >= 0
   ) |>
   # retain the "WEEK *" portion of the visit
@@ -53,18 +53,27 @@ adlb <- adlb |>
 #| label: tbl
 #| results: hide
 
-lbt01 <- crane::tbl_baseline_chg(
-  data = adlb,
-  by = "ARM",
-  baseline_level = "BASELINE",
-  denominator = adsl,
-  digits = list(
-    all_continuous() ~ list(
-      mean = 2, sd = 2, median = 2,
-      min = 1, max = 1
-    )
-  )
-)
+lbt01 <- adlb |>
+  mutate(AVISIT = trimws(AVISIT)) |>
+  filter(
+    AVISIT %in% c("BASELINE", "WEEK 5")
+  ) |>
+  gtsummary::tbl_strata_nested_stack(
+    strata = PARAM,
+    \(.x) {
+      .x |>
+        # apply tbl_baseline_chg function to each level of PARAM in the data
+        crane::tbl_baseline_chg(
+          baseline_level = "BASELINE",
+          by = "TRT01A",
+          denominator = adsl
+        )
+    }
+  ) |>
+  gtsummary::modify_bold(columns = label, rows = tbl_indent_id1 > 0L) |>
+  gtsummary::modify_spanning_header(gtsummary::all_stat_cols() ~ "**{level}**  \nN = {n}") |>
+  gtsummary::modify_header(label = "**Lab  \n\U00A0\U00A0\U00A0\U00A0 Visit**") |>
+  gtsummary::modify_source_note("Printing a few illustrative rows from the full table.")
 ```
 
 ```{r}
