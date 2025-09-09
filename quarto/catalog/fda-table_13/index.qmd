@@ -1,13 +1,13 @@
 ---
-title: FDA Table 12
-subtitle: Subjects With Adverse Events Leading to Treatment Discontinuation by System Organ Class and Preferred Term, Safety Population, Pooled Analysis (or Trial X) 
+title: FDA Table 13
+subtitle: Subjects With Adverse Events Leading to Treatment Discontinuation by Organ System and OCMQ (Narrow), Safety Population, Pooled Analysis (or Trial X)
 categories: [table, FDA, safety, adverse events]
 ---
 
 ::: panel-tabset
 ## Table Preview
 
-```{r img, echo=FALSE, fig.align='center', out.width='70%'}
+```{r img, echo=FALSE, fig.align='center', out.width='60%'}
 knitr::include_graphics("result.png")
 ```
 
@@ -19,9 +19,18 @@ library(dplyr)
 library(cards)
 library(gtsummary)
 
+set.seed(1)
 adsl <- random.cdisc.data::cadsl
 adae <- random.cdisc.data::cadae
+
+adae <- adae |>
+  rename(OCMQ01SC = SMQ01SC) |>
+  mutate(
+    AESER = sample(c("Y", "N"), size = nrow(adae), replace = TRUE),
+    OCMQ01NAM = sample(c("OCMQ1", "OCMQ2", "OCMQ3"), size = nrow(adae), replace = TRUE)
+  )
 adae$DCSREAS[is.na(adae$DCSREAS)] <- "ADVERSE EVENT"
+adae$OCMQ01SC[is.na(adae$OCMQ01SC)] <- "NARROW"
 
 # Pre-processing --------------------------------------------
 adsl <- adsl |>
@@ -31,6 +40,8 @@ data <- adae |>
   filter(
     # safety population
     SAFFL == "Y",
+    # narrow OCMQ
+    OCMQ01SC == "NARROW",
     # discontinuation due to AE
     DCSREAS == "ADVERSE EVENT"
   )
@@ -41,7 +52,7 @@ data <- adae |>
 ```{r ard, message=FALSE, warning=FALSE, results='hide'}
 ard <- ard_stack_hierarchical(
   data,
-  variables = c(AEBODSYS, AEDECOD),
+  variables = c(AEBODSYS, OCMQ01NAM),
   by = TRT01A,
   denominator = adsl,
   id = USUBJID
@@ -59,15 +70,15 @@ print(ard, columns = "all", n = 40)
 ## Build Table
 
 ```{r tbl, results = 'hide'}
-tbl <- tbl_hierarchical(
-  data,
-  variables = c(AEBODSYS, AEDECOD),
-  by = TRT01A,
-  id = USUBJID,
-  denominator = adsl,
-  overall_row = TRUE,
-  label = list(..ard_hierarchical_overall.. = "Subjects with at least one AE leading to treatment discontinuation")
-)
+tbl <-
+  tbl_hierarchical(
+    data,
+    variables = c(AEBODSYS, OCMQ01NAM),
+    by = TRT01A,
+    id = USUBJID,
+    denominator = adsl,
+    label = list(AEBODSYS = "Organ System", OCMQ01NAM = "OCMQ (Narrow)")
+  )
 
 tbl
 ```
@@ -77,6 +88,6 @@ tbl
 gt::gtsave(as_gt(tbl), filename = "result.png")
 ```
 
-```{r img, echo=FALSE, fig.align='center', out.width='70%'}
+```{r img, echo=FALSE, fig.align='center', out.width='60%'}
 ```
 :::

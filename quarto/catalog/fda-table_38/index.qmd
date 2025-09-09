@@ -1,13 +1,13 @@
 ---
 title: FDA Table 38
-subtitle: Patients With Adverse Events by System Organ Class, FDA Medical Query (Broad) and Preferred Term, Safety Population, Pooled Analysis (or Trial X)
-categories: [table, FDA, safety, adverse events]
+subtitle: Subjects Meeting Specific Postbaseline Hypotension Levels, Safety Population, Pooled Analysis (or Trial X)
+categories: [table, FDA, safety, vital signs]
 ---
 
 ::: panel-tabset
 ## Table Preview
 
-```{r img, echo=FALSE, fig.align='center', out.width='45%'}
+```{r img, echo=FALSE, fig.align='center', out.width='40%'}
 knitr::include_graphics("result.png")
 ```
 
@@ -19,44 +19,45 @@ library(dplyr)
 library(cards)
 library(gtsummary)
 
-adae <- random.cdisc.data::cadae
 adsl <- random.cdisc.data::cadsl
-
-set.seed(1)
-adae <- adae %>%
-  rename(FMQ01SC = SMQ01SC) %>%
-  mutate(
-    AESER = sample(c("Y", "N"), size = nrow(adae), replace = TRUE),
-    FMQ01NAM = sample(c("FMQ1", "FMQ2", "FMQ3"), size = nrow(adae), replace = TRUE)
-  )
-adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "BROAD"
+advs <- random.cdisc.data::cadvs
 
 # Pre-processing --------------------------------------------
 adsl <- adsl |>
   filter(SAFFL == "Y") # safety population
 
-data <- adae |>
+data <- advs |>
   filter(
     # safety population
     SAFFL == "Y",
-    # treatment-emergent
-    TRTEMFL == "Y",
-    # broad FMQ scope
-    FMQ01SC == "BROAD"
+    # diastolic & systolic blood pressure
+    PARAMCD %in% c("DIABP", "SYSBP"),
+    # post-baseline visits
+    AVISITN >= 1
+  ) |>
+  # analyze minimum values per parameter of each subject
+  slice_min(AVAL, n = 1L, by = c(USUBJID, PARAMCD)) |>
+  # define analysis value cutoffs per parameter
+  mutate(
+    SBP90 = PARAMCD == "SYSBP" & AVAL < 90, # SYSBP <90
+    DBP60 = PARAMCD == "DIABP" & AVAL < 60 # DIABP <60
   )
 ```
 
 ## Build ARD
 
 ```{r ard, message=FALSE, warning=FALSE, results='hide'}
-ard <- ard_stack_hierarchical(
-  data,
-  variables = c(AEBODSYS, FMQ01NAM, AEDECOD),
-  by = ARM,
-  id = USUBJID,
-  denominator = adsl,
-  # variables to include AE rates for
-  include = c(FMQ01NAM, AEDECOD)
+ard <- bind_ard(
+  ard_dichotomous(
+    data,
+    variables = c(SBP90, DBP60),
+    by = TRT01A,
+    statistic = ~ c("n", "p"),
+    # denominator values are number of subjects in arm with BP data
+    denominator = data |> distinct(USUBJID, TRT01A)
+  ),
+  # ARD for header N values
+  ard_categorical(adsl, variables = TRT01A)
 )
 
 ard
@@ -71,20 +72,20 @@ print(ard, columns = "all", n = 40)
 ## Build Table
 
 ```{r tbl, results = 'hide'}
-# create table using ARD-first approach (ARD -> table)
-tbl <-
-  tbl_ard_hierarchical(
-    ard,
-    variables = c(AEBODSYS, FMQ01NAM, AEDECOD),
-    by = ARM,
-    # variables to display AE rates for
-    include = c(FMQ01NAM, AEDECOD),
-    # Add custom variable labels
-    label = list(
-      AEBODSYS = "Body System or Organ Class",
-      FMQ01NAM = "FMQ (Broad)",
-      AEDECOD = "Dictionary-Derived Term"
-    )
+tbl <- tbl_ard_summary(
+  ard,
+  by = TRT01A,
+  # Add labels for each range
+  label = list(
+    SBP90 = "SBP<90",
+    DBP60 = "DBP<60"
+  )
+) |>
+  modify_header(
+    # Update label, add analysis value units
+    label ~ paste0("**Blood Pressure (", data$AVALU[1], ")**"),
+    # Add N values to `by` variable labels
+    all_stat_cols() ~ "**{level}**  \nN = {n}"
   )
 
 tbl
@@ -94,6 +95,6 @@ tbl
 gt::gtsave(as_gt(tbl), filename = "result.png")
 ```
 
-```{r img, echo=FALSE, fig.align='center', out.width='45%'}
+```{r img, echo=FALSE, fig.align='center', out.width='40%'}
 ```
 :::

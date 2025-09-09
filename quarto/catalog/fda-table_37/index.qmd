@@ -1,6 +1,6 @@
 ---
-title: FDA Table 31
-subtitle: Percentage of Patients With Maximum Systolic Blood Pressure by Category of Blood Pressure Postbaseline, Safety Population, Pooled Analysis
+title: FDA Table 37
+subtitle: Subjects With Maximum Postbaseline Diastolic Blood Pressure by Category of Blood Pressure, Safety Population, Pooled Analysis (or Trial X)
 categories: [table, FDA, safety, vital signs]
 ---
 
@@ -30,8 +30,8 @@ data <- advs |>
   filter(
     # safety population
     SAFFL == "Y",
-    # systolic blood pressure
-    PARAMCD == "SYSBP",
+    # diastolic blood pressure
+    PARAMCD == "DIABP",
     # post-baseline visits
     AVISITN >= 1
   ) |>
@@ -39,12 +39,11 @@ data <- advs |>
   slice_max(AVAL, n = 1L, by = USUBJID) |>
   # define analysis value cutoffs
   mutate(
-    L90 = AVAL < 90, # SYSBP <90
-    GE90 = AVAL >= 90 & AVAL < 120, # SYSBP >=90
-    GE120 = AVAL >= 120 & AVAL < 140, # SYSBP >=120
-    GE140 = AVAL >= 140 & AVAL < 160, # SYSBP >=140
-    GE160 = AVAL >= 160 & AVAL < 180, # SYSBP >=160
-    GE180 = AVAL >= 180 # SYSBP >=180
+    L60 = AVAL < 60, # DIABP <60
+    G60 = AVAL > 60, # DIABP >60
+    G90 = AVAL > 90, # DIABP >90
+    G110 = AVAL > 110, # DIABP >110
+    GE120 = AVAL >= 120 # DIABP >=120
   )
 ```
 
@@ -54,10 +53,11 @@ data <- advs |>
 ard <- bind_ard(
   ard_dichotomous(
     data,
-    variables = c(L90, GE90, GE120, GE140, GE160, GE180),
+    variables = c(L60, G60, G90, G110, GE120),
     by = TRT01A,
     statistic = ~ c("n", "p"),
-    denominator = adsl
+    # denominator values are number of subjects in arm with BP data
+    denominator = data |> distinct(USUBJID, TRT01A)
   ),
   # ARD for header N values
   ard_categorical(adsl, variables = TRT01A)
@@ -80,17 +80,16 @@ tbl <- tbl_ard_summary(
   by = TRT01A,
   # Add labels for each range
   label = list(
-    L90 = "<90",
-    GE90 = ">=90",
-    GE120 = ">=120",
-    GE140 = ">=140",
-    GE160 = ">=160",
-    GE180 = ">=180"
+    L60 = "<60",
+    G60 = ">60",
+    G90 = ">90",
+    G110 = ">110",
+    GE120 = ">=120"
   )
 ) |>
   modify_header(
     # Update label, add analysis value units
-    label ~ paste0("**Systolic Blood Pressure  \n(", data$AVALU[1], ")**"),
+    label ~ paste0("**Diastolic Blood Pressure (", data$AVALU[1], ")**"),
     # Add N values to `by` variable labels
     all_stat_cols() ~ "**{level}**  \nN = {n}"
   )

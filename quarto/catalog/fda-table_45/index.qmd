@@ -1,6 +1,6 @@
 ---
-title: FDA Table 16
-subtitle: Patients With Adverse Events by Male-Specific FDA Medical Query (Broad) and Preferred Term, Male Safety Population, Pooled Analyses
+title: FDA Table 45
+subtitle: Subjects With Adverse Events by Female-Specific OCMQ (Broad) and Preferred Term, Female Safety Population, Pooled Analysis (or Trial X)
 categories: [table, FDA, safety, adverse events]
 ---
 
@@ -23,29 +23,28 @@ adsl <- random.cdisc.data::cadsl
 adae <- random.cdisc.data::cadae
 
 set.seed(1)
-adae <- dplyr::rename(adae, FMQ01SC = SMQ01SC, FMQ01NAM = SMQ01NAM)
-levels(adae$FMQ01SC) <- c("BROAD", "NARROW")
-adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
-adae$FMQ01NAM <- factor(adae$FMQ01NAM, levels = c(unique(adae$FMQ01NAM), "Erectile Dysfunction", "Gynecomastia"))
-adae$FMQ01NAM[adae$SEX == "M"] <- as.factor(sample(c("Erectile Dysfunction", "Gynecomastia"), sum(adae$SEX == "M"), replace = TRUE))
+adae <- rename(adae, OCMQ01SC = SMQ01SC, OCMQ01NAM = SMQ01NAM)
+levels(adae$OCMQ01SC) <- c("BROAD", "NARROW")
+adae$OCMQ01SC[is.na(adae$OCMQ01SC)] <- "NARROW"
+adae$OCMQ01NAM <- factor(adae$OCMQ01NAM, levels = c(
+  unique(adae$OCMQ01NAM), "Abnormal Uterine Bleeding", "Amenorrhea",
+  "Bacterial Vaginosis", "Decreased Menstrual Bleeding"
+))
+adae$OCMQ01NAM[adae$SEX == "F"] <- as.factor(
+  sample(c(
+    "Abnormal Uterine Bleeding", "Amenorrhea",
+    "Bacterial Vaginosis", "Decreased Menstrual Bleeding"
+  ), sum(adae$SEX == "F"), replace = TRUE)
+)
 
 # Pre-processing --------------------------------------------
-adae <- adae |>
+data <- adae |>
   filter(
     SAFFL == "Y",
-    SEX == "M",
-    FMQ01SC == "BROAD"
-  )
-
-adsl <- adsl |>
-  filter(SAFFL == "Y") # safety population
-```
-
-## Build Table
-
-```{r tbl, results = 'hide'}
-tbl <- adae |>
-  select(FMQ01SC, ARM, FMQ01NAM, AEDECOD, USUBJID) |>
+    SEX == "F",
+    OCMQ01SC == "BROAD"
+  ) |>
+  select(OCMQ01SC, TRT01A, OCMQ01NAM, AEDECOD, USUBJID) |>
   # setting an explicit level for NA values so empty strata combinations are shown.
   mutate(across(everything(), ~ {
     if (anyNA(.)) {
@@ -53,16 +52,29 @@ tbl <- adae |>
     } else {
       .
     }
-  })) |>
+  }))
+
+# denominator values include only Female subjects in the arm with AEs
+denom <- data |> distinct(USUBJID, TRT01A)
+```
+
+## Build Table
+
+```{r tbl, results = 'hide'}
+tbl <- data |>
   tbl_hierarchical(
-    by = ARM,
-    variables = c(FMQ01NAM, AEDECOD),
+    by = TRT01A,
+    variables = c(OCMQ01NAM, AEDECOD),
     id = USUBJID,
-    denominator = adsl,
+    denominator = denom,
     # variables to calculate rates for
     include = c(AEDECOD),
-    label = list(FMQ01NAM ~ "FMQ (Broad)", AEDECOD ~ "Preferred Term")
+    label = list(
+      OCMQ01NAM ~ "OCMQ (Broad)",
+      AEDECOD ~ "Preferred Term"
+    )
   )
+
 tbl
 ```
 
@@ -77,7 +89,6 @@ gt::gtsave(as_gt(tbl), filename = "result.png")
 
 ```{r ard, message=FALSE, warning=FALSE, results='hide'}
 ard <- gather_ard(tbl)
-
 ard
 ```
 
