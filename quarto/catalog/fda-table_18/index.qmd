@@ -1,6 +1,6 @@
 ---
-title: FDA Table 18
-subtitle: Summary Assessment of [Insert AE of Interest], Safety Population, Pooled Analysis (or Trial X)
+title: Summary Assessment of [Insert AE of Interest], Safety Population, Pooled Analysis (or Trial X)
+subtitle: FDA Table 18
 categories: [table, FDA, safety, adverse events]
 ---
 
@@ -89,7 +89,7 @@ tbl_ae_gp <- data |>
 
 ## Maximum severity section ---------
 tbl_ae_sev <- data |>
-  ard_categorical_max(variables = AESEV, id = USUBJID, by = TRT01A, denominator = adsl, quiet = TRUE) |>
+  ard_tabulate_max(variables = AESEV, id = USUBJID, by = TRT01A, denominator = adsl, quiet = TRUE) |>
   tbl_ard_summary(by = TRT01A, label = list(AESEV = "Maximum severity"))
 
 ## Events section -------------------

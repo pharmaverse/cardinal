@@ -2,12 +2,15 @@
 title: "Template Catalog"
 listing:
   contents: "catalog/*/index.qmd"
-  type: grid
-  image-placeholder: assets/images/image-placeholder.png
+  type: table
+  table-hover: true
   categories: true
-  fields: [image, title, subtitle, categories]
-  sort-ui: false
+  sort: true
+  fields: [title, subtitle, categories]
+  sort-ui: [subtitle, title]
   filter-ui: [title, subtitle, categories]
-title-block-banner: true
+  field-display-names:
+    title: "TLG Description"
+    subtitle: "Source"
 ---
 

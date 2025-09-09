@@ -1,6 +1,6 @@
 ---
-title: FDA Table 37
-subtitle: Subjects With Maximum Postbaseline Diastolic Blood Pressure by Category of Blood Pressure, Safety Population, Pooled Analysis (or Trial X)
+title: Subjects With Maximum Postbaseline Diastolic Blood Pressure by Category of Blood Pressure, Safety Population, Pooled Analysis (or Trial X)
+subtitle: FDA Table 37
 categories: [table, FDA, safety, vital signs]
 ---
 
@@ -51,7 +51,7 @@ data <- advs |>
 
 ```{r ard, message=FALSE, warning=FALSE, results='hide'}
 ard <- bind_ard(
-  ard_dichotomous(
+  ard_tabulate_value(
     data,
     variables = c(L60, G60, G90, G110, GE120),
     by = TRT01A,
@@ -60,7 +60,7 @@ ard <- bind_ard(
     denominator = data |> distinct(USUBJID, TRT01A)
   ),
   # ARD for header N values
-  ard_categorical(adsl, variables = TRT01A)
+  ard_tabulate(adsl, variables = TRT01A)
 )
 
 ard

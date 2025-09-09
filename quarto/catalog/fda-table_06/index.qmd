@@ -1,6 +1,6 @@
 ---
-title: FDA Table 06
-subtitle: Duration of Treatment Exposure, Safety Population, Pooled Analysis (or Trial X)
+title: Duration of Treatment Exposure, Safety Population, Pooled Analysis (or Trial X)
+subtitle: FDA Table 06
 categories: [table, FDA, safety, exposure]
 ---
 
@@ -68,7 +68,7 @@ ard <- data |>
     ),
 
     # Analysis of subjects treated ------------------------
-    ard_dichotomous(
+    ard_tabulate_value(
       variables = c(D_ANY, D_GT1, D_GT3, D_GT6, D_GT12),
       # Calculate the n and % statistics for each flag variable
       statistic = everything() ~ c("n", "p")
