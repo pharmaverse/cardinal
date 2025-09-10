@@ -31,7 +31,7 @@ if (!require("crane")) install.packages("crane")
 
 For more information on these packages, see the [Additional Resources](#additional-resources) section below.
 
-#### Creating Your TLG Template
+### Creating Your TLG Template
 
 When adding a new template, start by initializing a new folder in the `quarto/catalog` folder with a name that uniquely identifies your TLG (e.g. `fda-table_01`, `lab-tests-summary`). Within this folder, add a file named `index.qmd` which will contain your new TLG template. To simplify the template-creation process we have provided an empty template file (`inst/empty-template.qmd`) which can be copied into your new `index.qmd` file and then modified.
 
