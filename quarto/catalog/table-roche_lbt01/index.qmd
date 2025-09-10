@@ -1,0 +1,89 @@
+---
+title: Laboratory Test Results and Change from Baseline by Visit
+subtitle: Roche LBT01
+categories: [table, Roche, parallel-group, change from baseline] 
+---
+
+::: panel-tabset
+## Table Preview
+
+```{r img, echo=FALSE, fig.align='center', out.width='60%'}
+knitr::include_graphics("result.png")
+```
+
+## Setup
+
+```{r setup, message=FALSE}
+# Load libraries & data -------------------------------------
+library(gtsummary)
+library(dplyr)
+library(crane)
+
+adsl <- random.cdisc.data::cadsl
+adlb <- random.cdisc.data::cadlb
+
+# Pre-processing --------------------------------------------
+data <- adlb |>
+  dplyr::filter(
+    SAFFL == "Y", # safety population
+    AVISITN >= 0 # only keep valid visits
+  ) |>
+  # retain the "WEEK *" portion of the visit
+  dplyr::mutate(
+    AVISIT = if_else(
+      stringr::str_detect(AVISIT, "WEEK"),
+      stringr::str_extract(AVISIT, "WEEK \\d+"),
+      AVISIT
+    ) |> trimws()
+  )
+```
+
+## Build Table
+
+```{r tbl, results='hide'}
+tbl <- data |>
+  filter(
+    AVISIT %in% c("BASELINE", "WEEK 5") # specify visits to display in table
+  ) |>
+  # apply tbl_baseline_chg function to each level of PARAM in the data
+  gtsummary::tbl_strata_nested_stack(
+    strata = PARAM,
+    ~ .x |>
+      crane::tbl_baseline_chg(
+        baseline_level = "BASELINE",
+        by = "TRT01A",
+        denominator = adsl
+      )
+  ) |>
+  # bold lab test labels
+  gtsummary::modify_bold(columns = label, rows = tbl_indent_id1 > 0L) |>
+  # update header labels
+  gtsummary::modify_header(label = "**Lab  \n\U00A0\U00A0\U00A0\U00A0 Visit**") |>
+  gtsummary::modify_spanning_header(gtsummary::all_stat_cols() ~ "**{level}**  \nN = {n}")
+
+tbl
+```
+
+```{r eval=FALSE, include=FALSE}
+gt::gtsave(as_gt(tbl), filename = "result.png")
+```
+
+```{r img, echo=FALSE, fig.align='center', out.width='60%'}
+```
+
+## Build ARD
+
+```{r ard, message=FALSE, warning=FALSE, results='hide'}
+# Extract ARD from previously created gtsummary table (refer to "Build Table")
+ard <- gather_ard(tbl)
+
+# Output ARD
+ard
+```
+
+```{r, echo=FALSE}
+# Print ARD
+withr::local_options(width = 9999)
+print(ard, columns = "all")
+```
+:::
