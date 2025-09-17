@@ -18,7 +18,8 @@ knitr::include_graphics("result.png")
 library(dplyr)
 library(gtsummary)
 
-adsl <- random.cdisc.data::cadsl
+adsl <- pharmaverseadam::adsl |>
+  filter(TRT01A != "Screen Failure") # Remove screen failure observations
 
 # Pre-processing --------------------------------------------
 pop_vars <- c("rand_fl", "ITTFL", "SAFFL", "prot_fl")
@@ -26,9 +27,10 @@ lbl_pop_vars <- c("Subjects randomized", "ITT population", "Safety population", 
 
 data <- adsl |>
   mutate(
-    across(all_of(c("ITTFL", "SAFFL")), ~ . == "Y"),
+    across(all_of("SAFFL"), ~ . == "Y"),
+    ITTFL = !is.na(RANDDT),
     rand_fl = !is.na(RANDDT),
-    prot_fl = is.na(DCSREAS)
+    prot_fl = EOSSTT == "COMPLETED"
   )
 ```
 

@@ -19,22 +19,16 @@ library(gtsummary)
 library(dplyr)
 library(crane)
 
-adsl <- random.cdisc.data::cadsl
-adlb <- random.cdisc.data::cadlb
+adsl <- pharmaverseadam::adsl
+adlb <- pharmaverseadam::adlb
 
 # Pre-processing --------------------------------------------
 data <- adlb |>
   dplyr::filter(
     SAFFL == "Y", # safety population
-    AVISITN >= 0 # only keep valid visits
-  ) |>
-  # retain the "WEEK *" portion of the visit
-  dplyr::mutate(
-    AVISIT = if_else(
-      stringr::str_detect(AVISIT, "WEEK"),
-      stringr::str_extract(AVISIT, "WEEK \\d+"),
-      AVISIT
-    ) |> trimws()
+    PARAMCD %in% c("ALT", "BILI", "CREAT")
+    # This step can be used to filter for valid visits. Since the table creation
+    # code specifies the visits, we can omit that step here.
   )
 ```
 
@@ -43,16 +37,18 @@ data <- adlb |>
 ```{r tbl, results='hide'}
 tbl <- data |>
   filter(
-    AVISIT %in% c("BASELINE", "WEEK 5") # specify visits to display in table
+    AVISIT %in% c("Baseline", "Week 4") # specify visits to display in table
   ) |>
   # apply tbl_baseline_chg function to each level of PARAM in the data
   gtsummary::tbl_strata_nested_stack(
     strata = PARAM,
     ~ .x |>
       crane::tbl_baseline_chg(
-        baseline_level = "BASELINE",
+        baseline_level = "Baseline",
         by = "TRT01A",
-        denominator = adsl
+        # this dataset has a treatment level called "Screen Failure".
+        # Filtering this out as adsl is used to calculate the denominator.
+        denominator = adsl |> filter(TRT01A != "Screen Failure")
       )
   ) |>
   # bold lab test labels

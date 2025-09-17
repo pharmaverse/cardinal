@@ -19,24 +19,30 @@ library(dplyr)
 library(cards)
 library(gtsummary)
 
-adsl <- random.cdisc.data::cadsl
+adsl <- pharmaverseadam::adsl
 
 set.seed(1)
-adsl$RANDDT[sample(seq_len(nrow(adsl)), 100)] <- NA
 scrnfail_reas_lvls <- c(
   "Inclusion/exclusion criteria not met", "Subject noncompliance", "Consent withdrawn", "Other"
 )
 data <- adsl |>
   mutate(
     ENRLDT = RANDDT,
-    SCRNFL = TRUE,
-    SCRNFRS = factor(sample(scrnfail_reas_lvls, size = nrow(adsl), replace = TRUE),
-      levels = scrnfail_reas_lvls
-    ),
     ENRLFL = !is.na(ENRLDT),
-    RANDFL = !is.na(RANDDT)
+    RANDFL = !is.na(RANDDT),
+    SCRNFL = TRUE,
+    SCRNFRS = NA_character_
+  ) |>
+  mutate( # set screen failure reasons for relevant observations.
+    SCRNFRS = factor(
+      replace(
+        SCRNFRS,
+        TRT01A == "Screen Failure",
+        sample(scrnfail_reas_lvls, size = sum(TRT01A == "Screen Failure"), replace = TRUE)
+      ),
+      levels = scrnfail_reas_lvls
+    )
   )
-data$SCRNFRS[data$SCRNFL == "N" | !is.na(data$ENRLDT)] <- NA
 ```
 
 ## Build ARD
@@ -76,7 +82,6 @@ print(ard, columns = "all", n = 40)
 ```{r tbl, message=FALSE, warning=FALSE, results='hide'}
 tbl_scrn <- tbl_summary(
   data = data,
-  by = TRT01A,
   include = "SCRNFL",
   missing = "no",
   label = ~"Subjects screened"
@@ -86,7 +91,6 @@ tbl_scrnfrs <- tbl_hierarchical(
   data = data,
   denominator = adsl,
   id = USUBJID,
-  by = TRT01A,
   variables = "SCRNFRS",
   label = list(..ard_hierarchical_overall.. = "Screening failures"),
   overall_row = TRUE
@@ -96,7 +100,6 @@ tbl_scrnfrs <- tbl_hierarchical(
 
 tbl_enrl_rand <- tbl_summary(
   data = data,
-  by = TRT01A,
   include = c("ENRLFL", "RANDFL"),
   missing = "no",
   label = list(ENRLFL = "Subjects enrolled", RANDFL = "Subjects randomized")
