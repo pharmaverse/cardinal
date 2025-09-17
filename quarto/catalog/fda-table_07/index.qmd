@@ -33,9 +33,9 @@ set.seed(1)
 # this data set doesn't have treatment action recorded. We can generate a variable for demonstration.
 aeacn_levels <- c("DRUG INTERRUPTED", "DOSE REDUCED", "DOSE RATE REDUCED", "DOSE INCREASED")
 data <- data |>
-mutate(AEACN = factor(sample(aeacn_levels, size = nrow(data), replace = TRUE),
-      levels = aeacn_levels
-    ) )
+  mutate(AEACN = factor(sample(aeacn_levels, size = nrow(data), replace = TRUE),
+    levels = aeacn_levels
+  ))
 ```
 
 
@@ -51,7 +51,7 @@ sae_vars <- list(
   "Life-threatening" = "AESLIFE",
   "Initial or prolonged hospitalization" = "AESHOSP",
   "Disability or permanent damage" = "AESDISAB"
-  )
+)
 
 # Summarize SAEs per category
 tbl_sae <-
@@ -77,7 +77,7 @@ tbl_sae <-
 # --- PART 2: Permanent discontinuation
 disc_ae <- adae |>
   # filtering for adverse events with a "discontinued" End of Study Status
-  filter(AESER == "Y" & EOSSTT == "DISCONTINUED" ) |>
+  filter(AESER == "Y" & EOSSTT == "DISCONTINUED") |>
   mutate(
     # convert label to a more meaningful value
     AEDISC = "AE leading to permanent discontinuation of treatment"

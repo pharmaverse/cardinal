@@ -26,9 +26,9 @@ adlb <- pharmaverseadam::adlb
 data <- adlb |>
   dplyr::filter(
     SAFFL == "Y", # safety population
-    PARAMCD %in% c("ALT", "BILI", "CREAT") 
-    # This step can be used to filter for valid visits. Since the table creation 
-    # code specifies the visits, we can omit that step here. 
+    PARAMCD %in% c("ALT", "BILI", "CREAT")
+    # This step can be used to filter for valid visits. Since the table creation
+    # code specifies the visits, we can omit that step here.
   )
 ```
 
