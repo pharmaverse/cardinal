@@ -19,7 +19,8 @@ library(dplyr)
 library(cards)
 library(gtsummary)
 
-adsl <- pharmaverseadam::adsl
+adsl <- pharmaverseadam::adsl |>
+  filter(TRT01A != "Screen Failure") # Remove screening failure observations
 
 # Pre-processing --------------------------------------------
 data <- adsl |>

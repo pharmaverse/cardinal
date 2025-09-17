@@ -18,17 +18,9 @@ knitr::include_graphics("result.png")
 library(dplyr)
 library(gtsummary)
 
-adsl <- random.cdisc.data::cadsl |>
-  mutate(
-    AGEGR1 = factor(
-      case_when(
-        AGE >= 17 & AGE < 65 ~ ">=17 to <65",
-        AGE >= 65 & AGE < 75 ~ "65-74",
-        AGE >= 75 ~ ">=75"
-      ),
-      levels = c(">=17 to <65", "65-74", ">=75")
-    )
-  )
+adsl <- pharmaverseadam::adsl |>
+  # removing screen failure observations
+  filter(TRT01A != "Screen Failure")
 
 # Pre-processing --------------------------------------------
 # Filter for the safety population, x
@@ -42,7 +34,7 @@ data <- adsl |>
 tbl <- data |>
   tbl_summary(
     by = "TRT01A",
-    include = c("SEX", "AGE", "AGEGR1", "ETHNIC", "RACE", "BMRKR1", "BMRKR2"),
+    include = c("SEX", "AGE", "AGEGR1", "ETHNIC", "RACE"),
     type = all_continuous() ~ "continuous2", # arranges statistics into multiple lines
     statistic = list(
       all_continuous() ~ c(
