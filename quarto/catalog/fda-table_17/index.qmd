@@ -19,13 +19,13 @@ library(dplyr)
 library(cards)
 library(gtsummary)
 
-adae <- random.cdisc.data::cadae |>
-  rename(OCMQ01SC = SMQ01SC, OCMQ01NAM = SMQ01NAM)
+adae <- pharmaverseadam::adae |>
+  rename(OCMQ01SC = AEHLTCD, OCMQ01NAM = AEHLT)
 
-adsl <- random.cdisc.data::cadsl
+adsl <- pharmaverseadam::adsl
 
-levels(adae$OCMQ01SC) <- c("BROAD", "NARROW")
-adae$OCMQ01SC[is.na(adae$OCMQ01SC)] <- "NARROW"
+set.seed(23)
+adae$OCMQ01SC <- sample(c("BROAD", "NARROW"), size = nrow(adae), replace = TRUE)
 
 # Pre-processing --------------------------------------------
 adae <- adae |>
