@@ -19,8 +19,8 @@ library(dplyr)
 library(cards)
 library(gtsummary)
 
-adae <- random.cdisc.data::cadae
-adsl <- random.cdisc.data::cadsl
+adae <- pharmaverseadam::adae
+adsl <- pharmaverseadam::adsl
 
 adsl <- adsl |>
   filter(SAFFL == "Y")
@@ -35,14 +35,6 @@ data <- adae |>
     SEXGR = "Sex, n (%)",
     SEXGR1 = as.factor(SEX),
     AGEGR = "Age group, years, n(%)",
-    AGEGR1 = factor(
-      case_when(
-        AGE >= 17 & AGE < 65 ~ ">=17 to <65",
-        AGE >= 65 & AGE < 75 ~ "65-74",
-        AGE >= 75 ~ ">=75"
-      ),
-      levels = c(">=17 to <65", "65-74", ">=75")
-    ),
     RACEGR = "Race, n(%)",
     RACEGR1 = as.factor(RACE),
     ETHNICGR = "Ethnicity, n(%)",

@@ -23,11 +23,19 @@ adsl <- random.cdisc.data::cadsl
 adae <- random.cdisc.data::cadae
 
 set.seed(1)
-adae <- rename(adae, OCMQ01SC = SMQ01SC, OCMQ01NAM = SMQ01NAM)
-levels(adae$OCMQ01SC) <- c("BROAD", "NARROW")
-adae$OCMQ01SC[is.na(adae$OCMQ01SC)] <- "NARROW"
-adae$OCMQ01NAM <- factor(adae$OCMQ01NAM, levels = c(unique(adae$OCMQ01NAM), "Erectile Dysfunction", "Gynecomastia"))
-adae$OCMQ01NAM[adae$SEX == "M"] <- as.factor(sample(c("Erectile Dysfunction", "Gynecomastia"), sum(adae$SEX == "M"), replace = TRUE))
+adae <-adae |>
+  mutate(
+    OCMQ01SC = as.factor(sample(c("BROAD", "NARROW"), nrow(adae), replace = TRUE)),
+    OCMQ01NAM = if_else(
+      SEX == "M",
+      as.factor(sample(
+       c("Erectile Dysfunction", "Gynecomastia"),
+        n(),
+        replace = TRUE
+      )),
+      NA_character_
+    )
+  )
 
 # Pre-processing --------------------------------------------
 data <- adae |>

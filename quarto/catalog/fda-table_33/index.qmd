@@ -19,13 +19,12 @@ library(dplyr)
 library(cards)
 library(gtsummary)
 
-adsl <- random.cdisc.data::cadsl
-adae <- random.cdisc.data::cadae
+adsl <- pharmaverseadam::adsl
+adae <- pharmaverseadam::adae
 
 set.seed(1)
-adae <- rename(adae, OCMQ01SC = SMQ01SC, OCMQ01NAM = SMQ01NAM)
-levels(adae$OCMQ01SC) <- c("BROAD", "NARROW")
-adae$OCMQ01SC[is.na(adae$OCMQ01SC)] <- "NARROW"
+adae <- rename(adae, OCMQ01SC = AEHLTCD, OCMQ01NAM = AEHLT)
+adae$OCMQ01SC <- as.factor(sample(c("BROAD", "NARROW"), nrow(adae), replace = TRUE))
 adae$OCMQ01NAM <- factor(adae$OCMQ01NAM, levels = c(unique(adae$OCMQ01NAM), "Erectile Dysfunction", "Gynecomastia"))
 adae$OCMQ01NAM[adae$SEX == "M"] <- as.factor(sample(c("Erectile Dysfunction", "Gynecomastia"), sum(adae$SEX == "M"), replace = TRUE))
 

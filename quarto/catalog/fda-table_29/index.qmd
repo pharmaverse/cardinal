@@ -19,12 +19,12 @@ library(dplyr)
 library(cards)
 library(gtsummary)
 
-adae <- random.cdisc.data::cadae
-adsl <- random.cdisc.data::cadsl
+adae <- pharmaverseadam::adae
+adsl <- pharmaverseadam::adsl
 
 set.seed(1)
 adae <- adae |>
-  rename(OCMQ01SC = SMQ01SC) |>
+  rename(OCMQ01SC = AEHLTCD) |>
   mutate(
     AESER = sample(c("Y", "N"), size = nrow(adae), replace = TRUE),
     OCMQ01NAM = sample(c("OCMQ1", "OCMQ2", "OCMQ3"), size = nrow(adae), replace = TRUE)
