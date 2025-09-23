@@ -33,7 +33,7 @@ data <- advs |>
     # systolic blood pressure
     PARAMCD == "SYSBP",
     # post-baseline visits
-    AVISITN >= 2 
+    AVISITN >= 2
   ) |>
   # analyze maximum values of each subject
   slice_max(AVAL, n = 1L, by = USUBJID) |>

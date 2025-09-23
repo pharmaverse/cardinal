@@ -23,7 +23,7 @@ adsl <- pharmaverseadam::adsl
 adae <- pharmaverseadam::adae
 
 set.seed(1)
-adae <-adae |>
+adae <- adae |>
   mutate(
     OCMQ01SC = as.factor(sample(c("BROAD", "NARROW"), nrow(adae), replace = TRUE)),
     OCMQ01NAM = if_else(

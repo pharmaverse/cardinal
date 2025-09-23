@@ -23,13 +23,13 @@ adsl <- random.cdisc.data::cadsl
 adae <- random.cdisc.data::cadae
 
 set.seed(1)
-adae <-adae |>
+adae <- adae |>
   mutate(
     OCMQ01SC = as.factor(sample(c("BROAD", "NARROW"), nrow(adae), replace = TRUE)),
     OCMQ01NAM = if_else(
       SEX == "M",
       as.factor(sample(
-       c("Erectile Dysfunction", "Gynecomastia"),
+        c("Erectile Dysfunction", "Gynecomastia"),
         n(),
         replace = TRUE
       )),
