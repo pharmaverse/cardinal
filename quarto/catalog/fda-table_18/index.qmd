@@ -24,16 +24,19 @@ adsl <- pharmaverseadam::adsl
 adae <- pharmaverseadam::adae
 
 set.seed(1)
-adae$AESIFL <- ifelse(adae$AESOC %in% c("CARDIAC DISORDERS", "GASTROINTESTINAL DISORDERS"), "Y", "N")
+adae$AESIFL <- ifelse(adae$AESOC %in% c("VASCULAR DISORDERS"), "Y", "N")
 
 # Pre-processing --------------------------------------------
 adsl <- adsl |>
-  filter(SAFFL == "Y") # safety population
+  # safety population
+  filter(SAFFL == "Y") 
 
 data <- adae |>
   filter(
-    SAFFL == "Y", # safety population
-    AESIFL == "Y" # AESI assessment
+    # safety population
+    SAFFL == "Y", 
+    # AESI assessment
+    AESIFL == "Y" 
   )
 
 # dataset of AE flag variable counts by subject

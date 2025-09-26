@@ -19,8 +19,8 @@ library(dplyr)
 library(cards)
 library(gtsummary)
 
-adsl <- random.cdisc.data::cadsl
-adae <- random.cdisc.data::cadae
+adsl <- pharmaverseadam::adsl
+adae <- pharmaverseadam::adae
 
 set.seed(1)
 adae <- adae |>
@@ -42,7 +42,9 @@ data <- adae |>
   filter(
     SAFFL == "Y",
     SEX == "M",
-    OCMQ01SC == "BROAD"
+    OCMQ01SC == "BROAD",
+    # filtering here to reduce the size of the table
+    AEDECOD %in% c("COUGH", "COLD SWEAT", "SOMNOLENCE", "APPLICATION SITE ERYTHEMA")
   ) |>
   select(OCMQ01SC, TRT01A, OCMQ01NAM, AEDECOD, USUBJID) |>
   # setting an explicit level for NA values so empty strata combinations are shown.

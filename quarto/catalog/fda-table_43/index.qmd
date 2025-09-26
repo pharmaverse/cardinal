@@ -41,7 +41,9 @@ data <- adae |>
     # treatment-emergent
     TRTEMFL == "Y",
     # broad OCMQ scope
-    OCMQ01SC == "BROAD"
+    OCMQ01SC == "BROAD",
+    # filtering here to reduce the size of the table
+    AESOC %in% c("EYE DISORDERS", "EAR AND LABYRINTH DISORDERS", "CONGENITAL, FAMILIAL AND GENETIC DISORDERS")
   )
 ```
 

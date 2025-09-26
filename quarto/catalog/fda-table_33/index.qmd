@@ -24,16 +24,20 @@ adae <- pharmaverseadam::adae
 
 set.seed(1)
 adae <- rename(adae, OCMQ01SC = AEHLTCD, OCMQ01NAM = AEHLT)
-adae$OCMQ01SC <- as.factor(sample(c("BROAD", "NARROW"), nrow(adae), replace = TRUE))
-adae$OCMQ01NAM <- factor(adae$OCMQ01NAM, levels = c(unique(adae$OCMQ01NAM), "Erectile Dysfunction", "Gynecomastia"))
+levels(adae$OCMQ01SC) <- c("BROAD", "NARROW")
+adae$OCMQ01SC[is.na(adae$OCMQ01SC)] <- "NARROW"
+adae$OCMQ01NAM <- factor(adae$OCMQ01NAM, levels = c("Erectile Dysfunction", "Gynecomastia"))
 adae$OCMQ01NAM[adae$SEX == "M"] <- as.factor(sample(c("Erectile Dysfunction", "Gynecomastia"), sum(adae$SEX == "M"), replace = TRUE))
+
 
 # Pre-processing --------------------------------------------
 data <- adae |>
   filter(
     SAFFL == "Y",
     SEX == "M",
-    OCMQ01SC == "NARROW"
+    OCMQ01SC == "NARROW",
+    # filtering here to reduce the size of the table
+    AEDECOD %in% c("COUGH", "COLD SWEAT", "SOMNOLENCE", "APPLICATION SITE ERYTHEMA")
   ) |>
   select(OCMQ01SC, TRT01A, OCMQ01NAM, AEDECOD, USUBJID) |>
   # setting an explicit level for NA values so empty strata combinations are shown.

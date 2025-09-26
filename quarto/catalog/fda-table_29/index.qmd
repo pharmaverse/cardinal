@@ -28,12 +28,17 @@ adae <- adae |>
   mutate(
     AESER = sample(c("Y", "N"), size = nrow(adae), replace = TRUE),
     OCMQ01NAM = sample(c("OCMQ1", "OCMQ2", "OCMQ3"), size = nrow(adae), replace = TRUE)
-  )
+  ) |>
+  # truncating table for demonstration
+  filter(AESOC == "VASCULAR DISORDERS")
 adae$OCMQ01SC[is.na(adae$OCMQ01SC)] <- "NARROW"
 
 # Pre-processing --------------------------------------------
 adsl <- adsl |>
-  filter(SAFFL == "Y") # safety population
+  # safety population
+  filter(
+    SAFFL == "Y"
+  )
 
 data <- adae |>
   filter(

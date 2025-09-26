@@ -53,7 +53,7 @@ ard <- data |>
     .by = TRT01A,
 
     # Analysis of treatment duration ----------------------
-    ard_continuous(
+    ard_summary(
       variables = TRTDUR,
       statistic = everything() ~ continuous_summary_fns(
         # Specify which default statistics to include

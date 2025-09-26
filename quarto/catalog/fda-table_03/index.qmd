@@ -45,38 +45,6 @@ data <- adsl |>
   )
 ```
 
-## Build ARD
-
-```{r ard, message=FALSE, warning=FALSE, results='hide'}
-ard <- data |>
-  ard_stack(
-    ard_tabulate_value(
-      variables = SCRNFL,
-      value = list(SCRNFL = TRUE),
-      statistic = everything() ~ c("n")
-    ),
-    ard_tabulate(
-      variables = SCRNFRS,
-      statistic = everything() ~ c("n", "p"),
-      denominator = data
-    ),
-    ard_tabulate_value(
-      variables = c(ENRLFL, RANDFL),
-      value = list(ENRLFL = TRUE, RANDFL = TRUE),
-      statistic = everything() ~ c("n", "p"),
-      denominator = data
-    )
-  )
-
-ard
-```
-
-```{r, echo=FALSE}
-# Print ARD
-withr::local_options(width = 9999)
-print(ard, columns = "all", n = 40)
-```
-
 ## Build Table
 
 ```{r tbl, message=FALSE, warning=FALSE, results='hide'}
@@ -118,5 +86,37 @@ gt::gtsave(as_gt(tbl), filename = "result.png")
 ```
 
 ```{r img, echo=FALSE, fig.align='center', out.width='60%'}
+```
+
+## Build ARD
+
+```{r ard, message=FALSE, warning=FALSE, results='hide'}
+ard <- data |>
+  ard_stack(
+    ard_tabulate_value(
+      variables = SCRNFL,
+      value = list(SCRNFL = TRUE),
+      statistic = everything() ~ c("n")
+    ),
+    ard_tabulate(
+      variables = SCRNFRS,
+      statistic = everything() ~ c("n", "p"),
+      denominator = data
+    ),
+    ard_tabulate_value(
+      variables = c(ENRLFL, RANDFL),
+      value = list(ENRLFL = TRUE, RANDFL = TRUE),
+      statistic = everything() ~ c("n", "p"),
+      denominator = data
+    )
+  )
+
+ard
+```
+
+```{r, echo=FALSE}
+# Print ARD
+withr::local_options(width = 9999)
+print(ard, columns = "all", n = 40)
 ```
 :::

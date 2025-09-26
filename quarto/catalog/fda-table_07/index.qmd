@@ -20,6 +20,7 @@ library(dplyr)
 
 adsl <- pharmaverseadam::adsl |>
   filter(TRT01A != "Screen Failure")
+
 adae <- pharmaverseadam::adae
 
 # Use safety population only
@@ -37,8 +38,6 @@ data <- data |>
     levels = aeacn_levels
   ))
 ```
-
-
 
 ## Build Table
 

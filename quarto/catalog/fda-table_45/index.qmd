@@ -42,7 +42,9 @@ data <- adae |>
   filter(
     SAFFL == "Y",
     SEX == "F",
-    OCMQ01SC == "BROAD"
+    OCMQ01SC == "BROAD",
+    # Filtering to reduce the size of the demo table
+    AEDECOD %in% c("APPLICATION SITE IRRITATION", "ERYTHEMA", "APPLICATION SITE PRURITUS", "BACK PAIN")
   ) |>
   select(OCMQ01SC, TRT01A, OCMQ01NAM, AEDECOD, USUBJID) |>
   # setting an explicit level for NA values so empty strata combinations are shown.
