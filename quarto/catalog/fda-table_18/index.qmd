@@ -29,14 +29,14 @@ adae$AESIFL <- ifelse(adae$AESOC %in% c("VASCULAR DISORDERS"), "Y", "N")
 # Pre-processing --------------------------------------------
 adsl <- adsl |>
   # safety population
-  filter(SAFFL == "Y") 
+  filter(SAFFL == "Y")
 
 data <- adae |>
   filter(
     # safety population
-    SAFFL == "Y", 
+    SAFFL == "Y",
     # AESI assessment
-    AESIFL == "Y" 
+    AESIFL == "Y"
   )
 
 # dataset of AE flag variable counts by subject
