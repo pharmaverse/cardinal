@@ -18,8 +18,8 @@ knitr::include_graphics("result.png")
 library(dplyr)
 library(gtsummary)
 
-adsl <- random.cdisc.data::cadsl
-adae <- random.cdisc.data::cadae
+adsl <- pharmaverseadam::adsl
+adae <- pharmaverseadam::adae
 
 # Pre-processing --------------------------------------------
 adae <- adae |>

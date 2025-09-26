@@ -19,8 +19,8 @@ library(dplyr)
 library(cards)
 library(gtsummary)
 
-adae <- random.cdisc.data::cadae
-adsl <- random.cdisc.data::cadsl
+adsl <- pharmaverseadam::adsl
+adae <- pharmaverseadam::adae
 
 # Pre-processing --------------------------------------------
 adsl <- adsl |>
