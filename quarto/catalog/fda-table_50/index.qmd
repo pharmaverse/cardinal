@@ -69,7 +69,7 @@ tbl_any_sae <- tbl_hierarchical(
 
 tbl_sex <- tbl_hierarchical(
   data = data,
-  denominator = data_any_sae |> slice_head(by = c(USUBJID)),
+  denominator = data_any_sae |> dplyr::slice_head(by = c(USUBJID)),
   id = "USUBJID",
   by = "TRT01A",
   variables = c(SEXGR, SEXGR1),
@@ -79,7 +79,7 @@ tbl_sex <- tbl_hierarchical(
 
 tbl_agegr1 <- tbl_hierarchical(
   data = data,
-  denominator = data_any_sae |> slice_head(by = c(USUBJID)),
+  denominator = data_any_sae |> dplyr::slice_head(by = c(USUBJID)),
   id = "USUBJID",
   by = "TRT01A",
   variables = c(AGEGR, AGEGR1),
@@ -89,7 +89,7 @@ tbl_agegr1 <- tbl_hierarchical(
 
 tbl_race <- tbl_hierarchical(
   data = data,
-  denominator = data_any_sae |> slice_head(by = c(USUBJID)),
+  denominator = data_any_sae |> dplyr::slice_head(by = c(USUBJID)),
   id = "USUBJID",
   by = "TRT01A",
   variables = c(RACEGR, RACEGR1),
@@ -99,7 +99,7 @@ tbl_race <- tbl_hierarchical(
 
 tbl_ethnic <- tbl_hierarchical(
   data = data,
-  denominator = data_any_sae |> slice_head(by = c(USUBJID)),
+  denominator = data_any_sae |> dplyr::slice_head(by = c(USUBJID)),
   id = "USUBJID",
   by = "TRT01A",
   variables = c(ETHNICGR, ETHNICGR1),
