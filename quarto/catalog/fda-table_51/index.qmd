@@ -19,37 +19,17 @@ library(dplyr)
 library(cards)
 library(gtsummary)
 
-adae <- random.cdisc.data::cadae
-adsl <- random.cdisc.data::cadsl
+adae <- pharmaverseadam::adae
+adsl <- pharmaverseadam::adsl
 
 adsl <- adsl |>
   filter(SAFFL == "Y") |>
-  mutate(
-    AGEGR1 = factor(
-      dplyr::case_when(
-        AGE >= 17 & AGE < 65 ~ ">=17 to <65",
-        AGE >= 65 & AGE < 75 ~ "65-74",
-        AGE >= 75 ~ ">=75"
-      ),
-      levels = c(">=17 to <65", "65-74", ">=75")
-    )
-  ) |>
   mutate(any_ae = "Any AE")
 
 data <- adae |>
   filter(
     SAFFL == "Y",
     TRTEMFL == "Y"
-  ) |>
-  mutate(
-    AGEGR1 = factor(
-      dplyr::case_when(
-        AGE >= 17 & AGE < 65 ~ ">=17 to <65",
-        AGE >= 65 & AGE < 75 ~ "65-74",
-        AGE >= 75 ~ ">=75"
-      ),
-      levels = c(">=17 to <65", "65-74", ">=75")
-    )
   ) |>
   mutate(any_ae = "Any AE") |>
   # subset to one AE per subject

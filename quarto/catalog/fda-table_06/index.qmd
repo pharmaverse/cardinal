@@ -19,7 +19,8 @@ library(dplyr)
 library(cards)
 library(gtsummary)
 
-adsl <- pharmaverseadam::adsl
+adsl <- pharmaverseadam::adsl |>
+  filter(TRT01A != "Screen Failure") # Remove screening failure observations
 
 # Pre-processing --------------------------------------------
 data <- adsl |>
@@ -52,7 +53,7 @@ ard <- data |>
     .by = TRT01A,
 
     # Analysis of treatment duration ----------------------
-    ard_continuous(
+    ard_summary(
       variables = TRTDUR,
       statistic = everything() ~ continuous_summary_fns(
         # Specify which default statistics to include
