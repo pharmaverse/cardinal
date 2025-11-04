@@ -55,7 +55,7 @@ tbl
 tbl <- tbl |>
   # instruct the function to replace and (0%) in the table to (0).
   modify_post_fmt_fun(
-    fmt_fun = ~ifelse(. == "0 (0%)", "0", .),
+    fmt_fun = ~ ifelse(. == "0 (0%)", "0", .),
     columns = all_stat_cols()
   )
 
