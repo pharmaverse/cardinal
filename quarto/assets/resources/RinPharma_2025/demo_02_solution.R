@@ -35,4 +35,3 @@ tbl
 ard <- gather_ard(tbl) # extract the ARD from the table
 
 ard
-

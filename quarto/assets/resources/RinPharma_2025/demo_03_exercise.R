@@ -28,4 +28,3 @@
 ## TODO: Use gtsummary::gather_ard() to extract the ARD from the table
 
 # ard <- ard_code_here
-
