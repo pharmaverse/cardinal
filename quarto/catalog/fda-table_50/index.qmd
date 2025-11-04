@@ -19,8 +19,8 @@ library(dplyr)
 library(cards)
 library(gtsummary)
 
-adae <- random.cdisc.data::cadae
-adsl <- random.cdisc.data::cadsl
+adae <- pharmaverseadam::adae
+adsl <- pharmaverseadam::adsl
 
 adsl <- adsl |>
   filter(SAFFL == "Y")
