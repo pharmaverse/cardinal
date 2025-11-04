@@ -19,17 +19,16 @@ library(dplyr)
 library(cards)
 library(gtsummary)
 
-adae <- random.cdisc.data::cadae
-adsl <- random.cdisc.data::cadsl
+adae <- pharmaverseadam::adae
+adsl <- pharmaverseadam::adsl
 
 set.seed(1)
 adae <- adae |>
-  rename(OCMQ01SC = SMQ01SC) |>
   mutate(
     AESER = sample(c("Y", "N"), size = nrow(adae), replace = TRUE),
-    OCMQ01NAM = sample(c("OCMQ1", "OCMQ2", "OCMQ3"), size = nrow(adae), replace = TRUE)
+    OCMQ01NAM = sample(c("OCMQ1", "OCMQ2", "OCMQ3"), size = nrow(adae), replace = TRUE),
+    OCMQ01SC = sample(c("BROAD", "NARROW"), size = nrow(adae), replace = TRUE)
   )
-adae$OCMQ01SC[is.na(adae$OCMQ01SC)] <- "BROAD"
 
 # Pre-processing --------------------------------------------
 adsl <- adsl |>
@@ -42,7 +41,9 @@ data <- adae |>
     # treatment-emergent
     TRTEMFL == "Y",
     # broad OCMQ scope
-    OCMQ01SC == "BROAD"
+    OCMQ01SC == "BROAD",
+    # filtering here to reduce the size of the table
+    AESOC %in% c("EYE DISORDERS", "EAR AND LABYRINTH DISORDERS", "CONGENITAL, FAMILIAL AND GENETIC DISORDERS")
   )
 ```
 

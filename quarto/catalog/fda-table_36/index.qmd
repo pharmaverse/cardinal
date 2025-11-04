@@ -19,8 +19,8 @@ library(dplyr)
 library(cards)
 library(gtsummary)
 
-adsl <- random.cdisc.data::cadsl
-advs <- random.cdisc.data::cadvs
+adsl <- pharmaverseadam::adsl
+advs <- pharmaverseadam::advs
 
 # Pre-processing --------------------------------------------
 adsl <- adsl |>
@@ -33,7 +33,7 @@ data <- advs |>
     # systolic blood pressure
     PARAMCD == "SYSBP",
     # post-baseline visits
-    AVISITN >= 1
+    AVISITN >= 2
   ) |>
   # analyze maximum values of each subject
   slice_max(AVAL, n = 1L, by = USUBJID) |>
@@ -91,7 +91,7 @@ tbl <- tbl_ard_summary(
 ) |>
   modify_header(
     # Update label, add analysis value units
-    label ~ paste0("**Systolic Blood Pressure (", data$AVALU[1], ")**"),
+    label ~ paste0("**Systolic Blood Pressure (", data$VSORRESU[1], ")**"),
     # Add N values to `by` variable labels
     all_stat_cols() ~ "**{level}**  \nN = {n}"
   )
