@@ -5,7 +5,7 @@ listing:
   type: table
   table-hover: true
   categories: true
-  sort: true
+  sort: [subtitle, title]
   fields: [title, subtitle, categories]
   sort-ui: [subtitle, title]
   filter-ui: [title, subtitle, categories]
