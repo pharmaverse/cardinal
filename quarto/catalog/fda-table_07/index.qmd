@@ -18,8 +18,10 @@ knitr::include_graphics("result.png")
 library(gtsummary)
 library(dplyr)
 
-adsl <- random.cdisc.data::cadsl
-adae <- random.cdisc.data::cadae
+adsl <- pharmaverseadam::adsl |>
+  filter(TRT01A != "Screen Failure")
+
+adae <- pharmaverseadam::adae
 
 # Use safety population only
 adsl <- adsl |>
@@ -27,9 +29,15 @@ adsl <- adsl |>
 
 data <- adae |>
   filter(SAFFL == "Y")
+
+set.seed(1)
+# this data set doesn't have treatment action recorded. We can generate a variable for demonstration.
+aeacn_levels <- c("DRUG INTERRUPTED", "DOSE REDUCED", "DOSE RATE REDUCED", "DOSE INCREASED")
+data <- data |>
+  mutate(AEACN = factor(sample(aeacn_levels, size = nrow(data), replace = TRUE),
+    levels = aeacn_levels
+  ))
 ```
-
-
 
 ## Build Table
 
@@ -41,9 +49,7 @@ sae_vars <- list(
   "Death" = "AESDTH",
   "Life-threatening" = "AESLIFE",
   "Initial or prolonged hospitalization" = "AESHOSP",
-  "Disability or permanent damage" = "AESDISAB",
-  "Congenital anomaly or birth defect" = "AESCONG",
-  "Other" = "AESMIE"
+  "Disability or permanent damage" = "AESDISAB"
 )
 
 # Summarize SAEs per category
@@ -69,24 +75,24 @@ tbl_sae <-
 
 # --- PART 2: Permanent discontinuation
 disc_ae <- adae |>
-  filter(AEACNOTH == "SUBJECT DISCONTINUED FROM STUDY") |>
+  # filtering for adverse events with a "discontinued" End of Study Status
+  filter(AESER == "Y" & EOSSTT == "DISCONTINUED") |>
   mutate(
     # convert label to a more meaningful value
-    AEACNOTH = "AE leading to permanent discontinuation of treatment"
+    AEDISC = "AE leading to permanent discontinuation of treatment"
   )
 
 tbl_disc_ae <- tbl_hierarchical( # calculate rates
   data = disc_ae,
-  variables = AEACNOTH,
+  variables = AEDISC,
   by = TRT01A,
   id = USUBJID,
   denominator = adsl,
-  label = AEACNOTH ~ "Event"
+  label = AEDISC ~ "Event"
 )
 
 # -- PART 3: Dose modification
-dose_mod_ae <- adae |>
-  filter(AEACN %in% c("DRUG INTERRUPTED", "DOSE REDUCED", "DOSE RATE REDUCED", "DOSE INCREASED")) |>
+dose_mod_ae <- data |>
   mutate(
     AEACN = case_when( # convert to meaningful labels
       AEACN == "DRUG INTERRUPTED" ~ "AE leading to interruption of study drug",

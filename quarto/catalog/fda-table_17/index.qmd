@@ -19,21 +19,24 @@ library(dplyr)
 library(cards)
 library(gtsummary)
 
-adae <- random.cdisc.data::cadae |>
-  rename(OCMQ01SC = SMQ01SC, OCMQ01NAM = SMQ01NAM)
+adae <- pharmaverseadam::adae |>
+  rename(OCMQ01SC = AEHLTCD, OCMQ01NAM = AEHLT)
 
-adsl <- random.cdisc.data::cadsl
+adsl <- pharmaverseadam::adsl
 
-levels(adae$OCMQ01SC) <- c("BROAD", "NARROW")
-adae$OCMQ01SC[is.na(adae$OCMQ01SC)] <- "NARROW"
+set.seed(23)
+adae$OCMQ01SC <- sample(c("BROAD", "NARROW"), size = nrow(adae), replace = TRUE)
 
 # Pre-processing --------------------------------------------
 adae <- adae |>
   # safety population
-  filter(SAFFL == "Y")
+  filter(SAFFL == "Y") |>
+  # filter 0CMQ to truncate table
+  filter(OCMQ01NAM %in% c("HLT_0649", "HLT_0644", " HLT_0570", " HLT_0256", "HLT_0742", "HLT_0244", "HLT_0097", "HLT_0738"))
 
 adsl <- adsl |>
-  filter(SAFFL == "Y") # safety population
+  # safety population
+  filter(SAFFL == "Y")
 ```
 
 ## Build Table
