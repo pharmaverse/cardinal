@@ -252,43 +252,45 @@ cookieconsent.run({
 <span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(cards)</span>
 <span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(gtsummary)</span>
 <span id="cb1-5"><a href="#cb1-5"></a></span>
-<span id="cb1-6"><a href="#cb1-6"></a>adsl <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadsl</span>
-<span id="cb1-7"><a href="#cb1-7"></a>adae <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadae</span>
+<span id="cb1-6"><a href="#cb1-6"></a>adsl <span class="ot">&lt;-</span> pharmaverseadam<span class="sc">::</span>adsl</span>
+<span id="cb1-7"><a href="#cb1-7"></a>adae <span class="ot">&lt;-</span> pharmaverseadam<span class="sc">::</span>adae</span>
 <span id="cb1-8"><a href="#cb1-8"></a></span>
 <span id="cb1-9"><a href="#cb1-9"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb1-10"><a href="#cb1-10"></a>adae <span class="ot">&lt;-</span> <span class="fu">rename</span>(adae, <span class="at">OCMQ01SC =</span> SMQ01SC, <span class="at">OCMQ01NAM =</span> SMQ01NAM)</span>
-<span id="cb1-11"><a href="#cb1-11"></a><span class="fu">levels</span>(adae<span class="sc">$</span>OCMQ01SC) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"BROAD"</span>, <span class="st">"NARROW"</span>)</span>
-<span id="cb1-12"><a href="#cb1-12"></a>adae<span class="sc">$</span>OCMQ01SC[<span class="fu">is.na</span>(adae<span class="sc">$</span>OCMQ01SC)] <span class="ot">&lt;-</span> <span class="st">"NARROW"</span></span>
-<span id="cb1-13"><a href="#cb1-13"></a>adae<span class="sc">$</span>OCMQ01NAM <span class="ot">&lt;-</span> <span class="fu">factor</span>(adae<span class="sc">$</span>OCMQ01NAM, <span class="at">levels =</span> <span class="fu">c</span>(</span>
-<span id="cb1-14"><a href="#cb1-14"></a>  <span class="fu">unique</span>(adae<span class="sc">$</span>OCMQ01NAM), <span class="st">"Abnormal Uterine Bleeding"</span>, <span class="st">"Amenorrhea"</span>,</span>
-<span id="cb1-15"><a href="#cb1-15"></a>  <span class="st">"Bacterial Vaginosis"</span>, <span class="st">"Decreased Menstrual Bleeding"</span></span>
-<span id="cb1-16"><a href="#cb1-16"></a>))</span>
-<span id="cb1-17"><a href="#cb1-17"></a>adae<span class="sc">$</span>OCMQ01NAM[adae<span class="sc">$</span>SEX <span class="sc">==</span> <span class="st">"F"</span>] <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(</span>
-<span id="cb1-18"><a href="#cb1-18"></a>  <span class="fu">sample</span>(<span class="fu">c</span>(</span>
-<span id="cb1-19"><a href="#cb1-19"></a>    <span class="st">"Abnormal Uterine Bleeding"</span>, <span class="st">"Amenorrhea"</span>,</span>
-<span id="cb1-20"><a href="#cb1-20"></a>    <span class="st">"Bacterial Vaginosis"</span>, <span class="st">"Decreased Menstrual Bleeding"</span></span>
-<span id="cb1-21"><a href="#cb1-21"></a>  ), <span class="fu">sum</span>(adae<span class="sc">$</span>SEX <span class="sc">==</span> <span class="st">"F"</span>), <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-22"><a href="#cb1-22"></a>)</span>
+<span id="cb1-10"><a href="#cb1-10"></a>adae <span class="ot">&lt;-</span> adae <span class="sc">|&gt;</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb1-12"><a href="#cb1-12"></a>    <span class="at">OCMQ01SC =</span> <span class="fu">as.factor</span>(<span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"BROAD"</span>, <span class="st">"NARROW"</span>), <span class="fu">nrow</span>(adae), <span class="at">replace =</span> <span class="cn">TRUE</span>)),</span>
+<span id="cb1-13"><a href="#cb1-13"></a>    <span class="at">OCMQ01NAM =</span> <span class="fu">if_else</span>(</span>
+<span id="cb1-14"><a href="#cb1-14"></a>      SEX <span class="sc">==</span> <span class="st">"F"</span>,</span>
+<span id="cb1-15"><a href="#cb1-15"></a>      <span class="fu">as.factor</span>(<span class="fu">sample</span>(</span>
+<span id="cb1-16"><a href="#cb1-16"></a>        <span class="fu">c</span>(<span class="st">"Abnormal Uterine Bleeding"</span>, <span class="st">"Amenorrhea"</span>, <span class="st">"Bacterial Vaginosis"</span>, <span class="st">"Decreased Menstrual Bleeding"</span>),</span>
+<span id="cb1-17"><a href="#cb1-17"></a>        <span class="fu">n</span>(),</span>
+<span id="cb1-18"><a href="#cb1-18"></a>        <span class="at">replace =</span> <span class="cn">TRUE</span></span>
+<span id="cb1-19"><a href="#cb1-19"></a>      )),</span>
+<span id="cb1-20"><a href="#cb1-20"></a>      <span class="cn">NA_character_</span></span>
+<span id="cb1-21"><a href="#cb1-21"></a>    )</span>
+<span id="cb1-22"><a href="#cb1-22"></a>  )</span>
 <span id="cb1-23"><a href="#cb1-23"></a></span>
 <span id="cb1-24"><a href="#cb1-24"></a><span class="co"># Pre-processing --------------------------------------------</span></span>
 <span id="cb1-25"><a href="#cb1-25"></a>data <span class="ot">&lt;-</span> adae <span class="sc">|&gt;</span></span>
 <span id="cb1-26"><a href="#cb1-26"></a>  <span class="fu">filter</span>(</span>
 <span id="cb1-27"><a href="#cb1-27"></a>    SAFFL <span class="sc">==</span> <span class="st">"Y"</span>,</span>
 <span id="cb1-28"><a href="#cb1-28"></a>    SEX <span class="sc">==</span> <span class="st">"F"</span>,</span>
-<span id="cb1-29"><a href="#cb1-29"></a>    OCMQ01SC <span class="sc">==</span> <span class="st">"NARROW"</span></span>
-<span id="cb1-30"><a href="#cb1-30"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb1-31"><a href="#cb1-31"></a>  <span class="fu">select</span>(OCMQ01SC, TRT01A, OCMQ01NAM, AEDECOD, USUBJID) <span class="sc">|&gt;</span></span>
-<span id="cb1-32"><a href="#cb1-32"></a>  <span class="co"># setting an explicit level for NA values so empty strata combinations are shown.</span></span>
-<span id="cb1-33"><a href="#cb1-33"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), <span class="sc">~</span> {</span>
-<span id="cb1-34"><a href="#cb1-34"></a>    <span class="cf">if</span> (<span class="fu">anyNA</span>(.)) {</span>
-<span id="cb1-35"><a href="#cb1-35"></a>      forcats<span class="sc">::</span><span class="fu">fct_na_value_to_level</span>(<span class="fu">as.factor</span>(.), <span class="at">level =</span> <span class="st">"&lt;Missing&gt;"</span>)</span>
-<span id="cb1-36"><a href="#cb1-36"></a>    } <span class="cf">else</span> {</span>
-<span id="cb1-37"><a href="#cb1-37"></a>      .</span>
-<span id="cb1-38"><a href="#cb1-38"></a>    }</span>
-<span id="cb1-39"><a href="#cb1-39"></a>  }))</span>
-<span id="cb1-40"><a href="#cb1-40"></a></span>
-<span id="cb1-41"><a href="#cb1-41"></a><span class="co"># denominator values include only Female subjects in the arm with AEs</span></span>
-<span id="cb1-42"><a href="#cb1-42"></a>denom <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> <span class="fu">distinct</span>(USUBJID, TRT01A)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-29"><a href="#cb1-29"></a>    OCMQ01SC <span class="sc">==</span> <span class="st">"NARROW"</span>,</span>
+<span id="cb1-30"><a href="#cb1-30"></a>    <span class="co"># Filtering to reduce the size of the demo table</span></span>
+<span id="cb1-31"><a href="#cb1-31"></a>    AEDECOD <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"APPLICATION SITE IRRITATION"</span>, <span class="st">"ERYTHEMA"</span>, <span class="st">"APPLICATION SITE PRURITUS"</span>, <span class="st">"BACK PAIN"</span>)</span>
+<span id="cb1-32"><a href="#cb1-32"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb1-33"><a href="#cb1-33"></a>  <span class="fu">select</span>(OCMQ01SC, TRT01A, OCMQ01NAM, AEDECOD, USUBJID) <span class="sc">|&gt;</span></span>
+<span id="cb1-34"><a href="#cb1-34"></a>  <span class="co"># setting an explicit level for NA values so empty strata combinations are shown.</span></span>
+<span id="cb1-35"><a href="#cb1-35"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), <span class="sc">~</span> {</span>
+<span id="cb1-36"><a href="#cb1-36"></a>    <span class="cf">if</span> (<span class="fu">anyNA</span>(.)) {</span>
+<span id="cb1-37"><a href="#cb1-37"></a>      forcats<span class="sc">::</span><span class="fu">fct_na_value_to_level</span>(<span class="fu">as.factor</span>(.), <span class="at">level =</span> <span class="st">"&lt;Missing&gt;"</span>)</span>
+<span id="cb1-38"><a href="#cb1-38"></a>    } <span class="cf">else</span> {</span>
+<span id="cb1-39"><a href="#cb1-39"></a>      .</span>
+<span id="cb1-40"><a href="#cb1-40"></a>    }</span>
+<span id="cb1-41"><a href="#cb1-41"></a>  }))</span>
+<span id="cb1-42"><a href="#cb1-42"></a></span>
+<span id="cb1-43"><a href="#cb1-43"></a><span class="co"># denominator values include only Female subjects in the arm with AEs</span></span>
+<span id="cb1-44"><a href="#cb1-44"></a>denom <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> <span class="fu">distinct</span>(USUBJID, TRT01A)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </div>
@@ -331,23 +333,23 @@ cookieconsent.run({
 <pre><code>$tbl_hierarchical</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>{cards} data frame: 297 x 15</code></pre>
+<pre><code>{cards} data frame: 117 x 15</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   group1 group1_level    group2 group2_level variable variable_level   context stat_name stat_label  stat stat_fmt fmt_fun warning error gts_column
-1    &lt;NA&gt;                   &lt;NA&gt;                TRT01A      A: Drug X  tabulate         n          n    70       70       0                   stat_1
-2    &lt;NA&gt;                   &lt;NA&gt;                TRT01A      A: Drug X  tabulate         N          N   209      209       0                   stat_1
-3    &lt;NA&gt;                   &lt;NA&gt;                TRT01A      A: Drug X  tabulate         p          % 0.335     33.5    &lt;fn&gt;                   stat_1
-4    &lt;NA&gt;                   &lt;NA&gt;                TRT01A      B: Place…  tabulate         n          n    77       77       0                   stat_2
-5    &lt;NA&gt;                   &lt;NA&gt;                TRT01A      B: Place…  tabulate         N          N   209      209       0                   stat_2
-6    &lt;NA&gt;                   &lt;NA&gt;                TRT01A      B: Place…  tabulate         p          % 0.368     36.8    &lt;fn&gt;                   stat_2
-7    &lt;NA&gt;                   &lt;NA&gt;                TRT01A      C: Combi…  tabulate         n          n    62       62       0                   stat_3
-8    &lt;NA&gt;                   &lt;NA&gt;                TRT01A      C: Combi…  tabulate         N          N   209      209       0                   stat_3
-9    &lt;NA&gt;                   &lt;NA&gt;                TRT01A      C: Combi…  tabulate         p          % 0.297     29.7    &lt;fn&gt;                   stat_3
-10 TRT01A    A: Drug X OCMQ01NAM    Abnormal…  AEDECOD      dcd A.1.… hierarch…         n          n    13       13    &lt;fn&gt;                   stat_1</code></pre>
+1    &lt;NA&gt;                   &lt;NA&gt;                TRT01A        Placebo  tabulate         n          n     9        9       0                   stat_1
+2    &lt;NA&gt;                   &lt;NA&gt;                TRT01A        Placebo  tabulate         N          N    33       33       0                   stat_1
+3    &lt;NA&gt;                   &lt;NA&gt;                TRT01A        Placebo  tabulate         p          % 0.273     27.3    &lt;fn&gt;                   stat_1
+4    &lt;NA&gt;                   &lt;NA&gt;                TRT01A      Xanomeli…  tabulate         n          n    13       13       0                   stat_2
+5    &lt;NA&gt;                   &lt;NA&gt;                TRT01A      Xanomeli…  tabulate         N          N    33       33       0                   stat_2
+6    &lt;NA&gt;                   &lt;NA&gt;                TRT01A      Xanomeli…  tabulate         p          % 0.394     39.4    &lt;fn&gt;                   stat_2
+7    &lt;NA&gt;                   &lt;NA&gt;                TRT01A      Xanomeli…  tabulate         n          n    11       11       0                   stat_3
+8    &lt;NA&gt;                   &lt;NA&gt;                TRT01A      Xanomeli…  tabulate         N          N    33       33       0                   stat_3
+9    &lt;NA&gt;                   &lt;NA&gt;                TRT01A      Xanomeli…  tabulate         p          % 0.333     33.3    &lt;fn&gt;                   stat_3
+10 TRT01A      Placebo OCMQ01NAM    Abnormal…  AEDECOD      APPLICAT… hierarch…         n          n     2        2    &lt;fn&gt;                   stat_1</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>ℹ 287 more rows</code></pre>
+<pre><code>ℹ 107 more rows</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>ℹ Use `print(n = ...)` to see more rows</code></pre>
@@ -986,85 +988,87 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb9-19"><a href="#cb9-19"></a><span class="in">library(cards)</span></span>
 <span id="cb9-20"><a href="#cb9-20"></a><span class="in">library(gtsummary)</span></span>
 <span id="cb9-21"><a href="#cb9-21"></a></span>
-<span id="cb9-22"><a href="#cb9-22"></a><span class="in">adsl &lt;- random.cdisc.data::cadsl</span></span>
-<span id="cb9-23"><a href="#cb9-23"></a><span class="in">adae &lt;- random.cdisc.data::cadae</span></span>
+<span id="cb9-22"><a href="#cb9-22"></a><span class="in">adsl &lt;- pharmaverseadam::adsl</span></span>
+<span id="cb9-23"><a href="#cb9-23"></a><span class="in">adae &lt;- pharmaverseadam::adae</span></span>
 <span id="cb9-24"><a href="#cb9-24"></a></span>
 <span id="cb9-25"><a href="#cb9-25"></a><span class="in">set.seed(1)</span></span>
-<span id="cb9-26"><a href="#cb9-26"></a><span class="in">adae &lt;- rename(adae, OCMQ01SC = SMQ01SC, OCMQ01NAM = SMQ01NAM)</span></span>
-<span id="cb9-27"><a href="#cb9-27"></a><span class="in">levels(adae$OCMQ01SC) &lt;- c("BROAD", "NARROW")</span></span>
-<span id="cb9-28"><a href="#cb9-28"></a><span class="in">adae$OCMQ01SC[is.na(adae$OCMQ01SC)] &lt;- "NARROW"</span></span>
-<span id="cb9-29"><a href="#cb9-29"></a><span class="in">adae$OCMQ01NAM &lt;- factor(adae$OCMQ01NAM, levels = c(</span></span>
-<span id="cb9-30"><a href="#cb9-30"></a><span class="in">  unique(adae$OCMQ01NAM), "Abnormal Uterine Bleeding", "Amenorrhea",</span></span>
-<span id="cb9-31"><a href="#cb9-31"></a><span class="in">  "Bacterial Vaginosis", "Decreased Menstrual Bleeding"</span></span>
-<span id="cb9-32"><a href="#cb9-32"></a><span class="in">))</span></span>
-<span id="cb9-33"><a href="#cb9-33"></a><span class="in">adae$OCMQ01NAM[adae$SEX == "F"] &lt;- as.factor(</span></span>
-<span id="cb9-34"><a href="#cb9-34"></a><span class="in">  sample(c(</span></span>
-<span id="cb9-35"><a href="#cb9-35"></a><span class="in">    "Abnormal Uterine Bleeding", "Amenorrhea",</span></span>
-<span id="cb9-36"><a href="#cb9-36"></a><span class="in">    "Bacterial Vaginosis", "Decreased Menstrual Bleeding"</span></span>
-<span id="cb9-37"><a href="#cb9-37"></a><span class="in">  ), sum(adae$SEX == "F"), replace = TRUE)</span></span>
-<span id="cb9-38"><a href="#cb9-38"></a><span class="in">)</span></span>
+<span id="cb9-26"><a href="#cb9-26"></a><span class="in">adae &lt;- adae |&gt;</span></span>
+<span id="cb9-27"><a href="#cb9-27"></a><span class="in">  mutate(</span></span>
+<span id="cb9-28"><a href="#cb9-28"></a><span class="in">    OCMQ01SC = as.factor(sample(c("BROAD", "NARROW"), nrow(adae), replace = TRUE)),</span></span>
+<span id="cb9-29"><a href="#cb9-29"></a><span class="in">    OCMQ01NAM = if_else(</span></span>
+<span id="cb9-30"><a href="#cb9-30"></a><span class="in">      SEX == "F",</span></span>
+<span id="cb9-31"><a href="#cb9-31"></a><span class="in">      as.factor(sample(</span></span>
+<span id="cb9-32"><a href="#cb9-32"></a><span class="in">        c("Abnormal Uterine Bleeding", "Amenorrhea", "Bacterial Vaginosis", "Decreased Menstrual Bleeding"),</span></span>
+<span id="cb9-33"><a href="#cb9-33"></a><span class="in">        n(),</span></span>
+<span id="cb9-34"><a href="#cb9-34"></a><span class="in">        replace = TRUE</span></span>
+<span id="cb9-35"><a href="#cb9-35"></a><span class="in">      )),</span></span>
+<span id="cb9-36"><a href="#cb9-36"></a><span class="in">      NA_character_</span></span>
+<span id="cb9-37"><a href="#cb9-37"></a><span class="in">    )</span></span>
+<span id="cb9-38"><a href="#cb9-38"></a><span class="in">  )</span></span>
 <span id="cb9-39"><a href="#cb9-39"></a></span>
 <span id="cb9-40"><a href="#cb9-40"></a><span class="in"># Pre-processing --------------------------------------------</span></span>
 <span id="cb9-41"><a href="#cb9-41"></a><span class="in">data &lt;- adae |&gt;</span></span>
 <span id="cb9-42"><a href="#cb9-42"></a><span class="in">  filter(</span></span>
 <span id="cb9-43"><a href="#cb9-43"></a><span class="in">    SAFFL == "Y",</span></span>
 <span id="cb9-44"><a href="#cb9-44"></a><span class="in">    SEX == "F",</span></span>
-<span id="cb9-45"><a href="#cb9-45"></a><span class="in">    OCMQ01SC == "NARROW"</span></span>
-<span id="cb9-46"><a href="#cb9-46"></a><span class="in">  ) |&gt;</span></span>
-<span id="cb9-47"><a href="#cb9-47"></a><span class="in">  select(OCMQ01SC, TRT01A, OCMQ01NAM, AEDECOD, USUBJID) |&gt;</span></span>
-<span id="cb9-48"><a href="#cb9-48"></a><span class="in">  # setting an explicit level for NA values so empty strata combinations are shown.</span></span>
-<span id="cb9-49"><a href="#cb9-49"></a><span class="in">  mutate(across(everything(), ~ {</span></span>
-<span id="cb9-50"><a href="#cb9-50"></a><span class="in">    if (anyNA(.)) {</span></span>
-<span id="cb9-51"><a href="#cb9-51"></a><span class="in">      forcats::fct_na_value_to_level(as.factor(.), level = "&lt;Missing&gt;")</span></span>
-<span id="cb9-52"><a href="#cb9-52"></a><span class="in">    } else {</span></span>
-<span id="cb9-53"><a href="#cb9-53"></a><span class="in">      .</span></span>
-<span id="cb9-54"><a href="#cb9-54"></a><span class="in">    }</span></span>
-<span id="cb9-55"><a href="#cb9-55"></a><span class="in">  }))</span></span>
-<span id="cb9-56"><a href="#cb9-56"></a></span>
-<span id="cb9-57"><a href="#cb9-57"></a><span class="in"># denominator values include only Female subjects in the arm with AEs</span></span>
-<span id="cb9-58"><a href="#cb9-58"></a><span class="in">denom &lt;- data |&gt; distinct(USUBJID, TRT01A)</span></span>
-<span id="cb9-59"><a href="#cb9-59"></a><span class="in">```</span></span>
-<span id="cb9-60"><a href="#cb9-60"></a></span>
-<span id="cb9-61"><a href="#cb9-61"></a><span class="fu">## Build Table</span></span>
+<span id="cb9-45"><a href="#cb9-45"></a><span class="in">    OCMQ01SC == "NARROW",</span></span>
+<span id="cb9-46"><a href="#cb9-46"></a><span class="in">    # Filtering to reduce the size of the demo table</span></span>
+<span id="cb9-47"><a href="#cb9-47"></a><span class="in">    AEDECOD %in% c("APPLICATION SITE IRRITATION", "ERYTHEMA", "APPLICATION SITE PRURITUS", "BACK PAIN")</span></span>
+<span id="cb9-48"><a href="#cb9-48"></a><span class="in">  ) |&gt;</span></span>
+<span id="cb9-49"><a href="#cb9-49"></a><span class="in">  select(OCMQ01SC, TRT01A, OCMQ01NAM, AEDECOD, USUBJID) |&gt;</span></span>
+<span id="cb9-50"><a href="#cb9-50"></a><span class="in">  # setting an explicit level for NA values so empty strata combinations are shown.</span></span>
+<span id="cb9-51"><a href="#cb9-51"></a><span class="in">  mutate(across(everything(), ~ {</span></span>
+<span id="cb9-52"><a href="#cb9-52"></a><span class="in">    if (anyNA(.)) {</span></span>
+<span id="cb9-53"><a href="#cb9-53"></a><span class="in">      forcats::fct_na_value_to_level(as.factor(.), level = "&lt;Missing&gt;")</span></span>
+<span id="cb9-54"><a href="#cb9-54"></a><span class="in">    } else {</span></span>
+<span id="cb9-55"><a href="#cb9-55"></a><span class="in">      .</span></span>
+<span id="cb9-56"><a href="#cb9-56"></a><span class="in">    }</span></span>
+<span id="cb9-57"><a href="#cb9-57"></a><span class="in">  }))</span></span>
+<span id="cb9-58"><a href="#cb9-58"></a></span>
+<span id="cb9-59"><a href="#cb9-59"></a><span class="in"># denominator values include only Female subjects in the arm with AEs</span></span>
+<span id="cb9-60"><a href="#cb9-60"></a><span class="in">denom &lt;- data |&gt; distinct(USUBJID, TRT01A)</span></span>
+<span id="cb9-61"><a href="#cb9-61"></a><span class="in">```</span></span>
 <span id="cb9-62"><a href="#cb9-62"></a></span>
-<span id="cb9-63"><a href="#cb9-63"></a><span class="in">```{r tbl, results = 'hide'}</span></span>
-<span id="cb9-64"><a href="#cb9-64"></a><span class="in">tbl &lt;- data |&gt;</span></span>
-<span id="cb9-65"><a href="#cb9-65"></a><span class="in">  tbl_hierarchical(</span></span>
-<span id="cb9-66"><a href="#cb9-66"></a><span class="in">    by = TRT01A,</span></span>
-<span id="cb9-67"><a href="#cb9-67"></a><span class="in">    variables = c(OCMQ01NAM, AEDECOD),</span></span>
-<span id="cb9-68"><a href="#cb9-68"></a><span class="in">    id = USUBJID,</span></span>
-<span id="cb9-69"><a href="#cb9-69"></a><span class="in">    denominator = denom,</span></span>
-<span id="cb9-70"><a href="#cb9-70"></a><span class="in">    # variables to calculate rates for</span></span>
-<span id="cb9-71"><a href="#cb9-71"></a><span class="in">    include = c(AEDECOD),</span></span>
-<span id="cb9-72"><a href="#cb9-72"></a><span class="in">    label = list(</span></span>
-<span id="cb9-73"><a href="#cb9-73"></a><span class="in">      OCMQ01NAM ~ "OCMQ (Narrow)",</span></span>
-<span id="cb9-74"><a href="#cb9-74"></a><span class="in">      AEDECOD ~ "Preferred Term"</span></span>
-<span id="cb9-75"><a href="#cb9-75"></a><span class="in">    )</span></span>
-<span id="cb9-76"><a href="#cb9-76"></a><span class="in">  )</span></span>
-<span id="cb9-77"><a href="#cb9-77"></a></span>
-<span id="cb9-78"><a href="#cb9-78"></a><span class="in">tbl</span></span>
-<span id="cb9-79"><a href="#cb9-79"></a><span class="in">```</span></span>
-<span id="cb9-80"><a href="#cb9-80"></a></span>
-<span id="cb9-81"><a href="#cb9-81"></a><span class="in">```{r eval=FALSE, include=FALSE}</span></span>
-<span id="cb9-82"><a href="#cb9-82"></a><span class="in">gt::gtsave(as_gt(tbl), filename = "result.png")</span></span>
-<span id="cb9-83"><a href="#cb9-83"></a><span class="in">```</span></span>
-<span id="cb9-84"><a href="#cb9-84"></a></span>
-<span id="cb9-85"><a href="#cb9-85"></a><span class="in">```{r img, echo=FALSE, fig.align='center', out.width='45%'}</span></span>
-<span id="cb9-86"><a href="#cb9-86"></a><span class="in">```</span></span>
-<span id="cb9-87"><a href="#cb9-87"></a></span>
-<span id="cb9-88"><a href="#cb9-88"></a><span class="fu">## Build ARD</span></span>
+<span id="cb9-63"><a href="#cb9-63"></a><span class="fu">## Build Table</span></span>
+<span id="cb9-64"><a href="#cb9-64"></a></span>
+<span id="cb9-65"><a href="#cb9-65"></a><span class="in">```{r tbl, results = 'hide'}</span></span>
+<span id="cb9-66"><a href="#cb9-66"></a><span class="in">tbl &lt;- data |&gt;</span></span>
+<span id="cb9-67"><a href="#cb9-67"></a><span class="in">  tbl_hierarchical(</span></span>
+<span id="cb9-68"><a href="#cb9-68"></a><span class="in">    by = TRT01A,</span></span>
+<span id="cb9-69"><a href="#cb9-69"></a><span class="in">    variables = c(OCMQ01NAM, AEDECOD),</span></span>
+<span id="cb9-70"><a href="#cb9-70"></a><span class="in">    id = USUBJID,</span></span>
+<span id="cb9-71"><a href="#cb9-71"></a><span class="in">    denominator = denom,</span></span>
+<span id="cb9-72"><a href="#cb9-72"></a><span class="in">    # variables to calculate rates for</span></span>
+<span id="cb9-73"><a href="#cb9-73"></a><span class="in">    include = c(AEDECOD),</span></span>
+<span id="cb9-74"><a href="#cb9-74"></a><span class="in">    label = list(</span></span>
+<span id="cb9-75"><a href="#cb9-75"></a><span class="in">      OCMQ01NAM ~ "OCMQ (Narrow)",</span></span>
+<span id="cb9-76"><a href="#cb9-76"></a><span class="in">      AEDECOD ~ "Preferred Term"</span></span>
+<span id="cb9-77"><a href="#cb9-77"></a><span class="in">    )</span></span>
+<span id="cb9-78"><a href="#cb9-78"></a><span class="in">  )</span></span>
+<span id="cb9-79"><a href="#cb9-79"></a></span>
+<span id="cb9-80"><a href="#cb9-80"></a><span class="in">tbl</span></span>
+<span id="cb9-81"><a href="#cb9-81"></a><span class="in">```</span></span>
+<span id="cb9-82"><a href="#cb9-82"></a></span>
+<span id="cb9-83"><a href="#cb9-83"></a><span class="in">```{r eval=FALSE, include=FALSE}</span></span>
+<span id="cb9-84"><a href="#cb9-84"></a><span class="in">gt::gtsave(as_gt(tbl), filename = "result.png")</span></span>
+<span id="cb9-85"><a href="#cb9-85"></a><span class="in">```</span></span>
+<span id="cb9-86"><a href="#cb9-86"></a></span>
+<span id="cb9-87"><a href="#cb9-87"></a><span class="in">```{r img, echo=FALSE, fig.align='center', out.width='45%'}</span></span>
+<span id="cb9-88"><a href="#cb9-88"></a><span class="in">```</span></span>
 <span id="cb9-89"><a href="#cb9-89"></a></span>
-<span id="cb9-90"><a href="#cb9-90"></a><span class="in">```{r ard, message=FALSE, warning=FALSE, results='hide'}</span></span>
-<span id="cb9-91"><a href="#cb9-91"></a><span class="in">ard &lt;- gather_ard(tbl)</span></span>
-<span id="cb9-92"><a href="#cb9-92"></a><span class="in">ard</span></span>
-<span id="cb9-93"><a href="#cb9-93"></a><span class="in">```</span></span>
-<span id="cb9-94"><a href="#cb9-94"></a></span>
-<span id="cb9-95"><a href="#cb9-95"></a><span class="in">```{r, echo=FALSE}</span></span>
-<span id="cb9-96"><a href="#cb9-96"></a><span class="in"># Print ARD</span></span>
-<span id="cb9-97"><a href="#cb9-97"></a><span class="in">withr::local_options(width = 9999)</span></span>
-<span id="cb9-98"><a href="#cb9-98"></a><span class="in">print(ard, columns = "all")</span></span>
-<span id="cb9-99"><a href="#cb9-99"></a><span class="in">```</span></span>
-<span id="cb9-100"><a href="#cb9-100"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-90"><a href="#cb9-90"></a><span class="fu">## Build ARD</span></span>
+<span id="cb9-91"><a href="#cb9-91"></a></span>
+<span id="cb9-92"><a href="#cb9-92"></a><span class="in">```{r ard, message=FALSE, warning=FALSE, results='hide'}</span></span>
+<span id="cb9-93"><a href="#cb9-93"></a><span class="in">ard &lt;- gather_ard(tbl)</span></span>
+<span id="cb9-94"><a href="#cb9-94"></a><span class="in">ard</span></span>
+<span id="cb9-95"><a href="#cb9-95"></a><span class="in">```</span></span>
+<span id="cb9-96"><a href="#cb9-96"></a></span>
+<span id="cb9-97"><a href="#cb9-97"></a><span class="in">```{r, echo=FALSE}</span></span>
+<span id="cb9-98"><a href="#cb9-98"></a><span class="in"># Print ARD</span></span>
+<span id="cb9-99"><a href="#cb9-99"></a><span class="in">withr::local_options(width = 9999)</span></span>
+<span id="cb9-100"><a href="#cb9-100"></a><span class="in">print(ard, columns = "all")</span></span>
+<span id="cb9-101"><a href="#cb9-101"></a><span class="in">```</span></span>
+<span id="cb9-102"><a href="#cb9-102"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">

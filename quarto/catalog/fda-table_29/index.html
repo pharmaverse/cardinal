@@ -252,33 +252,38 @@ cookieconsent.run({
 <span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(cards)</span>
 <span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(gtsummary)</span>
 <span id="cb1-5"><a href="#cb1-5"></a></span>
-<span id="cb1-6"><a href="#cb1-6"></a>adae <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadae</span>
-<span id="cb1-7"><a href="#cb1-7"></a>adsl <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadsl</span>
+<span id="cb1-6"><a href="#cb1-6"></a>adae <span class="ot">&lt;-</span> pharmaverseadam<span class="sc">::</span>adae</span>
+<span id="cb1-7"><a href="#cb1-7"></a>adsl <span class="ot">&lt;-</span> pharmaverseadam<span class="sc">::</span>adsl</span>
 <span id="cb1-8"><a href="#cb1-8"></a></span>
 <span id="cb1-9"><a href="#cb1-9"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
 <span id="cb1-10"><a href="#cb1-10"></a>adae <span class="ot">&lt;-</span> adae <span class="sc">|&gt;</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a>  <span class="fu">rename</span>(<span class="at">OCMQ01SC =</span> SMQ01SC) <span class="sc">|&gt;</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a>  <span class="fu">rename</span>(<span class="at">OCMQ01SC =</span> AEHLTCD) <span class="sc">|&gt;</span></span>
 <span id="cb1-12"><a href="#cb1-12"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb1-13"><a href="#cb1-13"></a>    <span class="at">AESER =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"Y"</span>, <span class="st">"N"</span>), <span class="at">size =</span> <span class="fu">nrow</span>(adae), <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
 <span id="cb1-14"><a href="#cb1-14"></a>    <span class="at">OCMQ01NAM =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"OCMQ1"</span>, <span class="st">"OCMQ2"</span>, <span class="st">"OCMQ3"</span>), <span class="at">size =</span> <span class="fu">nrow</span>(adae), <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-15"><a href="#cb1-15"></a>  )</span>
-<span id="cb1-16"><a href="#cb1-16"></a>adae<span class="sc">$</span>OCMQ01SC[<span class="fu">is.na</span>(adae<span class="sc">$</span>OCMQ01SC)] <span class="ot">&lt;-</span> <span class="st">"NARROW"</span></span>
-<span id="cb1-17"><a href="#cb1-17"></a></span>
-<span id="cb1-18"><a href="#cb1-18"></a><span class="co"># Pre-processing --------------------------------------------</span></span>
-<span id="cb1-19"><a href="#cb1-19"></a>adsl <span class="ot">&lt;-</span> adsl <span class="sc">|&gt;</span></span>
-<span id="cb1-20"><a href="#cb1-20"></a>  <span class="fu">filter</span>(SAFFL <span class="sc">==</span> <span class="st">"Y"</span>) <span class="co"># safety population</span></span>
-<span id="cb1-21"><a href="#cb1-21"></a></span>
-<span id="cb1-22"><a href="#cb1-22"></a>data <span class="ot">&lt;-</span> adae <span class="sc">|&gt;</span></span>
+<span id="cb1-15"><a href="#cb1-15"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a>  <span class="co"># truncating table for demonstration</span></span>
+<span id="cb1-17"><a href="#cb1-17"></a>  <span class="fu">filter</span>(AESOC <span class="sc">==</span> <span class="st">"VASCULAR DISORDERS"</span>)</span>
+<span id="cb1-18"><a href="#cb1-18"></a>adae<span class="sc">$</span>OCMQ01SC[<span class="fu">is.na</span>(adae<span class="sc">$</span>OCMQ01SC)] <span class="ot">&lt;-</span> <span class="st">"NARROW"</span></span>
+<span id="cb1-19"><a href="#cb1-19"></a></span>
+<span id="cb1-20"><a href="#cb1-20"></a><span class="co"># Pre-processing --------------------------------------------</span></span>
+<span id="cb1-21"><a href="#cb1-21"></a>adsl <span class="ot">&lt;-</span> adsl <span class="sc">|&gt;</span></span>
+<span id="cb1-22"><a href="#cb1-22"></a>  <span class="co"># safety population</span></span>
 <span id="cb1-23"><a href="#cb1-23"></a>  <span class="fu">filter</span>(</span>
-<span id="cb1-24"><a href="#cb1-24"></a>    <span class="co"># safety population</span></span>
-<span id="cb1-25"><a href="#cb1-25"></a>    SAFFL <span class="sc">==</span> <span class="st">"Y"</span>,</span>
-<span id="cb1-26"><a href="#cb1-26"></a>    <span class="co"># serious AEs</span></span>
-<span id="cb1-27"><a href="#cb1-27"></a>    AESER <span class="sc">==</span> <span class="st">"Y"</span>,</span>
-<span id="cb1-28"><a href="#cb1-28"></a>    <span class="co"># treatment-emergent</span></span>
-<span id="cb1-29"><a href="#cb1-29"></a>    TRTEMFL <span class="sc">==</span> <span class="st">"Y"</span>,</span>
-<span id="cb1-30"><a href="#cb1-30"></a>    <span class="co"># narrow OCMQ scope</span></span>
-<span id="cb1-31"><a href="#cb1-31"></a>    OCMQ01SC <span class="sc">==</span> <span class="st">"NARROW"</span></span>
-<span id="cb1-32"><a href="#cb1-32"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-24"><a href="#cb1-24"></a>    SAFFL <span class="sc">==</span> <span class="st">"Y"</span></span>
+<span id="cb1-25"><a href="#cb1-25"></a>  )</span>
+<span id="cb1-26"><a href="#cb1-26"></a></span>
+<span id="cb1-27"><a href="#cb1-27"></a>data <span class="ot">&lt;-</span> adae <span class="sc">|&gt;</span></span>
+<span id="cb1-28"><a href="#cb1-28"></a>  <span class="fu">filter</span>(</span>
+<span id="cb1-29"><a href="#cb1-29"></a>    <span class="co"># safety population</span></span>
+<span id="cb1-30"><a href="#cb1-30"></a>    SAFFL <span class="sc">==</span> <span class="st">"Y"</span>,</span>
+<span id="cb1-31"><a href="#cb1-31"></a>    <span class="co"># serious AEs</span></span>
+<span id="cb1-32"><a href="#cb1-32"></a>    AESER <span class="sc">==</span> <span class="st">"Y"</span>,</span>
+<span id="cb1-33"><a href="#cb1-33"></a>    <span class="co"># treatment-emergent</span></span>
+<span id="cb1-34"><a href="#cb1-34"></a>    TRTEMFL <span class="sc">==</span> <span class="st">"Y"</span>,</span>
+<span id="cb1-35"><a href="#cb1-35"></a>    <span class="co"># narrow OCMQ scope</span></span>
+<span id="cb1-36"><a href="#cb1-36"></a>    OCMQ01SC <span class="sc">==</span> <span class="st">"NARROW"</span></span>
+<span id="cb1-37"><a href="#cb1-37"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </div>
@@ -299,53 +304,53 @@ cookieconsent.run({
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stderr">
-<pre><code>{cards} data frame: 387 x 15</code></pre>
+<pre><code>{cards} data frame: 57 x 15</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   group1 group1_level   group2 group2_level    group3 group3_level  variable variable_level   context stat_name stat_label  stat fmt_fun warning error
-1    &lt;NA&gt;                  &lt;NA&gt;                   &lt;NA&gt;                 TRT01A      A: Drug X  tabulate         n          n   134       0              
-2    &lt;NA&gt;                  &lt;NA&gt;                   &lt;NA&gt;                 TRT01A      A: Drug X  tabulate         N          N   400       0              
-3    &lt;NA&gt;                  &lt;NA&gt;                   &lt;NA&gt;                 TRT01A      A: Drug X  tabulate         p          % 0.335    &lt;fn&gt;              
-4    &lt;NA&gt;                  &lt;NA&gt;                   &lt;NA&gt;                 TRT01A      B: Place…  tabulate         n          n   134       0              
-5    &lt;NA&gt;                  &lt;NA&gt;                   &lt;NA&gt;                 TRT01A      B: Place…  tabulate         N          N   400       0              
-6    &lt;NA&gt;                  &lt;NA&gt;                   &lt;NA&gt;                 TRT01A      B: Place…  tabulate         p          % 0.335    &lt;fn&gt;              
-7    &lt;NA&gt;                  &lt;NA&gt;                   &lt;NA&gt;                 TRT01A      C: Combi…  tabulate         n          n   132       0              
-8    &lt;NA&gt;                  &lt;NA&gt;                   &lt;NA&gt;                 TRT01A      C: Combi…  tabulate         N          N   400       0              
-9    &lt;NA&gt;                  &lt;NA&gt;                   &lt;NA&gt;                 TRT01A      C: Combi…  tabulate         p          %  0.33    &lt;fn&gt;              
-10 TRT01A    A: Drug X AEBODSYS       cl A.1      &lt;NA&gt;              OCMQ01NAM          OCMQ1 hierarch…         n          n    17       0              
-11 TRT01A    A: Drug X AEBODSYS       cl A.1      &lt;NA&gt;              OCMQ01NAM          OCMQ1 hierarch…         N          N   134       0              
-12 TRT01A    A: Drug X AEBODSYS       cl A.1      &lt;NA&gt;              OCMQ01NAM          OCMQ1 hierarch…         p          % 0.127    &lt;fn&gt;              
-13 TRT01A    B: Place… AEBODSYS       cl A.1      &lt;NA&gt;              OCMQ01NAM          OCMQ1 hierarch…         n          n    14       0              
-14 TRT01A    B: Place… AEBODSYS       cl A.1      &lt;NA&gt;              OCMQ01NAM          OCMQ1 hierarch…         N          N   134       0              
-15 TRT01A    B: Place… AEBODSYS       cl A.1      &lt;NA&gt;              OCMQ01NAM          OCMQ1 hierarch…         p          % 0.104    &lt;fn&gt;              
-16 TRT01A    C: Combi… AEBODSYS       cl A.1      &lt;NA&gt;              OCMQ01NAM          OCMQ1 hierarch…         n          n    29       0              
-17 TRT01A    C: Combi… AEBODSYS       cl A.1      &lt;NA&gt;              OCMQ01NAM          OCMQ1 hierarch…         N          N   132       0              
-18 TRT01A    C: Combi… AEBODSYS       cl A.1      &lt;NA&gt;              OCMQ01NAM          OCMQ1 hierarch…         p          %  0.22    &lt;fn&gt;              
-19 TRT01A    A: Drug X AEBODSYS       cl A.1 OCMQ01NAM        OCMQ1   AEDECOD      dcd A.1.… hierarch…         n          n     7       0              
-20 TRT01A    A: Drug X AEBODSYS       cl A.1 OCMQ01NAM        OCMQ1   AEDECOD      dcd A.1.… hierarch…         N          N   134       0              
-21 TRT01A    A: Drug X AEBODSYS       cl A.1 OCMQ01NAM        OCMQ1   AEDECOD      dcd A.1.… hierarch…         p          % 0.052    &lt;fn&gt;              
-22 TRT01A    B: Place… AEBODSYS       cl A.1 OCMQ01NAM        OCMQ1   AEDECOD      dcd A.1.… hierarch…         n          n     6       0              
-23 TRT01A    B: Place… AEBODSYS       cl A.1 OCMQ01NAM        OCMQ1   AEDECOD      dcd A.1.… hierarch…         N          N   134       0              
-24 TRT01A    B: Place… AEBODSYS       cl A.1 OCMQ01NAM        OCMQ1   AEDECOD      dcd A.1.… hierarch…         p          % 0.045    &lt;fn&gt;              
-25 TRT01A    C: Combi… AEBODSYS       cl A.1 OCMQ01NAM        OCMQ1   AEDECOD      dcd A.1.… hierarch…         n          n    13       0              
-26 TRT01A    C: Combi… AEBODSYS       cl A.1 OCMQ01NAM        OCMQ1   AEDECOD      dcd A.1.… hierarch…         N          N   132       0              
-27 TRT01A    C: Combi… AEBODSYS       cl A.1 OCMQ01NAM        OCMQ1   AEDECOD      dcd A.1.… hierarch…         p          % 0.098    &lt;fn&gt;              
-28 TRT01A    A: Drug X AEBODSYS       cl A.1 OCMQ01NAM        OCMQ1   AEDECOD      dcd A.1.… hierarch…         n          n    12       0              
-29 TRT01A    A: Drug X AEBODSYS       cl A.1 OCMQ01NAM        OCMQ1   AEDECOD      dcd A.1.… hierarch…         N          N   134       0              
-30 TRT01A    A: Drug X AEBODSYS       cl A.1 OCMQ01NAM        OCMQ1   AEDECOD      dcd A.1.… hierarch…         p          %  0.09    &lt;fn&gt;              
-31 TRT01A    B: Place… AEBODSYS       cl A.1 OCMQ01NAM        OCMQ1   AEDECOD      dcd A.1.… hierarch…         n          n     8       0              
-32 TRT01A    B: Place… AEBODSYS       cl A.1 OCMQ01NAM        OCMQ1   AEDECOD      dcd A.1.… hierarch…         N          N   134       0              
-33 TRT01A    B: Place… AEBODSYS       cl A.1 OCMQ01NAM        OCMQ1   AEDECOD      dcd A.1.… hierarch…         p          %  0.06    &lt;fn&gt;              
-34 TRT01A    C: Combi… AEBODSYS       cl A.1 OCMQ01NAM        OCMQ1   AEDECOD      dcd A.1.… hierarch…         n          n    18       0              
-35 TRT01A    C: Combi… AEBODSYS       cl A.1 OCMQ01NAM        OCMQ1   AEDECOD      dcd A.1.… hierarch…         N          N   132       0              
-36 TRT01A    C: Combi… AEBODSYS       cl A.1 OCMQ01NAM        OCMQ1   AEDECOD      dcd A.1.… hierarch…         p          % 0.136    &lt;fn&gt;              
-37 TRT01A    A: Drug X AEBODSYS       cl A.1      &lt;NA&gt;              OCMQ01NAM          OCMQ2 hierarch…         n          n    23       0              
-38 TRT01A    A: Drug X AEBODSYS       cl A.1      &lt;NA&gt;              OCMQ01NAM          OCMQ2 hierarch…         N          N   134       0              
-39 TRT01A    A: Drug X AEBODSYS       cl A.1      &lt;NA&gt;              OCMQ01NAM          OCMQ2 hierarch…         p          % 0.172    &lt;fn&gt;              
-40 TRT01A    B: Place… AEBODSYS       cl A.1      &lt;NA&gt;              OCMQ01NAM          OCMQ2 hierarch…         n          n    20       0              </code></pre>
+1    &lt;NA&gt;                  &lt;NA&gt;                   &lt;NA&gt;                 TRT01A        Placebo  tabulate         n          n    86       0              
+2    &lt;NA&gt;                  &lt;NA&gt;                   &lt;NA&gt;                 TRT01A        Placebo  tabulate         N          N   254       0              
+3    &lt;NA&gt;                  &lt;NA&gt;                   &lt;NA&gt;                 TRT01A        Placebo  tabulate         p          % 0.339    &lt;fn&gt;              
+4    &lt;NA&gt;                  &lt;NA&gt;                   &lt;NA&gt;                 TRT01A      Xanomeli…  tabulate         n          n    72       0              
+5    &lt;NA&gt;                  &lt;NA&gt;                   &lt;NA&gt;                 TRT01A      Xanomeli…  tabulate         N          N   254       0              
+6    &lt;NA&gt;                  &lt;NA&gt;                   &lt;NA&gt;                 TRT01A      Xanomeli…  tabulate         p          % 0.283    &lt;fn&gt;              
+7    &lt;NA&gt;                  &lt;NA&gt;                   &lt;NA&gt;                 TRT01A      Xanomeli…  tabulate         n          n    96       0              
+8    &lt;NA&gt;                  &lt;NA&gt;                   &lt;NA&gt;                 TRT01A      Xanomeli…  tabulate         N          N   254       0              
+9    &lt;NA&gt;                  &lt;NA&gt;                   &lt;NA&gt;                 TRT01A      Xanomeli…  tabulate         p          % 0.378    &lt;fn&gt;              
+10 TRT01A      Placebo AEBODSYS    VASCULAR…      &lt;NA&gt;              OCMQ01NAM          OCMQ1 hierarch…         n          n     1       0              
+11 TRT01A      Placebo AEBODSYS    VASCULAR…      &lt;NA&gt;              OCMQ01NAM          OCMQ1 hierarch…         N          N    86       0              
+12 TRT01A      Placebo AEBODSYS    VASCULAR…      &lt;NA&gt;              OCMQ01NAM          OCMQ1 hierarch…         p          % 0.012    &lt;fn&gt;              
+13 TRT01A    Xanomeli… AEBODSYS    VASCULAR…      &lt;NA&gt;              OCMQ01NAM          OCMQ1 hierarch…         n          n     1       0              
+14 TRT01A    Xanomeli… AEBODSYS    VASCULAR…      &lt;NA&gt;              OCMQ01NAM          OCMQ1 hierarch…         N          N    96       0              
+15 TRT01A    Xanomeli… AEBODSYS    VASCULAR…      &lt;NA&gt;              OCMQ01NAM          OCMQ1 hierarch…         p          %  0.01    &lt;fn&gt;              
+16 TRT01A      Placebo AEBODSYS    VASCULAR… OCMQ01NAM        OCMQ1   AEDECOD      HYPOTENS… hierarch…         n          n     1       0              
+17 TRT01A      Placebo AEBODSYS    VASCULAR… OCMQ01NAM        OCMQ1   AEDECOD      HYPOTENS… hierarch…         N          N    86       0              
+18 TRT01A      Placebo AEBODSYS    VASCULAR… OCMQ01NAM        OCMQ1   AEDECOD      HYPOTENS… hierarch…         p          % 0.012    &lt;fn&gt;              
+19 TRT01A    Xanomeli… AEBODSYS    VASCULAR… OCMQ01NAM        OCMQ1   AEDECOD      HYPOTENS… hierarch…         n          n     1       0              
+20 TRT01A    Xanomeli… AEBODSYS    VASCULAR… OCMQ01NAM        OCMQ1   AEDECOD      HYPOTENS… hierarch…         N          N    96       0              
+21 TRT01A    Xanomeli… AEBODSYS    VASCULAR… OCMQ01NAM        OCMQ1   AEDECOD      HYPOTENS… hierarch…         p          %  0.01    &lt;fn&gt;              
+22 TRT01A      Placebo AEBODSYS    VASCULAR…      &lt;NA&gt;              OCMQ01NAM          OCMQ2 hierarch…         n          n     1       0              
+23 TRT01A      Placebo AEBODSYS    VASCULAR…      &lt;NA&gt;              OCMQ01NAM          OCMQ2 hierarch…         N          N    86       0              
+24 TRT01A      Placebo AEBODSYS    VASCULAR…      &lt;NA&gt;              OCMQ01NAM          OCMQ2 hierarch…         p          % 0.012    &lt;fn&gt;              
+25 TRT01A    Xanomeli… AEBODSYS    VASCULAR…      &lt;NA&gt;              OCMQ01NAM          OCMQ2 hierarch…         n          n     1       0              
+26 TRT01A    Xanomeli… AEBODSYS    VASCULAR…      &lt;NA&gt;              OCMQ01NAM          OCMQ2 hierarch…         N          N    96       0              
+27 TRT01A    Xanomeli… AEBODSYS    VASCULAR…      &lt;NA&gt;              OCMQ01NAM          OCMQ2 hierarch…         p          %  0.01    &lt;fn&gt;              
+28 TRT01A      Placebo AEBODSYS    VASCULAR… OCMQ01NAM        OCMQ2   AEDECOD      HOT FLUSH hierarch…         n          n     0       0              
+29 TRT01A      Placebo AEBODSYS    VASCULAR… OCMQ01NAM        OCMQ2   AEDECOD      HOT FLUSH hierarch…         N          N    86       0              
+30 TRT01A      Placebo AEBODSYS    VASCULAR… OCMQ01NAM        OCMQ2   AEDECOD      HOT FLUSH hierarch…         p          %     0    &lt;fn&gt;              
+31 TRT01A    Xanomeli… AEBODSYS    VASCULAR… OCMQ01NAM        OCMQ2   AEDECOD      HOT FLUSH hierarch…         n          n     1       0              
+32 TRT01A    Xanomeli… AEBODSYS    VASCULAR… OCMQ01NAM        OCMQ2   AEDECOD      HOT FLUSH hierarch…         N          N    96       0              
+33 TRT01A    Xanomeli… AEBODSYS    VASCULAR… OCMQ01NAM        OCMQ2   AEDECOD      HOT FLUSH hierarch…         p          %  0.01    &lt;fn&gt;              
+34 TRT01A      Placebo AEBODSYS    VASCULAR… OCMQ01NAM        OCMQ2   AEDECOD      HYPOTENS… hierarch…         n          n     1       0              
+35 TRT01A      Placebo AEBODSYS    VASCULAR… OCMQ01NAM        OCMQ2   AEDECOD      HYPOTENS… hierarch…         N          N    86       0              
+36 TRT01A      Placebo AEBODSYS    VASCULAR… OCMQ01NAM        OCMQ2   AEDECOD      HYPOTENS… hierarch…         p          % 0.012    &lt;fn&gt;              
+37 TRT01A    Xanomeli… AEBODSYS    VASCULAR… OCMQ01NAM        OCMQ2   AEDECOD      HYPOTENS… hierarch…         n          n     0       0              
+38 TRT01A    Xanomeli… AEBODSYS    VASCULAR… OCMQ01NAM        OCMQ2   AEDECOD      HYPOTENS… hierarch…         N          N    96       0              
+39 TRT01A    Xanomeli… AEBODSYS    VASCULAR… OCMQ01NAM        OCMQ2   AEDECOD      HYPOTENS… hierarch…         p          %     0    &lt;fn&gt;              
+40 TRT01A      Placebo AEBODSYS    VASCULAR…      &lt;NA&gt;              OCMQ01NAM          OCMQ3 hierarch…         n          n     2       0              </code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>ℹ 347 more rows</code></pre>
+<pre><code>ℹ 17 more rows</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>ℹ Use `print(n = ...)` to see more rows</code></pre>
@@ -1010,82 +1015,87 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb8-19"><a href="#cb8-19"></a><span class="in">library(cards)</span></span>
 <span id="cb8-20"><a href="#cb8-20"></a><span class="in">library(gtsummary)</span></span>
 <span id="cb8-21"><a href="#cb8-21"></a></span>
-<span id="cb8-22"><a href="#cb8-22"></a><span class="in">adae &lt;- random.cdisc.data::cadae</span></span>
-<span id="cb8-23"><a href="#cb8-23"></a><span class="in">adsl &lt;- random.cdisc.data::cadsl</span></span>
+<span id="cb8-22"><a href="#cb8-22"></a><span class="in">adae &lt;- pharmaverseadam::adae</span></span>
+<span id="cb8-23"><a href="#cb8-23"></a><span class="in">adsl &lt;- pharmaverseadam::adsl</span></span>
 <span id="cb8-24"><a href="#cb8-24"></a></span>
 <span id="cb8-25"><a href="#cb8-25"></a><span class="in">set.seed(1)</span></span>
 <span id="cb8-26"><a href="#cb8-26"></a><span class="in">adae &lt;- adae |&gt;</span></span>
-<span id="cb8-27"><a href="#cb8-27"></a><span class="in">  rename(OCMQ01SC = SMQ01SC) |&gt;</span></span>
+<span id="cb8-27"><a href="#cb8-27"></a><span class="in">  rename(OCMQ01SC = AEHLTCD) |&gt;</span></span>
 <span id="cb8-28"><a href="#cb8-28"></a><span class="in">  mutate(</span></span>
 <span id="cb8-29"><a href="#cb8-29"></a><span class="in">    AESER = sample(c("Y", "N"), size = nrow(adae), replace = TRUE),</span></span>
 <span id="cb8-30"><a href="#cb8-30"></a><span class="in">    OCMQ01NAM = sample(c("OCMQ1", "OCMQ2", "OCMQ3"), size = nrow(adae), replace = TRUE)</span></span>
-<span id="cb8-31"><a href="#cb8-31"></a><span class="in">  )</span></span>
-<span id="cb8-32"><a href="#cb8-32"></a><span class="in">adae$OCMQ01SC[is.na(adae$OCMQ01SC)] &lt;- "NARROW"</span></span>
-<span id="cb8-33"><a href="#cb8-33"></a></span>
-<span id="cb8-34"><a href="#cb8-34"></a><span class="in"># Pre-processing --------------------------------------------</span></span>
-<span id="cb8-35"><a href="#cb8-35"></a><span class="in">adsl &lt;- adsl |&gt;</span></span>
-<span id="cb8-36"><a href="#cb8-36"></a><span class="in">  filter(SAFFL == "Y") # safety population</span></span>
-<span id="cb8-37"><a href="#cb8-37"></a></span>
-<span id="cb8-38"><a href="#cb8-38"></a><span class="in">data &lt;- adae |&gt;</span></span>
+<span id="cb8-31"><a href="#cb8-31"></a><span class="in">  ) |&gt;</span></span>
+<span id="cb8-32"><a href="#cb8-32"></a><span class="in">  # truncating table for demonstration</span></span>
+<span id="cb8-33"><a href="#cb8-33"></a><span class="in">  filter(AESOC == "VASCULAR DISORDERS")</span></span>
+<span id="cb8-34"><a href="#cb8-34"></a><span class="in">adae$OCMQ01SC[is.na(adae$OCMQ01SC)] &lt;- "NARROW"</span></span>
+<span id="cb8-35"><a href="#cb8-35"></a></span>
+<span id="cb8-36"><a href="#cb8-36"></a><span class="in"># Pre-processing --------------------------------------------</span></span>
+<span id="cb8-37"><a href="#cb8-37"></a><span class="in">adsl &lt;- adsl |&gt;</span></span>
+<span id="cb8-38"><a href="#cb8-38"></a><span class="in">  # safety population</span></span>
 <span id="cb8-39"><a href="#cb8-39"></a><span class="in">  filter(</span></span>
-<span id="cb8-40"><a href="#cb8-40"></a><span class="in">    # safety population</span></span>
-<span id="cb8-41"><a href="#cb8-41"></a><span class="in">    SAFFL == "Y",</span></span>
-<span id="cb8-42"><a href="#cb8-42"></a><span class="in">    # serious AEs</span></span>
-<span id="cb8-43"><a href="#cb8-43"></a><span class="in">    AESER == "Y",</span></span>
-<span id="cb8-44"><a href="#cb8-44"></a><span class="in">    # treatment-emergent</span></span>
-<span id="cb8-45"><a href="#cb8-45"></a><span class="in">    TRTEMFL == "Y",</span></span>
-<span id="cb8-46"><a href="#cb8-46"></a><span class="in">    # narrow OCMQ scope</span></span>
-<span id="cb8-47"><a href="#cb8-47"></a><span class="in">    OCMQ01SC == "NARROW"</span></span>
-<span id="cb8-48"><a href="#cb8-48"></a><span class="in">  )</span></span>
-<span id="cb8-49"><a href="#cb8-49"></a><span class="in">```</span></span>
-<span id="cb8-50"><a href="#cb8-50"></a></span>
-<span id="cb8-51"><a href="#cb8-51"></a><span class="fu">## Build ARD</span></span>
-<span id="cb8-52"><a href="#cb8-52"></a></span>
-<span id="cb8-53"><a href="#cb8-53"></a><span class="in">```{r ard, message=FALSE, warning=FALSE, results='hide'}</span></span>
-<span id="cb8-54"><a href="#cb8-54"></a><span class="in">ard &lt;- ard_stack_hierarchical(</span></span>
-<span id="cb8-55"><a href="#cb8-55"></a><span class="in">  data,</span></span>
-<span id="cb8-56"><a href="#cb8-56"></a><span class="in">  variables = c(AEBODSYS, OCMQ01NAM, AEDECOD),</span></span>
-<span id="cb8-57"><a href="#cb8-57"></a><span class="in">  by = TRT01A,</span></span>
-<span id="cb8-58"><a href="#cb8-58"></a><span class="in">  id = USUBJID,</span></span>
-<span id="cb8-59"><a href="#cb8-59"></a><span class="in">  denominator = adsl,</span></span>
-<span id="cb8-60"><a href="#cb8-60"></a><span class="in">  # variables to include AE rates for</span></span>
-<span id="cb8-61"><a href="#cb8-61"></a><span class="in">  include = c(OCMQ01NAM, AEDECOD)</span></span>
-<span id="cb8-62"><a href="#cb8-62"></a><span class="in">)</span></span>
-<span id="cb8-63"><a href="#cb8-63"></a></span>
-<span id="cb8-64"><a href="#cb8-64"></a><span class="in">ard</span></span>
-<span id="cb8-65"><a href="#cb8-65"></a><span class="in">```</span></span>
-<span id="cb8-66"><a href="#cb8-66"></a></span>
-<span id="cb8-67"><a href="#cb8-67"></a><span class="in">```{r, echo=FALSE}</span></span>
-<span id="cb8-68"><a href="#cb8-68"></a><span class="in"># Print ARD</span></span>
-<span id="cb8-69"><a href="#cb8-69"></a><span class="in">withr::local_options(width = 9999)</span></span>
-<span id="cb8-70"><a href="#cb8-70"></a><span class="in">print(ard, columns = "all", n = 40)</span></span>
-<span id="cb8-71"><a href="#cb8-71"></a><span class="in">```</span></span>
-<span id="cb8-72"><a href="#cb8-72"></a></span>
-<span id="cb8-73"><a href="#cb8-73"></a><span class="fu">## Build Table</span></span>
-<span id="cb8-74"><a href="#cb8-74"></a></span>
-<span id="cb8-75"><a href="#cb8-75"></a><span class="in">```{r tbl, results = 'hide'}</span></span>
-<span id="cb8-76"><a href="#cb8-76"></a><span class="in"># create table using ARD-first approach (ARD -&gt; table)</span></span>
-<span id="cb8-77"><a href="#cb8-77"></a><span class="in">tbl &lt;-</span></span>
-<span id="cb8-78"><a href="#cb8-78"></a><span class="in">  tbl_ard_hierarchical(</span></span>
-<span id="cb8-79"><a href="#cb8-79"></a><span class="in">    ard,</span></span>
-<span id="cb8-80"><a href="#cb8-80"></a><span class="in">    variables = c(AEBODSYS, OCMQ01NAM, AEDECOD),</span></span>
-<span id="cb8-81"><a href="#cb8-81"></a><span class="in">    by = TRT01A,</span></span>
-<span id="cb8-82"><a href="#cb8-82"></a><span class="in">    # variables to display AE rates for</span></span>
-<span id="cb8-83"><a href="#cb8-83"></a><span class="in">    include = c(OCMQ01NAM, AEDECOD)</span></span>
-<span id="cb8-84"><a href="#cb8-84"></a><span class="in">  ) |&gt;</span></span>
-<span id="cb8-85"><a href="#cb8-85"></a><span class="in">  # add custom variable label</span></span>
-<span id="cb8-86"><a href="#cb8-86"></a><span class="in">  modify_header(label = "**Organ System**")</span></span>
-<span id="cb8-87"><a href="#cb8-87"></a></span>
-<span id="cb8-88"><a href="#cb8-88"></a><span class="in">tbl</span></span>
-<span id="cb8-89"><a href="#cb8-89"></a><span class="in">```</span></span>
-<span id="cb8-90"><a href="#cb8-90"></a></span>
-<span id="cb8-91"><a href="#cb8-91"></a><span class="in">```{r eval=FALSE, include=FALSE}</span></span>
-<span id="cb8-92"><a href="#cb8-92"></a><span class="in">gt::gtsave(as_gt(tbl), filename = "result.png")</span></span>
-<span id="cb8-93"><a href="#cb8-93"></a><span class="in">```</span></span>
-<span id="cb8-94"><a href="#cb8-94"></a></span>
-<span id="cb8-95"><a href="#cb8-95"></a><span class="in">```{r img, echo=FALSE, fig.align='center', out.width='45%'}</span></span>
-<span id="cb8-96"><a href="#cb8-96"></a><span class="in">```</span></span>
-<span id="cb8-97"><a href="#cb8-97"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-40"><a href="#cb8-40"></a><span class="in">    SAFFL == "Y"</span></span>
+<span id="cb8-41"><a href="#cb8-41"></a><span class="in">  )</span></span>
+<span id="cb8-42"><a href="#cb8-42"></a></span>
+<span id="cb8-43"><a href="#cb8-43"></a><span class="in">data &lt;- adae |&gt;</span></span>
+<span id="cb8-44"><a href="#cb8-44"></a><span class="in">  filter(</span></span>
+<span id="cb8-45"><a href="#cb8-45"></a><span class="in">    # safety population</span></span>
+<span id="cb8-46"><a href="#cb8-46"></a><span class="in">    SAFFL == "Y",</span></span>
+<span id="cb8-47"><a href="#cb8-47"></a><span class="in">    # serious AEs</span></span>
+<span id="cb8-48"><a href="#cb8-48"></a><span class="in">    AESER == "Y",</span></span>
+<span id="cb8-49"><a href="#cb8-49"></a><span class="in">    # treatment-emergent</span></span>
+<span id="cb8-50"><a href="#cb8-50"></a><span class="in">    TRTEMFL == "Y",</span></span>
+<span id="cb8-51"><a href="#cb8-51"></a><span class="in">    # narrow OCMQ scope</span></span>
+<span id="cb8-52"><a href="#cb8-52"></a><span class="in">    OCMQ01SC == "NARROW"</span></span>
+<span id="cb8-53"><a href="#cb8-53"></a><span class="in">  )</span></span>
+<span id="cb8-54"><a href="#cb8-54"></a><span class="in">```</span></span>
+<span id="cb8-55"><a href="#cb8-55"></a></span>
+<span id="cb8-56"><a href="#cb8-56"></a><span class="fu">## Build ARD</span></span>
+<span id="cb8-57"><a href="#cb8-57"></a></span>
+<span id="cb8-58"><a href="#cb8-58"></a><span class="in">```{r ard, message=FALSE, warning=FALSE, results='hide'}</span></span>
+<span id="cb8-59"><a href="#cb8-59"></a><span class="in">ard &lt;- ard_stack_hierarchical(</span></span>
+<span id="cb8-60"><a href="#cb8-60"></a><span class="in">  data,</span></span>
+<span id="cb8-61"><a href="#cb8-61"></a><span class="in">  variables = c(AEBODSYS, OCMQ01NAM, AEDECOD),</span></span>
+<span id="cb8-62"><a href="#cb8-62"></a><span class="in">  by = TRT01A,</span></span>
+<span id="cb8-63"><a href="#cb8-63"></a><span class="in">  id = USUBJID,</span></span>
+<span id="cb8-64"><a href="#cb8-64"></a><span class="in">  denominator = adsl,</span></span>
+<span id="cb8-65"><a href="#cb8-65"></a><span class="in">  # variables to include AE rates for</span></span>
+<span id="cb8-66"><a href="#cb8-66"></a><span class="in">  include = c(OCMQ01NAM, AEDECOD)</span></span>
+<span id="cb8-67"><a href="#cb8-67"></a><span class="in">)</span></span>
+<span id="cb8-68"><a href="#cb8-68"></a></span>
+<span id="cb8-69"><a href="#cb8-69"></a><span class="in">ard</span></span>
+<span id="cb8-70"><a href="#cb8-70"></a><span class="in">```</span></span>
+<span id="cb8-71"><a href="#cb8-71"></a></span>
+<span id="cb8-72"><a href="#cb8-72"></a><span class="in">```{r, echo=FALSE}</span></span>
+<span id="cb8-73"><a href="#cb8-73"></a><span class="in"># Print ARD</span></span>
+<span id="cb8-74"><a href="#cb8-74"></a><span class="in">withr::local_options(width = 9999)</span></span>
+<span id="cb8-75"><a href="#cb8-75"></a><span class="in">print(ard, columns = "all", n = 40)</span></span>
+<span id="cb8-76"><a href="#cb8-76"></a><span class="in">```</span></span>
+<span id="cb8-77"><a href="#cb8-77"></a></span>
+<span id="cb8-78"><a href="#cb8-78"></a><span class="fu">## Build Table</span></span>
+<span id="cb8-79"><a href="#cb8-79"></a></span>
+<span id="cb8-80"><a href="#cb8-80"></a><span class="in">```{r tbl, results = 'hide'}</span></span>
+<span id="cb8-81"><a href="#cb8-81"></a><span class="in"># create table using ARD-first approach (ARD -&gt; table)</span></span>
+<span id="cb8-82"><a href="#cb8-82"></a><span class="in">tbl &lt;-</span></span>
+<span id="cb8-83"><a href="#cb8-83"></a><span class="in">  tbl_ard_hierarchical(</span></span>
+<span id="cb8-84"><a href="#cb8-84"></a><span class="in">    ard,</span></span>
+<span id="cb8-85"><a href="#cb8-85"></a><span class="in">    variables = c(AEBODSYS, OCMQ01NAM, AEDECOD),</span></span>
+<span id="cb8-86"><a href="#cb8-86"></a><span class="in">    by = TRT01A,</span></span>
+<span id="cb8-87"><a href="#cb8-87"></a><span class="in">    # variables to display AE rates for</span></span>
+<span id="cb8-88"><a href="#cb8-88"></a><span class="in">    include = c(OCMQ01NAM, AEDECOD)</span></span>
+<span id="cb8-89"><a href="#cb8-89"></a><span class="in">  ) |&gt;</span></span>
+<span id="cb8-90"><a href="#cb8-90"></a><span class="in">  # add custom variable label</span></span>
+<span id="cb8-91"><a href="#cb8-91"></a><span class="in">  modify_header(label = "**Organ System**")</span></span>
+<span id="cb8-92"><a href="#cb8-92"></a></span>
+<span id="cb8-93"><a href="#cb8-93"></a><span class="in">tbl</span></span>
+<span id="cb8-94"><a href="#cb8-94"></a><span class="in">```</span></span>
+<span id="cb8-95"><a href="#cb8-95"></a></span>
+<span id="cb8-96"><a href="#cb8-96"></a><span class="in">```{r eval=FALSE, include=FALSE}</span></span>
+<span id="cb8-97"><a href="#cb8-97"></a><span class="in">gt::gtsave(as_gt(tbl), filename = "result.png")</span></span>
+<span id="cb8-98"><a href="#cb8-98"></a><span class="in">```</span></span>
+<span id="cb8-99"><a href="#cb8-99"></a></span>
+<span id="cb8-100"><a href="#cb8-100"></a><span class="in">```{r img, echo=FALSE, fig.align='center', out.width='45%'}</span></span>
+<span id="cb8-101"><a href="#cb8-101"></a><span class="in">```</span></span>
+<span id="cb8-102"><a href="#cb8-102"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">

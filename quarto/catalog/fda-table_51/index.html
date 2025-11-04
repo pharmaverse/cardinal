@@ -252,41 +252,21 @@ cookieconsent.run({
 <span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(cards)</span>
 <span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(gtsummary)</span>
 <span id="cb1-5"><a href="#cb1-5"></a></span>
-<span id="cb1-6"><a href="#cb1-6"></a>adae <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadae</span>
-<span id="cb1-7"><a href="#cb1-7"></a>adsl <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadsl</span>
+<span id="cb1-6"><a href="#cb1-6"></a>adae <span class="ot">&lt;-</span> pharmaverseadam<span class="sc">::</span>adae</span>
+<span id="cb1-7"><a href="#cb1-7"></a>adsl <span class="ot">&lt;-</span> pharmaverseadam<span class="sc">::</span>adsl</span>
 <span id="cb1-8"><a href="#cb1-8"></a></span>
 <span id="cb1-9"><a href="#cb1-9"></a>adsl <span class="ot">&lt;-</span> adsl <span class="sc">|&gt;</span></span>
 <span id="cb1-10"><a href="#cb1-10"></a>  <span class="fu">filter</span>(SAFFL <span class="sc">==</span> <span class="st">"Y"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb1-12"><a href="#cb1-12"></a>    <span class="at">AGEGR1 =</span> <span class="fu">factor</span>(</span>
-<span id="cb1-13"><a href="#cb1-13"></a>      dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
-<span id="cb1-14"><a href="#cb1-14"></a>        AGE <span class="sc">&gt;=</span> <span class="dv">17</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"&gt;=17 to &lt;65"</span>,</span>
-<span id="cb1-15"><a href="#cb1-15"></a>        AGE <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">75</span> <span class="sc">~</span> <span class="st">"65-74"</span>,</span>
-<span id="cb1-16"><a href="#cb1-16"></a>        AGE <span class="sc">&gt;=</span> <span class="dv">75</span> <span class="sc">~</span> <span class="st">"&gt;=75"</span></span>
-<span id="cb1-17"><a href="#cb1-17"></a>      ),</span>
-<span id="cb1-18"><a href="#cb1-18"></a>      <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"&gt;=17 to &lt;65"</span>, <span class="st">"65-74"</span>, <span class="st">"&gt;=75"</span>)</span>
-<span id="cb1-19"><a href="#cb1-19"></a>    )</span>
-<span id="cb1-20"><a href="#cb1-20"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb1-21"><a href="#cb1-21"></a>  <span class="fu">mutate</span>(<span class="at">any_ae =</span> <span class="st">"Any AE"</span>)</span>
-<span id="cb1-22"><a href="#cb1-22"></a></span>
-<span id="cb1-23"><a href="#cb1-23"></a>data <span class="ot">&lt;-</span> adae <span class="sc">|&gt;</span></span>
-<span id="cb1-24"><a href="#cb1-24"></a>  <span class="fu">filter</span>(</span>
-<span id="cb1-25"><a href="#cb1-25"></a>    SAFFL <span class="sc">==</span> <span class="st">"Y"</span>,</span>
-<span id="cb1-26"><a href="#cb1-26"></a>    TRTEMFL <span class="sc">==</span> <span class="st">"Y"</span></span>
-<span id="cb1-27"><a href="#cb1-27"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb1-28"><a href="#cb1-28"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb1-29"><a href="#cb1-29"></a>    <span class="at">AGEGR1 =</span> <span class="fu">factor</span>(</span>
-<span id="cb1-30"><a href="#cb1-30"></a>      dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
-<span id="cb1-31"><a href="#cb1-31"></a>        AGE <span class="sc">&gt;=</span> <span class="dv">17</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"&gt;=17 to &lt;65"</span>,</span>
-<span id="cb1-32"><a href="#cb1-32"></a>        AGE <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">75</span> <span class="sc">~</span> <span class="st">"65-74"</span>,</span>
-<span id="cb1-33"><a href="#cb1-33"></a>        AGE <span class="sc">&gt;=</span> <span class="dv">75</span> <span class="sc">~</span> <span class="st">"&gt;=75"</span></span>
-<span id="cb1-34"><a href="#cb1-34"></a>      ),</span>
-<span id="cb1-35"><a href="#cb1-35"></a>      <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"&gt;=17 to &lt;65"</span>, <span class="st">"65-74"</span>, <span class="st">"&gt;=75"</span>)</span>
-<span id="cb1-36"><a href="#cb1-36"></a>    )</span>
-<span id="cb1-37"><a href="#cb1-37"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb1-38"><a href="#cb1-38"></a>  <span class="fu">mutate</span>(<span class="at">any_ae =</span> <span class="st">"Any AE"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb1-39"><a href="#cb1-39"></a>  <span class="co"># subset to one AE per subject</span></span>
-<span id="cb1-40"><a href="#cb1-40"></a>  dplyr<span class="sc">::</span><span class="fu">slice_tail</span>(<span class="at">n =</span> <span class="dv">1</span>L, <span class="at">by =</span> <span class="fu">all_of</span>(<span class="fu">c</span>(<span class="st">"USUBJID"</span>, <span class="st">"ARM"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-11"><a href="#cb1-11"></a>  <span class="fu">mutate</span>(<span class="at">any_ae =</span> <span class="st">"Any AE"</span>)</span>
+<span id="cb1-12"><a href="#cb1-12"></a></span>
+<span id="cb1-13"><a href="#cb1-13"></a>data <span class="ot">&lt;-</span> adae <span class="sc">|&gt;</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a>  <span class="fu">filter</span>(</span>
+<span id="cb1-15"><a href="#cb1-15"></a>    SAFFL <span class="sc">==</span> <span class="st">"Y"</span>,</span>
+<span id="cb1-16"><a href="#cb1-16"></a>    TRTEMFL <span class="sc">==</span> <span class="st">"Y"</span></span>
+<span id="cb1-17"><a href="#cb1-17"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb1-18"><a href="#cb1-18"></a>  <span class="fu">mutate</span>(<span class="at">any_ae =</span> <span class="st">"Any AE"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-19"><a href="#cb1-19"></a>  <span class="co"># subset to one AE per subject</span></span>
+<span id="cb1-20"><a href="#cb1-20"></a>  dplyr<span class="sc">::</span><span class="fu">slice_tail</span>(<span class="at">n =</span> <span class="dv">1</span>L, <span class="at">by =</span> <span class="fu">all_of</span>(<span class="fu">c</span>(<span class="st">"USUBJID"</span>, <span class="st">"ARM"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </div>
@@ -357,23 +337,23 @@ cookieconsent.run({
 <span id="cb2-63"><a href="#cb2-63"></a></span>
 <span id="cb2-64"><a href="#cb2-64"></a>tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<div id="rsfnoevrco" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#rsfnoevrco table {
+<div id="qigrkcfuhw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#qigrkcfuhw table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#rsfnoevrco thead, #rsfnoevrco tbody, #rsfnoevrco tfoot, #rsfnoevrco tr, #rsfnoevrco td, #rsfnoevrco th {
+#qigrkcfuhw thead, #qigrkcfuhw tbody, #qigrkcfuhw tfoot, #qigrkcfuhw tr, #qigrkcfuhw td, #qigrkcfuhw th {
   border-style: none;
 }
 
-#rsfnoevrco p {
+#qigrkcfuhw p {
   margin: 0;
   padding: 0;
 }
 
-#rsfnoevrco .gt_table {
+#qigrkcfuhw .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -399,12 +379,12 @@ cookieconsent.run({
   border-left-color: #D3D3D3;
 }
 
-#rsfnoevrco .gt_caption {
+#qigrkcfuhw .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#rsfnoevrco .gt_title {
+#qigrkcfuhw .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -416,7 +396,7 @@ cookieconsent.run({
   border-bottom-width: 0;
 }
 
-#rsfnoevrco .gt_subtitle {
+#qigrkcfuhw .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -428,7 +408,7 @@ cookieconsent.run({
   border-top-width: 0;
 }
 
-#rsfnoevrco .gt_heading {
+#qigrkcfuhw .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -440,13 +420,13 @@ cookieconsent.run({
   border-right-color: #D3D3D3;
 }
 
-#rsfnoevrco .gt_bottom_border {
+#qigrkcfuhw .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#rsfnoevrco .gt_col_headings {
+#qigrkcfuhw .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -461,7 +441,7 @@ cookieconsent.run({
   border-right-color: #D3D3D3;
 }
 
-#rsfnoevrco .gt_col_heading {
+#qigrkcfuhw .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -481,7 +461,7 @@ cookieconsent.run({
   overflow-x: hidden;
 }
 
-#rsfnoevrco .gt_column_spanner_outer {
+#qigrkcfuhw .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -493,15 +473,15 @@ cookieconsent.run({
   padding-right: 4px;
 }
 
-#rsfnoevrco .gt_column_spanner_outer:first-child {
+#qigrkcfuhw .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#rsfnoevrco .gt_column_spanner_outer:last-child {
+#qigrkcfuhw .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#rsfnoevrco .gt_column_spanner {
+#qigrkcfuhw .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -513,11 +493,11 @@ cookieconsent.run({
   width: 100%;
 }
 
-#rsfnoevrco .gt_spanner_row {
+#qigrkcfuhw .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#rsfnoevrco .gt_group_heading {
+#qigrkcfuhw .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -543,7 +523,7 @@ cookieconsent.run({
   text-align: left;
 }
 
-#rsfnoevrco .gt_empty_group_heading {
+#qigrkcfuhw .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -558,15 +538,15 @@ cookieconsent.run({
   vertical-align: middle;
 }
 
-#rsfnoevrco .gt_from_md > :first-child {
+#qigrkcfuhw .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#rsfnoevrco .gt_from_md > :last-child {
+#qigrkcfuhw .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#rsfnoevrco .gt_row {
+#qigrkcfuhw .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -585,7 +565,7 @@ cookieconsent.run({
   overflow-x: hidden;
 }
 
-#rsfnoevrco .gt_stub {
+#qigrkcfuhw .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -598,7 +578,7 @@ cookieconsent.run({
   padding-right: 5px;
 }
 
-#rsfnoevrco .gt_stub_row_group {
+#qigrkcfuhw .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -612,15 +592,15 @@ cookieconsent.run({
   vertical-align: top;
 }
 
-#rsfnoevrco .gt_row_group_first td {
+#qigrkcfuhw .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#rsfnoevrco .gt_row_group_first th {
+#qigrkcfuhw .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#rsfnoevrco .gt_summary_row {
+#qigrkcfuhw .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -630,16 +610,16 @@ cookieconsent.run({
   padding-right: 5px;
 }
 
-#rsfnoevrco .gt_first_summary_row {
+#qigrkcfuhw .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#rsfnoevrco .gt_first_summary_row.thick {
+#qigrkcfuhw .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#rsfnoevrco .gt_last_summary_row {
+#qigrkcfuhw .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -649,7 +629,7 @@ cookieconsent.run({
   border-bottom-color: #D3D3D3;
 }
 
-#rsfnoevrco .gt_grand_summary_row {
+#qigrkcfuhw .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -659,7 +639,7 @@ cookieconsent.run({
   padding-right: 5px;
 }
 
-#rsfnoevrco .gt_first_grand_summary_row {
+#qigrkcfuhw .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -669,7 +649,7 @@ cookieconsent.run({
   border-top-color: #D3D3D3;
 }
 
-#rsfnoevrco .gt_last_grand_summary_row_top {
+#qigrkcfuhw .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -679,11 +659,11 @@ cookieconsent.run({
   border-bottom-color: #D3D3D3;
 }
 
-#rsfnoevrco .gt_striped {
+#qigrkcfuhw .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#rsfnoevrco .gt_table_body {
+#qigrkcfuhw .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -692,7 +672,7 @@ cookieconsent.run({
   border-bottom-color: #D3D3D3;
 }
 
-#rsfnoevrco .gt_footnotes {
+#qigrkcfuhw .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -706,7 +686,7 @@ cookieconsent.run({
   border-right-color: #D3D3D3;
 }
 
-#rsfnoevrco .gt_footnote {
+#qigrkcfuhw .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -715,7 +695,7 @@ cookieconsent.run({
   padding-right: 5px;
 }
 
-#rsfnoevrco .gt_sourcenotes {
+#qigrkcfuhw .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -729,7 +709,7 @@ cookieconsent.run({
   border-right-color: #D3D3D3;
 }
 
-#rsfnoevrco .gt_sourcenote {
+#qigrkcfuhw .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -737,72 +717,72 @@ cookieconsent.run({
   padding-right: 5px;
 }
 
-#rsfnoevrco .gt_left {
+#qigrkcfuhw .gt_left {
   text-align: left;
 }
 
-#rsfnoevrco .gt_center {
+#qigrkcfuhw .gt_center {
   text-align: center;
 }
 
-#rsfnoevrco .gt_right {
+#qigrkcfuhw .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#rsfnoevrco .gt_font_normal {
+#qigrkcfuhw .gt_font_normal {
   font-weight: normal;
 }
 
-#rsfnoevrco .gt_font_bold {
+#qigrkcfuhw .gt_font_bold {
   font-weight: bold;
 }
 
-#rsfnoevrco .gt_font_italic {
+#qigrkcfuhw .gt_font_italic {
   font-style: italic;
 }
 
-#rsfnoevrco .gt_super {
+#qigrkcfuhw .gt_super {
   font-size: 65%;
 }
 
-#rsfnoevrco .gt_footnote_marks {
+#qigrkcfuhw .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#rsfnoevrco .gt_asterisk {
+#qigrkcfuhw .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#rsfnoevrco .gt_indent_1 {
+#qigrkcfuhw .gt_indent_1 {
   text-indent: 5px;
 }
 
-#rsfnoevrco .gt_indent_2 {
+#qigrkcfuhw .gt_indent_2 {
   text-indent: 10px;
 }
 
-#rsfnoevrco .gt_indent_3 {
+#qigrkcfuhw .gt_indent_3 {
   text-indent: 15px;
 }
 
-#rsfnoevrco .gt_indent_4 {
+#qigrkcfuhw .gt_indent_4 {
   text-indent: 20px;
 }
 
-#rsfnoevrco .gt_indent_5 {
+#qigrkcfuhw .gt_indent_5 {
   text-indent: 25px;
 }
 
-#rsfnoevrco .katex-display {
+#qigrkcfuhw .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#rsfnoevrco div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#qigrkcfuhw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -816,24 +796,24 @@ cookieconsent.run({
 <thead><tr class="header gt_col_headings">
 <th id="label" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Characteristic</strong></th>
 <th id="stat_1" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">
-<strong>A: Drug X</strong><br>
-N = 134<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
+<strong>Placebo</strong><br>
+N = 86<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
 </th>
 <th id="stat_2" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">
-<strong>B: Placebo</strong><br>
-N = 134<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
+<strong>Xanomeline High Dose</strong><br>
+N = 84<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
 </th>
 <th id="stat_3" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">
-<strong>C: Combination</strong><br>
-N = 132<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
+<strong>Xanomeline Low Dose</strong><br>
+N = 84<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
 </th>
 </tr></thead>
 <tbody class="gt_table_body">
 <tr class="odd">
 <td class="gt_row gt_left" headers="label">Any AE</td>
-<td class="gt_row gt_center" headers="stat_1">122 (91.0%)</td>
-<td class="gt_row gt_center" headers="stat_2">123 (91.8%)</td>
-<td class="gt_row gt_center" headers="stat_3">120 (90.9%)</td>
+<td class="gt_row gt_center" headers="stat_1">65 (75.6%)</td>
+<td class="gt_row gt_center" headers="stat_2">75 (89.3%)</td>
+<td class="gt_row gt_center" headers="stat_3">77 (91.7%)</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="label">Sex</td>
@@ -843,15 +823,15 @@ N = 132<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ital
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;F</td>
-<td class="gt_row gt_center" headers="stat_1">72 (91.1%)</td>
-<td class="gt_row gt_center" headers="stat_2">77 (93.9%)</td>
-<td class="gt_row gt_center" headers="stat_3">65 (92.9%)</td>
+<td class="gt_row gt_center" headers="stat_1">40 (75.5%)</td>
+<td class="gt_row gt_center" headers="stat_2">36 (90.0%)</td>
+<td class="gt_row gt_center" headers="stat_3">44 (88.0%)</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;M</td>
-<td class="gt_row gt_center" headers="stat_1">50 (90.9%)</td>
-<td class="gt_row gt_center" headers="stat_2">46 (88.5%)</td>
-<td class="gt_row gt_center" headers="stat_3">55 (88.7%)</td>
+<td class="gt_row gt_center" headers="stat_1">25 (75.8%)</td>
+<td class="gt_row gt_center" headers="stat_2">39 (88.6%)</td>
+<td class="gt_row gt_center" headers="stat_3">33 (97.1%)</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="label">Age Group, years</td>
@@ -860,76 +840,40 @@ N = 132<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ital
 <td class="gt_row gt_center" headers="stat_3"><br></td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;&gt;=17 to &lt;65</td>
-<td class="gt_row gt_center" headers="stat_1">122 (91.0%)</td>
-<td class="gt_row gt_center" headers="stat_2">123 (91.8%)</td>
-<td class="gt_row gt_center" headers="stat_3">119 (90.8%)</td>
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;&gt;64</td>
+<td class="gt_row gt_center" headers="stat_1">55 (76.4%)</td>
+<td class="gt_row gt_center" headers="stat_2">65 (89.0%)</td>
+<td class="gt_row gt_center" headers="stat_3">69 (90.8%)</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;65-74</td>
-<td class="gt_row gt_center" headers="stat_1">0 (0.0%)</td>
-<td class="gt_row gt_center" headers="stat_2">0 (0.0%)</td>
-<td class="gt_row gt_center" headers="stat_3">1 (100.0%)</td>
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;18-64</td>
+<td class="gt_row gt_center" headers="stat_1">10 (71.4%)</td>
+<td class="gt_row gt_center" headers="stat_2">10 (90.9%)</td>
+<td class="gt_row gt_center" headers="stat_3">8 (100.0%)</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;&gt;=75</td>
-<td class="gt_row gt_center" headers="stat_1">0 (0.0%)</td>
-<td class="gt_row gt_center" headers="stat_2">0 (0.0%)</td>
-<td class="gt_row gt_center" headers="stat_3">0 (0.0%)</td>
-</tr>
-<tr class="odd">
 <td class="gt_row gt_left" headers="label">Race</td>
 <td class="gt_row gt_center" headers="stat_1"><br></td>
 <td class="gt_row gt_center" headers="stat_2"><br></td>
 <td class="gt_row gt_center" headers="stat_3"><br></td>
 </tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;ASIAN</td>
-<td class="gt_row gt_center" headers="stat_1">61 (89.7%)</td>
-<td class="gt_row gt_center" headers="stat_2">62 (92.5%)</td>
-<td class="gt_row gt_center" headers="stat_3">63 (86.3%)</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;BLACK OR AFRICAN AMERICAN</td>
-<td class="gt_row gt_center" headers="stat_1">28 (90.3%)</td>
-<td class="gt_row gt_center" headers="stat_2">24 (85.7%)</td>
-<td class="gt_row gt_center" headers="stat_3">31 (96.9%)</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;WHITE</td>
-<td class="gt_row gt_center" headers="stat_1">26 (96.3%)</td>
-<td class="gt_row gt_center" headers="stat_2">25 (96.2%)</td>
-<td class="gt_row gt_center" headers="stat_3">21 (100.0%)</td>
-</tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;AMERICAN INDIAN OR ALASKA NATIVE</td>
-<td class="gt_row gt_center" headers="stat_1">7 (87.5%)</td>
-<td class="gt_row gt_center" headers="stat_2">10 (90.9%)</td>
-<td class="gt_row gt_center" headers="stat_3">5 (83.3%)</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;MULTIPLE</td>
-<td class="gt_row gt_center" headers="stat_1">0 (0.0%)</td>
-<td class="gt_row gt_center" headers="stat_2">1 (100.0%)</td>
-<td class="gt_row gt_center" headers="stat_3">0 (0.0%)</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER</td>
 <td class="gt_row gt_center" headers="stat_1">0 (0.0%)</td>
 <td class="gt_row gt_center" headers="stat_2">1 (100.0%)</td>
 <td class="gt_row gt_center" headers="stat_3">0 (0.0%)</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;OTHER</td>
-<td class="gt_row gt_center" headers="stat_1">0 (0.0%)</td>
-<td class="gt_row gt_center" headers="stat_2">0 (0.0%)</td>
-<td class="gt_row gt_center" headers="stat_3">0 (0.0%)</td>
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;BLACK OR AFRICAN AMERICAN</td>
+<td class="gt_row gt_center" headers="stat_1">6 (75.0%)</td>
+<td class="gt_row gt_center" headers="stat_2">7 (77.8%)</td>
+<td class="gt_row gt_center" headers="stat_3">4 (66.7%)</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;UNKNOWN</td>
-<td class="gt_row gt_center" headers="stat_1">0 (0.0%)</td>
-<td class="gt_row gt_center" headers="stat_2">0 (0.0%)</td>
-<td class="gt_row gt_center" headers="stat_3">0 (0.0%)</td>
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;WHITE</td>
+<td class="gt_row gt_center" headers="stat_1">59 (75.6%)</td>
+<td class="gt_row gt_center" headers="stat_2">67 (90.5%)</td>
+<td class="gt_row gt_center" headers="stat_3">73 (93.6%)</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="label">Ethnicity</td>
@@ -939,30 +883,18 @@ N = 132<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ital
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;HISPANIC OR LATINO</td>
-<td class="gt_row gt_center" headers="stat_1">13 (86.7%)</td>
-<td class="gt_row gt_center" headers="stat_2">17 (94.4%)</td>
-<td class="gt_row gt_center" headers="stat_3">13 (86.7%)</td>
+<td class="gt_row gt_center" headers="stat_1">3 (100.0%)</td>
+<td class="gt_row gt_center" headers="stat_2">3 (100.0%)</td>
+<td class="gt_row gt_center" headers="stat_3">6 (100.0%)</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;NOT HISPANIC OR LATINO</td>
-<td class="gt_row gt_center" headers="stat_1">95 (91.3%)</td>
-<td class="gt_row gt_center" headers="stat_2">94 (91.3%)</td>
-<td class="gt_row gt_center" headers="stat_3">93 (92.1%)</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;NOT REPORTED</td>
-<td class="gt_row gt_center" headers="stat_1">6 (100.0%)</td>
-<td class="gt_row gt_center" headers="stat_2">10 (100.0%)</td>
-<td class="gt_row gt_center" headers="stat_3">10 (90.9%)</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;UNKNOWN</td>
-<td class="gt_row gt_center" headers="stat_1">8 (88.9%)</td>
-<td class="gt_row gt_center" headers="stat_2">2 (66.7%)</td>
-<td class="gt_row gt_center" headers="stat_3">4 (80.0%)</td>
+<td class="gt_row gt_center" headers="stat_1">62 (74.7%)</td>
+<td class="gt_row gt_center" headers="stat_2">72 (88.9%)</td>
+<td class="gt_row gt_center" headers="stat_3">71 (91.0%)</td>
 </tr>
 </tbody>
-<tfoot class="gt_footnotes"><tr class="odd">
+<tfoot><tr class="odd gt_footnotes">
 <td colspan="4" class="gt_footnote">
 <span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> n/N_s (%)</td>
 </tr></tfoot>
@@ -991,53 +923,53 @@ N = 132<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ital
 <pre><code>$tbl_ard_summary</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>{cards} data frame: 175 x 12</code></pre>
+<pre><code>{cards} data frame: 103 x 12</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   group1 group1_level variable variable_level   context stat_name stat_label    stat fmt_fun warning error gts_column
 1    &lt;NA&gt;                any_ae                attribut…     label  Variable…  any_ae    &lt;fn&gt;                     &lt;NA&gt;
 2    &lt;NA&gt;                any_ae                attribut…     class  Variable… logical    NULL                     &lt;NA&gt;
-3     ARM    A: Drug X   any_ae         Any AE categori…         n          n     122       0                   stat_1
-4     ARM    A: Drug X      SEX              F categori…         n          n      72       0                   stat_1
-5     ARM    A: Drug X      SEX              M categori…         n          n      50       0                   stat_1
-6     ARM    A: Drug X   AGEGR1      &gt;=17 to … categori…         n          n     122       0                   stat_1
-7     ARM    A: Drug X   AGEGR1          65-74 categori…         n          n       0       0                   stat_1
-8     ARM    A: Drug X   AGEGR1           &gt;=75 categori…         n          n       0       0                   stat_1
-9     ARM    A: Drug X     RACE          ASIAN categori…         n          n      61       0                   stat_1
-10    ARM    A: Drug X     RACE      BLACK OR… categori…         n          n      28       0                   stat_1
-11    ARM    A: Drug X     RACE          WHITE categori…         n          n      26       0                   stat_1
-12    ARM    A: Drug X     RACE      AMERICAN… categori…         n          n       7       0                   stat_1
-13    ARM    A: Drug X     RACE       MULTIPLE categori…         n          n       0       0                   stat_1
-14    ARM    A: Drug X     RACE      NATIVE H… categori…         n          n       0       0                   stat_1
-15    ARM    A: Drug X     RACE          OTHER categori…         n          n       0       0                   stat_1
-16    ARM    A: Drug X     RACE        UNKNOWN categori…         n          n       0       0                   stat_1
-17    ARM    A: Drug X   ETHNIC      HISPANIC… categori…         n          n      13       0                   stat_1
-18    ARM    A: Drug X   ETHNIC      NOT HISP… categori…         n          n      95       0                   stat_1
-19    ARM    A: Drug X   ETHNIC      NOT REPO… categori…         n          n       6       0                   stat_1
-20    ARM    A: Drug X   ETHNIC        UNKNOWN categori…         n          n       8       0                   stat_1
-21    ARM    A: Drug X   any_ae         Any AE categori…       N_s        N_s     134       0                   stat_1
-22    ARM    A: Drug X      SEX              F categori…       N_s        N_s      79       0                   stat_1
-23    ARM    A: Drug X      SEX              M categori…       N_s        N_s      55       0                   stat_1
-24    ARM    A: Drug X   AGEGR1      &gt;=17 to … categori…       N_s        N_s     134       0                   stat_1
-25    ARM    A: Drug X   AGEGR1          65-74 categori…       N_s        N_s       0       0                   stat_1
-26    ARM    A: Drug X   AGEGR1           &gt;=75 categori…       N_s        N_s       0       0                   stat_1
-27    ARM    A: Drug X     RACE          ASIAN categori…       N_s        N_s      68       0                   stat_1
-28    ARM    A: Drug X     RACE      BLACK OR… categori…       N_s        N_s      31       0                   stat_1
-29    ARM    A: Drug X     RACE          WHITE categori…       N_s        N_s      27       0                   stat_1
-30    ARM    A: Drug X     RACE      AMERICAN… categori…       N_s        N_s       8       0                   stat_1
-31    ARM    A: Drug X     RACE       MULTIPLE categori…       N_s        N_s       0       0                   stat_1
-32    ARM    A: Drug X     RACE      NATIVE H… categori…       N_s        N_s       0       0                   stat_1
-33    ARM    A: Drug X     RACE          OTHER categori…       N_s        N_s       0       0                   stat_1
-34    ARM    A: Drug X     RACE        UNKNOWN categori…       N_s        N_s       0       0                   stat_1
-35    ARM    A: Drug X   ETHNIC      HISPANIC… categori…       N_s        N_s      15       0                   stat_1
-36    ARM    A: Drug X   ETHNIC      NOT HISP… categori…       N_s        N_s     104       0                   stat_1
-37    ARM    A: Drug X   ETHNIC      NOT REPO… categori…       N_s        N_s       6       0                   stat_1
-38    ARM    A: Drug X   ETHNIC        UNKNOWN categori…       N_s        N_s       9       0                   stat_1
-39    ARM    A: Drug X   any_ae         Any AE categori…         p          %    0.91    &lt;fn&gt;                   stat_1
-40    ARM    A: Drug X      SEX              F categori…         p          %   0.911    &lt;fn&gt;                   stat_1</code></pre>
+3     ARM      Placebo   any_ae         Any AE categori…         n          n      65       0                   stat_1
+4     ARM      Placebo      SEX              F categori…         n          n      40       0                   stat_1
+5     ARM      Placebo      SEX              M categori…         n          n      25       0                   stat_1
+6     ARM      Placebo   AGEGR1            &gt;64 categori…         n          n      55       0                   stat_1
+7     ARM      Placebo   AGEGR1          18-64 categori…         n          n      10       0                   stat_1
+8     ARM      Placebo     RACE      AMERICAN… categori…         n          n       0       0                   stat_1
+9     ARM      Placebo     RACE      BLACK OR… categori…         n          n       6       0                   stat_1
+10    ARM      Placebo     RACE          WHITE categori…         n          n      59       0                   stat_1
+11    ARM      Placebo   ETHNIC      HISPANIC… categori…         n          n       3       0                   stat_1
+12    ARM      Placebo   ETHNIC      NOT HISP… categori…         n          n      62       0                   stat_1
+13    ARM      Placebo   any_ae         Any AE categori…       N_s        N_s      86       0                   stat_1
+14    ARM      Placebo      SEX              F categori…       N_s        N_s      53       0                   stat_1
+15    ARM      Placebo      SEX              M categori…       N_s        N_s      33       0                   stat_1
+16    ARM      Placebo   AGEGR1            &gt;64 categori…       N_s        N_s      72       0                   stat_1
+17    ARM      Placebo   AGEGR1          18-64 categori…       N_s        N_s      14       0                   stat_1
+18    ARM      Placebo     RACE      AMERICAN… categori…       N_s        N_s       0       0                   stat_1
+19    ARM      Placebo     RACE      BLACK OR… categori…       N_s        N_s       8       0                   stat_1
+20    ARM      Placebo     RACE          WHITE categori…       N_s        N_s      78       0                   stat_1
+21    ARM      Placebo   ETHNIC      HISPANIC… categori…       N_s        N_s       3       0                   stat_1
+22    ARM      Placebo   ETHNIC      NOT HISP… categori…       N_s        N_s      83       0                   stat_1
+23    ARM      Placebo   any_ae         Any AE categori…         p          %   0.756    &lt;fn&gt;                   stat_1
+24    ARM      Placebo      SEX              F categori…         p          %   0.755    &lt;fn&gt;                   stat_1
+25    ARM      Placebo      SEX              M categori…         p          %   0.758    &lt;fn&gt;                   stat_1
+26    ARM      Placebo   AGEGR1            &gt;64 categori…         p          %   0.764    &lt;fn&gt;                   stat_1
+27    ARM      Placebo   AGEGR1          18-64 categori…         p          %   0.714    &lt;fn&gt;                   stat_1
+28    ARM      Placebo     RACE      AMERICAN… categori…         p          %       0    &lt;fn&gt;                   stat_1
+29    ARM      Placebo     RACE      BLACK OR… categori…         p          %    0.75    &lt;fn&gt;                   stat_1
+30    ARM      Placebo     RACE          WHITE categori…         p          %   0.756    &lt;fn&gt;                   stat_1
+31    ARM      Placebo   ETHNIC      HISPANIC… categori…         p          %       1    &lt;fn&gt;                   stat_1
+32    ARM      Placebo   ETHNIC      NOT HISP… categori…         p          %   0.747    &lt;fn&gt;                   stat_1
+33    ARM    Xanomeli…   any_ae         Any AE categori…         n          n      75       0                   stat_2
+34    ARM    Xanomeli…      SEX              F categori…         n          n      36       0                   stat_2
+35    ARM    Xanomeli…      SEX              M categori…         n          n      39       0                   stat_2
+36    ARM    Xanomeli…   AGEGR1            &gt;64 categori…         n          n      65       0                   stat_2
+37    ARM    Xanomeli…   AGEGR1          18-64 categori…         n          n      10       0                   stat_2
+38    ARM    Xanomeli…     RACE      AMERICAN… categori…         n          n       1       0                   stat_2
+39    ARM    Xanomeli…     RACE      BLACK OR… categori…         n          n       7       0                   stat_2
+40    ARM    Xanomeli…     RACE          WHITE categori…         n          n      67       0                   stat_2</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>ℹ 135 more rows</code></pre>
+<pre><code>ℹ 63 more rows</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>ℹ Use `print(n = ...)` to see more rows</code></pre>
@@ -1676,135 +1608,115 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb9-19"><a href="#cb9-19"></a><span class="in">library(cards)</span></span>
 <span id="cb9-20"><a href="#cb9-20"></a><span class="in">library(gtsummary)</span></span>
 <span id="cb9-21"><a href="#cb9-21"></a></span>
-<span id="cb9-22"><a href="#cb9-22"></a><span class="in">adae &lt;- random.cdisc.data::cadae</span></span>
-<span id="cb9-23"><a href="#cb9-23"></a><span class="in">adsl &lt;- random.cdisc.data::cadsl</span></span>
+<span id="cb9-22"><a href="#cb9-22"></a><span class="in">adae &lt;- pharmaverseadam::adae</span></span>
+<span id="cb9-23"><a href="#cb9-23"></a><span class="in">adsl &lt;- pharmaverseadam::adsl</span></span>
 <span id="cb9-24"><a href="#cb9-24"></a></span>
 <span id="cb9-25"><a href="#cb9-25"></a><span class="in">adsl &lt;- adsl |&gt;</span></span>
 <span id="cb9-26"><a href="#cb9-26"></a><span class="in">  filter(SAFFL == "Y") |&gt;</span></span>
-<span id="cb9-27"><a href="#cb9-27"></a><span class="in">  mutate(</span></span>
-<span id="cb9-28"><a href="#cb9-28"></a><span class="in">    AGEGR1 = factor(</span></span>
-<span id="cb9-29"><a href="#cb9-29"></a><span class="in">      dplyr::case_when(</span></span>
-<span id="cb9-30"><a href="#cb9-30"></a><span class="in">        AGE &gt;= 17 &amp; AGE &lt; 65 ~ "&gt;=17 to &lt;65",</span></span>
-<span id="cb9-31"><a href="#cb9-31"></a><span class="in">        AGE &gt;= 65 &amp; AGE &lt; 75 ~ "65-74",</span></span>
-<span id="cb9-32"><a href="#cb9-32"></a><span class="in">        AGE &gt;= 75 ~ "&gt;=75"</span></span>
-<span id="cb9-33"><a href="#cb9-33"></a><span class="in">      ),</span></span>
-<span id="cb9-34"><a href="#cb9-34"></a><span class="in">      levels = c("&gt;=17 to &lt;65", "65-74", "&gt;=75")</span></span>
-<span id="cb9-35"><a href="#cb9-35"></a><span class="in">    )</span></span>
-<span id="cb9-36"><a href="#cb9-36"></a><span class="in">  ) |&gt;</span></span>
-<span id="cb9-37"><a href="#cb9-37"></a><span class="in">  mutate(any_ae = "Any AE")</span></span>
+<span id="cb9-27"><a href="#cb9-27"></a><span class="in">  mutate(any_ae = "Any AE")</span></span>
+<span id="cb9-28"><a href="#cb9-28"></a></span>
+<span id="cb9-29"><a href="#cb9-29"></a><span class="in">data &lt;- adae |&gt;</span></span>
+<span id="cb9-30"><a href="#cb9-30"></a><span class="in">  filter(</span></span>
+<span id="cb9-31"><a href="#cb9-31"></a><span class="in">    SAFFL == "Y",</span></span>
+<span id="cb9-32"><a href="#cb9-32"></a><span class="in">    TRTEMFL == "Y"</span></span>
+<span id="cb9-33"><a href="#cb9-33"></a><span class="in">  ) |&gt;</span></span>
+<span id="cb9-34"><a href="#cb9-34"></a><span class="in">  mutate(any_ae = "Any AE") |&gt;</span></span>
+<span id="cb9-35"><a href="#cb9-35"></a><span class="in">  # subset to one AE per subject</span></span>
+<span id="cb9-36"><a href="#cb9-36"></a><span class="in">  dplyr::slice_tail(n = 1L, by = all_of(c("USUBJID", "ARM")))</span></span>
+<span id="cb9-37"><a href="#cb9-37"></a><span class="in">```</span></span>
 <span id="cb9-38"><a href="#cb9-38"></a></span>
-<span id="cb9-39"><a href="#cb9-39"></a><span class="in">data &lt;- adae |&gt;</span></span>
-<span id="cb9-40"><a href="#cb9-40"></a><span class="in">  filter(</span></span>
-<span id="cb9-41"><a href="#cb9-41"></a><span class="in">    SAFFL == "Y",</span></span>
-<span id="cb9-42"><a href="#cb9-42"></a><span class="in">    TRTEMFL == "Y"</span></span>
-<span id="cb9-43"><a href="#cb9-43"></a><span class="in">  ) |&gt;</span></span>
-<span id="cb9-44"><a href="#cb9-44"></a><span class="in">  mutate(</span></span>
-<span id="cb9-45"><a href="#cb9-45"></a><span class="in">    AGEGR1 = factor(</span></span>
-<span id="cb9-46"><a href="#cb9-46"></a><span class="in">      dplyr::case_when(</span></span>
-<span id="cb9-47"><a href="#cb9-47"></a><span class="in">        AGE &gt;= 17 &amp; AGE &lt; 65 ~ "&gt;=17 to &lt;65",</span></span>
-<span id="cb9-48"><a href="#cb9-48"></a><span class="in">        AGE &gt;= 65 &amp; AGE &lt; 75 ~ "65-74",</span></span>
-<span id="cb9-49"><a href="#cb9-49"></a><span class="in">        AGE &gt;= 75 ~ "&gt;=75"</span></span>
-<span id="cb9-50"><a href="#cb9-50"></a><span class="in">      ),</span></span>
-<span id="cb9-51"><a href="#cb9-51"></a><span class="in">      levels = c("&gt;=17 to &lt;65", "65-74", "&gt;=75")</span></span>
-<span id="cb9-52"><a href="#cb9-52"></a><span class="in">    )</span></span>
-<span id="cb9-53"><a href="#cb9-53"></a><span class="in">  ) |&gt;</span></span>
-<span id="cb9-54"><a href="#cb9-54"></a><span class="in">  mutate(any_ae = "Any AE") |&gt;</span></span>
-<span id="cb9-55"><a href="#cb9-55"></a><span class="in">  # subset to one AE per subject</span></span>
-<span id="cb9-56"><a href="#cb9-56"></a><span class="in">  dplyr::slice_tail(n = 1L, by = all_of(c("USUBJID", "ARM")))</span></span>
-<span id="cb9-57"><a href="#cb9-57"></a><span class="in">```</span></span>
-<span id="cb9-58"><a href="#cb9-58"></a></span>
-<span id="cb9-59"><a href="#cb9-59"></a><span class="fu">## Build Table</span></span>
-<span id="cb9-60"><a href="#cb9-60"></a></span>
-<span id="cb9-61"><a href="#cb9-61"></a><span class="in">```{r tbl, message=FALSE, warning=FALSE}</span></span>
-<span id="cb9-62"><a href="#cb9-62"></a><span class="in"># generate ARD for `n` statistic</span></span>
-<span id="cb9-63"><a href="#cb9-63"></a><span class="in">ard_summary &lt;- data |&gt;</span></span>
-<span id="cb9-64"><a href="#cb9-64"></a><span class="in">  ard_categorical(</span></span>
-<span id="cb9-65"><a href="#cb9-65"></a><span class="in">    variables = c(any_ae, SEX, AGEGR1, RACE, ETHNIC),</span></span>
-<span id="cb9-66"><a href="#cb9-66"></a><span class="in">    by = ARM,</span></span>
-<span id="cb9-67"><a href="#cb9-67"></a><span class="in">    statistic = ~"n"</span></span>
-<span id="cb9-68"><a href="#cb9-68"></a><span class="in">  )</span></span>
-<span id="cb9-69"><a href="#cb9-69"></a></span>
-<span id="cb9-70"><a href="#cb9-70"></a><span class="in"># generate ARD for `N_s` statistic</span></span>
-<span id="cb9-71"><a href="#cb9-71"></a><span class="in">ard_Ns &lt;- adsl |&gt;</span></span>
-<span id="cb9-72"><a href="#cb9-72"></a><span class="in">  ard_categorical(</span></span>
-<span id="cb9-73"><a href="#cb9-73"></a><span class="in">    variables = c(any_ae, SEX, AGEGR1, RACE, ETHNIC),</span></span>
-<span id="cb9-74"><a href="#cb9-74"></a><span class="in">    by = ARM,</span></span>
-<span id="cb9-75"><a href="#cb9-75"></a><span class="in">    statistic = ~"n",</span></span>
-<span id="cb9-76"><a href="#cb9-76"></a><span class="in">    stat_label = ~ list(n = "N_s")</span></span>
-<span id="cb9-77"><a href="#cb9-77"></a><span class="in">  ) |&gt;</span></span>
-<span id="cb9-78"><a href="#cb9-78"></a><span class="in">  mutate(stat_name = "N_s")</span></span>
-<span id="cb9-79"><a href="#cb9-79"></a></span>
-<span id="cb9-80"><a href="#cb9-80"></a><span class="in"># generate ARD for `p` statistic</span></span>
-<span id="cb9-81"><a href="#cb9-81"></a><span class="in">ard_p &lt;-</span></span>
-<span id="cb9-82"><a href="#cb9-82"></a><span class="in">  cards::bind_ard(</span></span>
-<span id="cb9-83"><a href="#cb9-83"></a><span class="in">    ard_summary,</span></span>
-<span id="cb9-84"><a href="#cb9-84"></a><span class="in">    ard_Ns</span></span>
-<span id="cb9-85"><a href="#cb9-85"></a><span class="in">  ) |&gt;</span></span>
-<span id="cb9-86"><a href="#cb9-86"></a><span class="in">  select(-stat_label) |&gt;</span></span>
-<span id="cb9-87"><a href="#cb9-87"></a><span class="in">  tidyr::pivot_wider(names_from = stat_name, values_from = stat, values_fn = unlist) |&gt;</span></span>
-<span id="cb9-88"><a href="#cb9-88"></a><span class="in">  rowwise() |&gt;</span></span>
-<span id="cb9-89"><a href="#cb9-89"></a><span class="in">  mutate(</span></span>
-<span id="cb9-90"><a href="#cb9-90"></a><span class="in">    stat_name = "p",</span></span>
-<span id="cb9-91"><a href="#cb9-91"></a><span class="in">    stat_label = "%",</span></span>
-<span id="cb9-92"><a href="#cb9-92"></a><span class="in">    stat = if_else(n &gt; 0, list(n / N_s), list(0)),</span></span>
-<span id="cb9-93"><a href="#cb9-93"></a><span class="in">    fmt_fun = list(label_round(digits = 1, scale = 100))</span></span>
-<span id="cb9-94"><a href="#cb9-94"></a><span class="in">  ) |&gt;</span></span>
-<span id="cb9-95"><a href="#cb9-95"></a><span class="in">  select(-n, -N_s)</span></span>
-<span id="cb9-96"><a href="#cb9-96"></a></span>
-<span id="cb9-97"><a href="#cb9-97"></a><span class="in"># combine all ARDs</span></span>
-<span id="cb9-98"><a href="#cb9-98"></a><span class="in">ard &lt;- cards::bind_ard(ard_summary, ard_Ns, ard_p, ard_categorical(adsl, variables = ARM, statistic = ~"n")) |&gt;</span></span>
-<span id="cb9-99"><a href="#cb9-99"></a><span class="in">  cards::tidy_ard_row_order()</span></span>
-<span id="cb9-100"><a href="#cb9-100"></a></span>
-<span id="cb9-101"><a href="#cb9-101"></a><span class="in"># generate table from ARDs</span></span>
-<span id="cb9-102"><a href="#cb9-102"></a><span class="in">tbl &lt;-</span></span>
-<span id="cb9-103"><a href="#cb9-103"></a><span class="in">  tbl_ard_summary(</span></span>
-<span id="cb9-104"><a href="#cb9-104"></a><span class="in">    ard,</span></span>
-<span id="cb9-105"><a href="#cb9-105"></a><span class="in">    by = ARM,</span></span>
-<span id="cb9-106"><a href="#cb9-106"></a><span class="in">    # set variable labels</span></span>
-<span id="cb9-107"><a href="#cb9-107"></a><span class="in">    label = list(</span></span>
-<span id="cb9-108"><a href="#cb9-108"></a><span class="in">      SEX = "Sex",</span></span>
-<span id="cb9-109"><a href="#cb9-109"></a><span class="in">      AGEGR1 = "Age Group, years",</span></span>
-<span id="cb9-110"><a href="#cb9-110"></a><span class="in">      RACE = "Race",</span></span>
-<span id="cb9-111"><a href="#cb9-111"></a><span class="in">      ETHNIC = "Ethnicity"</span></span>
-<span id="cb9-112"><a href="#cb9-112"></a><span class="in">    )</span></span>
-<span id="cb9-113"><a href="#cb9-113"></a><span class="in">  ) |&gt;</span></span>
-<span id="cb9-114"><a href="#cb9-114"></a><span class="in">  gtsummary::modify_table_body(</span></span>
-<span id="cb9-115"><a href="#cb9-115"></a><span class="in">    \(x) x |&gt; filter(!label %in% "any_ae")</span></span>
-<span id="cb9-116"><a href="#cb9-116"></a><span class="in">  ) |&gt;</span></span>
-<span id="cb9-117"><a href="#cb9-117"></a><span class="in">  gtsummary::modify_indent(columns = label, rows = variable == "any_ae", indent = 0L) |&gt;</span></span>
-<span id="cb9-118"><a href="#cb9-118"></a><span class="in">  # update statistic footnote</span></span>
-<span id="cb9-119"><a href="#cb9-119"></a><span class="in">  gtsummary::modify_footnote_header(</span></span>
-<span id="cb9-120"><a href="#cb9-120"></a><span class="in">    footnote = "n/N_s (%)",</span></span>
-<span id="cb9-121"><a href="#cb9-121"></a><span class="in">    columns = all_stat_cols()</span></span>
-<span id="cb9-122"><a href="#cb9-122"></a><span class="in">  ) |&gt;</span></span>
-<span id="cb9-123"><a href="#cb9-123"></a><span class="in">  gtsummary::modify_header(all_stat_cols() ~ "**{level}**  \n N = {n}")</span></span>
-<span id="cb9-124"><a href="#cb9-124"></a></span>
-<span id="cb9-125"><a href="#cb9-125"></a><span class="in">tbl</span></span>
-<span id="cb9-126"><a href="#cb9-126"></a><span class="in">```</span></span>
-<span id="cb9-127"><a href="#cb9-127"></a></span>
-<span id="cb9-128"><a href="#cb9-128"></a><span class="in">```{r eval=FALSE, include=FALSE}</span></span>
-<span id="cb9-129"><a href="#cb9-129"></a><span class="in"># Run chunk locally to generate image file</span></span>
-<span id="cb9-130"><a href="#cb9-130"></a><span class="in">gt::gtsave(as_gt(tbl), filename = "result.png")</span></span>
-<span id="cb9-131"><a href="#cb9-131"></a><span class="in">```</span></span>
-<span id="cb9-132"><a href="#cb9-132"></a></span>
-<span id="cb9-133"><a href="#cb9-133"></a><span class="in">```{r img, echo=FALSE, fig.align='center', out.width='65%'}</span></span>
-<span id="cb9-134"><a href="#cb9-134"></a><span class="in">```</span></span>
-<span id="cb9-135"><a href="#cb9-135"></a></span>
-<span id="cb9-136"><a href="#cb9-136"></a><span class="fu">## Build ARD</span></span>
-<span id="cb9-137"><a href="#cb9-137"></a></span>
-<span id="cb9-138"><a href="#cb9-138"></a><span class="in">```{r ard, message=FALSE, warning=FALSE, results='hide'}</span></span>
-<span id="cb9-139"><a href="#cb9-139"></a><span class="in">ard &lt;- gather_ard(tbl)</span></span>
-<span id="cb9-140"><a href="#cb9-140"></a></span>
-<span id="cb9-141"><a href="#cb9-141"></a><span class="in">ard</span></span>
-<span id="cb9-142"><a href="#cb9-142"></a><span class="in">```</span></span>
-<span id="cb9-143"><a href="#cb9-143"></a></span>
-<span id="cb9-144"><a href="#cb9-144"></a><span class="in">```{r, echo=FALSE}</span></span>
-<span id="cb9-145"><a href="#cb9-145"></a><span class="in"># Print ARD</span></span>
-<span id="cb9-146"><a href="#cb9-146"></a><span class="in">withr::local_options(width = 9999)</span></span>
-<span id="cb9-147"><a href="#cb9-147"></a><span class="in">print(ard, columns = "all", n = 40, na.print = NULL)</span></span>
-<span id="cb9-148"><a href="#cb9-148"></a><span class="in">```</span></span>
-<span id="cb9-149"><a href="#cb9-149"></a></span>
-<span id="cb9-150"><a href="#cb9-150"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-39"><a href="#cb9-39"></a><span class="fu">## Build Table</span></span>
+<span id="cb9-40"><a href="#cb9-40"></a></span>
+<span id="cb9-41"><a href="#cb9-41"></a><span class="in">```{r tbl, message=FALSE, warning=FALSE}</span></span>
+<span id="cb9-42"><a href="#cb9-42"></a><span class="in"># generate ARD for `n` statistic</span></span>
+<span id="cb9-43"><a href="#cb9-43"></a><span class="in">ard_summary &lt;- data |&gt;</span></span>
+<span id="cb9-44"><a href="#cb9-44"></a><span class="in">  ard_categorical(</span></span>
+<span id="cb9-45"><a href="#cb9-45"></a><span class="in">    variables = c(any_ae, SEX, AGEGR1, RACE, ETHNIC),</span></span>
+<span id="cb9-46"><a href="#cb9-46"></a><span class="in">    by = ARM,</span></span>
+<span id="cb9-47"><a href="#cb9-47"></a><span class="in">    statistic = ~"n"</span></span>
+<span id="cb9-48"><a href="#cb9-48"></a><span class="in">  )</span></span>
+<span id="cb9-49"><a href="#cb9-49"></a></span>
+<span id="cb9-50"><a href="#cb9-50"></a><span class="in"># generate ARD for `N_s` statistic</span></span>
+<span id="cb9-51"><a href="#cb9-51"></a><span class="in">ard_Ns &lt;- adsl |&gt;</span></span>
+<span id="cb9-52"><a href="#cb9-52"></a><span class="in">  ard_categorical(</span></span>
+<span id="cb9-53"><a href="#cb9-53"></a><span class="in">    variables = c(any_ae, SEX, AGEGR1, RACE, ETHNIC),</span></span>
+<span id="cb9-54"><a href="#cb9-54"></a><span class="in">    by = ARM,</span></span>
+<span id="cb9-55"><a href="#cb9-55"></a><span class="in">    statistic = ~"n",</span></span>
+<span id="cb9-56"><a href="#cb9-56"></a><span class="in">    stat_label = ~ list(n = "N_s")</span></span>
+<span id="cb9-57"><a href="#cb9-57"></a><span class="in">  ) |&gt;</span></span>
+<span id="cb9-58"><a href="#cb9-58"></a><span class="in">  mutate(stat_name = "N_s")</span></span>
+<span id="cb9-59"><a href="#cb9-59"></a></span>
+<span id="cb9-60"><a href="#cb9-60"></a><span class="in"># generate ARD for `p` statistic</span></span>
+<span id="cb9-61"><a href="#cb9-61"></a><span class="in">ard_p &lt;-</span></span>
+<span id="cb9-62"><a href="#cb9-62"></a><span class="in">  cards::bind_ard(</span></span>
+<span id="cb9-63"><a href="#cb9-63"></a><span class="in">    ard_summary,</span></span>
+<span id="cb9-64"><a href="#cb9-64"></a><span class="in">    ard_Ns</span></span>
+<span id="cb9-65"><a href="#cb9-65"></a><span class="in">  ) |&gt;</span></span>
+<span id="cb9-66"><a href="#cb9-66"></a><span class="in">  select(-stat_label) |&gt;</span></span>
+<span id="cb9-67"><a href="#cb9-67"></a><span class="in">  tidyr::pivot_wider(names_from = stat_name, values_from = stat, values_fn = unlist) |&gt;</span></span>
+<span id="cb9-68"><a href="#cb9-68"></a><span class="in">  rowwise() |&gt;</span></span>
+<span id="cb9-69"><a href="#cb9-69"></a><span class="in">  mutate(</span></span>
+<span id="cb9-70"><a href="#cb9-70"></a><span class="in">    stat_name = "p",</span></span>
+<span id="cb9-71"><a href="#cb9-71"></a><span class="in">    stat_label = "%",</span></span>
+<span id="cb9-72"><a href="#cb9-72"></a><span class="in">    stat = if_else(n &gt; 0, list(n / N_s), list(0)),</span></span>
+<span id="cb9-73"><a href="#cb9-73"></a><span class="in">    fmt_fun = list(label_round(digits = 1, scale = 100))</span></span>
+<span id="cb9-74"><a href="#cb9-74"></a><span class="in">  ) |&gt;</span></span>
+<span id="cb9-75"><a href="#cb9-75"></a><span class="in">  select(-n, -N_s)</span></span>
+<span id="cb9-76"><a href="#cb9-76"></a></span>
+<span id="cb9-77"><a href="#cb9-77"></a><span class="in"># combine all ARDs</span></span>
+<span id="cb9-78"><a href="#cb9-78"></a><span class="in">ard &lt;- cards::bind_ard(ard_summary, ard_Ns, ard_p, ard_categorical(adsl, variables = ARM, statistic = ~"n")) |&gt;</span></span>
+<span id="cb9-79"><a href="#cb9-79"></a><span class="in">  cards::tidy_ard_row_order()</span></span>
+<span id="cb9-80"><a href="#cb9-80"></a></span>
+<span id="cb9-81"><a href="#cb9-81"></a><span class="in"># generate table from ARDs</span></span>
+<span id="cb9-82"><a href="#cb9-82"></a><span class="in">tbl &lt;-</span></span>
+<span id="cb9-83"><a href="#cb9-83"></a><span class="in">  tbl_ard_summary(</span></span>
+<span id="cb9-84"><a href="#cb9-84"></a><span class="in">    ard,</span></span>
+<span id="cb9-85"><a href="#cb9-85"></a><span class="in">    by = ARM,</span></span>
+<span id="cb9-86"><a href="#cb9-86"></a><span class="in">    # set variable labels</span></span>
+<span id="cb9-87"><a href="#cb9-87"></a><span class="in">    label = list(</span></span>
+<span id="cb9-88"><a href="#cb9-88"></a><span class="in">      SEX = "Sex",</span></span>
+<span id="cb9-89"><a href="#cb9-89"></a><span class="in">      AGEGR1 = "Age Group, years",</span></span>
+<span id="cb9-90"><a href="#cb9-90"></a><span class="in">      RACE = "Race",</span></span>
+<span id="cb9-91"><a href="#cb9-91"></a><span class="in">      ETHNIC = "Ethnicity"</span></span>
+<span id="cb9-92"><a href="#cb9-92"></a><span class="in">    )</span></span>
+<span id="cb9-93"><a href="#cb9-93"></a><span class="in">  ) |&gt;</span></span>
+<span id="cb9-94"><a href="#cb9-94"></a><span class="in">  gtsummary::modify_table_body(</span></span>
+<span id="cb9-95"><a href="#cb9-95"></a><span class="in">    \(x) x |&gt; filter(!label %in% "any_ae")</span></span>
+<span id="cb9-96"><a href="#cb9-96"></a><span class="in">  ) |&gt;</span></span>
+<span id="cb9-97"><a href="#cb9-97"></a><span class="in">  gtsummary::modify_indent(columns = label, rows = variable == "any_ae", indent = 0L) |&gt;</span></span>
+<span id="cb9-98"><a href="#cb9-98"></a><span class="in">  # update statistic footnote</span></span>
+<span id="cb9-99"><a href="#cb9-99"></a><span class="in">  gtsummary::modify_footnote_header(</span></span>
+<span id="cb9-100"><a href="#cb9-100"></a><span class="in">    footnote = "n/N_s (%)",</span></span>
+<span id="cb9-101"><a href="#cb9-101"></a><span class="in">    columns = all_stat_cols()</span></span>
+<span id="cb9-102"><a href="#cb9-102"></a><span class="in">  ) |&gt;</span></span>
+<span id="cb9-103"><a href="#cb9-103"></a><span class="in">  gtsummary::modify_header(all_stat_cols() ~ "**{level}**  \n N = {n}")</span></span>
+<span id="cb9-104"><a href="#cb9-104"></a></span>
+<span id="cb9-105"><a href="#cb9-105"></a><span class="in">tbl</span></span>
+<span id="cb9-106"><a href="#cb9-106"></a><span class="in">```</span></span>
+<span id="cb9-107"><a href="#cb9-107"></a></span>
+<span id="cb9-108"><a href="#cb9-108"></a><span class="in">```{r eval=FALSE, include=FALSE}</span></span>
+<span id="cb9-109"><a href="#cb9-109"></a><span class="in"># Run chunk locally to generate image file</span></span>
+<span id="cb9-110"><a href="#cb9-110"></a><span class="in">gt::gtsave(as_gt(tbl), filename = "result.png")</span></span>
+<span id="cb9-111"><a href="#cb9-111"></a><span class="in">```</span></span>
+<span id="cb9-112"><a href="#cb9-112"></a></span>
+<span id="cb9-113"><a href="#cb9-113"></a><span class="in">```{r img, echo=FALSE, fig.align='center', out.width='65%'}</span></span>
+<span id="cb9-114"><a href="#cb9-114"></a><span class="in">```</span></span>
+<span id="cb9-115"><a href="#cb9-115"></a></span>
+<span id="cb9-116"><a href="#cb9-116"></a><span class="fu">## Build ARD</span></span>
+<span id="cb9-117"><a href="#cb9-117"></a></span>
+<span id="cb9-118"><a href="#cb9-118"></a><span class="in">```{r ard, message=FALSE, warning=FALSE, results='hide'}</span></span>
+<span id="cb9-119"><a href="#cb9-119"></a><span class="in">ard &lt;- gather_ard(tbl)</span></span>
+<span id="cb9-120"><a href="#cb9-120"></a></span>
+<span id="cb9-121"><a href="#cb9-121"></a><span class="in">ard</span></span>
+<span id="cb9-122"><a href="#cb9-122"></a><span class="in">```</span></span>
+<span id="cb9-123"><a href="#cb9-123"></a></span>
+<span id="cb9-124"><a href="#cb9-124"></a><span class="in">```{r, echo=FALSE}</span></span>
+<span id="cb9-125"><a href="#cb9-125"></a><span class="in"># Print ARD</span></span>
+<span id="cb9-126"><a href="#cb9-126"></a><span class="in">withr::local_options(width = 9999)</span></span>
+<span id="cb9-127"><a href="#cb9-127"></a><span class="in">print(ard, columns = "all", n = 40, na.print = NULL)</span></span>
+<span id="cb9-128"><a href="#cb9-128"></a><span class="in">```</span></span>
+<span id="cb9-129"><a href="#cb9-129"></a></span>
+<span id="cb9-130"><a href="#cb9-130"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">

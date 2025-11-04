@@ -252,23 +252,17 @@ cookieconsent.run({
 <span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(crane)</span>
 <span id="cb1-5"><a href="#cb1-5"></a></span>
-<span id="cb1-6"><a href="#cb1-6"></a>adsl <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadsl</span>
-<span id="cb1-7"><a href="#cb1-7"></a>adlb <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadlb</span>
+<span id="cb1-6"><a href="#cb1-6"></a>adsl <span class="ot">&lt;-</span> pharmaverseadam<span class="sc">::</span>adsl</span>
+<span id="cb1-7"><a href="#cb1-7"></a>adlb <span class="ot">&lt;-</span> pharmaverseadam<span class="sc">::</span>adlb</span>
 <span id="cb1-8"><a href="#cb1-8"></a></span>
 <span id="cb1-9"><a href="#cb1-9"></a><span class="co"># Pre-processing --------------------------------------------</span></span>
 <span id="cb1-10"><a href="#cb1-10"></a>data <span class="ot">&lt;-</span> adlb <span class="sc">|&gt;</span></span>
 <span id="cb1-11"><a href="#cb1-11"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(</span>
 <span id="cb1-12"><a href="#cb1-12"></a>    SAFFL <span class="sc">==</span> <span class="st">"Y"</span>, <span class="co"># safety population</span></span>
-<span id="cb1-13"><a href="#cb1-13"></a>    AVISITN <span class="sc">&gt;=</span> <span class="dv">0</span> <span class="co"># only keep valid visits</span></span>
-<span id="cb1-14"><a href="#cb1-14"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb1-15"><a href="#cb1-15"></a>  <span class="co"># retain the "WEEK *" portion of the visit</span></span>
-<span id="cb1-16"><a href="#cb1-16"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
-<span id="cb1-17"><a href="#cb1-17"></a>    <span class="at">AVISIT =</span> <span class="fu">if_else</span>(</span>
-<span id="cb1-18"><a href="#cb1-18"></a>      stringr<span class="sc">::</span><span class="fu">str_detect</span>(AVISIT, <span class="st">"WEEK"</span>),</span>
-<span id="cb1-19"><a href="#cb1-19"></a>      stringr<span class="sc">::</span><span class="fu">str_extract</span>(AVISIT, <span class="st">"WEEK </span><span class="sc">\\</span><span class="st">d+"</span>),</span>
-<span id="cb1-20"><a href="#cb1-20"></a>      AVISIT</span>
-<span id="cb1-21"><a href="#cb1-21"></a>    ) <span class="sc">|&gt;</span> <span class="fu">trimws</span>()</span>
-<span id="cb1-22"><a href="#cb1-22"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-13"><a href="#cb1-13"></a>    PARAMCD <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"ALT"</span>, <span class="st">"BILI"</span>, <span class="st">"CREAT"</span>)</span>
+<span id="cb1-14"><a href="#cb1-14"></a>    <span class="co"># This step can be used to filter for valid visits. Since the table creation</span></span>
+<span id="cb1-15"><a href="#cb1-15"></a>    <span class="co"># code specifies the visits, we can omit that step here.</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </div>
@@ -276,25 +270,27 @@ cookieconsent.run({
 <div class="cell">
 <details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>tbl <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a>  <span class="fu">filter</span>(</span>
-<span id="cb2-3"><a href="#cb2-3"></a>    AVISIT <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"BASELINE"</span>, <span class="st">"WEEK 5"</span>) <span class="co"># specify visits to display in table</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>    AVISIT <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Baseline"</span>, <span class="st">"Week 4"</span>) <span class="co"># specify visits to display in table</span></span>
 <span id="cb2-4"><a href="#cb2-4"></a>  ) <span class="sc">|&gt;</span></span>
 <span id="cb2-5"><a href="#cb2-5"></a>  <span class="co"># apply tbl_baseline_chg function to each level of PARAM in the data</span></span>
 <span id="cb2-6"><a href="#cb2-6"></a>  gtsummary<span class="sc">::</span><span class="fu">tbl_strata_nested_stack</span>(</span>
 <span id="cb2-7"><a href="#cb2-7"></a>    <span class="at">strata =</span> PARAM,</span>
 <span id="cb2-8"><a href="#cb2-8"></a>    <span class="sc">~</span> .x <span class="sc">|&gt;</span></span>
 <span id="cb2-9"><a href="#cb2-9"></a>      crane<span class="sc">::</span><span class="fu">tbl_baseline_chg</span>(</span>
-<span id="cb2-10"><a href="#cb2-10"></a>        <span class="at">baseline_level =</span> <span class="st">"BASELINE"</span>,</span>
+<span id="cb2-10"><a href="#cb2-10"></a>        <span class="at">baseline_level =</span> <span class="st">"Baseline"</span>,</span>
 <span id="cb2-11"><a href="#cb2-11"></a>        <span class="at">by =</span> <span class="st">"TRT01A"</span>,</span>
-<span id="cb2-12"><a href="#cb2-12"></a>        <span class="at">denominator =</span> adsl</span>
-<span id="cb2-13"><a href="#cb2-13"></a>      )</span>
-<span id="cb2-14"><a href="#cb2-14"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb2-15"><a href="#cb2-15"></a>  <span class="co"># bold lab test labels</span></span>
-<span id="cb2-16"><a href="#cb2-16"></a>  gtsummary<span class="sc">::</span><span class="fu">modify_bold</span>(<span class="at">columns =</span> label, <span class="at">rows =</span> tbl_indent_id1 <span class="sc">&gt;</span> <span class="dv">0</span>L) <span class="sc">|&gt;</span></span>
-<span id="cb2-17"><a href="#cb2-17"></a>  <span class="co"># update header labels</span></span>
-<span id="cb2-18"><a href="#cb2-18"></a>  gtsummary<span class="sc">::</span><span class="fu">modify_header</span>(<span class="at">label =</span> <span class="st">"**Lab  </span><span class="sc">\n</span><span class="st">\U00A0\U00A0\U00A0\U00A0 Visit**"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb2-19"><a href="#cb2-19"></a>  gtsummary<span class="sc">::</span><span class="fu">modify_spanning_header</span>(gtsummary<span class="sc">::</span><span class="fu">all_stat_cols</span>() <span class="sc">~</span> <span class="st">"**{level}**  </span><span class="sc">\n</span><span class="st">N = {n}"</span>)</span>
-<span id="cb2-20"><a href="#cb2-20"></a></span>
-<span id="cb2-21"><a href="#cb2-21"></a>tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-12"><a href="#cb2-12"></a>        <span class="co"># this dataset has a treatment level called "Screen Failure".</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a>        <span class="co"># Filtering this out as adsl is used to calculate the denominator.</span></span>
+<span id="cb2-14"><a href="#cb2-14"></a>        <span class="at">denominator =</span> adsl <span class="sc">|&gt;</span> <span class="fu">filter</span>(TRT01A <span class="sc">!=</span> <span class="st">"Screen Failure"</span>)</span>
+<span id="cb2-15"><a href="#cb2-15"></a>      )</span>
+<span id="cb2-16"><a href="#cb2-16"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb2-17"><a href="#cb2-17"></a>  <span class="co"># bold lab test labels</span></span>
+<span id="cb2-18"><a href="#cb2-18"></a>  gtsummary<span class="sc">::</span><span class="fu">modify_bold</span>(<span class="at">columns =</span> label, <span class="at">rows =</span> tbl_indent_id1 <span class="sc">&gt;</span> <span class="dv">0</span>L) <span class="sc">|&gt;</span></span>
+<span id="cb2-19"><a href="#cb2-19"></a>  <span class="co"># update header labels</span></span>
+<span id="cb2-20"><a href="#cb2-20"></a>  gtsummary<span class="sc">::</span><span class="fu">modify_header</span>(<span class="at">label =</span> <span class="st">"**Lab  </span><span class="sc">\n</span><span class="st">\U00A0\U00A0\U00A0\U00A0 Visit**"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-21"><a href="#cb2-21"></a>  gtsummary<span class="sc">::</span><span class="fu">modify_spanning_header</span>(gtsummary<span class="sc">::</span><span class="fu">all_stat_cols</span>() <span class="sc">~</span> <span class="st">"**{level}**  </span><span class="sc">\n</span><span class="st">N = {n}"</span>)</span>
+<span id="cb2-22"><a href="#cb2-22"></a></span>
+<span id="cb2-23"><a href="#cb2-23"></a>tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell" data-layout-align="center">
@@ -317,27 +313,27 @@ cookieconsent.run({
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>$`PARAM="Alanine Aminotransferase Measurement"`
-$`PARAM="Alanine Aminotransferase Measurement"`$tbl_baseline_chg</code></pre>
+<pre><code>$`PARAM="Alanine Aminotransferase (U/L)"`
+$`PARAM="Alanine Aminotransferase (U/L)"`$tbl_baseline_chg</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>{cards} data frame: 109 x 12</code></pre>
+<pre><code>{cards} data frame: 108 x 12</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   group1 group1_level variable variable_level context stat_name stat_label   stat fmt_fun warning error gts_column
-1  TRT01A    A: Drug X     AVAL       BASELINE summary      mean       Mean 17.738    &lt;fn&gt;                   stat_1
-2  TRT01A    A: Drug X     AVAL       BASELINE summary        sd         SD  9.926    &lt;fn&gt;                   stat_1
-3  TRT01A    A: Drug X     AVAL       BASELINE summary    median     Median 17.464    &lt;fn&gt;                   stat_1
-4  TRT01A    A: Drug X     AVAL       BASELINE summary       min        Min  0.002    &lt;fn&gt;                   stat_1
-5  TRT01A    A: Drug X     AVAL       BASELINE summary       max        Max 44.064    &lt;fn&gt;                   stat_1
-6  TRT01A    A: Drug X     AVAL         WEEK 5 summary      mean       Mean 19.215    &lt;fn&gt;                   stat_1
-7  TRT01A    A: Drug X     AVAL         WEEK 5 summary        sd         SD  9.471    &lt;fn&gt;                   stat_1
-8  TRT01A    A: Drug X     AVAL         WEEK 5 summary    median     Median 19.796    &lt;fn&gt;                   stat_1
-9  TRT01A    A: Drug X     AVAL         WEEK 5 summary       min        Min  0.007    &lt;fn&gt;                   stat_1
-10 TRT01A    A: Drug X     AVAL         WEEK 5 summary       max        Max 43.424    &lt;fn&gt;                   stat_1</code></pre>
+1  TRT01A      Placebo     AVAL       Baseline summary      mean       Mean  17.57    &lt;fn&gt;                   stat_1
+2  TRT01A      Placebo     AVAL       Baseline summary        sd         SD  9.216    &lt;fn&gt;                   stat_1
+3  TRT01A      Placebo     AVAL       Baseline summary    median     Median     15    &lt;fn&gt;                   stat_1
+4  TRT01A      Placebo     AVAL       Baseline summary       min        Min      7    &lt;fn&gt;                   stat_1
+5  TRT01A      Placebo     AVAL       Baseline summary       max        Max     69    &lt;fn&gt;                   stat_1
+6  TRT01A      Placebo     AVAL         Week 4 summary      mean       Mean 18.658    &lt;fn&gt;                   stat_1
+7  TRT01A      Placebo     AVAL         Week 4 summary        sd         SD 12.908    &lt;fn&gt;                   stat_1
+8  TRT01A      Placebo     AVAL         Week 4 summary    median     Median     16    &lt;fn&gt;                   stat_1
+9  TRT01A      Placebo     AVAL         Week 4 summary       min        Min      6    &lt;fn&gt;                   stat_1
+10 TRT01A      Placebo     AVAL         Week 4 summary       max        Max    107    &lt;fn&gt;                   stat_1</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>ℹ 99 more rows</code></pre>
+<pre><code>ℹ 98 more rows</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>ℹ Use `print(n = ...)` to see more rows</code></pre>
@@ -345,53 +341,53 @@ $`PARAM="Alanine Aminotransferase Measurement"`$tbl_baseline_chg</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 
-$`PARAM="C-Reactive Protein Measurement"`
-$`PARAM="C-Reactive Protein Measurement"`$tbl_baseline_chg</code></pre>
+$`PARAM="Bilirubin (umol/L)"`
+$`PARAM="Bilirubin (umol/L)"`$tbl_baseline_chg</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>{cards} data frame: 109 x 12</code></pre>
+<pre><code>{cards} data frame: 108 x 12</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   group1 group1_level variable variable_level context stat_name stat_label   stat fmt_fun warning error gts_column
-1  TRT01A    A: Drug X     AVAL       BASELINE summary      mean       Mean  9.056    &lt;fn&gt;                   stat_1
-2  TRT01A    A: Drug X     AVAL       BASELINE summary        sd         SD   0.93    &lt;fn&gt;                   stat_1
-3  TRT01A    A: Drug X     AVAL       BASELINE summary    median     Median  9.075    &lt;fn&gt;                   stat_1
-4  TRT01A    A: Drug X     AVAL       BASELINE summary       min        Min  6.215    &lt;fn&gt;                   stat_1
-5  TRT01A    A: Drug X     AVAL       BASELINE summary       max        Max 11.871    &lt;fn&gt;                   stat_1
-6  TRT01A    A: Drug X     AVAL         WEEK 5 summary      mean       Mean  9.041    &lt;fn&gt;                   stat_1
-7  TRT01A    A: Drug X     AVAL         WEEK 5 summary        sd         SD   1.04    &lt;fn&gt;                   stat_1
-8  TRT01A    A: Drug X     AVAL         WEEK 5 summary    median     Median  8.976    &lt;fn&gt;                   stat_1
-9  TRT01A    A: Drug X     AVAL         WEEK 5 summary       min        Min  6.922    &lt;fn&gt;                   stat_1
-10 TRT01A    A: Drug X     AVAL         WEEK 5 summary       max        Max 12.119    &lt;fn&gt;                   stat_1</code></pre>
+1  TRT01A      Placebo     AVAL       Baseline summary      mean       Mean  9.703    &lt;fn&gt;                   stat_1
+2  TRT01A      Placebo     AVAL       Baseline summary        sd         SD  3.965    &lt;fn&gt;                   stat_1
+3  TRT01A      Placebo     AVAL       Baseline summary    median     Median   8.55    &lt;fn&gt;                   stat_1
+4  TRT01A      Placebo     AVAL       Baseline summary       min        Min   5.13    &lt;fn&gt;                   stat_1
+5  TRT01A      Placebo     AVAL       Baseline summary       max        Max  25.65    &lt;fn&gt;                   stat_1
+6  TRT01A      Placebo     AVAL         Week 4 summary      mean       Mean 11.126    &lt;fn&gt;                   stat_1
+7  TRT01A      Placebo     AVAL         Week 4 summary        sd         SD  13.57    &lt;fn&gt;                   stat_1
+8  TRT01A      Placebo     AVAL         Week 4 summary    median     Median   8.55    &lt;fn&gt;                   stat_1
+9  TRT01A      Placebo     AVAL         Week 4 summary       min        Min   5.13    &lt;fn&gt;                   stat_1
+10 TRT01A      Placebo     AVAL         Week 4 summary       max        Max 124.83    &lt;fn&gt;                   stat_1</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>ℹ 99 more rows
+<pre><code>ℹ 98 more rows
 ℹ Use `print(n = ...)` to see more rows</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 
-$`PARAM="Immunoglobulin A Measurement"`
-$`PARAM="Immunoglobulin A Measurement"`$tbl_baseline_chg</code></pre>
+$`PARAM="Creatinine (umol/L)"`
+$`PARAM="Creatinine (umol/L)"`$tbl_baseline_chg</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>{cards} data frame: 109 x 12</code></pre>
+<pre><code>{cards} data frame: 108 x 12</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   group1 group1_level variable variable_level context stat_name stat_label  stat fmt_fun warning error gts_column
-1  TRT01A    A: Drug X     AVAL       BASELINE summary      mean       Mean 2.888    &lt;fn&gt;                   stat_1
-2  TRT01A    A: Drug X     AVAL       BASELINE summary        sd         SD 0.084    &lt;fn&gt;                   stat_1
-3  TRT01A    A: Drug X     AVAL       BASELINE summary    median     Median 2.888    &lt;fn&gt;                   stat_1
-4  TRT01A    A: Drug X     AVAL       BASELINE summary       min        Min 2.704    &lt;fn&gt;                   stat_1
-5  TRT01A    A: Drug X     AVAL       BASELINE summary       max        Max 3.122    &lt;fn&gt;                   stat_1
-6  TRT01A    A: Drug X     AVAL         WEEK 5 summary      mean       Mean 2.907    &lt;fn&gt;                   stat_1
-7  TRT01A    A: Drug X     AVAL         WEEK 5 summary        sd         SD  0.09    &lt;fn&gt;                   stat_1
-8  TRT01A    A: Drug X     AVAL         WEEK 5 summary    median     Median 2.913    &lt;fn&gt;                   stat_1
-9  TRT01A    A: Drug X     AVAL         WEEK 5 summary       min        Min 2.595    &lt;fn&gt;                   stat_1
-10 TRT01A    A: Drug X     AVAL         WEEK 5 summary       max        Max 3.085    &lt;fn&gt;                   stat_1</code></pre>
+<pre><code>   group1 group1_level variable variable_level context stat_name stat_label   stat fmt_fun warning error gts_column
+1  TRT01A      Placebo     AVAL       Baseline summary      mean       Mean 97.651    &lt;fn&gt;                   stat_1
+2  TRT01A      Placebo     AVAL       Baseline summary        sd         SD 17.779    &lt;fn&gt;                   stat_1
+3  TRT01A      Placebo     AVAL       Baseline summary    median     Median  97.24    &lt;fn&gt;                   stat_1
+4  TRT01A      Placebo     AVAL       Baseline summary       min        Min  61.88    &lt;fn&gt;                   stat_1
+5  TRT01A      Placebo     AVAL       Baseline summary       max        Max 159.12    &lt;fn&gt;                   stat_1
+6  TRT01A      Placebo     AVAL         Week 4 summary      mean       Mean 98.641    &lt;fn&gt;                   stat_1
+7  TRT01A      Placebo     AVAL         Week 4 summary        sd         SD 18.557    &lt;fn&gt;                   stat_1
+8  TRT01A      Placebo     AVAL         Week 4 summary    median     Median  97.24    &lt;fn&gt;                   stat_1
+9  TRT01A      Placebo     AVAL         Week 4 summary       min        Min  70.72    &lt;fn&gt;                   stat_1
+10 TRT01A      Placebo     AVAL         Week 4 summary       max        Max  176.8    &lt;fn&gt;                   stat_1</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>ℹ 99 more rows
+<pre><code>ℹ 98 more rows
 ℹ Use `print(n = ...)` to see more rows</code></pre>
 </div>
 </div>
@@ -1028,74 +1024,70 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb17-19"><a href="#cb17-19"></a><span class="in">library(dplyr)</span></span>
 <span id="cb17-20"><a href="#cb17-20"></a><span class="in">library(crane)</span></span>
 <span id="cb17-21"><a href="#cb17-21"></a></span>
-<span id="cb17-22"><a href="#cb17-22"></a><span class="in">adsl &lt;- random.cdisc.data::cadsl</span></span>
-<span id="cb17-23"><a href="#cb17-23"></a><span class="in">adlb &lt;- random.cdisc.data::cadlb</span></span>
+<span id="cb17-22"><a href="#cb17-22"></a><span class="in">adsl &lt;- pharmaverseadam::adsl</span></span>
+<span id="cb17-23"><a href="#cb17-23"></a><span class="in">adlb &lt;- pharmaverseadam::adlb</span></span>
 <span id="cb17-24"><a href="#cb17-24"></a></span>
 <span id="cb17-25"><a href="#cb17-25"></a><span class="in"># Pre-processing --------------------------------------------</span></span>
 <span id="cb17-26"><a href="#cb17-26"></a><span class="in">data &lt;- adlb |&gt;</span></span>
 <span id="cb17-27"><a href="#cb17-27"></a><span class="in">  dplyr::filter(</span></span>
 <span id="cb17-28"><a href="#cb17-28"></a><span class="in">    SAFFL == "Y", # safety population</span></span>
-<span id="cb17-29"><a href="#cb17-29"></a><span class="in">    AVISITN &gt;= 0 # only keep valid visits</span></span>
-<span id="cb17-30"><a href="#cb17-30"></a><span class="in">  ) |&gt;</span></span>
-<span id="cb17-31"><a href="#cb17-31"></a><span class="in">  # retain the "WEEK *" portion of the visit</span></span>
-<span id="cb17-32"><a href="#cb17-32"></a><span class="in">  dplyr::mutate(</span></span>
-<span id="cb17-33"><a href="#cb17-33"></a><span class="in">    AVISIT = if_else(</span></span>
-<span id="cb17-34"><a href="#cb17-34"></a><span class="in">      stringr::str_detect(AVISIT, "WEEK"),</span></span>
-<span id="cb17-35"><a href="#cb17-35"></a><span class="in">      stringr::str_extract(AVISIT, "WEEK \\d+"),</span></span>
-<span id="cb17-36"><a href="#cb17-36"></a><span class="in">      AVISIT</span></span>
-<span id="cb17-37"><a href="#cb17-37"></a><span class="in">    ) |&gt; trimws()</span></span>
-<span id="cb17-38"><a href="#cb17-38"></a><span class="in">  )</span></span>
-<span id="cb17-39"><a href="#cb17-39"></a><span class="in">```</span></span>
-<span id="cb17-40"><a href="#cb17-40"></a></span>
-<span id="cb17-41"><a href="#cb17-41"></a><span class="fu">## Build Table</span></span>
-<span id="cb17-42"><a href="#cb17-42"></a></span>
-<span id="cb17-43"><a href="#cb17-43"></a><span class="in">```{r tbl, results='hide'}</span></span>
-<span id="cb17-44"><a href="#cb17-44"></a><span class="in">tbl &lt;- data |&gt;</span></span>
-<span id="cb17-45"><a href="#cb17-45"></a><span class="in">  filter(</span></span>
-<span id="cb17-46"><a href="#cb17-46"></a><span class="in">    AVISIT %in% c("BASELINE", "WEEK 5") # specify visits to display in table</span></span>
-<span id="cb17-47"><a href="#cb17-47"></a><span class="in">  ) |&gt;</span></span>
-<span id="cb17-48"><a href="#cb17-48"></a><span class="in">  # apply tbl_baseline_chg function to each level of PARAM in the data</span></span>
-<span id="cb17-49"><a href="#cb17-49"></a><span class="in">  gtsummary::tbl_strata_nested_stack(</span></span>
-<span id="cb17-50"><a href="#cb17-50"></a><span class="in">    strata = PARAM,</span></span>
-<span id="cb17-51"><a href="#cb17-51"></a><span class="in">    ~ .x |&gt;</span></span>
-<span id="cb17-52"><a href="#cb17-52"></a><span class="in">      crane::tbl_baseline_chg(</span></span>
-<span id="cb17-53"><a href="#cb17-53"></a><span class="in">        baseline_level = "BASELINE",</span></span>
-<span id="cb17-54"><a href="#cb17-54"></a><span class="in">        by = "TRT01A",</span></span>
-<span id="cb17-55"><a href="#cb17-55"></a><span class="in">        denominator = adsl</span></span>
-<span id="cb17-56"><a href="#cb17-56"></a><span class="in">      )</span></span>
-<span id="cb17-57"><a href="#cb17-57"></a><span class="in">  ) |&gt;</span></span>
-<span id="cb17-58"><a href="#cb17-58"></a><span class="in">  # bold lab test labels</span></span>
-<span id="cb17-59"><a href="#cb17-59"></a><span class="in">  gtsummary::modify_bold(columns = label, rows = tbl_indent_id1 &gt; 0L) |&gt;</span></span>
-<span id="cb17-60"><a href="#cb17-60"></a><span class="in">  # update header labels</span></span>
-<span id="cb17-61"><a href="#cb17-61"></a><span class="in">  gtsummary::modify_header(label = "**Lab  \n\U00A0\U00A0\U00A0\U00A0 Visit**") |&gt;</span></span>
-<span id="cb17-62"><a href="#cb17-62"></a><span class="in">  gtsummary::modify_spanning_header(gtsummary::all_stat_cols() ~ "**{level}**  \nN = {n}")</span></span>
-<span id="cb17-63"><a href="#cb17-63"></a></span>
-<span id="cb17-64"><a href="#cb17-64"></a><span class="in">tbl</span></span>
+<span id="cb17-29"><a href="#cb17-29"></a><span class="in">    PARAMCD %in% c("ALT", "BILI", "CREAT")</span></span>
+<span id="cb17-30"><a href="#cb17-30"></a><span class="in">    # This step can be used to filter for valid visits. Since the table creation</span></span>
+<span id="cb17-31"><a href="#cb17-31"></a><span class="in">    # code specifies the visits, we can omit that step here.</span></span>
+<span id="cb17-32"><a href="#cb17-32"></a><span class="in">  )</span></span>
+<span id="cb17-33"><a href="#cb17-33"></a><span class="in">```</span></span>
+<span id="cb17-34"><a href="#cb17-34"></a></span>
+<span id="cb17-35"><a href="#cb17-35"></a><span class="fu">## Build Table</span></span>
+<span id="cb17-36"><a href="#cb17-36"></a></span>
+<span id="cb17-37"><a href="#cb17-37"></a><span class="in">```{r tbl, results='hide'}</span></span>
+<span id="cb17-38"><a href="#cb17-38"></a><span class="in">tbl &lt;- data |&gt;</span></span>
+<span id="cb17-39"><a href="#cb17-39"></a><span class="in">  filter(</span></span>
+<span id="cb17-40"><a href="#cb17-40"></a><span class="in">    AVISIT %in% c("Baseline", "Week 4") # specify visits to display in table</span></span>
+<span id="cb17-41"><a href="#cb17-41"></a><span class="in">  ) |&gt;</span></span>
+<span id="cb17-42"><a href="#cb17-42"></a><span class="in">  # apply tbl_baseline_chg function to each level of PARAM in the data</span></span>
+<span id="cb17-43"><a href="#cb17-43"></a><span class="in">  gtsummary::tbl_strata_nested_stack(</span></span>
+<span id="cb17-44"><a href="#cb17-44"></a><span class="in">    strata = PARAM,</span></span>
+<span id="cb17-45"><a href="#cb17-45"></a><span class="in">    ~ .x |&gt;</span></span>
+<span id="cb17-46"><a href="#cb17-46"></a><span class="in">      crane::tbl_baseline_chg(</span></span>
+<span id="cb17-47"><a href="#cb17-47"></a><span class="in">        baseline_level = "Baseline",</span></span>
+<span id="cb17-48"><a href="#cb17-48"></a><span class="in">        by = "TRT01A",</span></span>
+<span id="cb17-49"><a href="#cb17-49"></a><span class="in">        # this dataset has a treatment level called "Screen Failure".</span></span>
+<span id="cb17-50"><a href="#cb17-50"></a><span class="in">        # Filtering this out as adsl is used to calculate the denominator.</span></span>
+<span id="cb17-51"><a href="#cb17-51"></a><span class="in">        denominator = adsl |&gt; filter(TRT01A != "Screen Failure")</span></span>
+<span id="cb17-52"><a href="#cb17-52"></a><span class="in">      )</span></span>
+<span id="cb17-53"><a href="#cb17-53"></a><span class="in">  ) |&gt;</span></span>
+<span id="cb17-54"><a href="#cb17-54"></a><span class="in">  # bold lab test labels</span></span>
+<span id="cb17-55"><a href="#cb17-55"></a><span class="in">  gtsummary::modify_bold(columns = label, rows = tbl_indent_id1 &gt; 0L) |&gt;</span></span>
+<span id="cb17-56"><a href="#cb17-56"></a><span class="in">  # update header labels</span></span>
+<span id="cb17-57"><a href="#cb17-57"></a><span class="in">  gtsummary::modify_header(label = "**Lab  \n\U00A0\U00A0\U00A0\U00A0 Visit**") |&gt;</span></span>
+<span id="cb17-58"><a href="#cb17-58"></a><span class="in">  gtsummary::modify_spanning_header(gtsummary::all_stat_cols() ~ "**{level}**  \nN = {n}")</span></span>
+<span id="cb17-59"><a href="#cb17-59"></a></span>
+<span id="cb17-60"><a href="#cb17-60"></a><span class="in">tbl</span></span>
+<span id="cb17-61"><a href="#cb17-61"></a><span class="in">```</span></span>
+<span id="cb17-62"><a href="#cb17-62"></a></span>
+<span id="cb17-63"><a href="#cb17-63"></a><span class="in">```{r eval=FALSE, include=FALSE}</span></span>
+<span id="cb17-64"><a href="#cb17-64"></a><span class="in">gt::gtsave(as_gt(tbl), filename = "result.png")</span></span>
 <span id="cb17-65"><a href="#cb17-65"></a><span class="in">```</span></span>
 <span id="cb17-66"><a href="#cb17-66"></a></span>
-<span id="cb17-67"><a href="#cb17-67"></a><span class="in">```{r eval=FALSE, include=FALSE}</span></span>
-<span id="cb17-68"><a href="#cb17-68"></a><span class="in">gt::gtsave(as_gt(tbl), filename = "result.png")</span></span>
-<span id="cb17-69"><a href="#cb17-69"></a><span class="in">```</span></span>
-<span id="cb17-70"><a href="#cb17-70"></a></span>
-<span id="cb17-71"><a href="#cb17-71"></a><span class="in">```{r img, echo=FALSE, fig.align='center', out.width='60%'}</span></span>
-<span id="cb17-72"><a href="#cb17-72"></a><span class="in">```</span></span>
-<span id="cb17-73"><a href="#cb17-73"></a></span>
-<span id="cb17-74"><a href="#cb17-74"></a><span class="fu">## Build ARD</span></span>
+<span id="cb17-67"><a href="#cb17-67"></a><span class="in">```{r img, echo=FALSE, fig.align='center', out.width='60%'}</span></span>
+<span id="cb17-68"><a href="#cb17-68"></a><span class="in">```</span></span>
+<span id="cb17-69"><a href="#cb17-69"></a></span>
+<span id="cb17-70"><a href="#cb17-70"></a><span class="fu">## Build ARD</span></span>
+<span id="cb17-71"><a href="#cb17-71"></a></span>
+<span id="cb17-72"><a href="#cb17-72"></a><span class="in">```{r ard, message=FALSE, warning=FALSE, results='hide'}</span></span>
+<span id="cb17-73"><a href="#cb17-73"></a><span class="in"># Extract ARD from previously created gtsummary table (refer to "Build Table")</span></span>
+<span id="cb17-74"><a href="#cb17-74"></a><span class="in">ard &lt;- gather_ard(tbl)</span></span>
 <span id="cb17-75"><a href="#cb17-75"></a></span>
-<span id="cb17-76"><a href="#cb17-76"></a><span class="in">```{r ard, message=FALSE, warning=FALSE, results='hide'}</span></span>
-<span id="cb17-77"><a href="#cb17-77"></a><span class="in"># Extract ARD from previously created gtsummary table (refer to "Build Table")</span></span>
-<span id="cb17-78"><a href="#cb17-78"></a><span class="in">ard &lt;- gather_ard(tbl)</span></span>
+<span id="cb17-76"><a href="#cb17-76"></a><span class="in"># Output ARD</span></span>
+<span id="cb17-77"><a href="#cb17-77"></a><span class="in">ard</span></span>
+<span id="cb17-78"><a href="#cb17-78"></a><span class="in">```</span></span>
 <span id="cb17-79"><a href="#cb17-79"></a></span>
-<span id="cb17-80"><a href="#cb17-80"></a><span class="in"># Output ARD</span></span>
-<span id="cb17-81"><a href="#cb17-81"></a><span class="in">ard</span></span>
-<span id="cb17-82"><a href="#cb17-82"></a><span class="in">```</span></span>
-<span id="cb17-83"><a href="#cb17-83"></a></span>
-<span id="cb17-84"><a href="#cb17-84"></a><span class="in">```{r, echo=FALSE}</span></span>
-<span id="cb17-85"><a href="#cb17-85"></a><span class="in"># Print ARD</span></span>
-<span id="cb17-86"><a href="#cb17-86"></a><span class="in">withr::local_options(width = 9999)</span></span>
-<span id="cb17-87"><a href="#cb17-87"></a><span class="in">print(ard, columns = "all")</span></span>
-<span id="cb17-88"><a href="#cb17-88"></a><span class="in">```</span></span>
-<span id="cb17-89"><a href="#cb17-89"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-80"><a href="#cb17-80"></a><span class="in">```{r, echo=FALSE}</span></span>
+<span id="cb17-81"><a href="#cb17-81"></a><span class="in"># Print ARD</span></span>
+<span id="cb17-82"><a href="#cb17-82"></a><span class="in">withr::local_options(width = 9999)</span></span>
+<span id="cb17-83"><a href="#cb17-83"></a><span class="in">print(ard, columns = "all")</span></span>
+<span id="cb17-84"><a href="#cb17-84"></a><span class="in">```</span></span>
+<span id="cb17-85"><a href="#cb17-85"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">

@@ -252,8 +252,8 @@ cookieconsent.run({
 <span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(cards)</span>
 <span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(gtsummary)</span>
 <span id="cb1-5"><a href="#cb1-5"></a></span>
-<span id="cb1-6"><a href="#cb1-6"></a>adsl <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadsl</span>
-<span id="cb1-7"><a href="#cb1-7"></a>advs <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadvs</span>
+<span id="cb1-6"><a href="#cb1-6"></a>adsl <span class="ot">&lt;-</span> pharmaverseadam<span class="sc">::</span>adsl</span>
+<span id="cb1-7"><a href="#cb1-7"></a>advs <span class="ot">&lt;-</span> pharmaverseadam<span class="sc">::</span>advs</span>
 <span id="cb1-8"><a href="#cb1-8"></a></span>
 <span id="cb1-9"><a href="#cb1-9"></a><span class="co"># Pre-processing --------------------------------------------</span></span>
 <span id="cb1-10"><a href="#cb1-10"></a>adsl <span class="ot">&lt;-</span> adsl <span class="sc">|&gt;</span></span>
@@ -266,7 +266,7 @@ cookieconsent.run({
 <span id="cb1-17"><a href="#cb1-17"></a>    <span class="co"># systolic blood pressure</span></span>
 <span id="cb1-18"><a href="#cb1-18"></a>    PARAMCD <span class="sc">==</span> <span class="st">"SYSBP"</span>,</span>
 <span id="cb1-19"><a href="#cb1-19"></a>    <span class="co"># post-baseline visits</span></span>
-<span id="cb1-20"><a href="#cb1-20"></a>    AVISITN <span class="sc">&gt;=</span> <span class="dv">1</span></span>
+<span id="cb1-20"><a href="#cb1-20"></a>    AVISITN <span class="sc">&gt;=</span> <span class="dv">2</span></span>
 <span id="cb1-21"><a href="#cb1-21"></a>  ) <span class="sc">|&gt;</span></span>
 <span id="cb1-22"><a href="#cb1-22"></a>  <span class="co"># analyze maximum values of each subject</span></span>
 <span id="cb1-23"><a href="#cb1-23"></a>  <span class="fu">slice_max</span>(AVAL, <span class="at">n =</span> <span class="dv">1</span>L, <span class="at">by =</span> USUBJID) <span class="sc">|&gt;</span></span>
@@ -306,46 +306,46 @@ cookieconsent.run({
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   group1 group1_level variable variable_level   context stat_name stat_label  stat fmt_fun warning error
-1  TRT01A    A: Drug X      L90           TRUE tabulate…         n          n     0       0              
-2  TRT01A    A: Drug X      L90           TRUE tabulate…         p          %     0    &lt;fn&gt;              
-3  TRT01A    A: Drug X     GE90           TRUE tabulate…         n          n   134       0              
-4  TRT01A    A: Drug X     GE90           TRUE tabulate…         p          %     1    &lt;fn&gt;              
-5  TRT01A    A: Drug X    GE120           TRUE tabulate…         n          n   134       0              
-6  TRT01A    A: Drug X    GE120           TRUE tabulate…         p          %     1    &lt;fn&gt;              
-7  TRT01A    A: Drug X    GE140           TRUE tabulate…         n          n   133       0              
-8  TRT01A    A: Drug X    GE140           TRUE tabulate…         p          % 0.993    &lt;fn&gt;              
-9  TRT01A    A: Drug X    GE160           TRUE tabulate…         n          n   126       0              
-10 TRT01A    A: Drug X    GE160           TRUE tabulate…         p          %  0.94    &lt;fn&gt;              
-11 TRT01A    A: Drug X    GE180           TRUE tabulate…         n          n    78       0              
-12 TRT01A    A: Drug X    GE180           TRUE tabulate…         p          % 0.582    &lt;fn&gt;              
-13 TRT01A    B: Place…      L90           TRUE tabulate…         n          n     0       0              
-14 TRT01A    B: Place…      L90           TRUE tabulate…         p          %     0    &lt;fn&gt;              
-15 TRT01A    B: Place…     GE90           TRUE tabulate…         n          n   134       0              
-16 TRT01A    B: Place…     GE90           TRUE tabulate…         p          %     1    &lt;fn&gt;              
-17 TRT01A    B: Place…    GE120           TRUE tabulate…         n          n   133       0              
-18 TRT01A    B: Place…    GE120           TRUE tabulate…         p          % 0.993    &lt;fn&gt;              
-19 TRT01A    B: Place…    GE140           TRUE tabulate…         n          n   132       0              
-20 TRT01A    B: Place…    GE140           TRUE tabulate…         p          % 0.985    &lt;fn&gt;              
-21 TRT01A    B: Place…    GE160           TRUE tabulate…         n          n   120       0              
-22 TRT01A    B: Place…    GE160           TRUE tabulate…         p          % 0.896    &lt;fn&gt;              
-23 TRT01A    B: Place…    GE180           TRUE tabulate…         n          n    74       0              
-24 TRT01A    B: Place…    GE180           TRUE tabulate…         p          % 0.552    &lt;fn&gt;              
-25 TRT01A    C: Combi…      L90           TRUE tabulate…         n          n     0       0              
-26 TRT01A    C: Combi…      L90           TRUE tabulate…         p          %     0    &lt;fn&gt;              
-27 TRT01A    C: Combi…     GE90           TRUE tabulate…         n          n   132       0              
-28 TRT01A    C: Combi…     GE90           TRUE tabulate…         p          %     1    &lt;fn&gt;              
-29 TRT01A    C: Combi…    GE120           TRUE tabulate…         n          n   132       0              
-30 TRT01A    C: Combi…    GE120           TRUE tabulate…         p          %     1    &lt;fn&gt;              
-31 TRT01A    C: Combi…    GE140           TRUE tabulate…         n          n   132       0              
-32 TRT01A    C: Combi…    GE140           TRUE tabulate…         p          %     1    &lt;fn&gt;              
-33 TRT01A    C: Combi…    GE160           TRUE tabulate…         n          n   121       0              
-34 TRT01A    C: Combi…    GE160           TRUE tabulate…         p          % 0.917    &lt;fn&gt;              
-35 TRT01A    C: Combi…    GE180           TRUE tabulate…         n          n    73       0              
-36 TRT01A    C: Combi…    GE180           TRUE tabulate…         p          % 0.553    &lt;fn&gt;              
-37   &lt;NA&gt;                TRT01A      A: Drug X  tabulate         n          n   134       0              
-38   &lt;NA&gt;                TRT01A      A: Drug X  tabulate         N          N   400       0              
-39   &lt;NA&gt;                TRT01A      A: Drug X  tabulate         p          % 0.335    &lt;fn&gt;              
-40   &lt;NA&gt;                TRT01A      B: Place…  tabulate         n          n   134       0              </code></pre>
+1  TRT01A      Placebo      L90           TRUE tabulate…         n          n     0       0              
+2  TRT01A      Placebo      L90           TRUE tabulate…         p          %     0    &lt;fn&gt;              
+3  TRT01A      Placebo     GE90           TRUE tabulate…         n          n   135       0              
+4  TRT01A      Placebo     GE90           TRUE tabulate…         p          % 1.607    &lt;fn&gt;              
+5  TRT01A      Placebo    GE120           TRUE tabulate…         n          n   131       0              
+6  TRT01A      Placebo    GE120           TRUE tabulate…         p          %  1.56    &lt;fn&gt;              
+7  TRT01A      Placebo    GE140           TRUE tabulate…         n          n   101       0              
+8  TRT01A      Placebo    GE140           TRUE tabulate…         p          % 1.202    &lt;fn&gt;              
+9  TRT01A      Placebo    GE160           TRUE tabulate…         n          n    49       0              
+10 TRT01A      Placebo    GE160           TRUE tabulate…         p          % 0.583    &lt;fn&gt;              
+11 TRT01A      Placebo    GE180           TRUE tabulate…         n          n     6       0              
+12 TRT01A      Placebo    GE180           TRUE tabulate…         p          % 0.071    &lt;fn&gt;              
+13 TRT01A    Xanomeli…      L90           TRUE tabulate…         n          n     0       0              
+14 TRT01A    Xanomeli…      L90           TRUE tabulate…         p          %     0    &lt;fn&gt;              
+15 TRT01A    Xanomeli…     GE90           TRUE tabulate…         n          n   109       0              
+16 TRT01A    Xanomeli…     GE90           TRUE tabulate…         p          % 1.514    &lt;fn&gt;              
+17 TRT01A    Xanomeli…    GE120           TRUE tabulate…         n          n   108       0              
+18 TRT01A    Xanomeli…    GE120           TRUE tabulate…         p          %   1.5    &lt;fn&gt;              
+19 TRT01A    Xanomeli…    GE140           TRUE tabulate…         n          n    69       0              
+20 TRT01A    Xanomeli…    GE140           TRUE tabulate…         p          % 0.958    &lt;fn&gt;              
+21 TRT01A    Xanomeli…    GE160           TRUE tabulate…         n          n    24       0              
+22 TRT01A    Xanomeli…    GE160           TRUE tabulate…         p          % 0.333    &lt;fn&gt;              
+23 TRT01A    Xanomeli…    GE180           TRUE tabulate…         n          n     4       0              
+24 TRT01A    Xanomeli…    GE180           TRUE tabulate…         p          % 0.056    &lt;fn&gt;              
+25 TRT01A    Xanomeli…      L90           TRUE tabulate…         n          n     0       0              
+26 TRT01A    Xanomeli…      L90           TRUE tabulate…         p          %     0    &lt;fn&gt;              
+27 TRT01A    Xanomeli…     GE90           TRUE tabulate…         n          n   134       0              
+28 TRT01A    Xanomeli…     GE90           TRUE tabulate…         p          % 1.426    &lt;fn&gt;              
+29 TRT01A    Xanomeli…    GE120           TRUE tabulate…         n          n   132       0              
+30 TRT01A    Xanomeli…    GE120           TRUE tabulate…         p          % 1.404    &lt;fn&gt;              
+31 TRT01A    Xanomeli…    GE140           TRUE tabulate…         n          n   105       0              
+32 TRT01A    Xanomeli…    GE140           TRUE tabulate…         p          % 1.117    &lt;fn&gt;              
+33 TRT01A    Xanomeli…    GE160           TRUE tabulate…         n          n    50       0              
+34 TRT01A    Xanomeli…    GE160           TRUE tabulate…         p          % 0.532    &lt;fn&gt;              
+35 TRT01A    Xanomeli…    GE180           TRUE tabulate…         n          n     9       0              
+36 TRT01A    Xanomeli…    GE180           TRUE tabulate…         p          % 0.096    &lt;fn&gt;              
+37   &lt;NA&gt;                TRT01A        Placebo  tabulate         n          n    86       0              
+38   &lt;NA&gt;                TRT01A        Placebo  tabulate         N          N   254       0              
+39   &lt;NA&gt;                TRT01A        Placebo  tabulate         p          % 0.339    &lt;fn&gt;              
+40   &lt;NA&gt;                TRT01A      Xanomeli…  tabulate         n          n    72       0              </code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>ℹ 5 more rows</code></pre>
@@ -372,7 +372,7 @@ cookieconsent.run({
 <span id="cb7-13"><a href="#cb7-13"></a>) <span class="sc">|&gt;</span></span>
 <span id="cb7-14"><a href="#cb7-14"></a>  <span class="fu">modify_header</span>(</span>
 <span id="cb7-15"><a href="#cb7-15"></a>    <span class="co"># Update label, add analysis value units</span></span>
-<span id="cb7-16"><a href="#cb7-16"></a>    label <span class="sc">~</span> <span class="fu">paste0</span>(<span class="st">"**Systolic Blood Pressure ("</span>, data<span class="sc">$</span>AVALU[<span class="dv">1</span>], <span class="st">")**"</span>),</span>
+<span id="cb7-16"><a href="#cb7-16"></a>    label <span class="sc">~</span> <span class="fu">paste0</span>(<span class="st">"**Systolic Blood Pressure ("</span>, data<span class="sc">$</span>VSORRESU[<span class="dv">1</span>], <span class="st">")**"</span>),</span>
 <span id="cb7-17"><a href="#cb7-17"></a>    <span class="co"># Add N values to `by` variable labels</span></span>
 <span id="cb7-18"><a href="#cb7-18"></a>    <span class="fu">all_stat_cols</span>() <span class="sc">~</span> <span class="st">"**{level}**  </span><span class="sc">\n</span><span class="st">N = {n}"</span></span>
 <span id="cb7-19"><a href="#cb7-19"></a>  )</span>
@@ -1021,8 +1021,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb8-19"><a href="#cb8-19"></a><span class="in">library(cards)</span></span>
 <span id="cb8-20"><a href="#cb8-20"></a><span class="in">library(gtsummary)</span></span>
 <span id="cb8-21"><a href="#cb8-21"></a></span>
-<span id="cb8-22"><a href="#cb8-22"></a><span class="in">adsl &lt;- random.cdisc.data::cadsl</span></span>
-<span id="cb8-23"><a href="#cb8-23"></a><span class="in">advs &lt;- random.cdisc.data::cadvs</span></span>
+<span id="cb8-22"><a href="#cb8-22"></a><span class="in">adsl &lt;- pharmaverseadam::adsl</span></span>
+<span id="cb8-23"><a href="#cb8-23"></a><span class="in">advs &lt;- pharmaverseadam::advs</span></span>
 <span id="cb8-24"><a href="#cb8-24"></a></span>
 <span id="cb8-25"><a href="#cb8-25"></a><span class="in"># Pre-processing --------------------------------------------</span></span>
 <span id="cb8-26"><a href="#cb8-26"></a><span class="in">adsl &lt;- adsl |&gt;</span></span>
@@ -1035,7 +1035,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb8-33"><a href="#cb8-33"></a><span class="in">    # systolic blood pressure</span></span>
 <span id="cb8-34"><a href="#cb8-34"></a><span class="in">    PARAMCD == "SYSBP",</span></span>
 <span id="cb8-35"><a href="#cb8-35"></a><span class="in">    # post-baseline visits</span></span>
-<span id="cb8-36"><a href="#cb8-36"></a><span class="in">    AVISITN &gt;= 1</span></span>
+<span id="cb8-36"><a href="#cb8-36"></a><span class="in">    AVISITN &gt;= 2</span></span>
 <span id="cb8-37"><a href="#cb8-37"></a><span class="in">  ) |&gt;</span></span>
 <span id="cb8-38"><a href="#cb8-38"></a><span class="in">  # analyze maximum values of each subject</span></span>
 <span id="cb8-39"><a href="#cb8-39"></a><span class="in">  slice_max(AVAL, n = 1L, by = USUBJID) |&gt;</span></span>
@@ -1093,7 +1093,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb8-91"><a href="#cb8-91"></a><span class="in">) |&gt;</span></span>
 <span id="cb8-92"><a href="#cb8-92"></a><span class="in">  modify_header(</span></span>
 <span id="cb8-93"><a href="#cb8-93"></a><span class="in">    # Update label, add analysis value units</span></span>
-<span id="cb8-94"><a href="#cb8-94"></a><span class="in">    label ~ paste0("**Systolic Blood Pressure (", data$AVALU[1], ")**"),</span></span>
+<span id="cb8-94"><a href="#cb8-94"></a><span class="in">    label ~ paste0("**Systolic Blood Pressure (", data$VSORRESU[1], ")**"),</span></span>
 <span id="cb8-95"><a href="#cb8-95"></a><span class="in">    # Add N values to `by` variable labels</span></span>
 <span id="cb8-96"><a href="#cb8-96"></a><span class="in">    all_stat_cols() ~ "**{level}**  \nN = {n}"</span></span>
 <span id="cb8-97"><a href="#cb8-97"></a><span class="in">  )</span></span>

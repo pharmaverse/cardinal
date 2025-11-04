@@ -252,28 +252,29 @@ cookieconsent.run({
 <span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(cards)</span>
 <span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(gtsummary)</span>
 <span id="cb1-5"><a href="#cb1-5"></a></span>
-<span id="cb1-6"><a href="#cb1-6"></a>adsl <span class="ot">&lt;-</span> pharmaverseadam<span class="sc">::</span>adsl</span>
-<span id="cb1-7"><a href="#cb1-7"></a></span>
-<span id="cb1-8"><a href="#cb1-8"></a><span class="co"># Pre-processing --------------------------------------------</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a>data <span class="ot">&lt;-</span> adsl <span class="sc">|&gt;</span></span>
-<span id="cb1-10"><a href="#cb1-10"></a>  <span class="co"># Filter for the safety population</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a>  <span class="fu">filter</span>(SAFFL <span class="sc">==</span> <span class="st">"Y"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb1-12"><a href="#cb1-12"></a>  <span class="co"># Calculate treatment duration values</span></span>
-<span id="cb1-13"><a href="#cb1-13"></a>  <span class="fu">mutate</span>(<span class="at">TRTDUR =</span> lubridate<span class="sc">::</span><span class="fu">interval</span>(.data[[<span class="st">"TRTSDTM"</span>]], .data[[<span class="st">"TRTEDTM"</span>]])) <span class="sc">|&gt;</span></span>
-<span id="cb1-14"><a href="#cb1-14"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb1-15"><a href="#cb1-15"></a>    <span class="co"># Get treatment duration values in months (for analysis of subjects treated)</span></span>
-<span id="cb1-16"><a href="#cb1-16"></a>    <span class="at">TRTDUR_MONTHS =</span> TRTDUR <span class="sc">|&gt;</span> <span class="fu">as.numeric</span>(<span class="st">"months"</span>),</span>
-<span id="cb1-17"><a href="#cb1-17"></a>    <span class="co"># Specify unit to use for duration of treatment (for analysis of treatment duration)</span></span>
-<span id="cb1-18"><a href="#cb1-18"></a>    <span class="at">TRTDUR =</span> TRTDUR <span class="sc">|&gt;</span> <span class="fu">as.numeric</span>(<span class="st">"days"</span>)</span>
-<span id="cb1-19"><a href="#cb1-19"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb1-20"><a href="#cb1-20"></a>  <span class="co"># Add one flag variable for each treatment duration range</span></span>
-<span id="cb1-21"><a href="#cb1-21"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb1-22"><a href="#cb1-22"></a>    <span class="at">D_ANY =</span> TRTDUR <span class="sc">&gt;=</span> <span class="dv">1</span>, <span class="co"># duration &gt;=1 day</span></span>
-<span id="cb1-23"><a href="#cb1-23"></a>    <span class="at">D_GT1 =</span> TRTDUR_MONTHS <span class="sc">&gt;=</span> <span class="dv">1</span>, <span class="co"># duration &gt;=1 month</span></span>
-<span id="cb1-24"><a href="#cb1-24"></a>    <span class="at">D_GT3 =</span> TRTDUR_MONTHS <span class="sc">&gt;=</span> <span class="dv">3</span>, <span class="co"># duration &gt;=3 months</span></span>
-<span id="cb1-25"><a href="#cb1-25"></a>    <span class="at">D_GT6 =</span> TRTDUR_MONTHS <span class="sc">&gt;=</span> <span class="dv">6</span>, <span class="co"># duration &gt;=6 months</span></span>
-<span id="cb1-26"><a href="#cb1-26"></a>    <span class="at">D_GT12 =</span> TRTDUR_MONTHS <span class="sc">&gt;=</span> <span class="dv">12</span> <span class="co"># duration &gt;=12 months</span></span>
-<span id="cb1-27"><a href="#cb1-27"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-6"><a href="#cb1-6"></a>adsl <span class="ot">&lt;-</span> pharmaverseadam<span class="sc">::</span>adsl <span class="sc">|&gt;</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>  <span class="fu">filter</span>(TRT01A <span class="sc">!=</span> <span class="st">"Screen Failure"</span>) <span class="co"># Remove screening failure observations</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a></span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="co"># Pre-processing --------------------------------------------</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a>data <span class="ot">&lt;-</span> adsl <span class="sc">|&gt;</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a>  <span class="co"># Filter for the safety population</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a>  <span class="fu">filter</span>(SAFFL <span class="sc">==</span> <span class="st">"Y"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a>  <span class="co"># Calculate treatment duration values</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a>  <span class="fu">mutate</span>(<span class="at">TRTDUR =</span> lubridate<span class="sc">::</span><span class="fu">interval</span>(.data[[<span class="st">"TRTSDTM"</span>]], .data[[<span class="st">"TRTEDTM"</span>]])) <span class="sc">|&gt;</span></span>
+<span id="cb1-15"><a href="#cb1-15"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb1-16"><a href="#cb1-16"></a>    <span class="co"># Get treatment duration values in months (for analysis of subjects treated)</span></span>
+<span id="cb1-17"><a href="#cb1-17"></a>    <span class="at">TRTDUR_MONTHS =</span> TRTDUR <span class="sc">|&gt;</span> <span class="fu">as.numeric</span>(<span class="st">"months"</span>),</span>
+<span id="cb1-18"><a href="#cb1-18"></a>    <span class="co"># Specify unit to use for duration of treatment (for analysis of treatment duration)</span></span>
+<span id="cb1-19"><a href="#cb1-19"></a>    <span class="at">TRTDUR =</span> TRTDUR <span class="sc">|&gt;</span> <span class="fu">as.numeric</span>(<span class="st">"days"</span>)</span>
+<span id="cb1-20"><a href="#cb1-20"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb1-21"><a href="#cb1-21"></a>  <span class="co"># Add one flag variable for each treatment duration range</span></span>
+<span id="cb1-22"><a href="#cb1-22"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb1-23"><a href="#cb1-23"></a>    <span class="at">D_ANY =</span> TRTDUR <span class="sc">&gt;=</span> <span class="dv">1</span>, <span class="co"># duration &gt;=1 day</span></span>
+<span id="cb1-24"><a href="#cb1-24"></a>    <span class="at">D_GT1 =</span> TRTDUR_MONTHS <span class="sc">&gt;=</span> <span class="dv">1</span>, <span class="co"># duration &gt;=1 month</span></span>
+<span id="cb1-25"><a href="#cb1-25"></a>    <span class="at">D_GT3 =</span> TRTDUR_MONTHS <span class="sc">&gt;=</span> <span class="dv">3</span>, <span class="co"># duration &gt;=3 months</span></span>
+<span id="cb1-26"><a href="#cb1-26"></a>    <span class="at">D_GT6 =</span> TRTDUR_MONTHS <span class="sc">&gt;=</span> <span class="dv">6</span>, <span class="co"># duration &gt;=6 months</span></span>
+<span id="cb1-27"><a href="#cb1-27"></a>    <span class="at">D_GT12 =</span> TRTDUR_MONTHS <span class="sc">&gt;=</span> <span class="dv">12</span> <span class="co"># duration &gt;=12 months</span></span>
+<span id="cb1-28"><a href="#cb1-28"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </div>
@@ -285,7 +286,7 @@ cookieconsent.run({
 <span id="cb2-4"><a href="#cb2-4"></a>    <span class="at">.by =</span> TRT01A,</span>
 <span id="cb2-5"><a href="#cb2-5"></a></span>
 <span id="cb2-6"><a href="#cb2-6"></a>    <span class="co"># Analysis of treatment duration ----------------------</span></span>
-<span id="cb2-7"><a href="#cb2-7"></a>    <span class="fu">ard_continuous</span>(</span>
+<span id="cb2-7"><a href="#cb2-7"></a>    <span class="fu">ard_summary</span>(</span>
 <span id="cb2-8"><a href="#cb2-8"></a>      <span class="at">variables =</span> TRTDUR,</span>
 <span id="cb2-9"><a href="#cb2-9"></a>      <span class="at">statistic =</span> <span class="fu">everything</span>() <span class="sc">~</span> <span class="fu">continuous_summary_fns</span>(</span>
 <span id="cb2-10"><a href="#cb2-10"></a>        <span class="co"># Specify which default statistics to include</span></span>
@@ -317,15 +318,15 @@ cookieconsent.run({
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   group1 group1_level variable variable_level   context    stat_name stat_label     stat fmt_fun warning error
-1  TRT01A      Placebo   TRTDUR                continuo…         mean       Mean  149.541       1              
-2  TRT01A      Placebo   TRTDUR                continuo…           sd         SD   60.354       1              
-3  TRT01A      Placebo   TRTDUR                continuo…       median     Median      182       1              
-4  TRT01A      Placebo   TRTDUR                continuo…          min        Min        7       1              
-5  TRT01A      Placebo   TRTDUR                continuo…          max        Max      210       1              
-6  TRT01A      Placebo   TRTDUR                continuo…          p25         Q1      134       1              
-7  TRT01A      Placebo   TRTDUR                continuo…          p75         Q3      183       1              
-8  TRT01A      Placebo   TRTDUR                continuo… tot_exposure  tot_expo…    12711       1              
-9  TRT01A      Placebo   TRTDUR                continuo…   person_yrs  person_y…   34.801       1              
+1  TRT01A      Placebo   TRTDUR                  summary         mean       Mean  149.541       1              
+2  TRT01A      Placebo   TRTDUR                  summary           sd         SD   60.354       1              
+3  TRT01A      Placebo   TRTDUR                  summary       median     Median      182       1              
+4  TRT01A      Placebo   TRTDUR                  summary          min        Min        7       1              
+5  TRT01A      Placebo   TRTDUR                  summary          max        Max      210       1              
+6  TRT01A      Placebo   TRTDUR                  summary          p25         Q1      134       1              
+7  TRT01A      Placebo   TRTDUR                  summary          p75         Q3      183       1              
+8  TRT01A      Placebo   TRTDUR                  summary tot_exposure  tot_expo…    12711       1              
+9  TRT01A      Placebo   TRTDUR                  summary   person_yrs  person_y…   34.801       1              
 10 TRT01A      Placebo    D_ANY           TRUE tabulate…            n          n       85       0              
 11 TRT01A      Placebo    D_ANY           TRUE tabulate…            p          %        1    &lt;fn&gt;              
 12 TRT01A      Placebo    D_GT1           TRUE tabulate…            n          n       77       0              
@@ -336,15 +337,15 @@ cookieconsent.run({
 17 TRT01A      Placebo    D_GT6           TRUE tabulate…            p          %    0.471    &lt;fn&gt;              
 18 TRT01A      Placebo   D_GT12           TRUE tabulate…            n          n        0       0              
 19 TRT01A      Placebo   D_GT12           TRUE tabulate…            p          %        0    &lt;fn&gt;              
-20 TRT01A    Xanomeli…   TRTDUR                continuo…         mean       Mean  112.222       1              
-21 TRT01A    Xanomeli…   TRTDUR                continuo…           sd         SD   65.523       1              
-22 TRT01A    Xanomeli…   TRTDUR                continuo…       median     Median     96.5       1              
-23 TRT01A    Xanomeli…   TRTDUR                continuo…          min        Min       15       1              
-24 TRT01A    Xanomeli…   TRTDUR                continuo…          max        Max      200       1              
-25 TRT01A    Xanomeli…   TRTDUR                continuo…          p25         Q1     53.5       1              
-26 TRT01A    Xanomeli…   TRTDUR                continuo…          p75         Q3      183       1              
-27 TRT01A    Xanomeli…   TRTDUR                continuo… tot_exposure  tot_expo… 8079.999       1              
-28 TRT01A    Xanomeli…   TRTDUR                continuo…   person_yrs  person_y…   22.122       1              
+20 TRT01A    Xanomeli…   TRTDUR                  summary         mean       Mean  112.222       1              
+21 TRT01A    Xanomeli…   TRTDUR                  summary           sd         SD   65.523       1              
+22 TRT01A    Xanomeli…   TRTDUR                  summary       median     Median     96.5       1              
+23 TRT01A    Xanomeli…   TRTDUR                  summary          min        Min       15       1              
+24 TRT01A    Xanomeli…   TRTDUR                  summary          max        Max      200       1              
+25 TRT01A    Xanomeli…   TRTDUR                  summary          p25         Q1     53.5       1              
+26 TRT01A    Xanomeli…   TRTDUR                  summary          p75         Q3      183       1              
+27 TRT01A    Xanomeli…   TRTDUR                  summary tot_exposure  tot_expo… 8079.999       1              
+28 TRT01A    Xanomeli…   TRTDUR                  summary   person_yrs  person_y…   22.122       1              
 29 TRT01A    Xanomeli…    D_ANY           TRUE tabulate…            n          n       72       0              
 30 TRT01A    Xanomeli…    D_ANY           TRUE tabulate…            p          %        1    &lt;fn&gt;              
 31 TRT01A    Xanomeli…    D_GT1           TRUE tabulate…            n          n       67       0              
@@ -355,8 +356,8 @@ cookieconsent.run({
 36 TRT01A    Xanomeli…    D_GT6           TRUE tabulate…            p          %    0.278    &lt;fn&gt;              
 37 TRT01A    Xanomeli…   D_GT12           TRUE tabulate…            n          n        0       0              
 38 TRT01A    Xanomeli…   D_GT12           TRUE tabulate…            p          %        0    &lt;fn&gt;              
-39 TRT01A    Xanomeli…   TRTDUR                continuo…         mean       Mean   86.811       1              
-40 TRT01A    Xanomeli…   TRTDUR                continuo…           sd         SD   70.474       1              </code></pre>
+39 TRT01A    Xanomeli…   TRTDUR                  summary         mean       Mean   86.811       1              
+40 TRT01A    Xanomeli…   TRTDUR                  summary           sd         SD   70.474       1              </code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>ℹ 26 more rows</code></pre>
@@ -1049,122 +1050,123 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb8-19"><a href="#cb8-19"></a><span class="in">library(cards)</span></span>
 <span id="cb8-20"><a href="#cb8-20"></a><span class="in">library(gtsummary)</span></span>
 <span id="cb8-21"><a href="#cb8-21"></a></span>
-<span id="cb8-22"><a href="#cb8-22"></a><span class="in">adsl &lt;- pharmaverseadam::adsl</span></span>
-<span id="cb8-23"><a href="#cb8-23"></a></span>
-<span id="cb8-24"><a href="#cb8-24"></a><span class="in"># Pre-processing --------------------------------------------</span></span>
-<span id="cb8-25"><a href="#cb8-25"></a><span class="in">data &lt;- adsl |&gt;</span></span>
-<span id="cb8-26"><a href="#cb8-26"></a><span class="in">  # Filter for the safety population</span></span>
-<span id="cb8-27"><a href="#cb8-27"></a><span class="in">  filter(SAFFL == "Y") |&gt;</span></span>
-<span id="cb8-28"><a href="#cb8-28"></a><span class="in">  # Calculate treatment duration values</span></span>
-<span id="cb8-29"><a href="#cb8-29"></a><span class="in">  mutate(TRTDUR = lubridate::interval(.data[["TRTSDTM"]], .data[["TRTEDTM"]])) |&gt;</span></span>
-<span id="cb8-30"><a href="#cb8-30"></a><span class="in">  mutate(</span></span>
-<span id="cb8-31"><a href="#cb8-31"></a><span class="in">    # Get treatment duration values in months (for analysis of subjects treated)</span></span>
-<span id="cb8-32"><a href="#cb8-32"></a><span class="in">    TRTDUR_MONTHS = TRTDUR |&gt; as.numeric("months"),</span></span>
-<span id="cb8-33"><a href="#cb8-33"></a><span class="in">    # Specify unit to use for duration of treatment (for analysis of treatment duration)</span></span>
-<span id="cb8-34"><a href="#cb8-34"></a><span class="in">    TRTDUR = TRTDUR |&gt; as.numeric("days")</span></span>
-<span id="cb8-35"><a href="#cb8-35"></a><span class="in">  ) |&gt;</span></span>
-<span id="cb8-36"><a href="#cb8-36"></a><span class="in">  # Add one flag variable for each treatment duration range</span></span>
-<span id="cb8-37"><a href="#cb8-37"></a><span class="in">  mutate(</span></span>
-<span id="cb8-38"><a href="#cb8-38"></a><span class="in">    D_ANY = TRTDUR &gt;= 1, # duration &gt;=1 day</span></span>
-<span id="cb8-39"><a href="#cb8-39"></a><span class="in">    D_GT1 = TRTDUR_MONTHS &gt;= 1, # duration &gt;=1 month</span></span>
-<span id="cb8-40"><a href="#cb8-40"></a><span class="in">    D_GT3 = TRTDUR_MONTHS &gt;= 3, # duration &gt;=3 months</span></span>
-<span id="cb8-41"><a href="#cb8-41"></a><span class="in">    D_GT6 = TRTDUR_MONTHS &gt;= 6, # duration &gt;=6 months</span></span>
-<span id="cb8-42"><a href="#cb8-42"></a><span class="in">    D_GT12 = TRTDUR_MONTHS &gt;= 12 # duration &gt;=12 months</span></span>
-<span id="cb8-43"><a href="#cb8-43"></a><span class="in">  )</span></span>
-<span id="cb8-44"><a href="#cb8-44"></a><span class="in">```</span></span>
-<span id="cb8-45"><a href="#cb8-45"></a></span>
-<span id="cb8-46"><a href="#cb8-46"></a><span class="fu">## Build ARD</span></span>
-<span id="cb8-47"><a href="#cb8-47"></a></span>
-<span id="cb8-48"><a href="#cb8-48"></a><span class="in">```{r ard, message=FALSE, warning=FALSE, results='hide'}</span></span>
-<span id="cb8-49"><a href="#cb8-49"></a><span class="in"># Stack ARD results of two analyses</span></span>
-<span id="cb8-50"><a href="#cb8-50"></a><span class="in">ard &lt;- data |&gt;</span></span>
-<span id="cb8-51"><a href="#cb8-51"></a><span class="in">  ard_stack(</span></span>
-<span id="cb8-52"><a href="#cb8-52"></a><span class="in">    .by = TRT01A,</span></span>
-<span id="cb8-53"><a href="#cb8-53"></a></span>
-<span id="cb8-54"><a href="#cb8-54"></a><span class="in">    # Analysis of treatment duration ----------------------</span></span>
-<span id="cb8-55"><a href="#cb8-55"></a><span class="in">    ard_continuous(</span></span>
-<span id="cb8-56"><a href="#cb8-56"></a><span class="in">      variables = TRTDUR,</span></span>
-<span id="cb8-57"><a href="#cb8-57"></a><span class="in">      statistic = everything() ~ continuous_summary_fns(</span></span>
-<span id="cb8-58"><a href="#cb8-58"></a><span class="in">        # Specify which default statistics to include</span></span>
-<span id="cb8-59"><a href="#cb8-59"></a><span class="in">        summaries = c("mean", "sd", "median", "min", "max", "p25", "p75"),</span></span>
-<span id="cb8-60"><a href="#cb8-60"></a><span class="in">        # Specify custom statistics to include</span></span>
-<span id="cb8-61"><a href="#cb8-61"></a><span class="in">        other_stats = list(</span></span>
-<span id="cb8-62"><a href="#cb8-62"></a><span class="in">          # Add total exposure statistic</span></span>
-<span id="cb8-63"><a href="#cb8-63"></a><span class="in">          tot_exposure = \(x) sum(x),</span></span>
-<span id="cb8-64"><a href="#cb8-64"></a><span class="in">          # Add total person years statistic (using same unit specified in pre-processing)</span></span>
-<span id="cb8-65"><a href="#cb8-65"></a><span class="in">          person_yrs = \(x) as.numeric(lubridate::duration(sum(x), "days"), "years")</span></span>
-<span id="cb8-66"><a href="#cb8-66"></a><span class="in">        )</span></span>
-<span id="cb8-67"><a href="#cb8-67"></a><span class="in">      )</span></span>
-<span id="cb8-68"><a href="#cb8-68"></a><span class="in">    ),</span></span>
-<span id="cb8-69"><a href="#cb8-69"></a></span>
-<span id="cb8-70"><a href="#cb8-70"></a><span class="in">    # Analysis of subjects treated ------------------------</span></span>
-<span id="cb8-71"><a href="#cb8-71"></a><span class="in">    ard_tabulate_value(</span></span>
-<span id="cb8-72"><a href="#cb8-72"></a><span class="in">      variables = c(D_ANY, D_GT1, D_GT3, D_GT6, D_GT12),</span></span>
-<span id="cb8-73"><a href="#cb8-73"></a><span class="in">      # Calculate the n and % statistics for each flag variable</span></span>
-<span id="cb8-74"><a href="#cb8-74"></a><span class="in">      statistic = everything() ~ c("n", "p")</span></span>
-<span id="cb8-75"><a href="#cb8-75"></a><span class="in">    )</span></span>
-<span id="cb8-76"><a href="#cb8-76"></a><span class="in">  )</span></span>
-<span id="cb8-77"><a href="#cb8-77"></a></span>
-<span id="cb8-78"><a href="#cb8-78"></a><span class="in">ard</span></span>
-<span id="cb8-79"><a href="#cb8-79"></a><span class="in">```</span></span>
-<span id="cb8-80"><a href="#cb8-80"></a></span>
-<span id="cb8-81"><a href="#cb8-81"></a><span class="in">```{r, echo=FALSE}</span></span>
-<span id="cb8-82"><a href="#cb8-82"></a><span class="in"># Print ARD</span></span>
-<span id="cb8-83"><a href="#cb8-83"></a><span class="in">withr::local_options(width = 9999)</span></span>
-<span id="cb8-84"><a href="#cb8-84"></a><span class="in">print(ard, columns = "all", n = 40)</span></span>
-<span id="cb8-85"><a href="#cb8-85"></a><span class="in">```</span></span>
-<span id="cb8-86"><a href="#cb8-86"></a></span>
-<span id="cb8-87"><a href="#cb8-87"></a><span class="fu">## Build Table</span></span>
-<span id="cb8-88"><a href="#cb8-88"></a></span>
-<span id="cb8-89"><a href="#cb8-89"></a><span class="in">```{r tbl, results = 'hide'}</span></span>
-<span id="cb8-90"><a href="#cb8-90"></a><span class="in"># Use info from the ARD previously generated to create a table</span></span>
-<span id="cb8-91"><a href="#cb8-91"></a><span class="in">tbl &lt;- tbl_ard_summary(</span></span>
-<span id="cb8-92"><a href="#cb8-92"></a><span class="in">  ard,</span></span>
-<span id="cb8-93"><a href="#cb8-93"></a><span class="in">  by = TRT01A,</span></span>
-<span id="cb8-94"><a href="#cb8-94"></a><span class="in">  # Use type "continuous2" to display statistics on separate lines</span></span>
-<span id="cb8-95"><a href="#cb8-95"></a><span class="in">  type = list(TRTDUR = "continuous2"),</span></span>
-<span id="cb8-96"><a href="#cb8-96"></a><span class="in">  # Specify summary statistics to display for treatment duration variable</span></span>
-<span id="cb8-97"><a href="#cb8-97"></a><span class="in">  statistic = all_continuous() ~ c(</span></span>
-<span id="cb8-98"><a href="#cb8-98"></a><span class="in">    "{mean} ({sd})", "{median} ({min}, {max})",</span></span>
-<span id="cb8-99"><a href="#cb8-99"></a><span class="in">    iqr = "{p25} - {p75}", "{tot_exposure} ({person_yrs})"</span></span>
-<span id="cb8-100"><a href="#cb8-100"></a><span class="in">  ),</span></span>
-<span id="cb8-101"><a href="#cb8-101"></a><span class="in">  # Add descriptive labels for each variable</span></span>
-<span id="cb8-102"><a href="#cb8-102"></a><span class="in">  label =</span></span>
-<span id="cb8-103"><a href="#cb8-103"></a><span class="in">    list(</span></span>
-<span id="cb8-104"><a href="#cb8-104"></a><span class="in">      TRTDUR = "Duration of Treatment, days",</span></span>
-<span id="cb8-105"><a href="#cb8-105"></a><span class="in">      D_ANY = "&gt;= 1 day",</span></span>
-<span id="cb8-106"><a href="#cb8-106"></a><span class="in">      D_GT1 = "&gt;=1 month",</span></span>
-<span id="cb8-107"><a href="#cb8-107"></a><span class="in">      D_GT3 = "&gt;=3 months",</span></span>
-<span id="cb8-108"><a href="#cb8-108"></a><span class="in">      D_GT6 = "&gt;=6 months",</span></span>
-<span id="cb8-109"><a href="#cb8-109"></a><span class="in">      D_GT12 = "&gt;=12 months"</span></span>
-<span id="cb8-110"><a href="#cb8-110"></a><span class="in">    )</span></span>
-<span id="cb8-111"><a href="#cb8-111"></a><span class="in">) |&gt;</span></span>
-<span id="cb8-112"><a href="#cb8-112"></a><span class="in">  # Add custom statistic labels for treatment duration variable, keep other stat labels as is</span></span>
-<span id="cb8-113"><a href="#cb8-113"></a><span class="in">  add_stat_label(</span></span>
-<span id="cb8-114"><a href="#cb8-114"></a><span class="in">    label = list(</span></span>
-<span id="cb8-115"><a href="#cb8-115"></a><span class="in">      TRTDUR ~ c("Mean (SD)", "Median (min, max)", "Interquartile range", "Total exposure (person-years)"),</span></span>
-<span id="cb8-116"><a href="#cb8-116"></a><span class="in">      all_dichotomous() ~ NA_character_</span></span>
-<span id="cb8-117"><a href="#cb8-117"></a><span class="in">    )</span></span>
-<span id="cb8-118"><a href="#cb8-118"></a><span class="in">  ) |&gt;</span></span>
-<span id="cb8-119"><a href="#cb8-119"></a><span class="in">  # Add label over analysis of group of flag variables</span></span>
-<span id="cb8-120"><a href="#cb8-120"></a><span class="in">  add_variable_group_header("Subjects Treated, by duration, n (%)", all_dichotomous()) |&gt;</span></span>
-<span id="cb8-121"><a href="#cb8-121"></a><span class="in">  # Update header labels</span></span>
-<span id="cb8-122"><a href="#cb8-122"></a><span class="in">  modify_header(</span></span>
-<span id="cb8-123"><a href="#cb8-123"></a><span class="in">    label ~ "**Parameter**",</span></span>
-<span id="cb8-124"><a href="#cb8-124"></a><span class="in">    all_stat_cols() ~ "**{level}**  \nN = {n}"</span></span>
-<span id="cb8-125"><a href="#cb8-125"></a><span class="in">  )</span></span>
-<span id="cb8-126"><a href="#cb8-126"></a></span>
-<span id="cb8-127"><a href="#cb8-127"></a><span class="in">tbl</span></span>
-<span id="cb8-128"><a href="#cb8-128"></a><span class="in">```</span></span>
-<span id="cb8-129"><a href="#cb8-129"></a></span>
-<span id="cb8-130"><a href="#cb8-130"></a><span class="in">```{r eval=FALSE, include=FALSE}</span></span>
-<span id="cb8-131"><a href="#cb8-131"></a><span class="in"># Run chunk locally to generate image file</span></span>
-<span id="cb8-132"><a href="#cb8-132"></a><span class="in">gt::gtsave(as_gt(tbl), filename = "result.png")</span></span>
-<span id="cb8-133"><a href="#cb8-133"></a><span class="in">```</span></span>
-<span id="cb8-134"><a href="#cb8-134"></a></span>
-<span id="cb8-135"><a href="#cb8-135"></a><span class="in">```{r img, echo=FALSE, fig.align='center', out.width='60%'}</span></span>
-<span id="cb8-136"><a href="#cb8-136"></a><span class="in">```</span></span>
-<span id="cb8-137"><a href="#cb8-137"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-22"><a href="#cb8-22"></a><span class="in">adsl &lt;- pharmaverseadam::adsl |&gt;</span></span>
+<span id="cb8-23"><a href="#cb8-23"></a><span class="in">  filter(TRT01A != "Screen Failure") # Remove screening failure observations</span></span>
+<span id="cb8-24"><a href="#cb8-24"></a></span>
+<span id="cb8-25"><a href="#cb8-25"></a><span class="in"># Pre-processing --------------------------------------------</span></span>
+<span id="cb8-26"><a href="#cb8-26"></a><span class="in">data &lt;- adsl |&gt;</span></span>
+<span id="cb8-27"><a href="#cb8-27"></a><span class="in">  # Filter for the safety population</span></span>
+<span id="cb8-28"><a href="#cb8-28"></a><span class="in">  filter(SAFFL == "Y") |&gt;</span></span>
+<span id="cb8-29"><a href="#cb8-29"></a><span class="in">  # Calculate treatment duration values</span></span>
+<span id="cb8-30"><a href="#cb8-30"></a><span class="in">  mutate(TRTDUR = lubridate::interval(.data[["TRTSDTM"]], .data[["TRTEDTM"]])) |&gt;</span></span>
+<span id="cb8-31"><a href="#cb8-31"></a><span class="in">  mutate(</span></span>
+<span id="cb8-32"><a href="#cb8-32"></a><span class="in">    # Get treatment duration values in months (for analysis of subjects treated)</span></span>
+<span id="cb8-33"><a href="#cb8-33"></a><span class="in">    TRTDUR_MONTHS = TRTDUR |&gt; as.numeric("months"),</span></span>
+<span id="cb8-34"><a href="#cb8-34"></a><span class="in">    # Specify unit to use for duration of treatment (for analysis of treatment duration)</span></span>
+<span id="cb8-35"><a href="#cb8-35"></a><span class="in">    TRTDUR = TRTDUR |&gt; as.numeric("days")</span></span>
+<span id="cb8-36"><a href="#cb8-36"></a><span class="in">  ) |&gt;</span></span>
+<span id="cb8-37"><a href="#cb8-37"></a><span class="in">  # Add one flag variable for each treatment duration range</span></span>
+<span id="cb8-38"><a href="#cb8-38"></a><span class="in">  mutate(</span></span>
+<span id="cb8-39"><a href="#cb8-39"></a><span class="in">    D_ANY = TRTDUR &gt;= 1, # duration &gt;=1 day</span></span>
+<span id="cb8-40"><a href="#cb8-40"></a><span class="in">    D_GT1 = TRTDUR_MONTHS &gt;= 1, # duration &gt;=1 month</span></span>
+<span id="cb8-41"><a href="#cb8-41"></a><span class="in">    D_GT3 = TRTDUR_MONTHS &gt;= 3, # duration &gt;=3 months</span></span>
+<span id="cb8-42"><a href="#cb8-42"></a><span class="in">    D_GT6 = TRTDUR_MONTHS &gt;= 6, # duration &gt;=6 months</span></span>
+<span id="cb8-43"><a href="#cb8-43"></a><span class="in">    D_GT12 = TRTDUR_MONTHS &gt;= 12 # duration &gt;=12 months</span></span>
+<span id="cb8-44"><a href="#cb8-44"></a><span class="in">  )</span></span>
+<span id="cb8-45"><a href="#cb8-45"></a><span class="in">```</span></span>
+<span id="cb8-46"><a href="#cb8-46"></a></span>
+<span id="cb8-47"><a href="#cb8-47"></a><span class="fu">## Build ARD</span></span>
+<span id="cb8-48"><a href="#cb8-48"></a></span>
+<span id="cb8-49"><a href="#cb8-49"></a><span class="in">```{r ard, message=FALSE, warning=FALSE, results='hide'}</span></span>
+<span id="cb8-50"><a href="#cb8-50"></a><span class="in"># Stack ARD results of two analyses</span></span>
+<span id="cb8-51"><a href="#cb8-51"></a><span class="in">ard &lt;- data |&gt;</span></span>
+<span id="cb8-52"><a href="#cb8-52"></a><span class="in">  ard_stack(</span></span>
+<span id="cb8-53"><a href="#cb8-53"></a><span class="in">    .by = TRT01A,</span></span>
+<span id="cb8-54"><a href="#cb8-54"></a></span>
+<span id="cb8-55"><a href="#cb8-55"></a><span class="in">    # Analysis of treatment duration ----------------------</span></span>
+<span id="cb8-56"><a href="#cb8-56"></a><span class="in">    ard_summary(</span></span>
+<span id="cb8-57"><a href="#cb8-57"></a><span class="in">      variables = TRTDUR,</span></span>
+<span id="cb8-58"><a href="#cb8-58"></a><span class="in">      statistic = everything() ~ continuous_summary_fns(</span></span>
+<span id="cb8-59"><a href="#cb8-59"></a><span class="in">        # Specify which default statistics to include</span></span>
+<span id="cb8-60"><a href="#cb8-60"></a><span class="in">        summaries = c("mean", "sd", "median", "min", "max", "p25", "p75"),</span></span>
+<span id="cb8-61"><a href="#cb8-61"></a><span class="in">        # Specify custom statistics to include</span></span>
+<span id="cb8-62"><a href="#cb8-62"></a><span class="in">        other_stats = list(</span></span>
+<span id="cb8-63"><a href="#cb8-63"></a><span class="in">          # Add total exposure statistic</span></span>
+<span id="cb8-64"><a href="#cb8-64"></a><span class="in">          tot_exposure = \(x) sum(x),</span></span>
+<span id="cb8-65"><a href="#cb8-65"></a><span class="in">          # Add total person years statistic (using same unit specified in pre-processing)</span></span>
+<span id="cb8-66"><a href="#cb8-66"></a><span class="in">          person_yrs = \(x) as.numeric(lubridate::duration(sum(x), "days"), "years")</span></span>
+<span id="cb8-67"><a href="#cb8-67"></a><span class="in">        )</span></span>
+<span id="cb8-68"><a href="#cb8-68"></a><span class="in">      )</span></span>
+<span id="cb8-69"><a href="#cb8-69"></a><span class="in">    ),</span></span>
+<span id="cb8-70"><a href="#cb8-70"></a></span>
+<span id="cb8-71"><a href="#cb8-71"></a><span class="in">    # Analysis of subjects treated ------------------------</span></span>
+<span id="cb8-72"><a href="#cb8-72"></a><span class="in">    ard_tabulate_value(</span></span>
+<span id="cb8-73"><a href="#cb8-73"></a><span class="in">      variables = c(D_ANY, D_GT1, D_GT3, D_GT6, D_GT12),</span></span>
+<span id="cb8-74"><a href="#cb8-74"></a><span class="in">      # Calculate the n and % statistics for each flag variable</span></span>
+<span id="cb8-75"><a href="#cb8-75"></a><span class="in">      statistic = everything() ~ c("n", "p")</span></span>
+<span id="cb8-76"><a href="#cb8-76"></a><span class="in">    )</span></span>
+<span id="cb8-77"><a href="#cb8-77"></a><span class="in">  )</span></span>
+<span id="cb8-78"><a href="#cb8-78"></a></span>
+<span id="cb8-79"><a href="#cb8-79"></a><span class="in">ard</span></span>
+<span id="cb8-80"><a href="#cb8-80"></a><span class="in">```</span></span>
+<span id="cb8-81"><a href="#cb8-81"></a></span>
+<span id="cb8-82"><a href="#cb8-82"></a><span class="in">```{r, echo=FALSE}</span></span>
+<span id="cb8-83"><a href="#cb8-83"></a><span class="in"># Print ARD</span></span>
+<span id="cb8-84"><a href="#cb8-84"></a><span class="in">withr::local_options(width = 9999)</span></span>
+<span id="cb8-85"><a href="#cb8-85"></a><span class="in">print(ard, columns = "all", n = 40)</span></span>
+<span id="cb8-86"><a href="#cb8-86"></a><span class="in">```</span></span>
+<span id="cb8-87"><a href="#cb8-87"></a></span>
+<span id="cb8-88"><a href="#cb8-88"></a><span class="fu">## Build Table</span></span>
+<span id="cb8-89"><a href="#cb8-89"></a></span>
+<span id="cb8-90"><a href="#cb8-90"></a><span class="in">```{r tbl, results = 'hide'}</span></span>
+<span id="cb8-91"><a href="#cb8-91"></a><span class="in"># Use info from the ARD previously generated to create a table</span></span>
+<span id="cb8-92"><a href="#cb8-92"></a><span class="in">tbl &lt;- tbl_ard_summary(</span></span>
+<span id="cb8-93"><a href="#cb8-93"></a><span class="in">  ard,</span></span>
+<span id="cb8-94"><a href="#cb8-94"></a><span class="in">  by = TRT01A,</span></span>
+<span id="cb8-95"><a href="#cb8-95"></a><span class="in">  # Use type "continuous2" to display statistics on separate lines</span></span>
+<span id="cb8-96"><a href="#cb8-96"></a><span class="in">  type = list(TRTDUR = "continuous2"),</span></span>
+<span id="cb8-97"><a href="#cb8-97"></a><span class="in">  # Specify summary statistics to display for treatment duration variable</span></span>
+<span id="cb8-98"><a href="#cb8-98"></a><span class="in">  statistic = all_continuous() ~ c(</span></span>
+<span id="cb8-99"><a href="#cb8-99"></a><span class="in">    "{mean} ({sd})", "{median} ({min}, {max})",</span></span>
+<span id="cb8-100"><a href="#cb8-100"></a><span class="in">    iqr = "{p25} - {p75}", "{tot_exposure} ({person_yrs})"</span></span>
+<span id="cb8-101"><a href="#cb8-101"></a><span class="in">  ),</span></span>
+<span id="cb8-102"><a href="#cb8-102"></a><span class="in">  # Add descriptive labels for each variable</span></span>
+<span id="cb8-103"><a href="#cb8-103"></a><span class="in">  label =</span></span>
+<span id="cb8-104"><a href="#cb8-104"></a><span class="in">    list(</span></span>
+<span id="cb8-105"><a href="#cb8-105"></a><span class="in">      TRTDUR = "Duration of Treatment, days",</span></span>
+<span id="cb8-106"><a href="#cb8-106"></a><span class="in">      D_ANY = "&gt;= 1 day",</span></span>
+<span id="cb8-107"><a href="#cb8-107"></a><span class="in">      D_GT1 = "&gt;=1 month",</span></span>
+<span id="cb8-108"><a href="#cb8-108"></a><span class="in">      D_GT3 = "&gt;=3 months",</span></span>
+<span id="cb8-109"><a href="#cb8-109"></a><span class="in">      D_GT6 = "&gt;=6 months",</span></span>
+<span id="cb8-110"><a href="#cb8-110"></a><span class="in">      D_GT12 = "&gt;=12 months"</span></span>
+<span id="cb8-111"><a href="#cb8-111"></a><span class="in">    )</span></span>
+<span id="cb8-112"><a href="#cb8-112"></a><span class="in">) |&gt;</span></span>
+<span id="cb8-113"><a href="#cb8-113"></a><span class="in">  # Add custom statistic labels for treatment duration variable, keep other stat labels as is</span></span>
+<span id="cb8-114"><a href="#cb8-114"></a><span class="in">  add_stat_label(</span></span>
+<span id="cb8-115"><a href="#cb8-115"></a><span class="in">    label = list(</span></span>
+<span id="cb8-116"><a href="#cb8-116"></a><span class="in">      TRTDUR ~ c("Mean (SD)", "Median (min, max)", "Interquartile range", "Total exposure (person-years)"),</span></span>
+<span id="cb8-117"><a href="#cb8-117"></a><span class="in">      all_dichotomous() ~ NA_character_</span></span>
+<span id="cb8-118"><a href="#cb8-118"></a><span class="in">    )</span></span>
+<span id="cb8-119"><a href="#cb8-119"></a><span class="in">  ) |&gt;</span></span>
+<span id="cb8-120"><a href="#cb8-120"></a><span class="in">  # Add label over analysis of group of flag variables</span></span>
+<span id="cb8-121"><a href="#cb8-121"></a><span class="in">  add_variable_group_header("Subjects Treated, by duration, n (%)", all_dichotomous()) |&gt;</span></span>
+<span id="cb8-122"><a href="#cb8-122"></a><span class="in">  # Update header labels</span></span>
+<span id="cb8-123"><a href="#cb8-123"></a><span class="in">  modify_header(</span></span>
+<span id="cb8-124"><a href="#cb8-124"></a><span class="in">    label ~ "**Parameter**",</span></span>
+<span id="cb8-125"><a href="#cb8-125"></a><span class="in">    all_stat_cols() ~ "**{level}**  \nN = {n}"</span></span>
+<span id="cb8-126"><a href="#cb8-126"></a><span class="in">  )</span></span>
+<span id="cb8-127"><a href="#cb8-127"></a></span>
+<span id="cb8-128"><a href="#cb8-128"></a><span class="in">tbl</span></span>
+<span id="cb8-129"><a href="#cb8-129"></a><span class="in">```</span></span>
+<span id="cb8-130"><a href="#cb8-130"></a></span>
+<span id="cb8-131"><a href="#cb8-131"></a><span class="in">```{r eval=FALSE, include=FALSE}</span></span>
+<span id="cb8-132"><a href="#cb8-132"></a><span class="in"># Run chunk locally to generate image file</span></span>
+<span id="cb8-133"><a href="#cb8-133"></a><span class="in">gt::gtsave(as_gt(tbl), filename = "result.png")</span></span>
+<span id="cb8-134"><a href="#cb8-134"></a><span class="in">```</span></span>
+<span id="cb8-135"><a href="#cb8-135"></a></span>
+<span id="cb8-136"><a href="#cb8-136"></a><span class="in">```{r img, echo=FALSE, fig.align='center', out.width='60%'}</span></span>
+<span id="cb8-137"><a href="#cb8-137"></a><span class="in">```</span></span>
+<span id="cb8-138"><a href="#cb8-138"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
