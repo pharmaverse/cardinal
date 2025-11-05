@@ -30,12 +30,12 @@ data <- adae |>
   filter(SAFFL == "Y")  # safety population
  
 sliced_data <- data %>%
-  count(AEBODSYS, sort = TRUE) %>%
-  slice_head(n = 3) %>%        # keep top 3
-  pull(AEBODSYS)
+  count(AESOC, sort = TRUE) %>%
+  slice_head(n = 2) %>%        # keep top 3
+  pull(AESOC)
 
 data <- data %>%
-  filter(AEBODSYS %in% sliced_data)
+  filter(AESOC %in% sliced_data)
 
 ```
 
