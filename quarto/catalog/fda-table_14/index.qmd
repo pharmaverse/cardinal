@@ -27,8 +27,16 @@ adsl <- adsl |>
   filter(SAFFL == "Y") # safety population
 
 data <- adae |>
-  filter(SAFFL == "Y")  %>% # safety population
-  sample_frac(0.5) #reducing 50 percent of records for table visual 
+  filter(SAFFL == "Y")  # safety population
+ 
+sliced_data <- data %>%
+  count(AEBODSYS, sort = TRUE) %>%
+  slice_head(n = 3) %>%        # keep top 3
+  pull(AEBODSYS)
+
+data <- data %>%
+  filter(AEBODSYS %in% sliced_data)
+
 ```
 
 ## Build ARD
