@@ -43,6 +43,14 @@ data <- adae |>
     # narrow OCMQ
     OCMQ01SC == "NARROW"
   )
+
+sliced_data <- data %>%
+  count(AEBODSYS, sort = TRUE) %>%
+  slice_head(n = 3) %>% # keep top 3
+  pull(AEBODSYS)
+
+data <- data %>%
+  filter(AEBODSYS %in% sliced_data)
 ```
 
 ## Build ARD

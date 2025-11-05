@@ -28,6 +28,14 @@ adsl <- adsl |>
 
 data <- adae |>
   filter(SAFFL == "Y") # safety population
+
+sliced_data <- data %>%
+  count(AESOC, sort = TRUE) %>%
+  slice_head(n = 2) %>% # keep top 2
+  pull(AESOC)
+
+data <- data %>%
+  filter(AESOC %in% sliced_data)
 ```
 
 ## Build ARD
