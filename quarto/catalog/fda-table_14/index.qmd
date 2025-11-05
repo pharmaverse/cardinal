@@ -27,11 +27,11 @@ adsl <- adsl |>
   filter(SAFFL == "Y") # safety population
 
 data <- adae |>
-  filter(SAFFL == "Y")  # safety population
- 
+  filter(SAFFL == "Y") # safety population
+
 sliced_data <- data %>%
   count(AESOC, sort = TRUE) %>%
-  slice_head(n = 2) %>%        # keep top 3
+  slice_head(n = 2) %>%        # keep top 2
   pull(AESOC)
 
 data <- data %>%
