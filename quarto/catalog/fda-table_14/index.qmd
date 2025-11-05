@@ -27,7 +27,8 @@ adsl <- adsl |>
   filter(SAFFL == "Y") # safety population
 
 data <- adae |>
-  filter(SAFFL == "Y") # safety population
+  filter(SAFFL == "Y")  %>% # safety population
+  sample_frac(0.5) #reducing 50 percent of records for table visual 
 ```
 
 ## Build ARD

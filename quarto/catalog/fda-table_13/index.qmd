@@ -42,7 +42,7 @@ data <- adae |>
     SAFFL == "Y",
     # narrow OCMQ
     OCMQ01SC == "NARROW"
-  )
+  ) %>% sample_frac(0.5) #reducing 50 percent of records for table visual 
 ```
 
 ## Build ARD
