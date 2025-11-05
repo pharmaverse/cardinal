@@ -46,7 +46,7 @@ data <- adae |>
 
 sliced_data <- data %>%
   count(AEBODSYS, sort = TRUE) %>%
-  slice_head(n = 3) %>%        # keep top 3
+  slice_head(n = 3) %>% # keep top 3
   pull(AEBODSYS)
 
 data <- data %>%
