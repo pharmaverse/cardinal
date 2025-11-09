@@ -26,12 +26,10 @@ adae <- pharmaverseadam::adae
 adsl <- adsl |>
   filter(SAFFL == "Y") # safety population
 
-data <- adae |>
-  filter(SAFFL == "Y") # safety population
-
+# for display purpose showing only bottom 5 SOCs
 sliced_data <- data %>%
-  count(AESOC, sort = TRUE) %>%
-  slice_head(n = 2) %>% # keep top 2
+  count(AESOC) %>%
+  slice_min(order_by = n, n = 5) %>%
   pull(AESOC)
 
 data <- data %>%
