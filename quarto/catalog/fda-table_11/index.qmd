@@ -41,7 +41,6 @@ sliced_data <- data %>%
 
 data <- data %>%
   filter(AEBODSYS %in% sliced_data)
-
 ```
 
 ## Build ARD
