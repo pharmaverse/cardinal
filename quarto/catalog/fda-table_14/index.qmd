@@ -27,12 +27,12 @@ adsl <- adsl |>
   filter(SAFFL == "Y") # safety population
 
 # for display purpose showing only bottom 5 SOCs
-sliced_data <- data %>%
-  count(AESOC) %>%
-  slice_min(order_by = n, n = 5) %>%
+sliced_data <- data |>
+  count(AESOC) |>
+  slice_min(order_by = n, n = 5) |>
   pull(AESOC)
 
-data <- data %>%
+data <- data |>
   filter(AESOC %in% sliced_data)
 ```
 
