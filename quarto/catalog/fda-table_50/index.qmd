@@ -19,39 +19,40 @@ library(dplyr)
 library(cards)
 library(gtsummary)
 
-adae <- random.cdisc.data::cadae
-adsl <- random.cdisc.data::cadsl
+adae <- pharmaverseadam::adae
+adsl <- pharmaverseadam::adsl
+
+# This specific dataset is reduced significantly after filtering.
+# We'll take a few steps to ensure factor levels are present and
+# match between the AE data and the denominators.
 
 adsl <- adsl |>
-  filter(SAFFL == "Y")
+  filter(SAFFL == "Y") |>
+  mutate(TRT01A = as.factor(TRT01A))
+
+adae <- adae |> mutate(
+  TRT01A = as.factor(TRT01A),
+  SEXGR = "Sex, n (%)",
+  SEXGR1 = as.factor(SEX),
+  AGEGR = "Age group, years, n(%)",
+  RACEGR = "Race, n(%)",
+  ETHNICGR = "Ethnicity, n(%)",
+  ETHNICGR1 = as.factor(RACE)
+)
 
 data <- adae |>
   filter(
     SAFFL == "Y",
     TRTEMFL == "Y",
     AESER == "Y"
-  ) |>
-  mutate(
-    SEXGR = "Sex, n (%)",
-    SEXGR1 = as.factor(SEX),
-    AGEGR = "Age group, years, n(%)",
-    AGEGR1 = factor(
-      case_when(
-        AGE >= 17 & AGE < 65 ~ ">=17 to <65",
-        AGE >= 65 & AGE < 75 ~ "65-74",
-        AGE >= 75 ~ ">=75"
-      ),
-      levels = c(">=17 to <65", "65-74", ">=75")
-    ),
-    RACEGR = "Race, n(%)",
-    RACEGR1 = as.factor(RACE),
-    ETHNICGR = "Ethnicity, n(%)",
-    ETHNICGR1 = as.factor(RACE)
   )
+
 
 data_any_sae <- adae |>
   filter(AESER == "Y") |>
-  mutate(AESER = "Any SAE, n(%)")
+  mutate(
+    AESER = "Any SAE, n(%)"
+  )
 ```
 
 ## Build Table
@@ -110,7 +111,11 @@ tbl_ethnic <- tbl_hierarchical(
 tbl <- list(tbl_any_sae, tbl_sex, tbl_agegr1, tbl_race, tbl_ethnic) |>
   tbl_stack() |>
   modify_indent("label", rows = !(variable %in% c("..ard_hierarchical_overall..", "AESER", "SEXGR", "AGEGR", "RACEGR", "ETHNICGR"))) |>
-  remove_footnote_header(columns = everything())
+  remove_footnote_header(columns = everything()) |>
+  modify_post_fmt_fun(
+    fmt_fun = ~ ifelse(. == "0/0 (NA%)", "0 (0%)", .),
+    columns = all_stat_cols()
+  )
 
 tbl
 ```

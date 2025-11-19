@@ -20,16 +20,16 @@ library(cards)
 library(gtsummary)
 
 set.seed(1)
-adsl <- random.cdisc.data::cadsl
-adae <- random.cdisc.data::cadae
+adsl <- pharmaverseadam::adsl
+adae <- pharmaverseadam::adae
 
 adae <- adae |>
-  rename(OCMQ01SC = SMQ01SC) |>
+  rename(OCMQ01SC = AEHLTCD) |>
   mutate(
     AESER = sample(c("Y", "N"), size = nrow(adae), replace = TRUE),
     OCMQ01NAM = sample(c("OCMQ1", "OCMQ2", "OCMQ3"), size = nrow(adae), replace = TRUE)
   )
-adae$DCSREAS[is.na(adae$DCSREAS)] <- "ADVERSE EVENT"
+
 adae$OCMQ01SC[is.na(adae$OCMQ01SC)] <- "NARROW"
 
 # Pre-processing --------------------------------------------
@@ -41,10 +41,16 @@ data <- adae |>
     # safety population
     SAFFL == "Y",
     # narrow OCMQ
-    OCMQ01SC == "NARROW",
-    # discontinuation due to AE
-    DCSREAS == "ADVERSE EVENT"
+    OCMQ01SC == "NARROW"
   )
+
+sliced_data <- data |>
+  count(AEBODSYS, sort = TRUE) |>
+  slice_head(n = 3) |> # keep top 3
+  pull(AEBODSYS)
+
+data <- data |>
+  filter(AEBODSYS %in% sliced_data)
 ```
 
 ## Build ARD

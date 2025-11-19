@@ -19,15 +19,21 @@ library(dplyr)
 library(cards)
 library(gtsummary)
 
-adae <- random.cdisc.data::cadae
-adsl <- random.cdisc.data::cadsl
+adsl <- pharmaverseadam::adsl
+adae <- pharmaverseadam::adae
 
 # Pre-processing --------------------------------------------
 adsl <- adsl |>
   filter(SAFFL == "Y") # safety population
 
+# for display purpose showing only bottom 5 SOCs
+sliced_data <- adae |>
+  count(AESOC) |>
+  slice_min(order_by = n, n = 5) |>
+  pull(AESOC)
+
 data <- adae |>
-  filter(SAFFL == "Y") # safety population
+  filter(AESOC %in% sliced_data)
 ```
 
 ## Build ARD
