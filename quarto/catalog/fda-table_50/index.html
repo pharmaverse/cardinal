@@ -252,39 +252,40 @@ cookieconsent.run({
 <span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(cards)</span>
 <span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(gtsummary)</span>
 <span id="cb1-5"><a href="#cb1-5"></a></span>
-<span id="cb1-6"><a href="#cb1-6"></a>adae <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadae</span>
-<span id="cb1-7"><a href="#cb1-7"></a>adsl <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadsl</span>
+<span id="cb1-6"><a href="#cb1-6"></a>adae <span class="ot">&lt;-</span> pharmaverseadam<span class="sc">::</span>adae</span>
+<span id="cb1-7"><a href="#cb1-7"></a>adsl <span class="ot">&lt;-</span> pharmaverseadam<span class="sc">::</span>adsl</span>
 <span id="cb1-8"><a href="#cb1-8"></a></span>
-<span id="cb1-9"><a href="#cb1-9"></a>adsl <span class="ot">&lt;-</span> adsl <span class="sc">|&gt;</span></span>
-<span id="cb1-10"><a href="#cb1-10"></a>  <span class="fu">filter</span>(SAFFL <span class="sc">==</span> <span class="st">"Y"</span>)</span>
-<span id="cb1-11"><a href="#cb1-11"></a></span>
-<span id="cb1-12"><a href="#cb1-12"></a>data <span class="ot">&lt;-</span> adae <span class="sc">|&gt;</span></span>
-<span id="cb1-13"><a href="#cb1-13"></a>  <span class="fu">filter</span>(</span>
-<span id="cb1-14"><a href="#cb1-14"></a>    SAFFL <span class="sc">==</span> <span class="st">"Y"</span>,</span>
-<span id="cb1-15"><a href="#cb1-15"></a>    TRTEMFL <span class="sc">==</span> <span class="st">"Y"</span>,</span>
-<span id="cb1-16"><a href="#cb1-16"></a>    AESER <span class="sc">==</span> <span class="st">"Y"</span></span>
-<span id="cb1-17"><a href="#cb1-17"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb1-18"><a href="#cb1-18"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb1-19"><a href="#cb1-19"></a>    <span class="at">SEXGR =</span> <span class="st">"Sex, n (%)"</span>,</span>
-<span id="cb1-20"><a href="#cb1-20"></a>    <span class="at">SEXGR1 =</span> <span class="fu">as.factor</span>(SEX),</span>
-<span id="cb1-21"><a href="#cb1-21"></a>    <span class="at">AGEGR =</span> <span class="st">"Age group, years, n(%)"</span>,</span>
-<span id="cb1-22"><a href="#cb1-22"></a>    <span class="at">AGEGR1 =</span> <span class="fu">factor</span>(</span>
-<span id="cb1-23"><a href="#cb1-23"></a>      <span class="fu">case_when</span>(</span>
-<span id="cb1-24"><a href="#cb1-24"></a>        AGE <span class="sc">&gt;=</span> <span class="dv">17</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"&gt;=17 to &lt;65"</span>,</span>
-<span id="cb1-25"><a href="#cb1-25"></a>        AGE <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">&amp;</span> AGE <span class="sc">&lt;</span> <span class="dv">75</span> <span class="sc">~</span> <span class="st">"65-74"</span>,</span>
-<span id="cb1-26"><a href="#cb1-26"></a>        AGE <span class="sc">&gt;=</span> <span class="dv">75</span> <span class="sc">~</span> <span class="st">"&gt;=75"</span></span>
-<span id="cb1-27"><a href="#cb1-27"></a>      ),</span>
-<span id="cb1-28"><a href="#cb1-28"></a>      <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"&gt;=17 to &lt;65"</span>, <span class="st">"65-74"</span>, <span class="st">"&gt;=75"</span>)</span>
-<span id="cb1-29"><a href="#cb1-29"></a>    ),</span>
-<span id="cb1-30"><a href="#cb1-30"></a>    <span class="at">RACEGR =</span> <span class="st">"Race, n(%)"</span>,</span>
-<span id="cb1-31"><a href="#cb1-31"></a>    <span class="at">RACEGR1 =</span> <span class="fu">as.factor</span>(RACE),</span>
-<span id="cb1-32"><a href="#cb1-32"></a>    <span class="at">ETHNICGR =</span> <span class="st">"Ethnicity, n(%)"</span>,</span>
-<span id="cb1-33"><a href="#cb1-33"></a>    <span class="at">ETHNICGR1 =</span> <span class="fu">as.factor</span>(RACE)</span>
-<span id="cb1-34"><a href="#cb1-34"></a>  )</span>
-<span id="cb1-35"><a href="#cb1-35"></a></span>
-<span id="cb1-36"><a href="#cb1-36"></a>data_any_sae <span class="ot">&lt;-</span> adae <span class="sc">|&gt;</span></span>
-<span id="cb1-37"><a href="#cb1-37"></a>  <span class="fu">filter</span>(AESER <span class="sc">==</span> <span class="st">"Y"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb1-38"><a href="#cb1-38"></a>  <span class="fu">mutate</span>(<span class="at">AESER =</span> <span class="st">"Any SAE, n(%)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="co"># This specific dataset is reduced significantly after filtering.</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="co"># We'll take a few steps to ensure factor levels are present and</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="co"># match between the AE data and the denominators.</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a></span>
+<span id="cb1-13"><a href="#cb1-13"></a>adsl <span class="ot">&lt;-</span> adsl <span class="sc">|&gt;</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a>  <span class="fu">filter</span>(SAFFL <span class="sc">==</span> <span class="st">"Y"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-15"><a href="#cb1-15"></a>  <span class="fu">mutate</span>(<span class="at">TRT01A =</span> <span class="fu">as.factor</span>(TRT01A))</span>
+<span id="cb1-16"><a href="#cb1-16"></a></span>
+<span id="cb1-17"><a href="#cb1-17"></a>adae <span class="ot">&lt;-</span> adae <span class="sc">|&gt;</span> <span class="fu">mutate</span>(</span>
+<span id="cb1-18"><a href="#cb1-18"></a>  <span class="at">TRT01A =</span> <span class="fu">as.factor</span>(TRT01A),</span>
+<span id="cb1-19"><a href="#cb1-19"></a>  <span class="at">SEXGR =</span> <span class="st">"Sex, n (%)"</span>,</span>
+<span id="cb1-20"><a href="#cb1-20"></a>  <span class="at">SEXGR1 =</span> <span class="fu">as.factor</span>(SEX),</span>
+<span id="cb1-21"><a href="#cb1-21"></a>  <span class="at">AGEGR =</span> <span class="st">"Age group, years, n(%)"</span>,</span>
+<span id="cb1-22"><a href="#cb1-22"></a>  <span class="at">RACEGR =</span> <span class="st">"Race, n(%)"</span>,</span>
+<span id="cb1-23"><a href="#cb1-23"></a>  <span class="at">ETHNICGR =</span> <span class="st">"Ethnicity, n(%)"</span>,</span>
+<span id="cb1-24"><a href="#cb1-24"></a>  <span class="at">ETHNICGR1 =</span> <span class="fu">as.factor</span>(RACE)</span>
+<span id="cb1-25"><a href="#cb1-25"></a>)</span>
+<span id="cb1-26"><a href="#cb1-26"></a></span>
+<span id="cb1-27"><a href="#cb1-27"></a>data <span class="ot">&lt;-</span> adae <span class="sc">|&gt;</span></span>
+<span id="cb1-28"><a href="#cb1-28"></a>  <span class="fu">filter</span>(</span>
+<span id="cb1-29"><a href="#cb1-29"></a>    SAFFL <span class="sc">==</span> <span class="st">"Y"</span>,</span>
+<span id="cb1-30"><a href="#cb1-30"></a>    TRTEMFL <span class="sc">==</span> <span class="st">"Y"</span>,</span>
+<span id="cb1-31"><a href="#cb1-31"></a>    AESER <span class="sc">==</span> <span class="st">"Y"</span></span>
+<span id="cb1-32"><a href="#cb1-32"></a>  )</span>
+<span id="cb1-33"><a href="#cb1-33"></a></span>
+<span id="cb1-34"><a href="#cb1-34"></a></span>
+<span id="cb1-35"><a href="#cb1-35"></a>data_any_sae <span class="ot">&lt;-</span> adae <span class="sc">|&gt;</span></span>
+<span id="cb1-36"><a href="#cb1-36"></a>  <span class="fu">filter</span>(AESER <span class="sc">==</span> <span class="st">"Y"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-37"><a href="#cb1-37"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb1-38"><a href="#cb1-38"></a>    <span class="at">AESER =</span> <span class="st">"Any SAE, n(%)"</span></span>
+<span id="cb1-39"><a href="#cb1-39"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </div>
@@ -343,53 +344,57 @@ cookieconsent.run({
 <span id="cb2-51"><a href="#cb2-51"></a>tbl <span class="ot">&lt;-</span> <span class="fu">list</span>(tbl_any_sae, tbl_sex, tbl_agegr1, tbl_race, tbl_ethnic) <span class="sc">|&gt;</span></span>
 <span id="cb2-52"><a href="#cb2-52"></a>  <span class="fu">tbl_stack</span>() <span class="sc">|&gt;</span></span>
 <span id="cb2-53"><a href="#cb2-53"></a>  <span class="fu">modify_indent</span>(<span class="st">"label"</span>, <span class="at">rows =</span> <span class="sc">!</span>(variable <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"..ard_hierarchical_overall.."</span>, <span class="st">"AESER"</span>, <span class="st">"SEXGR"</span>, <span class="st">"AGEGR"</span>, <span class="st">"RACEGR"</span>, <span class="st">"ETHNICGR"</span>))) <span class="sc">|&gt;</span></span>
-<span id="cb2-54"><a href="#cb2-54"></a>  <span class="fu">remove_footnote_header</span>(<span class="at">columns =</span> <span class="fu">everything</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-54"><a href="#cb2-54"></a>  <span class="fu">remove_footnote_header</span>(<span class="at">columns =</span> <span class="fu">everything</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb2-55"><a href="#cb2-55"></a>  <span class="fu">modify_post_fmt_fun</span>(</span>
+<span id="cb2-56"><a href="#cb2-56"></a>    <span class="at">fmt_fun =</span> <span class="sc">~</span> <span class="fu">ifelse</span>(. <span class="sc">==</span> <span class="st">"0/0 (NA%)"</span>, <span class="st">"0 (0%)"</span>, .),</span>
+<span id="cb2-57"><a href="#cb2-57"></a>    <span class="at">columns =</span> <span class="fu">all_stat_cols</span>()</span>
+<span id="cb2-58"><a href="#cb2-58"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
-<pre><code>Table 1 Column Name   Header                             
-label                 "**Characteristic**"               
-stat_1                "**A: Drug X**  \nN = 134"         
-stat_2                "**B: Placebo**  \nN = 134"        
-stat_3                "**C: Combination**  \nN = 132"    
-Table 2 Column Name   Header                            
-label                 "**SEXGR**  \n&nbsp;&nbsp;&nbsp;&nbsp;**Sex**"        
-stat_1                "**A: Drug X**  \nN = 104"        
-stat_2                "**B: Placebo**  \nN = 101"       
-stat_3                "**C: Combination**  \nN = 99"    
-Table 3 Column Name   Header                            
-label                 "**AGEGR**  \n&nbsp;&nbsp;&nbsp;&nbsp;**AGEGR1**"     
-stat_1                "**A: Drug X**  \nN = 104"        
-stat_2                "**B: Placebo**  \nN = 101"       
-stat_3                "**C: Combination**  \nN = 99"    
-Table 4 Column Name   Header                            
-label                 "**RACEGR**  \n&nbsp;&nbsp;&nbsp;&nbsp;**Race**"      
-stat_1                "**A: Drug X**  \nN = 104"        
-stat_2                "**B: Placebo**  \nN = 101"       
-stat_3                "**C: Combination**  \nN = 99"    
-Table 5 Column Name   Header                            
-label                 "**ETHNICGR**  \n&nbsp;&nbsp;&nbsp;&nbsp;**Race**"    
-stat_1                "**A: Drug X**  \nN = 104"        
-stat_2                "**B: Placebo**  \nN = 101"       
-stat_3                "**C: Combination**  \nN = 99"    </code></pre>
+<pre><code>Table 1 Column Name   Header                                  
+label                 "**Characteristic**"                    
+stat_1                "**Placebo**  \nN = 86"                 
+stat_2                "**Xanomeline High Dose**  \nN = 72"    
+stat_3                "**Xanomeline Low Dose**  \nN = 96"     
+Table 2 Column Name   Header                                 
+label                 "**SEXGR**  \n&nbsp;&nbsp;&nbsp;&nbsp;**SEXGR1**"          
+stat_1                "**Placebo**  \nN = 0"                 
+stat_2                "**Xanomeline High Dose**  \nN = 1"    
+stat_3                "**Xanomeline Low Dose**  \nN = 2"     
+Table 3 Column Name   Header                                       
+label                 "**AGEGR**  \n&nbsp;&nbsp;&nbsp;&nbsp;**Pooled Age Group 1**"    
+stat_1                "**Placebo**  \nN = 0"                       
+stat_2                "**Xanomeline High Dose**  \nN = 1"          
+stat_3                "**Xanomeline Low Dose**  \nN = 2"           
+Table 4 Column Name   Header                                         
+label                 "**RACEGR**  \n&nbsp;&nbsp;&nbsp;&nbsp;**Pooled Race Group 1**"    
+stat_1                "**Placebo**  \nN = 0"                         
+stat_2                "**Xanomeline High Dose**  \nN = 1"            
+stat_3                "**Xanomeline Low Dose**  \nN = 2"             
+Table 5 Column Name   Header                                 
+label                 "**ETHNICGR**  \n&nbsp;&nbsp;&nbsp;&nbsp;**ETHNICGR1**"    
+stat_1                "**Placebo**  \nN = 0"                 
+stat_2                "**Xanomeline High Dose**  \nN = 1"    
+stat_3                "**Xanomeline Low Dose**  \nN = 2"     </code></pre>
 </div>
 <details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<div id="huxglvpauu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#huxglvpauu table {
+<div id="lprbixyybv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#lprbixyybv table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#huxglvpauu thead, #huxglvpauu tbody, #huxglvpauu tfoot, #huxglvpauu tr, #huxglvpauu td, #huxglvpauu th {
+#lprbixyybv thead, #lprbixyybv tbody, #lprbixyybv tfoot, #lprbixyybv tr, #lprbixyybv td, #lprbixyybv th {
   border-style: none;
 }
 
-#huxglvpauu p {
+#lprbixyybv p {
   margin: 0;
   padding: 0;
 }
 
-#huxglvpauu .gt_table {
+#lprbixyybv .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -415,12 +420,12 @@ stat_3                "**C: Combination**  \nN = 99"    </code></pre>
   border-left-color: #D3D3D3;
 }
 
-#huxglvpauu .gt_caption {
+#lprbixyybv .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#huxglvpauu .gt_title {
+#lprbixyybv .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -432,7 +437,7 @@ stat_3                "**C: Combination**  \nN = 99"    </code></pre>
   border-bottom-width: 0;
 }
 
-#huxglvpauu .gt_subtitle {
+#lprbixyybv .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -444,7 +449,7 @@ stat_3                "**C: Combination**  \nN = 99"    </code></pre>
   border-top-width: 0;
 }
 
-#huxglvpauu .gt_heading {
+#lprbixyybv .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -456,13 +461,13 @@ stat_3                "**C: Combination**  \nN = 99"    </code></pre>
   border-right-color: #D3D3D3;
 }
 
-#huxglvpauu .gt_bottom_border {
+#lprbixyybv .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#huxglvpauu .gt_col_headings {
+#lprbixyybv .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -477,7 +482,7 @@ stat_3                "**C: Combination**  \nN = 99"    </code></pre>
   border-right-color: #D3D3D3;
 }
 
-#huxglvpauu .gt_col_heading {
+#lprbixyybv .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -497,7 +502,7 @@ stat_3                "**C: Combination**  \nN = 99"    </code></pre>
   overflow-x: hidden;
 }
 
-#huxglvpauu .gt_column_spanner_outer {
+#lprbixyybv .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -509,15 +514,15 @@ stat_3                "**C: Combination**  \nN = 99"    </code></pre>
   padding-right: 4px;
 }
 
-#huxglvpauu .gt_column_spanner_outer:first-child {
+#lprbixyybv .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#huxglvpauu .gt_column_spanner_outer:last-child {
+#lprbixyybv .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#huxglvpauu .gt_column_spanner {
+#lprbixyybv .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -529,11 +534,11 @@ stat_3                "**C: Combination**  \nN = 99"    </code></pre>
   width: 100%;
 }
 
-#huxglvpauu .gt_spanner_row {
+#lprbixyybv .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#huxglvpauu .gt_group_heading {
+#lprbixyybv .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -559,7 +564,7 @@ stat_3                "**C: Combination**  \nN = 99"    </code></pre>
   text-align: left;
 }
 
-#huxglvpauu .gt_empty_group_heading {
+#lprbixyybv .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -574,15 +579,15 @@ stat_3                "**C: Combination**  \nN = 99"    </code></pre>
   vertical-align: middle;
 }
 
-#huxglvpauu .gt_from_md > :first-child {
+#lprbixyybv .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#huxglvpauu .gt_from_md > :last-child {
+#lprbixyybv .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#huxglvpauu .gt_row {
+#lprbixyybv .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -601,7 +606,7 @@ stat_3                "**C: Combination**  \nN = 99"    </code></pre>
   overflow-x: hidden;
 }
 
-#huxglvpauu .gt_stub {
+#lprbixyybv .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -614,7 +619,7 @@ stat_3                "**C: Combination**  \nN = 99"    </code></pre>
   padding-right: 5px;
 }
 
-#huxglvpauu .gt_stub_row_group {
+#lprbixyybv .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -628,15 +633,15 @@ stat_3                "**C: Combination**  \nN = 99"    </code></pre>
   vertical-align: top;
 }
 
-#huxglvpauu .gt_row_group_first td {
+#lprbixyybv .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#huxglvpauu .gt_row_group_first th {
+#lprbixyybv .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#huxglvpauu .gt_summary_row {
+#lprbixyybv .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -646,16 +651,16 @@ stat_3                "**C: Combination**  \nN = 99"    </code></pre>
   padding-right: 5px;
 }
 
-#huxglvpauu .gt_first_summary_row {
+#lprbixyybv .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#huxglvpauu .gt_first_summary_row.thick {
+#lprbixyybv .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#huxglvpauu .gt_last_summary_row {
+#lprbixyybv .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -665,7 +670,7 @@ stat_3                "**C: Combination**  \nN = 99"    </code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#huxglvpauu .gt_grand_summary_row {
+#lprbixyybv .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -675,7 +680,7 @@ stat_3                "**C: Combination**  \nN = 99"    </code></pre>
   padding-right: 5px;
 }
 
-#huxglvpauu .gt_first_grand_summary_row {
+#lprbixyybv .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -685,7 +690,7 @@ stat_3                "**C: Combination**  \nN = 99"    </code></pre>
   border-top-color: #D3D3D3;
 }
 
-#huxglvpauu .gt_last_grand_summary_row_top {
+#lprbixyybv .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -695,11 +700,11 @@ stat_3                "**C: Combination**  \nN = 99"    </code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#huxglvpauu .gt_striped {
+#lprbixyybv .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#huxglvpauu .gt_table_body {
+#lprbixyybv .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -708,7 +713,7 @@ stat_3                "**C: Combination**  \nN = 99"    </code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#huxglvpauu .gt_footnotes {
+#lprbixyybv .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -722,7 +727,7 @@ stat_3                "**C: Combination**  \nN = 99"    </code></pre>
   border-right-color: #D3D3D3;
 }
 
-#huxglvpauu .gt_footnote {
+#lprbixyybv .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -731,7 +736,7 @@ stat_3                "**C: Combination**  \nN = 99"    </code></pre>
   padding-right: 5px;
 }
 
-#huxglvpauu .gt_sourcenotes {
+#lprbixyybv .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -745,7 +750,7 @@ stat_3                "**C: Combination**  \nN = 99"    </code></pre>
   border-right-color: #D3D3D3;
 }
 
-#huxglvpauu .gt_sourcenote {
+#lprbixyybv .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -753,72 +758,72 @@ stat_3                "**C: Combination**  \nN = 99"    </code></pre>
   padding-right: 5px;
 }
 
-#huxglvpauu .gt_left {
+#lprbixyybv .gt_left {
   text-align: left;
 }
 
-#huxglvpauu .gt_center {
+#lprbixyybv .gt_center {
   text-align: center;
 }
 
-#huxglvpauu .gt_right {
+#lprbixyybv .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#huxglvpauu .gt_font_normal {
+#lprbixyybv .gt_font_normal {
   font-weight: normal;
 }
 
-#huxglvpauu .gt_font_bold {
+#lprbixyybv .gt_font_bold {
   font-weight: bold;
 }
 
-#huxglvpauu .gt_font_italic {
+#lprbixyybv .gt_font_italic {
   font-style: italic;
 }
 
-#huxglvpauu .gt_super {
+#lprbixyybv .gt_super {
   font-size: 65%;
 }
 
-#huxglvpauu .gt_footnote_marks {
+#lprbixyybv .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#huxglvpauu .gt_asterisk {
+#lprbixyybv .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#huxglvpauu .gt_indent_1 {
+#lprbixyybv .gt_indent_1 {
   text-indent: 5px;
 }
 
-#huxglvpauu .gt_indent_2 {
+#lprbixyybv .gt_indent_2 {
   text-indent: 10px;
 }
 
-#huxglvpauu .gt_indent_3 {
+#lprbixyybv .gt_indent_3 {
   text-indent: 15px;
 }
 
-#huxglvpauu .gt_indent_4 {
+#lprbixyybv .gt_indent_4 {
   text-indent: 20px;
 }
 
-#huxglvpauu .gt_indent_5 {
+#lprbixyybv .gt_indent_5 {
   text-indent: 25px;
 }
 
-#huxglvpauu .katex-display {
+#lprbixyybv .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#huxglvpauu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#lprbixyybv div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -832,21 +837,21 @@ stat_3                "**C: Combination**  \nN = 99"    </code></pre>
 <thead><tr class="header gt_col_headings">
 <th id="label" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Characteristic</strong></th>
 <th id="stat_1" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">
-<strong>A: Drug X</strong><br>
-N = 134</th>
+<strong>Placebo</strong><br>
+N = 86</th>
 <th id="stat_2" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">
-<strong>B: Placebo</strong><br>
-N = 134</th>
+<strong>Xanomeline High Dose</strong><br>
+N = 72</th>
 <th id="stat_3" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">
-<strong>C: Combination</strong><br>
-N = 132</th>
+<strong>Xanomeline Low Dose</strong><br>
+N = 96</th>
 </tr></thead>
 <tbody class="gt_table_body">
 <tr class="odd">
 <td class="gt_row gt_left" headers="label">Any SAE, n(%)</td>
-<td class="gt_row gt_center" headers="stat_1">104 (78%)</td>
-<td class="gt_row gt_center" headers="stat_2">101 (75%)</td>
-<td class="gt_row gt_center" headers="stat_3">99 (75%)</td>
+<td class="gt_row gt_center" headers="stat_1">0 (0%)</td>
+<td class="gt_row gt_center" headers="stat_2">1 (1.4%)</td>
+<td class="gt_row gt_center" headers="stat_3">2 (2.1%)</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="label">Sex, n (%)</td>
@@ -856,15 +861,15 @@ N = 132</th>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;F</td>
-<td class="gt_row gt_center" headers="stat_1">61/104 (59%)</td>
-<td class="gt_row gt_center" headers="stat_2">64/101 (63%)</td>
-<td class="gt_row gt_center" headers="stat_3">50/99 (51%)</td>
+<td class="gt_row gt_center" headers="stat_1">0 (0%)</td>
+<td class="gt_row gt_center" headers="stat_2">1/1 (100%)</td>
+<td class="gt_row gt_center" headers="stat_3">1/1 (100%)</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;M</td>
-<td class="gt_row gt_center" headers="stat_1">43/104 (41%)</td>
-<td class="gt_row gt_center" headers="stat_2">37/101 (37%)</td>
-<td class="gt_row gt_center" headers="stat_3">49/99 (49%)</td>
+<td class="gt_row gt_center" headers="stat_1">0 (0%)</td>
+<td class="gt_row gt_center" headers="stat_2">0 (0%)</td>
+<td class="gt_row gt_center" headers="stat_3">1/1 (100%)</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="label">Age group, years, n(%)</td>
@@ -873,58 +878,22 @@ N = 132</th>
 <td class="gt_row gt_center" headers="stat_3"><br></td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;65-74</td>
-<td class="gt_row gt_center" headers="stat_1">0/104 (0%)</td>
-<td class="gt_row gt_center" headers="stat_2">0/101 (0%)</td>
-<td class="gt_row gt_center" headers="stat_3">1/99 (1.0%)</td>
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;&gt;64</td>
+<td class="gt_row gt_center" headers="stat_1">0 (0%)</td>
+<td class="gt_row gt_center" headers="stat_2">1/1 (100%)</td>
+<td class="gt_row gt_center" headers="stat_3">2/2 (100%)</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;&gt;=17 to &lt;65</td>
-<td class="gt_row gt_center" headers="stat_1">104/104 (100%)</td>
-<td class="gt_row gt_center" headers="stat_2">101/101 (100%)</td>
-<td class="gt_row gt_center" headers="stat_3">98/99 (99%)</td>
-</tr>
-<tr class="even">
 <td class="gt_row gt_left" headers="label">Race, n(%)</td>
 <td class="gt_row gt_center" headers="stat_1"><br></td>
 <td class="gt_row gt_center" headers="stat_2"><br></td>
 <td class="gt_row gt_center" headers="stat_3"><br></td>
 </tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;AMERICAN INDIAN OR ALASKA NATIVE</td>
-<td class="gt_row gt_center" headers="stat_1">7/104 (6.7%)</td>
-<td class="gt_row gt_center" headers="stat_2">8/101 (7.9%)</td>
-<td class="gt_row gt_center" headers="stat_3">5/99 (5.1%)</td>
-</tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;ASIAN</td>
-<td class="gt_row gt_center" headers="stat_1">52/104 (50%)</td>
-<td class="gt_row gt_center" headers="stat_2">46/101 (46%)</td>
-<td class="gt_row gt_center" headers="stat_3">51/99 (52%)</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;BLACK OR AFRICAN AMERICAN</td>
-<td class="gt_row gt_center" headers="stat_1">23/104 (22%)</td>
-<td class="gt_row gt_center" headers="stat_2">23/101 (23%)</td>
-<td class="gt_row gt_center" headers="stat_3">26/99 (26%)</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;MULTIPLE</td>
-<td class="gt_row gt_center" headers="stat_1">0/104 (0%)</td>
-<td class="gt_row gt_center" headers="stat_2">1/101 (1.0%)</td>
-<td class="gt_row gt_center" headers="stat_3">0/99 (0%)</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER</td>
-<td class="gt_row gt_center" headers="stat_1">0/104 (0%)</td>
-<td class="gt_row gt_center" headers="stat_2">1/101 (1.0%)</td>
-<td class="gt_row gt_center" headers="stat_3">0/99 (0%)</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;WHITE</td>
-<td class="gt_row gt_center" headers="stat_1">22/104 (21%)</td>
-<td class="gt_row gt_center" headers="stat_2">22/101 (22%)</td>
-<td class="gt_row gt_center" headers="stat_3">17/99 (17%)</td>
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;White</td>
+<td class="gt_row gt_center" headers="stat_1">0 (0%)</td>
+<td class="gt_row gt_center" headers="stat_2">1/1 (100%)</td>
+<td class="gt_row gt_center" headers="stat_3">2/2 (100%)</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="label">Ethnicity, n(%)</td>
@@ -933,40 +902,10 @@ N = 132</th>
 <td class="gt_row gt_center" headers="stat_3"><br></td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;AMERICAN INDIAN OR ALASKA NATIVE</td>
-<td class="gt_row gt_center" headers="stat_1">7/104 (6.7%)</td>
-<td class="gt_row gt_center" headers="stat_2">8/101 (7.9%)</td>
-<td class="gt_row gt_center" headers="stat_3">5/99 (5.1%)</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;ASIAN</td>
-<td class="gt_row gt_center" headers="stat_1">52/104 (50%)</td>
-<td class="gt_row gt_center" headers="stat_2">46/101 (46%)</td>
-<td class="gt_row gt_center" headers="stat_3">51/99 (52%)</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;BLACK OR AFRICAN AMERICAN</td>
-<td class="gt_row gt_center" headers="stat_1">23/104 (22%)</td>
-<td class="gt_row gt_center" headers="stat_2">23/101 (23%)</td>
-<td class="gt_row gt_center" headers="stat_3">26/99 (26%)</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;MULTIPLE</td>
-<td class="gt_row gt_center" headers="stat_1">0/104 (0%)</td>
-<td class="gt_row gt_center" headers="stat_2">1/101 (1.0%)</td>
-<td class="gt_row gt_center" headers="stat_3">0/99 (0%)</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER</td>
-<td class="gt_row gt_center" headers="stat_1">0/104 (0%)</td>
-<td class="gt_row gt_center" headers="stat_2">1/101 (1.0%)</td>
-<td class="gt_row gt_center" headers="stat_3">0/99 (0%)</td>
-</tr>
-<tr class="odd">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;WHITE</td>
-<td class="gt_row gt_center" headers="stat_1">22/104 (21%)</td>
-<td class="gt_row gt_center" headers="stat_2">22/101 (22%)</td>
-<td class="gt_row gt_center" headers="stat_3">17/99 (17%)</td>
+<td class="gt_row gt_center" headers="stat_1">0 (0%)</td>
+<td class="gt_row gt_center" headers="stat_2">1/1 (100%)</td>
+<td class="gt_row gt_center" headers="stat_3">2/2 (100%)</td>
 </tr>
 </tbody>
 </table>
@@ -998,24 +937,24 @@ N = 132</th>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   group1 group1_level variable variable_level   context stat_name stat_label  stat stat_fmt fmt_fun warning error gts_column
-1    &lt;NA&gt;                TRT01A      A: Drug X  tabulate         n          n   134      134       0                   stat_1
-2    &lt;NA&gt;                TRT01A      A: Drug X  tabulate         N          N   400      400       0                   stat_1
-3    &lt;NA&gt;                TRT01A      A: Drug X  tabulate         p          % 0.335     33.5    &lt;fn&gt;                   stat_1
-4    &lt;NA&gt;                TRT01A      B: Place…  tabulate         n          n   134      134       0                   stat_2
-5    &lt;NA&gt;                TRT01A      B: Place…  tabulate         N          N   400      400       0                   stat_2
-6    &lt;NA&gt;                TRT01A      B: Place…  tabulate         p          % 0.335     33.5    &lt;fn&gt;                   stat_2
-7    &lt;NA&gt;                TRT01A      C: Combi…  tabulate         n          n   132      132       0                   stat_3
-8    &lt;NA&gt;                TRT01A      C: Combi…  tabulate         N          N   400      400       0                   stat_3
-9    &lt;NA&gt;                TRT01A      C: Combi…  tabulate         p          %  0.33     33.0    &lt;fn&gt;                   stat_3
-10 TRT01A    A: Drug X    AESER      Any SAE,… hierarch…         n          n   104      104    &lt;fn&gt;                   stat_1
-11 TRT01A    A: Drug X    AESER      Any SAE,… hierarch…         N          N   134      134    &lt;fn&gt;                   stat_1
-12 TRT01A    A: Drug X    AESER      Any SAE,… hierarch…         p          % 0.776       78    &lt;fn&gt;                   stat_1
-13 TRT01A    B: Place…    AESER      Any SAE,… hierarch…         n          n   101      101    &lt;fn&gt;                   stat_2
-14 TRT01A    B: Place…    AESER      Any SAE,… hierarch…         N          N   134      134    &lt;fn&gt;                   stat_2
-15 TRT01A    B: Place…    AESER      Any SAE,… hierarch…         p          % 0.754       75    &lt;fn&gt;                   stat_2
-16 TRT01A    C: Combi…    AESER      Any SAE,… hierarch…         n          n    99       99    &lt;fn&gt;                   stat_3
-17 TRT01A    C: Combi…    AESER      Any SAE,… hierarch…         N          N   132      132    &lt;fn&gt;                   stat_3
-18 TRT01A    C: Combi…    AESER      Any SAE,… hierarch…         p          %  0.75       75    &lt;fn&gt;                   stat_3
+1    &lt;NA&gt;                TRT01A        Placebo  tabulate         n          n    86       86       0                   stat_1
+2    &lt;NA&gt;                TRT01A        Placebo  tabulate         N          N   254      254       0                   stat_1
+3    &lt;NA&gt;                TRT01A        Placebo  tabulate         p          % 0.339     33.9    &lt;fn&gt;                   stat_1
+4    &lt;NA&gt;                TRT01A      Xanomeli…  tabulate         n          n    72       72       0                   stat_2
+5    &lt;NA&gt;                TRT01A      Xanomeli…  tabulate         N          N   254      254       0                   stat_2
+6    &lt;NA&gt;                TRT01A      Xanomeli…  tabulate         p          % 0.283     28.3    &lt;fn&gt;                   stat_2
+7    &lt;NA&gt;                TRT01A      Xanomeli…  tabulate         n          n    96       96       0                   stat_3
+8    &lt;NA&gt;                TRT01A      Xanomeli…  tabulate         N          N   254      254       0                   stat_3
+9    &lt;NA&gt;                TRT01A      Xanomeli…  tabulate         p          % 0.378     37.8    &lt;fn&gt;                   stat_3
+10 TRT01A      Placebo    AESER      Any SAE,… hierarch…         n          n     0        0    &lt;fn&gt;                   stat_1
+11 TRT01A      Placebo    AESER      Any SAE,… hierarch…         N          N    86       86    &lt;fn&gt;                   stat_1
+12 TRT01A      Placebo    AESER      Any SAE,… hierarch…         p          %     0        0    &lt;fn&gt;                   stat_1
+13 TRT01A    Xanomeli…    AESER      Any SAE,… hierarch…         n          n     1        1    &lt;fn&gt;                   stat_2
+14 TRT01A    Xanomeli…    AESER      Any SAE,… hierarch…         N          N    72       72    &lt;fn&gt;                   stat_2
+15 TRT01A    Xanomeli…    AESER      Any SAE,… hierarch…         p          % 0.014      1.4    &lt;fn&gt;                   stat_2
+16 TRT01A    Xanomeli…    AESER      Any SAE,… hierarch…         n          n     2        2    &lt;fn&gt;                   stat_3
+17 TRT01A    Xanomeli…    AESER      Any SAE,… hierarch…         N          N    96       96    &lt;fn&gt;                   stat_3
+18 TRT01A    Xanomeli…    AESER      Any SAE,… hierarch…         p          % 0.021      2.1    &lt;fn&gt;                   stat_3
 
 
 [[2]]
@@ -1026,182 +965,117 @@ N = 132</th>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   group1 group1_level group2 group2_level variable variable_level   context stat_name stat_label  stat stat_fmt fmt_fun warning error gts_column
-1    &lt;NA&gt;                &lt;NA&gt;                TRT01A      A: Drug X  tabulate         n          n   104      104       0                   stat_1
-2    &lt;NA&gt;                &lt;NA&gt;                TRT01A      A: Drug X  tabulate         N          N   304      304       0                   stat_1
-3    &lt;NA&gt;                &lt;NA&gt;                TRT01A      A: Drug X  tabulate         p          % 0.342     34.2    &lt;fn&gt;                   stat_1
-4    &lt;NA&gt;                &lt;NA&gt;                TRT01A      B: Place…  tabulate         n          n   101      101       0                   stat_2
-5    &lt;NA&gt;                &lt;NA&gt;                TRT01A      B: Place…  tabulate         N          N   304      304       0                   stat_2
-6    &lt;NA&gt;                &lt;NA&gt;                TRT01A      B: Place…  tabulate         p          % 0.332     33.2    &lt;fn&gt;                   stat_2
-7    &lt;NA&gt;                &lt;NA&gt;                TRT01A      C: Combi…  tabulate         n          n    99       99       0                   stat_3
-8    &lt;NA&gt;                &lt;NA&gt;                TRT01A      C: Combi…  tabulate         N          N   304      304       0                   stat_3
-9    &lt;NA&gt;                &lt;NA&gt;                TRT01A      C: Combi…  tabulate         p          % 0.326     32.6    &lt;fn&gt;                   stat_3
-10 TRT01A    A: Drug X  SEXGR    Sex, n (…   SEXGR1              F hierarch…         n          n    61       61    &lt;fn&gt;                   stat_1
-11 TRT01A    A: Drug X  SEXGR    Sex, n (…   SEXGR1              F hierarch…         N          N   104      104    &lt;fn&gt;                   stat_1
-12 TRT01A    A: Drug X  SEXGR    Sex, n (…   SEXGR1              F hierarch…         p          % 0.587       59    &lt;fn&gt;                   stat_1
-13 TRT01A    B: Place…  SEXGR    Sex, n (…   SEXGR1              F hierarch…         n          n    64       64    &lt;fn&gt;                   stat_2
-14 TRT01A    B: Place…  SEXGR    Sex, n (…   SEXGR1              F hierarch…         N          N   101      101    &lt;fn&gt;                   stat_2
-15 TRT01A    B: Place…  SEXGR    Sex, n (…   SEXGR1              F hierarch…         p          % 0.634       63    &lt;fn&gt;                   stat_2
-16 TRT01A    C: Combi…  SEXGR    Sex, n (…   SEXGR1              F hierarch…         n          n    50       50    &lt;fn&gt;                   stat_3
-17 TRT01A    C: Combi…  SEXGR    Sex, n (…   SEXGR1              F hierarch…         N          N    99       99    &lt;fn&gt;                   stat_3
-18 TRT01A    C: Combi…  SEXGR    Sex, n (…   SEXGR1              F hierarch…         p          % 0.505       51    &lt;fn&gt;                   stat_3
-19 TRT01A    A: Drug X  SEXGR    Sex, n (…   SEXGR1              M hierarch…         n          n    43       43    &lt;fn&gt;                   stat_1
-20 TRT01A    A: Drug X  SEXGR    Sex, n (…   SEXGR1              M hierarch…         N          N   104      104    &lt;fn&gt;                   stat_1
-21 TRT01A    A: Drug X  SEXGR    Sex, n (…   SEXGR1              M hierarch…         p          % 0.413       41    &lt;fn&gt;                   stat_1
-22 TRT01A    B: Place…  SEXGR    Sex, n (…   SEXGR1              M hierarch…         n          n    37       37    &lt;fn&gt;                   stat_2
-23 TRT01A    B: Place…  SEXGR    Sex, n (…   SEXGR1              M hierarch…         N          N   101      101    &lt;fn&gt;                   stat_2
-24 TRT01A    B: Place…  SEXGR    Sex, n (…   SEXGR1              M hierarch…         p          % 0.366       37    &lt;fn&gt;                   stat_2
-25 TRT01A    C: Combi…  SEXGR    Sex, n (…   SEXGR1              M hierarch…         n          n    49       49    &lt;fn&gt;                   stat_3
-26 TRT01A    C: Combi…  SEXGR    Sex, n (…   SEXGR1              M hierarch…         N          N    99       99    &lt;fn&gt;                   stat_3
-27 TRT01A    C: Combi…  SEXGR    Sex, n (…   SEXGR1              M hierarch…         p          % 0.495       49    &lt;fn&gt;                   stat_3
+1    &lt;NA&gt;                &lt;NA&gt;                TRT01A        Placebo  tabulate         n          n     0        0       0                   stat_1
+2    &lt;NA&gt;                &lt;NA&gt;                TRT01A        Placebo  tabulate         N          N     3        3       0                   stat_1
+3    &lt;NA&gt;                &lt;NA&gt;                TRT01A        Placebo  tabulate         p          %     0      0.0    &lt;fn&gt;                   stat_1
+4    &lt;NA&gt;                &lt;NA&gt;                TRT01A      Xanomeli…  tabulate         n          n     1        1       0                   stat_2
+5    &lt;NA&gt;                &lt;NA&gt;                TRT01A      Xanomeli…  tabulate         N          N     3        3       0                   stat_2
+6    &lt;NA&gt;                &lt;NA&gt;                TRT01A      Xanomeli…  tabulate         p          % 0.333     33.3    &lt;fn&gt;                   stat_2
+7    &lt;NA&gt;                &lt;NA&gt;                TRT01A      Xanomeli…  tabulate         n          n     2        2       0                   stat_3
+8    &lt;NA&gt;                &lt;NA&gt;                TRT01A      Xanomeli…  tabulate         N          N     3        3       0                   stat_3
+9    &lt;NA&gt;                &lt;NA&gt;                TRT01A      Xanomeli…  tabulate         p          % 0.667     66.7    &lt;fn&gt;                   stat_3
+10 TRT01A      Placebo  SEXGR    Sex, n (…   SEXGR1              F hierarch…         n          n     0        0    &lt;fn&gt;                   stat_1
+11 TRT01A      Placebo  SEXGR    Sex, n (…   SEXGR1              F hierarch…         N          N     0        0    &lt;fn&gt;                   stat_1
+12 TRT01A      Placebo  SEXGR    Sex, n (…   SEXGR1              F hierarch…         p          %   NaN       NA    &lt;fn&gt;                   stat_1
+13 TRT01A    Xanomeli…  SEXGR    Sex, n (…   SEXGR1              F hierarch…         n          n     1        1    &lt;fn&gt;                   stat_2
+14 TRT01A    Xanomeli…  SEXGR    Sex, n (…   SEXGR1              F hierarch…         N          N     1        1    &lt;fn&gt;                   stat_2
+15 TRT01A    Xanomeli…  SEXGR    Sex, n (…   SEXGR1              F hierarch…         p          %     1      100    &lt;fn&gt;                   stat_2
+16 TRT01A    Xanomeli…  SEXGR    Sex, n (…   SEXGR1              F hierarch…         n          n     1        1    &lt;fn&gt;                   stat_3
+17 TRT01A    Xanomeli…  SEXGR    Sex, n (…   SEXGR1              F hierarch…         N          N     1        1    &lt;fn&gt;                   stat_3
+18 TRT01A    Xanomeli…  SEXGR    Sex, n (…   SEXGR1              F hierarch…         p          %     1      100    &lt;fn&gt;                   stat_3
+19 TRT01A      Placebo  SEXGR    Sex, n (…   SEXGR1              M hierarch…         n          n     0        0    &lt;fn&gt;                   stat_1
+20 TRT01A      Placebo  SEXGR    Sex, n (…   SEXGR1              M hierarch…         N          N     0        0    &lt;fn&gt;                   stat_1
+21 TRT01A      Placebo  SEXGR    Sex, n (…   SEXGR1              M hierarch…         p          %   NaN       NA    &lt;fn&gt;                   stat_1
+22 TRT01A    Xanomeli…  SEXGR    Sex, n (…   SEXGR1              M hierarch…         n          n     0        0    &lt;fn&gt;                   stat_2
+23 TRT01A    Xanomeli…  SEXGR    Sex, n (…   SEXGR1              M hierarch…         N          N     0        0    &lt;fn&gt;                   stat_2
+24 TRT01A    Xanomeli…  SEXGR    Sex, n (…   SEXGR1              M hierarch…         p          %   NaN       NA    &lt;fn&gt;                   stat_2
+25 TRT01A    Xanomeli…  SEXGR    Sex, n (…   SEXGR1              M hierarch…         n          n     1        1    &lt;fn&gt;                   stat_3
+26 TRT01A    Xanomeli…  SEXGR    Sex, n (…   SEXGR1              M hierarch…         N          N     1        1    &lt;fn&gt;                   stat_3
+27 TRT01A    Xanomeli…  SEXGR    Sex, n (…   SEXGR1              M hierarch…         p          %     1      100    &lt;fn&gt;                   stat_3
 
 
 [[3]]
 [[3]]$tbl_hierarchical</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>{cards} data frame: 27 x 15</code></pre>
+<pre><code>{cards} data frame: 18 x 15</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   group1 group1_level group2 group2_level variable variable_level   context stat_name stat_label  stat stat_fmt fmt_fun warning error gts_column
-1    &lt;NA&gt;                &lt;NA&gt;                TRT01A      A: Drug X  tabulate         n          n   104      104       0                   stat_1
-2    &lt;NA&gt;                &lt;NA&gt;                TRT01A      A: Drug X  tabulate         N          N   304      304       0                   stat_1
-3    &lt;NA&gt;                &lt;NA&gt;                TRT01A      A: Drug X  tabulate         p          % 0.342     34.2    &lt;fn&gt;                   stat_1
-4    &lt;NA&gt;                &lt;NA&gt;                TRT01A      B: Place…  tabulate         n          n   101      101       0                   stat_2
-5    &lt;NA&gt;                &lt;NA&gt;                TRT01A      B: Place…  tabulate         N          N   304      304       0                   stat_2
-6    &lt;NA&gt;                &lt;NA&gt;                TRT01A      B: Place…  tabulate         p          % 0.332     33.2    &lt;fn&gt;                   stat_2
-7    &lt;NA&gt;                &lt;NA&gt;                TRT01A      C: Combi…  tabulate         n          n    99       99       0                   stat_3
-8    &lt;NA&gt;                &lt;NA&gt;                TRT01A      C: Combi…  tabulate         N          N   304      304       0                   stat_3
-9    &lt;NA&gt;                &lt;NA&gt;                TRT01A      C: Combi…  tabulate         p          % 0.326     32.6    &lt;fn&gt;                   stat_3
-10 TRT01A    A: Drug X  AGEGR    Age grou…   AGEGR1          65-74 hierarch…         n          n     0        0    &lt;fn&gt;                   stat_1
-11 TRT01A    A: Drug X  AGEGR    Age grou…   AGEGR1          65-74 hierarch…         N          N   104      104    &lt;fn&gt;                   stat_1
-12 TRT01A    A: Drug X  AGEGR    Age grou…   AGEGR1          65-74 hierarch…         p          %     0        0    &lt;fn&gt;                   stat_1
-13 TRT01A    B: Place…  AGEGR    Age grou…   AGEGR1          65-74 hierarch…         n          n     0        0    &lt;fn&gt;                   stat_2
-14 TRT01A    B: Place…  AGEGR    Age grou…   AGEGR1          65-74 hierarch…         N          N   101      101    &lt;fn&gt;                   stat_2
-15 TRT01A    B: Place…  AGEGR    Age grou…   AGEGR1          65-74 hierarch…         p          %     0        0    &lt;fn&gt;                   stat_2
-16 TRT01A    C: Combi…  AGEGR    Age grou…   AGEGR1          65-74 hierarch…         n          n     1        1    &lt;fn&gt;                   stat_3
-17 TRT01A    C: Combi…  AGEGR    Age grou…   AGEGR1          65-74 hierarch…         N          N    99       99    &lt;fn&gt;                   stat_3
-18 TRT01A    C: Combi…  AGEGR    Age grou…   AGEGR1          65-74 hierarch…         p          %  0.01      1.0    &lt;fn&gt;                   stat_3
-19 TRT01A    A: Drug X  AGEGR    Age grou…   AGEGR1      &gt;=17 to … hierarch…         n          n   104      104    &lt;fn&gt;                   stat_1
-20 TRT01A    A: Drug X  AGEGR    Age grou…   AGEGR1      &gt;=17 to … hierarch…         N          N   104      104    &lt;fn&gt;                   stat_1
-21 TRT01A    A: Drug X  AGEGR    Age grou…   AGEGR1      &gt;=17 to … hierarch…         p          %     1      100    &lt;fn&gt;                   stat_1
-22 TRT01A    B: Place…  AGEGR    Age grou…   AGEGR1      &gt;=17 to … hierarch…         n          n   101      101    &lt;fn&gt;                   stat_2
-23 TRT01A    B: Place…  AGEGR    Age grou…   AGEGR1      &gt;=17 to … hierarch…         N          N   101      101    &lt;fn&gt;                   stat_2
-24 TRT01A    B: Place…  AGEGR    Age grou…   AGEGR1      &gt;=17 to … hierarch…         p          %     1      100    &lt;fn&gt;                   stat_2
-25 TRT01A    C: Combi…  AGEGR    Age grou…   AGEGR1      &gt;=17 to … hierarch…         n          n    98       98    &lt;fn&gt;                   stat_3
-26 TRT01A    C: Combi…  AGEGR    Age grou…   AGEGR1      &gt;=17 to … hierarch…         N          N    99       99    &lt;fn&gt;                   stat_3
-27 TRT01A    C: Combi…  AGEGR    Age grou…   AGEGR1      &gt;=17 to … hierarch…         p          %  0.99       99    &lt;fn&gt;                   stat_3
+1    &lt;NA&gt;                &lt;NA&gt;                TRT01A        Placebo  tabulate         n          n     0        0       0                   stat_1
+2    &lt;NA&gt;                &lt;NA&gt;                TRT01A        Placebo  tabulate         N          N     3        3       0                   stat_1
+3    &lt;NA&gt;                &lt;NA&gt;                TRT01A        Placebo  tabulate         p          %     0      0.0    &lt;fn&gt;                   stat_1
+4    &lt;NA&gt;                &lt;NA&gt;                TRT01A      Xanomeli…  tabulate         n          n     1        1       0                   stat_2
+5    &lt;NA&gt;                &lt;NA&gt;                TRT01A      Xanomeli…  tabulate         N          N     3        3       0                   stat_2
+6    &lt;NA&gt;                &lt;NA&gt;                TRT01A      Xanomeli…  tabulate         p          % 0.333     33.3    &lt;fn&gt;                   stat_2
+7    &lt;NA&gt;                &lt;NA&gt;                TRT01A      Xanomeli…  tabulate         n          n     2        2       0                   stat_3
+8    &lt;NA&gt;                &lt;NA&gt;                TRT01A      Xanomeli…  tabulate         N          N     3        3       0                   stat_3
+9    &lt;NA&gt;                &lt;NA&gt;                TRT01A      Xanomeli…  tabulate         p          % 0.667     66.7    &lt;fn&gt;                   stat_3
+10 TRT01A      Placebo  AGEGR    Age grou…   AGEGR1            &gt;64 hierarch…         n          n     0        0    &lt;fn&gt;                   stat_1
+11 TRT01A      Placebo  AGEGR    Age grou…   AGEGR1            &gt;64 hierarch…         N          N     0        0    &lt;fn&gt;                   stat_1
+12 TRT01A      Placebo  AGEGR    Age grou…   AGEGR1            &gt;64 hierarch…         p          %   NaN       NA    &lt;fn&gt;                   stat_1
+13 TRT01A    Xanomeli…  AGEGR    Age grou…   AGEGR1            &gt;64 hierarch…         n          n     1        1    &lt;fn&gt;                   stat_2
+14 TRT01A    Xanomeli…  AGEGR    Age grou…   AGEGR1            &gt;64 hierarch…         N          N     1        1    &lt;fn&gt;                   stat_2
+15 TRT01A    Xanomeli…  AGEGR    Age grou…   AGEGR1            &gt;64 hierarch…         p          %     1      100    &lt;fn&gt;                   stat_2
+16 TRT01A    Xanomeli…  AGEGR    Age grou…   AGEGR1            &gt;64 hierarch…         n          n     2        2    &lt;fn&gt;                   stat_3
+17 TRT01A    Xanomeli…  AGEGR    Age grou…   AGEGR1            &gt;64 hierarch…         N          N     2        2    &lt;fn&gt;                   stat_3
+18 TRT01A    Xanomeli…  AGEGR    Age grou…   AGEGR1            &gt;64 hierarch…         p          %     1      100    &lt;fn&gt;                   stat_3
 
 
 [[4]]
 [[4]]$tbl_hierarchical</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>{cards} data frame: 63 x 15</code></pre>
+<pre><code>{cards} data frame: 18 x 15</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   group1 group1_level group2 group2_level variable variable_level   context stat_name stat_label  stat stat_fmt fmt_fun warning error gts_column
-1    &lt;NA&gt;                &lt;NA&gt;                TRT01A      A: Drug X  tabulate         n          n   104      104       0                   stat_1
-2    &lt;NA&gt;                &lt;NA&gt;                TRT01A      A: Drug X  tabulate         N          N   304      304       0                   stat_1
-3    &lt;NA&gt;                &lt;NA&gt;                TRT01A      A: Drug X  tabulate         p          % 0.342     34.2    &lt;fn&gt;                   stat_1
-4    &lt;NA&gt;                &lt;NA&gt;                TRT01A      B: Place…  tabulate         n          n   101      101       0                   stat_2
-5    &lt;NA&gt;                &lt;NA&gt;                TRT01A      B: Place…  tabulate         N          N   304      304       0                   stat_2
-6    &lt;NA&gt;                &lt;NA&gt;                TRT01A      B: Place…  tabulate         p          % 0.332     33.2    &lt;fn&gt;                   stat_2
-7    &lt;NA&gt;                &lt;NA&gt;                TRT01A      C: Combi…  tabulate         n          n    99       99       0                   stat_3
-8    &lt;NA&gt;                &lt;NA&gt;                TRT01A      C: Combi…  tabulate         N          N   304      304       0                   stat_3
-9    &lt;NA&gt;                &lt;NA&gt;                TRT01A      C: Combi…  tabulate         p          % 0.326     32.6    &lt;fn&gt;                   stat_3
-10 TRT01A    A: Drug X RACEGR    Race, n(…  RACEGR1      AMERICAN… hierarch…         n          n     7        7    &lt;fn&gt;                   stat_1
-11 TRT01A    A: Drug X RACEGR    Race, n(…  RACEGR1      AMERICAN… hierarch…         N          N   104      104    &lt;fn&gt;                   stat_1
-12 TRT01A    A: Drug X RACEGR    Race, n(…  RACEGR1      AMERICAN… hierarch…         p          % 0.067      6.7    &lt;fn&gt;                   stat_1
-13 TRT01A    B: Place… RACEGR    Race, n(…  RACEGR1      AMERICAN… hierarch…         n          n     8        8    &lt;fn&gt;                   stat_2
-14 TRT01A    B: Place… RACEGR    Race, n(…  RACEGR1      AMERICAN… hierarch…         N          N   101      101    &lt;fn&gt;                   stat_2
-15 TRT01A    B: Place… RACEGR    Race, n(…  RACEGR1      AMERICAN… hierarch…         p          % 0.079      7.9    &lt;fn&gt;                   stat_2
-16 TRT01A    C: Combi… RACEGR    Race, n(…  RACEGR1      AMERICAN… hierarch…         n          n     5        5    &lt;fn&gt;                   stat_3
-17 TRT01A    C: Combi… RACEGR    Race, n(…  RACEGR1      AMERICAN… hierarch…         N          N    99       99    &lt;fn&gt;                   stat_3
-18 TRT01A    C: Combi… RACEGR    Race, n(…  RACEGR1      AMERICAN… hierarch…         p          % 0.051      5.1    &lt;fn&gt;                   stat_3
-19 TRT01A    A: Drug X RACEGR    Race, n(…  RACEGR1          ASIAN hierarch…         n          n    52       52    &lt;fn&gt;                   stat_1
-20 TRT01A    A: Drug X RACEGR    Race, n(…  RACEGR1          ASIAN hierarch…         N          N   104      104    &lt;fn&gt;                   stat_1
-21 TRT01A    A: Drug X RACEGR    Race, n(…  RACEGR1          ASIAN hierarch…         p          %   0.5       50    &lt;fn&gt;                   stat_1
-22 TRT01A    B: Place… RACEGR    Race, n(…  RACEGR1          ASIAN hierarch…         n          n    46       46    &lt;fn&gt;                   stat_2
-23 TRT01A    B: Place… RACEGR    Race, n(…  RACEGR1          ASIAN hierarch…         N          N   101      101    &lt;fn&gt;                   stat_2
-24 TRT01A    B: Place… RACEGR    Race, n(…  RACEGR1          ASIAN hierarch…         p          % 0.455       46    &lt;fn&gt;                   stat_2
-25 TRT01A    C: Combi… RACEGR    Race, n(…  RACEGR1          ASIAN hierarch…         n          n    51       51    &lt;fn&gt;                   stat_3
-26 TRT01A    C: Combi… RACEGR    Race, n(…  RACEGR1          ASIAN hierarch…         N          N    99       99    &lt;fn&gt;                   stat_3
-27 TRT01A    C: Combi… RACEGR    Race, n(…  RACEGR1          ASIAN hierarch…         p          % 0.515       52    &lt;fn&gt;                   stat_3
-28 TRT01A    A: Drug X RACEGR    Race, n(…  RACEGR1      BLACK OR… hierarch…         n          n    23       23    &lt;fn&gt;                   stat_1
-29 TRT01A    A: Drug X RACEGR    Race, n(…  RACEGR1      BLACK OR… hierarch…         N          N   104      104    &lt;fn&gt;                   stat_1
-30 TRT01A    A: Drug X RACEGR    Race, n(…  RACEGR1      BLACK OR… hierarch…         p          % 0.221       22    &lt;fn&gt;                   stat_1
-31 TRT01A    B: Place… RACEGR    Race, n(…  RACEGR1      BLACK OR… hierarch…         n          n    23       23    &lt;fn&gt;                   stat_2
-32 TRT01A    B: Place… RACEGR    Race, n(…  RACEGR1      BLACK OR… hierarch…         N          N   101      101    &lt;fn&gt;                   stat_2
-33 TRT01A    B: Place… RACEGR    Race, n(…  RACEGR1      BLACK OR… hierarch…         p          % 0.228       23    &lt;fn&gt;                   stat_2
-34 TRT01A    C: Combi… RACEGR    Race, n(…  RACEGR1      BLACK OR… hierarch…         n          n    26       26    &lt;fn&gt;                   stat_3
-35 TRT01A    C: Combi… RACEGR    Race, n(…  RACEGR1      BLACK OR… hierarch…         N          N    99       99    &lt;fn&gt;                   stat_3
-36 TRT01A    C: Combi… RACEGR    Race, n(…  RACEGR1      BLACK OR… hierarch…         p          % 0.263       26    &lt;fn&gt;                   stat_3
-37 TRT01A    A: Drug X RACEGR    Race, n(…  RACEGR1       MULTIPLE hierarch…         n          n     0        0    &lt;fn&gt;                   stat_1
-38 TRT01A    A: Drug X RACEGR    Race, n(…  RACEGR1       MULTIPLE hierarch…         N          N   104      104    &lt;fn&gt;                   stat_1
-39 TRT01A    A: Drug X RACEGR    Race, n(…  RACEGR1       MULTIPLE hierarch…         p          %     0        0    &lt;fn&gt;                   stat_1
-40 TRT01A    B: Place… RACEGR    Race, n(…  RACEGR1       MULTIPLE hierarch…         n          n     1        1    &lt;fn&gt;                   stat_2</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>ℹ 23 more rows</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>ℹ Use `print(n = ...)` to see more rows</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
+1    &lt;NA&gt;                &lt;NA&gt;                TRT01A        Placebo  tabulate         n          n     0        0       0                   stat_1
+2    &lt;NA&gt;                &lt;NA&gt;                TRT01A        Placebo  tabulate         N          N     3        3       0                   stat_1
+3    &lt;NA&gt;                &lt;NA&gt;                TRT01A        Placebo  tabulate         p          %     0      0.0    &lt;fn&gt;                   stat_1
+4    &lt;NA&gt;                &lt;NA&gt;                TRT01A      Xanomeli…  tabulate         n          n     1        1       0                   stat_2
+5    &lt;NA&gt;                &lt;NA&gt;                TRT01A      Xanomeli…  tabulate         N          N     3        3       0                   stat_2
+6    &lt;NA&gt;                &lt;NA&gt;                TRT01A      Xanomeli…  tabulate         p          % 0.333     33.3    &lt;fn&gt;                   stat_2
+7    &lt;NA&gt;                &lt;NA&gt;                TRT01A      Xanomeli…  tabulate         n          n     2        2       0                   stat_3
+8    &lt;NA&gt;                &lt;NA&gt;                TRT01A      Xanomeli…  tabulate         N          N     3        3       0                   stat_3
+9    &lt;NA&gt;                &lt;NA&gt;                TRT01A      Xanomeli…  tabulate         p          % 0.667     66.7    &lt;fn&gt;                   stat_3
+10 TRT01A      Placebo RACEGR    Race, n(…  RACEGR1          White hierarch…         n          n     0        0    &lt;fn&gt;                   stat_1
+11 TRT01A      Placebo RACEGR    Race, n(…  RACEGR1          White hierarch…         N          N     0        0    &lt;fn&gt;                   stat_1
+12 TRT01A      Placebo RACEGR    Race, n(…  RACEGR1          White hierarch…         p          %   NaN       NA    &lt;fn&gt;                   stat_1
+13 TRT01A    Xanomeli… RACEGR    Race, n(…  RACEGR1          White hierarch…         n          n     1        1    &lt;fn&gt;                   stat_2
+14 TRT01A    Xanomeli… RACEGR    Race, n(…  RACEGR1          White hierarch…         N          N     1        1    &lt;fn&gt;                   stat_2
+15 TRT01A    Xanomeli… RACEGR    Race, n(…  RACEGR1          White hierarch…         p          %     1      100    &lt;fn&gt;                   stat_2
+16 TRT01A    Xanomeli… RACEGR    Race, n(…  RACEGR1          White hierarch…         n          n     2        2    &lt;fn&gt;                   stat_3
+17 TRT01A    Xanomeli… RACEGR    Race, n(…  RACEGR1          White hierarch…         N          N     2        2    &lt;fn&gt;                   stat_3
+18 TRT01A    Xanomeli… RACEGR    Race, n(…  RACEGR1          White hierarch…         p          %     1      100    &lt;fn&gt;                   stat_3
+
 
 [[5]]
 [[5]]$tbl_hierarchical</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>{cards} data frame: 63 x 15</code></pre>
+<pre><code>{cards} data frame: 18 x 15</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   group1 group1_level   group2 group2_level  variable variable_level   context stat_name stat_label  stat stat_fmt fmt_fun warning error gts_column
-1    &lt;NA&gt;                  &lt;NA&gt;                 TRT01A      A: Drug X  tabulate         n          n   104      104       0                   stat_1
-2    &lt;NA&gt;                  &lt;NA&gt;                 TRT01A      A: Drug X  tabulate         N          N   304      304       0                   stat_1
-3    &lt;NA&gt;                  &lt;NA&gt;                 TRT01A      A: Drug X  tabulate         p          % 0.342     34.2    &lt;fn&gt;                   stat_1
-4    &lt;NA&gt;                  &lt;NA&gt;                 TRT01A      B: Place…  tabulate         n          n   101      101       0                   stat_2
-5    &lt;NA&gt;                  &lt;NA&gt;                 TRT01A      B: Place…  tabulate         N          N   304      304       0                   stat_2
-6    &lt;NA&gt;                  &lt;NA&gt;                 TRT01A      B: Place…  tabulate         p          % 0.332     33.2    &lt;fn&gt;                   stat_2
-7    &lt;NA&gt;                  &lt;NA&gt;                 TRT01A      C: Combi…  tabulate         n          n    99       99       0                   stat_3
-8    &lt;NA&gt;                  &lt;NA&gt;                 TRT01A      C: Combi…  tabulate         N          N   304      304       0                   stat_3
-9    &lt;NA&gt;                  &lt;NA&gt;                 TRT01A      C: Combi…  tabulate         p          % 0.326     32.6    &lt;fn&gt;                   stat_3
-10 TRT01A    A: Drug X ETHNICGR    Ethnicit… ETHNICGR1      AMERICAN… hierarch…         n          n     7        7    &lt;fn&gt;                   stat_1
-11 TRT01A    A: Drug X ETHNICGR    Ethnicit… ETHNICGR1      AMERICAN… hierarch…         N          N   104      104    &lt;fn&gt;                   stat_1
-12 TRT01A    A: Drug X ETHNICGR    Ethnicit… ETHNICGR1      AMERICAN… hierarch…         p          % 0.067      6.7    &lt;fn&gt;                   stat_1
-13 TRT01A    B: Place… ETHNICGR    Ethnicit… ETHNICGR1      AMERICAN… hierarch…         n          n     8        8    &lt;fn&gt;                   stat_2
-14 TRT01A    B: Place… ETHNICGR    Ethnicit… ETHNICGR1      AMERICAN… hierarch…         N          N   101      101    &lt;fn&gt;                   stat_2
-15 TRT01A    B: Place… ETHNICGR    Ethnicit… ETHNICGR1      AMERICAN… hierarch…         p          % 0.079      7.9    &lt;fn&gt;                   stat_2
-16 TRT01A    C: Combi… ETHNICGR    Ethnicit… ETHNICGR1      AMERICAN… hierarch…         n          n     5        5    &lt;fn&gt;                   stat_3
-17 TRT01A    C: Combi… ETHNICGR    Ethnicit… ETHNICGR1      AMERICAN… hierarch…         N          N    99       99    &lt;fn&gt;                   stat_3
-18 TRT01A    C: Combi… ETHNICGR    Ethnicit… ETHNICGR1      AMERICAN… hierarch…         p          % 0.051      5.1    &lt;fn&gt;                   stat_3
-19 TRT01A    A: Drug X ETHNICGR    Ethnicit… ETHNICGR1          ASIAN hierarch…         n          n    52       52    &lt;fn&gt;                   stat_1
-20 TRT01A    A: Drug X ETHNICGR    Ethnicit… ETHNICGR1          ASIAN hierarch…         N          N   104      104    &lt;fn&gt;                   stat_1
-21 TRT01A    A: Drug X ETHNICGR    Ethnicit… ETHNICGR1          ASIAN hierarch…         p          %   0.5       50    &lt;fn&gt;                   stat_1
-22 TRT01A    B: Place… ETHNICGR    Ethnicit… ETHNICGR1          ASIAN hierarch…         n          n    46       46    &lt;fn&gt;                   stat_2
-23 TRT01A    B: Place… ETHNICGR    Ethnicit… ETHNICGR1          ASIAN hierarch…         N          N   101      101    &lt;fn&gt;                   stat_2
-24 TRT01A    B: Place… ETHNICGR    Ethnicit… ETHNICGR1          ASIAN hierarch…         p          % 0.455       46    &lt;fn&gt;                   stat_2
-25 TRT01A    C: Combi… ETHNICGR    Ethnicit… ETHNICGR1          ASIAN hierarch…         n          n    51       51    &lt;fn&gt;                   stat_3
-26 TRT01A    C: Combi… ETHNICGR    Ethnicit… ETHNICGR1          ASIAN hierarch…         N          N    99       99    &lt;fn&gt;                   stat_3
-27 TRT01A    C: Combi… ETHNICGR    Ethnicit… ETHNICGR1          ASIAN hierarch…         p          % 0.515       52    &lt;fn&gt;                   stat_3
-28 TRT01A    A: Drug X ETHNICGR    Ethnicit… ETHNICGR1      BLACK OR… hierarch…         n          n    23       23    &lt;fn&gt;                   stat_1
-29 TRT01A    A: Drug X ETHNICGR    Ethnicit… ETHNICGR1      BLACK OR… hierarch…         N          N   104      104    &lt;fn&gt;                   stat_1
-30 TRT01A    A: Drug X ETHNICGR    Ethnicit… ETHNICGR1      BLACK OR… hierarch…         p          % 0.221       22    &lt;fn&gt;                   stat_1
-31 TRT01A    B: Place… ETHNICGR    Ethnicit… ETHNICGR1      BLACK OR… hierarch…         n          n    23       23    &lt;fn&gt;                   stat_2
-32 TRT01A    B: Place… ETHNICGR    Ethnicit… ETHNICGR1      BLACK OR… hierarch…         N          N   101      101    &lt;fn&gt;                   stat_2
-33 TRT01A    B: Place… ETHNICGR    Ethnicit… ETHNICGR1      BLACK OR… hierarch…         p          % 0.228       23    &lt;fn&gt;                   stat_2
-34 TRT01A    C: Combi… ETHNICGR    Ethnicit… ETHNICGR1      BLACK OR… hierarch…         n          n    26       26    &lt;fn&gt;                   stat_3
-35 TRT01A    C: Combi… ETHNICGR    Ethnicit… ETHNICGR1      BLACK OR… hierarch…         N          N    99       99    &lt;fn&gt;                   stat_3
-36 TRT01A    C: Combi… ETHNICGR    Ethnicit… ETHNICGR1      BLACK OR… hierarch…         p          % 0.263       26    &lt;fn&gt;                   stat_3
-37 TRT01A    A: Drug X ETHNICGR    Ethnicit… ETHNICGR1       MULTIPLE hierarch…         n          n     0        0    &lt;fn&gt;                   stat_1
-38 TRT01A    A: Drug X ETHNICGR    Ethnicit… ETHNICGR1       MULTIPLE hierarch…         N          N   104      104    &lt;fn&gt;                   stat_1
-39 TRT01A    A: Drug X ETHNICGR    Ethnicit… ETHNICGR1       MULTIPLE hierarch…         p          %     0        0    &lt;fn&gt;                   stat_1
-40 TRT01A    B: Place… ETHNICGR    Ethnicit… ETHNICGR1       MULTIPLE hierarch…         n          n     1        1    &lt;fn&gt;                   stat_2</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>ℹ 23 more rows
-ℹ Use `print(n = ...)` to see more rows</code></pre>
+1    &lt;NA&gt;                  &lt;NA&gt;                 TRT01A        Placebo  tabulate         n          n     0        0       0                   stat_1
+2    &lt;NA&gt;                  &lt;NA&gt;                 TRT01A        Placebo  tabulate         N          N     3        3       0                   stat_1
+3    &lt;NA&gt;                  &lt;NA&gt;                 TRT01A        Placebo  tabulate         p          %     0      0.0    &lt;fn&gt;                   stat_1
+4    &lt;NA&gt;                  &lt;NA&gt;                 TRT01A      Xanomeli…  tabulate         n          n     1        1       0                   stat_2
+5    &lt;NA&gt;                  &lt;NA&gt;                 TRT01A      Xanomeli…  tabulate         N          N     3        3       0                   stat_2
+6    &lt;NA&gt;                  &lt;NA&gt;                 TRT01A      Xanomeli…  tabulate         p          % 0.333     33.3    &lt;fn&gt;                   stat_2
+7    &lt;NA&gt;                  &lt;NA&gt;                 TRT01A      Xanomeli…  tabulate         n          n     2        2       0                   stat_3
+8    &lt;NA&gt;                  &lt;NA&gt;                 TRT01A      Xanomeli…  tabulate         N          N     3        3       0                   stat_3
+9    &lt;NA&gt;                  &lt;NA&gt;                 TRT01A      Xanomeli…  tabulate         p          % 0.667     66.7    &lt;fn&gt;                   stat_3
+10 TRT01A      Placebo ETHNICGR    Ethnicit… ETHNICGR1          WHITE hierarch…         n          n     0        0    &lt;fn&gt;                   stat_1
+11 TRT01A      Placebo ETHNICGR    Ethnicit… ETHNICGR1          WHITE hierarch…         N          N     0        0    &lt;fn&gt;                   stat_1
+12 TRT01A      Placebo ETHNICGR    Ethnicit… ETHNICGR1          WHITE hierarch…         p          %   NaN       NA    &lt;fn&gt;                   stat_1
+13 TRT01A    Xanomeli… ETHNICGR    Ethnicit… ETHNICGR1          WHITE hierarch…         n          n     1        1    &lt;fn&gt;                   stat_2
+14 TRT01A    Xanomeli… ETHNICGR    Ethnicit… ETHNICGR1          WHITE hierarch…         N          N     1        1    &lt;fn&gt;                   stat_2
+15 TRT01A    Xanomeli… ETHNICGR    Ethnicit… ETHNICGR1          WHITE hierarch…         p          %     1      100    &lt;fn&gt;                   stat_2
+16 TRT01A    Xanomeli… ETHNICGR    Ethnicit… ETHNICGR1          WHITE hierarch…         n          n     2        2    &lt;fn&gt;                   stat_3
+17 TRT01A    Xanomeli… ETHNICGR    Ethnicit… ETHNICGR1          WHITE hierarch…         N          N     2        2    &lt;fn&gt;                   stat_3
+18 TRT01A    Xanomeli… ETHNICGR    Ethnicit… ETHNICGR1          WHITE hierarch…         p          %     1      100    &lt;fn&gt;                   stat_3</code></pre>
 </div>
 </div>
 </div>
@@ -1816,144 +1690,149 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb21" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb21-1"><a href="#cb21-1"></a><span class="co">---</span></span>
-<span id="cb21-2"><a href="#cb21-2"></a><span class="an">title:</span><span class="co"> Overview of Serious Adverse Events by Demographic Subgroup, Safety Population, Pooled Analysis (or Trial X)</span></span>
-<span id="cb21-3"><a href="#cb21-3"></a><span class="an">subtitle:</span><span class="co"> FDA Table 50</span></span>
-<span id="cb21-4"><a href="#cb21-4"></a><span class="an">categories:</span><span class="co"> [table, FDA, safety, adverse events]</span></span>
-<span id="cb21-5"><a href="#cb21-5"></a><span class="co">---</span></span>
-<span id="cb21-6"><a href="#cb21-6"></a></span>
-<span id="cb21-7"><a href="#cb21-7"></a>::: panel-tabset</span>
-<span id="cb21-8"><a href="#cb21-8"></a><span class="fu">## Table Preview</span></span>
-<span id="cb21-9"><a href="#cb21-9"></a></span>
-<span id="cb21-10"><a href="#cb21-10"></a><span class="in">```{r img, echo=FALSE, fig.align='center', out.width='60%'}</span></span>
-<span id="cb21-11"><a href="#cb21-11"></a><span class="in">knitr::include_graphics("result.png")</span></span>
-<span id="cb21-12"><a href="#cb21-12"></a><span class="in">```</span></span>
-<span id="cb21-13"><a href="#cb21-13"></a></span>
-<span id="cb21-14"><a href="#cb21-14"></a><span class="fu">## Setup</span></span>
-<span id="cb21-15"><a href="#cb21-15"></a></span>
-<span id="cb21-16"><a href="#cb21-16"></a><span class="in">```{r setup, message=FALSE}</span></span>
-<span id="cb21-17"><a href="#cb21-17"></a><span class="in"># Load libraries &amp; data -------------------------------------</span></span>
-<span id="cb21-18"><a href="#cb21-18"></a><span class="in">library(dplyr)</span></span>
-<span id="cb21-19"><a href="#cb21-19"></a><span class="in">library(cards)</span></span>
-<span id="cb21-20"><a href="#cb21-20"></a><span class="in">library(gtsummary)</span></span>
-<span id="cb21-21"><a href="#cb21-21"></a></span>
-<span id="cb21-22"><a href="#cb21-22"></a><span class="in">adae &lt;- random.cdisc.data::cadae</span></span>
-<span id="cb21-23"><a href="#cb21-23"></a><span class="in">adsl &lt;- random.cdisc.data::cadsl</span></span>
-<span id="cb21-24"><a href="#cb21-24"></a></span>
-<span id="cb21-25"><a href="#cb21-25"></a><span class="in">adsl &lt;- adsl |&gt;</span></span>
-<span id="cb21-26"><a href="#cb21-26"></a><span class="in">  filter(SAFFL == "Y")</span></span>
-<span id="cb21-27"><a href="#cb21-27"></a></span>
-<span id="cb21-28"><a href="#cb21-28"></a><span class="in">data &lt;- adae |&gt;</span></span>
-<span id="cb21-29"><a href="#cb21-29"></a><span class="in">  filter(</span></span>
-<span id="cb21-30"><a href="#cb21-30"></a><span class="in">    SAFFL == "Y",</span></span>
-<span id="cb21-31"><a href="#cb21-31"></a><span class="in">    TRTEMFL == "Y",</span></span>
-<span id="cb21-32"><a href="#cb21-32"></a><span class="in">    AESER == "Y"</span></span>
-<span id="cb21-33"><a href="#cb21-33"></a><span class="in">  ) |&gt;</span></span>
-<span id="cb21-34"><a href="#cb21-34"></a><span class="in">  mutate(</span></span>
-<span id="cb21-35"><a href="#cb21-35"></a><span class="in">    SEXGR = "Sex, n (%)",</span></span>
-<span id="cb21-36"><a href="#cb21-36"></a><span class="in">    SEXGR1 = as.factor(SEX),</span></span>
-<span id="cb21-37"><a href="#cb21-37"></a><span class="in">    AGEGR = "Age group, years, n(%)",</span></span>
-<span id="cb21-38"><a href="#cb21-38"></a><span class="in">    AGEGR1 = factor(</span></span>
-<span id="cb21-39"><a href="#cb21-39"></a><span class="in">      case_when(</span></span>
-<span id="cb21-40"><a href="#cb21-40"></a><span class="in">        AGE &gt;= 17 &amp; AGE &lt; 65 ~ "&gt;=17 to &lt;65",</span></span>
-<span id="cb21-41"><a href="#cb21-41"></a><span class="in">        AGE &gt;= 65 &amp; AGE &lt; 75 ~ "65-74",</span></span>
-<span id="cb21-42"><a href="#cb21-42"></a><span class="in">        AGE &gt;= 75 ~ "&gt;=75"</span></span>
-<span id="cb21-43"><a href="#cb21-43"></a><span class="in">      ),</span></span>
-<span id="cb21-44"><a href="#cb21-44"></a><span class="in">      levels = c("&gt;=17 to &lt;65", "65-74", "&gt;=75")</span></span>
-<span id="cb21-45"><a href="#cb21-45"></a><span class="in">    ),</span></span>
-<span id="cb21-46"><a href="#cb21-46"></a><span class="in">    RACEGR = "Race, n(%)",</span></span>
-<span id="cb21-47"><a href="#cb21-47"></a><span class="in">    RACEGR1 = as.factor(RACE),</span></span>
-<span id="cb21-48"><a href="#cb21-48"></a><span class="in">    ETHNICGR = "Ethnicity, n(%)",</span></span>
-<span id="cb21-49"><a href="#cb21-49"></a><span class="in">    ETHNICGR1 = as.factor(RACE)</span></span>
-<span id="cb21-50"><a href="#cb21-50"></a><span class="in">  )</span></span>
-<span id="cb21-51"><a href="#cb21-51"></a></span>
-<span id="cb21-52"><a href="#cb21-52"></a><span class="in">data_any_sae &lt;- adae |&gt;</span></span>
-<span id="cb21-53"><a href="#cb21-53"></a><span class="in">  filter(AESER == "Y") |&gt;</span></span>
-<span id="cb21-54"><a href="#cb21-54"></a><span class="in">  mutate(AESER = "Any SAE, n(%)")</span></span>
-<span id="cb21-55"><a href="#cb21-55"></a><span class="in">```</span></span>
-<span id="cb21-56"><a href="#cb21-56"></a></span>
-<span id="cb21-57"><a href="#cb21-57"></a><span class="fu">## Build Table</span></span>
-<span id="cb21-58"><a href="#cb21-58"></a></span>
-<span id="cb21-59"><a href="#cb21-59"></a><span class="in">```{r tbl, message=FALSE, warning=FALSE}</span></span>
-<span id="cb21-60"><a href="#cb21-60"></a><span class="in">tbl_any_sae &lt;- tbl_hierarchical(</span></span>
-<span id="cb21-61"><a href="#cb21-61"></a><span class="in">  data = data_any_sae,</span></span>
-<span id="cb21-62"><a href="#cb21-62"></a><span class="in">  denominator = adsl,</span></span>
-<span id="cb21-63"><a href="#cb21-63"></a><span class="in">  id = "USUBJID",</span></span>
-<span id="cb21-64"><a href="#cb21-64"></a><span class="in">  by = "TRT01A",</span></span>
-<span id="cb21-65"><a href="#cb21-65"></a><span class="in">  variables = "AESER",</span></span>
-<span id="cb21-66"><a href="#cb21-66"></a><span class="in">  statistic = ~"{n} ({p}%)",</span></span>
-<span id="cb21-67"><a href="#cb21-67"></a><span class="in">  label = AESER ~ "Characteristic"</span></span>
-<span id="cb21-68"><a href="#cb21-68"></a><span class="in">)</span></span>
-<span id="cb21-69"><a href="#cb21-69"></a></span>
-<span id="cb21-70"><a href="#cb21-70"></a><span class="in">tbl_sex &lt;- tbl_hierarchical(</span></span>
-<span id="cb21-71"><a href="#cb21-71"></a><span class="in">  data = data,</span></span>
-<span id="cb21-72"><a href="#cb21-72"></a><span class="in">  denominator = data_any_sae |&gt; slice_head(by = c(USUBJID)),</span></span>
-<span id="cb21-73"><a href="#cb21-73"></a><span class="in">  id = "USUBJID",</span></span>
-<span id="cb21-74"><a href="#cb21-74"></a><span class="in">  by = "TRT01A",</span></span>
-<span id="cb21-75"><a href="#cb21-75"></a><span class="in">  variables = c(SEXGR, SEXGR1),</span></span>
-<span id="cb21-76"><a href="#cb21-76"></a><span class="in">  include = SEXGR1,</span></span>
-<span id="cb21-77"><a href="#cb21-77"></a><span class="in">  statistic = ~"{n}/{N} ({p}%)"</span></span>
-<span id="cb21-78"><a href="#cb21-78"></a><span class="in">)</span></span>
-<span id="cb21-79"><a href="#cb21-79"></a></span>
-<span id="cb21-80"><a href="#cb21-80"></a><span class="in">tbl_agegr1 &lt;- tbl_hierarchical(</span></span>
-<span id="cb21-81"><a href="#cb21-81"></a><span class="in">  data = data,</span></span>
-<span id="cb21-82"><a href="#cb21-82"></a><span class="in">  denominator = data_any_sae |&gt; slice_head(by = c(USUBJID)),</span></span>
-<span id="cb21-83"><a href="#cb21-83"></a><span class="in">  id = "USUBJID",</span></span>
-<span id="cb21-84"><a href="#cb21-84"></a><span class="in">  by = "TRT01A",</span></span>
-<span id="cb21-85"><a href="#cb21-85"></a><span class="in">  variables = c(AGEGR, AGEGR1),</span></span>
-<span id="cb21-86"><a href="#cb21-86"></a><span class="in">  include = AGEGR1,</span></span>
-<span id="cb21-87"><a href="#cb21-87"></a><span class="in">  statistic = ~"{n}/{N} ({p}%)"</span></span>
-<span id="cb21-88"><a href="#cb21-88"></a><span class="in">)</span></span>
-<span id="cb21-89"><a href="#cb21-89"></a></span>
-<span id="cb21-90"><a href="#cb21-90"></a><span class="in">tbl_race &lt;- tbl_hierarchical(</span></span>
-<span id="cb21-91"><a href="#cb21-91"></a><span class="in">  data = data,</span></span>
-<span id="cb21-92"><a href="#cb21-92"></a><span class="in">  denominator = data_any_sae |&gt; slice_head(by = c(USUBJID)),</span></span>
-<span id="cb21-93"><a href="#cb21-93"></a><span class="in">  id = "USUBJID",</span></span>
-<span id="cb21-94"><a href="#cb21-94"></a><span class="in">  by = "TRT01A",</span></span>
-<span id="cb21-95"><a href="#cb21-95"></a><span class="in">  variables = c(RACEGR, RACEGR1),</span></span>
-<span id="cb21-96"><a href="#cb21-96"></a><span class="in">  include = RACEGR1,</span></span>
-<span id="cb21-97"><a href="#cb21-97"></a><span class="in">  statistic = ~"{n}/{N} ({p}%)"</span></span>
-<span id="cb21-98"><a href="#cb21-98"></a><span class="in">)</span></span>
-<span id="cb21-99"><a href="#cb21-99"></a></span>
-<span id="cb21-100"><a href="#cb21-100"></a><span class="in">tbl_ethnic &lt;- tbl_hierarchical(</span></span>
-<span id="cb21-101"><a href="#cb21-101"></a><span class="in">  data = data,</span></span>
-<span id="cb21-102"><a href="#cb21-102"></a><span class="in">  denominator = data_any_sae |&gt; slice_head(by = c(USUBJID)),</span></span>
-<span id="cb21-103"><a href="#cb21-103"></a><span class="in">  id = "USUBJID",</span></span>
-<span id="cb21-104"><a href="#cb21-104"></a><span class="in">  by = "TRT01A",</span></span>
-<span id="cb21-105"><a href="#cb21-105"></a><span class="in">  variables = c(ETHNICGR, ETHNICGR1),</span></span>
-<span id="cb21-106"><a href="#cb21-106"></a><span class="in">  include = ETHNICGR1,</span></span>
-<span id="cb21-107"><a href="#cb21-107"></a><span class="in">  statistic = ~"{n}/{N} ({p}%)"</span></span>
-<span id="cb21-108"><a href="#cb21-108"></a><span class="in">)</span></span>
-<span id="cb21-109"><a href="#cb21-109"></a></span>
-<span id="cb21-110"><a href="#cb21-110"></a><span class="in">tbl &lt;- list(tbl_any_sae, tbl_sex, tbl_agegr1, tbl_race, tbl_ethnic) |&gt;</span></span>
-<span id="cb21-111"><a href="#cb21-111"></a><span class="in">  tbl_stack() |&gt;</span></span>
-<span id="cb21-112"><a href="#cb21-112"></a><span class="in">  modify_indent("label", rows = !(variable %in% c("..ard_hierarchical_overall..", "AESER", "SEXGR", "AGEGR", "RACEGR", "ETHNICGR"))) |&gt;</span></span>
-<span id="cb21-113"><a href="#cb21-113"></a><span class="in">  remove_footnote_header(columns = everything())</span></span>
-<span id="cb21-114"><a href="#cb21-114"></a></span>
-<span id="cb21-115"><a href="#cb21-115"></a><span class="in">tbl</span></span>
-<span id="cb21-116"><a href="#cb21-116"></a><span class="in">```</span></span>
-<span id="cb21-117"><a href="#cb21-117"></a></span>
-<span id="cb21-118"><a href="#cb21-118"></a><span class="in">```{r eval=FALSE, include=FALSE}</span></span>
-<span id="cb21-119"><a href="#cb21-119"></a><span class="in"># Run chunk locally to generate image file</span></span>
-<span id="cb21-120"><a href="#cb21-120"></a><span class="in">gt::gtsave(as_gt(tbl), filename = "result.png")</span></span>
-<span id="cb21-121"><a href="#cb21-121"></a><span class="in">```</span></span>
-<span id="cb21-122"><a href="#cb21-122"></a></span>
-<span id="cb21-123"><a href="#cb21-123"></a><span class="in">```{r img, echo=FALSE, fig.align='center', out.width='60%'}</span></span>
-<span id="cb21-124"><a href="#cb21-124"></a><span class="in">```</span></span>
-<span id="cb21-125"><a href="#cb21-125"></a></span>
-<span id="cb21-126"><a href="#cb21-126"></a><span class="fu">## Build ARD</span></span>
-<span id="cb21-127"><a href="#cb21-127"></a></span>
-<span id="cb21-128"><a href="#cb21-128"></a><span class="in">```{r ard, message=FALSE, warning=FALSE, results='hide'}</span></span>
-<span id="cb21-129"><a href="#cb21-129"></a><span class="in">ard &lt;- gather_ard(tbl)</span></span>
-<span id="cb21-130"><a href="#cb21-130"></a><span class="in">ard</span></span>
-<span id="cb21-131"><a href="#cb21-131"></a><span class="in">```</span></span>
-<span id="cb21-132"><a href="#cb21-132"></a></span>
-<span id="cb21-133"><a href="#cb21-133"></a><span class="in">```{r, echo=FALSE}</span></span>
-<span id="cb21-134"><a href="#cb21-134"></a><span class="in"># Print ARD</span></span>
-<span id="cb21-135"><a href="#cb21-135"></a><span class="in">withr::local_options(width = 9999)</span></span>
-<span id="cb21-136"><a href="#cb21-136"></a><span class="in">print(ard, columns = "all", n = 40, na.print = NULL)</span></span>
-<span id="cb21-137"><a href="#cb21-137"></a><span class="in">```</span></span>
-<span id="cb21-138"><a href="#cb21-138"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb17" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb17-1"><a href="#cb17-1"></a><span class="co">---</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="an">title:</span><span class="co"> Overview of Serious Adverse Events by Demographic Subgroup, Safety Population, Pooled Analysis (or Trial X)</span></span>
+<span id="cb17-3"><a href="#cb17-3"></a><span class="an">subtitle:</span><span class="co"> FDA Table 50</span></span>
+<span id="cb17-4"><a href="#cb17-4"></a><span class="an">categories:</span><span class="co"> [table, FDA, safety, adverse events]</span></span>
+<span id="cb17-5"><a href="#cb17-5"></a><span class="co">---</span></span>
+<span id="cb17-6"><a href="#cb17-6"></a></span>
+<span id="cb17-7"><a href="#cb17-7"></a>::: panel-tabset</span>
+<span id="cb17-8"><a href="#cb17-8"></a><span class="fu">## Table Preview</span></span>
+<span id="cb17-9"><a href="#cb17-9"></a></span>
+<span id="cb17-10"><a href="#cb17-10"></a><span class="in">```{r img, echo=FALSE, fig.align='center', out.width='60%'}</span></span>
+<span id="cb17-11"><a href="#cb17-11"></a><span class="in">knitr::include_graphics("result.png")</span></span>
+<span id="cb17-12"><a href="#cb17-12"></a><span class="in">```</span></span>
+<span id="cb17-13"><a href="#cb17-13"></a></span>
+<span id="cb17-14"><a href="#cb17-14"></a><span class="fu">## Setup</span></span>
+<span id="cb17-15"><a href="#cb17-15"></a></span>
+<span id="cb17-16"><a href="#cb17-16"></a><span class="in">```{r setup, message=FALSE}</span></span>
+<span id="cb17-17"><a href="#cb17-17"></a><span class="in"># Load libraries &amp; data -------------------------------------</span></span>
+<span id="cb17-18"><a href="#cb17-18"></a><span class="in">library(dplyr)</span></span>
+<span id="cb17-19"><a href="#cb17-19"></a><span class="in">library(cards)</span></span>
+<span id="cb17-20"><a href="#cb17-20"></a><span class="in">library(gtsummary)</span></span>
+<span id="cb17-21"><a href="#cb17-21"></a></span>
+<span id="cb17-22"><a href="#cb17-22"></a><span class="in">adae &lt;- pharmaverseadam::adae</span></span>
+<span id="cb17-23"><a href="#cb17-23"></a><span class="in">adsl &lt;- pharmaverseadam::adsl</span></span>
+<span id="cb17-24"><a href="#cb17-24"></a></span>
+<span id="cb17-25"><a href="#cb17-25"></a><span class="in"># This specific dataset is reduced significantly after filtering.</span></span>
+<span id="cb17-26"><a href="#cb17-26"></a><span class="in"># We'll take a few steps to ensure factor levels are present and</span></span>
+<span id="cb17-27"><a href="#cb17-27"></a><span class="in"># match between the AE data and the denominators.</span></span>
+<span id="cb17-28"><a href="#cb17-28"></a></span>
+<span id="cb17-29"><a href="#cb17-29"></a><span class="in">adsl &lt;- adsl |&gt;</span></span>
+<span id="cb17-30"><a href="#cb17-30"></a><span class="in">  filter(SAFFL == "Y") |&gt;</span></span>
+<span id="cb17-31"><a href="#cb17-31"></a><span class="in">  mutate(TRT01A = as.factor(TRT01A))</span></span>
+<span id="cb17-32"><a href="#cb17-32"></a></span>
+<span id="cb17-33"><a href="#cb17-33"></a><span class="in">adae &lt;- adae |&gt; mutate(</span></span>
+<span id="cb17-34"><a href="#cb17-34"></a><span class="in">  TRT01A = as.factor(TRT01A),</span></span>
+<span id="cb17-35"><a href="#cb17-35"></a><span class="in">  SEXGR = "Sex, n (%)",</span></span>
+<span id="cb17-36"><a href="#cb17-36"></a><span class="in">  SEXGR1 = as.factor(SEX),</span></span>
+<span id="cb17-37"><a href="#cb17-37"></a><span class="in">  AGEGR = "Age group, years, n(%)",</span></span>
+<span id="cb17-38"><a href="#cb17-38"></a><span class="in">  RACEGR = "Race, n(%)",</span></span>
+<span id="cb17-39"><a href="#cb17-39"></a><span class="in">  ETHNICGR = "Ethnicity, n(%)",</span></span>
+<span id="cb17-40"><a href="#cb17-40"></a><span class="in">  ETHNICGR1 = as.factor(RACE)</span></span>
+<span id="cb17-41"><a href="#cb17-41"></a><span class="in">)</span></span>
+<span id="cb17-42"><a href="#cb17-42"></a></span>
+<span id="cb17-43"><a href="#cb17-43"></a><span class="in">data &lt;- adae |&gt;</span></span>
+<span id="cb17-44"><a href="#cb17-44"></a><span class="in">  filter(</span></span>
+<span id="cb17-45"><a href="#cb17-45"></a><span class="in">    SAFFL == "Y",</span></span>
+<span id="cb17-46"><a href="#cb17-46"></a><span class="in">    TRTEMFL == "Y",</span></span>
+<span id="cb17-47"><a href="#cb17-47"></a><span class="in">    AESER == "Y"</span></span>
+<span id="cb17-48"><a href="#cb17-48"></a><span class="in">  )</span></span>
+<span id="cb17-49"><a href="#cb17-49"></a></span>
+<span id="cb17-50"><a href="#cb17-50"></a></span>
+<span id="cb17-51"><a href="#cb17-51"></a><span class="in">data_any_sae &lt;- adae |&gt;</span></span>
+<span id="cb17-52"><a href="#cb17-52"></a><span class="in">  filter(AESER == "Y") |&gt;</span></span>
+<span id="cb17-53"><a href="#cb17-53"></a><span class="in">  mutate(</span></span>
+<span id="cb17-54"><a href="#cb17-54"></a><span class="in">    AESER = "Any SAE, n(%)"</span></span>
+<span id="cb17-55"><a href="#cb17-55"></a><span class="in">  )</span></span>
+<span id="cb17-56"><a href="#cb17-56"></a><span class="in">```</span></span>
+<span id="cb17-57"><a href="#cb17-57"></a></span>
+<span id="cb17-58"><a href="#cb17-58"></a><span class="fu">## Build Table</span></span>
+<span id="cb17-59"><a href="#cb17-59"></a></span>
+<span id="cb17-60"><a href="#cb17-60"></a><span class="in">```{r tbl, message=FALSE, warning=FALSE}</span></span>
+<span id="cb17-61"><a href="#cb17-61"></a><span class="in">tbl_any_sae &lt;- tbl_hierarchical(</span></span>
+<span id="cb17-62"><a href="#cb17-62"></a><span class="in">  data = data_any_sae,</span></span>
+<span id="cb17-63"><a href="#cb17-63"></a><span class="in">  denominator = adsl,</span></span>
+<span id="cb17-64"><a href="#cb17-64"></a><span class="in">  id = "USUBJID",</span></span>
+<span id="cb17-65"><a href="#cb17-65"></a><span class="in">  by = "TRT01A",</span></span>
+<span id="cb17-66"><a href="#cb17-66"></a><span class="in">  variables = "AESER",</span></span>
+<span id="cb17-67"><a href="#cb17-67"></a><span class="in">  statistic = ~"{n} ({p}%)",</span></span>
+<span id="cb17-68"><a href="#cb17-68"></a><span class="in">  label = AESER ~ "Characteristic"</span></span>
+<span id="cb17-69"><a href="#cb17-69"></a><span class="in">)</span></span>
+<span id="cb17-70"><a href="#cb17-70"></a></span>
+<span id="cb17-71"><a href="#cb17-71"></a><span class="in">tbl_sex &lt;- tbl_hierarchical(</span></span>
+<span id="cb17-72"><a href="#cb17-72"></a><span class="in">  data = data,</span></span>
+<span id="cb17-73"><a href="#cb17-73"></a><span class="in">  denominator = data_any_sae |&gt; slice_head(by = c(USUBJID)),</span></span>
+<span id="cb17-74"><a href="#cb17-74"></a><span class="in">  id = "USUBJID",</span></span>
+<span id="cb17-75"><a href="#cb17-75"></a><span class="in">  by = "TRT01A",</span></span>
+<span id="cb17-76"><a href="#cb17-76"></a><span class="in">  variables = c(SEXGR, SEXGR1),</span></span>
+<span id="cb17-77"><a href="#cb17-77"></a><span class="in">  include = SEXGR1,</span></span>
+<span id="cb17-78"><a href="#cb17-78"></a><span class="in">  statistic = ~"{n}/{N} ({p}%)"</span></span>
+<span id="cb17-79"><a href="#cb17-79"></a><span class="in">)</span></span>
+<span id="cb17-80"><a href="#cb17-80"></a></span>
+<span id="cb17-81"><a href="#cb17-81"></a><span class="in">tbl_agegr1 &lt;- tbl_hierarchical(</span></span>
+<span id="cb17-82"><a href="#cb17-82"></a><span class="in">  data = data,</span></span>
+<span id="cb17-83"><a href="#cb17-83"></a><span class="in">  denominator = data_any_sae |&gt; slice_head(by = c(USUBJID)),</span></span>
+<span id="cb17-84"><a href="#cb17-84"></a><span class="in">  id = "USUBJID",</span></span>
+<span id="cb17-85"><a href="#cb17-85"></a><span class="in">  by = "TRT01A",</span></span>
+<span id="cb17-86"><a href="#cb17-86"></a><span class="in">  variables = c(AGEGR, AGEGR1),</span></span>
+<span id="cb17-87"><a href="#cb17-87"></a><span class="in">  include = AGEGR1,</span></span>
+<span id="cb17-88"><a href="#cb17-88"></a><span class="in">  statistic = ~"{n}/{N} ({p}%)"</span></span>
+<span id="cb17-89"><a href="#cb17-89"></a><span class="in">)</span></span>
+<span id="cb17-90"><a href="#cb17-90"></a></span>
+<span id="cb17-91"><a href="#cb17-91"></a><span class="in">tbl_race &lt;- tbl_hierarchical(</span></span>
+<span id="cb17-92"><a href="#cb17-92"></a><span class="in">  data = data,</span></span>
+<span id="cb17-93"><a href="#cb17-93"></a><span class="in">  denominator = data_any_sae |&gt; slice_head(by = c(USUBJID)),</span></span>
+<span id="cb17-94"><a href="#cb17-94"></a><span class="in">  id = "USUBJID",</span></span>
+<span id="cb17-95"><a href="#cb17-95"></a><span class="in">  by = "TRT01A",</span></span>
+<span id="cb17-96"><a href="#cb17-96"></a><span class="in">  variables = c(RACEGR, RACEGR1),</span></span>
+<span id="cb17-97"><a href="#cb17-97"></a><span class="in">  include = RACEGR1,</span></span>
+<span id="cb17-98"><a href="#cb17-98"></a><span class="in">  statistic = ~"{n}/{N} ({p}%)"</span></span>
+<span id="cb17-99"><a href="#cb17-99"></a><span class="in">)</span></span>
+<span id="cb17-100"><a href="#cb17-100"></a></span>
+<span id="cb17-101"><a href="#cb17-101"></a><span class="in">tbl_ethnic &lt;- tbl_hierarchical(</span></span>
+<span id="cb17-102"><a href="#cb17-102"></a><span class="in">  data = data,</span></span>
+<span id="cb17-103"><a href="#cb17-103"></a><span class="in">  denominator = data_any_sae |&gt; slice_head(by = c(USUBJID)),</span></span>
+<span id="cb17-104"><a href="#cb17-104"></a><span class="in">  id = "USUBJID",</span></span>
+<span id="cb17-105"><a href="#cb17-105"></a><span class="in">  by = "TRT01A",</span></span>
+<span id="cb17-106"><a href="#cb17-106"></a><span class="in">  variables = c(ETHNICGR, ETHNICGR1),</span></span>
+<span id="cb17-107"><a href="#cb17-107"></a><span class="in">  include = ETHNICGR1,</span></span>
+<span id="cb17-108"><a href="#cb17-108"></a><span class="in">  statistic = ~"{n}/{N} ({p}%)"</span></span>
+<span id="cb17-109"><a href="#cb17-109"></a><span class="in">)</span></span>
+<span id="cb17-110"><a href="#cb17-110"></a></span>
+<span id="cb17-111"><a href="#cb17-111"></a><span class="in">tbl &lt;- list(tbl_any_sae, tbl_sex, tbl_agegr1, tbl_race, tbl_ethnic) |&gt;</span></span>
+<span id="cb17-112"><a href="#cb17-112"></a><span class="in">  tbl_stack() |&gt;</span></span>
+<span id="cb17-113"><a href="#cb17-113"></a><span class="in">  modify_indent("label", rows = !(variable %in% c("..ard_hierarchical_overall..", "AESER", "SEXGR", "AGEGR", "RACEGR", "ETHNICGR"))) |&gt;</span></span>
+<span id="cb17-114"><a href="#cb17-114"></a><span class="in">  remove_footnote_header(columns = everything()) |&gt;</span></span>
+<span id="cb17-115"><a href="#cb17-115"></a><span class="in">  modify_post_fmt_fun(</span></span>
+<span id="cb17-116"><a href="#cb17-116"></a><span class="in">    fmt_fun = ~ ifelse(. == "0/0 (NA%)", "0 (0%)", .),</span></span>
+<span id="cb17-117"><a href="#cb17-117"></a><span class="in">    columns = all_stat_cols()</span></span>
+<span id="cb17-118"><a href="#cb17-118"></a><span class="in">  )</span></span>
+<span id="cb17-119"><a href="#cb17-119"></a></span>
+<span id="cb17-120"><a href="#cb17-120"></a><span class="in">tbl</span></span>
+<span id="cb17-121"><a href="#cb17-121"></a><span class="in">```</span></span>
+<span id="cb17-122"><a href="#cb17-122"></a></span>
+<span id="cb17-123"><a href="#cb17-123"></a><span class="in">```{r eval=FALSE, include=FALSE}</span></span>
+<span id="cb17-124"><a href="#cb17-124"></a><span class="in"># Run chunk locally to generate image file</span></span>
+<span id="cb17-125"><a href="#cb17-125"></a><span class="in">gt::gtsave(as_gt(tbl), filename = "result.png")</span></span>
+<span id="cb17-126"><a href="#cb17-126"></a><span class="in">```</span></span>
+<span id="cb17-127"><a href="#cb17-127"></a></span>
+<span id="cb17-128"><a href="#cb17-128"></a><span class="in">```{r img, echo=FALSE, fig.align='center', out.width='60%'}</span></span>
+<span id="cb17-129"><a href="#cb17-129"></a><span class="in">```</span></span>
+<span id="cb17-130"><a href="#cb17-130"></a></span>
+<span id="cb17-131"><a href="#cb17-131"></a><span class="fu">## Build ARD</span></span>
+<span id="cb17-132"><a href="#cb17-132"></a></span>
+<span id="cb17-133"><a href="#cb17-133"></a><span class="in">```{r ard, message=FALSE, warning=FALSE, results='hide'}</span></span>
+<span id="cb17-134"><a href="#cb17-134"></a><span class="in">ard &lt;- gather_ard(tbl)</span></span>
+<span id="cb17-135"><a href="#cb17-135"></a><span class="in">ard</span></span>
+<span id="cb17-136"><a href="#cb17-136"></a><span class="in">```</span></span>
+<span id="cb17-137"><a href="#cb17-137"></a></span>
+<span id="cb17-138"><a href="#cb17-138"></a><span class="in">```{r, echo=FALSE}</span></span>
+<span id="cb17-139"><a href="#cb17-139"></a><span class="in"># Print ARD</span></span>
+<span id="cb17-140"><a href="#cb17-140"></a><span class="in">withr::local_options(width = 9999)</span></span>
+<span id="cb17-141"><a href="#cb17-141"></a><span class="in">print(ard, columns = "all", n = 40, na.print = NULL)</span></span>
+<span id="cb17-142"><a href="#cb17-142"></a><span class="in">```</span></span>
+<span id="cb17-143"><a href="#cb17-143"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">

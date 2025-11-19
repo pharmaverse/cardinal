@@ -251,8 +251,8 @@ cookieconsent.run({
 <span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(gtsummary)</span>
 <span id="cb1-4"><a href="#cb1-4"></a></span>
-<span id="cb1-5"><a href="#cb1-5"></a>adsl <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadsl</span>
-<span id="cb1-6"><a href="#cb1-6"></a>adae <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadae</span>
+<span id="cb1-5"><a href="#cb1-5"></a>adsl <span class="ot">&lt;-</span> pharmaverseadam<span class="sc">::</span>adsl</span>
+<span id="cb1-6"><a href="#cb1-6"></a>adae <span class="ot">&lt;-</span> pharmaverseadam<span class="sc">::</span>adae</span>
 <span id="cb1-7"><a href="#cb1-7"></a></span>
 <span id="cb1-8"><a href="#cb1-8"></a><span class="co"># Pre-processing --------------------------------------------</span></span>
 <span id="cb1-9"><a href="#cb1-9"></a>adae <span class="ot">&lt;-</span> adae <span class="sc">|&gt;</span></span>
@@ -300,23 +300,23 @@ cookieconsent.run({
 <pre><code>$tbl_hierarchical</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>{cards} data frame: 81 x 15</code></pre>
+<pre><code>{cards} data frame: 36 x 15</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   group1 group1_level group2 group2_level                     variable variable_level   context stat_name stat_label  stat stat_fmt fmt_fun warning error gts_column
-1    &lt;NA&gt;                &lt;NA&gt;                                    TRT01A      A: Drug X  tabulate         n          n   134      134       0                   stat_1
-2    &lt;NA&gt;                &lt;NA&gt;                                    TRT01A      A: Drug X  tabulate         N          N   400      400       0                   stat_1
-3    &lt;NA&gt;                &lt;NA&gt;                                    TRT01A      A: Drug X  tabulate         p          % 0.335     33.5    &lt;fn&gt;                   stat_1
-4    &lt;NA&gt;                &lt;NA&gt;                                    TRT01A      B: Place…  tabulate         n          n   134      134       0                   stat_2
-5    &lt;NA&gt;                &lt;NA&gt;                                    TRT01A      B: Place…  tabulate         N          N   400      400       0                   stat_2
-6    &lt;NA&gt;                &lt;NA&gt;                                    TRT01A      B: Place…  tabulate         p          % 0.335     33.5    &lt;fn&gt;                   stat_2
-7    &lt;NA&gt;                &lt;NA&gt;                                    TRT01A      C: Combi…  tabulate         n          n   132      132       0                   stat_3
-8    &lt;NA&gt;                &lt;NA&gt;                                    TRT01A      C: Combi…  tabulate         N          N   400      400       0                   stat_3
-9    &lt;NA&gt;                &lt;NA&gt;                                    TRT01A      C: Combi…  tabulate         p          %  0.33     33.0    &lt;fn&gt;                   stat_3
-10 TRT01A    A: Drug X   &lt;NA&gt;              ..ard_hierarchical_overall..           TRUE hierarch…         n          n   104      104    &lt;fn&gt;                   stat_1</code></pre>
+<pre><code>   group1 group1_level group2 group2_level variable variable_level  context stat_name stat_label  stat stat_fmt fmt_fun warning error gts_column
+1    &lt;NA&gt;                &lt;NA&gt;                TRT01A        Placebo tabulate         n          n    86       86       0                   stat_1
+2    &lt;NA&gt;                &lt;NA&gt;                TRT01A        Placebo tabulate         N          N   306      306       0                   stat_1
+3    &lt;NA&gt;                &lt;NA&gt;                TRT01A        Placebo tabulate         p          % 0.281     28.1    &lt;fn&gt;                   stat_1
+4    &lt;NA&gt;                &lt;NA&gt;                TRT01A      Screen F… tabulate         n          n    52       52       0                   stat_2
+5    &lt;NA&gt;                &lt;NA&gt;                TRT01A      Screen F… tabulate         N          N   306      306       0                   stat_2
+6    &lt;NA&gt;                &lt;NA&gt;                TRT01A      Screen F… tabulate         p          %  0.17     17.0    &lt;fn&gt;                   stat_2
+7    &lt;NA&gt;                &lt;NA&gt;                TRT01A      Xanomeli… tabulate         n          n    72       72       0                   stat_3
+8    &lt;NA&gt;                &lt;NA&gt;                TRT01A      Xanomeli… tabulate         N          N   306      306       0                   stat_3
+9    &lt;NA&gt;                &lt;NA&gt;                TRT01A      Xanomeli… tabulate         p          % 0.235     23.5    &lt;fn&gt;                   stat_3
+10   &lt;NA&gt;                &lt;NA&gt;                TRT01A      Xanomeli… tabulate         n          n    96       96       0                   stat_4</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>ℹ 71 more rows</code></pre>
+<pre><code>ℹ 26 more rows</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>ℹ Use `print(n = ...)` to see more rows</code></pre>
@@ -954,8 +954,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb9-18"><a href="#cb9-18"></a><span class="in">library(dplyr)</span></span>
 <span id="cb9-19"><a href="#cb9-19"></a><span class="in">library(gtsummary)</span></span>
 <span id="cb9-20"><a href="#cb9-20"></a></span>
-<span id="cb9-21"><a href="#cb9-21"></a><span class="in">adsl &lt;- random.cdisc.data::cadsl</span></span>
-<span id="cb9-22"><a href="#cb9-22"></a><span class="in">adae &lt;- random.cdisc.data::cadae</span></span>
+<span id="cb9-21"><a href="#cb9-21"></a><span class="in">adsl &lt;- pharmaverseadam::adsl</span></span>
+<span id="cb9-22"><a href="#cb9-22"></a><span class="in">adae &lt;- pharmaverseadam::adae</span></span>
 <span id="cb9-23"><a href="#cb9-23"></a></span>
 <span id="cb9-24"><a href="#cb9-24"></a><span class="in"># Pre-processing --------------------------------------------</span></span>
 <span id="cb9-25"><a href="#cb9-25"></a><span class="in">adae &lt;- adae |&gt;</span></span>

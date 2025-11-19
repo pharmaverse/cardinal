@@ -252,8 +252,8 @@ cookieconsent.run({
 <span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(cards)</span>
 <span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(gtsummary)</span>
 <span id="cb1-5"><a href="#cb1-5"></a></span>
-<span id="cb1-6"><a href="#cb1-6"></a>adsl <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadsl</span>
-<span id="cb1-7"><a href="#cb1-7"></a>adae <span class="ot">&lt;-</span> random.cdisc.data<span class="sc">::</span>cadae</span>
+<span id="cb1-6"><a href="#cb1-6"></a>adsl <span class="ot">&lt;-</span> pharmaverseadam<span class="sc">::</span>adsl</span>
+<span id="cb1-7"><a href="#cb1-7"></a>adae <span class="ot">&lt;-</span> pharmaverseadam<span class="sc">::</span>adae</span>
 <span id="cb1-8"><a href="#cb1-8"></a></span>
 <span id="cb1-9"><a href="#cb1-9"></a><span class="co"># Pre-processing --------------------------------------------</span></span>
 <span id="cb1-10"><a href="#cb1-10"></a>adsl <span class="ot">&lt;-</span> adsl <span class="sc">|&gt;</span></span>
@@ -322,23 +322,23 @@ cookieconsent.run({
 [[1]]$tbl_hierarchical</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>{cards} data frame: 81 x 13</code></pre>
+<pre><code>{cards} data frame: 33 x 13</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   group1 group1_level                     variable variable_level stat_name stat_label  stat stat_fmt
-1    &lt;NA&gt;                                    TRT01A      A: Drug X         n          n   134      134
-2    &lt;NA&gt;                                    TRT01A      A: Drug X         N          N   400      400
-3    &lt;NA&gt;                                    TRT01A      A: Drug X         p          % 0.335     33.5
-4    &lt;NA&gt;                                    TRT01A      B: Place…         n          n   134      134
-5    &lt;NA&gt;                                    TRT01A      B: Place…         N          N   400      400
-6    &lt;NA&gt;                                    TRT01A      B: Place…         p          % 0.335     33.5
-7    &lt;NA&gt;                                    TRT01A      C: Combi…         n          n   132      132
-8    &lt;NA&gt;                                    TRT01A      C: Combi…         N          N   400      400
-9    &lt;NA&gt;                                    TRT01A      C: Combi…         p          %  0.33     33.0
-10 TRT01A    A: Drug X ..ard_hierarchical_overall..           TRUE         n          n    24       24</code></pre>
+1    &lt;NA&gt;                                    TRT01A        Placebo         n          n    86       86
+2    &lt;NA&gt;                                    TRT01A        Placebo         N          N   254      254
+3    &lt;NA&gt;                                    TRT01A        Placebo         p          % 0.339     33.9
+4    &lt;NA&gt;                                    TRT01A      Xanomeli…         n          n    72       72
+5    &lt;NA&gt;                                    TRT01A      Xanomeli…         N          N   254      254
+6    &lt;NA&gt;                                    TRT01A      Xanomeli…         p          % 0.283     28.3
+7    &lt;NA&gt;                                    TRT01A      Xanomeli…         n          n    96       96
+8    &lt;NA&gt;                                    TRT01A      Xanomeli…         N          N   254      254
+9    &lt;NA&gt;                                    TRT01A      Xanomeli…         p          % 0.378     37.8
+10 TRT01A      Placebo ..ard_hierarchical_overall..           TRUE         n          n     2        2</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>ℹ 71 more rows</code></pre>
+<pre><code>ℹ 23 more rows</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>ℹ Use `print(n = ...)` to see more rows</code></pre>
@@ -353,23 +353,23 @@ cookieconsent.run({
 [[2]]$tbl_hierarchical</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>{cards} data frame: 36 x 13</code></pre>
+<pre><code>{cards} data frame: 33 x 13</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   group1 group1_level                     variable variable_level stat_name stat_label  stat stat_fmt
-1    &lt;NA&gt;                                    TRT01A      A: Drug X         n          n   134      134
-2    &lt;NA&gt;                                    TRT01A      A: Drug X         N          N   400      400
-3    &lt;NA&gt;                                    TRT01A      A: Drug X         p          % 0.335     33.5
-4    &lt;NA&gt;                                    TRT01A      B: Place…         n          n   134      134
-5    &lt;NA&gt;                                    TRT01A      B: Place…         N          N   400      400
-6    &lt;NA&gt;                                    TRT01A      B: Place…         p          % 0.335     33.5
-7    &lt;NA&gt;                                    TRT01A      C: Combi…         n          n   132      132
-8    &lt;NA&gt;                                    TRT01A      C: Combi…         N          N   400      400
-9    &lt;NA&gt;                                    TRT01A      C: Combi…         p          %  0.33     33.0
-10 TRT01A    A: Drug X ..ard_hierarchical_overall..           TRUE         n          n    18       18</code></pre>
+1    &lt;NA&gt;                                    TRT01A        Placebo         n          n    86       86
+2    &lt;NA&gt;                                    TRT01A        Placebo         N          N   254      254
+3    &lt;NA&gt;                                    TRT01A        Placebo         p          % 0.339     33.9
+4    &lt;NA&gt;                                    TRT01A      Xanomeli…         n          n    72       72
+5    &lt;NA&gt;                                    TRT01A      Xanomeli…         N          N   254      254
+6    &lt;NA&gt;                                    TRT01A      Xanomeli…         p          % 0.283     28.3
+7    &lt;NA&gt;                                    TRT01A      Xanomeli…         n          n    96       96
+8    &lt;NA&gt;                                    TRT01A      Xanomeli…         N          N   254      254
+9    &lt;NA&gt;                                    TRT01A      Xanomeli…         p          % 0.378     37.8
+10 TRT01A      Placebo ..ard_hierarchical_overall..           TRUE         n          n     2        2</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>ℹ 26 more rows</code></pre>
+<pre><code>ℹ 23 more rows</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>ℹ Use `print(n = ...)` to see more rows</code></pre>
@@ -1011,8 +1011,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb16-19"><a href="#cb16-19"></a><span class="in">library(cards)</span></span>
 <span id="cb16-20"><a href="#cb16-20"></a><span class="in">library(gtsummary)</span></span>
 <span id="cb16-21"><a href="#cb16-21"></a></span>
-<span id="cb16-22"><a href="#cb16-22"></a><span class="in">adsl &lt;- random.cdisc.data::cadsl</span></span>
-<span id="cb16-23"><a href="#cb16-23"></a><span class="in">adae &lt;- random.cdisc.data::cadae</span></span>
+<span id="cb16-22"><a href="#cb16-22"></a><span class="in">adsl &lt;- pharmaverseadam::adsl</span></span>
+<span id="cb16-23"><a href="#cb16-23"></a><span class="in">adae &lt;- pharmaverseadam::adae</span></span>
 <span id="cb16-24"><a href="#cb16-24"></a></span>
 <span id="cb16-25"><a href="#cb16-25"></a><span class="in"># Pre-processing --------------------------------------------</span></span>
 <span id="cb16-26"><a href="#cb16-26"></a><span class="in">adsl &lt;- adsl |&gt;</span></span>
