@@ -1,5 +1,4 @@
 test_that("fda-table_38() works", {
-
   library(dplyr)
   library(cards)
   library(gtsummary)
@@ -24,8 +23,8 @@ test_that("fda-table_38() works", {
     slice_min(AVAL, n = 1L, by = c(USUBJID, PARAMCD)) |>
     # define analysis value cutoffs per parameter
     mutate(
-      SBP90 = PARAMCD == "SYSBP" & AVAL < 90, # SYSBP <90
-      DBP60 = PARAMCD == "DIABP" & AVAL < 60 # DIABP <60
+      SBP90 = PARAMCD == "SYSBP" & AVAL < 90,
+      DBP60 = PARAMCD == "DIABP" & AVAL < 60
     )
 
   ard <- bind_ard(

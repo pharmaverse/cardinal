@@ -1,5 +1,4 @@
 test_that("fda-table_10() works", {
-
   library(dplyr)
   library(gtsummary)
 

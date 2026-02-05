@@ -1,5 +1,4 @@
 test_that("fda-table_33() works", {
-
   library(dplyr)
   library(cards)
   library(gtsummary)
@@ -12,7 +11,13 @@ test_that("fda-table_33() works", {
   levels(adae$OCMQ01SC) <- c("BROAD", "NARROW")
   adae$OCMQ01SC[is.na(adae$OCMQ01SC)] <- "NARROW"
   adae$OCMQ01NAM <- factor(adae$OCMQ01NAM, levels = c("Erectile Dysfunction", "Gynecomastia"))
-  adae$OCMQ01NAM[adae$SEX == "M"] <- as.factor(sample(c("Erectile Dysfunction", "Gynecomastia"), sum(adae$SEX == "M"), replace = TRUE))
+  adae$OCMQ01NAM[adae$SEX == "M"] <- as.factor(
+    sample(
+      c("Erectile Dysfunction", "Gynecomastia"),
+      sum(adae$SEX == "M"),
+      replace = TRUE
+    )
+  )
 
 
   # Pre-processing --------------------------------------------

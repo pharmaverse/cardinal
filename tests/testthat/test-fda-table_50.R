@@ -1,5 +1,4 @@
 test_that("fda-table_50() works", {
-
   library(dplyr)
   library(cards)
   library(gtsummary)
@@ -91,7 +90,10 @@ test_that("fda-table_50() works", {
 
   tbl <- list(tbl_any_sae, tbl_sex, tbl_agegr1, tbl_race, tbl_ethnic) |>
     tbl_stack() |>
-    modify_indent("label", rows = !(variable %in% c("..ard_hierarchical_overall..", "AESER", "SEXGR", "AGEGR", "RACEGR", "ETHNICGR"))) |>
+    modify_indent(
+      "label",
+      rows = !(variable %in% c("..ard_hierarchical_overall..", "AESER", "SEXGR", "AGEGR", "RACEGR", "ETHNICGR"))
+    ) |>
     remove_footnote_header(columns = everything()) |>
     modify_post_fmt_fun(
       fmt_fun = ~ ifelse(. == "0/0 (NA%)", "0 (0%)", .),
@@ -106,4 +108,4 @@ test_that("fda-table_50() works", {
   expect_snapshot(as.data.frame(ard[[3]]$tbl_hierarchical)[1:25, ])
   expect_snapshot(as.data.frame(ard[[4]]$tbl_hierarchical)[1:25, ])
   expect_snapshot(as.data.frame(ard[[5]]$tbl_hierarchical)[1:25, ])
-  })
+})

@@ -1,5 +1,4 @@
 test_that("fda-table_37() works", {
-
   library(dplyr)
   library(cards)
   library(gtsummary)
@@ -24,11 +23,11 @@ test_that("fda-table_37() works", {
     slice_max(AVAL, n = 1L, by = USUBJID) |>
     # define analysis value cutoffs
     mutate(
-      L60 = AVAL < 60, # DIABP <60
-      G60 = AVAL > 60, # DIABP >60
-      G90 = AVAL > 90, # DIABP >90
-      G110 = AVAL > 110, # DIABP >110
-      GE120 = AVAL >= 120 # DIABP >=120
+      L60 = AVAL < 60,
+      G60 = AVAL > 60,
+      G90 = AVAL > 90,
+      G110 = AVAL > 110,
+      GE120 = AVAL >= 120
     )
 
   ard <- bind_ard(

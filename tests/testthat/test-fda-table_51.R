@@ -1,5 +1,4 @@
 test_that("fda-table_51() works", {
-
   library(dplyr)
   library(cards)
   library(gtsummary)
@@ -29,7 +28,7 @@ test_that("fda-table_51() works", {
     )
 
   # generate ARD for `N_s` statistic
-  ard_Ns <- adsl |>
+  ard_ns <- adsl |>
     ard_categorical(
       variables = c(any_ae, SEX, AGEGR1, RACE, ETHNIC),
       by = ARM,
@@ -42,7 +41,7 @@ test_that("fda-table_51() works", {
   ard_p <-
     cards::bind_ard(
       ard_summary,
-      ard_Ns
+      ard_ns
     ) |>
     select(-stat_label) |>
     tidyr::pivot_wider(names_from = stat_name, values_from = stat, values_fn = unlist) |>
@@ -56,7 +55,7 @@ test_that("fda-table_51() works", {
     select(-n, -N_s)
 
   # combine all ARDs
-  ard <- cards::bind_ard(ard_summary, ard_Ns, ard_p, ard_categorical(adsl, variables = ARM, statistic = ~"n")) |>
+  ard <- cards::bind_ard(ard_summary, ard_ns, ard_p, ard_categorical(adsl, variables = ARM, statistic = ~"n")) |>
     cards::tidy_ard_row_order()
 
   # generate table from ARDs

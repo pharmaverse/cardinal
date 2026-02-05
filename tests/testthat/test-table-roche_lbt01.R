@@ -1,5 +1,4 @@
 test_that("table-roche_lbt01() works", {
-
   library(gtsummary)
   library(dplyr)
   library(crane)

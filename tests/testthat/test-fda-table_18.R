@@ -1,5 +1,4 @@
 test_that("fda-table_18() works", {
-
   library(dplyr)
   library(cards)
   library(cardx)

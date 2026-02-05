@@ -1,5 +1,4 @@
 test_that("fda-table_17() works", {
-
   library(dplyr)
   library(cards)
   library(gtsummary)
@@ -17,7 +16,10 @@ test_that("fda-table_17() works", {
     # safety population
     filter(SAFFL == "Y") |>
     # filter 0CMQ to truncate table
-    filter(OCMQ01NAM %in% c("HLT_0649", "HLT_0644", " HLT_0570", " HLT_0256", "HLT_0742", "HLT_0244", "HLT_0097", "HLT_0738"))
+    filter(
+      OCMQ01NAM %in%
+        c("HLT_0649", "HLT_0644", " HLT_0570", " HLT_0256", "HLT_0742", "HLT_0244", "HLT_0097", "HLT_0738")
+    )
 
   adsl <- adsl |>
     # safety population
