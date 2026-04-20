@@ -1,4 +1,7 @@
 test_that("fda-table_12() works", {
+  skip_if_not_installed("dplyr")
+  skip_if_not_installed("cards")
+  skip_if_not_installed("gtsummary")
   library(dplyr)
   library(cards)
   library(gtsummary)
