@@ -1,4 +1,10 @@
 test_that("table-roche_lbt01() works", {
+  skip_if_not_installed("dplyr")
+  skip_if_not_installed("cards")
+  skip_if_not_installed("gtsummary")
+  skip_if_not_installed("pharmaverseadam")
+  skip_if_not_installed("pharmaverseadam")
+
   library(gtsummary)
   library(dplyr)
   library(crane)

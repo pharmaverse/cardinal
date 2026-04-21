@@ -16,19 +16,91 @@ on:
   workflow_dispatch:
 
 jobs:
+  audit:
+    name: Audit Dependencies 🕵️‍♂️
+    uses: insightsengineering/r.pkg.template/.github/workflows/audit.yaml@main
+  r-cmd:
+    name: R CMD Check 🧬
+    uses: insightsengineering/r.pkg.template/.github/workflows/build-check-install.yaml@main
+    secrets:
+      REPO_GITHUB_TOKEN: ${{ secrets.PHARMAVERSE_BOT  }}
+    with:
+      additional-env-vars: |
+        _R_CHECK_CRAN_INCOMING_REMOTE_=false
+        TESTING_DEPTH=5
+        _R_CHECK_EXAMPLE_TIMING_THRESHOLD_=6
+      additional-r-cmd-check-params: --as-cran
+      enforce-note-blocklist: true
+      note-blocklist: |
+        checking dependencies in R code .* NOTE
+        checking R code for possible problems .* NOTE
+        checking examples .* NOTE
+        checking Rd line widths .* NOTE
+        checking S3 generic/method consistency .* NOTE
+        checking Rd .usage sections .* NOTE
+        checking for unstated dependencies in vignettes .* NOTE
+        checking top-level files .* NOTE
+      deps-installation-method: setup-r-dependencies
+
+  r-cmd-non-cran:
+    name: R CMD Check (non-CRAN) 🧬
+    uses: insightsengineering/r.pkg.template/.github/workflows/build-check-install.yaml@main
+    secrets:
+      REPO_GITHUB_TOKEN: ${{ secrets.PHARMAVERSE_BOT }}
+    with:
+      additional-env-vars: |
+        _R_CHECK_EXAMPLE_TIMING_THRESHOLD_=6
+        NOT_CRAN=true
+      enforce-note-blocklist: true
+      concurrency-group: non-cran
+      unit-test-report-directory: unit-test-report-non-cran
+      note-blocklist: |
+        checking dependencies in R code .* NOTE
+        checking R code for possible problems .* NOTE
+        checking examples .* NOTE
+        checking Rd line widths .* NOTE
+        checking S3 generic/method consistency .* NOTE
+        checking Rd .usage sections .* NOTE
+        checking for unstated dependencies in vignettes .* NOTE
+        checking top-level files .* NOTE
+      deps-installation-method: setup-r-dependencies
+
+  coverage:
+    name: Coverage 📔
+    uses: insightsengineering/r.pkg.template/.github/workflows/test-coverage.yaml@main
+    secrets:
+      REPO_GITHUB_TOKEN: ${{ secrets.PHARMAVERSE_BOT }}
+    with:
+      additional-env-vars: |
+        NOT_CRAN=true
+      deps-installation-method: setup-r-dependencies
   linter:
-    if: github.event_name == 'pull_request'
+    if: github.event_name != 'push'
     name: SuperLinter 🦸‍♀️
     uses: insightsengineering/r.pkg.template/.github/workflows/linter.yaml@main
+  roxygen:
+    name: Roxygen 🅾
+    uses: insightsengineering/r.pkg.template/.github/workflows/roxygen.yaml@main
+    secrets:
+      REPO_GITHUB_TOKEN: ${{ secrets.PHARMAVERSE_BOT }}
+    with:
+      auto-update: false
+      deps-installation-method: setup-r-dependencies
   gitleaks:
     name: gitleaks 💧
     uses: insightsengineering/r.pkg.template/.github/workflows/gitleaks.yaml@main
   spelling:
-    if: github.event_name == 'pull_request'
     name: Spell Check 🆎
     uses: insightsengineering/r.pkg.template/.github/workflows/spelling.yaml@main
+    secrets:
+      REPO_GITHUB_TOKEN: ${{ secrets.PHARMAVERSE_BOT }}
+  grammar:
+    name: Grammar Check 🔤
+    uses: insightsengineering/r.pkg.template/.github/workflows/grammar.yaml@main
+    secrets:
+      REPO_GITHUB_TOKEN: ${{ secrets.PHARMAVERSE_BOT }}
   links:
-    if: github.event_name == 'pull_request'
+    if: github.event_name != 'push'
     name: Check URLs 🌐
     uses: insightsengineering/r.pkg.template/.github/workflows/links.yaml@main
   vbump:
@@ -44,12 +116,10 @@ jobs:
     name: License Check 🃏
     uses: insightsengineering/r.pkg.template/.github/workflows/licenses.yaml@main
   style:
-    if: github.event_name == 'pull_request'
+    if: github.event_name != 'push'
     name: Style Check 👗
     uses: insightsengineering/r.pkg.template/.github/workflows/style.yaml@main
     with:
       auto-update: true
-  grammar:
-    if: github.event_name == 'pull_request'
-    name: Grammar Check 🔤
-    uses: insightsengineering/r.pkg.template/.github/workflows/grammar.yaml@main
+    secrets:
+      REPO_GITHUB_TOKEN: ${{ secrets.PHARMAVERSE_BOT }}

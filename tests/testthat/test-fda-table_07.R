@@ -1,4 +1,8 @@
 test_that("fda-table_07() works", {
+  skip_if_not_installed("dplyr")
+  skip_if_not_installed("gtsummary")
+  skip_if_not_installed("pharmaverseadam")
+
   library(gtsummary)
   library(dplyr)
 

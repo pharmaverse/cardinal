@@ -1,4 +1,10 @@
 test_that("fda-table_18() works", {
+  skip_if_not_installed("dplyr")
+  skip_if_not_installed("cards")
+  skip_if_not_installed("cardx")
+  skip_if_not_installed("gtsummary")
+  skip_if_not_installed("pharmaverseadam")
+
   library(dplyr)
   library(cards)
   library(cardx)
