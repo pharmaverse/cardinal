@@ -59,6 +59,9 @@ jobs:
           enable-check: false
           direction: upstream
 
+      - name: Install dependencies ⛓️
+        uses: r-lib/actions/setup-r-dependencies@v2
+
       - name: Install package 📦
         run: R CMD INSTALL .
 
