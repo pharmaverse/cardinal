@@ -2,6 +2,8 @@
 name: Check 🛠
 
 on:
+  schedule:
+    - cron: '45 3 * * 0'
   pull_request:
     types:
       - opened
