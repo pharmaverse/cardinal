@@ -2,6 +2,8 @@
 name: Check 🛠
 
 on:
+  schedule:
+    - cron: '45 3 * * 0'
   pull_request:
     types:
       - opened
@@ -97,8 +99,6 @@ jobs:
   grammar:
     name: Grammar Check 🔤
     uses: insightsengineering/r.pkg.template/.github/workflows/grammar.yaml@main
-    secrets:
-      REPO_GITHUB_TOKEN: ${{ secrets.PHARMAVERSE_BOT }}
   links:
     if: github.event_name != 'push'
     name: Check URLs 🌐
