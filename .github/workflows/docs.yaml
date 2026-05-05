@@ -53,6 +53,8 @@ jobs:
 
       - name: Install dependencies ⛓️
         uses: insightsengineering/setup-r-dependencies@47235b81d6af3f63d38523dd1f8c09dc9150b76a
+        with:
+          deps-installation-method: setup-r-dependencies
 
       - name: Install package 📦
         run: R CMD INSTALL .
