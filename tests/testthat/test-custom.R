@@ -15,7 +15,7 @@ test_that("custom table works", {
   adam_db <- list(
     adsl = pharmaverseadam::adsl,
     adae = pharmaverseadam::adae
-    )
+  )
   # data pre-processing ----------------------------------------------------------
   df_aet02 <-
     adam_db$adae |>
