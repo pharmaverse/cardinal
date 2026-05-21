@@ -28,8 +28,8 @@ test_that("custom table works", {
     )
 
   # build AET02 ------------------------------------------------------------------
-  expect_silent(
-      df_aet02 |>
+  expect_no_warning(
+    df_aet02 |>
       tbl_hierarchical_rate_and_count(
         by = "TRT01A",
         variables = c(AEBODSYS, AEDECOD),
