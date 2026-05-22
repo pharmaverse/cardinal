@@ -19,5 +19,10 @@ Useful links:
 \author{
 \strong{Maintainer}: Pawel Rucki \email{pawel.rucki@roche.com}
 
+Authors:
+\itemize{
+  \item Pawel Rucki \email{pawel.rucki@roche.com}
+}
+
 }
 \keyword{internal}
