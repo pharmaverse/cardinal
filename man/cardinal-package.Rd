@@ -12,6 +12,7 @@ Implementation of FDA Safety Tables and Figures
 Useful links:
 \itemize{
   \item \url{https://github.com/pharmaverse/cardinal/}
+  \item \url{https://pharmaverse.github.io/cardinal/}
   \item Report bugs at \url{https://github.com/pharmaverse/cardinal/issues}
 }
 
