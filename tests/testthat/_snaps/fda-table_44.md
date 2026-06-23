@@ -29,58 +29,32 @@
       23 TRT01A Xanomeline High Dose OCMQ01NAM Erectile Dysfunction  AEDECOD
       24 TRT01A Xanomeline High Dose OCMQ01NAM Erectile Dysfunction  AEDECOD
       25 TRT01A  Xanomeline Low Dose OCMQ01NAM Erectile Dysfunction  AEDECOD
-                    variable_level      context stat_name stat_label      stat
-      1                    Placebo     tabulate         n          n         3
-      2                    Placebo     tabulate         N          N        18
-      3                    Placebo     tabulate         p          % 0.1666667
-      4       Xanomeline High Dose     tabulate         n          n         8
-      5       Xanomeline High Dose     tabulate         N          N        18
-      6       Xanomeline High Dose     tabulate         p          % 0.4444444
-      7        Xanomeline Low Dose     tabulate         n          n         7
-      8        Xanomeline Low Dose     tabulate         N          N        18
-      9        Xanomeline Low Dose     tabulate         p          % 0.3888889
-      10 APPLICATION SITE ERYTHEMA hierarchical         n          n         0
-      11 APPLICATION SITE ERYTHEMA hierarchical         N          N         3
-      12 APPLICATION SITE ERYTHEMA hierarchical         p          %         0
-      13 APPLICATION SITE ERYTHEMA hierarchical         n          n         3
-      14 APPLICATION SITE ERYTHEMA hierarchical         N          N         8
-      15 APPLICATION SITE ERYTHEMA hierarchical         p          %     0.375
-      16 APPLICATION SITE ERYTHEMA hierarchical         n          n         3
-      17 APPLICATION SITE ERYTHEMA hierarchical         N          N         7
-      18 APPLICATION SITE ERYTHEMA hierarchical         p          % 0.4285714
-      19                     COUGH hierarchical         n          n         1
-      20                     COUGH hierarchical         N          N         3
-      21                     COUGH hierarchical         p          % 0.3333333
-      22                     COUGH hierarchical         n          n         3
-      23                     COUGH hierarchical         N          N         8
-      24                     COUGH hierarchical         p          %     0.375
-      25                     COUGH hierarchical         n          n         0
-         stat_fmt
-      1         3
-      2        18
-      3      16.7
-      4         8
-      5        18
-      6      44.4
-      7         7
-      8        18
-      9      38.9
-      10        0
-      11        3
-      12        0
-      13        3
-      14        8
-      15       38
-      16        3
-      17        7
-      18       43
-      19        1
-      20        3
-      21       33
-      22        3
-      23        8
-      24       38
-      25        0
+               variable_level      context stat_name stat_label      stat stat_fmt
+      1               Placebo     tabulate         n          n         3        3
+      2               Placebo     tabulate         N          N        18       18
+      3               Placebo     tabulate         p          % 0.1666667     16.7
+      4  Xanomeline High Dose     tabulate         n          n         8        8
+      5  Xanomeline High Dose     tabulate         N          N        18       18
+      6  Xanomeline High Dose     tabulate         p          % 0.4444444     44.4
+      7   Xanomeline Low Dose     tabulate         n          n         7        7
+      8   Xanomeline Low Dose     tabulate         N          N        18       18
+      9   Xanomeline Low Dose     tabulate         p          % 0.3888889     38.9
+      10                    1 hierarchical         n          n         0        0
+      11                    1 hierarchical         N          N         3        3
+      12                    1 hierarchical         p          %         0        0
+      13                    1 hierarchical         n          n         3        3
+      14                    1 hierarchical         N          N         8        8
+      15                    1 hierarchical         p          %     0.375       38
+      16                    1 hierarchical         n          n         3        3
+      17                    1 hierarchical         N          N         7        7
+      18                    1 hierarchical         p          % 0.4285714       43
+      19                    2 hierarchical         n          n         1        1
+      20                    2 hierarchical         N          N         3        3
+      21                    2 hierarchical         p          % 0.3333333       33
+      22                    2 hierarchical         n          n         3        3
+      23                    2 hierarchical         N          N         8        8
+      24                    2 hierarchical         p          %     0.375       38
+      25                    2 hierarchical         n          n         0        0
                                                                                                                                                                                                                                                                                                                            fmt_fun
       1                                                                                                                                                                                                                                                                                                                          0
       2                                                                                                                                                                                                                                                                                                                          0
