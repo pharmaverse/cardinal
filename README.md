@@ -28,8 +28,7 @@ See the [Getting Started page](https://pharmaverse.github.io/cardinal/quarto/get
 
 We are reachable via the following channels for inquiries and support:
 
-
-* [Slack](https://app.slack.com/client/T028PB489D3/C04MQS12MND) - Use this channel to message the Cardinal team directly with questions & feedback on the project. 
+* [Slack](https://app.slack.com/client/T028PB489D3/C04MQS12MND) - Use this channel to message the Cardinal team directly with questions & feedback on the project.
 * [GitHub Issues](https://github.com/pharmaverse/cardinal/issues/new/choose) - To report a bug, request a new TLG template, or ask a question, open a new issue on GitHub.
 
 ## Acknowledgment
