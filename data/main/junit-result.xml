@@ -1,209 +1,141 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="custom" timestamp="2026-07-05T06:58:58Z" hostname="d9b8d8cdd34b" tests="1" skipped="0" failures="0" errors="0" time="10.6">
-    <testcase time="10.6" classname="custom" name="custom_table_works"/>
+  <testsuite name="custom" timestamp="2026-07-05T06:59:15Z" hostname="8183e8f930d6" tests="1" skipped="0" failures="0" errors="0" time="10.285">
+    <testcase time="10.285" classname="custom" name="custom_table_works"/>
   </testsuite>
-  <testsuite name="fda-table_02" timestamp="2026-07-05T06:59:09Z" hostname="d9b8d8cdd34b" tests="2" skipped="0" failures="0" errors="0" time="3.502">
-    <testcase time="3.469" classname="fda_table_02" name="fda_table_02_works"/>
-    <testcase time="0.0330000000000013" classname="fda_table_02" name="fda_table_02_works"/>
-  </testsuite>
-  <testsuite name="fda-table_03" timestamp="2026-07-05T06:59:13Z" hostname="d9b8d8cdd34b" tests="3" skipped="0" failures="0" errors="0" time="1.435">
-    <testcase time="1.393" classname="fda_table_03" name="fda_table_03_works"/>
-    <testcase time="0.0240000000000009" classname="fda_table_03" name="fda_table_03_works"/>
-    <testcase time="0.0179999999999989" classname="fda_table_03" name="fda_table_03_works"/>
-  </testsuite>
-  <testsuite name="fda-table_04" timestamp="2026-07-05T06:59:14Z" hostname="d9b8d8cdd34b" tests="1" skipped="0" failures="0" errors="0" time="0.893">
-    <testcase time="0.893000000000002" classname="fda_table_04" name="fda_table_04_works"/>
-  </testsuite>
-  <testsuite name="fda-table_06" timestamp="2026-07-05T06:59:15Z" hostname="d9b8d8cdd34b" tests="1" skipped="0" failures="0" errors="0" time="1.067">
-    <testcase time="1.067" classname="fda_table_06" name="fda_table_06_works"/>
-  </testsuite>
-  <testsuite name="fda-table_07" timestamp="2026-07-05T06:59:16Z" hostname="d9b8d8cdd34b" tests="8" skipped="0" failures="0" errors="0" time="3.981">
-    <testcase time="3.857" classname="fda_table_07" name="fda_table_07_works"/>
-    <testcase time="0.0159999999999982" classname="fda_table_07" name="fda_table_07_works"/>
-    <testcase time="0.0160000000000018" classname="fda_table_07" name="fda_table_07_works"/>
-    <testcase time="0.0169999999999995" classname="fda_table_07" name="fda_table_07_works"/>
-    <testcase time="0.0159999999999982" classname="fda_table_07" name="fda_table_07_works"/>
-    <testcase time="0.0150000000000006" classname="fda_table_07" name="fda_table_07_works"/>
-    <testcase time="0.022000000000002" classname="fda_table_07" name="fda_table_07_works"/>
-    <testcase time="0.0219999999999985" classname="fda_table_07" name="fda_table_07_works"/>
-  </testsuite>
-  <testsuite name="fda-table_08" timestamp="2026-07-05T06:59:20Z" hostname="d9b8d8cdd34b" tests="2" skipped="0" failures="0" errors="0" time="1.339">
-    <testcase time="1.318" classname="fda_table_08" name="fda_table_08_works"/>
-    <testcase time="0.0209999999999972" classname="fda_table_08" name="fda_table_08_works"/>
-  </testsuite>
-  <testsuite name="fda-table_09" timestamp="2026-07-05T06:59:21Z" hostname="d9b8d8cdd34b" tests="1" skipped="0" failures="0" errors="0" time="0.178">
-    <testcase time="0.178000000000001" classname="fda_table_09" name="fda_table_09_works"/>
-  </testsuite>
-  <testsuite name="fda-table_10" timestamp="2026-07-05T06:59:21Z" hostname="d9b8d8cdd34b" tests="1" skipped="0" failures="0" errors="0" time="0.687">
-    <testcase time="0.687000000000001" classname="fda_table_10" name="fda_table_10_works"/>
-  </testsuite>
-  <testsuite name="fda-table_11" timestamp="2026-07-05T06:59:22Z" hostname="d9b8d8cdd34b" tests="1" skipped="0" failures="0" errors="0" time="0.904">
-    <testcase time="0.904" classname="fda_table_11" name="fda_table_11_works"/>
-  </testsuite>
-  <testsuite name="fda-table_12" timestamp="2026-07-05T06:59:23Z" hostname="d9b8d8cdd34b" tests="1" skipped="0" failures="1" errors="0" time="1.62">
-    <testcase time="1.62" classname="fda_table_12" name="fda_table_12_works">
-      <failure type="failure" message="Snapshot of code has changed: ('test-fda-table_12.R:47:3')">Snapshot of code has changed:
-old[1:42] vs new[1:42]
-  Code
-    as.data.frame(ard$tbl_hierarchical)[1:25, ]
-  Output
--      group1   group1_level group2 group2_level                     variable
-+      group1 group1_level group2 group2_level                     variable
--   1    &lt;NA&gt;           NULL   &lt;NA&gt;         NULL                       TRT01A
-+   1    &lt;NA&gt;         NULL   &lt;NA&gt;         NULL                       TRT01A
--   2    &lt;NA&gt;           NULL   &lt;NA&gt;         NULL                       TRT01A
-+   2    &lt;NA&gt;         NULL   &lt;NA&gt;         NULL                       TRT01A
--   3    &lt;NA&gt;           NULL   &lt;NA&gt;         NULL                       TRT01A
-+   3    &lt;NA&gt;         NULL   &lt;NA&gt;         NULL                       TRT01A
--   4    &lt;NA&gt;           NULL   &lt;NA&gt;         NULL                       TRT01A
-+   4    &lt;NA&gt;         NULL   &lt;NA&gt;         NULL                       TRT01A
--   5    &lt;NA&gt;           NULL   &lt;NA&gt;         NULL                       TRT01A
-+   5    &lt;NA&gt;         NULL   &lt;NA&gt;         NULL                       TRT01A
--   6    &lt;NA&gt;           NULL   &lt;NA&gt;         NULL                       TRT01A
-+   6    &lt;NA&gt;         NULL   &lt;NA&gt;         NULL                       TRT01A
--   7    &lt;NA&gt;           NULL   &lt;NA&gt;         NULL                       TRT01A
-+   7    &lt;NA&gt;         NULL   &lt;NA&gt;         NULL                       TRT01A
--   8    &lt;NA&gt;           NULL   &lt;NA&gt;         NULL                       TRT01A
-+   8    &lt;NA&gt;         NULL   &lt;NA&gt;         NULL                       TRT01A
--   9    &lt;NA&gt;           NULL   &lt;NA&gt;         NULL                       TRT01A
-+   9    &lt;NA&gt;         NULL   &lt;NA&gt;         NULL                       TRT01A
--   10 TRT01A      A: Drug X   &lt;NA&gt;         NULL ..ard_hierarchical_overall..
-+   10 TRT01A            1   &lt;NA&gt;         NULL ..ard_hierarchical_overall..
--   11 TRT01A      A: Drug X   &lt;NA&gt;         NULL ..ard_hierarchical_overall..
-+   11 TRT01A            1   &lt;NA&gt;         NULL ..ard_hierarchical_overall..
--   12 TRT01A      A: Drug X   &lt;NA&gt;         NULL ..ard_hierarchical_overall..
-+   12 TRT01A            1   &lt;NA&gt;         NULL ..ard_hierarchical_overall..
--   13 TRT01A     B: Placebo   &lt;NA&gt;         NULL ..ard_hierarchical_overall..
-+   13 TRT01A            2   &lt;NA&gt;         NULL ..ard_hierarchical_overall..
--   14 TRT01A     B: Placebo   &lt;NA&gt;         NULL ..ard_hierarchical_overall..
-+   14 TRT01A            2   &lt;NA&gt;         NULL ..ard_hierarchical_overall..
--   15 TRT01A     B: Placebo   &lt;NA&gt;         NULL ..ard_hierarchical_overall..
-+   15 TRT01A            2   &lt;NA&gt;         NULL ..ard_hierarchical_overall..
--   16 TRT01A C: Combination   &lt;NA&gt;         NULL ..ard_hierarchical_overall..
-+   16 TRT01A            3   &lt;NA&gt;         NULL ..ard_hierarchical_overall..
--   17 TRT01A C: Combination   &lt;NA&gt;         NULL ..ard_hierarchical_overall..
-+   17 TRT01A            3   &lt;NA&gt;         NULL ..ard_hierarchical_overall..
--   18 TRT01A C: Combination   &lt;NA&gt;         NULL ..ard_hierarchical_overall..
-+   18 TRT01A            3   &lt;NA&gt;         NULL ..ard_hierarchical_overall..
--   19 TRT01A      A: Drug X   &lt;NA&gt;         NULL                     AEBODSYS
-+   19 TRT01A            1   &lt;NA&gt;         NULL                     AEBODSYS
--   20 TRT01A      A: Drug X   &lt;NA&gt;         NULL                     AEBODSYS
-+   20 TRT01A            1   &lt;NA&gt;         NULL                     AEBODSYS
--   21 TRT01A      A: Drug X   &lt;NA&gt;         NULL                     AEBODSYS
-+   21 TRT01A            1   &lt;NA&gt;         NULL                     AEBODSYS
--   22 TRT01A     B: Placebo   &lt;NA&gt;         NULL                     AEBODSYS
-+   22 TRT01A            2   &lt;NA&gt;         NULL                     AEBODSYS
--   23 TRT01A     B: Placebo   &lt;NA&gt;         NULL                     AEBODSYS
-+   23 TRT01A            2   &lt;NA&gt;         NULL                     AEBODSYS
--   24 TRT01A     B: Placebo   &lt;NA&gt;         NULL                     AEBODSYS
-+   24 TRT01A            2   &lt;NA&gt;         NULL                     AEBODSYS
--   25 TRT01A C: Combination   &lt;NA&gt;         NULL                     AEBODSYS
-+   25 TRT01A            3   &lt;NA&gt;         NULL                     AEBODSYS
-       variable_level      context stat_name stat_label      stat stat_fmt
--   1       A: Drug X     tabulate         n          n       134      134
-+   1               1     tabulate         n          n       134      134
--   2       A: Drug X     tabulate         N          N       400      400
-+   2               1     tabulate         N          N       400      400
--   3       A: Drug X     tabulate         p          %     0.335     33.5
-+   3               1     tabulate         p          %     0.335     33.5
--   4      B: Placebo     tabulate         n          n       134      134
-+   4               2     tabulate         n          n       134      134
--   5      B: Placebo     tabulate         N          N       400      400
-+   5               2     tabulate         N          N       400      400
--   6      B: Placebo     tabulate         p          %     0.335     33.5
-+   6               2     tabulate         p          %     0.335     33.5
--   7  C: Combination     tabulate         n          n       132      132
-+   7               3     tabulate         n          n       132      132
--   8  C: Combination     tabulate         N          N       400      400
-+   8               3     tabulate         N          N       400      400
--   9  C: Combination     tabulate         p          %      0.33     33.0
-+   9               3     tabulate         p          %      0.33     33.0
-    10           TRUE hierarchical         n          n        86       86
-    11           TRUE hierarchical         N          N       134      134
-    12           TRUE hierarchical         p          %  0.641791       64
-old[46:58] vs new[46:58]
-    16           TRUE hierarchical         n          n        90       90
-    17           TRUE hierarchical         N          N       132      132
-    18           TRUE hierarchical         p          % 0.6818182       68
--   19         cl A.1 hierarchical         n          n        53       53
-+   19              1 hierarchical         n          n        53       53
--   20         cl A.1 hierarchical         N          N       134      134
-+   20              1 hierarchical         N          N       134      134
--   21         cl A.1 hierarchical         p          % 0.3955224       40
-+   21              1 hierarchical         p          % 0.3955224       40
--   22         cl A.1 hierarchical         n          n        55       55
-+   22              1 hierarchical         n          n        55       55
--   23         cl A.1 hierarchical         N          N       134      134
-+   23              1 hierarchical         N          N       134      134
--   24         cl A.1 hierarchical         p          % 0.4104478       41
-+   24              1 hierarchical         p          % 0.4104478       41
--   25         cl A.1 hierarchical         n          n        69       69
-+   25              1 hierarchical         n          n        69       69
-                                                                                                                                                                                                                                                                                                                         fmt_fun
-    1                                                                                                                                                                                                                                                                                                                          0
-    2                                                                                                                                                                                                                                                                                                                          0
-</failure>
+  <testsuite name="fda-table_02" timestamp="2026-07-05T06:59:25Z" hostname="8183e8f930d6" tests="1" skipped="1" failures="0" errors="0" time="3.053">
+    <testcase time="3.053" classname="fda_table_02" name="fda_table_02_works">
+      <skipped message="Reason: On CRAN ('test-fda-table_02.R:1:1')"/>
     </testcase>
   </testsuite>
-  <testsuite name="fda-table_13" timestamp="2026-07-05T06:59:25Z" hostname="d9b8d8cdd34b" tests="1" skipped="0" failures="0" errors="0" time="0.824">
-    <testcase time="0.823999999999998" classname="fda_table_13" name="fda_table_13_works"/>
+  <testsuite name="fda-table_03" timestamp="2026-07-05T06:59:28Z" hostname="8183e8f930d6" tests="1" skipped="1" failures="0" errors="0" time="1.391">
+    <testcase time="1.391" classname="fda_table_03" name="fda_table_03_works">
+      <skipped message="Reason: On CRAN ('test-fda-table_03.R:1:1')"/>
+    </testcase>
   </testsuite>
-  <testsuite name="fda-table_14" timestamp="2026-07-05T06:59:25Z" hostname="d9b8d8cdd34b" tests="1" skipped="0" failures="0" errors="0" time="0.85">
-    <testcase time="0.850000000000001" classname="fda_table_14" name="fda_table_14_works"/>
+  <testsuite name="fda-table_04" timestamp="2026-07-05T06:59:29Z" hostname="8183e8f930d6" tests="1" skipped="1" failures="0" errors="0" time="0.891">
+    <testcase time="0.891" classname="fda_table_04" name="fda_table_04_works">
+      <skipped message="Reason: On CRAN ('test-fda-table_04.R:1:1')"/>
+    </testcase>
   </testsuite>
-  <testsuite name="fda-table_15" timestamp="2026-07-05T06:59:26Z" hostname="d9b8d8cdd34b" tests="1" skipped="0" failures="0" errors="0" time="3.896">
-    <testcase time="3.896" classname="fda_table_15" name="fda_table_15_works"/>
+  <testsuite name="fda-table_06" timestamp="2026-07-05T06:59:30Z" hostname="8183e8f930d6" tests="1" skipped="1" failures="0" errors="0" time="1.082">
+    <testcase time="1.082" classname="fda_table_06" name="fda_table_06_works">
+      <skipped message="Reason: On CRAN ('test-fda-table_06.R:1:1')"/>
+    </testcase>
   </testsuite>
-  <testsuite name="fda-table_17" timestamp="2026-07-05T06:59:30Z" hostname="d9b8d8cdd34b" tests="2" skipped="0" failures="0" errors="0" time="1.296">
-    <testcase time="1.27500000000001" classname="fda_table_17" name="fda_table_17_works"/>
-    <testcase time="0.0209999999999937" classname="fda_table_17" name="fda_table_17_works"/>
+  <testsuite name="fda-table_07" timestamp="2026-07-05T06:59:31Z" hostname="8183e8f930d6" tests="1" skipped="1" failures="0" errors="0" time="3.862">
+    <testcase time="3.862" classname="fda_table_07" name="fda_table_07_works">
+      <skipped message="Reason: On CRAN ('test-fda-table_07.R:1:1')"/>
+    </testcase>
   </testsuite>
-  <testsuite name="fda-table_18" timestamp="2026-07-05T06:59:31Z" hostname="d9b8d8cdd34b" tests="3" skipped="0" failures="0" errors="0" time="2.105">
-    <testcase time="2.075" classname="fda_table_18" name="fda_table_18_works"/>
-    <testcase time="0.0150000000000006" classname="fda_table_18" name="fda_table_18_works"/>
-    <testcase time="0.0150000000000006" classname="fda_table_18" name="fda_table_18_works"/>
+  <testsuite name="fda-table_08" timestamp="2026-07-05T06:59:35Z" hostname="8183e8f930d6" tests="1" skipped="1" failures="0" errors="0" time="1.305">
+    <testcase time="1.305" classname="fda_table_08" name="fda_table_08_works">
+      <skipped message="Reason: On CRAN ('test-fda-table_08.R:1:1')"/>
+    </testcase>
   </testsuite>
-  <testsuite name="fda-table_29" timestamp="2026-07-05T06:59:34Z" hostname="d9b8d8cdd34b" tests="1" skipped="0" failures="0" errors="0" time="0.749">
-    <testcase time="0.749000000000002" classname="fda_table_29" name="fda_table_29_works"/>
+  <testsuite name="fda-table_09" timestamp="2026-07-05T06:59:37Z" hostname="8183e8f930d6" tests="1" skipped="1" failures="0" errors="0" time="0.171">
+    <testcase time="0.170999999999999" classname="fda_table_09" name="fda_table_09_works">
+      <skipped message="Reason: On CRAN ('test-fda-table_09.R:1:1')"/>
+    </testcase>
   </testsuite>
-  <testsuite name="fda-table_33" timestamp="2026-07-05T06:59:34Z" hostname="d9b8d8cdd34b" tests="1" skipped="0" failures="0" errors="0" time="0.597">
-    <testcase time="0.596999999999994" classname="fda_table_33" name="fda_table_33_works"/>
+  <testsuite name="fda-table_10" timestamp="2026-07-05T06:59:37Z" hostname="8183e8f930d6" tests="1" skipped="1" failures="0" errors="0" time="0.678">
+    <testcase time="0.678000000000001" classname="fda_table_10" name="fda_table_10_works">
+      <skipped message="Reason: On CRAN ('test-fda-table_10.R:1:1')"/>
+    </testcase>
   </testsuite>
-  <testsuite name="fda-table_34" timestamp="2026-07-05T06:59:35Z" hostname="d9b8d8cdd34b" tests="1" skipped="0" failures="0" errors="0" time="0.713">
-    <testcase time="0.713000000000001" classname="fda_table_34" name="fda_table_34_works"/>
+  <testsuite name="fda-table_11" timestamp="2026-07-05T06:59:37Z" hostname="8183e8f930d6" tests="1" skipped="1" failures="0" errors="0" time="0.872">
+    <testcase time="0.872" classname="fda_table_11" name="fda_table_11_works">
+      <skipped message="Reason: On CRAN ('test-fda-table_11.R:1:1')"/>
+    </testcase>
   </testsuite>
-  <testsuite name="fda-table_36" timestamp="2026-07-05T06:59:36Z" hostname="d9b8d8cdd34b" tests="1" skipped="0" failures="0" errors="0" time="0.742">
-    <testcase time="0.742000000000004" classname="fda_table_36" name="fda_table_36_works"/>
+  <testsuite name="fda-table_12" timestamp="2026-07-05T06:59:38Z" hostname="8183e8f930d6" tests="1" skipped="1" failures="0" errors="0" time="1.552">
+    <testcase time="1.552" classname="fda_table_12" name="fda_table_12_works">
+      <skipped message="Reason: On CRAN ('test-fda-table_12.R:1:1')"/>
+    </testcase>
   </testsuite>
-  <testsuite name="fda-table_37" timestamp="2026-07-05T06:59:36Z" hostname="d9b8d8cdd34b" tests="1" skipped="0" failures="0" errors="0" time="0.701">
-    <testcase time="0.701000000000001" classname="fda_table_37" name="fda_table_37_works"/>
+  <testsuite name="fda-table_13" timestamp="2026-07-05T06:59:40Z" hostname="8183e8f930d6" tests="1" skipped="1" failures="0" errors="0" time="0.761">
+    <testcase time="0.760999999999999" classname="fda_table_13" name="fda_table_13_works">
+      <skipped message="Reason: On CRAN ('test-fda-table_13.R:1:1')"/>
+    </testcase>
   </testsuite>
-  <testsuite name="fda-table_38" timestamp="2026-07-05T06:59:37Z" hostname="d9b8d8cdd34b" tests="1" skipped="0" failures="0" errors="0" time="0.552">
-    <testcase time="0.552" classname="fda_table_38" name="fda_table_38_works"/>
+  <testsuite name="fda-table_14" timestamp="2026-07-05T06:59:41Z" hostname="8183e8f930d6" tests="1" skipped="1" failures="0" errors="0" time="0.802">
+    <testcase time="0.802" classname="fda_table_14" name="fda_table_14_works">
+      <skipped message="Reason: On CRAN ('test-fda-table_14.R:1:1')"/>
+    </testcase>
   </testsuite>
-  <testsuite name="fda-table_43" timestamp="2026-07-05T06:59:38Z" hostname="d9b8d8cdd34b" tests="1" skipped="0" failures="0" errors="0" time="1.002">
-    <testcase time="1.002" classname="fda_table_43" name="fda_table_43_works"/>
+  <testsuite name="fda-table_15" timestamp="2026-07-05T06:59:41Z" hostname="8183e8f930d6" tests="1" skipped="1" failures="0" errors="0" time="3.67">
+    <testcase time="3.67" classname="fda_table_15" name="fda_table_15_works">
+      <skipped message="Reason: On CRAN ('test-fda-table_15.R:1:1')"/>
+    </testcase>
   </testsuite>
-  <testsuite name="fda-table_44" timestamp="2026-07-05T06:59:39Z" hostname="d9b8d8cdd34b" tests="1" skipped="0" failures="0" errors="0" time="0.561">
-    <testcase time="0.561" classname="fda_table_44" name="fda_table_44_works"/>
+  <testsuite name="fda-table_17" timestamp="2026-07-05T06:59:45Z" hostname="8183e8f930d6" tests="1" skipped="1" failures="0" errors="0" time="1.278">
+    <testcase time="1.278" classname="fda_table_17" name="fda_table_17_works">
+      <skipped message="Reason: On CRAN ('test-fda-table_17.R:1:1')"/>
+    </testcase>
   </testsuite>
-  <testsuite name="fda-table_45" timestamp="2026-07-05T06:59:39Z" hostname="d9b8d8cdd34b" tests="1" skipped="0" failures="0" errors="0" time="0.712">
-    <testcase time="0.711999999999996" classname="fda_table_45" name="fda_table_45_works"/>
+  <testsuite name="fda-table_18" timestamp="2026-07-05T06:59:46Z" hostname="8183e8f930d6" tests="1" skipped="1" failures="0" errors="0" time="2.006">
+    <testcase time="2.006" classname="fda_table_18" name="fda_table_18_works">
+      <skipped message="Reason: On CRAN ('test-fda-table_18.R:1:1')"/>
+    </testcase>
   </testsuite>
-  <testsuite name="fda-table_50" timestamp="2026-07-05T06:59:40Z" hostname="d9b8d8cdd34b" tests="5" skipped="0" failures="0" errors="0" time="2.631">
-    <testcase time="2.532" classname="fda_table_50" name="fda_table_50_works"/>
-    <testcase time="0.0329999999999941" classname="fda_table_50" name="fda_table_50_works"/>
-    <testcase time="0.0230000000000032" classname="fda_table_50" name="fda_table_50_works"/>
-    <testcase time="0.0219999999999985" classname="fda_table_50" name="fda_table_50_works"/>
-    <testcase time="0.0210000000000008" classname="fda_table_50" name="fda_table_50_works"/>
+  <testsuite name="fda-table_29" timestamp="2026-07-05T06:59:48Z" hostname="8183e8f930d6" tests="1" skipped="1" failures="0" errors="0" time="0.732">
+    <testcase time="0.731999999999999" classname="fda_table_29" name="fda_table_29_works">
+      <skipped message="Reason: On CRAN ('test-fda-table_29.R:1:1')"/>
+    </testcase>
   </testsuite>
-  <testsuite name="fda-table_51" timestamp="2026-07-05T06:59:43Z" hostname="d9b8d8cdd34b" tests="1" skipped="0" failures="0" errors="0" time="0.997">
-    <testcase time="0.997" classname="fda_table_51" name="fda_table_51_works"/>
+  <testsuite name="fda-table_33" timestamp="2026-07-05T06:59:49Z" hostname="8183e8f930d6" tests="1" skipped="1" failures="0" errors="0" time="0.574">
+    <testcase time="0.573999999999998" classname="fda_table_33" name="fda_table_33_works">
+      <skipped message="Reason: On CRAN ('test-fda-table_33.R:1:1')"/>
+    </testcase>
   </testsuite>
-  <testsuite name="table-roche_lbt01" timestamp="2026-07-05T06:59:44Z" hostname="d9b8d8cdd34b" tests="3" skipped="0" failures="0" errors="0" time="7.202">
-    <testcase time="7.163" classname="table_roche_lbt01" name="table_roche_lbt01_works"/>
-    <testcase time="0.019999999999996" classname="table_roche_lbt01" name="table_roche_lbt01_works"/>
-    <testcase time="0.0189999999999984" classname="table_roche_lbt01" name="table_roche_lbt01_works"/>
+  <testsuite name="fda-table_34" timestamp="2026-07-05T06:59:50Z" hostname="8183e8f930d6" tests="1" skipped="1" failures="0" errors="0" time="0.693">
+    <testcase time="0.692999999999998" classname="fda_table_34" name="fda_table_34_works">
+      <skipped message="Reason: On CRAN ('test-fda-table_34.R:1:1')"/>
+    </testcase>
+  </testsuite>
+  <testsuite name="fda-table_36" timestamp="2026-07-05T06:59:50Z" hostname="8183e8f930d6" tests="1" skipped="1" failures="0" errors="0" time="0.71">
+    <testcase time="0.710000000000001" classname="fda_table_36" name="fda_table_36_works">
+      <skipped message="Reason: On CRAN ('test-fda-table_36.R:1:1')"/>
+    </testcase>
+  </testsuite>
+  <testsuite name="fda-table_37" timestamp="2026-07-05T06:59:51Z" hostname="8183e8f930d6" tests="1" skipped="1" failures="0" errors="0" time="0.657">
+    <testcase time="0.657000000000004" classname="fda_table_37" name="fda_table_37_works">
+      <skipped message="Reason: On CRAN ('test-fda-table_37.R:1:1')"/>
+    </testcase>
+  </testsuite>
+  <testsuite name="fda-table_38" timestamp="2026-07-05T06:59:52Z" hostname="8183e8f930d6" tests="1" skipped="1" failures="0" errors="0" time="0.536">
+    <testcase time="0.535999999999994" classname="fda_table_38" name="fda_table_38_works">
+      <skipped message="Reason: On CRAN ('test-fda-table_38.R:1:1')"/>
+    </testcase>
+  </testsuite>
+  <testsuite name="fda-table_43" timestamp="2026-07-05T06:59:52Z" hostname="8183e8f930d6" tests="1" skipped="1" failures="0" errors="0" time="0.962">
+    <testcase time="0.962000000000003" classname="fda_table_43" name="fda_table_43_works">
+      <skipped message="Reason: On CRAN ('test-fda-table_43.R:1:1')"/>
+    </testcase>
+  </testsuite>
+  <testsuite name="fda-table_44" timestamp="2026-07-05T06:59:53Z" hostname="8183e8f930d6" tests="1" skipped="1" failures="0" errors="0" time="0.555">
+    <testcase time="0.555" classname="fda_table_44" name="fda_table_44_works">
+      <skipped message="Reason: On CRAN ('test-fda-table_44.R:1:1')"/>
+    </testcase>
+  </testsuite>
+  <testsuite name="fda-table_45" timestamp="2026-07-05T06:59:54Z" hostname="8183e8f930d6" tests="1" skipped="1" failures="0" errors="0" time="0.697">
+    <testcase time="0.697000000000003" classname="fda_table_45" name="fda_table_45_works">
+      <skipped message="Reason: On CRAN ('test-fda-table_45.R:1:1')"/>
+    </testcase>
+  </testsuite>
+  <testsuite name="fda-table_50" timestamp="2026-07-05T06:59:54Z" hostname="8183e8f930d6" tests="1" skipped="1" failures="0" errors="0" time="2.47">
+    <testcase time="2.47" classname="fda_table_50" name="fda_table_50_works">
+      <skipped message="Reason: On CRAN ('test-fda-table_50.R:1:1')"/>
+    </testcase>
+  </testsuite>
+  <testsuite name="fda-table_51" timestamp="2026-07-05T06:59:57Z" hostname="8183e8f930d6" tests="1" skipped="1" failures="0" errors="0" time="0.939">
+    <testcase time="0.939" classname="fda_table_51" name="fda_table_51_works">
+      <skipped message="Reason: On CRAN ('test-fda-table_51.R:1:1')"/>
+    </testcase>
+  </testsuite>
+  <testsuite name="table-roche_lbt01" timestamp="2026-07-05T06:59:58Z" hostname="8183e8f930d6" tests="1" skipped="1" failures="0" errors="0" time="6.705">
+    <testcase time="6.705" classname="table_roche_lbt01" name="table_roche_lbt01_works">
+      <skipped message="Reason: On CRAN ('test-table-roche_lbt01.R:1:1')"/>
+    </testcase>
   </testsuite>
 </testsuites>
