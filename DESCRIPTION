@@ -3,8 +3,27 @@ Package: cardinal
 Title: FDA Safety Tables and Figures
 Version: 0.1.0.9086
 Date: 2026-06-24
-Authors@R:
-    person("Pawel", "Rucki", , "pawel.rucki@roche.com", role = c("aut", "cre"))
+Authors@R: c(
+    person("Pawel", "Rucki", , "pawel.rucki@roche.com", role = "ctb"),
+    person("Abinaya", "Yogasekaram", , "ayogasek@gmail.com", role = "aut",
+           comment = c(ORCID = "0009-0005-2083-1105")),
+    person("Joe", "Zhu", , "joe.zhu@roche.com", role = "cre",
+           comment = c(ORCID = "0000-0001-7566-2787")),
+    person("Daniel D.", "Sjoberg", , "danield.sjoberg@gmail.com", role = "ctb",
+           comment = c(ORCID = "0000-0003-0862-2018")),
+    person("Emily", "de la Rua", , "emilydelarua@gmail.com", role = "aut",
+           comment = c(ORCID = "0009-0000-8738-5561")),
+    person("Vincent", "Shen", , "", role = "aut"),
+    person("Benoit", "Falquet", , "benoit.falquet@roche.com", role = "ctb",
+           comment = c(ORCID = "0000-0002-4434-3799")),
+    person("Huan", "Lu", , "huan.lu@sanofi.com", role = "ctb"),
+    person("Alex", "Assuied", , "", role = "ctb"),
+    person("Yoshito", "Koujin", , "", role = "ctb"),
+    person("Korbinian", "Matthias", , "", role = "ctb"),
+    person("Jessica", "Knizia", , "", role = "ctb"),
+    person("Lluís", "Revilla", , "", role = "ctb"),
+    person("Freeman", "Wang", , "", role = "ctb")
+  )
 Description: R package with implementation of Safety Tables and Figures
     issued by FDA.
 License: Apache License (>= 2)
@@ -41,3 +60,4 @@ Language: en-US
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 8.0.0
+
