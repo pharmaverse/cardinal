@@ -3,8 +3,11 @@ Package: cardinal
 Title: FDA Safety Tables and Figures
 Version: 0.1.0.9086
 Date: 2026-06-24
-Authors@R:
-    person("Pawel", "Rucki", , "pawel.rucki@roche.com", role = c("aut", "cre"))
+Authors@R: c(
+    person("Pawel", "Rucki", , "pawel.rucki@roche.com", role = c("aut", "cre")),
+    person("Lluís", "Revilla Sancho", , "lluis.revilla_sancho@roche.com", role = "ctb",
+           comment = c(ORCID = "0000-0001-9747-2570"))
+  )
 Description: R package with implementation of Safety Tables and Figures
     issued by FDA.
 License: Apache License (>= 2)
