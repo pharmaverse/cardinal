@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="custom" timestamp="2026-07-07T13:16:11Z" hostname="e9c79a1664f1" tests="1" skipped="0" failures="0" errors="0" time="10.528">
+    <testcase time="10.528" classname="custom" name="custom_table_works"/>
+  </testsuite>
+  <testsuite name="fda-table_02" timestamp="2026-07-07T13:16:21Z" hostname="e9c79a1664f1" tests="2" skipped="0" failures="0" errors="0" time="2.923">
+    <testcase time="2.892" classname="fda_table_02" name="fda_table_02_works"/>
+    <testcase time="0.0310000000000006" classname="fda_table_02" name="fda_table_02_works"/>
+  </testsuite>
+  <testsuite name="fda-table_03" timestamp="2026-07-07T13:16:24Z" hostname="e9c79a1664f1" tests="3" skipped="0" failures="0" errors="0" time="1.163">
+    <testcase time="1.122" classname="fda_table_03" name="fda_table_03_works"/>
+    <testcase time="0.020999999999999" classname="fda_table_03" name="fda_table_03_works"/>
+    <testcase time="0.0200000000000014" classname="fda_table_03" name="fda_table_03_works"/>
+  </testsuite>
+  <testsuite name="fda-table_04" timestamp="2026-07-07T13:16:25Z" hostname="e9c79a1664f1" tests="1" skipped="0" failures="0" errors="0" time="0.547">
+    <testcase time="0.546999999999999" classname="fda_table_04" name="fda_table_04_works"/>
+  </testsuite>
+  <testsuite name="fda-table_06" timestamp="2026-07-07T13:16:26Z" hostname="e9c79a1664f1" tests="1" skipped="0" failures="0" errors="0" time="0.868">
+    <testcase time="0.868000000000002" classname="fda_table_06" name="fda_table_06_works"/>
+  </testsuite>
+  <testsuite name="fda-table_07" timestamp="2026-07-07T13:16:27Z" hostname="e9c79a1664f1" tests="8" skipped="0" failures="0" errors="0" time="3.565">
+    <testcase time="3.425" classname="fda_table_07" name="fda_table_07_works"/>
+    <testcase time="0.0180000000000007" classname="fda_table_07" name="fda_table_07_works"/>
+    <testcase time="0.0180000000000007" classname="fda_table_07" name="fda_table_07_works"/>
+    <testcase time="0.0180000000000007" classname="fda_table_07" name="fda_table_07_works"/>
+    <testcase time="0.0180000000000007" classname="fda_table_07" name="fda_table_07_works"/>
+    <testcase time="0.0169999999999995" classname="fda_table_07" name="fda_table_07_works"/>
+    <testcase time="0.0259999999999998" classname="fda_table_07" name="fda_table_07_works"/>
+    <testcase time="0.0249999999999986" classname="fda_table_07" name="fda_table_07_works"/>
+  </testsuite>
+  <testsuite name="fda-table_08" timestamp="2026-07-07T13:16:30Z" hostname="e9c79a1664f1" tests="2" skipped="0" failures="0" errors="0" time="1.173">
+    <testcase time="1.146" classname="fda_table_08" name="fda_table_08_works"/>
+    <testcase time="0.027000000000001" classname="fda_table_08" name="fda_table_08_works"/>
+  </testsuite>
+  <testsuite name="fda-table_09" timestamp="2026-07-07T13:16:31Z" hostname="e9c79a1664f1" tests="1" skipped="0" failures="0" errors="0" time="0.153">
+    <testcase time="0.152999999999999" classname="fda_table_09" name="fda_table_09_works"/>
+  </testsuite>
+  <testsuite name="fda-table_10" timestamp="2026-07-07T13:16:31Z" hostname="e9c79a1664f1" tests="1" skipped="0" failures="0" errors="0" time="0.594">
+    <testcase time="0.594000000000001" classname="fda_table_10" name="fda_table_10_works"/>
+  </testsuite>
+  <testsuite name="fda-table_11" timestamp="2026-07-07T13:16:32Z" hostname="e9c79a1664f1" tests="1" skipped="0" failures="0" errors="0" time="0.765">
+    <testcase time="0.765000000000001" classname="fda_table_11" name="fda_table_11_works"/>
+  </testsuite>
+  <testsuite name="fda-table_12" timestamp="2026-07-07T13:16:33Z" hostname="e9c79a1664f1" tests="1" skipped="0" failures="1" errors="0" time="1.517">
+    <testcase time="1.517" classname="fda_table_12" name="fda_table_12_works">
+      <failure type="failure" message="Snapshot of code has changed: ('test-fda-table_12.R:47:3')">Snapshot of code has changed:
+old[1:42] vs new[1:42]
+  Code
+    as.data.frame(ard$tbl_hierarchical)[1:25, ]
+  Output
+-      group1   group1_level group2 group2_level                     variable
++      group1 group1_level group2 group2_level                     variable
+-   1    &lt;NA&gt;           NULL   &lt;NA&gt;         NULL                       TRT01A
++   1    &lt;NA&gt;         NULL   &lt;NA&gt;         NULL                       TRT01A
+-   2    &lt;NA&gt;           NULL   &lt;NA&gt;         NULL                       TRT01A
++   2    &lt;NA&gt;         NULL   &lt;NA&gt;         NULL                       TRT01A
+-   3    &lt;NA&gt;           NULL   &lt;NA&gt;         NULL                       TRT01A
++   3    &lt;NA&gt;         NULL   &lt;NA&gt;         NULL                       TRT01A
+-   4    &lt;NA&gt;           NULL   &lt;NA&gt;         NULL                       TRT01A
++   4    &lt;NA&gt;         NULL   &lt;NA&gt;         NULL                       TRT01A
+-   5    &lt;NA&gt;           NULL   &lt;NA&gt;         NULL                       TRT01A
++   5    &lt;NA&gt;         NULL   &lt;NA&gt;         NULL                       TRT01A
+-   6    &lt;NA&gt;           NULL   &lt;NA&gt;         NULL                       TRT01A
++   6    &lt;NA&gt;         NULL   &lt;NA&gt;         NULL                       TRT01A
+-   7    &lt;NA&gt;           NULL   &lt;NA&gt;         NULL                       TRT01A
++   7    &lt;NA&gt;         NULL   &lt;NA&gt;         NULL                       TRT01A
+-   8    &lt;NA&gt;           NULL   &lt;NA&gt;         NULL                       TRT01A
++   8    &lt;NA&gt;         NULL   &lt;NA&gt;         NULL                       TRT01A
+-   9    &lt;NA&gt;           NULL   &lt;NA&gt;         NULL                       TRT01A
++   9    &lt;NA&gt;         NULL   &lt;NA&gt;         NULL                       TRT01A
+-   10 TRT01A      A: Drug X   &lt;NA&gt;         NULL ..ard_hierarchical_overall..
++   10 TRT01A            1   &lt;NA&gt;         NULL ..ard_hierarchical_overall..
+-   11 TRT01A      A: Drug X   &lt;NA&gt;         NULL ..ard_hierarchical_overall..
++   11 TRT01A            1   &lt;NA&gt;         NULL ..ard_hierarchical_overall..
+-   12 TRT01A      A: Drug X   &lt;NA&gt;         NULL ..ard_hierarchical_overall..
++   12 TRT01A            1   &lt;NA&gt;         NULL ..ard_hierarchical_overall..
+-   13 TRT01A     B: Placebo   &lt;NA&gt;         NULL ..ard_hierarchical_overall..
++   13 TRT01A            2   &lt;NA&gt;         NULL ..ard_hierarchical_overall..
+-   14 TRT01A     B: Placebo   &lt;NA&gt;         NULL ..ard_hierarchical_overall..
++   14 TRT01A            2   &lt;NA&gt;         NULL ..ard_hierarchical_overall..
+-   15 TRT01A     B: Placebo   &lt;NA&gt;         NULL ..ard_hierarchical_overall..
++   15 TRT01A            2   &lt;NA&gt;         NULL ..ard_hierarchical_overall..
+-   16 TRT01A C: Combination   &lt;NA&gt;         NULL ..ard_hierarchical_overall..
++   16 TRT01A            3   &lt;NA&gt;         NULL ..ard_hierarchical_overall..
+-   17 TRT01A C: Combination   &lt;NA&gt;         NULL ..ard_hierarchical_overall..
++   17 TRT01A            3   &lt;NA&gt;         NULL ..ard_hierarchical_overall..
+-   18 TRT01A C: Combination   &lt;NA&gt;         NULL ..ard_hierarchical_overall..
++   18 TRT01A            3   &lt;NA&gt;         NULL ..ard_hierarchical_overall..
+-   19 TRT01A      A: Drug X   &lt;NA&gt;         NULL                     AEBODSYS
++   19 TRT01A            1   &lt;NA&gt;         NULL                     AEBODSYS
+-   20 TRT01A      A: Drug X   &lt;NA&gt;         NULL                     AEBODSYS
++   20 TRT01A            1   &lt;NA&gt;         NULL                     AEBODSYS
+-   21 TRT01A      A: Drug X   &lt;NA&gt;         NULL                     AEBODSYS
++   21 TRT01A            1   &lt;NA&gt;         NULL                     AEBODSYS
+-   22 TRT01A     B: Placebo   &lt;NA&gt;         NULL                     AEBODSYS
++   22 TRT01A            2   &lt;NA&gt;         NULL                     AEBODSYS
+-   23 TRT01A     B: Placebo   &lt;NA&gt;         NULL                     AEBODSYS
++   23 TRT01A            2   &lt;NA&gt;         NULL                     AEBODSYS
+-   24 TRT01A     B: Placebo   &lt;NA&gt;         NULL                     AEBODSYS
++   24 TRT01A            2   &lt;NA&gt;         NULL                     AEBODSYS
+-   25 TRT01A C: Combination   &lt;NA&gt;         NULL                     AEBODSYS
++   25 TRT01A            3   &lt;NA&gt;         NULL                     AEBODSYS
+       variable_level      context stat_name stat_label      stat stat_fmt
+-   1       A: Drug X     tabulate         n          n       134      134
++   1               1     tabulate         n          n       134      134
+-   2       A: Drug X     tabulate         N          N       400      400
++   2               1     tabulate         N          N       400      400
+-   3       A: Drug X     tabulate         p          %     0.335     33.5
++   3               1     tabulate         p          %     0.335     33.5
+-   4      B: Placebo     tabulate         n          n       134      134
++   4               2     tabulate         n          n       134      134
+-   5      B: Placebo     tabulate         N          N       400      400
++   5               2     tabulate         N          N       400      400
+-   6      B: Placebo     tabulate         p          %     0.335     33.5
++   6               2     tabulate         p          %     0.335     33.5
+-   7  C: Combination     tabulate         n          n       132      132
++   7               3     tabulate         n          n       132      132
+-   8  C: Combination     tabulate         N          N       400      400
++   8               3     tabulate         N          N       400      400
+-   9  C: Combination     tabulate         p          %      0.33     33.0
++   9               3     tabulate         p          %      0.33     33.0
+    10           TRUE hierarchical         n          n        86       86
+    11           TRUE hierarchical         N          N       134      134
+    12           TRUE hierarchical         p          %  0.641791       64
+old[46:58] vs new[46:58]
+    16           TRUE hierarchical         n          n        90       90
+    17           TRUE hierarchical         N          N       132      132
+    18           TRUE hierarchical         p          % 0.6818182       68
+-   19         cl A.1 hierarchical         n          n        53       53
++   19              1 hierarchical         n          n        53       53
+-   20         cl A.1 hierarchical         N          N       134      134
++   20              1 hierarchical         N          N       134      134
+-   21         cl A.1 hierarchical         p          % 0.3955224       40
++   21              1 hierarchical         p          % 0.3955224       40
+-   22         cl A.1 hierarchical         n          n        55       55
++   22              1 hierarchical         n          n        55       55
+-   23         cl A.1 hierarchical         N          N       134      134
++   23              1 hierarchical         N          N       134      134
+-   24         cl A.1 hierarchical         p          % 0.4104478       41
++   24              1 hierarchical         p          % 0.4104478       41
+-   25         cl A.1 hierarchical         n          n        69       69
++   25              1 hierarchical         n          n        69       69
+                                                                                                                                                                                                                                                                                                                         fmt_fun
+    1                                                                                                                                                                                                                                                                                                                          0
+    2                                                                                                                                                                                                                                                                                                                          0
+</failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="fda-table_13" timestamp="2026-07-07T13:16:34Z" hostname="e9c79a1664f1" tests="1" skipped="0" failures="0" errors="0" time="0.723">
+    <testcase time="0.722999999999999" classname="fda_table_13" name="fda_table_13_works"/>
+  </testsuite>
+  <testsuite name="fda-table_14" timestamp="2026-07-07T13:16:35Z" hostname="e9c79a1664f1" tests="1" skipped="0" failures="0" errors="0" time="0.725">
+    <testcase time="0.725000000000001" classname="fda_table_14" name="fda_table_14_works"/>
+  </testsuite>
+  <testsuite name="fda-table_15" timestamp="2026-07-07T13:16:36Z" hostname="e9c79a1664f1" tests="1" skipped="0" failures="0" errors="0" time="3.687">
+    <testcase time="3.687" classname="fda_table_15" name="fda_table_15_works"/>
+  </testsuite>
+  <testsuite name="fda-table_17" timestamp="2026-07-07T13:16:39Z" hostname="e9c79a1664f1" tests="2" skipped="0" failures="0" errors="0" time="1.153">
+    <testcase time="1.123" classname="fda_table_17" name="fda_table_17_works"/>
+    <testcase time="0.0300000000000011" classname="fda_table_17" name="fda_table_17_works"/>
+  </testsuite>
+  <testsuite name="fda-table_18" timestamp="2026-07-07T13:16:41Z" hostname="e9c79a1664f1" tests="3" skipped="0" failures="0" errors="0" time="1.671">
+    <testcase time="1.64" classname="fda_table_18" name="fda_table_18_works"/>
+    <testcase time="0.0159999999999982" classname="fda_table_18" name="fda_table_18_works"/>
+    <testcase time="0.0150000000000006" classname="fda_table_18" name="fda_table_18_works"/>
+  </testsuite>
+  <testsuite name="fda-table_29" timestamp="2026-07-07T13:16:42Z" hostname="e9c79a1664f1" tests="1" skipped="0" failures="0" errors="0" time="0.639">
+    <testcase time="0.639000000000003" classname="fda_table_29" name="fda_table_29_works"/>
+  </testsuite>
+  <testsuite name="fda-table_33" timestamp="2026-07-07T13:16:43Z" hostname="e9c79a1664f1" tests="1" skipped="0" failures="0" errors="0" time="0.538">
+    <testcase time="0.537999999999997" classname="fda_table_33" name="fda_table_33_works"/>
+  </testsuite>
+  <testsuite name="fda-table_34" timestamp="2026-07-07T13:16:43Z" hostname="e9c79a1664f1" tests="1" skipped="0" failures="0" errors="0" time="0.61">
+    <testcase time="0.609999999999999" classname="fda_table_34" name="fda_table_34_works"/>
+  </testsuite>
+  <testsuite name="fda-table_36" timestamp="2026-07-07T13:16:44Z" hostname="e9c79a1664f1" tests="1" skipped="0" failures="0" errors="0" time="0.578">
+    <testcase time="0.578000000000003" classname="fda_table_36" name="fda_table_36_works"/>
+  </testsuite>
+  <testsuite name="fda-table_37" timestamp="2026-07-07T13:16:45Z" hostname="e9c79a1664f1" tests="1" skipped="0" failures="0" errors="0" time="0.536">
+    <testcase time="0.536000000000001" classname="fda_table_37" name="fda_table_37_works"/>
+  </testsuite>
+  <testsuite name="fda-table_38" timestamp="2026-07-07T13:16:45Z" hostname="e9c79a1664f1" tests="1" skipped="0" failures="0" errors="0" time="0.448">
+    <testcase time="0.448" classname="fda_table_38" name="fda_table_38_works"/>
+  </testsuite>
+  <testsuite name="fda-table_43" timestamp="2026-07-07T13:16:46Z" hostname="e9c79a1664f1" tests="1" skipped="0" failures="0" errors="0" time="0.883">
+    <testcase time="0.882999999999996" classname="fda_table_43" name="fda_table_43_works"/>
+  </testsuite>
+  <testsuite name="fda-table_44" timestamp="2026-07-07T13:16:47Z" hostname="e9c79a1664f1" tests="1" skipped="0" failures="0" errors="0" time="0.514">
+    <testcase time="0.514000000000003" classname="fda_table_44" name="fda_table_44_works"/>
+  </testsuite>
+  <testsuite name="fda-table_45" timestamp="2026-07-07T13:16:47Z" hostname="e9c79a1664f1" tests="1" skipped="0" failures="0" errors="0" time="0.637">
+    <testcase time="0.637" classname="fda_table_45" name="fda_table_45_works"/>
+  </testsuite>
+  <testsuite name="fda-table_50" timestamp="2026-07-07T13:16:48Z" hostname="e9c79a1664f1" tests="5" skipped="0" failures="0" errors="0" time="2.26">
+    <testcase time="2.169" classname="fda_table_50" name="fda_table_50_works"/>
+    <testcase time="0.0230000000000032" classname="fda_table_50" name="fda_table_50_works"/>
+    <testcase time="0.0229999999999961" classname="fda_table_50" name="fda_table_50_works"/>
+    <testcase time="0.0220000000000056" classname="fda_table_50" name="fda_table_50_works"/>
+    <testcase time="0.0229999999999961" classname="fda_table_50" name="fda_table_50_works"/>
+  </testsuite>
+  <testsuite name="fda-table_51" timestamp="2026-07-07T13:16:50Z" hostname="e9c79a1664f1" tests="1" skipped="0" failures="0" errors="0" time="0.739">
+    <testcase time="0.739000000000004" classname="fda_table_51" name="fda_table_51_works"/>
+  </testsuite>
+  <testsuite name="table-roche_lbt01" timestamp="2026-07-07T13:16:51Z" hostname="e9c79a1664f1" tests="3" skipped="0" failures="0" errors="0" time="5.405">
+    <testcase time="5.36199999999999" classname="table_roche_lbt01" name="table_roche_lbt01_works"/>
+    <testcase time="0.0220000000000056" classname="table_roche_lbt01" name="table_roche_lbt01_works"/>
+    <testcase time="0.0209999999999937" classname="table_roche_lbt01" name="table_roche_lbt01_works"/>
+  </testsuite>
+</testsuites>
