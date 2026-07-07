@@ -3,42 +3,42 @@
     Code
       as.data.frame(ard$tbl_hierarchical)[1:25, ]
     Output
-         group1   group1_level group2 group2_level                     variable
-      1    <NA>           NULL   <NA>         NULL                       TRT01A
-      2    <NA>           NULL   <NA>         NULL                       TRT01A
-      3    <NA>           NULL   <NA>         NULL                       TRT01A
-      4    <NA>           NULL   <NA>         NULL                       TRT01A
-      5    <NA>           NULL   <NA>         NULL                       TRT01A
-      6    <NA>           NULL   <NA>         NULL                       TRT01A
-      7    <NA>           NULL   <NA>         NULL                       TRT01A
-      8    <NA>           NULL   <NA>         NULL                       TRT01A
-      9    <NA>           NULL   <NA>         NULL                       TRT01A
-      10 TRT01A      A: Drug X   <NA>         NULL ..ard_hierarchical_overall..
-      11 TRT01A      A: Drug X   <NA>         NULL ..ard_hierarchical_overall..
-      12 TRT01A      A: Drug X   <NA>         NULL ..ard_hierarchical_overall..
-      13 TRT01A     B: Placebo   <NA>         NULL ..ard_hierarchical_overall..
-      14 TRT01A     B: Placebo   <NA>         NULL ..ard_hierarchical_overall..
-      15 TRT01A     B: Placebo   <NA>         NULL ..ard_hierarchical_overall..
-      16 TRT01A C: Combination   <NA>         NULL ..ard_hierarchical_overall..
-      17 TRT01A C: Combination   <NA>         NULL ..ard_hierarchical_overall..
-      18 TRT01A C: Combination   <NA>         NULL ..ard_hierarchical_overall..
-      19 TRT01A      A: Drug X   <NA>         NULL                     AEBODSYS
-      20 TRT01A      A: Drug X   <NA>         NULL                     AEBODSYS
-      21 TRT01A      A: Drug X   <NA>         NULL                     AEBODSYS
-      22 TRT01A     B: Placebo   <NA>         NULL                     AEBODSYS
-      23 TRT01A     B: Placebo   <NA>         NULL                     AEBODSYS
-      24 TRT01A     B: Placebo   <NA>         NULL                     AEBODSYS
-      25 TRT01A C: Combination   <NA>         NULL                     AEBODSYS
+         group1 group1_level group2 group2_level                     variable
+      1    <NA>         NULL   <NA>         NULL                       TRT01A
+      2    <NA>         NULL   <NA>         NULL                       TRT01A
+      3    <NA>         NULL   <NA>         NULL                       TRT01A
+      4    <NA>         NULL   <NA>         NULL                       TRT01A
+      5    <NA>         NULL   <NA>         NULL                       TRT01A
+      6    <NA>         NULL   <NA>         NULL                       TRT01A
+      7    <NA>         NULL   <NA>         NULL                       TRT01A
+      8    <NA>         NULL   <NA>         NULL                       TRT01A
+      9    <NA>         NULL   <NA>         NULL                       TRT01A
+      10 TRT01A            1   <NA>         NULL ..ard_hierarchical_overall..
+      11 TRT01A            1   <NA>         NULL ..ard_hierarchical_overall..
+      12 TRT01A            1   <NA>         NULL ..ard_hierarchical_overall..
+      13 TRT01A            2   <NA>         NULL ..ard_hierarchical_overall..
+      14 TRT01A            2   <NA>         NULL ..ard_hierarchical_overall..
+      15 TRT01A            2   <NA>         NULL ..ard_hierarchical_overall..
+      16 TRT01A            3   <NA>         NULL ..ard_hierarchical_overall..
+      17 TRT01A            3   <NA>         NULL ..ard_hierarchical_overall..
+      18 TRT01A            3   <NA>         NULL ..ard_hierarchical_overall..
+      19 TRT01A            1   <NA>         NULL                     AEBODSYS
+      20 TRT01A            1   <NA>         NULL                     AEBODSYS
+      21 TRT01A            1   <NA>         NULL                     AEBODSYS
+      22 TRT01A            2   <NA>         NULL                     AEBODSYS
+      23 TRT01A            2   <NA>         NULL                     AEBODSYS
+      24 TRT01A            2   <NA>         NULL                     AEBODSYS
+      25 TRT01A            3   <NA>         NULL                     AEBODSYS
          variable_level      context stat_name stat_label      stat stat_fmt
-      1       A: Drug X     tabulate         n          n       134      134
-      2       A: Drug X     tabulate         N          N       400      400
-      3       A: Drug X     tabulate         p          %     0.335     33.5
-      4      B: Placebo     tabulate         n          n       134      134
-      5      B: Placebo     tabulate         N          N       400      400
-      6      B: Placebo     tabulate         p          %     0.335     33.5
-      7  C: Combination     tabulate         n          n       132      132
-      8  C: Combination     tabulate         N          N       400      400
-      9  C: Combination     tabulate         p          %      0.33     33.0
+      1               1     tabulate         n          n       134      134
+      2               1     tabulate         N          N       400      400
+      3               1     tabulate         p          %     0.335     33.5
+      4               2     tabulate         n          n       134      134
+      5               2     tabulate         N          N       400      400
+      6               2     tabulate         p          %     0.335     33.5
+      7               3     tabulate         n          n       132      132
+      8               3     tabulate         N          N       400      400
+      9               3     tabulate         p          %      0.33     33.0
       10           TRUE hierarchical         n          n        86       86
       11           TRUE hierarchical         N          N       134      134
       12           TRUE hierarchical         p          %  0.641791       64
@@ -48,13 +48,13 @@
       16           TRUE hierarchical         n          n        90       90
       17           TRUE hierarchical         N          N       132      132
       18           TRUE hierarchical         p          % 0.6818182       68
-      19         cl A.1 hierarchical         n          n        53       53
-      20         cl A.1 hierarchical         N          N       134      134
-      21         cl A.1 hierarchical         p          % 0.3955224       40
-      22         cl A.1 hierarchical         n          n        55       55
-      23         cl A.1 hierarchical         N          N       134      134
-      24         cl A.1 hierarchical         p          % 0.4104478       41
-      25         cl A.1 hierarchical         n          n        69       69
+      19              1 hierarchical         n          n        53       53
+      20              1 hierarchical         N          N       134      134
+      21              1 hierarchical         p          % 0.3955224       40
+      22              1 hierarchical         n          n        55       55
+      23              1 hierarchical         N          N       134      134
+      24              1 hierarchical         p          % 0.4104478       41
+      25              1 hierarchical         n          n        69       69
                                                                                                                                                                                                                                                                                                                            fmt_fun
       1                                                                                                                                                                                                                                                                                                                          0
       2                                                                                                                                                                                                                                                                                                                          0
