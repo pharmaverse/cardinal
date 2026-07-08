@@ -32,12 +32,12 @@ Other contributors:
   \item Pawel Rucki \email{pawel.rucki@roche.com} [contributor]
   \item Daniel D. Sjoberg \email{danield.sjoberg@gmail.com} (\href{https://orcid.org/0000-0003-0862-2018}{ORCID}) [contributor]
   \item Benoit Falquet \email{benoit.falquet@roche.com} (\href{https://orcid.org/0000-0002-4434-3799}{ORCID}) [contributor]
+  \item Lluís Revilla Sancho \email{lluis.revilla_sancho@roche.com} (\href{https://orcid.org/0000-0001-9747-2570}{ORCID}) [contributor]
   \item Huan Lu \email{huan.lu@sanofi.com} [contributor]
   \item Alex Assuied [contributor]
   \item Yoshito Koujin [contributor]
   \item Korbinian Matthias [contributor]
   \item Jessica Knizia [contributor]
-  \item Lluís Revilla [contributor]
   \item Freeman Wang [contributor]
 }
 
