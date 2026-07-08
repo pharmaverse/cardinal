@@ -18,11 +18,27 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Pawel Rucki \email{pawel.rucki@roche.com}
+\strong{Maintainer}: Joe Zhu \email{joe.zhu@roche.com} (\href{https://orcid.org/0000-0001-7566-2787}{ORCID})
 
 Authors:
 \itemize{
-  \item Pawel Rucki \email{pawel.rucki@roche.com}
+  \item Abinaya Yogasekaram \email{ayogasek@gmail.com} (\href{https://orcid.org/0009-0005-2083-1105}{ORCID})
+  \item Emily de la Rua \email{emilydelarua@gmail.com} (\href{https://orcid.org/0009-0000-8738-5561}{ORCID})
+  \item Vincent Shen
+}
+
+Other contributors:
+\itemize{
+  \item Pawel Rucki \email{pawel.rucki@roche.com} [contributor]
+  \item Daniel D. Sjoberg \email{danield.sjoberg@gmail.com} (\href{https://orcid.org/0000-0003-0862-2018}{ORCID}) [contributor]
+  \item Benoit Falquet \email{benoit.falquet@roche.com} (\href{https://orcid.org/0000-0002-4434-3799}{ORCID}) [contributor]
+  \item Lluís Revilla Sancho \email{lluis.revilla_sancho@roche.com} (\href{https://orcid.org/0000-0001-9747-2570}{ORCID}) [contributor]
+  \item Huan Lu \email{huan.lu@sanofi.com} [contributor]
+  \item Alex Assuied [contributor]
+  \item Yoshito Koujin [contributor]
+  \item Korbinian Matthias [contributor]
+  \item Jessica Knizia [contributor]
+  \item Freeman Wang [contributor]
 }
 
 }
