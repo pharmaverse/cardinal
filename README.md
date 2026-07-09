@@ -34,7 +34,3 @@ We are reachable via the following channels for inquiries and support:
 ## Acknowledgment
 
 This project is the result of an industry collaboration across several different companies. We would like to thank all of the developers and users who have contributed so far!
-
-## Stargazers over time
-
-[![stargazers](https://starchart.cc/pharmaverse/cardinal.svg)](https://starchart.cc/pharmaverse/cardinal)
