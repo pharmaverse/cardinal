@@ -32,10 +32,11 @@ URL: https://github.com/pharmaverse/cardinal/,
     https://pharmaverse.github.io/cardinal/
 BugReports: https://github.com/pharmaverse/cardinal/issues
 Depends:
-    R (>= 4.2)
-Suggests:
+    R (>= 4.2),
     cards (>= 0.8.1),
     cardx (>= 0.3.4),
+    gtsummary (>= 2.5.1)
+Suggests:
     cowplot (>= 1.2.0),
     crane (>= 0.3.1),
     dplyr (>= 1.2),
@@ -43,7 +44,6 @@ Suggests:
     ggplot2 (>= 4.0),
     ggsurvfit (>= 1.2.0),
     gt (>= 1.3.0),
-    gtsummary (>= 2.5.1),
     knitr (>= 1.50),
     labelled (>= 2.16.0),
     lubridate (>= 1.9),
