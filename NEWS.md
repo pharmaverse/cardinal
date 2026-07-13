@@ -1,3 +1,3 @@
-# cardinal 0.1.0.9088
+# cardinal 0.2.0
 
 * Initial release.
