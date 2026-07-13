@@ -1,4 +1,4 @@
-#' cardinal
+#' cardinalfda
 #'
 #' Implementation of FDA Safety Tables and Figures
 #'
