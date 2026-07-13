@@ -1,141 +1,313 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="custom" timestamp="2026-07-13T08:57:27Z" hostname="e43aac9e0318" tests="1" skipped="0" failures="0" errors="0" time="9.493">
-    <testcase time="9.493" classname="custom" name="custom_table_works"/>
+  <testsuite name="custom" timestamp="2026-07-13T08:57:25Z" hostname="e45649b644f8" tests="1" skipped="0" failures="0" errors="0" time="9.606">
+    <testcase time="9.606" classname="custom" name="custom_table_works"/>
   </testsuite>
-  <testsuite name="fda-table_02" timestamp="2026-07-13T08:57:36Z" hostname="e43aac9e0318" tests="1" skipped="1" failures="0" errors="0" time="2.93">
-    <testcase time="2.93" classname="fda_table_02" name="fda_table_02_works">
-      <skipped message="Reason: On CRAN ('test-fda-table_02.R:1:1')"/>
+  <testsuite name="fda-table_02" timestamp="2026-07-13T08:57:34Z" hostname="e45649b644f8" tests="2" skipped="0" failures="2" errors="0" time="3.055">
+    <testcase time="2.996" classname="fda_table_02" name="fda_table_02_works">
+      <failure type="failure" message="Snapshot of code has changed: ('test-fda-table_02.R:48:3')">Snapshot of code has changed:
+old[2:58] vs new[2:58]
+    as.data.frame(ard$tbl_summary)[1:25, ]
+  Output
+       group1 group1_level variable                   variable_level  context
+-   1  TRT01A      Placebo      SEX                                F tabulate
++   1  TRT01A      Placebo   AGEGR1                            18-64 tabulate
+-   2  TRT01A      Placebo      SEX                                F tabulate
++   2  TRT01A      Placebo   AGEGR1                            18-64 tabulate
+-   3  TRT01A      Placebo      SEX                                F tabulate
++   3  TRT01A      Placebo   AGEGR1                            18-64 tabulate
+-   4  TRT01A      Placebo      SEX                                M tabulate
++   4  TRT01A      Placebo   AGEGR1                              &gt;64 tabulate
+-   5  TRT01A      Placebo      SEX                                M tabulate
++   5  TRT01A      Placebo   AGEGR1                              &gt;64 tabulate
+-   6  TRT01A      Placebo      SEX                                M tabulate
++   6  TRT01A      Placebo   AGEGR1                              &gt;64 tabulate
+-   7  TRT01A      Placebo     RACE AMERICAN INDIAN OR ALASKA NATIVE tabulate
++   7  TRT01A      Placebo      SEX                                F tabulate
+-   8  TRT01A      Placebo     RACE AMERICAN INDIAN OR ALASKA NATIVE tabulate
++   8  TRT01A      Placebo      SEX                                F tabulate
+-   9  TRT01A      Placebo     RACE AMERICAN INDIAN OR ALASKA NATIVE tabulate
++   9  TRT01A      Placebo      SEX                                F tabulate
+-   10 TRT01A      Placebo     RACE        BLACK OR AFRICAN AMERICAN tabulate
++   10 TRT01A      Placebo      SEX                                M tabulate
+-   11 TRT01A      Placebo     RACE        BLACK OR AFRICAN AMERICAN tabulate
++   11 TRT01A      Placebo      SEX                                M tabulate
+-   12 TRT01A      Placebo     RACE        BLACK OR AFRICAN AMERICAN tabulate
++   12 TRT01A      Placebo      SEX                                M tabulate
+-   13 TRT01A      Placebo     RACE                            WHITE tabulate
++   13 TRT01A      Placebo     RACE AMERICAN INDIAN OR ALASKA NATIVE tabulate
+-   14 TRT01A      Placebo     RACE                            WHITE tabulate
++   14 TRT01A      Placebo     RACE AMERICAN INDIAN OR ALASKA NATIVE tabulate
+-   15 TRT01A      Placebo     RACE                            WHITE tabulate
++   15 TRT01A      Placebo     RACE AMERICAN INDIAN OR ALASKA NATIVE tabulate
+-   16 TRT01A      Placebo   ETHNIC               HISPANIC OR LATINO tabulate
++   16 TRT01A      Placebo     RACE        BLACK OR AFRICAN AMERICAN tabulate
+-   17 TRT01A      Placebo   ETHNIC               HISPANIC OR LATINO tabulate
++   17 TRT01A      Placebo     RACE        BLACK OR AFRICAN AMERICAN tabulate
+-   18 TRT01A      Placebo   ETHNIC               HISPANIC OR LATINO tabulate
++   18 TRT01A      Placebo     RACE        BLACK OR AFRICAN AMERICAN tabulate
+-   19 TRT01A      Placebo   ETHNIC           NOT HISPANIC OR LATINO tabulate
++   19 TRT01A      Placebo     RACE                            WHITE tabulate
+-   20 TRT01A      Placebo   ETHNIC           NOT HISPANIC OR LATINO tabulate
++   20 TRT01A      Placebo     RACE                            WHITE tabulate
+-   21 TRT01A      Placebo   ETHNIC           NOT HISPANIC OR LATINO tabulate
++   21 TRT01A      Placebo     RACE                            WHITE tabulate
+-   22 TRT01A      Placebo   AGEGR1                            18-64 tabulate
++   22 TRT01A      Placebo   ETHNIC               HISPANIC OR LATINO tabulate
+-   23 TRT01A      Placebo   AGEGR1                            18-64 tabulate
++   23 TRT01A      Placebo   ETHNIC               HISPANIC OR LATINO tabulate
+-   24 TRT01A      Placebo   AGEGR1                            18-64 tabulate
++   24 TRT01A      Placebo   ETHNIC               HISPANIC OR LATINO tabulate
+-   25 TRT01A      Placebo   AGEGR1                              &gt;64 tabulate
++   25 TRT01A      Placebo   ETHNIC           NOT HISPANIC OR LATINO tabulate
+       stat_name stat_label       stat
+-   1          n          n         53
++   1          n          n         14
+    2          N          N         86
+-   3          p          %  0.6162791
++   3          p          %  0.1627907
+-   4          n          n         33
++   4          n          n         72
+    5          N          N         86
+-   6          p          %  0.3837209
++   6          p          %  0.8372093
+-   7          n          n          0
++   7          n          n         53
+    8          N          N         86
+-   9          p          %          0
++   9          p          %  0.6162791
+-   10         n          n          8
++   10         n          n         33
+    11         N          N         86
+-   12         p          % 0.09302326
++   12         p          %  0.3837209
+-   13         n          n         78
++   13         n          n          0
+    14         N          N         86
+-   15         p          %  0.9069767
++   15         p          %          0
+-   16         n          n          3
++   16         n          n          8
+    17         N          N         86
+-   18         p          % 0.03488372
++   18         p          % 0.09302326
+-   19         n          n         83
++   19         n          n         78
+    20         N          N         86
+-   21         p          %  0.9651163
++   21         p          %  0.9069767
+-   22         n          n         14
++   22         n          n          3
+    23         N          N         86
+-   24         p          %  0.1627907
++   24         p          % 0.03488372
+-   25         n          n         72
++   25         n          n         83
+                                                                                                                                                                            fmt_fun
+    1  function (x) , style_number(x, digits = digits, big.mark = big.mark, decimal.mark = decimal.mark, ,     scale = scale, prefix = prefix, suffix = suffix, na = na, ,     ...)
+    2  function (x) , style_number(x, digits = digits, big.mark = big.mark, decimal.mark = decimal.mark, ,     scale = scale, prefix = prefix, suffix = suffix, na = na, ,     ...)
+</failure>
+    </testcase>
+    <testcase time="0.0590000000000011" classname="fda_table_02" name="fda_table_02_works">
+      <failure type="failure" message="Snapshot of code has changed: ('test-fda-table_02.R:49:3')">Snapshot of code has changed:
+old[2:58] vs new[2:58]
+    as.data.frame(ard$add_overall)[1:25, ]
+  Output
+       variable                   variable_level  context stat_name stat_label
+-   1       SEX                                F tabulate         n          n
++   1    AGEGR1                            18-64 tabulate         n          n
+-   2       SEX                                F tabulate         N          N
++   2    AGEGR1                            18-64 tabulate         N          N
+-   3       SEX                                F tabulate         p          %
++   3    AGEGR1                            18-64 tabulate         p          %
+-   4       SEX                                M tabulate         n          n
++   4    AGEGR1                              &gt;64 tabulate         n          n
+-   5       SEX                                M tabulate         N          N
++   5    AGEGR1                              &gt;64 tabulate         N          N
+-   6       SEX                                M tabulate         p          %
++   6    AGEGR1                              &gt;64 tabulate         p          %
+-   7      RACE AMERICAN INDIAN OR ALASKA NATIVE tabulate         n          n
++   7       SEX                                F tabulate         n          n
+-   8      RACE AMERICAN INDIAN OR ALASKA NATIVE tabulate         N          N
++   8       SEX                                F tabulate         N          N
+-   9      RACE AMERICAN INDIAN OR ALASKA NATIVE tabulate         p          %
++   9       SEX                                F tabulate         p          %
+-   10     RACE        BLACK OR AFRICAN AMERICAN tabulate         n          n
++   10      SEX                                M tabulate         n          n
+-   11     RACE        BLACK OR AFRICAN AMERICAN tabulate         N          N
++   11      SEX                                M tabulate         N          N
+-   12     RACE        BLACK OR AFRICAN AMERICAN tabulate         p          %
++   12      SEX                                M tabulate         p          %
+-   13     RACE                            WHITE tabulate         n          n
++   13     RACE AMERICAN INDIAN OR ALASKA NATIVE tabulate         n          n
+-   14     RACE                            WHITE tabulate         N          N
++   14     RACE AMERICAN INDIAN OR ALASKA NATIVE tabulate         N          N
+-   15     RACE                            WHITE tabulate         p          %
++   15     RACE AMERICAN INDIAN OR ALASKA NATIVE tabulate         p          %
+-   16   ETHNIC               HISPANIC OR LATINO tabulate         n          n
++   16     RACE        BLACK OR AFRICAN AMERICAN tabulate         n          n
+-   17   ETHNIC               HISPANIC OR LATINO tabulate         N          N
++   17     RACE        BLACK OR AFRICAN AMERICAN tabulate         N          N
+-   18   ETHNIC               HISPANIC OR LATINO tabulate         p          %
++   18     RACE        BLACK OR AFRICAN AMERICAN tabulate         p          %
+-   19   ETHNIC           NOT HISPANIC OR LATINO tabulate         n          n
++   19     RACE                            WHITE tabulate         n          n
+-   20   ETHNIC           NOT HISPANIC OR LATINO tabulate         N          N
++   20     RACE                            WHITE tabulate         N          N
+-   21   ETHNIC           NOT HISPANIC OR LATINO tabulate         p          %
++   21     RACE                            WHITE tabulate         p          %
+-   22   AGEGR1                            18-64 tabulate         n          n
++   22   ETHNIC               HISPANIC OR LATINO tabulate         n          n
+-   23   AGEGR1                            18-64 tabulate         N          N
++   23   ETHNIC               HISPANIC OR LATINO tabulate         N          N
+-   24   AGEGR1                            18-64 tabulate         p          %
++   24   ETHNIC               HISPANIC OR LATINO tabulate         p          %
+-   25   AGEGR1                              &gt;64 tabulate         n          n
++   25   ETHNIC           NOT HISPANIC OR LATINO tabulate         n          n
+              stat
+-   1          143
++   1           33
+    2          254
+-   3    0.5629921
++   3    0.1299213
+-   4          111
++   4          221
+    5          254
+-   6    0.4370079
++   6    0.8700787
+-   7            1
++   7          143
+    8          254
+-   9  0.003937008
++   9    0.5629921
+-   10          23
++   10         111
+    11         254
+-   12  0.09055118
++   12   0.4370079
+-   13         230
++   13           1
+    14         254
+-   15   0.9055118
++   15 0.003937008
+-   16          12
++   16          23
+    17         254
+-   18  0.04724409
++   18  0.09055118
+-   19         242
++   19         230
+    20         254
+-   21   0.9527559
++   21   0.9055118
+-   22          33
++   22          12
+    23         254
+-   24   0.1299213
++   24  0.04724409
+-   25         221
++   25         242
+                                                                                                                                                                            fmt_fun
+    1  function (x) , style_number(x, digits = digits, big.mark = big.mark, decimal.mark = decimal.mark, ,     scale = scale, prefix = prefix, suffix = suffix, na = na, ,     ...)
+    2  function (x) , style_number(x, digits = digits, big.mark = big.mark, decimal.mark = decimal.mark, ,     scale = scale, prefix = prefix, suffix = suffix, na = na, ,     ...)
+</failure>
     </testcase>
   </testsuite>
-  <testsuite name="fda-table_03" timestamp="2026-07-13T08:57:39Z" hostname="e43aac9e0318" tests="1" skipped="1" failures="0" errors="0" time="1.022">
-    <testcase time="1.022" classname="fda_table_03" name="fda_table_03_works">
-      <skipped message="Reason: On CRAN ('test-fda-table_03.R:1:1')"/>
-    </testcase>
+  <testsuite name="fda-table_03" timestamp="2026-07-13T08:57:38Z" hostname="e45649b644f8" tests="3" skipped="0" failures="0" errors="0" time="1.314">
+    <testcase time="1.276" classname="fda_table_03" name="fda_table_03_works"/>
+    <testcase time="0.0190000000000001" classname="fda_table_03" name="fda_table_03_works"/>
+    <testcase time="0.0190000000000001" classname="fda_table_03" name="fda_table_03_works"/>
   </testsuite>
-  <testsuite name="fda-table_04" timestamp="2026-07-13T08:57:40Z" hostname="e43aac9e0318" tests="1" skipped="1" failures="0" errors="0" time="0.534">
-    <testcase time="0.533999999999999" classname="fda_table_04" name="fda_table_04_works">
-      <skipped message="Reason: On CRAN ('test-fda-table_04.R:1:1')"/>
-    </testcase>
+  <testsuite name="fda-table_04" timestamp="2026-07-13T08:57:39Z" hostname="e45649b644f8" tests="1" skipped="0" failures="0" errors="0" time="0.512">
+    <testcase time="0.511999999999999" classname="fda_table_04" name="fda_table_04_works"/>
   </testsuite>
-  <testsuite name="fda-table_06" timestamp="2026-07-13T08:57:41Z" hostname="e43aac9e0318" tests="1" skipped="1" failures="0" errors="0" time="0.805">
-    <testcase time="0.805" classname="fda_table_06" name="fda_table_06_works">
-      <skipped message="Reason: On CRAN ('test-fda-table_06.R:1:1')"/>
-    </testcase>
+  <testsuite name="fda-table_06" timestamp="2026-07-13T08:57:39Z" hostname="e45649b644f8" tests="1" skipped="0" failures="0" errors="0" time="0.811">
+    <testcase time="0.811" classname="fda_table_06" name="fda_table_06_works"/>
   </testsuite>
-  <testsuite name="fda-table_07" timestamp="2026-07-13T08:57:42Z" hostname="e43aac9e0318" tests="1" skipped="1" failures="0" errors="0" time="3.219">
-    <testcase time="3.219" classname="fda_table_07" name="fda_table_07_works">
-      <skipped message="Reason: On CRAN ('test-fda-table_07.R:1:1')"/>
-    </testcase>
+  <testsuite name="fda-table_07" timestamp="2026-07-13T08:57:40Z" hostname="e45649b644f8" tests="8" skipped="0" failures="0" errors="0" time="3.395">
+    <testcase time="3.229" classname="fda_table_07" name="fda_table_07_works"/>
+    <testcase time="0.0190000000000019" classname="fda_table_07" name="fda_table_07_works"/>
+    <testcase time="0.0169999999999995" classname="fda_table_07" name="fda_table_07_works"/>
+    <testcase time="0.0199999999999996" classname="fda_table_07" name="fda_table_07_works"/>
+    <testcase time="0.0160000000000018" classname="fda_table_07" name="fda_table_07_works"/>
+    <testcase time="0.0199999999999996" classname="fda_table_07" name="fda_table_07_works"/>
+    <testcase time="0.0339999999999989" classname="fda_table_07" name="fda_table_07_works"/>
+    <testcase time="0.0399999999999991" classname="fda_table_07" name="fda_table_07_works"/>
   </testsuite>
-  <testsuite name="fda-table_08" timestamp="2026-07-13T08:57:45Z" hostname="e43aac9e0318" tests="1" skipped="1" failures="0" errors="0" time="1.088">
-    <testcase time="1.088" classname="fda_table_08" name="fda_table_08_works">
-      <skipped message="Reason: On CRAN ('test-fda-table_08.R:1:1')"/>
-    </testcase>
+  <testsuite name="fda-table_08" timestamp="2026-07-13T08:57:44Z" hostname="e45649b644f8" tests="2" skipped="0" failures="0" errors="0" time="1.201">
+    <testcase time="1.177" classname="fda_table_08" name="fda_table_08_works"/>
+    <testcase time="0.0240000000000009" classname="fda_table_08" name="fda_table_08_works"/>
   </testsuite>
-  <testsuite name="fda-table_09" timestamp="2026-07-13T08:57:46Z" hostname="e43aac9e0318" tests="1" skipped="1" failures="0" errors="0" time="0.168">
-    <testcase time="0.167999999999999" classname="fda_table_09" name="fda_table_09_works">
-      <skipped message="Reason: On CRAN ('test-fda-table_09.R:1:1')"/>
-    </testcase>
+  <testsuite name="fda-table_09" timestamp="2026-07-13T08:57:45Z" hostname="e45649b644f8" tests="1" skipped="0" failures="0" errors="0" time="0.163">
+    <testcase time="0.163" classname="fda_table_09" name="fda_table_09_works"/>
   </testsuite>
-  <testsuite name="fda-table_10" timestamp="2026-07-13T08:57:46Z" hostname="e43aac9e0318" tests="1" skipped="1" failures="0" errors="0" time="0.559">
-    <testcase time="0.559000000000001" classname="fda_table_10" name="fda_table_10_works">
-      <skipped message="Reason: On CRAN ('test-fda-table_10.R:1:1')"/>
-    </testcase>
+  <testsuite name="fda-table_10" timestamp="2026-07-13T08:57:45Z" hostname="e45649b644f8" tests="1" skipped="0" failures="0" errors="0" time="0.571">
+    <testcase time="0.571000000000002" classname="fda_table_10" name="fda_table_10_works"/>
   </testsuite>
-  <testsuite name="fda-table_11" timestamp="2026-07-13T08:57:47Z" hostname="e43aac9e0318" tests="1" skipped="1" failures="0" errors="0" time="0.708">
-    <testcase time="0.708000000000002" classname="fda_table_11" name="fda_table_11_works">
-      <skipped message="Reason: On CRAN ('test-fda-table_11.R:1:1')"/>
-    </testcase>
+  <testsuite name="fda-table_11" timestamp="2026-07-13T08:57:46Z" hostname="e45649b644f8" tests="1" skipped="0" failures="0" errors="0" time="0.737">
+    <testcase time="0.736999999999998" classname="fda_table_11" name="fda_table_11_works"/>
   </testsuite>
-  <testsuite name="fda-table_12" timestamp="2026-07-13T08:57:47Z" hostname="e43aac9e0318" tests="1" skipped="1" failures="0" errors="0" time="1.294">
-    <testcase time="1.294" classname="fda_table_12" name="fda_table_12_works">
-      <skipped message="Reason: On CRAN ('test-fda-table_12.R:1:1')"/>
-    </testcase>
+  <testsuite name="fda-table_12" timestamp="2026-07-13T08:57:46Z" hostname="e45649b644f8" tests="1" skipped="0" failures="0" errors="0" time="1.353">
+    <testcase time="1.353" classname="fda_table_12" name="fda_table_12_works"/>
   </testsuite>
-  <testsuite name="fda-table_13" timestamp="2026-07-13T08:57:49Z" hostname="e43aac9e0318" tests="1" skipped="1" failures="0" errors="0" time="0.658">
-    <testcase time="0.658000000000001" classname="fda_table_13" name="fda_table_13_works">
-      <skipped message="Reason: On CRAN ('test-fda-table_13.R:1:1')"/>
-    </testcase>
+  <testsuite name="fda-table_13" timestamp="2026-07-13T08:57:48Z" hostname="e45649b644f8" tests="1" skipped="0" failures="0" errors="0" time="0.699">
+    <testcase time="0.698999999999998" classname="fda_table_13" name="fda_table_13_works"/>
   </testsuite>
-  <testsuite name="fda-table_14" timestamp="2026-07-13T08:57:49Z" hostname="e43aac9e0318" tests="1" skipped="1" failures="0" errors="0" time="0.673">
-    <testcase time="0.673000000000002" classname="fda_table_14" name="fda_table_14_works">
-      <skipped message="Reason: On CRAN ('test-fda-table_14.R:1:1')"/>
-    </testcase>
+  <testsuite name="fda-table_14" timestamp="2026-07-13T08:57:48Z" hostname="e45649b644f8" tests="1" skipped="0" failures="0" errors="0" time="0.726">
+    <testcase time="0.726000000000003" classname="fda_table_14" name="fda_table_14_works"/>
   </testsuite>
-  <testsuite name="fda-table_15" timestamp="2026-07-13T08:57:50Z" hostname="e43aac9e0318" tests="1" skipped="1" failures="0" errors="0" time="3.371">
-    <testcase time="3.371" classname="fda_table_15" name="fda_table_15_works">
-      <skipped message="Reason: On CRAN ('test-fda-table_15.R:1:1')"/>
-    </testcase>
+  <testsuite name="fda-table_15" timestamp="2026-07-13T08:57:49Z" hostname="e45649b644f8" tests="1" skipped="0" failures="0" errors="0" time="3.496">
+    <testcase time="3.496" classname="fda_table_15" name="fda_table_15_works"/>
   </testsuite>
-  <testsuite name="fda-table_17" timestamp="2026-07-13T08:57:53Z" hostname="e43aac9e0318" tests="1" skipped="1" failures="0" errors="0" time="1.046">
-    <testcase time="1.046" classname="fda_table_17" name="fda_table_17_works">
-      <skipped message="Reason: On CRAN ('test-fda-table_17.R:1:1')"/>
-    </testcase>
+  <testsuite name="fda-table_17" timestamp="2026-07-13T08:57:53Z" hostname="e45649b644f8" tests="2" skipped="0" failures="0" errors="0" time="1.117">
+    <testcase time="1.094" classname="fda_table_17" name="fda_table_17_works"/>
+    <testcase time="0.0229999999999997" classname="fda_table_17" name="fda_table_17_works"/>
   </testsuite>
-  <testsuite name="fda-table_18" timestamp="2026-07-13T08:57:54Z" hostname="e43aac9e0318" tests="1" skipped="1" failures="0" errors="0" time="1.601">
-    <testcase time="1.601" classname="fda_table_18" name="fda_table_18_works">
-      <skipped message="Reason: On CRAN ('test-fda-table_18.R:1:1')"/>
-    </testcase>
+  <testsuite name="fda-table_18" timestamp="2026-07-13T08:57:54Z" hostname="e45649b644f8" tests="3" skipped="0" failures="0" errors="0" time="1.719">
+    <testcase time="1.69" classname="fda_table_18" name="fda_table_18_works"/>
+    <testcase time="0.0150000000000006" classname="fda_table_18" name="fda_table_18_works"/>
+    <testcase time="0.0139999999999993" classname="fda_table_18" name="fda_table_18_works"/>
   </testsuite>
-  <testsuite name="fda-table_29" timestamp="2026-07-13T08:57:56Z" hostname="e43aac9e0318" tests="1" skipped="1" failures="0" errors="0" time="0.614">
-    <testcase time="0.614000000000001" classname="fda_table_29" name="fda_table_29_works">
-      <skipped message="Reason: On CRAN ('test-fda-table_29.R:1:1')"/>
-    </testcase>
+  <testsuite name="fda-table_29" timestamp="2026-07-13T08:57:55Z" hostname="e45649b644f8" tests="1" skipped="0" failures="0" errors="0" time="0.643">
+    <testcase time="0.643000000000001" classname="fda_table_29" name="fda_table_29_works"/>
   </testsuite>
-  <testsuite name="fda-table_33" timestamp="2026-07-13T08:57:57Z" hostname="e43aac9e0318" tests="1" skipped="1" failures="0" errors="0" time="0.51">
-    <testcase time="0.510000000000002" classname="fda_table_33" name="fda_table_33_works">
-      <skipped message="Reason: On CRAN ('test-fda-table_33.R:1:1')"/>
-    </testcase>
+  <testsuite name="fda-table_33" timestamp="2026-07-13T08:57:56Z" hostname="e45649b644f8" tests="1" skipped="0" failures="0" errors="0" time="0.551">
+    <testcase time="0.550999999999995" classname="fda_table_33" name="fda_table_33_works"/>
   </testsuite>
-  <testsuite name="fda-table_34" timestamp="2026-07-13T08:57:57Z" hostname="e43aac9e0318" tests="1" skipped="1" failures="0" errors="0" time="0.719">
-    <testcase time="0.718999999999998" classname="fda_table_34" name="fda_table_34_works">
-      <skipped message="Reason: On CRAN ('test-fda-table_34.R:1:1')"/>
-    </testcase>
+  <testsuite name="fda-table_34" timestamp="2026-07-13T08:57:57Z" hostname="e45649b644f8" tests="1" skipped="0" failures="0" errors="0" time="0.645">
+    <testcase time="0.645000000000003" classname="fda_table_34" name="fda_table_34_works"/>
   </testsuite>
-  <testsuite name="fda-table_36" timestamp="2026-07-13T08:57:58Z" hostname="e43aac9e0318" tests="1" skipped="1" failures="0" errors="0" time="0.659">
-    <testcase time="0.659000000000002" classname="fda_table_36" name="fda_table_36_works">
-      <skipped message="Reason: On CRAN ('test-fda-table_36.R:1:1')"/>
-    </testcase>
+  <testsuite name="fda-table_36" timestamp="2026-07-13T08:57:57Z" hostname="e45649b644f8" tests="1" skipped="0" failures="0" errors="0" time="0.586">
+    <testcase time="0.585999999999999" classname="fda_table_36" name="fda_table_36_works"/>
   </testsuite>
-  <testsuite name="fda-table_37" timestamp="2026-07-13T08:57:58Z" hostname="e43aac9e0318" tests="1" skipped="1" failures="0" errors="0" time="0.525">
-    <testcase time="0.524999999999999" classname="fda_table_37" name="fda_table_37_works">
-      <skipped message="Reason: On CRAN ('test-fda-table_37.R:1:1')"/>
-    </testcase>
+  <testsuite name="fda-table_37" timestamp="2026-07-13T08:57:58Z" hostname="e45649b644f8" tests="1" skipped="0" failures="0" errors="0" time="0.548">
+    <testcase time="0.548000000000002" classname="fda_table_37" name="fda_table_37_works"/>
   </testsuite>
-  <testsuite name="fda-table_38" timestamp="2026-07-13T08:57:59Z" hostname="e43aac9e0318" tests="1" skipped="1" failures="0" errors="0" time="0.437">
-    <testcase time="0.436999999999998" classname="fda_table_38" name="fda_table_38_works">
-      <skipped message="Reason: On CRAN ('test-fda-table_38.R:1:1')"/>
-    </testcase>
+  <testsuite name="fda-table_38" timestamp="2026-07-13T08:57:58Z" hostname="e45649b644f8" tests="1" skipped="0" failures="0" errors="0" time="0.46">
+    <testcase time="0.460000000000001" classname="fda_table_38" name="fda_table_38_works"/>
   </testsuite>
-  <testsuite name="fda-table_43" timestamp="2026-07-13T08:57:59Z" hostname="e43aac9e0318" tests="1" skipped="1" failures="0" errors="0" time="0.852">
-    <testcase time="0.852000000000004" classname="fda_table_43" name="fda_table_43_works">
-      <skipped message="Reason: On CRAN ('test-fda-table_43.R:1:1')"/>
-    </testcase>
+  <testsuite name="fda-table_43" timestamp="2026-07-13T08:57:59Z" hostname="e45649b644f8" tests="1" skipped="0" failures="0" errors="0" time="0.957">
+    <testcase time="0.957000000000001" classname="fda_table_43" name="fda_table_43_works"/>
   </testsuite>
-  <testsuite name="fda-table_44" timestamp="2026-07-13T08:58:00Z" hostname="e43aac9e0318" tests="1" skipped="1" failures="0" errors="0" time="0.494">
-    <testcase time="0.494" classname="fda_table_44" name="fda_table_44_works">
-      <skipped message="Reason: On CRAN ('test-fda-table_44.R:1:1')"/>
-    </testcase>
+  <testsuite name="fda-table_44" timestamp="2026-07-13T08:58:00Z" hostname="e45649b644f8" tests="1" skipped="0" failures="0" errors="0" time="0.499">
+    <testcase time="0.498999999999995" classname="fda_table_44" name="fda_table_44_works"/>
   </testsuite>
-  <testsuite name="fda-table_45" timestamp="2026-07-13T08:58:01Z" hostname="e43aac9e0318" tests="1" skipped="1" failures="0" errors="0" time="0.617">
-    <testcase time="0.616999999999997" classname="fda_table_45" name="fda_table_45_works">
-      <skipped message="Reason: On CRAN ('test-fda-table_45.R:1:1')"/>
-    </testcase>
+  <testsuite name="fda-table_45" timestamp="2026-07-13T08:58:00Z" hostname="e45649b644f8" tests="1" skipped="0" failures="0" errors="0" time="0.614">
+    <testcase time="0.614000000000004" classname="fda_table_45" name="fda_table_45_works"/>
   </testsuite>
-  <testsuite name="fda-table_50" timestamp="2026-07-13T08:58:01Z" hostname="e43aac9e0318" tests="1" skipped="1" failures="0" errors="0" time="2.116">
-    <testcase time="2.116" classname="fda_table_50" name="fda_table_50_works">
-      <skipped message="Reason: On CRAN ('test-fda-table_50.R:1:1')"/>
-    </testcase>
+  <testsuite name="fda-table_50" timestamp="2026-07-13T08:58:01Z" hostname="e45649b644f8" tests="5" skipped="0" failures="0" errors="0" time="2.254">
+    <testcase time="2.153" classname="fda_table_50" name="fda_table_50_works"/>
+    <testcase time="0.0219999999999985" classname="fda_table_50" name="fda_table_50_works"/>
+    <testcase time="0.0330000000000013" classname="fda_table_50" name="fda_table_50_works"/>
+    <testcase time="0.0230000000000032" classname="fda_table_50" name="fda_table_50_works"/>
+    <testcase time="0.0229999999999961" classname="fda_table_50" name="fda_table_50_works"/>
   </testsuite>
-  <testsuite name="fda-table_51" timestamp="2026-07-13T08:58:03Z" hostname="e43aac9e0318" tests="1" skipped="1" failures="0" errors="0" time="0.731">
-    <testcase time="0.731000000000002" classname="fda_table_51" name="fda_table_51_works">
-      <skipped message="Reason: On CRAN ('test-fda-table_51.R:1:1')"/>
-    </testcase>
+  <testsuite name="fda-table_51" timestamp="2026-07-13T08:58:03Z" hostname="e45649b644f8" tests="1" skipped="0" failures="0" errors="0" time="0.717">
+    <testcase time="0.716999999999999" classname="fda_table_51" name="fda_table_51_works"/>
   </testsuite>
-  <testsuite name="table-roche_lbt01" timestamp="2026-07-13T08:58:04Z" hostname="e43aac9e0318" tests="1" skipped="1" failures="0" errors="0" time="5.168">
-    <testcase time="5.168" classname="table_roche_lbt01" name="table_roche_lbt01_works">
-      <skipped message="Reason: On CRAN ('test-table-roche_lbt01.R:1:1')"/>
-    </testcase>
+  <testsuite name="table-roche_lbt01" timestamp="2026-07-13T08:58:04Z" hostname="e45649b644f8" tests="3" skipped="0" failures="0" errors="0" time="5.604">
+    <testcase time="5.564" classname="table_roche_lbt01" name="table_roche_lbt01_works"/>
+    <testcase time="0.019999999999996" classname="table_roche_lbt01" name="table_roche_lbt01_works"/>
+    <testcase time="0.0200000000000031" classname="table_roche_lbt01" name="table_roche_lbt01_works"/>
   </testsuite>
 </testsuites>
