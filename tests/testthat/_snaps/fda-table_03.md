@@ -113,58 +113,58 @@
     Code
       as.data.frame(ard[[2]]$tbl_hierarchical)[1:25, ]
     Output
-                               variable                       variable_level
-      1    ..ard_hierarchical_overall..                                 TRUE
-      2    ..ard_hierarchical_overall..                                 TRUE
-      3    ..ard_hierarchical_overall..                                 TRUE
-      4                         SCRNFRS                    Consent withdrawn
-      5                         SCRNFRS                    Consent withdrawn
-      6                         SCRNFRS                    Consent withdrawn
-      7                         SCRNFRS Inclusion/exclusion criteria not met
-      8                         SCRNFRS Inclusion/exclusion criteria not met
-      9                         SCRNFRS Inclusion/exclusion criteria not met
-      10                        SCRNFRS                                Other
-      11                        SCRNFRS                                Other
-      12                        SCRNFRS                                Other
-      13                        SCRNFRS                Subject noncompliance
-      14                        SCRNFRS                Subject noncompliance
-      15                        SCRNFRS                Subject noncompliance
-      16                ..ard_total_n..                                 NULL
-      NA                           <NA>                                 NULL
-      NA.1                         <NA>                                 NULL
-      NA.2                         <NA>                                 NULL
-      NA.3                         <NA>                                 NULL
-      NA.4                         <NA>                                 NULL
-      NA.5                         <NA>                                 NULL
-      NA.6                         <NA>                                 NULL
-      NA.7                         <NA>                                 NULL
-      NA.8                         <NA>                                 NULL
-                context stat_name stat_label       stat stat_fmt
-      1    hierarchical         n          n         52       52
-      2    hierarchical         N          N        306      306
-      3    hierarchical         p          %  0.1699346       17
-      4    hierarchical         n          n         11       11
-      5    hierarchical         N          N        306      306
-      6    hierarchical         p          % 0.03594771      3.6
-      7    hierarchical         n          n         17       17
-      8    hierarchical         N          N        306      306
-      9    hierarchical         p          % 0.05555556      5.6
-      10   hierarchical         n          n          7        7
-      11   hierarchical         N          N        306      306
-      12   hierarchical         p          % 0.02287582      2.3
-      13   hierarchical         n          n         17       17
-      14   hierarchical         N          N        306      306
-      15   hierarchical         p          % 0.05555556      5.6
-      16        total_n         N          N        306      306
-      NA           <NA>      <NA>       <NA>       NULL     NULL
-      NA.1         <NA>      <NA>       <NA>       NULL     NULL
-      NA.2         <NA>      <NA>       <NA>       NULL     NULL
-      NA.3         <NA>      <NA>       <NA>       NULL     NULL
-      NA.4         <NA>      <NA>       <NA>       NULL     NULL
-      NA.5         <NA>      <NA>       <NA>       NULL     NULL
-      NA.6         <NA>      <NA>       <NA>       NULL     NULL
-      NA.7         <NA>      <NA>       <NA>       NULL     NULL
-      NA.8         <NA>      <NA>       <NA>       NULL     NULL
+                               variable variable_level      context stat_name
+      1    ..ard_hierarchical_overall..           TRUE hierarchical         n
+      2    ..ard_hierarchical_overall..           TRUE hierarchical         N
+      3    ..ard_hierarchical_overall..           TRUE hierarchical         p
+      4                         SCRNFRS              3 hierarchical         n
+      5                         SCRNFRS              3 hierarchical         N
+      6                         SCRNFRS              3 hierarchical         p
+      7                         SCRNFRS              1 hierarchical         n
+      8                         SCRNFRS              1 hierarchical         N
+      9                         SCRNFRS              1 hierarchical         p
+      10                        SCRNFRS              4 hierarchical         n
+      11                        SCRNFRS              4 hierarchical         N
+      12                        SCRNFRS              4 hierarchical         p
+      13                        SCRNFRS              2 hierarchical         n
+      14                        SCRNFRS              2 hierarchical         N
+      15                        SCRNFRS              2 hierarchical         p
+      16                ..ard_total_n..           NULL      total_n         N
+      NA                           <NA>           NULL         <NA>      <NA>
+      NA.1                         <NA>           NULL         <NA>      <NA>
+      NA.2                         <NA>           NULL         <NA>      <NA>
+      NA.3                         <NA>           NULL         <NA>      <NA>
+      NA.4                         <NA>           NULL         <NA>      <NA>
+      NA.5                         <NA>           NULL         <NA>      <NA>
+      NA.6                         <NA>           NULL         <NA>      <NA>
+      NA.7                         <NA>           NULL         <NA>      <NA>
+      NA.8                         <NA>           NULL         <NA>      <NA>
+           stat_label       stat stat_fmt
+      1             n         52       52
+      2             N        306      306
+      3             %  0.1699346       17
+      4             n         11       11
+      5             N        306      306
+      6             % 0.03594771      3.6
+      7             n         17       17
+      8             N        306      306
+      9             % 0.05555556      5.6
+      10            n          7        7
+      11            N        306      306
+      12            % 0.02287582      2.3
+      13            n         17       17
+      14            N        306      306
+      15            % 0.05555556      5.6
+      16            N        306      306
+      NA         <NA>       NULL     NULL
+      NA.1       <NA>       NULL     NULL
+      NA.2       <NA>       NULL     NULL
+      NA.3       <NA>       NULL     NULL
+      NA.4       <NA>       NULL     NULL
+      NA.5       <NA>       NULL     NULL
+      NA.6       <NA>       NULL     NULL
+      NA.7       <NA>       NULL     NULL
+      NA.8       <NA>       NULL     NULL
                                                                                                                                                                                 fmt_fun
       1    function (x) , style_number(x, digits = digits, big.mark = big.mark, decimal.mark = decimal.mark, ,     scale = scale, prefix = prefix, suffix = suffix, na = na, ,     ...)
       2    function (x) , style_number(x, digits = digits, big.mark = big.mark, decimal.mark = decimal.mark, ,     scale = scale, prefix = prefix, suffix = suffix, na = na, ,     ...)

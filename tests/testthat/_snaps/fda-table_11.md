@@ -42,19 +42,19 @@
       10  Xanomeline Low Dose     tabulate         n          n         96       96
       11  Xanomeline Low Dose     tabulate         N          N        306      306
       12  Xanomeline Low Dose     tabulate         p          %  0.3137255     31.4
-      13                OCMQ1 hierarchical         n          n          2        2
-      14                OCMQ1 hierarchical         N          N         86       86
-      15                OCMQ1 hierarchical         p          % 0.02325581      2.3
-      16                OCMQ1 hierarchical         n          n          1        1
-      17                OCMQ1 hierarchical         N          N         72       72
-      18                OCMQ1 hierarchical         p          % 0.01388889      1.4
-      19                OCMQ1 hierarchical         n          n          5        5
-      20                OCMQ1 hierarchical         N          N         96       96
-      21                OCMQ1 hierarchical         p          % 0.05208333      5.2
-      22                OCMQ2 hierarchical         n          n          4        4
-      23                OCMQ2 hierarchical         N          N         86       86
-      24                OCMQ2 hierarchical         p          % 0.04651163      4.7
-      25                OCMQ2 hierarchical         n          n          2        2
+      13                    1 hierarchical         n          n          2        2
+      14                    1 hierarchical         N          N         86       86
+      15                    1 hierarchical         p          % 0.02325581      2.3
+      16                    1 hierarchical         n          n          1        1
+      17                    1 hierarchical         N          N         72       72
+      18                    1 hierarchical         p          % 0.01388889      1.4
+      19                    1 hierarchical         n          n          5        5
+      20                    1 hierarchical         N          N         96       96
+      21                    1 hierarchical         p          % 0.05208333      5.2
+      22                    2 hierarchical         n          n          4        4
+      23                    2 hierarchical         N          N         86       86
+      24                    2 hierarchical         p          % 0.04651163      4.7
+      25                    2 hierarchical         n          n          2        2
                                                                                                                                                                                                                                                                                                                            fmt_fun
       1                                                                                                                                                                                                                                                                                                                          0
       2                                                                                                                                                                                                                                                                                                                          0
