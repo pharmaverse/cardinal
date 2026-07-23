@@ -526,29 +526,20 @@ create_table_09_data <- function(
     risk_diff = NULL) {
   basis_df <- if (!is.null(alt_counts_df)) alt_counts_df else adae
   N_data <- basis_df |> # nolint
-    {
-      if (is.null(lbl_overall)) group_by(., .data[[arm_var]]) else .
-    } |>
+    (\(df) if (is.null(lbl_overall)) group_by(df, .data[[arm_var]]) else df)() |>
     mutate(N = n()) |> # count observations
     ungroup() |>
     select(all_of(c(id_var, arm_var, "N")))
 
   # get total N
   total_N <- N_data |> # nolint
-    {
-      if (is.null(lbl_overall)) group_by(., .data[[arm_var]]) else .
-    } |>
+    (\(df) if (is.null(lbl_overall)) group_by(df, .data[[arm_var]]) else df)() |>
     distinct(N) |>
-    {
-      if (is.null(lbl_overall)) {
-        pivot_wider(.,
-          names_from = all_of(arm_var),
-          values_from = N
-        )
-      } else {
-        rename(., !!lbl_overall := "N")
-      }
-    }
+    (\(df) if (is.null(lbl_overall)) {
+      pivot_wider(df, names_from = all_of(arm_var), values_from = N)
+    } else {
+      rename(df, !!lbl_overall := "N")
+    })()
 
   adae <- adae |>
     left_join(N_data, by = c(id_var, arm_var), relationship = "many-to-many")
@@ -605,9 +596,7 @@ count_subjects <- function(adae, arm_var, id_var, sub_level_vars = NULL, lbl_ove
   }
 
   count_data <- adae |>
-    {
-      if (grouping || !is.null(sub_level_vars)) group_by(., across(all_of(grouping_vars))) else .
-    } |>
+    (\(df) if (grouping || !is.null(sub_level_vars)) group_by(df, across(all_of(grouping_vars))) else df)() |>
     summarize(
       val = n_distinct(.data[[id_var]]), # count on patient level
       N = unique(N),
@@ -615,18 +604,16 @@ count_subjects <- function(adae, arm_var, id_var, sub_level_vars = NULL, lbl_ove
       combined = paste0(val, " (", pct, "%)"),
       .groups = "drop"
     ) |>
-    {
-      if (grouping) {
-        pivot_wider(.,
-          id_cols = all_of(sub_level_vars),
-          names_from = all_of(arm_var),
-          values_from = all_of(c("val", "N", "combined"))
-        )
-      } else {
-        rename(., !!lbl_overall := "combined") |>
-          select(-c("val", "pct"))
-      }
-    }
+    (\(df) if (grouping) {
+      pivot_wider(df,
+        id_cols = all_of(sub_level_vars),
+        names_from = all_of(arm_var),
+        values_from = all_of(c("val", "N", "combined"))
+      )
+    } else {
+      rename(df, !!lbl_overall := "combined") |>
+        select(-c("val", "pct"))
+    })()
 
   if (!is.null(risk_diff)) {
     purrr::walk(risk_diff, function(x) {

@@ -39,7 +39,11 @@ split_cols_by_arm <- function(lyt, arm_var = "ARM", lbl_overall = NULL, risk_dif
   } else {
     arm_x <- risk_diff$arm_x
     arm_y <- risk_diff$arm_y
-    col_label <- if ("col_label" %in% names(risk_diff)) risk_diff$col_label else eval(formals(tern::add_riskdiff)$col_label)
+    col_label <- if ("col_label" %in% names(risk_diff)) {
+      risk_diff$col_label
+    } else {
+      eval(formals(tern::add_riskdiff)$col_label)
+    }
     pct <- if ("pct" %in% names(risk_diff)) risk_diff$pct else TRUE
     spl_fun <- tern::add_riskdiff(arm_x = arm_x, arm_y = arm_y, col_label = col_label, pct = pct)
   }
