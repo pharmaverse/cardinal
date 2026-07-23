@@ -9,7 +9,8 @@ make_table_02(
   return_ard = TRUE,
   arm_var = "TRT01A",
   saffl_var = "SAFFL",
-  vars = c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC")
+  vars = c("SEX", "AGE", "AGEGR1", "ETHNIC", "RACE"),
+  label = list()
 )
 }
 \arguments{
@@ -23,7 +24,10 @@ Defaults to \code{"TRT01A"}.}
 \item{saffl_var}{(\code{character})\cr name of the safety flag variable. Defaults to \code{"SAFFL"}.}
 
 \item{vars}{(\code{character})\cr variables from \code{df} to include in the table.
-Defaults to \code{c("SEX", "AGE", "AGEGR1", "RACE", "ETHNIC")}.}
+Defaults to \code{c("SEX", "AGE", "AGEGR1", "ETHNIC", "RACE")}.}
+
+\item{label}{(named \code{list})\cr variable labels passed to \code{gtsummary::tbl_summary()}.
+Defaults to \code{list()}.}
 }
 \value{
 A \code{gtsummary} table, or if \code{return_ard = TRUE}, a named list with elements \code{table} and \code{ard}.
@@ -35,8 +39,10 @@ for the safety population.
 \details{
 \itemize{
 \item \code{df} must contain the variables specified by \code{arm_var}, \code{saffl_var}, and all variables in \code{vars}.
-\item Rows with \code{saffl_var != "Y"} are excluded from the table.
-\item Continuous variables are summarised with mean (SD) and median (min - max).
+\item Rows with \code{saffl_var != "Y"} are excluded from the table (safety population filter applied internally).
+\item Data-specific preprocessing (e.g. joining additional variables, deriving new columns) should be
+performed by the caller before passing \code{df} to this function.
+\item Continuous variables are summarised with mean (SD) and median (min, max).
 \item Categorical variables are summarised with n (\%).
 \item When \code{return_ard = TRUE}, returns a named list with elements \code{table} (a \code{gtsummary} object)
 and \code{ard} (the intermediate ARD); otherwise returns the \code{gtsummary} table directly.
