@@ -35,12 +35,4 @@ to \code{build_table}.
 Splits \code{rtables} layout into columns by arm variable. Appends an "overall" column as the
 rightmost column if \code{lbl_overall} is supplied.
 }
-\examples{
-library(magrittr)
-
-adsl <- random.cdisc.data::cadsl
-
-lyt <- rtables::basic_table() \%>\% split_cols_by_arm(lbl_overall = "All Arms")
-rtables::build_table(lyt, df = adsl)
-
-}
+\keyword{internal}

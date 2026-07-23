@@ -21,8 +21,4 @@ to \code{build_table}.
 Initializes a table layout via \code{\link[rtables:basic_table]{rtables::basic_table()}} and applies \code{show_colcounts}
 argument. Adds any annotations supplied via the \code{annotations} argument.
 }
-\examples{
-lyt <- basic_table_annot(annotations = list(title = "Title", main_footer = "Main Footer"))
-rtables::build_table(lyt, df = data.frame())
-
-}
+\keyword{internal}

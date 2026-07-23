@@ -27,8 +27,4 @@ A \code{data.frame} (modified \code{alt_counts_df}) or \code{NULL}.
 If \code{alt_counts_df} is not \code{NULL}, will check for required variables (\code{arm_var}) and filter
 to include only safety population (\code{saffl_var}, if specified), then apply \code{\link[tern:df_explicit_na]{tern::df_explicit_na()}}.
 }
-\examples{
-adsl <- random.cdisc.data::cadsl
-alt_counts_df_preproc(adsl)
-
-}
+\keyword{internal}
