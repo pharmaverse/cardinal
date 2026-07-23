@@ -141,9 +141,6 @@ make_table_06_gtsummary <- function(df,
 }
 
 
-
-
-
 #' FDA Table 6: Overview of Adverse Events, Safety Population, Pooled Analyses
 #'
 #' @inheritParams argument_convention
@@ -236,8 +233,6 @@ make_table_06 <- function(df,
     return(tbl)
   }
 }
-
-
 
 
 #' FDA Table 6: Overview of Adverse Events, Safety Population, Pooled Analyses
