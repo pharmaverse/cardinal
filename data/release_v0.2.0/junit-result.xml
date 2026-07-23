@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="custom" timestamp="2026-07-23T08:54:26Z" hostname="ef65c14f03e9" tests="1" skipped="0" failures="0" errors="0" time="7.454">
-    <testcase time="7.454" classname="custom" name="custom_table_works"/>
+  <testsuite name="custom" timestamp="2026-07-23T08:59:04Z" hostname="7b1be8d1314e" tests="1" skipped="0" failures="0" errors="0" time="9.982">
+    <testcase time="9.982" classname="custom" name="custom_table_works"/>
   </testsuite>
-  <testsuite name="fda-table_02" timestamp="2026-07-23T08:54:34Z" hostname="ef65c14f03e9" tests="3" skipped="0" failures="0" errors="0" time="1.054">
-    <testcase time="0.0759999999999996" classname="fda_table_02" name="make_table_02_works">
+  <testsuite name="fda-table_02" timestamp="2026-07-23T08:59:14Z" hostname="7b1be8d1314e" tests="3" skipped="0" failures="0" errors="0" time="1.461">
+    <testcase time="0.0990000000000002" classname="fda_table_02" name="make_table_02_works">
       <system-out>Using an external vector in selections was deprecated in tidyselect 1.1.0.
 i Please use `all_of()` or `any_of()` instead.
   # Was:
@@ -40,12 +40,12 @@ Backtrace:
  22.                       \-tidyselect:::walk_data_tree(expr, data_mask, context_mask)
  23.                         \-tidyselect:::eval_sym(expr, data_mask, context_mask)</system-out>
     </testcase>
-    <testcase time="0.950000000000001" classname="fda_table_02" name="make_table_02_works"/>
-    <testcase time="0.0279999999999987" classname="fda_table_02" name="make_table_02_works"/>
+    <testcase time="1.325" classname="fda_table_02" name="make_table_02_works"/>
+    <testcase time="0.036999999999999" classname="fda_table_02" name="make_table_02_works"/>
   </testsuite>
-  <testsuite name="fda-table_03" timestamp="2026-07-23T08:54:35Z" hostname="ef65c14f03e9" tests="3" skipped="0" failures="1" errors="0" time="0.905">
-    <testcase time="0.791" classname="fda_table_03" name="fda_table_03_works"/>
-    <testcase time="0.0899999999999999" classname="fda_table_03" name="fda_table_03_works">
+  <testsuite name="fda-table_03" timestamp="2026-07-23T08:59:15Z" hostname="7b1be8d1314e" tests="3" skipped="0" failures="1" errors="0" time="1.24">
+    <testcase time="1.095" classname="fda_table_03" name="fda_table_03_works"/>
+    <testcase time="0.113" classname="fda_table_03" name="fda_table_03_works">
       <failure type="failure" message="Snapshot of code has changed: ('test-fda-table_03.R:69:3')">Snapshot of code has changed:
 old[1:58] vs new[1:58]
   Code
@@ -160,16 +160,16 @@ old[1:58] vs new[1:58]
     2    function (x) , style_number(x, digits = digits, big.mark = big.mark, decimal.mark = decimal.mark, ,     scale = scale, prefix = prefix, suffix = suffix, na = na, ,     ...)
 </failure>
     </testcase>
-    <testcase time="0.0240000000000009" classname="fda_table_03" name="fda_table_03_works"/>
+    <testcase time="0.032" classname="fda_table_03" name="fda_table_03_works"/>
   </testsuite>
-  <testsuite name="fda-table_04" timestamp="2026-07-23T08:54:36Z" hostname="ef65c14f03e9" tests="1" skipped="0" failures="0" errors="0" time="0.62">
-    <testcase time="0.619999999999999" classname="fda_table_04" name="fda_table_04_works"/>
+  <testsuite name="fda-table_04" timestamp="2026-07-23T08:59:16Z" hostname="7b1be8d1314e" tests="1" skipped="0" failures="0" errors="0" time="0.743">
+    <testcase time="0.743" classname="fda_table_04" name="fda_table_04_works"/>
   </testsuite>
-  <testsuite name="fda-table_06" timestamp="2026-07-23T08:54:36Z" hostname="ef65c14f03e9" tests="1" skipped="0" failures="0" errors="0" time="0.614">
-    <testcase time="0.614000000000001" classname="fda_table_06" name="fda_table_06_works"/>
+  <testsuite name="fda-table_06" timestamp="2026-07-23T08:59:17Z" hostname="7b1be8d1314e" tests="1" skipped="0" failures="0" errors="0" time="0.862">
+    <testcase time="0.862" classname="fda_table_06" name="fda_table_06_works"/>
   </testsuite>
-  <testsuite name="fda-table_07" timestamp="2026-07-23T08:54:37Z" hostname="ef65c14f03e9" tests="8" skipped="0" failures="8" errors="0" time="2.699">
-    <testcase time="2.439" classname="fda_table_07" name="fda_table_07_works">
+  <testsuite name="fda-table_07" timestamp="2026-07-23T08:59:18Z" hostname="7b1be8d1314e" tests="8" skipped="0" failures="8" errors="0" time="3.784">
+    <testcase time="3.453" classname="fda_table_07" name="fda_table_07_works">
       <failure type="failure" message="Snapshot of code has changed: ('test-fda-table_07.R:122:3')">Snapshot of code has changed:
 old[11:22] vs new[11:22]
     7    &lt;NA&gt;                 NULL   TRT01A  Xanomeline Low Dose     tabulate
@@ -192,7 +192,7 @@ old[11:22] vs new[11:22]
     2          N          N        254      254
 </failure>
     </testcase>
-    <testcase time="0.0359999999999996" classname="fda_table_07" name="fda_table_07_works">
+    <testcase time="0.0470000000000006" classname="fda_table_07" name="fda_table_07_works">
       <failure type="failure" message="Snapshot of code has changed: ('test-fda-table_07.R:123:3')">Snapshot of code has changed:
 old[11:22] vs new[11:22]
     7    &lt;NA&gt;                NULL   TRT01A  Xanomeline Low Dose     tabulate
@@ -215,7 +215,7 @@ old[11:22] vs new[11:22]
     2          N          N        254      254
 </failure>
     </testcase>
-    <testcase time="0.0289999999999999" classname="fda_table_07" name="fda_table_07_works">
+    <testcase time="0.0389999999999979" classname="fda_table_07" name="fda_table_07_works">
       <failure type="failure" message="Snapshot of code has changed: ('test-fda-table_07.R:124:3')">Snapshot of code has changed:
 old[11:22] vs new[11:22]
     7    &lt;NA&gt;                NULL   TRT01A  Xanomeline Low Dose     tabulate
@@ -238,7 +238,7 @@ old[11:22] vs new[11:22]
     2          N          N        254      254
 </failure>
     </testcase>
-    <testcase time="0.0540000000000003" classname="fda_table_07" name="fda_table_07_works">
+    <testcase time="0.0610000000000035" classname="fda_table_07" name="fda_table_07_works">
       <failure type="failure" message="Snapshot of code has changed: ('test-fda-table_07.R:125:3')">Snapshot of code has changed:
 old[1:44] vs new[1:44]
   Code
@@ -325,7 +325,7 @@ old[1:44] vs new[1:44]
     2                                                                                                                                                                                                                                                                                                                          0
 </failure>
     </testcase>
-    <testcase time="0.0289999999999999" classname="fda_table_07" name="fda_table_07_works">
+    <testcase time="0.0389999999999979" classname="fda_table_07" name="fda_table_07_works">
       <failure type="failure" message="Snapshot of code has changed: ('test-fda-table_07.R:126:3')">Snapshot of code has changed:
 old[1:32] vs new[1:32]
   Code
@@ -388,7 +388,7 @@ old[1:32] vs new[1:32]
     2                                                                                                                                                                                                                                                                                                                          0
 </failure>
     </testcase>
-    <testcase time="0.0299999999999994" classname="fda_table_07" name="fda_table_07_works">
+    <testcase time="0.0399999999999991" classname="fda_table_07" name="fda_table_07_works">
       <failure type="failure" message="Snapshot of code has changed: ('test-fda-table_07.R:127:3')">Snapshot of code has changed:
 old[1:54] vs new[1:38]
   Code
@@ -479,7 +479,7 @@ old[1:54] vs new[1:38]
     2                                                                                                                                                                                                                                                                                                                          0
 </failure>
     </testcase>
-    <testcase time="0.0400000000000009" classname="fda_table_07" name="fda_table_07_works">
+    <testcase time="0.0530000000000008" classname="fda_table_07" name="fda_table_07_works">
       <failure type="failure" message="Snapshot of code has changed: ('test-fda-table_07.R:128:3')">Snapshot of code has changed:
 old[56:171] vs new[56:116]
     52 TRT01A  Xanomeline Low Dose                        AEACN
@@ -655,7 +655,7 @@ old[56:171] vs new[56:116]
     2                                                                                                                                                                                                                                                                                                                          0
 </failure>
     </testcase>
-    <testcase time="0.0419999999999998" classname="fda_table_07" name="fda_table_07_works">
+    <testcase time="0.0519999999999996" classname="fda_table_07" name="fda_table_07_works">
       <failure type="failure" message="Snapshot of code has changed: ('test-fda-table_07.R:129:3')">Snapshot of code has changed:
 old[66:98] vs new[66:98]
     16                 TRUE hierarchical         n          n         86       86
@@ -721,8 +721,8 @@ old[66:98] vs new[66:98]
 </failure>
     </testcase>
   </testsuite>
-  <testsuite name="fda-table_08" timestamp="2026-07-23T08:54:40Z" hostname="ef65c14f03e9" tests="2" skipped="0" failures="2" errors="0" time="0.891">
-    <testcase time="0.858000000000001" classname="fda_table_08" name="fda_table_08_works">
+  <testsuite name="fda-table_08" timestamp="2026-07-23T08:59:22Z" hostname="7b1be8d1314e" tests="2" skipped="0" failures="2" errors="0" time="1.22">
+    <testcase time="1.174" classname="fda_table_08" name="fda_table_08_works">
       <failure type="failure" message="Snapshot of code has changed: ('test-fda-table_08.R:56:3')">Snapshot of code has changed:
 old[1:58] vs new[1:58]
   Code
@@ -837,7 +837,7 @@ old[1:58] vs new[1:58]
     2                                                                                                                                                                                                                                                                                                                          0
 </failure>
     </testcase>
-    <testcase time="0.0329999999999995" classname="fda_table_08" name="fda_table_08_works">
+    <testcase time="0.0460000000000029" classname="fda_table_08" name="fda_table_08_works">
       <failure type="failure" message="Snapshot of code has changed: ('test-fda-table_08.R:57:3')">Snapshot of code has changed:
 old[1:58] vs new[1:58]
   Code
@@ -953,11 +953,11 @@ old[1:58] vs new[1:58]
 </failure>
     </testcase>
   </testsuite>
-  <testsuite name="fda-table_09" timestamp="2026-07-23T08:54:41Z" hostname="ef65c14f03e9" tests="1" skipped="0" failures="0" errors="0" time="0.137">
-    <testcase time="0.137" classname="fda_table_09" name="fda_table_09_works"/>
+  <testsuite name="fda-table_09" timestamp="2026-07-23T08:59:23Z" hostname="7b1be8d1314e" tests="1" skipped="0" failures="0" errors="0" time="0.169">
+    <testcase time="0.168999999999997" classname="fda_table_09" name="fda_table_09_works"/>
   </testsuite>
-  <testsuite name="fda-table_10" timestamp="2026-07-23T08:54:41Z" hostname="ef65c14f03e9" tests="1" skipped="0" failures="1" errors="0" time="0.452">
-    <testcase time="0.452" classname="fda_table_10" name="fda_table_10_works">
+  <testsuite name="fda-table_10" timestamp="2026-07-23T08:59:23Z" hostname="7b1be8d1314e" tests="1" skipped="0" failures="1" errors="0" time="0.633">
+    <testcase time="0.633000000000003" classname="fda_table_10" name="fda_table_10_works">
       <failure type="failure" message="Snapshot of code has changed: ('test-fda-table_10.R:34:3')">Snapshot of code has changed:
 old[53:84] vs new[53:84]
     23                    &lt;NA&gt;                          NULL
@@ -1021,8 +1021,8 @@ old[53:84] vs new[53:84]
 </failure>
     </testcase>
   </testsuite>
-  <testsuite name="fda-table_11" timestamp="2026-07-23T08:54:41Z" hostname="ef65c14f03e9" tests="1" skipped="0" failures="1" errors="0" time="0.587">
-    <testcase time="0.587" classname="fda_table_11" name="fda_table_11_works">
+  <testsuite name="fda-table_11" timestamp="2026-07-23T08:59:24Z" hostname="7b1be8d1314e" tests="1" skipped="0" failures="1" errors="0" time="0.821">
+    <testcase time="0.820999999999998" classname="fda_table_11" name="fda_table_11_works">
       <failure type="failure" message="Snapshot of code has changed: ('test-fda-table_11.R:60:3')">Snapshot of code has changed:
 old[40:58] vs new[40:58]
     10  Xanomeline Low Dose     tabulate         n          n         96       96
@@ -1060,8 +1060,8 @@ old[40:58] vs new[40:58]
 </failure>
     </testcase>
   </testsuite>
-  <testsuite name="fda-table_12" timestamp="2026-07-23T08:54:42Z" hostname="ef65c14f03e9" tests="1" skipped="0" failures="1" errors="0" time="1.055">
-    <testcase time="1.055" classname="fda_table_12" name="fda_table_12_works">
+  <testsuite name="fda-table_12" timestamp="2026-07-23T08:59:25Z" hostname="7b1be8d1314e" tests="1" skipped="0" failures="1" errors="0" time="1.437">
+    <testcase time="1.437" classname="fda_table_12" name="fda_table_12_works">
       <failure type="failure" message="Snapshot of code has changed: ('test-fda-table_12.R:47:3')">Snapshot of code has changed:
 old[1:42] vs new[1:42]
   Code
@@ -1165,8 +1165,8 @@ old[46:58] vs new[46:58]
 </failure>
     </testcase>
   </testsuite>
-  <testsuite name="fda-table_13" timestamp="2026-07-23T08:54:43Z" hostname="ef65c14f03e9" tests="1" skipped="0" failures="1" errors="0" time="0.553">
-    <testcase time="0.553000000000001" classname="fda_table_13" name="fda_table_13_works">
+  <testsuite name="fda-table_13" timestamp="2026-07-23T08:59:26Z" hostname="7b1be8d1314e" tests="1" skipped="0" failures="1" errors="0" time="0.744">
+    <testcase time="0.744" classname="fda_table_13" name="fda_table_13_works">
       <failure type="failure" message="Snapshot of code has changed: ('test-fda-table_13.R:56:3')">Snapshot of code has changed:
 old[72:84] vs new[72:84]
     16 GENERAL DISORDERS AND ADMINISTRATION SITE CONDITIONS hierarchical         n
@@ -1192,11 +1192,11 @@ old[72:84] vs new[72:84]
 </failure>
     </testcase>
   </testsuite>
-  <testsuite name="fda-table_14" timestamp="2026-07-23T08:54:43Z" hostname="ef65c14f03e9" tests="1" skipped="0" failures="0" errors="0" time="0.55">
-    <testcase time="0.550000000000001" classname="fda_table_14" name="fda_table_14_works"/>
+  <testsuite name="fda-table_14" timestamp="2026-07-23T08:59:27Z" hostname="7b1be8d1314e" tests="1" skipped="0" failures="0" errors="0" time="0.754">
+    <testcase time="0.754000000000001" classname="fda_table_14" name="fda_table_14_works"/>
   </testsuite>
-  <testsuite name="fda-table_15" timestamp="2026-07-23T08:54:44Z" hostname="ef65c14f03e9" tests="1" skipped="0" failures="1" errors="0" time="2.719">
-    <testcase time="2.719" classname="fda_table_15" name="fda_table_15_works">
+  <testsuite name="fda-table_15" timestamp="2026-07-23T08:59:28Z" hostname="7b1be8d1314e" tests="1" skipped="0" failures="1" errors="0" time="3.73">
+    <testcase time="3.73" classname="fda_table_15" name="fda_table_15_works">
       <failure type="failure" message="Snapshot of code has changed: ('test-fda-table_15.R:39:3')">Snapshot of code has changed:
 old[1:58] vs new[1:58]
   Code
@@ -1312,8 +1312,8 @@ old[1:58] vs new[1:58]
 </failure>
     </testcase>
   </testsuite>
-  <testsuite name="fda-table_17" timestamp="2026-07-23T08:54:47Z" hostname="ef65c14f03e9" tests="2" skipped="0" failures="2" errors="0" time="0.885">
-    <testcase time="0.850000000000001" classname="fda_table_17" name="fda_table_17_works">
+  <testsuite name="fda-table_17" timestamp="2026-07-23T08:59:31Z" hostname="7b1be8d1314e" tests="2" skipped="0" failures="2" errors="0" time="1.229">
+    <testcase time="1.182" classname="fda_table_17" name="fda_table_17_works">
       <failure type="failure" message="Snapshot of code has changed: ('test-fda-table_17.R:62:3')">Snapshot of code has changed:
 old[37:58] vs new[37:58]
     7   Xanomeline Low Dose     tabulate         n          n         96       96
@@ -1356,7 +1356,7 @@ old[37:58] vs new[37:58]
     2                                                                                                                                                                                                                                                                                                                          0
 </failure>
     </testcase>
-    <testcase time="0.0350000000000001" classname="fda_table_17" name="fda_table_17_works">
+    <testcase time="0.0470000000000006" classname="fda_table_17" name="fda_table_17_works">
       <failure type="failure" message="Snapshot of code has changed: ('test-fda-table_17.R:63:3')">Snapshot of code has changed:
 old[37:58] vs new[37:58]
     7   Xanomeline Low Dose     tabulate         n          n         96       96
@@ -1400,8 +1400,8 @@ old[37:58] vs new[37:58]
 </failure>
     </testcase>
   </testsuite>
-  <testsuite name="fda-table_18" timestamp="2026-07-23T08:54:47Z" hostname="ef65c14f03e9" tests="3" skipped="0" failures="1" errors="0" time="1.258">
-    <testcase time="1.229" classname="fda_table_18" name="fda_table_18_works">
+  <testsuite name="fda-table_18" timestamp="2026-07-23T08:59:33Z" hostname="7b1be8d1314e" tests="3" skipped="0" failures="1" errors="0" time="1.775">
+    <testcase time="1.734" classname="fda_table_18" name="fda_table_18_works">
       <failure type="failure" message="Snapshot of code has changed: ('test-fda-table_18.R:108:3')">Snapshot of code has changed:
 old[46:58] vs new[46:58]
     16                 TRUE hierarchical         n          n          4        4
@@ -1426,14 +1426,14 @@ old[46:58] vs new[46:58]
     2                                                                                                                                                                                                                                                                                                                          0
 </failure>
     </testcase>
-    <testcase time="0.0190000000000019" classname="fda_table_18" name="fda_table_18_works"/>
-    <testcase time="0.00999999999999801" classname="fda_table_18" name="fda_table_18_works"/>
+    <testcase time="0.0259999999999998" classname="fda_table_18" name="fda_table_18_works"/>
+    <testcase time="0.0150000000000006" classname="fda_table_18" name="fda_table_18_works"/>
   </testsuite>
-  <testsuite name="fda-table_29" timestamp="2026-07-23T08:54:49Z" hostname="ef65c14f03e9" tests="1" skipped="0" failures="0" errors="0" time="0.47">
-    <testcase time="0.469999999999999" classname="fda_table_29" name="fda_table_29_works"/>
+  <testsuite name="fda-table_29" timestamp="2026-07-23T08:59:34Z" hostname="7b1be8d1314e" tests="1" skipped="0" failures="0" errors="0" time="0.664">
+    <testcase time="0.664000000000001" classname="fda_table_29" name="fda_table_29_works"/>
   </testsuite>
-  <testsuite name="fda-table_33" timestamp="2026-07-23T08:54:49Z" hostname="ef65c14f03e9" tests="1" skipped="0" failures="1" errors="0" time="0.416">
-    <testcase time="0.416" classname="fda_table_33" name="fda_table_33_works">
+  <testsuite name="fda-table_33" timestamp="2026-07-23T08:59:35Z" hostname="7b1be8d1314e" tests="1" skipped="0" failures="1" errors="0" time="0.618">
+    <testcase time="0.617999999999999" classname="fda_table_33" name="fda_table_33_works">
       <failure type="failure" message="Snapshot of code has changed: ('test-fda-table_33.R:68:3')">Snapshot of code has changed:
 old[1:84] vs new[1:58]
   Code
@@ -1575,8 +1575,8 @@ old[1:84] vs new[1:58]
 </failure>
     </testcase>
   </testsuite>
-  <testsuite name="fda-table_34" timestamp="2026-07-23T08:54:50Z" hostname="ef65c14f03e9" tests="1" skipped="0" failures="1" errors="0" time="0.481">
-    <testcase time="0.481000000000002" classname="fda_table_34" name="fda_table_34_works">
+  <testsuite name="fda-table_34" timestamp="2026-07-23T08:59:36Z" hostname="7b1be8d1314e" tests="1" skipped="0" failures="1" errors="0" time="0.676">
+    <testcase time="0.676000000000002" classname="fda_table_34" name="fda_table_34_works">
       <failure type="failure" message="Snapshot of code has changed: ('test-fda-table_34.R:69:3')">Snapshot of code has changed:
 old[27:84] vs new[27:58]
     23 TRT01A Xanomeline High Dose OCMQ01NAM Abnormal Uterine Bleeding  AEDECOD
@@ -1666,20 +1666,20 @@ old[27:84] vs new[27:58]
 </failure>
     </testcase>
   </testsuite>
-  <testsuite name="fda-table_36" timestamp="2026-07-23T08:54:50Z" hostname="ef65c14f03e9" tests="1" skipped="0" failures="0" errors="0" time="1.8">
-    <testcase time="1.8" classname="fda_table_36" name="fda_table_36_works"/>
+  <testsuite name="fda-table_36" timestamp="2026-07-23T08:59:36Z" hostname="7b1be8d1314e" tests="1" skipped="0" failures="0" errors="0" time="2.122">
+    <testcase time="2.122" classname="fda_table_36" name="fda_table_36_works"/>
   </testsuite>
-  <testsuite name="fda-table_37" timestamp="2026-07-23T08:54:52Z" hostname="ef65c14f03e9" tests="1" skipped="0" failures="0" errors="0" time="0.379">
-    <testcase time="0.378999999999998" classname="fda_table_37" name="fda_table_37_works"/>
+  <testsuite name="fda-table_37" timestamp="2026-07-23T08:59:38Z" hostname="7b1be8d1314e" tests="1" skipped="0" failures="0" errors="0" time="0.581">
+    <testcase time="0.581000000000003" classname="fda_table_37" name="fda_table_37_works"/>
   </testsuite>
-  <testsuite name="fda-table_38" timestamp="2026-07-23T08:54:52Z" hostname="ef65c14f03e9" tests="1" skipped="0" failures="0" errors="0" time="0.318">
-    <testcase time="0.318000000000001" classname="fda_table_38" name="fda_table_38_works"/>
+  <testsuite name="fda-table_38" timestamp="2026-07-23T08:59:39Z" hostname="7b1be8d1314e" tests="1" skipped="0" failures="0" errors="0" time="0.485">
+    <testcase time="0.484999999999999" classname="fda_table_38" name="fda_table_38_works"/>
   </testsuite>
-  <testsuite name="fda-table_43" timestamp="2026-07-23T08:54:53Z" hostname="ef65c14f03e9" tests="1" skipped="0" failures="0" errors="0" time="0.626">
-    <testcase time="0.626000000000001" classname="fda_table_43" name="fda_table_43_works"/>
+  <testsuite name="fda-table_43" timestamp="2026-07-23T08:59:40Z" hostname="7b1be8d1314e" tests="1" skipped="0" failures="0" errors="0" time="0.96">
+    <testcase time="0.960000000000001" classname="fda_table_43" name="fda_table_43_works"/>
   </testsuite>
-  <testsuite name="fda-table_44" timestamp="2026-07-23T08:54:53Z" hostname="ef65c14f03e9" tests="1" skipped="0" failures="1" errors="0" time="0.366">
-    <testcase time="0.366" classname="fda_table_44" name="fda_table_44_works">
+  <testsuite name="fda-table_44" timestamp="2026-07-23T08:59:41Z" hostname="7b1be8d1314e" tests="1" skipped="0" failures="1" errors="0" time="0.57">
+    <testcase time="0.57" classname="fda_table_44" name="fda_table_44_works">
       <failure type="failure" message="Snapshot of code has changed: ('test-fda-table_44.R:69:3')">Snapshot of code has changed:
 old[27:84] vs new[27:58]
     23 TRT01A Xanomeline High Dose OCMQ01NAM Erectile Dysfunction  AEDECOD
@@ -1769,8 +1769,8 @@ old[27:84] vs new[27:58]
 </failure>
     </testcase>
   </testsuite>
-  <testsuite name="fda-table_45" timestamp="2026-07-23T08:54:54Z" hostname="ef65c14f03e9" tests="1" skipped="0" failures="1" errors="0" time="0.487">
-    <testcase time="0.487000000000002" classname="fda_table_45" name="fda_table_45_works">
+  <testsuite name="fda-table_45" timestamp="2026-07-23T08:59:41Z" hostname="7b1be8d1314e" tests="1" skipped="0" failures="1" errors="0" time="0.731">
+    <testcase time="0.730999999999995" classname="fda_table_45" name="fda_table_45_works">
       <failure type="failure" message="Snapshot of code has changed: ('test-fda-table_45.R:69:3')">Snapshot of code has changed:
 old[27:84] vs new[27:58]
     23 TRT01A Xanomeline High Dose OCMQ01NAM Abnormal Uterine Bleeding  AEDECOD
@@ -1860,8 +1860,8 @@ old[27:84] vs new[27:58]
 </failure>
     </testcase>
   </testsuite>
-  <testsuite name="fda-table_50" timestamp="2026-07-23T08:54:54Z" hostname="ef65c14f03e9" tests="5" skipped="0" failures="5" errors="0" time="1.735">
-    <testcase time="1.587" classname="fda_table_50" name="fda_table_50_works">
+  <testsuite name="fda-table_50" timestamp="2026-07-23T08:59:42Z" hostname="7b1be8d1314e" tests="5" skipped="0" failures="5" errors="0" time="2.434">
+    <testcase time="2.241" classname="fda_table_50" name="fda_table_50_works">
       <failure type="failure" message="Snapshot of code has changed: ('test-fda-table_50.R:111:3')">Snapshot of code has changed:
 old[1:58] vs new[1:58]
   Code
@@ -1976,7 +1976,7 @@ old[1:58] vs new[1:58]
     2                                                                                                                                                                                                                                                                                                                            0
 </failure>
     </testcase>
-    <testcase time="0.0359999999999978" classname="fda_table_50" name="fda_table_50_works">
+    <testcase time="0.0470000000000041" classname="fda_table_50" name="fda_table_50_works">
       <failure type="failure" message="Snapshot of code has changed: ('test-fda-table_50.R:112:3')">Snapshot of code has changed:
 old[1:58] vs new[1:58]
   Code
@@ -2091,7 +2091,7 @@ old[1:58] vs new[1:58]
     2                                                                                                                                                                                                                                                                                                                          0
 </failure>
     </testcase>
-    <testcase time="0.0410000000000004" classname="fda_table_50" name="fda_table_50_works">
+    <testcase time="0.0519999999999996" classname="fda_table_50" name="fda_table_50_works">
       <failure type="failure" message="Snapshot of code has changed: ('test-fda-table_50.R:113:3')">Snapshot of code has changed:
 old[1:58] vs new[1:58]
   Code
@@ -2206,7 +2206,7 @@ old[1:58] vs new[1:58]
     2                                                                                                                                                                                                                                                                                                                            0
 </failure>
     </testcase>
-    <testcase time="0.0350000000000001" classname="fda_table_50" name="fda_table_50_works">
+    <testcase time="0.046999999999997" classname="fda_table_50" name="fda_table_50_works">
       <failure type="failure" message="Snapshot of code has changed: ('test-fda-table_50.R:114:3')">Snapshot of code has changed:
 old[1:58] vs new[1:58]
   Code
@@ -2321,7 +2321,7 @@ old[1:58] vs new[1:58]
     2                                                                                                                                                                                                                                                                                                                            0
 </failure>
     </testcase>
-    <testcase time="0.0360000000000014" classname="fda_table_50" name="fda_table_50_works">
+    <testcase time="0.0470000000000041" classname="fda_table_50" name="fda_table_50_works">
       <failure type="failure" message="Snapshot of code has changed: ('test-fda-table_50.R:115:3')">Snapshot of code has changed:
 old[1:58] vs new[1:58]
   Code
@@ -2437,12 +2437,12 @@ old[1:58] vs new[1:58]
 </failure>
     </testcase>
   </testsuite>
-  <testsuite name="fda-table_51" timestamp="2026-07-23T08:54:56Z" hostname="ef65c14f03e9" tests="1" skipped="0" failures="0" errors="0" time="0.551">
-    <testcase time="0.550999999999998" classname="fda_table_51" name="fda_table_51_works"/>
+  <testsuite name="fda-table_51" timestamp="2026-07-23T08:59:44Z" hostname="7b1be8d1314e" tests="1" skipped="0" failures="0" errors="0" time="0.773">
+    <testcase time="0.772999999999996" classname="fda_table_51" name="fda_table_51_works"/>
   </testsuite>
-  <testsuite name="table-roche_lbt01" timestamp="2026-07-23T08:54:56Z" hostname="ef65c14f03e9" tests="3" skipped="0" failures="0" errors="0" time="4.552">
-    <testcase time="4.52" classname="table_roche_lbt01" name="table_roche_lbt01_works"/>
-    <testcase time="0.0160000000000053" classname="table_roche_lbt01" name="table_roche_lbt01_works"/>
-    <testcase time="0.0159999999999982" classname="table_roche_lbt01" name="table_roche_lbt01_works"/>
+  <testsuite name="table-roche_lbt01" timestamp="2026-07-23T08:59:45Z" hostname="7b1be8d1314e" tests="3" skipped="0" failures="0" errors="0" time="5.743">
+    <testcase time="5.7" classname="table_roche_lbt01" name="table_roche_lbt01_works"/>
+    <testcase time="0.0219999999999985" classname="table_roche_lbt01" name="table_roche_lbt01_works"/>
+    <testcase time="0.0210000000000008" classname="table_roche_lbt01" name="table_roche_lbt01_works"/>
   </testsuite>
 </testsuites>
