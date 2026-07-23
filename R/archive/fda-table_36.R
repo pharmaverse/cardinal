@@ -36,8 +36,8 @@ make_table_36 <- function(
     risk_diff = NULL,
     prune_0 = FALSE,
     annotations = NULL) {
-  adae <- adae %>%
-    filter(.data[[saffl_var]] == "Y") %>%
+  adae <- adae |>
+    filter(.data[[saffl_var]] == "Y") |>
     df_explicit_na()
 
   alt_counts_df <- alt_counts_df_preproc(
@@ -47,19 +47,19 @@ make_table_36 <- function(
     saffl_var
   )
 
-  lyt <- basic_table_annot(show_colcounts, annotations) %>%
-    split_cols_by_arm(arm_var, lbl_overall, risk_diff) %>%
+  lyt <- basic_table_annot(show_colcounts, annotations) |>
+    split_cols_by_arm(arm_var, lbl_overall, risk_diff) |>
     split_rows_by(
       soc_var,
       label_pos = "topleft",
       split_label = lbl_soc_var
-    ) %>%
+    ) |>
     summarize_num_patients(
       var = id_var,
       riskdiff = !is.null(risk_diff),
       .stats = "unique",
       .labels = c(unique = NULL)
-    ) %>%
+    ) |>
     count_occurrences(
       vars = pref_var,
       drop = FALSE,

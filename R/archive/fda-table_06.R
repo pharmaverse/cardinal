@@ -281,10 +281,10 @@ make_table_06_rtables <- function(adae,
   ), names(adae))
   assert_flag_variables(adae, c(saffl_var, "TRTEMFL"))
 
-  adae <- adae %>%
-    as_tibble() %>%
-    filter(.data[[saffl_var]] == "Y", TRTEMFL == "Y") %>%
-    df_explicit_na() %>%
+  adae <- adae |>
+    as_tibble() |>
+    filter(.data[[saffl_var]] == "Y", TRTEMFL == "Y") |>
+    df_explicit_na() |>
     mutate(
       SER = with_label(AESER == "Y", "SAE"),
       SERFATAL = with_label(AESER == "Y" & AESDTH == "Y", "SAEs with fatal outcome"),
@@ -309,47 +309,47 @@ make_table_06_rtables <- function(adae,
 
   alt_counts_df <- alt_counts_df_preproc(alt_counts_df, id_var, arm_var, saffl_var)
 
-  lyt <- basic_table_annot(show_colcounts, annotations) %>%
-    split_cols_by_arm(arm_var, lbl_overall, risk_diff) %>%
+  lyt <- basic_table_annot(show_colcounts, annotations) |>
+    split_cols_by_arm(arm_var, lbl_overall, risk_diff) |>
     count_patients_with_flags(
       var = id_var,
       flag_variables = "SER",
       table_names = "ser",
       riskdiff = !is.null(risk_diff)
-    ) %>%
+    ) |>
     count_patients_with_flags(
       var = id_var,
       flag_variables = c("SERFATAL", "SERLIFE", "SERHOSP", "SERDISAB", "SERCONG", "SERMIE"),
       .indent_mods = 1L,
       table_names = "ser_fl",
       riskdiff = !is.null(risk_diff)
-    ) %>%
+    ) |>
     count_patients_with_flags(
       var = id_var,
       flag_variables = c("WD", "DSM"),
       table_names = "ae",
       riskdiff = !is.null(risk_diff)
-    ) %>%
+    ) |>
     count_patients_with_flags(
       var = id_var,
       flag_variables = c("DSINT", "DSRED", "DSD", "DSMIE"),
       .indent_mods = 1L,
       table_names = "ds",
       riskdiff = !is.null(risk_diff)
-    ) %>%
+    ) |>
     analyze_num_patients(
       vars = id_var,
       .stats = "unique",
       .labels = c(unique = "Any AE"),
       show_labels = "hidden",
       riskdiff = !is.null(risk_diff)
-    ) %>%
+    ) |>
     count_occurrences_by_grade(
       var = "AESEV",
       show_labels = "hidden",
       .indent_mods = 1L,
       riskdiff = !is.null(risk_diff)
-    ) %>%
+    ) |>
     append_topleft("Event")
 
   tbl <- build_table(lyt, df = adae, alt_counts_df = alt_counts_df)

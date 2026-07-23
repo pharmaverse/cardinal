@@ -46,9 +46,9 @@ make_table_20 <- function(adae,
   ), names(adae))
   assert_flag_variables(adae, c(saffl_var, aesifl_var, aelabfl_var))
 
-  adae <- adae %>%
-    as_tibble() %>%
-    filter(.data[[saffl_var]] == "Y", AESIFL == "Y") %>%
+  adae <- adae |>
+    as_tibble() |>
+    filter(.data[[saffl_var]] == "Y", AESIFL == "Y") |>
     df_explicit_na()
 
   adae[[aesifl_var]] <- with_label(adae[[aesifl_var]] == "Y", "AE grouping related to AESI")
@@ -56,33 +56,33 @@ make_table_20 <- function(adae,
 
   alt_counts_df <- alt_counts_df_preproc(alt_counts_df, id_var, arm_var, saffl_var)
 
-  lyt <- basic_table_annot(show_colcounts, annotations) %>%
-    split_cols_by_arm(arm_var, lbl_overall, risk_diff) %>%
+  lyt <- basic_table_annot(show_colcounts, annotations) |>
+    split_cols_by_arm(arm_var, lbl_overall, risk_diff) |>
     count_patients_with_flags(
       id_var,
       flag_variables = aesifl_var,
       denom = "N_col",
       riskdiff = !is.null(risk_diff),
       table_names = "tbl_aesi"
-    ) %>%
+    ) |>
     count_occurrences(
       pref_var,
       riskdiff = !is.null(risk_diff),
       .indent_mods = 1L
-    ) %>%
+    ) |>
     count_occurrences_by_grade(
       "AESEV",
       var_labels = "Maximum severity",
       show_labels = "visible",
       riskdiff = !is.null(risk_diff)
-    ) %>%
+    ) |>
     count_patients_with_event(
       id_var,
       filters = c("AESER" = "Y"),
       riskdiff = !is.null(risk_diff),
       .labels = "Serious",
       table_names = "tbl_ser"
-    ) %>%
+    ) |>
     count_patients_with_event(
       id_var,
       filters = c("AESDTH" = "Y"),
@@ -90,28 +90,28 @@ make_table_20 <- function(adae,
       .labels = "Deaths",
       .indent_mods = 1L,
       table_names = "tbl_death"
-    ) %>%
+    ) |>
     count_patients_with_event(
       vars = id_var,
       filters = c("EOSSTT" = "DISCONTINUED"),
       riskdiff = !is.null(risk_diff),
       .labels = "Resulting in discontinuation",
       table_names = "tbl_dis"
-    ) %>%
+    ) |>
     count_patients_with_event(
       id_var,
       filters = c("AEREL" = "Y"),
       riskdiff = !is.null(risk_diff),
       .labels = "Relatedness",
       table_names = "tbl_rel"
-    ) %>%
+    ) |>
     count_patients_with_flags(
       id_var,
       flag_variables = aelabfl_var,
       denom = "N_col",
       riskdiff = !is.null(risk_diff),
       table_names = "tbl_lab"
-    ) %>%
+    ) |>
     append_topleft("AESI Assessment")
 
   tbl <- build_table(lyt, df = adae, alt_counts_df = alt_counts_df)

@@ -42,33 +42,33 @@ make_table_08 <- function(adae,
   assert_flag_variables(adex, saffl_var)
 
   # Deaths
-  adae <- adae %>%
-    filter(.data[[saffl_var]] == "Y" & AESDTH == "Y") %>%
-    select(all_of(id_var), all_of(arm_var), AGE, SEX, DTHADY, all_of(dth_vars)) %>%
+  adae <- adae |>
+    filter(.data[[saffl_var]] == "Y" & AESDTH == "Y") |>
+    select(all_of(id_var), all_of(arm_var), AGE, SEX, DTHADY, all_of(dth_vars)) |>
     mutate(
       AGESEX = paste0(AGE, "/", SEX),
       DTHADY = as.character(DTHADY)
-    ) %>%
+    ) |>
     distinct(.data[[id_var]], DTHCAT, DTHCAUS, DTHADY, .keep_all = TRUE)
 
   # Dosing
-  adex <- adex %>%
-    filter(.data[[saffl_var]] == "Y", PARAMCD == "TDOSE") %>%
-    select(all_of(id_var), AVAL, AVALU, TRTSDT, TRTEDT) %>%
+  adex <- adex |>
+    filter(.data[[saffl_var]] == "Y", PARAMCD == "TDOSE") |>
+    select(all_of(id_var), AVAL, AVALU, TRTSDT, TRTEDT) |>
     mutate(
-      DOSDUR = (TRTEDT - TRTSDT + 1) %>% as.character(),
+      DOSDUR = (TRTEDT - TRTSDT + 1) |> as.character(),
       DOSAGE = paste0(AVAL, " ", AVALU)
     )
 
-  tbl_join <- left_join(adae, adex, by = id_var) %>%
-    select(all_of(c(arm_var, id_var)), AGESEX, DOSAGE, DOSDUR, DTHADY, all_of(dth_vars)) %>%
+  tbl_join <- left_join(adae, adex, by = id_var) |>
+    select(all_of(c(arm_var, id_var)), AGESEX, DOSAGE, DOSDUR, DTHADY, all_of(dth_vars)) |>
     var_relabel(
       AGESEX = "Age/\nGender",
       DOSAGE = "Dosage",
       DTHADY = "Study\nDay of\nDeath",
       DOSDUR = "Dosing\nDuration\n(Days)"
-    ) %>%
-    df_explicit_na(na_level = na_level) %>%
+    ) |>
+    df_explicit_na(na_level = na_level) |>
     arrange(across(all_of(c(arm_var, id_var, "AGESEX", "DOSAGE", "DOSDUR", "DTHADY"))))
 
   tbl_join[[arm_var]] <- with_label(tbl_join[[arm_var]], "Study Arm")

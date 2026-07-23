@@ -48,18 +48,18 @@ make_fig_03 <- function(df,
   assert_choice(u_trtdur, c("days", "weeks", "months", "years"))
   assert_flag_variables(df, saffl_var)
 
-  df <- df %>%
-    filter(.data[[saffl_var]] == "Y") %>%
-    df_explicit_na() %>%
+  df <- df |>
+    filter(.data[[saffl_var]] == "Y") |>
+    df_explicit_na() |>
     mutate(
       TRTDUR = lubridate::interval(lubridate::ymd_hms(.data[[trtsdtm_var]]), lubridate::ymd_hms(.data[[trtedtm_var]])),
-      TRTDUR = TRTDUR %>% as.numeric(u_trtdur),
+      TRTDUR = TRTDUR |> as.numeric(u_trtdur),
       AVALU = u_trtdur,
       STATUS = case_when(.data[[dcsreas_var]] == "ADVERSE EVENT" ~ 1, TRUE ~ 0)
-    ) %>%
-    filter(!is.na(TRTDUR)) %>%
-    select(all_of(c(id_var, arm_var)), TRTDUR, STATUS) %>%
-    distinct() %>%
+    ) |>
+    filter(!is.na(TRTDUR)) |>
+    select(all_of(c(id_var, arm_var)), TRTDUR, STATUS) |>
+    distinct() |>
     arrange(desc(TRTDUR))
 
   max_time <- max(df$TRTDUR)

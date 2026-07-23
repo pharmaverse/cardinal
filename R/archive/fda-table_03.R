@@ -28,7 +28,7 @@
 #' scrnfail_reas_lvls <- c(
 #'   "Inclusion/exclusion criteria not met", "Patient noncompliance", "Consent withdrawn", "Other"
 #' )
-#' adsl <- adsl %>%
+#' adsl <- adsl |>
 #'   mutate(
 #'     ENRLDT = RANDDT,
 #'     SCRNFL = "Y",
@@ -90,8 +90,8 @@ preproc_df_table_03 <- function(df,
   assert_subset(c(arm_var, id_var, scrnfl_var, scrnfailfl_var, scrnfail_var, "ENRLDT", "RANDDT"), names(df))
   assert_flag_variables(df, c(scrnfl_var, scrnfailfl_var))
 
-  df %>%
-    df_explicit_na() %>%
+  df |>
+    df_explicit_na() |>
     mutate(
       SCRNFL = with_label(.data[[scrnfl_var]] == "Y", "Patients screened"),
       SCRNFL = with_label(!is.na(scrnfail_var), "Screnning failures"),
@@ -112,7 +112,7 @@ preproc_df_table_03 <- function(df,
 #' scrnfail_reas_lvls <- c(
 #'   "Inclusion/exclusion criteria not met", "Patient noncompliance", "Consent withdrawn", "Other"
 #' )
-#' adsl <- adsl %>%
+#' adsl <- adsl |>
 #'   mutate(
 #'     ENRLDT = RANDDT,
 #'     SCRNFL = "Y",
@@ -208,7 +208,7 @@ ard_table_03 <- function(df,
 #' scrnfail_reas_lvls <- c(
 #'   "Inclusion/exclusion criteria not met", "Patient noncompliance", "Consent withdrawn", "Other"
 #' )
-#' adsl <- adsl %>%
+#' adsl <- adsl |>
 #'   mutate(
 #'     ENRLDT = RANDDT,
 #'     SCRNFL = "Y",
@@ -250,8 +250,8 @@ make_table_03_gtsummary <- function(df,
     denominator <- alt_counts_df_preproc(denominator, id_var, arm_var)
   }
 
-  tbl <- df %>%
-    select("ARM", scrnfl_var, scrnfail_var, "ENRLFL", "RANDFL") %>%
+  tbl <- df |>
+    select("ARM", scrnfl_var, scrnfail_var, "ENRLFL", "RANDFL") |>
     tbl_summary(
       by = arm_var,
       label = list(
@@ -259,7 +259,7 @@ make_table_03_gtsummary <- function(df,
         scrnfail_var ~ "Screening failures"
       ),
       missing = "no"
-    ) %>%
+    ) |>
     modify_header(label ~ "**Disposition**")
 
   tbl
@@ -283,36 +283,36 @@ make_table_03_rtables <- function(df,
   )
   assert_flag_variables(df, c(scrnfl_var, scrnfailfl_var))
 
-  df <- df %>%
+  df <- df |>
     mutate(
       SCRNFL = with_label(.data[[scrnfl_var]] == "Y", "Patients screened"),
       ENRLFL = with_label(!is.na(ENRLDT), "Patients enrolled"),
       RANDFL = with_label(!is.na(RANDDT), "Patients randomized")
-    ) %>%
+    ) |>
     df_explicit_na()
   if (!is.null(alt_counts_df)) {
     alt_counts_df <- alt_counts_df_preproc(alt_counts_df, id_var, arm_var)
   }
 
-  lyt <- basic_table_annot(show_colcounts, annotations) %>%
-    split_cols_by_arm(arm_var, lbl_overall) %>%
+  lyt <- basic_table_annot(show_colcounts, annotations) |>
+    split_cols_by_arm(arm_var, lbl_overall) |>
     count_patients_with_flags(
       var = id_var,
       flag_variables = "SCRNFL",
       .stats = "count"
-    ) %>%
-    split_rows_by(scrnfailfl_var, split_fun = keep_split_levels("Y")) %>%
+    ) |>
+    split_rows_by(scrnfailfl_var, split_fun = keep_split_levels("Y")) |>
     summarize_num_patients(
       var = id_var,
       .stats = "unique",
       .labels = c(unique = "Screening failures")
-    ) %>%
-    count_occurrences(vars = scrnfail_var) %>%
+    ) |>
+    count_occurrences(vars = scrnfail_var) |>
     count_patients_with_flags(
       var = id_var,
       flag_variables = c("ENRLFL", "RANDFL"),
       nested = FALSE
-    ) %>%
+    ) |>
     append_topleft("Disposition")
 
   tbl <- build_table(lyt, df = df, alt_counts_df = alt_counts_df)

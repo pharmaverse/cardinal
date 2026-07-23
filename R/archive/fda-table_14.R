@@ -44,27 +44,27 @@ make_table_14 <- function(adae,
   ), names(adae))
   assert_flag_variables(adae, saffl_var)
 
-  adae <- adae %>%
-    filter(.data[[saffl_var]] == "Y") %>%
+  adae <- adae |>
+    filter(.data[[saffl_var]] == "Y") |>
     df_explicit_na(na_level = na_level)
   adae[[fmqnam_var]] <- with_label(adae[[fmqnam_var]], "FMQ")
 
   alt_counts_df <- alt_counts_df_preproc(alt_counts_df, id_var, arm_var, saffl_var)
 
-  lyt <- basic_table_annot(show_colcounts, annotations) %>%
-    split_cols_by(fmqsc_var) %>%
-    split_cols_by_arm(arm_var, lbl_overall, risk_diff) %>%
+  lyt <- basic_table_annot(show_colcounts, annotations) |>
+    split_cols_by(fmqsc_var) |>
+    split_cols_by_arm(arm_var, lbl_overall, risk_diff) |>
     split_rows_by(
       soc_var,
       child_labels = "visible",
       label_pos = "topleft",
       split_label = obj_label(adae[[soc_var]])
-    ) %>%
+    ) |>
     count_occurrences(
       vars = fmqnam_var,
       drop = FALSE,
       riskdiff = !is.null(risk_diff)
-    ) %>%
+    ) |>
     append_varlabels(adae, fmqnam_var, indent = 1L)
 
   tbl <- build_table(lyt, df = adae, alt_counts_df = alt_counts_df)

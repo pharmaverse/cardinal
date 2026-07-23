@@ -26,8 +26,8 @@
 #' adae <- random.cdisc.data::cadae
 #'
 #' set.seed(1)
-#' adae <- adae %>%
-#'   rename(FMQ01SC = SMQ01SC) %>%
+#' adae <- adae |>
+#'   rename(FMQ01SC = SMQ01SC) |>
 #'   mutate(
 #'     AESER = sample(c("Y", "N"), size = nrow(adae), replace = TRUE),
 #'     FMQ01NAM = sample(c("FMQ1", "FMQ2", "FMQ3"), size = nrow(adae), replace = TRUE)
@@ -96,8 +96,8 @@ preproc_df_table_10 <- function(df,
   assert_flag_variables(df, saffl_var, "AESER")
   assert_subset(toupper(fmq_scope), c("NARROW", "BROAD"))
 
-  df <- df %>%
-    filter(.data[[saffl_var]] == "Y", AESER == "Y", .data[[fmqsc_var]] == fmq_scope) %>%
+  df <- df |>
+    filter(.data[[saffl_var]] == "Y", AESER == "Y", .data[[fmqsc_var]] == fmq_scope) |>
     df_explicit_na(na_level = na_level)
 
   df[[fmqnam_var]] <- with_label(df[[fmqnam_var]], paste0("FMQ (", tools::toTitleCase(tolower(fmq_scope)), ")"))
@@ -114,8 +114,8 @@ preproc_df_table_10 <- function(df,
 #' adae <- random.cdisc.data::cadae
 #'
 #' set.seed(1)
-#' adae <- adae %>%
-#'   rename(FMQ01SC = SMQ01SC) %>%
+#' adae <- adae |>
+#'   rename(FMQ01SC = SMQ01SC) |>
 #'   mutate(
 #'     AESER = sample(c("Y", "N"), size = nrow(adae), replace = TRUE),
 #'     FMQ01NAM = sample(c("FMQ1", "FMQ2", "FMQ3"), size = nrow(adae), replace = TRUE)
@@ -138,8 +138,8 @@ ard_table_10 <- function(df,
                          fmqnam_var = "FMQ01NAM",
                          fmq_scope = "NARROW",
                          na_level = "<Missing>") {
-  df <- preproc_df_table_10(df, id_var, arm_var, saffl_var, fmqsc_var, fmqnam_var, fmq_scope, na_level) %>%
-    select(id_var, arm_var, saffl_var, "AEBODSYS", fmqsc_var, fmqnam_var) %>%
+  df <- preproc_df_table_10(df, id_var, arm_var, saffl_var, fmqsc_var, fmqnam_var, fmq_scope, na_level) |>
+    select(id_var, arm_var, saffl_var, "AEBODSYS", fmqsc_var, fmqnam_var) |>
     distinct()
 
   if (is.null(denominator)) {
@@ -191,8 +191,8 @@ ard_table_10 <- function(df,
 #' adae <- random.cdisc.data::cadae
 #'
 #' set.seed(1)
-#' adae <- adae %>%
-#'   rename(FMQ01SC = SMQ01SC) %>%
+#' adae <- adae |>
+#'   rename(FMQ01SC = SMQ01SC) |>
 #'   mutate(
 #'     AESER = sample(c("Y", "N"), size = nrow(adae), replace = TRUE),
 #'     FMQ01NAM = sample(c("FMQ1", "FMQ2", "FMQ3"), size = nrow(adae), replace = TRUE)
@@ -258,18 +258,18 @@ make_table_10_rtables <- function(df,
   df <- preproc_df_table_10(df, id_var, arm_var, saffl_var, fmqsc_var, fmqnam_var, fmq_scope, na_level)
   alt_counts_df <- alt_counts_df_preproc(alt_counts_df, id_var, arm_var, saffl_var)
 
-  lyt <- basic_table_annot(show_colcounts, annotations) %>%
-    split_cols_by_arm(arm_var, lbl_overall, risk_diff) %>%
+  lyt <- basic_table_annot(show_colcounts, annotations) |>
+    split_cols_by_arm(arm_var, lbl_overall, risk_diff) |>
     split_rows_by(
       "AEBODSYS",
       label_pos = "topleft",
       split_label = obj_label(df$AEBODSYS)
-    ) %>%
+    ) |>
     count_occurrences(
       vars = fmqnam_var,
       drop = FALSE,
       riskdiff = !is.null(risk_diff)
-    ) %>%
+    ) |>
     append_varlabels(df, fmqnam_var, indent = 1L)
 
   tbl <- build_table(lyt, df = df, alt_counts_df = alt_counts_df)

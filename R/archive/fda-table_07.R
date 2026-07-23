@@ -44,35 +44,35 @@ make_table_07 <- function(adae,
   ), names(adae))
   assert_flag_variables(adae, c(saffl_var, "TRTEMFL", "DTHFL"), na_level = na_level)
 
-  adae <- adae %>%
-    filter(.data[[saffl_var]] == "Y", DTHFL == "Y") %>%
+  adae <- adae |>
+    filter(.data[[saffl_var]] == "Y", DTHFL == "Y") |>
     mutate(
-      TRTEMFL = ifelse(TRTEMFL == "Y", "Y", "N") %>% factor(levels = c("Y", "N")),
+      TRTEMFL = ifelse(TRTEMFL == "Y", "Y", "N") |> factor(levels = c("Y", "N")),
       trtem_lab = ifelse(TRTEMFL == "Y", "Treatment-emergent deaths", "Nontreatment-emergent deaths")
-    ) %>%
+    ) |>
     df_explicit_na(na_level = na_level)
 
   alt_counts_df <- alt_counts_df_preproc(alt_counts_df, id_var, arm_var, saffl_var)
 
-  lyt <- basic_table_annot(show_colcounts, annotations) %>%
-    split_cols_by_arm(arm_var, lbl_overall, risk_diff) %>%
+  lyt <- basic_table_annot(show_colcounts, annotations) |>
+    split_cols_by_arm(arm_var, lbl_overall, risk_diff) |>
     split_rows_by(
       "TRTEMFL",
       labels_var = "trtem_lab",
       split_fun = add_overall_level("Total deaths")
-    ) %>%
+    ) |>
     summarize_num_patients(
       var = id_var,
       riskdiff = !is.null(risk_diff),
       .stats = "unique",
       .labels = c(unique = NULL)
-    ) %>%
+    ) |>
     count_occurrences(
       vars = "DTHCAUS",
       denom = "n",
       drop = FALSE,
       riskdiff = !is.null(risk_diff)
-    ) %>%
+    ) |>
     rtables::append_topleft("Deaths")
 
   tbl <- build_table(lyt, df = adae, alt_counts_df = alt_counts_df)

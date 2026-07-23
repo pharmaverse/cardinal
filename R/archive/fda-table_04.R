@@ -19,8 +19,8 @@
 #' @examples
 #' library(dplyr)
 #'
-#' adsl <- random.cdisc.data::cadsl %>%
-#'   mutate(test = rbinom(400, 1, 0.5)) %>%
+#' adsl <- random.cdisc.data::cadsl |>
+#'   mutate(test = rbinom(400, 1, 0.5)) |>
 #'   mutate(
 #'     RANDFL = ifelse(test == 0, "N", "Y"),
 #'     PPROTFL = ifelse(test == 0, "N", "Y"),
@@ -57,9 +57,9 @@ make_table_04 <- function(df,
   assert_flag_variables(df, pop_vars)
 
 
-  df <- df %>%
-    as_tibble() %>%
-    df_explicit_na() %>%
+  df <- df |>
+    as_tibble() |>
+    df_explicit_na() |>
     mutate(
       across(all_of(pop_vars), ~ with_label(. == "Y", lbl_pop_vars[match(cur_column(), pop_vars)])),
       DISCSD = with_label(EOTSTT == "DISCONTINUED", "Discontinued study drug"),
@@ -80,33 +80,33 @@ make_table_04 <- function(df,
 
   alt_counts_df <- alt_counts_df_preproc(alt_counts_df, id_var, arm_var)
 
-  lyt <- basic_table_annot(show_colcounts, annotations) %>%
-    split_cols_by_arm(arm_var, lbl_overall, risk_diff) %>%
+  lyt <- basic_table_annot(show_colcounts, annotations) |>
+    split_cols_by_arm(arm_var, lbl_overall, risk_diff) |>
     count_patients_with_flags(
       var = id_var,
       flag_variables = var_labels(df[, pop_vars]),
       riskdiff = !is.null(risk_diff),
       table_names = "pop"
-    ) %>%
+    ) |>
     count_patients_with_flags(
       var = id_var,
       flag_variables = "DISCSD",
       riskdiff = !is.null(risk_diff),
       table_names = "discsd"
-    ) %>%
+    ) |>
     count_patients_with_flags(
       var = id_var,
       flag_variables = c("DISCSD_AE", "DISCSD_LOE", "DISCSD_PD", "DISCSD_DT", "DISCSD_WBS", "DISCSD_OTH"),
       riskdiff = !is.null(risk_diff),
       .indent_mods = 1L,
       table_names = "discsd_fl"
-    ) %>%
+    ) |>
     count_patients_with_flags(
       var = id_var,
       flag_variables = "DISCS",
       riskdiff = !is.null(risk_diff),
       table_names = "discs"
-    ) %>%
+    ) |>
     count_patients_with_flags(
       var = id_var,
       flag_variables = c("DISCS_DT", "DISCS_LFU", "DISCS_WBS", "DISCS_PHD", "DISCS_PD", "DISCS_OTH"),

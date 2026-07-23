@@ -36,18 +36,18 @@ make_table_13 <- function(adae,
   assert_subset(c(id_var, arm_var, saffl_var, pref_var), names(adae))
   assert_flag_variables(adae, saffl_var)
 
-  adae <- adae %>%
-    filter(.data[[saffl_var]] == "Y") %>%
+  adae <- adae |>
+    filter(.data[[saffl_var]] == "Y") |>
     df_explicit_na()
 
   alt_counts_df <- alt_counts_df_preproc(alt_counts_df, id_var, arm_var, saffl_var)
 
-  lyt <- basic_table_annot(show_colcounts, annotations) %>%
-    split_cols_by_arm(arm_var, lbl_overall, risk_diff) %>%
+  lyt <- basic_table_annot(show_colcounts, annotations) |>
+    split_cols_by_arm(arm_var, lbl_overall, risk_diff) |>
     count_occurrences(
       vars = pref_var,
       riskdiff = !is.null(risk_diff)
-    ) %>%
+    ) |>
     append_topleft(lbl_pref_var)
 
   tbl <- build_table(lyt, df = adae, alt_counts_df = alt_counts_df)

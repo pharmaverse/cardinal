@@ -47,17 +47,17 @@ make_fig_14 <- function(df,
   assert_subset(c(arm_var, saffl_var, visit_var), names(df))
   assert_flag_variables(df, saffl_var)
 
-  df <- df %>%
-    as_tibble() %>%
+  df <- df |>
+    as_tibble() |>
     filter(
       .data[[saffl_var]] == "Y",
       PARAMCD == {{ paramcd_val }},
       !is.na(AVAL)
-    ) %>%
+    ) |>
     df_explicit_na()
 
   if (!(is.null({{ add_cond }}))) {
-    df <- df %>%
+    df <- df |>
       filter(!!rlang::parse_expr(add_cond))
   }
 
@@ -68,18 +68,18 @@ make_fig_14 <- function(df,
     y_lab <- paste0("Mean Value (95% CI)", "\n", y_param, " (", y_avalu, ")")
   }
 
-  df <- df %>%
-    group_by(!!sym(arm_var), !!sym(visit_var), .drop = TRUE) %>%
+  df <- df |>
+    group_by(!!sym(arm_var), !!sym(visit_var), .drop = TRUE) |>
     summarise(
       mean = mean(AVAL, na.rm = TRUE),
       sd = sd(AVAL, na.rm = TRUE),
       n = n()
-    ) %>%
+    ) |>
     mutate(
       se = sd / sqrt(n),
       lower_ci = mean - qt(1 - (0.05 / 2), n - 1) * se,
       upper_ci = mean + qt(1 - (0.05 / 2), n - 1) * se
-    ) %>%
+    ) |>
     ungroup()
 
   g <-
@@ -128,8 +128,8 @@ make_fig_14 <- function(df,
 
     g <- g + theme(legend.position = "none")
 
-    tbl_n <- df %>%
-      mutate(meanr = sprintf("%.1f", mean)) %>%
+    tbl_n <- df |>
+      mutate(meanr = sprintf("%.1f", mean)) |>
       arrange(desc(!!sym(arm_var)))
 
     g_tbl1 <- ggplot(tbl_n, aes(x = !!sym(visit_var), y = !!sym(arm_var))) +

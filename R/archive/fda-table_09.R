@@ -47,36 +47,36 @@ make_table_09_rtables <- function(adae,
   assert_subset(c("AESER", "AESOC", arm_var, id_var, saffl_var, pref_var), names(adae))
   assert_flag_variables(adae, saffl_var)
 
-  adae <- adae %>%
-    filter(.data[[saffl_var]] == "Y", AESER == "Y") %>%
+  adae <- adae |>
+    filter(.data[[saffl_var]] == "Y", AESER == "Y") |>
     df_explicit_na()
 
   alt_counts_df <- alt_counts_df_preproc(alt_counts_df, id_var, arm_var, saffl_var)
 
-  lyt <- basic_table_annot(show_colcounts, annotations) %>%
-    split_cols_by_arm(arm_var, lbl_overall, risk_diff) %>%
+  lyt <- basic_table_annot(show_colcounts, annotations) |>
+    split_cols_by_arm(arm_var, lbl_overall, risk_diff) |>
     analyze_num_patients(
       vars = id_var,
       .stats = "unique",
       .labels = c(unique = "Any SAE"),
       riskdiff = !is.null(risk_diff)
-    ) %>%
+    ) |>
     split_rows_by(
       var = "AESOC",
       split_fun = drop_split_levels,
       split_label = "System Organ Class",
       label_pos = "topleft"
-    ) %>%
+    ) |>
     summarize_num_patients(
       var = id_var,
       .stats = "unique",
       .labels = c(unique = NULL),
       riskdiff = !is.null(risk_diff)
-    ) %>%
+    ) |>
     count_occurrences(
       vars = pref_var,
       riskdiff = !is.null(risk_diff)
-    ) %>%
+    ) |>
     append_topleft(paste(" ", lbl_pref_var))
 
   tbl <- build_table(lyt, df = adae, alt_counts_df = alt_counts_df)
@@ -220,14 +220,14 @@ make_table_09_tplyr <- function(
 
   # Use alternative counts if specified
   if (add_alt_counts) {
-    structure <- structure %>%
-      Tplyr::set_pop_data(alt_counts_df) %>%
+    structure <- structure |>
+      Tplyr::set_pop_data(alt_counts_df) |>
       Tplyr::set_pop_where(TRUE) # takes all subjects as basis, not only those where !!rlang::sym(ser_var) == "Y"!
   }
 
   # Add total column if specified
   if (add_overall_col) {
-    structure <- structure %>%
+    structure <- structure |>
       Tplyr::add_total_group(group_name = lbl_overall)
 
     header_string <- paste0(
@@ -237,13 +237,13 @@ make_table_09_tplyr <- function(
   }
 
   # Create table layers
-  layer1 <- structure %>%
-    Tplyr::group_count("Any SAE") %>%
+  layer1 <- structure |>
+    Tplyr::group_count("Any SAE") |>
     Tplyr::set_distinct_by(!!rlang::sym(id_var))
 
-  layer2 <- structure %>%
-    Tplyr::group_count(vars(!!sym(soc_var), !!sym(pref_var))) %>%
-    Tplyr::set_distinct_by(!!rlang::sym(id_var)) %>%
+  layer2 <- structure |>
+    Tplyr::group_count(vars(!!sym(soc_var), !!sym(pref_var))) |>
+    Tplyr::set_distinct_by(!!rlang::sym(id_var)) |>
     Tplyr::set_nest_count(TRUE)
 
   # Add risk difference column(s) if specified
@@ -259,15 +259,15 @@ make_table_09_tplyr <- function(
     } # nocov end
   }
   # Build table
-  table <- structure %>%
-    Tplyr::add_layers(layer1, layer2) %>%
-    Tplyr::build() %>%
+  table <- structure |>
+    Tplyr::add_layers(layer1, layer2) |>
+    Tplyr::build() |>
     suppressWarnings() # Artificially suppress Tplyr warning for nested factor variables
 
   # Remove "all zero"-rows if specified
   if (prune_0) {
-    table <- table %>%
-      mutate(across(starts_with("var"), ~ gsub("[0()\\%\\. ]", "", .x), .names = "detect_0_{.col}")) %>%
+    table <- table |>
+      mutate(across(starts_with("var"), ~ gsub("[0()\\%\\. ]", "", .x), .names = "detect_0_{.col}")) |>
       filter(if_any(starts_with("detect_0"), ~ .x != ""))
   }
 
@@ -276,16 +276,16 @@ make_table_09_tplyr <- function(
   arm_col_names <- paste0("var1_", arm_names)
   other_col_names <- col_names[!col_names %in% c(arm_col_names, "row_label1")]
 
-  table <- table %>%
-    select(all_of(c("row_label1", arm_col_names, other_col_names))) %>%
+  table <- table |>
+    select(all_of(c("row_label1", arm_col_names, other_col_names))) |>
     mutate(ord_layer_2 = if_else(ord_layer_2 == Inf, 0, ord_layer_2)) # To avoid sorting of Inf in the next step
 
   # Clean-up table
-  table <- table %>%
-    arrange(ord_layer_index, ord_layer_1, ord_layer_2) %>% # refer to
+  table <- table |>
+    arrange(ord_layer_index, ord_layer_1, ord_layer_2) |> # refer to
     # https://atorus-research.github.io/Tplyr/articles/post_processing.html#highly-customized-sort-variables
     # for sorting according to occurrence in case this is required later
-    select(starts_with(c("row_label", "var", "rdiff"))) %>%
+    select(starts_with(c("row_label", "var", "rdiff"))) |>
     Tplyr::add_column_headers(s = header_string, header_n = Tplyr::header_n(structure))
 
   if (tplyr_raw) {
@@ -304,24 +304,24 @@ make_table_09_tplyr <- function(
   trmd_pref_var_lvls <- pref_var_lvls
   trmd_pref_var_lvls[ind_prep_blank] <- sub(" +", "", trmd_pref_var_lvls[ind_prep_blank])
 
-  gt_tbl <- table[-1, ] %>% # drop header row
+  gt_tbl <- table[-1, ] |> # drop header row
     mutate(
       # remove prepending blank spaces since they are ignored by gt
       row_label1 = if_else(substr(row_label1, 1, 1) == " ", sub(" +", "", row_label1), row_label1),
       # remove blank space between opening bracket and percentage number
       across(!row_label1, ~ sub("\\( +", "(", .x))
-    ) %>%
-    gt(rowname_col = "row_label1") %>%
-    tab_stub_indent(any_of(trmd_pref_var_lvls), indent = 2) %>%
-    tab_stubhead(md(lbl_stubhead)) %>%
-    cols_label(.list = as.list(lbl_cols), .fn = md) %>%
+    ) |>
+    gt(rowname_col = "row_label1") |>
+    tab_stub_indent(any_of(trmd_pref_var_lvls), indent = 2) |>
+    tab_stubhead(md(lbl_stubhead)) |>
+    cols_label(.list = as.list(lbl_cols), .fn = md) |>
     tab_header(
       title = if (add_title) md(annotations[["title"]]) else NULL,
       subtitle = if (add_subtitles) md(paste(annotations[["subtitles"]], collapse = "<br/>")) else NULL
-    ) %>%
+    ) |>
     tab_footnote(
       if (add_footnotes) md(paste(annotations[["main_footer"]], collapse = "<br/>")) else NULL
-    ) %>%
+    ) |>
     tab_source_note(
       if (add_source_notes) md(paste(annotations[["prov_footer"]], collapse = "<br/>")) else NULL
     )
@@ -400,7 +400,7 @@ make_table_09_gtsum <- function(adae,
 
   assert_logical(show_colcounts)
 
-  adae <- adae %>%
+  adae <- adae |>
     filter(.data[[saffl_var]] == "Y", .data[[ser_var]] == "Y")
 
   # create data for table 09
@@ -429,10 +429,10 @@ make_table_09_gtsum <- function(adae,
       risk_diff = NULL
     )
 
-    result_list$data <- result_list[["data"]] %>%
+    result_list$data <- result_list[["data"]] |>
       left_join(overall_list[["data"]], by = join_by(!!sym(soc_var), !!sym(pref_var)))
 
-    result_list$total_N <- result_list[["total_N"]] %>%
+    result_list$total_N <- result_list[["total_N"]] |>
       cross_join(overall_list[["total_N"]])
   }
 
@@ -440,17 +440,17 @@ make_table_09_gtsum <- function(adae,
 
   rows_to_indent <- which(!is.na(result_data[[pref_var]]))
 
-  result_data <- result_data %>%
+  result_data <- result_data |>
     mutate(
       !!soc_var := if_else(is.na(.data[[soc_var]]), "Any SAE", .data[[soc_var]]),
       !!pref_var := if_else(is.na(.data[[pref_var]]), .data[[soc_var]], .data[[pref_var]])
-    ) %>%
+    ) |>
     select(-any_of(soc_var))
 
-  gt_table <- result_data %>%
+  gt_table <- result_data |>
     gt(
       rowname_col = pref_var
-    ) %>%
+    ) |>
     tab_stub_indent(rows = rows_to_indent, indent = 2)
 
 
@@ -465,28 +465,28 @@ make_table_09_gtsum <- function(adae,
       }
     }
 
-    gt_table <- gt_table %>%
+    gt_table <- gt_table |>
       cols_label_with(fn = set_col_labels)
   }
 
   label <- paste(lbl_soc_var, "<br/> &nbsp;&nbsp;", lbl_pref_var)
 
-  gt_table <- gt_table %>%
-    tab_stubhead(label = md(label)) %>%
+  gt_table <- gt_table |>
+    tab_stubhead(label = md(label)) |>
     cols_align(align = "center", columns = -1) # center all columns besides the first
 
   if (!is.null(annotations)) {
     if (!is.null(annotations[["title"]])) {
-      gt_table <- gt_table %>%
+      gt_table <- gt_table |>
         tab_header(annotations[["title"]])
     }
     if (!is.null(annotations[["subtitle"]])) {
-      gt_table <- gt_table %>%
+      gt_table <- gt_table |>
         tab_header(annotations[["title"]], subtitle = annotations[["subtitle"]])
     }
     if (!is.null(annotations[["footnotes"]])) {
       lapply(annotations[["footnotes"]], function(x) {
-        gt_table <<- gt_table %>%
+        gt_table <<- gt_table |>
           tab_footnote(x)
       })
     }
@@ -525,20 +525,20 @@ create_table_09_data <- function(
     lbl_overall = NULL,
     risk_diff = NULL) {
   basis_df <- if (!is.null(alt_counts_df)) alt_counts_df else adae
-  N_data <- basis_df %>% # nolint
+  N_data <- basis_df |> # nolint
     {
       if (is.null(lbl_overall)) group_by(., .data[[arm_var]]) else .
-    } %>%
-    mutate(N = n()) %>% # count observations
-    ungroup() %>%
+    } |>
+    mutate(N = n()) |> # count observations
+    ungroup() |>
     select(all_of(c(id_var, arm_var, "N")))
 
   # get total N
-  total_N <- N_data %>% # nolint
+  total_N <- N_data |> # nolint
     {
       if (is.null(lbl_overall)) group_by(., .data[[arm_var]]) else .
-    } %>%
-    distinct(N) %>%
+    } |>
+    distinct(N) |>
     {
       if (is.null(lbl_overall)) {
         pivot_wider(.,
@@ -550,7 +550,7 @@ create_table_09_data <- function(
       }
     }
 
-  adae <- adae %>%
+  adae <- adae |>
     left_join(N_data, by = c(id_var, arm_var), relationship = "many-to-many")
 
   input_list <- list(NULL, soc_var, c(soc_var, pref_var))
@@ -574,9 +574,9 @@ create_table_09_data <- function(
     sel_cols <- c(sel_cols, risk_diff_cols)
   }
 
-  result_data <- data_list %>%
-    bind_rows() %>%
-    select(all_of(c(soc_var, pref_var, sel_cols))) %>%
+  result_data <- data_list |>
+    bind_rows() |>
+    select(all_of(c(soc_var, pref_var, sel_cols))) |>
     arrange(desc(is.na(.data[[soc_var]])), .data[[soc_var]], desc(is.na(.data[[pref_var]])))
 
   list(data = result_data, total_N = total_N)
@@ -604,17 +604,17 @@ count_subjects <- function(adae, arm_var, id_var, sub_level_vars = NULL, lbl_ove
     }
   }
 
-  count_data <- adae %>%
+  count_data <- adae |>
     {
       if (grouping || !is.null(sub_level_vars)) group_by(., across(all_of(grouping_vars))) else .
-    } %>%
+    } |>
     summarize(
       val = n_distinct(.data[[id_var]]), # count on patient level
       N = unique(N),
       pct = format(val / mean(N) * 100, digits = 1, nsmall = 1),
       combined = paste0(val, " (", pct, "%)"),
       .groups = "drop"
-    ) %>%
+    ) |>
     {
       if (grouping) {
         pivot_wider(.,
@@ -623,14 +623,14 @@ count_subjects <- function(adae, arm_var, id_var, sub_level_vars = NULL, lbl_ove
           values_from = all_of(c("val", "N", "combined"))
         )
       } else {
-        rename(., !!lbl_overall := "combined") %>%
+        rename(., !!lbl_overall := "combined") |>
           select(-c("val", "pct"))
       }
     }
 
   if (!is.null(risk_diff)) {
     purrr::walk(risk_diff, function(x) {
-      count_data <<- count_data %>%
+      count_data <<- count_data |>
         mutate(
           !!paste0("rd_", x[[1]], "-", x[[2]]) := calculate_riskdiff(
             .data[[paste0("val_", x[[1]])]],
@@ -642,8 +642,8 @@ count_subjects <- function(adae, arm_var, id_var, sub_level_vars = NULL, lbl_ove
     })
   }
   if (grouping) {
-    count_data <- count_data %>%
-      rename_with(renaming_function, dplyr::starts_with("combined")) %>%
+    count_data <- count_data |>
+      rename_with(renaming_function, dplyr::starts_with("combined")) |>
       select(-any_of(c(starts_with("val_"), starts_with("N_"))))
   }
   count_data
@@ -729,7 +729,7 @@ make_table_09_gtsummary <- function(
     denominator <- df
   }
 
-  df <- df %>%
+  df <- df |>
     dplyr::filter(.data[[saffl_var]] == "Y", .data[[ser_var]] == "Y")
 
   tbl <- df |>
