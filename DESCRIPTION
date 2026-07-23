@@ -1,7 +1,7 @@
 Type: Package
 Package: cardinal
 Title: FDA Safety Tables and Figures
-Version: 0.1.0.9088
+Version: 0.2.0
 Date: 2026-07-09
 Authors@R: c(
     person("Pawel", "Rucki", , "pawel.rucki@roche.com", role = "ctb"),
@@ -25,8 +25,13 @@ Authors@R: c(
     person("Jessica", "Knizia", role = "ctb"),
     person("Freeman", "Wang", role = "ctb")
   )
-Description: R package with implementation of Safety Tables and Figures
-    issued by FDA.
+Description: Provides implementations of safety tables and figures recommended
+    by the FDA (U.S. Food and Drug Administration) for clinical trial reporting.
+    Functions generate standard outputs for adverse events, laboratory
+    abnormalities, vital signs, exposure, and other safety domains following
+    the FDA's Safety Reporting guidelines. Outputs are built on the 'gtsummary',
+    'cards', and 'cardx' frameworks, enabling reproducible and submission-ready
+    clinical trial safety summaries.
 License: Apache License (>= 2)
 URL: https://github.com/pharmaverse/cardinal/,
     https://pharmaverse.github.io/cardinal/
