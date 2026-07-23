@@ -3,58 +3,58 @@
     Code
       as.data.frame(ard$tbl_hierarchical)[1:25, ]
     Output
-         group1         group1_level variable       variable_level      context
-      1    <NA>                 NULL   TRT01A              Placebo     tabulate
-      2    <NA>                 NULL   TRT01A              Placebo     tabulate
-      3    <NA>                 NULL   TRT01A              Placebo     tabulate
-      4    <NA>                 NULL   TRT01A Xanomeline High Dose     tabulate
-      5    <NA>                 NULL   TRT01A Xanomeline High Dose     tabulate
-      6    <NA>                 NULL   TRT01A Xanomeline High Dose     tabulate
-      7    <NA>                 NULL   TRT01A  Xanomeline Low Dose     tabulate
-      8    <NA>                 NULL   TRT01A  Xanomeline Low Dose     tabulate
-      9    <NA>                 NULL   TRT01A  Xanomeline Low Dose     tabulate
-      10 TRT01A              Placebo  AEDECOD                   12 hierarchical
-      11 TRT01A              Placebo  AEDECOD                   12 hierarchical
-      12 TRT01A              Placebo  AEDECOD                   12 hierarchical
-      13 TRT01A Xanomeline High Dose  AEDECOD                   12 hierarchical
-      14 TRT01A Xanomeline High Dose  AEDECOD                   12 hierarchical
-      15 TRT01A Xanomeline High Dose  AEDECOD                   12 hierarchical
-      16 TRT01A  Xanomeline Low Dose  AEDECOD                   12 hierarchical
-      17 TRT01A  Xanomeline Low Dose  AEDECOD                   12 hierarchical
-      18 TRT01A  Xanomeline Low Dose  AEDECOD                   12 hierarchical
-      19 TRT01A              Placebo  AEDECOD                   16 hierarchical
-      20 TRT01A              Placebo  AEDECOD                   16 hierarchical
-      21 TRT01A              Placebo  AEDECOD                   16 hierarchical
-      22 TRT01A Xanomeline High Dose  AEDECOD                   16 hierarchical
-      23 TRT01A Xanomeline High Dose  AEDECOD                   16 hierarchical
-      24 TRT01A Xanomeline High Dose  AEDECOD                   16 hierarchical
-      25 TRT01A  Xanomeline Low Dose  AEDECOD                   16 hierarchical
-         stat_name stat_label       stat stat_fmt
-      1          n          n         86       86
-      2          N          N        254      254
-      3          p          %  0.3385827     33.9
-      4          n          n         72       72
-      5          N          N        254      254
-      6          p          %  0.2834646     28.3
-      7          n          n         96       96
-      8          N          N        254      254
-      9          p          %  0.3779528     37.8
-      10         n          n          5        5
-      11         N          N         86       86
-      12         p          % 0.05813953      5.8
-      13         n          n          7        7
-      14         N          N         72       72
-      15         p          % 0.09722222      9.7
-      16         n          n          9        9
-      17         N          N         96       96
-      18         p          %    0.09375      9.4
-      19         n          n          3        3
-      20         N          N         86       86
-      21         p          % 0.03488372      3.5
-      22         n          n         14       14
-      23         N          N         72       72
-      24         p          %  0.1944444       19
-      25         n          n         13       13
+         group1         group1_level variable              variable_level
+      1    <NA>                 NULL   TRT01A                     Placebo
+      2    <NA>                 NULL   TRT01A                     Placebo
+      3    <NA>                 NULL   TRT01A                     Placebo
+      4    <NA>                 NULL   TRT01A        Xanomeline High Dose
+      5    <NA>                 NULL   TRT01A        Xanomeline High Dose
+      6    <NA>                 NULL   TRT01A        Xanomeline High Dose
+      7    <NA>                 NULL   TRT01A         Xanomeline Low Dose
+      8    <NA>                 NULL   TRT01A         Xanomeline Low Dose
+      9    <NA>                 NULL   TRT01A         Xanomeline Low Dose
+      10 TRT01A              Placebo  AEDECOD APPLICATION SITE DERMATITIS
+      11 TRT01A              Placebo  AEDECOD APPLICATION SITE DERMATITIS
+      12 TRT01A              Placebo  AEDECOD APPLICATION SITE DERMATITIS
+      13 TRT01A Xanomeline High Dose  AEDECOD APPLICATION SITE DERMATITIS
+      14 TRT01A Xanomeline High Dose  AEDECOD APPLICATION SITE DERMATITIS
+      15 TRT01A Xanomeline High Dose  AEDECOD APPLICATION SITE DERMATITIS
+      16 TRT01A  Xanomeline Low Dose  AEDECOD APPLICATION SITE DERMATITIS
+      17 TRT01A  Xanomeline Low Dose  AEDECOD APPLICATION SITE DERMATITIS
+      18 TRT01A  Xanomeline Low Dose  AEDECOD APPLICATION SITE DERMATITIS
+      19 TRT01A              Placebo  AEDECOD   APPLICATION SITE ERYTHEMA
+      20 TRT01A              Placebo  AEDECOD   APPLICATION SITE ERYTHEMA
+      21 TRT01A              Placebo  AEDECOD   APPLICATION SITE ERYTHEMA
+      22 TRT01A Xanomeline High Dose  AEDECOD   APPLICATION SITE ERYTHEMA
+      23 TRT01A Xanomeline High Dose  AEDECOD   APPLICATION SITE ERYTHEMA
+      24 TRT01A Xanomeline High Dose  AEDECOD   APPLICATION SITE ERYTHEMA
+      25 TRT01A  Xanomeline Low Dose  AEDECOD   APPLICATION SITE ERYTHEMA
+              context stat_name stat_label       stat stat_fmt
+      1      tabulate         n          n         86       86
+      2      tabulate         N          N        254      254
+      3      tabulate         p          %  0.3385827     33.9
+      4      tabulate         n          n         72       72
+      5      tabulate         N          N        254      254
+      6      tabulate         p          %  0.2834646     28.3
+      7      tabulate         n          n         96       96
+      8      tabulate         N          N        254      254
+      9      tabulate         p          %  0.3779528     37.8
+      10 hierarchical         n          n          5        5
+      11 hierarchical         N          N         86       86
+      12 hierarchical         p          % 0.05813953      5.8
+      13 hierarchical         n          n          7        7
+      14 hierarchical         N          N         72       72
+      15 hierarchical         p          % 0.09722222      9.7
+      16 hierarchical         n          n          9        9
+      17 hierarchical         N          N         96       96
+      18 hierarchical         p          %    0.09375      9.4
+      19 hierarchical         n          n          3        3
+      20 hierarchical         N          N         86       86
+      21 hierarchical         p          % 0.03488372      3.5
+      22 hierarchical         n          n         14       14
+      23 hierarchical         N          N         72       72
+      24 hierarchical         p          %  0.1944444       19
+      25 hierarchical         n          n         13       13
                                                                                                                                                                                                                                                                                                                            fmt_fun
       1                                                                                                                                                                                                                                                                                                                          0
       2                                                                                                                                                                                                                                                                                                                          0
