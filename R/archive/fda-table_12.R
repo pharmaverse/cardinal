@@ -54,9 +54,9 @@ make_table_12 <- function(df,
   )
 
   if (return_ard) {
-    return(list(table = tbl, ard = ard))
+    list(table = tbl, ard = ard)
   } else {
-    return(tbl) # nocov
+    tbl # nocov
   }
 }
 
@@ -73,13 +73,13 @@ preproc_df_table_12 <- function(df,
   ), names(df))
   assert_flag_variables(df, saffl_var)
 
-  id_dcsae <- df %>%
-    filter(DCSREAS == "ADVERSE EVENT") %>%
-    select(all_of(c(id_var))) %>%
+  id_dcsae <- df |>
+    filter(DCSREAS == "ADVERSE EVENT") |>
+    select(all_of(c(id_var))) |>
     unlist()
 
-  df <- df %>%
-    filter(.data[[saffl_var]] == "Y", .data[[id_var]] %in% id_dcsae) %>%
+  df <- df |>
+    filter(.data[[saffl_var]] == "Y", .data[[id_var]] %in% id_dcsae) |>
     df_explicit_na()
 
   df
@@ -94,8 +94,8 @@ preproc_df_table_12 <- function(df,
 #' adae <- random.cdisc.data::cadae
 #'
 #' set.seed(1)
-#' adae <- adae %>%
-#'   rename(FMQ01SC = SMQ01SC) %>%
+#' adae <- adae |>
+#'   rename(FMQ01SC = SMQ01SC) |>
 #'   mutate(
 #'     AESER = sample(c("Y", "N"), size = nrow(adae), replace = TRUE),
 #'     FMQ01NAM = sample(c("FMQ1", "FMQ2", "FMQ3"), size = nrow(adae), replace = TRUE)
@@ -214,30 +214,30 @@ make_table_12_rtables <- function(df,
   df <- preproc_df_table_12(df, id_var, arm_var, saffl_var, pref_var)
   alt_counts_df <- alt_counts_df_preproc(alt_counts_df, id_var, arm_var, saffl_var)
 
-  lyt <- basic_table_annot(show_colcounts, annotations) %>%
-    split_cols_by_arm(arm_var, lbl_overall, risk_diff) %>%
+  lyt <- basic_table_annot(show_colcounts, annotations) |>
+    split_cols_by_arm(arm_var, lbl_overall, risk_diff) |>
     analyze_num_patients(
       vars = id_var,
       riskdiff = !is.null(risk_diff),
       .stats = c("unique"),
       .labels = c(unique = "Patients with at least one AE leading to discontinuation")
-    ) %>%
+    ) |>
     split_rows_by(
       "AEBODSYS",
       label_pos = "topleft",
       split_label = obj_label(df$AEBODSYS)
-    ) %>%
+    ) |>
     summarize_num_patients(
       var = id_var,
       riskdiff = !is.null(risk_diff),
       .stats = "unique",
       .labels = c(unique = NULL)
-    ) %>%
+    ) |>
     count_occurrences(
       vars = pref_var,
       drop = FALSE,
       riskdiff = !is.null(risk_diff)
-    ) %>%
+    ) |>
     append_varlabels(df, pref_var, indent = 1L)
 
   tbl <- build_table(lyt, df = df, alt_counts_df = alt_counts_df)

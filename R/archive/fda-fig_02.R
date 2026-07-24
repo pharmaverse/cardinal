@@ -41,17 +41,17 @@ make_fig_02 <- function(df,
   assert_choice(u_trtdur, c("days", "weeks", "months", "years"))
   assert_flag_variables(df, saffl_var)
 
-  df <- df %>%
-    filter(.data[[saffl_var]] == "Y") %>%
-    df_explicit_na() %>%
+  df <- df |>
+    filter(.data[[saffl_var]] == "Y") |>
+    df_explicit_na() |>
     mutate(
       TLSTFU = lubridate::days(.data[[eosdy_var]]),
-      TLSTFU = TLSTFU %>% as.numeric(u_trtdur),
+      TLSTFU = TLSTFU |> as.numeric(u_trtdur),
       AVALU = u_trtdur
-    ) %>%
-    filter(!is.na(TLSTFU)) %>%
-    select(all_of(c(id_var, arm_var)), TLSTFU) %>%
-    distinct() %>%
+    ) |>
+    filter(!is.na(TLSTFU)) |>
+    select(all_of(c(id_var, arm_var)), TLSTFU) |>
+    distinct() |>
     arrange(desc(TLSTFU))
 
   df$PT_PCT <- seq_len(nrow(df)) / nrow(df) * 100

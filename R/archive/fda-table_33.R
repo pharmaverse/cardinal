@@ -37,7 +37,7 @@ make_table_33 <- function(df,
   df <- preproc_df_table_33(df, denominator, id_var, arm_var, saffl_var, subset)
   avalu <- unique(df$AVALU)[1]
 
-  df <- df %>% select(-id_var, -AVALU)
+  df <- df |> select(-id_var, -AVALU)
 
   tbl_gts <- df |>
     tbl_summary(
@@ -62,9 +62,9 @@ make_table_33 <- function(df,
 
   if (return_ard) {
     ard <- gtsummary::gather_ard(tbl_gts)
-    return(list(table = tbl, ard = ard))
+    list(table = tbl, ard = ard)
   } else {
-    return(tbl) # nocov
+    tbl # nocov
   }
 }
 

@@ -20,8 +20,8 @@
 #' adsl <- random.cdisc.data::cadsl
 #'
 #' set.seed(1)
-#' adae <- adae %>%
-#'   rename(FMQ01SC = SMQ01SC) %>%
+#' adae <- adae |>
+#'   rename(FMQ01SC = SMQ01SC) |>
 #'   mutate(
 #'     AESER = sample(c("Y", "N"), size = nrow(adae), replace = TRUE),
 #'     FMQ01NAM = sample(c("FMQ1", "FMQ2", "FMQ3"), size = nrow(adae), replace = TRUE)
@@ -56,37 +56,37 @@ make_table_38 <- function(adae,
   assert_flag_variables(adae, saffl_var, trtemfl_var)
   assert_subset(toupper(fmq_scope), c("NARROW", "BROAD"))
 
-  adae <- adae %>%
-    filter(.data[[saffl_var]] == "Y", .data[[trtemfl_var]] == "Y", .data[[fmqsc_var]] == fmq_scope) %>%
+  adae <- adae |>
+    filter(.data[[saffl_var]] == "Y", .data[[trtemfl_var]] == "Y", .data[[fmqsc_var]] == fmq_scope) |>
     df_explicit_na(na_level = na_level)
   adae[[fmqnam_var]] <- with_label(adae[[fmqnam_var]], paste0("FMQ (", tools::toTitleCase(tolower(fmq_scope)), ")"))
 
   alt_counts_df <- alt_counts_df_preproc(alt_counts_df, id_var, arm_var, saffl_var)
 
-  lyt <- basic_table_annot(show_colcounts, annotations) %>%
-    split_cols_by_arm(arm_var, lbl_overall, risk_diff) %>%
+  lyt <- basic_table_annot(show_colcounts, annotations) |>
+    split_cols_by_arm(arm_var, lbl_overall, risk_diff) |>
     split_rows_by(
       var = "AEBODSYS",
       split_fun = drop_split_levels,
       split_label = obj_label(adae$AEBODSYS),
       label_pos = "topleft"
-    ) %>%
+    ) |>
     split_rows_by(
       fmqnam_var,
       child_labels = "hidden",
       label_pos = "topleft",
       split_label = obj_label(adae[[fmqnam_var]])
-    ) %>%
+    ) |>
     summarize_num_patients(
       var = id_var,
       .stats = "unique",
       .labels = c(unique = NULL),
       riskdiff = !is.null(risk_diff)
-    ) %>%
+    ) |>
     count_occurrences(
       vars = pref_var,
       riskdiff = !is.null(risk_diff)
-    ) %>%
+    ) |>
     append_topleft(paste("   ", lbl_pref_var))
 
   tbl <- build_table(lyt, df = adae, alt_counts_df = alt_counts_df)

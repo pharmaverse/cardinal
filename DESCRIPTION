@@ -1,7 +1,7 @@
 Type: Package
-Package: cardinal
+Package: cardinalfda
 Title: FDA Safety Tables and Figures
-Version: 0.1.0.9088
+Version: 0.2.0
 Date: 2026-07-09
 Authors@R: c(
     person("Pawel", "Rucki", , "pawel.rucki@roche.com", role = "ctb"),
@@ -25,25 +25,31 @@ Authors@R: c(
     person("Jessica", "Knizia", role = "ctb"),
     person("Freeman", "Wang", role = "ctb")
   )
-Description: R package with implementation of Safety Tables and Figures
-    issued by FDA.
+Description: Provides implementations of safety tables and figures recommended
+    by the FDA (U.S. Food and Drug Administration) for clinical trial reporting.
+    Functions generate standard outputs for adverse events, laboratory
+    abnormalities, vital signs, exposure, and other safety domains following
+    the FDA's Safety Reporting guidelines. Outputs are built on the 'gtsummary',
+    'cards', and 'cardx' frameworks, enabling reproducible and submission-ready
+    clinical trial safety summaries.
 License: Apache License (>= 2)
 URL: https://github.com/pharmaverse/cardinal/,
     https://pharmaverse.github.io/cardinal/
 BugReports: https://github.com/pharmaverse/cardinal/issues
 Depends:
-    R (>= 4.2)
-Suggests:
+    R (>= 4.2),
     cards (>= 0.8.1),
     cardx (>= 0.3.4),
+    gtsummary (>= 2.5.1)
+Imports:
+    dplyr (>= 1.2.1)
+Suggests:
     cowplot (>= 1.2.0),
     crane (>= 0.3.1),
-    dplyr (>= 1.2),
     forcats (>= 1.0.1),
     ggplot2 (>= 4.0),
     ggsurvfit (>= 1.2.0),
     gt (>= 1.3.0),
-    gtsummary (>= 2.5.1),
     knitr (>= 1.50),
     labelled (>= 2.16.0),
     lubridate (>= 1.9),
@@ -51,6 +57,8 @@ Suggests:
     purrr (>= 1.2),
     random.cdisc.data (>= 0.3.16),
     rlang (>= 1.1.7),
+    rtables (>= 0.6.11),
+    tern (>= 0.9.8),
     svglite (>= 2.2.2),
     testthat (>= 3.3.1),
     tidyr (>= 1.3.1),

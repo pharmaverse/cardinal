@@ -59,14 +59,14 @@ make_table_17 <- function(adae,
   assert_subset(toupper(fmq_scope), c("NARROW", "BROAD"))
 
   fmq_other_sexes <- unique(adae[adae[["SEX"]] != sex_scope, ][[fmqnam_var]])
-  adae <- adae %>%
-    as_tibble() %>%
+  adae <- adae |>
+    as_tibble() |>
     filter(
       .data[[saffl_var]] == "Y",
       .data[[fmqsc_var]] == fmq_scope,
       .data[["SEX"]] == sex_scope,
       !.data[[fmqnam_var]] %in% fmq_other_sexes
-    ) %>%
+    ) |>
     df_explicit_na(na_level = na_level)
 
   adae[[fmqnam_var]] <- with_label(adae[[fmqnam_var]], paste0("FMQ (", tools::toTitleCase(tolower(fmq_scope)), ")"))
@@ -74,18 +74,18 @@ make_table_17 <- function(adae,
 
   alt_counts_df <- alt_counts_df_preproc(alt_counts_df, id_var, arm_var, saffl_var)
 
-  lyt <- basic_table_annot(show_colcounts, annotations) %>%
-    split_cols_by_arm(arm_var, lbl_overall, risk_diff) %>%
+  lyt <- basic_table_annot(show_colcounts, annotations) |>
+    split_cols_by_arm(arm_var, lbl_overall, risk_diff) |>
     split_rows_by(
       fmqnam_var,
       label_pos = "topleft",
       split_label = obj_label(adae[[fmqnam_var]])
-    ) %>%
+    ) |>
     count_occurrences(
       vars = pref_var,
       drop = FALSE,
       riskdiff = !is.null(risk_diff)
-    ) %>%
+    ) |>
     append_varlabels(adae, pref_var, indent = 1L)
 
   tbl <- build_table(lyt, df = adae, alt_counts_df = alt_counts_df)

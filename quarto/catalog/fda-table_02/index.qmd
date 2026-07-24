@@ -15,13 +15,13 @@ knitr::include_graphics("result.png")
 
 ```{r setup, message=FALSE}
 # Load libraries & data -------------------------------------
+library(cardinalfda)
 library(dplyr)
-library(gtsummary)
 
 adsl <- pharmaverseadam::adsl |>
   # removing screen failure observations
   filter(TRT01A != "Screen Failure") |>
-  # Adding a numeric biomarker (weight)
+  # Adding a numeric biomarker (weight) — include in vars to show in table
   left_join(
     pharmaverseadam::advs |>
       filter(VSTESTCD == "WEIGHT", VISIT == "BASELINE") |>
@@ -29,41 +29,22 @@ adsl <- pharmaverseadam::adsl |>
     by = "USUBJID",
     relationship = "one-to-one"
   )
-
-
-# Pre-processing --------------------------------------------
-# Filter for the safety population, x
-data <- adsl |>
-  filter(SAFFL == "Y")
 ```
 
 ## Build Table
 
 ```{r tbl, results='hide'}
-tbl <- data |>
-  tbl_summary(
-    by = "TRT01A",
-    include = c("SEX", "AGE", "AGEGR1", "ETHNIC", "RACE"),
-    type = all_continuous() ~ "continuous2", # arranges statistics into multiple lines
-    statistic = list(
-      all_continuous() ~ c(
-        "{mean} ({sd})",
-        "{median} ({min}, {max})"
-      ),
-      all_categorical() ~ "{n} ({p}%)"
-    ),
-    label = list(AGEGR1 = "Age Group, Years")
-  ) |>
-  add_overall(last = TRUE, col_label = "**Total Population**  \nN = {N}") |>
-  # remove default footnote
-  remove_footnote_header(columns = everything())
+result <- make_table_02(
+  df = adsl,
+  label = list(AGEGR1 = "Age Group, Years")
+)
 
-tbl
+result$table
 ```
 
 ```{r eval=FALSE, include=FALSE}
 # Run chunk locally to generate image file
-gt::gtsave(as_gt(tbl), filename = "result.png")
+gt::gtsave(gtsummary::as_gt(result$table), filename = "result.png")
 ```
 
 ```{r img, echo=FALSE, fig.align='center', out.width='60%'}
@@ -71,14 +52,13 @@ gt::gtsave(as_gt(tbl), filename = "result.png")
 
 ## Build ARD
 
-```{r ard, message=FALSE, warning=FALSE, results='hide'}
-ard <- gather_ard(tbl)
-ard
+```{r ard, message=FALSE, warning=FALSE}
+result$ard
 ```
 
 ```{r, echo=FALSE}
 # Print full ARD
 withr::local_options(width = 9999)
-print(ard, columns = "all")
+print(result$ard, columns = "all")
 ```
 :::

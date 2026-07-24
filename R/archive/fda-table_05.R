@@ -56,9 +56,9 @@ make_table_05 <- function(df,
   )
 
   if (return_ard) {
-    return(list(table = tbl, ard = ard))
+    list(table = tbl, ard = ard)
   } else {
-    return(tbl)
+    tbl
   }
 }
 
@@ -70,24 +70,24 @@ preproc_df_table_05 <- function(df,
                                 trtsdtm_var = "TRTSDTM",
                                 trtedtm_var = "TRTEDTM",
                                 u_trtdur = "days") {
-  df %>%
-    as_tibble() %>%
-    filter(.data[[saffl_var]] == "Y") %>%
-    df_explicit_na() %>%
+  df |>
+    as_tibble() |>
+    filter(.data[[saffl_var]] == "Y") |>
+    df_explicit_na() |>
     mutate(
       TRTDUR = lubridate::interval(lubridate::ymd_hms(.data[[trtsdtm_var]]), lubridate::ymd_hms(.data[[trtedtm_var]]))
-    ) %>%
+    ) |>
     mutate(
-      TRTDUR_MONTHS = TRTDUR %>% as.numeric("months"),
-      TRTDUR = TRTDUR %>% as.numeric(u_trtdur)
-    ) %>%
+      TRTDUR_MONTHS = TRTDUR |> as.numeric("months"),
+      TRTDUR = TRTDUR |> as.numeric(u_trtdur)
+    ) |>
     mutate(
-      D_ANY = (TRTDUR_MONTHS > 0) %>% with_label("Any duration (at least 1 dose)"),
-      D_LT1 = (TRTDUR_MONTHS < 1) %>% with_label("<1 month"),
-      D_GT1 = (TRTDUR_MONTHS >= 1) %>% with_label(">=1 month"),
-      D_GT3 = (TRTDUR_MONTHS >= 3) %>% with_label(">=3 months"),
-      D_GT6 = (TRTDUR_MONTHS >= 6) %>% with_label(">=6 months"),
-      D_GT12 = (TRTDUR_MONTHS >= 12) %>% with_label(">=12 months"),
+      D_ANY = (TRTDUR_MONTHS > 0) |> with_label("Any duration (at least 1 dose)"),
+      D_LT1 = (TRTDUR_MONTHS < 1) |> with_label("<1 month"),
+      D_GT1 = (TRTDUR_MONTHS >= 1) |> with_label(">=1 month"),
+      D_GT3 = (TRTDUR_MONTHS >= 3) |> with_label(">=3 months"),
+      D_GT6 = (TRTDUR_MONTHS >= 6) |> with_label(">=6 months"),
+      D_GT12 = (TRTDUR_MONTHS >= 12) |> with_label(">=12 months"),
       DUR_LBL = "Patients Treated, by duration"
     )
 }
@@ -265,21 +265,21 @@ make_table_05_rtables <- function(df,
     alt_counts_df <- alt_counts_df_preproc(alt_counts_df, id_var, arm_var, saffl_var)
   }
 
-  lyt <- basic_table_annot(show_colcounts, annotations) %>%
-    split_cols_by_arm(arm_var, lbl_overall, risk_diff) %>%
+  lyt <- basic_table_annot(show_colcounts, annotations) |>
+    split_cols_by_arm(arm_var, lbl_overall, risk_diff) |>
     analyze(
       vars = "TRTDUR",
       var_labels = lbl_trtdur,
       show_labels = "visible",
       afun = a_trtdur_stats,
       extra_args = list(u_trtdur = u_trtdur, risk_diff = risk_diff)
-    ) %>%
-    split_rows_by("DUR_LBL") %>%
+    ) |>
+    split_rows_by("DUR_LBL") |>
     count_patients_with_flags(
       var = id_var,
       flag_variables = c("D_ANY", "D_LT1", "D_GT1", "D_GT3", "D_GT6", "D_GT12"),
       riskdiff = !is.null(risk_diff)
-    ) %>%
+    ) |>
     append_topleft("Parameter")
 
   tbl <- build_table(lyt, df = df, alt_counts_df = alt_counts_df)

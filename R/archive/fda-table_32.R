@@ -36,21 +36,21 @@ make_table_32 <- function(df,
   df <- preproc_df_table_32(df, denominator, id_var, arm_var, saffl_var, subset)
   avalu <- unique(df$AVALU)[1]
 
-  df <- df %>% select(-id_var, -AVALU)
+  df <- df |> select(-id_var, -AVALU)
 
-  tbl_gts <- df %>%
+  tbl_gts <- df |>
     tbl_summary(
       by = arm_var,
       statistic = list(all_categorical() ~ "{n} ({p}%)"),
       digits = list(all_continuous() ~ c(0, 1), all_categorical() ~ c(0, 1)),
       missing = "no"
-    ) %>%
-    modify_header(label ~ paste0("**Diastolic Blood Pressure (", avalu, ")**")) %>%
-    modify_header(all_stat_cols() ~ "**{level}**  \nN = {n}") %>%
+    ) |>
+    modify_header(label ~ paste0("**Diastolic Blood Pressure (", avalu, ")**")) |>
+    modify_header(all_stat_cols() ~ "**{level}**  \nN = {n}") |>
     gtsummary::modify_column_alignment(columns = all_stat_cols(), align = "right")
 
   if (!is.null(lbl_overall)) {
-    tbl_gts <- tbl_gts %>%
+    tbl_gts <- tbl_gts |>
       add_overall(last = TRUE, col_label = paste0("**", lbl_overall, "**  \n N = {n}"))
   }
 
@@ -61,9 +61,9 @@ make_table_32 <- function(df,
 
   if (return_ard) {
     ard <- gtsummary::gather_ard(tbl_gts)
-    return(list(table = tbl, ard = ard))
+    list(table = tbl, ard = ard)
   } else {
-    return(tbl) # nocov
+    tbl # nocov
   }
 }
 

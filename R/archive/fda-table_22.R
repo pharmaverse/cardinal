@@ -18,13 +18,13 @@
 #' @examples
 #' library(dplyr)
 #'
-#' adsl <- random.cdisc.data::cadsl %>%
+#' adsl <- random.cdisc.data::cadsl |>
 #'   mutate(AGEGR1 = as.factor(case_when(
 #'     AGE >= 17 & AGE < 65 ~ ">=17 to <65",
 #'     AGE >= 65 ~ ">=65",
 #'     AGE >= 65 & AGE < 75 ~ ">=65 to <75",
 #'     AGE >= 75 ~ ">=75"
-#'   )) %>% formatters::with_label("Age Group, years")) %>%
+#'   )) |> formatters::with_label("Age Group, years")) |>
 #'   formatters::var_relabel(AGE = "Age, years")
 #'
 #' adae <- random.cdisc.data::cadae
@@ -48,8 +48,8 @@ make_table_22 <- function(df,
                           annotations = NULL) {
   assert_subset(c(vars, arm_var, saffl_var), names(df))
 
-  df <- df %>%
-    filter(.data[[saffl_var]] == "Y") %>%
+  df <- df |>
+    filter(.data[[saffl_var]] == "Y") |>
     df_explicit_na()
 
   # For percentages calculations in case of N_s, add the overall observations
@@ -71,17 +71,17 @@ make_table_22 <- function(df,
   lyt <- basic_table_annot(show_colcounts, annotations)
 
   lyt <- if (!is.null(lbl_overall) && denom != "N_s") {
-    lyt %>% split_cols_by_arm(arm_var, lbl_overall)
+    lyt |> split_cols_by_arm(arm_var, lbl_overall)
   } else {
-    lyt %>% split_cols_by_arm(arm_var)
+    lyt |> split_cols_by_arm(arm_var)
   }
 
-  lyt <- lyt %>%
+  lyt <- lyt |>
     count_patients_with_event(
       "USUBJID",
       filters = c("TRTEMFL" = "Y"),
       .labels = c(count_fraction = "Any AE, n (%)")
-    ) %>%
+    ) |>
     analyze(
       vars = vars,
       var_labels = paste0(lbl_vars, ", n (%)"),
@@ -92,7 +92,7 @@ make_table_22 <- function(df,
         df_denom = if (!is.null(alt_counts_df)) alt_counts_df else df
       ),
       show_labels = "visible"
-    ) %>%
+    ) |>
     append_topleft(c("", "Characteristic"))
 
   tbl <- build_table(lyt, df = df, alt_counts_df = alt_counts_df)
@@ -119,7 +119,7 @@ a_count_occurrences_trtem_ae <- function(df,
                                          denom = c("N_s", "N_col", "n"),
                                          id_var = "USUBJID",
                                          arm_var = "ARM") {
-  df <- df %>% filter(TRTEMFL == "Y")
+  df <- df |> filter(TRTEMFL == "Y")
   occurrences <- df[[.var]]
   ids <- factor(df[[id_var]])
   has_occurrence_per_id <- table(occurrences, ids) > 0
@@ -134,10 +134,10 @@ a_count_occurrences_trtem_ae <- function(df,
     N_s = lapply(
       lvls,
       function(x) {
-        df_denom %>%
-          filter(.data[[.var]] == x, .data[[arm_var]] == df[[arm_var]][1]) %>%
-          select(USUBJID) %>%
-          distinct() %>%
+        df_denom |>
+          filter(.data[[.var]] == x, .data[[arm_var]] == df[[arm_var]][1]) |>
+          select(USUBJID) |>
+          distinct() |>
           nrow()
       }
     ),
