@@ -143,22 +143,23 @@ make_table_09_rtables <- function(adae,
 #'
 #' @export
 make_table_09_tplyr <- function(
-    adae,
-    alt_counts_df = NULL,
-    id_var = "USUBJID",
-    arm_var = "ARM",
-    saffl_var = "SAFFL",
-    ser_var = "AESER",
-    soc_var = "AESOC",
-    pref_var = "AEDECOD",
-    lbl_soc_var = "System Organ Class",
-    lbl_pref_var = "Reported Term for Adverse Event",
-    risk_diff_pairs = NULL,
-    show_colcounts = TRUE,
-    lbl_overall = NULL,
-    prune_0 = TRUE,
-    tplyr_raw = FALSE,
-    annotations = NULL) {
+  adae,
+  alt_counts_df = NULL,
+  id_var = "USUBJID",
+  arm_var = "ARM",
+  saffl_var = "SAFFL",
+  ser_var = "AESER",
+  soc_var = "AESOC",
+  pref_var = "AEDECOD",
+  lbl_soc_var = "System Organ Class",
+  lbl_pref_var = "Reported Term for Adverse Event",
+  risk_diff_pairs = NULL,
+  show_colcounts = TRUE,
+  lbl_overall = NULL,
+  prune_0 = TRUE,
+  tplyr_raw = FALSE,
+  annotations = NULL
+) {
   # Set instructions to activate/deactivate table components
   add_alt_counts <- ifelse(!is.null(alt_counts_df), TRUE, FALSE)
   add_overall_col <- ifelse(!is.null(lbl_overall), TRUE, FALSE)
@@ -516,14 +517,15 @@ NULL
 #'
 #' @keywords internal
 create_table_09_data <- function(
-    adae,
-    alt_counts_df,
-    arm_var,
-    id_var,
-    soc_var,
-    pref_var,
-    lbl_overall = NULL,
-    risk_diff = NULL) {
+  adae,
+  alt_counts_df,
+  arm_var,
+  id_var,
+  soc_var,
+  pref_var,
+  lbl_overall = NULL,
+  risk_diff = NULL
+) {
   basis_df <- if (!is.null(alt_counts_df)) alt_counts_df else adae
   N_data <- basis_df |> # nolint
     (\(df) if (is.null(lbl_overall)) group_by(df, .data[[arm_var]]) else df)() |>
@@ -676,7 +678,6 @@ calculate_riskdiff <- function(x, y, n_x, n_y) {
 }
 
 
-
 #' Engine-Specific Functions: Table 09
 #'
 #' The table engine used by each engine-specific function is identified by its suffix.
@@ -697,15 +698,16 @@ calculate_riskdiff <- function(x, y, n_x, n_y) {
 #' tbl_gtsummary <- make_table_09_gtsummary(df = adae, denominator = adsl)
 #' tbl_gtsummary
 make_table_09_gtsummary <- function(
-    df,
-    denominator = NULL,
-    saffl_var = "SAFFL",
-    ser_var = "AESER",
-    arm_var = "ARM",
-    pref_var = "AEDECOD",
-    id_var = "USUBJID",
-    soc_var = "AESOC",
-    lbl_overall = NULL) {
+  df,
+  denominator = NULL,
+  saffl_var = "SAFFL",
+  ser_var = "AESER",
+  arm_var = "ARM",
+  pref_var = "AEDECOD",
+  id_var = "USUBJID",
+  soc_var = "AESOC",
+  lbl_overall = NULL
+) {
   assert_data_frame(df)
   assert_subset(c(saffl_var, id_var, ser_var, soc_var, arm_var, pref_var), names(df))
   assert_flag_variables(df, saffl_var)
@@ -765,16 +767,17 @@ make_table_09_gtsummary <- function(
 #' tbl <- make_table_09(df = adae, denominator = adsl)
 #' tbl
 make_table_09 <- function(
-    df,
-    denominator = NULL,
-    return_ard = TRUE,
-    id_var = "USUBJID",
-    arm_var = "ARM",
-    saffl_var = "SAFFL",
-    ser_var = "AESER",
-    soc_var = "AESOC",
-    pref_var = "AEDECOD",
-    lbl_overall = NULL) {
+  df,
+  denominator = NULL,
+  return_ard = TRUE,
+  id_var = "USUBJID",
+  arm_var = "ARM",
+  saffl_var = "SAFFL",
+  ser_var = "AESER",
+  soc_var = "AESOC",
+  pref_var = "AEDECOD",
+  lbl_overall = NULL
+) {
   tbl <- make_table_09_gtsummary(
     df = df,
     denominator = denominator,
