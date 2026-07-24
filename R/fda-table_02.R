@@ -54,7 +54,7 @@ make_table_02 <- function(df,
 
   tbl <- df |>
     gtsummary::tbl_summary(
-      by = arm_var,
+      by = dplyr::all_of(arm_var),
       include = dplyr::all_of(vars),
       type = gtsummary::all_continuous() ~ "continuous2",
       statistic = list(

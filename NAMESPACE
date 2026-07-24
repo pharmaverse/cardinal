@@ -3,6 +3,7 @@
 export(make_table_02)
 importFrom(cards,ard_continuous)
 importFrom(cardx,ard_continuous_ci)
+importFrom(dplyr,.data)
 importFrom(dplyr,all_of)
 importFrom(dplyr,everything)
 importFrom(dplyr,filter)
