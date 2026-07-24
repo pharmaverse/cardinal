@@ -73,7 +73,7 @@ make_table_08 <- function(adae,
 
   tbl_join[[arm_var]] <- with_label(tbl_join[[arm_var]], "Study Arm")
   tbl_join[[id_var]] <- with_label(tbl_join[[id_var]], "Patient ID")
-  for (i in seq_len(length(dth_vars))) {
+  for (i in seq_along(dth_vars)) {
     tbl_join[[dth_vars[i]]] <- with_label(tbl_join[[dth_vars[i]]], lbl_dth_vars[i])
   }
 

@@ -137,7 +137,7 @@ make_table_06_gtsummary <- function(df,
     tbl_stack() |>
     modify_column_indent("label", rows = !(variable %in% c("..ard_hierarchical_overall..", sae_var, disc_var)))
 
-  return(tbl)
+  tbl
 }
 
 
@@ -228,9 +228,9 @@ make_table_06 <- function(df,
   # Return ARD if desired
   if (return_ard) {
     ard <- gather_ard(tbl)
-    return(list(table = tbl, ard = ard))
+    list(table = tbl, ard = ard)
   } else {
-    return(tbl)
+    tbl
   }
 }
 

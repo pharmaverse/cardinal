@@ -535,10 +535,12 @@ create_table_09_data <- function(
   total_N <- N_data |> # nolint
     (\(df) if (is.null(lbl_overall)) group_by(df, .data[[arm_var]]) else df)() |>
     distinct(N) |>
-    (\(df) if (is.null(lbl_overall)) {
-      pivot_wider(df, names_from = all_of(arm_var), values_from = N)
-    } else {
-      rename(df, !!lbl_overall := "N")
+    (\(df) {
+      if (is.null(lbl_overall)) {
+        pivot_wider(df, names_from = all_of(arm_var), values_from = N)
+      } else {
+        rename(df, !!lbl_overall := "N")
+      }
     })()
 
   adae <- adae |>
@@ -604,15 +606,17 @@ count_subjects <- function(adae, arm_var, id_var, sub_level_vars = NULL, lbl_ove
       combined = paste0(val, " (", pct, "%)"),
       .groups = "drop"
     ) |>
-    (\(df) if (grouping) {
-      pivot_wider(df,
-        id_cols = all_of(sub_level_vars),
-        names_from = all_of(arm_var),
-        values_from = all_of(c("val", "N", "combined"))
-      )
-    } else {
-      rename(df, !!lbl_overall := "combined") |>
-        select(-c("val", "pct"))
+    (\(df) {
+      if (grouping) {
+        pivot_wider(df,
+          id_cols = all_of(sub_level_vars),
+          names_from = all_of(arm_var),
+          values_from = all_of(c("val", "N", "combined"))
+        )
+      } else {
+        rename(df, !!lbl_overall := "combined") |>
+          select(-c("val", "pct"))
+      }
     })()
 
   if (!is.null(risk_diff)) {
@@ -741,7 +745,7 @@ make_table_09_gtsummary <- function(
   }
 
 
-  return(tbl)
+  tbl
 }
 
 
@@ -785,8 +789,8 @@ make_table_09 <- function(
 
   if (return_ard) {
     ard <- gather_ard(tbl)
-    return(list(table = tbl, ard = ard))
+    list(table = tbl, ard = ard)
   } else {
-    return(tbl)
+    tbl
   }
 }

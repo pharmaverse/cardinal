@@ -56,9 +56,9 @@ make_table_05 <- function(df,
   )
 
   if (return_ard) {
-    return(list(table = tbl, ard = ard))
+    list(table = tbl, ard = ard)
   } else {
-    return(tbl)
+    tbl
   }
 }
 

@@ -61,9 +61,9 @@ make_table_32 <- function(df,
 
   if (return_ard) {
     ard <- gtsummary::gather_ard(tbl_gts)
-    return(list(table = tbl, ard = ard))
+    list(table = tbl, ard = ard)
   } else {
-    return(tbl) # nocov
+    tbl # nocov
   }
 }
 
