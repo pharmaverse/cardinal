@@ -4,57 +4,57 @@
       as.data.frame(ard$tbl_summary)[1:25, ]
     Output
          group1 group1_level variable                   variable_level  context
-      1  TRT01A      Placebo      SEX                                F tabulate
-      2  TRT01A      Placebo      SEX                                F tabulate
-      3  TRT01A      Placebo      SEX                                F tabulate
-      4  TRT01A      Placebo      SEX                                M tabulate
-      5  TRT01A      Placebo      SEX                                M tabulate
-      6  TRT01A      Placebo      SEX                                M tabulate
-      7  TRT01A      Placebo     RACE AMERICAN INDIAN OR ALASKA NATIVE tabulate
-      8  TRT01A      Placebo     RACE AMERICAN INDIAN OR ALASKA NATIVE tabulate
-      9  TRT01A      Placebo     RACE AMERICAN INDIAN OR ALASKA NATIVE tabulate
-      10 TRT01A      Placebo     RACE        BLACK OR AFRICAN AMERICAN tabulate
-      11 TRT01A      Placebo     RACE        BLACK OR AFRICAN AMERICAN tabulate
-      12 TRT01A      Placebo     RACE        BLACK OR AFRICAN AMERICAN tabulate
-      13 TRT01A      Placebo     RACE                            WHITE tabulate
-      14 TRT01A      Placebo     RACE                            WHITE tabulate
-      15 TRT01A      Placebo     RACE                            WHITE tabulate
-      16 TRT01A      Placebo   ETHNIC               HISPANIC OR LATINO tabulate
-      17 TRT01A      Placebo   ETHNIC               HISPANIC OR LATINO tabulate
-      18 TRT01A      Placebo   ETHNIC               HISPANIC OR LATINO tabulate
-      19 TRT01A      Placebo   ETHNIC           NOT HISPANIC OR LATINO tabulate
-      20 TRT01A      Placebo   ETHNIC           NOT HISPANIC OR LATINO tabulate
-      21 TRT01A      Placebo   ETHNIC           NOT HISPANIC OR LATINO tabulate
-      22 TRT01A      Placebo   AGEGR1                            18-64 tabulate
-      23 TRT01A      Placebo   AGEGR1                            18-64 tabulate
-      24 TRT01A      Placebo   AGEGR1                            18-64 tabulate
-      25 TRT01A      Placebo   AGEGR1                              >64 tabulate
+      1  TRT01A      Placebo   AGEGR1                            18-64 tabulate
+      2  TRT01A      Placebo   AGEGR1                            18-64 tabulate
+      3  TRT01A      Placebo   AGEGR1                            18-64 tabulate
+      4  TRT01A      Placebo   AGEGR1                              >64 tabulate
+      5  TRT01A      Placebo   AGEGR1                              >64 tabulate
+      6  TRT01A      Placebo   AGEGR1                              >64 tabulate
+      7  TRT01A      Placebo      SEX                                F tabulate
+      8  TRT01A      Placebo      SEX                                F tabulate
+      9  TRT01A      Placebo      SEX                                F tabulate
+      10 TRT01A      Placebo      SEX                                M tabulate
+      11 TRT01A      Placebo      SEX                                M tabulate
+      12 TRT01A      Placebo      SEX                                M tabulate
+      13 TRT01A      Placebo     RACE AMERICAN INDIAN OR ALASKA NATIVE tabulate
+      14 TRT01A      Placebo     RACE AMERICAN INDIAN OR ALASKA NATIVE tabulate
+      15 TRT01A      Placebo     RACE AMERICAN INDIAN OR ALASKA NATIVE tabulate
+      16 TRT01A      Placebo     RACE        BLACK OR AFRICAN AMERICAN tabulate
+      17 TRT01A      Placebo     RACE        BLACK OR AFRICAN AMERICAN tabulate
+      18 TRT01A      Placebo     RACE        BLACK OR AFRICAN AMERICAN tabulate
+      19 TRT01A      Placebo     RACE                            WHITE tabulate
+      20 TRT01A      Placebo     RACE                            WHITE tabulate
+      21 TRT01A      Placebo     RACE                            WHITE tabulate
+      22 TRT01A      Placebo   ETHNIC               HISPANIC OR LATINO tabulate
+      23 TRT01A      Placebo   ETHNIC               HISPANIC OR LATINO tabulate
+      24 TRT01A      Placebo   ETHNIC               HISPANIC OR LATINO tabulate
+      25 TRT01A      Placebo   ETHNIC           NOT HISPANIC OR LATINO tabulate
          stat_name stat_label       stat
-      1          n          n         53
+      1          n          n         14
       2          N          N         86
-      3          p          %  0.6162791
-      4          n          n         33
+      3          p          %  0.1627907
+      4          n          n         72
       5          N          N         86
-      6          p          %  0.3837209
-      7          n          n          0
+      6          p          %  0.8372093
+      7          n          n         53
       8          N          N         86
-      9          p          %          0
-      10         n          n          8
+      9          p          %  0.6162791
+      10         n          n         33
       11         N          N         86
-      12         p          % 0.09302326
-      13         n          n         78
+      12         p          %  0.3837209
+      13         n          n          0
       14         N          N         86
-      15         p          %  0.9069767
-      16         n          n          3
+      15         p          %          0
+      16         n          n          8
       17         N          N         86
-      18         p          % 0.03488372
-      19         n          n         83
+      18         p          % 0.09302326
+      19         n          n         78
       20         N          N         86
-      21         p          %  0.9651163
-      22         n          n         14
+      21         p          %  0.9069767
+      22         n          n          3
       23         N          N         86
-      24         p          %  0.1627907
-      25         n          n         72
+      24         p          % 0.03488372
+      25         n          n         83
                                                                                                                                                                               fmt_fun
       1  function (x) , style_number(x, digits = digits, big.mark = big.mark, decimal.mark = decimal.mark, ,     scale = scale, prefix = prefix, suffix = suffix, na = na, ,     ...)
       2  function (x) , style_number(x, digits = digits, big.mark = big.mark, decimal.mark = decimal.mark, ,     scale = scale, prefix = prefix, suffix = suffix, na = na, ,     ...)
@@ -114,57 +114,57 @@
       as.data.frame(ard$add_overall)[1:25, ]
     Output
          variable                   variable_level  context stat_name stat_label
-      1       SEX                                F tabulate         n          n
-      2       SEX                                F tabulate         N          N
-      3       SEX                                F tabulate         p          %
-      4       SEX                                M tabulate         n          n
-      5       SEX                                M tabulate         N          N
-      6       SEX                                M tabulate         p          %
-      7      RACE AMERICAN INDIAN OR ALASKA NATIVE tabulate         n          n
-      8      RACE AMERICAN INDIAN OR ALASKA NATIVE tabulate         N          N
-      9      RACE AMERICAN INDIAN OR ALASKA NATIVE tabulate         p          %
-      10     RACE        BLACK OR AFRICAN AMERICAN tabulate         n          n
-      11     RACE        BLACK OR AFRICAN AMERICAN tabulate         N          N
-      12     RACE        BLACK OR AFRICAN AMERICAN tabulate         p          %
-      13     RACE                            WHITE tabulate         n          n
-      14     RACE                            WHITE tabulate         N          N
-      15     RACE                            WHITE tabulate         p          %
-      16   ETHNIC               HISPANIC OR LATINO tabulate         n          n
-      17   ETHNIC               HISPANIC OR LATINO tabulate         N          N
-      18   ETHNIC               HISPANIC OR LATINO tabulate         p          %
-      19   ETHNIC           NOT HISPANIC OR LATINO tabulate         n          n
-      20   ETHNIC           NOT HISPANIC OR LATINO tabulate         N          N
-      21   ETHNIC           NOT HISPANIC OR LATINO tabulate         p          %
-      22   AGEGR1                            18-64 tabulate         n          n
-      23   AGEGR1                            18-64 tabulate         N          N
-      24   AGEGR1                            18-64 tabulate         p          %
-      25   AGEGR1                              >64 tabulate         n          n
+      1    AGEGR1                            18-64 tabulate         n          n
+      2    AGEGR1                            18-64 tabulate         N          N
+      3    AGEGR1                            18-64 tabulate         p          %
+      4    AGEGR1                              >64 tabulate         n          n
+      5    AGEGR1                              >64 tabulate         N          N
+      6    AGEGR1                              >64 tabulate         p          %
+      7       SEX                                F tabulate         n          n
+      8       SEX                                F tabulate         N          N
+      9       SEX                                F tabulate         p          %
+      10      SEX                                M tabulate         n          n
+      11      SEX                                M tabulate         N          N
+      12      SEX                                M tabulate         p          %
+      13     RACE AMERICAN INDIAN OR ALASKA NATIVE tabulate         n          n
+      14     RACE AMERICAN INDIAN OR ALASKA NATIVE tabulate         N          N
+      15     RACE AMERICAN INDIAN OR ALASKA NATIVE tabulate         p          %
+      16     RACE        BLACK OR AFRICAN AMERICAN tabulate         n          n
+      17     RACE        BLACK OR AFRICAN AMERICAN tabulate         N          N
+      18     RACE        BLACK OR AFRICAN AMERICAN tabulate         p          %
+      19     RACE                            WHITE tabulate         n          n
+      20     RACE                            WHITE tabulate         N          N
+      21     RACE                            WHITE tabulate         p          %
+      22   ETHNIC               HISPANIC OR LATINO tabulate         n          n
+      23   ETHNIC               HISPANIC OR LATINO tabulate         N          N
+      24   ETHNIC               HISPANIC OR LATINO tabulate         p          %
+      25   ETHNIC           NOT HISPANIC OR LATINO tabulate         n          n
                 stat
-      1          143
+      1           33
       2          254
-      3    0.5629921
-      4          111
+      3    0.1299213
+      4          221
       5          254
-      6    0.4370079
-      7            1
+      6    0.8700787
+      7          143
       8          254
-      9  0.003937008
-      10          23
+      9    0.5629921
+      10         111
       11         254
-      12  0.09055118
-      13         230
+      12   0.4370079
+      13           1
       14         254
-      15   0.9055118
-      16          12
+      15 0.003937008
+      16          23
       17         254
-      18  0.04724409
-      19         242
+      18  0.09055118
+      19         230
       20         254
-      21   0.9527559
-      22          33
+      21   0.9055118
+      22          12
       23         254
-      24   0.1299213
-      25         221
+      24  0.04724409
+      25         242
                                                                                                                                                                               fmt_fun
       1  function (x) , style_number(x, digits = digits, big.mark = big.mark, decimal.mark = decimal.mark, ,     scale = scale, prefix = prefix, suffix = suffix, na = na, ,     ...)
       2  function (x) , style_number(x, digits = digits, big.mark = big.mark, decimal.mark = decimal.mark, ,     scale = scale, prefix = prefix, suffix = suffix, na = na, ,     ...)
