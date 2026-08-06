@@ -59,13 +59,13 @@
 #' @importFrom gtsummary tbl_summary add_overall gather_ard
 #' @export
 make_table_03 <- function(df,
-                           denominator = NULL,
-                           return_ard = TRUE,
-                           id_var = "USUBJID",
-                           arm_var = "TRT01A",
-                           scrnfl_var = "SCRNFL",
-                           scrnfailfl_var = "SCRNFAILFL",
-                           scrnfail_var = "SCRNFRS") {
+                          denominator = NULL,
+                          return_ard = TRUE,
+                          id_var = "USUBJID",
+                          arm_var = "TRT01A",
+                          scrnfl_var = "SCRNFL",
+                          scrnfailfl_var = "SCRNFAILFL",
+                          scrnfail_var = "SCRNFRS") {
   stopifnot(is.data.frame(df))
   stopifnot(all(c(arm_var, id_var, scrnfl_var, scrnfailfl_var, scrnfail_var, "ENRLDT", "RANDDT") %in% names(df)))
   stopifnot(is.logical(return_ard), length(return_ard) == 1L)

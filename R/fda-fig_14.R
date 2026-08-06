@@ -53,17 +53,17 @@
 #' @importFrom cowplot get_plot_component plot_grid
 #' @export
 make_fig_14 <- function(df,
-                         arm_var = "TRT01A",
-                         saffl_var = "SAFFL",
-                         visit_var = "AVISIT",
-                         paramcd_val = "SYSBP",
-                         add_cond = NULL,
-                         x_lab = "",
-                         y_lab = NULL,
-                         yticks = NA,
-                         ggtheme = NULL,
-                         add_table = TRUE,
-                         annotations = NULL) {
+                        arm_var = "TRT01A",
+                        saffl_var = "SAFFL",
+                        visit_var = "AVISIT",
+                        paramcd_val = "SYSBP",
+                        add_cond = NULL,
+                        x_lab = "",
+                        y_lab = NULL,
+                        yticks = NA,
+                        ggtheme = NULL,
+                        add_table = TRUE,
+                        annotations = NULL) {
   stopifnot(is.data.frame(df))
   stopifnot(all(c(arm_var, saffl_var, visit_var, "AVAL", "PARAMCD") %in% names(df)))
 
@@ -159,7 +159,8 @@ make_fig_14 <- function(df,
     for (i in seq_len(nrow(tbl_n))) {
       g_tbl1 <- g_tbl1 +
         ggplot2::annotate(
-          "text", label = as.character(tbl_n$meanr[i]),
+          "text",
+          label = as.character(tbl_n$meanr[i]),
           x = tbl_n[[visit_var]][i], y = tbl_n[[arm_var]][i]
         )
     }
@@ -181,7 +182,8 @@ make_fig_14 <- function(df,
     for (i in seq_len(nrow(tbl_n))) {
       g_tbl2 <- g_tbl2 +
         ggplot2::annotate(
-          "text", label = as.character(tbl_n$n[i]),
+          "text",
+          label = as.character(tbl_n$n[i]),
           x = tbl_n[[visit_var]][i], y = tbl_n[[arm_var]][i]
         )
     }

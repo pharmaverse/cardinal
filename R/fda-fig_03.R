@@ -53,19 +53,19 @@
 #' @importFrom cowplot get_plot_component plot_grid
 #' @export
 make_fig_03 <- function(df,
-                         arm_var = "TRT01A",
-                         id_var = "USUBJID",
-                         saffl_var = "SAFFL",
-                         trtsdtm_var = "TRTSDTM",
-                         trtedtm_var = "TRTEDTM",
-                         u_trtdur = "days",
-                         dcsreas_var = "DCSREAS",
-                         x_lab = paste0("Time from first dose (", u_trtdur, ")"),
-                         y_lab = "Cumulative Incidence (%)\nAEs Leading to Treatment\nDiscontinuation",
-                         xticks = NA,
-                         ggtheme = NULL,
-                         add_table = TRUE,
-                         annotations = NULL) {
+                        arm_var = "TRT01A",
+                        id_var = "USUBJID",
+                        saffl_var = "SAFFL",
+                        trtsdtm_var = "TRTSDTM",
+                        trtedtm_var = "TRTEDTM",
+                        u_trtdur = "days",
+                        dcsreas_var = "DCSREAS",
+                        x_lab = paste0("Time from first dose (", u_trtdur, ")"),
+                        y_lab = "Cumulative Incidence (%)\nAEs Leading to Treatment\nDiscontinuation",
+                        xticks = NA,
+                        ggtheme = NULL,
+                        add_table = TRUE,
+                        annotations = NULL) {
   stopifnot(is.data.frame(df))
   stopifnot(all(c(arm_var, id_var, saffl_var, trtsdtm_var, trtedtm_var, dcsreas_var) %in% names(df)))
   stopifnot(u_trtdur %in% c("days", "weeks", "months", "years"))
@@ -185,7 +185,8 @@ make_fig_03 <- function(df,
       colors <- ifelse(tbl_n_cum$arm[i] == levels(df[[arm_var]])[1], "blue", "darkgrey")
       g_tbl_cum <- g_tbl_cum +
         ggplot2::annotate(
-          "text", label = as.character(tbl_n_cum$n[i]),
+          "text",
+          label = as.character(tbl_n_cum$n[i]),
           x = tbl_n_cum$x[i], y = tbl_n_cum$arm[i], color = colors
         )
     }

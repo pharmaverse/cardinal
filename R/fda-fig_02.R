@@ -50,17 +50,17 @@
 #' @importFrom cowplot get_plot_component plot_grid
 #' @export
 make_fig_02 <- function(df,
-                         arm_var = "TRT01A",
-                         id_var = "USUBJID",
-                         saffl_var = "SAFFL",
-                         eosdy_var = "EOSDY",
-                         u_trtdur = "days",
-                         x_lab = paste0("Time from first dose (", u_trtdur, ")"),
-                         y_lab = "Percent of Patients (%)",
-                         xticks = NA,
-                         ggtheme = NULL,
-                         add_table = TRUE,
-                         annotations = NULL) {
+                        arm_var = "TRT01A",
+                        id_var = "USUBJID",
+                        saffl_var = "SAFFL",
+                        eosdy_var = "EOSDY",
+                        u_trtdur = "days",
+                        x_lab = paste0("Time from first dose (", u_trtdur, ")"),
+                        y_lab = "Percent of Patients (%)",
+                        xticks = NA,
+                        ggtheme = NULL,
+                        add_table = TRUE,
+                        annotations = NULL) {
   stopifnot(is.data.frame(df))
   stopifnot(all(c(arm_var, id_var, saffl_var, eosdy_var) %in% names(df)))
   stopifnot(u_trtdur %in% c("days", "weeks", "months", "years"))
