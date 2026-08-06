@@ -39,22 +39,22 @@
       7   Xanomeline Low Dose     tabulate         n          n         96       96
       8   Xanomeline Low Dose     tabulate         N          N        254      254
       9   Xanomeline Low Dose     tabulate         p          %  0.3779528     37.8
-      10             HLT_0644 hierarchical         n          n          0        0
-      11             HLT_0644 hierarchical         N          N         86       86
-      12             HLT_0644 hierarchical         p          %          0        0
-      13             HLT_0644 hierarchical         n          n          7        7
-      14             HLT_0644 hierarchical         N          N         72       72
-      15             HLT_0644 hierarchical         p          % 0.09722222      9.7
-      16             HLT_0644 hierarchical         n          n          6        6
-      17             HLT_0644 hierarchical         N          N         96       96
-      18             HLT_0644 hierarchical         p          %     0.0625      6.3
-      19             HLT_0649 hierarchical         n          n          2        2
-      20             HLT_0649 hierarchical         N          N         86       86
-      21             HLT_0649 hierarchical         p          % 0.02325581      2.3
-      22             HLT_0649 hierarchical         n          n          1        1
-      23             HLT_0649 hierarchical         N          N         72       72
-      24             HLT_0649 hierarchical         p          % 0.01388889      1.4
-      25             HLT_0649 hierarchical         n          n          2        2
+      10                    3 hierarchical         n          n          0        0
+      11                    3 hierarchical         N          N         86       86
+      12                    3 hierarchical         p          %          0        0
+      13                    3 hierarchical         n          n          7        7
+      14                    3 hierarchical         N          N         72       72
+      15                    3 hierarchical         p          % 0.09722222      9.7
+      16                    3 hierarchical         n          n          6        6
+      17                    3 hierarchical         N          N         96       96
+      18                    3 hierarchical         p          %     0.0625      6.3
+      19                    4 hierarchical         n          n          2        2
+      20                    4 hierarchical         N          N         86       86
+      21                    4 hierarchical         p          % 0.02325581      2.3
+      22                    4 hierarchical         n          n          1        1
+      23                    4 hierarchical         N          N         72       72
+      24                    4 hierarchical         p          % 0.01388889      1.4
+      25                    4 hierarchical         n          n          2        2
                                                                                                                                                                                                                                                                                                                            fmt_fun
       1                                                                                                                                                                                                                                                                                                                          0
       2                                                                                                                                                                                                                                                                                                                          0
@@ -149,22 +149,22 @@
       7   Xanomeline Low Dose     tabulate         n          n         96       96
       8   Xanomeline Low Dose     tabulate         N          N        254      254
       9   Xanomeline Low Dose     tabulate         p          %  0.3779528     37.8
-      10             HLT_0644 hierarchical         n          n          2        2
-      11             HLT_0644 hierarchical         N          N         86       86
-      12             HLT_0644 hierarchical         p          % 0.02325581      2.3
-      13             HLT_0644 hierarchical         n          n          4        4
-      14             HLT_0644 hierarchical         N          N         72       72
-      15             HLT_0644 hierarchical         p          % 0.05555556      5.6
-      16             HLT_0644 hierarchical         n          n          3        3
-      17             HLT_0644 hierarchical         N          N         96       96
-      18             HLT_0644 hierarchical         p          %    0.03125      3.1
-      19             HLT_0649 hierarchical         n          n          2        2
-      20             HLT_0649 hierarchical         N          N         86       86
-      21             HLT_0649 hierarchical         p          % 0.02325581      2.3
-      22             HLT_0649 hierarchical         n          n          3        3
-      23             HLT_0649 hierarchical         N          N         72       72
-      24             HLT_0649 hierarchical         p          % 0.04166667      4.2
-      25             HLT_0649 hierarchical         n          n          1        1
+      10                    3 hierarchical         n          n          2        2
+      11                    3 hierarchical         N          N         86       86
+      12                    3 hierarchical         p          % 0.02325581      2.3
+      13                    3 hierarchical         n          n          4        4
+      14                    3 hierarchical         N          N         72       72
+      15                    3 hierarchical         p          % 0.05555556      5.6
+      16                    3 hierarchical         n          n          3        3
+      17                    3 hierarchical         N          N         96       96
+      18                    3 hierarchical         p          %    0.03125      3.1
+      19                    4 hierarchical         n          n          2        2
+      20                    4 hierarchical         N          N         86       86
+      21                    4 hierarchical         p          % 0.02325581      2.3
+      22                    4 hierarchical         n          n          3        3
+      23                    4 hierarchical         N          N         72       72
+      24                    4 hierarchical         p          % 0.04166667      4.2
+      25                    4 hierarchical         n          n          1        1
                                                                                                                                                                                                                                                                                                                            fmt_fun
       1                                                                                                                                                                                                                                                                                                                          0
       2                                                                                                                                                                                                                                                                                                                          0

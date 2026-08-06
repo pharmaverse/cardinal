@@ -55,32 +55,32 @@
       23                    <NA>                          NULL
       24                    <NA>                          NULL
       25                   AESOC      NERVOUS SYSTEM DISORDERS
-            tbl_hierarchical.variable                tbl_hierarchical.variable_level
-      1                        TRT01A                                        Placebo
-      2                        TRT01A                                        Placebo
-      3                        TRT01A                                        Placebo
-      4                        TRT01A                                 Screen Failure
-      5                        TRT01A                                 Screen Failure
-      6                        TRT01A                                 Screen Failure
-      7                        TRT01A                           Xanomeline High Dose
-      8                        TRT01A                           Xanomeline High Dose
-      9                        TRT01A                           Xanomeline High Dose
-      10                       TRT01A                            Xanomeline Low Dose
-      11                       TRT01A                            Xanomeline Low Dose
-      12                       TRT01A                            Xanomeline Low Dose
-      13 ..ard_hierarchical_overall..                                           TRUE
-      14 ..ard_hierarchical_overall..                                           TRUE
-      15 ..ard_hierarchical_overall..                                           TRUE
-      16 ..ard_hierarchical_overall..                                           TRUE
-      17 ..ard_hierarchical_overall..                                           TRUE
-      18 ..ard_hierarchical_overall..                                           TRUE
-      19                        AESOC                       NERVOUS SYSTEM DISORDERS
-      20                        AESOC                       NERVOUS SYSTEM DISORDERS
-      21                        AESOC                       NERVOUS SYSTEM DISORDERS
-      22                        AESOC                       NERVOUS SYSTEM DISORDERS
-      23                        AESOC                       NERVOUS SYSTEM DISORDERS
-      24                        AESOC                       NERVOUS SYSTEM DISORDERS
-      25                      AEDECOD PARTIAL SEIZURES WITH SECONDARY GENERALISATION
+            tbl_hierarchical.variable tbl_hierarchical.variable_level
+      1                        TRT01A                         Placebo
+      2                        TRT01A                         Placebo
+      3                        TRT01A                         Placebo
+      4                        TRT01A                  Screen Failure
+      5                        TRT01A                  Screen Failure
+      6                        TRT01A                  Screen Failure
+      7                        TRT01A            Xanomeline High Dose
+      8                        TRT01A            Xanomeline High Dose
+      9                        TRT01A            Xanomeline High Dose
+      10                       TRT01A             Xanomeline Low Dose
+      11                       TRT01A             Xanomeline Low Dose
+      12                       TRT01A             Xanomeline Low Dose
+      13 ..ard_hierarchical_overall..                            TRUE
+      14 ..ard_hierarchical_overall..                            TRUE
+      15 ..ard_hierarchical_overall..                            TRUE
+      16 ..ard_hierarchical_overall..                            TRUE
+      17 ..ard_hierarchical_overall..                            TRUE
+      18 ..ard_hierarchical_overall..                            TRUE
+      19                        AESOC        NERVOUS SYSTEM DISORDERS
+      20                        AESOC        NERVOUS SYSTEM DISORDERS
+      21                        AESOC        NERVOUS SYSTEM DISORDERS
+      22                        AESOC        NERVOUS SYSTEM DISORDERS
+      23                        AESOC        NERVOUS SYSTEM DISORDERS
+      24                        AESOC        NERVOUS SYSTEM DISORDERS
+      25                      AEDECOD                               1
          tbl_hierarchical.context tbl_hierarchical.stat_name
       1                  tabulate                          n
       2                  tabulate                          N
