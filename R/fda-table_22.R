@@ -52,14 +52,14 @@
 #' @importFrom gtsummary tbl_summary add_overall gather_ard all_categorical
 #' @export
 make_table_22 <- function(df,
-                           denominator = NULL,
-                           return_ard = TRUE,
-                           id_var = "USUBJID",
-                           arm_var = "TRT01A",
-                           saffl_var = "SAFFL",
-                           trtemfl_var = "TRTEMFL",
-                           vars = c("SEX", "AGEGR1", "RACE", "ETHNIC"),
-                           lbl_overall = NULL) {
+                          denominator = NULL,
+                          return_ard = TRUE,
+                          id_var = "USUBJID",
+                          arm_var = "TRT01A",
+                          saffl_var = "SAFFL",
+                          trtemfl_var = "TRTEMFL",
+                          vars = c("SEX", "AGEGR1", "RACE", "ETHNIC"),
+                          lbl_overall = NULL) {
   stopifnot(is.data.frame(df))
   stopifnot(all(c(id_var, arm_var, saffl_var, trtemfl_var, vars) %in% names(df)))
   stopifnot(is.logical(return_ard), length(return_ard) == 1L)

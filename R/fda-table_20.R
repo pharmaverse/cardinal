@@ -48,15 +48,15 @@
 #' @importFrom gtsummary tbl_hierarchical tbl_summary tbl_stack add_overall gather_ard all_categorical
 #' @export
 make_table_20 <- function(df,
-                           denominator = NULL,
-                           return_ard = TRUE,
-                           id_var = "USUBJID",
-                           arm_var = "TRT01A",
-                           saffl_var = "SAFFL",
-                           pref_var = "AEDECOD",
-                           aesifl_var = "AESIFL",
-                           aelabfl_var = "AELABFL",
-                           lbl_overall = NULL) {
+                          denominator = NULL,
+                          return_ard = TRUE,
+                          id_var = "USUBJID",
+                          arm_var = "TRT01A",
+                          saffl_var = "SAFFL",
+                          pref_var = "AEDECOD",
+                          aesifl_var = "AESIFL",
+                          aelabfl_var = "AELABFL",
+                          lbl_overall = NULL) {
   stopifnot(is.data.frame(df))
   stopifnot(all(c(
     "AESEV", "AESER", "AESDTH", "EOSSTT", "AEREL",

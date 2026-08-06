@@ -37,16 +37,16 @@
 #' @importFrom rlistings as_listing
 #' @export
 make_table_08 <- function(adae,
-                           adex,
-                           arm_var = "TRT01A",
-                           id_var = "USUBJID",
-                           saffl_var = "SAFFL",
-                           dth_vars = c("DTHCAUS", "DTHCAT"),
-                           lbl_dth_vars = c(
-                             "Cause of Death\nMedDRA\nPreferred Term",
-                             "Cause of Death\nVerbatim Term"
-                           ),
-                           na_level = "NA") {
+                          adex,
+                          arm_var = "TRT01A",
+                          id_var = "USUBJID",
+                          saffl_var = "SAFFL",
+                          dth_vars = c("DTHCAUS", "DTHCAT"),
+                          lbl_dth_vars = c(
+                            "Cause of Death\nMedDRA\nPreferred Term",
+                            "Cause of Death\nVerbatim Term"
+                          ),
+                          na_level = "NA") {
   stopifnot(is.data.frame(adae))
   stopifnot(is.data.frame(adex))
   stopifnot(all(c("AGE", "SEX", "AESDTH", "DTHADY", dth_vars, arm_var, id_var, saffl_var) %in% names(adae)))

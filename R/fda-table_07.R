@@ -43,11 +43,11 @@
 #' @importFrom gtsummary tbl_hierarchical tbl_stack gather_ard
 #' @export
 make_table_07 <- function(adae,
-                           denominator = NULL,
-                           return_ard = TRUE,
-                           id_var = "USUBJID",
-                           arm_var = "TRT01A",
-                           saffl_var = "SAFFL") {
+                          denominator = NULL,
+                          return_ard = TRUE,
+                          id_var = "USUBJID",
+                          arm_var = "TRT01A",
+                          saffl_var = "SAFFL") {
   stopifnot(is.data.frame(adae))
   stopifnot(all(c("TRTEMFL", "DTHFL", "DTHCAUS", arm_var, id_var, saffl_var) %in% names(adae)))
   stopifnot(is.logical(return_ard), length(return_ard) == 1L)

@@ -47,15 +47,15 @@
 #' @importFrom gtsummary tbl_hierarchical tbl_merge gather_ard
 #' @export
 make_table_09 <- function(df,
-                           denominator = NULL,
-                           return_ard = TRUE,
-                           id_var = "USUBJID",
-                           arm_var = "TRT01A",
-                           saffl_var = "SAFFL",
-                           ser_var = "AESER",
-                           soc_var = "AESOC",
-                           pref_var = "AEDECOD",
-                           lbl_overall = NULL) {
+                          denominator = NULL,
+                          return_ard = TRUE,
+                          id_var = "USUBJID",
+                          arm_var = "TRT01A",
+                          saffl_var = "SAFFL",
+                          ser_var = "AESER",
+                          soc_var = "AESOC",
+                          pref_var = "AEDECOD",
+                          lbl_overall = NULL) {
   stopifnot(is.data.frame(df))
   stopifnot(all(c(id_var, arm_var, saffl_var, ser_var, soc_var, pref_var) %in% names(df)))
   stopifnot(is.logical(return_ard), length(return_ard) == 1L)

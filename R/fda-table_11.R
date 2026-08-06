@@ -57,15 +57,15 @@
 #' @importFrom gtsummary tbl_hierarchical gather_ard
 #' @export
 make_table_11 <- function(df,
-                           denominator = NULL,
-                           return_ard = TRUE,
-                           id_var = "USUBJID",
-                           arm_var = "TRT01A",
-                           saffl_var = "SAFFL",
-                           fmqsc_var = "FMQ01SC",
-                           fmqnam_var = "FMQ01NAM",
-                           fmq_scope = "NARROW",
-                           na_level = "<Missing>") {
+                          denominator = NULL,
+                          return_ard = TRUE,
+                          id_var = "USUBJID",
+                          arm_var = "TRT01A",
+                          saffl_var = "SAFFL",
+                          fmqsc_var = "FMQ01SC",
+                          fmqnam_var = "FMQ01NAM",
+                          fmq_scope = "NARROW",
+                          na_level = "<Missing>") {
   stopifnot(is.data.frame(df))
   stopifnot(all(c("AEBODSYS", "DCSREAS", arm_var, id_var, saffl_var, fmqsc_var, fmqnam_var) %in% names(df)))
   stopifnot(toupper(fmq_scope) %in% c("NARROW", "BROAD"))

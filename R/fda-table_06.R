@@ -49,29 +49,29 @@
 #' @importFrom gtsummary tbl_hierarchical tbl_stack tbl_merge modify_column_indent gather_ard
 #' @export
 make_table_06 <- function(df,
-                           denominator,
-                           return_ard = TRUE,
-                           id_var = "USUBJID",
-                           arm_var = "TRT01A",
-                           saffl_var = "SAFFL",
-                           sae_var = "AESER",
-                           sae_cat_vars = list(
-                             "SAEs with fatal outcome" = "AESDTH",
-                             "Life-threatening SAEs" = "AESLIFE",
-                             "SAEs requiring hospitalization" = "AESHOSP",
-                             "SAEs resulting in substantial disruption of normal life functions" = "AESDISAB",
-                             "Congenital anomaly or birth defect" = "AESCONG",
-                             "Other" = "AESMIE"
-                           ),
-                           disc_var = "AEACNOTH",
-                           dose_mod_var = "AEACN",
-                           dose_mod_cat_labels = list(
-                             "DRUG INTERRUPTED" = "AE leading to interruption of study drug",
-                             "DOSE REDUCED" = "AE leading to reduction of study drug",
-                             "DOSE RATE REDUCED" = "AE leading to dose delay of study drug",
-                             "DOSE INCREASED" = "Other"
-                           ),
-                           sev_var = "AESEV") {
+                          denominator,
+                          return_ard = TRUE,
+                          id_var = "USUBJID",
+                          arm_var = "TRT01A",
+                          saffl_var = "SAFFL",
+                          sae_var = "AESER",
+                          sae_cat_vars = list(
+                            "SAEs with fatal outcome" = "AESDTH",
+                            "Life-threatening SAEs" = "AESLIFE",
+                            "SAEs requiring hospitalization" = "AESHOSP",
+                            "SAEs resulting in substantial disruption of normal life functions" = "AESDISAB",
+                            "Congenital anomaly or birth defect" = "AESCONG",
+                            "Other" = "AESMIE"
+                          ),
+                          disc_var = "AEACNOTH",
+                          dose_mod_var = "AEACN",
+                          dose_mod_cat_labels = list(
+                            "DRUG INTERRUPTED" = "AE leading to interruption of study drug",
+                            "DOSE REDUCED" = "AE leading to reduction of study drug",
+                            "DOSE RATE REDUCED" = "AE leading to dose delay of study drug",
+                            "DOSE INCREASED" = "Other"
+                          ),
+                          sev_var = "AESEV") {
   stopifnot(is.data.frame(df))
   stopifnot(is.data.frame(denominator))
   stopifnot(all(c(id_var, arm_var) %in% names(denominator)))

@@ -47,12 +47,12 @@
 #' @importFrom gtsummary tbl_hierarchical gather_ard
 #' @export
 make_table_12 <- function(df,
-                           denominator = NULL,
-                           return_ard = TRUE,
-                           id_var = "USUBJID",
-                           arm_var = "TRT01A",
-                           saffl_var = "SAFFL",
-                           pref_var = "AEDECOD") {
+                          denominator = NULL,
+                          return_ard = TRUE,
+                          id_var = "USUBJID",
+                          arm_var = "TRT01A",
+                          saffl_var = "SAFFL",
+                          pref_var = "AEDECOD") {
   stopifnot(is.data.frame(df))
   stopifnot(all(c("AEBODSYS", "DCSREAS", arm_var, id_var, saffl_var, pref_var) %in% names(df)))
   stopifnot(is.logical(return_ard), length(return_ard) == 1L)

@@ -42,14 +42,14 @@
 #' @importFrom lubridate interval ymd_hms
 #' @export
 make_table_05 <- function(df,
-                           denominator = NULL,
-                           return_ard = TRUE,
-                           id_var = "USUBJID",
-                           arm_var = "TRT01A",
-                           saffl_var = "SAFFL",
-                           trtsdtm_var = "TRTSDTM",
-                           trtedtm_var = "TRTEDTM",
-                           u_trtdur = "days") {
+                          denominator = NULL,
+                          return_ard = TRUE,
+                          id_var = "USUBJID",
+                          arm_var = "TRT01A",
+                          saffl_var = "SAFFL",
+                          trtsdtm_var = "TRTSDTM",
+                          trtedtm_var = "TRTEDTM",
+                          u_trtdur = "days") {
   stopifnot(is.data.frame(df))
   stopifnot(all(c(id_var, arm_var, saffl_var, trtsdtm_var, trtedtm_var) %in% names(df)))
   stopifnot(u_trtdur %in% c("days", "weeks", "months", "years"))
