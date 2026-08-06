@@ -32,7 +32,7 @@
 #'
 #' @return A `ggplot2` object.
 #'
-#' @examplesIf requireNamespace("random.cdisc.data", quietly = TRUE) && requireNamespace("ggplot2", quietly = TRUE) && requireNamespace("dplyr", quietly = TRUE)
+#' @examplesIf requireNamespace("random.cdisc.data", quietly = TRUE)
 #' library(dplyr)
 #'
 #' advs <- random.cdisc.data::cadvs
@@ -47,7 +47,9 @@
 #' fig
 #'
 #' @importFrom dplyr filter mutate group_by summarise ungroup sym all_of
-#' @importFrom ggplot2 ggplot aes geom_point geom_line geom_errorbar labs theme element_blank scale_y_continuous ggplot_build annotate unit element_rect element_text position_dodge
+#' @importFrom ggplot2 ggplot aes geom_point geom_line geom_errorbar labs theme
+#' @importFrom ggplot2 element_blank scale_y_continuous ggplot_build annotate unit element_rect
+#' @importFrom ggplot2 element_text position_dodge
 #' @importFrom cowplot get_plot_component plot_grid
 #' @export
 make_fig_14 <- function(df,

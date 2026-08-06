@@ -66,7 +66,7 @@ equal to or greater than the given time.
 }
 }
 \examples{
-\dontshow{if (requireNamespace("pharmaverseadam", quietly = TRUE) && requireNamespace("dplyr", quietly = TRUE) && requireNamespace("ggplot2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+\dontshow{if (requireNamespace("pharmaverseadam", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 library(dplyr)
 
 adsl <- pharmaverseadam::adsl |>

@@ -177,7 +177,9 @@ make_table_06 <- function(df,
   )
 
   dose_mod_ae <- df |>
-    dplyr::filter(.data[[dose_mod_var]] %in% c("DRUG INTERRUPTED", "DOSE REDUCED", "DOSE RATE REDUCED", "DOSE INCREASED")) |>
+    dplyr::filter(.data[[dose_mod_var]] %in% c(
+      "DRUG INTERRUPTED", "DOSE REDUCED", "DOSE RATE REDUCED", "DOSE INCREASED"
+    )) |>
     dplyr::mutate(!!dose_mod_var := dplyr::case_when(
       .data[[dose_mod_var]] == "DRUG INTERRUPTED" ~ dose_mod_cat_labels[["DRUG INTERRUPTED"]],
       .data[[dose_mod_var]] == "DOSE REDUCED" ~ dose_mod_cat_labels[["DOSE REDUCED"]],

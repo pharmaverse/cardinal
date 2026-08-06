@@ -3,58 +3,84 @@
     Code
       as.data.frame(ard$tbl_hierarchical)[1:25, ]
     Output
-         group1         group1_level    group2 group2_level variable
-      1    <NA>                 NULL      <NA>         NULL   TRT01A
-      2    <NA>                 NULL      <NA>         NULL   TRT01A
-      3    <NA>                 NULL      <NA>         NULL   TRT01A
-      4    <NA>                 NULL      <NA>         NULL   TRT01A
-      5    <NA>                 NULL      <NA>         NULL   TRT01A
-      6    <NA>                 NULL      <NA>         NULL   TRT01A
-      7    <NA>                 NULL      <NA>         NULL   TRT01A
-      8    <NA>                 NULL      <NA>         NULL   TRT01A
-      9    <NA>                 NULL      <NA>         NULL   TRT01A
-      10 TRT01A              Placebo OCMQ01NAM            1  AEDECOD
-      11 TRT01A              Placebo OCMQ01NAM            1  AEDECOD
-      12 TRT01A              Placebo OCMQ01NAM            1  AEDECOD
-      13 TRT01A Xanomeline High Dose OCMQ01NAM            1  AEDECOD
-      14 TRT01A Xanomeline High Dose OCMQ01NAM            1  AEDECOD
-      15 TRT01A Xanomeline High Dose OCMQ01NAM            1  AEDECOD
-      16 TRT01A  Xanomeline Low Dose OCMQ01NAM            1  AEDECOD
-      17 TRT01A  Xanomeline Low Dose OCMQ01NAM            1  AEDECOD
-      18 TRT01A  Xanomeline Low Dose OCMQ01NAM            1  AEDECOD
-      19 TRT01A              Placebo OCMQ01NAM            1  AEDECOD
-      20 TRT01A              Placebo OCMQ01NAM            1  AEDECOD
-      21 TRT01A              Placebo OCMQ01NAM            1  AEDECOD
-      22 TRT01A Xanomeline High Dose OCMQ01NAM            1  AEDECOD
-      23 TRT01A Xanomeline High Dose OCMQ01NAM            1  AEDECOD
-      24 TRT01A Xanomeline High Dose OCMQ01NAM            1  AEDECOD
-      25 TRT01A  Xanomeline Low Dose OCMQ01NAM            1  AEDECOD
-               variable_level      context stat_name stat_label      stat stat_fmt
-      1               Placebo     tabulate         n          n         6        6
-      2               Placebo     tabulate         N          N        29       29
-      3               Placebo     tabulate         p          % 0.2068966     20.7
-      4  Xanomeline High Dose     tabulate         n          n        12       12
-      5  Xanomeline High Dose     tabulate         N          N        29       29
-      6  Xanomeline High Dose     tabulate         p          % 0.4137931     41.4
-      7   Xanomeline Low Dose     tabulate         n          n        11       11
-      8   Xanomeline Low Dose     tabulate         N          N        29       29
-      9   Xanomeline Low Dose     tabulate         p          % 0.3793103     37.9
-      10                    1 hierarchical         n          n         0        0
-      11                    1 hierarchical         N          N         6        6
-      12                    1 hierarchical         p          %         0        0
-      13                    1 hierarchical         n          n         6        6
-      14                    1 hierarchical         N          N        12       12
-      15                    1 hierarchical         p          %       0.5       50
-      16                    1 hierarchical         n          n         8        8
-      17                    1 hierarchical         N          N        11       11
-      18                    1 hierarchical         p          % 0.7272727       73
-      19                    2 hierarchical         n          n         1        1
-      20                    2 hierarchical         N          N         6        6
-      21                    2 hierarchical         p          % 0.1666667       17
-      22                    2 hierarchical         n          n         0        0
-      23                    2 hierarchical         N          N        12       12
-      24                    2 hierarchical         p          %         0        0
-      25                    2 hierarchical         n          n         0        0
+         group1         group1_level    group2         group2_level variable
+      1    <NA>                 NULL      <NA>                 NULL   TRT01A
+      2    <NA>                 NULL      <NA>                 NULL   TRT01A
+      3    <NA>                 NULL      <NA>                 NULL   TRT01A
+      4    <NA>                 NULL      <NA>                 NULL   TRT01A
+      5    <NA>                 NULL      <NA>                 NULL   TRT01A
+      6    <NA>                 NULL      <NA>                 NULL   TRT01A
+      7    <NA>                 NULL      <NA>                 NULL   TRT01A
+      8    <NA>                 NULL      <NA>                 NULL   TRT01A
+      9    <NA>                 NULL      <NA>                 NULL   TRT01A
+      10 TRT01A              Placebo OCMQ01NAM Erectile Dysfunction  AEDECOD
+      11 TRT01A              Placebo OCMQ01NAM Erectile Dysfunction  AEDECOD
+      12 TRT01A              Placebo OCMQ01NAM Erectile Dysfunction  AEDECOD
+      13 TRT01A Xanomeline High Dose OCMQ01NAM Erectile Dysfunction  AEDECOD
+      14 TRT01A Xanomeline High Dose OCMQ01NAM Erectile Dysfunction  AEDECOD
+      15 TRT01A Xanomeline High Dose OCMQ01NAM Erectile Dysfunction  AEDECOD
+      16 TRT01A  Xanomeline Low Dose OCMQ01NAM Erectile Dysfunction  AEDECOD
+      17 TRT01A  Xanomeline Low Dose OCMQ01NAM Erectile Dysfunction  AEDECOD
+      18 TRT01A  Xanomeline Low Dose OCMQ01NAM Erectile Dysfunction  AEDECOD
+      19 TRT01A              Placebo OCMQ01NAM Erectile Dysfunction  AEDECOD
+      20 TRT01A              Placebo OCMQ01NAM Erectile Dysfunction  AEDECOD
+      21 TRT01A              Placebo OCMQ01NAM Erectile Dysfunction  AEDECOD
+      22 TRT01A Xanomeline High Dose OCMQ01NAM Erectile Dysfunction  AEDECOD
+      23 TRT01A Xanomeline High Dose OCMQ01NAM Erectile Dysfunction  AEDECOD
+      24 TRT01A Xanomeline High Dose OCMQ01NAM Erectile Dysfunction  AEDECOD
+      25 TRT01A  Xanomeline Low Dose OCMQ01NAM Erectile Dysfunction  AEDECOD
+                    variable_level      context stat_name stat_label      stat
+      1                    Placebo     tabulate         n          n         6
+      2                    Placebo     tabulate         N          N        29
+      3                    Placebo     tabulate         p          % 0.2068966
+      4       Xanomeline High Dose     tabulate         n          n        12
+      5       Xanomeline High Dose     tabulate         N          N        29
+      6       Xanomeline High Dose     tabulate         p          % 0.4137931
+      7        Xanomeline Low Dose     tabulate         n          n        11
+      8        Xanomeline Low Dose     tabulate         N          N        29
+      9        Xanomeline Low Dose     tabulate         p          % 0.3793103
+      10 APPLICATION SITE ERYTHEMA hierarchical         n          n         0
+      11 APPLICATION SITE ERYTHEMA hierarchical         N          N         6
+      12 APPLICATION SITE ERYTHEMA hierarchical         p          %         0
+      13 APPLICATION SITE ERYTHEMA hierarchical         n          n         6
+      14 APPLICATION SITE ERYTHEMA hierarchical         N          N        12
+      15 APPLICATION SITE ERYTHEMA hierarchical         p          %       0.5
+      16 APPLICATION SITE ERYTHEMA hierarchical         n          n         8
+      17 APPLICATION SITE ERYTHEMA hierarchical         N          N        11
+      18 APPLICATION SITE ERYTHEMA hierarchical         p          % 0.7272727
+      19                COLD SWEAT hierarchical         n          n         1
+      20                COLD SWEAT hierarchical         N          N         6
+      21                COLD SWEAT hierarchical         p          % 0.1666667
+      22                COLD SWEAT hierarchical         n          n         0
+      23                COLD SWEAT hierarchical         N          N        12
+      24                COLD SWEAT hierarchical         p          %         0
+      25                COLD SWEAT hierarchical         n          n         0
+         stat_fmt
+      1         6
+      2        29
+      3      20.7
+      4        12
+      5        29
+      6      41.4
+      7        11
+      8        29
+      9      37.9
+      10        0
+      11        6
+      12        0
+      13        6
+      14       12
+      15       50
+      16        8
+      17       11
+      18       73
+      19        1
+      20        6
+      21       17
+      22        0
+      23       12
+      24        0
+      25        0
                                                                                                                                                                                                                                                                                                                            fmt_fun
       1                                                                                                                                                                                                                                                                                                                          0
       2                                                                                                                                                                                                                                                                                                                          0

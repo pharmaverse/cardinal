@@ -26,7 +26,7 @@
 #'
 #' @return A `listing_df` object.
 #'
-#' @examplesIf requireNamespace("random.cdisc.data", quietly = TRUE) && requireNamespace("rlistings", quietly = TRUE) && requireNamespace("dplyr", quietly = TRUE)
+#' @examplesIf requireNamespace("random.cdisc.data", quietly = TRUE)
 #' adae <- random.cdisc.data::cadae
 #' adex <- random.cdisc.data::cadex
 #'

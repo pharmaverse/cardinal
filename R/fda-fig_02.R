@@ -31,7 +31,7 @@
 #'
 #' @return A `ggplot2` object.
 #'
-#' @examplesIf requireNamespace("pharmaverseadam", quietly = TRUE) && requireNamespace("dplyr", quietly = TRUE) && requireNamespace("ggplot2", quietly = TRUE)
+#' @examplesIf requireNamespace("pharmaverseadam", quietly = TRUE)
 #' library(dplyr)
 #'
 #' adsl <- pharmaverseadam::adsl |>
@@ -45,7 +45,8 @@
 #'
 #' @importFrom dplyr filter mutate select distinct arrange all_of
 #' @importFrom lubridate days
-#' @importFrom ggplot2 ggplot aes geom_line labs theme element_blank scale_x_continuous ggplot_build annotate unit element_rect
+#' @importFrom ggplot2 ggplot aes geom_line labs theme element_blank
+#' @importFrom ggplot2 scale_x_continuous ggplot_build annotate unit element_rect
 #' @importFrom cowplot get_plot_component plot_grid
 #' @export
 make_fig_02 <- function(df,

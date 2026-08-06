@@ -28,7 +28,7 @@
 #'
 #' @return A `gtsummary` table, or if `return_ard = TRUE`, a named list with elements `table` and `ard`.
 #'
-#' @examplesIf requireNamespace("pharmaverseadam", quietly = TRUE) && requireNamespace("dplyr", quietly = TRUE) && requireNamespace("lubridate", quietly = TRUE)
+#' @examplesIf requireNamespace("pharmaverseadam", quietly = TRUE)
 #' library(dplyr)
 #'
 #' adsl <- pharmaverseadam::adsl |>

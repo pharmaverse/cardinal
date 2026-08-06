@@ -37,7 +37,7 @@
 #'
 #' @return A `ggplot2` object.
 #'
-#' @examplesIf requireNamespace("random.cdisc.data", quietly = TRUE) && requireNamespace("ggsurvfit", quietly = TRUE) && requireNamespace("dplyr", quietly = TRUE)
+#' @examplesIf requireNamespace("random.cdisc.data", quietly = TRUE)
 #' library(dplyr)
 #'
 #' adsl <- random.cdisc.data::cadsl
@@ -47,7 +47,8 @@
 #'
 #' @importFrom dplyr filter mutate select distinct arrange all_of case_when
 #' @importFrom lubridate interval ymd_hms
-#' @importFrom ggplot2 ggplot aes labs theme element_blank scale_x_continuous scale_color_manual ggplot_build annotate unit element_rect element_text
+#' @importFrom ggplot2 ggplot aes labs theme element_blank scale_x_continuous
+#' @importFrom ggplot2 scale_color_manual ggplot_build annotate unit element_rect element_text
 #' @importFrom ggsurvfit survfit2 Surv ggsurvfit
 #' @importFrom cowplot get_plot_component plot_grid
 #' @export

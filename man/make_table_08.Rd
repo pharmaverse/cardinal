@@ -54,7 +54,7 @@ Missing values in flag variables are treated as \code{"N"}.
 }
 }
 \examples{
-\dontshow{if (requireNamespace("random.cdisc.data", quietly = TRUE) && requireNamespace("rlistings", quietly = TRUE) && requireNamespace("dplyr", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+\dontshow{if (requireNamespace("random.cdisc.data", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 adae <- random.cdisc.data::cadae
 adex <- random.cdisc.data::cadex
 

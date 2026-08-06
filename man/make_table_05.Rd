@@ -57,7 +57,7 @@ Missing values in flag variables are treated as \code{"N"}.
 }
 }
 \examples{
-\dontshow{if (requireNamespace("pharmaverseadam", quietly = TRUE) && requireNamespace("dplyr", quietly = TRUE) && requireNamespace("lubridate", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+\dontshow{if (requireNamespace("pharmaverseadam", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 library(dplyr)
 
 adsl <- pharmaverseadam::adsl |>

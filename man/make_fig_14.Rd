@@ -67,7 +67,7 @@ Missing values in flag variables are treated as \code{"N"}.
 }
 }
 \examples{
-\dontshow{if (requireNamespace("random.cdisc.data", quietly = TRUE) && requireNamespace("ggplot2", quietly = TRUE) && requireNamespace("dplyr", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+\dontshow{if (requireNamespace("random.cdisc.data", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 library(dplyr)
 
 advs <- random.cdisc.data::cadvs
