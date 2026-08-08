@@ -63,8 +63,10 @@ make_table_43 <- function(df,
                           pref_var = "AEDECOD",
                           ocmq_scope = "BROAD") {
   stopifnot(is.data.frame(df))
-  stopifnot(all(c(id_var, arm_var, saffl_var, trtemfl_var, soc_var,
-                  ocmqsc_var, ocmqnam_var, pref_var) %in% names(df)))
+  stopifnot(all(c(
+    id_var, arm_var, saffl_var, trtemfl_var, soc_var,
+    ocmqsc_var, ocmqnam_var, pref_var
+  ) %in% names(df)))
   stopifnot(is.data.frame(denominator))
   stopifnot(all(c(id_var, arm_var) %in% names(denominator)))
   stopifnot(toupper(ocmq_scope) %in% c("NARROW", "BROAD"))

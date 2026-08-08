@@ -30,7 +30,9 @@
 #' @examplesIf requireNamespace("random.cdisc.data", quietly = TRUE)
 #' library(dplyr)
 #'
-#' adsl <- random.cdisc.data::cadsl |> filter(SAFFL == "Y") |> mutate(any_ae = "Any AE")
+#' adsl <- random.cdisc.data::cadsl |>
+#'   filter(SAFFL == "Y") |>
+#'   mutate(any_ae = "Any AE")
 #' adae <- random.cdisc.data::cadae |>
 #'   filter(SAFFL == "Y", TRTEMFL == "Y") |>
 #'   slice_tail(n = 1L, by = all_of(c("USUBJID", "ARM")))
@@ -70,14 +72,14 @@ make_table_51 <- function(df,
     cards::ard_categorical(
       variables = dplyr::all_of(ard_vars),
       by = dplyr::all_of(arm_var),
-      statistic = ~ "n"
+      statistic = ~"n"
     )
 
   ard_ns <- denominator |>
     cards::ard_categorical(
       variables = dplyr::all_of(ard_vars),
       by = dplyr::all_of(arm_var),
-      statistic = ~ "n",
+      statistic = ~"n",
       stat_label = ~ list(n = "N_s")
     ) |>
     dplyr::mutate(stat_name = "N_s")
@@ -98,7 +100,7 @@ make_table_51 <- function(df,
     ard_summary,
     ard_ns,
     ard_p,
-    cards::ard_categorical(denominator, variables = dplyr::all_of(arm_var), statistic = ~ "n")
+    cards::ard_categorical(denominator, variables = dplyr::all_of(arm_var), statistic = ~"n")
   ) |>
     cards::tidy_ard_row_order()
 

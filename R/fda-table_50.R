@@ -59,8 +59,10 @@ make_table_50 <- function(df,
                           race_var = "RACE",
                           ethnic_var = "ETHNIC") {
   stopifnot(is.data.frame(df))
-  stopifnot(all(c(id_var, arm_var, saffl_var, trtemfl_var, ser_var,
-                  sex_var, age_var, race_var, ethnic_var) %in% names(df)))
+  stopifnot(all(c(
+    id_var, arm_var, saffl_var, trtemfl_var, ser_var,
+    sex_var, age_var, race_var, ethnic_var
+  ) %in% names(df)))
   stopifnot(is.data.frame(denominator))
   stopifnot(all(c(id_var, arm_var) %in% names(denominator)))
   stopifnot(is.logical(return_ard), length(return_ard) == 1L)
@@ -72,10 +74,10 @@ make_table_50 <- function(df,
       .data[[ser_var]] == "Y"
     ) |>
     dplyr::mutate(
-      SEXGR    = "Sex, n (%)",
-      SEXGR1   = as.factor(.data[[sex_var]]),
-      AGEGR    = "Age group, years, n(%)",
-      RACEGR   = "Race, n(%)",
+      SEXGR = "Sex, n (%)",
+      SEXGR1 = as.factor(.data[[sex_var]]),
+      AGEGR = "Age group, years, n(%)",
+      RACEGR = "Race, n(%)",
       ETHNICGR = "Ethnicity, n(%)",
       ETHNICGR1 = as.factor(.data[[ethnic_var]])
     )
@@ -90,7 +92,7 @@ make_table_50 <- function(df,
     id = id_var,
     by = dplyr::all_of(arm_var),
     variables = dplyr::all_of(ser_var),
-    statistic = ~ "{n} ({p}%)",
+    statistic = ~"{n} ({p}%)",
     label = stats::setNames(list("Characteristic"), ser_var)
   )
 
@@ -103,7 +105,7 @@ make_table_50 <- function(df,
     by = dplyr::all_of(arm_var),
     variables = c(SEXGR, SEXGR1),
     include = SEXGR1,
-    statistic = ~ "{n}/{N} ({p}%)"
+    statistic = ~"{n}/{N} ({p}%)"
   )
 
   tbl_age <- gtsummary::tbl_hierarchical(
@@ -113,7 +115,7 @@ make_table_50 <- function(df,
     by = dplyr::all_of(arm_var),
     variables = c(AGEGR, dplyr::all_of(age_var)),
     include = dplyr::all_of(age_var),
-    statistic = ~ "{n}/{N} ({p}%)"
+    statistic = ~"{n}/{N} ({p}%)"
   )
 
   tbl_race <- gtsummary::tbl_hierarchical(
@@ -123,7 +125,7 @@ make_table_50 <- function(df,
     by = dplyr::all_of(arm_var),
     variables = c(RACEGR, dplyr::all_of(race_var)),
     include = dplyr::all_of(race_var),
-    statistic = ~ "{n}/{N} ({p}%)"
+    statistic = ~"{n}/{N} ({p}%)"
   )
 
   tbl_ethnic <- gtsummary::tbl_hierarchical(
@@ -133,7 +135,7 @@ make_table_50 <- function(df,
     by = dplyr::all_of(arm_var),
     variables = c(ETHNICGR, ETHNICGR1),
     include = ETHNICGR1,
-    statistic = ~ "{n}/{N} ({p}%)"
+    statistic = ~"{n}/{N} ({p}%)"
   )
 
   grp_vars <- c("..ard_hierarchical_overall..", ser_var, "SEXGR", "AGEGR", "RACEGR", "ETHNICGR")

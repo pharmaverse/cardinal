@@ -14,9 +14,12 @@ test_that("make_table_45() works", {
       OCMQ01NAM = if_else(
         SEX == "F",
         as.factor(sample(
-          c("Abnormal Uterine Bleeding", "Amenorrhea", "Bacterial Vaginosis",
-            "Decreased Menstrual Bleeding"),
-          n(), replace = TRUE
+          c(
+            "Abnormal Uterine Bleeding", "Amenorrhea", "Bacterial Vaginosis",
+            "Decreased Menstrual Bleeding"
+          ),
+          n(),
+          replace = TRUE
         )),
         NA_character_
       )
