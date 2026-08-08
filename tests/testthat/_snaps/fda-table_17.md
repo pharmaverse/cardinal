@@ -1,4 +1,4 @@
-# fda-table_17() works
+# make_table_17() works
 
     Code
       as.data.frame(ard$`OCMQ01SC="BROAD"`$tbl_hierarchical)[1:25, ]

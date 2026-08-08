@@ -1,4 +1,4 @@
-# fda-table_07() works
+# make_table_07() works
 
     Code
       as.data.frame(ard[[1]][[1]]$tbl_hierarchical)

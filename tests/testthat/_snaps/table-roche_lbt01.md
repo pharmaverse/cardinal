@@ -1,4 +1,4 @@
-# table-roche_lbt01() works
+# make_table_roche_lbt01() works
 
     Code
       as.data.frame(ard$`PARAM="Alanine Aminotransferase (U/L)"`$tbl_baseline_chg)[1:
@@ -328,4 +328,3 @@
       23    NULL  NULL     stat_3
       24    NULL  NULL     stat_3
       25    NULL  NULL     stat_3
-

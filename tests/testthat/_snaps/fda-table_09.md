@@ -1,4 +1,4 @@
-# fda-table_09() works
+# make_table_09() works
 
     Code
       as.data.frame(data)

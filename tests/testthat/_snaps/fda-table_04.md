@@ -1,4 +1,4 @@
-# fda-table_04() works
+# make_table_04() works
 
     Code
       as.data.frame(ard$tbl_summary)[1:25, ]

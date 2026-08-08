@@ -1,4 +1,4 @@
-# fda-table_50() works
+# make_table_50() works
 
     Code
       as.data.frame(ard[[1]]$tbl_hierarchical)[1:25, ]
@@ -547,4 +547,3 @@
       NA.4    NULL  NULL       <NA>
       NA.5    NULL  NULL       <NA>
       NA.6    NULL  NULL       <NA>
-

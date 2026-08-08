@@ -1,4 +1,4 @@
-# fda-table_51() works
+# make_table_51() works
 
     Code
       as.data.frame(ard$tbl_ard_summary)[1:25, ]
@@ -107,4 +107,3 @@
       23    NULL  NULL     stat_1
       24    NULL  NULL     stat_1
       25    NULL  NULL     stat_1
-

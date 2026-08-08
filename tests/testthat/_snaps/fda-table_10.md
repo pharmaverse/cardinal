@@ -1,4 +1,4 @@
-# fda-table_10() works
+# make_table_10() works
 
     Code
       as.data.frame(ard)[1:25, ]
