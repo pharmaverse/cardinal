@@ -1,61 +1,31 @@
-test_that("fda-table_11() works", {
+test_that("make_table_11() works", {
   skip_if_not_installed("dplyr")
   skip_if_not_installed("cards")
   skip_if_not_installed("gtsummary")
-  skip_if_not_installed("pharmaverseadam")
+  skip_if_not_installed("random.cdisc.data")
 
   library(dplyr)
-  library(cards)
-  library(gtsummary)
 
-  adsl <- pharmaverseadam::adsl
-  adae <- pharmaverseadam::adae
-
-  # Pre-Processing - OCMQ information
   set.seed(1)
-  adae <- adae |>
+  adsl <- random.cdisc.data::cadsl
+  adae <- random.cdisc.data::cadae |>
+    rename(FMQ01SC = SMQ01SC) |>
     mutate(
-      OCMQ01SC = sample(c("NARROW", "BROAD"), size = nrow(adae), replace = TRUE),
-      OCMQ01NAM = sample(c("OCMQ1", "OCMQ2", "OCMQ3"), size = nrow(adae), replace = TRUE),
-      AE_serious = sample(c("Y", "N"), size = nrow(adae), replace = TRUE)
+      FMQ01NAM = sample(c("FMQ1", "FMQ2", "FMQ3"), size = n(), replace = TRUE)
     )
-  # Use safety population, Serious Adverse Event only and Narrow OCMQ
-  data <- adae |>
-    filter(SAFFL == "Y", AE_serious == "Y", OCMQ01SC == "NARROW")
+  adae$DCSREAS[is.na(adae$DCSREAS)] <- "ADVERSE EVENT"
+  adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
 
-  sliced_data <- data |>
-    count(AEBODSYS, sort = TRUE) |>
-    slice_head(n = 3) %>% # keep top 3 for display purposes
-    pull(AEBODSYS)
-
-  data <- data |>
-    filter(AEBODSYS %in% sliced_data)
-
-  # Stack ARD results of two analyses
-  ard <- ard_stack_hierarchical(
-    data,
-    variables = c(AEBODSYS, OCMQ01NAM),
-    by = TRT01A,
+  result <- make_table_11(
+    df = adae,
     denominator = adsl,
-    id = USUBJID
+    arm_var = "ARM",
+    id_var = "USUBJID",
+    saffl_var = "SAFFL",
+    fmqsc_var = "FMQ01SC",
+    fmqnam_var = "FMQ01NAM"
   )
 
-  tbl <- data |>
-    tbl_hierarchical(
-      variables = c(AEBODSYS, OCMQ01NAM),
-      by = TRT01A,
-      id = USUBJID,
-      include = OCMQ01NAM,
-      denominator = adsl,
-      overall_row = FALSE,
-      label = list(
-        AEBODSYS = "**Organ System**",
-        OCMQ01NAM = "**OCMQ (Narrow)**"
-      )
-    )
-
-
-  ard <- gtsummary::gather_ard(tbl)
-
+  ard <- result$ard
   expect_snapshot(as.data.frame(ard$tbl_hierarchical)[1:25, ])
 })

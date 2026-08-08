@@ -2,25 +2,28 @@
 % Please edit documentation in R/fda-table_33.R
 \name{make_table_33}
 \alias{make_table_33}
-\title{FDA Table 33: Percentage of Patients Meeting Specific Hypotension Levels Postbaseline,
-Safety Population, Pooled Analysis}
+\title{FDA Table 33: Patients With Adverse Events by OCMQ (Narrow Scope) and Preferred Term,
+Safety Population, Pooled Analyses}
 \usage{
 make_table_33(
   df,
-  denominator = NULL,
+  denominator,
   return_ard = TRUE,
   id_var = "USUBJID",
   arm_var = "TRT01A",
-  saffl_var = "SAFFL",
-  avisitn_min = 1,
-  lbl_overall = NULL
+  ocmqnam_var = "OCMQ01NAM",
+  pref_var = "AEDECOD",
+  ocmq_scope = "NARROW",
+  na_level = "<Missing>"
 )
 }
 \arguments{
-\item{df}{(\code{data.frame})\cr vital signs dataset (typically ADVS) required to build the table.}
+\item{df}{(\code{data.frame})\cr pre-processed dataset required to build the table. The caller is
+responsible for pre-filtering (e.g. safety population, sex, OCMQ scope), selecting the
+relevant columns, and handling missing levels before passing to this function.}
 
-\item{denominator}{(\code{data.frame} or \code{NULL})\cr dataset used as the denominator (typically ADSL).
-If \code{NULL}, \code{df} is used.}
+\item{denominator}{(\code{data.frame})\cr dataset used as the denominator. Typically derived from
+\code{df} via \code{dplyr::distinct(id_var, arm_var)}.}
 
 \item{return_ard}{(\code{flag})\cr whether an ARD should be returned. Defaults to \code{TRUE}.}
 
@@ -29,41 +32,61 @@ If \code{NULL}, \code{df} is used.}
 \item{arm_var}{(\code{character})\cr name of the treatment arm variable used to split table into columns.
 Defaults to \code{"TRT01A"}.}
 
-\item{saffl_var}{(\code{character})\cr name of the safety flag variable. Defaults to \code{"SAFFL"}.}
+\item{ocmqnam_var}{(\code{character})\cr name of the OCMQ name variable. Defaults to \code{"OCMQ01NAM"}.}
 
-\item{avisitn_min}{(\code{numeric})\cr minimum value of \code{AVISITN} to include (postbaseline filter).
-Defaults to \code{1}.}
+\item{pref_var}{(\code{character})\cr name of the preferred term variable. Defaults to \code{"AEDECOD"}.}
 
-\item{lbl_overall}{(\code{character} or \code{NULL})\cr label for the overall column. If \code{NULL} (default),
-no overall column is added.}
+\item{ocmq_scope}{(\code{character})\cr OCMQ scope label used in the row group header. Defaults to
+\code{"NARROW"}, which produces the label \code{"OCMQ (Narrow)"}.}
+
+\item{na_level}{(\code{character})\cr string label used for missing value levels. Defaults to
+\code{"<Missing>"}. Expected to have been applied to \code{df} by the caller before passing to this
+function (e.g. via \code{forcats::fct_na_value_to_level()}).}
 }
 \value{
 A \code{gtsummary} table, or if \code{return_ard = TRUE}, a named list with elements \code{table} and \code{ard}.
 }
 \description{
-Creates FDA Table 33 showing the percentage of patients meeting specific hypotension criteria,
-including systolic BP < 90 and diastolic BP < 60, based on postbaseline values.
+Creates FDA Table 33 showing patients with adverse events by oncology condition medical query
+(OCMQ, narrow scope) and preferred term.
 }
 \details{
 \itemize{
-\item \code{df} must contain \code{PARAMCD}, \code{AVAL}, \code{AVALU}, \code{AVISITN}, and the variables specified by
-\code{saffl_var}, \code{arm_var}, and \code{id_var}.
-\item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false).
-Missing values in flag variables are treated as \code{"N"}.
-\item Hypotension criteria: systolic BP < 90 (\code{PARAMCD == "SYSBP"}) and diastolic BP < 60
-(\code{PARAMCD == "DIABP"}), based on minimum postbaseline values per patient.
+\item Pre-processing (filtering to safety population, sex, and OCMQ scope; selecting columns;
+converting \code{NA} values to an explicit level via \code{forcats::fct_na_value_to_level()}) is the
+caller's responsibility and must be done before calling this function.
+\item \code{df} must contain the variables specified by \code{id_var}, \code{arm_var}, \code{ocmqnam_var}, and \code{pref_var}.
+\item \code{denominator} must contain the variables specified by \code{id_var} and \code{arm_var}.
 \item Numbers in table represent the absolute numbers of patients and fraction of \code{N}.
 \item When \code{return_ard = TRUE}, returns a named list with elements \code{table} and \code{ard}.
 }
 }
 \examples{
-\dontshow{if (requireNamespace("random.cdisc.data", quietly = TRUE) && requireNamespace("dplyr", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+\dontshow{if (requireNamespace("pharmaverseadam", quietly = TRUE) && requireNamespace("forcats", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 library(dplyr)
+library(forcats)
 
-adsl <- random.cdisc.data::cadsl
-advs <- random.cdisc.data::cadvs
+set.seed(1)
+adae <- pharmaverseadam::adae
+adae <- rename(adae, OCMQ01SC = AEHLTCD, OCMQ01NAM = AEHLT)
+levels(adae$OCMQ01SC) <- c("BROAD", "NARROW")
+adae$OCMQ01SC[is.na(adae$OCMQ01SC)] <- "NARROW"
+adae$OCMQ01NAM <- factor(adae$OCMQ01NAM, levels = c("Erectile Dysfunction", "Gynecomastia"))
+adae$OCMQ01NAM[adae$SEX == "M"] <- as.factor(
+  sample(c("Erectile Dysfunction", "Gynecomastia"), sum(adae$SEX == "M"), replace = TRUE)
+)
 
-result <- make_table_33(df = advs, denominator = adsl, arm_var = "ARM")
+data <- adae |>
+  filter(
+    SAFFL == "Y", SEX == "M", OCMQ01SC == "NARROW",
+    AEDECOD \%in\% c("COUGH", "COLD SWEAT", "SOMNOLENCE", "APPLICATION SITE ERYTHEMA")
+  ) |>
+  select(OCMQ01SC, TRT01A, OCMQ01NAM, AEDECOD, USUBJID) |>
+  mutate(across(everything(), ~ fct_na_value_to_level(as.factor(.), level = "<Missing>")))
+
+denom <- data |> distinct(USUBJID, TRT01A)
+
+result <- make_table_33(df = data, denominator = denom)
 result$table
 \dontshow{\}) # examplesIf}
 }

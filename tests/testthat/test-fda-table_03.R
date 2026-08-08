@@ -1,28 +1,23 @@
-test_that("fda-table_03() works", {
+test_that("make_table_03() works", {
   skip_if_not_installed("dplyr")
   skip_if_not_installed("cards")
   skip_if_not_installed("gtsummary")
   skip_if_not_installed("pharmaverseadam")
 
   library(dplyr)
-  library(cards)
-  library(gtsummary)
-
-  adsl <- pharmaverseadam::adsl
 
   set.seed(1)
   scrnfail_reas_lvls <- c(
     "Inclusion/exclusion criteria not met", "Subject noncompliance", "Consent withdrawn", "Other"
   )
-  data <- adsl |>
+  adsl <- pharmaverseadam::adsl |>
     mutate(
       ENRLDT = RANDDT,
-      ENRLFL = !is.na(ENRLDT),
-      RANDFL = !is.na(RANDDT),
-      SCRNFL = TRUE,
-      SCRNFRS = NA_character_
+      SCRNFL = "Y",
+      SCRNFRS = NA_character_,
+      SCRNFAILFL = ifelse(is.na(ENRLDT), "Y", "N")
     ) |>
-    mutate( # set screen failure reasons for relevant observations.
+    mutate(
       SCRNFRS = factor(
         replace(
           SCRNFRS,
@@ -33,39 +28,15 @@ test_that("fda-table_03() works", {
       )
     )
 
-  tbl_scrn <- tbl_summary(
-    data = data,
-    include = "SCRNFL",
-    missing = "no",
-    label = ~"Subjects screened"
+  result <- make_table_03(
+    df = adsl,
+    arm_var = "TRT01A",
+    id_var = "USUBJID",
+    scrnfl_var = "SCRNFL",
+    scrnfailfl_var = "SCRNFAILFL",
+    scrnfail_var = "SCRNFRS"
   )
 
-  tbl_scrnfrs <- tbl_hierarchical(
-    data = data,
-    denominator = adsl,
-    id = USUBJID,
-    variables = "SCRNFRS",
-    label = list(..ard_hierarchical_overall.. = "Screening failures"),
-    overall_row = TRUE
-  ) |>
-    modify_indent(columns = label, rows = row_type == "level", indent = 4L) |>
-    modify_indent(columns = label, rows = variable == "SCRNFRS", indent = 8L)
-
-  tbl_enrl_rand <- tbl_summary(
-    data = data,
-    include = c("ENRLFL", "RANDFL"),
-    missing = "no",
-    label = list(ENRLFL = "Subjects enrolled", RANDFL = "Subjects randomized")
-  )
-
-  tbl <- list(tbl_scrn, tbl_scrnfrs, tbl_enrl_rand) |>
-    tbl_stack() |>
-    modify_header(label = "**Disposition**")
-
-
-  ard <- gtsummary::gather_ard(tbl)
-
-  expect_snapshot(as.data.frame(ard[[1]]$tbl_summary)[1:25, ])
-  expect_snapshot(as.data.frame(ard[[2]]$tbl_hierarchical)[1:25, ])
-  expect_snapshot(as.data.frame(ard[[3]]$tbl_summary)[1:25, ])
+  ard <- result$ard
+  expect_snapshot(as.data.frame(ard$tbl_summary)[1:25, ])
 })

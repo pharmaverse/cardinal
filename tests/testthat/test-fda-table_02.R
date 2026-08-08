@@ -8,7 +8,7 @@ test_that("make_table_02() works", {
   adsl <- pharmaverseadam::adsl |>
     filter(TRT01A != "Screen Failure")
 
-  result <- make_table_02(df = adsl)
+  result <- make_table_02(df = adsl, vars = c("SEX", "AGE", "AGEGR1", "ETHNIC", "RACE"))
 
   ard <- result$ard
 

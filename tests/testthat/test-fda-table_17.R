@@ -1,64 +1,46 @@
-test_that("fda-table_17() works", {
+test_that("make_table_17() works", {
   skip_if_not_installed("dplyr")
-  skip_if_not_installed("forcats")
   skip_if_not_installed("cards")
   skip_if_not_installed("gtsummary")
-  skip_if_not_installed("pharmaverseadam")
+  skip_if_not_installed("random.cdisc.data")
 
   library(dplyr)
-  library(cards)
-  library(gtsummary)
 
-  adae <- pharmaverseadam::adae |>
-    rename(OCMQ01SC = AEHLTCD, OCMQ01NAM = AEHLT)
-
-  adsl <- pharmaverseadam::adsl
-
-  set.seed(23)
-  adae$OCMQ01SC <- sample(c("BROAD", "NARROW"), size = nrow(adae), replace = TRUE)
-
-  # Pre-processing --------------------------------------------
-  adae <- adae |>
-    # safety population
-    filter(SAFFL == "Y") |>
-    # filter 0CMQ to truncate table
-    filter(
-      OCMQ01NAM %in%
-        c("HLT_0649", "HLT_0644", " HLT_0570", " HLT_0256", "HLT_0742", "HLT_0244", "HLT_0097", "HLT_0738")
+  set.seed(1)
+  adsl <- random.cdisc.data::cadsl
+  adae <- random.cdisc.data::cadae |>
+    rename(FMQ01SC = SMQ01SC, FMQ01NAM = SMQ01NAM)
+  levels(adae$FMQ01SC) <- c("BROAD", "NARROW")
+  adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
+  adae$FMQ01NAM <- factor(
+    adae$FMQ01NAM,
+    levels = c(
+      unique(adae$FMQ01NAM),
+      "Abnormal Uterine Bleeding", "Amenorrhea",
+      "Bacterial Vaginosis", "Decreased Menstrual Bleeding"
     )
+  )
+  adae$FMQ01NAM[adae$SEX == "F"] <- as.factor(
+    sample(
+      c("Abnormal Uterine Bleeding", "Amenorrhea", "Bacterial Vaginosis", "Decreased Menstrual Bleeding"),
+      sum(adae$SEX == "F"),
+      replace = TRUE
+    )
+  )
 
-  adsl <- adsl |>
-    # safety population
-    filter(SAFFL == "Y")
+  result <- make_table_17(
+    df = adae,
+    denominator = adsl,
+    arm_var = "ARM",
+    id_var = "USUBJID",
+    saffl_var = "SAFFL",
+    fmqsc_var = "FMQ01SC",
+    fmqnam_var = "FMQ01NAM",
+    pref_var = "AEDECOD",
+    sex_scope = "F",
+    fmq_scope = "NARROW"
+  )
 
-  tbl <- adae |>
-    select(OCMQ01SC, TRT01A, OCMQ01NAM, AEBODSYS, USUBJID) |>
-    # setting an explicit level for NA values so empty strata combinations are shown.
-    mutate(across(everything(), ~ {
-      if (anyNA(.)) {
-        forcats::fct_na_value_to_level(as.factor(.), level = "<Missing>")
-      } else {
-        .
-      }
-    })) |>
-    tbl_strata(
-      strata = OCMQ01SC,
-      ~ tbl_hierarchical(
-        .x,
-        by = TRT01A,
-        variables = c(AEBODSYS, OCMQ01NAM),
-        id = USUBJID,
-        denominator = adsl,
-        # variables to calculate rates for
-        include = c(OCMQ01NAM),
-        label = list(OCMQ01NAM ~ "OCMQ", AEBODSYS ~ "System Organ Class")
-      )
-    ) |>
-    modify_missing_symbol("NA", columns = everything(), rows = row_type == "level")
-
-
-  ard <- gtsummary::gather_ard(tbl)
-
-  expect_snapshot(as.data.frame(ard$`OCMQ01SC="BROAD"`$tbl_hierarchical)[1:25, ])
-  expect_snapshot(as.data.frame(ard$`OCMQ01SC="NARROW"`$tbl_hierarchical)[1:25, ])
+  ard <- result$ard
+  expect_snapshot(as.data.frame(ard$tbl_hierarchical)[1:25, ])
 })

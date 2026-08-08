@@ -1,4 +1,4 @@
-test_that("fda-table_45() works", {
+test_that("make_table_45() works", {
   skip_if_not_installed("dplyr")
   skip_if_not_installed("cards")
   skip_if_not_installed("gtsummary")
@@ -6,65 +6,46 @@ test_that("fda-table_45() works", {
   skip_if_not_installed("forcats")
 
   library(dplyr)
-  library(cards)
-  library(gtsummary)
-
-  adsl <- pharmaverseadam::adsl
-  adae <- pharmaverseadam::adae
 
   set.seed(1)
-  adae <- adae |>
+  adae <- pharmaverseadam::adae |>
     mutate(
-      OCMQ01SC = as.factor(sample(c("BROAD", "NARROW"), nrow(adae), replace = TRUE)),
+      OCMQ01SC = as.factor(sample(c("BROAD", "NARROW"), n(), replace = TRUE)),
       OCMQ01NAM = if_else(
         SEX == "F",
         as.factor(sample(
-          c("Abnormal Uterine Bleeding", "Amenorrhea", "Bacterial Vaginosis", "Decreased Menstrual Bleeding"),
-          n(),
-          replace = TRUE
+          c("Abnormal Uterine Bleeding", "Amenorrhea", "Bacterial Vaginosis",
+            "Decreased Menstrual Bleeding"),
+          n(), replace = TRUE
         )),
         NA_character_
       )
     )
 
-  # Pre-processing --------------------------------------------
   data <- adae |>
     filter(
       SAFFL == "Y",
       SEX == "F",
       OCMQ01SC == "BROAD",
-      # Filtering to reduce the size of the demo table
       AEDECOD %in% c("APPLICATION SITE IRRITATION", "ERYTHEMA", "APPLICATION SITE PRURITUS", "BACK PAIN")
     ) |>
     select(OCMQ01SC, TRT01A, OCMQ01NAM, AEDECOD, USUBJID) |>
-    # setting an explicit level for NA values so empty strata combinations are shown.
     mutate(across(everything(), ~ {
-      if (anyNA(.)) {
-        forcats::fct_na_value_to_level(as.factor(.), level = "<Missing>")
-      } else {
-        .
-      }
+      if (anyNA(.)) forcats::fct_na_value_to_level(as.factor(.), level = "<Missing>") else .
     }))
 
-  # denominator values include only Female subjects in the arm with AEs
   denom <- data |> distinct(USUBJID, TRT01A)
 
-  tbl <- data |>
-    tbl_hierarchical(
-      by = TRT01A,
-      variables = c(OCMQ01NAM, AEDECOD),
-      id = USUBJID,
-      denominator = denom,
-      # variables to calculate rates for
-      include = c(AEDECOD),
-      label = list(
-        OCMQ01NAM ~ "OCMQ (Broad)",
-        AEDECOD ~ "Preferred Term"
-      )
-    )
+  result <- make_table_45(
+    df = data,
+    denominator = denom,
+    arm_var = "TRT01A",
+    id_var = "USUBJID",
+    ocmqnam_var = "OCMQ01NAM",
+    pref_var = "AEDECOD",
+    ocmq_scope = "BROAD"
+  )
 
-
-  ard <- gtsummary::gather_ard(tbl)
-
+  ard <- result$ard
   expect_snapshot(as.data.frame(ard$tbl_hierarchical)[1:25, ])
 })

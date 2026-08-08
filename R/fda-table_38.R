@@ -1,101 +1,99 @@
-#' FDA Table 38: Patients With Adverse Events by System Organ Class, FDA Medical Query (Broad)
-#'   and Preferred Term, Safety Population, Pooled Analysis
+#' FDA Table 38: Percentage of Patients Meeting Specific Hypotension Criteria Postbaseline,
+#'   Safety Population, Pooled Analysis
 #'
 #' @description
-#' Creates FDA Table 38 showing patients with adverse events by System Organ Class (SOC),
-#' FDA Medical Query (FMQ, Broad scope) and Preferred Term (PT).
+#' Creates FDA Table 38 showing the percentage of patients meeting specific hypotension criteria
+#' (systolic BP < 90 and diastolic BP < 60) based on the minimum postbaseline value per subject
+#' per parameter.
 #'
-#' @param df (`data.frame`)\cr adverse events dataset (typically ADAE) required to build the table.
-#' @param denominator (`data.frame` or `NULL`)\cr dataset used as the denominator (typically ADSL).
-#'   If `NULL`, `df` is used.
+#' @param df (`data.frame`)\cr vital signs dataset (typically ADVS) required to build the table.
+#' @param denominator (`data.frame`)\cr dataset used as the denominator for header N values.
+#'   Typically ADSL pre-filtered to the safety population. Must contain `arm_var`.
 #' @param return_ard (`flag`)\cr whether an ARD should be returned. Defaults to `TRUE`.
 #' @param id_var (`character`)\cr name of the subject identifier variable. Defaults to `"USUBJID"`.
 #' @param arm_var (`character`)\cr name of the treatment arm variable used to split table into columns.
 #'   Defaults to `"TRT01A"`.
 #' @param saffl_var (`character`)\cr name of the safety flag variable. Defaults to `"SAFFL"`.
-#' @param soc_var (`character`)\cr name of the System Organ Class variable. Defaults to `"AEBODSYS"`.
-#' @param fmqsc_var (`character`)\cr name of the FMQ scope variable. Defaults to `"FMQ01SC"`.
-#' @param fmqnam_var (`character`)\cr name of the FMQ name variable. Defaults to `"FMQ01NAM"`.
-#' @param fmq_scope (`character`)\cr FMQ scope to filter on: `"NARROW"` or `"BROAD"`.
-#'   Defaults to `"BROAD"`.
-#' @param pref_var (`character`)\cr name of the preferred term variable. Defaults to `"AEDECOD"`.
-#' @param na_level (`character`)\cr string used to label missing values. Defaults to `"<Missing>"`.
+#' @param avisitn_min (`numeric`)\cr minimum value of `AVISITN` for the postbaseline filter.
+#'   Defaults to `2`.
 #'
 #' @details
-#' * `df` must contain `AEBODSYS`, and the variables specified by `arm_var`, `id_var`, `saffl_var`,
-#'   `fmqsc_var`, `fmqnam_var`, and `pref_var`.
-#' * Only records with `fmqsc_var == fmq_scope` are included.
-#' * Flag variables (i.e. `XXXFL`) are expected to have two levels: `"Y"` (true) and `"N"` (false).
-#'   Missing values in flag variables are treated as `"N"`.
+#' * `df` must contain `PARAMCD`, `AVAL`, `AVISITN`, `VSORRESU`, and the variables specified by
+#'   `saffl_var`, `arm_var`, and `id_var`.
+#' * Rows are filtered to safety population (`saffl_var == "Y"`),
+#'   `PARAMCD %in% c("DIABP", "SYSBP")`, and `AVISITN >= avisitn_min`.
+#'   The minimum `AVAL` per subject per `PARAMCD` is selected.
+#' * Two hypotension flags are derived: `SBP90` (`PARAMCD == "SYSBP" & AVAL < 90`) and
+#'   `DBP60` (`PARAMCD == "DIABP" & AVAL < 60`).
+#' * `denominator` should already be pre-filtered to the safety population.
 #' * Numbers in table represent the absolute numbers of patients and fraction of `N`.
 #' * When `return_ard = TRUE`, returns a named list with elements `table` and `ard`.
 #'
 #' @return A `gtsummary` table, or if `return_ard = TRUE`, a named list with elements `table` and `ard`.
 #'
-#' @examplesIf requireNamespace("random.cdisc.data", quietly = TRUE) && requireNamespace("dplyr", quietly = TRUE)
+#' @examplesIf requireNamespace("pharmaverseadam", quietly = TRUE)
 #' library(dplyr)
 #'
-#' adsl <- random.cdisc.data::cadsl
-#' adae <- random.cdisc.data::cadae
+#' adsl <- pharmaverseadam::adsl |> filter(SAFFL == "Y")
+#' advs <- pharmaverseadam::advs
 #'
-#' set.seed(1)
-#' adae <- adae |>
-#'   rename(FMQ01SC = SMQ01SC) |>
-#'   mutate(
-#'     FMQ01NAM = sample(c("FMQ1", "FMQ2", "FMQ3"), size = nrow(adae), replace = TRUE)
-#'   )
-#' adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "BROAD"
-#'
-#' result <- make_table_38(df = adae, denominator = adsl, arm_var = "ARM")
+#' result <- make_table_38(df = advs, denominator = adsl)
 #' result$table
 #'
-#' @importFrom dplyr filter all_of
-#' @importFrom gtsummary tbl_hierarchical gather_ard
+#' @importFrom dplyr filter slice_min mutate distinct all_of
+#' @importFrom cards bind_ard ard_tabulate_value ard_tabulate
+#' @importFrom gtsummary tbl_ard_summary modify_header all_stat_cols gather_ard
 #' @export
 make_table_38 <- function(df,
-                          denominator = NULL,
+                          denominator,
                           return_ard = TRUE,
                           id_var = "USUBJID",
                           arm_var = "TRT01A",
                           saffl_var = "SAFFL",
-                          soc_var = "AEBODSYS",
-                          fmqsc_var = "FMQ01SC",
-                          fmqnam_var = "FMQ01NAM",
-                          fmq_scope = "BROAD",
-                          pref_var = "AEDECOD",
-                          na_level = "<Missing>") {
+                          avisitn_min = 2) {
   stopifnot(is.data.frame(df))
-  stopifnot(all(c(soc_var, arm_var, id_var, saffl_var, fmqsc_var, fmqnam_var, pref_var) %in% names(df)))
-  stopifnot(toupper(fmq_scope) %in% c("NARROW", "BROAD"))
+  stopifnot(all(c(id_var, arm_var, saffl_var, "PARAMCD", "AVAL", "AVISITN", "VSORRESU") %in% names(df)))
+  stopifnot(is.data.frame(denominator))
+  stopifnot(all(arm_var %in% names(denominator)))
   stopifnot(is.logical(return_ard), length(return_ard) == 1L)
-  if (!is.null(denominator)) {
-    stopifnot(is.data.frame(denominator))
-    stopifnot(all(c(arm_var, id_var) %in% names(denominator)))
-  }
 
-  df <- df |>
+  data <- df |>
     dplyr::filter(
       .data[[saffl_var]] == "Y",
-      .data[[fmqsc_var]] == toupper(fmq_scope)
+      PARAMCD %in% c("DIABP", "SYSBP"),
+      AVISITN >= avisitn_min
+    ) |>
+    dplyr::slice_min(AVAL, n = 1L, by = dplyr::all_of(c(id_var, "PARAMCD"))) |>
+    dplyr::mutate(
+      SBP90 = PARAMCD == "SYSBP" & AVAL < 90,
+      DBP60 = PARAMCD == "DIABP" & AVAL < 60
     )
 
-  if (is.null(denominator)) {
-    denominator <- df
-  } else {
-    denominator <- denominator |> dplyr::filter(.data[[saffl_var]] == "Y")
-  }
+  vsorresu <- data$VSORRESU[1]
 
-  tbl <- gtsummary::tbl_hierarchical(
-    data = df,
-    variables = dplyr::all_of(c(soc_var, fmqnam_var, pref_var)),
-    by = dplyr::all_of(arm_var),
-    id = dplyr::all_of(id_var),
-    denominator = denominator,
-    overall_row = TRUE,
-    label = list(
-      "..ard_hierarchical_overall.." ~ paste0("Any AE (FMQ ", tools::toTitleCase(tolower(fmq_scope)), ")")
-    )
+  ard <- cards::bind_ard(
+    cards::ard_tabulate_value(
+      data,
+      variables = c(SBP90, DBP60),
+      by = dplyr::all_of(arm_var),
+      statistic = ~ c("n", "p"),
+      denominator = data |> dplyr::select(dplyr::all_of(c(id_var, arm_var))) |> dplyr::distinct()
+    ),
+    cards::ard_tabulate(denominator, variables = dplyr::all_of(arm_var))
   )
+
+  tbl <- gtsummary::tbl_ard_summary(
+    ard,
+    by = dplyr::all_of(arm_var),
+    label = list(
+      SBP90 = "SBP<90",
+      DBP60 = "DBP<60"
+    )
+  ) |>
+    gtsummary::modify_header(
+      label ~ paste0("**Blood Pressure (", vsorresu, ")**"),
+      gtsummary::all_stat_cols() ~ "**{level}**  \nN = {n}"
+    )
 
   if (return_ard) {
     ard <- gtsummary::gather_ard(tbl)

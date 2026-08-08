@@ -2,29 +2,24 @@
 % Please edit documentation in R/fda-table_38.R
 \name{make_table_38}
 \alias{make_table_38}
-\title{FDA Table 38: Patients With Adverse Events by System Organ Class, FDA Medical Query (Broad)
-and Preferred Term, Safety Population, Pooled Analysis}
+\title{FDA Table 38: Percentage of Patients Meeting Specific Hypotension Criteria Postbaseline,
+Safety Population, Pooled Analysis}
 \usage{
 make_table_38(
   df,
-  denominator = NULL,
+  denominator,
   return_ard = TRUE,
   id_var = "USUBJID",
   arm_var = "TRT01A",
   saffl_var = "SAFFL",
-  soc_var = "AEBODSYS",
-  fmqsc_var = "FMQ01SC",
-  fmqnam_var = "FMQ01NAM",
-  fmq_scope = "BROAD",
-  pref_var = "AEDECOD",
-  na_level = "<Missing>"
+  avisitn_min = 2
 )
 }
 \arguments{
-\item{df}{(\code{data.frame})\cr adverse events dataset (typically ADAE) required to build the table.}
+\item{df}{(\code{data.frame})\cr vital signs dataset (typically ADVS) required to build the table.}
 
-\item{denominator}{(\code{data.frame} or \code{NULL})\cr dataset used as the denominator (typically ADSL).
-If \code{NULL}, \code{df} is used.}
+\item{denominator}{(\code{data.frame})\cr dataset used as the denominator for header N values.
+Typically ADSL pre-filtered to the safety population. Must contain \code{arm_var}.}
 
 \item{return_ard}{(\code{flag})\cr whether an ARD should be returned. Defaults to \code{TRUE}.}
 
@@ -35,53 +30,39 @@ Defaults to \code{"TRT01A"}.}
 
 \item{saffl_var}{(\code{character})\cr name of the safety flag variable. Defaults to \code{"SAFFL"}.}
 
-\item{soc_var}{(\code{character})\cr name of the System Organ Class variable. Defaults to \code{"AEBODSYS"}.}
-
-\item{fmqsc_var}{(\code{character})\cr name of the FMQ scope variable. Defaults to \code{"FMQ01SC"}.}
-
-\item{fmqnam_var}{(\code{character})\cr name of the FMQ name variable. Defaults to \code{"FMQ01NAM"}.}
-
-\item{fmq_scope}{(\code{character})\cr FMQ scope to filter on: \code{"NARROW"} or \code{"BROAD"}.
-Defaults to \code{"BROAD"}.}
-
-\item{pref_var}{(\code{character})\cr name of the preferred term variable. Defaults to \code{"AEDECOD"}.}
-
-\item{na_level}{(\code{character})\cr string used to label missing values. Defaults to \code{"<Missing>"}.}
+\item{avisitn_min}{(\code{numeric})\cr minimum value of \code{AVISITN} for the postbaseline filter.
+Defaults to \code{2}.}
 }
 \value{
 A \code{gtsummary} table, or if \code{return_ard = TRUE}, a named list with elements \code{table} and \code{ard}.
 }
 \description{
-Creates FDA Table 38 showing patients with adverse events by System Organ Class (SOC),
-FDA Medical Query (FMQ, Broad scope) and Preferred Term (PT).
+Creates FDA Table 38 showing the percentage of patients meeting specific hypotension criteria
+(systolic BP < 90 and diastolic BP < 60) based on the minimum postbaseline value per subject
+per parameter.
 }
 \details{
 \itemize{
-\item \code{df} must contain \code{AEBODSYS}, and the variables specified by \code{arm_var}, \code{id_var}, \code{saffl_var},
-\code{fmqsc_var}, \code{fmqnam_var}, and \code{pref_var}.
-\item Only records with \code{fmqsc_var == fmq_scope} are included.
-\item Flag variables (i.e. \code{XXXFL}) are expected to have two levels: \code{"Y"} (true) and \code{"N"} (false).
-Missing values in flag variables are treated as \code{"N"}.
+\item \code{df} must contain \code{PARAMCD}, \code{AVAL}, \code{AVISITN}, \code{VSORRESU}, and the variables specified by
+\code{saffl_var}, \code{arm_var}, and \code{id_var}.
+\item Rows are filtered to safety population (\code{saffl_var == "Y"}),
+\code{PARAMCD \%in\% c("DIABP", "SYSBP")}, and \code{AVISITN >= avisitn_min}.
+The minimum \code{AVAL} per subject per \code{PARAMCD} is selected.
+\item Two hypotension flags are derived: \code{SBP90} (\code{PARAMCD == "SYSBP" & AVAL < 90}) and
+\code{DBP60} (\code{PARAMCD == "DIABP" & AVAL < 60}).
+\item \code{denominator} should already be pre-filtered to the safety population.
 \item Numbers in table represent the absolute numbers of patients and fraction of \code{N}.
 \item When \code{return_ard = TRUE}, returns a named list with elements \code{table} and \code{ard}.
 }
 }
 \examples{
-\dontshow{if (requireNamespace("random.cdisc.data", quietly = TRUE) && requireNamespace("dplyr", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+\dontshow{if (requireNamespace("pharmaverseadam", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 library(dplyr)
 
-adsl <- random.cdisc.data::cadsl
-adae <- random.cdisc.data::cadae
+adsl <- pharmaverseadam::adsl |> filter(SAFFL == "Y")
+advs <- pharmaverseadam::advs
 
-set.seed(1)
-adae <- adae |>
-  rename(FMQ01SC = SMQ01SC) |>
-  mutate(
-    FMQ01NAM = sample(c("FMQ1", "FMQ2", "FMQ3"), size = nrow(adae), replace = TRUE)
-  )
-adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "BROAD"
-
-result <- make_table_38(df = adae, denominator = adsl, arm_var = "ARM")
+result <- make_table_38(df = advs, denominator = adsl)
 result$table
 \dontshow{\}) # examplesIf}
 }

@@ -1,77 +1,24 @@
-test_that("fda-table_36() works", {
+test_that("make_table_36() works", {
   skip_if_not_installed("dplyr")
   skip_if_not_installed("cards")
   skip_if_not_installed("gtsummary")
   skip_if_not_installed("pharmaverseadam")
 
-
   library(dplyr)
-  library(cards)
-  library(gtsummary)
 
-  adsl <- pharmaverseadam::adsl
+  adsl <- pharmaverseadam::adsl |> filter(SAFFL == "Y")
   advs <- pharmaverseadam::advs
 
-  # Pre-processing --------------------------------------------
-  adsl <- adsl |>
-    filter(SAFFL == "Y") # safety population
-
-  data <- advs |>
-    filter(
-      # safety population
-      SAFFL == "Y",
-      # systolic blood pressure
-      PARAMCD == "SYSBP",
-      # post-baseline visits
-      AVISITN >= 2
-    ) |>
-    # analyze maximum values of each subject
-    slice_max(AVAL, n = 1L, by = USUBJID) |>
-    # define analysis value cutoffs
-    mutate(
-      L90 = AVAL < 90,
-      GE90 = AVAL >= 90,
-      GE120 = AVAL >= 120,
-      GE140 = AVAL >= 140,
-      GE160 = AVAL >= 160,
-      GE180 = AVAL >= 180
-    )
-
-  ard <- bind_ard(
-    ard_tabulate_value(
-      data,
-      variables = c(L90, GE90, GE120, GE140, GE160, GE180),
-      by = TRT01A,
-      statistic = ~ c("n", "p"),
-      # denominator values are number of subjects in arm with BP data
-      denominator = data |> distinct(USUBJID, TRT01A)
-    ),
-    # ARD for header N values
-    ard_tabulate(adsl, variables = TRT01A)
+  result <- make_table_36(
+    df = advs,
+    denominator = adsl,
+    arm_var = "TRT01A",
+    id_var = "USUBJID",
+    saffl_var = "SAFFL",
+    paramcd = "SYSBP",
+    avisitn_min = 2
   )
 
-  tbl <- tbl_ard_summary(
-    ard,
-    by = TRT01A,
-    # Add labels for each range
-    label = list(
-      L90 = "<90",
-      GE90 = ">=90",
-      GE120 = ">=120",
-      GE140 = ">=140",
-      GE160 = ">=160",
-      GE180 = ">=180"
-    )
-  ) |>
-    modify_header(
-      # Update label, add analysis value units
-      label ~ paste0("**Systolic Blood Pressure (", data$VSORRESU[1], ")**"),
-      # Add N values to `by` variable labels
-      all_stat_cols() ~ "**{level}**  \nN = {n}"
-    )
-
-
-  ard <- gtsummary::gather_ard(tbl)
-
+  ard <- result$ard
   expect_snapshot(as.data.frame(ard$tbl_ard_summary)[1:25, ])
 })
