@@ -59,7 +59,9 @@ demographic variables.
 \dontshow{if (requireNamespace("random.cdisc.data", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 library(dplyr)
 
-adsl <- random.cdisc.data::cadsl |> filter(SAFFL == "Y") |> mutate(any_ae = "Any AE")
+adsl <- random.cdisc.data::cadsl |>
+  filter(SAFFL == "Y") |>
+  mutate(any_ae = "Any AE")
 adae <- random.cdisc.data::cadae |>
   filter(SAFFL == "Y", TRTEMFL == "Y") |>
   slice_tail(n = 1L, by = all_of(c("USUBJID", "ARM")))

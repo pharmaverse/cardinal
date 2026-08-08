@@ -64,9 +64,12 @@ adae <- pharmaverseadam::adae |>
     OCMQ01NAM = dplyr::if_else(
       SEX == "F",
       as.factor(sample(
-        c("Abnormal Uterine Bleeding", "Amenorrhea", "Bacterial Vaginosis",
-          "Decreased Menstrual Bleeding"),
-        dplyr::n(), replace = TRUE
+        c(
+          "Abnormal Uterine Bleeding", "Amenorrhea", "Bacterial Vaginosis",
+          "Decreased Menstrual Bleeding"
+        ),
+        dplyr::n(),
+        replace = TRUE
       )),
       NA_character_
     )
