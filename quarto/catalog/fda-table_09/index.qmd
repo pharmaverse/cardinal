@@ -18,6 +18,7 @@ knitr::include_graphics("result.png")
 library(dplyr)
 library(cards)
 library(gtsummary)
+library(crane)
 
 adae <- pharmaverseadam::adae
 adex <- pharmaverseadam::adex
@@ -60,7 +61,7 @@ data <- left_join(adae, adex, by = "USUBJID") |>
 ## Build Table
 
 ```{r tbl, results = 'hide'}
-tbl <- as_gtsummary(data) |>
+tbl <- crane::tbl_listing(data) |>
   # set table header labels
   modify_header(
     TRT01A = "**Treatment Arm**",
