@@ -123,7 +123,7 @@ preproc_df_table_03 <- function(df,
 #'   )
 #' adsl$SCRNFRS[adsl$SCRNFL == "N" | !is.na(adsl$ENRLDT)] <- NA
 #'
-#' ard <- cardinal:::ard_table_03(df = df)
+#' ard <- cardinalfda:::ard_table_03(df = df)
 #' ard
 #'
 #' @keywords internal
@@ -220,14 +220,14 @@ ard_table_03 <- function(df,
 #' adsl$SCRNFRS[adsl$SCRNFL == "N" | !is.na(adsl$ENRLDT)] <- NA
 #'
 #' # gtsummary table --------------
-#' tbl_gtsummary <- cardinal:::make_table_03_gtsummary(
+#' tbl_gtsummary <- cardinalfda:::make_table_03_gtsummary(
 #'   df = adsl, scrnfl_var = "SCRNFL", scrnfailfl_var = "SCRNFAILFL",
 #'   scrnfail_var = "SCRNFRS"
 #' )
 #' tbl_gtsummary
 #'
 #' # rtables table ----------------
-#' tbl_rtables <- cardinal:::make_table_03_rtables(
+#' tbl_rtables <- cardinalfda:::make_table_03_rtables(
 #'   df = adsl, scrnfl_var = "SCRNFL", scrnfailfl_var = "SCRNFAILFL",
 #'   scrnfail_var = "SCRNFRS"
 #' )

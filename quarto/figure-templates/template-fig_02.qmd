@@ -13,7 +13,7 @@ format: html
 
 ```{r fig, message=FALSE, warning=FALSE}
 # Load Libraries & Data
-library(cardinal)
+library(cardinalfda)
 
 adsl <- random.cdisc.data::cadsl
 adsl$EOSDY <- sample(0:400, nrow(adsl), replace = TRUE)
