@@ -8,4 +8,3 @@ test_that("fda-table_10() works", {
 
   expect_snapshot(as.data.frame(ard)[1:25, ])
 })
-

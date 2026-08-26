@@ -9,4 +9,3 @@ test_that("fda-table_37() works", {
 
   expect_snapshot(as.data.frame(ard$tbl_ard_summary)[1:25, ])
 })
-

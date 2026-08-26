@@ -11,4 +11,3 @@ test_that("fda-table_17() works", {
   expect_snapshot(as.data.frame(ard$`OCMQ01SC="BROAD"`$tbl_hierarchical)[1:25, ])
   expect_snapshot(as.data.frame(ard$`OCMQ01SC="NARROW"`$tbl_hierarchical)[1:25, ])
 })
-

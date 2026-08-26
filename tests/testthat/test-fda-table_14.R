@@ -9,4 +9,3 @@ test_that("fda-table_14() works", {
 
   expect_snapshot(as.data.frame(ard$tbl_ard_hierarchical)[1:25, ])
 })
-
