@@ -3,58 +3,58 @@
     Code
       as.data.frame(ard[[1]]$tbl_hierarchical)[1:25, ]
     Output
-           group1 group1_level variable variable_level      context stat_name
-      1      <NA>         NULL   TRT01A              1     tabulate         n
-      2      <NA>         NULL   TRT01A              1     tabulate         N
-      3      <NA>         NULL   TRT01A              1     tabulate         p
-      4      <NA>         NULL   TRT01A              2     tabulate         n
-      5      <NA>         NULL   TRT01A              2     tabulate         N
-      6      <NA>         NULL   TRT01A              2     tabulate         p
-      7      <NA>         NULL   TRT01A              3     tabulate         n
-      8      <NA>         NULL   TRT01A              3     tabulate         N
-      9      <NA>         NULL   TRT01A              3     tabulate         p
-      10   TRT01A            1    AESER              1 hierarchical         n
-      11   TRT01A            1    AESER              1 hierarchical         N
-      12   TRT01A            1    AESER              1 hierarchical         p
-      13   TRT01A            2    AESER              1 hierarchical         n
-      14   TRT01A            2    AESER              1 hierarchical         N
-      15   TRT01A            2    AESER              1 hierarchical         p
-      16   TRT01A            3    AESER              1 hierarchical         n
-      17   TRT01A            3    AESER              1 hierarchical         N
-      18   TRT01A            3    AESER              1 hierarchical         p
-      NA     <NA>         NULL     <NA>           NULL         <NA>      <NA>
-      NA.1   <NA>         NULL     <NA>           NULL         <NA>      <NA>
-      NA.2   <NA>         NULL     <NA>           NULL         <NA>      <NA>
-      NA.3   <NA>         NULL     <NA>           NULL         <NA>      <NA>
-      NA.4   <NA>         NULL     <NA>           NULL         <NA>      <NA>
-      NA.5   <NA>         NULL     <NA>           NULL         <NA>      <NA>
-      NA.6   <NA>         NULL     <NA>           NULL         <NA>      <NA>
-           stat_label       stat stat_fmt
-      1             n         86       86
-      2             N        254      254
-      3             %  0.3385827     33.9
-      4             n         72       72
-      5             N        254      254
-      6             %  0.2834646     28.3
-      7             n         96       96
-      8             N        254      254
-      9             %  0.3779528     37.8
-      10            n          0        0
-      11            N         86       86
-      12            %          0        0
-      13            n          1        1
-      14            N         72       72
-      15            % 0.01388889      1.4
-      16            n          2        2
-      17            N         96       96
-      18            % 0.02083333      2.1
-      NA         <NA>       NULL     NULL
-      NA.1       <NA>       NULL     NULL
-      NA.2       <NA>       NULL     NULL
-      NA.3       <NA>       NULL     NULL
-      NA.4       <NA>       NULL     NULL
-      NA.5       <NA>       NULL     NULL
-      NA.6       <NA>       NULL     NULL
+           group1         group1_level variable       variable_level      context
+      1      <NA>                 NULL   TRT01A              Placebo     tabulate
+      2      <NA>                 NULL   TRT01A              Placebo     tabulate
+      3      <NA>                 NULL   TRT01A              Placebo     tabulate
+      4      <NA>                 NULL   TRT01A Xanomeline High Dose     tabulate
+      5      <NA>                 NULL   TRT01A Xanomeline High Dose     tabulate
+      6      <NA>                 NULL   TRT01A Xanomeline High Dose     tabulate
+      7      <NA>                 NULL   TRT01A  Xanomeline Low Dose     tabulate
+      8      <NA>                 NULL   TRT01A  Xanomeline Low Dose     tabulate
+      9      <NA>                 NULL   TRT01A  Xanomeline Low Dose     tabulate
+      10   TRT01A              Placebo    AESER        Any SAE, n(%) hierarchical
+      11   TRT01A              Placebo    AESER        Any SAE, n(%) hierarchical
+      12   TRT01A              Placebo    AESER        Any SAE, n(%) hierarchical
+      13   TRT01A Xanomeline High Dose    AESER        Any SAE, n(%) hierarchical
+      14   TRT01A Xanomeline High Dose    AESER        Any SAE, n(%) hierarchical
+      15   TRT01A Xanomeline High Dose    AESER        Any SAE, n(%) hierarchical
+      16   TRT01A  Xanomeline Low Dose    AESER        Any SAE, n(%) hierarchical
+      17   TRT01A  Xanomeline Low Dose    AESER        Any SAE, n(%) hierarchical
+      18   TRT01A  Xanomeline Low Dose    AESER        Any SAE, n(%) hierarchical
+      NA     <NA>                 NULL     <NA>                 NULL         <NA>
+      NA.1   <NA>                 NULL     <NA>                 NULL         <NA>
+      NA.2   <NA>                 NULL     <NA>                 NULL         <NA>
+      NA.3   <NA>                 NULL     <NA>                 NULL         <NA>
+      NA.4   <NA>                 NULL     <NA>                 NULL         <NA>
+      NA.5   <NA>                 NULL     <NA>                 NULL         <NA>
+      NA.6   <NA>                 NULL     <NA>                 NULL         <NA>
+           stat_name stat_label       stat stat_fmt
+      1            n          n         86       86
+      2            N          N        254      254
+      3            p          %  0.3385827     33.9
+      4            n          n         72       72
+      5            N          N        254      254
+      6            p          %  0.2834646     28.3
+      7            n          n         96       96
+      8            N          N        254      254
+      9            p          %  0.3779528     37.8
+      10           n          n          0        0
+      11           N          N         86       86
+      12           p          %          0        0
+      13           n          n          1        1
+      14           N          N         72       72
+      15           p          % 0.01388889      1.4
+      16           n          n          2        2
+      17           N          N         96       96
+      18           p          % 0.02083333      2.1
+      NA        <NA>       <NA>       NULL     NULL
+      NA.1      <NA>       <NA>       NULL     NULL
+      NA.2      <NA>       <NA>       NULL     NULL
+      NA.3      <NA>       <NA>       NULL     NULL
+      NA.4      <NA>       <NA>       NULL     NULL
+      NA.5      <NA>       <NA>       NULL     NULL
+      NA.6      <NA>       <NA>       NULL     NULL
                                                                                                                                                                                                                                                                                                                              fmt_fun
       1                                                                                                                                                                                                                                                                                                                            0
       2                                                                                                                                                                                                                                                                                                                            0
@@ -113,58 +113,58 @@
     Code
       as.data.frame(ard[[2]]$tbl_hierarchical)[1:25, ]
     Output
-         group1 group1_level group2 group2_level variable variable_level      context
-      1    <NA>         NULL   <NA>         NULL   TRT01A              1     tabulate
-      2    <NA>         NULL   <NA>         NULL   TRT01A              1     tabulate
-      3    <NA>         NULL   <NA>         NULL   TRT01A              1     tabulate
-      4    <NA>         NULL   <NA>         NULL   TRT01A              2     tabulate
-      5    <NA>         NULL   <NA>         NULL   TRT01A              2     tabulate
-      6    <NA>         NULL   <NA>         NULL   TRT01A              2     tabulate
-      7    <NA>         NULL   <NA>         NULL   TRT01A              3     tabulate
-      8    <NA>         NULL   <NA>         NULL   TRT01A              3     tabulate
-      9    <NA>         NULL   <NA>         NULL   TRT01A              3     tabulate
-      10 TRT01A            1  SEXGR   Sex, n (%)   SEXGR1              1 hierarchical
-      11 TRT01A            1  SEXGR   Sex, n (%)   SEXGR1              1 hierarchical
-      12 TRT01A            1  SEXGR   Sex, n (%)   SEXGR1              1 hierarchical
-      13 TRT01A            2  SEXGR   Sex, n (%)   SEXGR1              1 hierarchical
-      14 TRT01A            2  SEXGR   Sex, n (%)   SEXGR1              1 hierarchical
-      15 TRT01A            2  SEXGR   Sex, n (%)   SEXGR1              1 hierarchical
-      16 TRT01A            3  SEXGR   Sex, n (%)   SEXGR1              1 hierarchical
-      17 TRT01A            3  SEXGR   Sex, n (%)   SEXGR1              1 hierarchical
-      18 TRT01A            3  SEXGR   Sex, n (%)   SEXGR1              1 hierarchical
-      19 TRT01A            1  SEXGR   Sex, n (%)   SEXGR1              2 hierarchical
-      20 TRT01A            1  SEXGR   Sex, n (%)   SEXGR1              2 hierarchical
-      21 TRT01A            1  SEXGR   Sex, n (%)   SEXGR1              2 hierarchical
-      22 TRT01A            2  SEXGR   Sex, n (%)   SEXGR1              2 hierarchical
-      23 TRT01A            2  SEXGR   Sex, n (%)   SEXGR1              2 hierarchical
-      24 TRT01A            2  SEXGR   Sex, n (%)   SEXGR1              2 hierarchical
-      25 TRT01A            3  SEXGR   Sex, n (%)   SEXGR1              2 hierarchical
-         stat_name stat_label      stat stat_fmt
-      1          n          n         0        0
-      2          N          N         3        3
-      3          p          %         0      0.0
-      4          n          n         1        1
-      5          N          N         3        3
-      6          p          % 0.3333333     33.3
-      7          n          n         2        2
-      8          N          N         3        3
-      9          p          % 0.6666667     66.7
-      10         n          n         0        0
-      11         N          N         0        0
-      12         p          %       NaN       NA
-      13         n          n         1        1
-      14         N          N         1        1
-      15         p          %         1      100
-      16         n          n         1        1
-      17         N          N         2        2
-      18         p          %       0.5       50
-      19         n          n         0        0
-      20         N          N         0        0
-      21         p          %       NaN       NA
-      22         n          n         0        0
-      23         N          N         1        1
-      24         p          %         0        0
-      25         n          n         1        1
+         group1         group1_level group2 group2_level variable
+      1    <NA>                 NULL   <NA>         NULL   TRT01A
+      2    <NA>                 NULL   <NA>         NULL   TRT01A
+      3    <NA>                 NULL   <NA>         NULL   TRT01A
+      4    <NA>                 NULL   <NA>         NULL   TRT01A
+      5    <NA>                 NULL   <NA>         NULL   TRT01A
+      6    <NA>                 NULL   <NA>         NULL   TRT01A
+      7    <NA>                 NULL   <NA>         NULL   TRT01A
+      8    <NA>                 NULL   <NA>         NULL   TRT01A
+      9    <NA>                 NULL   <NA>         NULL   TRT01A
+      10 TRT01A              Placebo  SEXGR   Sex, n (%)   SEXGR1
+      11 TRT01A              Placebo  SEXGR   Sex, n (%)   SEXGR1
+      12 TRT01A              Placebo  SEXGR   Sex, n (%)   SEXGR1
+      13 TRT01A Xanomeline High Dose  SEXGR   Sex, n (%)   SEXGR1
+      14 TRT01A Xanomeline High Dose  SEXGR   Sex, n (%)   SEXGR1
+      15 TRT01A Xanomeline High Dose  SEXGR   Sex, n (%)   SEXGR1
+      16 TRT01A  Xanomeline Low Dose  SEXGR   Sex, n (%)   SEXGR1
+      17 TRT01A  Xanomeline Low Dose  SEXGR   Sex, n (%)   SEXGR1
+      18 TRT01A  Xanomeline Low Dose  SEXGR   Sex, n (%)   SEXGR1
+      19 TRT01A              Placebo  SEXGR   Sex, n (%)   SEXGR1
+      20 TRT01A              Placebo  SEXGR   Sex, n (%)   SEXGR1
+      21 TRT01A              Placebo  SEXGR   Sex, n (%)   SEXGR1
+      22 TRT01A Xanomeline High Dose  SEXGR   Sex, n (%)   SEXGR1
+      23 TRT01A Xanomeline High Dose  SEXGR   Sex, n (%)   SEXGR1
+      24 TRT01A Xanomeline High Dose  SEXGR   Sex, n (%)   SEXGR1
+      25 TRT01A  Xanomeline Low Dose  SEXGR   Sex, n (%)   SEXGR1
+               variable_level      context stat_name stat_label      stat stat_fmt
+      1               Placebo     tabulate         n          n         0        0
+      2               Placebo     tabulate         N          N         3        3
+      3               Placebo     tabulate         p          %         0      0.0
+      4  Xanomeline High Dose     tabulate         n          n         1        1
+      5  Xanomeline High Dose     tabulate         N          N         3        3
+      6  Xanomeline High Dose     tabulate         p          % 0.3333333     33.3
+      7   Xanomeline Low Dose     tabulate         n          n         2        2
+      8   Xanomeline Low Dose     tabulate         N          N         3        3
+      9   Xanomeline Low Dose     tabulate         p          % 0.6666667     66.7
+      10                    F hierarchical         n          n         0        0
+      11                    F hierarchical         N          N         0        0
+      12                    F hierarchical         p          %       NaN       NA
+      13                    F hierarchical         n          n         1        1
+      14                    F hierarchical         N          N         1        1
+      15                    F hierarchical         p          %         1      100
+      16                    F hierarchical         n          n         1        1
+      17                    F hierarchical         N          N         2        2
+      18                    F hierarchical         p          %       0.5       50
+      19                    M hierarchical         n          n         0        0
+      20                    M hierarchical         N          N         0        0
+      21                    M hierarchical         p          %       NaN       NA
+      22                    M hierarchical         n          n         0        0
+      23                    M hierarchical         N          N         1        1
+      24                    M hierarchical         p          %         0        0
+      25                    M hierarchical         n          n         1        1
                                                                                                                                                                                                                                                                                                                            fmt_fun
       1                                                                                                                                                                                                                                                                                                                          0
       2                                                                                                                                                                                                                                                                                                                          0
@@ -223,58 +223,58 @@
     Code
       as.data.frame(ard[[3]]$tbl_hierarchical)[1:25, ]
     Output
-           group1 group1_level group2           group2_level variable variable_level
-      1      <NA>         NULL   <NA>                   NULL   TRT01A              1
-      2      <NA>         NULL   <NA>                   NULL   TRT01A              1
-      3      <NA>         NULL   <NA>                   NULL   TRT01A              1
-      4      <NA>         NULL   <NA>                   NULL   TRT01A              2
-      5      <NA>         NULL   <NA>                   NULL   TRT01A              2
-      6      <NA>         NULL   <NA>                   NULL   TRT01A              2
-      7      <NA>         NULL   <NA>                   NULL   TRT01A              3
-      8      <NA>         NULL   <NA>                   NULL   TRT01A              3
-      9      <NA>         NULL   <NA>                   NULL   TRT01A              3
-      10   TRT01A            1  AGEGR Age group, years, n(%)   AGEGR1              1
-      11   TRT01A            1  AGEGR Age group, years, n(%)   AGEGR1              1
-      12   TRT01A            1  AGEGR Age group, years, n(%)   AGEGR1              1
-      13   TRT01A            2  AGEGR Age group, years, n(%)   AGEGR1              1
-      14   TRT01A            2  AGEGR Age group, years, n(%)   AGEGR1              1
-      15   TRT01A            2  AGEGR Age group, years, n(%)   AGEGR1              1
-      16   TRT01A            3  AGEGR Age group, years, n(%)   AGEGR1              1
-      17   TRT01A            3  AGEGR Age group, years, n(%)   AGEGR1              1
-      18   TRT01A            3  AGEGR Age group, years, n(%)   AGEGR1              1
-      NA     <NA>         NULL   <NA>                   NULL     <NA>           NULL
-      NA.1   <NA>         NULL   <NA>                   NULL     <NA>           NULL
-      NA.2   <NA>         NULL   <NA>                   NULL     <NA>           NULL
-      NA.3   <NA>         NULL   <NA>                   NULL     <NA>           NULL
-      NA.4   <NA>         NULL   <NA>                   NULL     <NA>           NULL
-      NA.5   <NA>         NULL   <NA>                   NULL     <NA>           NULL
-      NA.6   <NA>         NULL   <NA>                   NULL     <NA>           NULL
-                context stat_name stat_label      stat stat_fmt
-      1        tabulate         n          n         0        0
-      2        tabulate         N          N         3        3
-      3        tabulate         p          %         0      0.0
-      4        tabulate         n          n         1        1
-      5        tabulate         N          N         3        3
-      6        tabulate         p          % 0.3333333     33.3
-      7        tabulate         n          n         2        2
-      8        tabulate         N          N         3        3
-      9        tabulate         p          % 0.6666667     66.7
-      10   hierarchical         n          n         0        0
-      11   hierarchical         N          N         0        0
-      12   hierarchical         p          %       NaN       NA
-      13   hierarchical         n          n         1        1
-      14   hierarchical         N          N         1        1
-      15   hierarchical         p          %         1      100
-      16   hierarchical         n          n         2        2
-      17   hierarchical         N          N         2        2
-      18   hierarchical         p          %         1      100
-      NA           <NA>      <NA>       <NA>      NULL     NULL
-      NA.1         <NA>      <NA>       <NA>      NULL     NULL
-      NA.2         <NA>      <NA>       <NA>      NULL     NULL
-      NA.3         <NA>      <NA>       <NA>      NULL     NULL
-      NA.4         <NA>      <NA>       <NA>      NULL     NULL
-      NA.5         <NA>      <NA>       <NA>      NULL     NULL
-      NA.6         <NA>      <NA>       <NA>      NULL     NULL
+           group1         group1_level group2           group2_level variable
+      1      <NA>                 NULL   <NA>                   NULL   TRT01A
+      2      <NA>                 NULL   <NA>                   NULL   TRT01A
+      3      <NA>                 NULL   <NA>                   NULL   TRT01A
+      4      <NA>                 NULL   <NA>                   NULL   TRT01A
+      5      <NA>                 NULL   <NA>                   NULL   TRT01A
+      6      <NA>                 NULL   <NA>                   NULL   TRT01A
+      7      <NA>                 NULL   <NA>                   NULL   TRT01A
+      8      <NA>                 NULL   <NA>                   NULL   TRT01A
+      9      <NA>                 NULL   <NA>                   NULL   TRT01A
+      10   TRT01A              Placebo  AGEGR Age group, years, n(%)   AGEGR1
+      11   TRT01A              Placebo  AGEGR Age group, years, n(%)   AGEGR1
+      12   TRT01A              Placebo  AGEGR Age group, years, n(%)   AGEGR1
+      13   TRT01A Xanomeline High Dose  AGEGR Age group, years, n(%)   AGEGR1
+      14   TRT01A Xanomeline High Dose  AGEGR Age group, years, n(%)   AGEGR1
+      15   TRT01A Xanomeline High Dose  AGEGR Age group, years, n(%)   AGEGR1
+      16   TRT01A  Xanomeline Low Dose  AGEGR Age group, years, n(%)   AGEGR1
+      17   TRT01A  Xanomeline Low Dose  AGEGR Age group, years, n(%)   AGEGR1
+      18   TRT01A  Xanomeline Low Dose  AGEGR Age group, years, n(%)   AGEGR1
+      NA     <NA>                 NULL   <NA>                   NULL     <NA>
+      NA.1   <NA>                 NULL   <NA>                   NULL     <NA>
+      NA.2   <NA>                 NULL   <NA>                   NULL     <NA>
+      NA.3   <NA>                 NULL   <NA>                   NULL     <NA>
+      NA.4   <NA>                 NULL   <NA>                   NULL     <NA>
+      NA.5   <NA>                 NULL   <NA>                   NULL     <NA>
+      NA.6   <NA>                 NULL   <NA>                   NULL     <NA>
+                 variable_level      context stat_name stat_label      stat stat_fmt
+      1                 Placebo     tabulate         n          n         0        0
+      2                 Placebo     tabulate         N          N         3        3
+      3                 Placebo     tabulate         p          %         0      0.0
+      4    Xanomeline High Dose     tabulate         n          n         1        1
+      5    Xanomeline High Dose     tabulate         N          N         3        3
+      6    Xanomeline High Dose     tabulate         p          % 0.3333333     33.3
+      7     Xanomeline Low Dose     tabulate         n          n         2        2
+      8     Xanomeline Low Dose     tabulate         N          N         3        3
+      9     Xanomeline Low Dose     tabulate         p          % 0.6666667     66.7
+      10                    >64 hierarchical         n          n         0        0
+      11                    >64 hierarchical         N          N         0        0
+      12                    >64 hierarchical         p          %       NaN       NA
+      13                    >64 hierarchical         n          n         1        1
+      14                    >64 hierarchical         N          N         1        1
+      15                    >64 hierarchical         p          %         1      100
+      16                    >64 hierarchical         n          n         2        2
+      17                    >64 hierarchical         N          N         2        2
+      18                    >64 hierarchical         p          %         1      100
+      NA                   NULL         <NA>      <NA>       <NA>      NULL     NULL
+      NA.1                 NULL         <NA>      <NA>       <NA>      NULL     NULL
+      NA.2                 NULL         <NA>      <NA>       <NA>      NULL     NULL
+      NA.3                 NULL         <NA>      <NA>       <NA>      NULL     NULL
+      NA.4                 NULL         <NA>      <NA>       <NA>      NULL     NULL
+      NA.5                 NULL         <NA>      <NA>       <NA>      NULL     NULL
+      NA.6                 NULL         <NA>      <NA>       <NA>      NULL     NULL
                                                                                                                                                                                                                                                                                                                              fmt_fun
       1                                                                                                                                                                                                                                                                                                                            0
       2                                                                                                                                                                                                                                                                                                                            0
@@ -333,58 +333,58 @@
     Code
       as.data.frame(ard[[4]]$tbl_hierarchical)[1:25, ]
     Output
-           group1 group1_level group2 group2_level variable variable_level
-      1      <NA>         NULL   <NA>         NULL   TRT01A              1
-      2      <NA>         NULL   <NA>         NULL   TRT01A              1
-      3      <NA>         NULL   <NA>         NULL   TRT01A              1
-      4      <NA>         NULL   <NA>         NULL   TRT01A              2
-      5      <NA>         NULL   <NA>         NULL   TRT01A              2
-      6      <NA>         NULL   <NA>         NULL   TRT01A              2
-      7      <NA>         NULL   <NA>         NULL   TRT01A              3
-      8      <NA>         NULL   <NA>         NULL   TRT01A              3
-      9      <NA>         NULL   <NA>         NULL   TRT01A              3
-      10   TRT01A            1 RACEGR   Race, n(%)  RACEGR1              1
-      11   TRT01A            1 RACEGR   Race, n(%)  RACEGR1              1
-      12   TRT01A            1 RACEGR   Race, n(%)  RACEGR1              1
-      13   TRT01A            2 RACEGR   Race, n(%)  RACEGR1              1
-      14   TRT01A            2 RACEGR   Race, n(%)  RACEGR1              1
-      15   TRT01A            2 RACEGR   Race, n(%)  RACEGR1              1
-      16   TRT01A            3 RACEGR   Race, n(%)  RACEGR1              1
-      17   TRT01A            3 RACEGR   Race, n(%)  RACEGR1              1
-      18   TRT01A            3 RACEGR   Race, n(%)  RACEGR1              1
-      NA     <NA>         NULL   <NA>         NULL     <NA>           NULL
-      NA.1   <NA>         NULL   <NA>         NULL     <NA>           NULL
-      NA.2   <NA>         NULL   <NA>         NULL     <NA>           NULL
-      NA.3   <NA>         NULL   <NA>         NULL     <NA>           NULL
-      NA.4   <NA>         NULL   <NA>         NULL     <NA>           NULL
-      NA.5   <NA>         NULL   <NA>         NULL     <NA>           NULL
-      NA.6   <NA>         NULL   <NA>         NULL     <NA>           NULL
-                context stat_name stat_label      stat stat_fmt
-      1        tabulate         n          n         0        0
-      2        tabulate         N          N         3        3
-      3        tabulate         p          %         0      0.0
-      4        tabulate         n          n         1        1
-      5        tabulate         N          N         3        3
-      6        tabulate         p          % 0.3333333     33.3
-      7        tabulate         n          n         2        2
-      8        tabulate         N          N         3        3
-      9        tabulate         p          % 0.6666667     66.7
-      10   hierarchical         n          n         0        0
-      11   hierarchical         N          N         0        0
-      12   hierarchical         p          %       NaN       NA
-      13   hierarchical         n          n         1        1
-      14   hierarchical         N          N         1        1
-      15   hierarchical         p          %         1      100
-      16   hierarchical         n          n         2        2
-      17   hierarchical         N          N         2        2
-      18   hierarchical         p          %         1      100
-      NA           <NA>      <NA>       <NA>      NULL     NULL
-      NA.1         <NA>      <NA>       <NA>      NULL     NULL
-      NA.2         <NA>      <NA>       <NA>      NULL     NULL
-      NA.3         <NA>      <NA>       <NA>      NULL     NULL
-      NA.4         <NA>      <NA>       <NA>      NULL     NULL
-      NA.5         <NA>      <NA>       <NA>      NULL     NULL
-      NA.6         <NA>      <NA>       <NA>      NULL     NULL
+           group1         group1_level group2 group2_level variable
+      1      <NA>                 NULL   <NA>         NULL   TRT01A
+      2      <NA>                 NULL   <NA>         NULL   TRT01A
+      3      <NA>                 NULL   <NA>         NULL   TRT01A
+      4      <NA>                 NULL   <NA>         NULL   TRT01A
+      5      <NA>                 NULL   <NA>         NULL   TRT01A
+      6      <NA>                 NULL   <NA>         NULL   TRT01A
+      7      <NA>                 NULL   <NA>         NULL   TRT01A
+      8      <NA>                 NULL   <NA>         NULL   TRT01A
+      9      <NA>                 NULL   <NA>         NULL   TRT01A
+      10   TRT01A              Placebo RACEGR   Race, n(%)  RACEGR1
+      11   TRT01A              Placebo RACEGR   Race, n(%)  RACEGR1
+      12   TRT01A              Placebo RACEGR   Race, n(%)  RACEGR1
+      13   TRT01A Xanomeline High Dose RACEGR   Race, n(%)  RACEGR1
+      14   TRT01A Xanomeline High Dose RACEGR   Race, n(%)  RACEGR1
+      15   TRT01A Xanomeline High Dose RACEGR   Race, n(%)  RACEGR1
+      16   TRT01A  Xanomeline Low Dose RACEGR   Race, n(%)  RACEGR1
+      17   TRT01A  Xanomeline Low Dose RACEGR   Race, n(%)  RACEGR1
+      18   TRT01A  Xanomeline Low Dose RACEGR   Race, n(%)  RACEGR1
+      NA     <NA>                 NULL   <NA>         NULL     <NA>
+      NA.1   <NA>                 NULL   <NA>         NULL     <NA>
+      NA.2   <NA>                 NULL   <NA>         NULL     <NA>
+      NA.3   <NA>                 NULL   <NA>         NULL     <NA>
+      NA.4   <NA>                 NULL   <NA>         NULL     <NA>
+      NA.5   <NA>                 NULL   <NA>         NULL     <NA>
+      NA.6   <NA>                 NULL   <NA>         NULL     <NA>
+                 variable_level      context stat_name stat_label      stat stat_fmt
+      1                 Placebo     tabulate         n          n         0        0
+      2                 Placebo     tabulate         N          N         3        3
+      3                 Placebo     tabulate         p          %         0      0.0
+      4    Xanomeline High Dose     tabulate         n          n         1        1
+      5    Xanomeline High Dose     tabulate         N          N         3        3
+      6    Xanomeline High Dose     tabulate         p          % 0.3333333     33.3
+      7     Xanomeline Low Dose     tabulate         n          n         2        2
+      8     Xanomeline Low Dose     tabulate         N          N         3        3
+      9     Xanomeline Low Dose     tabulate         p          % 0.6666667     66.7
+      10                  White hierarchical         n          n         0        0
+      11                  White hierarchical         N          N         0        0
+      12                  White hierarchical         p          %       NaN       NA
+      13                  White hierarchical         n          n         1        1
+      14                  White hierarchical         N          N         1        1
+      15                  White hierarchical         p          %         1      100
+      16                  White hierarchical         n          n         2        2
+      17                  White hierarchical         N          N         2        2
+      18                  White hierarchical         p          %         1      100
+      NA                   NULL         <NA>      <NA>       <NA>      NULL     NULL
+      NA.1                 NULL         <NA>      <NA>       <NA>      NULL     NULL
+      NA.2                 NULL         <NA>      <NA>       <NA>      NULL     NULL
+      NA.3                 NULL         <NA>      <NA>       <NA>      NULL     NULL
+      NA.4                 NULL         <NA>      <NA>       <NA>      NULL     NULL
+      NA.5                 NULL         <NA>      <NA>       <NA>      NULL     NULL
+      NA.6                 NULL         <NA>      <NA>       <NA>      NULL     NULL
                                                                                                                                                                                                                                                                                                                              fmt_fun
       1                                                                                                                                                                                                                                                                                                                            0
       2                                                                                                                                                                                                                                                                                                                            0
@@ -443,58 +443,58 @@
     Code
       as.data.frame(ard[[5]]$tbl_hierarchical)[1:25, ]
     Output
-           group1 group1_level   group2    group2_level  variable variable_level
-      1      <NA>         NULL     <NA>            NULL    TRT01A              1
-      2      <NA>         NULL     <NA>            NULL    TRT01A              1
-      3      <NA>         NULL     <NA>            NULL    TRT01A              1
-      4      <NA>         NULL     <NA>            NULL    TRT01A              2
-      5      <NA>         NULL     <NA>            NULL    TRT01A              2
-      6      <NA>         NULL     <NA>            NULL    TRT01A              2
-      7      <NA>         NULL     <NA>            NULL    TRT01A              3
-      8      <NA>         NULL     <NA>            NULL    TRT01A              3
-      9      <NA>         NULL     <NA>            NULL    TRT01A              3
-      10   TRT01A            1 ETHNICGR Ethnicity, n(%) ETHNICGR1              1
-      11   TRT01A            1 ETHNICGR Ethnicity, n(%) ETHNICGR1              1
-      12   TRT01A            1 ETHNICGR Ethnicity, n(%) ETHNICGR1              1
-      13   TRT01A            2 ETHNICGR Ethnicity, n(%) ETHNICGR1              1
-      14   TRT01A            2 ETHNICGR Ethnicity, n(%) ETHNICGR1              1
-      15   TRT01A            2 ETHNICGR Ethnicity, n(%) ETHNICGR1              1
-      16   TRT01A            3 ETHNICGR Ethnicity, n(%) ETHNICGR1              1
-      17   TRT01A            3 ETHNICGR Ethnicity, n(%) ETHNICGR1              1
-      18   TRT01A            3 ETHNICGR Ethnicity, n(%) ETHNICGR1              1
-      NA     <NA>         NULL     <NA>            NULL      <NA>           NULL
-      NA.1   <NA>         NULL     <NA>            NULL      <NA>           NULL
-      NA.2   <NA>         NULL     <NA>            NULL      <NA>           NULL
-      NA.3   <NA>         NULL     <NA>            NULL      <NA>           NULL
-      NA.4   <NA>         NULL     <NA>            NULL      <NA>           NULL
-      NA.5   <NA>         NULL     <NA>            NULL      <NA>           NULL
-      NA.6   <NA>         NULL     <NA>            NULL      <NA>           NULL
-                context stat_name stat_label      stat stat_fmt
-      1        tabulate         n          n         0        0
-      2        tabulate         N          N         3        3
-      3        tabulate         p          %         0      0.0
-      4        tabulate         n          n         1        1
-      5        tabulate         N          N         3        3
-      6        tabulate         p          % 0.3333333     33.3
-      7        tabulate         n          n         2        2
-      8        tabulate         N          N         3        3
-      9        tabulate         p          % 0.6666667     66.7
-      10   hierarchical         n          n         0        0
-      11   hierarchical         N          N         0        0
-      12   hierarchical         p          %       NaN       NA
-      13   hierarchical         n          n         1        1
-      14   hierarchical         N          N         1        1
-      15   hierarchical         p          %         1      100
-      16   hierarchical         n          n         2        2
-      17   hierarchical         N          N         2        2
-      18   hierarchical         p          %         1      100
-      NA           <NA>      <NA>       <NA>      NULL     NULL
-      NA.1         <NA>      <NA>       <NA>      NULL     NULL
-      NA.2         <NA>      <NA>       <NA>      NULL     NULL
-      NA.3         <NA>      <NA>       <NA>      NULL     NULL
-      NA.4         <NA>      <NA>       <NA>      NULL     NULL
-      NA.5         <NA>      <NA>       <NA>      NULL     NULL
-      NA.6         <NA>      <NA>       <NA>      NULL     NULL
+           group1         group1_level   group2    group2_level  variable
+      1      <NA>                 NULL     <NA>            NULL    TRT01A
+      2      <NA>                 NULL     <NA>            NULL    TRT01A
+      3      <NA>                 NULL     <NA>            NULL    TRT01A
+      4      <NA>                 NULL     <NA>            NULL    TRT01A
+      5      <NA>                 NULL     <NA>            NULL    TRT01A
+      6      <NA>                 NULL     <NA>            NULL    TRT01A
+      7      <NA>                 NULL     <NA>            NULL    TRT01A
+      8      <NA>                 NULL     <NA>            NULL    TRT01A
+      9      <NA>                 NULL     <NA>            NULL    TRT01A
+      10   TRT01A              Placebo ETHNICGR Ethnicity, n(%) ETHNICGR1
+      11   TRT01A              Placebo ETHNICGR Ethnicity, n(%) ETHNICGR1
+      12   TRT01A              Placebo ETHNICGR Ethnicity, n(%) ETHNICGR1
+      13   TRT01A Xanomeline High Dose ETHNICGR Ethnicity, n(%) ETHNICGR1
+      14   TRT01A Xanomeline High Dose ETHNICGR Ethnicity, n(%) ETHNICGR1
+      15   TRT01A Xanomeline High Dose ETHNICGR Ethnicity, n(%) ETHNICGR1
+      16   TRT01A  Xanomeline Low Dose ETHNICGR Ethnicity, n(%) ETHNICGR1
+      17   TRT01A  Xanomeline Low Dose ETHNICGR Ethnicity, n(%) ETHNICGR1
+      18   TRT01A  Xanomeline Low Dose ETHNICGR Ethnicity, n(%) ETHNICGR1
+      NA     <NA>                 NULL     <NA>            NULL      <NA>
+      NA.1   <NA>                 NULL     <NA>            NULL      <NA>
+      NA.2   <NA>                 NULL     <NA>            NULL      <NA>
+      NA.3   <NA>                 NULL     <NA>            NULL      <NA>
+      NA.4   <NA>                 NULL     <NA>            NULL      <NA>
+      NA.5   <NA>                 NULL     <NA>            NULL      <NA>
+      NA.6   <NA>                 NULL     <NA>            NULL      <NA>
+                 variable_level      context stat_name stat_label      stat stat_fmt
+      1                 Placebo     tabulate         n          n         0        0
+      2                 Placebo     tabulate         N          N         3        3
+      3                 Placebo     tabulate         p          %         0      0.0
+      4    Xanomeline High Dose     tabulate         n          n         1        1
+      5    Xanomeline High Dose     tabulate         N          N         3        3
+      6    Xanomeline High Dose     tabulate         p          % 0.3333333     33.3
+      7     Xanomeline Low Dose     tabulate         n          n         2        2
+      8     Xanomeline Low Dose     tabulate         N          N         3        3
+      9     Xanomeline Low Dose     tabulate         p          % 0.6666667     66.7
+      10                  WHITE hierarchical         n          n         0        0
+      11                  WHITE hierarchical         N          N         0        0
+      12                  WHITE hierarchical         p          %       NaN       NA
+      13                  WHITE hierarchical         n          n         1        1
+      14                  WHITE hierarchical         N          N         1        1
+      15                  WHITE hierarchical         p          %         1      100
+      16                  WHITE hierarchical         n          n         2        2
+      17                  WHITE hierarchical         N          N         2        2
+      18                  WHITE hierarchical         p          %         1      100
+      NA                   NULL         <NA>      <NA>       <NA>      NULL     NULL
+      NA.1                 NULL         <NA>      <NA>       <NA>      NULL     NULL
+      NA.2                 NULL         <NA>      <NA>       <NA>      NULL     NULL
+      NA.3                 NULL         <NA>      <NA>       <NA>      NULL     NULL
+      NA.4                 NULL         <NA>      <NA>       <NA>      NULL     NULL
+      NA.5                 NULL         <NA>      <NA>       <NA>      NULL     NULL
+      NA.6                 NULL         <NA>      <NA>       <NA>      NULL     NULL
                                                                                                                                                                                                                                                                                                                              fmt_fun
       1                                                                                                                                                                                                                                                                                                                            0
       2                                                                                                                                                                                                                                                                                                                            0
