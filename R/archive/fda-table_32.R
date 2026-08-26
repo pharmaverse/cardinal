@@ -154,7 +154,7 @@ preproc_df_table_32 <- function(df,
 #' advs <- random.cdisc.data::cadvs
 #'
 #' # rtables table ----------------
-#' tbl_rtables <- cardinal::make_table_32_rtables(df = advs, alt_counts_df = adsl)
+#' tbl_rtables <- cardinalfda::make_table_32_rtables(df = advs, alt_counts_df = adsl)
 #' tbl_rtables
 #' @export
 #' @name tbl_make_table_32

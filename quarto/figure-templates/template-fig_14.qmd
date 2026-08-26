@@ -13,7 +13,7 @@ format: html
 
 ```{r fig, message=FALSE, warning=FALSE, fig.height=7, fig.width=9}
 # Load Libraries & Data
-library(cardinal)
+library(cardinalfda)
 
 advs <- random.cdisc.data::cadvs
 
