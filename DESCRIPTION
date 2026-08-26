@@ -1,8 +1,8 @@
 Type: Package
 Package: cardinalfda
 Title: FDA Safety Tables and Figures
-Version: 0.2.0.9001
-Date: 2026-08-06
+Version: 0.2.0.9002
+Date: 2026-08-26
 Authors@R: c(
     person("Pawel", "Rucki", , "pawel.rucki@roche.com", role = "ctb"),
     person("Abinaya", "Yogasekaram", , "ayogasek@gmail.com", role = "aut",
@@ -64,9 +64,9 @@ Suggests:
     testthat (>= 3.3.1),
     tidyr (>= 1.3.1),
     withr (>= 3.0.2)
+Config/roxygen2/version: 8.1.0
 Config/testthat/edition: 3
 Encoding: UTF-8
 Language: en-US
 LazyData: true
 Roxygen: list(markdown = TRUE)
-Config/roxygen2/version: 8.1.0
