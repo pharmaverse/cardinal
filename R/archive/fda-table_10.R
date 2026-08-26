@@ -122,7 +122,7 @@ preproc_df_table_10 <- function(df,
 #'   )
 #' adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
 #'
-#' ard <- cardinal:::ard_table_10(adae, adsl)
+#' ard <- cardinalfda:::ard_table_10(adae, adsl)
 #' ard
 #'
 #' @keywords internal
@@ -200,11 +200,11 @@ ard_table_10 <- function(df,
 #' adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
 #'
 #' # gtsummary table --------------
-#' tbl_gtsummary <- cardinal:::make_table_10_gtsummary(df = adae, denominator = adsl)
+#' tbl_gtsummary <- cardinalfda:::make_table_10_gtsummary(df = adae, denominator = adsl)
 #' tbl_gtsummary
 #'
 #' # rtables table ----------------
-#' tbl_rtables <- cardinal:::make_table_10_rtables(df = adae, alt_counts_df = adsl)
+#' tbl_rtables <- cardinalfda:::make_table_10_rtables(df = adae, alt_counts_df = adsl)
 #' tbl_rtables
 #'
 #' @export

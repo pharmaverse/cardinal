@@ -1,8 +1,8 @@
 Type: Package
 Package: cardinalfda
 Title: FDA Safety Tables and Figures
-Version: 0.2.0.9001
-Date: 2026-08-06
+Version: 0.2.0.9003
+Date: 2026-08-26
 Authors@R: c(
     person("Pawel", "Rucki", , "pawel.rucki@roche.com", role = "ctb"),
     person("Abinaya", "Yogasekaram", , "ayogasek@gmail.com", role = "aut",
@@ -13,6 +13,8 @@ Authors@R: c(
            comment = c(ORCID = "0000-0003-0862-2018")),
     person("Emily", "de la Rua", , "emilydelarua@gmail.com", role = "aut",
            comment = c(ORCID = "0009-0000-8738-5561")),
+    person("Davide", "Garolini", , "davide.garolini@roche.com", role = "aut",
+           comment = c(ORCID = "0000-0002-1445-1369")),
     person("Vincent", "Shen", role = "aut"),
     person("Benoit", "Falquet", , "benoit.falquet@roche.com", role = "ctb",
            comment = c(ORCID = "0000-0002-4434-3799")),
@@ -43,7 +45,7 @@ Depends:
     gtsummary (>= 2.5.1),
     R (>= 4.2)
 Imports:
-    dplyr (>= 1.2.1)
+    dplyr (>= 1.2.0)
 Suggests:
     cowplot (>= 1.2.0),
     crane (>= 0.3.1),
@@ -64,9 +66,9 @@ Suggests:
     testthat (>= 3.3.1),
     tidyr (>= 1.3.1),
     withr (>= 3.0.2)
+Config/roxygen2/version: 8.1.0
 Config/testthat/edition: 3
 Encoding: UTF-8
 Language: en-US
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 8.0.0
