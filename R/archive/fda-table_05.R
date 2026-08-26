@@ -96,7 +96,7 @@ preproc_df_table_05 <- function(df,
 #'
 #' @examples
 #' adsl <- random.cdisc.data::cadsl
-#' df <- cardinal:::preproc_df_table_05(
+#' df <- cardinalfda:::preproc_df_table_05(
 #'   adsl,
 #'   saffl_var = "SAFFL",
 #'   trtsdtm_var = "TRTSDTM",
@@ -104,7 +104,7 @@ preproc_df_table_05 <- function(df,
 #'   u_trtdur = "days"
 #' )
 #'
-#' ard <- cardinal:::ard_table_05(df = df)
+#' ard <- cardinalfda:::ard_table_05(df = df)
 #' ard
 #'
 #' @keywords internal
@@ -176,12 +176,12 @@ ard_table_05 <- function(df,
 #' adsl <- random.cdisc.data::cadsl
 #'
 #' # gtsummary table --------------
-#' ard <- cardinal:::ard_table_05(df = adsl)
-#' tbl_gtsummary <- cardinal:::make_table_05_gtsummary(df = adsl, ard = ard)
+#' ard <- cardinalfda:::ard_table_05(df = adsl)
+#' tbl_gtsummary <- cardinalfda:::make_table_05_gtsummary(df = adsl, ard = ard)
 #' tbl_gtsummary
 #'
 #' # rtables table ----------------
-#' tbl_rtables <- cardinal:::make_table_05_rtables(df = adsl)
+#' tbl_rtables <- cardinalfda:::make_table_05_rtables(df = adsl)
 #' tbl_rtables
 #'
 #' @export

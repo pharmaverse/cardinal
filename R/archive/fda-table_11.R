@@ -130,7 +130,7 @@ preproc_df_table_11 <- function(df,
 #' adae$DCSREAS[is.na(adae$DCSREAS)] <- "ADVERSE EVENT"
 #' adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
 #'
-#' ard <- cardinal:::ard_table_11(adae, adsl)
+#' ard <- cardinalfda:::ard_table_11(adae, adsl)
 #' ard
 #'
 #' @keywords internal
@@ -206,11 +206,11 @@ ard_table_11 <- function(df,
 #' adae$FMQ01SC[is.na(adae$FMQ01SC)] <- "NARROW"
 #'
 #' # gtsummary table --------------
-#' tbl_gtsummary <- cardinal:::make_table_11_gtsummary(df = adae, denominator = adsl)
+#' tbl_gtsummary <- cardinalfda:::make_table_11_gtsummary(df = adae, denominator = adsl)
 #' tbl_gtsummary
 #'
 #' # rtables table ----------------
-#' tbl_rtables <- cardinal:::make_table_11_rtables(df = adae, alt_counts_df = adsl)
+#' tbl_rtables <- cardinalfda:::make_table_11_rtables(df = adae, alt_counts_df = adsl)
 #' tbl_rtables
 #'
 #' @export

@@ -48,13 +48,13 @@
       16                 TRUE hierarchical         n          n          4        4
       17                 TRUE hierarchical         N          N         96       96
       18                 TRUE hierarchical         p          % 0.04166667      4.2
-      19                    1 hierarchical         n          n          0        0
-      20                    1 hierarchical         N          N         86       86
-      21                    1 hierarchical         p          %          0        0
-      22                    1 hierarchical         n          n          0        0
-      23                    1 hierarchical         N          N         72       72
-      24                    1 hierarchical         p          %          0        0
-      25                    1 hierarchical         n          n          1        1
+      19            HOT FLUSH hierarchical         n          n          0        0
+      20            HOT FLUSH hierarchical         N          N         86       86
+      21            HOT FLUSH hierarchical         p          %          0        0
+      22            HOT FLUSH hierarchical         n          n          0        0
+      23            HOT FLUSH hierarchical         N          N         72       72
+      24            HOT FLUSH hierarchical         p          %          0        0
+      25            HOT FLUSH hierarchical         n          n          1        1
                                                                                                                                                                                                                                                                                                                            fmt_fun
       1                                                                                                                                                                                                                                                                                                                          0
       2                                                                                                                                                                                                                                                                                                                          0
