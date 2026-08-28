@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE coverage SYSTEM "https://raw.githubusercontent.com/cobertura/cobertura/master/cobertura/src/site/htdocs/xml/coverage-04.dtd">
-<coverage line-rate="0.369230769230769" branch-rate="0" lines-covered="24" lines-valid="65" branches-covered="0" branches-valid="0" complexity="0" version="3.6.5" timestamp="2026-08-26 13:26:40.074256">
+<coverage line-rate="0.4" branch-rate="0" lines-covered="28" lines-valid="70" branches-covered="0" branches-valid="0" complexity="0" version="3.6.5" timestamp="2026-08-28 06:44:10.000303">
   <sources>
     <source>/__w/cardinal/cardinal/cardinal</source>
   </sources>
   <packages>
-    <package name="cardinalfda" line-rate="0.369230769230769" branch-rate="0" complexity="0">
+    <package name="cardinalfda" line-rate="0.4" branch-rate="0" complexity="0">
       <classes>
         <class name="fda-table_02.R" filename="R/fda-table_02.R" line-rate="0.96" branch-rate="0" complexity="0">
           <methods>
@@ -65,6 +65,26 @@
             <line number="73" hits="1" branch="false"/>
             <line number="74" hits="1" branch="false"/>
             <line number="77" hits="0" branch="false"/>
+          </lines>
+        </class>
+        <class name="run_template.R" filename="R/run_template.R" line-rate="0.8" branch-rate="0" complexity="0">
+          <methods>
+            <method name="run_template" signature="" line-rate="0.8" branch-rate="0" complexity="0">
+              <lines>
+                <line number="31" hits="24" branch="false"/>
+                <line number="32" hits="24" branch="false"/>
+                <line number="33" hits="0" branch="false"/>
+                <line number="35" hits="24" branch="false"/>
+                <line number="36" hits="24" branch="false"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="31" hits="24" branch="false"/>
+            <line number="32" hits="24" branch="false"/>
+            <line number="33" hits="0" branch="false"/>
+            <line number="35" hits="24" branch="false"/>
+            <line number="36" hits="24" branch="false"/>
           </lines>
         </class>
         <class name="utils.R" filename="R/utils.R" line-rate="0" branch-rate="0" complexity="0">
