@@ -23,7 +23,7 @@ data <- adae |>
 
 sliced_data <- data |>
   count(AEBODSYS, sort = TRUE) |>
-  slice_head(n = 3) %>% # keep top 3 for display purposes
+  slice_head(n = 3) |> # keep top 3 for display purposes
   pull(AEBODSYS)
 
 data <- data |>
