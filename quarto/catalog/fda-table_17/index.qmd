@@ -4,11 +4,97 @@ subtitle: FDA Table 17
 categories: [table, FDA, safety, adverse events]
 ---
 
-::: panel-tabset
-## Table Preview
+::::: columns
 
-```{r img, echo=FALSE, fig.align='center', out.width='45%'}
+:::: {.column width="52%"}
+### FDA IG Shell
+
+![](ig_shell.png){fig-alt="FDA IG example table shell" .lightbox width=100%}
+
+### Programming Notes
+
+**Background and Instructions**
+
+For Table 17: Subjects With Adverse Events by Organ System , it is important to review the entire table (or spreadsheet) produced by the CDS before deciding on the appropriate cutoff to be presented in the review. Depending on the data presented, a >5%, >2%, or >1% frequency or none may be an appropriate cutoff. Refer to Table 31 Subjects With Adverse Events by Organ System, OCMQ (Narrow) and Preferred Term, Safety Population, Pooled Analysis (or Trial X) to view specific preferred terms under each narrow OCMQ by organ system.
+
+**Customization**
+
+After analyzing, clinical reviewers may request to view specific preferred terms under each broad OCMQ by organ system. Based on the assessment of the OCMQ results, clinical reviewers may request Table 41: Subjects With Select Narrow FDA Medical Queries and Table 42: Subjects With Select Broad FDA Medical Queries found in Section 4.1 Optional Adverse Event Analyses to explore the data on specific subjects.
+
+::::
+
+:::: {.column width="4%"}
+::::
+
+:::: {.column width="44%"}
+### Output
+
+```{r out-result, echo=FALSE, fig.align='center', out.width='100%'}
 knitr::include_graphics("result.png")
+```
+
+::::
+
+:::::
+
+::: panel-tabset
+## Full Code
+
+```{r fullcode, eval=FALSE}
+# Load libraries & data -------------------------------------
+library(dplyr)
+library(cards)
+library(gtsummary)
+
+adae <- pharmaverseadam::adae |>
+  rename(OCMQ01SC = AEHLTCD, OCMQ01NAM = AEHLT)
+
+adsl <- pharmaverseadam::adsl
+
+set.seed(23)
+adae$OCMQ01SC <- sample(c("BROAD", "NARROW"), size = nrow(adae), replace = TRUE)
+
+# Pre-processing --------------------------------------------
+adae <- adae |>
+  # safety population
+  filter(SAFFL == "Y") |>
+  # filter 0CMQ to truncate table
+  filter(OCMQ01NAM %in% c("HLT_0649", "HLT_0644", " HLT_0570", " HLT_0256", "HLT_0742", "HLT_0244", "HLT_0097", "HLT_0738"))
+
+adsl <- adsl |>
+  # safety population
+  filter(SAFFL == "Y")
+
+tbl <- adae |>
+  select(OCMQ01SC, TRT01A, OCMQ01NAM, AEBODSYS, USUBJID) |>
+  # setting an explicit level for NA values so empty strata combinations are shown.
+  mutate(across(everything(), ~ {
+    if (anyNA(.)) {
+      forcats::fct_na_value_to_level(as.factor(.), level = "<Missing>")
+    } else {
+      .
+    }
+  })) |>
+  tbl_strata(
+    strata = OCMQ01SC,
+    ~ tbl_hierarchical(
+      .x,
+      by = TRT01A,
+      variables = c(AEBODSYS, OCMQ01NAM),
+      id = USUBJID,
+      denominator = adsl,
+      # variables to calculate rates for
+      include = c(OCMQ01NAM),
+      label = list(OCMQ01NAM ~ "OCMQ", AEBODSYS ~ "System Organ Class")
+    )
+  ) |>
+  modify_missing_symbol("NA", columns = everything(), rows = row_type == "level")
+
+ard <- gather_ard(tbl)
+
+# Print ARD
+withr::local_options(width = 9999)
+print(ard, columns = "all")
 ```
 
 ## Setup
@@ -70,13 +156,6 @@ tbl <- adae |>
 tbl
 ```
 
-```{r eval=FALSE, include=FALSE}
-gt::gtsave(as_gt(tbl), filename = "result.png")
-```
-
-```{r img, echo=FALSE, fig.align='center', out.width='45%'}
-```
-
 ## Build ARD
 
 ```{r ard, message=FALSE, warning=FALSE, results='hide'}
@@ -89,4 +168,5 @@ ard
 withr::local_options(width = 9999)
 print(ard, columns = "all")
 ```
+
 :::

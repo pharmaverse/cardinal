@@ -4,11 +4,135 @@ subtitle: FDA Table 03
 categories: [table, FDA, safety, disposition]
 ---
 
-::: panel-tabset
-## Table Preview
+::::: columns
 
-```{r img, echo=FALSE, fig.align='center', out.width='60%'}
+:::: {.column width="52%"}
+### FDA IG Shell
+
+![](ig_shell.png){fig-alt="FDA IG example table shell" .lightbox width=100%}
+
+### Programming Notes
+
+**Background and Instructions**
+
+The following enrollment populations are reflected in Table 3: Subject Screening and Enrollment below:
+
+•    Screened population (subjects screened): All subjects screened for entry into the trial.
+
+•    Screening failure population: All subjects who failed to meet inclusion/exclusion criteria.
+
+•    Enrolled population (subjects enrolled): All subjects who signed a consent form for participation in the trial.
+
+•    Randomized population (subjects randomized): All subjects randomized to a trial arm. Often referred to as the intent-to-treat
+
+population.
+
+**Customization**
+
+The review team may request a list of reasons for screen failure, such as "subject noncompliance," "consent withdrawn," "inclusion/exclusion criteria not met," "other," and/or a breakdown of "inclusion/exclusion criteria not met" and "other." Understanding reasons for screen failure can be informative to assess the generalizability of the trial.
+
+::::
+
+:::: {.column width="4%"}
+::::
+
+:::: {.column width="44%"}
+### Output
+
+```{r out-result, echo=FALSE, fig.align='center', out.width='100%'}
 knitr::include_graphics("result.png")
+```
+
+::::
+
+:::::
+
+::: panel-tabset
+## Full Code
+
+```{r fullcode, eval=FALSE}
+# Load libraries & data -------------------------------------
+library(dplyr)
+library(cards)
+library(gtsummary)
+
+adsl <- pharmaverseadam::adsl
+
+set.seed(1)
+scrnfail_reas_lvls <- c(
+  "Inclusion/exclusion criteria not met", "Subject noncompliance", "Consent withdrawn", "Other"
+)
+data <- adsl |>
+  mutate(
+    ENRLDT = RANDDT,
+    ENRLFL = !is.na(ENRLDT),
+    RANDFL = !is.na(RANDDT),
+    SCRNFL = TRUE,
+    SCRNFRS = NA_character_
+  ) |>
+  mutate( # set screen failure reasons for relevant observations.
+    SCRNFRS = factor(
+      replace(
+        SCRNFRS,
+        TRT01A == "Screen Failure",
+        sample(scrnfail_reas_lvls, size = sum(TRT01A == "Screen Failure"), replace = TRUE)
+      ),
+      levels = scrnfail_reas_lvls
+    )
+  )
+
+tbl_scrn <- tbl_summary(
+  data = data,
+  include = "SCRNFL",
+  missing = "no",
+  label = ~"Subjects screened"
+)
+
+tbl_scrnfrs <- tbl_hierarchical(
+  data = data,
+  denominator = adsl,
+  id = USUBJID,
+  variables = "SCRNFRS",
+  label = list(..ard_hierarchical_overall.. = "Screening failures"),
+  overall_row = TRUE
+) |>
+  modify_indent(columns = label, rows = row_type == "level", indent = 4L) |>
+  modify_indent(columns = label, rows = variable == "SCRNFRS", indent = 8L)
+
+tbl_enrl_rand <- tbl_summary(
+  data = data,
+  include = c("ENRLFL", "RANDFL"),
+  missing = "no",
+  label = list(ENRLFL = "Subjects enrolled", RANDFL = "Subjects randomized")
+)
+
+tbl <- list(tbl_scrn, tbl_scrnfrs, tbl_enrl_rand) |>
+  tbl_stack() |>
+  modify_header(label = "**Disposition**")
+
+ard <- data |>
+  ard_stack(
+    ard_tabulate_value(
+      variables = SCRNFL,
+      value = list(SCRNFL = TRUE),
+      statistic = everything() ~ c("n")
+    ),
+    ard_tabulate(
+      variables = SCRNFRS,
+      statistic = everything() ~ c("n", "p"),
+      denominator = data
+    ),
+    ard_tabulate_value(
+      variables = c(ENRLFL, RANDFL),
+      value = list(ENRLFL = TRUE, RANDFL = TRUE),
+      statistic = everything() ~ c("n", "p"),
+      denominator = data
+    )
+  )
+
+# Print ARD
+withr::local_options(width = 9999)
+print(ard, columns = "all", n = 40)
 ```
 
 ## Setup
@@ -80,14 +204,6 @@ tbl <- list(tbl_scrn, tbl_scrnfrs, tbl_enrl_rand) |>
 tbl
 ```
 
-```{r eval=FALSE, include=FALSE}
-# Run chunk locally to generate image file
-gt::gtsave(as_gt(tbl), filename = "result.png")
-```
-
-```{r img, echo=FALSE, fig.align='center', out.width='60%'}
-```
-
 ## Build ARD
 
 ```{r ard, message=FALSE, warning=FALSE, results='hide'}
@@ -119,4 +235,5 @@ ard
 withr::local_options(width = 9999)
 print(ard, columns = "all", n = 40)
 ```
+
 :::

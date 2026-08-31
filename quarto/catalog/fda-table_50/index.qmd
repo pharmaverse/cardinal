@@ -4,11 +4,147 @@ subtitle: FDA Table 50
 categories: [table, FDA, safety, adverse events]
 ---
 
-::: panel-tabset
-## Table Preview
+::::: columns
 
-```{r img, echo=FALSE, fig.align='center', out.width='60%'}
+:::: {.column width="52%"}
+### FDA IG Shell
+
+![](ig_shell.png){fig-alt="FDA IG example table shell" .lightbox width=100%}
+
+### Programming Notes
+
+**Background and Instructions**
+
+Table 50: Overview of Serious Adverse Events by Demographic Subgroup and Table 51: Overview of Adverse Events by Demographic Subgroup in this section display placeholder values for the demographic characteristics for subgroup analysis of SAEs and AEs. These placeholder values will change to reflect the values found in the clinical trial data. When CDISC-controlled terminology is used in the clinical trial data, the demographic characteristics in this table will reflect the controlled terminology.
+
+**Customization**
+
+Provide any additional potentially relevant subgroups beyond the standard demographic ones that may shed light on which subjects are most susceptible to the safety event (e.g., baseline diseases [e.g., cardiovascular disease or diabetes, or by CKD stage], concomitant medication, anthropometric characteristics [e.g., BMI]). The clinical reviewer should discuss appropriate age groups for the subgroup analysis with the CDS.
+
+::::
+
+:::: {.column width="4%"}
+::::
+
+:::: {.column width="44%"}
+### Output
+
+```{r out-result, echo=FALSE, fig.align='center', out.width='100%'}
 knitr::include_graphics("result.png")
+```
+
+::::
+
+:::::
+
+::: panel-tabset
+## Full Code
+
+```{r fullcode, eval=FALSE}
+# Load libraries & data -------------------------------------
+library(dplyr)
+library(cards)
+library(gtsummary)
+
+adae <- pharmaverseadam::adae
+adsl <- pharmaverseadam::adsl
+
+# This specific dataset is reduced significantly after filtering.
+# We'll take a few steps to ensure factor levels are present and
+# match between the AE data and the denominators.
+
+adsl <- adsl |>
+  filter(SAFFL == "Y") |>
+  mutate(TRT01A = as.factor(TRT01A))
+
+adae <- adae |> mutate(
+  TRT01A = as.factor(TRT01A),
+  SEXGR = "Sex, n (%)",
+  SEXGR1 = as.factor(SEX),
+  AGEGR = "Age group, years, n(%)",
+  RACEGR = "Race, n(%)",
+  ETHNICGR = "Ethnicity, n(%)",
+  ETHNICGR1 = as.factor(RACE)
+)
+
+data <- adae |>
+  filter(
+    SAFFL == "Y",
+    TRTEMFL == "Y",
+    AESER == "Y"
+  )
+
+
+data_any_sae <- adae |>
+  filter(AESER == "Y") |>
+  mutate(
+    AESER = "Any SAE, n(%)"
+  )
+
+tbl_any_sae <- tbl_hierarchical(
+  data = data_any_sae,
+  denominator = adsl,
+  id = "USUBJID",
+  by = "TRT01A",
+  variables = "AESER",
+  statistic = ~"{n} ({p}%)",
+  label = AESER ~ "Characteristic"
+)
+
+tbl_sex <- tbl_hierarchical(
+  data = data,
+  denominator = data_any_sae |> slice_head(by = c(USUBJID)),
+  id = "USUBJID",
+  by = "TRT01A",
+  variables = c(SEXGR, SEXGR1),
+  include = SEXGR1,
+  statistic = ~"{n}/{N} ({p}%)"
+)
+
+tbl_agegr1 <- tbl_hierarchical(
+  data = data,
+  denominator = data_any_sae |> slice_head(by = c(USUBJID)),
+  id = "USUBJID",
+  by = "TRT01A",
+  variables = c(AGEGR, AGEGR1),
+  include = AGEGR1,
+  statistic = ~"{n}/{N} ({p}%)"
+)
+
+tbl_race <- tbl_hierarchical(
+  data = data,
+  denominator = data_any_sae |> slice_head(by = c(USUBJID)),
+  id = "USUBJID",
+  by = "TRT01A",
+  variables = c(RACEGR, RACEGR1),
+  include = RACEGR1,
+  statistic = ~"{n}/{N} ({p}%)"
+)
+
+tbl_ethnic <- tbl_hierarchical(
+  data = data,
+  denominator = data_any_sae |> slice_head(by = c(USUBJID)),
+  id = "USUBJID",
+  by = "TRT01A",
+  variables = c(ETHNICGR, ETHNICGR1),
+  include = ETHNICGR1,
+  statistic = ~"{n}/{N} ({p}%)"
+)
+
+tbl <- list(tbl_any_sae, tbl_sex, tbl_agegr1, tbl_race, tbl_ethnic) |>
+  tbl_stack() |>
+  modify_indent("label", rows = !(variable %in% c("..ard_hierarchical_overall..", "AESER", "SEXGR", "AGEGR", "RACEGR", "ETHNICGR"))) |>
+  remove_footnote_header(columns = everything()) |>
+  modify_post_fmt_fun(
+    fmt_fun = ~ ifelse(. == "0/0 (NA%)", "0 (0%)", .),
+    columns = all_stat_cols()
+  )
+
+ard <- gather_ard(tbl)
+
+# Print ARD
+withr::local_options(width = 9999)
+print(ard, columns = "all", n = 40, na.print = NULL)
 ```
 
 ## Setup
@@ -46,7 +182,6 @@ data <- adae |>
     TRTEMFL == "Y",
     AESER == "Y"
   )
-
 
 data_any_sae <- adae |>
   filter(AESER == "Y") |>
@@ -120,14 +255,6 @@ tbl <- list(tbl_any_sae, tbl_sex, tbl_agegr1, tbl_race, tbl_ethnic) |>
 tbl
 ```
 
-```{r eval=FALSE, include=FALSE}
-# Run chunk locally to generate image file
-gt::gtsave(as_gt(tbl), filename = "result.png")
-```
-
-```{r img, echo=FALSE, fig.align='center', out.width='60%'}
-```
-
 ## Build ARD
 
 ```{r ard, message=FALSE, warning=FALSE, results='hide'}
@@ -140,4 +267,5 @@ ard
 withr::local_options(width = 9999)
 print(ard, columns = "all", n = 40, na.print = NULL)
 ```
+
 :::

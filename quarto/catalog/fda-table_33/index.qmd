@@ -4,11 +4,100 @@ subtitle: FDA Table 33
 categories: [table, FDA, safety, adverse events]
 ---
 
-::: panel-tabset
-## Table Preview
+::::: columns
 
-```{r img, echo=FALSE, fig.align='center', out.width='45%'}
+:::: {.column width="52%"}
+### FDA IG Shell
+
+![](ig_shell.png){fig-alt="FDA IG example table shell" .lightbox width=100%}
+
+### Programming Notes
+
+**Background and Instructions**
+
+Some OCMQs are relevant to only one sex. For instance, the Erectile Dysfunction OCMQ is relevant only to males, while the Abnormal Uterine Bleeding OCMQ is relevant only to females. Therefore, the tables that present these sex-specific OCMQs provide only the results for males or females, as appropriate, and have smaller denominators than the full safety population. Table 33: Adverse Events by Male Specific FDA Medical Query is limited to male-specific OCMQs and the male population. Table 34: Adverse Events by Female Specific FDA Medical Query is limited to female-specific OCMQs and the female population.
+
+**Customization**
+
+Clinical reviewers may request a similar table of AEs by male or female specific OCMQs (broad) from the CDS.
+
+::::
+
+:::: {.column width="4%"}
+::::
+
+:::: {.column width="44%"}
+### Output
+
+```{r out-result, echo=FALSE, fig.align='center', out.width='100%'}
 knitr::include_graphics("result.png")
+```
+
+::::
+
+:::::
+
+::: panel-tabset
+## Full Code
+
+```{r fullcode, eval=FALSE}
+# Load libraries & data -------------------------------------
+library(dplyr)
+library(cards)
+library(gtsummary)
+
+adsl <- pharmaverseadam::adsl
+adae <- pharmaverseadam::adae
+
+set.seed(1)
+adae <- rename(adae, OCMQ01SC = AEHLTCD, OCMQ01NAM = AEHLT)
+levels(adae$OCMQ01SC) <- c("BROAD", "NARROW")
+adae$OCMQ01SC[is.na(adae$OCMQ01SC)] <- "NARROW"
+adae$OCMQ01NAM <- factor(adae$OCMQ01NAM, levels = c("Erectile Dysfunction", "Gynecomastia"))
+adae$OCMQ01NAM[adae$SEX == "M"] <- as.factor(sample(c("Erectile Dysfunction", "Gynecomastia"), sum(adae$SEX == "M"), replace = TRUE))
+
+
+# Pre-processing --------------------------------------------
+data <- adae |>
+  filter(
+    SAFFL == "Y",
+    SEX == "M",
+    OCMQ01SC == "NARROW",
+    # filtering here to reduce the size of the table
+    AEDECOD %in% c("COUGH", "COLD SWEAT", "SOMNOLENCE", "APPLICATION SITE ERYTHEMA")
+  ) |>
+  select(OCMQ01SC, TRT01A, OCMQ01NAM, AEDECOD, USUBJID) |>
+  # setting an explicit level for NA values so empty strata combinations are shown.
+  mutate(across(everything(), ~ {
+    if (anyNA(.)) {
+      forcats::fct_na_value_to_level(as.factor(.), level = "<Missing>")
+    } else {
+      .
+    }
+  }))
+
+# denominator values include only Male subjects in the arm with AEs
+denom <- data |> distinct(USUBJID, TRT01A)
+
+tbl <- data |>
+  tbl_hierarchical(
+    by = TRT01A,
+    variables = c(OCMQ01NAM, AEDECOD),
+    id = USUBJID,
+    denominator = denom,
+    # variables to calculate rates for
+    include = c(AEDECOD),
+    label = list(
+      OCMQ01NAM ~ "OCMQ (Narrow)",
+      AEDECOD ~ "Preferred Term"
+    )
+  )
+
+ard <- gather_ard(tbl)
+
+# Print ARD
+withr::local_options(width = 9999)
+print(ard, columns = "all")
 ```
 
 ## Setup
@@ -28,7 +117,6 @@ levels(adae$OCMQ01SC) <- c("BROAD", "NARROW")
 adae$OCMQ01SC[is.na(adae$OCMQ01SC)] <- "NARROW"
 adae$OCMQ01NAM <- factor(adae$OCMQ01NAM, levels = c("Erectile Dysfunction", "Gynecomastia"))
 adae$OCMQ01NAM[adae$SEX == "M"] <- as.factor(sample(c("Erectile Dysfunction", "Gynecomastia"), sum(adae$SEX == "M"), replace = TRUE))
-
 
 # Pre-processing --------------------------------------------
 data <- adae |>
@@ -73,13 +161,6 @@ tbl <- data |>
 tbl
 ```
 
-```{r eval=FALSE, include=FALSE}
-gt::gtsave(as_gt(tbl), filename = "result.png")
-```
-
-```{r img, echo=FALSE, fig.align='center', out.width='45%'}
-```
-
 ## Build ARD
 
 ```{r ard, message=FALSE, warning=FALSE, results='hide'}
@@ -92,4 +173,5 @@ ard
 withr::local_options(width = 9999)
 print(ard, columns = "all")
 ```
+
 :::

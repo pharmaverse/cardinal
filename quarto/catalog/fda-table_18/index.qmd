@@ -4,11 +4,104 @@ subtitle: FDA Table 18
 categories: [table, FDA, safety, adverse events]
 ---
 
-::: panel-tabset
-## Table Preview
+::::: columns
 
-```{r img, echo=FALSE, fig.align='center', out.width='45%'}
+:::: {.column width="52%"}
+### FDA IG Shell
+
+![](ig_shell.png){fig-alt="FDA IG example table shell" .lightbox width=100%}
+
+### Programming Notes
+
+**Background and Instructions**
+
+Table 18: Summary Assessment of [Insert AE of Interest] is created for each AE of interest and may be created for any AEs identified during application review that may warrant further analysis. The table name should be updated to reflect the event being displayed. The approach to analysis and summary of safety data should be tailored to each AE.
+
+**Customization**
+
+Discuss with CDS specific AEs and other information (e.g., laboratory information) to be included in Table 18 to provide a complete picture of the AE of Interest. When information across different datasets is combined, carefully consider the number of subjects used as the denominator in analyses, as they may differ across datasets.
+
+::::
+
+:::: {.column width="4%"}
+::::
+
+:::: {.column width="44%"}
+### Output
+
+```{r out-result, echo=FALSE, fig.align='center', out.width='100%'}
 knitr::include_graphics("result.png")
+```
+
+::::
+
+:::::
+
+::: panel-tabset
+## Full Code
+
+```{r fullcode, eval=FALSE}
+# Load libraries & data -------------------------------------
+library(dplyr)
+library(cards)
+library(cardx)
+library(gtsummary)
+
+adsl <- pharmaverseadam::adsl
+adae <- pharmaverseadam::adae
+
+set.seed(1)
+adae$AESIFL <- ifelse(adae$AESOC %in% c("VASCULAR DISORDERS"), "Y", "N")
+
+# Pre-processing --------------------------------------------
+adsl <- adsl |>
+  # safety population
+  filter(SAFFL == "Y")
+
+data <- adae |>
+  filter(
+    # safety population
+    SAFFL == "Y",
+    # AESI assessment
+    AESIFL == "Y"
+  )
+
+# dataset of AE flag variable counts by subject
+data_ae_fl <-
+  adsl |>
+  select(USUBJID, TRT01A) |>
+  # create subject-level flags from adae data
+  left_join(
+    data |>
+      select(USUBJID, AESER, AESDTH, AESLIFE, AESHOSP, AESDISAB, AESCONG, AEACN) |>
+      mutate(
+        # Serious AE
+        ae_ser = any(AESER == "Y"),
+        # Serious AE leading to death
+        ae_ser_death = any(AESER == "Y" & AESDTH == "Y"),
+        ae_ser_life = any(AESER == "Y" & AESLIFE == "Y"),
+        ae_ser_hosp = any(AESER == "Y" & AESHOSP == "Y"),
+        ae_ser_disab = any(AESER == "Y" & AESDISAB == "Y"),
+        ae_ser_cong = any(AESER == "Y" & AESCONG == "Y"),
+        # AE resulting in discontinuation
+        ae_withdraw = any(AEACN == "DRUG WITHDRAWN"),
+        .by = USUBJID
+      ),
+    by = "USUBJID"
+  ) |>
+  distinct(USUBJID, .keep_all = TRUE) |>
+  # add number of AEs
+  left_join(
+    data |> summarise(.by = USUBJID, ae_count = n()),
+    by = "USUBJID",
+    relationship = "one-to-one"
+  )
+
+ard <- gather_ard(tbl)
+
+# Print ARD
+withr::local_options(width = 9999)
+print(ard)
 ```
 
 ## Setup
@@ -74,7 +167,9 @@ data_ae_fl <-
 ## Build Table
 
 ```{r tbl, results = 'hide'}
+
 ## AE grouping flags section --------
+
 tbl_ae_gp <- data |>
   tbl_hierarchical(
     variables = AEDECOD,
@@ -90,11 +185,13 @@ tbl_ae_gp <- data |>
   modify_indent(columns = label, rows = variable != "..ard_hierarchical_overall..", indent = 4L)
 
 ## Maximum severity section ---------
+
 tbl_ae_sev <- data |>
   ard_tabulate_max(variables = AESEV, id = USUBJID, by = TRT01A, denominator = adsl, quiet = TRUE) |>
   tbl_ard_summary(by = TRT01A, label = list(AESEV = "Maximum severity"))
 
 ## Events section -------------------
+
 tbl_ae_fl <- data_ae_fl |>
   tbl_summary(
     by = "TRT01A",
@@ -114,16 +211,10 @@ tbl_ae_fl <- data_ae_fl |>
   modify_indent(columns = label, rows = !variable %in% c("ae_ser", "ae_withdraw"), indent = 4L)
 
 ## Build table ----------------------
+
 tbl <- tbl_stack(list(tbl_ae_gp, tbl_ae_sev, tbl_ae_fl), quiet = TRUE)
 
 tbl
-```
-
-```{r eval=FALSE, include=FALSE}
-gt::gtsave(as_gt(tbl), filename = "result.png")
-```
-
-```{r img, echo=FALSE, fig.align='center', out.width='45%'}
 ```
 
 ## Build ARD
@@ -138,4 +229,5 @@ ard
 withr::local_options(width = 9999)
 print(ard)
 ```
+
 :::

@@ -4,11 +4,93 @@ subtitle: FDA Table 04
 categories: [table, FDA, safety, disposition]
 ---
 
-::: panel-tabset
-## Table Preview
+::::: columns
 
-```{r img, echo=FALSE, fig.align='center', out.width='60%'}
+:::: {.column width="52%"}
+### FDA IG Shell
+
+![](ig_shell.png){fig-alt="FDA IG example table shell" .lightbox width=100%}
+
+### Programming Notes
+
+**Background and Instructions**
+
+The following trial populations are reflected in Table 4: Subject Populations below:
+
+•    Intent-to-treat population (ITT): Includes every subject who is randomized according to randomized trial arm assignment.
+
+•    Modified intent-to-treat population (mITT): Subset of the intent-to-treat population that excludes a predefined subject
+
+population.
+
+•    Safety population: All subjects considered in the safety analyses who received at least one dose of the study drug in the trials or
+
+studies submitted.
+
+•    Per-protocol population: Only those subjects who completed the treatment originally allocated and planned without specified
+
+protocol violations.
+
+**Customization**
+
+N/A (per FDA IG)
+
+::::
+
+:::: {.column width="4%"}
+::::
+
+:::: {.column width="44%"}
+### Output
+
+```{r out-result, echo=FALSE, fig.align='center', out.width='100%'}
 knitr::include_graphics("result.png")
+```
+
+::::
+
+:::::
+
+::: panel-tabset
+## Full Code
+
+```{r fullcode, eval=FALSE}
+# Load libraries & data -------------------------------------
+library(dplyr)
+library(gtsummary)
+
+adsl <- pharmaverseadam::adsl |>
+  filter(TRT01A != "Screen Failure") # Remove screen failure observations
+
+# Pre-processing --------------------------------------------
+pop_vars <- c("rand_fl", "ITTFL", "SAFFL", "prot_fl")
+lbl_pop_vars <- c("Subjects randomized", "ITT population", "Safety population", "Per-protocol population")
+
+data <- adsl |>
+  mutate(
+    across(all_of("SAFFL"), ~ . == "Y"),
+    ITTFL = !is.na(RANDDT),
+    rand_fl = !is.na(RANDDT),
+    prot_fl = EOSSTT == "COMPLETED"
+  )
+
+tbl <- data |>
+  tbl_summary(
+    by = "TRT01A",
+    statistic = list(all_dichotomous() ~ "{n} ({p}%)"),
+    include = all_of(pop_vars),
+    digits = list(all_categorical() ~ c(0, 1)),
+    label = as.list(lbl_pop_vars) |> setNames(pop_vars)
+  ) |>
+  # Define which variables are children of parent variables
+  modify_indent(
+    columns = "label",
+    rows = variable != "rand_fl",
+    indent = 4L
+  ) |>
+  modify_header(label = "**Population**")
+
+ard <- gather_ard(tbl)
 ```
 
 ## Setup
@@ -56,14 +138,6 @@ tbl <- data |>
 tbl
 ```
 
-```{r eval=FALSE, include=FALSE}
-# Run chunk locally to generate image file
-gt::gtsave(as_gt(tbl), filename = "result.png")
-```
-
-```{r img, echo=FALSE, fig.align='center', out.width='60%'}
-```
-
 ## Build ARD
 
 ```{r ard, message=FALSE, warning=FALSE, results='hide'}
@@ -76,4 +150,5 @@ ard
 withr::local_options(width = 9999)
 print(ard, columns = "all")
 ```
+
 :::

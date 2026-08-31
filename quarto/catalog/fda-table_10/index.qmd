@@ -4,11 +4,70 @@ subtitle: FDA Table 10
 categories: [table, FDA, safety, adverse events]
 ---
 
-::: panel-tabset
-## Table Preview
+::::: columns
 
-```{r img, echo=FALSE, fig.align='center', out.width='60%'}
+:::: {.column width="52%"}
+### FDA IG Shell
+
+![](ig_shell.png){fig-alt="FDA IG example table shell" .lightbox width=100%}
+
+### Programming Notes
+
+**Background and Instructions**
+
+N/A (per FDA IG)
+
+**Customization**
+
+N/A (per FDA IG)
+
+::::
+
+:::: {.column width="4%"}
+::::
+
+:::: {.column width="44%"}
+### Output
+
+```{r out-result, echo=FALSE, fig.align='center', out.width='100%'}
 knitr::include_graphics("result.png")
+```
+
+::::
+
+:::::
+
+::: panel-tabset
+## Full Code
+
+```{r fullcode, eval=FALSE}
+# Load libraries & data -------------------------------------
+library(dplyr)
+library(gtsummary)
+
+adsl <- pharmaverseadam::adsl
+adae <- pharmaverseadam::adae
+
+# Pre-processing --------------------------------------------
+adae <- adae |>
+  filter(
+    # safety population
+    SAFFL == "Y",
+    # serious adverse events
+    AESER == "Y"
+  )
+
+tbl <- adae |>
+  tbl_hierarchical(
+    variables = c(AESOC, AEDECOD),
+    by = TRT01A,
+    id = USUBJID,
+    denominator = adsl,
+    overall_row = TRUE,
+    label = "..ard_hierarchical_overall.." ~ "Any SAE"
+  )
+
+ard <- gather_ard(tbl)
 ```
 
 ## Setup
@@ -47,14 +106,6 @@ tbl <- adae |>
 tbl
 ```
 
-```{r eval=FALSE, include=FALSE}
-# Run chunk locally to generate image file
-gt::gtsave(as_gt(tbl), filename = "result.png")
-```
-
-```{r img, echo=FALSE, fig.align='center', out.width='60%'}
-```
-
 ## Build ARD
 
 ```{r ard, message=FALSE, warning=FALSE, results='hide'}
@@ -67,4 +118,5 @@ ard
 withr::local_options(width = 9999)
 print(ard, columns = "all")
 ```
+
 :::
