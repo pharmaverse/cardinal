@@ -254,63 +254,66 @@ cookieconsent.run({
 <span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(cards)</span>
 <span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(gtsummary)</span>
-<span id="cb1-5"><a href="#cb1-5"></a></span>
-<span id="cb1-6"><a href="#cb1-6"></a>adae <span class="ot">&lt;-</span> pharmaverseadam<span class="sc">::</span>adae</span>
-<span id="cb1-7"><a href="#cb1-7"></a>adex <span class="ot">&lt;-</span> pharmaverseadam<span class="sc">::</span>adex</span>
-<span id="cb1-8"><a href="#cb1-8"></a></span>
-<span id="cb1-9"><a href="#cb1-9"></a><span class="co"># Pre-processing --------------------------------------------</span></span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="co"># deaths</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a>adae <span class="ot">&lt;-</span> adae <span class="sc">|&gt;</span></span>
-<span id="cb1-12"><a href="#cb1-12"></a>  <span class="fu">filter</span>(</span>
-<span id="cb1-13"><a href="#cb1-13"></a>    <span class="co"># safety population</span></span>
-<span id="cb1-14"><a href="#cb1-14"></a>    SAFFL <span class="sc">==</span> <span class="st">"Y"</span>,</span>
-<span id="cb1-15"><a href="#cb1-15"></a>    <span class="co"># deaths</span></span>
-<span id="cb1-16"><a href="#cb1-16"></a>    DTHFL <span class="sc">==</span> <span class="st">"Y"</span></span>
-<span id="cb1-17"><a href="#cb1-17"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb1-18"><a href="#cb1-18"></a>  <span class="co"># select variables from `adae` to include in final result</span></span>
-<span id="cb1-19"><a href="#cb1-19"></a>  <span class="fu">select</span>(USUBJID, TRT01A, AGE, SEX, DTHADY, DTHCAUS) <span class="sc">|&gt;</span></span>
-<span id="cb1-20"><a href="#cb1-20"></a>  <span class="co"># keep one row per unique ID</span></span>
-<span id="cb1-21"><a href="#cb1-21"></a>  <span class="fu">distinct</span>(USUBJID, DTHCAUS, DTHADY, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-22"><a href="#cb1-22"></a></span>
-<span id="cb1-23"><a href="#cb1-23"></a><span class="co"># dosing</span></span>
-<span id="cb1-24"><a href="#cb1-24"></a>adex <span class="ot">&lt;-</span> adex <span class="sc">|&gt;</span></span>
-<span id="cb1-25"><a href="#cb1-25"></a>  <span class="fu">filter</span>(</span>
-<span id="cb1-26"><a href="#cb1-26"></a>    <span class="co"># safety population</span></span>
-<span id="cb1-27"><a href="#cb1-27"></a>    SAFFL <span class="sc">==</span> <span class="st">"Y"</span>,</span>
-<span id="cb1-28"><a href="#cb1-28"></a>    <span class="co"># total dosages</span></span>
-<span id="cb1-29"><a href="#cb1-29"></a>    PARAMCD <span class="sc">==</span> <span class="st">"TDOSE"</span></span>
-<span id="cb1-30"><a href="#cb1-30"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb1-31"><a href="#cb1-31"></a>  <span class="co"># select variables from `adex` to include in final result</span></span>
-<span id="cb1-32"><a href="#cb1-32"></a>  <span class="fu">select</span>(USUBJID, AVAL, TRTSDT, TRTEDT) <span class="sc">|&gt;</span></span>
-<span id="cb1-33"><a href="#cb1-33"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb1-34"><a href="#cb1-34"></a>    <span class="co"># derive dosage duration</span></span>
-<span id="cb1-35"><a href="#cb1-35"></a>    <span class="at">DOSDUR =</span> (TRTEDT <span class="sc">-</span> TRTSDT <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">|&gt;</span> <span class="fu">as.character</span>()</span>
-<span id="cb1-36"><a href="#cb1-36"></a>  )</span>
-<span id="cb1-37"><a href="#cb1-37"></a></span>
-<span id="cb1-38"><a href="#cb1-38"></a><span class="co"># combine all data</span></span>
-<span id="cb1-39"><a href="#cb1-39"></a>data <span class="ot">&lt;-</span> <span class="fu">left_join</span>(adae, adex, <span class="at">by =</span> <span class="st">"USUBJID"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb1-40"><a href="#cb1-40"></a>  <span class="fu">select</span>(TRT01A, USUBJID, AGE, SEX, DOSDUR, DTHADY, DTHCAUS) <span class="sc">|&gt;</span></span>
-<span id="cb1-41"><a href="#cb1-41"></a>  <span class="fu">arrange</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">library</span>(crane)</span>
+<span id="cb1-6"><a href="#cb1-6"></a></span>
+<span id="cb1-7"><a href="#cb1-7"></a>adae <span class="ot">&lt;-</span> pharmaverseadam<span class="sc">::</span>adae</span>
+<span id="cb1-8"><a href="#cb1-8"></a>adex <span class="ot">&lt;-</span> pharmaverseadam<span class="sc">::</span>adex</span>
+<span id="cb1-9"><a href="#cb1-9"></a></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="co"># Pre-processing --------------------------------------------</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="co"># deaths</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a>adae <span class="ot">&lt;-</span> adae <span class="sc">|&gt;</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a>  <span class="fu">filter</span>(</span>
+<span id="cb1-14"><a href="#cb1-14"></a>    <span class="co"># safety population</span></span>
+<span id="cb1-15"><a href="#cb1-15"></a>    SAFFL <span class="sc">==</span> <span class="st">"Y"</span>,</span>
+<span id="cb1-16"><a href="#cb1-16"></a>    <span class="co"># deaths</span></span>
+<span id="cb1-17"><a href="#cb1-17"></a>    DTHFL <span class="sc">==</span> <span class="st">"Y"</span></span>
+<span id="cb1-18"><a href="#cb1-18"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb1-19"><a href="#cb1-19"></a>  <span class="co"># select variables from `adae` to include in final result</span></span>
+<span id="cb1-20"><a href="#cb1-20"></a>  <span class="fu">select</span>(USUBJID, TRT01A, AGE, SEX, DTHADY, DTHCAUS) <span class="sc">|&gt;</span></span>
+<span id="cb1-21"><a href="#cb1-21"></a>  <span class="co"># keep one row per unique ID</span></span>
+<span id="cb1-22"><a href="#cb1-22"></a>  <span class="fu">distinct</span>(USUBJID, DTHCAUS, DTHADY, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-23"><a href="#cb1-23"></a></span>
+<span id="cb1-24"><a href="#cb1-24"></a><span class="co"># dosing</span></span>
+<span id="cb1-25"><a href="#cb1-25"></a>adex <span class="ot">&lt;-</span> adex <span class="sc">|&gt;</span></span>
+<span id="cb1-26"><a href="#cb1-26"></a>  <span class="fu">filter</span>(</span>
+<span id="cb1-27"><a href="#cb1-27"></a>    <span class="co"># safety population</span></span>
+<span id="cb1-28"><a href="#cb1-28"></a>    SAFFL <span class="sc">==</span> <span class="st">"Y"</span>,</span>
+<span id="cb1-29"><a href="#cb1-29"></a>    <span class="co"># total dosages</span></span>
+<span id="cb1-30"><a href="#cb1-30"></a>    PARAMCD <span class="sc">==</span> <span class="st">"TDOSE"</span></span>
+<span id="cb1-31"><a href="#cb1-31"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb1-32"><a href="#cb1-32"></a>  <span class="co"># select variables from `adex` to include in final result</span></span>
+<span id="cb1-33"><a href="#cb1-33"></a>  <span class="fu">select</span>(USUBJID, AVAL, TRTSDT, TRTEDT) <span class="sc">|&gt;</span></span>
+<span id="cb1-34"><a href="#cb1-34"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb1-35"><a href="#cb1-35"></a>    <span class="co"># derive dosage duration</span></span>
+<span id="cb1-36"><a href="#cb1-36"></a>    <span class="at">DOSDUR =</span> (TRTEDT <span class="sc">-</span> TRTSDT <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">|&gt;</span> <span class="fu">as.character</span>()</span>
+<span id="cb1-37"><a href="#cb1-37"></a>  )</span>
+<span id="cb1-38"><a href="#cb1-38"></a></span>
+<span id="cb1-39"><a href="#cb1-39"></a><span class="co"># combine all data</span></span>
+<span id="cb1-40"><a href="#cb1-40"></a>data <span class="ot">&lt;-</span> <span class="fu">left_join</span>(adae, adex, <span class="at">by =</span> <span class="st">"USUBJID"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-41"><a href="#cb1-41"></a>  <span class="fu">select</span>(TRT01A, USUBJID, AGE, SEX, DOSDUR, DTHADY, DTHCAUS) <span class="sc">|&gt;</span></span>
+<span id="cb1-42"><a href="#cb1-42"></a>  <span class="fu">arrange</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </div>
 <div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
 <div class="cell">
-<details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>tbl <span class="ot">&lt;-</span> <span class="fu">as_gtsummary</span>(data) <span class="sc">|&gt;</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>  <span class="co"># set table header labels</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a>  <span class="fu">modify_header</span>(</span>
-<span id="cb2-4"><a href="#cb2-4"></a>    <span class="at">TRT01A =</span> <span class="st">"**Treatment Arm**"</span>,</span>
-<span id="cb2-5"><a href="#cb2-5"></a>    <span class="at">USUBJID =</span> <span class="st">"**Unique  </span><span class="sc">\n</span><span class="st"> Subject ID**"</span>,</span>
-<span id="cb2-6"><a href="#cb2-6"></a>    <span class="at">AGE =</span> <span class="st">"**Age**"</span>,</span>
-<span id="cb2-7"><a href="#cb2-7"></a>    <span class="at">SEX =</span> <span class="st">"**Sex**"</span>,</span>
-<span id="cb2-8"><a href="#cb2-8"></a>    <span class="at">DOSDUR =</span> <span class="st">"**Dosing**  </span><span class="sc">\n</span><span class="st"> **Duration**  </span><span class="sc">\n</span><span class="st"> **(Days)**"</span>,</span>
-<span id="cb2-9"><a href="#cb2-9"></a>    <span class="at">DTHADY =</span> <span class="st">"**Study**  </span><span class="sc">\n</span><span class="st"> **Day of**  </span><span class="sc">\n</span><span class="st"> **Death**"</span>,</span>
-<span id="cb2-10"><a href="#cb2-10"></a>    <span class="at">DTHCAUS =</span> <span class="st">"**Cause of Death**"</span></span>
-<span id="cb2-11"><a href="#cb2-11"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb2-12"><a href="#cb2-12"></a>  <span class="co"># align all columns left</span></span>
-<span id="cb2-13"><a href="#cb2-13"></a>  <span class="fu">modify_column_alignment</span>(<span class="fu">everything</span>(), <span class="at">align =</span> <span class="st">"left"</span>)</span>
-<span id="cb2-14"><a href="#cb2-14"></a></span>
-<span id="cb2-15"><a href="#cb2-15"></a>tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Table 9 is a subject-level listing in the FDA IG, so we use tbl_listing()</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="co"># rather than a summary constructor.</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>tbl <span class="ot">&lt;-</span> crane<span class="sc">::</span><span class="fu">tbl_listing</span>(data) <span class="sc">|&gt;</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>  <span class="co"># set table header labels</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>  <span class="fu">modify_header</span>(</span>
+<span id="cb2-6"><a href="#cb2-6"></a>    <span class="at">TRT01A =</span> <span class="st">"**Treatment Arm**"</span>,</span>
+<span id="cb2-7"><a href="#cb2-7"></a>    <span class="at">USUBJID =</span> <span class="st">"**Unique  </span><span class="sc">\n</span><span class="st"> Subject ID**"</span>,</span>
+<span id="cb2-8"><a href="#cb2-8"></a>    <span class="at">AGE =</span> <span class="st">"**Age**"</span>,</span>
+<span id="cb2-9"><a href="#cb2-9"></a>    <span class="at">SEX =</span> <span class="st">"**Sex**"</span>,</span>
+<span id="cb2-10"><a href="#cb2-10"></a>    <span class="at">DOSDUR =</span> <span class="st">"**Dosing**  </span><span class="sc">\n</span><span class="st"> **Duration**  </span><span class="sc">\n</span><span class="st"> **(Days)**"</span>,</span>
+<span id="cb2-11"><a href="#cb2-11"></a>    <span class="at">DTHADY =</span> <span class="st">"**Study**  </span><span class="sc">\n</span><span class="st"> **Day of**  </span><span class="sc">\n</span><span class="st"> **Death**"</span>,</span>
+<span id="cb2-12"><a href="#cb2-12"></a>    <span class="at">DTHCAUS =</span> <span class="st">"**Cause of Death**"</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb2-14"><a href="#cb2-14"></a>  <span class="co"># align all columns left</span></span>
+<span id="cb2-15"><a href="#cb2-15"></a>  <span class="fu">modify_column_alignment</span>(<span class="fu">everything</span>(), <span class="at">align =</span> <span class="st">"left"</span>)</span>
+<span id="cb2-16"><a href="#cb2-16"></a></span>
+<span id="cb2-17"><a href="#cb2-17"></a>tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell" data-layout-align="center">
@@ -980,87 +983,90 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb5-18"><a href="#cb5-18"></a><span class="in">library(dplyr)</span></span>
 <span id="cb5-19"><a href="#cb5-19"></a><span class="in">library(cards)</span></span>
 <span id="cb5-20"><a href="#cb5-20"></a><span class="in">library(gtsummary)</span></span>
-<span id="cb5-21"><a href="#cb5-21"></a></span>
-<span id="cb5-22"><a href="#cb5-22"></a><span class="in">adae &lt;- pharmaverseadam::adae</span></span>
-<span id="cb5-23"><a href="#cb5-23"></a><span class="in">adex &lt;- pharmaverseadam::adex</span></span>
-<span id="cb5-24"><a href="#cb5-24"></a></span>
-<span id="cb5-25"><a href="#cb5-25"></a><span class="in"># Pre-processing --------------------------------------------</span></span>
-<span id="cb5-26"><a href="#cb5-26"></a><span class="in"># deaths</span></span>
-<span id="cb5-27"><a href="#cb5-27"></a><span class="in">adae &lt;- adae |&gt;</span></span>
-<span id="cb5-28"><a href="#cb5-28"></a><span class="in">  filter(</span></span>
-<span id="cb5-29"><a href="#cb5-29"></a><span class="in">    # safety population</span></span>
-<span id="cb5-30"><a href="#cb5-30"></a><span class="in">    SAFFL == "Y",</span></span>
-<span id="cb5-31"><a href="#cb5-31"></a><span class="in">    # deaths</span></span>
-<span id="cb5-32"><a href="#cb5-32"></a><span class="in">    DTHFL == "Y"</span></span>
-<span id="cb5-33"><a href="#cb5-33"></a><span class="in">  ) |&gt;</span></span>
-<span id="cb5-34"><a href="#cb5-34"></a><span class="in">  # select variables from `adae` to include in final result</span></span>
-<span id="cb5-35"><a href="#cb5-35"></a><span class="in">  select(USUBJID, TRT01A, AGE, SEX, DTHADY, DTHCAUS) |&gt;</span></span>
-<span id="cb5-36"><a href="#cb5-36"></a><span class="in">  # keep one row per unique ID</span></span>
-<span id="cb5-37"><a href="#cb5-37"></a><span class="in">  distinct(USUBJID, DTHCAUS, DTHADY, .keep_all = TRUE)</span></span>
-<span id="cb5-38"><a href="#cb5-38"></a></span>
-<span id="cb5-39"><a href="#cb5-39"></a><span class="in"># dosing</span></span>
-<span id="cb5-40"><a href="#cb5-40"></a><span class="in">adex &lt;- adex |&gt;</span></span>
-<span id="cb5-41"><a href="#cb5-41"></a><span class="in">  filter(</span></span>
-<span id="cb5-42"><a href="#cb5-42"></a><span class="in">    # safety population</span></span>
-<span id="cb5-43"><a href="#cb5-43"></a><span class="in">    SAFFL == "Y",</span></span>
-<span id="cb5-44"><a href="#cb5-44"></a><span class="in">    # total dosages</span></span>
-<span id="cb5-45"><a href="#cb5-45"></a><span class="in">    PARAMCD == "TDOSE"</span></span>
-<span id="cb5-46"><a href="#cb5-46"></a><span class="in">  ) |&gt;</span></span>
-<span id="cb5-47"><a href="#cb5-47"></a><span class="in">  # select variables from `adex` to include in final result</span></span>
-<span id="cb5-48"><a href="#cb5-48"></a><span class="in">  select(USUBJID, AVAL, TRTSDT, TRTEDT) |&gt;</span></span>
-<span id="cb5-49"><a href="#cb5-49"></a><span class="in">  mutate(</span></span>
-<span id="cb5-50"><a href="#cb5-50"></a><span class="in">    # derive dosage duration</span></span>
-<span id="cb5-51"><a href="#cb5-51"></a><span class="in">    DOSDUR = (TRTEDT - TRTSDT + 1) |&gt; as.character()</span></span>
-<span id="cb5-52"><a href="#cb5-52"></a><span class="in">  )</span></span>
-<span id="cb5-53"><a href="#cb5-53"></a></span>
-<span id="cb5-54"><a href="#cb5-54"></a><span class="in"># combine all data</span></span>
-<span id="cb5-55"><a href="#cb5-55"></a><span class="in">data &lt;- left_join(adae, adex, by = "USUBJID") |&gt;</span></span>
-<span id="cb5-56"><a href="#cb5-56"></a><span class="in">  select(TRT01A, USUBJID, AGE, SEX, DOSDUR, DTHADY, DTHCAUS) |&gt;</span></span>
-<span id="cb5-57"><a href="#cb5-57"></a><span class="in">  arrange()</span></span>
-<span id="cb5-58"><a href="#cb5-58"></a><span class="in">```</span></span>
-<span id="cb5-59"><a href="#cb5-59"></a></span>
-<span id="cb5-60"><a href="#cb5-60"></a><span class="fu">## Build Table</span></span>
-<span id="cb5-61"><a href="#cb5-61"></a></span>
-<span id="cb5-62"><a href="#cb5-62"></a><span class="in">```{r tbl, results = 'hide'}</span></span>
-<span id="cb5-63"><a href="#cb5-63"></a><span class="in">tbl &lt;- as_gtsummary(data) |&gt;</span></span>
-<span id="cb5-64"><a href="#cb5-64"></a><span class="in">  # set table header labels</span></span>
-<span id="cb5-65"><a href="#cb5-65"></a><span class="in">  modify_header(</span></span>
-<span id="cb5-66"><a href="#cb5-66"></a><span class="in">    TRT01A = "**Treatment Arm**",</span></span>
-<span id="cb5-67"><a href="#cb5-67"></a><span class="in">    USUBJID = "**Unique  \n Subject ID**",</span></span>
-<span id="cb5-68"><a href="#cb5-68"></a><span class="in">    AGE = "**Age**",</span></span>
-<span id="cb5-69"><a href="#cb5-69"></a><span class="in">    SEX = "**Sex**",</span></span>
-<span id="cb5-70"><a href="#cb5-70"></a><span class="in">    DOSDUR = "**Dosing**  \n **Duration**  \n **(Days)**",</span></span>
-<span id="cb5-71"><a href="#cb5-71"></a><span class="in">    DTHADY = "**Study**  \n **Day of**  \n **Death**",</span></span>
-<span id="cb5-72"><a href="#cb5-72"></a><span class="in">    DTHCAUS = "**Cause of Death**"</span></span>
-<span id="cb5-73"><a href="#cb5-73"></a><span class="in">  ) |&gt;</span></span>
-<span id="cb5-74"><a href="#cb5-74"></a><span class="in">  # align all columns left</span></span>
-<span id="cb5-75"><a href="#cb5-75"></a><span class="in">  modify_column_alignment(everything(), align = "left")</span></span>
-<span id="cb5-76"><a href="#cb5-76"></a></span>
-<span id="cb5-77"><a href="#cb5-77"></a><span class="in">tbl</span></span>
-<span id="cb5-78"><a href="#cb5-78"></a><span class="in">```</span></span>
+<span id="cb5-21"><a href="#cb5-21"></a><span class="in">library(crane)</span></span>
+<span id="cb5-22"><a href="#cb5-22"></a></span>
+<span id="cb5-23"><a href="#cb5-23"></a><span class="in">adae &lt;- pharmaverseadam::adae</span></span>
+<span id="cb5-24"><a href="#cb5-24"></a><span class="in">adex &lt;- pharmaverseadam::adex</span></span>
+<span id="cb5-25"><a href="#cb5-25"></a></span>
+<span id="cb5-26"><a href="#cb5-26"></a><span class="in"># Pre-processing --------------------------------------------</span></span>
+<span id="cb5-27"><a href="#cb5-27"></a><span class="in"># deaths</span></span>
+<span id="cb5-28"><a href="#cb5-28"></a><span class="in">adae &lt;- adae |&gt;</span></span>
+<span id="cb5-29"><a href="#cb5-29"></a><span class="in">  filter(</span></span>
+<span id="cb5-30"><a href="#cb5-30"></a><span class="in">    # safety population</span></span>
+<span id="cb5-31"><a href="#cb5-31"></a><span class="in">    SAFFL == "Y",</span></span>
+<span id="cb5-32"><a href="#cb5-32"></a><span class="in">    # deaths</span></span>
+<span id="cb5-33"><a href="#cb5-33"></a><span class="in">    DTHFL == "Y"</span></span>
+<span id="cb5-34"><a href="#cb5-34"></a><span class="in">  ) |&gt;</span></span>
+<span id="cb5-35"><a href="#cb5-35"></a><span class="in">  # select variables from `adae` to include in final result</span></span>
+<span id="cb5-36"><a href="#cb5-36"></a><span class="in">  select(USUBJID, TRT01A, AGE, SEX, DTHADY, DTHCAUS) |&gt;</span></span>
+<span id="cb5-37"><a href="#cb5-37"></a><span class="in">  # keep one row per unique ID</span></span>
+<span id="cb5-38"><a href="#cb5-38"></a><span class="in">  distinct(USUBJID, DTHCAUS, DTHADY, .keep_all = TRUE)</span></span>
+<span id="cb5-39"><a href="#cb5-39"></a></span>
+<span id="cb5-40"><a href="#cb5-40"></a><span class="in"># dosing</span></span>
+<span id="cb5-41"><a href="#cb5-41"></a><span class="in">adex &lt;- adex |&gt;</span></span>
+<span id="cb5-42"><a href="#cb5-42"></a><span class="in">  filter(</span></span>
+<span id="cb5-43"><a href="#cb5-43"></a><span class="in">    # safety population</span></span>
+<span id="cb5-44"><a href="#cb5-44"></a><span class="in">    SAFFL == "Y",</span></span>
+<span id="cb5-45"><a href="#cb5-45"></a><span class="in">    # total dosages</span></span>
+<span id="cb5-46"><a href="#cb5-46"></a><span class="in">    PARAMCD == "TDOSE"</span></span>
+<span id="cb5-47"><a href="#cb5-47"></a><span class="in">  ) |&gt;</span></span>
+<span id="cb5-48"><a href="#cb5-48"></a><span class="in">  # select variables from `adex` to include in final result</span></span>
+<span id="cb5-49"><a href="#cb5-49"></a><span class="in">  select(USUBJID, AVAL, TRTSDT, TRTEDT) |&gt;</span></span>
+<span id="cb5-50"><a href="#cb5-50"></a><span class="in">  mutate(</span></span>
+<span id="cb5-51"><a href="#cb5-51"></a><span class="in">    # derive dosage duration</span></span>
+<span id="cb5-52"><a href="#cb5-52"></a><span class="in">    DOSDUR = (TRTEDT - TRTSDT + 1) |&gt; as.character()</span></span>
+<span id="cb5-53"><a href="#cb5-53"></a><span class="in">  )</span></span>
+<span id="cb5-54"><a href="#cb5-54"></a></span>
+<span id="cb5-55"><a href="#cb5-55"></a><span class="in"># combine all data</span></span>
+<span id="cb5-56"><a href="#cb5-56"></a><span class="in">data &lt;- left_join(adae, adex, by = "USUBJID") |&gt;</span></span>
+<span id="cb5-57"><a href="#cb5-57"></a><span class="in">  select(TRT01A, USUBJID, AGE, SEX, DOSDUR, DTHADY, DTHCAUS) |&gt;</span></span>
+<span id="cb5-58"><a href="#cb5-58"></a><span class="in">  arrange()</span></span>
+<span id="cb5-59"><a href="#cb5-59"></a><span class="in">```</span></span>
+<span id="cb5-60"><a href="#cb5-60"></a></span>
+<span id="cb5-61"><a href="#cb5-61"></a><span class="fu">## Build Table</span></span>
+<span id="cb5-62"><a href="#cb5-62"></a></span>
+<span id="cb5-63"><a href="#cb5-63"></a><span class="in">```{r tbl, results = 'hide'}</span></span>
+<span id="cb5-64"><a href="#cb5-64"></a><span class="in"># Table 9 is a subject-level listing in the FDA IG, so we use tbl_listing()</span></span>
+<span id="cb5-65"><a href="#cb5-65"></a><span class="in"># rather than a summary constructor.</span></span>
+<span id="cb5-66"><a href="#cb5-66"></a><span class="in">tbl &lt;- crane::tbl_listing(data) |&gt;</span></span>
+<span id="cb5-67"><a href="#cb5-67"></a><span class="in">  # set table header labels</span></span>
+<span id="cb5-68"><a href="#cb5-68"></a><span class="in">  modify_header(</span></span>
+<span id="cb5-69"><a href="#cb5-69"></a><span class="in">    TRT01A = "**Treatment Arm**",</span></span>
+<span id="cb5-70"><a href="#cb5-70"></a><span class="in">    USUBJID = "**Unique  \n Subject ID**",</span></span>
+<span id="cb5-71"><a href="#cb5-71"></a><span class="in">    AGE = "**Age**",</span></span>
+<span id="cb5-72"><a href="#cb5-72"></a><span class="in">    SEX = "**Sex**",</span></span>
+<span id="cb5-73"><a href="#cb5-73"></a><span class="in">    DOSDUR = "**Dosing**  \n **Duration**  \n **(Days)**",</span></span>
+<span id="cb5-74"><a href="#cb5-74"></a><span class="in">    DTHADY = "**Study**  \n **Day of**  \n **Death**",</span></span>
+<span id="cb5-75"><a href="#cb5-75"></a><span class="in">    DTHCAUS = "**Cause of Death**"</span></span>
+<span id="cb5-76"><a href="#cb5-76"></a><span class="in">  ) |&gt;</span></span>
+<span id="cb5-77"><a href="#cb5-77"></a><span class="in">  # align all columns left</span></span>
+<span id="cb5-78"><a href="#cb5-78"></a><span class="in">  modify_column_alignment(everything(), align = "left")</span></span>
 <span id="cb5-79"><a href="#cb5-79"></a></span>
-<span id="cb5-80"><a href="#cb5-80"></a><span class="in">```{r eval=FALSE, include=FALSE}</span></span>
-<span id="cb5-81"><a href="#cb5-81"></a><span class="in">gt::gtsave(as_gt(tbl), filename = "result.png")</span></span>
-<span id="cb5-82"><a href="#cb5-82"></a><span class="in">```</span></span>
-<span id="cb5-83"><a href="#cb5-83"></a></span>
-<span id="cb5-84"><a href="#cb5-84"></a><span class="in">```{r img, echo=FALSE, fig.align='center', out.width='60%'}</span></span>
+<span id="cb5-80"><a href="#cb5-80"></a><span class="in">tbl</span></span>
+<span id="cb5-81"><a href="#cb5-81"></a><span class="in">```</span></span>
+<span id="cb5-82"><a href="#cb5-82"></a></span>
+<span id="cb5-83"><a href="#cb5-83"></a><span class="in">```{r eval=FALSE, include=FALSE}</span></span>
+<span id="cb5-84"><a href="#cb5-84"></a><span class="in">gt::gtsave(as_gt(tbl), filename = "result.png")</span></span>
 <span id="cb5-85"><a href="#cb5-85"></a><span class="in">```</span></span>
 <span id="cb5-86"><a href="#cb5-86"></a></span>
-<span id="cb5-87"><a href="#cb5-87"></a><span class="fu">## Build ARD</span></span>
-<span id="cb5-88"><a href="#cb5-88"></a></span>
-<span id="cb5-89"><a href="#cb5-89"></a><span class="in">```{r ard, message=FALSE, warning=FALSE, results='hide'}</span></span>
-<span id="cb5-90"><a href="#cb5-90"></a><span class="in"># For this table we do not build an ARD since we are returning the complete</span></span>
-<span id="cb5-91"><a href="#cb5-91"></a><span class="in"># dataset as our result, so there are no statistics to display in an ARD.</span></span>
-<span id="cb5-92"><a href="#cb5-92"></a><span class="in"># The full unformatted dataset (`data`) can be used instead if needed</span></span>
-<span id="cb5-93"><a href="#cb5-93"></a><span class="in">data</span></span>
-<span id="cb5-94"><a href="#cb5-94"></a><span class="in">```</span></span>
-<span id="cb5-95"><a href="#cb5-95"></a></span>
-<span id="cb5-96"><a href="#cb5-96"></a><span class="in">```{r, echo=FALSE}</span></span>
-<span id="cb5-97"><a href="#cb5-97"></a><span class="in"># Print data</span></span>
-<span id="cb5-98"><a href="#cb5-98"></a><span class="in">withr::local_options(width = 9999)</span></span>
-<span id="cb5-99"><a href="#cb5-99"></a><span class="in">print(data, columns = "all", n = 40)</span></span>
-<span id="cb5-100"><a href="#cb5-100"></a><span class="in">```</span></span>
-<span id="cb5-101"><a href="#cb5-101"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb5-87"><a href="#cb5-87"></a><span class="in">```{r img, echo=FALSE, fig.align='center', out.width='60%'}</span></span>
+<span id="cb5-88"><a href="#cb5-88"></a><span class="in">```</span></span>
+<span id="cb5-89"><a href="#cb5-89"></a></span>
+<span id="cb5-90"><a href="#cb5-90"></a><span class="fu">## Build ARD</span></span>
+<span id="cb5-91"><a href="#cb5-91"></a></span>
+<span id="cb5-92"><a href="#cb5-92"></a><span class="in">```{r ard, message=FALSE, warning=FALSE, results='hide'}</span></span>
+<span id="cb5-93"><a href="#cb5-93"></a><span class="in"># For this table we do not build an ARD since we are returning the complete</span></span>
+<span id="cb5-94"><a href="#cb5-94"></a><span class="in"># dataset as our result, so there are no statistics to display in an ARD.</span></span>
+<span id="cb5-95"><a href="#cb5-95"></a><span class="in"># The full unformatted dataset (`data`) can be used instead if needed</span></span>
+<span id="cb5-96"><a href="#cb5-96"></a><span class="in">data</span></span>
+<span id="cb5-97"><a href="#cb5-97"></a><span class="in">```</span></span>
+<span id="cb5-98"><a href="#cb5-98"></a></span>
+<span id="cb5-99"><a href="#cb5-99"></a><span class="in">```{r, echo=FALSE}</span></span>
+<span id="cb5-100"><a href="#cb5-100"></a><span class="in"># Print data</span></span>
+<span id="cb5-101"><a href="#cb5-101"></a><span class="in">withr::local_options(width = 9999)</span></span>
+<span id="cb5-102"><a href="#cb5-102"></a><span class="in">print(data, columns = "all", n = 40)</span></span>
+<span id="cb5-103"><a href="#cb5-103"></a><span class="in">```</span></span>
+<span id="cb5-104"><a href="#cb5-104"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
