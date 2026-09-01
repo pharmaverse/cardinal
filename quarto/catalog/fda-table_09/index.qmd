@@ -114,6 +114,7 @@ print(data, columns = "all", n = 40)
 library(dplyr)
 library(cards)
 library(gtsummary)
+library(crane)
 
 adae <- pharmaverseadam::adae
 adex <- pharmaverseadam::adex
@@ -156,7 +157,9 @@ data <- left_join(adae, adex, by = "USUBJID") |>
 ## Build Table
 
 ```{r tbl, results = 'hide'}
-tbl <- as_gtsummary(data) |>
+# Table 9 is a subject-level listing in the FDA IG, so we use tbl_listing()
+# rather than a summary constructor.
+tbl <- crane::tbl_listing(data) |>
   # set table header labels
   modify_header(
     TRT01A = "**Treatment Arm**",

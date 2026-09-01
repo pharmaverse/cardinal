@@ -3,6 +3,7 @@ test_that("fda-table_09() works", {
   skip_if_not_installed("cards")
   skip_if_not_installed("gtsummary")
   skip_if_not_installed("pharmaverseadam")
+  skip_if_not_installed("crane")
 
   library(dplyr)
   library(cards)
@@ -45,7 +46,11 @@ test_that("fda-table_09() works", {
     select(TRT01A, USUBJID, AGE, SEX, DOSDUR, DTHADY, DTHCAUS) |>
     arrange()
 
-  tbl <- as_gtsummary(data) |>
+  # Table 9 is one of the FDA IG's subject-level listings (titled "All
+  # Individual Subject Deaths"), so it uses tbl_listing() rather than a
+  # summary constructor. The other IG listings (Tables 39, 41, 42, 54, 55)
+  # are not in the catalog yet; when added they should use tbl_listing() too.
+  tbl <- crane::tbl_listing(data) |>
     # set table header labels
     modify_header(
       TRT01A = "**Treatment Arm**",
@@ -59,6 +64,6 @@ test_that("fda-table_09() works", {
     # align all columns left
     modify_column_alignment(everything(), align = "left")
 
-  # as_gtsummary doesn't create ard
+  # a listing has no ARD; snapshot the underlying data
   expect_snapshot(as.data.frame(data))
 })
