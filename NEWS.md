@@ -1,4 +1,4 @@
-# cardinalfda 0.2.0.9003
+# cardinalfda 0.2.0.9004
 
  * Moved `dplyr` from `Suggests` to `Imports` to support `make_table_02()`.
  * FDA Table 9 (individual subject deaths) now builds its listing with `crane::tbl_listing()` instead of `gtsummary::as_gtsummary()`, so it is classed as a listing.
