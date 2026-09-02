@@ -46,74 +46,21 @@ knitr::include_graphics("result.png")
 ::: panel-tabset
 ## Full Code
 
-```{r fullcode, eval=FALSE}
-# Load libraries & data -------------------------------------
-library(cardinalfda)
-library(dplyr)
-
-adsl <- pharmaverseadam::adsl |>
-  # removing screen failure observations
-  filter(TRT01A != "Screen Failure") |>
-  # Adding a numeric biomarker (weight) — include in vars to show in table
-  left_join(
-    pharmaverseadam::advs |>
-      filter(VSTESTCD == "WEIGHT", VISIT == "BASELINE") |>
-      select(USUBJID, WEIGHTBL = AVAL),
-    by = "USUBJID",
-    relationship = "one-to-one"
-  )
-
-result <- make_table_02(
-  df = adsl,
-  label = list(AGEGR1 = "Age Group, Years")
-)
-
-result$table
-
-result$ard
+```{r fullcode, file="../../../inst/templates/fda-table_02.R", message=FALSE, warning=FALSE, results='hide'}
 ```
 
-## Setup
+## Table
 
-```{r setup, message=FALSE}
-# Load libraries & data -------------------------------------
-library(cardinalfda)
-library(dplyr)
-
-adsl <- pharmaverseadam::adsl |>
-  # removing screen failure observations
-  filter(TRT01A != "Screen Failure") |>
-  # Adding a numeric biomarker (weight) — include in vars to show in table
-  left_join(
-    pharmaverseadam::advs |>
-      filter(VSTESTCD == "WEIGHT", VISIT == "BASELINE") |>
-      select(USUBJID, WEIGHTBL = AVAL),
-    by = "USUBJID",
-    relationship = "one-to-one"
-  )
+```{r tbl}
+tbl
 ```
 
-## Build Table
-
-```{r tbl, results='hide'}
-result <- make_table_02(
-  df = adsl,
-  label = list(AGEGR1 = "Age Group, Years")
-)
-
-result$table
-```
-
-## Build ARD
+## ARD
 
 ```{r ard, message=FALSE, warning=FALSE}
-result$ard
-```
-
-```{r, echo=FALSE}
-# Print full ARD
-withr::local_options(width = 9999)
-print(result$ard, columns = "all")
+withr::local_options(width = 9999, tibble.print_max = Inf)
+print(ard, columns = "all")
 ```
 
 :::
+

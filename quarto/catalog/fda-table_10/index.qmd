@@ -40,83 +40,21 @@ knitr::include_graphics("result.png")
 ::: panel-tabset
 ## Full Code
 
-```{r fullcode, eval=FALSE}
-# Load libraries & data -------------------------------------
-library(dplyr)
-library(gtsummary)
-
-adsl <- pharmaverseadam::adsl
-adae <- pharmaverseadam::adae
-
-# Pre-processing --------------------------------------------
-adae <- adae |>
-  filter(
-    # safety population
-    SAFFL == "Y",
-    # serious adverse events
-    AESER == "Y"
-  )
-
-tbl <- adae |>
-  tbl_hierarchical(
-    variables = c(AESOC, AEDECOD),
-    by = TRT01A,
-    id = USUBJID,
-    denominator = adsl,
-    overall_row = TRUE,
-    label = "..ard_hierarchical_overall.." ~ "Any SAE"
-  )
-
-ard <- gather_ard(tbl)
+```{r fullcode, file="../../../inst/templates/fda-table_10.R", message=FALSE, warning=FALSE, results='hide'}
 ```
 
-## Setup
+## Table
 
-```{r setup, message=FALSE}
-# Load libraries & data -------------------------------------
-library(dplyr)
-library(gtsummary)
-
-adsl <- pharmaverseadam::adsl
-adae <- pharmaverseadam::adae
-
-# Pre-processing --------------------------------------------
-adae <- adae |>
-  filter(
-    # safety population
-    SAFFL == "Y",
-    # serious adverse events
-    AESER == "Y"
-  )
-```
-
-## Build Table
-
-```{r tbl, results='hide'}
-tbl <- adae |>
-  tbl_hierarchical(
-    variables = c(AESOC, AEDECOD),
-    by = TRT01A,
-    id = USUBJID,
-    denominator = adsl,
-    overall_row = TRUE,
-    label = "..ard_hierarchical_overall.." ~ "Any SAE"
-  )
-
+```{r tbl}
 tbl
 ```
 
-## Build ARD
+## ARD
 
-```{r ard, message=FALSE, warning=FALSE, results='hide'}
-ard <- gather_ard(tbl)
-ard
-```
-
-```{r, echo=FALSE}
-# Print full ARD
-withr::local_options(width = 9999)
+```{r ard, message=FALSE, warning=FALSE}
+withr::local_options(width = 9999, tibble.print_max = Inf)
 print(ard, columns = "all")
 ```
 
 :::
+

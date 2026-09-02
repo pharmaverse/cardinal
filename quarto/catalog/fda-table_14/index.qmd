@@ -40,116 +40,21 @@ knitr::include_graphics("result.png")
 ::: panel-tabset
 ## Full Code
 
-```{r fullcode, eval=FALSE}
-# Load libraries & data -------------------------------------
-library(dplyr)
-library(cards)
-library(gtsummary)
-
-adsl <- pharmaverseadam::adsl
-adae <- pharmaverseadam::adae
-
-# Pre-processing --------------------------------------------
-adsl <- adsl |>
-  filter(SAFFL == "Y") # safety population
-
-# for display purpose showing only bottom 5 SOCs
-sliced_data <- adae |>
-  count(AESOC) |>
-  slice_min(order_by = n, n = 5) |>
-  pull(AESOC)
-
-data <- adae |>
-  filter(AESOC %in% sliced_data)
-
-ard <- ard_stack_hierarchical(
-  data,
-  variables = c(AESOC, AEDECOD),
-  by = TRT01A,
-  id = USUBJID,
-  denominator = adsl
-)
-
-# Print ARD
-withr::local_options(width = 9999)
-print(ard, columns = "all", n = 40)
-
-# create table using ARD-first approach (ARD -> table)
-tbl <-
-  tbl_ard_hierarchical(
-    ard,
-    variables = c(AESOC, AEDECOD),
-    by = TRT01A,
-    # add custom variable labels
-    label = list(
-      AESOC = "System Organ Class",
-      AEDECOD = "Preferred Term"
-    )
-  )
+```{r fullcode, file="../../../inst/templates/fda-table_14.R", message=FALSE, warning=FALSE, results='hide'}
 ```
 
-## Setup
+## Table
 
-```{r setup, message=FALSE}
-# Load libraries & data -------------------------------------
-library(dplyr)
-library(cards)
-library(gtsummary)
-
-adsl <- pharmaverseadam::adsl
-adae <- pharmaverseadam::adae
-
-# Pre-processing --------------------------------------------
-adsl <- adsl |>
-  filter(SAFFL == "Y") # safety population
-
-# for display purpose showing only bottom 5 SOCs
-sliced_data <- adae |>
-  count(AESOC) |>
-  slice_min(order_by = n, n = 5) |>
-  pull(AESOC)
-
-data <- adae |>
-  filter(AESOC %in% sliced_data)
-```
-
-## Build ARD
-
-```{r ard, message=FALSE, warning=FALSE, results='hide'}
-ard <- ard_stack_hierarchical(
-  data,
-  variables = c(AESOC, AEDECOD),
-  by = TRT01A,
-  id = USUBJID,
-  denominator = adsl
-)
-
-ard
-```
-
-```{r, echo=FALSE}
-# Print ARD
-withr::local_options(width = 9999)
-print(ard, columns = "all", n = 40)
-```
-
-## Build Table
-
-```{r tbl, results = 'hide'}
-# create table using ARD-first approach (ARD -> table)
-tbl <-
-  tbl_ard_hierarchical(
-    ard,
-    variables = c(AESOC, AEDECOD),
-    by = TRT01A,
-    # add custom variable labels
-    label = list(
-      AESOC = "System Organ Class",
-      AEDECOD = "Preferred Term"
-    )
-  )
-
+```{r tbl}
 tbl
 ```
 
+## ARD
+
+```{r ard, message=FALSE, warning=FALSE}
+withr::local_options(width = 9999, tibble.print_max = Inf)
+print(ard, columns = "all")
+```
+
 :::
+

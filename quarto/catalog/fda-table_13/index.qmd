@@ -40,144 +40,21 @@ knitr::include_graphics("result.png")
 ::: panel-tabset
 ## Full Code
 
-```{r fullcode, eval=FALSE}
-# Load libraries & data -------------------------------------
-library(dplyr)
-library(cards)
-library(gtsummary)
-
-set.seed(1)
-adsl <- pharmaverseadam::adsl
-adae <- pharmaverseadam::adae
-
-adae <- adae |>
-  rename(OCMQ01SC = AEHLTCD) |>
-  mutate(
-    AESER = sample(c("Y", "N"), size = nrow(adae), replace = TRUE),
-    OCMQ01NAM = sample(c("OCMQ1", "OCMQ2", "OCMQ3"), size = nrow(adae), replace = TRUE)
-  )
-
-adae$OCMQ01SC[is.na(adae$OCMQ01SC)] <- "NARROW"
-
-# Pre-processing --------------------------------------------
-adsl <- adsl |>
-  filter(SAFFL == "Y") # safety population
-
-data <- adae |>
-  filter(
-    # safety population
-    SAFFL == "Y",
-    # narrow OCMQ
-    OCMQ01SC == "NARROW"
-  )
-
-sliced_data <- data |>
-  count(AEBODSYS, sort = TRUE) |>
-  slice_head(n = 3) |> # keep top 3
-  pull(AEBODSYS)
-
-data <- data |>
-  filter(AEBODSYS %in% sliced_data)
-
-ard <- ard_stack_hierarchical(
-  data,
-  variables = c(AEBODSYS, OCMQ01NAM),
-  by = TRT01A,
-  denominator = adsl,
-  id = USUBJID
-)
-
-# Print ARD
-withr::local_options(width = 9999)
-print(ard, columns = "all", n = 40)
-
-tbl <-
-  tbl_hierarchical(
-    data,
-    variables = c(AEBODSYS, OCMQ01NAM),
-    by = TRT01A,
-    id = USUBJID,
-    denominator = adsl,
-    label = list(AEBODSYS = "Organ System", OCMQ01NAM = "OCMQ (Narrow)")
-  )
+```{r fullcode, file="../../../inst/templates/fda-table_13.R", message=FALSE, warning=FALSE, results='hide'}
 ```
 
-## Setup
+## Table
 
-```{r setup, message=FALSE}
-# Load libraries & data -------------------------------------
-library(dplyr)
-library(cards)
-library(gtsummary)
-
-set.seed(1)
-adsl <- pharmaverseadam::adsl
-adae <- pharmaverseadam::adae
-
-adae <- adae |>
-  rename(OCMQ01SC = AEHLTCD) |>
-  mutate(
-    AESER = sample(c("Y", "N"), size = nrow(adae), replace = TRUE),
-    OCMQ01NAM = sample(c("OCMQ1", "OCMQ2", "OCMQ3"), size = nrow(adae), replace = TRUE)
-  )
-
-adae$OCMQ01SC[is.na(adae$OCMQ01SC)] <- "NARROW"
-
-# Pre-processing --------------------------------------------
-adsl <- adsl |>
-  filter(SAFFL == "Y") # safety population
-
-data <- adae |>
-  filter(
-    # safety population
-    SAFFL == "Y",
-    # narrow OCMQ
-    OCMQ01SC == "NARROW"
-  )
-
-sliced_data <- data |>
-  count(AEBODSYS, sort = TRUE) |>
-  slice_head(n = 3) |> # keep top 3
-  pull(AEBODSYS)
-
-data <- data |>
-  filter(AEBODSYS %in% sliced_data)
-```
-
-## Build ARD
-
-```{r ard, message=FALSE, warning=FALSE, results='hide'}
-ard <- ard_stack_hierarchical(
-  data,
-  variables = c(AEBODSYS, OCMQ01NAM),
-  by = TRT01A,
-  denominator = adsl,
-  id = USUBJID
-)
-
-ard
-```
-
-```{r, echo=FALSE}
-# Print ARD
-withr::local_options(width = 9999)
-print(ard, columns = "all", n = 40)
-```
-
-## Build Table
-
-```{r tbl, results = 'hide'}
-tbl <-
-  tbl_hierarchical(
-    data,
-    variables = c(AEBODSYS, OCMQ01NAM),
-    by = TRT01A,
-    id = USUBJID,
-    denominator = adsl,
-    label = list(AEBODSYS = "Organ System", OCMQ01NAM = "OCMQ (Narrow)")
-  )
-
+```{r tbl}
 tbl
 ```
 
+## ARD
+
+```{r ard, message=FALSE, warning=FALSE}
+withr::local_options(width = 9999, tibble.print_max = Inf)
+print(ard, columns = "all")
+```
+
 :::
+
