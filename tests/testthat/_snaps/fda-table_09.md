@@ -1,7 +1,7 @@
 # fda-table_09() works
 
     Code
-      as.data.frame(data)
+      as.data.frame(env$data)
     Output
                      TRT01A     USUBJID AGE SEX DOSDUR DTHADY               DTHCAUS
       1 Xanomeline Low Dose 01-701-1211  76   F     59     61          SUDDEN DEATH
