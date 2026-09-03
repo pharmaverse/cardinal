@@ -54,7 +54,7 @@ make_table_02_rtables <- function(df,
 }
 
 # Archived gtsummary implementation of make_table_02()
-make_table_02_gtsummary_archived <- function(df,
+make_table_02_gtsummary_old <- function(df,
                                              return_ard = TRUE,
                                              arm_var = "TRT01A",
                                              saffl_var = "SAFFL",
