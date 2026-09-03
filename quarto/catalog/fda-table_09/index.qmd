@@ -55,7 +55,7 @@ This table is a listing, so there is no ARD. The underlying dataset is the resul
 
 ```{r data-listing, message=FALSE, warning=FALSE}
 withr::local_options(width = 9999, tibble.print_max = Inf)
-print(data, columns = "all", n = 40)
+data
 ```
 
 :::

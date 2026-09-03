@@ -3,7 +3,6 @@
 # Used by tests via run_template() and published in the catalog.
 
 library(dplyr)
-library(cards)
 library(gtsummary)
 library(crane)
 

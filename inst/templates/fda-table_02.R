@@ -7,15 +7,7 @@ library(dplyr)
 
 adsl <- pharmaverseadam::adsl |>
   # removing screen failure observations
-  filter(TRT01A != "Screen Failure") |>
-  # Adding a numeric biomarker (weight) — include in vars to show in table
-  left_join(
-    pharmaverseadam::advs |>
-      filter(VSTESTCD == "WEIGHT", VISIT == "BASELINE") |>
-      select(USUBJID, WEIGHTBL = AVAL),
-    by = "USUBJID",
-    relationship = "one-to-one"
-  )
+  filter(TRT01A != "Screen Failure")
 
 tbl <- adsl |>
   dplyr::filter(SAFFL == "Y") |>
