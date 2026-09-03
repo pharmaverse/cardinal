@@ -17,11 +17,22 @@ adsl <- pharmaverseadam::adsl |>
     relationship = "one-to-one"
   )
 
-result <- make_table_02(
-  df = adsl,
-  label = list(AGEGR1 = "Age Group, Years")
-)
+tbl <- adsl |>
+  dplyr::filter(SAFFL == "Y") |>
+  gtsummary::tbl_summary(
+    by = dplyr::all_of("TRT01A"),
+    include = dplyr::all_of(c("SEX", "AGE", "AGEGR1", "ETHNIC", "RACE")),
+    type = gtsummary::all_continuous() ~ "continuous2",
+    statistic = list(
+      gtsummary::all_continuous() ~ c(
+        "{mean} ({sd})",
+        "{median} ({min}, {max})"
+      ),
+      gtsummary::all_categorical() ~ "{n} ({p}%)"
+    ),
+    label = list(AGEGR1 = "Age Group, Years")
+  ) |>
+  gtsummary::add_overall(last = TRUE, col_label = "**Total Population**  \nN = {N}") |>
+  gtsummary::remove_footnote_header(columns = dplyr::everything())
 
-tbl <- result$table
-
-ard <- result$ard
+ard <- gtsummary::gather_ard(tbl)

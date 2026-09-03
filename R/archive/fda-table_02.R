@@ -52,3 +52,42 @@ make_table_02_rtables <- function(df,
 
   tbl
 }
+
+# Archived gtsummary implementation of make_table_02()
+make_table_02_gtsummary_archived <- function(df,
+                                             return_ard = TRUE,
+                                             arm_var = "TRT01A",
+                                             saffl_var = "SAFFL",
+                                             vars = c("SEX", "AGE", "AGEGR1", "ETHNIC", "RACE"),
+                                             label = list()) {
+  stopifnot(is.data.frame(df))
+  stopifnot(all(c(arm_var, saffl_var, vars) %in% names(df)))
+  stopifnot(is.logical(return_ard), length(return_ard) == 1L)
+
+  df <- df |>
+    dplyr::filter(.data[[saffl_var]] == "Y")
+
+  tbl <- df |>
+    gtsummary::tbl_summary(
+      by = dplyr::all_of(arm_var),
+      include = dplyr::all_of(vars),
+      type = gtsummary::all_continuous() ~ "continuous2",
+      statistic = list(
+        gtsummary::all_continuous() ~ c(
+          "{mean} ({sd})",
+          "{median} ({min}, {max})"
+        ),
+        gtsummary::all_categorical() ~ "{n} ({p}%)"
+      ),
+      label = label
+    ) |>
+    gtsummary::add_overall(last = TRUE, col_label = "**Total Population**  \nN = {N}") |>
+    gtsummary::remove_footnote_header(columns = dplyr::everything())
+
+  if (return_ard) {
+    ard <- gtsummary::gather_ard(tbl)
+    return(list(table = tbl, ard = ard))
+  }
+
+  tbl
+}

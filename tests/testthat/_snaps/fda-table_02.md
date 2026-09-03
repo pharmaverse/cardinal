@@ -1,4 +1,4 @@
-# make_table_02() works
+# fda-table_02() works
 
     Code
       as.data.frame(ard$tbl_summary)[1:25, ]
@@ -217,4 +217,3 @@
       23    NULL  NULL     stat_0
       24    NULL  NULL     stat_0
       25    NULL  NULL     stat_0
-
