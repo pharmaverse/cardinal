@@ -72,7 +72,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../../site_libs/bootstrap/bootstrap-b9dbead50e81c18249e2e1e9b4aaddfa.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-046be37f67332dfcbae0104d3ddeb5a1.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+<link href="../../../site_libs/bootstrap/bootstrap-dark-046be37f67332dfcbae0104d3ddeb5a1.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": true,
   "collapse-after": 3,
@@ -128,10 +131,11 @@ cookieconsent.run({
 <link rel="stylesheet" href="../../../quarto/assets/style.scss">
 <meta property="og:title" content="Demographics and Baseline Clinical Characteristics, Safety Population, Pooled Analysis (or Trial X) – Cardinal">
 <meta property="og:description" content="FDA Table 02">
-<meta property="og:image" content="https://pharmaverse.github.io/cardinal/quarto/catalog/fda-table_02/result.png">
+<meta property="og:image" content="https://pharmaverse.github.io/cardinal/quarto/catalog/fda-table_02/ig_shell.png">
 <meta property="og:site_name" content="Cardinal">
-<meta property="og:image:height" content="1390">
-<meta property="og:image:width" content="1972">
+<meta property="og:image:alt" content="FDA IG example table shell">
+<meta property="og:image:height" content="1142">
+<meta property="og:image:width" content="1541">
 </head>
 <body class="nav-fixed">
 
@@ -230,136 +234,944 @@ cookieconsent.run({
   
 
 
-</header><div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Table Preview</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Setup</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Build Table</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false">Build ARD</a></li>
-</ul>
-<div class="tab-content">
-<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+</header><div class="columns">
+<div class="column" style="width:52%;">
+<section id="fda-ig-shell" class="level3"><h3 class="anchored" data-anchor-id="fda-ig-shell">FDA IG Shell</h3>
+<p><a href="ig_shell.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="ig_shell.png" class="img-fluid" style="width:100.0%" alt="FDA IG example table shell"></a></p>
+</section><section id="programming-notes" class="level3"><h3 class="anchored" data-anchor-id="programming-notes">Programming Notes</h3>
+<p><strong>Background and Instructions</strong></p>
+<p>For Table 2: Demographics and Baseline Clinical Characteristics, consider the key baseline characteristics and subpopulations with different disease characteristics that could influence the effectiveness or safety of the drug. The latter may include baseline entry criteria and other specific characteristics that were recorded but not considered as entry criteria, such as duration, stage, or severity of disease; a history of failure on particular treatments; comorbid conditions; use of relevant concomitant medications; risk factors; or baseline laboratory measurements not part of the entry criteria (e.g., LDL cholesterol, C-reactive protein levels, kidney function, or hepatic function) that could affect safety. Depending on the geographic makeup of the trial, the region of participation rather than country may be included.</p>
+<p>Table 2 is typically generated for each trial listed in Table 1: Clinical Trials Submitted in Support of Efficacy and Safety. When there is missing data in one of the demographic categories, a row labeled as “Missing” will be included in this table and explanatory footnotes added. The table currently displays placeholder values for the characteristics. These placeholder values will change to reflect the data from the respective clinical trial. Demographic characteristics in this table will reflect the Clinical Data Interchange Standards Consortium (CDISC) controlled terminology when submitted data conforms to CDISC data standards.</p>
+<p><strong>Customization</strong></p>
+<p>In addition to the standard groupings, the clinical reviewer may request custom age groups (e.g., &lt;45, 45 to &lt;65 years, etc.), additional baseline characteristics (e.g., anthropometric measurements such as body mass index [BMI], disease characteristics such as medical history of diabetes) to be displayed as needed. For trials that include older subjects (e.g., Alzheimer’s disease trials), additional geriatric age subgroups may be included (e.g., 65 to 74 years of age, 75 to 84 years of age, and 85 years of age and older). Refer to the guidance for industry E7 Studies in Support of Special Populations: Geriatrics, Questions and Answers (March 2012).</p>
+</section>
+</div><div class="column" style="width:4%;">
+
+</div><div class="column" style="width:44%;">
+<section id="output" class="level3"><h3 class="anchored" data-anchor-id="output">Output</h3>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="result.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+<figure class="figure"><p><img src="result.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
+</div>
+</section>
+</div>
+</div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Full Code</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Table</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">ARD</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># FDA TABLE 02 ---------------------------------------------------------------</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="co"># Self-contained template. Run top-to-bottom to build the objects below.</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="co"># Used by tests via run_template() and published in the catalog.</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">library</span>(cardinalfda)</span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-7"><a href="#cb1-7"></a></span>
+<span id="cb1-8"><a href="#cb1-8"></a>adsl <span class="ot">&lt;-</span> pharmaverseadam<span class="sc">::</span>adsl <span class="sc">|&gt;</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a>  <span class="co"># removing screen failure observations</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a>  <span class="fu">filter</span>(TRT01A <span class="sc">!=</span> <span class="st">"Screen Failure"</span>)</span>
+<span id="cb1-11"><a href="#cb1-11"></a></span>
+<span id="cb1-12"><a href="#cb1-12"></a>tbl <span class="ot">&lt;-</span> adsl <span class="sc">|&gt;</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(SAFFL <span class="sc">==</span> <span class="st">"Y"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a>  gtsummary<span class="sc">::</span><span class="fu">tbl_summary</span>(</span>
+<span id="cb1-15"><a href="#cb1-15"></a>    <span class="at">by =</span> dplyr<span class="sc">::</span><span class="fu">all_of</span>(<span class="st">"TRT01A"</span>),</span>
+<span id="cb1-16"><a href="#cb1-16"></a>    <span class="at">include =</span> dplyr<span class="sc">::</span><span class="fu">all_of</span>(<span class="fu">c</span>(<span class="st">"SEX"</span>, <span class="st">"AGE"</span>, <span class="st">"AGEGR1"</span>, <span class="st">"ETHNIC"</span>, <span class="st">"RACE"</span>)),</span>
+<span id="cb1-17"><a href="#cb1-17"></a>    <span class="at">type =</span> gtsummary<span class="sc">::</span><span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="st">"continuous2"</span>,</span>
+<span id="cb1-18"><a href="#cb1-18"></a>    <span class="at">statistic =</span> <span class="fu">list</span>(</span>
+<span id="cb1-19"><a href="#cb1-19"></a>      gtsummary<span class="sc">::</span><span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="fu">c</span>(</span>
+<span id="cb1-20"><a href="#cb1-20"></a>        <span class="st">"{mean} ({sd})"</span>,</span>
+<span id="cb1-21"><a href="#cb1-21"></a>        <span class="st">"{median} ({min}, {max})"</span></span>
+<span id="cb1-22"><a href="#cb1-22"></a>      ),</span>
+<span id="cb1-23"><a href="#cb1-23"></a>      gtsummary<span class="sc">::</span><span class="fu">all_categorical</span>() <span class="sc">~</span> <span class="st">"{n} ({p}%)"</span></span>
+<span id="cb1-24"><a href="#cb1-24"></a>    ),</span>
+<span id="cb1-25"><a href="#cb1-25"></a>    <span class="at">label =</span> <span class="fu">list</span>(<span class="at">AGEGR1 =</span> <span class="st">"Age Group, Years"</span>)</span>
+<span id="cb1-26"><a href="#cb1-26"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb1-27"><a href="#cb1-27"></a>  gtsummary<span class="sc">::</span><span class="fu">add_overall</span>(<span class="at">last =</span> <span class="cn">TRUE</span>, <span class="at">col_label =</span> <span class="st">"**Total Population**  </span><span class="sc">\n</span><span class="st">N = {N}"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-28"><a href="#cb1-28"></a>  gtsummary<span class="sc">::</span><span class="fu">remove_footnote_header</span>(<span class="at">columns =</span> dplyr<span class="sc">::</span><span class="fu">everything</span>())</span>
+<span id="cb1-29"><a href="#cb1-29"></a></span>
+<span id="cb1-30"><a href="#cb1-30"></a>ard <span class="ot">&lt;-</span> gtsummary<span class="sc">::</span><span class="fu">gather_ard</span>(tbl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <div class="cell">
-<details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Load libraries &amp; data -------------------------------------</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(cardinalfda)</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-4"><a href="#cb1-4"></a></span>
-<span id="cb1-5"><a href="#cb1-5"></a>adsl <span class="ot">&lt;-</span> pharmaverseadam<span class="sc">::</span>adsl <span class="sc">|&gt;</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a>  <span class="co"># removing screen failure observations</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a>  <span class="fu">filter</span>(TRT01A <span class="sc">!=</span> <span class="st">"Screen Failure"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a>  <span class="co"># Adding a numeric biomarker (weight) — include in vars to show in table</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a>  <span class="fu">left_join</span>(</span>
-<span id="cb1-10"><a href="#cb1-10"></a>    pharmaverseadam<span class="sc">::</span>advs <span class="sc">|&gt;</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a>      <span class="fu">filter</span>(VSTESTCD <span class="sc">==</span> <span class="st">"WEIGHT"</span>, VISIT <span class="sc">==</span> <span class="st">"BASELINE"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb1-12"><a href="#cb1-12"></a>      <span class="fu">select</span>(USUBJID, <span class="at">WEIGHTBL =</span> AVAL),</span>
-<span id="cb1-13"><a href="#cb1-13"></a>    <span class="at">by =</span> <span class="st">"USUBJID"</span>,</span>
-<span id="cb1-14"><a href="#cb1-14"></a>    <span class="at">relationship =</span> <span class="st">"one-to-one"</span></span>
-<span id="cb1-15"><a href="#cb1-15"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+<details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div id="xnemktmtdd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xnemktmtdd table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#xnemktmtdd thead, #xnemktmtdd tbody, #xnemktmtdd tfoot, #xnemktmtdd tr, #xnemktmtdd td, #xnemktmtdd th {
+  border-style: none;
+}
+
+#xnemktmtdd p {
+  margin: 0;
+  padding: 0;
+}
+
+#xnemktmtdd .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#xnemktmtdd .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#xnemktmtdd .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#xnemktmtdd .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#xnemktmtdd .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#xnemktmtdd .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xnemktmtdd .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#xnemktmtdd .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#xnemktmtdd .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#xnemktmtdd .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#xnemktmtdd .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#xnemktmtdd .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#xnemktmtdd .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#xnemktmtdd .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#xnemktmtdd .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#xnemktmtdd .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#xnemktmtdd .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#xnemktmtdd .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#xnemktmtdd .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xnemktmtdd .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#xnemktmtdd .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#xnemktmtdd .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#xnemktmtdd .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xnemktmtdd .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#xnemktmtdd .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#xnemktmtdd .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xnemktmtdd .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xnemktmtdd .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#xnemktmtdd .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xnemktmtdd .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#xnemktmtdd .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xnemktmtdd .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#xnemktmtdd .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xnemktmtdd .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#xnemktmtdd .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xnemktmtdd .gt_left {
+  text-align: left;
+}
+
+#xnemktmtdd .gt_center {
+  text-align: center;
+}
+
+#xnemktmtdd .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#xnemktmtdd .gt_font_normal {
+  font-weight: normal;
+}
+
+#xnemktmtdd .gt_font_bold {
+  font-weight: bold;
+}
+
+#xnemktmtdd .gt_font_italic {
+  font-style: italic;
+}
+
+#xnemktmtdd .gt_super {
+  font-size: 65%;
+}
+
+#xnemktmtdd .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#xnemktmtdd .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#xnemktmtdd .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#xnemktmtdd .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#xnemktmtdd .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#xnemktmtdd .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#xnemktmtdd .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#xnemktmtdd .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#xnemktmtdd div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead><tr class="gt_col_headings header">
+<th id="label" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Characteristic</strong></th>
+<th id="stat_1" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">
+<strong>Placebo</strong><br>
+N = 86</th>
+<th id="stat_2" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">
+<strong>Xanomeline High Dose</strong><br>
+N = 72</th>
+<th id="stat_3" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">
+<strong>Xanomeline Low Dose</strong><br>
+N = 96</th>
+<th id="stat_0" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">
+<strong>Total Population</strong><br>
+N = 254</th>
+</tr></thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">Sex</td>
+<td class="gt_row gt_center" headers="stat_1"><br></td>
+<td class="gt_row gt_center" headers="stat_2"><br></td>
+<td class="gt_row gt_center" headers="stat_3"><br></td>
+<td class="gt_row gt_center" headers="stat_0"><br></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;F</td>
+<td class="gt_row gt_center" headers="stat_1">53 (62%)</td>
+<td class="gt_row gt_center" headers="stat_2">35 (49%)</td>
+<td class="gt_row gt_center" headers="stat_3">55 (57%)</td>
+<td class="gt_row gt_center" headers="stat_0">143 (56%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;M</td>
+<td class="gt_row gt_center" headers="stat_1">33 (38%)</td>
+<td class="gt_row gt_center" headers="stat_2">37 (51%)</td>
+<td class="gt_row gt_center" headers="stat_3">41 (43%)</td>
+<td class="gt_row gt_center" headers="stat_0">111 (44%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">Age</td>
+<td class="gt_row gt_center" headers="stat_1"><br></td>
+<td class="gt_row gt_center" headers="stat_2"><br></td>
+<td class="gt_row gt_center" headers="stat_3"><br></td>
+<td class="gt_row gt_center" headers="stat_0"><br></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Mean (SD)</td>
+<td class="gt_row gt_center" headers="stat_1">75 (9)</td>
+<td class="gt_row gt_center" headers="stat_2">74 (8)</td>
+<td class="gt_row gt_center" headers="stat_3">76 (8)</td>
+<td class="gt_row gt_center" headers="stat_0">75 (8)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Median (Min, Max)</td>
+<td class="gt_row gt_center" headers="stat_1">76 (52, 89)</td>
+<td class="gt_row gt_center" headers="stat_2">76 (56, 88)</td>
+<td class="gt_row gt_center" headers="stat_3">78 (51, 88)</td>
+<td class="gt_row gt_center" headers="stat_0">77 (51, 89)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">Age Group, Years</td>
+<td class="gt_row gt_center" headers="stat_1"><br></td>
+<td class="gt_row gt_center" headers="stat_2"><br></td>
+<td class="gt_row gt_center" headers="stat_3"><br></td>
+<td class="gt_row gt_center" headers="stat_0"><br></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;18-64</td>
+<td class="gt_row gt_center" headers="stat_1">14 (16%)</td>
+<td class="gt_row gt_center" headers="stat_2">11 (15%)</td>
+<td class="gt_row gt_center" headers="stat_3">8 (8.3%)</td>
+<td class="gt_row gt_center" headers="stat_0">33 (13%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;&gt;64</td>
+<td class="gt_row gt_center" headers="stat_1">72 (84%)</td>
+<td class="gt_row gt_center" headers="stat_2">61 (85%)</td>
+<td class="gt_row gt_center" headers="stat_3">88 (92%)</td>
+<td class="gt_row gt_center" headers="stat_0">221 (87%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">Ethnicity</td>
+<td class="gt_row gt_center" headers="stat_1"><br></td>
+<td class="gt_row gt_center" headers="stat_2"><br></td>
+<td class="gt_row gt_center" headers="stat_3"><br></td>
+<td class="gt_row gt_center" headers="stat_0"><br></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;HISPANIC OR LATINO</td>
+<td class="gt_row gt_center" headers="stat_1">3 (3.5%)</td>
+<td class="gt_row gt_center" headers="stat_2">3 (4.2%)</td>
+<td class="gt_row gt_center" headers="stat_3">6 (6.3%)</td>
+<td class="gt_row gt_center" headers="stat_0">12 (4.7%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;NOT HISPANIC OR LATINO</td>
+<td class="gt_row gt_center" headers="stat_1">83 (97%)</td>
+<td class="gt_row gt_center" headers="stat_2">69 (96%)</td>
+<td class="gt_row gt_center" headers="stat_3">90 (94%)</td>
+<td class="gt_row gt_center" headers="stat_0">242 (95%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">Race</td>
+<td class="gt_row gt_center" headers="stat_1"><br></td>
+<td class="gt_row gt_center" headers="stat_2"><br></td>
+<td class="gt_row gt_center" headers="stat_3"><br></td>
+<td class="gt_row gt_center" headers="stat_0"><br></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;AMERICAN INDIAN OR ALASKA NATIVE</td>
+<td class="gt_row gt_center" headers="stat_1">0 (0%)</td>
+<td class="gt_row gt_center" headers="stat_2">1 (1.4%)</td>
+<td class="gt_row gt_center" headers="stat_3">0 (0%)</td>
+<td class="gt_row gt_center" headers="stat_0">1 (0.4%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;BLACK OR AFRICAN AMERICAN</td>
+<td class="gt_row gt_center" headers="stat_1">8 (9.3%)</td>
+<td class="gt_row gt_center" headers="stat_2">9 (13%)</td>
+<td class="gt_row gt_center" headers="stat_3">6 (6.3%)</td>
+<td class="gt_row gt_center" headers="stat_0">23 (9.1%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;WHITE</td>
+<td class="gt_row gt_center" headers="stat_1">78 (91%)</td>
+<td class="gt_row gt_center" headers="stat_2">62 (86%)</td>
+<td class="gt_row gt_center" headers="stat_3">90 (94%)</td>
+<td class="gt_row gt_center" headers="stat_0">230 (91%)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
 <div class="cell">
-<details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>result <span class="ot">&lt;-</span> <span class="fu">make_table_02</span>(</span>
-<span id="cb2-2"><a href="#cb2-2"></a>  <span class="at">df =</span> adsl,</span>
-<span id="cb2-3"><a href="#cb2-3"></a>  <span class="at">label =</span> <span class="fu">list</span>(<span class="at">AGEGR1 =</span> <span class="st">"Age Group, Years"</span>)</span>
-<span id="cb2-4"><a href="#cb2-4"></a>)</span>
-<span id="cb2-5"><a href="#cb2-5"></a></span>
-<span id="cb2-6"><a href="#cb2-6"></a>result<span class="sc">$</span>table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="result.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
-<div class="cell">
-<details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>result<span class="sc">$</span>ard</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>withr<span class="sc">::</span><span class="fu">local_options</span>(<span class="at">width =</span> <span class="dv">9999</span>, <span class="at">tibble.print_max =</span> <span class="cn">Inf</span>)</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">print</span>(ard, <span class="at">columns =</span> <span class="st">"all"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
 <pre><code>$tbl_summary
 # An ARD data frame: 193 × 12
-   group1 group1_level variable variable_level stat_name   stat gts_column
-   &lt;chr&gt;  &lt;list&gt;       &lt;chr&gt;    &lt;list&gt;         &lt;chr&gt;     &lt;list&gt; &lt;chr&gt;     
- 1 TRT01A Placebo      AGEGR1   18-64          n         14     stat_1    
- 2 TRT01A Placebo      AGEGR1   18-64          N         86     stat_1    
- 3 TRT01A Placebo      AGEGR1   18-64          p          0.163 stat_1    
- 4 TRT01A Placebo      AGEGR1   &gt;64            n         72     stat_1    
- 5 TRT01A Placebo      AGEGR1   &gt;64            N         86     stat_1    
- 6 TRT01A Placebo      AGEGR1   &gt;64            p          0.837 stat_1    
- 7 TRT01A Placebo      SEX      F              n         53     stat_1    
- 8 TRT01A Placebo      SEX      F              N         86     stat_1    
- 9 TRT01A Placebo      SEX      F              p          0.616 stat_1    
-10 TRT01A Placebo      SEX      M              n         33     stat_1    
-# ℹ 183 more rows
-# ℹ 5 more variables: context &lt;chr&gt;, stat_label &lt;chr&gt;, fmt_fun &lt;list&gt;,
-#   warning &lt;list&gt;, error &lt;list&gt;
+    group1 group1_level         variable        variable_level                   context    stat_name stat_label     stat                           fmt_fun warning error  gts_column
+    &lt;chr&gt;  &lt;list&gt;               &lt;chr&gt;           &lt;list&gt;                           &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;          &lt;list&gt;                         &lt;list&gt;  &lt;list&gt;  &lt;list&gt; &lt;chr&gt;     
+  1 TRT01A Placebo              AGEGR1          18-64                            tabulate   n         n              14                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+  2 TRT01A Placebo              AGEGR1          18-64                            tabulate   N         N              86                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+  3 TRT01A Placebo              AGEGR1          18-64                            tabulate   p         %              0.1627907                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+  4 TRT01A Placebo              AGEGR1          &gt;64                              tabulate   n         n              72                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+  5 TRT01A Placebo              AGEGR1          &gt;64                              tabulate   N         N              86                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+  6 TRT01A Placebo              AGEGR1          &gt;64                              tabulate   p         %              0.8372093                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+  7 TRT01A Placebo              SEX             F                                tabulate   n         n              53                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+  8 TRT01A Placebo              SEX             F                                tabulate   N         N              86                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+  9 TRT01A Placebo              SEX             F                                tabulate   p         %              0.6162791                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 10 TRT01A Placebo              SEX             M                                tabulate   n         n              33                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 11 TRT01A Placebo              SEX             M                                tabulate   N         N              86                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 12 TRT01A Placebo              SEX             M                                tabulate   p         %              0.3837209                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 13 TRT01A Placebo              RACE            AMERICAN INDIAN OR ALASKA NATIVE tabulate   n         n              0                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 14 TRT01A Placebo              RACE            AMERICAN INDIAN OR ALASKA NATIVE tabulate   N         N              86                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 15 TRT01A Placebo              RACE            AMERICAN INDIAN OR ALASKA NATIVE tabulate   p         %              0                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 16 TRT01A Placebo              RACE            BLACK OR AFRICAN AMERICAN        tabulate   n         n              8                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 17 TRT01A Placebo              RACE            BLACK OR AFRICAN AMERICAN        tabulate   N         N              86                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 18 TRT01A Placebo              RACE            BLACK OR AFRICAN AMERICAN        tabulate   p         %              0.09302326                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 19 TRT01A Placebo              RACE            WHITE                            tabulate   n         n              78                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 20 TRT01A Placebo              RACE            WHITE                            tabulate   N         N              86                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 21 TRT01A Placebo              RACE            WHITE                            tabulate   p         %              0.9069767                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 22 TRT01A Placebo              ETHNIC          HISPANIC OR LATINO               tabulate   n         n              3                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 23 TRT01A Placebo              ETHNIC          HISPANIC OR LATINO               tabulate   N         N              86                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 24 TRT01A Placebo              ETHNIC          HISPANIC OR LATINO               tabulate   p         %              0.03488372                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 25 TRT01A Placebo              ETHNIC          NOT HISPANIC OR LATINO           tabulate   n         n              83                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 26 TRT01A Placebo              ETHNIC          NOT HISPANIC OR LATINO           tabulate   N         N              86                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 27 TRT01A Placebo              ETHNIC          NOT HISPANIC OR LATINO           tabulate   p         %              0.9651163                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 28 TRT01A Xanomeline High Dose AGEGR1          18-64                            tabulate   n         n              11                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 29 TRT01A Xanomeline High Dose AGEGR1          18-64                            tabulate   N         N              72                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 30 TRT01A Xanomeline High Dose AGEGR1          18-64                            tabulate   p         %              0.1527778                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 31 TRT01A Xanomeline High Dose AGEGR1          &gt;64                              tabulate   n         n              61                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 32 TRT01A Xanomeline High Dose AGEGR1          &gt;64                              tabulate   N         N              72                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 33 TRT01A Xanomeline High Dose AGEGR1          &gt;64                              tabulate   p         %              0.8472222                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 34 TRT01A Xanomeline High Dose SEX             F                                tabulate   n         n              35                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 35 TRT01A Xanomeline High Dose SEX             F                                tabulate   N         N              72                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 36 TRT01A Xanomeline High Dose SEX             F                                tabulate   p         %              0.4861111                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 37 TRT01A Xanomeline High Dose SEX             M                                tabulate   n         n              37                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 38 TRT01A Xanomeline High Dose SEX             M                                tabulate   N         N              72                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 39 TRT01A Xanomeline High Dose SEX             M                                tabulate   p         %              0.5138889                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 40 TRT01A Xanomeline High Dose RACE            AMERICAN INDIAN OR ALASKA NATIVE tabulate   n         n              1                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 41 TRT01A Xanomeline High Dose RACE            AMERICAN INDIAN OR ALASKA NATIVE tabulate   N         N              72                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 42 TRT01A Xanomeline High Dose RACE            AMERICAN INDIAN OR ALASKA NATIVE tabulate   p         %              0.01388889                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 43 TRT01A Xanomeline High Dose RACE            BLACK OR AFRICAN AMERICAN        tabulate   n         n              9                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 44 TRT01A Xanomeline High Dose RACE            BLACK OR AFRICAN AMERICAN        tabulate   N         N              72                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 45 TRT01A Xanomeline High Dose RACE            BLACK OR AFRICAN AMERICAN        tabulate   p         %              0.125                          &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 46 TRT01A Xanomeline High Dose RACE            WHITE                            tabulate   n         n              62                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 47 TRT01A Xanomeline High Dose RACE            WHITE                            tabulate   N         N              72                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 48 TRT01A Xanomeline High Dose RACE            WHITE                            tabulate   p         %              0.8611111                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 49 TRT01A Xanomeline High Dose ETHNIC          HISPANIC OR LATINO               tabulate   n         n              3                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 50 TRT01A Xanomeline High Dose ETHNIC          HISPANIC OR LATINO               tabulate   N         N              72                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 51 TRT01A Xanomeline High Dose ETHNIC          HISPANIC OR LATINO               tabulate   p         %              0.04166667                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 52 TRT01A Xanomeline High Dose ETHNIC          NOT HISPANIC OR LATINO           tabulate   n         n              69                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 53 TRT01A Xanomeline High Dose ETHNIC          NOT HISPANIC OR LATINO           tabulate   N         N              72                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 54 TRT01A Xanomeline High Dose ETHNIC          NOT HISPANIC OR LATINO           tabulate   p         %              0.9583333                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 55 TRT01A Xanomeline Low Dose  AGEGR1          18-64                            tabulate   n         n              8                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 56 TRT01A Xanomeline Low Dose  AGEGR1          18-64                            tabulate   N         N              96                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 57 TRT01A Xanomeline Low Dose  AGEGR1          18-64                            tabulate   p         %              0.08333333                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 58 TRT01A Xanomeline Low Dose  AGEGR1          &gt;64                              tabulate   n         n              88                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 59 TRT01A Xanomeline Low Dose  AGEGR1          &gt;64                              tabulate   N         N              96                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 60 TRT01A Xanomeline Low Dose  AGEGR1          &gt;64                              tabulate   p         %              0.9166667                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 61 TRT01A Xanomeline Low Dose  SEX             F                                tabulate   n         n              55                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 62 TRT01A Xanomeline Low Dose  SEX             F                                tabulate   N         N              96                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 63 TRT01A Xanomeline Low Dose  SEX             F                                tabulate   p         %              0.5729167                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 64 TRT01A Xanomeline Low Dose  SEX             M                                tabulate   n         n              41                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 65 TRT01A Xanomeline Low Dose  SEX             M                                tabulate   N         N              96                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 66 TRT01A Xanomeline Low Dose  SEX             M                                tabulate   p         %              0.4270833                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 67 TRT01A Xanomeline Low Dose  RACE            AMERICAN INDIAN OR ALASKA NATIVE tabulate   n         n              0                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 68 TRT01A Xanomeline Low Dose  RACE            AMERICAN INDIAN OR ALASKA NATIVE tabulate   N         N              96                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 69 TRT01A Xanomeline Low Dose  RACE            AMERICAN INDIAN OR ALASKA NATIVE tabulate   p         %              0                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 70 TRT01A Xanomeline Low Dose  RACE            BLACK OR AFRICAN AMERICAN        tabulate   n         n              6                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 71 TRT01A Xanomeline Low Dose  RACE            BLACK OR AFRICAN AMERICAN        tabulate   N         N              96                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 72 TRT01A Xanomeline Low Dose  RACE            BLACK OR AFRICAN AMERICAN        tabulate   p         %              0.0625                         &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 73 TRT01A Xanomeline Low Dose  RACE            WHITE                            tabulate   n         n              90                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 74 TRT01A Xanomeline Low Dose  RACE            WHITE                            tabulate   N         N              96                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 75 TRT01A Xanomeline Low Dose  RACE            WHITE                            tabulate   p         %              0.9375                         &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 76 TRT01A Xanomeline Low Dose  ETHNIC          HISPANIC OR LATINO               tabulate   n         n              6                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 77 TRT01A Xanomeline Low Dose  ETHNIC          HISPANIC OR LATINO               tabulate   N         N              96                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 78 TRT01A Xanomeline Low Dose  ETHNIC          HISPANIC OR LATINO               tabulate   p         %              0.0625                         &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 79 TRT01A Xanomeline Low Dose  ETHNIC          NOT HISPANIC OR LATINO           tabulate   n         n              90                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 80 TRT01A Xanomeline Low Dose  ETHNIC          NOT HISPANIC OR LATINO           tabulate   N         N              96                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 81 TRT01A Xanomeline Low Dose  ETHNIC          NOT HISPANIC OR LATINO           tabulate   p         %              0.9375                         &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 82 TRT01A Placebo              AGE             &lt;NULL&gt;                           summary    mean      Mean           75.2093                        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 83 TRT01A Placebo              AGE             &lt;NULL&gt;                           summary    sd        SD             8.590167                       &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 84 TRT01A Placebo              AGE             &lt;NULL&gt;                           summary    median    Median         76                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 85 TRT01A Placebo              AGE             &lt;NULL&gt;                           summary    min       Min            52                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 86 TRT01A Placebo              AGE             &lt;NULL&gt;                           summary    max       Max            89                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 87 TRT01A Xanomeline High Dose AGE             &lt;NULL&gt;                           summary    mean      Mean           73.77778                       &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 88 TRT01A Xanomeline High Dose AGE             &lt;NULL&gt;                           summary    sd        SD             7.943856                       &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 89 TRT01A Xanomeline High Dose AGE             &lt;NULL&gt;                           summary    median    Median         75.5                           &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 90 TRT01A Xanomeline High Dose AGE             &lt;NULL&gt;                           summary    min       Min            56                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 91 TRT01A Xanomeline High Dose AGE             &lt;NULL&gt;                           summary    max       Max            88                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 92 TRT01A Xanomeline Low Dose  AGE             &lt;NULL&gt;                           summary    mean      Mean           75.95833                       &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 93 TRT01A Xanomeline Low Dose  AGE             &lt;NULL&gt;                           summary    sd        SD             8.113558                       &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 94 TRT01A Xanomeline Low Dose  AGE             &lt;NULL&gt;                           summary    median    Median         78                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 95 TRT01A Xanomeline Low Dose  AGE             &lt;NULL&gt;                           summary    min       Min            51                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 96 TRT01A Xanomeline Low Dose  AGE             &lt;NULL&gt;                           summary    max       Max            88                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 97 &lt;NA&gt;   &lt;NULL&gt;               SEX             &lt;NULL&gt;                           attributes label     Variable Label Sex                            &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+ 98 &lt;NA&gt;   &lt;NULL&gt;               SEX             &lt;NULL&gt;                           attributes class     Variable Class character                      &lt;NULL&gt;  &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+ 99 &lt;NA&gt;   &lt;NULL&gt;               AGE             &lt;NULL&gt;                           attributes label     Variable Label Age                            &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+100 &lt;NA&gt;   &lt;NULL&gt;               AGE             &lt;NULL&gt;                           attributes class     Variable Class numeric                        &lt;NULL&gt;  &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+101 &lt;NA&gt;   &lt;NULL&gt;               AGEGR1          &lt;NULL&gt;                           attributes label     Variable Label Age Group, Years               &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+102 &lt;NA&gt;   &lt;NULL&gt;               AGEGR1          &lt;NULL&gt;                           attributes class     Variable Class character                      &lt;NULL&gt;  &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+103 &lt;NA&gt;   &lt;NULL&gt;               ETHNIC          &lt;NULL&gt;                           attributes label     Variable Label Ethnicity                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+104 &lt;NA&gt;   &lt;NULL&gt;               ETHNIC          &lt;NULL&gt;                           attributes class     Variable Class character                      &lt;NULL&gt;  &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+105 &lt;NA&gt;   &lt;NULL&gt;               RACE            &lt;NULL&gt;                           attributes label     Variable Label Race                           &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+106 &lt;NA&gt;   &lt;NULL&gt;               RACE            &lt;NULL&gt;                           attributes class     Variable Class character                      &lt;NULL&gt;  &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+107 &lt;NA&gt;   &lt;NULL&gt;               TRT01A          &lt;NULL&gt;                           attributes label     Variable Label Actual Treatment for Period 01 &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+108 &lt;NA&gt;   &lt;NULL&gt;               TRT01A          &lt;NULL&gt;                           attributes class     Variable Class character                      &lt;NULL&gt;  &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+109 TRT01A Placebo              SEX             &lt;NULL&gt;                           missing    N_obs     No. obs.       86                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+110 TRT01A Placebo              SEX             &lt;NULL&gt;                           missing    N_miss    N Missing      0                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+111 TRT01A Placebo              SEX             &lt;NULL&gt;                           missing    N_nonmiss N Non-missing  86                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+112 TRT01A Placebo              SEX             &lt;NULL&gt;                           missing    p_miss    % Missing      0                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+113 TRT01A Placebo              SEX             &lt;NULL&gt;                           missing    p_nonmiss % Non-missing  1                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+114 TRT01A Placebo              AGE             &lt;NULL&gt;                           missing    N_obs     No. obs.       86                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+115 TRT01A Placebo              AGE             &lt;NULL&gt;                           missing    N_miss    N Missing      0                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+116 TRT01A Placebo              AGE             &lt;NULL&gt;                           missing    N_nonmiss N Non-missing  86                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+117 TRT01A Placebo              AGE             &lt;NULL&gt;                           missing    p_miss    % Missing      0                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+118 TRT01A Placebo              AGE             &lt;NULL&gt;                           missing    p_nonmiss % Non-missing  1                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+119 TRT01A Placebo              AGEGR1          &lt;NULL&gt;                           missing    N_obs     No. obs.       86                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+120 TRT01A Placebo              AGEGR1          &lt;NULL&gt;                           missing    N_miss    N Missing      0                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+121 TRT01A Placebo              AGEGR1          &lt;NULL&gt;                           missing    N_nonmiss N Non-missing  86                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+122 TRT01A Placebo              AGEGR1          &lt;NULL&gt;                           missing    p_miss    % Missing      0                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+123 TRT01A Placebo              AGEGR1          &lt;NULL&gt;                           missing    p_nonmiss % Non-missing  1                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+124 TRT01A Placebo              ETHNIC          &lt;NULL&gt;                           missing    N_obs     No. obs.       86                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+125 TRT01A Placebo              ETHNIC          &lt;NULL&gt;                           missing    N_miss    N Missing      0                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+126 TRT01A Placebo              ETHNIC          &lt;NULL&gt;                           missing    N_nonmiss N Non-missing  86                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+127 TRT01A Placebo              ETHNIC          &lt;NULL&gt;                           missing    p_miss    % Missing      0                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+128 TRT01A Placebo              ETHNIC          &lt;NULL&gt;                           missing    p_nonmiss % Non-missing  1                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+129 TRT01A Placebo              RACE            &lt;NULL&gt;                           missing    N_obs     No. obs.       86                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+130 TRT01A Placebo              RACE            &lt;NULL&gt;                           missing    N_miss    N Missing      0                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+131 TRT01A Placebo              RACE            &lt;NULL&gt;                           missing    N_nonmiss N Non-missing  86                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+132 TRT01A Placebo              RACE            &lt;NULL&gt;                           missing    p_miss    % Missing      0                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+133 TRT01A Placebo              RACE            &lt;NULL&gt;                           missing    p_nonmiss % Non-missing  1                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+134 TRT01A Xanomeline High Dose SEX             &lt;NULL&gt;                           missing    N_obs     No. obs.       72                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+135 TRT01A Xanomeline High Dose SEX             &lt;NULL&gt;                           missing    N_miss    N Missing      0                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+136 TRT01A Xanomeline High Dose SEX             &lt;NULL&gt;                           missing    N_nonmiss N Non-missing  72                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+137 TRT01A Xanomeline High Dose SEX             &lt;NULL&gt;                           missing    p_miss    % Missing      0                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+138 TRT01A Xanomeline High Dose SEX             &lt;NULL&gt;                           missing    p_nonmiss % Non-missing  1                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+139 TRT01A Xanomeline High Dose AGE             &lt;NULL&gt;                           missing    N_obs     No. obs.       72                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+140 TRT01A Xanomeline High Dose AGE             &lt;NULL&gt;                           missing    N_miss    N Missing      0                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+141 TRT01A Xanomeline High Dose AGE             &lt;NULL&gt;                           missing    N_nonmiss N Non-missing  72                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+142 TRT01A Xanomeline High Dose AGE             &lt;NULL&gt;                           missing    p_miss    % Missing      0                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+143 TRT01A Xanomeline High Dose AGE             &lt;NULL&gt;                           missing    p_nonmiss % Non-missing  1                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+144 TRT01A Xanomeline High Dose AGEGR1          &lt;NULL&gt;                           missing    N_obs     No. obs.       72                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+145 TRT01A Xanomeline High Dose AGEGR1          &lt;NULL&gt;                           missing    N_miss    N Missing      0                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+146 TRT01A Xanomeline High Dose AGEGR1          &lt;NULL&gt;                           missing    N_nonmiss N Non-missing  72                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+147 TRT01A Xanomeline High Dose AGEGR1          &lt;NULL&gt;                           missing    p_miss    % Missing      0                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+148 TRT01A Xanomeline High Dose AGEGR1          &lt;NULL&gt;                           missing    p_nonmiss % Non-missing  1                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+149 TRT01A Xanomeline High Dose ETHNIC          &lt;NULL&gt;                           missing    N_obs     No. obs.       72                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+150 TRT01A Xanomeline High Dose ETHNIC          &lt;NULL&gt;                           missing    N_miss    N Missing      0                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+151 TRT01A Xanomeline High Dose ETHNIC          &lt;NULL&gt;                           missing    N_nonmiss N Non-missing  72                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+152 TRT01A Xanomeline High Dose ETHNIC          &lt;NULL&gt;                           missing    p_miss    % Missing      0                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+153 TRT01A Xanomeline High Dose ETHNIC          &lt;NULL&gt;                           missing    p_nonmiss % Non-missing  1                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+154 TRT01A Xanomeline High Dose RACE            &lt;NULL&gt;                           missing    N_obs     No. obs.       72                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+155 TRT01A Xanomeline High Dose RACE            &lt;NULL&gt;                           missing    N_miss    N Missing      0                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+156 TRT01A Xanomeline High Dose RACE            &lt;NULL&gt;                           missing    N_nonmiss N Non-missing  72                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+157 TRT01A Xanomeline High Dose RACE            &lt;NULL&gt;                           missing    p_miss    % Missing      0                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+158 TRT01A Xanomeline High Dose RACE            &lt;NULL&gt;                           missing    p_nonmiss % Non-missing  1                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+159 TRT01A Xanomeline Low Dose  SEX             &lt;NULL&gt;                           missing    N_obs     No. obs.       96                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+160 TRT01A Xanomeline Low Dose  SEX             &lt;NULL&gt;                           missing    N_miss    N Missing      0                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+161 TRT01A Xanomeline Low Dose  SEX             &lt;NULL&gt;                           missing    N_nonmiss N Non-missing  96                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+162 TRT01A Xanomeline Low Dose  SEX             &lt;NULL&gt;                           missing    p_miss    % Missing      0                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+163 TRT01A Xanomeline Low Dose  SEX             &lt;NULL&gt;                           missing    p_nonmiss % Non-missing  1                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+164 TRT01A Xanomeline Low Dose  AGE             &lt;NULL&gt;                           missing    N_obs     No. obs.       96                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+165 TRT01A Xanomeline Low Dose  AGE             &lt;NULL&gt;                           missing    N_miss    N Missing      0                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+166 TRT01A Xanomeline Low Dose  AGE             &lt;NULL&gt;                           missing    N_nonmiss N Non-missing  96                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+167 TRT01A Xanomeline Low Dose  AGE             &lt;NULL&gt;                           missing    p_miss    % Missing      0                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+168 TRT01A Xanomeline Low Dose  AGE             &lt;NULL&gt;                           missing    p_nonmiss % Non-missing  1                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+169 TRT01A Xanomeline Low Dose  AGEGR1          &lt;NULL&gt;                           missing    N_obs     No. obs.       96                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+170 TRT01A Xanomeline Low Dose  AGEGR1          &lt;NULL&gt;                           missing    N_miss    N Missing      0                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+171 TRT01A Xanomeline Low Dose  AGEGR1          &lt;NULL&gt;                           missing    N_nonmiss N Non-missing  96                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+172 TRT01A Xanomeline Low Dose  AGEGR1          &lt;NULL&gt;                           missing    p_miss    % Missing      0                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+173 TRT01A Xanomeline Low Dose  AGEGR1          &lt;NULL&gt;                           missing    p_nonmiss % Non-missing  1                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+174 TRT01A Xanomeline Low Dose  ETHNIC          &lt;NULL&gt;                           missing    N_obs     No. obs.       96                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+175 TRT01A Xanomeline Low Dose  ETHNIC          &lt;NULL&gt;                           missing    N_miss    N Missing      0                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+176 TRT01A Xanomeline Low Dose  ETHNIC          &lt;NULL&gt;                           missing    N_nonmiss N Non-missing  96                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+177 TRT01A Xanomeline Low Dose  ETHNIC          &lt;NULL&gt;                           missing    p_miss    % Missing      0                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+178 TRT01A Xanomeline Low Dose  ETHNIC          &lt;NULL&gt;                           missing    p_nonmiss % Non-missing  1                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+179 TRT01A Xanomeline Low Dose  RACE            &lt;NULL&gt;                           missing    N_obs     No. obs.       96                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+180 TRT01A Xanomeline Low Dose  RACE            &lt;NULL&gt;                           missing    N_miss    N Missing      0                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+181 TRT01A Xanomeline Low Dose  RACE            &lt;NULL&gt;                           missing    N_nonmiss N Non-missing  96                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+182 TRT01A Xanomeline Low Dose  RACE            &lt;NULL&gt;                           missing    p_miss    % Missing      0                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+183 TRT01A Xanomeline Low Dose  RACE            &lt;NULL&gt;                           missing    p_nonmiss % Non-missing  1                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+184 &lt;NA&gt;   &lt;NULL&gt;               ..ard_total_n.. &lt;NULL&gt;                           total_n    N         N              254                            0       &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+185 &lt;NA&gt;   &lt;NULL&gt;               TRT01A          Placebo                          tabulate   n         n              86                             0       &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+186 &lt;NA&gt;   &lt;NULL&gt;               TRT01A          Placebo                          tabulate   N         N              254                            0       &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+187 &lt;NA&gt;   &lt;NULL&gt;               TRT01A          Placebo                          tabulate   p         %              0.3385827                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+188 &lt;NA&gt;   &lt;NULL&gt;               TRT01A          Xanomeline High Dose             tabulate   n         n              72                             0       &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+189 &lt;NA&gt;   &lt;NULL&gt;               TRT01A          Xanomeline High Dose             tabulate   N         N              254                            0       &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+190 &lt;NA&gt;   &lt;NULL&gt;               TRT01A          Xanomeline High Dose             tabulate   p         %              0.2834646                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+191 &lt;NA&gt;   &lt;NULL&gt;               TRT01A          Xanomeline Low Dose              tabulate   n         n              96                             0       &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+192 &lt;NA&gt;   &lt;NULL&gt;               TRT01A          Xanomeline Low Dose              tabulate   N         N              254                            0       &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+193 &lt;NA&gt;   &lt;NULL&gt;               TRT01A          Xanomeline Low Dose              tabulate   p         %              0.3779528                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
 
 $add_overall
 # An ARD data frame: 68 × 10
-   variable variable_level context  stat_name stat_label    stat gts_column
-   &lt;chr&gt;    &lt;list&gt;         &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;       &lt;list&gt; &lt;chr&gt;     
- 1 AGEGR1   18-64          tabulate n         n           33     stat_0    
- 2 AGEGR1   18-64          tabulate N         N          254     stat_0    
- 3 AGEGR1   18-64          tabulate p         %            0.130 stat_0    
- 4 AGEGR1   &gt;64            tabulate n         n          221     stat_0    
- 5 AGEGR1   &gt;64            tabulate N         N          254     stat_0    
- 6 AGEGR1   &gt;64            tabulate p         %            0.870 stat_0    
- 7 SEX      F              tabulate n         n          143     stat_0    
- 8 SEX      F              tabulate N         N          254     stat_0    
- 9 SEX      F              tabulate p         %            0.563 stat_0    
-10 SEX      M              tabulate n         n          111     stat_0    
-# ℹ 58 more rows
-# ℹ 3 more variables: fmt_fun &lt;list&gt;, warning &lt;list&gt;, error &lt;list&gt;</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>$tbl_summary
-# An ARD data frame: 193 × 12
-   group1 group1_level variable variable_level context  stat_name stat_label   stat fmt_fun warning error  gts_column
-   &lt;chr&gt;  &lt;list&gt;       &lt;chr&gt;    &lt;list&gt;         &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;      &lt;list&gt; &lt;list&gt;  &lt;list&gt;  &lt;list&gt; &lt;chr&gt;     
- 1 TRT01A Placebo      AGEGR1   18-64          tabulate n         n          14     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
- 2 TRT01A Placebo      AGEGR1   18-64          tabulate N         N          86     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
- 3 TRT01A Placebo      AGEGR1   18-64          tabulate p         %           0.163 &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
- 4 TRT01A Placebo      AGEGR1   &gt;64            tabulate n         n          72     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
- 5 TRT01A Placebo      AGEGR1   &gt;64            tabulate N         N          86     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
- 6 TRT01A Placebo      AGEGR1   &gt;64            tabulate p         %           0.837 &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
- 7 TRT01A Placebo      SEX      F              tabulate n         n          53     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
- 8 TRT01A Placebo      SEX      F              tabulate N         N          86     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
- 9 TRT01A Placebo      SEX      F              tabulate p         %           0.616 &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
-10 TRT01A Placebo      SEX      M              tabulate n         n          33     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
-# ℹ 183 more rows
-
-$add_overall
-# An ARD data frame: 68 × 10
-   variable variable_level context  stat_name stat_label    stat fmt_fun warning error  gts_column
-   &lt;chr&gt;    &lt;list&gt;         &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;       &lt;list&gt; &lt;list&gt;  &lt;list&gt;  &lt;list&gt; &lt;chr&gt;     
- 1 AGEGR1   18-64          tabulate n         n           33     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
- 2 AGEGR1   18-64          tabulate N         N          254     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
- 3 AGEGR1   18-64          tabulate p         %            0.130 &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
- 4 AGEGR1   &gt;64            tabulate n         n          221     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
- 5 AGEGR1   &gt;64            tabulate N         N          254     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
- 6 AGEGR1   &gt;64            tabulate p         %            0.870 &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
- 7 SEX      F              tabulate n         n          143     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
- 8 SEX      F              tabulate N         N          254     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
- 9 SEX      F              tabulate p         %            0.563 &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
-10 SEX      M              tabulate n         n          111     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
-# ℹ 58 more rows</code></pre>
+   variable        variable_level                   context    stat_name stat_label     stat             fmt_fun warning error  gts_column
+   &lt;chr&gt;           &lt;list&gt;                           &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;          &lt;list&gt;           &lt;list&gt;  &lt;list&gt;  &lt;list&gt; &lt;chr&gt;     
+ 1 AGEGR1          18-64                            tabulate   n         n              33               &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+ 2 AGEGR1          18-64                            tabulate   N         N              254              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+ 3 AGEGR1          18-64                            tabulate   p         %              0.1299213        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+ 4 AGEGR1          &gt;64                              tabulate   n         n              221              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+ 5 AGEGR1          &gt;64                              tabulate   N         N              254              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+ 6 AGEGR1          &gt;64                              tabulate   p         %              0.8700787        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+ 7 SEX             F                                tabulate   n         n              143              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+ 8 SEX             F                                tabulate   N         N              254              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+ 9 SEX             F                                tabulate   p         %              0.5629921        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+10 SEX             M                                tabulate   n         n              111              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+11 SEX             M                                tabulate   N         N              254              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+12 SEX             M                                tabulate   p         %              0.4370079        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+13 RACE            AMERICAN INDIAN OR ALASKA NATIVE tabulate   n         n              1                &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+14 RACE            AMERICAN INDIAN OR ALASKA NATIVE tabulate   N         N              254              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+15 RACE            AMERICAN INDIAN OR ALASKA NATIVE tabulate   p         %              0.003937008      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+16 RACE            BLACK OR AFRICAN AMERICAN        tabulate   n         n              23               &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+17 RACE            BLACK OR AFRICAN AMERICAN        tabulate   N         N              254              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+18 RACE            BLACK OR AFRICAN AMERICAN        tabulate   p         %              0.09055118       &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+19 RACE            WHITE                            tabulate   n         n              230              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+20 RACE            WHITE                            tabulate   N         N              254              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+21 RACE            WHITE                            tabulate   p         %              0.9055118        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+22 ETHNIC          HISPANIC OR LATINO               tabulate   n         n              12               &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+23 ETHNIC          HISPANIC OR LATINO               tabulate   N         N              254              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+24 ETHNIC          HISPANIC OR LATINO               tabulate   p         %              0.04724409       &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+25 ETHNIC          NOT HISPANIC OR LATINO           tabulate   n         n              242              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+26 ETHNIC          NOT HISPANIC OR LATINO           tabulate   N         N              254              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+27 ETHNIC          NOT HISPANIC OR LATINO           tabulate   p         %              0.9527559        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+28 AGE             &lt;NULL&gt;                           summary    mean      Mean           75.08661         &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+29 AGE             &lt;NULL&gt;                           summary    sd        SD             8.246234         &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+30 AGE             &lt;NULL&gt;                           summary    median    Median         77               &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+31 AGE             &lt;NULL&gt;                           summary    min       Min            51               &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+32 AGE             &lt;NULL&gt;                           summary    max       Max            89               &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+33 SEX             &lt;NULL&gt;                           attributes label     Variable Label Sex              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+34 SEX             &lt;NULL&gt;                           attributes class     Variable Class character        &lt;NULL&gt;  &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+35 AGE             &lt;NULL&gt;                           attributes label     Variable Label Age              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+36 AGE             &lt;NULL&gt;                           attributes class     Variable Class numeric          &lt;NULL&gt;  &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+37 AGEGR1          &lt;NULL&gt;                           attributes label     Variable Label Age Group, Years &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+38 AGEGR1          &lt;NULL&gt;                           attributes class     Variable Class character        &lt;NULL&gt;  &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+39 ETHNIC          &lt;NULL&gt;                           attributes label     Variable Label Ethnicity        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+40 ETHNIC          &lt;NULL&gt;                           attributes class     Variable Class character        &lt;NULL&gt;  &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+41 RACE            &lt;NULL&gt;                           attributes label     Variable Label Race             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+42 RACE            &lt;NULL&gt;                           attributes class     Variable Class character        &lt;NULL&gt;  &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+43 SEX             &lt;NULL&gt;                           missing    N_obs     No. obs.       254              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+44 SEX             &lt;NULL&gt;                           missing    N_miss    N Missing      0                &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+45 SEX             &lt;NULL&gt;                           missing    N_nonmiss N Non-missing  254              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+46 SEX             &lt;NULL&gt;                           missing    p_miss    % Missing      0                &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+47 SEX             &lt;NULL&gt;                           missing    p_nonmiss % Non-missing  1                &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+48 AGE             &lt;NULL&gt;                           missing    N_obs     No. obs.       254              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+49 AGE             &lt;NULL&gt;                           missing    N_miss    N Missing      0                &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+50 AGE             &lt;NULL&gt;                           missing    N_nonmiss N Non-missing  254              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+51 AGE             &lt;NULL&gt;                           missing    p_miss    % Missing      0                &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+52 AGE             &lt;NULL&gt;                           missing    p_nonmiss % Non-missing  1                &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+53 AGEGR1          &lt;NULL&gt;                           missing    N_obs     No. obs.       254              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+54 AGEGR1          &lt;NULL&gt;                           missing    N_miss    N Missing      0                &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+55 AGEGR1          &lt;NULL&gt;                           missing    N_nonmiss N Non-missing  254              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+56 AGEGR1          &lt;NULL&gt;                           missing    p_miss    % Missing      0                &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+57 AGEGR1          &lt;NULL&gt;                           missing    p_nonmiss % Non-missing  1                &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+58 ETHNIC          &lt;NULL&gt;                           missing    N_obs     No. obs.       254              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+59 ETHNIC          &lt;NULL&gt;                           missing    N_miss    N Missing      0                &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+60 ETHNIC          &lt;NULL&gt;                           missing    N_nonmiss N Non-missing  254              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+61 ETHNIC          &lt;NULL&gt;                           missing    p_miss    % Missing      0                &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+62 ETHNIC          &lt;NULL&gt;                           missing    p_nonmiss % Non-missing  1                &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+63 RACE            &lt;NULL&gt;                           missing    N_obs     No. obs.       254              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+64 RACE            &lt;NULL&gt;                           missing    N_miss    N Missing      0                &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+65 RACE            &lt;NULL&gt;                           missing    N_nonmiss N Non-missing  254              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+66 RACE            &lt;NULL&gt;                           missing    p_miss    % Missing      0                &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+67 RACE            &lt;NULL&gt;                           missing    p_nonmiss % Non-missing  1                &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_0    
+68 ..ard_total_n.. &lt;NULL&gt;                           total_n    N         N              254              0       &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      </code></pre>
 </div>
 </div>
 </div>
@@ -982,70 +1794,67 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb6" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1"></a><span class="co">---</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="an">title:</span><span class="co"> Demographics and Baseline Clinical Characteristics, Safety Population, Pooled Analysis (or Trial X)</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="an">subtitle:</span><span class="co"> FDA Table 02</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="an">categories:</span><span class="co"> [table, FDA, safety, demographics]</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a><span class="co">---</span></span>
-<span id="cb6-6"><a href="#cb6-6"></a></span>
-<span id="cb6-7"><a href="#cb6-7"></a>::: panel-tabset</span>
-<span id="cb6-8"><a href="#cb6-8"></a><span class="fu">## Table Preview</span></span>
-<span id="cb6-9"><a href="#cb6-9"></a></span>
-<span id="cb6-10"><a href="#cb6-10"></a><span class="in">```{r img, echo=FALSE, fig.align='center', out.width='60%'}</span></span>
-<span id="cb6-11"><a href="#cb6-11"></a><span class="in">knitr::include_graphics("result.png")</span></span>
-<span id="cb6-12"><a href="#cb6-12"></a><span class="in">```</span></span>
-<span id="cb6-13"><a href="#cb6-13"></a></span>
-<span id="cb6-14"><a href="#cb6-14"></a><span class="fu">## Setup</span></span>
-<span id="cb6-15"><a href="#cb6-15"></a></span>
-<span id="cb6-16"><a href="#cb6-16"></a><span class="in">```{r setup, message=FALSE}</span></span>
-<span id="cb6-17"><a href="#cb6-17"></a><span class="in"># Load libraries &amp; data -------------------------------------</span></span>
-<span id="cb6-18"><a href="#cb6-18"></a><span class="in">library(cardinalfda)</span></span>
-<span id="cb6-19"><a href="#cb6-19"></a><span class="in">library(dplyr)</span></span>
-<span id="cb6-20"><a href="#cb6-20"></a></span>
-<span id="cb6-21"><a href="#cb6-21"></a><span class="in">adsl &lt;- pharmaverseadam::adsl |&gt;</span></span>
-<span id="cb6-22"><a href="#cb6-22"></a><span class="in">  # removing screen failure observations</span></span>
-<span id="cb6-23"><a href="#cb6-23"></a><span class="in">  filter(TRT01A != "Screen Failure") |&gt;</span></span>
-<span id="cb6-24"><a href="#cb6-24"></a><span class="in">  # Adding a numeric biomarker (weight) — include in vars to show in table</span></span>
-<span id="cb6-25"><a href="#cb6-25"></a><span class="in">  left_join(</span></span>
-<span id="cb6-26"><a href="#cb6-26"></a><span class="in">    pharmaverseadam::advs |&gt;</span></span>
-<span id="cb6-27"><a href="#cb6-27"></a><span class="in">      filter(VSTESTCD == "WEIGHT", VISIT == "BASELINE") |&gt;</span></span>
-<span id="cb6-28"><a href="#cb6-28"></a><span class="in">      select(USUBJID, WEIGHTBL = AVAL),</span></span>
-<span id="cb6-29"><a href="#cb6-29"></a><span class="in">    by = "USUBJID",</span></span>
-<span id="cb6-30"><a href="#cb6-30"></a><span class="in">    relationship = "one-to-one"</span></span>
-<span id="cb6-31"><a href="#cb6-31"></a><span class="in">  )</span></span>
-<span id="cb6-32"><a href="#cb6-32"></a><span class="in">```</span></span>
-<span id="cb6-33"><a href="#cb6-33"></a></span>
-<span id="cb6-34"><a href="#cb6-34"></a><span class="fu">## Build Table</span></span>
-<span id="cb6-35"><a href="#cb6-35"></a></span>
-<span id="cb6-36"><a href="#cb6-36"></a><span class="in">```{r tbl, results='hide'}</span></span>
-<span id="cb6-37"><a href="#cb6-37"></a><span class="in">result &lt;- make_table_02(</span></span>
-<span id="cb6-38"><a href="#cb6-38"></a><span class="in">  df = adsl,</span></span>
-<span id="cb6-39"><a href="#cb6-39"></a><span class="in">  label = list(AGEGR1 = "Age Group, Years")</span></span>
-<span id="cb6-40"><a href="#cb6-40"></a><span class="in">)</span></span>
-<span id="cb6-41"><a href="#cb6-41"></a></span>
-<span id="cb6-42"><a href="#cb6-42"></a><span class="in">result$table</span></span>
-<span id="cb6-43"><a href="#cb6-43"></a><span class="in">```</span></span>
-<span id="cb6-44"><a href="#cb6-44"></a></span>
-<span id="cb6-45"><a href="#cb6-45"></a><span class="in">```{r eval=FALSE, include=FALSE}</span></span>
-<span id="cb6-46"><a href="#cb6-46"></a><span class="in"># Run chunk locally to generate image file</span></span>
-<span id="cb6-47"><a href="#cb6-47"></a><span class="in">gt::gtsave(gtsummary::as_gt(result$table), filename = "result.png")</span></span>
-<span id="cb6-48"><a href="#cb6-48"></a><span class="in">```</span></span>
-<span id="cb6-49"><a href="#cb6-49"></a></span>
-<span id="cb6-50"><a href="#cb6-50"></a><span class="in">```{r img, echo=FALSE, fig.align='center', out.width='60%'}</span></span>
-<span id="cb6-51"><a href="#cb6-51"></a><span class="in">```</span></span>
-<span id="cb6-52"><a href="#cb6-52"></a></span>
-<span id="cb6-53"><a href="#cb6-53"></a><span class="fu">## Build ARD</span></span>
-<span id="cb6-54"><a href="#cb6-54"></a></span>
-<span id="cb6-55"><a href="#cb6-55"></a><span class="in">```{r ard, message=FALSE, warning=FALSE}</span></span>
-<span id="cb6-56"><a href="#cb6-56"></a><span class="in">result$ard</span></span>
-<span id="cb6-57"><a href="#cb6-57"></a><span class="in">```</span></span>
-<span id="cb6-58"><a href="#cb6-58"></a></span>
-<span id="cb6-59"><a href="#cb6-59"></a><span class="in">```{r, echo=FALSE}</span></span>
-<span id="cb6-60"><a href="#cb6-60"></a><span class="in"># Print full ARD</span></span>
-<span id="cb6-61"><a href="#cb6-61"></a><span class="in">withr::local_options(width = 9999)</span></span>
-<span id="cb6-62"><a href="#cb6-62"></a><span class="in">print(result$ard, columns = "all")</span></span>
-<span id="cb6-63"><a href="#cb6-63"></a><span class="in">```</span></span>
-<span id="cb6-64"><a href="#cb6-64"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1"></a><span class="co">---</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="an">title:</span><span class="co"> Demographics and Baseline Clinical Characteristics, Safety Population, Pooled Analysis (or Trial X)</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="an">subtitle:</span><span class="co"> FDA Table 02</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="an">categories:</span><span class="co"> [table, FDA, safety, demographics]</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="co">---</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a></span>
+<span id="cb5-7"><a href="#cb5-7"></a>::::: columns</span>
+<span id="cb5-8"><a href="#cb5-8"></a></span>
+<span id="cb5-9"><a href="#cb5-9"></a>:::: {.column width="52%"}</span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="fu">### FDA IG Shell</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a></span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="al">![](ig_shell.png)</span>{fig-alt="FDA IG example table shell" .lightbox width=100%}</span>
+<span id="cb5-13"><a href="#cb5-13"></a></span>
+<span id="cb5-14"><a href="#cb5-14"></a><span class="fu">### Programming Notes</span></span>
+<span id="cb5-15"><a href="#cb5-15"></a></span>
+<span id="cb5-16"><a href="#cb5-16"></a>**Background and Instructions**</span>
+<span id="cb5-17"><a href="#cb5-17"></a></span>
+<span id="cb5-18"><a href="#cb5-18"></a>For Table 2: Demographics and Baseline Clinical Characteristics, consider the key baseline characteristics and subpopulations with different disease characteristics that could influence the effectiveness or safety of the drug. The latter may include baseline entry criteria and other specific characteristics that were recorded but not considered as entry criteria, such as duration, stage, or severity of disease; a history of failure on particular treatments; comorbid conditions; use of relevant concomitant medications; risk factors; or baseline laboratory measurements not part of the entry criteria (e.g., LDL cholesterol, C-reactive protein levels, kidney function, or hepatic function) that could affect safety. Depending on the geographic makeup of the trial, the region of participation rather than country may be included.</span>
+<span id="cb5-19"><a href="#cb5-19"></a></span>
+<span id="cb5-20"><a href="#cb5-20"></a>Table 2 is typically generated for each trial listed in Table 1: Clinical Trials Submitted in Support of Efficacy and Safety. When there is missing data in one of the demographic categories, a row labeled as "Missing" will be included in this table and explanatory footnotes added. The table currently displays placeholder values for the characteristics. These placeholder values will change to reflect the data from the respective clinical trial. Demographic characteristics in this table will reflect the Clinical Data Interchange Standards Consortium (CDISC) controlled terminology when submitted data conforms to CDISC data standards.</span>
+<span id="cb5-21"><a href="#cb5-21"></a></span>
+<span id="cb5-22"><a href="#cb5-22"></a>**Customization**</span>
+<span id="cb5-23"><a href="#cb5-23"></a></span>
+<span id="cb5-24"><a href="#cb5-24"></a>In addition to the standard groupings, the clinical reviewer may request custom age groups (e.g., &lt;45, 45 to &lt;65 years, etc.), additional baseline characteristics (e.g., anthropometric measurements such as body mass index <span class="co">[</span><span class="ot">BMI</span><span class="co">]</span>, disease characteristics such as medical history of diabetes) to be displayed as needed. For trials that include older subjects (e.g., Alzheimer's disease trials), additional geriatric age subgroups may be included (e.g., 65 to 74 years of age, 75 to 84 years of age, and 85 years of age and older). Refer to the guidance for industry E7 Studies in Support of Special Populations: Geriatrics, Questions and Answers (March 2012).</span>
+<span id="cb5-25"><a href="#cb5-25"></a></span>
+<span id="cb5-26"><a href="#cb5-26"></a>::::</span>
+<span id="cb5-27"><a href="#cb5-27"></a></span>
+<span id="cb5-28"><a href="#cb5-28"></a>:::: {.column width="4%"}</span>
+<span id="cb5-29"><a href="#cb5-29"></a>::::</span>
+<span id="cb5-30"><a href="#cb5-30"></a></span>
+<span id="cb5-31"><a href="#cb5-31"></a>:::: {.column width="44%"}</span>
+<span id="cb5-32"><a href="#cb5-32"></a><span class="fu">### Output</span></span>
+<span id="cb5-33"><a href="#cb5-33"></a></span>
+<span id="cb5-34"><a href="#cb5-34"></a><span class="in">```{r out-result, echo=FALSE, fig.align='center', out.width='100%'}</span></span>
+<span id="cb5-35"><a href="#cb5-35"></a><span class="in">knitr::include_graphics("result.png")</span></span>
+<span id="cb5-36"><a href="#cb5-36"></a><span class="in">```</span></span>
+<span id="cb5-37"><a href="#cb5-37"></a></span>
+<span id="cb5-38"><a href="#cb5-38"></a>::::</span>
+<span id="cb5-39"><a href="#cb5-39"></a></span>
+<span id="cb5-40"><a href="#cb5-40"></a>:::::</span>
+<span id="cb5-41"><a href="#cb5-41"></a></span>
+<span id="cb5-42"><a href="#cb5-42"></a>::: panel-tabset</span>
+<span id="cb5-43"><a href="#cb5-43"></a><span class="fu">## Full Code</span></span>
+<span id="cb5-44"><a href="#cb5-44"></a></span>
+<span id="cb5-45"><a href="#cb5-45"></a><span class="in">```{r fullcode, file="../../../inst/templates/fda-table_02.R", message=FALSE, warning=FALSE, results='hide'}</span></span>
+<span id="cb5-46"><a href="#cb5-46"></a><span class="in">```</span></span>
+<span id="cb5-47"><a href="#cb5-47"></a></span>
+<span id="cb5-48"><a href="#cb5-48"></a><span class="fu">## Table</span></span>
+<span id="cb5-49"><a href="#cb5-49"></a></span>
+<span id="cb5-50"><a href="#cb5-50"></a><span class="in">```{r tbl}</span></span>
+<span id="cb5-51"><a href="#cb5-51"></a><span class="in">tbl</span></span>
+<span id="cb5-52"><a href="#cb5-52"></a><span class="in">```</span></span>
+<span id="cb5-53"><a href="#cb5-53"></a></span>
+<span id="cb5-54"><a href="#cb5-54"></a><span class="fu">## ARD</span></span>
+<span id="cb5-55"><a href="#cb5-55"></a></span>
+<span id="cb5-56"><a href="#cb5-56"></a><span class="in">```{r ard, message=FALSE, warning=FALSE}</span></span>
+<span id="cb5-57"><a href="#cb5-57"></a><span class="in">withr::local_options(width = 9999, tibble.print_max = Inf)</span></span>
+<span id="cb5-58"><a href="#cb5-58"></a><span class="in">print(ard, columns = "all")</span></span>
+<span id="cb5-59"><a href="#cb5-59"></a><span class="in">```</span></span>
+<span id="cb5-60"><a href="#cb5-60"></a></span>
+<span id="cb5-61"><a href="#cb5-61"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
@@ -1063,7 +1872,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       &nbsp;
     </div>
   </div>
-</footer>
+</footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 <script src="../../../site_libs/quarto-html/zenscroll-min.js"></script>

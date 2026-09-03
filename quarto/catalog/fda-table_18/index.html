@@ -72,7 +72,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../../site_libs/bootstrap/bootstrap-b9dbead50e81c18249e2e1e9b4aaddfa.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-046be37f67332dfcbae0104d3ddeb5a1.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+<link href="../../../site_libs/bootstrap/bootstrap-dark-046be37f67332dfcbae0104d3ddeb5a1.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": true,
   "collapse-after": 3,
@@ -128,10 +131,11 @@ cookieconsent.run({
 <link rel="stylesheet" href="../../../quarto/assets/style.scss">
 <meta property="og:title" content="Summary Assessment of [Insert AE of Interest], Safety Population, Pooled Analysis (or Trial X) – Cardinal">
 <meta property="og:description" content="FDA Table 18">
-<meta property="og:image" content="https://pharmaverse.github.io/cardinal/quarto/catalog/fda-table_18/result.png">
+<meta property="og:image" content="https://pharmaverse.github.io/cardinal/quarto/catalog/fda-table_18/ig_shell.png">
 <meta property="og:site_name" content="Cardinal">
-<meta property="og:image:height" content="1328">
-<meta property="og:image:width" content="1658">
+<meta property="og:image:alt" content="FDA IG example table shell">
+<meta property="og:image:height" content="1142">
+<meta property="og:image:width" content="1541">
 </head>
 <body class="nav-fixed">
 
@@ -230,164 +234,801 @@ cookieconsent.run({
   
 
 
-</header><div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Table Preview</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Setup</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Build Table</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false">Build ARD</a></li>
-</ul>
-<div class="tab-content">
-<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+</header><div class="columns">
+<div class="column" style="width:52%;">
+<section id="fda-ig-shell" class="level3"><h3 class="anchored" data-anchor-id="fda-ig-shell">FDA IG Shell</h3>
+<p><a href="ig_shell.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="ig_shell.png" class="img-fluid" style="width:100.0%" alt="FDA IG example table shell"></a></p>
+</section><section id="programming-notes" class="level3"><h3 class="anchored" data-anchor-id="programming-notes">Programming Notes</h3>
+<p><strong>Background and Instructions</strong></p>
+<p>Table 18: Summary Assessment of [Insert AE of Interest] is created for each AE of interest and may be created for any AEs identified during application review that may warrant further analysis. The table name should be updated to reflect the event being displayed. The approach to analysis and summary of safety data should be tailored to each AE.</p>
+<p><strong>Customization</strong></p>
+<p>Discuss with CDS specific AEs and other information (e.g., laboratory information) to be included in Table 18 to provide a complete picture of the AE of Interest. When information across different datasets is combined, carefully consider the number of subjects used as the denominator in analyses, as they may differ across datasets.</p>
+</section>
+</div><div class="column" style="width:4%;">
+
+</div><div class="column" style="width:44%;">
+<section id="output" class="level3"><h3 class="anchored" data-anchor-id="output">Output</h3>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="result.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:45.0%"></p>
+<figure class="figure"><p><img src="result.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
+</div>
+</section>
+</div>
+</div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Full Code</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Table</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">ARD</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># FDA TABLE 18 ---------------------------------------------------------------</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="co"># Self-contained template. Run top-to-bottom to build the objects below.</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="co"># Used by tests via run_template() and published in the catalog.</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="fu">library</span>(cards)</span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="fu">library</span>(cardx)</span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="fu">library</span>(gtsummary)</span>
+<span id="cb1-9"><a href="#cb1-9"></a></span>
+<span id="cb1-10"><a href="#cb1-10"></a>adsl <span class="ot">&lt;-</span> pharmaverseadam<span class="sc">::</span>adsl</span>
+<span id="cb1-11"><a href="#cb1-11"></a>adae <span class="ot">&lt;-</span> pharmaverseadam<span class="sc">::</span>adae</span>
+<span id="cb1-12"><a href="#cb1-12"></a></span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb1-14"><a href="#cb1-14"></a>adae<span class="sc">$</span>AESIFL <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(adae<span class="sc">$</span>AESOC <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"VASCULAR DISORDERS"</span>), <span class="st">"Y"</span>, <span class="st">"N"</span>)</span>
+<span id="cb1-15"><a href="#cb1-15"></a></span>
+<span id="cb1-16"><a href="#cb1-16"></a><span class="co"># Pre-processing --------------------------------------------</span></span>
+<span id="cb1-17"><a href="#cb1-17"></a>adsl <span class="ot">&lt;-</span> adsl <span class="sc">|&gt;</span></span>
+<span id="cb1-18"><a href="#cb1-18"></a>  <span class="co"># safety population</span></span>
+<span id="cb1-19"><a href="#cb1-19"></a>  <span class="fu">filter</span>(SAFFL <span class="sc">==</span> <span class="st">"Y"</span>)</span>
+<span id="cb1-20"><a href="#cb1-20"></a></span>
+<span id="cb1-21"><a href="#cb1-21"></a>data <span class="ot">&lt;-</span> adae <span class="sc">|&gt;</span></span>
+<span id="cb1-22"><a href="#cb1-22"></a>  <span class="fu">filter</span>(</span>
+<span id="cb1-23"><a href="#cb1-23"></a>    <span class="co"># safety population</span></span>
+<span id="cb1-24"><a href="#cb1-24"></a>    SAFFL <span class="sc">==</span> <span class="st">"Y"</span>,</span>
+<span id="cb1-25"><a href="#cb1-25"></a>    <span class="co"># AESI assessment</span></span>
+<span id="cb1-26"><a href="#cb1-26"></a>    AESIFL <span class="sc">==</span> <span class="st">"Y"</span></span>
+<span id="cb1-27"><a href="#cb1-27"></a>  )</span>
+<span id="cb1-28"><a href="#cb1-28"></a></span>
+<span id="cb1-29"><a href="#cb1-29"></a><span class="co"># dataset of AE flag variable counts by subject</span></span>
+<span id="cb1-30"><a href="#cb1-30"></a>data_ae_fl <span class="ot">&lt;-</span></span>
+<span id="cb1-31"><a href="#cb1-31"></a>  adsl <span class="sc">|&gt;</span></span>
+<span id="cb1-32"><a href="#cb1-32"></a>  <span class="fu">select</span>(USUBJID, TRT01A) <span class="sc">|&gt;</span></span>
+<span id="cb1-33"><a href="#cb1-33"></a>  <span class="co"># create subject-level flags from adae data</span></span>
+<span id="cb1-34"><a href="#cb1-34"></a>  <span class="fu">left_join</span>(</span>
+<span id="cb1-35"><a href="#cb1-35"></a>    data <span class="sc">|&gt;</span></span>
+<span id="cb1-36"><a href="#cb1-36"></a>      <span class="fu">select</span>(USUBJID, AESER, AESDTH, AESLIFE, AESHOSP, AESDISAB, AESCONG, AEACN) <span class="sc">|&gt;</span></span>
+<span id="cb1-37"><a href="#cb1-37"></a>      <span class="fu">mutate</span>(</span>
+<span id="cb1-38"><a href="#cb1-38"></a>        <span class="co"># Serious AE</span></span>
+<span id="cb1-39"><a href="#cb1-39"></a>        <span class="at">ae_ser =</span> <span class="fu">any</span>(AESER <span class="sc">==</span> <span class="st">"Y"</span>),</span>
+<span id="cb1-40"><a href="#cb1-40"></a>        <span class="co"># Serious AE leading to death</span></span>
+<span id="cb1-41"><a href="#cb1-41"></a>        <span class="at">ae_ser_death =</span> <span class="fu">any</span>(AESER <span class="sc">==</span> <span class="st">"Y"</span> <span class="sc">&amp;</span> AESDTH <span class="sc">==</span> <span class="st">"Y"</span>),</span>
+<span id="cb1-42"><a href="#cb1-42"></a>        <span class="at">ae_ser_life =</span> <span class="fu">any</span>(AESER <span class="sc">==</span> <span class="st">"Y"</span> <span class="sc">&amp;</span> AESLIFE <span class="sc">==</span> <span class="st">"Y"</span>),</span>
+<span id="cb1-43"><a href="#cb1-43"></a>        <span class="at">ae_ser_hosp =</span> <span class="fu">any</span>(AESER <span class="sc">==</span> <span class="st">"Y"</span> <span class="sc">&amp;</span> AESHOSP <span class="sc">==</span> <span class="st">"Y"</span>),</span>
+<span id="cb1-44"><a href="#cb1-44"></a>        <span class="at">ae_ser_disab =</span> <span class="fu">any</span>(AESER <span class="sc">==</span> <span class="st">"Y"</span> <span class="sc">&amp;</span> AESDISAB <span class="sc">==</span> <span class="st">"Y"</span>),</span>
+<span id="cb1-45"><a href="#cb1-45"></a>        <span class="at">ae_ser_cong =</span> <span class="fu">any</span>(AESER <span class="sc">==</span> <span class="st">"Y"</span> <span class="sc">&amp;</span> AESCONG <span class="sc">==</span> <span class="st">"Y"</span>),</span>
+<span id="cb1-46"><a href="#cb1-46"></a>        <span class="co"># AE resulting in discontinuation</span></span>
+<span id="cb1-47"><a href="#cb1-47"></a>        <span class="at">ae_withdraw =</span> <span class="fu">any</span>(AEACN <span class="sc">==</span> <span class="st">"DRUG WITHDRAWN"</span>),</span>
+<span id="cb1-48"><a href="#cb1-48"></a>        <span class="at">.by =</span> USUBJID</span>
+<span id="cb1-49"><a href="#cb1-49"></a>      ),</span>
+<span id="cb1-50"><a href="#cb1-50"></a>    <span class="at">by =</span> <span class="st">"USUBJID"</span></span>
+<span id="cb1-51"><a href="#cb1-51"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb1-52"><a href="#cb1-52"></a>  <span class="fu">distinct</span>(USUBJID, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-53"><a href="#cb1-53"></a>  <span class="co"># add number of AEs</span></span>
+<span id="cb1-54"><a href="#cb1-54"></a>  <span class="fu">left_join</span>(</span>
+<span id="cb1-55"><a href="#cb1-55"></a>    data <span class="sc">|&gt;</span> <span class="fu">summarise</span>(<span class="at">.by =</span> USUBJID, <span class="at">ae_count =</span> <span class="fu">n</span>()),</span>
+<span id="cb1-56"><a href="#cb1-56"></a>    <span class="at">by =</span> <span class="st">"USUBJID"</span>,</span>
+<span id="cb1-57"><a href="#cb1-57"></a>    <span class="at">relationship =</span> <span class="st">"one-to-one"</span></span>
+<span id="cb1-58"><a href="#cb1-58"></a>  )</span>
+<span id="cb1-59"><a href="#cb1-59"></a></span>
+<span id="cb1-60"><a href="#cb1-60"></a><span class="do">## AE grouping flags section --------</span></span>
+<span id="cb1-61"><a href="#cb1-61"></a>tbl_ae_gp <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span></span>
+<span id="cb1-62"><a href="#cb1-62"></a>  <span class="fu">tbl_hierarchical</span>(</span>
+<span id="cb1-63"><a href="#cb1-63"></a>    <span class="at">variables =</span> AEDECOD,</span>
+<span id="cb1-64"><a href="#cb1-64"></a>    <span class="at">id =</span> USUBJID,</span>
+<span id="cb1-65"><a href="#cb1-65"></a>    <span class="at">denominator =</span> adsl,</span>
+<span id="cb1-66"><a href="#cb1-66"></a>    <span class="at">by =</span> TRT01A,</span>
+<span id="cb1-67"><a href="#cb1-67"></a>    <span class="at">overall_row =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1-68"><a href="#cb1-68"></a>    <span class="at">label =</span> <span class="fu">list</span>(</span>
+<span id="cb1-69"><a href="#cb1-69"></a>      <span class="at">..ard_hierarchical_overall.. =</span> <span class="st">"[Insert AE of Interest]"</span>,</span>
+<span id="cb1-70"><a href="#cb1-70"></a>      <span class="at">AEDECOD =</span> <span class="st">"AE of Interest Assessment"</span></span>
+<span id="cb1-71"><a href="#cb1-71"></a>    )</span>
+<span id="cb1-72"><a href="#cb1-72"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb1-73"><a href="#cb1-73"></a>  <span class="fu">modify_indent</span>(<span class="at">columns =</span> label, <span class="at">rows =</span> variable <span class="sc">!=</span> <span class="st">"..ard_hierarchical_overall.."</span>, <span class="at">indent =</span> <span class="dv">4</span>L)</span>
+<span id="cb1-74"><a href="#cb1-74"></a></span>
+<span id="cb1-75"><a href="#cb1-75"></a><span class="do">## Maximum severity section ---------</span></span>
+<span id="cb1-76"><a href="#cb1-76"></a>tbl_ae_sev <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span></span>
+<span id="cb1-77"><a href="#cb1-77"></a>  <span class="fu">ard_tabulate_max</span>(<span class="at">variables =</span> AESEV, <span class="at">id =</span> USUBJID, <span class="at">by =</span> TRT01A, <span class="at">denominator =</span> adsl, <span class="at">quiet =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-78"><a href="#cb1-78"></a>  <span class="fu">tbl_ard_summary</span>(<span class="at">by =</span> TRT01A, <span class="at">label =</span> <span class="fu">list</span>(<span class="at">AESEV =</span> <span class="st">"Maximum severity"</span>))</span>
+<span id="cb1-79"><a href="#cb1-79"></a></span>
+<span id="cb1-80"><a href="#cb1-80"></a><span class="do">## Events section -------------------</span></span>
+<span id="cb1-81"><a href="#cb1-81"></a>tbl_ae_fl <span class="ot">&lt;-</span> data_ae_fl <span class="sc">|&gt;</span></span>
+<span id="cb1-82"><a href="#cb1-82"></a>  <span class="fu">tbl_summary</span>(</span>
+<span id="cb1-83"><a href="#cb1-83"></a>    <span class="at">by =</span> <span class="st">"TRT01A"</span>,</span>
+<span id="cb1-84"><a href="#cb1-84"></a>    <span class="at">include =</span> <span class="fu">c</span>(ae_ser, ae_ser_death, ae_ser_life, ae_ser_hosp, ae_ser_disab, ae_ser_cong, ae_withdraw),</span>
+<span id="cb1-85"><a href="#cb1-85"></a>    <span class="at">missing =</span> <span class="st">"no"</span>,</span>
+<span id="cb1-86"><a href="#cb1-86"></a>    <span class="at">percent =</span> adsl,</span>
+<span id="cb1-87"><a href="#cb1-87"></a>    <span class="at">label =</span> <span class="fu">list</span>(</span>
+<span id="cb1-88"><a href="#cb1-88"></a>      <span class="at">ae_ser =</span> <span class="st">"SAE"</span>,</span>
+<span id="cb1-89"><a href="#cb1-89"></a>      <span class="at">ae_ser_death =</span> <span class="st">"Death"</span>,</span>
+<span id="cb1-90"><a href="#cb1-90"></a>      <span class="at">ae_ser_life =</span> <span class="st">"Life-threatening"</span>,</span>
+<span id="cb1-91"><a href="#cb1-91"></a>      <span class="at">ae_ser_hosp =</span> <span class="st">"Initial or prolonged hospitalization"</span>,</span>
+<span id="cb1-92"><a href="#cb1-92"></a>      <span class="at">ae_ser_disab =</span> <span class="st">"Disability or permanent damage"</span>,</span>
+<span id="cb1-93"><a href="#cb1-93"></a>      <span class="at">ae_ser_cong =</span> <span class="st">"Congenital anomaly or birth defect"</span>,</span>
+<span id="cb1-94"><a href="#cb1-94"></a>      <span class="at">ae_withdraw =</span> <span class="st">"Resulting in treatment discontinuation"</span></span>
+<span id="cb1-95"><a href="#cb1-95"></a>    )</span>
+<span id="cb1-96"><a href="#cb1-96"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb1-97"><a href="#cb1-97"></a>  <span class="fu">modify_indent</span>(<span class="at">columns =</span> label, <span class="at">rows =</span> <span class="sc">!</span>variable <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"ae_ser"</span>, <span class="st">"ae_withdraw"</span>), <span class="at">indent =</span> <span class="dv">4</span>L)</span>
+<span id="cb1-98"><a href="#cb1-98"></a></span>
+<span id="cb1-99"><a href="#cb1-99"></a><span class="do">## Build table ----------------------</span></span>
+<span id="cb1-100"><a href="#cb1-100"></a>tbl <span class="ot">&lt;-</span> <span class="fu">tbl_stack</span>(<span class="fu">list</span>(tbl_ae_gp, tbl_ae_sev, tbl_ae_fl), <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-101"><a href="#cb1-101"></a></span>
+<span id="cb1-102"><a href="#cb1-102"></a></span>
+<span id="cb1-103"><a href="#cb1-103"></a>ard <span class="ot">&lt;-</span> gtsummary<span class="sc">::</span><span class="fu">gather_ard</span>(tbl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <div class="cell">
-<details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Load libraries &amp; data -------------------------------------</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(cards)</span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(cardx)</span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">library</span>(gtsummary)</span>
-<span id="cb1-6"><a href="#cb1-6"></a></span>
-<span id="cb1-7"><a href="#cb1-7"></a>adsl <span class="ot">&lt;-</span> pharmaverseadam<span class="sc">::</span>adsl</span>
-<span id="cb1-8"><a href="#cb1-8"></a>adae <span class="ot">&lt;-</span> pharmaverseadam<span class="sc">::</span>adae</span>
-<span id="cb1-9"><a href="#cb1-9"></a></span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb1-11"><a href="#cb1-11"></a>adae<span class="sc">$</span>AESIFL <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(adae<span class="sc">$</span>AESOC <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"VASCULAR DISORDERS"</span>), <span class="st">"Y"</span>, <span class="st">"N"</span>)</span>
-<span id="cb1-12"><a href="#cb1-12"></a></span>
-<span id="cb1-13"><a href="#cb1-13"></a><span class="co"># Pre-processing --------------------------------------------</span></span>
-<span id="cb1-14"><a href="#cb1-14"></a>adsl <span class="ot">&lt;-</span> adsl <span class="sc">|&gt;</span></span>
-<span id="cb1-15"><a href="#cb1-15"></a>  <span class="co"># safety population</span></span>
-<span id="cb1-16"><a href="#cb1-16"></a>  <span class="fu">filter</span>(SAFFL <span class="sc">==</span> <span class="st">"Y"</span>)</span>
-<span id="cb1-17"><a href="#cb1-17"></a></span>
-<span id="cb1-18"><a href="#cb1-18"></a>data <span class="ot">&lt;-</span> adae <span class="sc">|&gt;</span></span>
-<span id="cb1-19"><a href="#cb1-19"></a>  <span class="fu">filter</span>(</span>
-<span id="cb1-20"><a href="#cb1-20"></a>    <span class="co"># safety population</span></span>
-<span id="cb1-21"><a href="#cb1-21"></a>    SAFFL <span class="sc">==</span> <span class="st">"Y"</span>,</span>
-<span id="cb1-22"><a href="#cb1-22"></a>    <span class="co"># AESI assessment</span></span>
-<span id="cb1-23"><a href="#cb1-23"></a>    AESIFL <span class="sc">==</span> <span class="st">"Y"</span></span>
-<span id="cb1-24"><a href="#cb1-24"></a>  )</span>
-<span id="cb1-25"><a href="#cb1-25"></a></span>
-<span id="cb1-26"><a href="#cb1-26"></a><span class="co"># dataset of AE flag variable counts by subject</span></span>
-<span id="cb1-27"><a href="#cb1-27"></a>data_ae_fl <span class="ot">&lt;-</span></span>
-<span id="cb1-28"><a href="#cb1-28"></a>  adsl <span class="sc">|&gt;</span></span>
-<span id="cb1-29"><a href="#cb1-29"></a>  <span class="fu">select</span>(USUBJID, TRT01A) <span class="sc">|&gt;</span></span>
-<span id="cb1-30"><a href="#cb1-30"></a>  <span class="co"># create subject-level flags from adae data</span></span>
-<span id="cb1-31"><a href="#cb1-31"></a>  <span class="fu">left_join</span>(</span>
-<span id="cb1-32"><a href="#cb1-32"></a>    data <span class="sc">|&gt;</span></span>
-<span id="cb1-33"><a href="#cb1-33"></a>      <span class="fu">select</span>(USUBJID, AESER, AESDTH, AESLIFE, AESHOSP, AESDISAB, AESCONG, AEACN) <span class="sc">|&gt;</span></span>
-<span id="cb1-34"><a href="#cb1-34"></a>      <span class="fu">mutate</span>(</span>
-<span id="cb1-35"><a href="#cb1-35"></a>        <span class="co"># Serious AE</span></span>
-<span id="cb1-36"><a href="#cb1-36"></a>        <span class="at">ae_ser =</span> <span class="fu">any</span>(AESER <span class="sc">==</span> <span class="st">"Y"</span>),</span>
-<span id="cb1-37"><a href="#cb1-37"></a>        <span class="co"># Serious AE leading to death</span></span>
-<span id="cb1-38"><a href="#cb1-38"></a>        <span class="at">ae_ser_death =</span> <span class="fu">any</span>(AESER <span class="sc">==</span> <span class="st">"Y"</span> <span class="sc">&amp;</span> AESDTH <span class="sc">==</span> <span class="st">"Y"</span>),</span>
-<span id="cb1-39"><a href="#cb1-39"></a>        <span class="at">ae_ser_life =</span> <span class="fu">any</span>(AESER <span class="sc">==</span> <span class="st">"Y"</span> <span class="sc">&amp;</span> AESLIFE <span class="sc">==</span> <span class="st">"Y"</span>),</span>
-<span id="cb1-40"><a href="#cb1-40"></a>        <span class="at">ae_ser_hosp =</span> <span class="fu">any</span>(AESER <span class="sc">==</span> <span class="st">"Y"</span> <span class="sc">&amp;</span> AESHOSP <span class="sc">==</span> <span class="st">"Y"</span>),</span>
-<span id="cb1-41"><a href="#cb1-41"></a>        <span class="at">ae_ser_disab =</span> <span class="fu">any</span>(AESER <span class="sc">==</span> <span class="st">"Y"</span> <span class="sc">&amp;</span> AESDISAB <span class="sc">==</span> <span class="st">"Y"</span>),</span>
-<span id="cb1-42"><a href="#cb1-42"></a>        <span class="at">ae_ser_cong =</span> <span class="fu">any</span>(AESER <span class="sc">==</span> <span class="st">"Y"</span> <span class="sc">&amp;</span> AESCONG <span class="sc">==</span> <span class="st">"Y"</span>),</span>
-<span id="cb1-43"><a href="#cb1-43"></a>        <span class="co"># AE resulting in discontinuation</span></span>
-<span id="cb1-44"><a href="#cb1-44"></a>        <span class="at">ae_withdraw =</span> <span class="fu">any</span>(AEACN <span class="sc">==</span> <span class="st">"DRUG WITHDRAWN"</span>),</span>
-<span id="cb1-45"><a href="#cb1-45"></a>        <span class="at">.by =</span> USUBJID</span>
-<span id="cb1-46"><a href="#cb1-46"></a>      ),</span>
-<span id="cb1-47"><a href="#cb1-47"></a>    <span class="at">by =</span> <span class="st">"USUBJID"</span></span>
-<span id="cb1-48"><a href="#cb1-48"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb1-49"><a href="#cb1-49"></a>  <span class="fu">distinct</span>(USUBJID, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
-<span id="cb1-50"><a href="#cb1-50"></a>  <span class="co"># add number of AEs</span></span>
-<span id="cb1-51"><a href="#cb1-51"></a>  <span class="fu">left_join</span>(</span>
-<span id="cb1-52"><a href="#cb1-52"></a>    data <span class="sc">|&gt;</span> <span class="fu">summarise</span>(<span class="at">.by =</span> USUBJID, <span class="at">ae_count =</span> <span class="fu">n</span>()),</span>
-<span id="cb1-53"><a href="#cb1-53"></a>    <span class="at">by =</span> <span class="st">"USUBJID"</span>,</span>
-<span id="cb1-54"><a href="#cb1-54"></a>    <span class="at">relationship =</span> <span class="st">"one-to-one"</span></span>
-<span id="cb1-55"><a href="#cb1-55"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+<details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div id="ydgabwknrs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ydgabwknrs table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#ydgabwknrs thead, #ydgabwknrs tbody, #ydgabwknrs tfoot, #ydgabwknrs tr, #ydgabwknrs td, #ydgabwknrs th {
+  border-style: none;
+}
+
+#ydgabwknrs p {
+  margin: 0;
+  padding: 0;
+}
+
+#ydgabwknrs .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#ydgabwknrs .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#ydgabwknrs .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#ydgabwknrs .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#ydgabwknrs .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ydgabwknrs .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ydgabwknrs .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ydgabwknrs .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#ydgabwknrs .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#ydgabwknrs .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#ydgabwknrs .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#ydgabwknrs .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#ydgabwknrs .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#ydgabwknrs .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#ydgabwknrs .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ydgabwknrs .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#ydgabwknrs .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#ydgabwknrs .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#ydgabwknrs .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ydgabwknrs .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#ydgabwknrs .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#ydgabwknrs .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#ydgabwknrs .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ydgabwknrs .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#ydgabwknrs .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#ydgabwknrs .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ydgabwknrs .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ydgabwknrs .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#ydgabwknrs .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ydgabwknrs .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#ydgabwknrs .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ydgabwknrs .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ydgabwknrs .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ydgabwknrs .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ydgabwknrs .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ydgabwknrs .gt_left {
+  text-align: left;
+}
+
+#ydgabwknrs .gt_center {
+  text-align: center;
+}
+
+#ydgabwknrs .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#ydgabwknrs .gt_font_normal {
+  font-weight: normal;
+}
+
+#ydgabwknrs .gt_font_bold {
+  font-weight: bold;
+}
+
+#ydgabwknrs .gt_font_italic {
+  font-style: italic;
+}
+
+#ydgabwknrs .gt_super {
+  font-size: 65%;
+}
+
+#ydgabwknrs .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#ydgabwknrs .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#ydgabwknrs .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#ydgabwknrs .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#ydgabwknrs .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#ydgabwknrs .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#ydgabwknrs .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#ydgabwknrs .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#ydgabwknrs div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead><tr class="gt_col_headings header">
+<th id="label" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>AE of Interest Assessment</strong></th>
+<th id="stat_1" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">
+<strong>Placebo</strong><br>
+N = 86<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
+</th>
+<th id="stat_2" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">
+<strong>Xanomeline High Dose</strong><br>
+N = 72<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
+</th>
+<th id="stat_3" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">
+<strong>Xanomeline Low Dose</strong><br>
+N = 96<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
+</th>
+</tr></thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">[Insert AE of Interest]</td>
+<td class="gt_row gt_center" headers="stat_1">3 (3.5%)</td>
+<td class="gt_row gt_center" headers="stat_2">1 (1.4%)</td>
+<td class="gt_row gt_center" headers="stat_3">4 (4.2%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;HOT FLUSH</td>
+<td class="gt_row gt_center" headers="stat_1">0 (0%)</td>
+<td class="gt_row gt_center" headers="stat_2">0 (0%)</td>
+<td class="gt_row gt_center" headers="stat_3">1 (1.0%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;HYPERTENSION</td>
+<td class="gt_row gt_center" headers="stat_1">1 (1.2%)</td>
+<td class="gt_row gt_center" headers="stat_2">0 (0%)</td>
+<td class="gt_row gt_center" headers="stat_3">2 (2.1%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;HYPOTENSION</td>
+<td class="gt_row gt_center" headers="stat_1">2 (2.3%)</td>
+<td class="gt_row gt_center" headers="stat_2">0 (0%)</td>
+<td class="gt_row gt_center" headers="stat_3">1 (1.0%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;ORTHOSTATIC HYPOTENSION</td>
+<td class="gt_row gt_center" headers="stat_1">1 (1.2%)</td>
+<td class="gt_row gt_center" headers="stat_2">0 (0%)</td>
+<td class="gt_row gt_center" headers="stat_3">0 (0%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;WOUND HAEMORRHAGE</td>
+<td class="gt_row gt_center" headers="stat_1">0 (0%)</td>
+<td class="gt_row gt_center" headers="stat_2">1 (1.4%)</td>
+<td class="gt_row gt_center" headers="stat_3">0 (0%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">Maximum severity</td>
+<td class="gt_row gt_center" headers="stat_1"><br></td>
+<td class="gt_row gt_center" headers="stat_2"><br></td>
+<td class="gt_row gt_center" headers="stat_3"><br></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;MILD</td>
+<td class="gt_row gt_center" headers="stat_1">1 (1.2%)</td>
+<td class="gt_row gt_center" headers="stat_2">0 (0.0%)</td>
+<td class="gt_row gt_center" headers="stat_3">3 (3.1%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;MODERATE</td>
+<td class="gt_row gt_center" headers="stat_1">2 (2.3%)</td>
+<td class="gt_row gt_center" headers="stat_2">1 (1.4%)</td>
+<td class="gt_row gt_center" headers="stat_3">1 (1.0%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">SAE</td>
+<td class="gt_row gt_center" headers="stat_1">0 (0%)</td>
+<td class="gt_row gt_center" headers="stat_2">0 (0%)</td>
+<td class="gt_row gt_center" headers="stat_3">0 (0%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Death</td>
+<td class="gt_row gt_center" headers="stat_1">0 (0%)</td>
+<td class="gt_row gt_center" headers="stat_2">0 (0%)</td>
+<td class="gt_row gt_center" headers="stat_3">0 (0%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Life-threatening</td>
+<td class="gt_row gt_center" headers="stat_1">0 (0%)</td>
+<td class="gt_row gt_center" headers="stat_2">0 (0%)</td>
+<td class="gt_row gt_center" headers="stat_3">0 (0%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Initial or prolonged hospitalization</td>
+<td class="gt_row gt_center" headers="stat_1">0 (0%)</td>
+<td class="gt_row gt_center" headers="stat_2">0 (0%)</td>
+<td class="gt_row gt_center" headers="stat_3">0 (0%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Disability or permanent damage</td>
+<td class="gt_row gt_center" headers="stat_1">0 (0%)</td>
+<td class="gt_row gt_center" headers="stat_2">0 (0%)</td>
+<td class="gt_row gt_center" headers="stat_3">0 (0%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Congenital anomaly or birth defect</td>
+<td class="gt_row gt_center" headers="stat_1">0 (0%)</td>
+<td class="gt_row gt_center" headers="stat_2">0 (0%)</td>
+<td class="gt_row gt_center" headers="stat_3">0 (0%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">Resulting in treatment discontinuation</td>
+<td class="gt_row gt_center" headers="stat_1">0 (0%)</td>
+<td class="gt_row gt_center" headers="stat_2">0 (0%)</td>
+<td class="gt_row gt_center" headers="stat_3">0 (0%)</td>
+</tr>
+</tbody>
+<tfoot><tr class="gt_footnotes odd">
+<td colspan="4" class="gt_footnote">
+<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> n (%)</td>
+</tr></tfoot>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
 <div class="cell">
-<details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="do">## AE grouping flags section --------</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>tbl_ae_gp <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a>  <span class="fu">tbl_hierarchical</span>(</span>
-<span id="cb2-4"><a href="#cb2-4"></a>    <span class="at">variables =</span> AEDECOD,</span>
-<span id="cb2-5"><a href="#cb2-5"></a>    <span class="at">id =</span> USUBJID,</span>
-<span id="cb2-6"><a href="#cb2-6"></a>    <span class="at">denominator =</span> adsl,</span>
-<span id="cb2-7"><a href="#cb2-7"></a>    <span class="at">by =</span> TRT01A,</span>
-<span id="cb2-8"><a href="#cb2-8"></a>    <span class="at">overall_row =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb2-9"><a href="#cb2-9"></a>    <span class="at">label =</span> <span class="fu">list</span>(</span>
-<span id="cb2-10"><a href="#cb2-10"></a>      <span class="at">..ard_hierarchical_overall.. =</span> <span class="st">"[Insert AE of Interest]"</span>,</span>
-<span id="cb2-11"><a href="#cb2-11"></a>      <span class="at">AEDECOD =</span> <span class="st">"AE of Interest Assessment"</span></span>
-<span id="cb2-12"><a href="#cb2-12"></a>    )</span>
-<span id="cb2-13"><a href="#cb2-13"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb2-14"><a href="#cb2-14"></a>  <span class="fu">modify_indent</span>(<span class="at">columns =</span> label, <span class="at">rows =</span> variable <span class="sc">!=</span> <span class="st">"..ard_hierarchical_overall.."</span>, <span class="at">indent =</span> <span class="dv">4</span>L)</span>
-<span id="cb2-15"><a href="#cb2-15"></a></span>
-<span id="cb2-16"><a href="#cb2-16"></a><span class="do">## Maximum severity section ---------</span></span>
-<span id="cb2-17"><a href="#cb2-17"></a>tbl_ae_sev <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span></span>
-<span id="cb2-18"><a href="#cb2-18"></a>  <span class="fu">ard_tabulate_max</span>(<span class="at">variables =</span> AESEV, <span class="at">id =</span> USUBJID, <span class="at">by =</span> TRT01A, <span class="at">denominator =</span> adsl, <span class="at">quiet =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
-<span id="cb2-19"><a href="#cb2-19"></a>  <span class="fu">tbl_ard_summary</span>(<span class="at">by =</span> TRT01A, <span class="at">label =</span> <span class="fu">list</span>(<span class="at">AESEV =</span> <span class="st">"Maximum severity"</span>))</span>
-<span id="cb2-20"><a href="#cb2-20"></a></span>
-<span id="cb2-21"><a href="#cb2-21"></a><span class="do">## Events section -------------------</span></span>
-<span id="cb2-22"><a href="#cb2-22"></a>tbl_ae_fl <span class="ot">&lt;-</span> data_ae_fl <span class="sc">|&gt;</span></span>
-<span id="cb2-23"><a href="#cb2-23"></a>  <span class="fu">tbl_summary</span>(</span>
-<span id="cb2-24"><a href="#cb2-24"></a>    <span class="at">by =</span> <span class="st">"TRT01A"</span>,</span>
-<span id="cb2-25"><a href="#cb2-25"></a>    <span class="at">include =</span> <span class="fu">c</span>(ae_ser, ae_ser_death, ae_ser_life, ae_ser_hosp, ae_ser_disab, ae_ser_cong, ae_withdraw),</span>
-<span id="cb2-26"><a href="#cb2-26"></a>    <span class="at">missing =</span> <span class="st">"no"</span>,</span>
-<span id="cb2-27"><a href="#cb2-27"></a>    <span class="at">percent =</span> adsl,</span>
-<span id="cb2-28"><a href="#cb2-28"></a>    <span class="at">label =</span> <span class="fu">list</span>(</span>
-<span id="cb2-29"><a href="#cb2-29"></a>      <span class="at">ae_ser =</span> <span class="st">"SAE"</span>,</span>
-<span id="cb2-30"><a href="#cb2-30"></a>      <span class="at">ae_ser_death =</span> <span class="st">"Death"</span>,</span>
-<span id="cb2-31"><a href="#cb2-31"></a>      <span class="at">ae_ser_life =</span> <span class="st">"Life-threatening"</span>,</span>
-<span id="cb2-32"><a href="#cb2-32"></a>      <span class="at">ae_ser_hosp =</span> <span class="st">"Initial or prolonged hospitalization"</span>,</span>
-<span id="cb2-33"><a href="#cb2-33"></a>      <span class="at">ae_ser_disab =</span> <span class="st">"Disability or permanent damage"</span>,</span>
-<span id="cb2-34"><a href="#cb2-34"></a>      <span class="at">ae_ser_cong =</span> <span class="st">"Congenital anomaly or birth defect"</span>,</span>
-<span id="cb2-35"><a href="#cb2-35"></a>      <span class="at">ae_withdraw =</span> <span class="st">"Resulting in treatment discontinuation"</span></span>
-<span id="cb2-36"><a href="#cb2-36"></a>    )</span>
-<span id="cb2-37"><a href="#cb2-37"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb2-38"><a href="#cb2-38"></a>  <span class="fu">modify_indent</span>(<span class="at">columns =</span> label, <span class="at">rows =</span> <span class="sc">!</span>variable <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"ae_ser"</span>, <span class="st">"ae_withdraw"</span>), <span class="at">indent =</span> <span class="dv">4</span>L)</span>
-<span id="cb2-39"><a href="#cb2-39"></a></span>
-<span id="cb2-40"><a href="#cb2-40"></a><span class="do">## Build table ----------------------</span></span>
-<span id="cb2-41"><a href="#cb2-41"></a>tbl <span class="ot">&lt;-</span> <span class="fu">tbl_stack</span>(<span class="fu">list</span>(tbl_ae_gp, tbl_ae_sev, tbl_ae_fl), <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb2-42"><a href="#cb2-42"></a></span>
-<span id="cb2-43"><a href="#cb2-43"></a>tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="result.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:45.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
-<div class="cell">
-<details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>ard <span class="ot">&lt;-</span> <span class="fu">gather_ard</span>(tbl)</span>
-<span id="cb3-2"><a href="#cb3-2"></a>ard</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
+<details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>withr<span class="sc">::</span><span class="fu">local_options</span>(<span class="at">width =</span> <span class="dv">9999</span>, <span class="at">tibble.print_max =</span> <span class="cn">Inf</span>)</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">print</span>(ard, <span class="at">columns =</span> <span class="st">"all"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
 <pre><code>[[1]]
 [[1]]$tbl_hierarchical
 # An ARD data frame: 63 × 13
-   group1 group1_level variable                     variable_level       context      stat_name stat_label    stat stat_fmt fmt_fun warning error  gts_column
-   &lt;chr&gt;  &lt;list&gt;       &lt;chr&gt;                        &lt;list&gt;               &lt;chr&gt;        &lt;chr&gt;     &lt;chr&gt;       &lt;list&gt; &lt;list&gt;   &lt;list&gt;  &lt;list&gt;  &lt;list&gt; &lt;chr&gt;     
- 1 &lt;NA&gt;   &lt;NULL&gt;       TRT01A                       Placebo              tabulate     n         n           86     86       0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
- 2 &lt;NA&gt;   &lt;NULL&gt;       TRT01A                       Placebo              tabulate     N         N          254     254      0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
- 3 &lt;NA&gt;   &lt;NULL&gt;       TRT01A                       Placebo              tabulate     p         %            0.339 33.9     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
- 4 &lt;NA&gt;   &lt;NULL&gt;       TRT01A                       Xanomeline High Dose tabulate     n         n           72     72       0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
- 5 &lt;NA&gt;   &lt;NULL&gt;       TRT01A                       Xanomeline High Dose tabulate     N         N          254     254      0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
- 6 &lt;NA&gt;   &lt;NULL&gt;       TRT01A                       Xanomeline High Dose tabulate     p         %            0.283 28.3     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
- 7 &lt;NA&gt;   &lt;NULL&gt;       TRT01A                       Xanomeline Low Dose  tabulate     n         n           96     96       0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
- 8 &lt;NA&gt;   &lt;NULL&gt;       TRT01A                       Xanomeline Low Dose  tabulate     N         N          254     254      0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
- 9 &lt;NA&gt;   &lt;NULL&gt;       TRT01A                       Xanomeline Low Dose  tabulate     p         %            0.378 37.8     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
-10 TRT01A Placebo      ..ard_hierarchical_overall.. TRUE                 hierarchical n         n            3     3        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
-# ℹ 53 more rows
+   group1 group1_level         variable                     variable_level          context      stat_name stat_label     stat stat_fmt fmt_fun warning error  gts_column
+   &lt;chr&gt;  &lt;list&gt;               &lt;chr&gt;                        &lt;list&gt;                  &lt;chr&gt;        &lt;chr&gt;     &lt;chr&gt;        &lt;list&gt; &lt;list&gt;   &lt;list&gt;  &lt;list&gt;  &lt;list&gt; &lt;chr&gt;     
+ 1 &lt;NA&gt;   &lt;NULL&gt;               TRT01A                       Placebo                 tabulate     n         n           86      86       0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 2 &lt;NA&gt;   &lt;NULL&gt;               TRT01A                       Placebo                 tabulate     N         N          254      254      0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 3 &lt;NA&gt;   &lt;NULL&gt;               TRT01A                       Placebo                 tabulate     p         %            0.339  33.9     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 4 &lt;NA&gt;   &lt;NULL&gt;               TRT01A                       Xanomeline High Dose    tabulate     n         n           72      72       0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 5 &lt;NA&gt;   &lt;NULL&gt;               TRT01A                       Xanomeline High Dose    tabulate     N         N          254      254      0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 6 &lt;NA&gt;   &lt;NULL&gt;               TRT01A                       Xanomeline High Dose    tabulate     p         %            0.283  28.3     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 7 &lt;NA&gt;   &lt;NULL&gt;               TRT01A                       Xanomeline Low Dose     tabulate     n         n           96      96       0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 8 &lt;NA&gt;   &lt;NULL&gt;               TRT01A                       Xanomeline Low Dose     tabulate     N         N          254      254      0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 9 &lt;NA&gt;   &lt;NULL&gt;               TRT01A                       Xanomeline Low Dose     tabulate     p         %            0.378  37.8     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+10 TRT01A Placebo              ..ard_hierarchical_overall.. TRUE                    hierarchical n         n            3      3        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+11 TRT01A Placebo              ..ard_hierarchical_overall.. TRUE                    hierarchical N         N           86      86       &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+12 TRT01A Placebo              ..ard_hierarchical_overall.. TRUE                    hierarchical p         %            0.0349 3.5      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+13 TRT01A Xanomeline High Dose ..ard_hierarchical_overall.. TRUE                    hierarchical n         n            1      1        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+14 TRT01A Xanomeline High Dose ..ard_hierarchical_overall.. TRUE                    hierarchical N         N           72      72       &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+15 TRT01A Xanomeline High Dose ..ard_hierarchical_overall.. TRUE                    hierarchical p         %            0.0139 1.4      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+16 TRT01A Xanomeline Low Dose  ..ard_hierarchical_overall.. TRUE                    hierarchical n         n            4      4        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+17 TRT01A Xanomeline Low Dose  ..ard_hierarchical_overall.. TRUE                    hierarchical N         N           96      96       &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+18 TRT01A Xanomeline Low Dose  ..ard_hierarchical_overall.. TRUE                    hierarchical p         %            0.0417 4.2      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+19 TRT01A Placebo              AEDECOD                      HOT FLUSH               hierarchical n         n            0      0        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+20 TRT01A Placebo              AEDECOD                      HOT FLUSH               hierarchical N         N           86      86       &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+21 TRT01A Placebo              AEDECOD                      HOT FLUSH               hierarchical p         %            0      0        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+22 TRT01A Xanomeline High Dose AEDECOD                      HOT FLUSH               hierarchical n         n            0      0        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+23 TRT01A Xanomeline High Dose AEDECOD                      HOT FLUSH               hierarchical N         N           72      72       &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+24 TRT01A Xanomeline High Dose AEDECOD                      HOT FLUSH               hierarchical p         %            0      0        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+25 TRT01A Xanomeline Low Dose  AEDECOD                      HOT FLUSH               hierarchical n         n            1      1        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+26 TRT01A Xanomeline Low Dose  AEDECOD                      HOT FLUSH               hierarchical N         N           96      96       &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+27 TRT01A Xanomeline Low Dose  AEDECOD                      HOT FLUSH               hierarchical p         %            0.0104 1.0      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+28 TRT01A Placebo              AEDECOD                      HYPERTENSION            hierarchical n         n            1      1        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+29 TRT01A Placebo              AEDECOD                      HYPERTENSION            hierarchical N         N           86      86       &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+30 TRT01A Placebo              AEDECOD                      HYPERTENSION            hierarchical p         %            0.0116 1.2      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+31 TRT01A Xanomeline High Dose AEDECOD                      HYPERTENSION            hierarchical n         n            0      0        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+32 TRT01A Xanomeline High Dose AEDECOD                      HYPERTENSION            hierarchical N         N           72      72       &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+33 TRT01A Xanomeline High Dose AEDECOD                      HYPERTENSION            hierarchical p         %            0      0        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+34 TRT01A Xanomeline Low Dose  AEDECOD                      HYPERTENSION            hierarchical n         n            2      2        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+35 TRT01A Xanomeline Low Dose  AEDECOD                      HYPERTENSION            hierarchical N         N           96      96       &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+36 TRT01A Xanomeline Low Dose  AEDECOD                      HYPERTENSION            hierarchical p         %            0.0208 2.1      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+37 TRT01A Placebo              AEDECOD                      HYPOTENSION             hierarchical n         n            2      2        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+38 TRT01A Placebo              AEDECOD                      HYPOTENSION             hierarchical N         N           86      86       &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+39 TRT01A Placebo              AEDECOD                      HYPOTENSION             hierarchical p         %            0.0233 2.3      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+40 TRT01A Xanomeline High Dose AEDECOD                      HYPOTENSION             hierarchical n         n            0      0        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+41 TRT01A Xanomeline High Dose AEDECOD                      HYPOTENSION             hierarchical N         N           72      72       &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+42 TRT01A Xanomeline High Dose AEDECOD                      HYPOTENSION             hierarchical p         %            0      0        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+43 TRT01A Xanomeline Low Dose  AEDECOD                      HYPOTENSION             hierarchical n         n            1      1        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+44 TRT01A Xanomeline Low Dose  AEDECOD                      HYPOTENSION             hierarchical N         N           96      96       &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+45 TRT01A Xanomeline Low Dose  AEDECOD                      HYPOTENSION             hierarchical p         %            0.0104 1.0      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+46 TRT01A Placebo              AEDECOD                      ORTHOSTATIC HYPOTENSION hierarchical n         n            1      1        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+47 TRT01A Placebo              AEDECOD                      ORTHOSTATIC HYPOTENSION hierarchical N         N           86      86       &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+48 TRT01A Placebo              AEDECOD                      ORTHOSTATIC HYPOTENSION hierarchical p         %            0.0116 1.2      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+49 TRT01A Xanomeline High Dose AEDECOD                      ORTHOSTATIC HYPOTENSION hierarchical n         n            0      0        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+50 TRT01A Xanomeline High Dose AEDECOD                      ORTHOSTATIC HYPOTENSION hierarchical N         N           72      72       &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+51 TRT01A Xanomeline High Dose AEDECOD                      ORTHOSTATIC HYPOTENSION hierarchical p         %            0      0        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+52 TRT01A Xanomeline Low Dose  AEDECOD                      ORTHOSTATIC HYPOTENSION hierarchical n         n            0      0        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+53 TRT01A Xanomeline Low Dose  AEDECOD                      ORTHOSTATIC HYPOTENSION hierarchical N         N           96      96       &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+54 TRT01A Xanomeline Low Dose  AEDECOD                      ORTHOSTATIC HYPOTENSION hierarchical p         %            0      0        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+55 TRT01A Placebo              AEDECOD                      WOUND HAEMORRHAGE       hierarchical n         n            0      0        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+56 TRT01A Placebo              AEDECOD                      WOUND HAEMORRHAGE       hierarchical N         N           86      86       &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+57 TRT01A Placebo              AEDECOD                      WOUND HAEMORRHAGE       hierarchical p         %            0      0        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+58 TRT01A Xanomeline High Dose AEDECOD                      WOUND HAEMORRHAGE       hierarchical n         n            1      1        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+59 TRT01A Xanomeline High Dose AEDECOD                      WOUND HAEMORRHAGE       hierarchical N         N           72      72       &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+60 TRT01A Xanomeline High Dose AEDECOD                      WOUND HAEMORRHAGE       hierarchical p         %            0.0139 1.4      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+61 TRT01A Xanomeline Low Dose  AEDECOD                      WOUND HAEMORRHAGE       hierarchical n         n            0      0        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+62 TRT01A Xanomeline Low Dose  AEDECOD                      WOUND HAEMORRHAGE       hierarchical N         N           96      96       &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+63 TRT01A Xanomeline Low Dose  AEDECOD                      WOUND HAEMORRHAGE       hierarchical p         %            0      0        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
 
 
 [[2]]
@@ -420,19 +1061,202 @@ cookieconsent.run({
 [[3]]
 [[3]]$tbl_summary
 # An ARD data frame: 194 × 12
-   group1 group1_level variable     variable_level context        stat_name stat_label   stat fmt_fun warning error  gts_column
-   &lt;chr&gt;  &lt;list&gt;       &lt;chr&gt;        &lt;list&gt;         &lt;chr&gt;          &lt;chr&gt;     &lt;chr&gt;      &lt;list&gt; &lt;list&gt;  &lt;list&gt;  &lt;list&gt; &lt;chr&gt;     
- 1 TRT01A Placebo      ae_ser       TRUE           tabulate_value n         n               0 &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
- 2 TRT01A Placebo      ae_ser       TRUE           tabulate_value N         N              86 &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
- 3 TRT01A Placebo      ae_ser       TRUE           tabulate_value p         %               0 &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
- 4 TRT01A Placebo      ae_ser_death TRUE           tabulate_value n         n               0 &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
- 5 TRT01A Placebo      ae_ser_death TRUE           tabulate_value N         N              86 &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
- 6 TRT01A Placebo      ae_ser_death TRUE           tabulate_value p         %               0 &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
- 7 TRT01A Placebo      ae_ser_life  TRUE           tabulate_value n         n               0 &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
- 8 TRT01A Placebo      ae_ser_life  TRUE           tabulate_value N         N              86 &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
- 9 TRT01A Placebo      ae_ser_life  TRUE           tabulate_value p         %               0 &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
-10 TRT01A Placebo      ae_ser_hosp  TRUE           tabulate_value n         n               0 &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
-# ℹ 184 more rows</code></pre>
+    group1 group1_level         variable        variable_level       context        stat_name stat_label     stat                                   fmt_fun warning error  gts_column
+    &lt;chr&gt;  &lt;list&gt;               &lt;chr&gt;           &lt;list&gt;               &lt;chr&gt;          &lt;chr&gt;     &lt;chr&gt;          &lt;list&gt;                                 &lt;list&gt;  &lt;list&gt;  &lt;list&gt; &lt;chr&gt;     
+  1 TRT01A Placebo              ae_ser          TRUE                 tabulate_value n         n              0                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+  2 TRT01A Placebo              ae_ser          TRUE                 tabulate_value N         N              86                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+  3 TRT01A Placebo              ae_ser          TRUE                 tabulate_value p         %              0                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+  4 TRT01A Placebo              ae_ser_death    TRUE                 tabulate_value n         n              0                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+  5 TRT01A Placebo              ae_ser_death    TRUE                 tabulate_value N         N              86                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+  6 TRT01A Placebo              ae_ser_death    TRUE                 tabulate_value p         %              0                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+  7 TRT01A Placebo              ae_ser_life     TRUE                 tabulate_value n         n              0                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+  8 TRT01A Placebo              ae_ser_life     TRUE                 tabulate_value N         N              86                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+  9 TRT01A Placebo              ae_ser_life     TRUE                 tabulate_value p         %              0                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 10 TRT01A Placebo              ae_ser_hosp     TRUE                 tabulate_value n         n              0                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 11 TRT01A Placebo              ae_ser_hosp     TRUE                 tabulate_value N         N              86                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 12 TRT01A Placebo              ae_ser_hosp     TRUE                 tabulate_value p         %              0                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 13 TRT01A Placebo              ae_ser_disab    TRUE                 tabulate_value n         n              0                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 14 TRT01A Placebo              ae_ser_disab    TRUE                 tabulate_value N         N              86                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 15 TRT01A Placebo              ae_ser_disab    TRUE                 tabulate_value p         %              0                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 16 TRT01A Placebo              ae_ser_cong     TRUE                 tabulate_value n         n              0                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 17 TRT01A Placebo              ae_ser_cong     TRUE                 tabulate_value N         N              86                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 18 TRT01A Placebo              ae_ser_cong     TRUE                 tabulate_value p         %              0                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 19 TRT01A Placebo              ae_withdraw     TRUE                 tabulate_value n         n              0                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 20 TRT01A Placebo              ae_withdraw     TRUE                 tabulate_value N         N              86                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 21 TRT01A Placebo              ae_withdraw     TRUE                 tabulate_value p         %              0                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 22 TRT01A Xanomeline High Dose ae_ser          TRUE                 tabulate_value n         n              0                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 23 TRT01A Xanomeline High Dose ae_ser          TRUE                 tabulate_value N         N              72                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 24 TRT01A Xanomeline High Dose ae_ser          TRUE                 tabulate_value p         %              0                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 25 TRT01A Xanomeline High Dose ae_ser_death    TRUE                 tabulate_value n         n              0                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 26 TRT01A Xanomeline High Dose ae_ser_death    TRUE                 tabulate_value N         N              72                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 27 TRT01A Xanomeline High Dose ae_ser_death    TRUE                 tabulate_value p         %              0                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 28 TRT01A Xanomeline High Dose ae_ser_life     TRUE                 tabulate_value n         n              0                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 29 TRT01A Xanomeline High Dose ae_ser_life     TRUE                 tabulate_value N         N              72                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 30 TRT01A Xanomeline High Dose ae_ser_life     TRUE                 tabulate_value p         %              0                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 31 TRT01A Xanomeline High Dose ae_ser_hosp     TRUE                 tabulate_value n         n              0                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 32 TRT01A Xanomeline High Dose ae_ser_hosp     TRUE                 tabulate_value N         N              72                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 33 TRT01A Xanomeline High Dose ae_ser_hosp     TRUE                 tabulate_value p         %              0                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 34 TRT01A Xanomeline High Dose ae_ser_disab    TRUE                 tabulate_value n         n              0                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 35 TRT01A Xanomeline High Dose ae_ser_disab    TRUE                 tabulate_value N         N              72                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 36 TRT01A Xanomeline High Dose ae_ser_disab    TRUE                 tabulate_value p         %              0                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 37 TRT01A Xanomeline High Dose ae_ser_cong     TRUE                 tabulate_value n         n              0                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 38 TRT01A Xanomeline High Dose ae_ser_cong     TRUE                 tabulate_value N         N              72                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 39 TRT01A Xanomeline High Dose ae_ser_cong     TRUE                 tabulate_value p         %              0                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 40 TRT01A Xanomeline High Dose ae_withdraw     TRUE                 tabulate_value n         n              0                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 41 TRT01A Xanomeline High Dose ae_withdraw     TRUE                 tabulate_value N         N              72                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 42 TRT01A Xanomeline High Dose ae_withdraw     TRUE                 tabulate_value p         %              0                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 43 TRT01A Xanomeline Low Dose  ae_ser          TRUE                 tabulate_value n         n              0                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 44 TRT01A Xanomeline Low Dose  ae_ser          TRUE                 tabulate_value N         N              96                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 45 TRT01A Xanomeline Low Dose  ae_ser          TRUE                 tabulate_value p         %              0                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 46 TRT01A Xanomeline Low Dose  ae_ser_death    TRUE                 tabulate_value n         n              0                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 47 TRT01A Xanomeline Low Dose  ae_ser_death    TRUE                 tabulate_value N         N              96                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 48 TRT01A Xanomeline Low Dose  ae_ser_death    TRUE                 tabulate_value p         %              0                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 49 TRT01A Xanomeline Low Dose  ae_ser_life     TRUE                 tabulate_value n         n              0                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 50 TRT01A Xanomeline Low Dose  ae_ser_life     TRUE                 tabulate_value N         N              96                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 51 TRT01A Xanomeline Low Dose  ae_ser_life     TRUE                 tabulate_value p         %              0                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 52 TRT01A Xanomeline Low Dose  ae_ser_hosp     TRUE                 tabulate_value n         n              0                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 53 TRT01A Xanomeline Low Dose  ae_ser_hosp     TRUE                 tabulate_value N         N              96                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 54 TRT01A Xanomeline Low Dose  ae_ser_hosp     TRUE                 tabulate_value p         %              0                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 55 TRT01A Xanomeline Low Dose  ae_ser_disab    TRUE                 tabulate_value n         n              0                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 56 TRT01A Xanomeline Low Dose  ae_ser_disab    TRUE                 tabulate_value N         N              96                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 57 TRT01A Xanomeline Low Dose  ae_ser_disab    TRUE                 tabulate_value p         %              0                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 58 TRT01A Xanomeline Low Dose  ae_ser_cong     TRUE                 tabulate_value n         n              0                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 59 TRT01A Xanomeline Low Dose  ae_ser_cong     TRUE                 tabulate_value N         N              96                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 60 TRT01A Xanomeline Low Dose  ae_ser_cong     TRUE                 tabulate_value p         %              0                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 61 TRT01A Xanomeline Low Dose  ae_withdraw     TRUE                 tabulate_value n         n              0                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 62 TRT01A Xanomeline Low Dose  ae_withdraw     TRUE                 tabulate_value N         N              96                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 63 TRT01A Xanomeline Low Dose  ae_withdraw     TRUE                 tabulate_value p         %              0                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 64 &lt;NA&gt;   &lt;NULL&gt;               ae_ser          &lt;NULL&gt;               attributes     label     Variable Label SAE                                    &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+ 65 &lt;NA&gt;   &lt;NULL&gt;               ae_ser          &lt;NULL&gt;               attributes     class     Variable Class logical                                &lt;NULL&gt;  &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+ 66 &lt;NA&gt;   &lt;NULL&gt;               ae_ser_death    &lt;NULL&gt;               attributes     label     Variable Label Death                                  &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+ 67 &lt;NA&gt;   &lt;NULL&gt;               ae_ser_death    &lt;NULL&gt;               attributes     class     Variable Class logical                                &lt;NULL&gt;  &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+ 68 &lt;NA&gt;   &lt;NULL&gt;               ae_ser_life     &lt;NULL&gt;               attributes     label     Variable Label Life-threatening                       &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+ 69 &lt;NA&gt;   &lt;NULL&gt;               ae_ser_life     &lt;NULL&gt;               attributes     class     Variable Class logical                                &lt;NULL&gt;  &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+ 70 &lt;NA&gt;   &lt;NULL&gt;               ae_ser_hosp     &lt;NULL&gt;               attributes     label     Variable Label Initial or prolonged hospitalization   &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+ 71 &lt;NA&gt;   &lt;NULL&gt;               ae_ser_hosp     &lt;NULL&gt;               attributes     class     Variable Class logical                                &lt;NULL&gt;  &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+ 72 &lt;NA&gt;   &lt;NULL&gt;               ae_ser_disab    &lt;NULL&gt;               attributes     label     Variable Label Disability or permanent damage         &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+ 73 &lt;NA&gt;   &lt;NULL&gt;               ae_ser_disab    &lt;NULL&gt;               attributes     class     Variable Class logical                                &lt;NULL&gt;  &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+ 74 &lt;NA&gt;   &lt;NULL&gt;               ae_ser_cong     &lt;NULL&gt;               attributes     label     Variable Label Congenital anomaly or birth defect     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+ 75 &lt;NA&gt;   &lt;NULL&gt;               ae_ser_cong     &lt;NULL&gt;               attributes     class     Variable Class logical                                &lt;NULL&gt;  &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+ 76 &lt;NA&gt;   &lt;NULL&gt;               ae_withdraw     &lt;NULL&gt;               attributes     label     Variable Label Resulting in treatment discontinuation &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+ 77 &lt;NA&gt;   &lt;NULL&gt;               ae_withdraw     &lt;NULL&gt;               attributes     class     Variable Class logical                                &lt;NULL&gt;  &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+ 78 &lt;NA&gt;   &lt;NULL&gt;               TRT01A          &lt;NULL&gt;               attributes     label     Variable Label Actual Treatment for Period 01         &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+ 79 &lt;NA&gt;   &lt;NULL&gt;               TRT01A          &lt;NULL&gt;               attributes     class     Variable Class character                              &lt;NULL&gt;  &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+ 80 TRT01A Placebo              ae_ser          &lt;NULL&gt;               missing        N_obs     No. obs.       86                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 81 TRT01A Placebo              ae_ser          &lt;NULL&gt;               missing        N_miss    N Missing      83                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 82 TRT01A Placebo              ae_ser          &lt;NULL&gt;               missing        N_nonmiss N Non-missing  3                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 83 TRT01A Placebo              ae_ser          &lt;NULL&gt;               missing        p_miss    % Missing      0.9651163                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 84 TRT01A Placebo              ae_ser          &lt;NULL&gt;               missing        p_nonmiss % Non-missing  0.03488372                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 85 TRT01A Placebo              ae_ser_death    &lt;NULL&gt;               missing        N_obs     No. obs.       86                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 86 TRT01A Placebo              ae_ser_death    &lt;NULL&gt;               missing        N_miss    N Missing      83                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 87 TRT01A Placebo              ae_ser_death    &lt;NULL&gt;               missing        N_nonmiss N Non-missing  3                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 88 TRT01A Placebo              ae_ser_death    &lt;NULL&gt;               missing        p_miss    % Missing      0.9651163                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 89 TRT01A Placebo              ae_ser_death    &lt;NULL&gt;               missing        p_nonmiss % Non-missing  0.03488372                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 90 TRT01A Placebo              ae_ser_life     &lt;NULL&gt;               missing        N_obs     No. obs.       86                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 91 TRT01A Placebo              ae_ser_life     &lt;NULL&gt;               missing        N_miss    N Missing      83                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 92 TRT01A Placebo              ae_ser_life     &lt;NULL&gt;               missing        N_nonmiss N Non-missing  3                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 93 TRT01A Placebo              ae_ser_life     &lt;NULL&gt;               missing        p_miss    % Missing      0.9651163                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 94 TRT01A Placebo              ae_ser_life     &lt;NULL&gt;               missing        p_nonmiss % Non-missing  0.03488372                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 95 TRT01A Placebo              ae_ser_hosp     &lt;NULL&gt;               missing        N_obs     No. obs.       86                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 96 TRT01A Placebo              ae_ser_hosp     &lt;NULL&gt;               missing        N_miss    N Missing      83                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 97 TRT01A Placebo              ae_ser_hosp     &lt;NULL&gt;               missing        N_nonmiss N Non-missing  3                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 98 TRT01A Placebo              ae_ser_hosp     &lt;NULL&gt;               missing        p_miss    % Missing      0.9651163                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 99 TRT01A Placebo              ae_ser_hosp     &lt;NULL&gt;               missing        p_nonmiss % Non-missing  0.03488372                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+100 TRT01A Placebo              ae_ser_disab    &lt;NULL&gt;               missing        N_obs     No. obs.       86                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+101 TRT01A Placebo              ae_ser_disab    &lt;NULL&gt;               missing        N_miss    N Missing      83                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+102 TRT01A Placebo              ae_ser_disab    &lt;NULL&gt;               missing        N_nonmiss N Non-missing  3                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+103 TRT01A Placebo              ae_ser_disab    &lt;NULL&gt;               missing        p_miss    % Missing      0.9651163                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+104 TRT01A Placebo              ae_ser_disab    &lt;NULL&gt;               missing        p_nonmiss % Non-missing  0.03488372                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+105 TRT01A Placebo              ae_ser_cong     &lt;NULL&gt;               missing        N_obs     No. obs.       86                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+106 TRT01A Placebo              ae_ser_cong     &lt;NULL&gt;               missing        N_miss    N Missing      83                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+107 TRT01A Placebo              ae_ser_cong     &lt;NULL&gt;               missing        N_nonmiss N Non-missing  3                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+108 TRT01A Placebo              ae_ser_cong     &lt;NULL&gt;               missing        p_miss    % Missing      0.9651163                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+109 TRT01A Placebo              ae_ser_cong     &lt;NULL&gt;               missing        p_nonmiss % Non-missing  0.03488372                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+110 TRT01A Placebo              ae_withdraw     &lt;NULL&gt;               missing        N_obs     No. obs.       86                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+111 TRT01A Placebo              ae_withdraw     &lt;NULL&gt;               missing        N_miss    N Missing      86                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+112 TRT01A Placebo              ae_withdraw     &lt;NULL&gt;               missing        N_nonmiss N Non-missing  0                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+113 TRT01A Placebo              ae_withdraw     &lt;NULL&gt;               missing        p_miss    % Missing      1                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+114 TRT01A Placebo              ae_withdraw     &lt;NULL&gt;               missing        p_nonmiss % Non-missing  0                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+115 TRT01A Xanomeline High Dose ae_ser          &lt;NULL&gt;               missing        N_obs     No. obs.       72                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+116 TRT01A Xanomeline High Dose ae_ser          &lt;NULL&gt;               missing        N_miss    N Missing      71                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+117 TRT01A Xanomeline High Dose ae_ser          &lt;NULL&gt;               missing        N_nonmiss N Non-missing  1                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+118 TRT01A Xanomeline High Dose ae_ser          &lt;NULL&gt;               missing        p_miss    % Missing      0.9861111                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+119 TRT01A Xanomeline High Dose ae_ser          &lt;NULL&gt;               missing        p_nonmiss % Non-missing  0.01388889                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+120 TRT01A Xanomeline High Dose ae_ser_death    &lt;NULL&gt;               missing        N_obs     No. obs.       72                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+121 TRT01A Xanomeline High Dose ae_ser_death    &lt;NULL&gt;               missing        N_miss    N Missing      71                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+122 TRT01A Xanomeline High Dose ae_ser_death    &lt;NULL&gt;               missing        N_nonmiss N Non-missing  1                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+123 TRT01A Xanomeline High Dose ae_ser_death    &lt;NULL&gt;               missing        p_miss    % Missing      0.9861111                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+124 TRT01A Xanomeline High Dose ae_ser_death    &lt;NULL&gt;               missing        p_nonmiss % Non-missing  0.01388889                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+125 TRT01A Xanomeline High Dose ae_ser_life     &lt;NULL&gt;               missing        N_obs     No. obs.       72                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+126 TRT01A Xanomeline High Dose ae_ser_life     &lt;NULL&gt;               missing        N_miss    N Missing      71                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+127 TRT01A Xanomeline High Dose ae_ser_life     &lt;NULL&gt;               missing        N_nonmiss N Non-missing  1                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+128 TRT01A Xanomeline High Dose ae_ser_life     &lt;NULL&gt;               missing        p_miss    % Missing      0.9861111                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+129 TRT01A Xanomeline High Dose ae_ser_life     &lt;NULL&gt;               missing        p_nonmiss % Non-missing  0.01388889                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+130 TRT01A Xanomeline High Dose ae_ser_hosp     &lt;NULL&gt;               missing        N_obs     No. obs.       72                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+131 TRT01A Xanomeline High Dose ae_ser_hosp     &lt;NULL&gt;               missing        N_miss    N Missing      71                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+132 TRT01A Xanomeline High Dose ae_ser_hosp     &lt;NULL&gt;               missing        N_nonmiss N Non-missing  1                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+133 TRT01A Xanomeline High Dose ae_ser_hosp     &lt;NULL&gt;               missing        p_miss    % Missing      0.9861111                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+134 TRT01A Xanomeline High Dose ae_ser_hosp     &lt;NULL&gt;               missing        p_nonmiss % Non-missing  0.01388889                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+135 TRT01A Xanomeline High Dose ae_ser_disab    &lt;NULL&gt;               missing        N_obs     No. obs.       72                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+136 TRT01A Xanomeline High Dose ae_ser_disab    &lt;NULL&gt;               missing        N_miss    N Missing      71                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+137 TRT01A Xanomeline High Dose ae_ser_disab    &lt;NULL&gt;               missing        N_nonmiss N Non-missing  1                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+138 TRT01A Xanomeline High Dose ae_ser_disab    &lt;NULL&gt;               missing        p_miss    % Missing      0.9861111                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+139 TRT01A Xanomeline High Dose ae_ser_disab    &lt;NULL&gt;               missing        p_nonmiss % Non-missing  0.01388889                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+140 TRT01A Xanomeline High Dose ae_ser_cong     &lt;NULL&gt;               missing        N_obs     No. obs.       72                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+141 TRT01A Xanomeline High Dose ae_ser_cong     &lt;NULL&gt;               missing        N_miss    N Missing      71                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+142 TRT01A Xanomeline High Dose ae_ser_cong     &lt;NULL&gt;               missing        N_nonmiss N Non-missing  1                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+143 TRT01A Xanomeline High Dose ae_ser_cong     &lt;NULL&gt;               missing        p_miss    % Missing      0.9861111                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+144 TRT01A Xanomeline High Dose ae_ser_cong     &lt;NULL&gt;               missing        p_nonmiss % Non-missing  0.01388889                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+145 TRT01A Xanomeline High Dose ae_withdraw     &lt;NULL&gt;               missing        N_obs     No. obs.       72                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+146 TRT01A Xanomeline High Dose ae_withdraw     &lt;NULL&gt;               missing        N_miss    N Missing      72                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+147 TRT01A Xanomeline High Dose ae_withdraw     &lt;NULL&gt;               missing        N_nonmiss N Non-missing  0                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+148 TRT01A Xanomeline High Dose ae_withdraw     &lt;NULL&gt;               missing        p_miss    % Missing      1                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+149 TRT01A Xanomeline High Dose ae_withdraw     &lt;NULL&gt;               missing        p_nonmiss % Non-missing  0                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+150 TRT01A Xanomeline Low Dose  ae_ser          &lt;NULL&gt;               missing        N_obs     No. obs.       96                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+151 TRT01A Xanomeline Low Dose  ae_ser          &lt;NULL&gt;               missing        N_miss    N Missing      92                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+152 TRT01A Xanomeline Low Dose  ae_ser          &lt;NULL&gt;               missing        N_nonmiss N Non-missing  4                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+153 TRT01A Xanomeline Low Dose  ae_ser          &lt;NULL&gt;               missing        p_miss    % Missing      0.9583333                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+154 TRT01A Xanomeline Low Dose  ae_ser          &lt;NULL&gt;               missing        p_nonmiss % Non-missing  0.04166667                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+155 TRT01A Xanomeline Low Dose  ae_ser_death    &lt;NULL&gt;               missing        N_obs     No. obs.       96                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+156 TRT01A Xanomeline Low Dose  ae_ser_death    &lt;NULL&gt;               missing        N_miss    N Missing      92                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+157 TRT01A Xanomeline Low Dose  ae_ser_death    &lt;NULL&gt;               missing        N_nonmiss N Non-missing  4                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+158 TRT01A Xanomeline Low Dose  ae_ser_death    &lt;NULL&gt;               missing        p_miss    % Missing      0.9583333                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+159 TRT01A Xanomeline Low Dose  ae_ser_death    &lt;NULL&gt;               missing        p_nonmiss % Non-missing  0.04166667                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+160 TRT01A Xanomeline Low Dose  ae_ser_life     &lt;NULL&gt;               missing        N_obs     No. obs.       96                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+161 TRT01A Xanomeline Low Dose  ae_ser_life     &lt;NULL&gt;               missing        N_miss    N Missing      92                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+162 TRT01A Xanomeline Low Dose  ae_ser_life     &lt;NULL&gt;               missing        N_nonmiss N Non-missing  4                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+163 TRT01A Xanomeline Low Dose  ae_ser_life     &lt;NULL&gt;               missing        p_miss    % Missing      0.9583333                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+164 TRT01A Xanomeline Low Dose  ae_ser_life     &lt;NULL&gt;               missing        p_nonmiss % Non-missing  0.04166667                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+165 TRT01A Xanomeline Low Dose  ae_ser_hosp     &lt;NULL&gt;               missing        N_obs     No. obs.       96                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+166 TRT01A Xanomeline Low Dose  ae_ser_hosp     &lt;NULL&gt;               missing        N_miss    N Missing      92                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+167 TRT01A Xanomeline Low Dose  ae_ser_hosp     &lt;NULL&gt;               missing        N_nonmiss N Non-missing  4                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+168 TRT01A Xanomeline Low Dose  ae_ser_hosp     &lt;NULL&gt;               missing        p_miss    % Missing      0.9583333                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+169 TRT01A Xanomeline Low Dose  ae_ser_hosp     &lt;NULL&gt;               missing        p_nonmiss % Non-missing  0.04166667                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+170 TRT01A Xanomeline Low Dose  ae_ser_disab    &lt;NULL&gt;               missing        N_obs     No. obs.       96                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+171 TRT01A Xanomeline Low Dose  ae_ser_disab    &lt;NULL&gt;               missing        N_miss    N Missing      92                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+172 TRT01A Xanomeline Low Dose  ae_ser_disab    &lt;NULL&gt;               missing        N_nonmiss N Non-missing  4                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+173 TRT01A Xanomeline Low Dose  ae_ser_disab    &lt;NULL&gt;               missing        p_miss    % Missing      0.9583333                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+174 TRT01A Xanomeline Low Dose  ae_ser_disab    &lt;NULL&gt;               missing        p_nonmiss % Non-missing  0.04166667                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+175 TRT01A Xanomeline Low Dose  ae_ser_cong     &lt;NULL&gt;               missing        N_obs     No. obs.       96                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+176 TRT01A Xanomeline Low Dose  ae_ser_cong     &lt;NULL&gt;               missing        N_miss    N Missing      92                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+177 TRT01A Xanomeline Low Dose  ae_ser_cong     &lt;NULL&gt;               missing        N_nonmiss N Non-missing  4                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+178 TRT01A Xanomeline Low Dose  ae_ser_cong     &lt;NULL&gt;               missing        p_miss    % Missing      0.9583333                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+179 TRT01A Xanomeline Low Dose  ae_ser_cong     &lt;NULL&gt;               missing        p_nonmiss % Non-missing  0.04166667                             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+180 TRT01A Xanomeline Low Dose  ae_withdraw     &lt;NULL&gt;               missing        N_obs     No. obs.       96                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+181 TRT01A Xanomeline Low Dose  ae_withdraw     &lt;NULL&gt;               missing        N_miss    N Missing      96                                     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+182 TRT01A Xanomeline Low Dose  ae_withdraw     &lt;NULL&gt;               missing        N_nonmiss N Non-missing  0                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+183 TRT01A Xanomeline Low Dose  ae_withdraw     &lt;NULL&gt;               missing        p_miss    % Missing      1                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+184 TRT01A Xanomeline Low Dose  ae_withdraw     &lt;NULL&gt;               missing        p_nonmiss % Non-missing  0                                      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+185 &lt;NA&gt;   &lt;NULL&gt;               ..ard_total_n.. &lt;NULL&gt;               total_n        N         N              254                                    0       &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+186 &lt;NA&gt;   &lt;NULL&gt;               TRT01A          Placebo              tabulate       n         n              86                                     0       &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+187 &lt;NA&gt;   &lt;NULL&gt;               TRT01A          Placebo              tabulate       N         N              254                                    0       &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+188 &lt;NA&gt;   &lt;NULL&gt;               TRT01A          Placebo              tabulate       p         %              0.3385827                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+189 &lt;NA&gt;   &lt;NULL&gt;               TRT01A          Xanomeline High Dose tabulate       n         n              72                                     0       &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+190 &lt;NA&gt;   &lt;NULL&gt;               TRT01A          Xanomeline High Dose tabulate       N         N              254                                    0       &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+191 &lt;NA&gt;   &lt;NULL&gt;               TRT01A          Xanomeline High Dose tabulate       p         %              0.2834646                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+192 &lt;NA&gt;   &lt;NULL&gt;               TRT01A          Xanomeline Low Dose  tabulate       n         n              96                                     0       &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+193 &lt;NA&gt;   &lt;NULL&gt;               TRT01A          Xanomeline Low Dose  tabulate       N         N              254                                    0       &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+194 &lt;NA&gt;   &lt;NULL&gt;               TRT01A          Xanomeline Low Dose  tabulate       p         %              0.3779528                              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      </code></pre>
 </div>
 </div>
 </div>
@@ -1061,141 +1885,59 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb5-4"><a href="#cb5-4"></a><span class="an">categories:</span><span class="co"> [table, FDA, safety, adverse events]</span></span>
 <span id="cb5-5"><a href="#cb5-5"></a><span class="co">---</span></span>
 <span id="cb5-6"><a href="#cb5-6"></a></span>
-<span id="cb5-7"><a href="#cb5-7"></a>::: panel-tabset</span>
-<span id="cb5-8"><a href="#cb5-8"></a><span class="fu">## Table Preview</span></span>
-<span id="cb5-9"><a href="#cb5-9"></a></span>
-<span id="cb5-10"><a href="#cb5-10"></a><span class="in">```{r img, echo=FALSE, fig.align='center', out.width='45%'}</span></span>
-<span id="cb5-11"><a href="#cb5-11"></a><span class="in">knitr::include_graphics("result.png")</span></span>
-<span id="cb5-12"><a href="#cb5-12"></a><span class="in">```</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a>::::: columns</span>
+<span id="cb5-8"><a href="#cb5-8"></a></span>
+<span id="cb5-9"><a href="#cb5-9"></a>:::: {.column width="52%"}</span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="fu">### FDA IG Shell</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a></span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="al">![](ig_shell.png)</span>{fig-alt="FDA IG example table shell" .lightbox width=100%}</span>
 <span id="cb5-13"><a href="#cb5-13"></a></span>
-<span id="cb5-14"><a href="#cb5-14"></a><span class="fu">## Setup</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a><span class="fu">### Programming Notes</span></span>
 <span id="cb5-15"><a href="#cb5-15"></a></span>
-<span id="cb5-16"><a href="#cb5-16"></a><span class="in">```{r setup, message=FALSE}</span></span>
-<span id="cb5-17"><a href="#cb5-17"></a><span class="in"># Load libraries &amp; data -------------------------------------</span></span>
-<span id="cb5-18"><a href="#cb5-18"></a><span class="in">library(dplyr)</span></span>
-<span id="cb5-19"><a href="#cb5-19"></a><span class="in">library(cards)</span></span>
-<span id="cb5-20"><a href="#cb5-20"></a><span class="in">library(cardx)</span></span>
-<span id="cb5-21"><a href="#cb5-21"></a><span class="in">library(gtsummary)</span></span>
-<span id="cb5-22"><a href="#cb5-22"></a></span>
-<span id="cb5-23"><a href="#cb5-23"></a><span class="in">adsl &lt;- pharmaverseadam::adsl</span></span>
-<span id="cb5-24"><a href="#cb5-24"></a><span class="in">adae &lt;- pharmaverseadam::adae</span></span>
+<span id="cb5-16"><a href="#cb5-16"></a>**Background and Instructions**</span>
+<span id="cb5-17"><a href="#cb5-17"></a></span>
+<span id="cb5-18"><a href="#cb5-18"></a>Table 18: Summary Assessment of <span class="co">[</span><span class="ot">Insert AE of Interest</span><span class="co">]</span> is created for each AE of interest and may be created for any AEs identified during application review that may warrant further analysis. The table name should be updated to reflect the event being displayed. The approach to analysis and summary of safety data should be tailored to each AE.</span>
+<span id="cb5-19"><a href="#cb5-19"></a></span>
+<span id="cb5-20"><a href="#cb5-20"></a>**Customization**</span>
+<span id="cb5-21"><a href="#cb5-21"></a></span>
+<span id="cb5-22"><a href="#cb5-22"></a>Discuss with CDS specific AEs and other information (e.g., laboratory information) to be included in Table 18 to provide a complete picture of the AE of Interest. When information across different datasets is combined, carefully consider the number of subjects used as the denominator in analyses, as they may differ across datasets.</span>
+<span id="cb5-23"><a href="#cb5-23"></a></span>
+<span id="cb5-24"><a href="#cb5-24"></a>::::</span>
 <span id="cb5-25"><a href="#cb5-25"></a></span>
-<span id="cb5-26"><a href="#cb5-26"></a><span class="in">set.seed(1)</span></span>
-<span id="cb5-27"><a href="#cb5-27"></a><span class="in">adae$AESIFL &lt;- ifelse(adae$AESOC %in% c("VASCULAR DISORDERS"), "Y", "N")</span></span>
+<span id="cb5-26"><a href="#cb5-26"></a>:::: {.column width="4%"}</span>
+<span id="cb5-27"><a href="#cb5-27"></a>::::</span>
 <span id="cb5-28"><a href="#cb5-28"></a></span>
-<span id="cb5-29"><a href="#cb5-29"></a><span class="in"># Pre-processing --------------------------------------------</span></span>
-<span id="cb5-30"><a href="#cb5-30"></a><span class="in">adsl &lt;- adsl |&gt;</span></span>
-<span id="cb5-31"><a href="#cb5-31"></a><span class="in">  # safety population</span></span>
-<span id="cb5-32"><a href="#cb5-32"></a><span class="in">  filter(SAFFL == "Y")</span></span>
-<span id="cb5-33"><a href="#cb5-33"></a></span>
-<span id="cb5-34"><a href="#cb5-34"></a><span class="in">data &lt;- adae |&gt;</span></span>
-<span id="cb5-35"><a href="#cb5-35"></a><span class="in">  filter(</span></span>
-<span id="cb5-36"><a href="#cb5-36"></a><span class="in">    # safety population</span></span>
-<span id="cb5-37"><a href="#cb5-37"></a><span class="in">    SAFFL == "Y",</span></span>
-<span id="cb5-38"><a href="#cb5-38"></a><span class="in">    # AESI assessment</span></span>
-<span id="cb5-39"><a href="#cb5-39"></a><span class="in">    AESIFL == "Y"</span></span>
-<span id="cb5-40"><a href="#cb5-40"></a><span class="in">  )</span></span>
-<span id="cb5-41"><a href="#cb5-41"></a></span>
-<span id="cb5-42"><a href="#cb5-42"></a><span class="in"># dataset of AE flag variable counts by subject</span></span>
-<span id="cb5-43"><a href="#cb5-43"></a><span class="in">data_ae_fl &lt;-</span></span>
-<span id="cb5-44"><a href="#cb5-44"></a><span class="in">  adsl |&gt;</span></span>
-<span id="cb5-45"><a href="#cb5-45"></a><span class="in">  select(USUBJID, TRT01A) |&gt;</span></span>
-<span id="cb5-46"><a href="#cb5-46"></a><span class="in">  # create subject-level flags from adae data</span></span>
-<span id="cb5-47"><a href="#cb5-47"></a><span class="in">  left_join(</span></span>
-<span id="cb5-48"><a href="#cb5-48"></a><span class="in">    data |&gt;</span></span>
-<span id="cb5-49"><a href="#cb5-49"></a><span class="in">      select(USUBJID, AESER, AESDTH, AESLIFE, AESHOSP, AESDISAB, AESCONG, AEACN) |&gt;</span></span>
-<span id="cb5-50"><a href="#cb5-50"></a><span class="in">      mutate(</span></span>
-<span id="cb5-51"><a href="#cb5-51"></a><span class="in">        # Serious AE</span></span>
-<span id="cb5-52"><a href="#cb5-52"></a><span class="in">        ae_ser = any(AESER == "Y"),</span></span>
-<span id="cb5-53"><a href="#cb5-53"></a><span class="in">        # Serious AE leading to death</span></span>
-<span id="cb5-54"><a href="#cb5-54"></a><span class="in">        ae_ser_death = any(AESER == "Y" &amp; AESDTH == "Y"),</span></span>
-<span id="cb5-55"><a href="#cb5-55"></a><span class="in">        ae_ser_life = any(AESER == "Y" &amp; AESLIFE == "Y"),</span></span>
-<span id="cb5-56"><a href="#cb5-56"></a><span class="in">        ae_ser_hosp = any(AESER == "Y" &amp; AESHOSP == "Y"),</span></span>
-<span id="cb5-57"><a href="#cb5-57"></a><span class="in">        ae_ser_disab = any(AESER == "Y" &amp; AESDISAB == "Y"),</span></span>
-<span id="cb5-58"><a href="#cb5-58"></a><span class="in">        ae_ser_cong = any(AESER == "Y" &amp; AESCONG == "Y"),</span></span>
-<span id="cb5-59"><a href="#cb5-59"></a><span class="in">        # AE resulting in discontinuation</span></span>
-<span id="cb5-60"><a href="#cb5-60"></a><span class="in">        ae_withdraw = any(AEACN == "DRUG WITHDRAWN"),</span></span>
-<span id="cb5-61"><a href="#cb5-61"></a><span class="in">        .by = USUBJID</span></span>
-<span id="cb5-62"><a href="#cb5-62"></a><span class="in">      ),</span></span>
-<span id="cb5-63"><a href="#cb5-63"></a><span class="in">    by = "USUBJID"</span></span>
-<span id="cb5-64"><a href="#cb5-64"></a><span class="in">  ) |&gt;</span></span>
-<span id="cb5-65"><a href="#cb5-65"></a><span class="in">  distinct(USUBJID, .keep_all = TRUE) |&gt;</span></span>
-<span id="cb5-66"><a href="#cb5-66"></a><span class="in">  # add number of AEs</span></span>
-<span id="cb5-67"><a href="#cb5-67"></a><span class="in">  left_join(</span></span>
-<span id="cb5-68"><a href="#cb5-68"></a><span class="in">    data |&gt; summarise(.by = USUBJID, ae_count = n()),</span></span>
-<span id="cb5-69"><a href="#cb5-69"></a><span class="in">    by = "USUBJID",</span></span>
-<span id="cb5-70"><a href="#cb5-70"></a><span class="in">    relationship = "one-to-one"</span></span>
-<span id="cb5-71"><a href="#cb5-71"></a><span class="in">  )</span></span>
-<span id="cb5-72"><a href="#cb5-72"></a><span class="in">```</span></span>
-<span id="cb5-73"><a href="#cb5-73"></a></span>
-<span id="cb5-74"><a href="#cb5-74"></a><span class="fu">## Build Table</span></span>
-<span id="cb5-75"><a href="#cb5-75"></a></span>
-<span id="cb5-76"><a href="#cb5-76"></a><span class="in">```{r tbl, results = 'hide'}</span></span>
-<span id="cb5-77"><a href="#cb5-77"></a><span class="in">## AE grouping flags section --------</span></span>
-<span id="cb5-78"><a href="#cb5-78"></a><span class="in">tbl_ae_gp &lt;- data |&gt;</span></span>
-<span id="cb5-79"><a href="#cb5-79"></a><span class="in">  tbl_hierarchical(</span></span>
-<span id="cb5-80"><a href="#cb5-80"></a><span class="in">    variables = AEDECOD,</span></span>
-<span id="cb5-81"><a href="#cb5-81"></a><span class="in">    id = USUBJID,</span></span>
-<span id="cb5-82"><a href="#cb5-82"></a><span class="in">    denominator = adsl,</span></span>
-<span id="cb5-83"><a href="#cb5-83"></a><span class="in">    by = TRT01A,</span></span>
-<span id="cb5-84"><a href="#cb5-84"></a><span class="in">    overall_row = TRUE,</span></span>
-<span id="cb5-85"><a href="#cb5-85"></a><span class="in">    label = list(</span></span>
-<span id="cb5-86"><a href="#cb5-86"></a><span class="in">      ..ard_hierarchical_overall.. = "[Insert AE of Interest]",</span></span>
-<span id="cb5-87"><a href="#cb5-87"></a><span class="in">      AEDECOD = "AE of Interest Assessment"</span></span>
-<span id="cb5-88"><a href="#cb5-88"></a><span class="in">    )</span></span>
-<span id="cb5-89"><a href="#cb5-89"></a><span class="in">  ) |&gt;</span></span>
-<span id="cb5-90"><a href="#cb5-90"></a><span class="in">  modify_indent(columns = label, rows = variable != "..ard_hierarchical_overall..", indent = 4L)</span></span>
-<span id="cb5-91"><a href="#cb5-91"></a></span>
-<span id="cb5-92"><a href="#cb5-92"></a><span class="in">## Maximum severity section ---------</span></span>
-<span id="cb5-93"><a href="#cb5-93"></a><span class="in">tbl_ae_sev &lt;- data |&gt;</span></span>
-<span id="cb5-94"><a href="#cb5-94"></a><span class="in">  ard_tabulate_max(variables = AESEV, id = USUBJID, by = TRT01A, denominator = adsl, quiet = TRUE) |&gt;</span></span>
-<span id="cb5-95"><a href="#cb5-95"></a><span class="in">  tbl_ard_summary(by = TRT01A, label = list(AESEV = "Maximum severity"))</span></span>
-<span id="cb5-96"><a href="#cb5-96"></a></span>
-<span id="cb5-97"><a href="#cb5-97"></a><span class="in">## Events section -------------------</span></span>
-<span id="cb5-98"><a href="#cb5-98"></a><span class="in">tbl_ae_fl &lt;- data_ae_fl |&gt;</span></span>
-<span id="cb5-99"><a href="#cb5-99"></a><span class="in">  tbl_summary(</span></span>
-<span id="cb5-100"><a href="#cb5-100"></a><span class="in">    by = "TRT01A",</span></span>
-<span id="cb5-101"><a href="#cb5-101"></a><span class="in">    include = c(ae_ser, ae_ser_death, ae_ser_life, ae_ser_hosp, ae_ser_disab, ae_ser_cong, ae_withdraw),</span></span>
-<span id="cb5-102"><a href="#cb5-102"></a><span class="in">    missing = "no",</span></span>
-<span id="cb5-103"><a href="#cb5-103"></a><span class="in">    percent = adsl,</span></span>
-<span id="cb5-104"><a href="#cb5-104"></a><span class="in">    label = list(</span></span>
-<span id="cb5-105"><a href="#cb5-105"></a><span class="in">      ae_ser = "SAE",</span></span>
-<span id="cb5-106"><a href="#cb5-106"></a><span class="in">      ae_ser_death = "Death",</span></span>
-<span id="cb5-107"><a href="#cb5-107"></a><span class="in">      ae_ser_life = "Life-threatening",</span></span>
-<span id="cb5-108"><a href="#cb5-108"></a><span class="in">      ae_ser_hosp = "Initial or prolonged hospitalization",</span></span>
-<span id="cb5-109"><a href="#cb5-109"></a><span class="in">      ae_ser_disab = "Disability or permanent damage",</span></span>
-<span id="cb5-110"><a href="#cb5-110"></a><span class="in">      ae_ser_cong = "Congenital anomaly or birth defect",</span></span>
-<span id="cb5-111"><a href="#cb5-111"></a><span class="in">      ae_withdraw = "Resulting in treatment discontinuation"</span></span>
-<span id="cb5-112"><a href="#cb5-112"></a><span class="in">    )</span></span>
-<span id="cb5-113"><a href="#cb5-113"></a><span class="in">  ) |&gt;</span></span>
-<span id="cb5-114"><a href="#cb5-114"></a><span class="in">  modify_indent(columns = label, rows = !variable %in% c("ae_ser", "ae_withdraw"), indent = 4L)</span></span>
-<span id="cb5-115"><a href="#cb5-115"></a></span>
-<span id="cb5-116"><a href="#cb5-116"></a><span class="in">## Build table ----------------------</span></span>
-<span id="cb5-117"><a href="#cb5-117"></a><span class="in">tbl &lt;- tbl_stack(list(tbl_ae_gp, tbl_ae_sev, tbl_ae_fl), quiet = TRUE)</span></span>
-<span id="cb5-118"><a href="#cb5-118"></a></span>
-<span id="cb5-119"><a href="#cb5-119"></a><span class="in">tbl</span></span>
-<span id="cb5-120"><a href="#cb5-120"></a><span class="in">```</span></span>
-<span id="cb5-121"><a href="#cb5-121"></a></span>
-<span id="cb5-122"><a href="#cb5-122"></a><span class="in">```{r eval=FALSE, include=FALSE}</span></span>
-<span id="cb5-123"><a href="#cb5-123"></a><span class="in">gt::gtsave(as_gt(tbl), filename = "result.png")</span></span>
-<span id="cb5-124"><a href="#cb5-124"></a><span class="in">```</span></span>
-<span id="cb5-125"><a href="#cb5-125"></a></span>
-<span id="cb5-126"><a href="#cb5-126"></a><span class="in">```{r img, echo=FALSE, fig.align='center', out.width='45%'}</span></span>
-<span id="cb5-127"><a href="#cb5-127"></a><span class="in">```</span></span>
-<span id="cb5-128"><a href="#cb5-128"></a></span>
-<span id="cb5-129"><a href="#cb5-129"></a><span class="fu">## Build ARD</span></span>
-<span id="cb5-130"><a href="#cb5-130"></a></span>
-<span id="cb5-131"><a href="#cb5-131"></a><span class="in">```{r ard, message=FALSE, warning=FALSE, results='hide'}</span></span>
-<span id="cb5-132"><a href="#cb5-132"></a><span class="in">ard &lt;- gather_ard(tbl)</span></span>
-<span id="cb5-133"><a href="#cb5-133"></a><span class="in">ard</span></span>
-<span id="cb5-134"><a href="#cb5-134"></a><span class="in">```</span></span>
-<span id="cb5-135"><a href="#cb5-135"></a></span>
-<span id="cb5-136"><a href="#cb5-136"></a><span class="in">```{r, echo=FALSE}</span></span>
-<span id="cb5-137"><a href="#cb5-137"></a><span class="in"># Print ARD</span></span>
-<span id="cb5-138"><a href="#cb5-138"></a><span class="in">withr::local_options(width = 9999)</span></span>
-<span id="cb5-139"><a href="#cb5-139"></a><span class="in">print(ard)</span></span>
-<span id="cb5-140"><a href="#cb5-140"></a><span class="in">```</span></span>
-<span id="cb5-141"><a href="#cb5-141"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb5-29"><a href="#cb5-29"></a>:::: {.column width="44%"}</span>
+<span id="cb5-30"><a href="#cb5-30"></a><span class="fu">### Output</span></span>
+<span id="cb5-31"><a href="#cb5-31"></a></span>
+<span id="cb5-32"><a href="#cb5-32"></a><span class="in">```{r out-result, echo=FALSE, fig.align='center', out.width='100%'}</span></span>
+<span id="cb5-33"><a href="#cb5-33"></a><span class="in">knitr::include_graphics("result.png")</span></span>
+<span id="cb5-34"><a href="#cb5-34"></a><span class="in">```</span></span>
+<span id="cb5-35"><a href="#cb5-35"></a></span>
+<span id="cb5-36"><a href="#cb5-36"></a>::::</span>
+<span id="cb5-37"><a href="#cb5-37"></a></span>
+<span id="cb5-38"><a href="#cb5-38"></a>:::::</span>
+<span id="cb5-39"><a href="#cb5-39"></a></span>
+<span id="cb5-40"><a href="#cb5-40"></a>::: panel-tabset</span>
+<span id="cb5-41"><a href="#cb5-41"></a><span class="fu">## Full Code</span></span>
+<span id="cb5-42"><a href="#cb5-42"></a></span>
+<span id="cb5-43"><a href="#cb5-43"></a><span class="in">```{r fullcode, file="../../../inst/templates/fda-table_18.R", message=FALSE, warning=FALSE, results='hide'}</span></span>
+<span id="cb5-44"><a href="#cb5-44"></a><span class="in">```</span></span>
+<span id="cb5-45"><a href="#cb5-45"></a></span>
+<span id="cb5-46"><a href="#cb5-46"></a><span class="fu">## Table</span></span>
+<span id="cb5-47"><a href="#cb5-47"></a></span>
+<span id="cb5-48"><a href="#cb5-48"></a><span class="in">```{r tbl}</span></span>
+<span id="cb5-49"><a href="#cb5-49"></a><span class="in">tbl</span></span>
+<span id="cb5-50"><a href="#cb5-50"></a><span class="in">```</span></span>
+<span id="cb5-51"><a href="#cb5-51"></a></span>
+<span id="cb5-52"><a href="#cb5-52"></a><span class="fu">## ARD</span></span>
+<span id="cb5-53"><a href="#cb5-53"></a></span>
+<span id="cb5-54"><a href="#cb5-54"></a><span class="in">```{r ard, message=FALSE, warning=FALSE}</span></span>
+<span id="cb5-55"><a href="#cb5-55"></a><span class="in">withr::local_options(width = 9999, tibble.print_max = Inf)</span></span>
+<span id="cb5-56"><a href="#cb5-56"></a><span class="in">print(ard, columns = "all")</span></span>
+<span id="cb5-57"><a href="#cb5-57"></a><span class="in">```</span></span>
+<span id="cb5-58"><a href="#cb5-58"></a></span>
+<span id="cb5-59"><a href="#cb5-59"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
@@ -1213,7 +1955,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       &nbsp;
     </div>
   </div>
-</footer>
+</footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 <script src="../../../site_libs/quarto-html/zenscroll-min.js"></script>

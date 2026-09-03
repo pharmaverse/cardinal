@@ -72,7 +72,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../../site_libs/bootstrap/bootstrap-b9dbead50e81c18249e2e1e9b4aaddfa.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-046be37f67332dfcbae0104d3ddeb5a1.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+<link href="../../../site_libs/bootstrap/bootstrap-dark-046be37f67332dfcbae0104d3ddeb5a1.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": true,
   "collapse-after": 3,
@@ -128,10 +131,11 @@ cookieconsent.run({
 <link rel="stylesheet" href="../../../quarto/assets/style.scss">
 <meta property="og:title" content="Subjects Meeting Specific Postbaseline Hypotension Levels, Safety Population, Pooled Analysis (or Trial X) – Cardinal">
 <meta property="og:description" content="FDA Table 38">
-<meta property="og:image" content="https://pharmaverse.github.io/cardinal/quarto/catalog/fda-table_38/result.png">
+<meta property="og:image" content="https://pharmaverse.github.io/cardinal/quarto/catalog/fda-table_38/ig_shell.png">
 <meta property="og:site_name" content="Cardinal">
-<meta property="og:image:height" content="320">
-<meta property="og:image:width" content="1510">
+<meta property="og:image:alt" content="FDA IG example table shell">
+<meta property="og:image:height" content="1142">
+<meta property="og:image:width" content="1541">
 </head>
 <body class="nav-fixed">
 
@@ -230,131 +234,638 @@ cookieconsent.run({
   
 
 
-</header><div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Table Preview</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Setup</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Build ARD</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false">Build Table</a></li>
-</ul>
-<div class="tab-content">
-<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+</header><div class="columns">
+<div class="column" style="width:52%;">
+<section id="fda-ig-shell" class="level3"><h3 class="anchored" data-anchor-id="fda-ig-shell">FDA IG Shell</h3>
+<p><a href="ig_shell.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="ig_shell.png" class="img-fluid" style="width:100.0%" alt="FDA IG example table shell"></a></p>
+</section><section id="programming-notes" class="level3"><h3 class="anchored" data-anchor-id="programming-notes">Programming Notes</h3>
+<p><strong>Background and Instructions</strong></p>
+<p>N/A (per FDA IG)</p>
+<p><strong>Customization</strong></p>
+<p>Clinical review team may customize the cutoff criteria they wish to use.</p>
+</section>
+</div><div class="column" style="width:4%;">
+
+</div><div class="column" style="width:44%;">
+<section id="output" class="level3"><h3 class="anchored" data-anchor-id="output">Output</h3>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="result.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:40.0%"></p>
+<figure class="figure"><p><img src="result.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
+</div>
+</section>
+</div>
+</div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Full Code</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Table</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">ARD</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># FDA TABLE 38 ---------------------------------------------------------------</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="co"># Self-contained template. Run top-to-bottom to build the objects below.</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="co"># Used by tests via run_template() and published in the catalog.</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="fu">library</span>(cards)</span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="fu">library</span>(gtsummary)</span>
+<span id="cb1-8"><a href="#cb1-8"></a></span>
+<span id="cb1-9"><a href="#cb1-9"></a>adsl <span class="ot">&lt;-</span> pharmaverseadam<span class="sc">::</span>adsl</span>
+<span id="cb1-10"><a href="#cb1-10"></a>advs <span class="ot">&lt;-</span> pharmaverseadam<span class="sc">::</span>advs</span>
+<span id="cb1-11"><a href="#cb1-11"></a></span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="co"># Pre-processing --------------------------------------------</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a>adsl <span class="ot">&lt;-</span> adsl <span class="sc">|&gt;</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a>  <span class="fu">filter</span>(SAFFL <span class="sc">==</span> <span class="st">"Y"</span>) <span class="co"># safety population</span></span>
+<span id="cb1-15"><a href="#cb1-15"></a></span>
+<span id="cb1-16"><a href="#cb1-16"></a>data <span class="ot">&lt;-</span> advs <span class="sc">|&gt;</span></span>
+<span id="cb1-17"><a href="#cb1-17"></a>  <span class="fu">filter</span>(</span>
+<span id="cb1-18"><a href="#cb1-18"></a>    <span class="co"># safety population</span></span>
+<span id="cb1-19"><a href="#cb1-19"></a>    SAFFL <span class="sc">==</span> <span class="st">"Y"</span>,</span>
+<span id="cb1-20"><a href="#cb1-20"></a>    <span class="co"># diastolic &amp; systolic blood pressure</span></span>
+<span id="cb1-21"><a href="#cb1-21"></a>    PARAMCD <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"DIABP"</span>, <span class="st">"SYSBP"</span>),</span>
+<span id="cb1-22"><a href="#cb1-22"></a>    <span class="co"># post-baseline visits</span></span>
+<span id="cb1-23"><a href="#cb1-23"></a>    AVISITN <span class="sc">&gt;=</span> <span class="dv">2</span></span>
+<span id="cb1-24"><a href="#cb1-24"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb1-25"><a href="#cb1-25"></a>  <span class="co"># analyze minimum values per parameter of each subject</span></span>
+<span id="cb1-26"><a href="#cb1-26"></a>  <span class="fu">slice_min</span>(AVAL, <span class="at">n =</span> <span class="dv">1</span>L, <span class="at">by =</span> <span class="fu">c</span>(USUBJID, PARAMCD)) <span class="sc">|&gt;</span></span>
+<span id="cb1-27"><a href="#cb1-27"></a>  <span class="co"># define analysis value cutoffs per parameter</span></span>
+<span id="cb1-28"><a href="#cb1-28"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb1-29"><a href="#cb1-29"></a>    <span class="at">SBP90 =</span> PARAMCD <span class="sc">==</span> <span class="st">"SYSBP"</span> <span class="sc">&amp;</span> AVAL <span class="sc">&lt;</span> <span class="dv">90</span>,</span>
+<span id="cb1-30"><a href="#cb1-30"></a>    <span class="at">DBP60 =</span> PARAMCD <span class="sc">==</span> <span class="st">"DIABP"</span> <span class="sc">&amp;</span> AVAL <span class="sc">&lt;</span> <span class="dv">60</span></span>
+<span id="cb1-31"><a href="#cb1-31"></a>  )</span>
+<span id="cb1-32"><a href="#cb1-32"></a></span>
+<span id="cb1-33"><a href="#cb1-33"></a>ard <span class="ot">&lt;-</span> <span class="fu">bind_ard</span>(</span>
+<span id="cb1-34"><a href="#cb1-34"></a>  <span class="fu">ard_tabulate_value</span>(</span>
+<span id="cb1-35"><a href="#cb1-35"></a>    data,</span>
+<span id="cb1-36"><a href="#cb1-36"></a>    <span class="at">variables =</span> <span class="fu">c</span>(SBP90, DBP60),</span>
+<span id="cb1-37"><a href="#cb1-37"></a>    <span class="at">by =</span> TRT01A,</span>
+<span id="cb1-38"><a href="#cb1-38"></a>    <span class="at">statistic =</span> <span class="sc">~</span> <span class="fu">c</span>(<span class="st">"n"</span>, <span class="st">"p"</span>),</span>
+<span id="cb1-39"><a href="#cb1-39"></a>    <span class="co"># denominator values are number of subjects in arm with BP data</span></span>
+<span id="cb1-40"><a href="#cb1-40"></a>    <span class="at">denominator =</span> data <span class="sc">|&gt;</span> <span class="fu">distinct</span>(USUBJID, TRT01A)</span>
+<span id="cb1-41"><a href="#cb1-41"></a>  ),</span>
+<span id="cb1-42"><a href="#cb1-42"></a>  <span class="co"># ARD for header N values</span></span>
+<span id="cb1-43"><a href="#cb1-43"></a>  <span class="fu">ard_tabulate</span>(adsl, <span class="at">variables =</span> TRT01A)</span>
+<span id="cb1-44"><a href="#cb1-44"></a>)</span>
+<span id="cb1-45"><a href="#cb1-45"></a></span>
+<span id="cb1-46"><a href="#cb1-46"></a>tbl <span class="ot">&lt;-</span> <span class="fu">tbl_ard_summary</span>(</span>
+<span id="cb1-47"><a href="#cb1-47"></a>  ard,</span>
+<span id="cb1-48"><a href="#cb1-48"></a>  <span class="at">by =</span> TRT01A,</span>
+<span id="cb1-49"><a href="#cb1-49"></a>  <span class="co"># Add labels for each range</span></span>
+<span id="cb1-50"><a href="#cb1-50"></a>  <span class="at">label =</span> <span class="fu">list</span>(</span>
+<span id="cb1-51"><a href="#cb1-51"></a>    <span class="at">SBP90 =</span> <span class="st">"SBP&lt;90"</span>,</span>
+<span id="cb1-52"><a href="#cb1-52"></a>    <span class="at">DBP60 =</span> <span class="st">"DBP&lt;60"</span></span>
+<span id="cb1-53"><a href="#cb1-53"></a>  )</span>
+<span id="cb1-54"><a href="#cb1-54"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb1-55"><a href="#cb1-55"></a>  <span class="fu">modify_header</span>(</span>
+<span id="cb1-56"><a href="#cb1-56"></a>    <span class="co"># Update label, add analysis value units</span></span>
+<span id="cb1-57"><a href="#cb1-57"></a>    label <span class="sc">~</span> <span class="fu">paste0</span>(<span class="st">"**Blood Pressure ("</span>, data<span class="sc">$</span>VSORRESU[<span class="dv">1</span>], <span class="st">")**"</span>),</span>
+<span id="cb1-58"><a href="#cb1-58"></a>    <span class="co"># Add N values to `by` variable labels</span></span>
+<span id="cb1-59"><a href="#cb1-59"></a>    <span class="fu">all_stat_cols</span>() <span class="sc">~</span> <span class="st">"**{level}**  </span><span class="sc">\n</span><span class="st">N = {n}"</span></span>
+<span id="cb1-60"><a href="#cb1-60"></a>  )</span>
+<span id="cb1-61"><a href="#cb1-61"></a></span>
+<span id="cb1-62"><a href="#cb1-62"></a></span>
+<span id="cb1-63"><a href="#cb1-63"></a>ard <span class="ot">&lt;-</span> gtsummary<span class="sc">::</span><span class="fu">gather_ard</span>(tbl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <div class="cell">
-<details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Load libraries &amp; data -------------------------------------</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(cards)</span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(gtsummary)</span>
-<span id="cb1-5"><a href="#cb1-5"></a></span>
-<span id="cb1-6"><a href="#cb1-6"></a>adsl <span class="ot">&lt;-</span> pharmaverseadam<span class="sc">::</span>adsl</span>
-<span id="cb1-7"><a href="#cb1-7"></a>advs <span class="ot">&lt;-</span> pharmaverseadam<span class="sc">::</span>advs</span>
-<span id="cb1-8"><a href="#cb1-8"></a></span>
-<span id="cb1-9"><a href="#cb1-9"></a><span class="co"># Pre-processing --------------------------------------------</span></span>
-<span id="cb1-10"><a href="#cb1-10"></a>adsl <span class="ot">&lt;-</span> adsl <span class="sc">|&gt;</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a>  <span class="fu">filter</span>(SAFFL <span class="sc">==</span> <span class="st">"Y"</span>) <span class="co"># safety population</span></span>
-<span id="cb1-12"><a href="#cb1-12"></a></span>
-<span id="cb1-13"><a href="#cb1-13"></a>data <span class="ot">&lt;-</span> advs <span class="sc">|&gt;</span></span>
-<span id="cb1-14"><a href="#cb1-14"></a>  <span class="fu">filter</span>(</span>
-<span id="cb1-15"><a href="#cb1-15"></a>    <span class="co"># safety population</span></span>
-<span id="cb1-16"><a href="#cb1-16"></a>    SAFFL <span class="sc">==</span> <span class="st">"Y"</span>,</span>
-<span id="cb1-17"><a href="#cb1-17"></a>    <span class="co"># diastolic &amp; systolic blood pressure</span></span>
-<span id="cb1-18"><a href="#cb1-18"></a>    PARAMCD <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"DIABP"</span>, <span class="st">"SYSBP"</span>),</span>
-<span id="cb1-19"><a href="#cb1-19"></a>    <span class="co"># post-baseline visits</span></span>
-<span id="cb1-20"><a href="#cb1-20"></a>    AVISITN <span class="sc">&gt;=</span> <span class="dv">2</span></span>
-<span id="cb1-21"><a href="#cb1-21"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb1-22"><a href="#cb1-22"></a>  <span class="co"># analyze minimum values per parameter of each subject</span></span>
-<span id="cb1-23"><a href="#cb1-23"></a>  <span class="fu">slice_min</span>(AVAL, <span class="at">n =</span> <span class="dv">1</span>L, <span class="at">by =</span> <span class="fu">c</span>(USUBJID, PARAMCD)) <span class="sc">|&gt;</span></span>
-<span id="cb1-24"><a href="#cb1-24"></a>  <span class="co"># define analysis value cutoffs per parameter</span></span>
-<span id="cb1-25"><a href="#cb1-25"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb1-26"><a href="#cb1-26"></a>    <span class="at">SBP90 =</span> PARAMCD <span class="sc">==</span> <span class="st">"SYSBP"</span> <span class="sc">&amp;</span> AVAL <span class="sc">&lt;</span> <span class="dv">90</span>, <span class="co"># SYSBP &lt;90</span></span>
-<span id="cb1-27"><a href="#cb1-27"></a>    <span class="at">DBP60 =</span> PARAMCD <span class="sc">==</span> <span class="st">"DIABP"</span> <span class="sc">&amp;</span> AVAL <span class="sc">&lt;</span> <span class="dv">60</span> <span class="co"># DIABP &lt;60</span></span>
-<span id="cb1-28"><a href="#cb1-28"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+<details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div id="tqsmkdyytl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tqsmkdyytl table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#tqsmkdyytl thead, #tqsmkdyytl tbody, #tqsmkdyytl tfoot, #tqsmkdyytl tr, #tqsmkdyytl td, #tqsmkdyytl th {
+  border-style: none;
+}
+
+#tqsmkdyytl p {
+  margin: 0;
+  padding: 0;
+}
+
+#tqsmkdyytl .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#tqsmkdyytl .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#tqsmkdyytl .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#tqsmkdyytl .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#tqsmkdyytl .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#tqsmkdyytl .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tqsmkdyytl .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#tqsmkdyytl .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#tqsmkdyytl .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#tqsmkdyytl .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#tqsmkdyytl .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#tqsmkdyytl .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#tqsmkdyytl .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#tqsmkdyytl .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#tqsmkdyytl .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#tqsmkdyytl .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#tqsmkdyytl .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#tqsmkdyytl .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#tqsmkdyytl .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tqsmkdyytl .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#tqsmkdyytl .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#tqsmkdyytl .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#tqsmkdyytl .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tqsmkdyytl .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#tqsmkdyytl .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#tqsmkdyytl .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tqsmkdyytl .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tqsmkdyytl .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#tqsmkdyytl .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tqsmkdyytl .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#tqsmkdyytl .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tqsmkdyytl .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#tqsmkdyytl .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tqsmkdyytl .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#tqsmkdyytl .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tqsmkdyytl .gt_left {
+  text-align: left;
+}
+
+#tqsmkdyytl .gt_center {
+  text-align: center;
+}
+
+#tqsmkdyytl .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#tqsmkdyytl .gt_font_normal {
+  font-weight: normal;
+}
+
+#tqsmkdyytl .gt_font_bold {
+  font-weight: bold;
+}
+
+#tqsmkdyytl .gt_font_italic {
+  font-style: italic;
+}
+
+#tqsmkdyytl .gt_super {
+  font-size: 65%;
+}
+
+#tqsmkdyytl .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#tqsmkdyytl .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#tqsmkdyytl .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#tqsmkdyytl .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#tqsmkdyytl .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#tqsmkdyytl .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#tqsmkdyytl .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#tqsmkdyytl .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#tqsmkdyytl div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead><tr class="gt_col_headings header">
+<th id="label" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Blood Pressure (mmHg)</strong></th>
+<th id="stat_1" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">
+<strong>Placebo</strong><br>
+N = 86<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
+</th>
+<th id="stat_2" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">
+<strong>Xanomeline High Dose</strong><br>
+N = 72<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
+</th>
+<th id="stat_3" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">
+<strong>Xanomeline Low Dose</strong><br>
+N = 96<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
+</th>
+</tr></thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">SBP&lt;90</td>
+<td class="gt_row gt_center" headers="stat_1">8 (9.5%)</td>
+<td class="gt_row gt_center" headers="stat_2">0 (0.0%)</td>
+<td class="gt_row gt_center" headers="stat_3">1 (1.1%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">DBP&lt;60</td>
+<td class="gt_row gt_center" headers="stat_1">32 (38.1%)</td>
+<td class="gt_row gt_center" headers="stat_2">27 (37.5%)</td>
+<td class="gt_row gt_center" headers="stat_3">29 (30.9%)</td>
+</tr>
+</tbody>
+<tfoot><tr class="gt_footnotes odd">
+<td colspan="4" class="gt_footnote">
+<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> n (%)</td>
+</tr></tfoot>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
 <div class="cell">
-<details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>ard <span class="ot">&lt;-</span> <span class="fu">bind_ard</span>(</span>
-<span id="cb2-2"><a href="#cb2-2"></a>  <span class="fu">ard_tabulate_value</span>(</span>
-<span id="cb2-3"><a href="#cb2-3"></a>    data,</span>
-<span id="cb2-4"><a href="#cb2-4"></a>    <span class="at">variables =</span> <span class="fu">c</span>(SBP90, DBP60),</span>
-<span id="cb2-5"><a href="#cb2-5"></a>    <span class="at">by =</span> TRT01A,</span>
-<span id="cb2-6"><a href="#cb2-6"></a>    <span class="at">statistic =</span> <span class="sc">~</span> <span class="fu">c</span>(<span class="st">"n"</span>, <span class="st">"p"</span>),</span>
-<span id="cb2-7"><a href="#cb2-7"></a>    <span class="co"># denominator values are number of subjects in arm with BP data</span></span>
-<span id="cb2-8"><a href="#cb2-8"></a>    <span class="at">denominator =</span> data <span class="sc">|&gt;</span> <span class="fu">distinct</span>(USUBJID, TRT01A)</span>
-<span id="cb2-9"><a href="#cb2-9"></a>  ),</span>
-<span id="cb2-10"><a href="#cb2-10"></a>  <span class="co"># ARD for header N values</span></span>
-<span id="cb2-11"><a href="#cb2-11"></a>  <span class="fu">ard_tabulate</span>(adsl, <span class="at">variables =</span> TRT01A)</span>
-<span id="cb2-12"><a href="#cb2-12"></a>)</span>
-<span id="cb2-13"><a href="#cb2-13"></a></span>
-<span id="cb2-14"><a href="#cb2-14"></a>ard</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code># An ARD data frame: 21 × 11
-   group1 group1_level         variable variable_level       context        stat_name stat_label     stat fmt_fun warning error 
-   &lt;chr&gt;  &lt;list&gt;               &lt;chr&gt;    &lt;list&gt;               &lt;chr&gt;          &lt;chr&gt;     &lt;chr&gt;        &lt;list&gt; &lt;list&gt;  &lt;list&gt;  &lt;list&gt;
- 1 TRT01A Placebo              SBP90    TRUE                 tabulate_value n         n            8      0       &lt;NULL&gt;  &lt;NULL&gt;
- 2 TRT01A Placebo              SBP90    TRUE                 tabulate_value p         %            0.0952 &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt;
- 3 TRT01A Placebo              DBP60    TRUE                 tabulate_value n         n           32      0       &lt;NULL&gt;  &lt;NULL&gt;
- 4 TRT01A Placebo              DBP60    TRUE                 tabulate_value p         %            0.381  &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt;
- 5 TRT01A Xanomeline High Dose SBP90    TRUE                 tabulate_value n         n            0      0       &lt;NULL&gt;  &lt;NULL&gt;
- 6 TRT01A Xanomeline High Dose SBP90    TRUE                 tabulate_value p         %            0      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt;
- 7 TRT01A Xanomeline High Dose DBP60    TRUE                 tabulate_value n         n           27      0       &lt;NULL&gt;  &lt;NULL&gt;
- 8 TRT01A Xanomeline High Dose DBP60    TRUE                 tabulate_value p         %            0.375  &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt;
- 9 TRT01A Xanomeline Low Dose  SBP90    TRUE                 tabulate_value n         n            1      0       &lt;NULL&gt;  &lt;NULL&gt;
-10 TRT01A Xanomeline Low Dose  SBP90    TRUE                 tabulate_value p         %            0.0106 &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt;
-11 TRT01A Xanomeline Low Dose  DBP60    TRUE                 tabulate_value n         n           29      0       &lt;NULL&gt;  &lt;NULL&gt;
-12 TRT01A Xanomeline Low Dose  DBP60    TRUE                 tabulate_value p         %            0.309  &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt;
-13 &lt;NA&gt;   &lt;NULL&gt;               TRT01A   Placebo              tabulate       n         n           86      0       &lt;NULL&gt;  &lt;NULL&gt;
-14 &lt;NA&gt;   &lt;NULL&gt;               TRT01A   Placebo              tabulate       N         N          254      0       &lt;NULL&gt;  &lt;NULL&gt;
-15 &lt;NA&gt;   &lt;NULL&gt;               TRT01A   Placebo              tabulate       p         %            0.339  &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt;
-16 &lt;NA&gt;   &lt;NULL&gt;               TRT01A   Xanomeline High Dose tabulate       n         n           72      0       &lt;NULL&gt;  &lt;NULL&gt;
-17 &lt;NA&gt;   &lt;NULL&gt;               TRT01A   Xanomeline High Dose tabulate       N         N          254      0       &lt;NULL&gt;  &lt;NULL&gt;
-18 &lt;NA&gt;   &lt;NULL&gt;               TRT01A   Xanomeline High Dose tabulate       p         %            0.283  &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt;
-19 &lt;NA&gt;   &lt;NULL&gt;               TRT01A   Xanomeline Low Dose  tabulate       n         n           96      0       &lt;NULL&gt;  &lt;NULL&gt;
-20 &lt;NA&gt;   &lt;NULL&gt;               TRT01A   Xanomeline Low Dose  tabulate       N         N          254      0       &lt;NULL&gt;  &lt;NULL&gt;
-21 &lt;NA&gt;   &lt;NULL&gt;               TRT01A   Xanomeline Low Dose  tabulate       p         %            0.378  &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt;</code></pre>
-</div>
-</div>
-</div>
-<div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
-<div class="cell">
-<details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>tbl <span class="ot">&lt;-</span> <span class="fu">tbl_ard_summary</span>(</span>
-<span id="cb4-2"><a href="#cb4-2"></a>  ard,</span>
-<span id="cb4-3"><a href="#cb4-3"></a>  <span class="at">by =</span> TRT01A,</span>
-<span id="cb4-4"><a href="#cb4-4"></a>  <span class="co"># Add labels for each range</span></span>
-<span id="cb4-5"><a href="#cb4-5"></a>  <span class="at">label =</span> <span class="fu">list</span>(</span>
-<span id="cb4-6"><a href="#cb4-6"></a>    <span class="at">SBP90 =</span> <span class="st">"SBP&lt;90"</span>,</span>
-<span id="cb4-7"><a href="#cb4-7"></a>    <span class="at">DBP60 =</span> <span class="st">"DBP&lt;60"</span></span>
-<span id="cb4-8"><a href="#cb4-8"></a>  )</span>
-<span id="cb4-9"><a href="#cb4-9"></a>) <span class="sc">|&gt;</span></span>
-<span id="cb4-10"><a href="#cb4-10"></a>  <span class="fu">modify_header</span>(</span>
-<span id="cb4-11"><a href="#cb4-11"></a>    <span class="co"># Update label, add analysis value units</span></span>
-<span id="cb4-12"><a href="#cb4-12"></a>    label <span class="sc">~</span> <span class="fu">paste0</span>(<span class="st">"**Blood Pressure ("</span>, data<span class="sc">$</span>VSORRESU[<span class="dv">1</span>], <span class="st">")**"</span>),</span>
-<span id="cb4-13"><a href="#cb4-13"></a>    <span class="co"># Add N values to `by` variable labels</span></span>
-<span id="cb4-14"><a href="#cb4-14"></a>    <span class="fu">all_stat_cols</span>() <span class="sc">~</span> <span class="st">"**{level}**  </span><span class="sc">\n</span><span class="st">N = {n}"</span></span>
-<span id="cb4-15"><a href="#cb4-15"></a>  )</span>
-<span id="cb4-16"><a href="#cb4-16"></a></span>
-<span id="cb4-17"><a href="#cb4-17"></a>tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="result.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:40.0%"></p>
-</figure>
-</div>
+<details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>withr<span class="sc">::</span><span class="fu">local_options</span>(<span class="at">width =</span> <span class="dv">9999</span>, <span class="at">tibble.print_max =</span> <span class="cn">Inf</span>)</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">print</span>(ard, <span class="at">columns =</span> <span class="st">"all"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>$tbl_ard_summary
+# An ARD data frame: 25 × 12
+   group1 group1_level         variable variable_level       context        stat_name stat_label     stat      fmt_fun warning error  gts_column
+   &lt;chr&gt;  &lt;list&gt;               &lt;chr&gt;    &lt;list&gt;               &lt;chr&gt;          &lt;chr&gt;     &lt;chr&gt;          &lt;list&gt;    &lt;list&gt;  &lt;list&gt;  &lt;list&gt; &lt;chr&gt;     
+ 1 TRT01A Placebo              SBP90    TRUE                 tabulate_value n         n              8         0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 2 TRT01A Placebo              SBP90    TRUE                 tabulate_value p         %              0.0952381 &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 3 TRT01A Placebo              DBP60    TRUE                 tabulate_value n         n              32        0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 4 TRT01A Placebo              DBP60    TRUE                 tabulate_value p         %              0.3809524 &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 5 TRT01A Xanomeline High Dose SBP90    TRUE                 tabulate_value n         n              0         0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 6 TRT01A Xanomeline High Dose SBP90    TRUE                 tabulate_value p         %              0         &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 7 TRT01A Xanomeline High Dose DBP60    TRUE                 tabulate_value n         n              27        0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 8 TRT01A Xanomeline High Dose DBP60    TRUE                 tabulate_value p         %              0.375     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 9 TRT01A Xanomeline Low Dose  SBP90    TRUE                 tabulate_value n         n              1         0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+10 TRT01A Xanomeline Low Dose  SBP90    TRUE                 tabulate_value p         %              0.0106383 &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+11 TRT01A Xanomeline Low Dose  DBP60    TRUE                 tabulate_value n         n              29        0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+12 TRT01A Xanomeline Low Dose  DBP60    TRUE                 tabulate_value p         %              0.3085106 &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+13 &lt;NA&gt;   &lt;NULL&gt;               TRT01A   Placebo              tabulate       n         n              86        0       &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+14 &lt;NA&gt;   &lt;NULL&gt;               TRT01A   Placebo              tabulate       N         N              254       0       &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+15 &lt;NA&gt;   &lt;NULL&gt;               TRT01A   Placebo              tabulate       p         %              0.3385827 &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+16 &lt;NA&gt;   &lt;NULL&gt;               TRT01A   Xanomeline High Dose tabulate       n         n              72        0       &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+17 &lt;NA&gt;   &lt;NULL&gt;               TRT01A   Xanomeline High Dose tabulate       N         N              254       0       &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+18 &lt;NA&gt;   &lt;NULL&gt;               TRT01A   Xanomeline High Dose tabulate       p         %              0.2834646 &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+19 &lt;NA&gt;   &lt;NULL&gt;               TRT01A   Xanomeline Low Dose  tabulate       n         n              96        0       &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+20 &lt;NA&gt;   &lt;NULL&gt;               TRT01A   Xanomeline Low Dose  tabulate       N         N              254       0       &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+21 &lt;NA&gt;   &lt;NULL&gt;               TRT01A   Xanomeline Low Dose  tabulate       p         %              0.3779528 &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+22 &lt;NA&gt;   &lt;NULL&gt;               SBP90    &lt;NULL&gt;               attributes     label     Variable Label SBP&lt;90    &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+23 &lt;NA&gt;   &lt;NULL&gt;               SBP90    &lt;NULL&gt;               attributes     class     Variable Class logical   &lt;NULL&gt;  &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+24 &lt;NA&gt;   &lt;NULL&gt;               DBP60    &lt;NULL&gt;               attributes     label     Variable Label DBP&lt;60    &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+25 &lt;NA&gt;   &lt;NULL&gt;               DBP60    &lt;NULL&gt;               attributes     class     Variable Class logical   &lt;NULL&gt;  &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      </code></pre>
 </div>
 </div>
 </div>
@@ -983,100 +1494,59 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb5-4"><a href="#cb5-4"></a><span class="an">categories:</span><span class="co"> [table, FDA, safety, vital signs]</span></span>
 <span id="cb5-5"><a href="#cb5-5"></a><span class="co">---</span></span>
 <span id="cb5-6"><a href="#cb5-6"></a></span>
-<span id="cb5-7"><a href="#cb5-7"></a>::: panel-tabset</span>
-<span id="cb5-8"><a href="#cb5-8"></a><span class="fu">## Table Preview</span></span>
-<span id="cb5-9"><a href="#cb5-9"></a></span>
-<span id="cb5-10"><a href="#cb5-10"></a><span class="in">```{r img, echo=FALSE, fig.align='center', out.width='40%'}</span></span>
-<span id="cb5-11"><a href="#cb5-11"></a><span class="in">knitr::include_graphics("result.png")</span></span>
-<span id="cb5-12"><a href="#cb5-12"></a><span class="in">```</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a>::::: columns</span>
+<span id="cb5-8"><a href="#cb5-8"></a></span>
+<span id="cb5-9"><a href="#cb5-9"></a>:::: {.column width="52%"}</span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="fu">### FDA IG Shell</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a></span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="al">![](ig_shell.png)</span>{fig-alt="FDA IG example table shell" .lightbox width=100%}</span>
 <span id="cb5-13"><a href="#cb5-13"></a></span>
-<span id="cb5-14"><a href="#cb5-14"></a><span class="fu">## Setup</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a><span class="fu">### Programming Notes</span></span>
 <span id="cb5-15"><a href="#cb5-15"></a></span>
-<span id="cb5-16"><a href="#cb5-16"></a><span class="in">```{r setup, message=FALSE}</span></span>
-<span id="cb5-17"><a href="#cb5-17"></a><span class="in"># Load libraries &amp; data -------------------------------------</span></span>
-<span id="cb5-18"><a href="#cb5-18"></a><span class="in">library(dplyr)</span></span>
-<span id="cb5-19"><a href="#cb5-19"></a><span class="in">library(cards)</span></span>
-<span id="cb5-20"><a href="#cb5-20"></a><span class="in">library(gtsummary)</span></span>
+<span id="cb5-16"><a href="#cb5-16"></a>**Background and Instructions**</span>
+<span id="cb5-17"><a href="#cb5-17"></a></span>
+<span id="cb5-18"><a href="#cb5-18"></a>N/A (per FDA IG)</span>
+<span id="cb5-19"><a href="#cb5-19"></a></span>
+<span id="cb5-20"><a href="#cb5-20"></a>**Customization**</span>
 <span id="cb5-21"><a href="#cb5-21"></a></span>
-<span id="cb5-22"><a href="#cb5-22"></a><span class="in">adsl &lt;- pharmaverseadam::adsl</span></span>
-<span id="cb5-23"><a href="#cb5-23"></a><span class="in">advs &lt;- pharmaverseadam::advs</span></span>
-<span id="cb5-24"><a href="#cb5-24"></a></span>
-<span id="cb5-25"><a href="#cb5-25"></a><span class="in"># Pre-processing --------------------------------------------</span></span>
-<span id="cb5-26"><a href="#cb5-26"></a><span class="in">adsl &lt;- adsl |&gt;</span></span>
-<span id="cb5-27"><a href="#cb5-27"></a><span class="in">  filter(SAFFL == "Y") # safety population</span></span>
+<span id="cb5-22"><a href="#cb5-22"></a>Clinical review team may customize the cutoff criteria they wish to use.</span>
+<span id="cb5-23"><a href="#cb5-23"></a></span>
+<span id="cb5-24"><a href="#cb5-24"></a>::::</span>
+<span id="cb5-25"><a href="#cb5-25"></a></span>
+<span id="cb5-26"><a href="#cb5-26"></a>:::: {.column width="4%"}</span>
+<span id="cb5-27"><a href="#cb5-27"></a>::::</span>
 <span id="cb5-28"><a href="#cb5-28"></a></span>
-<span id="cb5-29"><a href="#cb5-29"></a><span class="in">data &lt;- advs |&gt;</span></span>
-<span id="cb5-30"><a href="#cb5-30"></a><span class="in">  filter(</span></span>
-<span id="cb5-31"><a href="#cb5-31"></a><span class="in">    # safety population</span></span>
-<span id="cb5-32"><a href="#cb5-32"></a><span class="in">    SAFFL == "Y",</span></span>
-<span id="cb5-33"><a href="#cb5-33"></a><span class="in">    # diastolic &amp; systolic blood pressure</span></span>
-<span id="cb5-34"><a href="#cb5-34"></a><span class="in">    PARAMCD %in% c("DIABP", "SYSBP"),</span></span>
-<span id="cb5-35"><a href="#cb5-35"></a><span class="in">    # post-baseline visits</span></span>
-<span id="cb5-36"><a href="#cb5-36"></a><span class="in">    AVISITN &gt;= 2</span></span>
-<span id="cb5-37"><a href="#cb5-37"></a><span class="in">  ) |&gt;</span></span>
-<span id="cb5-38"><a href="#cb5-38"></a><span class="in">  # analyze minimum values per parameter of each subject</span></span>
-<span id="cb5-39"><a href="#cb5-39"></a><span class="in">  slice_min(AVAL, n = 1L, by = c(USUBJID, PARAMCD)) |&gt;</span></span>
-<span id="cb5-40"><a href="#cb5-40"></a><span class="in">  # define analysis value cutoffs per parameter</span></span>
-<span id="cb5-41"><a href="#cb5-41"></a><span class="in">  mutate(</span></span>
-<span id="cb5-42"><a href="#cb5-42"></a><span class="in">    SBP90 = PARAMCD == "SYSBP" &amp; AVAL &lt; 90, # SYSBP &lt;90</span></span>
-<span id="cb5-43"><a href="#cb5-43"></a><span class="in">    DBP60 = PARAMCD == "DIABP" &amp; AVAL &lt; 60 # DIABP &lt;60</span></span>
-<span id="cb5-44"><a href="#cb5-44"></a><span class="in">  )</span></span>
-<span id="cb5-45"><a href="#cb5-45"></a><span class="in">```</span></span>
-<span id="cb5-46"><a href="#cb5-46"></a></span>
-<span id="cb5-47"><a href="#cb5-47"></a><span class="fu">## Build ARD</span></span>
-<span id="cb5-48"><a href="#cb5-48"></a></span>
-<span id="cb5-49"><a href="#cb5-49"></a><span class="in">```{r ard, message=FALSE, warning=FALSE, results='hide'}</span></span>
-<span id="cb5-50"><a href="#cb5-50"></a><span class="in">ard &lt;- bind_ard(</span></span>
-<span id="cb5-51"><a href="#cb5-51"></a><span class="in">  ard_tabulate_value(</span></span>
-<span id="cb5-52"><a href="#cb5-52"></a><span class="in">    data,</span></span>
-<span id="cb5-53"><a href="#cb5-53"></a><span class="in">    variables = c(SBP90, DBP60),</span></span>
-<span id="cb5-54"><a href="#cb5-54"></a><span class="in">    by = TRT01A,</span></span>
-<span id="cb5-55"><a href="#cb5-55"></a><span class="in">    statistic = ~ c("n", "p"),</span></span>
-<span id="cb5-56"><a href="#cb5-56"></a><span class="in">    # denominator values are number of subjects in arm with BP data</span></span>
-<span id="cb5-57"><a href="#cb5-57"></a><span class="in">    denominator = data |&gt; distinct(USUBJID, TRT01A)</span></span>
-<span id="cb5-58"><a href="#cb5-58"></a><span class="in">  ),</span></span>
-<span id="cb5-59"><a href="#cb5-59"></a><span class="in">  # ARD for header N values</span></span>
-<span id="cb5-60"><a href="#cb5-60"></a><span class="in">  ard_tabulate(adsl, variables = TRT01A)</span></span>
-<span id="cb5-61"><a href="#cb5-61"></a><span class="in">)</span></span>
-<span id="cb5-62"><a href="#cb5-62"></a></span>
-<span id="cb5-63"><a href="#cb5-63"></a><span class="in">ard</span></span>
-<span id="cb5-64"><a href="#cb5-64"></a><span class="in">```</span></span>
-<span id="cb5-65"><a href="#cb5-65"></a></span>
-<span id="cb5-66"><a href="#cb5-66"></a><span class="in">```{r, echo=FALSE}</span></span>
-<span id="cb5-67"><a href="#cb5-67"></a><span class="in"># Print ARD</span></span>
-<span id="cb5-68"><a href="#cb5-68"></a><span class="in">withr::local_options(width = 9999)</span></span>
-<span id="cb5-69"><a href="#cb5-69"></a><span class="in">print(ard, columns = "all", n = 40)</span></span>
-<span id="cb5-70"><a href="#cb5-70"></a><span class="in">```</span></span>
-<span id="cb5-71"><a href="#cb5-71"></a></span>
-<span id="cb5-72"><a href="#cb5-72"></a><span class="fu">## Build Table</span></span>
-<span id="cb5-73"><a href="#cb5-73"></a></span>
-<span id="cb5-74"><a href="#cb5-74"></a><span class="in">```{r tbl, results = 'hide'}</span></span>
-<span id="cb5-75"><a href="#cb5-75"></a><span class="in">tbl &lt;- tbl_ard_summary(</span></span>
-<span id="cb5-76"><a href="#cb5-76"></a><span class="in">  ard,</span></span>
-<span id="cb5-77"><a href="#cb5-77"></a><span class="in">  by = TRT01A,</span></span>
-<span id="cb5-78"><a href="#cb5-78"></a><span class="in">  # Add labels for each range</span></span>
-<span id="cb5-79"><a href="#cb5-79"></a><span class="in">  label = list(</span></span>
-<span id="cb5-80"><a href="#cb5-80"></a><span class="in">    SBP90 = "SBP&lt;90",</span></span>
-<span id="cb5-81"><a href="#cb5-81"></a><span class="in">    DBP60 = "DBP&lt;60"</span></span>
-<span id="cb5-82"><a href="#cb5-82"></a><span class="in">  )</span></span>
-<span id="cb5-83"><a href="#cb5-83"></a><span class="in">) |&gt;</span></span>
-<span id="cb5-84"><a href="#cb5-84"></a><span class="in">  modify_header(</span></span>
-<span id="cb5-85"><a href="#cb5-85"></a><span class="in">    # Update label, add analysis value units</span></span>
-<span id="cb5-86"><a href="#cb5-86"></a><span class="in">    label ~ paste0("**Blood Pressure (", data$VSORRESU[1], ")**"),</span></span>
-<span id="cb5-87"><a href="#cb5-87"></a><span class="in">    # Add N values to `by` variable labels</span></span>
-<span id="cb5-88"><a href="#cb5-88"></a><span class="in">    all_stat_cols() ~ "**{level}**  \nN = {n}"</span></span>
-<span id="cb5-89"><a href="#cb5-89"></a><span class="in">  )</span></span>
-<span id="cb5-90"><a href="#cb5-90"></a></span>
-<span id="cb5-91"><a href="#cb5-91"></a><span class="in">tbl</span></span>
-<span id="cb5-92"><a href="#cb5-92"></a><span class="in">```</span></span>
-<span id="cb5-93"><a href="#cb5-93"></a></span>
-<span id="cb5-94"><a href="#cb5-94"></a><span class="in">```{r eval=FALSE, include=FALSE}</span></span>
-<span id="cb5-95"><a href="#cb5-95"></a><span class="in">gt::gtsave(as_gt(tbl), filename = "result.png")</span></span>
-<span id="cb5-96"><a href="#cb5-96"></a><span class="in">```</span></span>
-<span id="cb5-97"><a href="#cb5-97"></a></span>
-<span id="cb5-98"><a href="#cb5-98"></a><span class="in">```{r img, echo=FALSE, fig.align='center', out.width='40%'}</span></span>
-<span id="cb5-99"><a href="#cb5-99"></a><span class="in">```</span></span>
-<span id="cb5-100"><a href="#cb5-100"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb5-29"><a href="#cb5-29"></a>:::: {.column width="44%"}</span>
+<span id="cb5-30"><a href="#cb5-30"></a><span class="fu">### Output</span></span>
+<span id="cb5-31"><a href="#cb5-31"></a></span>
+<span id="cb5-32"><a href="#cb5-32"></a><span class="in">```{r out-result, echo=FALSE, fig.align='center', out.width='100%'}</span></span>
+<span id="cb5-33"><a href="#cb5-33"></a><span class="in">knitr::include_graphics("result.png")</span></span>
+<span id="cb5-34"><a href="#cb5-34"></a><span class="in">```</span></span>
+<span id="cb5-35"><a href="#cb5-35"></a></span>
+<span id="cb5-36"><a href="#cb5-36"></a>::::</span>
+<span id="cb5-37"><a href="#cb5-37"></a></span>
+<span id="cb5-38"><a href="#cb5-38"></a>:::::</span>
+<span id="cb5-39"><a href="#cb5-39"></a></span>
+<span id="cb5-40"><a href="#cb5-40"></a>::: panel-tabset</span>
+<span id="cb5-41"><a href="#cb5-41"></a><span class="fu">## Full Code</span></span>
+<span id="cb5-42"><a href="#cb5-42"></a></span>
+<span id="cb5-43"><a href="#cb5-43"></a><span class="in">```{r fullcode, file="../../../inst/templates/fda-table_38.R", message=FALSE, warning=FALSE, results='hide'}</span></span>
+<span id="cb5-44"><a href="#cb5-44"></a><span class="in">```</span></span>
+<span id="cb5-45"><a href="#cb5-45"></a></span>
+<span id="cb5-46"><a href="#cb5-46"></a><span class="fu">## Table</span></span>
+<span id="cb5-47"><a href="#cb5-47"></a></span>
+<span id="cb5-48"><a href="#cb5-48"></a><span class="in">```{r tbl}</span></span>
+<span id="cb5-49"><a href="#cb5-49"></a><span class="in">tbl</span></span>
+<span id="cb5-50"><a href="#cb5-50"></a><span class="in">```</span></span>
+<span id="cb5-51"><a href="#cb5-51"></a></span>
+<span id="cb5-52"><a href="#cb5-52"></a><span class="fu">## ARD</span></span>
+<span id="cb5-53"><a href="#cb5-53"></a></span>
+<span id="cb5-54"><a href="#cb5-54"></a><span class="in">```{r ard, message=FALSE, warning=FALSE}</span></span>
+<span id="cb5-55"><a href="#cb5-55"></a><span class="in">withr::local_options(width = 9999, tibble.print_max = Inf)</span></span>
+<span id="cb5-56"><a href="#cb5-56"></a><span class="in">print(ard, columns = "all")</span></span>
+<span id="cb5-57"><a href="#cb5-57"></a><span class="in">```</span></span>
+<span id="cb5-58"><a href="#cb5-58"></a></span>
+<span id="cb5-59"><a href="#cb5-59"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
@@ -1094,7 +1564,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       &nbsp;
     </div>
   </div>
-</footer>
+</footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 <script src="../../../site_libs/quarto-html/zenscroll-min.js"></script>

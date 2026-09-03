@@ -72,7 +72,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../../site_libs/bootstrap/bootstrap-b9dbead50e81c18249e2e1e9b4aaddfa.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-046be37f67332dfcbae0104d3ddeb5a1.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+<link href="../../../site_libs/bootstrap/bootstrap-dark-046be37f67332dfcbae0104d3ddeb5a1.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": true,
   "collapse-after": 3,
@@ -128,10 +131,11 @@ cookieconsent.run({
 <link rel="stylesheet" href="../../../quarto/assets/style.scss">
 <meta property="og:title" content="Overview of Adverse Events by Demographic Subgroup, Safety Population, Pooled Analysis (or Trial X) – Cardinal">
 <meta property="og:description" content="FDA Table 51">
-<meta property="og:image" content="https://pharmaverse.github.io/cardinal/quarto/catalog/fda-table_51/result.png">
+<meta property="og:image" content="https://pharmaverse.github.io/cardinal/quarto/catalog/fda-table_51/ig_shell.png">
 <meta property="og:site_name" content="Cardinal">
-<meta property="og:image:height" content="1184">
-<meta property="og:image:width" content="1732">
+<meta property="og:image:alt" content="FDA IG example table shell">
+<meta property="og:image:height" content="1151">
+<meta property="og:image:width" content="1549">
 </head>
 <body class="nav-fixed">
 
@@ -230,133 +234,153 @@ cookieconsent.run({
   
 
 
-</header><div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Table Preview</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Setup</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Build Table</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false">Build ARD</a></li>
-</ul>
-<div class="tab-content">
-<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+</header><div class="columns">
+<div class="column" style="width:52%;">
+<section id="fda-ig-shell" class="level3"><h3 class="anchored" data-anchor-id="fda-ig-shell">FDA IG Shell</h3>
+<p><a href="ig_shell.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="ig_shell.png" class="img-fluid" style="width:100.0%" alt="FDA IG example table shell"></a></p>
+</section><section id="programming-notes" class="level3"><h3 class="anchored" data-anchor-id="programming-notes">Programming Notes</h3>
+<p><strong>Background and Instructions</strong></p>
+<p>Table 50: Overview of Serious Adverse Events by Demographic Subgroup and Table 51: Overview of Adverse Events by Demographic Subgroup in this section display placeholder values for the demographic characteristics for subgroup analysis of SAEs and AEs. These placeholder values will change to reflect the values found in the clinical trial data. When CDISC-controlled terminology is used in the clinical trial data, the demographic characteristics in this table will reflect the controlled terminology.</p>
+<p><strong>Customization</strong></p>
+<p>Provide any additional potentially relevant subgroups beyond the standard demographic ones that may shed light on which subjects are most susceptible to the safety event (e.g., baseline diseases [e.g., cardiovascular disease or diabetes, or by CKD stage], concomitant medication, anthropometric characteristics [e.g., BMI]). The clinical reviewer should discuss appropriate age groups for the subgroup analysis with the CDS.</p>
+</section>
+</div><div class="column" style="width:4%;">
+
+</div><div class="column" style="width:44%;">
+<section id="output" class="level3"><h3 class="anchored" data-anchor-id="output">Output</h3>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="result.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:65.0%"></p>
+<figure class="figure"><p><img src="result.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
 </div>
+</section>
 </div>
-<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+</div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Full Code</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Table</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">ARD</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <div class="cell">
-<details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Load libraries &amp; data -------------------------------------</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(cards)</span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(gtsummary)</span>
-<span id="cb1-5"><a href="#cb1-5"></a></span>
-<span id="cb1-6"><a href="#cb1-6"></a>adae <span class="ot">&lt;-</span> pharmaverseadam<span class="sc">::</span>adae</span>
-<span id="cb1-7"><a href="#cb1-7"></a>adsl <span class="ot">&lt;-</span> pharmaverseadam<span class="sc">::</span>adsl</span>
+<details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># FDA TABLE 51 ---------------------------------------------------------------</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="co"># Self-contained template. Run top-to-bottom to build the objects below.</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="co"># Used by tests via run_template() and published in the catalog.</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="fu">library</span>(cards)</span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="fu">library</span>(gtsummary)</span>
 <span id="cb1-8"><a href="#cb1-8"></a></span>
-<span id="cb1-9"><a href="#cb1-9"></a>adsl <span class="ot">&lt;-</span> adsl <span class="sc">|&gt;</span></span>
-<span id="cb1-10"><a href="#cb1-10"></a>  <span class="fu">filter</span>(SAFFL <span class="sc">==</span> <span class="st">"Y"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a>  <span class="fu">mutate</span>(<span class="at">any_ae =</span> <span class="st">"Any AE"</span>)</span>
-<span id="cb1-12"><a href="#cb1-12"></a></span>
-<span id="cb1-13"><a href="#cb1-13"></a>data <span class="ot">&lt;-</span> adae <span class="sc">|&gt;</span></span>
-<span id="cb1-14"><a href="#cb1-14"></a>  <span class="fu">filter</span>(</span>
-<span id="cb1-15"><a href="#cb1-15"></a>    SAFFL <span class="sc">==</span> <span class="st">"Y"</span>,</span>
-<span id="cb1-16"><a href="#cb1-16"></a>    TRTEMFL <span class="sc">==</span> <span class="st">"Y"</span></span>
-<span id="cb1-17"><a href="#cb1-17"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb1-18"><a href="#cb1-18"></a>  <span class="fu">mutate</span>(<span class="at">any_ae =</span> <span class="st">"Any AE"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb1-19"><a href="#cb1-19"></a>  <span class="co"># subset to one AE per subject</span></span>
-<span id="cb1-20"><a href="#cb1-20"></a>  dplyr<span class="sc">::</span><span class="fu">slice_tail</span>(<span class="at">n =</span> <span class="dv">1</span>L, <span class="at">by =</span> <span class="fu">all_of</span>(<span class="fu">c</span>(<span class="st">"USUBJID"</span>, <span class="st">"ARM"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-9"><a href="#cb1-9"></a>adae <span class="ot">&lt;-</span> pharmaverseadam<span class="sc">::</span>adae</span>
+<span id="cb1-10"><a href="#cb1-10"></a>adsl <span class="ot">&lt;-</span> pharmaverseadam<span class="sc">::</span>adsl</span>
+<span id="cb1-11"><a href="#cb1-11"></a></span>
+<span id="cb1-12"><a href="#cb1-12"></a>adsl <span class="ot">&lt;-</span> adsl <span class="sc">|&gt;</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a>  <span class="fu">filter</span>(SAFFL <span class="sc">==</span> <span class="st">"Y"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a>  <span class="fu">mutate</span>(<span class="at">any_ae =</span> <span class="st">"Any AE"</span>)</span>
+<span id="cb1-15"><a href="#cb1-15"></a></span>
+<span id="cb1-16"><a href="#cb1-16"></a>data <span class="ot">&lt;-</span> adae <span class="sc">|&gt;</span></span>
+<span id="cb1-17"><a href="#cb1-17"></a>  <span class="fu">filter</span>(</span>
+<span id="cb1-18"><a href="#cb1-18"></a>    SAFFL <span class="sc">==</span> <span class="st">"Y"</span>,</span>
+<span id="cb1-19"><a href="#cb1-19"></a>    TRTEMFL <span class="sc">==</span> <span class="st">"Y"</span></span>
+<span id="cb1-20"><a href="#cb1-20"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb1-21"><a href="#cb1-21"></a>  <span class="fu">mutate</span>(<span class="at">any_ae =</span> <span class="st">"Any AE"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-22"><a href="#cb1-22"></a>  <span class="co"># subset to one AE per subject</span></span>
+<span id="cb1-23"><a href="#cb1-23"></a>  dplyr<span class="sc">::</span><span class="fu">slice_tail</span>(<span class="at">n =</span> <span class="dv">1</span>L, <span class="at">by =</span> <span class="fu">all_of</span>(<span class="fu">c</span>(<span class="st">"USUBJID"</span>, <span class="st">"ARM"</span>)))</span>
+<span id="cb1-24"><a href="#cb1-24"></a></span>
+<span id="cb1-25"><a href="#cb1-25"></a><span class="co"># generate ARD for `n` statistic</span></span>
+<span id="cb1-26"><a href="#cb1-26"></a>ard_summary <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span></span>
+<span id="cb1-27"><a href="#cb1-27"></a>  <span class="fu">ard_categorical</span>(</span>
+<span id="cb1-28"><a href="#cb1-28"></a>    <span class="at">variables =</span> <span class="fu">c</span>(any_ae, SEX, AGEGR1, RACE, ETHNIC),</span>
+<span id="cb1-29"><a href="#cb1-29"></a>    <span class="at">by =</span> ARM,</span>
+<span id="cb1-30"><a href="#cb1-30"></a>    <span class="at">statistic =</span> <span class="sc">~</span><span class="st">"n"</span></span>
+<span id="cb1-31"><a href="#cb1-31"></a>  )</span>
+<span id="cb1-32"><a href="#cb1-32"></a></span>
+<span id="cb1-33"><a href="#cb1-33"></a><span class="co"># generate ARD for `N_s` statistic</span></span>
+<span id="cb1-34"><a href="#cb1-34"></a>ard_ns <span class="ot">&lt;-</span> adsl <span class="sc">|&gt;</span></span>
+<span id="cb1-35"><a href="#cb1-35"></a>  <span class="fu">ard_categorical</span>(</span>
+<span id="cb1-36"><a href="#cb1-36"></a>    <span class="at">variables =</span> <span class="fu">c</span>(any_ae, SEX, AGEGR1, RACE, ETHNIC),</span>
+<span id="cb1-37"><a href="#cb1-37"></a>    <span class="at">by =</span> ARM,</span>
+<span id="cb1-38"><a href="#cb1-38"></a>    <span class="at">statistic =</span> <span class="sc">~</span><span class="st">"n"</span>,</span>
+<span id="cb1-39"><a href="#cb1-39"></a>    <span class="at">stat_label =</span> <span class="sc">~</span> <span class="fu">list</span>(<span class="at">n =</span> <span class="st">"N_s"</span>)</span>
+<span id="cb1-40"><a href="#cb1-40"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb1-41"><a href="#cb1-41"></a>  <span class="fu">mutate</span>(<span class="at">stat_name =</span> <span class="st">"N_s"</span>)</span>
+<span id="cb1-42"><a href="#cb1-42"></a></span>
+<span id="cb1-43"><a href="#cb1-43"></a><span class="co"># generate ARD for `p` statistic</span></span>
+<span id="cb1-44"><a href="#cb1-44"></a>ard_p <span class="ot">&lt;-</span></span>
+<span id="cb1-45"><a href="#cb1-45"></a>  cards<span class="sc">::</span><span class="fu">bind_ard</span>(</span>
+<span id="cb1-46"><a href="#cb1-46"></a>    ard_summary,</span>
+<span id="cb1-47"><a href="#cb1-47"></a>    ard_ns</span>
+<span id="cb1-48"><a href="#cb1-48"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb1-49"><a href="#cb1-49"></a>  <span class="fu">select</span>(<span class="sc">-</span>stat_label) <span class="sc">|&gt;</span></span>
+<span id="cb1-50"><a href="#cb1-50"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_wider</span>(<span class="at">names_from =</span> stat_name, <span class="at">values_from =</span> stat, <span class="at">values_fn =</span> unlist) <span class="sc">|&gt;</span></span>
+<span id="cb1-51"><a href="#cb1-51"></a>  <span class="fu">rowwise</span>() <span class="sc">|&gt;</span></span>
+<span id="cb1-52"><a href="#cb1-52"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb1-53"><a href="#cb1-53"></a>    <span class="at">stat_name =</span> <span class="st">"p"</span>,</span>
+<span id="cb1-54"><a href="#cb1-54"></a>    <span class="at">stat_label =</span> <span class="st">"%"</span>,</span>
+<span id="cb1-55"><a href="#cb1-55"></a>    <span class="at">stat =</span> <span class="fu">if_else</span>(n <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="fu">list</span>(n <span class="sc">/</span> N_s), <span class="fu">list</span>(<span class="dv">0</span>)),</span>
+<span id="cb1-56"><a href="#cb1-56"></a>    <span class="at">fmt_fun =</span> <span class="fu">list</span>(<span class="fu">label_round</span>(<span class="at">digits =</span> <span class="dv">1</span>, <span class="at">scale =</span> <span class="dv">100</span>))</span>
+<span id="cb1-57"><a href="#cb1-57"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb1-58"><a href="#cb1-58"></a>  <span class="fu">select</span>(<span class="sc">-</span>n, <span class="sc">-</span>N_s)</span>
+<span id="cb1-59"><a href="#cb1-59"></a></span>
+<span id="cb1-60"><a href="#cb1-60"></a><span class="co"># combine all ARDs</span></span>
+<span id="cb1-61"><a href="#cb1-61"></a>ard <span class="ot">&lt;-</span> cards<span class="sc">::</span><span class="fu">bind_ard</span>(ard_summary, ard_ns, ard_p, <span class="fu">ard_categorical</span>(adsl, <span class="at">variables =</span> ARM, <span class="at">statistic =</span> <span class="sc">~</span><span class="st">"n"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb1-62"><a href="#cb1-62"></a>  cards<span class="sc">::</span><span class="fu">tidy_ard_row_order</span>()</span>
+<span id="cb1-63"><a href="#cb1-63"></a></span>
+<span id="cb1-64"><a href="#cb1-64"></a><span class="co"># generate table from ARDs</span></span>
+<span id="cb1-65"><a href="#cb1-65"></a>tbl <span class="ot">&lt;-</span></span>
+<span id="cb1-66"><a href="#cb1-66"></a>  <span class="fu">tbl_ard_summary</span>(</span>
+<span id="cb1-67"><a href="#cb1-67"></a>    ard,</span>
+<span id="cb1-68"><a href="#cb1-68"></a>    <span class="at">by =</span> ARM,</span>
+<span id="cb1-69"><a href="#cb1-69"></a>    <span class="co"># set variable labels</span></span>
+<span id="cb1-70"><a href="#cb1-70"></a>    <span class="at">label =</span> <span class="fu">list</span>(</span>
+<span id="cb1-71"><a href="#cb1-71"></a>      <span class="at">SEX =</span> <span class="st">"Sex"</span>,</span>
+<span id="cb1-72"><a href="#cb1-72"></a>      <span class="at">AGEGR1 =</span> <span class="st">"Age Group, years"</span>,</span>
+<span id="cb1-73"><a href="#cb1-73"></a>      <span class="at">RACE =</span> <span class="st">"Race"</span>,</span>
+<span id="cb1-74"><a href="#cb1-74"></a>      <span class="at">ETHNIC =</span> <span class="st">"Ethnicity"</span></span>
+<span id="cb1-75"><a href="#cb1-75"></a>    )</span>
+<span id="cb1-76"><a href="#cb1-76"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb1-77"><a href="#cb1-77"></a>  gtsummary<span class="sc">::</span><span class="fu">modify_table_body</span>(</span>
+<span id="cb1-78"><a href="#cb1-78"></a>    \(x) x <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="sc">!</span>label <span class="sc">%in%</span> <span class="st">"any_ae"</span>)</span>
+<span id="cb1-79"><a href="#cb1-79"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb1-80"><a href="#cb1-80"></a>  gtsummary<span class="sc">::</span><span class="fu">modify_indent</span>(<span class="at">columns =</span> label, <span class="at">rows =</span> variable <span class="sc">==</span> <span class="st">"any_ae"</span>, <span class="at">indent =</span> <span class="dv">0</span>L) <span class="sc">|&gt;</span></span>
+<span id="cb1-81"><a href="#cb1-81"></a>  <span class="co"># update statistic footnote</span></span>
+<span id="cb1-82"><a href="#cb1-82"></a>  gtsummary<span class="sc">::</span><span class="fu">modify_footnote_header</span>(</span>
+<span id="cb1-83"><a href="#cb1-83"></a>    <span class="at">footnote =</span> <span class="st">"n/N_s (%)"</span>,</span>
+<span id="cb1-84"><a href="#cb1-84"></a>    <span class="at">columns =</span> <span class="fu">all_stat_cols</span>()</span>
+<span id="cb1-85"><a href="#cb1-85"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb1-86"><a href="#cb1-86"></a>  gtsummary<span class="sc">::</span><span class="fu">modify_header</span>(<span class="fu">all_stat_cols</span>() <span class="sc">~</span> <span class="st">"**{level}**  </span><span class="sc">\n</span><span class="st"> N = {n}"</span>)</span>
+<span id="cb1-87"><a href="#cb1-87"></a></span>
+<span id="cb1-88"><a href="#cb1-88"></a></span>
+<span id="cb1-89"><a href="#cb1-89"></a>ard <span class="ot">&lt;-</span> gtsummary<span class="sc">::</span><span class="fu">gather_ard</span>(tbl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </div>
-<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <div class="cell">
-<details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># generate ARD for `n` statistic</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>ard_summary <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a>  <span class="fu">ard_categorical</span>(</span>
-<span id="cb2-4"><a href="#cb2-4"></a>    <span class="at">variables =</span> <span class="fu">c</span>(any_ae, SEX, AGEGR1, RACE, ETHNIC),</span>
-<span id="cb2-5"><a href="#cb2-5"></a>    <span class="at">by =</span> ARM,</span>
-<span id="cb2-6"><a href="#cb2-6"></a>    <span class="at">statistic =</span> <span class="sc">~</span><span class="st">"n"</span></span>
-<span id="cb2-7"><a href="#cb2-7"></a>  )</span>
-<span id="cb2-8"><a href="#cb2-8"></a></span>
-<span id="cb2-9"><a href="#cb2-9"></a><span class="co"># generate ARD for `N_s` statistic</span></span>
-<span id="cb2-10"><a href="#cb2-10"></a>ard_Ns <span class="ot">&lt;-</span> adsl <span class="sc">|&gt;</span></span>
-<span id="cb2-11"><a href="#cb2-11"></a>  <span class="fu">ard_categorical</span>(</span>
-<span id="cb2-12"><a href="#cb2-12"></a>    <span class="at">variables =</span> <span class="fu">c</span>(any_ae, SEX, AGEGR1, RACE, ETHNIC),</span>
-<span id="cb2-13"><a href="#cb2-13"></a>    <span class="at">by =</span> ARM,</span>
-<span id="cb2-14"><a href="#cb2-14"></a>    <span class="at">statistic =</span> <span class="sc">~</span><span class="st">"n"</span>,</span>
-<span id="cb2-15"><a href="#cb2-15"></a>    <span class="at">stat_label =</span> <span class="sc">~</span> <span class="fu">list</span>(<span class="at">n =</span> <span class="st">"N_s"</span>)</span>
-<span id="cb2-16"><a href="#cb2-16"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb2-17"><a href="#cb2-17"></a>  <span class="fu">mutate</span>(<span class="at">stat_name =</span> <span class="st">"N_s"</span>)</span>
-<span id="cb2-18"><a href="#cb2-18"></a></span>
-<span id="cb2-19"><a href="#cb2-19"></a><span class="co"># generate ARD for `p` statistic</span></span>
-<span id="cb2-20"><a href="#cb2-20"></a>ard_p <span class="ot">&lt;-</span></span>
-<span id="cb2-21"><a href="#cb2-21"></a>  cards<span class="sc">::</span><span class="fu">bind_ard</span>(</span>
-<span id="cb2-22"><a href="#cb2-22"></a>    ard_summary,</span>
-<span id="cb2-23"><a href="#cb2-23"></a>    ard_Ns</span>
-<span id="cb2-24"><a href="#cb2-24"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb2-25"><a href="#cb2-25"></a>  <span class="fu">select</span>(<span class="sc">-</span>stat_label) <span class="sc">|&gt;</span></span>
-<span id="cb2-26"><a href="#cb2-26"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_wider</span>(<span class="at">names_from =</span> stat_name, <span class="at">values_from =</span> stat, <span class="at">values_fn =</span> unlist) <span class="sc">|&gt;</span></span>
-<span id="cb2-27"><a href="#cb2-27"></a>  <span class="fu">rowwise</span>() <span class="sc">|&gt;</span></span>
-<span id="cb2-28"><a href="#cb2-28"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb2-29"><a href="#cb2-29"></a>    <span class="at">stat_name =</span> <span class="st">"p"</span>,</span>
-<span id="cb2-30"><a href="#cb2-30"></a>    <span class="at">stat_label =</span> <span class="st">"%"</span>,</span>
-<span id="cb2-31"><a href="#cb2-31"></a>    <span class="at">stat =</span> <span class="fu">if_else</span>(n <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="fu">list</span>(n <span class="sc">/</span> N_s), <span class="fu">list</span>(<span class="dv">0</span>)),</span>
-<span id="cb2-32"><a href="#cb2-32"></a>    <span class="at">fmt_fun =</span> <span class="fu">list</span>(<span class="fu">label_round</span>(<span class="at">digits =</span> <span class="dv">1</span>, <span class="at">scale =</span> <span class="dv">100</span>))</span>
-<span id="cb2-33"><a href="#cb2-33"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb2-34"><a href="#cb2-34"></a>  <span class="fu">select</span>(<span class="sc">-</span>n, <span class="sc">-</span>N_s)</span>
-<span id="cb2-35"><a href="#cb2-35"></a></span>
-<span id="cb2-36"><a href="#cb2-36"></a><span class="co"># combine all ARDs</span></span>
-<span id="cb2-37"><a href="#cb2-37"></a>ard <span class="ot">&lt;-</span> cards<span class="sc">::</span><span class="fu">bind_ard</span>(ard_summary, ard_Ns, ard_p, <span class="fu">ard_categorical</span>(adsl, <span class="at">variables =</span> ARM, <span class="at">statistic =</span> <span class="sc">~</span><span class="st">"n"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb2-38"><a href="#cb2-38"></a>  cards<span class="sc">::</span><span class="fu">tidy_ard_row_order</span>()</span>
-<span id="cb2-39"><a href="#cb2-39"></a></span>
-<span id="cb2-40"><a href="#cb2-40"></a><span class="co"># generate table from ARDs</span></span>
-<span id="cb2-41"><a href="#cb2-41"></a>tbl <span class="ot">&lt;-</span></span>
-<span id="cb2-42"><a href="#cb2-42"></a>  <span class="fu">tbl_ard_summary</span>(</span>
-<span id="cb2-43"><a href="#cb2-43"></a>    ard,</span>
-<span id="cb2-44"><a href="#cb2-44"></a>    <span class="at">by =</span> ARM,</span>
-<span id="cb2-45"><a href="#cb2-45"></a>    <span class="co"># set variable labels</span></span>
-<span id="cb2-46"><a href="#cb2-46"></a>    <span class="at">label =</span> <span class="fu">list</span>(</span>
-<span id="cb2-47"><a href="#cb2-47"></a>      <span class="at">SEX =</span> <span class="st">"Sex"</span>,</span>
-<span id="cb2-48"><a href="#cb2-48"></a>      <span class="at">AGEGR1 =</span> <span class="st">"Age Group, years"</span>,</span>
-<span id="cb2-49"><a href="#cb2-49"></a>      <span class="at">RACE =</span> <span class="st">"Race"</span>,</span>
-<span id="cb2-50"><a href="#cb2-50"></a>      <span class="at">ETHNIC =</span> <span class="st">"Ethnicity"</span></span>
-<span id="cb2-51"><a href="#cb2-51"></a>    )</span>
-<span id="cb2-52"><a href="#cb2-52"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb2-53"><a href="#cb2-53"></a>  gtsummary<span class="sc">::</span><span class="fu">modify_table_body</span>(</span>
-<span id="cb2-54"><a href="#cb2-54"></a>    \(x) x <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="sc">!</span>label <span class="sc">%in%</span> <span class="st">"any_ae"</span>)</span>
-<span id="cb2-55"><a href="#cb2-55"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb2-56"><a href="#cb2-56"></a>  gtsummary<span class="sc">::</span><span class="fu">modify_indent</span>(<span class="at">columns =</span> label, <span class="at">rows =</span> variable <span class="sc">==</span> <span class="st">"any_ae"</span>, <span class="at">indent =</span> <span class="dv">0</span>L) <span class="sc">|&gt;</span></span>
-<span id="cb2-57"><a href="#cb2-57"></a>  <span class="co"># update statistic footnote</span></span>
-<span id="cb2-58"><a href="#cb2-58"></a>  gtsummary<span class="sc">::</span><span class="fu">modify_footnote_header</span>(</span>
-<span id="cb2-59"><a href="#cb2-59"></a>    <span class="at">footnote =</span> <span class="st">"n/N_s (%)"</span>,</span>
-<span id="cb2-60"><a href="#cb2-60"></a>    <span class="at">columns =</span> <span class="fu">all_stat_cols</span>()</span>
-<span id="cb2-61"><a href="#cb2-61"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb2-62"><a href="#cb2-62"></a>  gtsummary<span class="sc">::</span><span class="fu">modify_header</span>(<span class="fu">all_stat_cols</span>() <span class="sc">~</span> <span class="st">"**{level}**  </span><span class="sc">\n</span><span class="st"> N = {n}"</span>)</span>
-<span id="cb2-63"><a href="#cb2-63"></a></span>
-<span id="cb2-64"><a href="#cb2-64"></a>tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<div id="ambuiznyik" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ambuiznyik table {
+<div id="oekqbktadp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#oekqbktadp table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ambuiznyik thead, #ambuiznyik tbody, #ambuiznyik tfoot, #ambuiznyik tr, #ambuiznyik td, #ambuiznyik th {
+#oekqbktadp thead, #oekqbktadp tbody, #oekqbktadp tfoot, #oekqbktadp tr, #oekqbktadp td, #oekqbktadp th {
   border-style: none;
 }
 
-#ambuiznyik p {
+#oekqbktadp p {
   margin: 0;
   padding: 0;
 }
 
-#ambuiznyik .gt_table {
+#oekqbktadp .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -382,12 +406,12 @@ cookieconsent.run({
   border-left-color: #D3D3D3;
 }
 
-#ambuiznyik .gt_caption {
+#oekqbktadp .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ambuiznyik .gt_title {
+#oekqbktadp .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -399,7 +423,7 @@ cookieconsent.run({
   border-bottom-width: 0;
 }
 
-#ambuiznyik .gt_subtitle {
+#oekqbktadp .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -411,7 +435,7 @@ cookieconsent.run({
   border-top-width: 0;
 }
 
-#ambuiznyik .gt_heading {
+#oekqbktadp .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -423,13 +447,13 @@ cookieconsent.run({
   border-right-color: #D3D3D3;
 }
 
-#ambuiznyik .gt_bottom_border {
+#oekqbktadp .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ambuiznyik .gt_col_headings {
+#oekqbktadp .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -444,7 +468,7 @@ cookieconsent.run({
   border-right-color: #D3D3D3;
 }
 
-#ambuiznyik .gt_col_heading {
+#oekqbktadp .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -464,7 +488,7 @@ cookieconsent.run({
   overflow-x: hidden;
 }
 
-#ambuiznyik .gt_column_spanner_outer {
+#oekqbktadp .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -476,15 +500,15 @@ cookieconsent.run({
   padding-right: 4px;
 }
 
-#ambuiznyik .gt_column_spanner_outer:first-child {
+#oekqbktadp .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ambuiznyik .gt_column_spanner_outer:last-child {
+#oekqbktadp .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ambuiznyik .gt_column_spanner {
+#oekqbktadp .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -496,11 +520,11 @@ cookieconsent.run({
   width: 100%;
 }
 
-#ambuiznyik .gt_spanner_row {
+#oekqbktadp .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ambuiznyik .gt_group_heading {
+#oekqbktadp .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -526,7 +550,7 @@ cookieconsent.run({
   text-align: left;
 }
 
-#ambuiznyik .gt_empty_group_heading {
+#oekqbktadp .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -541,15 +565,15 @@ cookieconsent.run({
   vertical-align: middle;
 }
 
-#ambuiznyik .gt_from_md > :first-child {
+#oekqbktadp .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ambuiznyik .gt_from_md > :last-child {
+#oekqbktadp .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ambuiznyik .gt_row {
+#oekqbktadp .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -568,7 +592,7 @@ cookieconsent.run({
   overflow-x: hidden;
 }
 
-#ambuiznyik .gt_stub {
+#oekqbktadp .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -581,7 +605,7 @@ cookieconsent.run({
   padding-right: 5px;
 }
 
-#ambuiznyik .gt_stub_row_group {
+#oekqbktadp .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -595,15 +619,15 @@ cookieconsent.run({
   vertical-align: top;
 }
 
-#ambuiznyik .gt_row_group_first td {
+#oekqbktadp .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ambuiznyik .gt_row_group_first th {
+#oekqbktadp .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ambuiznyik .gt_summary_row {
+#oekqbktadp .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -613,16 +637,16 @@ cookieconsent.run({
   padding-right: 5px;
 }
 
-#ambuiznyik .gt_first_summary_row {
+#oekqbktadp .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ambuiznyik .gt_first_summary_row.thick {
+#oekqbktadp .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ambuiznyik .gt_last_summary_row {
+#oekqbktadp .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -632,7 +656,7 @@ cookieconsent.run({
   border-bottom-color: #D3D3D3;
 }
 
-#ambuiznyik .gt_grand_summary_row {
+#oekqbktadp .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -642,7 +666,7 @@ cookieconsent.run({
   padding-right: 5px;
 }
 
-#ambuiznyik .gt_first_grand_summary_row {
+#oekqbktadp .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -652,7 +676,7 @@ cookieconsent.run({
   border-top-color: #D3D3D3;
 }
 
-#ambuiznyik .gt_last_grand_summary_row_top {
+#oekqbktadp .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -662,11 +686,11 @@ cookieconsent.run({
   border-bottom-color: #D3D3D3;
 }
 
-#ambuiznyik .gt_striped {
+#oekqbktadp .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ambuiznyik .gt_table_body {
+#oekqbktadp .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -675,7 +699,7 @@ cookieconsent.run({
   border-bottom-color: #D3D3D3;
 }
 
-#ambuiznyik .gt_footnotes {
+#oekqbktadp .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -689,7 +713,7 @@ cookieconsent.run({
   border-right-color: #D3D3D3;
 }
 
-#ambuiznyik .gt_footnote {
+#oekqbktadp .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -698,7 +722,7 @@ cookieconsent.run({
   padding-right: 5px;
 }
 
-#ambuiznyik .gt_sourcenotes {
+#oekqbktadp .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -712,7 +736,7 @@ cookieconsent.run({
   border-right-color: #D3D3D3;
 }
 
-#ambuiznyik .gt_sourcenote {
+#oekqbktadp .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -720,72 +744,72 @@ cookieconsent.run({
   padding-right: 5px;
 }
 
-#ambuiznyik .gt_left {
+#oekqbktadp .gt_left {
   text-align: left;
 }
 
-#ambuiznyik .gt_center {
+#oekqbktadp .gt_center {
   text-align: center;
 }
 
-#ambuiznyik .gt_right {
+#oekqbktadp .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ambuiznyik .gt_font_normal {
+#oekqbktadp .gt_font_normal {
   font-weight: normal;
 }
 
-#ambuiznyik .gt_font_bold {
+#oekqbktadp .gt_font_bold {
   font-weight: bold;
 }
 
-#ambuiznyik .gt_font_italic {
+#oekqbktadp .gt_font_italic {
   font-style: italic;
 }
 
-#ambuiznyik .gt_super {
+#oekqbktadp .gt_super {
   font-size: 65%;
 }
 
-#ambuiznyik .gt_footnote_marks {
+#oekqbktadp .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ambuiznyik .gt_asterisk {
+#oekqbktadp .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ambuiznyik .gt_indent_1 {
+#oekqbktadp .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ambuiznyik .gt_indent_2 {
+#oekqbktadp .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ambuiznyik .gt_indent_3 {
+#oekqbktadp .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ambuiznyik .gt_indent_4 {
+#oekqbktadp .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ambuiznyik .gt_indent_5 {
+#oekqbktadp .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ambuiznyik .katex-display {
+#oekqbktadp .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ambuiznyik div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#oekqbktadp div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -905,69 +929,119 @@ N = 84<span class="gt_footnote_marks" style="white-space:nowrap;font-style:itali
 </div>
 </div>
 </div>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="result.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:65.0%"></p>
-</figure>
 </div>
-</div>
-</div>
-</div>
-<div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
 <div class="cell">
-<details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>ard <span class="ot">&lt;-</span> <span class="fu">gather_ard</span>(tbl)</span>
-<span id="cb3-2"><a href="#cb3-2"></a></span>
-<span id="cb3-3"><a href="#cb3-3"></a>ard</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
+<details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>withr<span class="sc">::</span><span class="fu">local_options</span>(<span class="at">width =</span> <span class="dv">9999</span>, <span class="at">tibble.print_max =</span> <span class="cn">Inf</span>)</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">print</span>(ard, <span class="at">columns =</span> <span class="st">"all"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
 <pre><code>$tbl_ard_summary
 # An ARD data frame: 103 × 12
-   group1 group1_level         variable variable_level                   context     stat_name stat_label     stat      fmt_fun warning error  gts_column
-   &lt;chr&gt;  &lt;list&gt;               &lt;chr&gt;    &lt;list&gt;                           &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt;          &lt;list&gt;    &lt;list&gt;  &lt;list&gt;  &lt;list&gt; &lt;chr&gt;     
- 1 &lt;NA&gt;   &lt;NULL&gt;               any_ae   &lt;NULL&gt;                           attributes  label     Variable Label any_ae    &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
- 2 &lt;NA&gt;   &lt;NULL&gt;               any_ae   &lt;NULL&gt;                           attributes  class     Variable Class logical   &lt;NULL&gt;  &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
- 3 ARM    Placebo              any_ae   Any AE                           categorical n         n              65        0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
- 4 ARM    Placebo              SEX      F                                categorical n         n              40        0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
- 5 ARM    Placebo              SEX      M                                categorical n         n              25        0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
- 6 ARM    Placebo              AGEGR1   18-64                            categorical n         n              10        0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
- 7 ARM    Placebo              AGEGR1   &gt;64                              categorical n         n              55        0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
- 8 ARM    Placebo              RACE     AMERICAN INDIAN OR ALASKA NATIVE categorical n         n              0         0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
- 9 ARM    Placebo              RACE     BLACK OR AFRICAN AMERICAN        categorical n         n              6         0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
-10 ARM    Placebo              RACE     WHITE                            categorical n         n              59        0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
-11 ARM    Placebo              ETHNIC   HISPANIC OR LATINO               categorical n         n              3         0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
-12 ARM    Placebo              ETHNIC   NOT HISPANIC OR LATINO           categorical n         n              62        0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
-13 ARM    Placebo              any_ae   Any AE                           categorical N_s       N_s            86        0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
-14 ARM    Placebo              SEX      F                                categorical N_s       N_s            53        0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
-15 ARM    Placebo              SEX      M                                categorical N_s       N_s            33        0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
-16 ARM    Placebo              AGEGR1   18-64                            categorical N_s       N_s            14        0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
-17 ARM    Placebo              AGEGR1   &gt;64                              categorical N_s       N_s            72        0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
-18 ARM    Placebo              RACE     AMERICAN INDIAN OR ALASKA NATIVE categorical N_s       N_s            0         0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
-19 ARM    Placebo              RACE     BLACK OR AFRICAN AMERICAN        categorical N_s       N_s            8         0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
-20 ARM    Placebo              RACE     WHITE                            categorical N_s       N_s            78        0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
-21 ARM    Placebo              ETHNIC   HISPANIC OR LATINO               categorical N_s       N_s            3         0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
-22 ARM    Placebo              ETHNIC   NOT HISPANIC OR LATINO           categorical N_s       N_s            83        0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
-23 ARM    Placebo              any_ae   Any AE                           categorical p         %              0.755814  &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
-24 ARM    Placebo              SEX      F                                categorical p         %              0.754717  &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
-25 ARM    Placebo              SEX      M                                categorical p         %              0.7575758 &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
-26 ARM    Placebo              AGEGR1   18-64                            categorical p         %              0.7142857 &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
-27 ARM    Placebo              AGEGR1   &gt;64                              categorical p         %              0.7638889 &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
-28 ARM    Placebo              RACE     AMERICAN INDIAN OR ALASKA NATIVE categorical p         %              0         &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
-29 ARM    Placebo              RACE     BLACK OR AFRICAN AMERICAN        categorical p         %              0.75      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
-30 ARM    Placebo              RACE     WHITE                            categorical p         %              0.7564103 &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
-31 ARM    Placebo              ETHNIC   HISPANIC OR LATINO               categorical p         %              1         &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
-32 ARM    Placebo              ETHNIC   NOT HISPANIC OR LATINO           categorical p         %              0.746988  &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
-33 ARM    Xanomeline High Dose any_ae   Any AE                           categorical n         n              75        0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
-34 ARM    Xanomeline High Dose SEX      F                                categorical n         n              36        0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
-35 ARM    Xanomeline High Dose SEX      M                                categorical n         n              39        0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
-36 ARM    Xanomeline High Dose AGEGR1   18-64                            categorical n         n              10        0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
-37 ARM    Xanomeline High Dose AGEGR1   &gt;64                              categorical n         n              65        0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
-38 ARM    Xanomeline High Dose RACE     AMERICAN INDIAN OR ALASKA NATIVE categorical n         n              1         0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
-39 ARM    Xanomeline High Dose RACE     BLACK OR AFRICAN AMERICAN        categorical n         n              7         0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
-40 ARM    Xanomeline High Dose RACE     WHITE                            categorical n         n              67        0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
-# ℹ 63 more rows</code></pre>
+    group1 group1_level         variable variable_level                   context     stat_name stat_label     stat             fmt_fun warning error  gts_column
+    &lt;chr&gt;  &lt;list&gt;               &lt;chr&gt;    &lt;list&gt;                           &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt;          &lt;list&gt;           &lt;list&gt;  &lt;list&gt;  &lt;list&gt; &lt;chr&gt;     
+  1 &lt;NA&gt;   &lt;NULL&gt;               any_ae   &lt;NULL&gt;                           attributes  label     Variable Label any_ae           &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+  2 &lt;NA&gt;   &lt;NULL&gt;               any_ae   &lt;NULL&gt;                           attributes  class     Variable Class logical          &lt;NULL&gt;  &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+  3 ARM    Placebo              any_ae   Any AE                           categorical n         n              65               0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+  4 ARM    Placebo              SEX      F                                categorical n         n              40               0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+  5 ARM    Placebo              SEX      M                                categorical n         n              25               0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+  6 ARM    Placebo              AGEGR1   18-64                            categorical n         n              10               0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+  7 ARM    Placebo              AGEGR1   &gt;64                              categorical n         n              55               0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+  8 ARM    Placebo              RACE     AMERICAN INDIAN OR ALASKA NATIVE categorical n         n              0                0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+  9 ARM    Placebo              RACE     BLACK OR AFRICAN AMERICAN        categorical n         n              6                0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 10 ARM    Placebo              RACE     WHITE                            categorical n         n              59               0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 11 ARM    Placebo              ETHNIC   HISPANIC OR LATINO               categorical n         n              3                0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 12 ARM    Placebo              ETHNIC   NOT HISPANIC OR LATINO           categorical n         n              62               0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 13 ARM    Placebo              any_ae   Any AE                           categorical N_s       N_s            86               0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 14 ARM    Placebo              SEX      F                                categorical N_s       N_s            53               0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 15 ARM    Placebo              SEX      M                                categorical N_s       N_s            33               0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 16 ARM    Placebo              AGEGR1   18-64                            categorical N_s       N_s            14               0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 17 ARM    Placebo              AGEGR1   &gt;64                              categorical N_s       N_s            72               0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 18 ARM    Placebo              RACE     AMERICAN INDIAN OR ALASKA NATIVE categorical N_s       N_s            0                0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 19 ARM    Placebo              RACE     BLACK OR AFRICAN AMERICAN        categorical N_s       N_s            8                0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 20 ARM    Placebo              RACE     WHITE                            categorical N_s       N_s            78               0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 21 ARM    Placebo              ETHNIC   HISPANIC OR LATINO               categorical N_s       N_s            3                0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 22 ARM    Placebo              ETHNIC   NOT HISPANIC OR LATINO           categorical N_s       N_s            83               0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 23 ARM    Placebo              any_ae   Any AE                           categorical p         %              0.755814         &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 24 ARM    Placebo              SEX      F                                categorical p         %              0.754717         &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 25 ARM    Placebo              SEX      M                                categorical p         %              0.7575758        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 26 ARM    Placebo              AGEGR1   18-64                            categorical p         %              0.7142857        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 27 ARM    Placebo              AGEGR1   &gt;64                              categorical p         %              0.7638889        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 28 ARM    Placebo              RACE     AMERICAN INDIAN OR ALASKA NATIVE categorical p         %              0                &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 29 ARM    Placebo              RACE     BLACK OR AFRICAN AMERICAN        categorical p         %              0.75             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 30 ARM    Placebo              RACE     WHITE                            categorical p         %              0.7564103        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 31 ARM    Placebo              ETHNIC   HISPANIC OR LATINO               categorical p         %              1                &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 32 ARM    Placebo              ETHNIC   NOT HISPANIC OR LATINO           categorical p         %              0.746988         &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 33 ARM    Xanomeline High Dose any_ae   Any AE                           categorical n         n              75               0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 34 ARM    Xanomeline High Dose SEX      F                                categorical n         n              36               0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 35 ARM    Xanomeline High Dose SEX      M                                categorical n         n              39               0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 36 ARM    Xanomeline High Dose AGEGR1   18-64                            categorical n         n              10               0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 37 ARM    Xanomeline High Dose AGEGR1   &gt;64                              categorical n         n              65               0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 38 ARM    Xanomeline High Dose RACE     AMERICAN INDIAN OR ALASKA NATIVE categorical n         n              1                0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 39 ARM    Xanomeline High Dose RACE     BLACK OR AFRICAN AMERICAN        categorical n         n              7                0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 40 ARM    Xanomeline High Dose RACE     WHITE                            categorical n         n              67               0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 41 ARM    Xanomeline High Dose ETHNIC   HISPANIC OR LATINO               categorical n         n              3                0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 42 ARM    Xanomeline High Dose ETHNIC   NOT HISPANIC OR LATINO           categorical n         n              72               0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 43 ARM    Xanomeline High Dose any_ae   Any AE                           categorical N_s       N_s            84               0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 44 ARM    Xanomeline High Dose SEX      F                                categorical N_s       N_s            40               0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 45 ARM    Xanomeline High Dose SEX      M                                categorical N_s       N_s            44               0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 46 ARM    Xanomeline High Dose AGEGR1   18-64                            categorical N_s       N_s            11               0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 47 ARM    Xanomeline High Dose AGEGR1   &gt;64                              categorical N_s       N_s            73               0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 48 ARM    Xanomeline High Dose RACE     AMERICAN INDIAN OR ALASKA NATIVE categorical N_s       N_s            1                0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 49 ARM    Xanomeline High Dose RACE     BLACK OR AFRICAN AMERICAN        categorical N_s       N_s            9                0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 50 ARM    Xanomeline High Dose RACE     WHITE                            categorical N_s       N_s            74               0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 51 ARM    Xanomeline High Dose ETHNIC   HISPANIC OR LATINO               categorical N_s       N_s            3                0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 52 ARM    Xanomeline High Dose ETHNIC   NOT HISPANIC OR LATINO           categorical N_s       N_s            81               0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 53 ARM    Xanomeline High Dose any_ae   Any AE                           categorical p         %              0.8928571        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 54 ARM    Xanomeline High Dose SEX      F                                categorical p         %              0.9              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 55 ARM    Xanomeline High Dose SEX      M                                categorical p         %              0.8863636        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 56 ARM    Xanomeline High Dose AGEGR1   18-64                            categorical p         %              0.9090909        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 57 ARM    Xanomeline High Dose AGEGR1   &gt;64                              categorical p         %              0.890411         &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 58 ARM    Xanomeline High Dose RACE     AMERICAN INDIAN OR ALASKA NATIVE categorical p         %              1                &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 59 ARM    Xanomeline High Dose RACE     BLACK OR AFRICAN AMERICAN        categorical p         %              0.7777778        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 60 ARM    Xanomeline High Dose RACE     WHITE                            categorical p         %              0.9054054        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 61 ARM    Xanomeline High Dose ETHNIC   HISPANIC OR LATINO               categorical p         %              1                &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 62 ARM    Xanomeline High Dose ETHNIC   NOT HISPANIC OR LATINO           categorical p         %              0.8888889        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 63 ARM    Xanomeline Low Dose  any_ae   Any AE                           categorical n         n              77               0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 64 ARM    Xanomeline Low Dose  SEX      F                                categorical n         n              44               0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 65 ARM    Xanomeline Low Dose  SEX      M                                categorical n         n              33               0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 66 ARM    Xanomeline Low Dose  AGEGR1   18-64                            categorical n         n              8                0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 67 ARM    Xanomeline Low Dose  AGEGR1   &gt;64                              categorical n         n              69               0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 68 ARM    Xanomeline Low Dose  RACE     AMERICAN INDIAN OR ALASKA NATIVE categorical n         n              0                0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 69 ARM    Xanomeline Low Dose  RACE     BLACK OR AFRICAN AMERICAN        categorical n         n              4                0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 70 ARM    Xanomeline Low Dose  RACE     WHITE                            categorical n         n              73               0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 71 ARM    Xanomeline Low Dose  ETHNIC   HISPANIC OR LATINO               categorical n         n              6                0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 72 ARM    Xanomeline Low Dose  ETHNIC   NOT HISPANIC OR LATINO           categorical n         n              71               0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 73 ARM    Xanomeline Low Dose  any_ae   Any AE                           categorical N_s       N_s            84               0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 74 ARM    Xanomeline Low Dose  SEX      F                                categorical N_s       N_s            50               0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 75 ARM    Xanomeline Low Dose  SEX      M                                categorical N_s       N_s            34               0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 76 ARM    Xanomeline Low Dose  AGEGR1   18-64                            categorical N_s       N_s            8                0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 77 ARM    Xanomeline Low Dose  AGEGR1   &gt;64                              categorical N_s       N_s            76               0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 78 ARM    Xanomeline Low Dose  RACE     AMERICAN INDIAN OR ALASKA NATIVE categorical N_s       N_s            0                0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 79 ARM    Xanomeline Low Dose  RACE     BLACK OR AFRICAN AMERICAN        categorical N_s       N_s            6                0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 80 ARM    Xanomeline Low Dose  RACE     WHITE                            categorical N_s       N_s            78               0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 81 ARM    Xanomeline Low Dose  ETHNIC   HISPANIC OR LATINO               categorical N_s       N_s            6                0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 82 ARM    Xanomeline Low Dose  ETHNIC   NOT HISPANIC OR LATINO           categorical N_s       N_s            78               0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 83 ARM    Xanomeline Low Dose  any_ae   Any AE                           categorical p         %              0.9166667        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 84 ARM    Xanomeline Low Dose  SEX      F                                categorical p         %              0.88             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 85 ARM    Xanomeline Low Dose  SEX      M                                categorical p         %              0.9705882        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 86 ARM    Xanomeline Low Dose  AGEGR1   18-64                            categorical p         %              1                &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 87 ARM    Xanomeline Low Dose  AGEGR1   &gt;64                              categorical p         %              0.9078947        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 88 ARM    Xanomeline Low Dose  RACE     AMERICAN INDIAN OR ALASKA NATIVE categorical p         %              0                &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 89 ARM    Xanomeline Low Dose  RACE     BLACK OR AFRICAN AMERICAN        categorical p         %              0.6666667        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 90 ARM    Xanomeline Low Dose  RACE     WHITE                            categorical p         %              0.9358974        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 91 ARM    Xanomeline Low Dose  ETHNIC   HISPANIC OR LATINO               categorical p         %              1                &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 92 ARM    Xanomeline Low Dose  ETHNIC   NOT HISPANIC OR LATINO           categorical p         %              0.9102564        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 93 &lt;NA&gt;   &lt;NULL&gt;               ARM      Placebo                          categorical n         n              86               0       &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+ 94 &lt;NA&gt;   &lt;NULL&gt;               ARM      Xanomeline High Dose             categorical n         n              84               0       &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+ 95 &lt;NA&gt;   &lt;NULL&gt;               ARM      Xanomeline Low Dose              categorical n         n              84               0       &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+ 96 &lt;NA&gt;   &lt;NULL&gt;               SEX      &lt;NULL&gt;                           attributes  label     Variable Label Sex              &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+ 97 &lt;NA&gt;   &lt;NULL&gt;               SEX      &lt;NULL&gt;                           attributes  class     Variable Class logical          &lt;NULL&gt;  &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+ 98 &lt;NA&gt;   &lt;NULL&gt;               AGEGR1   &lt;NULL&gt;                           attributes  label     Variable Label Age Group, years &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+ 99 &lt;NA&gt;   &lt;NULL&gt;               AGEGR1   &lt;NULL&gt;                           attributes  class     Variable Class logical          &lt;NULL&gt;  &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+100 &lt;NA&gt;   &lt;NULL&gt;               RACE     &lt;NULL&gt;                           attributes  label     Variable Label Race             &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+101 &lt;NA&gt;   &lt;NULL&gt;               RACE     &lt;NULL&gt;                           attributes  class     Variable Class logical          &lt;NULL&gt;  &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+102 &lt;NA&gt;   &lt;NULL&gt;               ETHNIC   &lt;NULL&gt;                           attributes  label     Variable Label Ethnicity        &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      
+103 &lt;NA&gt;   &lt;NULL&gt;               ETHNIC   &lt;NULL&gt;                           attributes  class     Variable Class logical          &lt;NULL&gt;  &lt;NULL&gt;  &lt;NULL&gt; &lt;NA&gt;      </code></pre>
 </div>
 </div>
 </div>
@@ -1596,130 +1670,59 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb5-4"><a href="#cb5-4"></a><span class="an">categories:</span><span class="co"> [table, FDA, safety, adverse events]</span></span>
 <span id="cb5-5"><a href="#cb5-5"></a><span class="co">---</span></span>
 <span id="cb5-6"><a href="#cb5-6"></a></span>
-<span id="cb5-7"><a href="#cb5-7"></a>::: panel-tabset</span>
-<span id="cb5-8"><a href="#cb5-8"></a><span class="fu">## Table Preview</span></span>
-<span id="cb5-9"><a href="#cb5-9"></a></span>
-<span id="cb5-10"><a href="#cb5-10"></a><span class="in">```{r img, echo=FALSE, fig.align='center', out.width='65%'}</span></span>
-<span id="cb5-11"><a href="#cb5-11"></a><span class="in">knitr::include_graphics("result.png")</span></span>
-<span id="cb5-12"><a href="#cb5-12"></a><span class="in">```</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a>::::: columns</span>
+<span id="cb5-8"><a href="#cb5-8"></a></span>
+<span id="cb5-9"><a href="#cb5-9"></a>:::: {.column width="52%"}</span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="fu">### FDA IG Shell</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a></span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="al">![](ig_shell.png)</span>{fig-alt="FDA IG example table shell" .lightbox width=100%}</span>
 <span id="cb5-13"><a href="#cb5-13"></a></span>
-<span id="cb5-14"><a href="#cb5-14"></a><span class="fu">## Setup</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a><span class="fu">### Programming Notes</span></span>
 <span id="cb5-15"><a href="#cb5-15"></a></span>
-<span id="cb5-16"><a href="#cb5-16"></a><span class="in">```{r setup, message=FALSE}</span></span>
-<span id="cb5-17"><a href="#cb5-17"></a><span class="in"># Load libraries &amp; data -------------------------------------</span></span>
-<span id="cb5-18"><a href="#cb5-18"></a><span class="in">library(dplyr)</span></span>
-<span id="cb5-19"><a href="#cb5-19"></a><span class="in">library(cards)</span></span>
-<span id="cb5-20"><a href="#cb5-20"></a><span class="in">library(gtsummary)</span></span>
+<span id="cb5-16"><a href="#cb5-16"></a>**Background and Instructions**</span>
+<span id="cb5-17"><a href="#cb5-17"></a></span>
+<span id="cb5-18"><a href="#cb5-18"></a>Table 50: Overview of Serious Adverse Events by Demographic Subgroup and Table 51: Overview of Adverse Events by Demographic Subgroup in this section display placeholder values for the demographic characteristics for subgroup analysis of SAEs and AEs. These placeholder values will change to reflect the values found in the clinical trial data. When CDISC-controlled terminology is used in the clinical trial data, the demographic characteristics in this table will reflect the controlled terminology.</span>
+<span id="cb5-19"><a href="#cb5-19"></a></span>
+<span id="cb5-20"><a href="#cb5-20"></a>**Customization**</span>
 <span id="cb5-21"><a href="#cb5-21"></a></span>
-<span id="cb5-22"><a href="#cb5-22"></a><span class="in">adae &lt;- pharmaverseadam::adae</span></span>
-<span id="cb5-23"><a href="#cb5-23"></a><span class="in">adsl &lt;- pharmaverseadam::adsl</span></span>
-<span id="cb5-24"><a href="#cb5-24"></a></span>
-<span id="cb5-25"><a href="#cb5-25"></a><span class="in">adsl &lt;- adsl |&gt;</span></span>
-<span id="cb5-26"><a href="#cb5-26"></a><span class="in">  filter(SAFFL == "Y") |&gt;</span></span>
-<span id="cb5-27"><a href="#cb5-27"></a><span class="in">  mutate(any_ae = "Any AE")</span></span>
+<span id="cb5-22"><a href="#cb5-22"></a>Provide any additional potentially relevant subgroups beyond the standard demographic ones that may shed light on which subjects are most susceptible to the safety event (e.g., baseline diseases <span class="co">[</span><span class="ot">e.g., cardiovascular disease or diabetes, or by CKD stage</span><span class="co">]</span>, concomitant medication, anthropometric characteristics <span class="co">[</span><span class="ot">e.g., BMI</span><span class="co">]</span>). The clinical reviewer should discuss appropriate age groups for the subgroup analysis with the CDS.</span>
+<span id="cb5-23"><a href="#cb5-23"></a></span>
+<span id="cb5-24"><a href="#cb5-24"></a>::::</span>
+<span id="cb5-25"><a href="#cb5-25"></a></span>
+<span id="cb5-26"><a href="#cb5-26"></a>:::: {.column width="4%"}</span>
+<span id="cb5-27"><a href="#cb5-27"></a>::::</span>
 <span id="cb5-28"><a href="#cb5-28"></a></span>
-<span id="cb5-29"><a href="#cb5-29"></a><span class="in">data &lt;- adae |&gt;</span></span>
-<span id="cb5-30"><a href="#cb5-30"></a><span class="in">  filter(</span></span>
-<span id="cb5-31"><a href="#cb5-31"></a><span class="in">    SAFFL == "Y",</span></span>
-<span id="cb5-32"><a href="#cb5-32"></a><span class="in">    TRTEMFL == "Y"</span></span>
-<span id="cb5-33"><a href="#cb5-33"></a><span class="in">  ) |&gt;</span></span>
-<span id="cb5-34"><a href="#cb5-34"></a><span class="in">  mutate(any_ae = "Any AE") |&gt;</span></span>
-<span id="cb5-35"><a href="#cb5-35"></a><span class="in">  # subset to one AE per subject</span></span>
-<span id="cb5-36"><a href="#cb5-36"></a><span class="in">  dplyr::slice_tail(n = 1L, by = all_of(c("USUBJID", "ARM")))</span></span>
-<span id="cb5-37"><a href="#cb5-37"></a><span class="in">```</span></span>
-<span id="cb5-38"><a href="#cb5-38"></a></span>
-<span id="cb5-39"><a href="#cb5-39"></a><span class="fu">## Build Table</span></span>
-<span id="cb5-40"><a href="#cb5-40"></a></span>
-<span id="cb5-41"><a href="#cb5-41"></a><span class="in">```{r tbl, message=FALSE, warning=FALSE}</span></span>
-<span id="cb5-42"><a href="#cb5-42"></a><span class="in"># generate ARD for `n` statistic</span></span>
-<span id="cb5-43"><a href="#cb5-43"></a><span class="in">ard_summary &lt;- data |&gt;</span></span>
-<span id="cb5-44"><a href="#cb5-44"></a><span class="in">  ard_categorical(</span></span>
-<span id="cb5-45"><a href="#cb5-45"></a><span class="in">    variables = c(any_ae, SEX, AGEGR1, RACE, ETHNIC),</span></span>
-<span id="cb5-46"><a href="#cb5-46"></a><span class="in">    by = ARM,</span></span>
-<span id="cb5-47"><a href="#cb5-47"></a><span class="in">    statistic = ~"n"</span></span>
-<span id="cb5-48"><a href="#cb5-48"></a><span class="in">  )</span></span>
-<span id="cb5-49"><a href="#cb5-49"></a></span>
-<span id="cb5-50"><a href="#cb5-50"></a><span class="in"># generate ARD for `N_s` statistic</span></span>
-<span id="cb5-51"><a href="#cb5-51"></a><span class="in">ard_Ns &lt;- adsl |&gt;</span></span>
-<span id="cb5-52"><a href="#cb5-52"></a><span class="in">  ard_categorical(</span></span>
-<span id="cb5-53"><a href="#cb5-53"></a><span class="in">    variables = c(any_ae, SEX, AGEGR1, RACE, ETHNIC),</span></span>
-<span id="cb5-54"><a href="#cb5-54"></a><span class="in">    by = ARM,</span></span>
-<span id="cb5-55"><a href="#cb5-55"></a><span class="in">    statistic = ~"n",</span></span>
-<span id="cb5-56"><a href="#cb5-56"></a><span class="in">    stat_label = ~ list(n = "N_s")</span></span>
-<span id="cb5-57"><a href="#cb5-57"></a><span class="in">  ) |&gt;</span></span>
-<span id="cb5-58"><a href="#cb5-58"></a><span class="in">  mutate(stat_name = "N_s")</span></span>
-<span id="cb5-59"><a href="#cb5-59"></a></span>
-<span id="cb5-60"><a href="#cb5-60"></a><span class="in"># generate ARD for `p` statistic</span></span>
-<span id="cb5-61"><a href="#cb5-61"></a><span class="in">ard_p &lt;-</span></span>
-<span id="cb5-62"><a href="#cb5-62"></a><span class="in">  cards::bind_ard(</span></span>
-<span id="cb5-63"><a href="#cb5-63"></a><span class="in">    ard_summary,</span></span>
-<span id="cb5-64"><a href="#cb5-64"></a><span class="in">    ard_Ns</span></span>
-<span id="cb5-65"><a href="#cb5-65"></a><span class="in">  ) |&gt;</span></span>
-<span id="cb5-66"><a href="#cb5-66"></a><span class="in">  select(-stat_label) |&gt;</span></span>
-<span id="cb5-67"><a href="#cb5-67"></a><span class="in">  tidyr::pivot_wider(names_from = stat_name, values_from = stat, values_fn = unlist) |&gt;</span></span>
-<span id="cb5-68"><a href="#cb5-68"></a><span class="in">  rowwise() |&gt;</span></span>
-<span id="cb5-69"><a href="#cb5-69"></a><span class="in">  mutate(</span></span>
-<span id="cb5-70"><a href="#cb5-70"></a><span class="in">    stat_name = "p",</span></span>
-<span id="cb5-71"><a href="#cb5-71"></a><span class="in">    stat_label = "%",</span></span>
-<span id="cb5-72"><a href="#cb5-72"></a><span class="in">    stat = if_else(n &gt; 0, list(n / N_s), list(0)),</span></span>
-<span id="cb5-73"><a href="#cb5-73"></a><span class="in">    fmt_fun = list(label_round(digits = 1, scale = 100))</span></span>
-<span id="cb5-74"><a href="#cb5-74"></a><span class="in">  ) |&gt;</span></span>
-<span id="cb5-75"><a href="#cb5-75"></a><span class="in">  select(-n, -N_s)</span></span>
-<span id="cb5-76"><a href="#cb5-76"></a></span>
-<span id="cb5-77"><a href="#cb5-77"></a><span class="in"># combine all ARDs</span></span>
-<span id="cb5-78"><a href="#cb5-78"></a><span class="in">ard &lt;- cards::bind_ard(ard_summary, ard_Ns, ard_p, ard_categorical(adsl, variables = ARM, statistic = ~"n")) |&gt;</span></span>
-<span id="cb5-79"><a href="#cb5-79"></a><span class="in">  cards::tidy_ard_row_order()</span></span>
-<span id="cb5-80"><a href="#cb5-80"></a></span>
-<span id="cb5-81"><a href="#cb5-81"></a><span class="in"># generate table from ARDs</span></span>
-<span id="cb5-82"><a href="#cb5-82"></a><span class="in">tbl &lt;-</span></span>
-<span id="cb5-83"><a href="#cb5-83"></a><span class="in">  tbl_ard_summary(</span></span>
-<span id="cb5-84"><a href="#cb5-84"></a><span class="in">    ard,</span></span>
-<span id="cb5-85"><a href="#cb5-85"></a><span class="in">    by = ARM,</span></span>
-<span id="cb5-86"><a href="#cb5-86"></a><span class="in">    # set variable labels</span></span>
-<span id="cb5-87"><a href="#cb5-87"></a><span class="in">    label = list(</span></span>
-<span id="cb5-88"><a href="#cb5-88"></a><span class="in">      SEX = "Sex",</span></span>
-<span id="cb5-89"><a href="#cb5-89"></a><span class="in">      AGEGR1 = "Age Group, years",</span></span>
-<span id="cb5-90"><a href="#cb5-90"></a><span class="in">      RACE = "Race",</span></span>
-<span id="cb5-91"><a href="#cb5-91"></a><span class="in">      ETHNIC = "Ethnicity"</span></span>
-<span id="cb5-92"><a href="#cb5-92"></a><span class="in">    )</span></span>
-<span id="cb5-93"><a href="#cb5-93"></a><span class="in">  ) |&gt;</span></span>
-<span id="cb5-94"><a href="#cb5-94"></a><span class="in">  gtsummary::modify_table_body(</span></span>
-<span id="cb5-95"><a href="#cb5-95"></a><span class="in">    \(x) x |&gt; filter(!label %in% "any_ae")</span></span>
-<span id="cb5-96"><a href="#cb5-96"></a><span class="in">  ) |&gt;</span></span>
-<span id="cb5-97"><a href="#cb5-97"></a><span class="in">  gtsummary::modify_indent(columns = label, rows = variable == "any_ae", indent = 0L) |&gt;</span></span>
-<span id="cb5-98"><a href="#cb5-98"></a><span class="in">  # update statistic footnote</span></span>
-<span id="cb5-99"><a href="#cb5-99"></a><span class="in">  gtsummary::modify_footnote_header(</span></span>
-<span id="cb5-100"><a href="#cb5-100"></a><span class="in">    footnote = "n/N_s (%)",</span></span>
-<span id="cb5-101"><a href="#cb5-101"></a><span class="in">    columns = all_stat_cols()</span></span>
-<span id="cb5-102"><a href="#cb5-102"></a><span class="in">  ) |&gt;</span></span>
-<span id="cb5-103"><a href="#cb5-103"></a><span class="in">  gtsummary::modify_header(all_stat_cols() ~ "**{level}**  \n N = {n}")</span></span>
-<span id="cb5-104"><a href="#cb5-104"></a></span>
-<span id="cb5-105"><a href="#cb5-105"></a><span class="in">tbl</span></span>
-<span id="cb5-106"><a href="#cb5-106"></a><span class="in">```</span></span>
-<span id="cb5-107"><a href="#cb5-107"></a></span>
-<span id="cb5-108"><a href="#cb5-108"></a><span class="in">```{r eval=FALSE, include=FALSE}</span></span>
-<span id="cb5-109"><a href="#cb5-109"></a><span class="in"># Run chunk locally to generate image file</span></span>
-<span id="cb5-110"><a href="#cb5-110"></a><span class="in">gt::gtsave(as_gt(tbl), filename = "result.png")</span></span>
-<span id="cb5-111"><a href="#cb5-111"></a><span class="in">```</span></span>
-<span id="cb5-112"><a href="#cb5-112"></a></span>
-<span id="cb5-113"><a href="#cb5-113"></a><span class="in">```{r img, echo=FALSE, fig.align='center', out.width='65%'}</span></span>
-<span id="cb5-114"><a href="#cb5-114"></a><span class="in">```</span></span>
-<span id="cb5-115"><a href="#cb5-115"></a></span>
-<span id="cb5-116"><a href="#cb5-116"></a><span class="fu">## Build ARD</span></span>
-<span id="cb5-117"><a href="#cb5-117"></a></span>
-<span id="cb5-118"><a href="#cb5-118"></a><span class="in">```{r ard, message=FALSE, warning=FALSE, results='hide'}</span></span>
-<span id="cb5-119"><a href="#cb5-119"></a><span class="in">ard &lt;- gather_ard(tbl)</span></span>
-<span id="cb5-120"><a href="#cb5-120"></a></span>
-<span id="cb5-121"><a href="#cb5-121"></a><span class="in">ard</span></span>
-<span id="cb5-122"><a href="#cb5-122"></a><span class="in">```</span></span>
-<span id="cb5-123"><a href="#cb5-123"></a></span>
-<span id="cb5-124"><a href="#cb5-124"></a><span class="in">```{r, echo=FALSE}</span></span>
-<span id="cb5-125"><a href="#cb5-125"></a><span class="in"># Print ARD</span></span>
-<span id="cb5-126"><a href="#cb5-126"></a><span class="in">withr::local_options(width = 9999)</span></span>
-<span id="cb5-127"><a href="#cb5-127"></a><span class="in">print(ard, columns = "all", n = 40, na.print = NULL)</span></span>
-<span id="cb5-128"><a href="#cb5-128"></a><span class="in">```</span></span>
-<span id="cb5-129"><a href="#cb5-129"></a></span>
-<span id="cb5-130"><a href="#cb5-130"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb5-29"><a href="#cb5-29"></a>:::: {.column width="44%"}</span>
+<span id="cb5-30"><a href="#cb5-30"></a><span class="fu">### Output</span></span>
+<span id="cb5-31"><a href="#cb5-31"></a></span>
+<span id="cb5-32"><a href="#cb5-32"></a><span class="in">```{r out-result, echo=FALSE, fig.align='center', out.width='100%'}</span></span>
+<span id="cb5-33"><a href="#cb5-33"></a><span class="in">knitr::include_graphics("result.png")</span></span>
+<span id="cb5-34"><a href="#cb5-34"></a><span class="in">```</span></span>
+<span id="cb5-35"><a href="#cb5-35"></a></span>
+<span id="cb5-36"><a href="#cb5-36"></a>::::</span>
+<span id="cb5-37"><a href="#cb5-37"></a></span>
+<span id="cb5-38"><a href="#cb5-38"></a>:::::</span>
+<span id="cb5-39"><a href="#cb5-39"></a></span>
+<span id="cb5-40"><a href="#cb5-40"></a>::: panel-tabset</span>
+<span id="cb5-41"><a href="#cb5-41"></a><span class="fu">## Full Code</span></span>
+<span id="cb5-42"><a href="#cb5-42"></a></span>
+<span id="cb5-43"><a href="#cb5-43"></a><span class="in">```{r fullcode, file="../../../inst/templates/fda-table_51.R", message=FALSE, warning=FALSE, results='hide'}</span></span>
+<span id="cb5-44"><a href="#cb5-44"></a><span class="in">```</span></span>
+<span id="cb5-45"><a href="#cb5-45"></a></span>
+<span id="cb5-46"><a href="#cb5-46"></a><span class="fu">## Table</span></span>
+<span id="cb5-47"><a href="#cb5-47"></a></span>
+<span id="cb5-48"><a href="#cb5-48"></a><span class="in">```{r tbl}</span></span>
+<span id="cb5-49"><a href="#cb5-49"></a><span class="in">tbl</span></span>
+<span id="cb5-50"><a href="#cb5-50"></a><span class="in">```</span></span>
+<span id="cb5-51"><a href="#cb5-51"></a></span>
+<span id="cb5-52"><a href="#cb5-52"></a><span class="fu">## ARD</span></span>
+<span id="cb5-53"><a href="#cb5-53"></a></span>
+<span id="cb5-54"><a href="#cb5-54"></a><span class="in">```{r ard, message=FALSE, warning=FALSE}</span></span>
+<span id="cb5-55"><a href="#cb5-55"></a><span class="in">withr::local_options(width = 9999, tibble.print_max = Inf)</span></span>
+<span id="cb5-56"><a href="#cb5-56"></a><span class="in">print(ard, columns = "all")</span></span>
+<span id="cb5-57"><a href="#cb5-57"></a><span class="in">```</span></span>
+<span id="cb5-58"><a href="#cb5-58"></a></span>
+<span id="cb5-59"><a href="#cb5-59"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
@@ -1737,7 +1740,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       &nbsp;
     </div>
   </div>
-</footer>
+</footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 <script src="../../../site_libs/quarto-html/zenscroll-min.js"></script>

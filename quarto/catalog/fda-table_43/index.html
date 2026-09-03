@@ -72,7 +72,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../../site_libs/bootstrap/bootstrap-b9dbead50e81c18249e2e1e9b4aaddfa.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-046be37f67332dfcbae0104d3ddeb5a1.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+<link href="../../../site_libs/bootstrap/bootstrap-dark-046be37f67332dfcbae0104d3ddeb5a1.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": true,
   "collapse-after": 3,
@@ -128,10 +131,11 @@ cookieconsent.run({
 <link rel="stylesheet" href="../../../quarto/assets/style.scss">
 <meta property="og:title" content="Subjects With Adverse Events by Organ System, OCMQ (Broad) and Preferred Term, Safety Population, Pooled Analysis (or Trial X) – Cardinal">
 <meta property="og:description" content="FDA Table 43">
-<meta property="og:image" content="https://pharmaverse.github.io/cardinal/quarto/catalog/fda-table_43/result.png">
+<meta property="og:image" content="https://pharmaverse.github.io/cardinal/quarto/catalog/fda-table_43/ig_shell.png">
 <meta property="og:site_name" content="Cardinal">
-<meta property="og:image:height" content="1510">
-<meta property="og:image:width" content="1844">
+<meta property="og:image:alt" content="FDA IG example table shell">
+<meta property="og:image:height" content="1142">
+<meta property="og:image:width" content="1541">
 </head>
 <body class="nav-fixed">
 
@@ -230,151 +234,857 @@ cookieconsent.run({
   
 
 
-</header><div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Table Preview</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Setup</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Build ARD</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false">Build Table</a></li>
-</ul>
-<div class="tab-content">
-<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+</header><div class="columns">
+<div class="column" style="width:52%;">
+<section id="fda-ig-shell" class="level3"><h3 class="anchored" data-anchor-id="fda-ig-shell">FDA IG Shell</h3>
+<p><a href="ig_shell.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="ig_shell.png" class="img-fluid" style="width:100.0%" alt="FDA IG example table shell"></a></p>
+</section><section id="programming-notes" class="level3"><h3 class="anchored" data-anchor-id="programming-notes">Programming Notes</h3>
+<p><strong>Background and Instructions</strong></p>
+<p>N/A (per FDA IG)</p>
+<p><strong>Customization</strong></p>
+<p>N/A (per FDA IG)</p>
+</section>
+</div><div class="column" style="width:4%;">
+
+</div><div class="column" style="width:44%;">
+<section id="output" class="level3"><h3 class="anchored" data-anchor-id="output">Output</h3>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="result.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:45.0%"></p>
+<figure class="figure"><p><img src="result.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
+</div>
+</section>
+</div>
+</div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Full Code</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Table</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">ARD</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># FDA TABLE 43 ---------------------------------------------------------------</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="co"># Self-contained template. Run top-to-bottom to build the objects below.</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="co"># Used by tests via run_template() and published in the catalog.</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="fu">library</span>(cards)</span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="fu">library</span>(gtsummary)</span>
+<span id="cb1-8"><a href="#cb1-8"></a></span>
+<span id="cb1-9"><a href="#cb1-9"></a>adae <span class="ot">&lt;-</span> pharmaverseadam<span class="sc">::</span>adae</span>
+<span id="cb1-10"><a href="#cb1-10"></a>adsl <span class="ot">&lt;-</span> pharmaverseadam<span class="sc">::</span>adsl</span>
+<span id="cb1-11"><a href="#cb1-11"></a></span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb1-13"><a href="#cb1-13"></a>adae <span class="ot">&lt;-</span> adae <span class="sc">|&gt;</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb1-15"><a href="#cb1-15"></a>    <span class="at">AESER =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"Y"</span>, <span class="st">"N"</span>), <span class="at">size =</span> <span class="fu">nrow</span>(adae), <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb1-16"><a href="#cb1-16"></a>    <span class="at">OCMQ01NAM =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"OCMQ1"</span>, <span class="st">"OCMQ2"</span>, <span class="st">"OCMQ3"</span>), <span class="at">size =</span> <span class="fu">nrow</span>(adae), <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb1-17"><a href="#cb1-17"></a>    <span class="at">OCMQ01SC =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"BROAD"</span>, <span class="st">"NARROW"</span>), <span class="at">size =</span> <span class="fu">nrow</span>(adae), <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-18"><a href="#cb1-18"></a>  )</span>
+<span id="cb1-19"><a href="#cb1-19"></a></span>
+<span id="cb1-20"><a href="#cb1-20"></a><span class="co"># Pre-processing --------------------------------------------</span></span>
+<span id="cb1-21"><a href="#cb1-21"></a>adsl <span class="ot">&lt;-</span> adsl <span class="sc">|&gt;</span></span>
+<span id="cb1-22"><a href="#cb1-22"></a>  <span class="fu">filter</span>(SAFFL <span class="sc">==</span> <span class="st">"Y"</span>) <span class="co"># safety population</span></span>
+<span id="cb1-23"><a href="#cb1-23"></a></span>
+<span id="cb1-24"><a href="#cb1-24"></a>data <span class="ot">&lt;-</span> adae <span class="sc">|&gt;</span></span>
+<span id="cb1-25"><a href="#cb1-25"></a>  <span class="fu">filter</span>(</span>
+<span id="cb1-26"><a href="#cb1-26"></a>    <span class="co"># safety population</span></span>
+<span id="cb1-27"><a href="#cb1-27"></a>    SAFFL <span class="sc">==</span> <span class="st">"Y"</span>,</span>
+<span id="cb1-28"><a href="#cb1-28"></a>    <span class="co"># treatment-emergent</span></span>
+<span id="cb1-29"><a href="#cb1-29"></a>    TRTEMFL <span class="sc">==</span> <span class="st">"Y"</span>,</span>
+<span id="cb1-30"><a href="#cb1-30"></a>    <span class="co"># broad OCMQ scope</span></span>
+<span id="cb1-31"><a href="#cb1-31"></a>    OCMQ01SC <span class="sc">==</span> <span class="st">"BROAD"</span>,</span>
+<span id="cb1-32"><a href="#cb1-32"></a>    <span class="co"># filtering here to reduce the size of the table</span></span>
+<span id="cb1-33"><a href="#cb1-33"></a>    AESOC <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"EYE DISORDERS"</span>, <span class="st">"EAR AND LABYRINTH DISORDERS"</span>, <span class="st">"CONGENITAL, FAMILIAL AND GENETIC DISORDERS"</span>)</span>
+<span id="cb1-34"><a href="#cb1-34"></a>  )</span>
+<span id="cb1-35"><a href="#cb1-35"></a></span>
+<span id="cb1-36"><a href="#cb1-36"></a>ard <span class="ot">&lt;-</span> <span class="fu">ard_stack_hierarchical</span>(</span>
+<span id="cb1-37"><a href="#cb1-37"></a>  data,</span>
+<span id="cb1-38"><a href="#cb1-38"></a>  <span class="at">variables =</span> <span class="fu">c</span>(AEBODSYS, OCMQ01NAM, AEDECOD),</span>
+<span id="cb1-39"><a href="#cb1-39"></a>  <span class="at">by =</span> TRT01A,</span>
+<span id="cb1-40"><a href="#cb1-40"></a>  <span class="at">id =</span> USUBJID,</span>
+<span id="cb1-41"><a href="#cb1-41"></a>  <span class="at">denominator =</span> adsl,</span>
+<span id="cb1-42"><a href="#cb1-42"></a>  <span class="co"># variables to include AE rates for</span></span>
+<span id="cb1-43"><a href="#cb1-43"></a>  <span class="at">include =</span> <span class="fu">c</span>(OCMQ01NAM, AEDECOD)</span>
+<span id="cb1-44"><a href="#cb1-44"></a>)</span>
+<span id="cb1-45"><a href="#cb1-45"></a></span>
+<span id="cb1-46"><a href="#cb1-46"></a><span class="co"># create table using ARD-first approach (ARD -&gt; table)</span></span>
+<span id="cb1-47"><a href="#cb1-47"></a>tbl <span class="ot">&lt;-</span></span>
+<span id="cb1-48"><a href="#cb1-48"></a>  <span class="fu">tbl_ard_hierarchical</span>(</span>
+<span id="cb1-49"><a href="#cb1-49"></a>    ard,</span>
+<span id="cb1-50"><a href="#cb1-50"></a>    <span class="at">variables =</span> <span class="fu">c</span>(AEBODSYS, OCMQ01NAM, AEDECOD),</span>
+<span id="cb1-51"><a href="#cb1-51"></a>    <span class="at">by =</span> TRT01A,</span>
+<span id="cb1-52"><a href="#cb1-52"></a>    <span class="co"># variables to display AE rates for</span></span>
+<span id="cb1-53"><a href="#cb1-53"></a>    <span class="at">include =</span> <span class="fu">c</span>(OCMQ01NAM, AEDECOD),</span>
+<span id="cb1-54"><a href="#cb1-54"></a>    <span class="co"># Add custom variable labels</span></span>
+<span id="cb1-55"><a href="#cb1-55"></a>    <span class="at">label =</span> <span class="fu">list</span>(</span>
+<span id="cb1-56"><a href="#cb1-56"></a>      <span class="at">AEBODSYS =</span> <span class="st">"Organ System"</span>,</span>
+<span id="cb1-57"><a href="#cb1-57"></a>      <span class="at">OCMQ01NAM =</span> <span class="st">"OCMQ (Broad)"</span>,</span>
+<span id="cb1-58"><a href="#cb1-58"></a>      <span class="at">AEDECOD =</span> <span class="st">"Preferred Term"</span></span>
+<span id="cb1-59"><a href="#cb1-59"></a>    )</span>
+<span id="cb1-60"><a href="#cb1-60"></a>  )</span>
+<span id="cb1-61"><a href="#cb1-61"></a></span>
+<span id="cb1-62"><a href="#cb1-62"></a></span>
+<span id="cb1-63"><a href="#cb1-63"></a>ard <span class="ot">&lt;-</span> gtsummary<span class="sc">::</span><span class="fu">gather_ard</span>(tbl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <div class="cell">
-<details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Load libraries &amp; data -------------------------------------</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(cards)</span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(gtsummary)</span>
-<span id="cb1-5"><a href="#cb1-5"></a></span>
-<span id="cb1-6"><a href="#cb1-6"></a>adae <span class="ot">&lt;-</span> pharmaverseadam<span class="sc">::</span>adae</span>
-<span id="cb1-7"><a href="#cb1-7"></a>adsl <span class="ot">&lt;-</span> pharmaverseadam<span class="sc">::</span>adsl</span>
-<span id="cb1-8"><a href="#cb1-8"></a></span>
-<span id="cb1-9"><a href="#cb1-9"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb1-10"><a href="#cb1-10"></a>adae <span class="ot">&lt;-</span> adae <span class="sc">|&gt;</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb1-12"><a href="#cb1-12"></a>    <span class="at">AESER =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"Y"</span>, <span class="st">"N"</span>), <span class="at">size =</span> <span class="fu">nrow</span>(adae), <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb1-13"><a href="#cb1-13"></a>    <span class="at">OCMQ01NAM =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"OCMQ1"</span>, <span class="st">"OCMQ2"</span>, <span class="st">"OCMQ3"</span>), <span class="at">size =</span> <span class="fu">nrow</span>(adae), <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb1-14"><a href="#cb1-14"></a>    <span class="at">OCMQ01SC =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"BROAD"</span>, <span class="st">"NARROW"</span>), <span class="at">size =</span> <span class="fu">nrow</span>(adae), <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-15"><a href="#cb1-15"></a>  )</span>
-<span id="cb1-16"><a href="#cb1-16"></a></span>
-<span id="cb1-17"><a href="#cb1-17"></a><span class="co"># Pre-processing --------------------------------------------</span></span>
-<span id="cb1-18"><a href="#cb1-18"></a>adsl <span class="ot">&lt;-</span> adsl <span class="sc">|&gt;</span></span>
-<span id="cb1-19"><a href="#cb1-19"></a>  <span class="fu">filter</span>(SAFFL <span class="sc">==</span> <span class="st">"Y"</span>) <span class="co"># safety population</span></span>
-<span id="cb1-20"><a href="#cb1-20"></a></span>
-<span id="cb1-21"><a href="#cb1-21"></a>data <span class="ot">&lt;-</span> adae <span class="sc">|&gt;</span></span>
-<span id="cb1-22"><a href="#cb1-22"></a>  <span class="fu">filter</span>(</span>
-<span id="cb1-23"><a href="#cb1-23"></a>    <span class="co"># safety population</span></span>
-<span id="cb1-24"><a href="#cb1-24"></a>    SAFFL <span class="sc">==</span> <span class="st">"Y"</span>,</span>
-<span id="cb1-25"><a href="#cb1-25"></a>    <span class="co"># treatment-emergent</span></span>
-<span id="cb1-26"><a href="#cb1-26"></a>    TRTEMFL <span class="sc">==</span> <span class="st">"Y"</span>,</span>
-<span id="cb1-27"><a href="#cb1-27"></a>    <span class="co"># broad OCMQ scope</span></span>
-<span id="cb1-28"><a href="#cb1-28"></a>    OCMQ01SC <span class="sc">==</span> <span class="st">"BROAD"</span>,</span>
-<span id="cb1-29"><a href="#cb1-29"></a>    <span class="co"># filtering here to reduce the size of the table</span></span>
-<span id="cb1-30"><a href="#cb1-30"></a>    AESOC <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"EYE DISORDERS"</span>, <span class="st">"EAR AND LABYRINTH DISORDERS"</span>, <span class="st">"CONGENITAL, FAMILIAL AND GENETIC DISORDERS"</span>)</span>
-<span id="cb1-31"><a href="#cb1-31"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+<details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div id="bjycdtqjbe" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#bjycdtqjbe table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#bjycdtqjbe thead, #bjycdtqjbe tbody, #bjycdtqjbe tfoot, #bjycdtqjbe tr, #bjycdtqjbe td, #bjycdtqjbe th {
+  border-style: none;
+}
+
+#bjycdtqjbe p {
+  margin: 0;
+  padding: 0;
+}
+
+#bjycdtqjbe .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#bjycdtqjbe .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#bjycdtqjbe .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#bjycdtqjbe .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#bjycdtqjbe .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#bjycdtqjbe .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bjycdtqjbe .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#bjycdtqjbe .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#bjycdtqjbe .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#bjycdtqjbe .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#bjycdtqjbe .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#bjycdtqjbe .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#bjycdtqjbe .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#bjycdtqjbe .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#bjycdtqjbe .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#bjycdtqjbe .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#bjycdtqjbe .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#bjycdtqjbe .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#bjycdtqjbe .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bjycdtqjbe .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#bjycdtqjbe .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#bjycdtqjbe .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#bjycdtqjbe .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bjycdtqjbe .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#bjycdtqjbe .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#bjycdtqjbe .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bjycdtqjbe .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bjycdtqjbe .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#bjycdtqjbe .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bjycdtqjbe .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#bjycdtqjbe .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bjycdtqjbe .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#bjycdtqjbe .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bjycdtqjbe .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#bjycdtqjbe .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bjycdtqjbe .gt_left {
+  text-align: left;
+}
+
+#bjycdtqjbe .gt_center {
+  text-align: center;
+}
+
+#bjycdtqjbe .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#bjycdtqjbe .gt_font_normal {
+  font-weight: normal;
+}
+
+#bjycdtqjbe .gt_font_bold {
+  font-weight: bold;
+}
+
+#bjycdtqjbe .gt_font_italic {
+  font-style: italic;
+}
+
+#bjycdtqjbe .gt_super {
+  font-size: 65%;
+}
+
+#bjycdtqjbe .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#bjycdtqjbe .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#bjycdtqjbe .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#bjycdtqjbe .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#bjycdtqjbe .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#bjycdtqjbe .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#bjycdtqjbe .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#bjycdtqjbe .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#bjycdtqjbe div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead><tr class="gt_col_headings header">
+<th id="label" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">
+<strong>Organ System</strong><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<strong>OCMQ (Broad)</strong><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Preferred Term</strong>
+</th>
+<th id="stat_1" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">
+<strong>Placebo</strong><br>
+N = 86<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
+</th>
+<th id="stat_2" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">
+<strong>Xanomeline High Dose</strong><br>
+N = 72<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
+</th>
+<th id="stat_3" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">
+<strong>Xanomeline Low Dose</strong><br>
+N = 96<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
+</th>
+</tr></thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">CONGENITAL, FAMILIAL AND GENETIC DISORDERS</td>
+<td class="gt_row gt_center" headers="stat_1"><br></td>
+<td class="gt_row gt_center" headers="stat_2"><br></td>
+<td class="gt_row gt_center" headers="stat_3"><br></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;OCMQ3</td>
+<td class="gt_row gt_center" headers="stat_1">0 (0.0%)</td>
+<td class="gt_row gt_center" headers="stat_2">1 (1.4%)</td>
+<td class="gt_row gt_center" headers="stat_3">0 (0.0%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VENTRICULAR SEPTAL DEFECT</td>
+<td class="gt_row gt_center" headers="stat_1">0 (0.0%)</td>
+<td class="gt_row gt_center" headers="stat_2">1 (1.4%)</td>
+<td class="gt_row gt_center" headers="stat_3">0 (0.0%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">EAR AND LABYRINTH DISORDERS</td>
+<td class="gt_row gt_center" headers="stat_1"><br></td>
+<td class="gt_row gt_center" headers="stat_2"><br></td>
+<td class="gt_row gt_center" headers="stat_3"><br></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;OCMQ1</td>
+<td class="gt_row gt_center" headers="stat_1">1 (1.2%)</td>
+<td class="gt_row gt_center" headers="stat_2">1 (1.4%)</td>
+<td class="gt_row gt_center" headers="stat_3">0 (0.0%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EAR PAIN</td>
+<td class="gt_row gt_center" headers="stat_1">1 (1.2%)</td>
+<td class="gt_row gt_center" headers="stat_2">0 (0.0%)</td>
+<td class="gt_row gt_center" headers="stat_3">0 (0.0%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VERTIGO</td>
+<td class="gt_row gt_center" headers="stat_1">0 (0.0%)</td>
+<td class="gt_row gt_center" headers="stat_2">1 (1.4%)</td>
+<td class="gt_row gt_center" headers="stat_3">0 (0.0%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;OCMQ2</td>
+<td class="gt_row gt_center" headers="stat_1">0 (0.0%)</td>
+<td class="gt_row gt_center" headers="stat_2">0 (0.0%)</td>
+<td class="gt_row gt_center" headers="stat_3">1 (1.0%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CERUMEN IMPACTION</td>
+<td class="gt_row gt_center" headers="stat_1">0 (0.0%)</td>
+<td class="gt_row gt_center" headers="stat_2">0 (0.0%)</td>
+<td class="gt_row gt_center" headers="stat_3">1 (1.0%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">EYE DISORDERS</td>
+<td class="gt_row gt_center" headers="stat_1"><br></td>
+<td class="gt_row gt_center" headers="stat_2"><br></td>
+<td class="gt_row gt_center" headers="stat_3"><br></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;OCMQ1</td>
+<td class="gt_row gt_center" headers="stat_1">2 (2.3%)</td>
+<td class="gt_row gt_center" headers="stat_2">0 (0.0%)</td>
+<td class="gt_row gt_center" headers="stat_3">0 (0.0%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CONJUNCTIVITIS</td>
+<td class="gt_row gt_center" headers="stat_1">1 (1.2%)</td>
+<td class="gt_row gt_center" headers="stat_2">0 (0.0%)</td>
+<td class="gt_row gt_center" headers="stat_3">0 (0.0%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EYE ALLERGY</td>
+<td class="gt_row gt_center" headers="stat_1">1 (1.2%)</td>
+<td class="gt_row gt_center" headers="stat_2">0 (0.0%)</td>
+<td class="gt_row gt_center" headers="stat_3">0 (0.0%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EYE PRURITUS</td>
+<td class="gt_row gt_center" headers="stat_1">1 (1.2%)</td>
+<td class="gt_row gt_center" headers="stat_2">0 (0.0%)</td>
+<td class="gt_row gt_center" headers="stat_3">0 (0.0%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;OCMQ2</td>
+<td class="gt_row gt_center" headers="stat_1">1 (1.2%)</td>
+<td class="gt_row gt_center" headers="stat_2">0 (0.0%)</td>
+<td class="gt_row gt_center" headers="stat_3">0 (0.0%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CONJUNCTIVITIS</td>
+<td class="gt_row gt_center" headers="stat_1">1 (1.2%)</td>
+<td class="gt_row gt_center" headers="stat_2">0 (0.0%)</td>
+<td class="gt_row gt_center" headers="stat_3">0 (0.0%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;OCMQ3</td>
+<td class="gt_row gt_center" headers="stat_1">0 (0.0%)</td>
+<td class="gt_row gt_center" headers="stat_2">1 (1.4%)</td>
+<td class="gt_row gt_center" headers="stat_3">1 (1.0%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VISION BLURRED</td>
+<td class="gt_row gt_center" headers="stat_1">0 (0.0%)</td>
+<td class="gt_row gt_center" headers="stat_2">1 (1.4%)</td>
+<td class="gt_row gt_center" headers="stat_3">1 (1.0%)</td>
+</tr>
+</tbody>
+<tfoot><tr class="gt_footnotes odd">
+<td colspan="4" class="gt_footnote">
+<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> n (%)</td>
+</tr></tfoot>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
 <div class="cell">
-<details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>ard <span class="ot">&lt;-</span> <span class="fu">ard_stack_hierarchical</span>(</span>
-<span id="cb2-2"><a href="#cb2-2"></a>  data,</span>
-<span id="cb2-3"><a href="#cb2-3"></a>  <span class="at">variables =</span> <span class="fu">c</span>(AEBODSYS, OCMQ01NAM, AEDECOD),</span>
-<span id="cb2-4"><a href="#cb2-4"></a>  <span class="at">by =</span> TRT01A,</span>
-<span id="cb2-5"><a href="#cb2-5"></a>  <span class="at">id =</span> USUBJID,</span>
-<span id="cb2-6"><a href="#cb2-6"></a>  <span class="at">denominator =</span> adsl,</span>
-<span id="cb2-7"><a href="#cb2-7"></a>  <span class="co"># variables to include AE rates for</span></span>
-<span id="cb2-8"><a href="#cb2-8"></a>  <span class="at">include =</span> <span class="fu">c</span>(OCMQ01NAM, AEDECOD)</span>
-<span id="cb2-9"><a href="#cb2-9"></a>)</span>
-<span id="cb2-10"><a href="#cb2-10"></a></span>
-<span id="cb2-11"><a href="#cb2-11"></a>ard</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code># An ARD data frame: 144 × 15
-   group1 group1_level         group2   group2_level                               group3    group3_level variable  variable_level            context      stat_name stat_label     stat fmt_fun warning error 
-   &lt;chr&gt;  &lt;list&gt;               &lt;chr&gt;    &lt;list&gt;                                     &lt;chr&gt;     &lt;list&gt;       &lt;chr&gt;     &lt;list&gt;                    &lt;chr&gt;        &lt;chr&gt;     &lt;chr&gt;        &lt;list&gt; &lt;list&gt;  &lt;list&gt;  &lt;list&gt;
- 1 &lt;NA&gt;   &lt;NULL&gt;               &lt;NA&gt;     &lt;NULL&gt;                                     &lt;NA&gt;      &lt;NULL&gt;       TRT01A    Placebo                   tabulate     n         n           86      0       &lt;NULL&gt;  &lt;NULL&gt;
- 2 &lt;NA&gt;   &lt;NULL&gt;               &lt;NA&gt;     &lt;NULL&gt;                                     &lt;NA&gt;      &lt;NULL&gt;       TRT01A    Placebo                   tabulate     N         N          254      0       &lt;NULL&gt;  &lt;NULL&gt;
- 3 &lt;NA&gt;   &lt;NULL&gt;               &lt;NA&gt;     &lt;NULL&gt;                                     &lt;NA&gt;      &lt;NULL&gt;       TRT01A    Placebo                   tabulate     p         %            0.339  &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt;
- 4 &lt;NA&gt;   &lt;NULL&gt;               &lt;NA&gt;     &lt;NULL&gt;                                     &lt;NA&gt;      &lt;NULL&gt;       TRT01A    Xanomeline High Dose      tabulate     n         n           72      0       &lt;NULL&gt;  &lt;NULL&gt;
- 5 &lt;NA&gt;   &lt;NULL&gt;               &lt;NA&gt;     &lt;NULL&gt;                                     &lt;NA&gt;      &lt;NULL&gt;       TRT01A    Xanomeline High Dose      tabulate     N         N          254      0       &lt;NULL&gt;  &lt;NULL&gt;
- 6 &lt;NA&gt;   &lt;NULL&gt;               &lt;NA&gt;     &lt;NULL&gt;                                     &lt;NA&gt;      &lt;NULL&gt;       TRT01A    Xanomeline High Dose      tabulate     p         %            0.283  &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt;
- 7 &lt;NA&gt;   &lt;NULL&gt;               &lt;NA&gt;     &lt;NULL&gt;                                     &lt;NA&gt;      &lt;NULL&gt;       TRT01A    Xanomeline Low Dose       tabulate     n         n           96      0       &lt;NULL&gt;  &lt;NULL&gt;
- 8 &lt;NA&gt;   &lt;NULL&gt;               &lt;NA&gt;     &lt;NULL&gt;                                     &lt;NA&gt;      &lt;NULL&gt;       TRT01A    Xanomeline Low Dose       tabulate     N         N          254      0       &lt;NULL&gt;  &lt;NULL&gt;
- 9 &lt;NA&gt;   &lt;NULL&gt;               &lt;NA&gt;     &lt;NULL&gt;                                     &lt;NA&gt;      &lt;NULL&gt;       TRT01A    Xanomeline Low Dose       tabulate     p         %            0.378  &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt;
-10 TRT01A Placebo              AEBODSYS CONGENITAL, FAMILIAL AND GENETIC DISORDERS &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ3                     hierarchical n         n            0      0       &lt;NULL&gt;  &lt;NULL&gt;
-11 TRT01A Placebo              AEBODSYS CONGENITAL, FAMILIAL AND GENETIC DISORDERS &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ3                     hierarchical N         N           86      0       &lt;NULL&gt;  &lt;NULL&gt;
-12 TRT01A Placebo              AEBODSYS CONGENITAL, FAMILIAL AND GENETIC DISORDERS &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ3                     hierarchical p         %            0      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt;
-13 TRT01A Xanomeline High Dose AEBODSYS CONGENITAL, FAMILIAL AND GENETIC DISORDERS &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ3                     hierarchical n         n            1      0       &lt;NULL&gt;  &lt;NULL&gt;
-14 TRT01A Xanomeline High Dose AEBODSYS CONGENITAL, FAMILIAL AND GENETIC DISORDERS &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ3                     hierarchical N         N           72      0       &lt;NULL&gt;  &lt;NULL&gt;
-15 TRT01A Xanomeline High Dose AEBODSYS CONGENITAL, FAMILIAL AND GENETIC DISORDERS &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ3                     hierarchical p         %            0.0139 &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt;
-16 TRT01A Xanomeline Low Dose  AEBODSYS CONGENITAL, FAMILIAL AND GENETIC DISORDERS &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ3                     hierarchical n         n            0      0       &lt;NULL&gt;  &lt;NULL&gt;
-17 TRT01A Xanomeline Low Dose  AEBODSYS CONGENITAL, FAMILIAL AND GENETIC DISORDERS &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ3                     hierarchical N         N           96      0       &lt;NULL&gt;  &lt;NULL&gt;
-18 TRT01A Xanomeline Low Dose  AEBODSYS CONGENITAL, FAMILIAL AND GENETIC DISORDERS &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ3                     hierarchical p         %            0      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt;
-19 TRT01A Placebo              AEBODSYS CONGENITAL, FAMILIAL AND GENETIC DISORDERS OCMQ01NAM OCMQ3        AEDECOD   VENTRICULAR SEPTAL DEFECT hierarchical n         n            0      0       &lt;NULL&gt;  &lt;NULL&gt;
-20 TRT01A Placebo              AEBODSYS CONGENITAL, FAMILIAL AND GENETIC DISORDERS OCMQ01NAM OCMQ3        AEDECOD   VENTRICULAR SEPTAL DEFECT hierarchical N         N           86      0       &lt;NULL&gt;  &lt;NULL&gt;
-21 TRT01A Placebo              AEBODSYS CONGENITAL, FAMILIAL AND GENETIC DISORDERS OCMQ01NAM OCMQ3        AEDECOD   VENTRICULAR SEPTAL DEFECT hierarchical p         %            0      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt;
-22 TRT01A Xanomeline High Dose AEBODSYS CONGENITAL, FAMILIAL AND GENETIC DISORDERS OCMQ01NAM OCMQ3        AEDECOD   VENTRICULAR SEPTAL DEFECT hierarchical n         n            1      0       &lt;NULL&gt;  &lt;NULL&gt;
-23 TRT01A Xanomeline High Dose AEBODSYS CONGENITAL, FAMILIAL AND GENETIC DISORDERS OCMQ01NAM OCMQ3        AEDECOD   VENTRICULAR SEPTAL DEFECT hierarchical N         N           72      0       &lt;NULL&gt;  &lt;NULL&gt;
-24 TRT01A Xanomeline High Dose AEBODSYS CONGENITAL, FAMILIAL AND GENETIC DISORDERS OCMQ01NAM OCMQ3        AEDECOD   VENTRICULAR SEPTAL DEFECT hierarchical p         %            0.0139 &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt;
-25 TRT01A Xanomeline Low Dose  AEBODSYS CONGENITAL, FAMILIAL AND GENETIC DISORDERS OCMQ01NAM OCMQ3        AEDECOD   VENTRICULAR SEPTAL DEFECT hierarchical n         n            0      0       &lt;NULL&gt;  &lt;NULL&gt;
-26 TRT01A Xanomeline Low Dose  AEBODSYS CONGENITAL, FAMILIAL AND GENETIC DISORDERS OCMQ01NAM OCMQ3        AEDECOD   VENTRICULAR SEPTAL DEFECT hierarchical N         N           96      0       &lt;NULL&gt;  &lt;NULL&gt;
-27 TRT01A Xanomeline Low Dose  AEBODSYS CONGENITAL, FAMILIAL AND GENETIC DISORDERS OCMQ01NAM OCMQ3        AEDECOD   VENTRICULAR SEPTAL DEFECT hierarchical p         %            0      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt;
-28 TRT01A Placebo              AEBODSYS EAR AND LABYRINTH DISORDERS                &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ1                     hierarchical n         n            1      0       &lt;NULL&gt;  &lt;NULL&gt;
-29 TRT01A Placebo              AEBODSYS EAR AND LABYRINTH DISORDERS                &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ1                     hierarchical N         N           86      0       &lt;NULL&gt;  &lt;NULL&gt;
-30 TRT01A Placebo              AEBODSYS EAR AND LABYRINTH DISORDERS                &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ1                     hierarchical p         %            0.0116 &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt;
-31 TRT01A Xanomeline High Dose AEBODSYS EAR AND LABYRINTH DISORDERS                &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ1                     hierarchical n         n            1      0       &lt;NULL&gt;  &lt;NULL&gt;
-32 TRT01A Xanomeline High Dose AEBODSYS EAR AND LABYRINTH DISORDERS                &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ1                     hierarchical N         N           72      0       &lt;NULL&gt;  &lt;NULL&gt;
-33 TRT01A Xanomeline High Dose AEBODSYS EAR AND LABYRINTH DISORDERS                &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ1                     hierarchical p         %            0.0139 &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt;
-34 TRT01A Xanomeline Low Dose  AEBODSYS EAR AND LABYRINTH DISORDERS                &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ1                     hierarchical n         n            0      0       &lt;NULL&gt;  &lt;NULL&gt;
-35 TRT01A Xanomeline Low Dose  AEBODSYS EAR AND LABYRINTH DISORDERS                &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ1                     hierarchical N         N           96      0       &lt;NULL&gt;  &lt;NULL&gt;
-36 TRT01A Xanomeline Low Dose  AEBODSYS EAR AND LABYRINTH DISORDERS                &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ1                     hierarchical p         %            0      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt;
-37 TRT01A Placebo              AEBODSYS EAR AND LABYRINTH DISORDERS                OCMQ01NAM OCMQ1        AEDECOD   EAR PAIN                  hierarchical n         n            1      0       &lt;NULL&gt;  &lt;NULL&gt;
-38 TRT01A Placebo              AEBODSYS EAR AND LABYRINTH DISORDERS                OCMQ01NAM OCMQ1        AEDECOD   EAR PAIN                  hierarchical N         N           86      0       &lt;NULL&gt;  &lt;NULL&gt;
-39 TRT01A Placebo              AEBODSYS EAR AND LABYRINTH DISORDERS                OCMQ01NAM OCMQ1        AEDECOD   EAR PAIN                  hierarchical p         %            0.0116 &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt;
-40 TRT01A Xanomeline High Dose AEBODSYS EAR AND LABYRINTH DISORDERS                OCMQ01NAM OCMQ1        AEDECOD   EAR PAIN                  hierarchical n         n            0      0       &lt;NULL&gt;  &lt;NULL&gt;
-# ℹ 104 more rows</code></pre>
-</div>
-</div>
-</div>
-<div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
-<div class="cell">
-<details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># create table using ARD-first approach (ARD -&gt; table)</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a>tbl <span class="ot">&lt;-</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a>  <span class="fu">tbl_ard_hierarchical</span>(</span>
-<span id="cb4-4"><a href="#cb4-4"></a>    ard,</span>
-<span id="cb4-5"><a href="#cb4-5"></a>    <span class="at">variables =</span> <span class="fu">c</span>(AEBODSYS, OCMQ01NAM, AEDECOD),</span>
-<span id="cb4-6"><a href="#cb4-6"></a>    <span class="at">by =</span> TRT01A,</span>
-<span id="cb4-7"><a href="#cb4-7"></a>    <span class="co"># variables to display AE rates for</span></span>
-<span id="cb4-8"><a href="#cb4-8"></a>    <span class="at">include =</span> <span class="fu">c</span>(OCMQ01NAM, AEDECOD),</span>
-<span id="cb4-9"><a href="#cb4-9"></a>    <span class="co"># Add custom variable labels</span></span>
-<span id="cb4-10"><a href="#cb4-10"></a>    <span class="at">label =</span> <span class="fu">list</span>(</span>
-<span id="cb4-11"><a href="#cb4-11"></a>      <span class="at">AEBODSYS =</span> <span class="st">"Organ System"</span>,</span>
-<span id="cb4-12"><a href="#cb4-12"></a>      <span class="at">OCMQ01NAM =</span> <span class="st">"OCMQ (Broad)"</span>,</span>
-<span id="cb4-13"><a href="#cb4-13"></a>      <span class="at">AEDECOD =</span> <span class="st">"Preferred Term"</span></span>
-<span id="cb4-14"><a href="#cb4-14"></a>    )</span>
-<span id="cb4-15"><a href="#cb4-15"></a>  )</span>
-<span id="cb4-16"><a href="#cb4-16"></a></span>
-<span id="cb4-17"><a href="#cb4-17"></a>tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="result.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:45.0%"></p>
-</figure>
-</div>
+<details open="" class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>withr<span class="sc">::</span><span class="fu">local_options</span>(<span class="at">width =</span> <span class="dv">9999</span>, <span class="at">tibble.print_max =</span> <span class="cn">Inf</span>)</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">print</span>(ard, <span class="at">columns =</span> <span class="st">"all"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>$tbl_ard_hierarchical
+# An ARD data frame: 144 × 17
+    group1 group1_level         group2   group2_level                               group3    group3_level variable  variable_level            context      stat_name stat_label     stat stat_fmt fmt_fun warning error  gts_column
+    &lt;chr&gt;  &lt;list&gt;               &lt;chr&gt;    &lt;list&gt;                                     &lt;chr&gt;     &lt;list&gt;       &lt;chr&gt;     &lt;list&gt;                    &lt;chr&gt;        &lt;chr&gt;     &lt;chr&gt;        &lt;list&gt; &lt;list&gt;   &lt;list&gt;  &lt;list&gt;  &lt;list&gt; &lt;chr&gt;     
+  1 &lt;NA&gt;   &lt;NULL&gt;               &lt;NA&gt;     &lt;NULL&gt;                                     &lt;NA&gt;      &lt;NULL&gt;       TRT01A    Placebo                   tabulate     n         n           86      86       0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+  2 &lt;NA&gt;   &lt;NULL&gt;               &lt;NA&gt;     &lt;NULL&gt;                                     &lt;NA&gt;      &lt;NULL&gt;       TRT01A    Placebo                   tabulate     N         N          254      254      0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+  3 &lt;NA&gt;   &lt;NULL&gt;               &lt;NA&gt;     &lt;NULL&gt;                                     &lt;NA&gt;      &lt;NULL&gt;       TRT01A    Placebo                   tabulate     p         %            0.339  33.9     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+  4 &lt;NA&gt;   &lt;NULL&gt;               &lt;NA&gt;     &lt;NULL&gt;                                     &lt;NA&gt;      &lt;NULL&gt;       TRT01A    Xanomeline High Dose      tabulate     n         n           72      72       0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+  5 &lt;NA&gt;   &lt;NULL&gt;               &lt;NA&gt;     &lt;NULL&gt;                                     &lt;NA&gt;      &lt;NULL&gt;       TRT01A    Xanomeline High Dose      tabulate     N         N          254      254      0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+  6 &lt;NA&gt;   &lt;NULL&gt;               &lt;NA&gt;     &lt;NULL&gt;                                     &lt;NA&gt;      &lt;NULL&gt;       TRT01A    Xanomeline High Dose      tabulate     p         %            0.283  28.3     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+  7 &lt;NA&gt;   &lt;NULL&gt;               &lt;NA&gt;     &lt;NULL&gt;                                     &lt;NA&gt;      &lt;NULL&gt;       TRT01A    Xanomeline Low Dose       tabulate     n         n           96      96       0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+  8 &lt;NA&gt;   &lt;NULL&gt;               &lt;NA&gt;     &lt;NULL&gt;                                     &lt;NA&gt;      &lt;NULL&gt;       TRT01A    Xanomeline Low Dose       tabulate     N         N          254      254      0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+  9 &lt;NA&gt;   &lt;NULL&gt;               &lt;NA&gt;     &lt;NULL&gt;                                     &lt;NA&gt;      &lt;NULL&gt;       TRT01A    Xanomeline Low Dose       tabulate     p         %            0.378  37.8     &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 10 TRT01A Placebo              AEBODSYS CONGENITAL, FAMILIAL AND GENETIC DISORDERS &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ3                     hierarchical n         n            0      0        0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 11 TRT01A Placebo              AEBODSYS CONGENITAL, FAMILIAL AND GENETIC DISORDERS &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ3                     hierarchical N         N           86      86       0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 12 TRT01A Placebo              AEBODSYS CONGENITAL, FAMILIAL AND GENETIC DISORDERS &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ3                     hierarchical p         %            0      0.0      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 13 TRT01A Xanomeline High Dose AEBODSYS CONGENITAL, FAMILIAL AND GENETIC DISORDERS &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ3                     hierarchical n         n            1      1        0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 14 TRT01A Xanomeline High Dose AEBODSYS CONGENITAL, FAMILIAL AND GENETIC DISORDERS &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ3                     hierarchical N         N           72      72       0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 15 TRT01A Xanomeline High Dose AEBODSYS CONGENITAL, FAMILIAL AND GENETIC DISORDERS &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ3                     hierarchical p         %            0.0139 1.4      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 16 TRT01A Xanomeline Low Dose  AEBODSYS CONGENITAL, FAMILIAL AND GENETIC DISORDERS &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ3                     hierarchical n         n            0      0        0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 17 TRT01A Xanomeline Low Dose  AEBODSYS CONGENITAL, FAMILIAL AND GENETIC DISORDERS &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ3                     hierarchical N         N           96      96       0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 18 TRT01A Xanomeline Low Dose  AEBODSYS CONGENITAL, FAMILIAL AND GENETIC DISORDERS &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ3                     hierarchical p         %            0      0.0      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 19 TRT01A Placebo              AEBODSYS CONGENITAL, FAMILIAL AND GENETIC DISORDERS OCMQ01NAM OCMQ3        AEDECOD   VENTRICULAR SEPTAL DEFECT hierarchical n         n            0      0        0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 20 TRT01A Placebo              AEBODSYS CONGENITAL, FAMILIAL AND GENETIC DISORDERS OCMQ01NAM OCMQ3        AEDECOD   VENTRICULAR SEPTAL DEFECT hierarchical N         N           86      86       0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 21 TRT01A Placebo              AEBODSYS CONGENITAL, FAMILIAL AND GENETIC DISORDERS OCMQ01NAM OCMQ3        AEDECOD   VENTRICULAR SEPTAL DEFECT hierarchical p         %            0      0.0      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 22 TRT01A Xanomeline High Dose AEBODSYS CONGENITAL, FAMILIAL AND GENETIC DISORDERS OCMQ01NAM OCMQ3        AEDECOD   VENTRICULAR SEPTAL DEFECT hierarchical n         n            1      1        0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 23 TRT01A Xanomeline High Dose AEBODSYS CONGENITAL, FAMILIAL AND GENETIC DISORDERS OCMQ01NAM OCMQ3        AEDECOD   VENTRICULAR SEPTAL DEFECT hierarchical N         N           72      72       0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 24 TRT01A Xanomeline High Dose AEBODSYS CONGENITAL, FAMILIAL AND GENETIC DISORDERS OCMQ01NAM OCMQ3        AEDECOD   VENTRICULAR SEPTAL DEFECT hierarchical p         %            0.0139 1.4      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 25 TRT01A Xanomeline Low Dose  AEBODSYS CONGENITAL, FAMILIAL AND GENETIC DISORDERS OCMQ01NAM OCMQ3        AEDECOD   VENTRICULAR SEPTAL DEFECT hierarchical n         n            0      0        0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 26 TRT01A Xanomeline Low Dose  AEBODSYS CONGENITAL, FAMILIAL AND GENETIC DISORDERS OCMQ01NAM OCMQ3        AEDECOD   VENTRICULAR SEPTAL DEFECT hierarchical N         N           96      96       0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 27 TRT01A Xanomeline Low Dose  AEBODSYS CONGENITAL, FAMILIAL AND GENETIC DISORDERS OCMQ01NAM OCMQ3        AEDECOD   VENTRICULAR SEPTAL DEFECT hierarchical p         %            0      0.0      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 28 TRT01A Placebo              AEBODSYS EAR AND LABYRINTH DISORDERS                &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ1                     hierarchical n         n            1      1        0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 29 TRT01A Placebo              AEBODSYS EAR AND LABYRINTH DISORDERS                &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ1                     hierarchical N         N           86      86       0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 30 TRT01A Placebo              AEBODSYS EAR AND LABYRINTH DISORDERS                &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ1                     hierarchical p         %            0.0116 1.2      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 31 TRT01A Xanomeline High Dose AEBODSYS EAR AND LABYRINTH DISORDERS                &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ1                     hierarchical n         n            1      1        0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 32 TRT01A Xanomeline High Dose AEBODSYS EAR AND LABYRINTH DISORDERS                &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ1                     hierarchical N         N           72      72       0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 33 TRT01A Xanomeline High Dose AEBODSYS EAR AND LABYRINTH DISORDERS                &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ1                     hierarchical p         %            0.0139 1.4      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 34 TRT01A Xanomeline Low Dose  AEBODSYS EAR AND LABYRINTH DISORDERS                &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ1                     hierarchical n         n            0      0        0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 35 TRT01A Xanomeline Low Dose  AEBODSYS EAR AND LABYRINTH DISORDERS                &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ1                     hierarchical N         N           96      96       0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 36 TRT01A Xanomeline Low Dose  AEBODSYS EAR AND LABYRINTH DISORDERS                &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ1                     hierarchical p         %            0      0.0      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 37 TRT01A Placebo              AEBODSYS EAR AND LABYRINTH DISORDERS                OCMQ01NAM OCMQ1        AEDECOD   EAR PAIN                  hierarchical n         n            1      1        0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 38 TRT01A Placebo              AEBODSYS EAR AND LABYRINTH DISORDERS                OCMQ01NAM OCMQ1        AEDECOD   EAR PAIN                  hierarchical N         N           86      86       0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 39 TRT01A Placebo              AEBODSYS EAR AND LABYRINTH DISORDERS                OCMQ01NAM OCMQ1        AEDECOD   EAR PAIN                  hierarchical p         %            0.0116 1.2      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 40 TRT01A Xanomeline High Dose AEBODSYS EAR AND LABYRINTH DISORDERS                OCMQ01NAM OCMQ1        AEDECOD   EAR PAIN                  hierarchical n         n            0      0        0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 41 TRT01A Xanomeline High Dose AEBODSYS EAR AND LABYRINTH DISORDERS                OCMQ01NAM OCMQ1        AEDECOD   EAR PAIN                  hierarchical N         N           72      72       0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 42 TRT01A Xanomeline High Dose AEBODSYS EAR AND LABYRINTH DISORDERS                OCMQ01NAM OCMQ1        AEDECOD   EAR PAIN                  hierarchical p         %            0      0.0      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 43 TRT01A Xanomeline Low Dose  AEBODSYS EAR AND LABYRINTH DISORDERS                OCMQ01NAM OCMQ1        AEDECOD   EAR PAIN                  hierarchical n         n            0      0        0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 44 TRT01A Xanomeline Low Dose  AEBODSYS EAR AND LABYRINTH DISORDERS                OCMQ01NAM OCMQ1        AEDECOD   EAR PAIN                  hierarchical N         N           96      96       0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 45 TRT01A Xanomeline Low Dose  AEBODSYS EAR AND LABYRINTH DISORDERS                OCMQ01NAM OCMQ1        AEDECOD   EAR PAIN                  hierarchical p         %            0      0.0      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 46 TRT01A Placebo              AEBODSYS EAR AND LABYRINTH DISORDERS                OCMQ01NAM OCMQ1        AEDECOD   VERTIGO                   hierarchical n         n            0      0        0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 47 TRT01A Placebo              AEBODSYS EAR AND LABYRINTH DISORDERS                OCMQ01NAM OCMQ1        AEDECOD   VERTIGO                   hierarchical N         N           86      86       0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 48 TRT01A Placebo              AEBODSYS EAR AND LABYRINTH DISORDERS                OCMQ01NAM OCMQ1        AEDECOD   VERTIGO                   hierarchical p         %            0      0.0      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 49 TRT01A Xanomeline High Dose AEBODSYS EAR AND LABYRINTH DISORDERS                OCMQ01NAM OCMQ1        AEDECOD   VERTIGO                   hierarchical n         n            1      1        0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 50 TRT01A Xanomeline High Dose AEBODSYS EAR AND LABYRINTH DISORDERS                OCMQ01NAM OCMQ1        AEDECOD   VERTIGO                   hierarchical N         N           72      72       0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 51 TRT01A Xanomeline High Dose AEBODSYS EAR AND LABYRINTH DISORDERS                OCMQ01NAM OCMQ1        AEDECOD   VERTIGO                   hierarchical p         %            0.0139 1.4      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 52 TRT01A Xanomeline Low Dose  AEBODSYS EAR AND LABYRINTH DISORDERS                OCMQ01NAM OCMQ1        AEDECOD   VERTIGO                   hierarchical n         n            0      0        0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 53 TRT01A Xanomeline Low Dose  AEBODSYS EAR AND LABYRINTH DISORDERS                OCMQ01NAM OCMQ1        AEDECOD   VERTIGO                   hierarchical N         N           96      96       0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 54 TRT01A Xanomeline Low Dose  AEBODSYS EAR AND LABYRINTH DISORDERS                OCMQ01NAM OCMQ1        AEDECOD   VERTIGO                   hierarchical p         %            0      0.0      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 55 TRT01A Placebo              AEBODSYS EAR AND LABYRINTH DISORDERS                &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ2                     hierarchical n         n            0      0        0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 56 TRT01A Placebo              AEBODSYS EAR AND LABYRINTH DISORDERS                &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ2                     hierarchical N         N           86      86       0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 57 TRT01A Placebo              AEBODSYS EAR AND LABYRINTH DISORDERS                &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ2                     hierarchical p         %            0      0.0      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 58 TRT01A Xanomeline High Dose AEBODSYS EAR AND LABYRINTH DISORDERS                &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ2                     hierarchical n         n            0      0        0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 59 TRT01A Xanomeline High Dose AEBODSYS EAR AND LABYRINTH DISORDERS                &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ2                     hierarchical N         N           72      72       0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 60 TRT01A Xanomeline High Dose AEBODSYS EAR AND LABYRINTH DISORDERS                &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ2                     hierarchical p         %            0      0.0      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 61 TRT01A Xanomeline Low Dose  AEBODSYS EAR AND LABYRINTH DISORDERS                &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ2                     hierarchical n         n            1      1        0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 62 TRT01A Xanomeline Low Dose  AEBODSYS EAR AND LABYRINTH DISORDERS                &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ2                     hierarchical N         N           96      96       0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 63 TRT01A Xanomeline Low Dose  AEBODSYS EAR AND LABYRINTH DISORDERS                &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ2                     hierarchical p         %            0.0104 1.0      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 64 TRT01A Placebo              AEBODSYS EAR AND LABYRINTH DISORDERS                OCMQ01NAM OCMQ2        AEDECOD   CERUMEN IMPACTION         hierarchical n         n            0      0        0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 65 TRT01A Placebo              AEBODSYS EAR AND LABYRINTH DISORDERS                OCMQ01NAM OCMQ2        AEDECOD   CERUMEN IMPACTION         hierarchical N         N           86      86       0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 66 TRT01A Placebo              AEBODSYS EAR AND LABYRINTH DISORDERS                OCMQ01NAM OCMQ2        AEDECOD   CERUMEN IMPACTION         hierarchical p         %            0      0.0      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 67 TRT01A Xanomeline High Dose AEBODSYS EAR AND LABYRINTH DISORDERS                OCMQ01NAM OCMQ2        AEDECOD   CERUMEN IMPACTION         hierarchical n         n            0      0        0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 68 TRT01A Xanomeline High Dose AEBODSYS EAR AND LABYRINTH DISORDERS                OCMQ01NAM OCMQ2        AEDECOD   CERUMEN IMPACTION         hierarchical N         N           72      72       0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 69 TRT01A Xanomeline High Dose AEBODSYS EAR AND LABYRINTH DISORDERS                OCMQ01NAM OCMQ2        AEDECOD   CERUMEN IMPACTION         hierarchical p         %            0      0.0      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 70 TRT01A Xanomeline Low Dose  AEBODSYS EAR AND LABYRINTH DISORDERS                OCMQ01NAM OCMQ2        AEDECOD   CERUMEN IMPACTION         hierarchical n         n            1      1        0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 71 TRT01A Xanomeline Low Dose  AEBODSYS EAR AND LABYRINTH DISORDERS                OCMQ01NAM OCMQ2        AEDECOD   CERUMEN IMPACTION         hierarchical N         N           96      96       0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 72 TRT01A Xanomeline Low Dose  AEBODSYS EAR AND LABYRINTH DISORDERS                OCMQ01NAM OCMQ2        AEDECOD   CERUMEN IMPACTION         hierarchical p         %            0.0104 1.0      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 73 TRT01A Placebo              AEBODSYS EYE DISORDERS                              &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ1                     hierarchical n         n            2      2        0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 74 TRT01A Placebo              AEBODSYS EYE DISORDERS                              &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ1                     hierarchical N         N           86      86       0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 75 TRT01A Placebo              AEBODSYS EYE DISORDERS                              &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ1                     hierarchical p         %            0.0233 2.3      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 76 TRT01A Xanomeline High Dose AEBODSYS EYE DISORDERS                              &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ1                     hierarchical n         n            0      0        0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 77 TRT01A Xanomeline High Dose AEBODSYS EYE DISORDERS                              &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ1                     hierarchical N         N           72      72       0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 78 TRT01A Xanomeline High Dose AEBODSYS EYE DISORDERS                              &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ1                     hierarchical p         %            0      0.0      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 79 TRT01A Xanomeline Low Dose  AEBODSYS EYE DISORDERS                              &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ1                     hierarchical n         n            0      0        0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 80 TRT01A Xanomeline Low Dose  AEBODSYS EYE DISORDERS                              &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ1                     hierarchical N         N           96      96       0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 81 TRT01A Xanomeline Low Dose  AEBODSYS EYE DISORDERS                              &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ1                     hierarchical p         %            0      0.0      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 82 TRT01A Placebo              AEBODSYS EYE DISORDERS                              OCMQ01NAM OCMQ1        AEDECOD   CONJUNCTIVITIS            hierarchical n         n            1      1        0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 83 TRT01A Placebo              AEBODSYS EYE DISORDERS                              OCMQ01NAM OCMQ1        AEDECOD   CONJUNCTIVITIS            hierarchical N         N           86      86       0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 84 TRT01A Placebo              AEBODSYS EYE DISORDERS                              OCMQ01NAM OCMQ1        AEDECOD   CONJUNCTIVITIS            hierarchical p         %            0.0116 1.2      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 85 TRT01A Xanomeline High Dose AEBODSYS EYE DISORDERS                              OCMQ01NAM OCMQ1        AEDECOD   CONJUNCTIVITIS            hierarchical n         n            0      0        0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 86 TRT01A Xanomeline High Dose AEBODSYS EYE DISORDERS                              OCMQ01NAM OCMQ1        AEDECOD   CONJUNCTIVITIS            hierarchical N         N           72      72       0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 87 TRT01A Xanomeline High Dose AEBODSYS EYE DISORDERS                              OCMQ01NAM OCMQ1        AEDECOD   CONJUNCTIVITIS            hierarchical p         %            0      0.0      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 88 TRT01A Xanomeline Low Dose  AEBODSYS EYE DISORDERS                              OCMQ01NAM OCMQ1        AEDECOD   CONJUNCTIVITIS            hierarchical n         n            0      0        0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 89 TRT01A Xanomeline Low Dose  AEBODSYS EYE DISORDERS                              OCMQ01NAM OCMQ1        AEDECOD   CONJUNCTIVITIS            hierarchical N         N           96      96       0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 90 TRT01A Xanomeline Low Dose  AEBODSYS EYE DISORDERS                              OCMQ01NAM OCMQ1        AEDECOD   CONJUNCTIVITIS            hierarchical p         %            0      0.0      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 91 TRT01A Placebo              AEBODSYS EYE DISORDERS                              OCMQ01NAM OCMQ1        AEDECOD   EYE ALLERGY               hierarchical n         n            1      1        0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 92 TRT01A Placebo              AEBODSYS EYE DISORDERS                              OCMQ01NAM OCMQ1        AEDECOD   EYE ALLERGY               hierarchical N         N           86      86       0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 93 TRT01A Placebo              AEBODSYS EYE DISORDERS                              OCMQ01NAM OCMQ1        AEDECOD   EYE ALLERGY               hierarchical p         %            0.0116 1.2      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+ 94 TRT01A Xanomeline High Dose AEBODSYS EYE DISORDERS                              OCMQ01NAM OCMQ1        AEDECOD   EYE ALLERGY               hierarchical n         n            0      0        0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 95 TRT01A Xanomeline High Dose AEBODSYS EYE DISORDERS                              OCMQ01NAM OCMQ1        AEDECOD   EYE ALLERGY               hierarchical N         N           72      72       0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 96 TRT01A Xanomeline High Dose AEBODSYS EYE DISORDERS                              OCMQ01NAM OCMQ1        AEDECOD   EYE ALLERGY               hierarchical p         %            0      0.0      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+ 97 TRT01A Xanomeline Low Dose  AEBODSYS EYE DISORDERS                              OCMQ01NAM OCMQ1        AEDECOD   EYE ALLERGY               hierarchical n         n            0      0        0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 98 TRT01A Xanomeline Low Dose  AEBODSYS EYE DISORDERS                              OCMQ01NAM OCMQ1        AEDECOD   EYE ALLERGY               hierarchical N         N           96      96       0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+ 99 TRT01A Xanomeline Low Dose  AEBODSYS EYE DISORDERS                              OCMQ01NAM OCMQ1        AEDECOD   EYE ALLERGY               hierarchical p         %            0      0.0      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+100 TRT01A Placebo              AEBODSYS EYE DISORDERS                              OCMQ01NAM OCMQ1        AEDECOD   EYE PRURITUS              hierarchical n         n            1      1        0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+101 TRT01A Placebo              AEBODSYS EYE DISORDERS                              OCMQ01NAM OCMQ1        AEDECOD   EYE PRURITUS              hierarchical N         N           86      86       0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+102 TRT01A Placebo              AEBODSYS EYE DISORDERS                              OCMQ01NAM OCMQ1        AEDECOD   EYE PRURITUS              hierarchical p         %            0.0116 1.2      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+103 TRT01A Xanomeline High Dose AEBODSYS EYE DISORDERS                              OCMQ01NAM OCMQ1        AEDECOD   EYE PRURITUS              hierarchical n         n            0      0        0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+104 TRT01A Xanomeline High Dose AEBODSYS EYE DISORDERS                              OCMQ01NAM OCMQ1        AEDECOD   EYE PRURITUS              hierarchical N         N           72      72       0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+105 TRT01A Xanomeline High Dose AEBODSYS EYE DISORDERS                              OCMQ01NAM OCMQ1        AEDECOD   EYE PRURITUS              hierarchical p         %            0      0.0      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+106 TRT01A Xanomeline Low Dose  AEBODSYS EYE DISORDERS                              OCMQ01NAM OCMQ1        AEDECOD   EYE PRURITUS              hierarchical n         n            0      0        0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+107 TRT01A Xanomeline Low Dose  AEBODSYS EYE DISORDERS                              OCMQ01NAM OCMQ1        AEDECOD   EYE PRURITUS              hierarchical N         N           96      96       0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+108 TRT01A Xanomeline Low Dose  AEBODSYS EYE DISORDERS                              OCMQ01NAM OCMQ1        AEDECOD   EYE PRURITUS              hierarchical p         %            0      0.0      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+109 TRT01A Placebo              AEBODSYS EYE DISORDERS                              &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ2                     hierarchical n         n            1      1        0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+110 TRT01A Placebo              AEBODSYS EYE DISORDERS                              &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ2                     hierarchical N         N           86      86       0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+111 TRT01A Placebo              AEBODSYS EYE DISORDERS                              &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ2                     hierarchical p         %            0.0116 1.2      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+112 TRT01A Xanomeline High Dose AEBODSYS EYE DISORDERS                              &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ2                     hierarchical n         n            0      0        0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+113 TRT01A Xanomeline High Dose AEBODSYS EYE DISORDERS                              &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ2                     hierarchical N         N           72      72       0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+114 TRT01A Xanomeline High Dose AEBODSYS EYE DISORDERS                              &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ2                     hierarchical p         %            0      0.0      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+115 TRT01A Xanomeline Low Dose  AEBODSYS EYE DISORDERS                              &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ2                     hierarchical n         n            0      0        0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+116 TRT01A Xanomeline Low Dose  AEBODSYS EYE DISORDERS                              &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ2                     hierarchical N         N           96      96       0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+117 TRT01A Xanomeline Low Dose  AEBODSYS EYE DISORDERS                              &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ2                     hierarchical p         %            0      0.0      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+118 TRT01A Placebo              AEBODSYS EYE DISORDERS                              OCMQ01NAM OCMQ2        AEDECOD   CONJUNCTIVITIS            hierarchical n         n            1      1        0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+119 TRT01A Placebo              AEBODSYS EYE DISORDERS                              OCMQ01NAM OCMQ2        AEDECOD   CONJUNCTIVITIS            hierarchical N         N           86      86       0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+120 TRT01A Placebo              AEBODSYS EYE DISORDERS                              OCMQ01NAM OCMQ2        AEDECOD   CONJUNCTIVITIS            hierarchical p         %            0.0116 1.2      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+121 TRT01A Xanomeline High Dose AEBODSYS EYE DISORDERS                              OCMQ01NAM OCMQ2        AEDECOD   CONJUNCTIVITIS            hierarchical n         n            0      0        0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+122 TRT01A Xanomeline High Dose AEBODSYS EYE DISORDERS                              OCMQ01NAM OCMQ2        AEDECOD   CONJUNCTIVITIS            hierarchical N         N           72      72       0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+123 TRT01A Xanomeline High Dose AEBODSYS EYE DISORDERS                              OCMQ01NAM OCMQ2        AEDECOD   CONJUNCTIVITIS            hierarchical p         %            0      0.0      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+124 TRT01A Xanomeline Low Dose  AEBODSYS EYE DISORDERS                              OCMQ01NAM OCMQ2        AEDECOD   CONJUNCTIVITIS            hierarchical n         n            0      0        0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+125 TRT01A Xanomeline Low Dose  AEBODSYS EYE DISORDERS                              OCMQ01NAM OCMQ2        AEDECOD   CONJUNCTIVITIS            hierarchical N         N           96      96       0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+126 TRT01A Xanomeline Low Dose  AEBODSYS EYE DISORDERS                              OCMQ01NAM OCMQ2        AEDECOD   CONJUNCTIVITIS            hierarchical p         %            0      0.0      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+127 TRT01A Placebo              AEBODSYS EYE DISORDERS                              &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ3                     hierarchical n         n            0      0        0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+128 TRT01A Placebo              AEBODSYS EYE DISORDERS                              &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ3                     hierarchical N         N           86      86       0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+129 TRT01A Placebo              AEBODSYS EYE DISORDERS                              &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ3                     hierarchical p         %            0      0.0      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+130 TRT01A Xanomeline High Dose AEBODSYS EYE DISORDERS                              &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ3                     hierarchical n         n            1      1        0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+131 TRT01A Xanomeline High Dose AEBODSYS EYE DISORDERS                              &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ3                     hierarchical N         N           72      72       0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+132 TRT01A Xanomeline High Dose AEBODSYS EYE DISORDERS                              &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ3                     hierarchical p         %            0.0139 1.4      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+133 TRT01A Xanomeline Low Dose  AEBODSYS EYE DISORDERS                              &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ3                     hierarchical n         n            1      1        0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+134 TRT01A Xanomeline Low Dose  AEBODSYS EYE DISORDERS                              &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ3                     hierarchical N         N           96      96       0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+135 TRT01A Xanomeline Low Dose  AEBODSYS EYE DISORDERS                              &lt;NA&gt;      &lt;NULL&gt;       OCMQ01NAM OCMQ3                     hierarchical p         %            0.0104 1.0      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+136 TRT01A Placebo              AEBODSYS EYE DISORDERS                              OCMQ01NAM OCMQ3        AEDECOD   VISION BLURRED            hierarchical n         n            0      0        0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+137 TRT01A Placebo              AEBODSYS EYE DISORDERS                              OCMQ01NAM OCMQ3        AEDECOD   VISION BLURRED            hierarchical N         N           86      86       0       &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+138 TRT01A Placebo              AEBODSYS EYE DISORDERS                              OCMQ01NAM OCMQ3        AEDECOD   VISION BLURRED            hierarchical p         %            0      0.0      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_1    
+139 TRT01A Xanomeline High Dose AEBODSYS EYE DISORDERS                              OCMQ01NAM OCMQ3        AEDECOD   VISION BLURRED            hierarchical n         n            1      1        0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+140 TRT01A Xanomeline High Dose AEBODSYS EYE DISORDERS                              OCMQ01NAM OCMQ3        AEDECOD   VISION BLURRED            hierarchical N         N           72      72       0       &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+141 TRT01A Xanomeline High Dose AEBODSYS EYE DISORDERS                              OCMQ01NAM OCMQ3        AEDECOD   VISION BLURRED            hierarchical p         %            0.0139 1.4      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_2    
+142 TRT01A Xanomeline Low Dose  AEBODSYS EYE DISORDERS                              OCMQ01NAM OCMQ3        AEDECOD   VISION BLURRED            hierarchical n         n            1      1        0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+143 TRT01A Xanomeline Low Dose  AEBODSYS EYE DISORDERS                              OCMQ01NAM OCMQ3        AEDECOD   VISION BLURRED            hierarchical N         N           96      96       0       &lt;NULL&gt;  &lt;NULL&gt; stat_3    
+144 TRT01A Xanomeline Low Dose  AEBODSYS EYE DISORDERS                              OCMQ01NAM OCMQ3        AEDECOD   VISION BLURRED            hierarchical p         %            0.0104 1.0      &lt;fn&gt;    &lt;NULL&gt;  &lt;NULL&gt; stat_3    </code></pre>
 </div>
 </div>
 </div>
@@ -1003,100 +1713,59 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb5-4"><a href="#cb5-4"></a><span class="an">categories:</span><span class="co"> [table, FDA, safety, adverse events]</span></span>
 <span id="cb5-5"><a href="#cb5-5"></a><span class="co">---</span></span>
 <span id="cb5-6"><a href="#cb5-6"></a></span>
-<span id="cb5-7"><a href="#cb5-7"></a>::: panel-tabset</span>
-<span id="cb5-8"><a href="#cb5-8"></a><span class="fu">## Table Preview</span></span>
-<span id="cb5-9"><a href="#cb5-9"></a></span>
-<span id="cb5-10"><a href="#cb5-10"></a><span class="in">```{r img, echo=FALSE, fig.align='center', out.width='45%'}</span></span>
-<span id="cb5-11"><a href="#cb5-11"></a><span class="in">knitr::include_graphics("result.png")</span></span>
-<span id="cb5-12"><a href="#cb5-12"></a><span class="in">```</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a>::::: columns</span>
+<span id="cb5-8"><a href="#cb5-8"></a></span>
+<span id="cb5-9"><a href="#cb5-9"></a>:::: {.column width="52%"}</span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="fu">### FDA IG Shell</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a></span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="al">![](ig_shell.png)</span>{fig-alt="FDA IG example table shell" .lightbox width=100%}</span>
 <span id="cb5-13"><a href="#cb5-13"></a></span>
-<span id="cb5-14"><a href="#cb5-14"></a><span class="fu">## Setup</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a><span class="fu">### Programming Notes</span></span>
 <span id="cb5-15"><a href="#cb5-15"></a></span>
-<span id="cb5-16"><a href="#cb5-16"></a><span class="in">```{r setup, message=FALSE}</span></span>
-<span id="cb5-17"><a href="#cb5-17"></a><span class="in"># Load libraries &amp; data -------------------------------------</span></span>
-<span id="cb5-18"><a href="#cb5-18"></a><span class="in">library(dplyr)</span></span>
-<span id="cb5-19"><a href="#cb5-19"></a><span class="in">library(cards)</span></span>
-<span id="cb5-20"><a href="#cb5-20"></a><span class="in">library(gtsummary)</span></span>
+<span id="cb5-16"><a href="#cb5-16"></a>**Background and Instructions**</span>
+<span id="cb5-17"><a href="#cb5-17"></a></span>
+<span id="cb5-18"><a href="#cb5-18"></a>N/A (per FDA IG)</span>
+<span id="cb5-19"><a href="#cb5-19"></a></span>
+<span id="cb5-20"><a href="#cb5-20"></a>**Customization**</span>
 <span id="cb5-21"><a href="#cb5-21"></a></span>
-<span id="cb5-22"><a href="#cb5-22"></a><span class="in">adae &lt;- pharmaverseadam::adae</span></span>
-<span id="cb5-23"><a href="#cb5-23"></a><span class="in">adsl &lt;- pharmaverseadam::adsl</span></span>
-<span id="cb5-24"><a href="#cb5-24"></a></span>
-<span id="cb5-25"><a href="#cb5-25"></a><span class="in">set.seed(1)</span></span>
-<span id="cb5-26"><a href="#cb5-26"></a><span class="in">adae &lt;- adae |&gt;</span></span>
-<span id="cb5-27"><a href="#cb5-27"></a><span class="in">  mutate(</span></span>
-<span id="cb5-28"><a href="#cb5-28"></a><span class="in">    AESER = sample(c("Y", "N"), size = nrow(adae), replace = TRUE),</span></span>
-<span id="cb5-29"><a href="#cb5-29"></a><span class="in">    OCMQ01NAM = sample(c("OCMQ1", "OCMQ2", "OCMQ3"), size = nrow(adae), replace = TRUE),</span></span>
-<span id="cb5-30"><a href="#cb5-30"></a><span class="in">    OCMQ01SC = sample(c("BROAD", "NARROW"), size = nrow(adae), replace = TRUE)</span></span>
-<span id="cb5-31"><a href="#cb5-31"></a><span class="in">  )</span></span>
-<span id="cb5-32"><a href="#cb5-32"></a></span>
-<span id="cb5-33"><a href="#cb5-33"></a><span class="in"># Pre-processing --------------------------------------------</span></span>
-<span id="cb5-34"><a href="#cb5-34"></a><span class="in">adsl &lt;- adsl |&gt;</span></span>
-<span id="cb5-35"><a href="#cb5-35"></a><span class="in">  filter(SAFFL == "Y") # safety population</span></span>
-<span id="cb5-36"><a href="#cb5-36"></a></span>
-<span id="cb5-37"><a href="#cb5-37"></a><span class="in">data &lt;- adae |&gt;</span></span>
-<span id="cb5-38"><a href="#cb5-38"></a><span class="in">  filter(</span></span>
-<span id="cb5-39"><a href="#cb5-39"></a><span class="in">    # safety population</span></span>
-<span id="cb5-40"><a href="#cb5-40"></a><span class="in">    SAFFL == "Y",</span></span>
-<span id="cb5-41"><a href="#cb5-41"></a><span class="in">    # treatment-emergent</span></span>
-<span id="cb5-42"><a href="#cb5-42"></a><span class="in">    TRTEMFL == "Y",</span></span>
-<span id="cb5-43"><a href="#cb5-43"></a><span class="in">    # broad OCMQ scope</span></span>
-<span id="cb5-44"><a href="#cb5-44"></a><span class="in">    OCMQ01SC == "BROAD",</span></span>
-<span id="cb5-45"><a href="#cb5-45"></a><span class="in">    # filtering here to reduce the size of the table</span></span>
-<span id="cb5-46"><a href="#cb5-46"></a><span class="in">    AESOC %in% c("EYE DISORDERS", "EAR AND LABYRINTH DISORDERS", "CONGENITAL, FAMILIAL AND GENETIC DISORDERS")</span></span>
-<span id="cb5-47"><a href="#cb5-47"></a><span class="in">  )</span></span>
-<span id="cb5-48"><a href="#cb5-48"></a><span class="in">```</span></span>
-<span id="cb5-49"><a href="#cb5-49"></a></span>
-<span id="cb5-50"><a href="#cb5-50"></a><span class="fu">## Build ARD</span></span>
+<span id="cb5-22"><a href="#cb5-22"></a>N/A (per FDA IG)</span>
+<span id="cb5-23"><a href="#cb5-23"></a></span>
+<span id="cb5-24"><a href="#cb5-24"></a>::::</span>
+<span id="cb5-25"><a href="#cb5-25"></a></span>
+<span id="cb5-26"><a href="#cb5-26"></a>:::: {.column width="4%"}</span>
+<span id="cb5-27"><a href="#cb5-27"></a>::::</span>
+<span id="cb5-28"><a href="#cb5-28"></a></span>
+<span id="cb5-29"><a href="#cb5-29"></a>:::: {.column width="44%"}</span>
+<span id="cb5-30"><a href="#cb5-30"></a><span class="fu">### Output</span></span>
+<span id="cb5-31"><a href="#cb5-31"></a></span>
+<span id="cb5-32"><a href="#cb5-32"></a><span class="in">```{r out-result, echo=FALSE, fig.align='center', out.width='100%'}</span></span>
+<span id="cb5-33"><a href="#cb5-33"></a><span class="in">knitr::include_graphics("result.png")</span></span>
+<span id="cb5-34"><a href="#cb5-34"></a><span class="in">```</span></span>
+<span id="cb5-35"><a href="#cb5-35"></a></span>
+<span id="cb5-36"><a href="#cb5-36"></a>::::</span>
+<span id="cb5-37"><a href="#cb5-37"></a></span>
+<span id="cb5-38"><a href="#cb5-38"></a>:::::</span>
+<span id="cb5-39"><a href="#cb5-39"></a></span>
+<span id="cb5-40"><a href="#cb5-40"></a>::: panel-tabset</span>
+<span id="cb5-41"><a href="#cb5-41"></a><span class="fu">## Full Code</span></span>
+<span id="cb5-42"><a href="#cb5-42"></a></span>
+<span id="cb5-43"><a href="#cb5-43"></a><span class="in">```{r fullcode, file="../../../inst/templates/fda-table_43.R", message=FALSE, warning=FALSE, results='hide'}</span></span>
+<span id="cb5-44"><a href="#cb5-44"></a><span class="in">```</span></span>
+<span id="cb5-45"><a href="#cb5-45"></a></span>
+<span id="cb5-46"><a href="#cb5-46"></a><span class="fu">## Table</span></span>
+<span id="cb5-47"><a href="#cb5-47"></a></span>
+<span id="cb5-48"><a href="#cb5-48"></a><span class="in">```{r tbl}</span></span>
+<span id="cb5-49"><a href="#cb5-49"></a><span class="in">tbl</span></span>
+<span id="cb5-50"><a href="#cb5-50"></a><span class="in">```</span></span>
 <span id="cb5-51"><a href="#cb5-51"></a></span>
-<span id="cb5-52"><a href="#cb5-52"></a><span class="in">```{r ard, message=FALSE, warning=FALSE, results='hide'}</span></span>
-<span id="cb5-53"><a href="#cb5-53"></a><span class="in">ard &lt;- ard_stack_hierarchical(</span></span>
-<span id="cb5-54"><a href="#cb5-54"></a><span class="in">  data,</span></span>
-<span id="cb5-55"><a href="#cb5-55"></a><span class="in">  variables = c(AEBODSYS, OCMQ01NAM, AEDECOD),</span></span>
-<span id="cb5-56"><a href="#cb5-56"></a><span class="in">  by = TRT01A,</span></span>
-<span id="cb5-57"><a href="#cb5-57"></a><span class="in">  id = USUBJID,</span></span>
-<span id="cb5-58"><a href="#cb5-58"></a><span class="in">  denominator = adsl,</span></span>
-<span id="cb5-59"><a href="#cb5-59"></a><span class="in">  # variables to include AE rates for</span></span>
-<span id="cb5-60"><a href="#cb5-60"></a><span class="in">  include = c(OCMQ01NAM, AEDECOD)</span></span>
-<span id="cb5-61"><a href="#cb5-61"></a><span class="in">)</span></span>
-<span id="cb5-62"><a href="#cb5-62"></a></span>
-<span id="cb5-63"><a href="#cb5-63"></a><span class="in">ard</span></span>
-<span id="cb5-64"><a href="#cb5-64"></a><span class="in">```</span></span>
-<span id="cb5-65"><a href="#cb5-65"></a></span>
-<span id="cb5-66"><a href="#cb5-66"></a><span class="in">```{r, echo=FALSE}</span></span>
-<span id="cb5-67"><a href="#cb5-67"></a><span class="in"># Print ARD</span></span>
-<span id="cb5-68"><a href="#cb5-68"></a><span class="in">withr::local_options(width = 9999)</span></span>
-<span id="cb5-69"><a href="#cb5-69"></a><span class="in">print(ard, columns = "all", n = 40)</span></span>
-<span id="cb5-70"><a href="#cb5-70"></a><span class="in">```</span></span>
-<span id="cb5-71"><a href="#cb5-71"></a></span>
-<span id="cb5-72"><a href="#cb5-72"></a><span class="fu">## Build Table</span></span>
-<span id="cb5-73"><a href="#cb5-73"></a></span>
-<span id="cb5-74"><a href="#cb5-74"></a><span class="in">```{r tbl, results = 'hide'}</span></span>
-<span id="cb5-75"><a href="#cb5-75"></a><span class="in"># create table using ARD-first approach (ARD -&gt; table)</span></span>
-<span id="cb5-76"><a href="#cb5-76"></a><span class="in">tbl &lt;-</span></span>
-<span id="cb5-77"><a href="#cb5-77"></a><span class="in">  tbl_ard_hierarchical(</span></span>
-<span id="cb5-78"><a href="#cb5-78"></a><span class="in">    ard,</span></span>
-<span id="cb5-79"><a href="#cb5-79"></a><span class="in">    variables = c(AEBODSYS, OCMQ01NAM, AEDECOD),</span></span>
-<span id="cb5-80"><a href="#cb5-80"></a><span class="in">    by = TRT01A,</span></span>
-<span id="cb5-81"><a href="#cb5-81"></a><span class="in">    # variables to display AE rates for</span></span>
-<span id="cb5-82"><a href="#cb5-82"></a><span class="in">    include = c(OCMQ01NAM, AEDECOD),</span></span>
-<span id="cb5-83"><a href="#cb5-83"></a><span class="in">    # Add custom variable labels</span></span>
-<span id="cb5-84"><a href="#cb5-84"></a><span class="in">    label = list(</span></span>
-<span id="cb5-85"><a href="#cb5-85"></a><span class="in">      AEBODSYS = "Organ System",</span></span>
-<span id="cb5-86"><a href="#cb5-86"></a><span class="in">      OCMQ01NAM = "OCMQ (Broad)",</span></span>
-<span id="cb5-87"><a href="#cb5-87"></a><span class="in">      AEDECOD = "Preferred Term"</span></span>
-<span id="cb5-88"><a href="#cb5-88"></a><span class="in">    )</span></span>
-<span id="cb5-89"><a href="#cb5-89"></a><span class="in">  )</span></span>
-<span id="cb5-90"><a href="#cb5-90"></a></span>
-<span id="cb5-91"><a href="#cb5-91"></a><span class="in">tbl</span></span>
-<span id="cb5-92"><a href="#cb5-92"></a><span class="in">```</span></span>
-<span id="cb5-93"><a href="#cb5-93"></a></span>
-<span id="cb5-94"><a href="#cb5-94"></a><span class="in">```{r eval=FALSE, include=FALSE}</span></span>
-<span id="cb5-95"><a href="#cb5-95"></a><span class="in">gt::gtsave(as_gt(tbl), filename = "result.png")</span></span>
-<span id="cb5-96"><a href="#cb5-96"></a><span class="in">```</span></span>
-<span id="cb5-97"><a href="#cb5-97"></a></span>
-<span id="cb5-98"><a href="#cb5-98"></a><span class="in">```{r img, echo=FALSE, fig.align='center', out.width='45%'}</span></span>
-<span id="cb5-99"><a href="#cb5-99"></a><span class="in">```</span></span>
-<span id="cb5-100"><a href="#cb5-100"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb5-52"><a href="#cb5-52"></a><span class="fu">## ARD</span></span>
+<span id="cb5-53"><a href="#cb5-53"></a></span>
+<span id="cb5-54"><a href="#cb5-54"></a><span class="in">```{r ard, message=FALSE, warning=FALSE}</span></span>
+<span id="cb5-55"><a href="#cb5-55"></a><span class="in">withr::local_options(width = 9999, tibble.print_max = Inf)</span></span>
+<span id="cb5-56"><a href="#cb5-56"></a><span class="in">print(ard, columns = "all")</span></span>
+<span id="cb5-57"><a href="#cb5-57"></a><span class="in">```</span></span>
+<span id="cb5-58"><a href="#cb5-58"></a></span>
+<span id="cb5-59"><a href="#cb5-59"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
@@ -1114,7 +1783,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       &nbsp;
     </div>
   </div>
-</footer>
+</footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 <script src="../../../site_libs/quarto-html/zenscroll-min.js"></script>
