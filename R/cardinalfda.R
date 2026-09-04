@@ -8,3 +8,11 @@
 #' @importFrom dplyr .data
 #' @importFrom gtsummary tbl_summary
 "_PACKAGE"
+
+ignore_unused_imports <- function() {
+  cards::ard_continuous
+  cardx::ard_continuous_ci
+  dplyr::.data
+  crane::tbl_demographics
+  gtsummary::tbl_summary
+}
