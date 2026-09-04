@@ -1,4 +1,4 @@
-# cardinalfda 0.2.0.9005
+# cardinalfda 0.2.0.9006
 
  * Removed the exported `make_table_02()`. FDA Table 2 is now built from `inst/templates/fda-table_02.R` and run via `run_template()`, matching the other tables.
  * Moved `dplyr` from `Suggests` to `Imports`.

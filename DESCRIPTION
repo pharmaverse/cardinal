@@ -1,7 +1,7 @@
 Type: Package
 Package: cardinalfda
 Title: FDA Safety Tables and Figures
-Version: 0.2.0.9005
+Version: 0.2.0.9006
 Date: 2026-09-04
 Authors@R: c(
     person("Pawel", "Rucki", , "pawel.rucki@roche.com", role = "ctb"),
@@ -42,8 +42,8 @@ BugReports: https://github.com/pharmaverse/cardinal/issues
 Depends:
     cards (>= 0.8.1),
     cardx (>= 0.3.4),
-    gtsummary (>= 2.5.1),
     crane (>= 0.3.1),
+    gtsummary (>= 2.5.1),
     R (>= 4.2)
 Imports:
     dplyr (>= 1.2.0)
