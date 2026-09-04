@@ -5,15 +5,13 @@
 #' @keywords internal
 #' @importFrom cards ard_continuous
 #' @importFrom cardx ard_continuous_ci
-#' @importFrom crane tbl_demographics
+#' @importFrom crane tbl_roche_summary
 #' @importFrom dplyr .data
-#' @importFrom gtsummary tbl_summary
 "_PACKAGE"
 
 ignore_unused_imports <- function() {
   cards::ard_continuous
   cardx::ard_continuous_ci
   dplyr::.data
-  crane::tbl_demographics
-  gtsummary::tbl_summary
+  crane::tbl_roche_summary
 }
