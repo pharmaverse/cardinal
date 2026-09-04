@@ -54,12 +54,12 @@ make_table_02_rtables <- function(df,
 }
 
 # Archived gtsummary implementation of make_table_02()
-make_table_02_gtsummary_old <- function(df,
-                                        return_ard = TRUE,
-                                        arm_var = "TRT01A",
-                                        saffl_var = "SAFFL",
-                                        vars = c("SEX", "AGE", "AGEGR1", "ETHNIC", "RACE"),
-                                        label = list()) {
+make_table_02 <- function(df,
+                          return_ard = TRUE,
+                          arm_var = "TRT01A",
+                          saffl_var = "SAFFL",
+                          vars = c("SEX", "AGE", "AGEGR1", "ETHNIC", "RACE"),
+                          label = list()) {
   stopifnot(is.data.frame(df))
   stopifnot(all(c(arm_var, saffl_var, vars) %in% names(df)))
   stopifnot(is.logical(return_ard), length(return_ard) == 1L)

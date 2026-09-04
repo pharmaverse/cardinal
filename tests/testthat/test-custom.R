@@ -1,5 +1,4 @@
 test_that("custom table works", {
-
   skip_if_not_installed("dplyr")
   skip_if_not_installed("cards")
   skip_if_not_installed("gtsummary")
