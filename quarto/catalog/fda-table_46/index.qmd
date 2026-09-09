@@ -1,0 +1,58 @@
+---
+title: Subjects With Adverse Events by System Organ Class and Preferred Term (Rate and Count), Safety Population, Pooled Analysis (or Trial X)
+subtitle: FDA Table 46
+categories: [table, FDA, safety, adverse events]
+---
+
+::::: columns
+
+:::: {.column width="52%"}
+### FDA IG Shell
+
+<!-- TODO: add ig_shell.png (FDA IG example shell) once available from the source document. -->
+
+### Programming Notes
+
+**Background and Instructions**
+
+This table summarises treatment-emergent adverse events by system organ class and preferred term, presenting both the number of participants with at least one event (rate) and the total number of events (count) within each treatment arm. Denominators come from the subject-level safety population so the header Ns are correct.
+
+**Customization**
+
+Reviewers may request a higher-level term layer between the system organ class and preferred term.
+
+::::
+
+:::: {.column width="4%"}
+::::
+
+:::: {.column width="44%"}
+### Output
+
+<!-- TODO: add result.png (screenshot of the rendered table) once available. -->
+See the **Table** tab below for the live rendered output.
+
+::::
+
+:::::
+
+::: panel-tabset
+## Full Code
+
+```{r fullcode, file="../../../inst/templates/fda-table_46.R", message=FALSE, warning=FALSE, results='hide'}
+```
+
+## Table
+
+```{r tbl}
+tbl
+```
+
+## ARD
+
+```{r ard, message=FALSE, warning=FALSE}
+withr::local_options(width = 9999, tibble.print_max = Inf)
+print(ard, columns = "all")
+```
+
+:::

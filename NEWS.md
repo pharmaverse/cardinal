@@ -1,5 +1,6 @@
 # cardinalfda 0.3.0
 
+ * Added FDA Tables 46 and 47: adverse events by system organ class and preferred term with rate-and-count statistics. Table 47 shows a category with no events as a zero-row. (#368)
  * Removed the exported `make_table_02()`. FDA Table 2 is now built from `inst/templates/fda-table_02.R` and run via `run_template()`, matching the other tables.
  * Moved `dplyr` from `Suggests` to `Imports`.
  * FDA Table 9 (individual subject deaths) now builds its listing with `crane::tbl_listing()` instead of `gtsummary::as_gtsummary()`, so it is classed as a listing.
