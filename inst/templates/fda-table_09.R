@@ -4,7 +4,7 @@
 
 library(dplyr)
 library(gtsummary)
-library(crane)
+library(crane) # tbl_listing()
 
 adae <- pharmaverseadam::adae
 adex <- pharmaverseadam::adex
@@ -47,7 +47,7 @@ data <- left_join(adae, adex, by = "USUBJID") |>
 # Individual Subject Deaths"), so it uses tbl_listing() rather than a summary
 # constructor. The other IG listings (Tables 39, 41, 42, 54, 55) are not in
 # the catalog yet; when added they should use tbl_listing() too.
-tbl <- crane::tbl_listing(data) |>
+tbl <- tbl_listing(data) |>
   # set table header labels
   modify_header(
     TRT01A = "**Treatment Arm**",

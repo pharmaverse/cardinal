@@ -5,6 +5,7 @@
 library(dplyr)
 library(cards)
 library(gtsummary)
+library(crane) # sort_hierarchical()
 
 adsl <- pharmaverseadam::adsl
 adae <- pharmaverseadam::adae

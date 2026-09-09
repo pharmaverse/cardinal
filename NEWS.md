@@ -1,5 +1,6 @@
 # cardinalfda 0.3.0
 
+ * Standardised how `{crane}` helpers are referenced across the catalog templates and added coverage for the ordering, filtering and listing key de-duplication helpers the catalog relies on. (#367)
  * Removed the exported `make_table_02()`. FDA Table 2 is now built from `inst/templates/fda-table_02.R` and run via `run_template()`, matching the other tables.
  * Moved `dplyr` from `Suggests` to `Imports`.
  * FDA Table 9 (individual subject deaths) now builds its listing with `crane::tbl_listing()` instead of `gtsummary::as_gtsummary()`, so it is classed as a listing.
