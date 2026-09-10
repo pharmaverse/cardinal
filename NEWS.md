@@ -1,5 +1,6 @@
 # cardinalfda 0.3.0
 
+ * Added edge-case assertions to the Table 8, 9, 15 and 50 tests: empty-category rendering, listing key de-duplication, hierarchical sort order, and the incidence-filter threshold. (#369)
  * Removed the exported `make_table_02()`. FDA Table 2 is now built from `inst/templates/fda-table_02.R` and run via `run_template()`, matching the other tables.
  * Moved `dplyr` from `Suggests` to `Imports`.
  * FDA Table 9 (individual subject deaths) now builds its listing with `crane::tbl_listing()` instead of `gtsummary::as_gtsummary()`, so it is classed as a listing.
