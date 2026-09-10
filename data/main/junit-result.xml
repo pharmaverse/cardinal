@@ -1,136 +1,149 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="custom" timestamp="2026-09-07T01:09:48Z" hostname="be76d5fe3539" tests="1" skipped="0" failures="0" errors="0" time="1.24">
-    <testcase time="1.24" classname="custom" name="custom_table_works"/>
+  <testsuite name="cardinalfda" timestamp="2026-09-10T01:02:52Z" hostname="9cae41c31031" tests="1" skipped="0" failures="0" errors="0" time="0.012">
+    <testcase time="0.012" classname="cardinalfda" name="ignore_unused_imports_references_the_Depends_packages"/>
   </testsuite>
-  <testsuite name="fda-table_02" timestamp="2026-09-07T01:09:49Z" hostname="be76d5fe3539" tests="2" skipped="0" failures="0" errors="0" time="0.744">
-    <testcase time="0.718" classname="fda_table_02" name="fda_table_02_works"/>
-    <testcase time="0.0260000000000002" classname="fda_table_02" name="fda_table_02_works"/>
+  <testsuite name="custom" timestamp="2026-09-10T01:02:52Z" hostname="9cae41c31031" tests="1" skipped="0" failures="0" errors="0" time="1.293">
+    <testcase time="1.293" classname="custom" name="custom_table_works"/>
   </testsuite>
-  <testsuite name="fda-table_03" timestamp="2026-09-07T01:09:50Z" hostname="be76d5fe3539" tests="3" skipped="0" failures="0" errors="0" time="0.613">
-    <testcase time="0.579" classname="fda_table_03" name="fda_table_03_works"/>
-    <testcase time="0.0169999999999999" classname="fda_table_03" name="fda_table_03_works"/>
-    <testcase time="0.0169999999999999" classname="fda_table_03" name="fda_table_03_works"/>
+  <testsuite name="fda-table_02" timestamp="2026-09-10T01:02:53Z" hostname="9cae41c31031" tests="2" skipped="0" failures="0" errors="0" time="0.783">
+    <testcase time="0.756" classname="fda_table_02" name="fda_table_02_works"/>
+    <testcase time="0.0269999999999997" classname="fda_table_02" name="fda_table_02_works"/>
   </testsuite>
-  <testsuite name="fda-table_04" timestamp="2026-09-07T01:09:51Z" hostname="be76d5fe3539" tests="1" skipped="0" failures="0" errors="0" time="0.29">
-    <testcase time="0.29" classname="fda_table_04" name="fda_table_04_works"/>
+  <testsuite name="fda-table_03" timestamp="2026-09-10T01:02:54Z" hostname="9cae41c31031" tests="3" skipped="0" failures="0" errors="0" time="0.634">
+    <testcase time="0.597" classname="fda_table_03" name="fda_table_03_works"/>
+    <testcase time="0.0190000000000001" classname="fda_table_03" name="fda_table_03_works"/>
+    <testcase time="0.0179999999999998" classname="fda_table_03" name="fda_table_03_works"/>
   </testsuite>
-  <testsuite name="fda-table_06" timestamp="2026-09-07T01:09:51Z" hostname="be76d5fe3539" tests="1" skipped="0" failures="0" errors="0" time="0.528">
-    <testcase time="0.528" classname="fda_table_06" name="fda_table_06_works"/>
+  <testsuite name="fda-table_04" timestamp="2026-09-10T01:02:55Z" hostname="9cae41c31031" tests="1" skipped="0" failures="0" errors="0" time="0.304">
+    <testcase time="0.304" classname="fda_table_04" name="fda_table_04_works"/>
   </testsuite>
-  <testsuite name="fda-table_07" timestamp="2026-09-07T01:09:52Z" hostname="be76d5fe3539" tests="8" skipped="0" failures="0" errors="0" time="1.712">
-    <testcase time="1.6" classname="fda_table_07" name="fda_table_07_works"/>
-    <testcase time="0.0140000000000002" classname="fda_table_07" name="fda_table_07_works"/>
-    <testcase time="0.0140000000000002" classname="fda_table_07" name="fda_table_07_works"/>
+  <testsuite name="fda-table_06" timestamp="2026-09-10T01:02:55Z" hostname="9cae41c31031" tests="1" skipped="0" failures="0" errors="0" time="0.534">
+    <testcase time="0.534" classname="fda_table_06" name="fda_table_06_works"/>
+  </testsuite>
+  <testsuite name="fda-table_07" timestamp="2026-09-10T01:02:55Z" hostname="9cae41c31031" tests="8" skipped="0" failures="0" errors="0" time="1.863">
+    <testcase time="1.736" classname="fda_table_07" name="fda_table_07_works"/>
+    <testcase time="0.016" classname="fda_table_07" name="fda_table_07_works"/>
     <testcase time="0.0169999999999995" classname="fda_table_07" name="fda_table_07_works"/>
-    <testcase time="0.0130000000000008" classname="fda_table_07" name="fda_table_07_works"/>
-    <testcase time="0.0139999999999993" classname="fda_table_07" name="fda_table_07_works"/>
+    <testcase time="0.016" classname="fda_table_07" name="fda_table_07_works"/>
+    <testcase time="0.016" classname="fda_table_07" name="fda_table_07_works"/>
+    <testcase time="0.0179999999999998" classname="fda_table_07" name="fda_table_07_works"/>
+    <testcase time="0.0230000000000006" classname="fda_table_07" name="fda_table_07_works"/>
     <testcase time="0.0209999999999999" classname="fda_table_07" name="fda_table_07_works"/>
-    <testcase time="0.0190000000000001" classname="fda_table_07" name="fda_table_07_works"/>
   </testsuite>
-  <testsuite name="fda-table_08" timestamp="2026-09-07T01:09:53Z" hostname="be76d5fe3539" tests="2" skipped="0" failures="0" errors="0" time="0.547">
-    <testcase time="0.53" classname="fda_table_08" name="fda_table_08_works"/>
-    <testcase time="0.0170000000000003" classname="fda_table_08" name="fda_table_08_works"/>
+  <testsuite name="fda-table_08" timestamp="2026-09-10T01:02:57Z" hostname="9cae41c31031" tests="4" skipped="0" failures="0" errors="0" time="1.227">
+    <testcase time="0.593" classname="fda_table_08" name="fda_table_08_works"/>
+    <testcase time="0.0209999999999999" classname="fda_table_08" name="fda_table_08_works"/>
+    <testcase time="0.61" classname="fda_table_08" name="fda_table_08_orders_terms_after_hierarchical_sorting"/>
+    <testcase time="0.00300000000000011" classname="fda_table_08" name="fda_table_08_orders_terms_after_hierarchical_sorting"/>
   </testsuite>
-  <testsuite name="fda-table_09" timestamp="2026-09-07T01:09:54Z" hostname="be76d5fe3539" tests="1" skipped="0" failures="0" errors="0" time="0.154">
-    <testcase time="0.154" classname="fda_table_09" name="fda_table_09_works"/>
+  <testsuite name="fda-table_09" timestamp="2026-09-10T01:02:58Z" hostname="9cae41c31031" tests="3" skipped="0" failures="0" errors="0" time="0.185">
+    <testcase time="0.136999999999999" classname="fda_table_09" name="fda_table_09_works"/>
+    <testcase time="0.0450000000000017" classname="fda_table_09" name="fda_table_09_de_duplicates_repeated_treatment_keys_in_the_listing"/>
+    <testcase time="0.00299999999999834" classname="fda_table_09" name="fda_table_09_de_duplicates_repeated_treatment_keys_in_the_listing"/>
   </testsuite>
-  <testsuite name="fda-table_10" timestamp="2026-09-07T01:09:54Z" hostname="be76d5fe3539" tests="1" skipped="0" failures="0" errors="0" time="0.299">
-    <testcase time="0.298999999999999" classname="fda_table_10" name="fda_table_10_works"/>
+  <testsuite name="fda-table_10" timestamp="2026-09-10T01:02:59Z" hostname="9cae41c31031" tests="1" skipped="0" failures="0" errors="0" time="0.337">
+    <testcase time="0.337000000000002" classname="fda_table_10" name="fda_table_10_works"/>
   </testsuite>
-  <testsuite name="fda-table_11" timestamp="2026-09-07T01:09:54Z" hostname="be76d5fe3539" tests="1" skipped="0" failures="0" errors="0" time="0.315">
-    <testcase time="0.315" classname="fda_table_11" name="fda_table_11_works"/>
+  <testsuite name="fda-table_11" timestamp="2026-09-10T01:02:59Z" hostname="9cae41c31031" tests="1" skipped="0" failures="0" errors="0" time="0.357">
+    <testcase time="0.356999999999999" classname="fda_table_11" name="fda_table_11_works"/>
   </testsuite>
-  <testsuite name="fda-table_12" timestamp="2026-09-07T01:09:55Z" hostname="be76d5fe3539" tests="1" skipped="0" failures="0" errors="0" time="0.445">
-    <testcase time="0.445" classname="fda_table_12" name="fda_table_12_works"/>
+  <testsuite name="fda-table_12" timestamp="2026-09-10T01:02:59Z" hostname="9cae41c31031" tests="1" skipped="0" failures="0" errors="0" time="0.498">
+    <testcase time="0.497999999999999" classname="fda_table_12" name="fda_table_12_works"/>
   </testsuite>
-  <testsuite name="fda-table_13" timestamp="2026-09-07T01:09:55Z" hostname="be76d5fe3539" tests="1" skipped="0" failures="0" errors="0" time="0.242">
-    <testcase time="0.241999999999999" classname="fda_table_13" name="fda_table_13_works"/>
+  <testsuite name="fda-table_13" timestamp="2026-09-10T01:03:00Z" hostname="9cae41c31031" tests="1" skipped="0" failures="0" errors="0" time="0.273">
+    <testcase time="0.273000000000001" classname="fda_table_13" name="fda_table_13_works"/>
   </testsuite>
-  <testsuite name="fda-table_14" timestamp="2026-09-07T01:09:55Z" hostname="be76d5fe3539" tests="1" skipped="0" failures="0" errors="0" time="0.256">
-    <testcase time="0.256" classname="fda_table_14" name="fda_table_14_works"/>
+  <testsuite name="fda-table_14" timestamp="2026-09-10T01:03:00Z" hostname="9cae41c31031" tests="1" skipped="0" failures="0" errors="0" time="0.295">
+    <testcase time="0.295" classname="fda_table_14" name="fda_table_14_works"/>
   </testsuite>
-  <testsuite name="fda-table_15" timestamp="2026-09-07T01:09:56Z" hostname="be76d5fe3539" tests="1" skipped="0" failures="0" errors="0" time="0.331">
-    <testcase time="0.331" classname="fda_table_15" name="fda_table_15_works"/>
+  <testsuite name="fda-table_15" timestamp="2026-09-10T01:03:00Z" hostname="9cae41c31031" tests="5" skipped="0" failures="0" errors="0" time="1.099">
+    <testcase time="0.388999999999999" classname="fda_table_15" name="fda_table_15_works"/>
+    <testcase time="0.695" classname="fda_table_15" name="fda_table_15_keeps_only_terms_at_or_above_the_5_threshold"/>
+    <testcase time="0.000999999999999446" classname="fda_table_15" name="fda_table_15_keeps_only_terms_at_or_above_the_5_threshold"/>
+    <testcase time="0.011000000000001" classname="fda_table_15" name="fda_table_15_keeps_only_terms_at_or_above_the_5_threshold"/>
+    <testcase time="0.00300000000000011" classname="fda_table_15" name="fda_table_15_keeps_only_terms_at_or_above_the_5_threshold"/>
   </testsuite>
-  <testsuite name="fda-table_17" timestamp="2026-09-07T01:09:56Z" hostname="be76d5fe3539" tests="2" skipped="0" failures="0" errors="0" time="0.45">
-    <testcase time="0.433000000000002" classname="fda_table_17" name="fda_table_17_works"/>
-    <testcase time="0.0169999999999995" classname="fda_table_17" name="fda_table_17_works"/>
+  <testsuite name="fda-table_17" timestamp="2026-09-10T01:03:01Z" hostname="9cae41c31031" tests="2" skipped="0" failures="0" errors="0" time="0.517">
+    <testcase time="0.495999999999999" classname="fda_table_17" name="fda_table_17_works"/>
+    <testcase time="0.0210000000000008" classname="fda_table_17" name="fda_table_17_works"/>
   </testsuite>
-  <testsuite name="fda-table_18" timestamp="2026-09-07T01:09:56Z" hostname="be76d5fe3539" tests="3" skipped="0" failures="0" errors="0" time="0.819">
-    <testcase time="0.793000000000001" classname="fda_table_18" name="fda_table_18_works"/>
+  <testsuite name="fda-table_18" timestamp="2026-09-10T01:03:02Z" hostname="9cae41c31031" tests="3" skipped="0" failures="0" errors="0" time="0.915">
+    <testcase time="0.888" classname="fda_table_18" name="fda_table_18_works"/>
     <testcase time="0.0129999999999999" classname="fda_table_18" name="fda_table_18_works"/>
-    <testcase time="0.0129999999999999" classname="fda_table_18" name="fda_table_18_works"/>
+    <testcase time="0.0139999999999993" classname="fda_table_18" name="fda_table_18_works"/>
   </testsuite>
-  <testsuite name="fda-table_29" timestamp="2026-09-07T01:09:57Z" hostname="be76d5fe3539" tests="1" skipped="0" failures="0" errors="0" time="0.27">
-    <testcase time="0.27" classname="fda_table_29" name="fda_table_29_works"/>
+  <testsuite name="fda-table_29" timestamp="2026-09-10T01:03:03Z" hostname="9cae41c31031" tests="1" skipped="0" failures="0" errors="0" time="0.303">
+    <testcase time="0.303000000000001" classname="fda_table_29" name="fda_table_29_works"/>
   </testsuite>
-  <testsuite name="fda-table_33" timestamp="2026-09-07T01:09:57Z" hostname="be76d5fe3539" tests="1" skipped="0" failures="0" errors="0" time="0.206">
-    <testcase time="0.206" classname="fda_table_33" name="fda_table_33_works"/>
+  <testsuite name="fda-table_33" timestamp="2026-09-10T01:03:03Z" hostname="9cae41c31031" tests="1" skipped="0" failures="0" errors="0" time="0.234">
+    <testcase time="0.234" classname="fda_table_33" name="fda_table_33_works"/>
   </testsuite>
-  <testsuite name="fda-table_34" timestamp="2026-09-07T01:09:58Z" hostname="be76d5fe3539" tests="1" skipped="0" failures="0" errors="0" time="0.209">
-    <testcase time="0.209" classname="fda_table_34" name="fda_table_34_works"/>
+  <testsuite name="fda-table_34" timestamp="2026-09-10T01:03:03Z" hostname="9cae41c31031" tests="1" skipped="0" failures="0" errors="0" time="0.404">
+    <testcase time="0.404" classname="fda_table_34" name="fda_table_34_works"/>
   </testsuite>
-  <testsuite name="fda-table_36" timestamp="2026-09-07T01:09:58Z" hostname="be76d5fe3539" tests="1" skipped="0" failures="0" errors="0" time="1.855">
-    <testcase time="1.855" classname="fda_table_36" name="fda_table_36_works"/>
+  <testsuite name="fda-table_36" timestamp="2026-09-10T01:03:04Z" hostname="9cae41c31031" tests="1" skipped="0" failures="0" errors="0" time="2.03">
+    <testcase time="2.03" classname="fda_table_36" name="fda_table_36_works"/>
   </testsuite>
-  <testsuite name="fda-table_37" timestamp="2026-09-07T01:10:00Z" hostname="be76d5fe3539" tests="1" skipped="0" failures="0" errors="0" time="0.506">
-    <testcase time="0.506" classname="fda_table_37" name="fda_table_37_works"/>
+  <testsuite name="fda-table_37" timestamp="2026-09-10T01:03:06Z" hostname="9cae41c31031" tests="1" skipped="0" failures="0" errors="0" time="0.354">
+    <testcase time="0.354000000000001" classname="fda_table_37" name="fda_table_37_works"/>
   </testsuite>
-  <testsuite name="fda-table_38" timestamp="2026-09-07T01:10:00Z" hostname="be76d5fe3539" tests="1" skipped="0" failures="0" errors="0" time="0.264">
-    <testcase time="0.263999999999999" classname="fda_table_38" name="fda_table_38_works"/>
+  <testsuite name="fda-table_38" timestamp="2026-09-10T01:03:06Z" hostname="9cae41c31031" tests="1" skipped="0" failures="0" errors="0" time="0.31">
+    <testcase time="0.309999999999999" classname="fda_table_38" name="fda_table_38_works"/>
   </testsuite>
-  <testsuite name="fda-table_43" timestamp="2026-09-07T01:10:01Z" hostname="be76d5fe3539" tests="1" skipped="0" failures="0" errors="0" time="0.268">
-    <testcase time="0.268000000000001" classname="fda_table_43" name="fda_table_43_works"/>
+  <testsuite name="fda-table_43" timestamp="2026-09-10T01:03:07Z" hostname="9cae41c31031" tests="1" skipped="0" failures="0" errors="0" time="0.315">
+    <testcase time="0.315000000000001" classname="fda_table_43" name="fda_table_43_works"/>
   </testsuite>
-  <testsuite name="fda-table_44" timestamp="2026-09-07T01:10:01Z" hostname="be76d5fe3539" tests="1" skipped="0" failures="0" errors="0" time="0.189">
-    <testcase time="0.189" classname="fda_table_44" name="fda_table_44_works"/>
+  <testsuite name="fda-table_44" timestamp="2026-09-10T01:03:07Z" hostname="9cae41c31031" tests="1" skipped="0" failures="0" errors="0" time="0.223">
+    <testcase time="0.222999999999999" classname="fda_table_44" name="fda_table_44_works"/>
   </testsuite>
-  <testsuite name="fda-table_45" timestamp="2026-09-07T01:10:01Z" hostname="be76d5fe3539" tests="1" skipped="0" failures="0" errors="0" time="0.199">
-    <testcase time="0.199" classname="fda_table_45" name="fda_table_45_works"/>
+  <testsuite name="fda-table_45" timestamp="2026-09-10T01:03:07Z" hostname="9cae41c31031" tests="1" skipped="0" failures="0" errors="0" time="0.228">
+    <testcase time="0.228000000000002" classname="fda_table_45" name="fda_table_45_works"/>
   </testsuite>
-  <testsuite name="fda-table_50" timestamp="2026-09-07T01:10:01Z" hostname="be76d5fe3539" tests="5" skipped="0" failures="0" errors="0" time="0.997">
-    <testcase time="0.916" classname="fda_table_50" name="fda_table_50_works"/>
-    <testcase time="0.0190000000000001" classname="fda_table_50" name="fda_table_50_works"/>
-    <testcase time="0.0199999999999996" classname="fda_table_50" name="fda_table_50_works"/>
-    <testcase time="0.0229999999999997" classname="fda_table_50" name="fda_table_50_works"/>
-    <testcase time="0.0190000000000001" classname="fda_table_50" name="fda_table_50_works"/>
+  <testsuite name="fda-table_50" timestamp="2026-09-10T01:03:07Z" hostname="9cae41c31031" tests="7" skipped="0" failures="0" errors="0" time="2.188">
+    <testcase time="1.059" classname="fda_table_50" name="fda_table_50_works"/>
+    <testcase time="0.0210000000000008" classname="fda_table_50" name="fda_table_50_works"/>
+    <testcase time="0.0210000000000008" classname="fda_table_50" name="fda_table_50_works"/>
+    <testcase time="0.0210000000000008" classname="fda_table_50" name="fda_table_50_works"/>
+    <testcase time="0.0249999999999986" classname="fda_table_50" name="fda_table_50_works"/>
+    <testcase time="1.038" classname="fda_table_50" name="fda_table_50_renders_categories_with_no_events_as_0_0_"/>
+    <testcase time="0.00300000000000011" classname="fda_table_50" name="fda_table_50_renders_categories_with_no_events_as_0_0_"/>
   </testsuite>
-  <testsuite name="fda-table_51" timestamp="2026-09-07T01:10:02Z" hostname="be76d5fe3539" tests="1" skipped="0" failures="0" errors="0" time="0.38">
-    <testcase time="0.380000000000001" classname="fda_table_51" name="fda_table_51_works"/>
+  <testsuite name="fda-table_51" timestamp="2026-09-10T01:03:10Z" hostname="9cae41c31031" tests="1" skipped="0" failures="0" errors="0" time="0.4">
+    <testcase time="0.399999999999999" classname="fda_table_51" name="fda_table_51_works"/>
   </testsuite>
-  <testsuite name="run_template" timestamp="2026-09-07T01:10:03Z" hostname="be76d5fe3539" tests="4" skipped="0" failures="0" errors="0" time="1.27">
-    <testcase time="0.0129999999999999" classname="run_template" name="run_template_errors_for_an_unknown_template"/>
-    <testcase time="0.631" classname="run_template" name="run_template_sources_a_template_and_returns_its_environment"/>
+  <testsuite name="run_template" timestamp="2026-09-10T01:03:10Z" hostname="9cae41c31031" tests="4" skipped="0" failures="0" errors="0" time="1.34">
+    <testcase time="0.0120000000000005" classname="run_template" name="run_template_errors_for_an_unknown_template"/>
+    <testcase time="0.667000000000002" classname="run_template" name="run_template_sources_a_template_and_returns_its_environment"/>
     <testcase time="0.00300000000000011" classname="run_template" name="run_template_sources_a_template_and_returns_its_environment"/>
-    <testcase time="0.623000000000001" classname="run_template" name="run_template_does_not_leak_objects_into_the_caller"/>
+    <testcase time="0.657999999999998" classname="run_template" name="run_template_does_not_leak_objects_into_the_caller"/>
   </testsuite>
-  <testsuite name="table-roche_lbt01" timestamp="2026-09-07T01:10:04Z" hostname="be76d5fe3539" tests="3" skipped="0" failures="0" errors="0" time="4.122">
-    <testcase time="4.08" classname="table_roche_lbt01" name="table_roche_lbt01_works"/>
-    <testcase time="0.0240000000000009" classname="table_roche_lbt01" name="table_roche_lbt01_works"/>
-    <testcase time="0.0180000000000007" classname="table_roche_lbt01" name="table_roche_lbt01_works"/>
+  <testsuite name="table-roche_lbt01" timestamp="2026-09-10T01:03:11Z" hostname="9cae41c31031" tests="3" skipped="0" failures="0" errors="0" time="4.426">
+    <testcase time="4.384" classname="table_roche_lbt01" name="table_roche_lbt01_works"/>
+    <testcase time="0.0190000000000019" classname="table_roche_lbt01" name="table_roche_lbt01_works"/>
+    <testcase time="0.0229999999999997" classname="table_roche_lbt01" name="table_roche_lbt01_works"/>
   </testsuite>
-  <testsuite name="utils" timestamp="2026-09-07T01:10:08Z" hostname="be76d5fe3539" tests="21" skipped="0" failures="0" errors="0" time="0.394">
-    <testcase time="0.00899999999999679" classname="utils" name="assert_flag_variables_accepts_valid_flag_values"/>
-    <testcase time="0.00200000000000244" classname="utils" name="assert_flag_variables_accepts_valid_flag_values"/>
+  <testsuite name="utils" timestamp="2026-09-10T01:03:16Z" hostname="9cae41c31031" tests="21" skipped="0" failures="0" errors="0" time="0.41">
+    <testcase time="0.0100000000000016" classname="utils" name="assert_flag_variables_accepts_valid_flag_values"/>
     <testcase time="0.00199999999999889" classname="utils" name="assert_flag_variables_accepts_valid_flag_values"/>
-    <testcase time="0.00600000000000023" classname="utils" name="assert_flag_variables_accepts_a_custom_na_level"/>
+    <testcase time="0.00200000000000244" classname="utils" name="assert_flag_variables_accepts_valid_flag_values"/>
+    <testcase time="0.00499999999999901" classname="utils" name="assert_flag_variables_accepts_a_custom_na_level"/>
     <testcase time="0.00300000000000011" classname="utils" name="assert_flag_variables_accepts_a_custom_na_level"/>
-    <testcase time="0.00700000000000145" classname="utils" name="assert_flag_variables_errors_on_invalid_values"/>
-    <testcase time="0.00399999999999778" classname="utils" name="assert_flag_variables_errors_on_invalid_values"/>
+    <testcase time="0.0069999999999979" classname="utils" name="assert_flag_variables_errors_on_invalid_values"/>
+    <testcase time="0.00500000000000256" classname="utils" name="assert_flag_variables_errors_on_invalid_values"/>
     <testcase time="0.00499999999999901" classname="utils" name="alt_counts_df_preproc_returns_NULL_when_input_is_NULL"/>
     <testcase time="0.00700000000000145" classname="utils" name="alt_counts_df_preproc_errors_when_required_variables_are_missing"/>
-    <testcase time="0.266999999999999" classname="utils" name="alt_counts_df_preproc_filters_to_the_safety_population"/>
+    <testcase time="0.279999999999998" classname="utils" name="alt_counts_df_preproc_filters_to_the_safety_population"/>
     <testcase time="0.00300000000000011" classname="utils" name="alt_counts_df_preproc_filters_to_the_safety_population"/>
-    <testcase time="0.00200000000000244" classname="utils" name="alt_counts_df_preproc_filters_to_the_safety_population"/>
-    <testcase time="0.00599999999999667" classname="utils" name="alt_counts_df_preproc_works_without_a_safety_flag"/>
-    <testcase time="0.00300000000000011" classname="utils" name="alt_counts_df_preproc_works_without_a_safety_flag"/>
+    <testcase time="0.00300000000000011" classname="utils" name="alt_counts_df_preproc_filters_to_the_safety_population"/>
+    <testcase time="0.00600000000000023" classname="utils" name="alt_counts_df_preproc_works_without_a_safety_flag"/>
+    <testcase time="0.00199999999999889" classname="utils" name="alt_counts_df_preproc_works_without_a_safety_flag"/>
     <testcase time="0.00800000000000267" classname="utils" name="alt_counts_df_preproc_validates_the_flag_variable"/>
-    <testcase time="0.0139999999999993" classname="utils" name="basic_table_annot_returns_a_layout_with_and_without_annotations"/>
-    <testcase time="0.00999999999999801" classname="utils" name="basic_table_annot_returns_a_layout_with_and_without_annotations"/>
+    <testcase time="0.0130000000000017" classname="utils" name="basic_table_annot_returns_a_layout_with_and_without_annotations"/>
+    <testcase time="0.0109999999999992" classname="utils" name="basic_table_annot_returns_a_layout_with_and_without_annotations"/>
     <testcase time="0.0120000000000005" classname="utils" name="split_cols_by_arm_splits_with_and_without_an_overall_column"/>
-    <testcase time="0.00700000000000145" classname="utils" name="split_cols_by_arm_splits_with_and_without_an_overall_column"/>
-    <testcase time="0.0109999999999992" classname="utils" name="split_cols_by_arm_supports_risk_difference_columns"/>
-    <testcase time="0.00600000000000023" classname="utils" name="split_cols_by_arm_supports_risk_difference_columns"/>
+    <testcase time="0.0069999999999979" classname="utils" name="split_cols_by_arm_splits_with_and_without_an_overall_column"/>
+    <testcase time="0.0120000000000005" classname="utils" name="split_cols_by_arm_supports_risk_difference_columns"/>
+    <testcase time="0.00700000000000145" classname="utils" name="split_cols_by_arm_supports_risk_difference_columns"/>
   </testsuite>
 </testsuites>
