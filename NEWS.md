@@ -1,4 +1,4 @@
-# cardinalfda 0.3.0
+# cardinalfda 0.3.0.9000
 
  * Added edge-case assertions to the Table 8, 9, 15 and 50 tests: empty-category rendering, listing key de-duplication, hierarchical sort order, and the incidence-filter threshold. (#369)
  * Removed the exported `make_table_02()`. FDA Table 2 is now built from `inst/templates/fda-table_02.R` and run via `run_template()`, matching the other tables.
